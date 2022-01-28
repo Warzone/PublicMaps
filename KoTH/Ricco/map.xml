@@ -1,0 +1,120 @@
+<map proto="1.4.0">
+<name>Ricco</name>
+<version>1.0</version>
+<objective>Be the first team to reach 1200 points from capturing the hills!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b" />
+    <!-- Henrs -->
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="16">Red</team>
+    <team id="yellow-team" color="yellow" max="16">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="16">leaves</item>
+        <item slot="3" unbreakable="true">shears</item>
+        <item slot="7" amount="24">arrow</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <potion duration="5s" amplifier="10">damage resistance</potion>
+    </kit>
+    <kit id="red" parents="spawn">
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="yellow" parents="spawn">
+        <leggings color="e5e533" unbreakable="true">leather leggings</leggings>
+        <boots color="e5e533" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="8">arrow</item>
+    <item amount="8">leaves</item>
+</kill-reward>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leaves</item>
+    <item>shears</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+    <item>sapling</item>
+</itemremove>
+<filters>
+    <all id="only-leaves-in-map">
+        <not>
+            <void/>
+        </not>
+        <material>leaves</material>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <cuboid min="-14,6,51" max="-9,16,-46"/>
+        <cuboid min="15,6,52" max="10,16,47"/>
+    </union>
+    <above id="playable" y="1"/>
+    <below id="non-playable" y="1"/>
+    <apply region="spawns" block="never" message="`eYou may not build in the `cSpawns`e!"/>
+    <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7void`e!"/>
+    <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
+</regions>
+<spawns>
+    <spawn yaw="0" team="red-team" kit="red">
+        <region>
+            <point>-11.5,6,-48.5</point>
+        </region>
+    </spawn>
+    <spawn yaw="180" team="yellow-team" kit="yellow">
+        <region>
+            <point>12.5,6,49.5</point>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <point>0.5,40,0.5</point>
+        </region>
+    </default>
+</spawns>
+<control-points required="false">
+    <control-point name="Point A" capture-time="5s">
+        <capture>
+            <cuboid min="26,2,-23" max="19,4,-16"/>
+        </capture>
+        <progress>
+            <cuboid min="26,2,-23" max="19,4,-16"/>
+        </progress>
+    </control-point>
+    <control-point name="Middle" capture-time="5s">
+        <capture>
+            <cuboid min="-3,7,4" max="4,10,-3"/>
+        </capture>
+        <progress>
+            <cuboid min="-3,7,4" max="4,10,-3"/>
+        </progress>
+    </control-point>
+    <control-point name="Point B" capture-time="5s">
+        <capture>
+            <cuboid min="-25,2,24" max="-18,4,17"/>
+        </capture>
+        <progress>
+            <cuboid min="-25,2,24" max="-18,4,17"/>
+        </progress>
+    </control-point>
+</control-points>
+<score>
+    <limit>1200</limit>
+</score>
+<maxbuildheight>14</maxbuildheight>
+</map>

@@ -1,0 +1,181 @@
+<map proto="1.4.2">
+<name>Desolate Gully</name>
+<version>1.1.0</version>
+<objective>Destroy the other team's Emerald monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="10">Blue</team>
+    <team id="red-team"  color="dark red" max="10">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="16"        material="wood" damage="1" />
+        <item slot="7" amount="24"        material="arrow" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="24" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+        <boots    unbreakable="true" color="0066cc" material="leather boots" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="24" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+        <boots    unbreakable="true" color="cd0000" material="leather boots" />
+    </kit>
+</kits>
+<spawns>
+    <default angle="-89,49.5,382.5">
+        <regions>
+            <cylinder base="-89,48,379" radius="2" height="1" />
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-90">-112.5,10.5,323.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="90">-65.5,10.5,434.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<respawn delay="3s" />
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-player-cause">
+        <cause>player</cause>
+    </not>
+    <not id="deny-enchant-break">
+        <material>enchantment table</material>
+    </not>
+</filters>
+<regions>
+    <negative id="void">
+        <rectangle id="playable" min="-118,320" max="-60,438" />
+    </negative>
+    <union id="team-spawns">
+        <cuboid id="blue-spawn" min="-105,0,326" max="-118,17,320" />
+        <cuboid id="red-spawn"  min="-73,0,432" max="-60,17,437" />
+    </union>
+    <above id="world-limit" y="23" />
+    <apply region="blue-spawn"   enter="only-blue"               message="You may not enter the other team's spawn" />
+    <apply region="red-spawn"    enter="only-red"                message="You may not enter the other team's spawn" />
+    <apply region="team-spawns"  block="never"                   message="You may not modify the spawn area" />
+    <apply region="world-limit"  block-place="deny-player-cause" message="You may not place blocks that high" />
+    <apply region="void"         block-place="never"             message="You may not interact with that material here" />
+    <apply                       block="deny-enchant-break"      message="You may not break the enchantment table" />
+</regions>
+<destroyables materials="emerald block" mode-changes="true">
+    <destroyable id="blue-monument" name="Monument" owner="blue-team">
+        <region>
+            <cuboid min="-84,14,334" max="-81,17,337" />
+        </region>
+    </destroyable>
+    <destroyable id="red-monument" name="Monument" owner="red-team">
+        <region>
+            <cuboid min="-94,14,424" max="-97,17,421" />
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="12m" material="coal block" />
+</modes>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow" />
+        <item amount="1" material="golden apple" />
+        <item amount="2" material="exp bottle" />
+        <item amount="1" material="gold ingot" />
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="8" damage="11" material="stained clay" />
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="8" damage="14" material="stained clay" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="false" />
+        </filter>
+        <item damage="61" material="flint and steel" />
+        <item amount="1"  material="golden apple" />
+        <item amount="2"  material="exp bottle" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="8" repeat="true" />
+        </filter>
+        <item amount="1" material="tnt" />
+    </kill-reward>
+</kill-rewards>
+<blockdrops>
+    <rule>
+        <filter>
+            <material>gold block</material>
+        </filter>
+        <drops>
+            <item amount="9" material="gold ingot" />
+        </drops>
+    </rule>
+    <rule experience="8">
+        <filter>
+            <material>lapis ore</material>
+        </filter>
+        <drops>
+            <item amount="1" material="ink sack" damage="4" />
+        </drops>
+    </rule>
+</blockdrops>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold sword</material>
+            <material>gold pickaxe</material>
+            <material>gold axe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+            <material>shears</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+    <rule>
+        <match>
+            <material>gold chestplate</material>
+        </match>
+        <modify>
+            <enchantment level="1">protection</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sapling</item>
+    <item>emerald block</item>
+</itemremove>
+</map>

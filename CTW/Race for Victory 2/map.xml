@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Race for Victory 2</name>
+<version>1.2.10</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="map design"/> <!-- Plastix -->
+    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="map design"/> <!-- IM_A_H0B0 -->
+    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="map design and gameplay management"/> <!-- MonsieurApple -->
+    <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="map design and item management"/> <!-- Anxuiz -->
+</authors>
+<rules>
+    <rule>Players may not obstruct the majority of the lane with lava or obsidian.</rule>
+    <rule>Players may not use lava or obsidian to block a team's spawn.</rule>
+</rules>
+<teams>
+    <team color="blue" max="32">Blue</team>
+    <team color="dark red" max="32">Red</team>
+</teams>
+<spawns>
+    <spawn team="blue" yaw="0" kit="spawn-kit">
+        <cylinder base="0.5,4,-54.5" radius="2.5" height="0"/>
+    </spawn>
+    <spawn team="red" yaw="180" kit="spawn-kit">
+        <cylinder base="0.5,4,69.5" radius="2.5" height="0"/>
+    </spawn>
+    <default yaw="270">
+        <cylinder base="44.5,8,7.5" radius="4" height="0"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn-kit">
+        <item slot="0">iron_sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron_pickaxe</item>
+        <item slot="3" amount="64" damage="2">log</item>
+        <item slot="4" amount="64">cooked_fish</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6" amount="64">arrow</item>
+        <item slot="7" amount="64">arrow</item>
+        <item slot="8" amount="64">ladder</item>
+    </kit>
+    <kit name="survival">
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit name="adventure">
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <!-- blue wool room protection (these are the wools blue has to get) -->
+    <union name="blue-wool-rooms">
+        <rectangle name="purple-room" min="5,119" max="17,134"/>
+        <rectangle name="yellow-room" min="-16,119" max="-4,134"/>
+    </union>
+    <apply block="only-blue" use="only-blue-usage">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter your own wool room!">
+        <region name="blue-wool-rooms"/>
+    </apply>
+
+    <!-- red wool room protection (these are the wools red has to get) -->
+    <union name="red-wool-rooms">
+        <rectangle name="orange-room" min="5,-119" max="17,-104"/>
+        <rectangle name="lime-room" min="-16,-119" max="-4,-104"/>
+    </union>
+    <apply block="only-red" use="only-red-usage">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter your own wool room!">
+        <region name="red-wool-rooms"/>
+    </apply>
+
+    <!-- void protection -->
+    <apply block-place="deny-all" message="You may not place blocks in the void!">
+        <!-- blue side -->
+        <rectangle min="-4,-oo" max="5,-69"/>
+        <rectangle min="17,-oo" max="100,-19"/>
+        <rectangle min="-16,-oo" max="-100,-19"/>
+        <!-- red side -->
+        <rectangle min="-4,84" max="5,oo"/>
+        <rectangle min="-100,34" max="-16,oo"/>
+        <rectangle min="17,34" max="100,oo"/>
+    </apply>
+
+    <!-- supply room protection -->
+    <apply block="deny-all" message="You may not break or place blocks in the storage room!">
+        <cuboid name="blue-storage-room" min="-14,0,-65" max="15,9,-41"/>
+        <cuboid name="red-storage-room" min="-14,0,56" max="15,9,80"/>
+    </apply>
+
+    <!-- spawn protection -->
+    <apply enter="only-red" message="You may not enter the enemy team's spawn!">
+        <cuboid name="red-spawn-room" min="-14,0,56" max="15,7,80"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy team's spawn!">
+        <cuboid name="blue-spawn-room" min="-14,0,-65" max="15,7,-41"/>    
+    </apply>
+    <!-- Blockglitch Prevention -->
+    <apply kit="adventure">
+        <region name="blockglitch-zone"/>
+    </apply>
+    <apply kit="survival">
+        <region name="non-blockglitch-zone"/>
+    </apply>
+    <negative name="non-blockglitch-zone">
+        <union name="blockglitch-zone">
+            <rectangle name="red-blockglitch" min="-4,95" max="5,134"/>
+            <rectangle name="blue-blockglitch" min="5,-80" max="-4,-119"/>
+        </union>
+    </negative>
+
+</regions>
+<playable>
+    <rectangle min="-24,-127" max="25,142"/>
+</playable>
+<maxbuildheight>30</maxbuildheight>
+<wools team="red">
+    <wool color="orange">
+        <block>-1,5,78</block>
+    </wool>
+    <wool color="lime">
+        <block>1,5,78</block>
+    </wool>
+</wools>
+<wools team="blue">
+    <wool color="purple">
+        <block>-1,5,-64</block>
+    </wool>
+    <wool color="yellow">
+        <block>1,5,-64</block>
+    </wool>
+</wools>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">fire</damage>
+    <damage ally="true" self="false" enemy="false" other="false">fire tick</damage>
+    <damage ally="true" self="false" enemy="false" other="false">lava</damage>
+    <damage ally="true" self="false" enemy="false" other="false">poison</damage>
+    <damage ally="true" self="false" enemy="false" other="false">magic</damage>
+</disabledamage>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>trap door</item>
+    <item>cooked fish</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>ladder</item>
+</itemremove>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
+            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
+        </message>
+        <teleport>
+            <point yaw="90">27,11,7</point>
+        </teleport>
+    </stage>
+    <stage title="Blue Wool Rooms">
+        <message>
+            <line>These are `9Blue Team`r's wool rooms housing `alime `rand `6orange`r.</line>
+            <line>`cRed Team `rhas `5purple `rand `eyellow`r wools.</line>
+            <line>Blue Team should defend these rooms against Red Team invaders who are trying to steal the wool and make it back alive.</line>
+            <line>There are special goodies inside that will help you fight your way out.</line>
+        </message>
+        <teleport>
+            <point yaw="180" pitch="30">0,22,-93</point>
+        </teleport>
+    </stage>
+    <stage title="Red Team Base">
+        <message>
+            <line>Here is the `cRed Team `rvictory monument and spawn where the captured wool must be placed.</line>
+            <line>Both wool must be placed to win.</line>
+            <line>You can get geared up with supplies from the chests.</line>
+        </message>
+        <teleport>
+            <point yaw="0">0.5,4,73.5</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Supplies">
+        <message>
+            <line>Here is the iron supply for `cRed Team`r. Note that `9Blue Team `rhas the same thing on their side.</line>
+            <line>You can craft iron armor to prepare yourself for battle.</line>
+            <line>There are additional resources in the chests that will help you bridge the void.</line>
+        </message>
+        <teleport>
+            <point yaw="180">0.5,22,94</point>
+        </teleport>
+    </stage>
+    <stage title="Underground Lava">
+        <message>
+            <line>Lava, potions and more iron can be found here.</line>
+            <line>There is another lava pool on the other side of the lane as well.</line>
+        </message>
+        <teleport>
+            <point yaw="-73" pitch="10">-27.5,4,40</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

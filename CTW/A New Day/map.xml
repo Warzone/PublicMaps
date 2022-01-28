@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>A New Day</name>
+<version>1.0.6</version>
+<objective>Capture the enemies wool and return it to your base.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="b5071a63-bba3-491a-909f-02db314f4319" contribution="Idea and Build and XML changes"/> <!-- dcstarwars -->
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11" contribution="Aesthetics"/> <!-- JTerwiesch -->
+</authors>
+<contributors>
+    <contributor uuid="62c41f0e-133d-4192-ad33-f0896f47d23a" contribution="Most of the XML and Spawners"/> <!-- nixter1029 -->
+    <contributor uuid="76cf5483-a7ea-4b5d-8830-385f768c4807" contribution="Stolen Houses"/> <!-- xannallax33 -->
+</contributors>
+<wools team="red">
+    <wool color="purple">
+        <block>114.5,9,213.5</block>
+    </wool>
+    <wool color="lime">
+        <block>114.5,9,209.5</block>
+    </wool>
+</wools>
+<wools team="blue">
+    <wool color="yellow">
+        <block>-127.5,9,209.5</block>
+    </wool>
+    <wool color="orange">
+        <block>-127.5,9,213.5</block>
+    </wool>
+</wools>
+<teams>
+    <team color="dark red" max="32">Red</team>
+    <team color="blue" max="32">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64">cooked beef</item>
+        <item slot="5" amount="3">golden apple</item>
+        <item slot="6" amount="64" damage="1">log</item>
+        <item slot="8">water bucket</item>
+        <item slot="7" amount="64">glass</item>
+        <potion duration="5" amplifier="1">heal</potion>
+    </kit>
+    <kit name="red-spawn" parents="spawn">
+        <chestplate color="FF0000">leather chestplate</chestplate>
+    </kit>
+    <kit name="blue-spawn" parents="spawn">
+        <chestplate color="0000FF">leather chestplate</chestplate>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>cooked beef</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>leather chestplate</item>
+    <item>seeds</item>
+    <item>flint</item>
+</itemremove>
+<autorespawn/>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+     <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-web">
+        <block>web</block>
+    </filter>
+</filters>
+<regions>
+    <apply block="no-void" message="You may not build in the void!">
+        <negative>
+            <rectangle name="yes-void" min="-72,171" max="59,252"/>
+        </negative>
+    </apply>
+    <apply block="only-iron" message="You may not modify the base!">
+        <rectangle name="red-spawn" min="99,198" max="59,225"/>
+        <rectangle name="blue-spawn" min="-112,225" max="-72,198"/>
+    </apply>
+    <apply block="deny-all" message="You may not edit the spawn building!">
+        <rectangle name="red-house" min="99,202" max="119,221"/>
+        <rectangle name="blue-house" min="-112,221" max="-132,202"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the Red Team's base!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the Blue Team's base!">
+        <region name="blue-spawn"/>
+    </apply>
+    <apply enter="only-blue" block="only-web" use="only-blue">
+        <rectangle name="yellow" min="79,136" max="110,106"/>
+        <rectangle name="orange" min="110,287" max="79,317"/>
+    </apply>
+    <apply enter="only-red" block="only-web" use="only-red">
+        <rectangle name="magenta" min="-92,287" max="-123,317"/>
+        <rectangle name="lime" min="-123,136" max="-92,106"/>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="red" kit="red-spawn" yaw="90">
+        <cylinder base="110,8,211.5" radius="1" height="0"/>
+    </spawn>
+    <spawn team="blue" kit="blue-spawn" yaw="-90">
+        <cylinder base="-123,8,211.5" radius="1" height="0"/>
+    </spawn>
+    <default yaw="180">
+        <block>-6.5,22,300.5</block>
+    </default>
+</spawns>
+<renewables>
+    <renewable rate="2.5" grow="false" particles="false" sound="false" avoid-entities="true">
+        <region>
+            <union>
+                <cuboid min="119,0,198" max="59,20,225"/>
+                <cuboid min="-132,0,225" max="-72,20,198"/>
+            </union>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+    </renewable>
+</renewables>
+<maxbuildheight>35</maxbuildheight>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>

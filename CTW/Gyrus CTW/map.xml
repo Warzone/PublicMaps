@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Wool">
+<name>Gyrus CTW</name>
+<version>1.0.1</version>
+<objective>Capture all 3 wools and bring them back to your base!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="1154d26d-fa5d-4c42-9a38-aa3506d6ac7e"/> <!-- Stuarts -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team"  color="blue"      min="1" max="15">Blue</team>
+    <team id="green-team"  color="green"    min="1" max="15">Green</team>
+    <team id="red-team"    color="dark red" min="1" max="15">Red</team>
+    <team id="yellow-team" color="yellow"   min="1" max="15">Yellow</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="infinity:1">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" unbreakable="true">iron spade</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="16">cooked beef</item>
+	    <item slot="9" amount="1">arrow</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots unbreakable="true" team-color="true">leather boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team"   kit="default" yaw="180" region="blue-spawn"/>
+    <spawn team="green-team"  kit="default" yaw="0"   region="green-spawn"/>
+    <spawn team="red-team"    kit="default" yaw="90"  region="red-spawn"/>
+    <spawn team="yellow-team" kit="default" yaw="-90" region="yellow-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Wools -->
+<wools craftable="false">
+    <!-- Blue Team -->
+    <wool team="blue-team" monument="blue-team-green-wool"  color="green"  location="-1140,65,231"/>
+    <wool team="blue-team" monument="blue-team-red-wool"    color="red"    location="-1049,65,383"/>
+    <wool team="blue-team" monument="blue-team-yellow-wool" color="yellow" location="1292,65,322"/>
+    <!-- Green Team -->
+    <wool team="green-team" monument="green-team-blue-wool"   color="blue"   location="-1201,65,474"/>
+    <wool team="green-team" monument="green-team-red-wool"    color="red"    location="-1049,65,383"/>
+    <wool team="green-team" monument="green-team-yellow-wool" color="yellow" location="1292,65,322"/>
+    <!-- Red Team -->
+    <wool team="red-team" monument="red-team-blue-wool"   color="blue"   location="-1201,65,474"/>
+    <wool team="red-team" monument="red-team-green-wool"  color="green"  location="-1140,65,231"/>
+    <wool team="red-team" monument="red-team-yellow-wool" color="yellow" location="1292,65,322"/>
+    <!-- Yellow Team -->
+    <wool team="yellow-team" monument="yellow-team-blue-wool"  color="blue"  location="-1201,65,474"/>
+    <wool team="yellow-team" monument="yellow-team-green-wool" color="green" location="-1140,65,231"/>
+    <wool team="yellow-team" monument="yellow-team-red-wool"   color="red"   location="-1049,65,383"/>
+</wools>
+<!-- Filters -->
+<filters>
+    <not id="not-blue">
+        <team id="only-blue">blue-team</team>
+    </not>
+    <not id="not-green">
+        <team id="only-green">green-team</team>
+    </not>
+    <not id="not-red">
+        <team id="only-red">red-team</team>
+    </not>
+    <not id="not-yellow">
+        <team id="only-yellow">yellow-team</team>
+    </not>
+    <not id="not-void">
+        <void/>
+    </not>
+    <all id="only-iron-blocks">
+        <material>iron block</material>
+    </all>
+    <deny id="deny-wools">
+        <any>
+            <material>wool:4</material>
+            <material>wool:11</material>
+            <material>wool:13</material>
+            <material>wool:14</material>
+        </any>
+    </deny>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <!-- Spawn protection regions -->
+    <union id="spawn-protections">
+        <rectangle id="blue-spawn-protection"   min="-1179,421" max="-1162,459"/>
+        <rectangle id="green-spawn-protection"  min="-1162,284" max="-1179,246"/>
+	    <rectangle id="red-spawn-protection"    min="-1102,361" max="-1064,344"/>
+        <rectangle id="yellow-spawn-protection" min="-1239,344" max="-1277,361"/>
+    </union>
+    <!-- Wool room regions -->
+    <union id="wool-rooms">
+        <rectangle id="blue-wool-room"   min="-1193,466" max="-1209,482"/>
+        <rectangle id="green-wool-room"  min="-1132,223" max="-1148,239"/>
+        <rectangle id="red-wool-room"    min="-1041,375" max="-1057,391"/>
+        <rectangle id="yellow-wool-room" min="-1284,314" max="-1300,330"/>
+    </union>
+    <!-- Spawn points -->
+    <point id="blue-spawn">-1170.5,71,431.5</point>
+    <point id="green-spawn">-1170.5,71,273.5</point>
+    <point id="red-spawn">-1091.5,71,352.5</point>
+    <point id="yellow-spawn">-1249.5,71,352.5</point>
+    <point id="obs-spawn">-1229.5,96,293.5</point>
+    <!-- Wool Monuments -->
+    <!-- Blue Team -->
+    <block id="blue-team-green-wool">-1173,72,435</block>
+    <block id="blue-team-red-wool">-1167,72,275</block>
+    <block id="blue-team-yellow-wool">-1175,72,271</block>
+    <!-- Green Team -->
+    <block id="green-team-blue-wool">-1169,72,269</block>
+    <block id="green-team-red-wool">-1167,72,433</block>
+    <block id="green-team-yellow-wool">-1175,72,429</block>
+    <!-- Red Team -->
+    <block id="red-team-blue-wool">-1094,72,356</block>
+    <block id="red-team-green-wool">-1090,72,348</block>
+    <block id="red-team-yellow-wool">-1088,72,354</block>
+    <!-- Yellow Team -->
+    <block id="yellow-team-blue-wool">-1252,72,356</block>
+    <block id="yellow-team-green-wool">-1248,72,348</block>
+    <block id="yellow-team-red-wool">-1254,72,350</block>
+    <!-- Applications -->
+    <!-- Spawn protections -->
+    <apply enter="only-blue"        region="blue-spawn-protection"   message="You may not enter the enemy spawn."/>
+    <apply enter="only-green"       region="green-spawn-protection"  message="You may not enter the enemy spawn."/>
+    <apply enter="only-red"         region="red-spawn-protection"    message="You may not enter the enemy spawn."/>
+    <apply enter="only-yellow"      region="yellow-spawn-protection" message="You may not enter the enemy spawn."/>
+    <apply block-break="only-iron-blocks" block-place="never" region="spawn-protections" message="You may only break iron blocks at spawn!"/>
+    <!-- Wool room protections -->
+    <apply block="never"      region="wool-rooms"       message="You are not allowed to modify terrain here."/>
+    <apply enter="not-blue"   region="blue-wool-room"   message="You may not enter your own wool room!"/>
+    <apply enter="not-green"  region="green-wool-room"  message="You may not enter your own wool room!"/>
+    <apply enter="not-red"    region="red-wool-room"    message="You may not enter your own wool room!"/>
+    <apply enter="not-yellow" region="yellow-wool-room" message="You may not enter your own wool room!"/>
+    <!-- Disable safeties -->
+    <apply block-place="deny-wools" region="everywhere" message="You may not place or destroy safety wools!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>90</maxbuildheight>
+</map>

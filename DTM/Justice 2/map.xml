@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Justice 2</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy team's monument(s).</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="yellow-team" color="yellow" max="25">Yellow</team>
+    <team id="red-team" color="dark red" max="25">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="64">arrow</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="yellow-kit" parents="default">
+        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
+        <leggings unbreakable="true" color="E5E533">leather leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="yellow-team" kit="yellow-kit" yaw="-180" region="yellow-spawn"/>
+    <spawn team="red-team" kit="red-kit" region="red-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables repairable="false" sparks="true">
+    <destroyable name="Left Monument" owner="yellow-team" materials="obsidian" region="left-yellow-monument"/>
+    <destroyable name="Right Monument" owner="yellow-team" materials="obsidian" region="right-yellow-monument"/>
+    <destroyable name="Left Monument" owner="red-team" materials="obsidian" region="left-red-monument"/>
+    <destroyable name="Right Monument" owner="red-team" materials="obsidian" region="right-red-monument"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <block id="left-yellow-monument">-1131,30,-247</block>
+        <block id="right-yellow-monument">-1269,30,-247</block>
+        <block id="left-red-monument">-1269,30,-403</block>
+        <block id="right-red-monument">-1131,30,-403</block>
+    </union>
+    <union id="spawn-protections">
+        <cylinder id="yellow-spawn-protection" base="-1200,17,-192" radius="21" height="oo"/>
+        <cylinder id="red-spawn-protection" base="-1200,17,-458" radius="21" height="oo"/>
+    </union>
+    <point id="yellow-spawn">-1199.5,27,-191.5</point>
+    <point id="red-spawn">-1199.5,27,-457.5</point>
+    <point id="obs-spawn">-1322.5,83,-324.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-1109,-172" max="-1289,-476"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"                 block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"       block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="red-only" message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>obsidian</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>45</maxbuildheight>
+</map>

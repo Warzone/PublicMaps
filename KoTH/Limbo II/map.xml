@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<map proto="1.3.5">
+<name>Limbo II</name>
+<version>1.0.2</version>
+<objective>Gain 2000 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/>
+</authors>
+<contributors>
+    <contributor contribution="Tourney Dude">Reshif</contributor>
+</contributors>
+<edition>ranked</edition>
+<teams>
+    <team color="gold" max="16">Orange</team>
+    <team color="dark aqua" max="16">Cyan</team>
+</teams>
+<kits>
+    <kit name="spawn" potion-particles="false">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" amount="32">cooked beef</item>
+        <potion duration="5" amplifier="4">heal</potion>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+        <potion duration="oo">night vision</potion>
+        <leggings enchantment="protection projectile:1" damage="-3000">iron leggings</leggings>
+    </kit>
+    <kit name="cyan" parents="spawn">
+        <helmet color="4C7F99" damage="-3000">leather helmet</helmet>
+        <chestplate color="4C7F99" damage="-3000">leather chestplate</chestplate>
+        <boots color="4C7F99" damage="-3000">leather boots</boots>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="D87F33" damage="-3000">leather helmet</helmet>
+        <chestplate color="D87F33" damage="-3000">leather chestplate</chestplate>
+        <boots color="D87F33" damage="-3000">leather boots</boots>
+    </kit>
+    <kit name="obs" potion-particles="false">
+        <potion duration="oo">night vision</potion>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply velocity="@0,1.7,-0.1">
+        <cuboid min="-1,6,24" max="2,9,27"/>
+    </apply>
+    <apply velocity="@0,1.7,0.1">
+        <cuboid min="-1,6,-26" max="2,9,-23"/>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="cyan" kit="cyan" yaw="90">
+        <cylinder base="53.5,19,0.5" radius="2" height="1"/>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="-90">
+        <cylinder base="-52.5,19,0.5" radius="2" height="1"/>
+    </spawn>
+    <default kit="obs" yaw="180">
+        <cylinder base="0.5,42,0.5" radius="2" height="1"/>
+    </default>
+</spawns>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<timelock>on</timelock>
+<control-points capture-time="8s" incremental="true" neutral-state="true" show-progress="true" scaled-time="true" time-multiplier="0.5">
+    <control-point name="Point A" points="3">
+        <capture-region>
+            <cuboid min="-2,18,9" max="3,22,14"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-2,18,9" max="3,22,14"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-2,26,9" max="3,31,14"/>
+        </owner-display-region>
+    </control-point>
+    <control-point name="Point B" points="3">
+        <capture-region>
+            <cuboid min="-2,18,-13" max="3,22,-8"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-2,18,-13" max="3,22,-8"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-2,26,-13" max="3,31,-8"/>
+        </owner-display-region>
+    </control-point>
+    <control-point name="Point C" points="4">
+        <capture-region>
+            <cuboid min="-2,8,-2" max="3,12,3"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-2,8,-2" max="3,12,3"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-2,21,-2" max="3,26,3"/>
+        </owner-display-region>
+    </control-point>
+</control-points>
+<score>
+    <limit>2000</limit>
+    <king/>
+</score>
+</map>

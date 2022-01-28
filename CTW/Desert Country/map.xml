@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Desert Country</name>
+<version>1.0.5</version>
+<objective>Capture the wools located on the opposite side.</objective>
+<!-- Map authors & contributors. -->
+<authors>
+    <author uuid="b5967591-14fc-421f-a5e2-931498e10fb8"/> <!-- OCNs_OMEN -->
+    <author uuid="7cbf2168-7f49-4fb3-aea8-6df8048a7ade"/> <!-- nigges60 -->
+    <author uuid="6d256510-f2ec-4a5b-b678-fc01c5abd7b3"/> <!-- Sp33dfr3ak -->
+    <author uuid="f066a092-d825-4316-bc9a-5f8ddd21b167"/> <!-- Valkyyyy -->
+    <author uuid="e15f0cac-6ba7-4069-8c43-26aa38866f77"/> <!-- OCNs_Loki -->
+</authors>
+<contributors>
+    <contributor uuid="5951eb64-d04b-4917-967e-57551860ed34" contribution="Spawn"/> <!-- xXBatManXx -->
+</contributors>
+<gamemode>ctw</gamemode>
+<broadcasts>
+    <tip after="2s">`7You will get `b8 wood`7 and `b10 arrows `7every kill</tip>
+</broadcasts>
+<teams>
+    <team id="green-team" color="green" max="20" max-overfill="25">Green</team>
+    <team id="blue-team" color="blue" max="20" max-overfill="25">Blue</team>
+</teams>
+<spawns>
+    <spawn team="green-team" kit="green-kit">
+        <regions yaw="180">
+            <cuboid min="532,11.5,-129" max="536,12,-127"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <cuboid min="532,11.5,-324" max="536,12,-322"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>478,42.5,-226</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" unbreakable="true" material="shears"/>
+        <item slot="5" amount="64" material="grilled pork"/>
+        <item slot="6" amount="40" material="red sandstone"/>
+        <item slot="7" amount="16" damage="3" material="log"/>
+        <item slot="17" amount="64" material="arrow"/>
+        <potion amplifier="100" duration="15">heal</potion>
+        <potion amplifier="100" duration="15">damage resistance</potion>
+        <potion amplifier="100" duration="15">regeneration</potion>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+        <helmet color="667F33" material="leather helmet"/>
+        <chestplate color="667F33" material="leather chestplate">
+            <enchantment level="1">protection projectile</enchantment>
+        </chestplate>
+        <boots color="667F33" material="leather boots"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="334CB2" material="leather helmet"/>
+        <chestplate color="334CB2" material="leather chestplate">
+            <enchantment level="1">protection projectile</enchantment>
+        </chestplate>
+        <boots color="334CB2" material="leather boots"/>
+    </kit>
+    <kit id="wool-gear" force="true">
+        <knockback-reduction>0.1</knockback-reduction>
+        <chestplate material="chainmail chestplate">
+            <enchantment level="1">protection projectile</enchantment>
+        </chestplate>
+        <potion duration="30s">regeneration</potion>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" damage="3" material="wood"/>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <team id="only-green">green-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <any id="iron-diamond-allow">
+        <material>iron block</material>
+        <material>diamond block</material>
+    </any>
+    <not id="blacklisted-blocks">
+        <any>
+            <material>emerald block</material>
+            <material>beacon</material>
+            <material>mob spawner</material>
+        </any>
+    </not>
+    <all id="bluewoolrooms">
+        <material>web</material>
+        <team>blue-team</team>
+    </all>
+    <all id="greenwoolrooms">
+        <material>web</material>
+        <team>green-team</team>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="greenspawn">
+            <rectangle id="greenspawn1" min="528,-131" max="540,-119"/>
+            <rectangle id="greenspawn2" min="520,-150" max="548,-132"/>
+        </union>
+        <union id="bluespawn">
+            <rectangle id="bluespawn1" min="528,-334" max="540,-322"/>
+            <rectangle id="bluespawn2" min="520,-321" max="548,-303"/>
+        </union>
+    </union>
+    <union id="rooms">
+    <!-- Blue Wool Rooms (Wools blue need to get) -->
+        <rectangle id="bluewoolroomsReg" min="524,-113" max="544,-98"/>
+    <!-- Green Wool Rooms (Wools green need to get) -->
+        <rectangle id="greenwoolroomsReg" min="524,-354" max="544,-339"/>
+    </union>
+    <negative id="yes-void">
+        <union id="void-areas">
+            <rectangle min="504,-257" max="565,-195"/>
+            <rectangle min="516,-274" max="553,-178"/>
+            <rectangle min="561,-295" max="568,-157"/>
+            <rectangle min="501,-296" max="508,-157"/>
+            <rectangle min="495,-245" max="574,-207"/>
+            <region id="greenspawn"/>
+            <region id="bluespawn"/>
+        </union>
+    </negative>
+    <union id="Iron">
+        <rectangle min="521,-317" max="547,-309"/>
+        <rectangle min="521,-144" max="547,-136"/>
+    </union>
+    <!--Applying-->
+    <apply enter="only-green" block="greenwoolrooms" use="only-green" region="greenwoolroomsReg" message="You may not enter your wool rooms"/>
+    <apply enter="only-blue" block="bluewoolrooms" use="only-blue" region="bluewoolroomsReg" message="You may not enter your wool rooms"/>
+    <apply enter="only-green" region="greenspawn" message="You may not enter the enemy spawn"/>
+    <apply enter="only-blue" region="bluespawn" message="You may not enter the enemy spawn"/>
+    <apply block="iron-diamond-allow">
+        <region>
+            <region id="greenspawn"/>
+            <region id="bluespawn"/>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build in the void!" region="yes-void"/>
+    <apply block-break="blacklisted-blocks" message="You are not allowed to break this block!"/>
+    <apply kit="wool-gear" region="rooms"/>
+</regions>
+<wools>
+    <wool team="blue-team" color="purple" location="533,7,-104">
+        <monument><block>533,12,-328</block></monument>
+    </wool>
+    <wool team="blue-team" color="red" location="535,7,-104">
+        <monument><block>535,12,-328</block></monument>
+    </wool>
+    <wool team="green-team" color="orange" location="533,7,-349">
+        <monument><block>533,12,-125</block></monument>
+    </wool>
+    <wool team="green-team" color="yellow" location="535,7,-349">
+        <monument><block>535,12,-125</block></monument>
+    </wool>
+</wools>
+<itemremove>
+    <item>red sandstone</item>
+    <item>grilled pork</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>shears</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>stone axe</item>
+</itemremove>
+<timelock>on</timelock>
+<maxbuildheight>23</maxbuildheight>
+<renewables>
+    <renewable rate="1.5" grow="false" particles="true" sound="true" avoid-entites="true" region="Iron">
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+</map>

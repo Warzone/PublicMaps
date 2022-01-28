@@ -1,0 +1,173 @@
+<map proto="1.4.2">
+<name>Dead Waters</name>
+<version>1.1.0</version>
+<objective>Destroy the other team's Gold monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="5" max-overfill="6">Blue</team>
+    <team id="red-team"  color="dark red" max="5" max-overfill="6">Red</team>
+</teams>
+<time>20m</time>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="48"        material="wood" damage="3" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="28" amount="24"       material="arrow" />
+        <chestplate unbreakable="true" material="chainmail chestplate" />
+        <boots      unbreakable="true" material="iron boots" />
+        <effect duration="3" amplifier="10">resistance</effect>
+        <effect duration="3" amplifier="1">strength</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+</kits>
+<respawn delay="3.5s"/>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="-90">-370.5,24,80</point>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="0">-370.5,7.5,80</point>
+            <point yaw="-180">-370.5,7.5,80</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="0">-285.5,7.5,80</point>
+            <point yaw="-180">-285.5,7.5,80</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-void">
+        <void />
+    </not>
+    <not id="deny-player">
+        <cause>player</cause>
+    </not>
+</filters>
+<regions>
+    <union id="team-spawns">
+        <rectangle id="blue-spawns" min="-366,94" max="-377,66" />
+        <rectangle id="red-spawns" min="-290,94" max="-277,66" />
+    </union>
+    <above id="world-limit" y="17" />
+    <apply region="team-spawns"  block="never"             message="You may not modify the spawn area" />
+    <apply region="blue-spawns"  enter="only-blue"         message="You may not enter Blue's spawn" />
+    <apply region="red-spawns"   enter="only-red"          message="You may not enter Blue's spawn" />
+    <apply region="world-limit"  block-place="deny-player" message="You may not place blocks that high" />
+    <apply                       block-place="deny-void"   message="You may not interact with that material here" />
+</regions>
+<destroyables materials="gold block" mode-changes="true">
+    <destroyable id="blue-monument" name="Monument" owner="blue-team">
+        <region>
+            <cuboid min="-356,7,81" max="-352,12,79" />
+        </region>
+    </destroyable>
+    <destroyable id="red-monument" name="Monument" owner="red-team">
+        <region>
+            <cuboid min="-302,7,81" max="-300,12,79" />
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="10m" material="coal block" />
+    <mode after="15m" material="packed ice" />
+</modes>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow" />
+        <item amount="8" material="wood" damage="3" />
+        <item            material="golden apple" />
+        <item amount="2" material="gold ingot" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="false" />
+        </filter>
+        <item damage="61" material="flint and steel" />
+        <item amount="3"  material="golden apple" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="8" repeat="true" />
+        </filter>
+        <item amount="1" material="tnt" />
+    </kill-reward>
+</kill-rewards>
+<block-drops>
+    <rule>
+        <filter>
+            <material>gold ore</material>
+        </filter>
+        <drops>
+            <item amount="3" material="gold ingot"/>
+        </drops>
+    </rule>
+</block-drops>
+<item-mods>
+    <rule>
+        <match>
+            <material>bow</material>
+            <material>gold sword</material>
+            <material>gold pickaxe</material>
+            <material>gold axe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+            <material>iron sword</material>
+            <material>iron pickaxe</material>
+            <material>iron axe</material>
+            <material>iron spade</material>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+</item-mods>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>stone sword</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>gold block</item>
+    <item>coal block</item>
+    <item>packed ice</item>
+    <item>stained clay</item>
+</itemremove>
+</map>

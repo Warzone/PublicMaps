@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Golden Drought III</name>
+<version>1.2.4</version>
+<objective>Capture the wool and return it to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<contributors>
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Building Help"/> <!-- Tywnis -->
+</contributors>
+<teams>
+    <team color="dark red" max="16" max-overfill="22">Red</team>
+    <team color="blue" max="16" max-overfill="22">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="2" enchantment="durability:4;dig speed:1">iron pickaxe</item>
+        <item slot="3" amount="64">sandstone</item>
+        <item slot="4" amount="64">sandstone</item>
+        <item slot="5" amount="64" damage="2">wood</item>
+        <item slot="6" amount="32">ladder</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="32">cooked chicken</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="30" amount="64">sandstone</item>
+        <item slot="31" amount="64">sandstone</item>
+        <item slot="32" amount="4">web</item>
+        <potion duration="5" amplifier="3">heal</potion>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>sandstone</item>
+    <item>ladder</item>
+    <item>wood</item>
+    <item>string</item>
+    <item>chainmail chestplate</item>
+    <item>web</item>
+    <item>cooked chicken</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item amount="2">golden apple</item>
+</killreward>
+<spawns>
+    <spawn team="blue" kit="spawn" yaw="90">
+        <point>114,14,0</point>
+    </spawn>
+    <spawn team="red" kit="spawn" yaw="-90">
+        <point>-119,14,0</point>
+    </spawn>
+    <default yaw="-180">
+        <cuboid min="-1,20,49" max="1,20,47"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="red">
+        <team>red</team>
+    </filter>
+    <filter name="blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-gold">
+        <block>gold block</block>
+    </filter>
+    <filter name="anti-grief-red" parents="red">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="anti-grief-blue" parents="blue">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+    <filter name="no-spawner">
+        <deny>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="all" min="-oo,-oo" max="oo,oo"/>
+    <union name="center">
+        <rectangle name="real-center" min="-46,31" max="46,-31"/>
+        <rectangle name="blue-center" min="58,-6" max="45,6"/>
+        <rectangle name="red-center" min="-58,6" max="-45,-6"/>
+    </union>
+    <union name="bases">
+        <cuboid name="red-base" min="-58,0,18" max="-oo,oo,-18"/>
+        <cuboid name="blue-base" min="58,0,-18" max="oo,oo,18"/>
+    </union>
+    <union name="int-bases">
+        <cuboid name="int-red-base" min="-65,0,11" max="-117,oo,-11"/>
+        <cuboid name="int-blue-base" min="65,0,-11" max="117,oo,11"/>
+    </union>
+    <union name="red-wool-rooms"> <!-- Red must enter -->
+        <cuboid name="green-wool" min="118,0,-30" max="130,oo,-18"/>
+        <cuboid name="lime-wool" min="118,0,18" max="130,oo,30"/>
+    </union>
+    <union name="blue-wool-rooms"> <!-- Blue must enter -->
+        <cuboid name="pink-wool" min="-118,0,30" max="-130,oo,18"/>
+        <cuboid name="magenta-wool" min="-118,0,-18" max="-130,oo,-30"/>
+    </union>
+    <!-- Applied -->
+    <apply block="no-spawner" message="You cannot break the spawners!">
+        <region name="all"/>
+    </apply>
+    <apply block-break="only-gold" block-place="deny-all">
+        <region name="bases"/>
+    </apply>
+    <apply enter="red" message="You cannot enter the enemy base!">
+        <region name="int-red-base"/>
+    </apply>
+    <apply enter="blue" message="You cannot enter the enemy base!">
+        <region name="int-blue-base"/>
+    </apply>
+    <apply enter="anti-grief-red" message="You cannot enter your own wool room!">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply enter="anti-grief-blue" message="You cannot enter your own wool room!">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block="anti-grief-red" use="only-red-usage">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply block="anti-grief-blue" use="only-blue-usage">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block="deny-void" message="You cannot build outside the map area!">
+        <negative>
+            <region name="center"/>
+        </negative>
+    </apply>
+</regions>
+<crafting>
+    <shaped>
+        <result damage="1" material="golden apple"/>
+            <shape>
+                <row>GGG</row>
+                <row>GAG</row>
+                <row>GGG</row>
+            </shape>
+        <ingredient symbol="G">gold block</ingredient>
+        <ingredient symbol="A">apple</ingredient>
+    </shaped>
+</crafting>
+<renewables rate="3" grow="true" avoid-entities="true" sound="false">
+    <renewable>
+        <region>
+            <cuboid min="-58,4,18" max="-87,13,-18"/>
+            <cuboid min="58,4,-18" max="87,13,18"/>
+        </region>
+        <renew>gold block</renew>
+    </renewable>
+</renewables>
+<wools team="blue">
+    <wool color="magenta">
+        <block>66,15,0</block>
+    </wool>
+    <wool color="pink">
+        <block>66,15,-1</block>
+    </wool>
+</wools>
+<wools team="red">
+    <wool color="green">
+        <block>-67,15,-1</block>
+    </wool>
+    <wool color="lime">
+        <block>-67,15,0</block>
+    </wool>
+</wools>
+<maxbuildheight>37</maxbuildheight>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
+            <line>`rThe objective is to grab the `4TWO`r wools on the other team's side and return it to your base.</line>
+        </message>
+        <teleport>
+            <point yaw="-60" pitch="10">36,19,-46</point>
+        </teleport>
+    </stage>
+    <stage title="Blue Team Base">
+        <message>
+            <line>`rThis is the `9Blue Team `rbase. You spawn with gear ready to go into battle!</line>
+            <line>`rTo your right and to your left are `bchests `rfilled with extra equipment.</line>
+            <line>`rTo the back is one set of `6gold block `rsupplies.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="10">54,20,0</point>
+        </teleport>
+    </stage>
+    <stage title="Gold Supplies">
+        <message>
+            <line>`rHere is the `6gold `rsupply for `9Blue Team`r. Note that `cRed Team `rhas the same thing on their side.</line>
+            <line>`rYou can craft `6gold armor `rto prepare yourself for battle.</line>
+        </message>
+        <teleport>
+            <point yaw="-135">66.5,4,9.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Wool Rooms">
+        <message>
+            <line>`rThese are `cRed Team`r's wool rooms housing `dpink`r and `5purple`r `rwools.</line>
+            <line>`9Blue Team `rhas `alime`r, and `2green`r `rwools to defend.</line>
+            <line>`cRed Team`r should defend these rooms against `9Blue Team`r invaders who are trying to steal the wool and make it back alive.</line>
+            <line>`rThere are special goodies inside that will help you fight your way out.</line>
+        </message>
+        <teleport>
+            <point yaw="110">-83,18,45</point>
+        </teleport>
+    </stage>
+    <stage title="Notch Apples">
+        <message>
+            <line>`rThere are `b2 `rcenter islands with chests.</line>
+            <line>`rThe chest contains an apple with which you can craft a `aNotch Apple`r.</line>
+            <line>`rThis will help when trying to defend and get in wool rooms</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="30">5.5,10,18.5</point>
+        </teleport>
+    </stage>
+    <stage title="Speed Buff">
+        <message>
+            <line>`rThere is a singe island in the middle of the map with potion spawners.</line>
+            <line>`rThe splash potions give you speed and haste for standing on the spawners.</line>
+            <line>`rThis will help when trying to break a long stalemate</line>
+        </message>
+        <teleport>
+            <point yaw="180">0,12,6</point>
+        </teleport>
+    </stage>
+    <stage title="Victory Monument">
+        <message>
+            <line>`rThis is the `9Blue Team`r's victory monument.</line>
+            <line>`rThe four colored wools from the `cRed Team`r's wool rooms must be placed in the victory monuments for the match to end.</line>
+            <line>`rNote that Red Team has an identical victory monument for their respective wools.</line>
+        </message>
+        <teleport>
+            <point yaw="90">70,14,0</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

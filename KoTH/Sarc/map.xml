@@ -1,0 +1,101 @@
+<map proto="1.4.2">
+<name>Sarc</name>
+<version>1.1.1</version>
+<objective>Be the first to score 300 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="5" max-overfill="6">Blue</team>
+    <team id="red-team"  color="dark red" max="5" max-overfill="6">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="64"        material="golden carrot"/>
+        <item slot="8" amount="36"        material="arrow"/>
+        <chestplate    unbreakable="true" material="chainmail chestplate"/>
+        <boots         unbreakable="true" material="iron boots"/>
+        <effect duration="3" amplifier="10">resistance</effect>
+        <effect duration="3" amplifier="10">strength</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet"/>
+        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet"/>
+        <leggings unbreakable="true" color="cd0000" material="leather leggings"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions angle="-247.5,11.5,-247.5">
+            <block>-249.5,10,-245.5</block>
+        </regions>
+    </default>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions angle="-208.5,4,-297.5">
+            <cylinder base="-208.5,2.5,-301.5" radius="2" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions angle="-236.5,4,-249.5">
+            <cylinder base="-236.5,2.5,-245.5" radius="2" height="0"/>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <any id="block-whitelist">
+        <material>tnt</material>
+        <material>long grass</material>
+    </any>
+</filters>
+<regions>
+    <cuboid id="point-a-base" min="-229,5,-285" max="-234,10,-280"/>
+    <cuboid id="point-b-base" min="-211,5,-267" max="-216,10,-262"/>
+    <cylinder id="point-a-indicator" base="-231.5,17,-282.5" radius="2" height="8"/>
+    <cylinder id="point-b-indicator" base="-213.5,17,-264.5" radius="2" height="8"/>
+    <apply block="block-whitelist" message="You may not interact with that material here"/>
+</regions>
+<score>
+    <limit>300</limit>
+</score>
+<control-points required="false" neutral-state="false" capture-rule="majority" decay="0">
+    <control-point id="point-a" name="Point A" capture-time="5s" points="1" capture="point-a-base" progress="point-a-base" captured="point-a-indicator"/>
+    <control-point id="point-b" name="Point B" capture-time="5s" points="1" capture="point-b-base" progress="point-b-base" captured="point-b-indicator"/>
+</control-points>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" material="arrow"/>
+        <item             material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item amount="2" material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>stick</item>
+    <item>arrow</item>
+</itemremove>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>2s</fuse>
+</tnt>
+</map>

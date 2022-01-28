@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.3.2">
+   <name>Senex 3</name>
+   <version>2.2.1</version>
+   <ganemode>dtm</ganemode>
+   <objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+   <authors>
+      <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
+      <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ViceWatercolour -->
+   </authors>
+   <teams>
+      <team color="gold" max="42">Orange</team>
+      <team color="dark purple" max="42">Purple</team>
+   </teams>
+   <kits>
+      <kit name="spawn">
+         <item slot="0" unbreakable="true">stone sword</item>
+         <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+         <item slot="2" unbreakable="true">diamond pickaxe</item>
+         <item slot="3" unbreakable="true">stone axe</item>
+         <item slot="4" amount="64">wood</item>
+         <item slot="5" amount="64">wood</item>
+         <item slot="6" amount="64">wood</item>
+         <item slot="7" amount="1">golden apple</item>
+         <item slot="8" amount="64">cooked beef</item>
+         <item slot="9" amount="64">arrow</item>
+         <potion duration="5" amplifier="5">damage resistance</potion>
+         <potion duration="5" amplifier="5">heal</potion>
+         <chestplate unbreakable="true">chainmail chestplate</chestplate>
+         <boots unbreakable="true">iron boots</boots>
+      </kit>
+      <kit name="purple" parents="spawn">
+         <helmet unbreakable="true" color="7F3FB2">leather helmet</helmet>
+         <leggings unbreakable="true" color="7F3FB2">leather leggings</leggings>
+      </kit>
+      <kit name="orange" parents="spawn">
+         <helmet unbreakable="true" color="D87F33">leather helmet</helmet>
+         <leggings unbreakable="true" color="D87F33">leather leggings</leggings>
+      </kit>
+   </kits>
+   <spawns>
+      <spawn team="purple" kit="purple" yaw="-90">
+         <point>128.5, 18, -878.5</point>
+      </spawn>
+      <spawn team="orange" kit="orange" yaw="90">
+         <point>36.5,18,-878.5</point>
+      </spawn>
+      <default yaw="180">
+         <point>82.5,37,-809.5</point>
+      </default>
+   </spawns>
+   <filters>
+      <filter name="only-purple">
+         <team>purple</team>
+      </filter>
+      <filter name="only-orange">
+         <team>orange</team>
+      </filter>
+      <filter name="deny-void">
+          <deny>
+              <void/>
+          </deny>
+      </filter>
+   </filters>
+   <regions>
+      <rectangle name="playable" min="-30,-816" max="195,-940" />
+      <cylinder name="purple-spawn" base="128.5,13,-879.5" height="255" radius="9" />
+      <cylinder name="orange-spawn" base="36.5,13,-879.5" height="255" radius="9" />
+      <cuboid name="purple-spawn-bridge-protection" min="136,8,-872" max="150,oo,-886"/>
+      <cuboid name="orange-spawn-bridge-protection" min="14,8,-872" max="28,oo,-886"/>
+      <apply block="deny-all" message="You may not build outside of the playing field!">
+         <negative>
+            <region name="playable" />
+         </negative>
+      </apply>
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="purple-spawn" />
+         <region name="purple-spawn-bridge-protection" />
+      </apply>
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="orange-spawn" />
+         <region name="orange-spawn-bridge-protection" />
+      </apply>
+      <apply enter="only-purple" message="You may not enter the enemy spawn.">
+         <region name="purple-spawn" />
+      </apply>
+      <apply enter="only-orange" message="You may not enter the enemy spawn.">
+         <region name="orange-spawn" />
+      </apply>
+   </regions>
+   <destroyables materials="obsidian" sparks="true">
+      <destroyable name="Left Monument" owner="orange">
+         <block>36,13,-839</block>
+      </destroyable>
+      <destroyable name="Right Monument" owner="orange">
+         <block>36,13,-919</block>
+      </destroyable>
+      <destroyable name="Left Monument" owner="purple">
+         <block>128,13,-919</block>
+      </destroyable>
+      <destroyable name="Right Monument" owner="purple">
+         <block>128,13,-839</block>
+      </destroyable>
+   </destroyables>
+   <itemremove>
+      <item>stone sword</item>
+      <item>bow</item>
+      <item>diamond pickaxe</item>
+      <item>stone axe</item>
+      <item>wood</item>
+      <item>obsidian</item>
+      <item>arrow</item>
+      <item>cooked beef</item>
+      <item>golden apple</item>
+      <item>leather helmet</item>
+      <item>chainmail chestplate</item>
+      <item>leather leggings</item>
+      <item>iron boots</item>
+   </itemremove>
+   <killreward>
+      <item amount="1">golden apple</item>
+   </killreward>
+   <timelock>on</timelock>
+   <maxbuildheight>33</maxbuildheight>
+</map>

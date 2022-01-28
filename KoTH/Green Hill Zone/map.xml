@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Green Hill Zone</name>
+<version>1.0.5</version>
+<objective>Capture and hold all three points to win.</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+</authors>
+<contributors>
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- Dinner1111 -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled</rule>
+</rules>
+<teams>
+    <team max="32" color="gold">Orange</team>
+    <team max="32" color="dark purple">Purple</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" enchantment="durability:3;dig speed:2">iron pickaxe</item>
+        <item slot="3" damage="8261">potion</item>
+        <item slot="7" amount="64">apple</item>
+        <item slot="8" amount="32">arrow</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+    </kit>
+    <kit name="purple" parents="spawn">
+        <helmet color="8B0A91" unbreakable="true">leather helmet</helmet>
+        <leggings color="8B0A91" unbreakable="true">leather leggings</leggings>
+        <boots color="8B0A91" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="FF9214" unbreakable="true">leather helmet</helmet>
+        <leggings color="FF9214" unbreakable="true">leather leggings</leggings>
+        <boots color="FF9214" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="purple" kit="purple" yaw="-150">
+        <cylinder name="p-spawn" base="149,10,87" height="1" radius="2"/>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="-30">
+        <cylinder name="o-spawn" base="149,10,161" height="1" radius="2"/>
+    </spawn>
+    <default yaw="-90">
+        <cuboid min="150,35,123" max="152,35,125"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="no-purple">
+        <not>
+            <team>purple</team>
+        </not>
+    </filter>
+    <filter name="no-orange">
+        <not>
+            <team>orange</team>
+        </not>
+    </filter>
+    <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="deny-beacon">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block-break="only-iron" block-place="deny-all" use="deny-beacon">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply enter="no-purple" message="`aYou may not enter the enemy spawn area!">
+        <cylinder base="149,0,162" radius="5" height="16"/>
+    </apply>
+    <apply enter="no-orange" message="`aYou may not enter the enemy spawn area!">
+        <cylinder base="149,0,86" radius="5" height="16"/>
+    </apply>
+    <apply velocity="@-.5,2.3,0">
+        <cuboid min="183,14,123" max="179,16,126"/>
+    </apply>
+</regions>
+<renewables>
+    <renewable rate="2" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+            <union>
+                <cuboid min="147,10,207" max="162,13,191"/>
+                <cuboid min="147,10,41" max="162,13,56"/>
+            </union>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+    </renewable>
+</renewables>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>apple</item>
+    <item>glass bottle</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<killreward>
+    <item damage="8261">potion</item>
+</killreward>
+<timelock>on</timelock>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<king>
+    <hills>
+        <hill name="Point A" capture-time="10s" points="1">
+            <capture>
+                <cuboid min="185,23,27" max="178,30,34"/>
+            </capture>
+            <progress>
+                <cuboid min="184,22,27" max="178,22,33"/>
+            </progress>
+            <captured>
+                <cuboid min="177,32,34" max="185,32,26"/>
+            </captured>
+        </hill>
+        <hill name="Center" capture-time="15s" points="1">
+            <capture>
+                <cuboid min="146,35,130" max="157,38,119"/>
+            </capture>
+            <progress>
+                <cuboid min="145,34,130" max="157,35,118"/>
+            </progress>
+            <captured>
+                <cuboid min="157,44,118" max="145,44,130"/>
+            </captured>
+        </hill>
+        <hill name="Point B" capture-time="10s" points="1">
+            <capture>
+                <cuboid min="178,23,215" max="185,30,222"/>
+            </capture>
+            <progress>
+                <cuboid min="178,22,215" max="184,22,221"/>
+            </progress>
+            <captured>
+                <cuboid min="185,32,222" max="177,32,214"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+<tutorial>
+    <stage title="King of the Hill (KotH)">
+        <message>
+            <line>`rThis map is a `a`lKing of the Hill `r(KotH) map. The objective is to collect</line>
+            <line>`r750 points by capturing and holding the `c`l3 hills`r, denoted by the beacons.</line>
+        </message>
+        <teleport>
+            <point yaw="160" pitch="10">169,39,152</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Supplies">
+        <message>
+            <line>`rAcross from the spawn, there are `a`liron blocks`r to gain iron armor.</line>
+            <line>`rThere is a `c`lspawner`r, so your team will never run out of iron.</line>
+        </message>
+        <teleport>
+            <point yaw="115" pitch="10">167,12,56</point>
+        </teleport>
+    </stage>
+    <stage title="Jump Pad">
+        <message>
+            <line>`rStep on the `6`lgold blocks`r to be shot up through the mountain.</line>
+        </message>
+        <teleport>
+            <point yaw="-176" pitch="30">181,18,131</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

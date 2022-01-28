@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.2">
+<name>Formorgar 2</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy's monument(s) to win!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
+    <author uuid="9116d3fa-1400-4ada-aecd-2eae1d73e383"/> <!-- Xuph -->
+    <author uuid="3cce0080-9faa-48f9-82cf-64410305822a"/> <!-- ProfessorUtonium -->
+</authors>
+<teams>
+    <team id="purple" color="dark purple" max="25">Purple</team>
+    <team id="yellow" color="yellow" max="25">Yellow</team>
+</teams>
+<spawns>
+    <spawn team="purple" kit="pkit">
+        <regions yaw="180">
+            <point>7.5, 81, 234.5</point>
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="ykit">
+        <regions yaw="0">
+            <point>7.5, 81, 24.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-70.5, 110, 129.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="both">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="1">golden apple</item>
+        <item slot="7" amount="64">cooked beef</item>
+        <item slot="8" amount="4">exp bottle</item>
+        <item slot="9" amount="64">arrow</item>
+        <item slot="10" amount="1">lapis block</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="pkit" parents="both">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+    </kit>
+    <kit id="ykit" parents="both">
+        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
+        <leggings unbreakable="true" color="E5E533">leather leggings</leggings>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="4" material="exp bottle"/>
+    </kill-reward>
+</kill-rewards>
+<destroyables owner="yellow" completion="100%" sparks="true">
+    <destroyable name="Monument A" region="yellow-monument-a" materials="obsidian"/>
+    <destroyable name="Monument B" region="yellow-monument-b" materials="obsidian"/>
+</destroyables>
+    <destroyables owner="purple" completion="100%" sparks="true">
+    <destroyable name="Monument A" region="purple-monument-a" materials="obsidian"/>
+    <destroyable name="Monument B" region="purple-monument-b" materials="obsidian"/>
+</destroyables>
+<filters>
+    <team id="only-yellow">yellow</team>
+    <team id="only-purple">purple</team>
+</filters>
+<regions>
+    <cuboid id="yellow-spawn" min="-3, 0, 15" max="17, oo, 46"/>
+    <cuboid id="purple-spawn" min="-3, 0, 212" max="17, oo, 243"/>
+    <union id="monuments">
+        <block id="yellow-monument-a">-23, 87, 7</block>
+        <block id="yellow-monument-b">37, 87, 7</block>
+        <block id="purple-monument-a">37, 87, 251</block>
+        <block id="purple-monument-b">-23, 87, 251</block>
+    </union>
+    <apply block="never" enter="only-yellow" region="yellow-spawn" message="You can not modify blocks or enter here!"/>
+    <apply block="never" enter="only-purple" region="purple-spawn" message="You can not modify blocks or enter here!"/>
+    <apply enter="only-yellow" region="yellow-spawn"/>
+    <apply enter="only-purple" region="purple-spawn"/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>obsidian</item>
+    <item>exp bottle</item>
+    <item>lapis block</item>
+</itemremove>
+</map>

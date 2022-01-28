@@ -1,0 +1,128 @@
+<map proto="1.4.0">
+<name>Kyoto</name>
+<version>1.1.0</version>
+<gamemode>dtm</gamemode>
+<objective>Destroy the other team’s two monuments to win!</objective>
+<authors>
+    <author uuid="c1d94f18-6ea3-495a-8d1b-7d9eaf393f64"/>
+    <!--   KyotoSquid   -->
+</authors>
+<contributors>
+    <contributor uuid="2df2bef6-6f50-4e4e-a891-048990bf1f5c"/> <!-- Blaszczak -->
+    <contributor uuid="9ec82338-4c1d-4b38-97b2-fedd0a92923c" /> <!-- D_A_N_G_E_R -->
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML" /> <!-- Crazy_ -->
+</contributors>
+<teams>
+   <team id="white" color="white" max="20">White</team>
+   <team id="yellow" color="yellow" max="20">Yellow</team>
+</teams>
+<kits>
+    <kit id="white-kit">
+        <helmet color="FFFFFF">leather helmet</helmet>
+        <chestplate>gold chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="FFFFFF">leather boots</boots>
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" amount="2">golden apple</item>
+        <item slot="4" amount="48">log</item>
+        <item slot="5" amount="32">glass</item>
+        <item slot="6">iron axe</item>
+        <item slot="7" amount="32">cooked beef</item>
+        <item slot="28">arrow</item>
+    </kit>
+    <kit id="yellow-kit">
+        <helmet color="E5E533">leather helmet</helmet>
+        <chestplate>gold chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="E5E533">leather boots</boots>
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" amount="2">golden apple</item>
+        <item slot="4" amount="48">log</item>
+        <item slot="5" amount="32">glass</item>
+        <item slot="6">iron axe</item>
+        <item slot="7" amount="32">cooked beef</item>
+        <item slot="28">arrow</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="white" kit="white-kit">
+        <regions yaw="0">
+            <cylinder base="-2,75,-40" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="yellow-kit">
+        <regions yaw="180">
+            <cylinder base="-2,75,156" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cylinder base="76,115,61" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="white-filter">white</team>
+    <team id="yellow-filter">yellow</team>
+    <any id="can-break">
+        <material>diamond block</material>
+        <material>iron block</material>
+    </any>
+</filters>
+<regions>
+    <negative id="play">
+        <cuboid min="47,58,-59" max="-51,88,175"/>
+    </negative>
+    <cuboid id="white-spawn-area" min="-9,74,-44" max="6,90,-33"/>
+    <cuboid id="yellow-spawn-area" min="6,74,160" max="-9,90,150"/>
+    <apply enter="white-filter" region="white-spawn-area" message="You may not enter the other team's spawn!"/>
+    <apply enter="yellow-filter" region="yellow-spawn-area" message="You may not enter the other team's spawn!"/>
+    <apply block-place="never" region="yellow-spawn-area" block-break="can-break" message="You can only break iron and diamond blocks in spawn!"/>
+    <apply block-place="never" region="white-spawn-area" block-break="can-break" message="You can only break iron and diamond blocks in spawn!"/>
+    <apply block="never" region="play" message="You may not interact with blocks outside the playing field."/>
+</regions>
+<destroyables name="Left Monument" materials="gold block;obsidian" completion="100%">
+    <destroyable owner="white">
+        <region>
+            <cuboid min="43,65,-28" max="39,69,-30"/>
+        </region>
+    </destroyable>
+    <destroyable owner="yellow">
+        <region>
+            <cuboid min="-43,65,144" max="-47,69,146"/>
+        </region>
+    </destroyable>
+</destroyables>
+<destroyables name="Right Monument" materials="gold block;obsidian" completion="100%">
+    <destroyable owner="white">
+        <region>
+            <cuboid min="-43,65,-28" max="-47,69,-30"/>
+        </region>
+    </destroyable>
+    <destroyable owner="yellow">
+        <region>
+            <cuboid min="43,65,144" max="39,69,146"/>
+        </region>
+    </destroyable>
+</destroyables>
+<itemremove>
+    <item>leather helmet</item>
+    <item>gold chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>gold block</item>
+    <item>obsidian</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+</map>

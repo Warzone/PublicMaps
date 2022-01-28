@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Flag">
+<name>Museum</name>
+<version>1.2.0</version>
+<objective>First team to capture the enemy flag 3 times wins!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
+    <author uuid="1fc24e45-8ce8-4749-922f-fc9e8c59cf74"/> <!-- betche -->
+    <author uuid="f36bdc4f-7dab-462b-87b6-dee2e3af8490"/> <!-- _Stay -->
+    <author uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b"/> <!-- MewTwoKing -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="orange" color="gold" max="25">Orange</team>
+    <team id="cyan" color="dark aqua" max="25">Cyan</team>
+</teams>
+<!-- Match information -->
+<time>20m</time>
+<score>
+    <limit>3</limit>
+</score>
+<respawn delay="3.5s"/>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="7" amount="1" material="golden apple"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <item slot="17" amount="32" material="arrow"/>
+        <helmet unbreakable="true" material="chainmail helmet"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="orange-kit" parents="spawn">
+        <chestplate unbreakable="true" color="FFA500" material="leather chestplate"/>
+        <boots unbreakable="true" color="FFA500" material="leather boots"/>
+    </kit>
+    <kit id="cyan-kit" parents="spawn">
+        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
+        <boots unbreakable="true" color="4C7F99" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="orange" kit="orange-kit" region="orange-spawn"/>
+    <spawn team="cyan" kit="cyan-kit" yaw="180" region="cyan-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="orange-only">orange</team>
+    <team id="cyan-only">cyan</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="orange-spawn-protection" min="-16.5,0,-86.5" max="17.5,oo,-108"/>
+        <cuboid id="orange-right-spawn-protection" min="-10,0,-80" max="-16.5,64,-86.5"/>
+        <cuboid id="orange-left-spawn-protection" min="11,0,-80" max="17.5,64,-86.5"/>
+        <cuboid id="cyan-spawn-protection" min="17.5,0,87.5" max="-16.5,oo,108"/>
+        <cuboid id="cyan-right-spawn-protection" min="11,0,81" max="17.5,64,87.5"/>
+        <cuboid id="cyan-left-spawn-protection" min="-10,0,81" max="-16.5,64,87.5"/>
+    </union>
+    <cylinder id="orange-net" base="0.5,59,-81.5" radius="1" height="3"/>
+    <cylinder id="cyan-net" base="0.5,59,82.5" radius="1" height="3"/>
+    <point id="orange-spawn">0.5,59,-103</point>
+    <point id="cyan-spawn">0.5,59,104</point>
+    <point id="obs-spawn">0.5,53.5,0.5</point>
+    <!-- Applications -->
+    <apply region="spawn-protections"          block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="orange-spawn-protection"    enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn-protection"      enter="cyan-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Portals -->
+<portals>
+    <!-- Orange Left Portal -->
+    <portal protect="true" sound="false">
+        <region>
+            <cuboid min="20.5,50,-20.5" max="20.5,51,-20.5"/>
+        </region>
+        <destination>
+            <point>20.5,59,-20.5</point>
+        </destination>
+    </portal>
+    <!-- Orange Right Portal -->
+    <portal protect="true" sound="false">
+      <region>
+          <cuboid min="-19.5,50,-20.5" max="-19.5,51,-20.5"/>
+      </region>
+      <destination>
+          <point>-19.5,59,-20.5</point>
+      </destination>
+    </portal>
+    <!-- Cyan Left Portal -->
+    <portal protect="true" sound="false">
+        <region>
+            <cuboid min="-19.5,50,21.5" max="-19.5,51,21.5"/>
+        </region>
+        <destination>
+            <point>-19.5,59,21.5</point>
+        </destination>
+    </portal>
+    <!-- Cyan Right Portal -->
+    <portal protect="true" sound="false">
+      <region>
+          <cuboid min="20.5,50,21.5" max="20.5,51,21.5"/>
+      </region>
+      <destination>
+          <point>20.5,59,21.5</point>
+      </destination>
+    </portal>
+</portals>
+<!-- Flags -->
+<flags>
+    <!-- Orange's Flag -->
+    <post id="orange-flag-post" pickup-filter="cyan-only" recover-time="0" respawn-time="20s">0.5,60,-81.5</post>
+    <flag id="orange-flag" owner="orange" name="Orange Flag" color="orange" post="orange-flag-post" beam="true"/>
+    <net post="orange-flag-post" points="1" region="cyan-net" capture-filter="cyan-only"/>
+    <!-- Cyan's Flag -->
+    <post id="cyan-flag-post" pickup-filter="orange-only" recover-time="0" respawn-time="20s">0.5,60,82.5</post>
+    <flag id="cyan-flag" owner="cyan" name="Cyan Flag" color="cyan" post="cyan-flag-post" beam="true"/>
+    <net post="cyan-flag-post" points="1" region="orange-net" capture-filter="orange-only"/>
+</flags>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>golden carrot</item>
+    <item>arrow</item>
+    <item>chainmail helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <killreward>
+        <item material="golden apple"/>
+    </killreward>
+</kill-rewards>
+</map>

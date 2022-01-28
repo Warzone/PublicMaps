@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Eclipse</name>
+<version>1.0.2</version>
+<objective>Reach 300 points before the other team!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<score>
+    <limit>300</limit>
+</score>
+<teams>
+    <team id="purple" color="dark purple" max="5" max-overfill="6">Purple</team>
+    <team id="green" color="green" max="5" max-overfill="6">Green</team>
+</teams>
+<spawns>
+    <spawn team="purple" kit="purple-kit">
+        <regions yaw="90">
+            <point>-117.5,1,17.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green" kit="green-kit">
+        <regions yaw="-90">
+            <point>-151.5,1,17.5</point>
+        </regions>
+    </spawn>
+    <default kit="obs-kit">
+        <regions yaw="-90">
+            <cuboid min="-147.5,7,19.5" max="-146.5,7,15.5"/>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="3s"/>
+<kits>
+    <kit id="obs-kit">
+        <potion amplifier="255" duration="9999">night vision</potion>
+    </kit>
+    <kit id="spawn">
+        <clear/>
+		    <item slot="0" material="stone sword" unbreakable="true"/>
+	    	<item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="golden apple" amount="1"/>
+		    <item slot="3" material="arrow" amount="8"/>
+	    	<potion amplifier="255" duration="3">resistance</potion>
+        <potion amplifier="255" duration="9999">night vision</potion>
+	    	<chestplate color="4C4C4C" unbreakable="true" material="leather chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+	    	<helmet color="7F3FB2" material="leather helmet" unbreakable="true"/>
+	    	<leggings color="7F3FB2" material="leather leggings" unbreakable="true"/>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+	    	<helmet color="01DF01" material="leather helmet" unbreakable="true"/>
+	    	<leggings color="01DF01" material="leather leggings" unbreakable="true"/>
+    </kit>
+</kits>
+<control-points incremental="true" show-progress="true" required="false" points="1" capture-time="5" neutral-state="true">
+    <control-point name="Hill A" id="hill-a">
+        <capture-region>
+            <cuboid min="-137,4,34" max="-132,7,29"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-137,4,34" max="-132,7,29"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-137,4,34" max="-132,7,29"/>
+        </owner-display-region>
+    </control-point>
+    <control-point name="Hill B" id="hill-b">
+        <capture-region>
+            <cuboid min="-132,4,1" max="-137,7,6"/>
+        </capture-region>
+        <progress-display-region>
+            <cuboid min="-132,4,1" max="-137,7,6"/>
+        </progress-display-region>
+        <owner-display-region>
+            <cuboid min="-132,4,1" max="-137,7,6"/>
+        </owner-display-region>
+    </control-point>
+</control-points>
+<regions>
+    <cuboid id="purple-spawn" min="-122,0,15" max="-114,5,20"/>
+    <cuboid id="green-spawn" min="-147,0,20" max="-155,5,15"/>
+    <apply enter="only-purple" message="You may not enter the enemy spawn!" region="purple-spawn"/>
+    <apply enter="only-green" message="You may not enter the enemy spawn!" region="green-spawn"/>
+    <apply block="never" region="everywhere"/>
+</regions>
+<filters>
+    <team id="only-green">green</team>
+    <team id="only-purple">purple</team>
+</filters>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<kill-rewards>
+    <kill-reward>
+	      <item amount="1" material="golden apple"/>
+       	<item amount="4" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+</map>

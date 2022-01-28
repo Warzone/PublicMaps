@@ -1,0 +1,220 @@
+<map proto="1.4.2">
+<name>Dry Outpost</name>
+<version>1.0.2</version>
+<objective>Capture the wool and return it to your victory monument</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="4" max-overfill="5">Blue</team>
+    <team id="red-team"  color="dark red" max="4" max-overfill="5">Red</team>
+</teams>
+<time>20m</time>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="stone pickaxe" />
+        <item slot="3" unbreakable="true" material="stone axe" />
+        <item slot="4" amount="48"        material="wood" damage="4" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <item slot="28" amount="36"       material="arrow" />
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <boots         unbreakable="true" material="iron boots" />
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="11"  material="stained clay" />
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item     slot="5" amount="36" damage="14"  material="stained clay" />
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+</kits>
+<spawns>
+    <default region="default-spawn" yaw="0" />
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-90">-258.5,7.5,-116.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="90">-166.5,7.5,-116.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-void">
+        <void />
+    </not>
+    <not id="deny-player-cause">
+        <cause>player</cause>
+    </not>
+    <all id="view-wool-beam-blue">
+        <filter id="only-blue" />
+        <not>
+            <all id="view-monument-beam-blue">
+                <filter id="only-blue" />
+                <carrying>
+                    <item damage="14" material="wool" />
+                </carrying>
+            </all>
+        </not>
+    </all>
+    <all id="view-wool-beam-red">
+        <filter id="only-red" />
+        <not>
+            <all id="view-monument-beam-red">
+                <filter id="only-red" />
+                <carrying>
+                    <item damage="11" material="wool" />
+                </carrying>
+            </all>
+        </not>
+    </all>
+    <any id="wool-room-blacklist">
+        <material>chest</material>
+        <material>redstone wire</material>
+        <material>redstone torch on</material>
+    </any>
+    <not id="deny-blue-wool-room">
+        <any>
+            <filter id="only-blue" />
+            <filter id="wool-room-blacklist" />
+        </any>
+    </not>
+    <not id="deny-red-wool-room">
+        <any>
+            <filter id="only-red" />
+            <filter id="wool-room-blacklist" />
+        </any>
+    </not>
+</filters>
+<regions>
+    <block id="default-spawn">-212.5,5,-152.5</block>
+    <rectangle id="blue-spawn"  min="-261,-113" max="-237,-121" />
+    <rectangle id="red-spawn"   min="-164,-113" max="-188,-121" />
+    <rectangle id="blue-wool"   min="-231,-164" max="-219,-152" />
+    <rectangle id="red-wool"    min="-194,-152" max="-206,-164" />
+    <rectangle id="middle-wall" min="-219,-164" max="-206,-145" />
+    <above id="world-limit" y="17" />
+    <apply region="middle-wall"  block="never"                   message="You may not modify this area" />
+    <apply region="middle-wall"  enter="never"                   message="You may not cross this area" />
+    <apply region="blue-spawn"   enter="only-blue"               message="You may not enter the other team's spawn" />
+    <apply region="blue-spawn"   block="never"                   message="You may not modify the spawn area" />
+    <apply region="red-spawn"    enter="only-red"                message="You may not enter the other team's spawn" />
+    <apply region="red-spawn"    block="never"                   message="You may not modify the spawn area" />
+    <apply region="blue-wool"    enter="only-red"  block="deny-blue-wool-room" use="only-red"  message="You may not do that in this woolroom" />
+    <apply region="red-wool"     enter="only-blue" block="deny-red-wool-room"  use="only-blue" message="You may not do that in this woolroom" />
+    <apply region="world-limit"  block-place="deny-player-cause" message="You may not place blocks that high" />
+    <apply block-place="deny-void"                               message="You may not interact with that material here" />
+</regions>
+<wools>
+    <wool team="blue-team" color="red" location="-199.5,4,-158">
+        <monument>
+            <block>-254.5,6,-116.5</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="blue" location="-225.5,4,-158">
+        <monument>
+            <block>-170.5,6,-116.5</block>
+        </monument>
+    </wool>
+</wools>
+<beacons>
+    <beacon location="-199.5,4,-158"   color="blue" particle-count="45" visibility-filter="view-wool-beam-blue" />
+    <beacon location="-246.5,6,-116.5" color="blue" particle-count="45" visibility-filter="view-monument-beam-blue" />
+    <beacon location="-225.5,4,-158"   color="red"  particle-count="45" visibility-filter="view-wool-beam-red" />
+    <beacon location="-178.5,6,-116.5" color="red"  particle-count="45" visibility-filter="view-monument-beam-red" />
+</beacons>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" material="wood" damage="4" />
+        <item amount="12" material="arrow" />
+        <item             material="golden apple" />
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="12" damage="11" material="stained clay" />
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="12" damage="14" material="stained clay" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="false" />
+        </filter>
+        <item damage="61" material="flint and steel" />
+        <item amount="2"  material="golden apple" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="8" repeat="true" />
+        </filter>
+        <item amount="1" material="tnt" />
+    </kill-reward>
+</kill-rewards>
+<block-drops>
+    <rule>
+        <filter>
+            <material>gold ore</material>
+        </filter>
+        <drops>
+            <item material="gold ingot" amount="4" />
+        </drops>
+    </rule>
+</block-drops>
+<item-mods>
+    <rule>
+        <match>
+            <material>bow</material>
+            <material>gold sword</material>
+            <material>gold pickaxe</material>
+            <material>gold axe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+    <rule>
+        <match>
+            <material>gold boots</material>
+        </match>
+        <modify>
+            <enchantment level="1">protection fall</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>stone sword</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>stained clay</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>arrow</item>
+    <item>string</item>
+</itemremove>
+<itemkeep>
+    <item>wood</item>
+</itemkeep>
+</map>

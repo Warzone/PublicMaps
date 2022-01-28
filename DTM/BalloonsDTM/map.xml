@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>BalloonsDTM</name>
+<version>2.2.1</version>
+<objective>Destroy the enemy team's monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- Pandaboy999 -->
+</authors>
+<contributors>
+    <contributor uuid="b0b3c5d5-e9bd-4984-bc07-1bd552d4b042" contribution="Balloon and Building Design"/> <!-- Beebou -->
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML Help"/> <!-- Dinner1111 -->
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Aesthetics"/> <!-- Stealth5061 -->
+    <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="Renewables"/> <!-- BlockDrop74 -->
+</contributors>
+<teams>
+    <team color="dark red" max="12">Red</team>
+    <team color="blue" max="12">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:3;durability:3">stone axe</item>
+        <item slot="4" amount="64">bread</item>
+        <item slot="5" amount="32">log</item>
+        <item slot="6" amount="64">ladder</item>
+        <item slot="7" amount="64">glass</item>
+        <item slot="8" amount="2">golden apple</item>
+        <item slot="9" amount="16" damage="4">ink sack</item>
+        <item slot="28" amount="16">arrow</item>
+        <item slot="34" amount="64">glass</item>
+        <item slot="29" enchantment="dig speed:3;durability:3">stone spade</item>
+        <potion duration="5" amplifier="5">damage resistance</potion>
+        <potion duration="5" amplifier="5">heal</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<crafting>
+    <disable>leather chestplate</disable>
+    <disable>leather helmet</disable>
+    <disable>leather leggings</disable>
+    <disable>leather boots</disable>
+</crafting>
+<spawns>
+    <spawn team="red" kit="red" angle="19.5,9.5,27.5">
+        <cylinder base="23.5,9,27.5" height="0" radius="2"/>
+    </spawn>
+    <spawn team="blue" kit="blue" angle="-18.5,9.5,-26.5">
+        <cylinder base="-22.5,9,-26.5" height="0" radius="2"/>
+    </spawn>
+    <default angle="0.5,64.5,-1.5">
+        <cuboid min="-1,63.5,-1" max="1,63.5,1"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="deny-fire-spread">
+        <deny>
+            <block>fire</block>
+        </deny>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="playable" min="-31,-57" max="31,57"/>
+    <cuboid name="red-spawn" min="27,13,21" max="18,8,33"/>
+    <cuboid name="blue-spawn" min="-27,13,-21" max="-18,8,-33"/>
+    <union name="enchantment-tables">
+        <block>21,15,0</block>
+        <block>-21,15,0</block>
+    </union>
+    <apply block="deny-fire-spread">
+        <complement>
+            <region name="playable"/>
+            <block>0.5,26,48.5</block>
+            <block>0.5,26,-47.5</block>
+        </complement>
+    </apply>
+    <apply block="deny-all" message="You may not build outside of the playing field!">
+        <negative>
+            <region name="playable"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="Don't break the spawns!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply block="deny-all" message="Don't break the spawns!">
+        <region name="blue-spawn"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter `4Red Team`c's spawn area!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter `9Blue Team`c's spawn area!">
+        <region name="blue-spawn"/>
+    </apply>
+    <apply block="deny-all">
+        <region name="enchantment-tables"/>
+    </apply>
+</regions>
+<destroyables name="Monument" materials="obsidian" completion="100%">
+    <destroyable owner="red">
+        <cuboid min="-1,20,49" max="1,23,47"/>
+    </destroyable>
+    <destroyable owner="blue">
+        <cuboid min="-1,20,-47" max="1,23,-49"/>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+    <tool>shears</tool>
+</toolrepair>
+<itemremove>
+    <item>seeds</item>
+    <item>flint</item>
+    <item>obsidian</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>coal</item>
+    <item>redstone</item>
+    <item>351:4</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>ladder</item>
+    <item>bread</item>
+    <item>emerald</item>
+    <item>dispenser</item>
+    <item>burning furnace</item>
+    <item>ink sack</item>
+</itemremove>
+<killreward>
+    <item amount="8">gold nugget</item>
+    <item amount="1">exp bottle</item>
+    <item amount="8">arrow</item>
+</killreward>
+<timelock>on</timelock>
+<maxbuildheight>31</maxbuildheight>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <teleport>
+            <point angle="21.5,15.5,0.5">50,48,0.5</point>
+        </teleport>
+        <message>
+            <line>The objective is `3Destroy the Monument`r.</line>
+            <line>Your team can win by destroying the other team's `4monument`r, which consists of two `5obsidian blocks`r.</line>
+        </message>
+    </stage>
+    <stage title="The Monument">
+        <teleport>
+            <point pitch="10" yaw="42">10,23,38</point>
+        </teleport>
+        <message>
+            <line>The monument's two `5obsidian blocks `rare located in the center of the `9large balloon`r.</line>
+            <line>Note that there is also a monument on `9Blue Team`r's side.</line>
+            <line>`4Red Team `rmust defend their monument from `9Blue Team `rinvaders, and vice versa.</line>
+        </message>
+    </stage>
+    <stage title="Your Side">
+        <teleport>
+            <point angle="0.5,9.5,44">-0.5,24.5,4.5</point>
+        </teleport>
+        <message>
+            <line>This is `4Red Team`r's side. (Note that `9Blue Team`r's side is exactly the same.)</line>
+            <line>There are chests with `6special supplies `rscattered throughout.</line>
+            <line>These supplies can help you do things such as `5enchant your tools `ror `2build defenses`r.</line>
+        </message>
+    </stage>
+    <stage title="Center Lane">
+        <teleport>
+            <point pitch="25" yaw="47.5">31,23.5,-15.5</point>
+        </teleport>
+        <message>
+            <line>This is the center lane. The purple balloons have `5enchanting tables `rin them.</line>
+            <line>These tables can be used to `2enchant your tools `rwith special abilities.</line>
+            <line>These abilities can give you a `4major advantage `rin `6navigating the map `ror `6fighting with other players`r.</line>
+        </message>
+    </stage>
+</tutorial>
+</map>
