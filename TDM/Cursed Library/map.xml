@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<map proto="2.0.0">
+<name>Cursed Library</name>
+<version>1.1.0</version>
+<objective>Get the most points in 3 minutes!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--  mitchiii_  -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="5" max-overfill="6">Red</team>
+    <team id="blue" color="blue" max="5" max-overfill="6">Blue</team>
+</teams>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+		<item slot="2" material="golden apple" amount="1"/>
+        <item slot="8" material="arrow" amount="24"/>
+        <leggings material="chainmail leggings" unbreakable="true"/>
+        <effect duration="4s" amplifier="100">damage resistance</effect>
+        <effect>night vision</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="red-kit" parent="spawn-kit">
+        <helmet material="leather helmet" color="993333" unbreakable="true"/>
+        <chestplate material="leather chestplate" color="993333" unbreakable="true"/>
+        <boots material="leather boots" color="993333" unbreakable="true"/>
+    </kit>
+    <kit id="blue-kit" parent="spawn-kit">
+        <helmet material="leather helmet" color="334cb2" unbreakable="true"/>
+        <chestplate material="leather chestplate" color="334cb2" unbreakable="true"/>
+        <boots material="leather boots" color="334cb2" unbreakable="true"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <region yaw="-90">
+            <cylinder base="-82,25.5,-115.5" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <region yaw="90">
+            <cylinder base="-23,25.5,-115.5" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <default>
+        <region angle="-52.5,32.5,-131.5">
+            <cuboid min="-55,31,-128" max="-50,31.1,-130"/>
+        </region>
+    </default>
+</spawns>
+<score kills="1"/>
+<time>3m</time>
+<filters>
+	<team id="only-blue">blue</team>
+	<team id="only-red">red</team>
+</filters>
+<regions>
+    <above id="blue-spawn" x="-33"/>
+    <below id="red-spawn" x="-71"/>
+    <apply region="blue-spawn" enter="only-blue" message="You cannot enter the enemy team's spawn!"/>
+    <apply region="red-spawn" enter="only-red" message="You cannot enter the enemy team's spawn!"/>
+    <apply block="never"/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>ink sack</item>
+</itemremove>
+<kill-reward>
+    <item material="arrow" amount="8"/>
+    <item material="golden apple"/>
+    <item material="ink sack" damage="4"/>
+    <item material="exp bottle" amount="3"/>
+</kill-reward>	
+</map>

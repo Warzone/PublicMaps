@@ -1,0 +1,119 @@
+<map proto="1.4.2">
+<name>Gladiator</name>
+<version>1.0.0</version>
+<objective>Reach 100 kills or be the team with the most kills before the timer ends!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="f391227e-626f-4076-a389-95e2b922d167" contribution="Map maker"/> <!-- Sir__Haribo -->
+</authors>
+<teams>
+    <team id="cyan"   color="dark aqua"   min="1" max="10">Cyan</team>
+    <team id="lime"   color="green"       min="1" max="10">Lime</team>
+    <team id="purple" color="dark purple" min="1" max="10">Purple</team>
+    <team id="red"    color="red"         min="1" max="10">Red</team>
+</teams>
+<time result="score">8m</time>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="2"  material="golden apple"/>
+        <item slot="4" amount="16" material="log"/>
+        <item slot="5" amount="32" material="cobblestone"/>
+    </kit>
+    <kit id="cyan-kit" parent="default">
+        <helmet     unbreakable="true" color="4C7F99" material="leather helmet"/>
+        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="4C7F99" material="leather leggings"/>
+        <boots      unbreakable="true" color="4C7F99" material="leather boots"/>
+    </kit>
+    <kit id="lime-kit" parent="default">
+        <helmet     unbreakable="true" color="7FCC19" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7FCC19" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="7FCC19" material="leather leggings"/>
+        <boots      unbreakable="true" color="7FCC19" material="leather boots"/>
+    </kit>
+    <kit id="purple-kit" parent="default">
+        <helmet     unbreakable="true" color="7F3FB2" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7F3FB2" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="7F3FB2" material="leather leggings"/>
+        <boots      unbreakable="true" color="7F3FB2" material="leather boots"/>
+    </kit>
+    <kit id="red-kit" parent="default">
+        <helmet     unbreakable="true" color="993333" material="leather helmet"/>
+        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="993333" material="leather leggings"/>
+        <boots      unbreakable="true" color="993333" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-45">
+            <point>-41.5,57,-862.5</point>
+        </region>
+    </default>
+    <spawn team="cyan" kit="cyan-kit" yaw="90">
+        <regions>
+            <point>76.5,57,-797.5</point>
+        </regions>
+    </spawn>
+    <spawn team="lime" kit="lime-kit" yaw="0">
+        <regions>
+            <point>23.5,57,-850.5</point>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple-kit" yaw="-90">
+        <regions>
+            <point>-29.5,57,-797.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="180">
+        <regions>
+            <point>23.5,57,-744.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-cyan">cyan</team>
+    <team id="only-lime">lime</team>
+    <team id="only-purple">purple</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cylinder id="cyan-spawn-protection"   base="76,56,-798"  radius="4" height="6"/>
+        <cylinder id="lime-spawn-protection"   base="23,56,-851"  radius="4" height="6"/>
+        <cylinder id="purple-spawn-protection" base="-30,56,-798" radius="4" height="6"/>
+        <cylinder id="red-spawn-protection"    base="23,56,-745"  radius="4" height="6"/>
+    </union>
+    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="cyan-spawn-protection"   enter="only-cyan"   message="You may not enter the enemy spawn."/>
+    <apply region="lime-spawn-protection"   enter="only-lime"   message="You may not enter the enemy spawn."/>
+    <apply region="purple-spawn-protection" enter="only-purple" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="only-red"    message="You may not enter the enemy spawn."/>
+</regions>
+<score>
+    <limit>100</limit>
+    <kills>1</kills>
+</score>
+<itemremove>
+    <item>iron sword</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>cobblestone</item>
+    <item>golden apple</item>
+</itemremove>
+<kill-reward>
+    <item material="golden apple"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

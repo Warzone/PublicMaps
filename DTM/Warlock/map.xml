@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Warlock</name>
+<version>1.3.5</version>
+<objective>Break the obsidian from the enemy team's monument.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="e5953ddf-c1fc-4405-9ac9-6939631cd185"/> <!-- McSpider -->
+</authors>
+<contributors>
+    <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map Feedback and XML Coding"/> <!-- Plastix -->
+</contributors>
+<rules>
+    <rule>Don't spawn kill!</rule>
+    <rule>Don't block the spawns!</rule>
+</rules>
+<teams>
+    <team color="dark red" max="12">Red</team>
+    <team color="blue" max="12">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6" amount="64" damage="2">wood</item>
+        <item slot="17" amount="2">gold nugget</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="27" amount="64">apple</item>
+        <potion duration="2" amplifier="1">heal</potion>
+        <potion duration="4">damage resistance</potion>
+    </kit>
+    <kit name="red-spawn" parents="spawn">
+        <item lore="Red spawn sword" slot="0" unbreakable="true">iron sword</item>
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="blue-spawn" parents="spawn">
+        <item lore="Blue spawn sword" slot="0" unbreakable="true">iron sword</item>
+        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0066cc" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="red-spawn" team="red" yaw="0">
+        <cuboid min="40,6,-30" max="44,6,-34"/>
+    </spawn>
+    <spawn kit="blue-spawn" team="blue" yaw="180">
+        <cuboid min="40,6,31" max="44,6,35"/>
+    </spawn>
+    <default yaw="90">
+        <point>133.5,22,0.5</point>
+    </default>
+</spawns>
+<destroyables name="Monument" materials="obsidian" mode-changes="true">
+    <destroyable owner="red">
+        <cuboid min="77,1,-36" max="78,3,-37"/>
+    </destroyable>
+    <destroyable owner="blue">
+        <cuboid min="77,1,37" max="78,3,38"/>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode material="beacon" after="20m"/>
+</modes>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>apple</item>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+</itemremove>
+<filters>
+    <filter name="base-filter">
+        <filter name="deny-blocks"/>
+        <block>glass</block>
+    </filter>
+    <filter name="no-beacon">
+        <not>
+            <block>beacon</block>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="base-filter">
+        <union name="red-base">
+            <cuboid min="36,5,-38" max="55,11,-25"/>
+            <cuboid min="54,5,-31" max="61,11,-38"/>
+        </union>
+    </apply>
+    <apply block="base-filter">
+        <union name="blue-base">
+            <cuboid min="36,5,39" max="55,11,26"/>
+            <cuboid min="54,5,32" max="61,11,39"/>
+        </union>
+    </apply>
+    <apply block="deny-all">
+        <negative>
+            <cuboid min="55,40,-oo" max="60,-oo,oo"/>
+            <cuboid min="-oo,-oo,-oo" max="121,22,oo"/>
+        </negative>
+    </apply>
+    <apply use="no-beacon">
+        <negative>
+            <empty/>
+        </negative>
+    </apply>
+</regions>
+<killreward>
+    <item>gold nugget</item>
+</killreward>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+</tnt>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Monument (DTM) `rmap.</line>
+            <line>The objective is to destroy the other team's monument on their side.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="30">20.5,48,0.5</point>
+        </teleport>
+    </stage>
+    <stage title="Blue Base">
+        <message>
+            <line>`rThis is the `9Blue Base`r.</line>
+            <line>`rThis is where the `9Blue Team `rspawns. You spawn with gear ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="140" pitch="10">43.5,7.5,35.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Base">
+        <message>
+            <line>`rThis is the `cRed Base`r.</line>
+            <line>`rThis is where the `cRed Team `rspawns. You spawn with gear ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="40" pitch="10">43.5,7.5,-34.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Monument">
+        <message>
+            <line>`rThis is the `cRed Monument`r.</line>
+            <line>`rThe two `5obsidian blocks `rare what the `9Blue Team `rneeds to destroy to win.</line>
+        </message>
+        <teleport>
+            <point yaw="180" angle="77.5,3,-36.5">77.5,22,-35.5</point>
+        </teleport>
+    </stage>
+    <stage title="Blue Monument">
+        <message>
+            <line>`rThis is the `9Blue Monument`r.</line>
+            <line>`rThe two `5obsidian blocks `rare what the `cRed Team `rneeds to destroy to win.</line>
+        </message>
+        <teleport>
+            <point yaw="0" angle="77.5,3,37.5">77.5,22,36.5</point>
+        </teleport>
+    </stage>
+    <stage title="Underground Passages">
+        <message>
+            <line>`rThese are `bunderground passages `rthat connect the two sides.</line>
+            <line>`rYou can use these to sneak to your enemy's `amonument`r!</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="-15">101,-8,0.5</point>
+        </teleport>
+    </stage>
+    <stage title="Skybridge Lane">
+        <message>
+            <line>`rA extra high `bskybridge lane `ris marked with floating glowstone buoys.</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="0">85.5,34,0.5</point>
+        </teleport>
+    </stage>
+    <stage title="Gunpowder Chests">
+        <message>
+            <line>`rEach team has 5 `4gunpowder chests `rwhich can be used to craft TNT.</line>
+            <line>`rUse this TNT wisely!</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="0">40.5,4,0.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map> 
