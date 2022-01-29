@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Wool">
+<name>Mayan Apocalypse DTW</name>
+<version>1.0.7</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924"/> <!-- Mikeg542 -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="50">Blue</team>
+    <team id="red-team" color="dark red" max="50">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="64">arrow</item>
+				<helmet unbreakable="true">iron helmet</helmet>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="180" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="18%" repairable="false" show-progress="true" sparks="true">
+    <destroyable name="Blue Wool" owner="blue-team" materials="wool" region="blue-wool"/>
+    <destroyable name="Red Wool" owner="red-team" materials="wool" region="red-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="108,21,9"  max="112,28,13"/>
+        <cuboid id="red-wool" min="-123,21,68" max="-127,28,72"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="96,17,80" max="125,34,64"/>
+        <cuboid id="red-spawn-protection" min="-112,17,0" max="-140,34,16"/>
+    </union>
+    <point id="blue-spawn">108,25,76</point>
+    <point id="red-spawn">-123,25,4.9</point>
+    <point id="obs-spawn">-6.9,52,120.7</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-141,0" max="125,79"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+		<kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="5"/>
+            </all>
+        </filter>
+        <item amount="4">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>75</maxbuildheight>
+</map>
