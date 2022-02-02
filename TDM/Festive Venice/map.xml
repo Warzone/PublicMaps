@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.0">
 <name>Festive Venice</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Get the most kills in 15 minutes!</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -9,7 +9,7 @@
     <author uuid="468c7d75-62e0-4d11-8fc1-4888965be11c"/> <!-- matt772 -->
 </authors>
 <teams>
-    <team color="green" max="64">Green</team>
+    <team color="blue" max="64">Blue</team>
     <team color="dark red" max="64">Red</team>
 </teams>
 <kits>
@@ -31,15 +31,15 @@
         <leggings color="cd0000">leather leggings</leggings>
         <boots color="cd0000" enchantment="protection fall:2">leather boots</boots>
     </kit>
-    <kit name="green" parents="spawn">
-        <helmet color="00cd00">leather helmet</helmet>
+    <kit name="blue" parents="spawn">
+        <helmet color="6E6EF9">leather helmet</helmet>
         <chestplate>chainmail chestplate</chestplate>
-        <leggings color="00cd00">leather leggings</leggings>
-        <boots color="00cd00" enchantment="protection fall:2">leather boots</boots>
+        <leggings color="6E6EF9">leather leggings</leggings>
+        <boots color="6E6EF9" enchantment="protection fall:2">leather boots</boots>
     </kit>
 </kits>
 <spawns>
-    <spawn team="green" kit="green" yaw="0"><cuboid min="7,12,-84" max="-6,12,-76"/></spawn>
+    <spawn team="blue" kit="blue" yaw="0"><cuboid min="7,12,-84" max="-6,12,-76"/></spawn>
     <spawn team="red" kit="red" yaw="180"><cuboid min="-6,12,85" max="7,12,77"/></spawn>
     <default yaw="315"> <cylinder base="-104,58,-111" radius="5" height="0"/> </default>
 </spawns>
@@ -70,7 +70,7 @@
     <apply block="deny-world"><!-- This should disable melting -->
         <union name="playable-region">
             <rectangle name="main" min="-70,-77" max="71,78"/>
-            <rectangle name="green-spawn" min="-8,-86" max="9,-76"/>
+            <rectangle name="blue-spawn" min="-8,-86" max="9,-76"/>
             <rectangle name="red-spawn" min="-8,77" max="9,87"/>
         </union>
     </apply>
@@ -90,8 +90,8 @@
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>pumpkin pie</item>
-</itemremove><!-- Disable until fixed
+</itemremove>
 <modifybowprojectile>
     <projectile>Snowball</projectile>
-</modifybowprojectile>-->
+</modifybowprojectile>
 </map>

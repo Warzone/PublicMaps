@@ -1,74 +1,87 @@
-<map proto="1.4.0" game="FFA">
-    <name>Pompeii</name>
-    <version>1.1.2</version>
-    <authors>
-        <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23" />
-        <!--  KRo_oOH  -->
-        <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" />
-        <!--  GoldenOre  -->
-    </authors>
-    <objective>Be the player with the most kills after 10 minutes. There are no teams, so watch your back!</objective>
-    <gamemode>ffa</gamemode>
-    <score>
-        <kills>1</kills>
-    </score>
-    <time>10m</time>
-    <rage />
-    <respawn spectate="true" />
-    <players min="2" max="50" max-overfill="60" show-name-tags="false" />
-    <spawns>
-        <spawn kit="players" spread="true" safe="true">
-            <regions>
-                <cylinder base="249.5,68,-2113.5" radius="150" height="5" />
-            </regions>
-        </spawn>
-        <default>
-            <regions>
-                <cylinder base="128.5,70,-2010.5" radius="3" height="0" />
-            </regions>
-        </default>
-    </spawns>
-    <kits>
-        <kit id="players" force="true">
-            <item slot="0">iron sword</item>
-            <item slot="1" enchantment="arrow infinite">bow</item>
-            <item slot="2">arrow</item>
-            <potion duration="6" amplifier="20">damage resistance</potion>
-            <chestplate locked="true" unbreakable="true" color="667F33">leather chestplate</chestplate>
-            <leggings color="E5E533" damage="-3000">leather leggings</leggings>
-            <boots enchantment="protection fall:2;protection environmental:1" color="E5E533" damage="-3000">leather boots</boots>
-        </kit>
-        <kit id="kill-boost">
-            <potion duration="4" amplifier="3">regeneration</potion>
-        </kit>
-    </kits>
-    <killreward kit="kill-boost" />
-    <hunger>
-        <depletion>off</depletion>
-    </hunger>
-    <itemremove>
-        <item>leather leggings</item>
-        <item>leather boots</item>
-        <item>water lily</item>
-        <item>chest</item>
-        <item>seeds</item>
-        <item>sapling</item>
-        <item>apple</item>
-        <item>arrow</item>
-        <item>red mushroom</item>
-        <item>leather chestplate</item>
-        <item>leaves</item>
-    </itemremove>
-    <toolrepair>
-        <tool>iron sword</tool>
-        <tool>bow</tool>
-    </toolrepair>
-    <filters>
-        <any id="lily">
-            <material>water lily</material>
-        </any>
-    </filters>
-    <regions>
-        <apply block="lily" />
-    </regions>
+<map proto="1.4.0">
+<name>Pompeii</name>
+<version>1.1.5</version>
+<authors>
+    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23" />
+    <!--  KRo_oOH  -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" />
+    <!--  GoldenOre  -->
+</authors>
+<objective>Be the player with the most kills after 10 minutes!</objective>
+<gamemode>ffa</gamemode>
+<score>
+    <kills>1</kills>
+</score>
+<time>10m</time>
+<players min="2" max="64" colors="true" />
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<broadcasts>
+    <alert after="2s">Fall damage is disabled on this map! You can also double jump!</alert>
+</broadcasts>
+<kits>
+    <kit id="players" force="true">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="28">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2;depth_strider:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+        <effect>speed</effect>
+        <double-jump power="3" recharge-before-landing="true" recharge-time="6s"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="players" spread="true" safe="true">
+        <regions angle="231,70,-2070">
+            <cuboid min="398,63.5,-1958" max="115,100,-2230"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="128.5,70,-2010.5" radius="3" height="0" />
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <any id="lily">
+        <material>water lily</material>
+    </any>
+</filters>
+<regions>
+    <apply block="lily" />
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>water lily</item>
+    <item>chest</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>arrow</item>
+    <item>red mushroom</item>
+    <item>leaves</item>
+    <item>golden apple</item>
+</itemremove>
+<kill-reward>
+    <item material="golden apple"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 </map>

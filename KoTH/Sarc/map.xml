@@ -1,34 +1,30 @@
 <map proto="1.4.2">
 <name>Sarc</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Be the first to score 300 points!</objective>
 <gamemode>koth</gamemode>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
 </authors>
 <teams>
-    <team id="blue-team" color="blue"     max="5" max-overfill="6">Blue</team>
-    <team id="red-team"  color="dark red" max="5" max-overfill="6">Red</team>
+    <team id="blue-team" color="blue" max="7">Blue</team>
+    <team id="red-team" color="dark red" max="7">Red</team>
 </teams>
 <kits>
-    <kit id="main-kit">
+    <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" amount="64"        material="golden carrot"/>
-        <item slot="8" amount="36"        material="arrow"/>
-        <chestplate    unbreakable="true" material="chainmail chestplate"/>
-        <boots         unbreakable="true" material="iron boots"/>
-        <effect duration="3" amplifier="10">resistance</effect>
-        <effect duration="3" amplifier="10">strength</effect>
-    </kit>
-    <kit id="blue-kit" parents="main-kit">
-        <helmet   unbreakable="true" color="0066cc" material="leather helmet"/>
-        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
-    </kit>
-    <kit id="red-kit" parents="main-kit">
-        <helmet   unbreakable="true" color="cd0000" material="leather helmet"/>
-        <leggings unbreakable="true" color="cd0000" material="leather leggings"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="3" amplifier="255">resistance</effect>
+        <effect duration="3" amplifier="255">strength</effect>
     </kit>
 </kits>
 <spawns>
@@ -37,12 +33,12 @@
             <block>-249.5,10,-245.5</block>
         </regions>
     </default>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions angle="-208.5,4,-297.5">
             <cylinder base="-208.5,2.5,-301.5" radius="2" height="0"/>
         </regions>
     </spawn>
-    <spawn team="red-team" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions angle="-236.5,4,-249.5">
             <cylinder base="-236.5,2.5,-245.5" radius="2" height="0"/>
         </regions>
@@ -57,23 +53,37 @@
     </any>
 </filters>
 <regions>
-    <cuboid id="point-a-base" min="-229,5,-285" max="-234,10,-280"/>
-    <cuboid id="point-b-base" min="-211,5,-267" max="-216,10,-262"/>
-    <cylinder id="point-a-indicator" base="-231.5,17,-282.5" radius="2" height="8"/>
-    <cylinder id="point-b-indicator" base="-213.5,17,-264.5" radius="2" height="8"/>
+    <cuboid id="hill-a-base" min="-229,5,-285" max="-234,10,-280"/>
+    <cuboid id="hill-b-base" min="-211,5,-267" max="-216,10,-262"/>
+    <cylinder id="hill-a-indicator" base="-231.5,17,-282.5" radius="2" height="8"/>
+    <cylinder id="hill-b-indicator" base="-213.5,17,-264.5" radius="2" height="8"/>
     <apply block="block-whitelist" message="You may not interact with that material here"/>
 </regions>
+<king>
+    <hills incremental="true" show-progress="true" neutral-state="false" capture-rule="majority" required="false" capture-time="5s" points="1">
+        <hill id="hill-a" name="Hill A" capture="hill-a-base" progress="hill-a-base" captured="hill-a-indicator"/>
+        <hill id="hill-b" name="Hill B" capture="hill-b-base" progress="hill-b-base" captured="hill-b-indicator"/>
+    </hills>
+</king>
 <score>
     <limit>300</limit>
 </score>
-<control-points required="false" neutral-state="false" capture-rule="majority" decay="0">
-    <control-point id="point-a" name="Point A" capture-time="5s" points="1" capture="point-a-base" progress="point-a-base" captured="point-a-indicator"/>
-    <control-point id="point-b" name="Point B" capture-time="5s" points="1" capture="point-b-base" progress="point-b-base" captured="point-b-indicator"/>
-</control-points>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>stick</item>
+</itemremove>
 <kill-rewards>
     <kill-reward>
-        <item amount="12" material="arrow"/>
-        <item             material="golden apple"/>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
     </kill-reward>
     <kill-reward>
         <filter>
@@ -82,20 +92,16 @@
         <item amount="2" material="tnt"/>
     </kill-reward>
 </kill-rewards>
-<itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>golden carrot</item>
-    <item>leather helmet</item>
-    <item>chainmail chestplate</item>
-    <item>leather leggings</item>
-    <item>iron boots</item>
-    <item>seeds</item>
-    <item>stick</item>
+<itemkeep>
+    <item>golden apple</item>
     <item>arrow</item>
-</itemremove>
+    <item>tnt</item>
+</itemkeep>
 <tnt>
     <instantignite>on</instantignite>
     <fuse>2s</fuse>
 </tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

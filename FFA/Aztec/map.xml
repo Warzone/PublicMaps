@@ -1,58 +1,35 @@
-<map proto="1.4.0" game="Aztec FFA">
+<map proto="1.4.0">
 <name>Aztec</name>
 <gamemode>ffa</gamemode>
+<version>1.0.1</version>
+<objective>Kill as many players as possible in 8 minutes</objective>
+<gamemode>ffa</gamemode>
+<phase>development</phase>
 <authors>
     <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
     <!--yoyo_-->
 </authors>
-<version>1.0.0</version>
-<objective>Kill as many players as possible in 8 minutes</objective>
-<time>8m</time>
-<players min="2" max="18"/>
-<score>
-    <kills>1</kills>
-</score>
+<time>5m</time>
+<players min="2" max="10" max-overfill="10" colors="true"/>
 <kits>
     <kit id="players-kit">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
         <item slot="2">golden apple</item>
-        <item slot="3" amount="32">arrow</item>
-        <potion duration="oo">night vision</potion>
-        <helmet unbreakable="true">leather helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <item slot="8" amount="16">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
         <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true">chainmail boots</boots>
-        <potion duration="2" amplifier="10">resistance</potion>
-    </kit>
-    <kit id="kill-reward">
-        <item slot="2">golden apple</item>
-        <potion duration="3" amplifier="4">regeneration</potion>
-        <item amount="12">arrow</item>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
     </kit>
 </kits>
 <regions>
     <apply block="never" region="everywhere"/>
 </regions>
-<itemremove>
-    <item>arrow</item>
-    <item>apple</item>
-    <item>sapling</item>
-    <item>long grass</item>
-    <item>leather helmet</item>
-    <item>chainmail chestplate</item>
-    <item>chainmail leggings</item>
-    <item>chainmail boots</item>
-</itemremove>
-<toolrepair>
-    <tool>bow</tool>
-    <tool>stone sword</tool>
-</toolrepair>
-<kill-rewards>
-    <kill-reward kit="kill-reward"/>
-</kill-rewards>
 <spawns>
-    <spawn kit="players-kit" spread="true">
+    <spawn kit="players-kit" spread="true" safe="true">
         <regions angle="-18.5,40,-3.5">
             <point>29.5,45,34.5</point>
             <point>5.5,37,47.6</point>
@@ -85,5 +62,27 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<score>
+    <kills>1</kills>
+</score>
 <timelock>on</timelock>
+<itemremove>
+    <item>arrow</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>long grass</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<killreward>
+    <item>golden apple</item>
+    <item amount="8">arrow</item>
+</killreward>
 </map>

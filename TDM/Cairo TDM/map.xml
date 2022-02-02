@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.0">
 <name>Cairo TDM</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Be the team with the least amount of deaths after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -17,12 +17,12 @@
     <team color="blue" max="32">Blue</team>
 </teams>
 <spawns>
-    <spawns kit="spawn" safe="true" sequential="true">
-        <spawn team="red" yaw="0">
+    <spawns safe="true" sequential="true">
+        <spawn team="red" kit="red" yaw="0">
             <cuboid min="187,2,148" max="97,19,106"/>
             <point yaw="0">141,2,108</point>
         </spawn>
-        <spawn team="blue" yaw="180">
+        <spawn team="blue" kit="blue" yaw="180">
             <cuboid min="96,2,153" max="186,19,195"/>
             <point yaw="180">141,2,192</point>
     </spawn>
@@ -39,12 +39,20 @@
         <item slot="2" amount="32">ladder</item>
         <item slot="4" amount="3">golden apple</item>
         <item slot="3" amount="32">cooked chicken</item>
-        <helmet>leather helmet</helmet>
-        <chestplate>leather chestplate</chestplate>
-        <leggings>leather leggings</leggings>
-        <boots enchantment="protection fall:4">leather boots</boots>
         <potion duration="5" amplifier="1">heal</potion>
         <potion duration="10">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000" enchantment="protection fall:4">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc" enchantment="protection fall:4">leather boots</boots>
     </kit>
 </kits>
 <regions>

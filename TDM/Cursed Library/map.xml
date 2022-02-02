@@ -1,62 +1,54 @@
-<?xml version="1.0"?>
 <map proto="1.4.2">
 <name>Cursed Library</name>
-<version>1.1.0</version>
-<objective>Get the most points in 3 minutes!</objective>
+<version>1.1.2</version>
+<objective>Get the most points in 5 minutes!</objective>
 <gamemode>tdm</gamemode>
+<time result="score">5m</time>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--  mitchiii_  -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--  mitchiii  -->
 </authors>
 <teams>
-    <team id="red" color="dark red" max="5" max-overfill="6">Red</team>
-    <team id="blue" color="blue" max="5" max-overfill="6">Blue</team>
+    <team id="blue" color="blue" max="6">Blue</team>
+    <team id="red" color="dark red" max="6">Red</team>
 </teams>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <kits>
-    <kit id="spawn-kit">
-        <item slot="0" material="stone sword" unbreakable="true"/>
-        <item slot="1" material="bow" unbreakable="true"/>
-	<item slot="2" material="golden apple" amount="1"/>
-        <item slot="8" material="arrow" amount="24"/>
-        <leggings material="chainmail leggings" unbreakable="true"/>
-        <effect duration="4s" amplifier="100">damage resistance</effect>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="3" amplifier="255">resistance</effect>
         <effect>night vision</effect>
         <game-mode>adventure</game-mode>
     </kit>
-    <kit id="red-kit" parent="spawn-kit">
-        <helmet material="leather helmet" color="993333" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="993333" unbreakable="true"/>
-        <boots material="leather boots" color="993333" unbreakable="true"/>
-    </kit>
-    <kit id="blue-kit" parent="spawn-kit">
-        <helmet material="leather helmet" color="334cb2" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="334cb2" unbreakable="true"/>
-        <boots material="leather boots" color="334cb2" unbreakable="true"/>
-    </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red-kit">
-        <region yaw="-90">
-            <cylinder base="-82,25.5,-115.5" radius="1" height="1"/>
-        </region>
-    </spawn>
-    <spawn team="blue" kit="blue-kit">
-        <region yaw="90">
-            <cylinder base="-23,25.5,-115.5" radius="1" height="1"/>
-        </region>
-    </spawn>
-    <default>
+    <default kit="default-kit">
         <region angle="-52.5,32.5,-131.5">
             <cuboid min="-55,31,-128" max="-50,31.1,-130"/>
         </region>
     </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="90">
+            <cylinder base="-23,25.5,-115.5" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="-90">
+            <cylinder base="-82,25.5,-115.5" radius="1" height="1"/>
+        </region>
+    </spawn>
 </spawns>
-<score>
-    <kills>1</kills>
-</score>
-<time>3m</time>
 <filters>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
@@ -68,19 +60,32 @@
     <apply region="red-spawn" enter="only-red" message="You cannot enter the enemy team's spawn!"/>
     <apply block="never"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
-    <item>leather boots</item>
-    <item>ink sack</item>
+    <item>iron boots</item>
 </itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>ink sack</item>
+    <item>exp bottle</item>
+</itemkeep>
 <kill-reward>
-    <item material="arrow" amount="8"/>
     <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
     <item material="ink sack" damage="4"/>
-    <item material="exp bottle" amount="3"/>
-</kill-reward>	
+    <item amount="3" material="exp bottle"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
