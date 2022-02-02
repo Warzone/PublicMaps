@@ -1,0 +1,180 @@
+<map proto="1.4.0">
+<name>Sunrise Over Paradise Emerald</name>
+<version>1.1.6</version>
+<objective>Break the blocks from both of the enemy team's monuments.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design"/> <!-- Plastix -->
+</authors>
+<contributors>
+    <contributor uuid="e39fe3bc-b80e-46d2-81fe-d18042471989" contribution="Map feedback"/> <!-- EnarRikardz -->
+    <contributor uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Emerald-ification and other improvements"/> <!-- Jexel -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="16">Blue</team>
+    <team id="red" color="dark red" max="16">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate">
+            <enchantment level="2">protection_projectile</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment>protection_projectile</enchantment>
+            <enchantment level="6">blast_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5"  amplifier="1">heal</effect>
+        <effect duration="10" amplifier="2">damage resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <item slot="5" amount="8" damage="11" lore="Immune to TNT" material="stained glass"/>
+        <item slot="4" amount="32" damage="11" material="stained clay"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <item slot="5" amount="8" damage="14" lore="Immune to TNT" material="stained glass"/>
+        <item slot="4" amount="32" damage="14" material="stained clay"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <region>
+            <cylinder base="-45,35,0" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="blue-kit" yaw="0">
+        <region>
+            <cylinder base="0,3,-80" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="180">
+        <region>
+            <cylinder base="0,3,80" radius="1" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <not id="no-beacon">
+        <material>beacon</material>
+    </not>
+    <not id="tnt-immune">
+        <all>
+            <not>
+                <any>
+                    <material>stained clay</material>
+                    <material>wood</material>
+                    <material>wood stairs</material>
+                    <material>wood button</material>
+                    <material>stone button</material>
+                    <material>sign post</material>
+                    <material>wall sign</material>
+                    <material>wood plate</material>
+                    <material>wood step</material>
+                    <material>fence</material>
+                    <material>torch</material>
+                </any>
+            </not>
+            <cause>explosion</cause>
+        </all>
+    </not>
+    <material id="only-tnt">tnt</material>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <cuboid id="blue-mon-a" min="-46,8,-52" max="-43,4,-49"/>
+    <cuboid id="blue-mon-b" min="44,8,-52" max="47,4,-49"/>
+    <cuboid id="red-mon-a" min="44,8,50" max="47,4,53"/>
+    <cuboid id="red-mon-b" min="-46,8,50" max="-43,4,53"/>
+    <union id="no-spawn-island">
+        <circle center="0.5,-79.5" radius="10.5"/>
+        <circle center="0.5,80.5"  radius="10.5"/>
+    </union>
+    <negative id="no-playable">
+        <circle id="playable" center="0.5,0.5" radius="101"/>
+    </negative>
+    <above id="above-20" y="20"/>
+    <apply block="only-tnt" region="above-20" message="You may only place TNT at this height!"/>
+    <apply block="never" region="no-spawn-island" message="You may not modify the spawn island!"/>
+    <apply block="never" region="no-playable" message="You may not build outside the playable region!"/>
+    <apply use="no-beacon" block="tnt-immune"/>
+    <apply block="always" region="playable"/>
+</regions>
+<destroyables completion="100%" materials="emerald block" mode-changes="true" show-progress="true" sparks="true">
+    <destroyable name="Monument A" owner="blue" region="blue-mon-a"/>
+    <destroyable name="Monument B" owner="blue" region="blue-mon-b"/>
+    <destroyable name="Monument A" owner="red" region="red-mon-a"/>
+    <destroyable name="Monument B" owner="red" region="red-mon-b"/>
+</destroyables>
+<modes>
+    <mode after="18m" name="GOLD MONUMENT MODE" show-before="75s" material="gold block"/>
+    <mode after="30m" name="STAINED CLAY MONUMENT MODE" material="stained clay:15"/>
+</modes>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>obsidian</item>
+    <item>coal block</item>
+    <item>stained clay</item>
+    <item>beacon</item>
+    <item>string</item>
+    <item>seeds</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>stained glass</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="arrow" amount="8"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true"/>
+        </filter>
+        <item amount="1" name="Power TNT" lore="TNT slightly more powerful..." material="tnt">
+            <enchantment level="2">power</enchantment>
+        </item>
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="8" damage="11" material="stained clay"/>
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="8" damage="14" material="stained clay"/>
+    </kill-reward>
+</kill-rewards>
+<tnt>
+    <instantignite>true</instantignite>
+    <licensing>false</licensing>
+    <friendly-defuse>false</friendly-defuse>
+    <fuse>1.7s</fuse>
+    <power>5.5</power>
+</tnt>
+<disabledamage>
+    <damage ally="true" self="true" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<maxbuildheight>21</maxbuildheight>
+<timelock>off</timelock>
+</map>

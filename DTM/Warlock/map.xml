@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.2">
-<include src="tutorial.xml"/>
 <name>Warlock</name>
-<version>1.3.5</version>
+<version>1.3.9</version>
 <objective>Break the obsidian from the enemy team's monument.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -16,8 +15,8 @@
     <rule>Don't block the spawns!</rule>
 </rules>
 <teams>
-    <team color="dark red" max="12">Red</team>
-    <team color="blue" max="12">Blue</team>
+    <team color="dark red" max="13">Red</team>
+    <team color="blue" max="13">Blue</team>
 </teams>
 <kits>
     <kit name="spawn">
@@ -70,6 +69,14 @@
 <modes>
     <mode material="beacon" after="20m"/>
 </modes>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item damage="4" material="ink sack"/>
+    </kill-reward>
+</kill-rewards>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>diamond pickaxe</tool>
@@ -88,6 +95,8 @@
     <item>cooked beef</item>
     <item>obsidian</item>
     <item>beacon</item>
+    <item>ink sack</item>
+    <item>golden apple</item>
 </itemremove>
 <filters>
     <filter name="base-filter">
@@ -113,10 +122,9 @@
             <cuboid min="54,5,32" max="61,11,39"/>
         </union>
     </apply>
-    <apply block="deny-all">
+    <apply block="deny-all" message="You may not build outside of the map!">
         <negative>
-            <cuboid min="55,40,-oo" max="60,-oo,oo"/>
-            <cuboid min="-oo,-oo,-oo" max="121,22,oo"/>
+            <rectangle min="26,-49" max="120,50"/>
         </negative>
     </apply>
     <apply use="no-beacon">
@@ -125,85 +133,14 @@
         </negative>
     </apply>
 </regions>
+<maxbuildheight>25</maxbuildheight>
 <killreward>
     <item>gold nugget</item>
+    <item>golden apple</item>
 </killreward>
 <tnt>
     <instantignite>on</instantignite>
     <licensing>off</licensing>
     <friendly-defuse>off</friendly-defuse>
 </tnt>
-<tutorial>
-    <stage title="Destroy the Monument">
-        <message>
-            <line>`rThis map is a `a`lDestroy the Monument (DTM) `rmap.</line>
-            <line>The objective is to destroy the other team's monument on their side.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="30">20.5,48,0.5</point>
-        </teleport>
-    </stage>
-    <stage title="Blue Base">
-        <message>
-            <line>`rThis is the `9Blue Base`r.</line>
-            <line>`rThis is where the `9Blue Team `rspawns. You spawn with gear ready to go into battle!</line>
-        </message>
-        <teleport>
-            <point yaw="140" pitch="10">43.5,7.5,35.5</point>
-        </teleport>
-    </stage>
-    <stage title="Red Base">
-        <message>
-            <line>`rThis is the `cRed Base`r.</line>
-            <line>`rThis is where the `cRed Team `rspawns. You spawn with gear ready to go into battle!</line>
-        </message>
-        <teleport>
-            <point yaw="40" pitch="10">43.5,7.5,-34.5</point>
-        </teleport>
-    </stage>
-    <stage title="Red Monument">
-        <message>
-            <line>`rThis is the `cRed Monument`r.</line>
-            <line>`rThe two `5obsidian blocks `rare what the `9Blue Team `rneeds to destroy to win.</line>
-        </message>
-        <teleport>
-            <point yaw="180" angle="77.5,3,-36.5">77.5,22,-35.5</point>
-        </teleport>
-    </stage>
-    <stage title="Blue Monument">
-        <message>
-            <line>`rThis is the `9Blue Monument`r.</line>
-            <line>`rThe two `5obsidian blocks `rare what the `cRed Team `rneeds to destroy to win.</line>
-        </message>
-        <teleport>
-            <point yaw="0" angle="77.5,3,37.5">77.5,22,36.5</point>
-        </teleport>
-    </stage>
-    <stage title="Underground Passages">
-        <message>
-            <line>`rThese are `bunderground passages `rthat connect the two sides.</line>
-            <line>`rYou can use these to sneak to your enemy's `amonument`r!</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="-15">101,-8,0.5</point>
-        </teleport>
-    </stage>
-    <stage title="Skybridge Lane">
-        <message>
-            <line>`rA extra high `bskybridge lane `ris marked with floating glowstone buoys.</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="0">85.5,34,0.5</point>
-        </teleport>
-    </stage>
-    <stage title="Gunpowder Chests">
-        <message>
-            <line>`rEach team has 5 `4gunpowder chests `rwhich can be used to craft TNT.</line>
-            <line>`rUse this TNT wisely!</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="0">40.5,4,0.5</point>
-        </teleport>
-    </stage>
-</tutorial>
-</map> 
+</map>

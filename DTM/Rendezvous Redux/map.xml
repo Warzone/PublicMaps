@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.3.2">
    <name>Rendezvous Redux</name>
-   <version>2.2.1</version>
-   <gamemode>dtm</gamemode>
+   <version>2.2.2</version>
    <objective>Destroy the enemy team's monuments!</objective>
+   <gamemode>dtm</gamemode>
    <authors>
-      <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
-      <author uuid="378952b5-808f-4a33-911e-39c7ba153b38"/> <!-- Pavlo -->
+      <author>Haribo98</author>
+      <!-- Haribo98 -->
+      <author>Pavlo</author>
+      <!-- Pavlo -->
    </authors>
    <teams>
       <team color="dark red" max="32">Red</team>
@@ -14,39 +16,39 @@
    </teams>
    <kits>
       <kit name="spawn">
-         <item slot="0" unbreakable="true">iron sword</item>
-         <item slot="1" unbreakable="true">bow</item>
-         <item slot="2" unbreakable="true">diamond pickaxe</item>
-         <item slot="3" unbreakable="true">stone axe</item>
-         <item slot="4" amount="64">wood</item>
-         <item slot="5" amount="64">wood</item>
-         <item slot="6" amount="64">glass</item>
-         <item slot="7" amount="1">golden apple</item>
-         <item slot="8" amount="64">cooked beef</item>
-         <item slot="9" amount="64">arrow</item>
+         <item slot="0">iron sword</item>
+         <item slot="1" enchantment="arrow infinite:1">bow</item>
+         <item slot="2" enchantment="durability:3">diamond pickaxe</item>
+         <item slot="3" amount="2">golden apple</item>
+         <item slot="4" amount="32">cooked fish</item>
+         <item slot="5" amount="64">glass</item>
+         <item slot="6" amount="32">log</item>
+         <item slot="28" amount="1">arrow</item>
          <potion duration="5" amplifier="5">damage resistance</potion>
          <potion duration="5" amplifier="5">heal</potion>
-         <chestplate unbreakable="true">chainmail chestplate</chestplate>
-         <boots unbreakable="true">iron boots</boots>
       </kit>
       <kit name="red" parents="spawn">
-         <helmet unbreakable="true" color="993333">leather helmet</helmet>
-         <leggings unbreakable="true" color="993333">leather leggings</leggings>
+        <helmet color="993333" unbreakable="true">leather helmet</helmet>
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="993333" unbreakable="true">leather leggings</leggings>
+        <boots color="993333" unbreakable="true">leather boots</boots>
       </kit>
       <kit name="blue" parents="spawn">
-         <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
-         <leggings unbreakable="true" color="334CB2">leather leggings</leggings>
+        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
+        <boots color="334CB2" unbreakable="true">leather boots</boots>
       </kit>
    </kits>
    <spawns>
       <spawn team="red" kit="red" yaw="90">
-         <point>69.5,27,-797.5</point>
+         <cylinder base="67.5,27,-798.5" height="0" radius="1" />
       </spawn>
       <spawn team="blue" kit="blue" yaw="-90">
-         <point>-44.5,27,-797.5</point>
+         <cylinder base="-42.5,27,-798.5" height="0" radius="1" />
       </spawn>
-      <default>
-         <point>12.5,54,-897.5</point>
+      <default yaw="0">
+         <cylinder base="12.5,54,-898.5" height="0" radius="1" />
       </default>
    </spawns>
    <filters>
@@ -58,7 +60,6 @@
       </filter>
    </filters>
    <regions>
-       <rectangle name="playable" min="-89,-837" max="114,-757" />
        <cuboid name="red-spawn-enter" min="56,33,-802" max="61,37,-794"/>
        <cuboid name="blue-spawn-enter" min="-37,33,-802" max="-32,37,-794"/>
        <cuboid name="red-spawn-tunnel" min="57,25,-802" max="73,33,-794"/>
@@ -81,40 +82,38 @@
       <apply enter="only-blue" message="You may not enter `9Blue Team`c's spawn area!">
          <region name="blue-spawn-tunnel" />
       </apply>
-      <apply block="deny-all" message="You may not build outside of the playing field!">
-         <negative>
-            <region name="playable" />
-         </negative>
-      </apply>
    </regions>
-   <destroyables materials="obsidian" sparks="true">
-      <destroyable name="Left Monument" owner="red">
+   <destroyables materials="obsidian">
+      <destroyable name="Left" owner="red">
          <block>108,37,-832</block>
       </destroyable>
-      <destroyable name="Right Monument" owner="red">
+      <destroyable name="Right" owner="red">
          <block>108,37,-764</block>
       </destroyable>
-      <destroyable name="Left Monument" owner="blue">
+      <destroyable name="Left" owner="blue">
          <block>-84,37,-764</block>
       </destroyable>
-      <destroyable name="Right Monument" owner="blue">
+      <destroyable name="Right" owner="blue">
          <block>-84,37,-832</block>
       </destroyable>
    </destroyables>
+   <toolrepair>
+      <tool>diamond pickaxe</tool>
+      <tool>bow</tool>
+      <item>shears</item>
+      <tool>iron sword</tool>
+   </toolrepair>
    <itemremove>
-      <item>iron sword</item>
-      <item>bow</item>
-      <item>diamond pickaxe</item>
-      <item>stone axe</item>
-      <item>wood</item>
       <item>obsidian</item>
+      <item>log</item>
       <item>glass</item>
       <item>arrow</item>
       <item>leather helmet</item>
-      <item>chainmail chestplate</item>
+      <item>leather chestplate</item>
       <item>leather leggings</item>
-      <item>iron boots</item>
-      <item>cooked beef</item>
+      <item>leather boots</item>
+      <item>apple</item>
+      <item>cooked fish</item>
       <item>golden apple</item>
    </itemremove>
    <killreward>

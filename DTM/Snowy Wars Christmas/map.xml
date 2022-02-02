@@ -1,122 +1,184 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<name>Snowy Wars Christmas</name>
-<version>1.0.2</version>
-<objective>Break the obsidian from the enemy team's monument.</objective>
+<map proto="1.4.2">
+<name>Snowy Wars: Christmas</name>
+<version>1.5.3</version>
+<objective>Break the enemy's monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
-    <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- roro28gutier -->
+    <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- Ro_G -->
 </authors>
 <teams>
-    <team color="dark red" max="12">Red</team>
-    <team color="dark green" max="12">Green</team>
+    <team id="blue" color="blue" max="16">Blue</team>
+    <team id="red" color="dark red" max="16">Red</team>
 </teams>
-<maxbuildheight>20</maxbuildheight>
-<spawns>
-    <spawn team="red" kit="red">
-        <point yaw="-45">
-            <cylinder base="-619.5,11,259.5" height="0" radius="2"/> <!-- West -->
-        </point>
-        <point yaw="45">
-            <cylinder base="-571.5,11,259.5" height="0" radius="2"/> <!-- East -->
-        </point>
-    </spawn>
-    <spawn team="green" kit="green">
-        <point yaw="-135">
-            <cylinder base="-619.5,11,349.5" height="0" radius="2"/> <!-- West -->
-        </point>
-        <point yaw="135">
-            <cylinder base="-571.5,11,349.5" height="0" radius="2"/> <!-- East -->
-        </point>
-    </spawn>
-    <default yaw="-90"><cuboid min="-544,13,302" max="-540,13,306"/></default>
-</spawns>
-<destroyables name="Monument" completion="100%" materials="obsidian">
-    <destroyable owner="green">
-        <cuboid min="-596,10,361" max="-595,12,362"/>
-    </destroyable>
-    <destroyable owner="red">
-        <cuboid min="-596,10,247" max="-595,12,248"/>
-    </destroyable>
-</destroyables>
-<filters>
-    <filter name="deny-icemelt">
-        <not><all> <!-- DENY if world and ice, ALLOW if not world, ABSTAIN if world and not ice-->
-            <any> <!-- ALLOW if world, DENY else -->
-                <filter name="allow-world" />
-                <filter name="deny-all" />
-            </any>
-            <block>ice</block> <!-- ALLOW if ice, ABSTAIN else -->
-        </all></not>
-    </filter>
-</filters>
-<regions>
-    <apply block="deny-icemelt">
-        <rectangle min="-635,232" max="-556,377" name="playable" />
-    </apply>
-    <apply block="deny-players" message="Please don't break the spawns!">
-        <cylinder base="-619.5,10,259.5" height="6" radius="5"/> <!-- West Red -->
-        <cylinder base="-571.5,10,259.5" height="6" radius="5"/> <!-- East -->
-        <cylinder base="-619.5,10,349.5" height="6" radius="5"/> <!-- West green -->
-        <cylinder base="-571.5,10,349.5" height="6" radius="5"/> <!-- East -->
-    </apply>
-    <apply block="deny-players" message="You may not build outside of the playing field.">
-        <negative>
-            <region name="playable"/>
-        </negative>
-    </apply>
-    <apply enter="deny-all" message="Don't enter the observers spawn area!">
-        <cuboid min="-535,10,313" max="-549,oo,295"/>
-    </apply>
-</regions>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2">iron axe</item>
-        <item slot="3" enchantment="dig speed:1">diamond pickaxe</item>
-        <item slot="4" amount="64" damage="2">wood</item>
-        <item slot="5" amount="64">cooked beef</item>
-        <item slot="6" amount="7">gold nugget</item>
-        <item slot="27" amount="64">apple</item>
-        <potion duration="2" amplifier="1">heal</potion>
-        <potion duration="5">damage resistance</potion>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="30" unbreakable="true" material="iron spade"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" material="gold ingot"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate">
+            <enchantment level="2">projectile_protection</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect amplifier="255">damage resistance</effect>
     </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="cd0000">leather helmet</helmet>
-        <chestplate color="cd0000" enchantment="protection environmental:1">leather chestplate</chestplate>
-        <leggings color="cd0000">leather leggings</leggings>
-        <boots color="cd0000">leather boots</boots>
-    </kit>
-    <kit name="green" parents="spawn">
-        <helmet color="667F33">leather helmet</helmet>
-        <chestplate color="667F33" enchantment="protection environmental:1">leather chestplate</chestplate>
-        <leggings color="667F33">leather leggings</leggings>
-        <boots color="667F33">leather boots</boots>
+    <kit id="reset-resitance-kit" force="true">
+        <effect duration="0" amplifier="0">damage resistance</effect>
     </kit>
 </kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cuboid min="-544,13,302" max="-540,13,306"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-135">
+            <cylinder base="-619.5,11,349.5" height="0" radius="2"/> <!-- West -->
+        </region>
+        <region yaw="135">
+            <cylinder base="-571.5,11,349.5" height="0" radius="2"/> <!-- East -->
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="-45">
+            <cylinder base="-619.5,11,259.5" height="0" radius="2"/> <!-- West -->
+        </region>
+        <region yaw="45">
+            <cylinder base="-571.5,11,259.5" height="0" radius="2"/> <!-- East -->
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <deny id="no-melting">
+        <all>
+            <cause>world</cause>
+            <material>ice</material>
+        </all>
+    </deny>
+</filters>
+<regions>
+    <cuboid id="blue-monument" min="-596,10,361" max="-595,12,362"/>
+    <cuboid id="red-monument" min="-596,10,247" max="-595,12,248"/>
+    <negative id="not-spawns">
+        <union id="spawns">
+            <cylinder base="-619.5,10,349.5" height="6" radius="7"/> <!-- West Blue -->
+            <cylinder base="-571.5,10,349.5" height="6" radius="7"/> <!-- East -->
+            <cylinder base="-619.5,10,259.5" height="6" radius="7"/> <!-- West Red -->
+            <cylinder base="-571.5,10,259.5" height="6" radius="7"/> <!-- East -->
+        </union>
+    </negative>
+    <complement id="void">
+        <everywhere/>
+        <rectangle min="-631,236" max="-560,373"/>
+    </complement>
+    <intersect id="obs-spawn">
+        <rectangle min="-549,295" max="-535,313"/>
+        <above y="10"/>
+    </intersect>
+    <complement id="height-limit">
+        <above y="20"/>
+        <cylinder id="tower-a" base="-621.5,20,304.5" radius="5" height="3"/>
+        <cylinder id="tower-b" base="-569.5,20,304.5" radius="5" height="3"/>
+    </complement>
+    <apply kit="reset-resitance-kit" region="not-spawns"/>
+    <apply enter="never"  region="obs-spawn" message="You may not enter the observers spawn area!"/>
+    <apply block="no-melting"/>
+    <apply block="never" region="spawns" message="You may not break or place blocks in the spawn regions!"/>
+    <apply block="never" region="void" message="You may not build outside of the playing field!"/>
+    <apply block-place="never" region="height-limit" message="match.maxBuildHeight"/>
+</regions>
+<destroyables name="Monument" material="obsidian" mode-changes="true">
+    <destroyable owner="blue" region="blue-monument"/>
+    <destroyable owner="red" region="red-monument"/>
+</destroyables>
+<modes>
+    <mode after="15m" material="beacon" name="`bBEACON MONUMENT MODE"/>
+    <mode after="30m" material="coal block" name="`8COAL MONUMENT MODE"/>
+</modes>
 <toolrepair>
     <tool>stone sword</tool>
+    <tool>bow</tool>
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
-    <tool>bow</tool>
+    <tool>arrow</tool>
+    <tool>iron spade</tool>
 </toolrepair>
 <itemremove>
-    <item>arrow</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>wood</item>
-    <item>apple</item>
-    <item>cooked beef</item>
     <item>obsidian</item>
+    <item>beacon</item>
+    <item>coal block</item>
 </itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-reward>
+    <item amount="16" damage="2" material="wood"/>
+    <item amount="8" material="glass"/>
+    <item material="golden apple"/>
+</kill-reward>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+    <rule>
+        <match>
+            <material>gold chestplate</material>
+        </match>
+        <modify unbreakable="true">
+            <enchantment level="2">projectile_protection</enchantment>
+        </modify>
+    </rule>
+</item-mods>
 <tnt>
     <instantignite>on</instantignite>
     <licensing>off</licensing>
     <friendly-defuse>off</friendly-defuse>
     <blockdamage>off</blockdamage>
 </tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

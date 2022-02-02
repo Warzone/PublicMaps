@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Merry Drought DTM</name>
+<version>1.1.4</version>
+<objective>Destroy the obsidian monuments on the enemy side while defending your own monuments.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<include src="tutorial.xml"/>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Monument `r(DTM) map</line>
+            <line>The objective is to get to the enemy side and destroy two obsidian monuments.</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="10">111.5,15,-455.5</point>
+        </teleport>
+    </stage>
+    <stage title="Green Team Base">
+        <message>
+            <line>`rThis is the `aGreen Team `rbase. You spawn with gear ready to go into battle!</line>
+            <line>To your right and to your left are `bchests `rfilled with extra equipment.</line>
+            <line>To the back is one set of `6iron block `rsupplies.</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="10">121.5,19,-361.5</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Supplies">
+        <message>
+            <line>Here is the `7iron `rsupply for `aGreen Team`r. Note that `cRed Team `rhas the same thing on their side.</line>
+            <line>You can craft `7iron armor `rto prepare yourself for battle.</line>
+            <line>If you happen to run out of iron, there may be some left in the center ceiling or on the upper level.</line>
+        </message>
+        <teleport>
+            <point yaw="-45">133.5,8,-349.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Monuments">
+        <message>
+            <line>These are `cRed team`r's monuments.</line>
+            <line>`4Red Team `rhas `drink`r and `5purple `rmonuments.</line>
+            <line>`cRed Team`r should defend these monuments against `aGreen Team`r invaders who are trying to break them.</line>
+            <line>There are 5 obsidian blocks to break with your efficiency II diamond pickaxe.</line>
+        </message>
+        <teleport>
+            <point yaw="135">-3.5,21,-486.5</point>
+        </teleport>
+    </stage>
+    <stage title="Diamond Blocks">
+        <message>
+            <line>There are `b4 `rislands with a diamond block and extra iron blocks.</line>
+            <line>The diamond block can be used to make armor or weapons.</line>
+            <line>This will help when trying to defend and get in wool rooms</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="90">69.5,35,-413.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+<teams>
+    <team color="blue" max="50">Blue</team>
+    <team color="dark red" max="50">Red</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="2" enchantment="durability:1;dig speed:2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64">quartz block</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64">ladder</item>
+        <item slot="7" amount="2">golden apple</item>
+        <item slot="8" amount="64">cooked chicken</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="31" amount="64">quartz block</item>
+        <item slot="32" amount="4">web</item>
+        <item slot="33" amount="1">bucket</item>
+        <item slot="22" amount="64">quartz block</item>
+        <potion duration="10" amplifier="4">damage resistance</potion>
+    </kit>
+</kits>
+<itemremove>
+    <item>cooked chicken</item>
+    <item>golden apple</item>
+    <item>sandstone</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>web</item>
+    <item>bucket</item>
+    <item>glass bottle</item>
+    <item>string</item>
+    <item>quartz block</item>
+    <item>obsidian</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<spawns>
+    <spawn team="blue" kit="spawn">
+        <point type="random" yaw="135">
+            <cylinder base="136,17,-346" radius="1" height="0"/>
+        </point>
+    </spawn>
+    <spawn team="red" kit="spawn">
+        <point type="random" yaw="315">
+            <cylinder base="2,17,-481" radius="1" height="0"/>
+        </point>
+    </spawn>
+    <default>
+        <point type="random" yaw="225">
+            <cylinder base="116,12,-461" radius="2" height="0"/>
+        </point>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-blue" parents="deny-players deny-world">
+        <allow><team>blue</team></allow>
+    </filter>
+    <filter name="only-red" parents="deny-players deny-world">
+        <allow><team>red</team></allow>
+    </filter>
+    <filter name="allow-iron" parents="deny-all">
+        <allow>
+            <block>iron block</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <apply enter="only-blue" message="You may not enter the enemy team's base">
+        <rectangle min="154,-329" max="119,-364"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy team's base">
+        <rectangle min="-15,-498" max="20,-463"/>
+    </apply>
+    <!-- void protection -->
+    <apply block="deny-all" message="You may not break or place blocks in the void!">
+        <!-- red side -->
+       <rectangle min="-1000,1000" max="32,-436"/>
+           <rectangle min="1000,-1000" max="47,-451"/>
+           <rectangle min="-1000,-1000" max="-13,-496"/>
+           <rectangle min="-1000,-1000" max="-42,-436"/>
+           <rectangle min="-1000,-1000" max="46,-525"/>
+            <!-- blue side -->
+           <rectangle min="1000,-1000" max="107,-391"/>
+           <rectangle min="-1000,1000" max="92,-376"/>
+           <rectangle min="1000,1000" max="152,-331"/>
+           <rectangle min="1000,1000" max="181,-390"/>
+           <rectangle min="1000,1000" max="92,-302"/>
+     </apply>
+     <apply block-break="allow-iron" block-place="deny-all" message="You may only break iron blocks in the base">
+        <rectangle min="107,-376" max="166,-317"/>
+        <rectangle min="-27,-510" max="32,-451"/>
+     </apply>
+</regions>
+<maxbuildheight>45</maxbuildheight>
+<destroyables completion="100%" owner="blue" materials="obsidian">
+    <destroyable name="Light Green Monument">
+        <cuboid min="172,20,-340" max="175,21,-337"/>
+    </destroyable>
+    <destroyable name="Green Monument">
+        <cuboid min="143,20,-311" max="146,21,-308"/>
+    </destroyable>
+</destroyables>
+<destroyables completion="100%" owner="red" materials="obsidian">
+    <destroyable name="Pink Monument">
+        <cuboid min="-7,20,-519" max="-4,21,-516"/>
+    </destroyable>
+    <destroyable name="Purple Monument">
+        <cuboid min="-36,20,-490" max="-33,21,-487"/>
+    </destroyable>
+</destroyables>
+</map> 
