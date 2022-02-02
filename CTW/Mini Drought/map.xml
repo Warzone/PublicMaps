@@ -2,7 +2,7 @@
 <map proto="1.3.0">
 <include src="tutorial.xml"/>
 <name>Mini Drought</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Take the wool from the enemy wool rooms and place it on your victory monument while defending your own wool.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -18,28 +18,29 @@
 <kits>
     <kit name="spawn">
         <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
         <item slot="2" enchantment="durability:1;dig speed:1">iron pickaxe</item>
-        <item slot="3" amount="64">sandstone</item>
-        <item slot="4" amount="64" damage="2">wood</item>
-        <item slot="8" amount="64">cooked chicken</item>
-        <item slot="7" amount="3">golden apple</item>
+        <item slot="3" enchantment="durability:3">gold axe</item>
+        <item slot="4" amount="64">sandstone</item>
+        <item slot="5" amount="64" damage="2">wood</item>
         <item slot="6" amount="64">ladder</item>
-        <item slot="5" amount="3">web</item>
-        <item slot="35" amount="1">bucket</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="64">cooked chicken</item>
         <item slot="28" amount="1">arrow</item>
-        <item slot="21" amount="64">sandstone</item>
-        <item slot="30" amount="64">sandstone</item>
+        <item slot="31" amount="64">sandstone</item>
+        <item slot="32" amount="3">web</item>
+        <item slot="33" amount="1">bucket</item>
+        <item slot="22" amount="64">sandstone</item>
         <potion duration="10" amplifier="4">damage resistance</potion>
     </kit>
 </kits>
 <itemremove>
     <item>cooked chicken</item>
+    <item>golden apple</item>
     <item>sandstone</item>
     <item>wood</item>
     <item>ladder</item>
     <item>web</item>
-    <item>arrow</item>
     <item>bucket</item>
     <item>glass bottle</item>
     <item>string</item>
@@ -48,6 +49,8 @@
     <tool>stone sword</tool>
     <tool>bow</tool>
     <tool>iron pickaxe</tool>
+    <tool>gold axe</tool>
+    <tool>arrow</tool>
 </toolrepair>
 <spawns>
     <spawn team="blue" kit="spawn" yaw="135">
@@ -148,6 +151,16 @@
         <region name="red-base"/>
     </apply>
 </regions>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold axe</material>
+        </match>
+        <modify>
+            <enchantment level="3">unbreaking</enchantment>
+        </modify>
+    </rule>
+</item-mods>
 <maxbuildheight>24</maxbuildheight>
 <wools>
     <wool team="red" color="lime">

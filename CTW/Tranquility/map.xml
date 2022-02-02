@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Tranquility</name>
-<version>1.0.0</version>
+<version>1.0.2</version>
 <objective>Capture the enemy's two wools!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -10,37 +10,51 @@
     <team id="red" color="dark red" max="10">Red</team>
     <team id="blue" color="blue" max="10">Blue</team>
 </teams>
+<broadcasts>
+    <tip after="8s">A TNT Spawner lies at the center of mid!</tip>
+</broadcasts>
 <kits>
-    <kit id="spawn">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2" unbreakable="true" enchantment="dig speed:1">iron pickaxe</item>
-        <item slot="3" unbreakable="true" enchantment="dig speed:2">iron axe</item>
-        <item slot="31" unbreakable="true" enchantment="dig speed:1">iron spade</item>
-        <item slot="8" amount="64">golden carrot</item>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" enchantment="protection fall:1">iron boots</boots>
-        <potion duration="4" amplifier="255">resistance</potion>
+    <kit id="default-kit">
+        <effect>night vision</effect>
     </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet color="993333">leather helmet</helmet>
-        <chestplate color="993333">leather chestplate</chestplate>
-        <item slot="4" amount="32" damage="2">wood</item>
-        <item slot="5" amount="16" damage="14">stained glass</item>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment level="2">efficiency</enchantment>
+        </item>
+        <item slot="31" unbreakable="true" material="iron spade">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+        <effect duration="4" amplifier="255">resistance</effect>
     </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet color="334CB2">leather helmet</helmet>
-        <chestplate color="334CB2">leather chestplate</chestplate>
-        <item slot="4" amount="32">wood</item>
-        <item slot="5" amount="16" damage="11">stained glass</item>
+    <kit id="blue-kit" parents="spawn-kit">
+        <item slot="4" amount="32" material="wood"/>
+        <item slot="5" amount="16" damage="11" material="stained glass"/>
+        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
+        <chestplate color="334CB2" unbreakable="true" material="leather chestplate"/>
     </kit>
-    <kit id="obs-kit">
-        <potion duration="9999" amplifier="255">night vision</potion>
+    <kit id="red-kit" parents="spawn-kit">
+        <item slot="4" amount="32" damage="2" material="wood"/>
+        <item slot="5" amount="16" damage="14" material="stained glass"/>
+        <helmet color="993333" unbreakable="true" material="leather helmet"/>
+        <chestplate color="993333" unbreakable="true" material="leather chestplate"/>
     </kit>
 </kits>
 <spawns>
-    <default kit="obs-kit">
+    <default kit="default-kit">
         <regions>
             <cuboid min="-366.5,44,25.5" max="-367.5,44,23.5" yaw="90"/>
             <cuboid min="-368.5,44,21.5" max="-370.5,44,22.5" yaw="0"/>
@@ -48,20 +62,17 @@
             <cuboid min="-370.5,44,27.5" max="-368.5,44,26.5" yaw="180"/>
         </regions>
     </default>
-    <spawn team="red" kit="red-kit">
-        <regions yaw="0">
-            <cuboid min="-368.5,7,-40.5" max="-370.5,7,-38.5"/>
-        </regions>
-    </spawn>
-    <spawn team="blue" kit="blue-kit">
-        <regions yaw="180">
+    <spawn team="blue" kit="blue-kit" yaw="180">
+        <region yaw="180">
             <cuboid min="-370.5,7,89.5" max="-368.5,7,87.5"/>
-        </regions>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="0">
+        <region>
+            <cuboid min="-368.5,7,-40.5" max="-370.5,7,-38.5"/>
+        </region>
     </spawn>
 </spawns>
-<broadcasts>
-    <tip after="8s">A TNT Spawner lies at the center of mid!</tip>
-</broadcasts>
 <wools>
     <wool team="blue" color="orange" craftable="false" location="-405.5,11,-43.5">
         <monument>
@@ -73,67 +84,85 @@
             <block>-366.5,8,86.5</block>
         </monument>
     </wool>
-    <wool team="red" color="purple" craftable="false" location="-405.5,11,92.5">
-        <monument>
-            <block>-372.5,8,-37.5</block>
-        </monument>
-    </wool>
     <wool team="red" color="cyan" craftable="false" location="-333.5,11,92.5">
         <monument>
             <block>-366.5,8,-37.5</block>
         </monument>
     </wool>
+    <wool team="red" color="purple" craftable="false" location="-405.5,11,92.5">
+        <monument>
+            <block>-372.5,8,-37.5</block>
+        </monument>
+    </wool>
 </wools>
 <filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-    <not id="no-void">
-        <void/>
-    </not>
     <not id="deny-blue-wool-room">
         <any>
-            <filter id="only-blue"/>
-            <filter id="no-chest"/>
+            <team id="only-blue">blue</team>
+            <material>chest</material>
         </any>
     </not>
     <not id="deny-red-wool-room">
         <any>
-            <filter id="only-red"/>
-            <filter id="no-chest"/>
+            <team id="only-red">red</team>
+            <material>chest</material>
         </any>
     </not>
-    <any id="no-chest">
-        <material>chest</material>
-    </any>
+    <not id="no-void">
+        <void/>
+    </not>
 </filters>
 <regions>
     <union id="spawns">
+        <rectangle id="blue-spawn" min="-378,75" max="-361,91"/>
         <rectangle id="red-spawn" min="-378,-42" max="-361,-26"/>
-        <rectangle id="blue-spawn" min="-361,75" max="-378,91"/>
     </union>
     <union id="wool-rooms">
-        <union id="red-wool-rooms"> <!-- Red defends these -->
-            <rectangle id="orange-woolroom" min="-400,-36" max="-411,-49"/>
-            <rectangle id="yellow-woolroom" min="-339,-36" max="-328,-49"/>
-        </union>
         <union id="blue-wool-rooms"> <!-- Blue defends these -->
-            <rectangle id="purple-wool-room" min="-400,85" max="-411,98"/>
             <rectangle id="cyan-wool-room" min="-339,85" max="-328,98"/>
+            <rectangle id="purple-wool-room" min="-411,85" max="-400,98"/>
+        </union>
+        <union id="red-wool-rooms"> <!-- Red defends these -->
+            <rectangle id="orange-woolroom" min="-411,-49" max="-400,-36"/>
+            <rectangle id="yellow-woolroom" min="-339,-49" max="-328,-36"/>
         </union>
     </union>
-    <union>
-        <cuboid min="-369,6,24" max="-370,7,25" id="tnt-spawner"/>
-    </union>
-    <apply block="never" region="spawns" message="You may not edit the spawn!"/>
-    <apply block="deny-blue-wool-room" region="blue-wool-rooms"/>
-    <apply block="deny-red-wool-room" region="red-wool-rooms"/>
+    <cuboid id="tnt-spawner" min="-370,6,24" max="-369,7,25"/>
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
     <apply enter="only-blue" region="red-wool-rooms" message="You may not enter your own wool room!"/>
     <apply enter="only-red" region="blue-wool-rooms" message="You may not enter your own wool room!"/>
+    <apply block="never" region="spawns" message="You may not edit the spawn!"/>
+    <apply block="deny-blue-wool-room" region="blue-wool-rooms"/>
+    <apply block="deny-red-wool-room" region="red-wool-rooms"/>
     <apply block-break="never" region="tnt-spawner" message="You may not destroy the TNT spawner!"/>
-    <apply block-place="no-void" block-break="always" region="everywhere" message="You may not edit the void!"/>
+    <apply block-place="no-void" message="You may not edit the void!"/>
 </regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>wood:0</item>
+    <item>wood:2</item>
+    <item>stained glass</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>string</item>
+    <item>redstone</item>
+    <item>seeds</item>
+    <item>sapling</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
 <kill-rewards>
     <kill-reward>
         <item material="golden apple"/>
@@ -145,28 +174,6 @@
         <item amount="16" damage="2" material="wood"/>
     </kill-reward>
 </kill-rewards>
-<toolrepair>
-    <tool>bow</tool>
-    <tool>stone sword</tool>
-    <tool>iron pickaxe</tool>
-    <tool>iron spade</tool>
-    <tool>iron axe</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
-    <item>arrow</item>
-    <item>golden carrot</item>
-    <item>string</item>
-    <item>redstone</item>
-    <item>seeds</item>
-    <item>wood:0</item>
-    <item>wood:2</item>
-    <item>stained glass</item>
-    <item>sapling</item>
-</itemremove>
 <tnt>
     <instantignite>on</instantignite>
     <licensing>off</licensing>
@@ -174,5 +181,4 @@
     <power>3</power>
 </tnt>
 <maxbuildheight>22</maxbuildheight>
-<timelock>on</timelock>
 </map>

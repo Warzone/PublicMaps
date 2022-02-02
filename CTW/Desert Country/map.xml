@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
 <map proto="1.4.0">
 <name>Desert Country</name>
-<version>1.0.5</version>
+<version>1.0.11</version>
 <objective>Capture the wools located on the opposite side.</objective>
+<gamemode>ctw</gamemode>
 <!-- Map authors & contributors. -->
 <authors>
     <author uuid="b5967591-14fc-421f-a5e2-931498e10fb8"/> <!-- OCNs_OMEN -->
@@ -14,10 +14,6 @@
 <contributors>
     <contributor uuid="5951eb64-d04b-4917-967e-57551860ed34" contribution="Spawn"/> <!-- xXBatManXx -->
 </contributors>
-<gamemode>ctw</gamemode>
-<broadcasts>
-    <tip after="2s">`7You will get `b8 wood`7 and `b10 arrows `7every kill</tip>
-</broadcasts>
 <teams>
     <team id="green-team" color="green" max="20" max-overfill="25">Green</team>
     <team id="blue-team" color="blue" max="20" max-overfill="25">Blue</team>
@@ -41,18 +37,18 @@
 </spawns>
 <kits>
     <kit id="spawn" force="true">
-        <item slot="0" unbreakable="true" material="stone sword"/>
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="iron pickaxe"/>
         <item slot="3" unbreakable="true" material="stone axe"/>
-        <item slot="4" unbreakable="true" material="shears"/>
-        <item slot="5" amount="64" material="grilled pork"/>
-        <item slot="6" amount="40" material="red sandstone"/>
-        <item slot="7" amount="16" damage="3" material="log"/>
+        <item slot="4" amount="64" damage="3" material="wood"/>
+        <item slot="5" amount="32" material="red sandstone"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="grilled pork"/>
         <item slot="17" amount="64" material="arrow"/>
-        <potion amplifier="100" duration="15">heal</potion>
-        <potion amplifier="100" duration="15">damage resistance</potion>
-        <potion amplifier="100" duration="15">regeneration</potion>
+        <potion amplifier="10" duration="7">damage resistance</potion>
+        <potion amplifier="10" duration="7">regeneration</potion>
     </kit>
     <kit id="green-kit" parents="spawn">
         <helmet color="667F33" material="leather helmet"/>
@@ -76,12 +72,6 @@
         <potion duration="30s">regeneration</potion>
     </kit>
 </kits>
-<kill-rewards>
-    <kill-reward>
-        <item amount="8" damage="3" material="wood"/>
-        <item amount="10" material="arrow"/>
-    </kill-reward>
-</kill-rewards>
 <filters>
     <team id="only-green">green-team</team>
     <team id="only-blue">blue-team</team>
@@ -99,31 +89,63 @@
             <material>mob spawner</material>
         </any>
     </not>
-    <all id="bluewoolrooms">
+    <all id="blue-wool-rooms-blocks">
         <material>web</material>
         <team>blue-team</team>
     </all>
-    <all id="greenwoolrooms">
-        <material>web</material>
-        <team>green-team</team>
+    <all id="green-wool-rooms-blocks">
+        <all>
+            <material>web</material>
+            <team>green-team</team>
+        </all>
     </all>
+    <player id="player-in-purple">
+        <all>
+            <filter id="only-blue"/>
+            <filter id="purple-wool-room"/>
+        </all>
+    </player>
+    <player id="player-in-red">
+        <all>
+            <filter id="only-blue"/>
+            <filter id="red-wool-room"/>
+        </all>
+    </player>
+    <player id="player-in-orange">
+        <all>
+            <filter id="only-green"/>
+            <filter id="orange-wool-room"/>
+        </all>
+    </player>
+    <player id="player-in-yellow">
+        <all>
+            <filter id="only-green"/>
+            <filter id="yellow-wool-room"/>
+        </all>
+    </player>
 </filters>
 <regions>
     <union id="spawns">
-        <union id="greenspawn">
-            <rectangle id="greenspawn1" min="528,-131" max="540,-119"/>
-            <rectangle id="greenspawn2" min="520,-150" max="548,-132"/>
+        <union id="green-spawn">
+            <rectangle id="green-spawn-1" min="528,-131" max="540,-119"/>
+            <rectangle id="green-spawn-2" min="520,-150" max="548,-132"/>
         </union>
-        <union id="bluespawn">
-            <rectangle id="bluespawn1" min="528,-334" max="540,-322"/>
-            <rectangle id="bluespawn2" min="520,-321" max="548,-303"/>
+        <union id="blue-spawn">
+            <rectangle id="blue-spawn-1" min="528,-334" max="540,-322"/>
+            <rectangle id="blue-spawn-2" min="520,-321" max="548,-303"/>
         </union>
     </union>
     <union id="rooms">
-    <!-- Blue Wool Rooms (Wools blue need to get) -->
-        <rectangle id="bluewoolroomsReg" min="524,-113" max="544,-98"/>
-    <!-- Green Wool Rooms (Wools green need to get) -->
-        <rectangle id="greenwoolroomsReg" min="524,-354" max="544,-339"/>
+        <!--  Blue Wool Rooms (Wools blue need to get)  -->
+        <union id="blue-wool-rooms">
+            <rectangle id="purple-wool-room" min="534.5,-113" max="524,-98"/>
+            <rectangle id="red-wool-room" min="534.5,-113" max="545,-98"/>
+        </union>
+        <!--  Green Wool Rooms (Wools green need to get)  -->
+        <union id="green-wool-rooms">
+            <rectangle id="orange-wool-room" min="534.5,-354" max="524,-339"/>
+            <rectangle id="yellow-wool-room" min="534.5,-354" max="545,-339"/>
+        </union>
     </union>
     <negative id="yes-void">
         <union id="void-areas">
@@ -132,23 +154,32 @@
             <rectangle min="561,-295" max="568,-157"/>
             <rectangle min="501,-296" max="508,-157"/>
             <rectangle min="495,-245" max="574,-207"/>
-            <region id="greenspawn"/>
-            <region id="bluespawn"/>
+            <region id="green-spawn"/>
+            <region id="blue-spawn"/>
         </union>
     </negative>
     <union id="Iron">
         <rectangle min="521,-317" max="547,-309"/>
         <rectangle min="521,-144" max="547,-136"/>
     </union>
-    <!--Applying-->
-    <apply enter="only-green" block="greenwoolrooms" use="only-green" region="greenwoolroomsReg" message="You may not enter your wool rooms"/>
-    <apply enter="only-blue" block="bluewoolrooms" use="only-blue" region="bluewoolroomsReg" message="You may not enter your wool rooms"/>
-    <apply enter="only-green" region="greenspawn" message="You may not enter the enemy spawn"/>
-    <apply enter="only-blue" region="bluespawn" message="You may not enter the enemy spawn"/>
+    <!-- Blocks -->
+    <apply block="green-wool-rooms-blocks" region="green-wool-rooms" message="You may not modify the wool rooms"/>
+    <apply block="blue-wool-rooms-blocks" region="blue-wool-rooms" message="You may not modify the wool rooms"/>
+    <!-- Chest Blocking -->
+    <apply use="player-in-purple" region="purple-wool-room"/>
+    <apply use="player-in-red" region="red-wool-room"/>
+    <apply use="player-in-orange" region="orange-wool-room"/>
+    <apply use="player-in-yellow" region="yellow-wool-room"/>
+    <!-- Enter -->
+    <apply enter="only-green"  region="green-wool-rooms" message="You may not enter your wool rooms"/>
+    <apply enter="only-blue"  region="blue-wool-rooms" message="You may not enter your wool rooms"/>
+    <apply enter="only-green" region="green-spawn" message="You may not enter the enemy spawn"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn"/>
+    <!-- Modify -->
     <apply block="iron-diamond-allow">
         <region>
-            <region id="greenspawn"/>
-            <region id="bluespawn"/>
+            <region id="green-spawn"/>
+            <region id="blue-spawn"/>
         </region>
     </apply>
     <apply block="deny-void" message="You may not build in the void!" region="yes-void"/>
@@ -157,31 +188,50 @@
 </regions>
 <wools>
     <wool team="blue-team" color="purple" location="533,7,-104">
-        <monument><block>533,12,-328</block></monument>
+        <monument>
+            <block>533,12,-328</block>
+        </monument>
     </wool>
     <wool team="blue-team" color="red" location="535,7,-104">
-        <monument><block>535,12,-328</block></monument>
+        <monument>
+            <block>535,12,-328</block>
+        </monument>
     </wool>
     <wool team="green-team" color="orange" location="533,7,-349">
-        <monument><block>533,12,-125</block></monument>
+        <monument>
+            <block>533,12,-125</block>
+        </monument>
     </wool>
     <wool team="green-team" color="yellow" location="535,7,-349">
-        <monument><block>535,12,-125</block></monument>
+        <monument>
+            <block>535,12,-125</block>
+        </monument>
     </wool>
 </wools>
 <itemremove>
+    <item>wood</item>
     <item>red sandstone</item>
     <item>grilled pork</item>
     <item>arrow</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather boots</item>
-    <item>shears</item>
-    <item>stone sword</item>
+    <item>iron sword</item>
     <item>bow</item>
     <item>iron pickaxe</item>
     <item>stone axe</item>
 </itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" damage="3" material="wood"/>
+        <item amount="8" damage="3" material="red sandstone"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <timelock>on</timelock>
 <maxbuildheight>23</maxbuildheight>
 <renewables>

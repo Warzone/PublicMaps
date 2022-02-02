@@ -1,6 +1,6 @@
 <map proto="1.3.3" internal="true">
 <name>Downforce</name>
-<version>1.0.1</version>
+<version>1.0.3</version>
 <objective>Capture the enemy team's wool!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -12,8 +12,8 @@
     <contributor uuid="e37f18f1-117b-47db-8806-6d3a0854b518" contribution="Feedback"/> <!-- chickolympics -->
 </contributors>
 <teams>
-    <team id="red" color="dark red" max="5">Red</team>
-    <team id="blue" color="blue" max="5">Blue</team>
+    <team id="red" color="dark red" max="10" max-overfill="14">Red</team>
+    <team id="blue" color="blue" max="10" max-overfill="14">Blue</team>
 </teams>
 <spawns>
     <default yaw="90">
@@ -34,7 +34,7 @@
         <item slot="3" enchantment="durability:3">stone spade</item>
         <item slot="4" amount="32">smooth brick</item>
         <item slot="5" amount="16">glass</item>
-        <item slot="28" amount="8">arrow</item>
+        <item slot="28" amount="16">arrow</item>
         <item slot="8" amount="64">cooked beef</item>
         <potion duration="5" amplifier="5">damage resistance</potion>
     </kit>
@@ -69,6 +69,7 @@
     <item>leather boots</item>
     <item>wool:11</item>
     <item>wool:14</item>
+    <item>golden apple</item>
 </itemremove>
 <filters>
     <filter name="blue-chests">
@@ -104,7 +105,7 @@
         <complement name="blue-spawn-lane">
             <cuboid min="9,7,-39" max="39,30,-25"/>
             <cuboid name="blue-spawn-room" min="20,7,-39" max="29,30,-32"/>
-            <cuboid min="16,7,-25" max="33,30,-32"/>
+            <cuboid min="16,7,-25" max="33,30,-32"/>    
         </complement>
     </union>
     <union name="red-side">
@@ -154,5 +155,6 @@
 <killreward>
     <item amount="2">arrow</item>
     <item amount="4" damage="2">log</item>
+	<item>golden apple</item>
 </killreward>
 </map>

@@ -1,184 +1,161 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<include src="tutorial.xml"/>
+<map proto="1.4.2">
 <name>Race for Victory 2</name>
-<version>1.2.10</version>
-<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<version>1.3.1</version>
+<objective>Take the enemy's wools located to either side of the enemy's base and place them in your victory monument.</objective>
 <gamemode>ctw</gamemode>
 <authors>
-    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="map design"/> <!-- Plastix -->
-    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="map design"/> <!-- IM_A_H0B0 -->
-    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="map design and gameplay management"/> <!-- MonsieurApple -->
-    <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="map design and item management"/> <!-- Anxuiz -->
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design"/> <!-- Plastix -->
+    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Map design"/> <!-- IM_A_H0B0 -->
+    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="Map design and gameplay management"/> <!-- MonsieurApple -->
+    <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="Map design and item management"/> <!-- Anxuiz -->
 </authors>
 <rules>
     <rule>Players may not obstruct the majority of the lane with lava or obsidian.</rule>
     <rule>Players may not use lava or obsidian to block a team's spawn.</rule>
 </rules>
 <teams>
-    <team color="blue" max="32">Blue</team>
-    <team color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
 </teams>
-<spawns>
-    <spawn team="blue" yaw="0" kit="spawn-kit">
-        <cylinder base="0.5,4,-54.5" radius="2.5" height="0"/>
-    </spawn>
-    <spawn team="red" yaw="180" kit="spawn-kit">
-        <cylinder base="0.5,4,69.5" radius="2.5" height="0"/>
-    </spawn>
-    <default yaw="270">
-        <cylinder base="44.5,8,7.5" radius="4" height="0"/>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn-kit">
-        <item slot="0">iron_sword</item>
-        <item slot="1">bow</item>
-        <item slot="2" enchantment="durability:3;dig speed:1">iron_pickaxe</item>
-        <item slot="3" amount="64" damage="2">log</item>
-        <item slot="4" amount="64">cooked_fish</item>
-        <item slot="5" amount="64">glass</item>
-        <item slot="6" amount="64">arrow</item>
-        <item slot="7" amount="64">arrow</item>
-        <item slot="8" amount="64">ladder</item>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron_sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" amount="64" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="31" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" amount="64" material="ladder"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
-    <kit name="survival">
+    <kit id="survival">
         <game-mode>survival</game-mode>
     </kit>
-    <kit name="adventure">
+    <kit id="adventure">
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <default>
+        <region yaw="270">
+            <cylinder base="44.5,8,7.5" radius="4" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="0">
+            <cylinder base="0.5,4,-54.5" radius="2.5" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="180">
+            <cylinder base="0.5,4,69.5" radius="2.5" height="0"/>
+        </region>
+    </spawn>
+</spawns>
 <filters>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-red-usage">
-        <not>
-            <all>
-                <any>
-                    <block>chest</block>
-                    <block>workbench</block>
-                    <block>trap door</block>
-                </any>
-                <team>blue</team>
-            </all>
-        </not>
-    </filter>
-    <filter name="only-blue-usage">
-        <not>
-            <all>
-                <any>
-                    <block>chest</block>
-                    <block>workbench</block>
-                    <block>trap door</block>
-                </any>
-                <team>red</team>
-            </all>
-        </not>
-    </filter>
+    <not id="blue-in-wr">
+        <any>
+            <material>chest</material>
+            <team id="only-red">red</team>
+        </any>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <material>chest</material>
+            <team id="only-blue">blue</team>
+        </any>
+    </not>
 </filters>
 <regions>
-    <!-- blue wool room protection (these are the wools blue has to get) -->
-    <union name="blue-wool-rooms">
-        <rectangle name="purple-room" min="5,119" max="17,134"/>
-        <rectangle name="yellow-room" min="-16,119" max="-4,134"/>
+    <!-- blue wool rooms (these are the wools blue has to get) -->
+    <union id="blue-wool-rooms">
+        <rectangle id="purple-room" min="5,119" max="17,134"/>
+        <rectangle id="yellow-room" min="-16,119" max="-4,134"/>
     </union>
-    <apply block="only-blue" use="only-blue-usage">
-        <region name="blue-wool-rooms"/>
-    </apply>
-    <apply enter="only-blue" message="You may not enter your own wool room!">
-        <region name="blue-wool-rooms"/>
-    </apply>
-
-    <!-- red wool room protection (these are the wools red has to get) -->
-    <union name="red-wool-rooms">
-        <rectangle name="orange-room" min="5,-119" max="17,-104"/>
-        <rectangle name="lime-room" min="-16,-119" max="-4,-104"/>
+    <!-- red wool room (these are the wools red has to get) -->
+    <union id="red-wool-rooms">
+        <rectangle id="lime-room" min="-16,-119" max="-4,-104"/>
+        <rectangle id="orange-room" min="5,-119" max="17,-104"/>
     </union>
-    <apply block="only-red" use="only-red-usage">
-        <region name="red-wool-rooms"/>
-    </apply>
-    <apply enter="only-red" message="You may not enter your own wool room!">
-        <region name="red-wool-rooms"/>
-    </apply>
-
-    <!-- void protection -->
-    <apply block-place="deny-all" message="You may not place blocks in the void!">
-        <!-- blue side -->
-        <rectangle min="-4,-oo" max="5,-69"/>
-        <rectangle min="17,-oo" max="100,-19"/>
-        <rectangle min="-16,-oo" max="-100,-19"/>
-        <!-- red side -->
-        <rectangle min="-4,84" max="5,oo"/>
-        <rectangle min="-100,34" max="-16,oo"/>
-        <rectangle min="17,34" max="100,oo"/>
-    </apply>
-
-    <!-- supply room protection -->
-    <apply block="deny-all" message="You may not break or place blocks in the storage room!">
-        <cuboid name="blue-storage-room" min="-14,0,-65" max="15,9,-41"/>
-        <cuboid name="red-storage-room" min="-14,0,56" max="15,9,80"/>
-    </apply>
-
-    <!-- spawn protection -->
-    <apply enter="only-red" message="You may not enter the enemy team's spawn!">
-        <cuboid name="red-spawn-room" min="-14,0,56" max="15,7,80"/>
-    </apply>
-    <apply enter="only-blue" message="You may not enter the enemy team's spawn!">
-        <cuboid name="blue-spawn-room" min="-14,0,-65" max="15,7,-41"/>    
-    </apply>
-    <!-- Blockglitch Prevention -->
-    <apply kit="adventure">
-        <region name="blockglitch-zone"/>
-    </apply>
-    <apply kit="survival">
-        <region name="non-blockglitch-zone"/>
-    </apply>
-    <negative name="non-blockglitch-zone">
-        <union name="blockglitch-zone">
-            <rectangle name="red-blockglitch" min="-4,95" max="5,134"/>
-            <rectangle name="blue-blockglitch" min="5,-80" max="-4,-119"/>
+    <union id="storage-rooms">
+        <cuboid id="blue-storage-room" min="-14,0,-65" max="15,9,-41"/>
+        <cuboid id="red-storage-room" min="-14,0,56" max="15,9,80"/>
+    </union>
+    <union id="spawn-rooms">
+        <cuboid id="blue-spawn-room" min="-14,0,-65" max="15,7,-41"/>
+        <cuboid id="red-spawn-room" min="-14,0,56" max="15,7,80"/>
+    </union>
+    <negative id="void">
+        <union id="map">
+            <rectangle min="-16,-119" max="17,-19"/>
+            <rectangle min="-16,34" max="17,134"/>
+            <rectangle min="-23,-19" max="24,34"/>
         </union>
     </negative>
-
+    <negative id="non-blockglitch-zone">
+        <union id="blockglitch-zone">
+            <rectangle id="blue-blockglitch" min="-4,-119" max="5,-80"/>
+            <rectangle id="red-blockglitch" min="-4,95" max="5,134"/>
+        </union>
+    </negative>
+    <apply enter="only-blue" message="You may not enter the enemy team's spawn!" region="blue-spawn-room"/>
+    <apply enter="only-red" message="You may not enter the enemy team's spawn!" region="red-spawn-room"/>
+    <apply enter="only-blue" message="You may not enter your own wool room!" region="blue-wool-rooms"/>
+    <apply enter="only-red" message="You may not enter your own wool room!" region="red-wool-rooms"/>
+    <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
+    <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
+    <apply block="never" message="You may not break or place blocks in the storage room!" region="storage-rooms"/>
+    <apply block="never" message="You may not break or place blocks in the void!" region="void"/>
+    <apply kit="adventure" region="blockglitch-zone"/>
+    <apply kit="survival" region="non-blockglitch-zone"/>
 </regions>
-<playable>
-    <rectangle min="-24,-127" max="25,142"/>
-</playable>
-<maxbuildheight>30</maxbuildheight>
-<wools team="red">
-    <wool color="orange">
-        <block>-1,5,78</block>
-    </wool>
-    <wool color="lime">
-        <block>1,5,78</block>
-    </wool>
-</wools>
 <wools team="blue">
-    <wool color="purple">
-        <block>-1,5,-64</block>
+    <wool color="purple" location="11,12,128.5">
+        <monument>
+            <block>-1,5,-64</block>
+        </monument>
     </wool>
-    <wool color="yellow">
-        <block>1,5,-64</block>
+    <wool color="yellow" location="-10,12,128.5">
+        <monument>
+            <block>1,5,-64</block>
+        </monument>
     </wool>
 </wools>
-<disabledamage>
-    <damage ally="true" self="false" enemy="false" other="false">fire</damage>
-    <damage ally="true" self="false" enemy="false" other="false">fire tick</damage>
-    <damage ally="true" self="false" enemy="false" other="false">lava</damage>
-    <damage ally="true" self="false" enemy="false" other="false">poison</damage>
-    <damage ally="true" self="false" enemy="false" other="false">magic</damage>
-</disabledamage>
+<wools team="red">
+    <wool color="lime" location="-10,12,-113.5">
+        <monument>
+            <block>1,5,78</block>
+        </monument>
+    </wool>
+    <wool color="orange" location="11,12,-113.5">
+        <monument>
+            <block>-1,5,78</block>
+        </monument>
+    </wool>
+</wools>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
     <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
 </toolrepair>
 <itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
     <item>string</item>
     <item>glowstone dust</item>
     <item>apple</item>
@@ -188,11 +165,57 @@
     <item>stone plate</item>
     <item>sand</item>
     <item>trap door</item>
-    <item>cooked fish</item>
-    <item>log</item>
-    <item>glass</item>
-    <item>ladder</item>
 </itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>ladder</material>
+        </filter>
+        <drops>
+            <item chance="0" material="ladder"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden apple</item>
+    <item>ladder</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="32" damage="2" material="wood"/>
+    <item amount="16" material="glass"/>
+</kill-reward>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">fire</damage>
+    <damage ally="true" self="false" enemy="false" other="false">fire tick</damage>
+    <damage ally="true" self="false" enemy="false" other="false">lava</damage>
+    <damage ally="true" self="false" enemy="false" other="false">poison</damage>
+    <damage ally="true" self="false" enemy="false" other="false">magic</damage>
+</disabledamage>
+<maxbuildheight>30</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
+<!-- <include src="tutorial.xml"/>
 <tutorial>
     <stage title="Capture the Wool">
         <message>
@@ -243,5 +266,4 @@
             <point yaw="-73" pitch="10">-27.5,4,40</point>
         </teleport>
     </stage>
-</tutorial>
-</map>
+</tutorial> -->
