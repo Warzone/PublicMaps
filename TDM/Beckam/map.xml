@@ -1,0 +1,84 @@
+<map proto="1.3.0">
+<name>Beckam</name>
+<version>1.0.7</version>
+<objective>Be The Team With The Most Kills</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
+</authors>
+<teams>
+    <team color="yellow" max="9">Yellow</team>
+    <team color="gold" max="9">Orange</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="32">bread</item>
+        <item slot="5" amount="1">iron ingot</item>
+        <item slot="6" amount="1">exp bottle</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="8">arrow</item>
+        <potion duration="3" amplifier="4">damage resistance</potion>
+        <potion duration="3" amplifier="4">heal</potion>
+        <potion duration="3" amplifier="1">increase damage</potion>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <helmet color="E5E533" unbreakable="true">leather helmet</helmet>
+        <chestplate color="E5E533" unbreakable="true">leather chestplate</chestplate>
+        <boots color="E5E533" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
+        <boots color="D87F33" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>bread</item>
+    <item>golden apple</item>
+    <item>iron ingot</item>
+    <item>exp bottle</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<spawns>
+    <spawn team="yellow" kit="yellow" yaw="-45">
+        <block>9.5,9.5,-17.5</block>
+    </spawn>
+    <spawn team="yellow" kit="yellow" yaw="0">
+        <block>-2.5,7.5,-21.5</block>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="-135">
+        <block>9.5,9.5,16.5</block>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="180">
+        <block>-2.5,7.5,20.5</block>
+    </spawn>
+    <default yaw="-90">
+        <cylinder base="17,5,-0" radius="1" height="2"/>
+    </default>
+</spawns>
+<score>
+    <time>7m</time>
+</score>
+<regions>
+    <apply block="deny-all" message="You may not modify blocks!">
+        <rectangle min="50,-30" max="-30,50"/>
+    </apply>
+</regions>
+<timelock>on</timelock>
+<killreward>
+    <item>golden apple</item>
+    <item amount="2">exp bottle</item>
+    <item damage="4">ink sack</item>
+    <item amount="2">iron ingot</item>
+    <item amount="4">arrow</item>
+</killreward>
+</map>
