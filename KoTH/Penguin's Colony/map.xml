@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Penguin's Colony</name>
+<version>1.0.1</version>
+<objective>Reach 1250 points before the opposing team!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b"/> <!-- MewTwoKing -->
+    <author uuid="f36bdc4f-7dab-462b-87b6-dee2e3af8490"/> <!-- _Stay -->
+    <author uuid="5a098b06-e7f6-4501-add4-bf8a027da261"/> <!-- revinition -->
+    <author uuid="0e7cf4ed-6741-4fd4-b619-297377c76154"/> <!-- yhan -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and map conversion"/> <!-- _Pear -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="15">Blue</team>
+    <team id="red" color="red" max="15">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="24" damage="1" material="leaves"/>
+        <item slot="3" unbreakable="true" material="shears"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <item slot="8" amount="16" material="golden carrot"/>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="3C44AA" material="leather helmet"/>
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
+        <boots unbreakable="true" color="3C44AA" material="leather boots"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
+        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
+        <boots unbreakable="true" color="B02E26" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <region>
+            <point>-78.5,80,-275.5</point>
+        </region>
+    </default>
+    <spawn team="blue" kit="blue-kit" yaw="40" pitch="-10">
+        <region>
+            <point>-26.5, 37, -250.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="-140" pitch="-10">
+        <region>
+            <point>-130.5,37,-232.5</point>
+        </region>
+    </spawn>
+</spawns>
+<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="B Point" points="1">
+        <capture>
+            <cylinder id="b-hill" base="-51.5,42,-256.5" radius="5" height="4"/>
+        </capture>
+        <progress>
+            <region id="b-hill"/>
+        </progress>
+        <captured>
+            <region id="b-hill"/>
+        </captured>
+    </control-point>
+    <control-point name="Mid Point" points="1">
+        <capture>
+            <cylinder id="mid-hill" base="-78.5,43,-241.5" radius="7" height="4"/>
+        </capture>
+        <progress>
+            <region id="mid-hill"/>
+        </progress>
+        <captured>
+            <region id="mid-hill"/>
+        </captured>
+    </control-point>
+	 <control-point name="A Point" points="1">
+        <capture>
+            <cylinder id="a-hill" base="-105.5,42,-226.5" radius="5" height="4"/>
+        </capture>
+        <progress>
+            <region id="a-hill"/>
+        </progress>
+        <captured>
+            <region id="a-hill"/>
+        </captured>
+    </control-point>
+</control-points>
+<filters>
+    <team id="blue-only">blue</team>
+    <team id="red-only">red</team>
+    <all id="only-leaves-in-map">
+        <material>leaves</material>
+    </all>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-45,-oo,-259"  max="-17,oo,-230"/>
+        <cuboid id="red-spawn-protection"  min="-136,-oo,-254" max="-111,oo,-225"/>
+    </union>
+    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection"   enter="blue-only"          message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="red-only"           message="You may not enter the enemy spawn."/>
+    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leaves</item>
+    <item>shears</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="6">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<score>
+    <limit>1250</limit>
+</score>
+<timelock>on</timelock>
+<maxbuildheight>48</maxbuildheight>
+</map>
