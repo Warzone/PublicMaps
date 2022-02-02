@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Wool">
+<name>Village 2 Christmas</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+    <author uuid="665f52b7-7ecf-4694-877c-d4adc176bb6f"/> <!-- thatoneblockhead -->
+</authors>
+<contributors>
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit"></contributor> <!-- Wesdial -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="World conversion, XML"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="yellow-team" color="yellow" max="50">Yellow</team>
+    <team id="red-team" color="dark red" max="50">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron axe</item>
+        <item slot="3" amount="64">wood</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="7" amount="16">arrow</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="yellow-kit" parents="default">
+        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
+        <leggings unbreakable="true" color="E5E533">leather leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="yellow-team" kit="yellow-kit" yaw="180" region="yellow-spawn"/>
+    <spawn team="red-team" kit="red-kit" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="10%" repairable="false" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="yellow-team" materials="wool" region="left-yellow-wool"/>
+    <destroyable name="Right Wool" owner="yellow-team" materials="wool" region="right-yellow-wool"/>
+    <destroyable name="Left Wool" owner="red-team" materials="wool" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" materials="wool" region="right-red-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="left-yellow-wool" min="412,10,530" max="417,20,535"/>
+        <cuboid id="right-yellow-wool" min="412,10,466" max="417,20,471"/>
+        <cuboid id="left-red-wool" min="568,10,466" max="573,20,471"/>
+        <cuboid id="right-red-wool" min="568,10,529" max="573,20,535"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="yellow-spawn-protection" min="407,10,92" max="400,oo,504"/>
+        <cuboid id="red-spawn-protection" min="577,10,508" max="584,oo,496"/>
+    </union>
+    <point id="yellow-spawn">403.5,11,500.5</point>
+    <point id="red-spawn">581.5,11,500.5</point>
+    <point id="obs-spawn">492.5,38,549.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="398,458" max="586,542"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"                 block="never"       message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+		<kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="5"/>
+            </all>
+        </filter>
+        <item amount="16">wood</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>35</maxbuildheight>
+</map>

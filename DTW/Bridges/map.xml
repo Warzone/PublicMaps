@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Wool">
+<name>Bridges</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<phase>development</phase>
+<authors>
+    <author uuid="0fee9b73-72ce-4793-926f-c2c45340f480"/> <!-- Nightsent -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"></contributor> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue"     max="50">Blue</team>
+    <team id="red-team"  color="dark red" max="50">Red</team>
+</teams>
+<!-- Classes -->
+<classes family="Warzone" sticky="false">
+    <class name="Phoenix" default="true" description="Fight with the power of the sun!" icon="fireball">
+        <kit>
+            <item slot="0" unbreakable="true">wood sword</item>
+            <item slot="1" unbreakable="true">bow</item>
+            <item slot="2" name="`6`lFIRE BREATH">blaze powder</item>
+            <item slot="3">golden apple</item>
+            <item slot="5" amount="64">wood</item>
+            <item slot="6" unbreakable="true">wood axe</item>
+            <item slot="8" amount="64">arrow</item>
+            <helmet     unbreakable="true" locked="true">chainmail helmet</helmet>
+            <chestplate unbreakable="true" locked="true" team-color="true" >leather chestplate</chestplate>
+        </kit>
+    </class>
+    <class name="Ninja" description="Don't need armor when you can't get hit!" icon="flint">
+        <kit>
+            <item slot="0" unbreakable="true">wood sword</item>
+            <item slot="1">golden apple</item>
+            <item slot="3" name="`7Ninja Ability">flint</item>
+            <item slot="6" amount="64">wood</item>
+            <item slot="7" unbreakable="true">wood axe</item>
+            <helmet unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+            <boots  unbreakable="true" locked="true" team-color="true">leather boots</boots>
+            <effect duration="1000000" amplifier="2">speed</effect>
+        </kit>
+    </class>
+    <class name="Builder" description="Extra blocks to help build fortifications." icon="wood stairs">
+        <kit>
+            <item slot="0" unbreakable="true">iron pickaxe</item>
+            <item slot="1" unbreakable="true">stone axe</item>
+            <item slot="2" unbreakable="true">bow</item>
+            <item slot="3" name="`cSuper Breaker">feather</item>
+            <item slot="4">golden apple</item>
+            <item slot="6" amount="64">wood</item>
+            <item slot="7" amount="64">wood stairs</item>
+            <item slot="8" amount="16">ladder</item>
+            <item slot="9" amount="64">glass</item>
+            <item slot="10" amount="64">log</item>
+            <item slot="11" amount="64">log</item>
+            <item slot="17" amount="64">arrow</item>
+            <helmet     unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+            <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
+            <boots      unbreakable="true" locked="true">iron boots</boots>
+        </kit>
+    </class>
+    <class name="Spy" description="Keep your friends close, and your enemies closer!" icon="leather helmet">
+        <kit>
+            <item slot="0" unbreakable="true">wood sword</item>
+            <item slot="1" unbreakable="true">bow</item>
+            <item slot="2">golden apple</item>
+            <item slot="3" name="`fDisguise">ink sack</item>
+            <item slot="5" amount="64">wood</item>
+            <item slot="6" unbreakable="true">wood axe</item>
+            <item slot="8" amount="64">arrow</item>
+            <helmet     unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+            <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
+            <leggings   unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
+            <boots      unbreakable="true" locked="true" team-color="true">leather boots</boots>
+        </kit>
+    </class>
+</classes>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" yaw="90" region="blue-spawn"/>
+    <spawn team="red-team" yaw="-90" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="63%" repairable="false" show-progress="true" sparks="true">
+    <destroyable name="Blue Wool" owner="blue-team" materials="wool" region="blue-wool"/>
+    <destroyable name="Red Wool" owner="red-team" materials="wool" region="red-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="45,24,47"  max="41,29,51"/>
+        <cuboid id="red-wool" min="-45,24,-47" max="-41,29,-51"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="47,-oo,4" max="39,oo,-4"/>
+        <cuboid id="red-spawn-protection" min="-47,-oo,-4" max="-39,oo,4"/>
+    </union>
+    <point id="blue-spawn">43.5,25,0.5</point>
+    <point id="red-spawn">-42.5,25,0.5</point>
+    <point id="obs-spawn">0.5,65,67.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-55,55" max="55,-54"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>52</maxbuildheight>
+</map>

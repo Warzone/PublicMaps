@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Wool">
+<name>Scarescape</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="546c7ea4-0c3d-465d-89b2-133d10668bd1"/> <!-- SirBaconDude -->
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Vicei -->
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="TGM to PGM conversion"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="orange-team" color="gold" max="50">Orange</team>
+    <team id="yellow-team" color="yellow" max="50">Yellow</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">stone pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="32">log</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="32">arrow</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="orange-team" kit="default" yaw="180" region="orange-spawn"/>
+    <spawn team="yellow-team" kit="default" region="yellow-spawn"/>
+    <default yaw="90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="21%" repairable="false" show-progress="true" sparks="true">
+    <destroyable name="Orange Wool" owner="orange-team" materials="wool" region="orange-wool"/>
+    <destroyable name="Yellow Wool" owner="yellow-team" materials="wool" region="yellow-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="orange-only">orange-team</team>
+    <team id="yellow-only">yellow-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="orange-wool" min="-134,36,1630" max="-138,42,1634"/>
+        <cuboid id="yellow-wool" min="-134,36,1494" max="-138,42,1498"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="orange-spawn-protection" min="-126,36,1660" max="-146,oo,1673"/>
+        <cuboid id="yellow-spawn-protection" min="-126,36,1455" max="-146,oo,1468"/>
+    </union>
+    <point id="orange-spawn">-136.5,37,1670.5</point>
+    <point id="yellow-spawn">-137.5,37,1457.5</point>
+    <point id="obs-spawn">-90.5,76,1564.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-180,1455" max="-93,1674"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="yellow-spawn-protection"  enter="yellow-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="1">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>63</maxbuildheight>
+</map>
