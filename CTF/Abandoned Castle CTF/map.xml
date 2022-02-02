@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Flag">
+<name>Abandoned Castle CTF</name>
+<version>1.0.0</version>
+<objective>Capture the enemy flag 3 times to win!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="075b5514-293a-4bd5-bcef-367e687d3556"/> <!-- KojaCola -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="yellow" color="yellow" min="1" max="20" max-overfill="25">Yellow</team>
+    <team id="lime" color="green" min="1" max="20" max-overfill="25">Lime</team>
+</teams>
+<!-- Score -->
+<score>
+    <limit>3</limit>
+</score>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="1" material="golden apple"/>
+        <item slot="3" amount="32" material="cooked beef"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5s" amplifier="1">damage resistance</effect>
+    </kit>
+    <kit id="yellow-kit" parents="spawn">
+        <helmet unbreakable="true" color="E5E533" material="leather helmet"/>
+        <chestplate unbreakable="true" color="E5E533" material="leather chestplate"/>
+    </kit>
+    <kit id="lime-kit" parents="spawn">
+        <helmet unbreakable="true" color="7FCC19" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7FCC19" material="leather chestplate"/>
+    </kit>
+    <kit id="kill-reward-kit">
+        <item amount="4" material="arrow"/>
+        <item material="golden apple"/>
+        <effect duration="5s" amplifier="1">speed</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="yellow" kit="yellow-kit" yaw="0" region="yellow-spawn"/>
+    <spawn team="lime" kit="lime-kit" yaw="180" region="lime-spawn"/>
+    <default yaw="90" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow</team>
+    <team id="lime-only">lime</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="yellow-spawn-protection" min="2,14,-16" max="19,17,-25"/>
+        <cuboid id="lime-spawn-protection" min="2,14,89" max="19,17,99"/>
+    </union>
+    <cuboid id="yellow-net" min="8,16,-23" max="12,13,-19"/>
+    <cuboid id="lime-net" min="8,16,91" max="12,13,95"/>
+    <point id="yellow-spawn">10.5,15,-20.5</point>
+    <point id="lime-spawn">10.5,15,93.5</point>
+    <point id="obs-spawn">51.5,30,36.5</point>
+    <!-- Applications -->
+    <apply block="never"/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="lime-spawn-protection"   enter="lime-only"   message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Flags -->
+<flags>
+    <!-- Yellow's Flag -->
+    <post id="yellow-flag-post" pickup-filter="lime-only" recover-time="0" respawn-time="10s">10,21,-23</post>
+    <flag id="yellow-flag" owner="yellow" name="Yellow Flag" color="yellow" post="yellow-flag-post" beam="true"/>
+    <net post="yellow-flag-post" points="1" region="lime-net" capture-filter="lime-only"/>
+    <!-- Lime's Flag -->
+    <post id="lime-flag-post" pickup-filter="yellow-only" recover-time="0" respawn-time="10s">10,21,95</post>
+    <flag id="lime-flag" owner="lime" name="Lime Flag" color="lime" post="lime-flag-post" beam="true"/>
+    <net post="lime-flag-post" points="1" region="yellow-net" capture-filter="yellow-only"/>
+</flags>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>golden apple</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <killreward>
+        <kit id="kill-reward-kit"/>
+    </killreward>
+</kill-rewards>
+</map>

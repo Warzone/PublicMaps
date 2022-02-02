@@ -1,0 +1,88 @@
+<map proto="1.3.5">
+<name>Cabin Fever II</name>
+<version>1.0.2</version>
+<objective>Capture the enemy flag 3 times to win!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+    <author uuid="91295196-9cd2-4963-b7ec-afd1a110edbe"/> <!-- Pbat -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+</teams>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+</filters>
+<flags>
+    <flag id="blue-flag" name="Blue Flag" color="light blue" pickup-filter="only-red">
+        <post yaw="0" return-time="15s">-246.5,72,-513.5</post>
+        <net points="1" region="red-return"/>
+    </flag>
+    <flag id="red-flag" name="Red Flag" color="red" pickup-filter="only-blue">
+        <post yaw="180" return-time="15s">-146.5,72,-301.5</post>
+        <net points="1" region="blue-return"/>
+    </flag>
+</flags>
+<score>
+    <kills>0</kills>
+    <deaths>0</deaths>
+    <limit>3</limit>
+</score>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="2">fishing rod</item>
+        <item slot="3" amount="64">cooked beef</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="28">arrow</item>
+        <leggings unbreakable="true">gold leggings</leggings>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="AF002A" unbreakable="true">leather helmet</helmet>
+        <chestplate color="AF002A" unbreakable="true">leather chestplate</chestplate>
+        <boots color="AF002A" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="6E6EF9" unbreakable="true">leather helmet</helmet>
+        <chestplate color="6E6EF9" unbreakable="true">leather chestplate</chestplate>
+        <boots color="6E6EF9" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red" yaw="180">
+        <block>-112,52,-325</block>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="0">
+        <block>-280,52,-489</block>
+    </spawn>
+    <default yaw="235">
+        <block>-225,71,-375</block>
+    </default>
+</spawns>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <union name="returns">
+        <cuboid name="blue-return" min="-247,72,-514" max="-245,74,-512"/>
+        <cuboid name="red-return" min="-147,72,-302" max="-145,74,-300"/>
+    </union>
+</regions>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>gold leggings</item>
+    <item>leather boots</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>cooked beef</item>
+</itemremove>
+</map>

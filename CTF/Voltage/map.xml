@@ -1,0 +1,100 @@
+<map proto="1.4.0">
+<name>Voltage</name>
+<version>1.0.5</version>
+<objective>Capture the opposing team's flag 4 times!</objective>
+<score>
+	<limit>4</limit>
+	<kills>0</kills>
+</score>
+<gamemode>ctf</gamemode>
+<authors>
+	<author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<time result="objectives">10m</time>
+<respawn delay="3s"/>
+<teams>
+	<team id="purple-team" color="dark purple" max="4" max-overfill="5">Purple</team>
+	<team id="green-team" color="green" max="4" max-overfill="5">Green</team>
+</teams>
+<kits>
+	<kit id="spawn" force="true">
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2" amount="1">golden apple</item>
+		<item slot="8" amount="8">arrow</item>
+		<helmet unbreakable="true">gold helmet</helmet>
+		<leggings unbreakable="true">iron leggings</leggings>
+		<effect duration="1" amplifier="15">damage resistance</effect>
+	</kit>
+	<kit id="purple-kit" parents="spawn">
+		<chestplate color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+		<boots color="7F3FB2" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+	</kit>
+	<kit id="green-kit" parents="spawn">
+		<chestplate color="01DF01" unbreakable="true">leather chestplate</chestplate>
+		<boots color="01DF01" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+	</kit>
+	<kit id="flag-kit">
+		<effect duration="oo" amplifier="1">slowness</effect>
+	</kit>
+</kits>
+<spawns>
+	<spawn team="purple-team" kit="purple-kit">
+        <regions yaw="-90">
+			<point>-36.5,6,37</point>
+		</regions>
+	</spawn>
+	<spawn team="green-team" kit="green-kit">
+		<regions yaw="180">
+			<point>1,6,74.5</point>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="-135">
+			<cylinder base="-10.5,19,48.5" radius="1" height="0"/>
+		</regions>
+	</default>
+</spawns>
+<filters>
+	<team id="only-purple">purple-team</team>
+	<team id="only-green">green-team</team>
+</filters>
+<regions>
+	<apply block="never"/>
+</regions>
+<flags>
+	<post id="purple-post" pickup-filter="only-green" recover-time="8s" respawn-time="3s" yaw="-45">-23,11,49</post>
+	<post id="green-post" pickup-filter="only-purple" recover-time="8s" respawn-time="3s" yaw="135">-12,11,60</post>
+	<flag id="purple-flag" owner="purple-team" required="false" name="Purple Flag" color="purple" post="purple-post" carry-kit="flag-kit"
+		carry-message="You are carrying the flag! Return it to your flag post!"/>
+	<flag id="green-flag" owner="green-team" required="false" name="Green Flag" color="lime" post="green-post" carry-kit="flag-kit"
+		carry-message="You are carrying the flag! Return it to your flag post!"/>
+	<net flag="purple-flag" points="1">
+		<region>
+			<cuboid min="-11,11,61" max="-12,13,60"/>
+		</region>
+	</net>
+	<net flag="green-flag" points="1">
+		<region>
+			<cuboid min="-22,11,49" max="-23,13,50"/>
+		</region>
+	</net>
+</flags>
+<killreward>
+	<item>golden apple</item>
+	<item amount="6">arrow</item>
+</killreward>
+<itemremove>
+	<item>gold helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+</itemremove>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

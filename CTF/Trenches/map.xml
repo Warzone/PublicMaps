@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Flag">
+<name>Trenches</name>
+<version>1.0.0</version>
+<objective>First team to capture the enemy flag 3 times wins!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="8baf96fd-0ea9-4ed8-b804-48752bece664"/> <!-- Lorddevington -->
+    <author uuid="652ed2c0-eb3d-471f-8fa8-e997bf351361"/> <!-- Beears -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red" color="dark red" max="30">Red</team>
+    <team id="blue" color="blue" max="30">Blue</team>
+</teams>
+<!-- Time Limit and Score -->
+<time>20m</time>
+<score>
+    <limit>3</limit>
+</score>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" unbreakable="true" material="iron spade"/>
+        <item slot="4" amount="64" material="bread"/>
+        <item slot="5" amount="64" damage="1" material="wood"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <helmet unbreakable="true" material="chainmail helmet"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="chainmail boots"/>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+    </kit>
+    <kit id="flag-kit">
+        <max-health>12</max-health>
+        <effect duration="3s" amplifier="3">absorption</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="45" region="red-spawn"/>
+    <spawn team="blue" kit="blue-kit" yaw="-135" region="blue-spawn"/>
+    <default yaw="45" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="red-only">red</team>
+    <team id="blue-only">blue</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="red-spawn-protection" min="17,0,-83" max="34,10,-71"/>
+        <cuboid id="blue-spawn-protection" min="-90,0,30" max="-73,10,42"/>
+    </union>
+    <union id="extended-spawn-protections">
+        <cuboid id="extended-red-spawn-protection" min="9,0,-74" max="24,10,-59"/>
+        <cuboid id="extended-blue-spawn-protection" min="-65,0,18" max="-80,10,33"/>
+    </union>
+    <cuboid id="red-net" min="5,0,-89" max="11,oo,-83"/>
+    <cuboid id="blue-net" min="-67,0,42" max="-61,oo,48"/>
+    <point id="red-spawn">28.5,6,-76.5</point>
+    <point id="blue-spawn">-83.5,6,36.5</point>
+    <point id="obs-spawn">-28.0,75,-20.0</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-103,-96" max="48,56"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"                    block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"          block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="extended-spawn-protections" block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="red-spawn-protection"       enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection"      enter="blue-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Flags -->
+<flags>
+    <!-- Red's Flag -->
+    <post id="red-flag-post" pickup-filter="blue-only" recover-time="0" respawn-time="10s">8,11,-86</post>
+    <flag id="red-flag" owner="red" name="Red Flag" color="red" post="red-flag-post" carry-kit="flag-kit" beam="true"/>
+    <net post="red-flag-post" points="1" region="blue-net" capture-filter="blue-only"/>
+    <!-- Blue's Flag -->
+    <post id="blue-flag-post" pickup-filter="red-only" recover-time="0" respawn-time="10s">-64,11,45</post>
+    <flag id="blue-flag" owner="blue" name="Blue Flag" color="blue" post="blue-flag-post" carry-kit="flag-kit" beam="true"/>
+    <net post="blue-flag-post" points="1" region="red-net" capture-filter="red-only"/>
+</flags>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>bread</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>chainmail helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>golden apple</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <killreward>
+        <item material="golden apple"/>
+    </killreward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>30</maxbuildheight>
+</map>
