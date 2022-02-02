@@ -1,0 +1,151 @@
+<map proto="1.4.0">
+<name>Chestnut</name> <!-- August 2020 -->
+<version>1.0.0</version>
+<objective>Capture the opponent's wool back to your base!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<teams>
+	<team id="red-team" color="dark red" max="4" max-overfill="5">Red</team>
+	<team id="blue-team" color="blue" max="4" max-overfill="5">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed">stone axe</item>
+        <item slot="4" damage="5" amount="40">wood</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="28">arrow</item>
+        <potion amplifier="255" duration="3s">resistance</potion>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="993333" unbreakable="true" material="leather helmet"/>
+        <chestplate color="993333" unbreakable="true" material="leather chestplate"/>
+        <boots color="993333" unbreakable="true" material="leather boots"/>
+        <item slot="5" damage="14" amount="20">stained glass</item>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
+        <chestplate color="334CB2" unbreakable="true" material="leather chestplate"/>
+        <boots color="334CB2" unbreakable="true" material="leather boots"/>
+        <item slot="5" damage="11" amount="20">stained glass</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="-38.5,13,55.5" max="-38.5,13,55.5"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <cuboid min="-38.5,13,-34.5" max="-38.5,13,-34.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="-4.5,34,11.5" max="-5.5,34,9.5"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <any id="only-webs">
+        <material>web</material>
+    </any>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="red-spawn">
+	        	<rectangle min="-22,47" max="-55,59"/>
+	      </union>
+        <union id="blue-spawn">
+            <rectangle min="-55,-26" max="-22,-38"/>
+      	</union>
+    </union>
+    <union id="woolrooms">
+        <union id="red-woolrooms">
+            <rectangle min="-43,47" max="-34,38"/> <!-- Pink -->
+        </union>
+    	  <union id="blue-woolrooms">
+		        <rectangle min="-43,-17" max="-34,-26"/> <!-- Light Blue -->
+	      </union>
+    </union>
+    <union id="spawner-stuff">
+        <cuboid id="pink-spawn-drop" min="-38.5,10,42.5" max="-38.5,10,42.5"/>
+        <cuboid id="pink-spawn-activation" min="-41,6,45" max="-36,14,40"/>
+        <cuboid id="lightblue-spawn-drop" min="-38.5,10,-21.5" max="-38.5,10,-21.5"/>
+        <cuboid id="lightblue-spawn-activation" min="-41,6,-19" max="-36,14,-24"/>
+    </union>
+    <apply block="never" region="spawns" message="You may not edit the spawn!"/>
+	  <apply enter="only-red" region="red-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply block="only-webs" region="woolrooms" message="You may not edit the wool rooms!"/>
+    <apply use="only-blue" region="red-woolrooms"/>
+    <apply use="only-red" region="blue-woolrooms"/>
+    <apply block="only-blue" region="red-woolrooms"/>
+    <apply block="only-red" region="blue-woolrooms"/>
+  	<apply enter="only-blue" region="red-woolrooms" message="You may not enter your own wool room!"/>
+    <apply enter="only-red" region="blue-woolrooms" message="You may not enter your own wool room!"/>
+	  <apply block-place="no-void" message="You may not edit the void!"/>
+</regions>
+<spawners>
+    <spawner id="pink-wool-spawner" spawn-region="pink-spawn-drop" player-region="pink-spawn-activation" max-entities="9999" delay="3s">
+        <item amount="1" damage="6" material="wool"/>
+    </spawner>
+    <spawner id="lightblue-wool-spawner" spawn-region="lightblue-spawn-drop" player-region="lightblue-spawn-activation" max-entities="9999" delay="3s">
+        <item amount="1" damage="3" material="wool"/>
+    </spawner>
+</spawners>
+<wools>
+	<wool team="red-team" color="light blue" location="-38.5,9,-21.5">
+    <monument><block>-38.5,14,57.5</block></monument>
+	</wool>
+	<wool team="blue-team" color="pink" location="-38.5,9,42.5">
+		<monument><block>-38.5,14,-36.5</block></monument>
+	</wool>
+</wools>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+  	<item>wood</item>
+  	<item>stained glass</item>
+  	<item>string</item>
+    <item>sapling</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>31</item>
+    <item>37</item>
+    <item>38</item>
+    <item>338</item>
+    <item>apple</item>
+    <item>redstone</item>
+    <item>redstone torch on</item>
+    <item>seeds</item>
+    <item>stick</item>
+</itemremove>
+<killreward>
+	  <item>golden apple</item>
+    <item amount="10" damage="5">wood</item>
+</killreward>
+<timelock>on</timelock>
+<maxbuildheight>16</maxbuildheight>
+<time results="objective">20m</time>
+</map>

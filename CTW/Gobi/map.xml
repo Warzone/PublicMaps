@@ -1,0 +1,517 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Gobi</name>
+<version>1.0.6</version>
+<objective>Capture the enemy team's wools.</objective>
+<gamemode>ctw</gamemode>
+<time result="objectives">45m</time>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/>
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="8" max-overfill="8">Red Team</team>
+    <team id="blue-team" color="blue" max="8" max-overfill="8">Blue Team</team>
+</teams>
+<respawn delay="6s"/>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="dig speed:1">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:1">iron axe</item>
+        <item slot="4" amount="64">golden carrot</item>
+        <item slot="5" amount="64" damage="1">wood</item>
+        <item slot="32" amount="64" damage="1">wood</item>
+        <item slot="23" amount="64" damage="1">wood</item>
+        <item slot="7" amount="16">ladder</item>
+        <item slot="8" amount="2">web</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" enchantment="protection projectile:1" unbreakable="true" color="993333"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate material="leather chestplate" enchantment="protection projectile:1" unbreakable="true" color="334CB2"/>
+    </kit>
+</kits>
+<wools>
+    <wool team="red-team" color="lime" location="273.5,17,-144">
+        <monument>
+            <block>90.5,10,-116.5</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="yellow" location="280.5,25,-63">
+        <monument>
+            <block>90.5,10,-90.5</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="light blue" location="97.5,17,-144">
+        <monument>
+            <block>280.5,10,-116.5</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="pink" location="90.5,25,-63">
+        <monument>
+            <block>280.5,10,-90.5</block>
+        </monument>
+    </wool>
+</wools>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+    <material id="only-iron">iron block</material>
+    <not id="not-some">
+        <any>
+            <material>double step:8</material>
+            <material>stone:6</material>
+            <material>chest</material>
+        </any>
+    </not>
+    <all id="only-red-some">
+        <team>red-team</team>
+        <filter id="not-some"/>
+    </all>
+    <all id="only-blue-some">
+        <team>blue-team</team>
+        <filter id="not-some"/>
+    </all>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <apply block="only-blue-some" enter="only-blue" message="You may not modify or enter your own wool room!">
+        <region>
+            <rectangle id="pink-wool" min="103,-70" max="90,-56"/>
+            <rectangle id="light-blue-wool" min="103,-151" max="90,-137"/>
+        </region>
+    </apply>
+    <apply block="only-red-some" enter="only-red" message="You may not modify or enter your own wool room!">
+        <region>
+            <rectangle id="lime-wool" min="268,-137" max="281,-151"/>
+            <rectangle id="yellow-wool" min="281,-70" max="268,-56"/>
+        </region>
+    </apply>
+    <apply block="never" message="You may not break the spawn bridges!">
+        <region>
+            <complement id="blue-spawn-bridges">
+                <rectangle min="261,-116" max="277,-91"/>
+                <rectangle min="261,-111" max="277,-96"/>
+            </complement>
+            <complement id="red-spawn-bridges">
+                <rectangle min="110,-91" max="94,-116"/>
+                <rectangle min="110,-96" max="94,-111"/>
+            </complement>
+        </region>
+    </apply>
+    <apply enter="only-red" region="red-spawn-bridges" message="You may not cross the enemy team's spawn bridges!"/>
+    <apply enter="only-blue" region="blue-spawn-bridges" message="You may not cross the enemy team's spawn bridges!"/>
+    <apply block="not-some" message="You may only modify cobwebs, redstone and wood here!">
+        <region>
+            <region id="pink-wool"/>
+            <region id="light-blue-wool"/>
+            <region id="lime-wool"/>
+            <region id="yellow-wool"/>
+        </region>
+    </apply>
+    <apply block="never" message="You may not modify the spawn!">
+        <region>
+            <complement id="red-spawn">
+                <rectangle min="94,-87" max="77,-120"/>
+                <cuboid id="red-iron" min="79,7,-113" max="86,3,-94"/>
+            </complement>
+            <complement id="blue-spawn">
+                <rectangle min="277,-120" max="294,-87"/>
+                <cuboid id="blue-iron" min="292,7,-113" max="285,3,-94"/>
+            </complement>
+        </region>
+    </apply>
+    <apply block="only-iron" message="You may only modify iron blocks here!">
+        <region>
+            <union id="iron-mines">
+                <region id="red-iron"/>
+                <region id="blue-iron"/>
+            </union>
+        </region>
+    </apply>
+    <apply block="no-void" message="You may not modify blocks in the void!">
+        <region>
+            <negative>
+                <union>
+                    <block>241.5,8,-103.5</block>
+                    <block>185.5,6,-144.5</block>
+                    <block>129.5,8,-103.5</block>
+                <!-- For Cardinal -->
+                    <block>241.5,9,-103.5</block>
+                    <block>185.5,7,-144.5</block>
+                    <block>129.5,9,-103.5</block>
+                <!-- -->
+                    <region id="red-spawn-bridges"/>
+                    <region id="blue-spawn-bridges"/>
+                    <rectangle min="260,-125" max="246,-82"/>
+                    <rectangle min="125,-125" max="111,-82"/>
+                    <rectangle min="231,-87" max="140,-100"/>
+                    <rectangle min="231,-107" max="222,-120"/>
+                    <rectangle min="237,-137" max="222,-151"/>
+                    <rectangle min="134,-151" max="149,-137"/>
+                    <rectangle min="222,-87" max="149,-65"/>
+                    <complement>
+                        <rectangle min="149,-151" max="222,-100"/>
+                        <rectangle min="222,-100" max="212,-107"/>
+                        <rectangle min="159,-100" max="149,-107"/>
+                        <rectangle min="178,-100" max="193,-114"/>
+                        <rectangle min="181,133" max="190,-151"/>
+                    </complement>
+                </union>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable interval="15" grow="true" particles="true" sound="false" avoid-players="2">
+        <region>
+            <region id="iron-mines"/>
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <region yaw="-90">
+            <point>83.5,9,-103.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <region yaw="90">
+            <point>287.5,9,-103.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="180">
+            <point>185.5,37,-30.5</point>
+        </region>
+    </default>
+</spawns>
+<crafting>
+    <disable>boat</disable>
+
+    <!--<shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.EE</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E.E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>EE.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>E..</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>.E.</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>..E</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>...</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>...</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>E..</row>
+            <row>...</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>E..</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>.E.</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>..E</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>...</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>...</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>.E.</row>
+            <row>...</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>E..</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>.E.</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>..E</row>
+            <row>...</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>...</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>...</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>..E</row>
+            <row>...</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>E..</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>E..</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>E..</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>.E.</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>.E.</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>.E.</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>..E</row>
+            <row>E..</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>..E</row>
+            <row>.E.</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>
+    <shaped>
+        <result material="cookie"/>
+        <shape>
+            <row>...</row>
+            <row>..E</row>
+            <row>..E</row>
+        </shape>
+        <ingredient symbol="E">elytra</ingredient>
+    </shaped>-->
+
+</crafting>
+<block-drops>
+    <rule wrong-tool="false">
+        <region>
+            <everywhere/>
+        </region>
+        <filter>
+            <material>double step:9</material>
+        </filter>
+        <drops>
+            <item material="sandstone"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemremove>
+    <item>redstone</item>
+    <item>redstone torch off</item>
+    <item>redstone torch on</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>golden carrot</item>
+    <item>arrow</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>string</item>
+    <item>web</item>
+    <item>wood:2</item>
+    <item>boat</item>
+    <item>leather chestplate</item>
+    <item>sandstone</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>golden apple</item>
+    <item>ladder</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>23</maxbuildheight>
+</map>

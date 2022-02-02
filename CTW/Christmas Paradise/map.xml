@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Wool">
+<name>Christmas Paradise</name>
+<version>1.0.1</version>
+<objective>Capture the wools and bring them back to your base!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- FlammingFreak296 -->
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad" contribution="Original JSON"></contributor> <!-- Piinoy -->
+    <contributor uuid="a1a68bef-247f-457d-b8cf-85994e14d8c4" contribution="Tree design"></contributor> <!-- kukuba008 -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="cyan-team" color="dark aqua" max="24">Cyan</team>
+    <team id="yellow-team" color="yellow" max="24">Yellow</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" amount="64" damage="2">wood</item>
+        <item slot="5" amount="64" damage="2">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="32">arrow</item>
+        <item slot="31" amount="64" damage="2">wood</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="cyan-kit" parents="default">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+    </kit>
+    <kit id="yellow-kit" parents="default">
+        <helmet unbreakable="true" color="7FCC19">leather helmet</helmet>
+        <leggings unbreakable="true" color="7FCC19">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="cyan-team" kit="cyan-kit" yaw="-90" region="cyan-spawn"/>
+    <spawn team="yellow-team" kit="yellow-kit" yaw="90" region="yellow-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Wools -->
+<wools craftable="false">
+    <!-- Cyan Team -->
+    <wool team="cyan-team" monument="cyan-team-orange-wool" color="orange" location="158,72,2"/>
+    <wool team="cyan-team" monument="cyan-team-red-wool" color="red" location="158,72,-2"/>
+    <!-- Yellow Team -->
+    <wool team="yellow-team" monument="yellow-team-pink-wool" color="pink" location="-158,72,-2"/>
+    <wool team="yellow-team" monument="yellow-team-purple-wool" color="purple" location="-158,72,2"/>
+</wools>
+<!-- Filters -->
+<filters>
+    <not id="not-cyan">
+        <team id="only-cyan">cyan-team</team>
+    </not>
+    <not id="not-yellow">
+        <team id="only-yellow">yellow-team</team>
+    </not>
+    <not id="not-void">
+        <void/>
+    </not>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <!-- Spawn protection -->
+    <union id="spawn-protections">
+        <cuboid id="cyan-spawn-protection" min="-114,0,13" max="-135,oo,-13"/>
+        <cuboid id="yellow-spawn-protection" min="114,0,13" max="135,oo,-13"/>
+    </union>
+    <!-- Wool Rooms -->
+    <rectangle id="cyan-team-wool-rooms" min="-145,-14" max="-167,15"/>
+    <rectangle id="yellow-team-wool-rooms" min="146,-14" max="168,15"/>
+    <!-- Wool Lanes -->
+    <union id="wool-lanes">
+        <rectangle id="purple-pink-wool-lane" min="-167,-50" max="-131,51"/>
+        <rectangle id="orange-red-wool-lane" min="132,-50" max="168,51"/>
+    </union>
+    <!-- Spawns -->
+    <point id="cyan-spawn">-128.5,73,0.5</point>
+    <point id="yellow-spawn">129.5,73,0.5</point>
+    <point id="obs-spawn">0.5,106,100.5</point>
+    <!-- Wool Monuments -->
+    <!-- Cyan Team -->
+    <block id="cyan-team-orange-wool">-132,74,2</block>
+    <block id="cyan-team-red-wool">-132,74,-2</block>
+    <!-- Yellow Team -->
+    <block id="yellow-team-pink-wool">132,74,-2</block>
+    <block id="yellow-team-purple-wool">132,74,2</block>
+    <negative id="not-map">
+        <rectangle id="map" min="-167,-76" max="168,77"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="cyan-spawn-protection" enter="only-cyan" message="You may not enter the enemy spawn."/>
+    <apply region="yellow-spawn-protection" enter="only-yellow" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-team-wool-rooms" enter="only-yellow" message="You may not enter your own wool room!"/>
+    <apply region="cyan-team-wool-rooms" block="only-yellow" message="You are not allowed to modify terrain here."/>
+    <apply region="yellow-team-wool-rooms" enter="only-cyan" message="You may not enter your own wool room!"/>
+    <apply region="yellow-team-wool-rooms" block="only-cyan" message="You are not allowed to modify terrain here."/>
+    <apply block-place="not-void" region="wool-lanes" message="You may not build over the void!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="1">arrow</item>
+    </kill-reward>
+		<kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="5"/>
+            </all>
+        </filter>
+				<item amount="2">golden apple</item>
+        <item amount="10">arrow</item>
+        <item amount="15" damage="2">wood</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>89</maxbuildheight>
+</map>

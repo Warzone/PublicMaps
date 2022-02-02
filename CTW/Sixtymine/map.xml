@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Wool">
+<name>Sixtymine</name>
+<version>1.0.0</version>
+<objective>Capture the wool and bring it back to your base!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+    <team id="red-team" color="dark red" max="20">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="efficiency:2">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="efficiency:2">stone axe</item>
+        <item slot="4" unbreakable="true" enchantment="efficiency:2">shears</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="7" amount="16">cooked fish</item>
+        <item slot="8" amount="1">golden apple</item>
+        <item slot="9" amount="32">arrow</item>
+        <item slot="32" amount="64">wood</item>
+        <item slot="33" amount="64">wood</item>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+        <boots unbreakable="true" color="B02E26">leather boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="135" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" yaw="-45" region="red-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Wools -->
+<wools craftable="false">
+    <wool team="blue-team" monument="blue-team-pink-wool" color="pink" location="57,19,-33"/>
+    <wool team="red-team" monument="red-team-light-blue-wool" color="light blue" location="-57,19,33"/>
+</wools>
+<!-- Filters -->
+<filters>
+    <not id="not-blue">
+        <team id="only-blue">blue-team</team>
+    </not>
+    <not id="not-red">
+        <team id="only-red">red-team</team>
+    </not>
+    <not id="not-void">
+        <void/>
+    </not>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <!-- Spawn protection -->
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="25,4,80" max="21,10,76"/>
+        <cuboid id="red-spawn-protection" min="-25,4,-80" max="-21,10,-76"/>
+    </union>
+    <!-- Wool Rooms -->
+    <union id="light-blue-wool-room">
+        <rectangle min="-43,25" max="-70,44"/>
+        <rectangle min="-51,42" max="-55,45"/>
+        <rectangle min="-55,43" max="-58,46"/>
+        <rectangle min="-58,44" max="-62,47"/>
+        <rectangle min="-62,45" max="-70,48"/>
+    </union>
+    <union id="pink-wool-room">
+        <rectangle min="44,-24" max="71,-43"/>
+        <rectangle min="52,-41" max="56,-44"/>
+        <rectangle min="56,-42" max="59,-45"/>
+        <rectangle min="59,-43" max="63,-46"/>
+        <rectangle min="63,-44" max="70,-47"/>
+    </union>
+    <!-- Spawns -->
+    <point id="blue-spawn">23.5,6,78.5</point>
+    <point id="red-spawn">-22.5,6,-77.5</point>
+    <point id="obs-spawn">0.5,20,0.5</point>
+    <!-- Wool Monuments -->
+    <block id="blue-team-pink-wool">25,7,80</block>
+    <block id="red-team-light-blue-wool">-25,7,-80</block>
+    <!-- Buildable Void -->
+    <negative id="void-filters">
+        <rectangle id="main" min="-30,-30" max="31,31"/>
+    </negative>
+    <negative id="not-map">
+        <rectangle id="map" min="-68,-85" max="69,86"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy spawn."/>
+    <apply enter="only-blue" region="pink-wool-room" message="You may not enter your own wool room!"/>
+    <apply enter="only-red" region="light-blue-wool-room" message="You may not enter your own wool room!"/>
+    <apply block="only-blue" region="pink-wool-room" message="You are not allowed to modify terrain here."/>
+    <apply block="only-red" region="light-blue-wool-room" message="You are not allowed to modify terrain here."/>
+    <apply block-place="not-void" region="void-filters" message="You may not build over the void!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>stone axe</item>
+    <item>shears</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>49</maxbuildheight>
+</map>

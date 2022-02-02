@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Turf Wars</name>
+<version>1.0.7</version>
+<include src="tutorial.xml"/>
+<objective>Capture the other team's wools to win the game!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="e37f18f1-117b-47db-8806-6d3a0854b518"/> <!-- chickolympics -->
+    <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contributor="Map Feedback"/> <!-- ElectroidFilms -->
+    <contributor uuid="c2a4c847-653e-482a-b62e-d7f8b64330cb" contributon="Map Feedback"/> <!-- NathanTheBook -->
+    <contributor uuid="fb820bf4-5157-4d7b-8cca-e8ec759b87cd" contributor="Aesthetics and Feedback"/> <!-- Vetches -->
+    <contributor uuid="94d2a023-182e-4d61-864c-1e895d164e50" contributor="Map Feedback and Minor Aesthetics"/> <!-- DirkyJerky -->
+</contributors>
+<teams>
+    <team color="dark red" max="32">Red</team>
+    <team color="blue" max="32">Blue</team>
+</teams>
+<timelock>on</timelock>
+<spawns>
+    <spawn team="red" yaw="-180" pitch="90">
+        <point>0.5,128,143.5</point>
+    </spawn>
+    <spawn team="blue" yaw="0" pitch="90">
+        <point>0.5,128,-142.5</point>
+    </spawn>
+    <default yaw="-90">
+        <cuboid name="obs-spawn" min="0,50,3" max="1,50,-2"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="teams">
+        <potion amplifier="100" duration="15">heal</potion>
+        <potion amplifier="100" duration="15">damage resistance</potion>
+        <potion amplifier="100" duration="15">regeneration</potion>
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64">golden carrot</item>
+        <item slot="31" amount="32">apple</item>
+        <item slot="6" amount="64" damage="1">wood</item>
+        <item slot="7" amount="64">glass</item>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit name="red" parents="teams">
+        <item slot="5" amount="64" damage="14">stained clay</item>
+        <item slot="32" amount="64" damage="14">stained clay</item>
+        <item slot="23" amount="64" damage="14">stained clay</item>
+    </kit>
+    <kit name="blue" parents="teams">
+        <item slot="5" amount="64" damage="11">stained clay</item>
+        <item slot="32" amount="64" damage="11">stained clay</item>
+        <item slot="23" amount="64" damage="11">stained clay</item>
+    </kit>
+    <kit name="survival">
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit name="adventure">
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<regions>
+    <cuboid name="above-32" min="-oo,33,-oo" max="oo,oo,oo"/>
+    <negative name="non-bases">
+        <union name="bases">
+            <cylinder name="red-base" base="0.5,5,133.5" radius="25" height="oo"/>
+            <cylinder name="blue-base" base="0.5,5,-132.5" radius="25" height="oo"/>
+        </union>
+    </negative>
+    <union name="red-wools"> <!-- Red must get into -->
+        <cylinder name="orange-wool" base="76.5,0,-65.5" radius="8" height="oo"/>
+        <cylinder name="yellow-wool" base="-75.5,0,-65.5" radius="8" height="oo"/>
+    </union>
+    <union name="blue-wools"> <!-- Blue must get into -->
+        <cylinder name="magenta-wool" base="76.5,0,66.5" radius="8" height="oo"/>
+        <cylinder name="purple-wool" base="-75.5,0,66.5" radius="8" height="oo"/>
+    </union>
+    <union name="void-lanes">
+        <rectangle name="left-lane" min="-39,30" max="-29,-29"/>
+        <rectangle name="middle-lane" min="-6,26" max="7,-25"/>
+        <rectangle name="right-lane" min="30,-29" max="40,30"/>
+    </union>
+    <union name="spawn-drops">
+        <circle center="0.5,-142.5" radius="5"/>
+        <circle center="0.5,143.5" radius="5"/>
+    </union>
+    <!-- Applied -->
+    <apply block="deny-all">
+        <region name="spawn-drops"/>
+    </apply>
+    <apply block="deny-all" message="You cannot modify block this high!">
+        <region name="above-32"/>
+    </apply>
+    <apply block-break="only-some-a" block-place="deny-all">
+        <complement>
+            <region name="bases"/>
+            <region name="spawn-drops"/>
+        </complement>
+    </apply>
+    <apply enter="red" message="You cannot enter the enemy base!">
+        <region name="red-base"/>
+    </apply>
+    <apply enter="blue" message="You cannot enter the enemy base!">
+        <region name="blue-base"/>
+    </apply>
+    <apply block="red-wool" use="only-red-usage">
+        <region name="red-wools"/>
+    </apply>
+    <apply block="blue-wool" use="only-blue-usage">
+        <region name="blue-wools"/>
+    </apply>
+    <apply enter="red-wool" message="You cannot enter your own wool room!">
+        <region name="red-wools"/>
+    </apply>
+    <apply enter="blue-wool" message="You cannot enter your own wool room!">
+        <region name="blue-wools"/>
+    </apply>
+    <apply block="deny-all" message="You cannot break the middle spawner!">
+        <block>0,9,0</block>
+    </apply>
+    <apply block="no-void">
+        <negative>
+            <region name="void-lanes"/>
+        </negative>
+    </apply>
+    <apply kit="red">
+        <cuboid min="-1,19,142" max="2,25,145"/>
+    </apply>
+    <apply kit="blue">
+        <cuboid min="2,19,-141" max="-1,25,-144"/>
+    </apply>
+    <apply enter="deny-all">
+        <cuboid min="21,22.5,141" max="-20,25,119"/>
+        <cuboid min="-20,22.5,-140" max="21,25,-118"/>
+    </apply>
+    <!-- Blockglitch Spawn Prevention -->
+    <apply kit="adventure">
+        <region name="bases"/>
+    </apply>
+    <apply kit="survival">
+        <region name="non-bases"/>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>apple</item>
+    <item>golden carrot</item>
+    <item>glass</item>
+    <item>stained clay</item>
+    <item>string</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>arrow</item>
+</itemremove>
+<filters>
+    <filter name="red">
+        <team>red</team>    
+    </filter>
+    <filter name="blue">
+        <team>blue</team>    
+    </filter>
+    <filter name="red-wool" parents="red">
+        <deny>
+            <block>chest</block>
+            <block>mob spawner</block>
+            <block>trapped chest</block>
+        </deny>
+    </filter>
+    <filter name="blue-wool" parents="blue">
+        <deny>
+            <block>chest</block>
+            <block>mob spawner</block>
+            <block>trapped chest</block>
+        </deny>
+    </filter>
+    <filter name="only-some-a" parents="deny-all">
+        <allow>
+            <block>iron block</block>
+        </allow>
+    </filter>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<wools>
+    <wool team="blue" color="magenta">
+        <block>1,21,-123</block>
+    </wool>
+    <wool team="blue" color="purple">
+        <block>-1,21,-123</block>
+    </wool>
+    <wool team="red" color="yellow">
+        <block>-1,21,123</block>
+    </wool>
+    <wool team="red" color="orange">
+        <block>1,21,123</block>
+    </wool>
+</wools>
+<item-mods>
+    <rule>
+        <match>
+            <material>iron pickaxe</material>
+        </match>
+        <modify show-can-destroy="false">
+            <can-destroy>
+                <material>iron block</material>
+            </can-destroy>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>wool</material>
+        </match>
+        <modify>
+            <can-place-on>
+                <material>stained clay</material>
+            </can-place-on>
+        </modify>
+    </rule>
+</item-mods>
+<killreward>
+    <item amount="1">gold ingot</item>
+</killreward>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
+            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
+        </message>
+        <teleport>
+            <point yaw="-150" pitch="40">-22,48,6</point>
+        </teleport>
+    </stage>
+    <stage title="Wool Rooms">
+        <message>
+            <line>This is `9Blue Team`r's `eyellow`r wool room. They also have to defend the `6orange`r wool room.</line>
+            <line>`cRed Team `rhas to defend `5purple `rand `dmagenta`r wools.</line>
+            <line>Blue Team should defend these rooms against Red Team invaders who are trying to steal the wool and make it back alive.</line>
+            <line>There are some good items inside which will help the red team fight off enemy's on their way out.</line>
+        </message>
+        <teleport>
+            <point yaw="43" pitch="10">-64,21,-76</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>This is the `9Blue Team`r's spawn base. They spawn from up in the sky and fall down into this base.</line>
+        </message>
+        <teleport>
+            <point yaw="-163" pitch="10">-5,26,-126.5</point>
+        </teleport>
+    </stage>
+    <stage title="Victory Monument">
+        <message>
+            <line>This is the `9Blue Team`r's victory monument. They must place both of the red team's wools in the designated spots to win the match.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="5">0,20,-125.5</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Supplies">
+        <message>
+            <line>Here is the iron supply for `9Blue Team`r. Note that `cRed Team `rhas the same thing on their side.</line>
+            <line>You should place down a crafting table and then craft armor so that you can go into battle.</line>
+            <line>There are chests with extra blocks and recources if needed.</line>
+        </message>
+        <teleport>
+            <point yaw="180">0,15,-121.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

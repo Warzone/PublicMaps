@@ -1,0 +1,116 @@
+<map proto="1.4.0">
+<name>Japan</name>
+<version>1.0.0</version>
+<objective>Bring the enemy's wool back to your own side.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/>
+    <!--   ViceWatercolour   -->
+</authors>
+<teams>
+    <team id="orange" color="gold" max="8">Orange</team>
+    <team id="green" color="green" max="8">Green</team>
+</teams>
+<spawns>
+    <spawn team="orange" kit="orange-kit">
+        <regions>
+            <point yaw="90">-33.5,11,-46.5</point>
+        </regions>
+    </spawn>
+    <spawn team="green" kit="green-kit">
+        <regions>
+            <point yaw="-90">62.5,11,21.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="0">15.5,22,-49.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="5" amount="32" material="golden carrot"/>
+        <item slot="6" amount="32" material="wood"/>
+        <item slot="7" amount="16" material="glass"/>
+        <item slot="28" material="arrow" amount="32"/>
+        <item slot="29" material="shears"/>
+        <potion duration="5" amplifier="10">damage resistance</potion>
+    </kit>
+    <kit id="orange-kit" parents="spawn">
+        <helmet color="d87f33" unbreakable="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings color="d87f33" unbreakable="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+        <helmet color="667f33" unbreakable="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings color="667f33" unbreakable="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>wood</item>
+    <item>glowstone dust</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>glass</item>
+    <item>shears</item>
+    <item>golden carrot</item>
+</itemremove>
+<maxbuildheight>30</maxbuildheight>
+<wools>
+    <wool team="orange" color="cyan" location="0,0,0">
+        <monument><block>-32,12,-47</block></monument>
+    </wool>
+    <wool team="green" color="red" location="0,0,0">
+        <monument><block>60,12,21</block></monument>
+    </wool>
+</wools>
+<kill-reward>
+    <kill-reward>
+        <item>golden apple</item>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-reward>
+<filters>
+    <team id="only-orange">orange</team>
+    <team id="only-green">green</team>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <cuboid id="orange-spawn" min="-25,0,-32" max="-45,24,-54"/>
+        <cuboid id="green-spawn" min="54,0,9" max="74,24,29"/>
+    </union>
+    <cuboid id="orange-woolroom" min="-77,0,39" max="-94,64,24"/>
+    <cuboid id="green-woolroom" min="105,0,-65" max="122,64,-50"/>
+    <rectangle id="mid" min="31,-21" max="-2,-4"/>
+
+    <apply block="only-orange" message="You may not modify your side's wool room!" region="green-woolroom"/>
+    <apply block="only-green" message="You may not modify your side's wool room!" region="orange-woolroom"/>
+    <apply enter="only-orange" message="You may not enter your side's wool room!" region="green-woolroom"/>
+    <apply enter="only-green" message="You may not enter your side's wool room!" region="orange-woolroom"/>
+    <apply enter="only-orange" message="You may not enter the enemy's spawn!" region="orange-spawn"/>
+    <apply enter="only-green" message="You may not enter the enemy's spawn!" region="green-spawn"/>
+    <apply block="never" message="You may not modify the spawns!" region="spawns"/>
+    <apply block="always" region="mid"/>
+    <apply block="no-void" message="You may not place or break blocks here!" region="everywhere"/>
+</regions>
+</map>

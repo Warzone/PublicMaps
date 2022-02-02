@@ -1,0 +1,224 @@
+<map proto="1.3.2">
+<name>Perspookysto</name>
+<version>1.0.2</version>
+<objective>Capture both wools to win.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="RIP Map Maker."/> <!-- Timothee38 -->
+    <author uuid="03ba5ebd-5ded-4de6-93b0-c86d0b9002b7" contribution="RIP Map Maker."/> <!-- auxdempster -->
+    <author uuid="cbd0da49-26ac-46ef-b91d-47c2bb8d23bd" contribution="RIP Map Maker."/> <!-- re_cel -->
+    <author uuid="b0900577-7604-4dc7-9e82-f431da31e456" contribution="RIP Map Maker."/> <!-- Dracoheart2 -->
+</authors>
+<contributors>
+    <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="He's VERY Scary"/> <!-- Plastix -->
+    <contributor uuid="260004f0-996b-4539-ba21-df4ee6336b63" contribution="Spiky."/> <!-- Captain_Elliott -->
+</contributors>
+<wools team="Tricks">
+    <wool color="yellow">
+        <block>15,11,146</block>
+    </wool>
+    <wool color="magenta">
+        <block>7,11,146</block>
+    </wool>
+</wools>
+<wools team="Treats">
+    <wool color="orange">
+        <block>15,11,26</block>
+    </wool>
+    <wool color="lime">
+        <block>7,11,26</block>
+    </wool>
+</wools>
+<teams>
+    <team color="dark red" max="12" max-overfill="15" plural="true">Tricks</team>
+    <team color="blue" max="12" max-overfill="15" plural="true">Treats</team>
+</teams>
+<kits>
+    <kit name="spawn" force="true">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="durability:2">iron pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="32">cooked beef</item>
+        <item slot="5" amount="32">log</item>
+        <item slot="6" amount="32">glass</item>
+        <item slot="7">bucket</item>
+        <item slot="28" amount="64">arrow</item>
+        <potion duration="5" amplifier="1">heal</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots>chainmail boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots>chainmail boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="Tricks" kit="red" yaw="180">
+        <cuboid min="13,10,149" max="10,10,147"/>
+    </spawn>
+    <spawn team="Treats" kit="blue" yaw="0">
+        <cuboid min="10,10,24" max="13,10,26"/>
+    </spawn>
+    <default yaw="0">
+        <point>-38.5,24,86.5</point>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red" parents="deny-players">
+        <allow>
+            <team>Tricks</team>
+        </allow>
+    </filter>
+    <filter name="only-blue" parents="deny-players">
+        <allow>
+        <team>Treats</team>
+        </allow>
+    </filter>
+    <filter name="allow-some" parents="deny-all">
+        <allow>
+            <team>tricks</team>
+            <block>web</block>
+            <block>wool</block>
+            <block>step</block>
+            <block>wood stairs</block>
+            <block>thin glass</block>
+            <block>log</block>
+            <block>dead bush</block>
+            <block>fence</block>
+            <block>leaves</block>
+            <block>sandstone</block>
+            <block>grass</block>
+            <block>dirt</block>
+            <block>stone</block>
+            <block>wood</block>
+            <block>redstone block</block>
+            <block>torch</block>
+        </allow>
+    </filter>
+    <filter name="red-rooms">
+        <all>
+            <team>Tricks</team>
+            <filter name="allow-some"/>
+        </all>
+    </filter>
+    <filter name="blue-rooms">
+        <all>
+            <team>Treats</team>
+            <filter name="allow-some"/>
+        </all>
+    </filter>
+</filters>
+<!-- Complicated regions -->
+<regions>
+<apply enter="only-red">
+<union name="blue-wr">
+    <rectangle min="-37,63" max="-50,38"/>
+    <rectangle min="60,38" max="73,63"/>
+</union>
+<union name="red-spawn">
+    <rectangle min="24,144" max="-1,153"/>
+    <!-- red spawn  -->
+</union>
+</apply>
+<apply enter="only-blue">
+    <union name="red-wr">
+        <rectangle min="60,110" max="73,135"/>
+        <rectangle min="-37,110" max="-50,135"/>
+    </union>
+    <union name="blue-spawn">
+        <rectangle min="24,29" max="-1,20"/>
+    <!-- blue spawn  -->
+    </union>
+</apply>
+<apply enter="deny-players" message="You may not stand near the victory monument!">
+    <union name="no-standing">
+        <circle center="15.5,146.5" radius="1"/>
+        <circle center="7.5,146.5" radius="1"/>
+        <circle center="15.5,26.5" radius="1"/>
+        <circle center="7.5,26.5" radius="1"/>
+    </union>
+</apply>
+<apply block="allow-blocks">
+    <union name="block-placing-allowed">
+        <rectangle min="-1,153" max="24,102"/>
+        <rectangle min="60,127" max="-37,118"/>
+        <rectangle min="-1,92" max="24,80"/>
+        <rectangle min="24,71" max="-1,19"/>
+        <rectangle min="60,55" max="-37,46"/>
+        <rectangle min="-1,70" max="10,102"/>
+        <rectangle min="13,103" max="24,70"/>
+        <!-- blue wr -->
+        <rectangle min="-37,63" max="-50,38"/>
+        <rectangle min="60,38" max="73,63"/>
+        <!-- red wr -->
+        <rectangle min="60,110" max="73,135"/>
+        <rectangle min="-37,110" max="-50,135"/>
+    </union>
+</apply>
+<apply enter="only-blue">
+    <region name="red-wr"/>
+</apply>
+<apply enter="only-red">
+    <region name="blue-wr"/>
+</apply>
+<apply block="deny-blocks">
+    <negative>
+        <region name="block-placing-allowed"/>
+    </negative>
+    <union name="no-block-place in spawns">
+        <region name="blue-spawn"/>
+        <region name="red-spawn"/>
+    </union>
+</apply>
+<apply block="red-rooms">
+    <region name="blue-wr"/>
+</apply>
+<apply block="blue-rooms">
+    <region name="red-wr"/>
+</apply>
+</regions>
+<maxbuildheight>30</maxbuildheight>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>cooked beef</item>
+    <item>leather chestplate</item>
+    <item>iron chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>stone sword</item>
+    <item>iron pickaxe</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>redstone block</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>lapis block</item>
+    <item>seeds</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>gravel</item>
+    <item>flint</item>
+</itemremove>
+<timelock>on</timelock>
+<renewables>
+        <renewable rate="2" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+            <cuboid min="34,0,-220" max="2,30,-232"/>
+            <cuboid min="1,0,7" max="34,30,19"/>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+    </renewable>
+</renewables>
+</map>

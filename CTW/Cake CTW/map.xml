@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Cake CTW</name>
+<version>1.0.0</version>
+<objective>Capture both wools!</objective>
+<gamemode>ctw</gamemode>
+<maxbuildheight>31</maxbuildheight>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+    <author uuid="50a34639-abb3-4cf1-b182-204756c49f49"/> <!-- Sam -->
+    <author uuid="3ec3ad7c-563c-45fb-aedf-dd32066a2e19"/> <!-- mepii -->
+</authors>
+<contributors>
+	<contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="XML"/> <!--  Ruediger_LP  -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="24">Blue</team>
+    <team id="yellow-team" color="yellow" max="24">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="5" material="sandstone" amount="32"/>
+        <item slot="6" material="log" amount="16"/>
+        <item slot="7" material="golden apple" amount="3"/>
+        <item slot="8" material="cooked fish" amount="32"/>
+        <item slot="9" material="arrow" amount="32"/>
+        <effect duration="5" amplifier="100">resistance</effect>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <item slot="4" material="stained glass" damage="3" amount="64"/>
+        <helmet color="2471A3" unbreakable="true">leather helmet</helmet>
+        <chestplate color="2471A3" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="2471A3" unbreakable="true">leather leggings</leggings>
+        <boots color="2471A3" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="yellow-kit" parents="spawn">
+        <item slot="4" material="stained glass" damage="4" amount="64"/>
+        <helmet color="F1C40F" unbreakable="true">leather helmet</helmet>
+        <chestplate color="F1C40F" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="F1C40F" unbreakable="true">leather leggings</leggings>
+        <boots color="F1C40F" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="0">
+            <cylinder base="0.5,46.5,-150.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow-team" kit="yellow-kit">
+        <regions yaw="-180">
+             <cylinder base="0.5,46.5,151.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="-72.5,45,0.5" radius="1.5" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<wools>
+    <wool team="blue-team" color="yellow" location="-2.5,14.5,149">
+        <monument><block>-3,12,-132</block></monument>
+    </wool>
+    <wool team="blue-team" color="orange" location="3.5,14.5,149">
+        <monument><block>3,12,-132</block></monument>
+    </wool>
+    <wool team="yellow-team" color="light blue" location="-2.5,14.5,-148">
+        <monument><block>-3,12,132</block></monument>
+    </wool>
+    <wool team="yellow-team" color="blue" location="3.5,14.5,-148">
+        <monument><block>3,12,132</block></monument>
+    </wool>
+</wools>
+<filters>
+    <not id="deny-void"><void/></not>
+    <team id="only-blue">blue-team</team>
+    <team id="only-yellow">yellow-team</team>
+    <not id="blue-spawn-with-wools-filter">
+        <any>
+            <all>
+                <team>blue-team</team>
+                <not>
+                    <material>stationary water</material>
+                </not>
+            </all>
+            <all>
+                <team>yellow-team</team>
+                <not>
+                    <material>web</material>
+                </not>
+            </all>
+        </any>
+    </not>
+    <not id="yellow-spawn-with-wools-filter">
+        <any>
+            <all>
+                <team>yellow-team</team>
+                <not>
+                    <material>stationary water</material>
+                </not>
+            </all>
+            <all>
+                <team>blue-team</team>
+                <not>
+                    <material>web</material>
+                </not>
+            </all>
+        </any>
+    </not>
+</filters>
+<regions>
+    <union id="void-lanes">
+        <rectangle min="-37,43" max="-62,-42"/> <!-- void lanes obs spawn side -->
+        <rectangle min="27,27" max="-26,-26"/> <!-- mid void lane -->
+        <rectangle min="38,-42" max="63,43"/> <!-- not obs side void lane -->
+    </union>
+    <union id="part-infront-of-wools">
+        <rectangle min="-13,-133" max="-29,-154"/> <!-- blue side -->
+        <rectangle min="14,-133" max="30,-154"/>
+        <rectangle min="14,134" max="30,155"/> <!-- yellow side -->
+        <rectangle min="-13,134" max="-29,155"/>
+    </union>
+    <rectangle min="14,-118" max="-13,-158" id="blue-spawn-with-wools"/>
+    <rectangle min="-13,119" max="14,159" id="yellow-spawn-with-wools"/>
+    <cuboid min="3,10,-130" max="-2,13,-131" id="blue-spawn-enter"/>
+    <cuboid min="-2,10,132" max="3,13,133" id="yellow-spaw-enter"/>
+    <union id="blue-wool-rooms">
+        <cuboid min="11,14,-142" max="9,24,-154" id="blue-wool"/>
+        <cuboid min="-10,14,-142" max="-8,24,-154" id="light-blue-wool"/>
+    </union>
+    <union id="yellow-wool-rooms">
+        <cuboid min="-10,14,143" max="-8,24,155" id="yellow-wool"/>
+        <cuboid min="11,14,143" max="9,24,155" id="orange-wool"/>
+    </union>
+    <apply enter="only-blue" region="blue-spawn-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-yellow" region="yellow-spaw-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="yellow-wool-rooms" message="You may not enter this wool room!"/>
+    <apply enter="only-yellow" region="blue-wool-rooms" message="You may not enter this wool room!"/>
+    <apply block-break="blue-spawn-with-wools-filter" region="blue-spawn-with-wools" message="You may not edit the wool room!"/>
+    <apply block-break="yellow-spawn-with-wools-filter" region="yellow-spawn-with-wools" message="You may not edit the wool room!"/>
+    <apply block="always" region="part-infront-of-wools"/>
+    <apply block="always" region="void-lanes"/>
+    <apply block-place="deny-void" region="everywhere" message="You may not edit the void!"/>
+</regions>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>golden apple</item>
+    <item>cooked fish</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>stained glass</item>
+    <item>sandstone</item>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="arrow" amount="16"/>
+    </kill-reward>
+</kill-rewards>
+</map>

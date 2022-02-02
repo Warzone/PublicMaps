@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Haunted Rings</name>
+<version>1.6.2</version>
+<objective>Capture both wools from the enemy's wool rooms and return them to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924"/> <!-- Mikeg542 -->
+</authors>
+<contributors>
+    <contributor uuid="8e0b87e1-2369-4c3e-9819-c9e93cd4f8eb" contribution="eye candy"/> <!-- theDrewGuy -->
+    <contributor uuid="4402100d-8f9e-4d23-9a51-5e17dde415d5" contribution="general help"/> <!-- Miniman9499 -->
+</contributors>
+<rules>
+    <rule>Do not block any lane with lava or obsidian.</rule>
+</rules>
+<teams>
+    <team color="dark purple" max="32">Purple</team>
+    <team color="gold" max="32">Orange</team>
+</teams>
+<kits>
+    <kit name="observers">
+        <helmet>jack o lantern</helmet>
+    </kit>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:1">iron axe</item>
+        <item slot="4" amount="64" damage="2">log</item>
+        <item slot="5" amount="32">glass</item>
+        <item slot="6" amount="2">golden apple</item>
+        <item slot="7" amount="64">cooked fish</item>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="orange" yaw="90">
+            <cylinder base="159,17,-3" radius="3" height="0"/>
+        </spawn>
+        <spawn team="purple" yaw="270">
+            <cylinder base="19,17,-3" radius="3" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="180" kit="observers">
+        <cuboid min="87,31,35" max="91,31,37"/>
+    </default>
+</spawns>
+<maxbuildheight>40</maxbuildheight>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>iron sword</item>
+    <item>glass</item>
+</itemremove>
+<filters>
+    <filter name="no-fire">
+        <deny>
+            <block>fire</block>
+        </deny>
+    </filter>
+    <filter name="no-void">
+        <not>
+            <void/>
+        </not>
+    </filter>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+    <filter name="only-purple">
+        <team>purple</team>
+    </filter>
+    <filter name="only-orange-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>purple</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-purple-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>orange</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="no-fire">
+        <rectangle min="oo,oo" max="-oo,-oo"/>
+    </apply>
+    <apply block="no-void" message="You may not modify the void area!">
+        <negative>
+            <rectangle min="101,-21" max="77,-30"/>
+            <rectangle min="77,-9" max="101,4"/>
+            <rectangle min="101,16" max="77,25"/>
+        </negative>
+    </apply>
+    <apply enter="only-purple" block="only-purple deny-world" use="only-purple-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Yellow Room   -->
+        <rectangle min="221,38" max="241,58"/>
+        <!--   Red Room   -->
+        <rectangle min="241,-44" max="221,-64"/>
+    </apply>
+    <apply enter="only-orange" block="only-orange deny-world" use="only-orange-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Lime Room   -->
+        <rectangle min="-63,-44" max="-43,-64"/>
+        <!--   Blue Room   -->
+        <rectangle min="-43,58" max="-63,38"/>
+    </apply>
+    <!--   spawn room protection   -->
+    <apply block="deny-all" message="You may not modify the spawn!">
+        <cuboid name="purple-storage-room" min="27,15,-11" max="12,32,5"/>
+        <cuboid name="orange-storage-room" min="166,15,-11" max="152,32,5"/>
+    </apply>
+    <!--   prevent teams from entering each other's spawns   -->
+    <apply enter="only-purple" message="You may not enter `5Purple Team`c's spawn room!">
+        <region name="purple-storage-room"/>
+    </apply>
+    <apply enter="only-orange" message="You may not enter `6Orange Team`c's spawn room!">
+        <region name="orange-storage-room"/>
+    </apply>
+</regions>
+<wools>
+    <wool team="purple" color="red">
+        <block location="13,18,-1"/>
+    </wool>
+    <wool team="purple" color="yellow">
+        <block location="13,18,-5"/>
+    </wool>
+    <wool team="orange" color="blue">
+        <block location="165,18,-1"/>
+    </wool>
+    <wool team="orange" color="lime">
+        <block location="165,18,-5"/>
+    </wool>
+</wools>
+</map>

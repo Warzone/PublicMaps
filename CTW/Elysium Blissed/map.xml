@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Capture the Wool">
+<name>Elysium Blissed</name>
+<version>1.0.1</version>
+<objective>Capture all 3 wools and bring them back to your base!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b"/> <!-- slees -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" min="1" max="10">Blue Team</team>
+    <team id="lime-team" color="green" min="1" max="10">Lime Team</team>
+    <team id="magenta-team" color="light purple" min="1" max="10">Magenta Team</team>
+    <team id="yellow-team" color="yellow" min="1" max="10">Yellow Team</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true">wood spade</item>
+        <item slot="4" amount="32">snow block</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="64">cooked fish</item>
+	<item slot="28" amount="64">arrow</item>
+        <effect duration="oo" amplifier="1">night vision</effect>
+    </kit>
+    <kit id="blue-kit" parents="default">
+	<helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+	<boots unbreakable="true" color="3C44AA">leather boots</boots>
+    </kit>
+    <kit id="lime-kit" parents="default">
+	<helmet unbreakable="true" color="7FCC19">leather helmet</helmet>
+        <chestplate unbreakable="true" color="7FCC19">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="7FCC19">leather leggings</leggings>
+	<boots unbreakable="true" color="7FCC19">leather boots</boots>
+    </kit>
+    <kit id="magenta-kit" parents="default">
+	<helmet unbreakable="true" color="B24CD8">leather helmet</helmet>
+        <chestplate unbreakable="true" color="B24CD8">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="B24CD8">leather leggings</leggings>
+	<boots unbreakable="true" color="B24CD8">leather boots</boots>
+    </kit>
+    <kit id="yellow-kit" parents="default">
+	<helmet unbreakable="true" color="E5E533">leather helmet</helmet>
+        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="E5E533">leather leggings</leggings>
+	<boots unbreakable="true" color="E5E533">leather boots</boots>
+    </kit>
+    <kit id="obs-kit">
+        <effect duration="oo" amplifier="1">night vision</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" region="blue-spawn"/>
+    <spawn team="lime-team" kit="lime-kit" yaw="-90" region="lime-spawn"/>
+    <spawn team="magenta-team" kit="magenta-kit" yaw="90" region="magenta-spawn"/>
+    <spawn team="yellow-team" kit="yellow-kit" yaw="-180" region="yellow-spawn"/>
+    <default kit="obs-kit" region="obs-spawn"/>
+</spawns>
+<!-- Wools -->
+<wools craftable="false">
+    <!-- Blue Team -->
+    <wool team="blue-team" monument="blue-team-lime-wool" color="lime" location="-71.5,23,1.5"/>
+    <wool team="blue-team" monument="blue-team-magenta-wool" color="magenta" location="72.5,23,-0.5"/>
+    <wool team="blue-team" monument="blue-team-yellow-wool" color="yellow" location="1.5,23,72.5"/>
+    <!-- Lime Team -->
+    <wool team="lime-team" monument="lime-team-light-blue-wool" color="light blue" location="-0.5,23,-71.5"/>
+    <wool team="lime-team" monument="lime-team-magenta-wool" color="magenta" location="72.5,23,-0.5"/>
+    <wool team="lime-team" monument="lime-team-yellow-wool" color="yellow" location="1.5,23,72.5"/>
+    <!-- Magenta Team -->
+    <wool team="magenta-team" monument="magenta-team-light-blue-wool" color="light blue" location="-0.5,23,-71.5"/>
+    <wool team="magenta-team" monument="magenta-team-lime-wool" color="lime" location="-71.5,23,1.5"/>
+    <wool team="magenta-team" monument="magenta-team-yellow-wool" color="yellow" location="1.5,23,72.5"/>
+    <!-- Yellow Team -->
+    <wool team="yellow-team" monument="yellow-team-light-blue-wool" color="light blue" location="-0.5,23,-71.5"/>
+    <wool team="yellow-team" monument="yellow-team-lime-wool" color="lime" location="-71.5,23,1.5"/>
+    <wool team="yellow-team" monument="yellow-team-magenta-wool" color="magenta" location="72.5,23,-0.5"/>
+</wools>
+<!-- Filters -->
+<filters>
+    <not id="not-blue">
+        <team id="only-blue">blue-team</team>
+    </not>
+    <not id="not-lime">
+        <team id="only-lime">lime-team</team>
+    </not>
+    <not id="not-magenta">
+        <team id="only-magenta">magenta-team</team>
+    </not>
+    <not id="not-yellow">
+        <team id="only-yellow">yellow-team</team>
+    </not>
+    <not id="not-void">
+        <void/>
+    </not>
+    <deny id="deny-wools">
+        <any>
+            <material>wool:2</material>
+            <material>wool:3</material>
+            <material>wool:4</material>
+            <material>wool:5</material>
+        </any>
+    </deny>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <!-- Spawn protection -->
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-47,0,-43" max="-67,oo,-67"/>
+        <cuboid id="lime-spawn-protection" min="-43,0,48" max="-67,oo,68"/>
+	<cuboid id="magenta-spawn-protection" min="44,0,-47" max="68,oo,-67"/>
+        <cuboid id="yellow-spawn-protection" min="48,0,44" max="68,oo,68"/>
+    </union>
+    <!-- Wool Rooms -->
+    <union id="wool-rooms">
+        <cuboid id="light-blue-wool-room" min="-18,0,-83" max="8,27,-60"/>
+        <cuboid id="lime-wool-room" min="-83,0,19" max="-60,27,-7"/>
+        <cuboid id="magenta-wool-room" min="84,0,-18" max="61,27,8"/>
+        <cuboid id="yellow-wool-room" min="19,0,84" max="-7,27,61"/>
+    </union>
+    <!-- Spawns -->
+    <point id="blue-spawn">-57,11,-57.5</point>
+    <point id="lime-spawn">-57.5,11,58</point>
+    <point id="magenta-spawn">58.5,11,-57</point>
+    <point id="yellow-spawn">58,11,58.5</point>
+    <point id="obs-spawn">0.5,24,-1.5</point>
+    <!-- Wool Monuments -->
+    <!-- Blue Team -->
+    <block id="blue-team-lime-wool">-60,12,-57</block>
+    <block id="blue-team-magenta-wool">-60,12,-58</block>
+    <block id="blue-team-yellow-wool">-60,12,-59</block>
+    <!-- Lime Team -->
+    <block id="lime-team-light-blue-wool">-57,12,60</block>
+    <block id="lime-team-magenta-wool">-58,12,60</block>
+    <block id="lime-team-yellow-wool">-59,12,60</block>
+    <!-- Magenta Team -->
+    <block id="magenta-team-light-blue-wool">57,12,-60</block>
+    <block id="magenta-team-lime-wool">58,12,-60</block>
+    <block id="magenta-team-yellow-wool">59,12,-60</block>
+    <!-- Yellow Team -->
+    <block id="yellow-team-light-blue-wool">60,12,57</block>
+    <block id="yellow-team-lime-wool">60,12,58</block>
+    <block id="yellow-team-magenta-wool">60,12,59</block>
+    <!-- Buildable Void -->
+    <negative id="void-filters">
+        <rectangle id="blue-to-magenta-bridge" min="-2,-22" max="-45,-45"/>
+        <rectangle id="lime-to-blue-bridge" min="-22,3" max="-45,46"/>
+        <rectangle id="magenta-to-yellow-bridge" min="23,-2" max="46,-45"/>
+        <rectangle id="yellow-to-lime-bridge" min="3,23" max="46,46"/>
+
+        <rectangle id="middle-island-main" min="-16,-16" max="17,17"/>
+        <rectangle id="middle-island-north" min="-12,-22" max="11,-15"/>
+        <rectangle id="middle-island-south" min="-10,16" max="13,23"/>
+        <rectangle id="middle-island-east" min="16,11" max="23,-12"/>
+        <rectangle id="middle-island-west" min="-22,-10" max="-15,13"/>
+
+        <rectangle id="light-blue-wool-lane" min="-28,-49" max="-39,-52"/>
+        <rectangle id="lime-wool-lane" min="-49,29" max="-52,40"/>
+        <rectangle id="magenta-wool-lane" min="50,-28" max="53,-39"/>
+        <rectangle id="yellow-wool-lane" min="29,50" max="40,53"/>
+    </negative>
+    <negative id="not-map">
+        <rectangle id="map" min="-80,-80" max="81,81"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn."/>
+    <apply region="lime-spawn-protection" enter="only-lime" message="You may not enter the enemy spawn."/>
+    <apply region="magenta-spawn-protection" enter="only-magenta" message="You may not enter the enemy spawn."/>
+    <apply region="yellow-spawn-protection" enter="only-yellow" message="You may not enter the enemy spawn."/>
+    <apply region="wool-rooms" block="never" message="You are not allowed to modify terrain here."/>
+    <apply enter="not-blue" region="light-blue-wool-room" message="You may not enter your own wool room!"/>
+    <apply enter="not-lime" region="lime-wool-room" message="You may not enter your own wool room!"/>
+    <apply enter="not-magenta" region="magenta-wool-room" message="You may not enter your own wool room!"/>
+    <apply enter="not-yellow" region="yellow-wool-room" message="You may not enter your own wool room!"/>
+    <apply block-place="deny-wools" region="everywhere" message="You may not place safety wools!"/>
+    <apply block-place="not-void" region="void-filters" message="You may not build over the void!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>wood spade</item>
+    <item>snow block</item>
+    <item>golden apple</item>
+    <item>cooked fish</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>28</maxbuildheight>
+</map>

@@ -1,0 +1,150 @@
+<map proto="1.4.0">
+<name>Lagoon</name>
+<version>1.0</version>
+<objective>Capture the enemy wool!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="4" max-overfill="4">Red</team>
+    <team id="blue" color="blue" max="4" max-overfill="4">Blue</team>
+</teams>
+<time>20m</time>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-90">
+            <point>-193.5,6,144.5</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="90">
+            <point>-125.5,6,144.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cylinder base="-161.5,17,144.5" radius="1" height="0.5" />
+        </regions>
+    </default>
+</spawns>
+<respawn delay="2.5s" auto="true"/>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="stone pickaxe"/>
+        <item slot="3" material="stone axe" enchantment="dig speed:1"/>
+        <item slot="4" material="wood" damage="2" amount="8"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" material="cooked beef" amount="64"/>
+        <item slot="28" material="arrow" amount="6"/>
+        <effect duration="2s" amplifier="100">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+        <item slot="5" amount="8" damage="14">stained clay</item>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+        <item slot="5" amount="8" damage="11">stained clay</item>
+    </kit>
+    <kit id="wool-gear" force="true">
+        <chestplate unbreakable="true">diamond chestplate</chestplate>
+        <potion duration="oo">regeneration</potion>
+    </kit>
+</kits>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="no-void">
+        <void/>
+    </not>
+    <not id="no-spawners">
+		<any>
+			<material>mob spawner</material>
+			<material>gold plate</material>
+			<material>iron plate</material>
+		</any>
+    </not>
+</filters>
+<regions>
+    <union id="wool-rooms">
+        <cuboid id="red-wool-room" min="-129,10,141" max="-122,20,148"/>
+        <cuboid id="blue-wool-room" min="-197,10,141" max="-190,20,148"/>
+    </union>
+	<union id="spawn-bridges">
+        <cuboid min="-128,0,147" max="-133,10,142"/>
+        <cuboid min="-191,0,147" max="-186,10,142"/>
+	</union>
+	<union id="ladders">
+        <cuboid min="-195,0,148" max="-192,11,149"/>
+        <cuboid min="-195,0,141" max="-192,11,140"/>
+        <cuboid min="-124,0,148" max="-127,11,149"/>
+        <cuboid min="-124,0,141" max="-127,11,140"/>
+	</union>
+    <cuboid id="red-spawn" min="-122,0,142" max="-129,10,147"/>
+    <cuboid id="blue-spawn" min="-190,0,142" max="-197,10,147"/>
+    <apply region="wool-rooms" block="never"/>
+    <apply enter="only-blue" use="only-blue" message="You may not enter this wool room." kit="wool-gear" region="red-wool-room"/>
+    <apply enter="only-red" use="only-red" message="You may not enter this wool room." kit="wool-gear" region="blue-wool-room"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn." region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn." region="blue-spawn"/>
+    <apply block="never" message="You may not edit spawn." region="red-spawn"/>
+    <apply block="never" message="You may not edit spawn." region="blue-spawn"/>
+	<apply block="never" message="You may not break the spawn bridges!" region="spawn-bridges"/>
+	<apply block="never" message="You may not break the ladders!" region="ladders"/>
+    <apply block-break="no-spawners" block-place="no-void" message="You may not edit blocks here!" region="everywhere"/>
+</regions>
+<wools craftable="false">
+    <wool team="red" color="cyan" location="-189.5,11,144.5">
+        <monument><block>-124,7,144</block></monument>
+    </wool>
+    <wool team="blue" color="orange" location="-125.5,11,144.5">
+        <monument><block>-196,7,144</block></monument>
+    </wool>
+</wools>
+<killreward>
+    <item material="golden apple"/>
+    <item material="arrow" amount="3"/>
+    <item material="wood" damage="2" amount="4"/>
+</killreward>
+<maxbuildheight>14</maxbuildheight>
+<itemremove>
+    <item>wood</item>
+    <item>stained clay</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>diamond chestplate</item>
+	<item>redstone lamp off</item>
+	<item>sandstone</item>
+	<item>dirt</item>
+	<item>seeds</item>
+	<item>sugar cane</item>
+	<item>red rose</item>
+	<item>log</item>
+	<item>jungle fence</item>
+	<item>step</item>
+	<item>redstone block</item>
+	<item>jungle wood stairs</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<crafting>
+    <disable>boat</disable>
+</crafting>
+</map>
