@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.2">
+<name>Port Town 2</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy's monument(s) to win!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
+    <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
+</authors>
+<teams>
+    <team id="lime" color="green"        min="1"  max="25" max-overfill="30">Lime</team>
+    <team id="pink" color="light purple" min="1"  max="25" max-overfill="30">Pink</team>
+</teams>
+<spawns>
+    <spawn team="lime" kit="default">
+        <regions yaw="0">
+            <point>0.5,14,-90</point>
+        </regions>
+    </spawn>
+    <spawn team="pink" kit="default">
+        <regions yaw="180">
+            <point>0.5,14,139.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-85.5,40,23.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="infinity:1">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="64">log</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6" amount="4">exp bottle</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="16">cooked beef</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="29" amount="1">lapis block</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="5" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<destroyables owner="lime" completion="100%" sparks="true">
+    <destroyable name="Monument A" region="lime-monument-a" materials="obsidian"/>
+    <destroyable name="Monument B" region="lime-monument-b" materials="obsidian"/>
+</destroyables>
+    <destroyables owner="pink" completion="100%" sparks="true">
+    <destroyable name="Monument A" region="pink-monument-a" materials="obsidian"/>
+    <destroyable name="Monument B" region="pink-monument-b" materials="obsidian"/>
+</destroyables>
+<filters>
+    <team id="only-lime">lime</team>
+    <team id="only-pink">pink</team>
+</filters>
+<regions>
+    <cuboid id="lime-spawn" min="5,0,-94" max="-4,oo,-66"/>
+    <cuboid id="pink-spawn" min="5,0,115" max="-4,oo,143"/>
+    <union id="monuments">
+        <block id="lime-monument-a">-20, 16, -22</block>
+        <block id="lime-monument-b">20, 16, -22</block>
+        <block id="pink-monument-a">20, 16, 70</block>
+        <block id="pink-monument-b">-20, 16, 70</block>
+    </union>
+    <union id="enchantment-tables">
+        <block id="lime-table">0, 14, -4</block>
+        <block id="pink-table">0, 14, 52</block>
+    </union>
+    <negative id="not-map">
+        <rectangle id="map" min="-53,-95" max="54,144"/>
+    </negative>
+    <apply region="not-map"  block="never"               message="You may not edit outside the map!"/>
+    <apply block="never"     region="lime-spawn"         message="You are not allowed to modify terrain here."/>
+    <apply block="never"     region="pink-spawn"         message="You are not allowed to modify terrain here."/>
+    <apply enter="only-lime" region="lime-spawn"         message="You may not enter the enemy spawn."/>
+    <apply enter="only-pink" region="pink-spawn"         message="You may not enter the enemy spawn."/>
+    <apply block="never"     region="enchantment-tables" message="You may not break the enchantment tables."/>
+</regions>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>obsidian</item>
+    <item>exp bottle</item>
+    <item>lapis block</item>
+</itemremove>
+<maxbuildheight>36</maxbuildheight>
+</map>

@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Icescar</name>
+<version>1.2.1</version>
+<objective>
+    Destroy the enemy team's Upper, Lower and Central Monument while upgrading your gear.
+</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+    <author uuid="8e5b106b-f0af-4be1-b199-7b9205ec8af6"/> <!-- dragonsrule9 -->
+</authors>
+<teams>
+    <team color="green" max="75" max-overfill="75">Green</team>
+    <team color="dark purple" max="75" max-overfill="75">Purple</team>
+</teams>
+<kits>
+    <kit name="heal">
+        <potion duration="10" amplifier="4">damage resistance</potion>
+        <potion duration="5" amplifier="1">heal</potion>
+    </kit>
+    <kit name="spawn" parents="heal">
+        <item slot="0" attributes="generic.attackDamage:add:4" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">stone pickaxe</item>
+        <item slot="7" amount="32">bread</item>
+        <item slot="8" amount="1">gold ingot</item>
+    </kit>
+    <kit name="green-kit" parents="spawn">
+        <helmet color="7FCC19" unbreakable="true">leather helmet</helmet>
+        <chestplate color="7FCC19" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit name="purple-kit" parents="spawn">
+        <helmet color="cc00ff" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cc00ff" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<tnt>
+    <blockdamage>on</blockdamage>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <yield>0</yield>
+</tnt>
+<timelock>on</timelock>
+<filters>
+    <filter name="green-only">
+        <team>green</team>
+    </filter>
+    <filter name="purple-only">
+        <team>purple</team>
+    </filter>
+    <filter name="allow-break" parents="deny-all">
+        <allow>
+            <block>glass</block>
+            <block>lapis block</block>
+            <block>emerald block</block>
+        </allow>
+    </filter>
+    <filter name="allow-place">
+        <block>tnt</block>
+    </filter>
+    <filter name="deny-beacon">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <!--   Region Definitions   -->
+    <cylinder name="default-spawn" base="0.5,25,-169" radius="1" height="0"/>
+    <rectangle name="all" min="-155,-192" max="155,155"/>
+    <cuboid name="no-mountains" min="-155,20,-192" max="155,oo,155"/>
+    <cylinder name="green-spawn" base="131,15,-78" radius="2.5" height="0"/>
+    <circle name="green-base" center="120,-74.5" radius="15"/>
+    <cuboid name="green-central-m" min="76,12,-34" max="71,15,-39"/>
+    <cuboid name="green-upper-m" min="122,12,36" max="127,15,31"/>
+    <cuboid name="green-lower-m" min="73,12,-103" max="68,15,-108"/>
+    <cylinder name="purple-spawn" base="-131,15,-78" radius="2.5" height="0"/>
+    <circle name="purple-base" center="-120,-74.5" radius="15"/>
+    <cuboid name="purple-central-m" min="-70,12,-34" max="-75,15,-39"/>
+    <cuboid name="purple-upper-m" min="-121,12,36" max="-126,15,31"/>
+    <cuboid name="purple-lower-m" min="-67,12,-108" max="-72,15,-103"/>
+    <union name="green-portals">
+        <cuboid name="green-teleport-1" min="54,10,-99" max="53,14,-98"/>
+        <cuboid name="green-teleport-2" min="52,10,-12" max="51,14,-11"/>
+        <cuboid name="green-teleport-3" min="106,10,40" max="105,14,41"/>
+        <cuboid name="green-teleport-4" min="69,10,107" max="68,14,108"/>
+    </union>
+    <union name="purple-portals">
+        <cuboid name="purple-teleport-1" min="-53,10,-99" max="-52,14,-98"/>
+        <cuboid name="purple-teleport-2" min="-50,10,-11" max="-51,14,-12"/>
+        <cuboid name="purple-teleport-3" min="-105,10,40" max="-104,14,41"/>
+        <cuboid name="purple-teleport-4" min="-69,10,107" max="-68,14,108"/>
+    </union>
+    <!-- Filter Applications -->
+    <apply enter="green-only" message="You may not enter the enemy team's base!">
+        <region name="green-base"/>
+    </apply>
+    <apply enter="purple-only" message="You may not enter the enemy team's base!">
+        <region name="purple-base"/>
+    </apply>
+    <apply block-break="allow-break" block-place="allow-place" use="deny-beacon">
+        <region name="all"/>
+    </apply>
+    <apply kit="heal" enter="purple-only">
+        <region name="purple-portals"/>
+    </apply>
+    <apply kit="heal" enter="green-only">
+        <region name="green-portals"/>
+    </apply>
+    <apply enter="deny-all" message="The mountains are out of bounds!">
+        <region name="no-mountains"/>
+    </apply>
+    <apply block="deny-all">
+        <region name="green-base"/>
+        <region name="purple-base"/>
+    </apply>
+</regions>
+<portals>
+    <portal x="@131" y="@15" z="@-78" pitch="@0" yaw="@90" filter="green-only">
+        <region name="green-portals"/>
+    </portal>
+    <portal x="@-131" y="@15" z="@-78" pitch="@0" yaw="@-90" filter="purple-only">
+        <region name="purple-portals"/>
+    </portal>
+</portals>
+<spawns>
+    <spawn team="green" kit="green-kit" yaw="90">
+        <region name="green-spawn"/>
+    </spawn>
+    <spawn team="purple" kit="purple-kit" yaw="-90">
+        <region name="purple-spawn"/>
+    </spawn>
+    <default yaw="0">
+        <region name="default-spawn"/>
+    </default>
+</spawns>
+<destroyables materials="glass;lapis block;emerald block" completion="100%">
+    <destroyable name="Central Monument" owner="green">
+        <region name="green-central-m"/>
+    </destroyable>
+    <destroyable name="Upper Monument" owner="green">
+        <region name="green-upper-m"/>
+    </destroyable>
+    <destroyable name="Lower Monument" owner="green">
+        <region name="green-lower-m"/>
+    </destroyable>
+    <destroyable name="Central Monument" owner="purple">
+        <region name="purple-central-m"/>
+    </destroyable>
+    <destroyable name="Upper Monument" owner="purple">
+        <region name="purple-upper-m"/>
+    </destroyable>
+    <destroyable name="Lower Monument" owner="purple">
+        <region name="purple-lower-m"/>
+    </destroyable>
+</destroyables>
+<itemremove>
+    <item>stone sword</item>
+    <item>leather chestplate</item>
+    <item>leather helmet</item>
+    <item>bread</item>
+    <item>iron axe</item>
+    <item>iron sword</item>
+    <item>gold axe</item>
+    <item>diamond sword</item>
+    <item>arrow</item>
+    <item>bow</item>
+    <item>chainmail boots</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>gold chestplate</item>
+    <item>iron chestplate</item>
+    <item>diamond chestplate</item>
+    <item>diamond boots</item>
+    <item>glass bottle</item>
+    <item>stone pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>lapis block</item>
+    <item>emerald block</item>
+    <item>glass</item>
+</itemremove>
+<killreward>
+    <item amount="2">gold ingot</item>
+</killreward>
+<multitrade/>
+<tutorial>
+    <stage title="Icescar">
+        <message>
+            <line>
+                A `aDestroy the Monument`r (DTM) map with the `bGear`r aspect.
+            </line>
+            <line>
+                The objective is to `4destroy`r the enemy team's `aCentral, Upper and Lower Monuments.
+            </line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="45">0,60,-85</point>
+        </teleport>
+    </stage>
+    <stage title="Villager Trading">
+        <message>
+            <line>
+                Using `6gold ingots`r gained from gold spawners and killing players, you can upgrade your gear at `aspawn.
+            </line>
+            <line>Don't die! You will `4lose your equipment!</line>
+        </message>
+        <teleport>
+            <point yaw="105" pitch="20">132,16,-82</point>
+        </teleport>
+    </stage>
+    <stage title="Returning to Spawn">
+        <message>
+            <line>
+                A way to get back to spawn is by simply using the stairs.
+            </line>
+            <line>
+                Another way is to enter these `bportals`r which will warp you back to your base.
+            </line>
+        </message>
+        <teleport>
+            <point yaw="-20" pitch="-10">48,11,-20</point>
+        </teleport>
+    </stage>
+    <stage title="The Monuments">
+        <message>
+            <line>
+                This is the Green team's Central Monument. The other monuments are marked by `bbeacons.
+            </line>
+            <line>
+                Break the `aGlass, Lapis blocks and Emerald blocks`r using your `4pickaxe or TNT.
+            </line>
+        </message>
+        <teleport>
+            <point yaw="20" pitch="-10">75,11,-44</point>
+        </teleport>
+    </stage>
+    <stage title="Gold spawners">
+        <message>
+            <line>
+                There are five of these in the map, 2 on each team's side and the central spawner.
+            </line>
+            <line>
+                These spawn `6gold ingots`r over a period of time. The Central Spawner is more powerful.
+            </line>
+        </message>
+        <teleport>
+            <point yaw="155" pitch="40">24,13,82</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.2">
+<name>Yellowstone</name>
+<version>1.1.0</version>
+<objective>Destroy all three of the enemy's monuments to win!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="3893a242-cc17-447e-9b1c-774fc8941af8"/> <!-- G Skippy -->
+</authors>
+<teams>
+    <team id="moon-tribe" color="dark aqua" max="25">Moon Tribe</team>
+    <team id="sun-tribe" color="yellow" max="25">Sun Tribe</team>
+</teams>
+<spawns>
+    <spawn team="moon-tribe" kit="moon-tribe-kit">
+        <regions yaw="0">
+            <point>0.5, 8, -260</point>
+        </regions>
+    </spawn>
+    <spawn team="sun-tribe" kit="sun-tribe-kit">
+        <regions yaw="180">
+            <point>0.5, 8, 7.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>97.5, 60, -126.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" amount="64">cobblestone</item>
+        <item slot="4" amount="64">cobblestone</item>
+        <item slot="7" amount="64">cooked beef</item>    
+        <item slot="8" amount="1">golden apple</item>
+        <item slot="9" amount="64">arrow</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+        <kit id="moon-tribe-kit" parents="default">
+        <helmet unbreakable="true" color="00AAAA">leather helmet</helmet>
+        <leggings unbreakable="true" color="00AAAA">leather leggings</leggings>
+    </kit>
+    <kit id="sun-tribe-kit" parents="default">
+        <helmet unbreakable="true" color="FFFF55">leather helmet</helmet>
+        <leggings unbreakable="true" color="FFFF55">leather leggings</leggings>
+    </kit>
+</kits>
+<destroyables owner="moon-tribe" completion="100%">
+    <destroyable name="Left Monument" region="moon-front-left" materials="obsidian"/>
+    <destroyable name="Right Monument" region="moon-front-right" materials="obsidian"/>
+    <destroyable name="Back Left Monument" region="moon-back-left" materials="obsidian"/>
+    <destroyable name="Back Right Monument" region="moon-back-right" materials="obsidian"/>
+</destroyables>
+<destroyables owner="sun-tribe" completion="100%">
+    <destroyable name="Left Monument" region="sun-front-left" materials="obsidian"/>
+    <destroyable name="Right Monument" region="sun-front-right" materials="obsidian"/>
+    <destroyable name="Back Left Monument" region="sun-back-left" materials="obsidian"/>
+    <destroyable name="Back Right Monument" region="sun-back-right" materials="obsidian"/>
+</destroyables>
+<filters>
+    <team id="only-moon">moon-tribe</team>
+    <team id="only-sun">sun-tribe</team>
+</filters>
+<regions>
+    <cylinder id="moon-spawn" base="0, 5, -258" radius="9" height="7"/>
+    <cylinder id="sun-spawn" base="0, 5, 4" radius="9" height="7"/>
+    <cuboid id="nobuild-one" max="-46, 36, -90" min="-44, 27, -92"/>
+    <cuboid id="nobuild-two" max="46, 36, -162" min="44, 27, -164"/>
+    <cuboid id="nobuild-three" max="46, 36, -92" min="44, 27, -90"/>
+    <cuboid id="nobuild-four" max="-46, 36, -162" min="-44, 27, 164"/>
+    <!-- Monuments -->
+    <union id="monuments">
+        <block id="moon-front-left">-29, 28, -193</block>
+        <block id="moon-front-right">29, 28, -193</block>
+        <block id="moon-back-left">-69, 22, -234</block>
+        <block id="moon-back-right">69, 22, -234</block>
+        <block id="sun-front-left">29, 28, -61</block>
+        <block id="sun-front-right">-29, 28, -61</block>
+        <block id="sun-back-left">69, 22, -20</block>
+        <block id="sun-back-right">-69, 22, -20</block>
+    </union>
+    <negative id="not-map">
+        <rectangle id="map" min="-80,-269" max="80,16"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply block="never" region="nobuild-one" message="You may not modify blocks here!"/>
+    <apply block="never" region="nobuild-two" message="You may not modify blocks here!"/>
+    <apply block="never" region="nobuild-three" message="You may not modify blocks here!"/>
+    <apply block="never" region="nobuild-four" message="You may not modify blocks here!"/>
+    <apply block="never" enter="only-moon" region="moon-spawn" message="You may not modify blocks or enter here!"/>
+    <apply block="never" enter="only-sun" region="sun-spawn" message="You may not modify blocks or enter here!"/>
+    <apply enter="only-sun" region="sun-spawn"/>
+    <apply enter="only-moon" region="moon-spawn"/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>cobblestone</item>
+    <item>cooked beef</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>obsidian</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="5" material="cobblestone"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>55</maxbuildheight>
+</map>

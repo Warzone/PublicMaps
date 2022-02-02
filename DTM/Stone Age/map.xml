@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Beacon">
+<name>Stone Age</name>
+<version>1.2.0</version>
+<objective>Destroy the other team's beacon! Your beacon is at the top of the mountain, protect it!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+    <author uuid="39a9e1b5-1e1d-40c0-8c16-69a9568efa72"/> <!-- Teejers -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="TGM to PGM conversion"></contributor> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="50">Blue</team>
+    <team id="red-team" color="dark red" max="50">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone axe</item>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <chestplate unbreakable="true" locked="true" color="3C44AA">leather chestplate</chestplate>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <chestplate unbreakable="true" locked="true" color="B02E26">leather chestplate</chestplate>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="135" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" yaw="-45" region="red-spawn"/>
+    <default yaw="-135" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="100%" repairable="false" show-progress="false" sparks="true">
+    <destroyable name="Beacon" owner="blue-team" materials="beacon" region="blue-beacon"/>
+    <destroyable name="Beacon" owner="red-team" materials="beacon" region="red-beacon"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <block id="blue-beacon">38,91,-3</block>
+        <block id="red-beacon">-152,91,-169</block>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="28,40,-16" max="37,50,-7"/>
+        <cuboid id="red-spawn-protection" min="-140,40,-155" max="-150,50,-164"/>
+    </union>
+    <point id="blue-spawn">32.5,44,-11.5</point>
+    <point id="red-spawn">-145.5,44,-159.5</point>
+    <point id="obs-spawn">-108.5,95,-43.5</point>
+    <!-- Applications -->
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone axe</item>
+    <item>leather chestplate</item>
+    <item>egg</item>
+    <item>snow ball</item>
+</itemremove>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

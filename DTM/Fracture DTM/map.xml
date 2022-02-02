@@ -1,0 +1,341 @@
+<map proto="1.4.2">
+<name>Fracture DTM</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument to win</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue"     max="12" max-overfill="14">Blue</team>
+    <team id="red-team"  color="dark red" max="12" max-overfill="14">Red</team>
+</teams>
+<kits>
+    <kit id="main-kit">
+        <clear />
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" unbreakable="true" material="diamond pickaxe" show-can-destroy="false">
+            <can-destroy>
+                <material>gold block</material>
+            </can-destroy>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment level="1">efficiency</enchantment>
+        </item>
+        <item slot="4" amount="24"        material="wood" damage="1" />
+        <item slot="5" amount="16"         material="smooth brick" />
+        <item slot="8" amount="64"        material="golden carrot" />
+        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <boots         unbreakable="true" material="iron boots" />
+        <effect duration="oo" amplifier="10">resistance</effect>
+        <effect duration="oo" amplifier="10">weakness</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
+    </kit>
+    <kit id="playing-kit" force="true">
+        <game-mode>survival</game-mode>
+        <effect duration="3" amplifier="10">resistance</effect>
+        <effect duration="3" amplifier="10">regeneration</effect>
+        <effect duration="0" amplifier="10">weakness</effect>
+        <item amount="24" material="arrow" />
+    </kit>
+    <lend kit="strong-defending-kit" filter="defending-monument-close" />
+    <kit id="strong-defending-kit">
+        <effect amplifier="2">haste</effect>
+        <effect amplifier="1">speed</effect>
+    </kit>
+    <lend kit="defending-kit" filter="defending-monument-far" />
+    <kit id="defending-kit">
+        <effect amplifier="1">haste</effect>
+    </kit>
+</kits>
+<spawns>
+    <default region="default-spawn" yaw="90" />
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="-90">-28.5,16,165</point>
+            <point yaw="90">-28.5,16,165</point>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="-90">-28.5,16,8</point>
+            <point yaw="90">-28.5,16,8</point>
+        </regions>
+    </spawn>
+</spawns>
+<respawn delay="2.5s" />
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <not id="deny-void">
+        <void />
+    </not>
+    <not id="deny-island-bottom-layer">
+        <material>stone</material>
+    </not>
+    <material id="only-gold">gold block</material>
+    <any id="defending-monument-far">
+        <all>
+            <filter id="only-blue" />
+            <region id="blue-monument-far" />
+        </all>
+        <all>
+            <filter id="only-red" />
+            <region id="red-monument-far" />
+        </all>
+    </any>
+    <any id="defending-monument-close">
+        <all>
+            <filter id="only-blue" />
+            <region id="blue-monument-close" />
+        </all>
+        <all>
+            <filter id="only-red" />
+            <region id="red-monument-close" />
+        </all>
+    </any>
+    <not id="deny-player-cause">
+        <cause>player</cause>
+    </not>
+</filters>
+<regions>
+    <block id="default-spawn">41.5,38,86.5</block>
+    <union id="spawn-protection-template">
+        <!-- regions taken from blue's east side of spawn -->
+        <rectangle min="1,145"   max="-9,174" />
+        <rectangle min="-9,153"  max="-11,174" />
+        <rectangle min="-9,154"  max="-15,174" />
+        <rectangle min="-15,158" max="-29,174" />
+    </union>
+    <negative id="playing-area">
+        <union id="spawn-extension">
+            <!-- extensions of spawn regions so players cant
+                 half step out of spawn to get playing kit -->
+            <cuboid id="blue-east-extend" min="-1,17,144" max="-8,24,145" />
+            <mirror id="blue-west-extend" normal="-1,0,0" origin="-28.5,0,86">
+                <region id="blue-east-extend" />
+            </mirror>
+            <mirror normal="0,0,-1" origin="-28.5,0,86.5">
+                <region id="blue-east-extend" />
+            </mirror>
+            <mirror normal="0,0,-1" origin="-28.5,0,86.5">
+                <region id="blue-west-extend" />
+            </mirror>
+            <union id="team-spawns">
+                <union id="blue-spawn">
+                    <region id="spawn-protection-template" />
+                    <mirror id="spawn-protection-template-mirror" normal="-1,0,0" origin="-28.5,0,86">
+                        <region id="spawn-protection-template" />
+                    </mirror>
+                </union>
+                <union id="red-spawn">
+                    <mirror normal="0,0,-1" origin="-28.5,0,86.5">
+                        <region id="spawn-protection-template" />
+                    </mirror>
+                    <mirror normal="0,0,-1" origin="-28.5,0,86.5">
+                        <region id="spawn-protection-template-mirror" />
+                    </mirror>
+                </union>
+            </union>
+        </union>
+    </negative>
+    <sphere id="blue-monument-close" origin="-28.5,11,137.5" radius="8" />
+    <sphere id="red-monument-close"  origin="-28.5,11,35.5" radius="8" />
+    <complement id="blue-monument-far">
+        <sphere origin="-28.5,11,137.5" radius="24" />
+        <!-- radius has to be 0.5 larger than the close sphere
+             so that the stronger haste doesn't overrule this
+             one being applied for far defenders -->
+        <sphere origin="-28.5,11,137.5" radius="8.3" />
+    </complement>
+    <complement id="red-monument-far">
+        <sphere origin="-28.5,11,35.5" radius="24" />
+        <sphere origin="-28.5,11,35.5" radius="8.3" />
+    </complement>
+    <union id="spawn-pools">
+        <cylinder id="blue-west-pool" base="-52.5,0,144.5" radius="4.5" height="20" />
+        <cylinder id="blue-east-pool" base="-4.5,0,144.5"  radius="4.5" height="20" />
+        <cylinder id="red-west-pool"  base="-52.5,0,28.5"  radius="4.5" height="20" />
+        <cylinder id="red-east-pool"  base="-4.5,0,28.5"   radius="4.5" height="20" />
+    </union>
+    <above id="world-limit" y="16" />
+    <below id="bottom-layer" y="2" />
+    <apply region="playing-area" kit="playing-kit" />
+    <apply region="blue-spawn"   enter="only-blue"                      message="You may not enter the other team's spawn" />
+    <apply region="red-spawn"    enter="only-red"                       message="You may not enter the other team's spawn" />
+    <apply region="world-limit"  block-place="deny-player-cause"        message="You may not place blocks that high" />
+    <apply region="spawn-pools"  block="never"                          message="You may not interact with that material here" />
+    <apply region="team-spawns"  block="only-gold"                      message="You may not interact with that material here" />
+    <apply region="bottom-layer" block-break="deny-island-bottom-layer" message="You may not interact with that material here" />
+    <apply                       block-place="deny-void"                message="You may not interact with that material here" />
+</regions>
+<destroyables name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+    <destroyable owner="blue-team">
+       <region>
+           <cuboid min="-29,10,136" max="-27,13,138" />
+        </region>
+    </destroyable>
+    <destroyable owner="red-team">
+       <region>
+           <cuboid min="-29,10,36" max="-27,13,34" />
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="16m" show-before="24s" material="beacon" />
+    <mode after="24m" show-before="24s" material="coal block" />
+</modes>
+<beacons>
+  <beacon location="-28.5,0,35.5"  color="blue" particle-count="10" visibility-filter="only-blue" />
+  <beacon location="-28.5,0,137.5" color="red"  particle-count="10" visibility-filter="only-red" />
+</beacons>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6" material="wood" damage="1" />
+        <item amount="8" material="arrow" />
+        <item            material="golden apple" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4" repeat="false" />
+        </filter>
+        <item damage="61" material="flint and steel" />
+        <item amount="3"  material="golden apple" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="true" />
+        </filter>
+        <item amount="2" material="tnt" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <any>
+                <filter id="defending-monument-far" />
+                <filter id="defending-monument-close" />
+            </any>
+        </filter>
+        <kit>
+            <any count="1">
+                <option weight="70">
+                    <item material="air" />
+                </option>
+                <option weight="25">
+                    <item material="fireball" />
+                </option>
+                <option weight="5">
+                    <item material="tnt" />
+                </option>
+            </any>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<block-drops>
+    <rule>
+        <filter>
+            <material>iron block</material>
+        </filter>
+        <drops>
+            <item chance="1.00" amount="9" material="iron ingot" />
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>gold block</material>
+        </filter>
+        <drops>
+            <item chance="1.00" amount="9" material="gold ingot" />
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>log 2</material>
+        </filter>
+        <drops>
+            <item chance="1.00" amount="4" material="wood" damage="1" />
+        </drops>
+    </rule>
+</block-drops>
+<renewables>
+    <renewable interval="8s" particles="true">
+        <renew-filter>
+            <material>gold block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<item-mods>
+    <rule>
+        <match>
+            <material>bow</material>
+            <material>gold sword</material>
+            <material>gold pickaxe</material>
+            <material>gold axe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+            <material>iron sword</material>
+            <material>iron pickaxe</material>
+            <material>iron axe</material>
+            <material>iron spade</material>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+    <rule>
+        <match>
+            <material>gold chestplate</material>
+            <material>iron chestplate</material>
+        </match>
+        <modify>
+            <enchantment level="1">protection</enchantment>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>gold boots</material>
+        </match>
+        <modify>
+            <enchantment level="1">protection fall</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<crafting>
+    <disable>bucket</disable>
+</crafting>
+<itemkeep>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>bow</item>
+</itemkeep>
+<itemremove>
+    <item>stone sword</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>obsidian</item>
+</itemremove>
+</map>

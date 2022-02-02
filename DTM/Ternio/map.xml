@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.3.2">
+   <name>Ternio</name>
+   <version>2.2.2</version>
+
+   <objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+   <authors>
+      <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
+   </authors>
+   <teams>
+      <team color="dark purple" max="15">Purple</team>
+      <team color="dark aqua" max="15">Cyan</team>
+   </teams>
+   <kits>
+      <kit name="spawn">
+         <item slot="0" unbreakable="true">stone sword</item>
+         <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+         <item slot="2" unbreakable="true" enchantment="dig speed:1">diamond pickaxe</item>
+         <item slot="3" unbreakable="true">stone axe</item>
+         <item slot="4" amount="3">golden apple</item>
+         <item slot="5" amount="32">glass</item>
+         <item slot="6" amount="64">log</item>
+         <item slot="7" amount="64">cooked beef</item>
+         <item slot="28" amount="1">arrow</item>
+         <potion duration="5" amplifier="5">damage resistance</potion>
+         <potion duration="5" amplifier="5">heal</potion>
+      </kit>
+      <kit name="cyan" parents="spawn">
+         <helmet unbreakable="true" color="4C7F99">leather helmet</helmet>
+         <chestplate unbreakable="true" color="4C7F99" enchantment="protection projectile:2">leather chestplate</chestplate>
+         <leggings unbreakable="true" color="4C7F99">leather leggings</leggings>
+         <boots unbreakable="true" color="4C7F99">leather boots</boots>
+      </kit>
+      <kit name="purple" parents="spawn">
+         <helmet unbreakable="true" color="7F3FB2">leather helmet</helmet>
+         <chestplate unbreakable="true" color="7F3FB2" enchantment="protection projectile:2">leather chestplate</chestplate>
+         <leggings unbreakable="true" color="7F3FB2">leather leggings</leggings>
+         <boots unbreakable="true" color="7F3FB2">leather boots</boots>
+      </kit>
+   </kits>
+   <spawns>
+      <spawn team="purple" kit="purple" yaw="0">
+         <point>4.5, 25, -820.5</point>
+      </spawn>
+      <spawn team="cyan" kit="cyan" yaw="180">
+         <point>4.5, 25, -713.5</point>
+      </spawn>
+      <default yaw="-90">
+         <point>-55.5, 46, -766.5</point>
+      </default>
+   </spawns>
+   <filters>
+      <filter name="deny-fire-spread">
+         <deny>
+            <block>fire</block>
+         </deny>
+      </filter>
+      <filter name="only-purple">
+         <team>purple</team>
+      </filter>
+      <filter name="only-cyan">
+         <team>cyan</team>
+      </filter>
+   </filters>
+   <regions>
+      <rectangle name="playable" min="-37,-869" max="46,-665" />
+      <cylinder name="cyan-spawn" base="4,23,-714" height="7" radius="15"/>
+      <cylinder name="purple-spawn" base="4,23,-821" height="7" radius="15"/>
+      <cuboid name="cyan-bridge-spawn-protection" min="10,0,-740" max="-2,31,-729"/>
+      <cuboid name="purple-bridge-spawn-protection" min="-2,0,-795" max="10,31,-806"/>
+      <apply block="deny-all" message="You may not build outside of the playing field!">
+         <negative>
+            <region name="playable" />
+         </negative>
+      </apply>
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="purple-spawn" />
+         <region name="purple-bridge-spawn-protection" />
+      </apply>
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="cyan-spawn" />
+         <region name="cyan-bridge-spawn-protection" />
+      </apply>
+      <apply enter="only-cyan" message="You may not enter `3Cyan Team`c's spawn area!">
+         <region name="cyan-spawn" />
+      </apply>
+      <apply enter="only-purple" message="You may not enter `5Purple Team`c's spawn area!">
+         <region name="purple-spawn" />
+      </apply>
+   </regions>
+   <destroyables materials="obsidian" sparks="true">
+      <destroyable name="Left" owner="purple">
+         <block>-33,29,-821</block>
+      </destroyable>
+      <destroyable name="Center" owner="purple">
+         <block>4,29,-858</block>
+      </destroyable>
+      <destroyable name="Right" owner="purple">
+         <block>41,29,-821</block>
+      </destroyable>
+      <destroyable name="Left" owner="cyan">
+         <block>41,29,-714</block>
+      </destroyable>
+      <destroyable name="Center" owner="cyan">
+         <block>4,29,-677</block>
+      </destroyable>
+      <destroyable name="Right" owner="cyan">
+        <block>-33,29,-714</block>
+      </destroyable>
+   </destroyables>
+   <itemremove>
+      <item>stone sword</item>
+      <item>bow</item>
+      <item>diamond pickaxe</item>
+      <item>stone axe</item>
+      <item>obsidian</item>
+      <item>log</item>
+      <item>glass</item>
+      <item>arrow</item>
+      <item>wood</item>
+      <item>leather helmet</item>
+      <item>leather chestplate</item>
+      <item>leather leggings</item>
+      <item>leather boots</item>
+      <item>cooked beef</item>
+      <item>golden apple</item>
+   </itemremove>
+   <killreward>
+      <item amount="1">golden apple</item>
+   </killreward>
+   <timelock>on</timelock>
+   <maxbuildheight>64</maxbuildheight>
+</map>

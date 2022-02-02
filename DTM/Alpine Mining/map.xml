@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Alpine Mining</name>
+<version>1.2</version>
+<objective>Destroy the enemy's 2 monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Inventing theme/Name map/Gamemode"/>
+    <!--  rockymine  -->
+    <author uuid="c2848337-b526-4db0-9130-fabd0a5c7cfb" contribution="Aesthetics/Iron mine/Wisdom"/>
+    <!--  jollee999  -->
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Aesthetics/Village"/>
+    <!--  DoomRobotBoy  -->
+</authors>
+<contributors>
+    <contributor uuid="083ec416-c87e-438f-8732-170798b4fe93" contribution="XML"/>
+    <!--  orky48  -->
+</contributors>
+<teams>
+    <team color="blue" max="50" max-overfill="58">Blue</team>
+    <team color="dark red" max="50" max-overfill="58">Red</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:1">iron axe</item>
+        <item slot="4" enchantment="durability:1">stone spade</item>
+        <item slot="5" amount="32">bread</item>
+        <item slot="6" amount="32">log</item>
+        <item slot="7" amount="32">glass</item>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
+    </kit>
+    <kit name="red" parents="spawn">
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="993333" unbreakable="true">leather leggings</leggings>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red">
+        <regions yaw="-90">
+            <cuboid min="-42,27,-177" max="-39,27,-174"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <regions yaw="90">
+            <cuboid min="43,27,322" max="40,27,319"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <block>66.5,57.5,72.5</block>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <filter name="no-enchantment">
+        <not>
+            <block>enchantment table</block>
+        </not>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="deny-lava">
+        <not>
+            <block>stationary lava</block>
+        </not>
+    </filter>
+    <filter name="deny-beacon-use">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="map" min="47,329" max="-46,-184"/>
+    <apply block="deny-all" message="You may not place or break blocks in spawn!">
+        <rectangle name="red-spawn" min="-46,-165" max="-32,-184"/>
+        <rectangle name="blue-spawn" min="47,310" max="33,329"/>
+    </apply>
+    <apply block="deny-all" message="You may not break the defense-chests!">
+        <cuboid name="red-chests" min="-9,22,-167" max="-14,24,-165"/>
+        <cuboid name="blue-chests" min="10,22,312" max="15,24,310"/>
+    </apply>
+    <apply block="no-enchantment" message="You may not break the enchanting table!">
+        <region name="map"/>
+    </apply>
+    <apply block-place="deny-lava">
+        <region name="map"/>
+    </apply>
+    <apply block="deny-all" message="You reached the maximum build limit over the ocean.">
+        <cuboid min="-46,36,-2" max="47,56,147"/>
+    </apply>
+    <apply use="deny-beacon-use">
+        <region name="map"/>
+    </apply>
+    <apply block="deny-all" message="You may not build outside the map!">
+        <negative>
+            <region name="map"/>
+        </negative>
+    </apply>
+</regions>
+<destroyables materials="obsidian;beacon">
+    <destroyables name="Monument A">
+        <destroyable owner="red" id="red-2">
+            <region>
+                <cuboid min="-19,32,-94" max="-20,35,-95"/>
+            </region>
+        </destroyable>
+        <destroyable owner="blue" id="blue-2">
+            <region>
+                <cuboid min="20,32,239" max="21,35,240"/>
+            </region>
+        </destroyable>
+    </destroyables>
+    <destroyables name="Monument B">
+        <destroyable owner="red" id="red-1">
+            <region>
+                <cuboid min="22,34,-69" max="23,37,-70"/>
+            </region>
+        </destroyable>
+        <destroyable owner="blue" id="blue-1">
+            <region>
+                <cuboid min="-21,34,214" max="-22,37,215"/>
+            </region>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<blockdrops>
+    <rule>
+        <region>
+            <region name="map"/>
+        </region>
+        <filter>
+            <block>gravel</block>
+        </filter>
+        <drops>
+            <item>gravel</item>
+        </drops>
+    </rule>
+</blockdrops>
+<itemremove>
+    <item>log:2</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>stone sword</item>
+    <item>bread</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+</itemremove>
+<toolrepair>
+    <tool>arrow</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+</toolrepair>
+<maxbuildheight>55</maxbuildheight>
+</map>

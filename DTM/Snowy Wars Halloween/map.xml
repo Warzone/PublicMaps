@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Snowy Wars Halloween</name>
+<version>1.0.2</version>
+<objective>Break the obsidian from the enemy team's monument.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- roro28gutier -->
+</authors>
+<teams>
+    <team color="dark red" max="12">Red</team>
+    <team color="blue" max="12">Blue</team>
+</teams>
+<maxbuildheight>20</maxbuildheight>
+<spawns>
+    <spawn team="red" kit="red">
+        <point yaw="-45">
+            <cylinder base="-619.5,11,259.5" height="0" radius="2"/> <!-- West -->
+        </point>
+        <point yaw="45">
+            <cylinder base="-571.5,11,259.5" height="0" radius="2"/> <!-- East -->
+        </point>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <point yaw="-135">
+            <cylinder base="-619.5,11,349.5" height="0" radius="2"/> <!-- West -->
+        </point>
+        <point yaw="135">
+            <cylinder base="-571.5,11,349.5" height="0" radius="2"/> <!-- East -->
+        </point>
+    </spawn>
+    <default yaw="-90"><cuboid min="-544,13,302" max="-540,13,306"/></default>
+</spawns>
+<destroyables name="Monument" completion="100%" materials="obsidian">
+    <destroyable owner="blue">
+        <cuboid min="-596,10,361" max="-595,12,362"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="-596,10,247" max="-595,12,248"/>
+    </destroyable>
+</destroyables>
+<filters>
+    <filter name="deny-icemelt">
+        <not><all> <!-- DENY if world and ice, ALLOW if not world, ABSTAIN if world and not ice-->
+            <any> <!-- ALLOW if world, DENY else -->
+                <filter name="allow-world" />
+                <filter name="deny-all" />
+            </any>
+            <block>ice</block> <!-- ALLOW if ice, ABSTAIN else -->
+        </all></not>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-icemelt">
+        <rectangle min="-635,232" max="-556,377" name="playable" />
+    </apply>
+    <apply block="deny-players" message="Please don't break the spawns!">
+        <cylinder base="-619.5,10,259.5" height="6" radius="5"/> <!-- West Red -->
+        <cylinder base="-571.5,10,259.5" height="6" radius="5"/> <!-- East -->
+        <cylinder base="-619.5,10,349.5" height="6" radius="5"/> <!-- West Blue -->
+        <cylinder base="-571.5,10,349.5" height="6" radius="5"/> <!-- East -->
+    </apply>
+    <apply block="deny-players" message="You may not build outside of the playing field.">
+        <negative>
+            <region name="playable"/>
+        </negative>
+    </apply>
+    <apply enter="deny-all" message="Don't enter the observers spawn area!">
+        <cuboid min="-535,10,313" max="-549,oo,295"/>
+    </apply>
+</regions>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">iron axe</item>
+        <item slot="3" enchantment="dig speed:1">diamond pickaxe</item>
+        <item slot="4" amount="64" damage="2">wood</item>
+        <item slot="5" amount="64">cooked beef</item>
+        <item slot="6" amount="7">gold nugget</item>
+        <item slot="27" amount="64">apple</item>
+        <potion duration="2" amplifier="1">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000" enchantment="protection environmental:1">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc" enchantment="protection environmental:1">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>apple</item>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+</itemremove>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+</map>

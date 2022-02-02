@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Embers 1</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy team's monument(s).</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" min="1" max="25">Blue</team>
+    <team id="red-team" color="dark red" min="1" max="25">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="infinity:1">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="5" amount="64">golden carrot</item>
+        <item slot="7" amount="64" damage="2">log</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="90" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" yaw="-90" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables owner="blue-team" repairable="false" sparks="true">
+    <destroyable name="Back Right" materials="obsidian" region="back-right-blue-monument"/>
+    <destroyable name="Back Left" materials="obsidian" region="back-left-blue-monument"/>
+    <destroyable name="Front Right" materials="obsidian" region="front-right-blue-monument"/>
+    <destroyable name="Front Left" materials="obsidian" region="front-left-blue-monument"/>
+</destroyables>
+<destroyables owner="red-team" repairable="false" sparks="true">
+    <destroyable name="Back Right" materials="obsidian" region="back-right-red-monument"/>
+    <destroyable name="Back Left" materials="obsidian" region="back-left-red-monument"/>
+    <destroyable name="Front Right" materials="obsidian" region="front-right-red-monument"/>
+    <destroyable name="Front Left" materials="obsidian" region="front-left-red-monument"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="blue-monuments">
+        <block id="back-right-blue-monument">161,90,52</block>
+        <block id="back-left-blue-monument">161,90,-18</block>
+        <block id="front-right-blue-monument">74,90,77</block>
+        <block id="front-left-blue-monument">74,90,-43</block>
+    </union>
+    <union id="red-monuments">
+        <block id="back-right-red-monument">-119,90,-18</block>
+        <block id="back-left-red-monument">-119,90,52</block>
+        <block id="front-right-red-monument">-32,90,-43</block>
+        <block id="front-left-red-monument">-32,90,77</block>
+    </union>
+    <union id="spawn-protections">
+        <cylinder id="blue-spawn-protection" base="119.5,87,17.5" radius="9" height="25"/>/>
+        <cylinder id="red-spawn-protection" base="-76.5,87,17.5" radius="9" height="25"/>/>
+    </union>
+    <point id="blue-spawn">119.5,88,17.5</point>
+    <point id="red-spawn">-76.5,88,17.5</point>
+    <point id="obs-spawn">22.5,132,116.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-128,-65" max="171,100"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"   message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>golden apple</item>
+    <item>golden carrot</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>obsidian</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>102</maxbuildheight>
+</map>

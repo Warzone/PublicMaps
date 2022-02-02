@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Proelium: DTM</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author>sweeeper</author> <!-- Neither author or contributor has ever joined -->
+</authors>
+<contributors>
+    <contributor>resepignev</contributor>
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="40">Red</team>
+    <team id="blue" color="blue" max="40">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>arrow infinite</enchantment>
+        </item>
+        <item slot="2" unbreakable="true" material="diamond pickaxe">
+            <enchantment level="3">dig speed</enchantment>
+        </item>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" amount="64" material="glass"/>
+        <item slot="7" amount="2" material="golden apple"/>
+        <item slot="8" amount="16" material="cooked beef"/>
+        <item slot="28" material="arrow"/>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet unbreakable="true" color="993333" material="leather helmet"/>
+        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
+        <leggings unbreakable="true" color="993333" material="leather leggings"/>
+        <boots unbreakable="true" color="993333" material="leather boots"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet unbreakable="true" color="334CB2" material="leather helmet"/>
+        <chestplate unbreakable="true" color="334CB2" material="leather chestplate"/>
+        <leggings unbreakable="true" color="334CB2" material="leather leggings"/>
+        <boots unbreakable="true" color="334CB2" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="180">
+        <regions>
+            <point>0.5,64,-38.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="0">
+        <regions>
+            <point>0.5,64,-244</point>
+        </regions>
+    </spawn>
+    <default yaw="90">
+        <regions>
+            <point>72.5,129,-140.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <union id="spawns">
+        <cylinder id="blue-spawn" base="0,63,-245" height="11" radius="10"/> <!-- blue -->
+        <cylinder id="red-spawn" base="0,63,-39" height="11" radius="10"/> <!-- red -->
+    </union>
+    <apply block="never" region="spawns" message="You may not modify the spawn area!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter Red team's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter Blue team's spawn!"/>
+</regions>
+<destroyables materials="obsidian">
+    <destroyable owner="blue" name="Left Monument">
+        <region>
+            <block>-39,65,-245</block>
+        </region>
+    </destroyable>
+    <destroyable owner="blue" name="Right Monument">
+        <region>
+            <block>39,65,-245</block>
+        </region>
+    </destroyable>
+    <destroyable owner="red" name="Left Monument">
+        <region>
+            <block>39,65,-39</block>
+        </region>
+    </destroyable>
+    <destroyable owner="red" name="Right Monument">
+        <region>
+            <block>-39,65,-39</block>
+        </region>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>glass</item>
+    <item>cooked beef</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+</map>

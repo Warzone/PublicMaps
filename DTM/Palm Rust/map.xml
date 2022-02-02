@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.3.2">
+   <name>Palm Rust</name>
+   <version>2.2.1</version>
+   <objective>Destroy the enemy team's monuments!</objective>
+   <gamemode>dtm</gamemode>
+   <authors>
+      <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Vice -->
+      <author uuid="93db9798-b995-4bda-b70a-23f5d33124a0"/> <!-- steven5703 -->
+      <author uuid="c7e1e823-83c3-4070-898b-1dd5f5cd458e"/> <!-- stu133 -->
+   </authors>
+   <teams>
+      <team color="green" max="16">Lime</team>
+      <team color="gold" max="16">Orange</team>
+   </teams>
+   <kits>
+      <kit name="spawn">
+         <item slot="0">iron sword</item>
+         <item slot="1" enchantment="arrow infinite:1">bow</item>
+         <item slot="2" enchantment="dig speed:3;durability:3">diamond pickaxe</item>
+         <item slot="3">iron spade</item>
+         <item slot="4" amount="2">golden apple</item>
+         <item slot="5" amount="64">log</item>
+         <item slot="6" amount="64">sandstone</item>
+         <item slot="7" amount="16">cooked beef</item>
+         <item slot="27" amount="1">arrow</item>
+         <potion duration="5" amplifier="5">damage resistance</potion>
+         <potion duration="5" amplifier="5">heal</potion>
+      </kit>
+      <kit name="orange" parents="spawn">
+         <helmet color="D87F33">leather helmet</helmet>
+         <chestplate color="D87F33" enchantment="protection projectile:2">leather chestplate</chestplate>
+         <leggings>iron leggings</leggings>
+         <boots color="D87F33">leather boots</boots>
+      </kit>
+      <kit name="lime" parents="spawn">
+         <helmet color="7FCC19">leather helmet</helmet>
+         <chestplate color="7FCC19" enchantment="protection projectile:2">leather chestplate</chestplate>
+         <leggings>iron leggings</leggings>
+         <boots color="7FCC19">leather boots</boots>
+      </kit>
+   </kits>
+   <spawns>
+      <spawn team="lime" kit="lime" yaw="-45">
+         <cylinder base="-56.5,36,33.5" height="0" radius="1" />
+      </spawn>
+      <spawn team="orange" kit="orange" yaw="135">
+         <cylinder base="47.5,36,137.5" height="0" radius="1" />
+      </spawn>
+      <default yaw="-90">
+         <cylinder base="18.5,43,58.5" height="0" radius="1" />
+      </default>
+   </spawns>
+   <filters>
+      <filter name="deny-fire-spread">
+         <deny>
+            <block>fire</block>
+         </deny>
+      </filter>
+      <filter name="only-orange">
+         <team>orange</team>
+      </filter>
+      <filter name="only-lime">
+         <team>lime</team>
+      </filter>
+   </filters>
+   <regions>
+      <rectangle name="playable" min="52,-892" max="-24,-742" />
+      <sphere name="orange-spawn" origin="47,36,137" radius="8"/> 
+      <sphere name="lime-spawn" origin="-56,36,33" radius="8"/> 
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="orange-spawn" />
+      </apply>
+      <apply block="deny-all" message="You may not modify the spawn area.">
+         <region name="lime-spawn" />
+      </apply>
+      <apply enter="only-lime" message="You may not enter `6Orange Team`c's spawn area!">
+         <region name="lime-spawn" />
+      </apply>
+      <apply enter="only-orange" message="You may not enter `aLime Team`c's spawn area!">
+         <region name="orange-spawn" />
+      </apply>
+   </regions>
+   <destroyables materials="obsidian">
+      <destroyable name="Left" owner="lime">
+         <block>-47,24,83</block>
+      </destroyable>
+      <destroyable name="Right" owner="lime">
+         <block>-7,24,43</block>
+      </destroyable>
+      <destroyable name="Left" owner="orange">
+         <block>37,24,87</block>
+      </destroyable>
+      <destroyable name="Right" owner="orange">
+        <block>-3,24,127</block>
+      </destroyable>
+   </destroyables>
+   <toolrepair>
+      <tool>diamond pickaxe</tool>
+      <tool>bow</tool>
+      <tool>iron sword</tool>
+      <tool>iron spade</tool>
+   </toolrepair>
+   <itemremove>
+      <item>obsidian</item>
+      <item>log</item>
+      <item>glass</item>
+      <item>arrow</item>
+      <item>leather helmet</item>
+      <item>leather chestplate</item>
+      <item>iron leggings</item>
+      <item>leather boots</item>
+      <item>cooked beef</item>
+      <item>golden apple</item>
+   </itemremove>
+   <killreward>
+      <item amount="1">golden apple</item>
+   </killreward>
+   <timelock>on</timelock>
+   <maxbuildheight>40</maxbuildheight>
+</map>

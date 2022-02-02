@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Halloween Train</name>
+<version>1.0.2</version>
+<objective>Break both of the enemy team's obsidian monuments.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+    <author uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2"/> <!-- dinner1111 -->
+</authors>
+<contributors>
+    <contributor uuid="d1cb6983-5491-4aba-8730-c2b59eae2b2d" contribution="Derpy Assistant"/> <!-- Sirwheels -->
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Created iron bars"/> <!-- Stealth5061 -->
+    <contributor uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Fix up the XML"/> <!-- IM_A_H0B0 -->
+</contributors>
+<include src="tutorial.xml"/>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Monument `r(DTM) map.</line>
+            <line>The objective is to destroy the other team's `5obsidian `bmonuments `ron their side.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="30">-32,108,36.5</point>
+        </teleport>
+    </stage>
+    <stage title="The Monument">
+        <message>
+            <line>`rThis is a `bmonument`r. There is one on either team's side.</line>
+            <line>`rYou must destroy the `5obsidian blocks `rin both enemy's monuments to win.</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="0">100,27,102</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>`rTeams spawn inside a base that looks like a minecart. You spawn with gear ready for battle!</line>
+            <line>`rNote that the enemy team cannot enter your team spawn.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="0">56,29,112</point>
+        </teleport>
+    </stage>
+    <stage title="Iron">
+        <message>
+            <line>`rThere are `biron blocks `rin the piston building. You can use iron blocks to craft `aarmor`r.</line>
+            <line>`rThere are also underground mines that contain `biron blocks`r.</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="50">95,25,70</point>
+        </teleport>
+    </stage>
+    <stage title="Extra Supplies">
+        <message>
+            <line>`rExtra supplies can be found in a building that looks like a dispenser.</line>
+            <line>`rUseful items can also be found the piston buildings.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="20">-5,25,108</point>
+        </teleport>
+    </stage>
+</tutorial>
+<teams>
+    <team color="green" max="50">Green</team>
+    <team color="dark purple" max="50">Purple</team>
+</teams>
+<timelock>on</timelock>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="green" yaw="0">
+        <cuboid min="58,29,-60" max="54,29,-56"/>
+    </spawn>
+    <spawn team="purple" yaw="180">
+        <cuboid min="54,29,130" max="58,29,126"/>
+    </spawn>
+</spawns>
+<default yaw="90">
+    <cuboid min="-56,33,32" max="-50,33,38"/>
+</default>
+</spawns>
+<destroyables completion="100%" materials="obsidian">
+    <destroyable name="Monument A" owner="purple">
+        <cuboid min="105,30,107" max="104,27,106"/>
+    </destroyable>
+    <destroyable name="Monument B" owner="purple">
+        <cuboid min="8,30,109" max="7,27,108"/>
+    </destroyable>
+    <destroyable name="Monument A" owner="green">
+        <cuboid min="8,30,-36" max="7,27,-37"/>
+    </destroyable>
+    <destroyable name="Monument B" owner="green">
+        <cuboid min="105,30,-38" max="104,27,-39"/>
+    </destroyable>
+</destroyables>
+<filters>
+    <filter name="only-green" parents="deny-players deny-world">
+        <allow><team>green</team></allow>
+    </filter>
+    <filter name="only-purple" parents="deny-players deny-world">
+        <allow><team>purple</team></allow>
+    </filter>
+    <filter name="deny-chest">
+        <deny><block>chest</block></deny>
+    </filter>
+    <filter name="deny-lava">
+        <deny><block>lava</block></deny>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all" message="You may not build outside the playable region!">
+        <negative name="playable-inverse">
+            <rectangle name="playable" min="135,140" max="-23,-70"/>
+        </negative>
+    </apply>
+    <apply block="deny-world" use="deny-lava">
+        <region name="playable"/>
+    </apply>
+    <apply enter="only-green" message="You may not enter the Green Team's spawn!">
+        <rectangle min="48,-48" max="64,-68"/>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the Purple Team's spawn!">
+        <rectangle min="64,118" max="48,138"/>
+    </apply>
+    <apply block="deny-all" message="You may not modify the spawn rooms!">
+        <rectangle min="48,113" max="63,137"/>
+        <rectangle min="63,-43" max="48,-67"/>
+    </apply>
+    <!-- Team grief protection -->
+    <apply name="team-chests" block-break="deny-chest" message="You can't break team supply chests!">
+        <!-- Green Team -->
+        <!-- Dispenser room -->
+        <cuboid min="110,18,-62" max="111,21,-54"/>
+        <cuboid min="113,18,-65" max="121,21,-64"/>
+        <cuboid min="123,18,-62" max="124,21,-54"/>
+        <cuboid min="120,18,-52" max="121,21,-51"/>
+        <cuboid min="113,18,-52" max="114,21,-51"/>
+        <!-- Right Piston room -->
+        <cuboid min="-3,8,-13" max="-2,12,-3"/>
+        <cuboid min="6,8,-5" max="7,12,-3"/>
+        <cuboid min="6,8,-13" max="7,12,-11"/>
+        <cuboid min="4,8,-15" max="5,12,-14"/>
+        <cuboid min="-1,8,-15" max="0,12,-14"/>
+        <!-- Left Piston room -->
+        <cuboid min="114,8,-13" max="115,12,-3"/>
+        <cuboid min="105,8,-5" max="106,12,-3"/>
+        <cuboid min="105,8,-13" max="106,12,-11"/>
+        <cuboid min="107,8,-15" max="108,12,-14"/>
+        <cuboid min="112,8,-15" max="113,12,-14"/>
+        <!-- Red Team -->
+        <!-- Dispenser room -->
+        <cuboid min="1,18,124" max="2,21,132"/>
+        <cuboid min="-9,18,134" max="-1,21,135"/>
+        <cuboid min="-12,18,124" max="-11,21,132"/>
+        <cuboid min="-9,18,121" max="-8,21,122"/>
+        <cuboid min="-2,18,121" max="-1,21,122"/>
+        <!-- Right Piston room -->
+        <cuboid min="114,8,73" max="115,12,83"/>
+        <cuboid min="105,8,73" max="106,12,75"/>
+        <cuboid min="105,8,81" max="106,12,83"/>
+        <cuboid min="107,8,84" max="108,12,85"/>
+        <cuboid min="112,8,84" max="113,12,85"/>
+        <!-- Left Piston room -->
+        <cuboid min="-3,8,73" max="-2,12,83"/>
+        <cuboid min="6,8,73" max="7,12,75"/>
+        <cuboid min="6,8,81" max="7,12,83"/>
+        <cuboid min="4,8,84" max="5,12,85"/>
+        <cuboid min="-1,8,84" max="0,12,85"/>
+    </apply>
+</regions>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="27" amount="1">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:2">iron axe</item>
+        <item slot="4">diamond pickaxe</item>
+        <item slot="5" damage="1" amount="64">log</item>
+        <item slot="6" amount="64">glass</item>
+        <item slot="8" amount="32">pumpkin pie</item>
+        <item slot="28" enchantment="dig speed:1;durability:3">iron spade</item>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>shears</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>glass</item>
+    <item>wood:2</item>
+    <item>log:2</item>
+    <item>arrow</item>
+    <item>ice</item>
+    <item>flint</item>
+    <item>stone</item>
+    <item>log:1</item>
+    <item>gold block</item>
+    <item>obsidian</item>
+    <item>gold ore</item>
+</itemremove>
+</map>

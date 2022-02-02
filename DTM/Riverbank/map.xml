@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<map proto="1.3.5">
+<name>Riverbank</name> 
+<version>1.0.0</version> 
+<objective>To win destroy both of the enemy team's monuments.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- yoyo_power -->
+</authors>
+<teams>
+   <team color="red" max="25" max-overfill="27">Red</team>
+   <team color="blue" max="25" max-overfill="27">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="32">arrow</item>
+        <item slot="2">iron pickaxe</item>
+        <item slot="3" amount="32">baked potato</item>
+        <item slot="8">boat</item>
+        <item slot="35">boat</item>
+        <item slot="26">boat</item>
+        <chestplate unbreakable="true">gold chestplate</chestplate>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="ff0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="ff0000" unbreakable="true">leather leggings</leggings>
+        <boots color="ff0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0000ff" unbreakable="true">leather helmet</helmet>
+        <leggings color="0000ff" unbreakable="true">leather leggings</leggings>
+        <boots color="0000ff" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red" yaw="-135">
+        <block>-70,20,-6</block>
+    </spawn>
+    <spawn team="red" kit="red" yaw="45">
+        <block>-63,20,-13</block>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="-135">
+        <block>30,20,14</block>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="45">
+        <block>37,20,7</block>
+    </spawn>
+    <default yaw="90">
+        <block>-16.5,7,0.5</block>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-obsidian">
+        <any>
+            <block>obsidian</block>
+        </any>
+    </filter>
+</filters>
+<regions>
+    <union name="spawns">
+        <rectangle name="red-spawn" min="-60,-16" max="-62,-11"/>
+        <rectangle name="blue-spawn" min="27,17" max="29,12"/>
+    </union>
+    <union name="map">
+        <rectangle name="playable" min="63.5,-37" max="-97,37"/>
+    </union>
+    <apply enter="only-red" message="You may not enter the enemy's base!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy's base!">
+        <region name="blue-spawn"/>
+    </apply>
+    <apply block="deny-all" message="You may not edit the team spawns!">
+        <region name="spawns"/>
+    </apply>
+    <apply block="only-obsidian">
+        <region name="playable"/>
+    </apply>
+</regions>
+<destroyables>
+    <destroyables name="Front Monument" materials="obsidian">
+        <destroyable owner="blue">
+            <block>-4,9,30</block>
+        </destroyable>
+        <destroyable owner="red">
+            <block>-30,9,-30</block>
+        </destroyable>
+    </destroyables>
+    <destroyables name="Back Monument" materials="obsidian">
+        <destroyable owner="blue">
+            <block>42,13,-25</block>
+        </destroyable>
+        <destroyable owner="red">
+            <block>-76,13,25</block>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<itemremove>
+    <item>baked potato</item>
+    <item>obsidian</item>
+    <item>boat</item>
+    <item>leather helmet</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>gold chestplate</item>
+    <item>wood</item>
+    <item>stick</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<armorkeep>
+    <item>iron boots</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+</armorkeep>
+<itemkeep>
+    <item>diamond pickaxe</item>
+    <item>gold ingot</item>
+</itemkeep>
+<killreward>
+    <item name="Fine Gold" lore="Use this as currency.">gold ingot</item>
+    <item amount="8">arrow</item>
+</killreward>
+<multitrade/>
+</map>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Iris DTM</name>
+<version>1.3.2</version>
+<objective>Break the enemy's obsidian monument in their base!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="3a549b18-08ed-4756-a78c-b34d29a4fd87"/> <!-- Torn_Ares -->
+</authors>
+<teams>
+    <team color="dark red" max="16">Red</team>
+    <team color="blue" max="16">Blue</team>
+</teams>
+<kits>
+    <kit name="teams">
+        <item slot="0" lore="`cRemember: `7This does the same damage as a stone sword!">diamond pickaxe</item>
+        <item slot="1" name="`6TNT Defuser" lore="`7Right click to defuse teammate's TNT|`7Does not work in `9water`7!">shears</item>
+    </kit>
+</kits>
+<spawns kit="teams">
+    <spawn team="blue" yaw="0">
+        <cuboid min="-63,160,-100" max="-63,160,-100"/>
+    </spawn>
+    <spawn team="red" yaw="0">
+        <cuboid min="29,160,-100" max="29,160,-100"/>
+    </spawn>
+    <default yaw="0">
+        <cylinder base="-17,36,13" radius="3" height="0"/>
+    </default>
+</spawns>
+<regions>
+    <union name="outside-map-b">
+        <negative name="outside-map-a">
+            <rectangle name="map" min="57,-206" max="-91,-55"/>
+        </negative>
+        <cuboid name="above-80" min="-oo,81,-oo" max="oo,oo,oo"/>
+    </union>
+    <apply block="deny-all" message="You may not edit the spawn pools">
+        <cuboid min="33,26,-93" max="26,oo,-86"/>
+        <cuboid min="-66,26,-86" max="-59,oo,-93"/>
+    </apply>
+    <apply block="deny-all" message="You cannot build/modify here!">
+        <region name="outside-map-b"/>
+    </apply>
+</regions>
+<destroyables name="Monument" materials="obsidian" completion="100%">
+    <destroyable owner="blue">
+       <cuboid min="-65,37,-126" max="-60,31,-131"/>
+    </destroyable>
+    <destroyable owner="red">
+       <cuboid min="27,37,-126" max="32,31,-131"/>
+    </destroyable>
+</destroyables>
+<timelock>on</timelock>
+<itemremove>
+    <item>diamond pickaxe</item>
+    <item>obsidian</item>
+    <item>shears</item>
+</itemremove>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThe objective of this map is to `cdestroy `rthe other team's monument.</line>
+            <line>`rGet `airon blocks `rand `aTNT `rfrom the side islands.</line>
+            <line>`rYou will spawn with a stone sword, but get the rest of the supplies from the chests.</line>
+        </message>
+        <teleport>
+            <point yaw="160" pitch="20">0,72,-50</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn Spaceship">
+        <message>
+            <line>`rYou will spawn in a spaceship in the air.</line>
+            <line>`rJump down the hole and into the `awater pool</line>
+            <line>`rBe careful not to hit the ground to hard!</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="90">-62,162,-90</point>
+        </teleport>
+    </stage>
+    <stage title="Supply Chests">
+        <message>
+            <line>`rYou will find `asupply chests `rin the main asteroid.</line>
+            <line>`rProtect them, because the `cenemy `rwill try to blow them up!</line>
+        </message>
+        <teleport>
+            <point yaw="64" pitch="10">-42,31,-112</point>
+        </teleport>
+    </stage>
+    <stage title="Iron and TNT Supplies">
+        <message>
+            <line>`rOn the side asteroid--across from the main asteroid--you will find TNT and Iron.</line>
+            <line>`rUse this to your advantage and capture the enemy's asteroid.</line>
+        </message>
+        <teleport>
+            <point yaw="180" pitch="0">-63,41,-157</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

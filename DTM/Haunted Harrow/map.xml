@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.0">
+<name>Haunted Harrow</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy's monument(s) to win!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="2c1cf65f-f668-41eb-812e-091391eb2896"/> <!-- Loks -->
+    <author uuid="99fa5c84-9f49-4231-b16f-5a83fe858ff0"/> <!-- NinjaTrev -->
+</authors>
+<teams>
+    <team id="red"  color="dark red" min="1" max="50">Red</team>
+    <team id="blue" color="blue"     min="1" max="50">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="default">
+        <regions yaw="-90">
+            <point>-154.5,58,-43.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="default">
+        <regions yaw="90">
+            <point>-22.5,58,-38.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point>-89.5,70,-77.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">stone pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="16">arrow</item>
+        <helmet     unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings   unbreakable="true">chainmail leggings</leggings>
+        <boots      unbreakable="true" team-color="true">leather boots</boots>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="2"/>
+            </all>
+        </filter>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<destroyables show-progress="true" repairable="false" owner="red" completion="14%" sparks="true">
+    <destroyable name="Left Pumpkin" region="red-left-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
+    <destroyable name="Right Pumpkin" region="red-right-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
+</destroyables>
+    <destroyables show-progress="true" repairable="false" owner="blue" completion="14%" sparks="true">
+    <destroyable name="Left Pumpkin" region="blue-left-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
+    <destroyable name="Right Pumpkin" region="blue-right-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
+</destroyables>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <rectangle id="red-spawn"  min="-149,-50" max="-162,-37"/>
+        <rectangle id="blue-spawn" min="-28,-32"  max="-15,-46"/>
+    </union>
+    <union id="monuments">
+        <cuboid id="red-left-pumpkin" min="-134,54,-17" max="-139,61,-22"/>
+        <cuboid id="red-right-pumpkin" min="-134,54,-65" max="-139,61,-70"/>
+        <cuboid id="blue-left-pumpkin" min="-38,54,-60" max="-43,61,-65"/>
+        <cuboid id="blue-right-pumpkin" min="-38,54,-12" max="-43,61,-17"/>
+    </union>
+    <negative id="not-map">
+        <rectangle id="map" min="-170,-82" max="-9,-3"/>
+    </negative>
+    <apply region="not-map"   block="never"              message="You may not edit outside the map!"/>
+    <apply block="never"      region="spawn-protections" message="You are not allowed to modify terrain here."/>
+    <apply enter="only-red"   region="red-spawn"         message="You may not enter the enemy spawn."/>
+    <apply enter="only-blue"  region="blue-spawn"        message="You may not enter the enemy spawn."/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>obsidian</item>
+</itemremove>
+<maxbuildheight>66</maxbuildheight>
+</map>

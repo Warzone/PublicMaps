@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Molendinis</name>
+<version>1.2.1</version>
+<objective>Destroy the enemy's monument while protecting your own</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<teams>
+    <team color="dark red" max="20">Red</team>
+    <team color="yellow" max="20">Yellow</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="5" damage="2" amount="64">wood</item>
+        <item slot="6" amount="64">bread</item>
+        <item slot="3">stone axe</item>
+        <item slot="4">stone spade</item>
+        <item slot="28">arrow</item>
+        <helmet>iron helmet</helmet>
+        <leggings>iron leggings</leggings>
+        <potion amplifier="4" duration="10">damage resistance</potion>
+        <potion duration="10">heal</potion>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <chestplate color="DEB233">leather chestplate</chestplate>
+        <boots color="DEB233">leather boots</boots>
+    </kit>
+    <kit name="red" parents="spawn">
+        <chestplate color="993333">leather chestplate</chestplate>
+        <boots color="993333">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" yaw="135" kit="red">
+        <cuboid min="-34,9,75" max="-32,9,77"/>
+    </spawn>
+    <spawn team="yellow" yaw="-45" kit="yellow">
+        <cuboid min="-208,9,7" max="-211,9,4"/>
+    </spawn>
+    <default yaw="0">
+        <point>-122,55,41</point>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-yellow" parents="deny-players deny-world">
+        <allow>
+            <team>yellow</team>
+        </allow>
+    </filter>
+    <filter name="only-red" parents="deny-players deny-world">
+        <allow>
+            <team>red</team>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all" message="You may not build outside the playable region!">
+        <negative name="playable-inverse">
+            <rectangle min="-220,-6" max="-21,88"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" enter="only-red">
+        <circle center="-33,76" radius="10"/>
+    </apply>
+    <apply block="deny-all" enter="only-yellow">
+        <circle center="-210,6" radius="10"/>
+    </apply>
+</regions>
+<destroyables name="Monument" completion="100%" materials="obsidian">
+    <destroyable owner="yellow">
+        <cuboid min="-196,6,34" max="-193,10,37"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="-46,6,48" max="-49,10,45"/>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone spade</tool>
+    <tool>stone axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+    <item>string</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>bread</item>
+    <item>obsidian</item>
+</itemremove>
+<maxbuildheight>43</maxbuildheight>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Monument (DTM) `rmap.</line>
+            <line>The objective is to destroy the other team's monument on their side.</line>
+        </message>
+        <teleport>
+            <point yaw="25" pitch="45">-78,49,-15</point>
+        </teleport>
+    </stage>
+    <stage title="Yellow Base">
+        <message>
+            <line>`rThis is the `eYellow Base`r.</line>
+            <line>`rThis is where the `eYellow Team `rspawns. You spawn with gear ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="35">-21.5,17,87.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Base">
+        <message>
+            <line>`rThis is the `cRed Base`r.</line>
+            <line>`rThis is where the `cRed Team `rspawns. You spawn with gear ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="35">-187.5,17,-5.5</point>
+        </teleport>
+    </stage>
+    <stage title="Red Monument">
+        <message>
+            <line>`rThis is the `cRed Monument`r.</line>
+            <line>`rThe two `5obsidian blocks `rare what the `eYellow Team `rneeds to destroy to win.</line>
+        </message>
+        <teleport>
+            <point yaw="40" pitch="65">-154.5,28,52</point>
+        </teleport>
+    </stage>
+    <stage title="Yellow Monument">
+        <message>
+            <line>`rThis is the `eYellow Monument`r.</line>
+            <line>`rThe two `5obsidian blocks `rare what the `cRed Team `rneeds to destroy to win.</line>
+        </message>
+        <teleport>
+            <point yaw="-135" pitch="65">-56,28,30.8</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>
