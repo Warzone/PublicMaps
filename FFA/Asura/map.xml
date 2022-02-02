@@ -1,0 +1,65 @@
+<map proto="1.4.0">
+<name>Asura</name>
+<version>1.1.0</version>
+<authors>
+    <author uuid="2e05eb91-e64b-46f8-8a49-368d205d26fd"/>  <!--  gushingblood  -->
+</authors>
+<objective>Be the player will the most kills at the end of 10 minutes!</objective>
+<gamemode>ffa</gamemode>
+<score>
+    <kills>1</kills>
+</score>
+<time>8m</time>
+<players min="2" max="24" max-overfill="28" show-name-tags="false"/>
+<spawns>
+    <spawn kit="spawn" spread="true" safe="true">
+        <regions angle="48.5,16,-107">
+            <cuboid min="0,8,0" max="97,30,-114"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="-33.5,65,-56.5" radius="2" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="32">arrow</item>
+        <helmet color="E5E533" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="E5E533" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="E5E533" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="E5E533" unbreakable="true" locked="true">leather boots</boots>
+        <potion duration="2" amplifier="20">damage resistance</potion>
+    </kit>
+    <kit id="kill-reward">
+        <potion duration="3" amplifier="3">regeneration</potion>
+    </kit>
+</kits>
+<regions>
+    <apply block="never">
+        <everywhere/>
+    </apply>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<killreward>
+    <kit id="kill-reward" />
+    <item amount="8">arrow</item>
+</killreward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+</map>

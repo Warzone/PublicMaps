@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Tropico: FFA</name>
+<version>1.0.1</version>
+<objective>The player with the most kills after 8 minutes wins!</objective>
+<gamemode>ffa</gamemode>
+<authors>
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samtheman43 -->
+</authors>
+<contributors>
+	<contributor contribution="Feedback and Flag Refining" uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<players min="2" max="16"/>
+<score>
+    <kills>1</kills>
+</score>
+<time>8m</time>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material ="iron sword" name="`cDagger"/>
+        <item slot="1" material="bow" name="`ePistol"/>
+        <item slot="3" amount="32" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <leggings locked="true" material="chainmail leggings"/>
+        <chestplate locked="true" color="D87F33" material="leather chestplate"/>
+        <boots locked="true" color="D87F33" material="leather boots"/>
+    </kit>
+    <kit id="kill-reward">
+        <item slot="2">golden apple</item>
+        <potion duration="2" amplifier="3">regeneration</potion>
+        <item amount="12" slot="3">arrow</item>
+    </kit>
+</kits>
+<kill-rewards>
+    <kill-reward kit="kill-reward"/>
+</kill-rewards>
+<spawns>
+    <default>
+        <regions yaw="90">
+            <cylinder base="12,51,-66" radius="1" height="0"/>
+        </regions>
+    </default>
+    <spawn kit="spawn" safe="true" spread="true">
+        <regions angle="12.5,13,-66">
+            <point>100.5,12,-89.5</point>
+            <point>89.5,12,-66.5</point>
+            <point>71.5,19,-44.5</point>
+            <point>64.5,12,-60.5</point>
+            <point>56.5,18,-79.5</point>
+            <point>42.5,12,-54.5</point>
+            <point>31.5,12,-80.5</point>
+            <point>19.5,12,-58.5</point>
+            <point>16.5,12,-83.5</point>
+            <point>0.5,12,-45.5</point>
+            <point>-13.5,12,-52.5</point>
+            <point>-27.5,12,-64.5</point>
+            <point>-31.5,19,-59.5</point>
+            <point>-43.5,19,-90.5</point>
+            <point>-46.5,18,-56.5</point>
+            <point>-48.5,16,-79.5</point>
+            <point>-55.5,12,-72.5</point>
+            <point>-62.5,12,-66.5</point>
+            <point>-71.5,12,-46.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="never">
+        <region>
+            <rectangle min="-oo,-oo" max="oo,oo"/>
+        </region>
+    </apply>
+    <apply use="never">
+        <region>
+            <everywhere/>
+        </region>
+    </apply>
+</regions>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>anvil</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

@@ -1,0 +1,89 @@
+<map proto="1.4.0" game="Aztec FFA">
+<name>Aztec</name>
+<gamemode>ffa</gamemode>
+<authors>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
+    <!--yoyo_-->
+</authors>
+<version>1.0.0</version>
+<objective>Kill as many players as possible in 8 minutes</objective>
+<time>8m</time>
+<players min="2" max="18"/>
+<score>
+    <kills>1</kills>
+</score>
+<kits>
+    <kit id="players-kit">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="3" amount="32">arrow</item>
+        <potion duration="oo">night vision</potion>
+        <helmet unbreakable="true">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true">chainmail boots</boots>
+        <potion duration="2" amplifier="10">resistance</potion>
+    </kit>
+    <kit id="kill-reward">
+        <item slot="2">golden apple</item>
+        <potion duration="3" amplifier="4">regeneration</potion>
+        <item amount="12">arrow</item>
+    </kit>
+</kits>
+<regions>
+    <apply block="never" region="everywhere"/>
+</regions>
+<itemremove>
+    <item>arrow</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>long grass</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward kit="kill-reward"/>
+</kill-rewards>
+<spawns>
+    <spawn kit="players-kit" spread="true">
+        <regions angle="-18.5,40,-3.5">
+            <point>29.5,45,34.5</point>
+            <point>5.5,37,47.6</point>
+            <point>-32.5,40,36.5</point>
+            <point>-46.5,36,48.5</point>
+            <point>-68.5,28,33.5</point>
+            <point>-56.5,28,12.5</point>
+            <point>-75.5,39,41.5</point>
+            <point>-67.5,40,5.5</point>
+            <point>-70.5,34,-22.5</point>
+            <point>-50.5,34,-36.5</point>
+            <point>-28.5,30,-32.5</point>
+            <point>-14.5,41,-32.5</point>
+            <point>-30.5,38,-14.5</point>
+            <point>30.5,42,-42.5</point>
+            <point>30.5,48,-16.5</point>
+            <point>5.5,33,-17.5</point>
+            <point>7.5,32,4.5</point>
+            <point>-15.5,31,9.5</point>
+            <point>-29.5,40,11.5</point>
+            <point>-21.5,45,-38.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>-18.5,40,-3.5</point>
+        </regions>
+    </default>
+</spawns>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+</map>
