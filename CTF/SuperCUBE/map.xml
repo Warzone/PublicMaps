@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.3.6">
+<map proto="1.4.2">
 <name>SuperCUBE</name>
-<genre>Objectives</genre>
-<version>0.8.0</version>
-<objective>Capture the enemy flag and bring it back to your flag room!</objective>
+<version>0.9</version>
+<objective>Capture the enemy's flag as many times as possible in 12 minutes to win!</objective>
 <gamemode>ctf</gamemode>
+<time result="score" overtime="1m" max-overtime="2m">12m</time>
 <authors>
     <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b"/> <!-- ollyj -->
     <author uuid="8e8340b2-d315-4d26-9178-d2145b59850c"/> <!-- oX_W1LL_G_Xo -->
@@ -19,171 +18,178 @@
 <rules>
     <rule>Fall damage is disabled!</rule>
 </rules>
-
-<if ranked="true">
-    <time>30m</time>
-</if>
-
 <teams>
-    <team id="red" color="dark red" max="12" max-overfill="13">Red</team>
-    <team id="blue" color="blue" max="12" max-overfill="13">Blue</team>
+    <team id="blue" color="blue" max="12">Blue</team>
+    <team id="red" color="dark red" max="12">Red</team>
 </teams>
-
-<flags>
-    <flag color="red" id="r-flag" name="Red Flag" owner="red" pickup-filter="only-blue" pickup-kit="flag" drop-kit="flag-remove">
-        <post yaw="90" return-time="20s">-10.5,5,56.5</post>
-        <net points="1">
-            <region>
-                <cuboid min="-123.5,5,13.5" max="-129.5,9,7.5"/>
-            </region>
-        </net>
-    </flag>
-    <flag color="blue" id="b-flag" name="Blue Flag" owner="blue" pickup-filter="only-red" pickup-kit="flag" drop-kit="flag-remove">
-        <post yaw="-90" return-time="20s">-126.5,5,10.5</post>
-        <net points="1">
-            <region>
-                <cuboid min="-13.5,5,53.5" max="-7.5,9,59.5"/>
-            </region>
-        </net>
-    </flag>
-</flags>
-<score>
-    <limit>3</limit>
-    <deaths>0</deaths>
-    <kills>0</kills>
-</score>
 <kits>
-    <kit name="spawn">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="8" damage="8229" name="`cHealth Kit">potion</item>
-        <item slot="28">arrow</item>
-        <potion duration="5" amplifier="25">heal</potion>
-        <potion duration="5" amplifier="25">damage resistance</potion>
-        <potion duration="oo">speed</potion>
-        <potion duration="oo">night vision</potion>
+    <kit id="default-kit">
+        <effect>night vision</effect>
     </kit>
-    <kit name="red" parents="spawn">
-        <chestplate color="cc0000" unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
-        <boots color="cc0000" unbreakable="true">leather boots</boots>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="20" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="255">heal</effect>
+        <effect duration="5" amplifier="255">damage resistance</effect>
+        <effect>speed</effect>
     </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="0000cc" unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
-        <boots color="0000cc" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="obs">
-        <potion duration="oo">speed</potion>
-        <potion duration="oo">night vision</potion>
-    </kit>
-    <kit name="flag" force="true">
-        <potion duration="oo" amplifier="1">health boost</potion>
-        <potion duration="5" amplifier="2">regeneration</potion>
+    <kit id="flag-kit" force="true">
+        <effect duration="0" amplifier="0">speed</effect>
+        <effect amplifier="-2">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
         <knockback-reduction>0.25</knockback-reduction>
     </kit>
-    <kit name="flag-remove" force="true">
-        <potion duration="0" amplifier="0">health boost</potion>
-        <potion duration="0" amplifier="0">regeneration</potion>
-        <knockback-reduction>0.0</knockback-reduction>
+    <kit id="reset-health" force="true">
+        <effect>speed</effect>
+        <effect duration="0" amplifier="0">health boost</effect>
+        <knockback-reduction>0</knockback-reduction>
+    </kit>
+    <kit id="flag-captured" force="true">
+        <effect duration="2" amplifier="10">regeneration</effect>
     </kit>
 </kits>
+<spawns safe="true">
+    <default kit="default-kit">
+        <region yaw="90">
+            <cylinder base="-68,25,33" radius="3" height="0"/>
+        </region>
+    </default>
+    <!-- blue -->
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-90">
+            <cylinder base="-163,2,15" radius="2" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-135">
+            <block>-150.5,4,57.5</block>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-45">
+            <cylinder base="-166,2,-22" radius="2" height="1"/>
+        </region>
+    </spawn>
+    <!-- red -->
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="90">
+            <cylinder base="26,2,51" radius="2" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="45">
+            <block>13.5,4,9.5</block>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="135">
+            <cylinder base="29,2,89" radius="2" height="1"/>
+        </region>
+    </spawn>
+</spawns>
 <filters>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="no-use">
-        <not>
-            <block>hopper</block>
-        </not>
-    </filter>
+    <time id="flag-respawns">0</time>
+    <all id="blue-captures-flag">
+        <team id="only-blue">blue</team>
+        <carrying-flag>r-flag</carrying-flag>
+    </all>
+    <all id="red-captures-flag">
+        <team id="only-red">red</team>
+        <carrying-flag>b-flag</carrying-flag>
+    </all>
+    <deny id="no-use">
+        <material>hopper</material>
+    </deny>
 </filters>
 <regions>
-    <apply block="deny-blocks" use="no-use">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-
-    <!-- red pad spawn -->
-    <apply velocity="@0.0,1.0,-1.5">
-        <cylinder base="29.5,1,36.5" radius="1" height="1"/>
-    </apply>
-    <!-- red pad near flag -->
-    <apply velocity="@0.0,1.0,0.5">
-        <cylinder base="-27.5,1,63.5" radius="1" height="1"/>
+    <cuboid id="blue-net" min="-123.5,5,13.5" max="-129.5,9,7.5"/>
+    <cuboid id="red-net" min="-13.5,5,53.5" max="-7.5,9,59.5"/>
+    <apply kit="flag-captured" filter="blue-captures-flag" region="blue-net"/>
+    <apply kit="flag-captured" filter="red-captures-flag" region="red-net"/>
+    <apply block="never" use="no-use"/>
+    <!-- blue pad spawn -->
+    <apply velocity="@0.0,1.0,1.0">
+        <region>
+            <cylinder base="-166.5,1,30.5" radius="1" height="1"/>
+        </region>
     </apply>
     <!-- blue pad near flag -->
     <apply velocity="@-0.0,1.0,-0.5">
-        <cylinder base="-109.5,1,3.5" radius="1" height="1"/>
+        <region>
+            <cylinder base="-109.5,1,3.5" radius="1" height="1"/>
+        </region>
     </apply>
-    <!-- blue pad spawn -->
-    <apply velocity="@0.0,1.0,1.0">
-        <cylinder base="-166.5,1,30.5" radius="1" height="1"/>
+    <!-- red pad spawn -->
+    <apply velocity="@0.0,1.0,-1.5">
+        <region>
+            <cylinder base="29.5,1,36.5" radius="1" height="1"/>
+        </region>
+    </apply>
+    <!-- red pad near flag -->
+    <apply velocity="@0.0,1.0,0.5">
+        <region>
+            <cylinder base="-27.5,1,63.5" radius="1" height="1"/>
+        </region>
     </apply>
 </regions>
-<spawns safe="true">
-    <!-- red -->
-    <spawn team="red" kit="red">
-        <regions yaw="90">
-            <cylinder base="26,2,51" radius="2" height="1"/>
-        </regions>
-    </spawn>
-    <spawn team="red" kit="red">
-        <regions yaw="45">
-            <block>13.5,4,9.5</block>
-        </regions>
-    </spawn>
-    <spawn team="red" kit="red">
-        <regions yaw="135">
-            <cylinder base="29,2,89" radius="2" height="1"/>
-        </regions>
-    </spawn>
-    <!-- blue -->
-    <spawn team="blue" kit="blue">
-        <regions yaw="-90">
-            <cylinder base="-163,2,15" radius="2" height="1"/>
-        </regions>
-    </spawn>
-    <spawn team="blue" kit="blue">
-        <regions yaw="-135">
-            <block>-150.5,4,57.5</block>
-        </regions>
-    </spawn>
-    <spawn team="blue" kit="blue">
-        <regions yaw="-45">
-            <cylinder base="-166,2,-22" radius="2" height="1"/>
-        </regions>
-    </spawn>
-    <default kit="obs">
-        <regions yaw="90">
-            <cylinder base="-68,25,33" radius="3" height="0"/>
-        </regions>
-    </default>
-</spawns>
+<flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
+    <flag id="b-flag"
+          name="Blue Flag"
+          owner="blue"
+          color="blue"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
+        <post pickup-filter="only-red" recover-time="20s" respawn-time="15s">-126.5,5,10.5</post>
+    </flag>
+    <flag id="r-flag"
+          name="Red Flag"
+          owner="red"
+          color="red"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
+        <post pickup-filter="only-blue" recover-time="20s" respawn-time="15s">-10.5,5,56.5</post>
+    </flag>
+    <flags points="1">
+        <net region="blue-net" flag="r-flag" respawn-filter="flag-respawns"/>
+        <net region="red-net" flag="b-flag" respawn-filter="flag-respawns"/>
+    </flags>
+</flags>
+<score>
+    <mercy>3</mercy>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
 <itemremove>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>arrow</item>
-    <item>potion</item>
-    <item>glass bottle</item>
+    <item>leather helmet</item>
     <item>leather chestplate</item>
-    <item>iron leggings</item>
-    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>banner</item>
 </itemremove>
-<killreward>
-    <item damage="8229" name="`cHealth Kit">potion</item>
-    <kit>
-        <potion duration="5">regeneration</potion>
-    </kit>
-</killreward>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="10" material="arrow"/>
+</kill-reward>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<respawn delay="4.5s" spectate="true"/>
-<timelock>on</timelock>
+<respawn delay="4.5s"/>
 </map>
