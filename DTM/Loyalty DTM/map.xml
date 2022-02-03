@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.4.0">
 <name>Loyalty DTM</name>
-<version>1.1.2</version> 
+<version>1.1.3</version> 
 <objective>Break the other teams two obsidian monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -9,85 +9,101 @@
     <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 AKA bend -->
 </authors>
 <teams>
-    <team color="dark red" max="14">Red</team>
-    <team color="blue" max="14">Blue</team>
+    <team id="red" color="dark red" min="1" max="14">Red</team>
+    <team id="blue" color="blue" min="1" max="14">Blue</team>
 </teams>
-<maxbuildheight>42</maxbuildheight>
-<timelock>on</timelock>
+<!-- Spawns -->
 <spawns>
-    <spawn team="red" kit="red" yaw="-90">
-        <cuboid min="-370,10,1173" max="-375,10,1173"/>
+    <spawn team="red" kit="default">
+        <region yaw="-90">
+            <cuboid min="-370,10,1173" max="-375,10,1173"/>
+        </region>
     </spawn>
-    <spawn team="blue" kit="blue" yaw="90">
-        <cuboid min="-256,10,1173" max="-261,10,1173"/>
+    <spawn team="blue" kit="default">
+        <region yaw="90">
+            <cuboid min="-256,10,1173" max="-261,10,1173"/>
+        </region>
     </spawn>
-    <default yaw="90">
-        <cylinder base="-315.5,49,1173.5" radius="1" height="0"/>
+    <default>
+        <region yaw="90">
+            <cylinder base="-315.5,49,1173.5" radius="1" height="0"/>
+        </region>
     </default>
 </spawns>
-<destroyables completion="100%" materials="obsidian">
+<!-- Destroyables -->
+<destroyables completion="100%" materials="obsidian" sparks="true">
     <destroyable name="Monument A" owner="blue">
-        <cuboid min="-290,27,1192" max="-290,28,1192"/>
+        <region>
+            <cuboid min="-289,27,1192" max="-290,29,1193"/>
+        </region>
     </destroyable>
     <destroyable name="Monument B" owner="blue">
-        <cuboid min="-290,27,1154" max="-290,28,1154"/>
+        <region>
+            <cuboid min="-289,27,1154" max="-290,29,1155"/>
+        </region>
     </destroyable>
     <destroyable name="Monument A" owner="red">
-        <cuboid min="-342,27,1154" max="-342,28,1154"/>
+        <region>
+            <cuboid min="-341,27,1154" max="-342,29,1155"/>
+        </region>
     </destroyable>
     <destroyable name="Monument B" owner="red">
-        <cuboid min="-342,27,1192" max="-342,28,1192"/>
+        <region>
+            <cuboid min="-341,27,1192" max="-342,29,1193"/>
+        </region>
     </destroyable>
 </destroyables>
+<!-- Filters -->
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<!-- Regions -->
 <regions>
-    <apply block="deny-all" message="You may not modify spawn areas! Go elsewhere!">
-        <union name="red-spawn">
+    <union id="spawn-protections">
+        <union id="red-spawn-protection">
             <rectangle min="-354,1184" max="-366,1178"/>
             <rectangle min="-354,1162" max="-366,1168"/>
             <rectangle min="-357,1167" max="-379,1179"/>
         </union>
-        <union name="blue-spawn">
+        <union id="blue-spawn-protection">
             <rectangle min="-276,1162" max="-264,1168"/>
             <rectangle min="-276,1184" max="-264,1178"/>
             <rectangle min="-273,1167" max="-251,1179"/>
         </union>
-        <!-- weird regions that select the monument housing, no filters that allow obsidian breakage
-        <cuboid min="-338,23,1189" max="-344,oo,1195"/>
-        <cuboid min="-338,23,1151" max="-344,oo,1157"/>
-        <cuboid min="-286,23,1189" max="-292,oo,1195"/>
-        <cuboid min="-286,23,1151" max="-292,oo,1157"/>
-        -->
-    </apply>
-    <apply block="deny-all" message="You may not build outside the map! Go back to battle!">
-        <negative name="playable">
-            <cuboid min="-380,1,1149" max="-251,42,1198"/>
-        </negative>
-    </apply>
+    </union>
+    <!-- weird regions that select the monument housing, no filters that allow obsidian breakage
+    <cuboid min="-338,23,1189" max="-344,oo,1195"/>
+    <cuboid min="-338,23,1151" max="-344,oo,1157"/>
+    <cuboid min="-286,23,1189" max="-292,oo,1195"/>
+    <cuboid min="-286,23,1151" max="-292,oo,1157"/> -->
+    <negative id="playable">
+        <cuboid min="-380,1,1149" max="-251,42,1198"/>
+    </negative>
+    <apply region="spawn-protections" block="never" message="You may not modify spawn areas! Go elsewhere!"/>
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn."/>
+    <apply region="playable" block="never" message="You may not build outside the map! Go back to battle!"/>
 </regions>
+<!-- Kits -->
 <kits>
-    <kit name="spawn">
+    <kit id="default">
         <item slot="0">stone sword</item>
         <item slot="1" enchantment="arrow infinite:1">bow</item>
         <item slot="2">diamond pickaxe</item>
-        <item slot="28">arrow</item>
         <item slot="3">iron axe</item>
         <item slot="4" amount="32">log</item>
         <item slot="5" amount="32">bread</item>
-        <chestplate>iron chestplate</chestplate>
+        <item slot="28">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" team-color="true">leather boots</boots>
         <potion duration="5" amplifier="1">heal</potion>
         <potion duration="5">damage resistance</potion>
     </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="993333">leather helmet</helmet>
-        <leggings color="993333">leather leggings</leggings>
-        <boots color="993333">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="6699D8">leather helmet</helmet>
-        <leggings color="6699D8">leather leggings</leggings>
-        <boots color="6699D8">leather boots</boots>
-    </kit>
 </kits>
+<!-- Item removal / repair -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -96,6 +112,7 @@
 </toolrepair>
 <itemremove>
     <item>arrow</item>
+    <item>golden apple</item>
     <item>leather helmet</item>
     <item>iron chestplate</item>
     <item>leather leggings</item>
@@ -104,4 +121,13 @@
     <item>seeds</item>
     <item>obsidian</item>
 </itemremove>
+<!-- Kill rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>42</maxbuildheight>
+<timelock>on</timelock>
 </map>
