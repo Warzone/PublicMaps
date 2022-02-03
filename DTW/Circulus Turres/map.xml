@@ -1,6 +1,6 @@
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Circulus Turres</name>
-<version>1.0.0</version>
+<version>1.1.0</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -10,6 +10,11 @@
 <contributors>
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor>
 </contributors>
+<!-- Tips/Broadcasts -->
+<broadcasts>
+    <tip after="1s">Defensive supplies are in the towers!</tip>
+    <tip after="1s" every="1m">Iron blocks regenerate on this map!</tip>
+</broadcasts>
 <!-- Teams -->
 <teams>
     <team id="aliquam-team" color="gold" max="30">Aliquam</team>
@@ -58,6 +63,12 @@
 <filters>
     <team id="aliquam-only">aliquam-team</team>
     <team id="purpura-only">purpura-team</team>
+    <all id="only-iron-regen">
+        <cause>world</cause>
+    </all>
+    <all id="only-iron">
+        <material>iron block</material>
+    </all>
 </filters>
 <!-- Regions -->
 <regions>
@@ -69,8 +80,8 @@
         <cuboid id="right-purpura-wool" min="91,78,43"   max="94,81,46"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="aliquam-spawn-protection" min="-112,0,-7" max="-133,oo,7"/>
-        <cuboid id="purpura-spawn-protection" min="112,0,7"   max="133,oo,-7"/>
+        <cylinder id="aliquam-spawn-protection" base="-117.5,0,0.5" radius="13" height="oo"/>
+        <cylinder id="purpura-spawn-protection" base="118.5,0,0.5"  radius="13" height="oo"/>
     </union>
     <union id="diamond-protections">
         <cuboid id="aliquam-diamond-protection" min="-80,82,-1" max="-77,87,2"/>
@@ -83,12 +94,17 @@
         <rectangle id="map" min="-134,55" max="134,-55"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"                  block="never"        message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"        block="never"        message="You are not allowed to modify terrain here."/>
-    <apply region="diamond-protections"      block="never"        message="You are not allowed to modify terrain here."/>
-    <apply region="aliquam-spawn-protection" enter="aliquam-only" message="You may not enter the enemy spawn."/>
-    <apply region="purpura-spawn-protection" enter="purpura-only" message="You may not enter the enemy spawn."/>
+    <apply region="spawn-protections"        block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in spawn!"/>
+    <apply region="not-map"                  block="never"           message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"        block="never"           message="You are not allowed to modify terrain here."/>
+    <apply region="diamond-protections"      block="never"           message="You are not allowed to modify terrain here."/>
+    <apply region="aliquam-spawn-protection" enter="aliquam-only"    message="You may not enter the enemy spawn."/>
+    <apply region="purpura-spawn-protection" enter="purpura-only"    message="You may not enter the enemy spawn."/>
 </regions>
+<!-- Renewables -->
+<renewables>
+    <renewable interval="3" grow="true" particles="false" sound="false" avoid-players="2" region="spawn-protections" renew-filter="only-iron"/>
+</renewables>
 <!-- Item Remove -->
 <itemremove>
     <item>stone sword</item>
@@ -101,8 +117,6 @@
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>iron block</item>
-    <item>iron ingot</item>
     <item>wool</item>
 </itemremove>
 <!-- Kill Rewards -->
