@@ -6,7 +6,7 @@ This repository contains public maps and active rotation list that are found on 
 When creating a new map or modifying an existing map, please note some of the requirements for our maps. Pull requests from non-map developers that affect the map rotation are subject to approval and may be closed.
 
 ### World Version
-- Every map must work with Minecraft 1.8.9. To determine the version of the map, you can load it into your Singleplayer Menu.  
+- Every map must work with Minecraft 1.8.9. To determine the version of a map, you can open the map's `level.dat` with a NBT editor and [find the value of `Data/DataVersion` or `Version`](https://minecraft.fandom.com/wiki/Data_version#List_of_data_versions). 
 - If the world version is from a future (1.9.x and above) or from past (1.7.x and below) versions of Minecraft, you **must** convert the map to be compatible with 1.8.9.  
   - This can be achieved manually or by using [a script to automate](https://github.com/mitchts/nbt-converter) the process.  
 
@@ -30,6 +30,7 @@ If you need any additional support with the mapmaking process, you may visit the
 - [PGM Documentation](https://pgm.dev/) - The most current documentation for the latest (1.8) version of PGM. It covers the various modules as well as XML syntax. This resource is useful for beginner mapmakers that are not sure where to begin.  
 - [OCN XML Documentation](https://docs.oc.tc/) - Older, but readable, documentation which contains some modules from 1.9.x PGM. Some contents covered here may not work with the 1.8 fork of PGM used by Warzone.  
 - [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/), or [Notepad++](https://notepad-plus-plus.org/) - Some of the recommended programs for editing XML, as it comes with syntax highlighting, autocompletion, and other tools to help you create XML files for your maps.  
+- [webNBT](https://github.com/iRath96/webNBT) or [NBT Explorer](https://github.com/jaquadro/NBTExplorer) - This will allow you to manipulate any map's `level.dat` as well as determining the version a certain map was created for.
 
 ## License
 Maps in this repository are made available under the [**CC BY-SA 4.0** license](https://creativecommons.org/licenses/by-sa/4.0/), which allows you to share and adapt any maps of this repository, even for commercial purposes, as long you give appropriate credit and provide your modifications under the same license. By submitting a map for use at Warzone, you agree with the terms of the aforementioned license, and must distribute your map with it where applicable.
