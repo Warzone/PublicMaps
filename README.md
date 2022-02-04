@@ -10,7 +10,7 @@ When creating a new map or modifying an existing map, please note some of the re
 
 -   Every map must work with Minecraft 1.8.9. To determine the version of a map, you can open the map's `level.dat` with a NBT editor and [find the value of `Data/DataVersion` or `Version`](https://minecraft.fandom.com/wiki/Data_version#List_of_data_versions).
 -   If the world version is from a future (1.9.x and above) or from past (1.7.x and below) versions of Minecraft, you **must** convert the map to be compatible with 1.8.9.
-  -   This can be achieved manually or by using [a script to automate](https://github.com/mitchts/nbt-converter) the process.
+    -   This can be achieved manually or by using [a script to automate](https://github.com/mitchts/nbt-converter) the process.
 
 ### Chunk Pruning
 
@@ -18,9 +18,9 @@ In order to remove undesired portions of the map as well as to decrease its tota
 
 -   This means that **all** chunks excluding the map itself should be deleted from the world.
 -   This can be achieved with third-party programs such as [MCASelector](https://github.com/Querz/mcaselector), [MCEdit-Unified](https://github.com/Podshot/MCEdit-Unified), or [MCEdit 2.0](https://github.com/mcedit/mcedit2).
--  **Note:** When using MCASelector, please make sure you select the `region` folder inside a world folder to edit a world, not the entire world folder.
+-   **Note:** When using MCASelector, please make sure you select the `region` folder inside a world folder to edit a world, not the entire world folder.
 -   After pruning the map, please make sure that you only include the required world files (`region/*`, `level.dat`, `map.png`, `map.xml`, ).
-  -   For more information about cleaning the world files, [view this page on PGM Documentation](https://pgm.dev/docs/guides/packaging/cleaning-files).
+    -   For more information about cleaning the world files, [view this page on PGM Documentation](https://pgm.dev/docs/guides/packaging/cleaning-files).
 
 ### XML Creation
 
