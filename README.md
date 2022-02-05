@@ -46,4 +46,6 @@ Maps in this repository are made available under the [**CC BY-SA 4.0** license](
 
 ## Acknowledgements
 
-This repository represents the years of efforts made by Warzone staff, map developers, and contributors. Without them, none of this would have been possible. Kudos to them for their great work maintaining Warzone's maps.
+This repository represents the combined efforts of PGM contributors, map makers, and map developers since the original release of the plugin. Without them, this repository would not exist. Additionally, we'd like to credit the following:
+-   [MCResourcePile](https://mcresourcepile.github.io/) - for their hard work compiling and archiving hundreds of maps from several communities, making them available for public download and use.
+-   Overcast Community's [PublicMaps](https://github.com/OvercastCommunity/PublicMaps) - for their continued efforts maintaining and updating commercial map files and making them available for everyone.
