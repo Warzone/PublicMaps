@@ -48,4 +48,4 @@ Maps in this repository are made available under the [**CC BY-SA 4.0** license](
 
 This repository represents the combined efforts of PGM contributors, map makers, and map developers since the original release of the plugin. Without them, this repository would not exist. Additionally, we'd like to credit the following:
 -   [MCResourcePile](https://mcresourcepile.github.io/) - for their hard work compiling and archiving hundreds of maps from several communities, making them available for public download and use.
--   Overcast Community's [PublicMaps](https://github.com/OvercastCommunity/PublicMaps) - for their continued efforts maintaining and updating commercial map files and making them available for everyone.
+-   Overcast Community's [PublicMaps](https://github.com/OvercastCommunity/PublicMaps) - for their continued efforts maintaining and updating commercial map files, making them available for everyone.
