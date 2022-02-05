@@ -1,193 +1,243 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Coral Reef II</name>
-<version>1.8.1</version>
-<gamemode>ctw</gamemode>
+<version>1.9.1</version>
 <objective>Capture the wools and return them to your victory monument.</objective>
+<gamemode>ctw</gamemode>
 <authors>
-    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/>
-    <!-- GoldenOre -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
 <contributors>
-    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Feedback"/>
-    <!-- Strangey -->
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Feedback"/> <!-- Strangey -->
 </contributors>
+<broadcasts>
+    <tip after="1m" every="5m">Break the sponges in the wool rooms to get better gear!</tip>
+</broadcasts>
 <teams>
-    <team id="red" color="dark red" max="8" max-overfill="8">Red</team>
-    <team id="blue" color="blue" max="8" max-overfill="8">Blue</team>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
 </teams>
 <kits>
-    <kit id="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite">bow</item>
-        <item slot="2" enchantment="durability:4;dig speed:1">iron pickaxe</item>
-        <item slot="3" enchantment="durability:4">iron axe</item>
-        <item slot="5" amount="64" damage="2">wood</item>
-        <item slot="7" amount="1">golden apple</item>
-        <item slot="8" amount="32" damage="1">cooked fish</item>
-        <item slot="28" amount="1">arrow</item>
-        <effect duration="11" amplifier="5">resistance</effect>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment level="2">efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" unbreakable="true" material="iron spade">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="6" amount="48" material="sandstone"/>
+        <item slot="7" material="water bucket"/>
+        <item slot="8" material="golden apple"/>
+        <helmet prevent-sharing="true" unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate prevent-sharing="true" unbreakable="true" team-color="true" material="leather chestplate"/>
+        <effect duration="5" amplifier="5">resistance</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue" kit="spawn">
-        <regions yaw="-90">
-            <point>-473.5,250,171</point>
-        </regions>
-    </spawn>
-    <spawn team="red" kit="spawn">
-        <regions yaw="90">
-            <point>-261.5,250,171</point>
-        </regions>
-    </spawn>
     <default>
-        <regions yaw="0">
+        <region yaw="0">
             <point>-366.5,44,111.5</point>
-        </regions>
+        </region>
     </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-90">
+            <cuboid min="-474,11,170" max="-473,11,172"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="90">
+            <cuboid min="-262,11,170" max="-261,11,172"/>
+        </region>
+    </spawn>
 </spawns>
-<time result="objectives">45m</time>
-<block-drops>
-    <rule>
-        <region>
-            <everywhere/>
-        </region>
-        <filter>
-            <any>
-                <material>sponge</material>
-            </any>
-        </filter>
-        <drops>
-            <item amount="8" material="golden apple"/>
-            <item amount="1" material="iron leggings"/>
-        </drops>
-    </rule>
-    <rule>
-        <region>
-            <everywhere/>
-        </region>
-        <filter>
-            <any>
-                <material>double step</material>
-            </any>
-        </filter>
-        <drops>
-            <item amount="1" material="sandstone"/>
-        </drops>
-    </rule>
-</block-drops>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
+    <not id="blue-in-wr">
+        <any>
+            <material>chest</material>
+            <team id="only-red">red</team>
+        </any>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <material>chest</material>
+            <team id="only-blue">blue</team>
+        </any>
+    </not>
+    <all id="only-iron-regen">
+        <cause>world</cause>
+        <material id="only-iron">iron block</material>
+    </all>
     <not id="deny-void">
         <void/>
     </not>
-    <material id="only-gold">gold block</material>
 </filters>
 <regions>
-    <union id="bridgezones">
-        <cuboid id="bridgezone1" min="-326,30,130" max="-409,0,212"/>
-        <cuboid id="bridgezone2" min="-438,30,146" max="-452,0,196"/>
-        <cuboid id="bridgezone3" min="-297,30,146" max="-283,0,196"/>
-    </union>
     <union id="bases">
         <cuboid id="blue-base" min="-485,30,183" max="-462,0,159"/>
         <cuboid id="red-base" min="-250,30,159" max="-273,0,183"/>
     </union>
-    <!-- Red must enter -->
-    <union id="red-wools">
-        <rectangle id="green-wool" min="-452,212" max="-438,198"/>
-        <rectangle id="lime-wool" min="-452,144" max="-438,130"/>
+    <union id="wool-rooms">
+        <union id="blue-wools">
+            <!-- Blue must enter -->
+            <rectangle id="magenta-wool" min="-283,198" max="-297,212"/>
+            <rectangle id="purple-wool" min="-283,130" max="-297,144"/>
+        </union>
+        <union id="red-wools">
+            <!-- Red must enter -->
+            <rectangle id="green-wool" min="-452,212" max="-438,198"/>
+            <rectangle id="lime-wool" min="-452,144" max="-438,130"/>
+        </union>
     </union>
-    <!-- Blue must enter -->
-    <union id="blue-wools">
-        <rectangle id="purple-wool" min="-283,130" max="-297,144"/>
-        <rectangle id="magenta-wool" min="-283,198" max="-297,212"/>
-    </union>
+    <complement id="void-region">
+        <everywhere/>
+        <rectangle id="mid" min="-409,130" max="-326,212"/>
+    </complement>
+    <block id="spawner">-368,13,170</block>
     <!-- Applied -->
-    <apply block="never" message="You may not break the spawner!">
-        <region>
-            <block>-368,13,170</block>
-        </region>
-    </apply>
-    <apply block="only-gold" message="You may only break gold blocks in your base!">
-        <region>
-            <region id="blue-base"/>
-            <region id="red-base"/>
-        </region>
-    </apply>
-    <apply enter="only-red" message="You may not enter the enemy base!">
-        <region>
-            <region id="red-base"/>
-        </region>
-    </apply>
-    <apply enter="only-blue" message="You may not enter the enemy base!">
-        <region>
-            <region id="blue-base"/>
-        </region>
-    </apply>
-    <apply enter="only-red" block="only-red" message="You may not enter or modify your own wool room!">
-        <region>
-            <region id="red-wools"/>
-        </region>
-    </apply>
-    <apply enter="only-blue" block="only-blue" message="You may not enter or modify your own wool room!">
-        <region>
-            <region id="blue-wools"/>
-        </region>
-    </apply>
-    <apply block="deny-void" message="You may not build outside the map area!">
-        <region>
-            <negative>
-                <region id="bridgezones"/>
-            </negative>
-        </region>
-    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy base!" region="blue-base"/>
+    <apply enter="only-red" message="You may not enter the enemy base!" region="red-base"/>
+    <apply enter="only-blue" message="You may not enter your team's own wool room!" region="blue-wools"/>
+    <apply enter="only-red" message="You may not enter your team's own wool room!" region="red-wools"/>
+    <apply block="never" message="You may not break the spawner!" region="spawner"/>
+    <apply block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in the base!" region="bases"/>
+    <apply block="blue-in-wr" use="only-blue" region="blue-wools"/>
+    <apply block="red-in-wr" use="only-red" region="red-wools"/>
+    <apply block="deny-void" message="You may not build in the void area!" region="void-region"/>
 </regions>
+<renewables>
+    <renewable region="bases" renew-filter="only-iron"/>
+    <renewable region="wool-rooms">
+        <renew-filter>
+            <material>sponge</material>
+        </renew-filter>
+    </renewable>
+</renewables>
 <wools team="blue">
-    <wool color="purple" location="-290,10,137" craftable="false">
-        <monument>
-            <block>-467,12,168</block>
-        </monument>
-    </wool>
     <wool color="magenta" location="-290,10,205" craftable="false">
         <monument>
             <block>-467,12,173</block>
         </monument>
     </wool>
-</wools>
-<wools team="red">
-    <wool color="lime" location="-445,10,136" craftable="false">
+    <wool color="purple" location="-290,10,137" craftable="false">
         <monument>
-            <block>-269,12,168</block>
+            <block>-467,12,168</block>
         </monument>
     </wool>
+</wools>
+<wools team="red">
     <wool color="green" location="-445,10,205" craftable="false">
         <monument>
             <block>-269,12,173</block>
         </monument>
     </wool>
+    <wool color="lime" location="-445,10,136" craftable="false">
+        <monument>
+            <block>-269,12,168</block>
+        </monument>
+    </wool>
 </wools>
-<maxbuildheight>30</maxbuildheight>
-<itemremove>
-    <item>cooked fish</item>
-    <item>stained clay</item>
-    <item>stone button</item>
-    <item>brown mushroom</item>
-    <item>redstone</item>
-    <item>sandstone</item>
-    <item>sand</item>
-    <item>string</item>
-</itemremove>
 <toolrepair>
-    <tool>iron axe</tool>
-    <tool>stone sword</tool>
+    <tool>iron sword</tool>
     <tool>bow</tool>
     <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
 </toolrepair>
-<timelock>on</timelock>
-<killreward>
-    <item amount="1">golden apple</item>
-    <item amount="16">sandstone</item>
-</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>brown mushroom</item>
+    <item>redstone</item>
+    <item>string</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>sandstone</material>
+        </filter>
+        <drops>
+            <item chance="0" material="sandstone"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>double step</material>
+        </filter>
+        <drops>
+            <item chance="0" material="sandstone"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>stained clay</material>
+        </filter>
+        <drops>
+            <item chance="0" material="stained clay"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>stone button</material>
+        </filter>
+        <drops>
+            <item chance="0" material="stone button"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>log</material>
+        </filter>
+        <drops>
+            <item chance="0" material="log"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>sponge</material>
+        </filter>
+        <drops>
+            <item amount="8" material="golden apple"/>
+            <item material="bow">
+                <enchantment>infinity</enchantment>
+                <enchantment>power</enchantment>
+            </item>
+            <item material="diamond chestplate"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>wood</item>
+    <item>sandstone</item>
+    <item>water bucket</item>
+    <item>golden apple</item>
+    <item>bucket</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="16" damage="2" material="wood"/>
+    <item amount="12" material="sandstone"/>
+</kill-reward>
+<maxbuildheight>30</maxbuildheight>
+<respawn delay="3s" auto="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
