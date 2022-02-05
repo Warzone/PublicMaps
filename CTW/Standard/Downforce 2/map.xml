@@ -1,0 +1,232 @@
+<map proto="1.3.0">
+<name>Downforce 2</name>
+<version>1.0</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it on your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="61982fa8-f0f9-46d7-977a-47325c9bbd5c" contribution="Map concept and main builder"/> <!-- Cirenah -->
+    <author uuid="36e46b32-80ef-4fa5-b1e2-6c777736d888" contribution="Aesthetic and gameplay edits, XML"/> <!-- Elijahyap -->
+</authors>
+<kits>
+    <kit name="spawn protection">
+        <potion duration="3" amplifier="5">damage resistance</potion>
+    </kit>
+</kits>
+<teams>
+    <team color="blue" max="14">Blue</team>
+    <team color="dark red" max="14">Red</team>
+</teams>
+<spawns>
+    <spawn team="red" yaw="135">
+        <point>50.5,6,50.5</point>
+    </spawn>
+    <spawn team="blue" yaw="-45">
+        <point>-49.5,6,-49.5</point>
+    </spawn>
+    <default yaw="180">
+        <point>0.5,59,0.5</point>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="deny-spawners">
+        <deny>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <union name="iron-renew">
+        <cuboid name="red-iron" min="-36,4,-36" max="-29,5,-29"/>
+        <cuboid name="blue-iron" min="37,4,37" max="30,5,30"/>
+    </union>
+    <cuboid name="red-left-portal" min="46,6,52" max="45,9,49"/>
+    <cuboid name="red-right-portal" min="52,6,46" max="49,9,45"/>
+    <cuboid name="blue-left-portal" min="-45,6,-51" max="-44,9,-48"/>
+    <cuboid name="blue-right-portal" min="-51,6,-45" max="-48,9,-44"/>
+    <union name="pink-wool-room">
+        <cuboid name="pink-wool-cuboid" min="76,0,-15" max="84,18,-23"/>
+        <translate offset="-1,0,-1"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-2,0,-2"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-3,0,-3"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-4,0,-4"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-5,0,-5"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-6,0,-6"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-7,0,-7"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-8,0,-8"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-9,0,-9"><region name="pink-wool-cuboid"/></translate>
+        <translate offset="-10,0,-10"><region name="pink-wool-cuboid"/></translate>
+    </union>
+    <union name="green-wool-room">
+        <cuboid name="green-wool-cuboid" min="16,0,-75" max="24,18,-83"/>
+        <translate offset="1,0,1"><region name="green-wool-cuboid"/></translate>
+        <translate offset="2,0,2"><region name="green-wool-cuboid"/></translate>
+        <translate offset="3,0,3"><region name="green-wool-cuboid"/></translate>
+        <translate offset="4,0,4"><region name="green-wool-cuboid"/></translate>
+        <translate offset="5,0,5"><region name="green-wool-cuboid"/></translate>
+        <translate offset="6,0,6"><region name="green-wool-cuboid"/></translate>
+        <translate offset="7,0,7"><region name="green-wool-cuboid"/></translate>
+        <translate offset="8,0,8"><region name="green-wool-cuboid"/></translate>
+        <translate offset="9,0,9"><region name="green-wool-cuboid"/></translate>
+        <translate offset="10,0,10"><region name="green-wool-cuboid"/></translate>
+    </union>
+    <union name="purple-wool-room">
+        <cuboid name="purple-wool-cuboid" min="-15,0,76" max="-23,18,84"/>
+        <translate offset="-1,0,-1"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-2,0,-2"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-3,0,-3"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-4,0,-4"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-5,0,-5"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-6,0,-6"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-7,0,-7"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-8,0,-8"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-9,0,-9"><region name="purple-wool-cuboid"/></translate>
+        <translate offset="-10,0,-10"><region name="purple-wool-cuboid"/></translate>
+    </union>
+    <union name="lime-wool-room">
+        <cuboid name="lime-wool-cuboid" min="-75,0,16" max="-83,18,24"/>
+        <translate offset="1,0,1"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="2,0,2"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="3,0,3"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="4,0,4"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="5,0,5"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="6,0,6"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="7,0,7"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="8,0,8"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="9,0,9"><region name="lime-wool-cuboid"/></translate>
+        <translate offset="10,0,10"><region name="lime-wool-cuboid"/></translate>
+    </union>
+    <union name="blue-spawn-regions">
+        <rectangle name="blue-spawn-island" min="-56,-56" max="-43,-43"/>
+        <rectangle name="blue-left-tower" min="-56,-24" max="-47,-15"/>
+        <rectangle name="blue-right-tower" min="-24,-56" max="-15,-47"/>
+    </union>
+    <union name="red-spawn-regions">
+        <rectangle name="red-spawn-island" min="57,57" max="44,44"/>
+        <rectangle name="red-left-tower" min="57,25" max="48,16"/>
+        <rectangle name="red-right-tower" min="25,57" max="16,48"/>
+    </union>
+    <!--   blue wool room protection (these are the wools blue has to get)   -->
+    <apply block="only-blue" use="only-blue-usage" message="You may not edit your own wool room!">
+        <region name="pink-wool-room"/>
+        <region name="purple-wool-room"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter your own wool room!">
+        <region name="pink-wool-room"/>
+        <region name="purple-wool-room"/>
+    </apply>
+    <!--   red wool room protection (these are the wools red has to get)   -->
+    <apply block="only-red" use="only-red-usage" message="You may not edit your own wool room!">
+        <region name="green-wool-room"/>
+        <region name="lime-wool-room"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter your own wool room!">
+        <region name="green-wool-room"/>
+        <region name="lime-wool-room"/>
+    </apply>
+    <!--  spawn protection  -->
+    <apply enter="only-blue" message="You may not enter the enemy team's spawn!">
+        <region name="blue-spawn-regions"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy team's spawn!">
+        <region name="red-spawn-regions"/>
+    </apply>
+    <apply block="deny-all" message="You may not edit the spawns!">
+        <region name="blue-spawn-regions"/>
+        <region name="red-spawn-regions"/>
+    </apply>
+    <apply block="no-void" message="You may not edit the void area!">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply block="deny-spawners">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<maxbuildheight>18</maxbuildheight>
+<wools team="red">
+    <wool color="green">
+        <block location="52.5,6.5,20.5"/>
+    </wool>
+    <wool color="lime">
+        <block location="20.5,6.5,52.5"/>
+    </wool>
+</wools>
+<wools team="blue">
+    <wool color="purple">
+        <block location="-51.5,6.5,-19.5"/>
+    </wool>
+    <wool color="pink">
+        <block location="-19.5,6.5,-51.5"/>
+    </wool>
+</wools>
+<itemremove>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>clay ball</item>
+    <item>step</item>
+    <item>cooked fish</item>
+    <item>redstone wire</item>
+</itemremove>
+<portals>
+    <portal x="@-21.5" y="@6" z="@-51.5">
+        <region name="blue-left-portal"/>
+    </portal>
+    <portal x="@-51.5" y="@6" z="@-21.5">
+        <region name="blue-right-portal"/>
+    </portal>
+    <portal x="@22.5" y="@6" z="@52.5">
+        <region name="red-left-portal"/>
+    </portal>
+    <portal x="@52.5" y="@6" z="@22.5">
+        <region name="red-right-portal"/>
+    </portal>
+</portals>
+<renewables>
+    <renewable rate="5" grow="true" particles="true" sound="true" avoid-entities="false">
+        <region>
+            <region name="iron-renew"/>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+    </renewable>
+</renewables>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <fuse>2.5s</fuse>
+    <power>5</power>
+</tnt>
+</map>

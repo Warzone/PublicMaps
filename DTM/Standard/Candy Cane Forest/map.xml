@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Candy Cane Forest</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of obsidian.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77"/> <!-- _NotMaria -->
+    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f"/> <!-- Virus53 -->
+</authors>
+<contributors>
+	<contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"/> <!-- _Pear  -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="50">Blue</team>
+    <team id="red-team" color="red" max="50">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="wood" amount="64"/>
+        <item slot="5" material="wood" amount="64"/>
+        <item slot="7" material="golden apple" amount="1"/>
+        <item slot="8" material="pumpkin pie" amount="64"/>
+        <item slot="28" material="arrow" amount="64"/>
+        <item slot="31" material="wood" amount="64"/>
+        <item slot="32" material="wood" amount="64"/>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+        <boots unbreakable="true" color="B02E26">leather boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables material="obsidian" repairable="false" sparks="true">
+    <destroyable owner="blue-team" name="Monument">
+        <region>
+            <block>381,71,6</block>
+        </region>
+    </destroyable>
+    <destroyable owner="red-team" name="Monument">
+        <region>
+            <block>77,71,6</block>
+        </region>
+    </destroyable>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Definitions -->
+<regions>
+    <negative id="not-map">
+        <rectangle id="map" min="39,-39" max="419,45"/>
+    </negative>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="400,-oo,-39" max="419,oo,-24"/>
+        <cuboid id="red-spawn-protection" min="39,-oo,-39" max="58,oo,-24"/>
+    </union>
+    <point id="blue-spawn">409.5,67,-30.5</point>
+    <point id="red-spawn">49.5,67,-29.5</point>
+    <point id="obs-spawn">229.5,95,60.5</point>
+    <!-- Applications -->
+    <apply block="never" region="not-map" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>pumpkin pie</item>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>90</maxbuildheight>
+</map>

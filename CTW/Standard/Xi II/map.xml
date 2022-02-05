@@ -1,0 +1,218 @@
+<map proto="1.4.2">
+<name>Xi II</name>
+<version>1.0.1</version>
+<objective>Capture the wool located on the opposite side.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade"/> <!-- chle_ -->
+</authors>
+<contributors>
+    <contributor uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Suggestions"/> <!-- GoldenOre -->
+</contributors>
+<teams>
+    <team id="cyan" color="dark aqua" max="12">Cyan</team>
+    <team id="purple" color="dark purple" max="12">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item unbreakable="true" slot="2" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item unbreakable="true" slot="3" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" amount="64" damage="4" material="wood"/>
+        <item slot="6" material="water bucket"/>
+        <item slot="8" material="golden apple"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment>projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect amplifier="255" duration="5">heal</effect>
+        <effect amplifier="255" duration="5">damage resistance</effect>
+        <effect amplifier="255" duration="5">regeneration</effect>
+    </kit>
+    <kit id="cyan-kit" parents="spawn-kit">
+        <item slot="5" amount="32" damage="9" material="stained glass"/>
+        <helmet unbreakable="true" color="4C7F99" material="leather helmet"/>
+        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <item slot="5" amount="32" damage="10" material="stained glass"/>
+        <helmet unbreakable="true" color="7F3FB2" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7F3FB2" material="leather chestplate"/>
+    </kit>
+    <kit id="wool-room-kit" force="true">
+        <leggings unbreakable="true" material="diamond leggings">
+            <enchantment>projectile_protection</enchantment>
+            <enchantment>protection</enchantment>
+        </leggings>
+        <effect amplifier="255" duration="2">heal</effect>
+        <effect amplifier="255" duration="2">damage resistance</effect>
+        <effect amplifier="255" duration="2">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="0">
+            <cuboid min="3.5,42.5,57.5" max="0.5,43,57.5"/>
+        </region>
+    </default>
+    <spawn team="cyan" kit="cyan-kit">
+        <regions yaw="-90">
+            <cuboid min="-94.5,21.5,12.5" max="-93.5,22,13.5"/>
+            <cuboid min="-94.5,21.5,-48.5" max="-93.5,22,-47.5"/>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <regions yaw="90">
+            <cuboid min="98.5,21.5,-47.5" max="97.5,22,-48.5"/>
+            <cuboid min="98.5,21.5,13.5" max="97.5,22,12.5"/>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <not id="no-water">
+        <any>
+            <material>stationary water</material>
+            <material>water</material>
+            <material>water bucket</material>
+            <material>bucket</material>
+        </any>
+    </not>
+    <all id="cyan-in-wr">
+        <material>stained glass pane</material>
+        <team id="only-cyan">cyan</team>
+    </all>
+    <all id="purple-in-wr">
+        <material>stained glass pane</material>
+        <team id="only-purple">purple</team>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="cyan-spawns">
+            <rectangle id="cyan-left" min="-96.5,-5.5" max="-72.5,15.5"/>
+            <rectangle id="cyan-right" min="-96.5,-50.5" max="-72.5,-29.5"/>
+        </union>
+        <union id="purple-spawns">
+            <rectangle id="purple-left" min="76.5,-50.5" max="100.5,-29.5"/>
+            <rectangle id="purple-right" min="76.5,-5.5" max="100.5,15.5"/>
+        </union>
+    </union>
+    <union id="wool-rooms">
+        <rectangle id="cyan-wool" min="-107,-25" max="-118,-10"/>
+        <rectangle id="purple-wool" min="111,-25" max="122,-10"/>
+    </union>
+    <union id="apply-wr-kit">
+        <rectangle id="cyan-wr-kit" min="-108,-23" max="-116,-12"/>
+        <rectangle id="purple-wr-kit" min="112,-23" max="120,-12"/>
+    </union>
+    <union id="victory-monuments">
+        <cuboid id="cyan-v" min="-77,7,-19" max="-75,10,-16"/>
+        <cuboid id="purple-v" min="81,7,-16" max="79,10,-19"/>
+    </union>
+    <complement id="void-area">
+        <everywhere/>
+        <rectangle min="-31.5,-6.5" max="35.5,7.5"/>
+        <rectangle min="-31.5,-42.5" max="35.5,-28.5"/>
+    </complement>
+    <apply enter="only-cyan" region="cyan-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="only-purple" region="purple-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="only-cyan" message="You may not enter your team's own wool room!" region="purple-wool"/>
+    <apply enter="only-purple" message="You may not enter your team's own wool room!" region="cyan-wool"/>
+    <apply kit="wool-room-kit" region="cyan-wr-kit" filter="only-purple"/>
+    <apply kit="wool-room-kit" region="purple-wr-kit" filter="only-cyan"/>
+    <apply use="no-water" region="spawns"/>
+    <apply block="never" region="spawns" message="You may not modify the spawns!"/>
+    <apply block="never" region="victory-monuments" message="You may not edit the victory monuments!"/>
+    <apply block="cyan-in-wr" use="only-cyan" region="purple-wool"/>
+    <apply block="purple-in-wr" use="only-purple" region="cyan-wool"/>
+    <apply block="deny-void" region="void-area" message="You may not build in the void!"/>
+</regions>
+<wools>
+    <wool team="cyan" color="purple" location="116,10.5,-17.5">
+        <monument>
+            <block>-76,8,-18</block>
+        </monument>
+    </wool>
+    <wool team="purple" color="cyan" location="-112,10.5,-17.5">
+        <monument>
+            <block>79,8,-18</block>
+        </monument>
+    </wool>
+</wools>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>gravel</item>
+    <item>flint</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>stained glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="stained glass"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>log 2</material>
+        </filter>
+        <drops>
+            <item chance="0" material="log 2"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>wood</item>
+    <item>stained glass</item>
+    <item>golden apple</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" damage="4" material="wood"/>
+    </kill-reward>
+    <kill-reward filter="only-cyan">
+        <item amount="8" damage="9" material="stained glass"/>
+    </kill-reward>
+    <kill-reward filter="only-purple">
+        <item amount="8" damage="10" material="stained glass"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>23</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
