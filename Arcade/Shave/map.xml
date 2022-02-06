@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Shave</name>
+<version>1.1.0</version>
+<objective>Shave off the other team's beard to win.</objective>
+<gamemode>arcade</gamemode>
+<rules>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+</rules>
+<authors>
+    <author uuid="82d03646-d1a1-4383-a533-9509b130f751"/> <!-- iLifting -->
+</authors>
+<contributors>
+    <contributor uuid="f6e61e24-5143-4ab9-b269-d765c3ffb216"/> <!-- RedstoneVEVO -->
+    <contributor uuid="21f84cc8-6098-45ce-805b-2707a1e6a411"/> <!-- justMEthewolf -->
+    <contributor uuid="bd029cbe-ec66-48cb-8760-6509c1607328"/> <!-- hoodedredstoner -->
+</contributors>
+<teams>
+    <team color="blue" max="8" max-overfill="10">Blue</team>
+    <team color="dark red" max="8" max-overfill="10">Red</team>
+</teams>
+<kits>
+    <kit name="spawnkit">
+        <item slot="0" name="`bRazor" enchantment="damage all:5;durability:5;dig speed:1">shears</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="64">arrow</item>
+        <item slot="6" amount="32">ladder</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <helmet name="`8Hair Net">chainmail helmet</helmet>
+    </kit>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit name="red-kit" parents="spawnkit">
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+        <item slot="4" damage="14" amount="64">stained glass</item>
+        <item slot="5" damage="14" amount="64">wool</item>
+        <item slot="31" damage="14" amount="64">stained glass</item>
+        <item slot="32" damage="14" amount="64">wool</item>
+    </kit>
+    <kit name="blue-kit" parents="spawnkit">
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
+        <boots color="0066cc" unbreakable="true">leather boots</boots>
+        <item slot="4" damage="11" amount="64">stained glass</item>
+        <item slot="5" damage="11" amount="64">wool</item>
+        <item slot="31" damage="11" amount="64">stained glass</item>
+        <item slot="32" damage="11" amount="64">wool</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="blue-kit" team="blue" yaw="-179">
+        <block>-4,123,-67</block>
+        <block>-3,123,-67</block>
+    </spawn>
+    <spawn kit="red-kit" team="red" yaw="180">
+        <block>-4,123,-24</block>
+        <block>-3,123,-24</block>
+    </spawn>
+    <default yaw="90">
+        <cylinder base="-4,101,-45.5" radius="2" height="0" />
+    </default>
+</spawns>
+<filters>
+    <filter name="only-spawnkit-blocks" parents="deny-blocks">
+        <allow>
+            <block>stained glass:11</block>
+            <block>stained glass:14</block>
+            <block>wool:11</block>
+            <block>wool:14</block>
+            <block>wool:12</block>
+            <block>wool:4</block>
+            <block>ladder</block>
+        </allow>
+    </filter>
+    <filter name="only-red" parents="deny-all">
+        <allow>
+            <team>red</team>
+        </allow>
+    </filter>
+    <filter name="only-blue" parents="deny-all"> 
+        <allow>
+            <team>blue</team>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <union name="spawns">
+        <circle name="red-spawn" center="-3,-67" radius="6" />
+        <circle name="blue-sawn" center="-3,-24" radius="6" />
+    </union>
+    <union name="men">
+        <rectangle name="blue-man" min="-25,-75" max="16,-99"/>
+        <rectangle name="red-man" min="-25,6" max="16,-18"/>
+    </union>
+    <apply enter="only-red" message="You may not enter `4Red Spawn!">
+        <region name="blue-sawn"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter `1Blue Spawn!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region name="blue-sawn"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+        <region name="red-spawn"/>
+    </apply>
+    <apply block="deny-all" message="You may not modify the spawn areas!">
+        <region name="spawns" />
+    </apply>
+    <apply block="deny-all" messgae="You are not allowed to place in this area!">
+        <rectangle name="denied-area" min="2,-61" max="-11,-31"/>
+    </apply>
+    <apply block="deny-all" message="You may not place outside the area!">
+        <negative>
+            <rectangle min="-25,-99" max="16,6"/>
+        </negative>
+    </apply>
+    <apply block="only-spawnkit-blocks" message="You may not modify these blocks!">
+        <region name="men"/>
+    </apply>
+</regions>
+<!-- <playable>
+    <rectangle min="-25,-99" max="16,6"/>
+</playable> -->
+<destroyables>
+    <destroyables name="Beard" show-progress="true" completion="100%" materials="wool:4">
+        <destroyable owner="blue">
+            <cuboid min="5,70,-90" max="-13,81,-92" />
+        </destroyable>
+    </destroyables>
+    <destroyables name="Beard" show-progress="true" completion="100%" materials="wool:12">
+        <destroyable owner="red">
+            <cuboid min="5,70,-2" max="-13,81,0" />
+        </destroyable>
+    </destroyables>
+</destroyables>
+<itemremove>
+    <item>wool</item>
+    <item>chainmail helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>ladder</item>
+</itemremove>
+<toolrepair>
+    <tool>shears</tool>
+    <tool>bow</tool>
+</toolrepair>
+<maxbuildheight>89</maxbuildheight>
+</map>

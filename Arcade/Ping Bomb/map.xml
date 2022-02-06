@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Ping Bomb</name>
+<version>1.1.0</version>
+<objective>Blow up the enemy side before they blow up yours!</objective>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Design"/> <!-- Flashee -->
+    <author uuid="17feaec5-9616-49d8-a507-83026050dd8f" contribution="Design"/> <!-- ShinyDialga -->
+    <author uuid="453003c1-d3a2-4b0a-b491-1205e503de90" contribution="Idea"/> <!-- majjus_ -->
+</authors>
+<time>5m</time>
+<teams>
+    <team id="red" color="dark red" max="5" max-overfill="6">Red</team>
+    <team id="blue" color="blue" max="5" max-overfill="6">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" amount="9">ender stone</item>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="oo" amplifier="-3">health boost</potion>
+    </kit>
+      <kit id="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<spawns>
+    <spawn team="red" kit="spawn">
+        <regions yaw="180">
+            <cuboid min="-9,31,32" max="10,31,32"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn">
+        <regions yaw="0">
+            <cuboid min="-9,31,-32" max="10,31,-32"/>
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions yaw="90">
+            <cuboid min="23,55,-5" max="23,55,5"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <any id="only-ender-stone">
+        <material>ender stone</material>
+    </any>
+</filters>
+<regions>
+    <apply block="never" message="Don't build outside of the map">
+        <region>
+            <negative>
+                <cuboid name="red-region" min="12,24,21" max="-11,36,36"/>
+                <cuboid name="blue-region" min="12,24,-21" max="-11,36,-35"/>
+            </negative>
+        </region>
+    </apply> 
+    <apply block="only-ender-stone" region="everywhere" message="You may not break the map!"/>
+</regions>
+<killreward>
+    <item>diamond</item>
+</killreward>
+</map>

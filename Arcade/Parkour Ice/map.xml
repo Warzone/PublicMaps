@@ -1,0 +1,108 @@
+<map proto="1.4.0" game="`d`lParkour!">
+<name>Parkour: Ice</name>
+<version>1.0.3</version>
+<objective>Reach the top first!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<contributors>
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Map concept"/> <!-- ViceTechnicolour -->
+</contributors>
+<players colors="true" max="50" show-name-tags="false"/>
+<spawns>
+    <spawn yaw="180" kit="invis">
+        <regions>
+            <point>-115.5,1.5,9</point>
+        </regions>
+    </spawn>
+    <spawn yaw="180" kit="invis" filter="only-at-1" region="portal-check-1"/>
+    <spawn yaw="0" kit="invis" filter="only-at-2" region="portal-check-2"/>
+    <spawn yaw="180" kit="invis" filter="only-at-3" region="portal-check-3"/>
+    <default yaw="180">
+        <regions>
+            <point>-120.5,34,39.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="invis">
+        <effect duration="oo">invisibility</effect>
+        <item slot="0" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="1" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="2" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="3" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="4" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="5" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+    </kit>
+</kits>
+<filters>
+    <score id="only-at-0">0</score>
+    <score id="only-at-1">1</score>
+    <score id="only-at-2">2</score>
+    <score id="only-at-3">3</score>
+</filters>
+<regions>
+    <point id="spawn">-115.5,1.5,9</point>
+    <apply block="never"/>
+    <!-- Checkpoints to pass through -->
+    <cuboid id="checkpoint-1" min="-130,11,7" max="-127,14,-10"/>
+    <cuboid id="checkpoint-2" min="-100,12,-19" max="-97,15,-16"/>
+    <cuboid id="checkpoint-3" min="-117,20,-1" max="-120,23,-4"/>
+    <!-- Teleport locations for checkpoints -->
+    <point id="portal-check-1">-128.5,11.5,-8.5</point>
+    <point id="portal-check-2">-98.5,12.5,-17.5</point>
+    <point id="portal-check-3">-118.5,20.5,-2.5</point>
+</regions>
+<portals>
+    <portal destination="spawn" yaw="@180" filter="only-at-0">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+    <portal destination="portal-check-1" yaw="@180" filter="only-at-1">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+    <portal destination="portal-check-2" yaw="@0" filter="only-at-2">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+    <portal destination="portal-check-3" yaw="@180" filter="only-at-3">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+<time>8m</time>
+<broadcasts>
+    <tip after="5s" every="1m">There are checkpoints scattered throughout the course!</tip>
+</broadcasts>
+<score>
+    <limit>4</limit>
+    <box points="1" filter="only-at-0" silent="true" region="checkpoint-1"/>
+    <box points="1" filter="only-at-1" silent="true" region="checkpoint-2"/>
+    <box points="1" filter="only-at-2" silent="true" region="checkpoint-3"/>
+    <box points="1" filter="only-at-3">
+        <region>
+            <cuboid min="-117,21,-12" max="-120,24,-15"/>
+        </region>
+    </box>
+</score>
+<timelock>on</timelock>
+<itemremove>
+    <item>wood button</item>
+</itemremove>
+</map>

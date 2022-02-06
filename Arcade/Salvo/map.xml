@@ -1,0 +1,85 @@
+<map proto="1.4.0">
+<name>Salvo</name>
+<version>1.2.1</version>
+<objective>Destroy the other team’s two clay monuments to win!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="8242e55e-cc6a-458a-b272-a2b34918045f"/>
+    <!--   keenanjt   -->
+</authors>
+<broadcasts>
+    <tip after="1s">Use your stick to launch TNT at the monuments!</tip>
+    <tip after="3s">You can build with the blocks that drop!</tip>
+</broadcasts>
+<teams>
+   <team id="pink" color="light purple" max="50">Pink</team>
+   <team id="yellow" color="yellow" max="50">Yellow</team>
+</teams>
+<kits>
+    <kit id="kit">
+        <item slot="0" name="`4TNT Gun">bow</item>
+        <item slot="1" material="golden apple"/>
+        <item slot="2" amount="64">arrow</item>
+        <item slot="3" amount="64">arrow</item>
+        <item slot="4" amount="64">arrow</item>
+    </kit>
+</kits>
+<modifybowprojectile>
+    <projectile>TNTPrimed</projectile>
+</modifybowprojectile>
+<!--<projectiles>
+    <projectile
+        id="tnt"
+        name="tnt"
+        projectile="TNTPrimed"
+        velocity="2.5"
+        damage="7"
+        throwable="false"
+        cooldown="1s"/>
+</projectiles>-->
+<spawns>
+    <spawn team="pink" kit="kit" yaw="180">
+        <region>
+            <cylinder base="3,10,44" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="kit">
+        <region>
+            <cylinder base="3,10,-8" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cylinder base="-34,33,18" radius="1" height="0"/>
+        </region>
+    </default>
+</spawns>
+<regions>
+    <cuboid id="pink-left" min="14,13,42" max="18,18,46"/>
+    <cuboid id="yellow-left" min="-12,13,-6" max="-8,18,-10"/>
+    <cuboid id="pink-right" min="-8,13,46" max="-12,18,42"/>
+    <cuboid id="yellow-right" min="14,13,-6" max="18,18,-10"/>
+</regions>
+<destroyables name="Left Monument" materials="stained clay" completion="100%">
+    <destroyable owner="pink" region="pink-left"/>
+    <destroyable owner="yellow" region="yellow-left"/>
+</destroyables>
+<destroyables name="Right Monument" materials="stained clay" completion="100%">
+    <destroyable owner="pink" region="pink-right"/>
+    <destroyable owner="yellow" region="yellow-right"/>
+</destroyables>
+<time>2m30s</time>
+<disabledamage>
+    <damage ally="true" enemy="false" self="false" other="false">block explosion</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+</toolrepair>
+</map>

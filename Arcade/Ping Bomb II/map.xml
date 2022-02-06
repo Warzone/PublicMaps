@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Ping Bomb II</name>
+<version>1.2.5</version>
+<objective>Blow up the enemy side before they blow up yours!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Design"/> <!-- Flashee -->
+    <author uuid="17feaec5-9616-49d8-a507-83026050dd8f" contribution="Design"/> <!-- ShinyDialga -->
+    <author uuid="453003c1-d3a2-4b0a-b491-1205e503de90" contribution="Idea"/> <!-- majjus_ -->
+</authors>
+<time>5m</time>
+<teams>
+    <team id="red" color="dark red" max="25">Red</team>
+    <team id="blue" color="blue" max="25">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" amount="12">sandstone</item>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="oo" amplifier="-3">health boost</potion>
+    </kit>
+      <kit id="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<falling-blocks>
+    <rule>
+        <filter>
+            <material>STAINED_CLAY</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>TNT</material>
+                <material>STAINED_CLAY</material>
+                <material>QUARTZ_STAIRS</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>QUARTZ_BLOCK</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+                <material>QUARTZ_STAIRS</material>
+                <material>QUARTZ_BLOCK</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>QUARTZ_STAIRS</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+                <material>QUARTZ_STAIRS</material>
+                <material>QUARTZ_BLOCK</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>DOUBLE_STEP</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>STEP</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+                <material>BARRIER</material>
+                <material>STEP</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>BARRIER</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>COAL_BLOCK</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>TNT</material>
+            </any>
+        </sticky>
+    </rule>
+    <rule>
+        <filter>
+            <material>sandstone</material>
+        </filter>
+        <sticky>
+            <any>
+                <material>STAINED_CLAY</material>
+                <material>STEP</material>
+                <material>DOUBLE_STEP</material>
+                <material>QUARTZ_STAIRS</material>
+                <material>QUARTZ_BLOCK</material>
+                <material>sandstone</material>
+            </any>
+        </sticky>
+    </rule>
+</falling-blocks>
+<filters>
+    <any id="not-TNT">
+        <material>STAINED_CLAY</material>
+        <material>STEP</material>
+        <material>DOUBLE_STEP</material>
+        <material>QUARTZ_STAIRS</material>
+        <material>QUARTZ_BLOCK</material>
+        <material>sandstone</material>
+        <material>COAL_BLOCK</material>
+        <material>BARRIER</material>
+        <material>SKULL</material>
+        <material>MOB_SPAWNER</material>
+        <material>FIRE</material>
+    </any>
+</filters>
+<regions>
+    <apply block-break="not-TNT" region="everywhere" message="You may not break TNT!"/>
+</regions>
+<spawns>
+    <spawn team="red" kit="spawn">
+        <regions yaw="0">
+            <cuboid min="2,26,-57" max="-2,26,-61"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn">
+        <regions yaw="180">
+            <cuboid min="-2,26,45" max="2,26,49"/>
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions yaw="90">
+            <cuboid min="38,39,5" max="40,39,-17"/>
+        </regions>
+    </default>
+</spawns>
+<killreward>
+    <item>diamond</item>
+</killreward>
+</map>

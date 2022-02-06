@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Spleef">
+<name>Not So Spleef</name>
+<version>1.0.2</version>
+<objective>Spleef everyone on the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="TGM to PGM conversion"/> <!-- TheBestGamer -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" min="1" max="20">Red</team>
+    <team id="blue" color="blue" min="1" max="20">Blue</team>
+</teams>
+<broadcasts>
+    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="5s">`eGood luck!</alert>
+    <alert after="15s">`cThe `6lava `chas been dispensed! Watch your head!</alert>
+    <alert after="20s">`cNobody is safe from the `6lava`c.</alert>
+</broadcasts>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<kits>
+    <kit id="red-kit">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
+        <item slot="1" unbreakable="true" damage="1">ink sack</item>
+        <item slot="2" unbreakable="true" damage="1">ink sack</item>
+        <item slot="3" unbreakable="true" damage="1">ink sack</item>
+        <item slot="4" unbreakable="true" damage="1">ink sack</item>
+        <item slot="5" unbreakable="true" damage="1">ink sack</item>
+        <item slot="6" unbreakable="true" damage="1">ink sack</item>
+        <item slot="7" unbreakable="true" damage="1">ink sack</item>
+        <item slot="8" unbreakable="true" damage="1">ink sack</item>
+        <helmet unbreakable="true" locked="true" color="B02E26">leather helmet</helmet>
+        <chestplate unbreakable="true" locked="true" color="B02E26">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true" color="B02E26">leather leggings</leggings>
+        <boots unbreakable="true" locked="true" color="B02E26">leather boots</boots>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+    <kit id="blue-kit">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
+        <item slot="1" unbreakable="true" damage="4">ink sack</item>
+        <item slot="2" unbreakable="true" damage="4">ink sack</item>
+        <item slot="3" unbreakable="true" damage="4">ink sack</item>
+        <item slot="4" unbreakable="true" damage="4">ink sack</item>
+        <item slot="5" unbreakable="true" damage="4">ink sack</item>
+        <item slot="6" unbreakable="true" damage="4">ink sack</item>
+        <item slot="7" unbreakable="true" damage="4">ink sack</item>
+        <item slot="8" unbreakable="true" damage="4">ink sack</item>
+        <helmet unbreakable="true" locked="true" color="3C44AA">leather helmet</helmet>
+        <chestplate unbreakable="true" locked="true" color="3C44AA">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true" color="3C44AA">leather leggings</leggings>
+        <boots unbreakable="true" locked="true" color="3C44AA">leather boots</boots>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+</kits>
+<destroyables required="false" show="false">
+    <destroyable name="First lava layer"  owner="red"  materials="air" modes="first-layer-to-lava"  region="first-layer"/>
+    <destroyable name="Second lava layer" owner="blue" materials="air" modes="second-layer-to-lava" region="second-layer"/>
+</destroyables>
+<modes>
+    <mode id="first-layer-to-lava"  after="15s" show-before="0" material="lava"/>
+    <mode id="second-layer-to-lava" after="20s" show-before="0" material="lava"/>
+</modes>
+<filters>
+    <all id="only-snow-in-map">
+        <material>snow block</material>
+    </all>
+</filters>
+<regions>
+    <cuboid id="first-layer"  min="1,44,1" max="12,46,13"/>
+    <cuboid id="second-layer" min="1,41,1" max="12,42,13"/>
+    <apply region="everywhere" block-break="only-snow-in-map" message="You may only break snow blocks."/>
+</regions>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="2,39,10" max="11,41,12"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions>
+            <cuboid min="2,39,2" max="11,41,4"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point>6.5,47,7</point>
+        </regions>
+    </default>
+</spawns>
+<toolrepair>
+    <item>diamond spade</item>
+</toolrepair>
+<itemremove>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>

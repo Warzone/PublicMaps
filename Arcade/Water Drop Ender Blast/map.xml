@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Water Drop">
+<name>Water Drop: Ender Blast</name>
+<version>2.0.1</version>
+<objective>Get to the bottom 2 times!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="ca2306d1-1198-4d46-8c44-a82f5b3c8a4e" contribution="Original map theme" /> <!-- BeanButt -->
+    <author uuid="36e46b32-80ef-4fa5-b1e2-6c777736d888" contribution="Original map theme" /> <!-- Elijah -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Water Drop adaptation"/> <!-- mitchiii_ -->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="-90" region="spawn"/>
+    <default kit="obs" yaw="-90" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="oo" amplifier="-2">health boost</effect>
+        <effect duration="oo">night vision</effect>
+        <effect duration="0" amplifier="101">damage resistance</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="rocket-jumper" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
+        <item slot="1" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
+        <item slot="2" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="oo" amplifier="100">damage resistance</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<filters>
+    <allow id="allow-world">
+        <cause>world</cause>
+    </allow>
+    <any id="allowed-place">
+        <all>
+            <any>
+                <material>water</material>
+                <material>stationary water</material>
+            </any>
+            <cause>player</cause>
+        </all>
+        <all id="allow-world-tnt">
+            <material id="only-tnt">tnt</material>
+            <cause>world</cause>
+        </all>
+    </any>
+    <any id="allowed-break">
+        <material>water</material>
+        <material>stationary water</material>
+        <all>
+            <material>tnt</material>
+            <cause>world</cause>
+        </all>
+    </any>
+    <any id="allowed-physics">
+        <material>tnt</material>
+        <material>dispenser</material>
+        <material>stone button</material>
+    </any>
+    <not id="no-dispenser">
+        <all>
+            <material>dispenser</material>
+            <cause>player</cause>
+        </all>
+    </not>
+</filters>
+<regions>
+    <cylinder id="spawn" base="88.5,251.5,3.5" radius="2" height="0"/>
+    <cylinder id="end" base="410.5,73,3.5" radius="3" height="3"/>
+    <negative id="outside">
+        <complement id="tnt-cube">
+            <cuboid id="tnt-cube-main" min="224,161,10" max="237,175,-3"/>
+            <cuboid id="tnt-cube-tube" min="229,161,5" max="232,175,2"/>
+        </complement>
+    </negative>
+    <union id="no-cheat">
+        <cuboid id="tnt-tube-pit" min="233,161,6" max="228,162,9"/>
+        <below y="70"/>
+    </union>
+    <union id="tnt-allowed">
+        <cuboid id="first-tnt" min="225,161,1" max="228,164,-2"/>
+        <cuboid id="second-tnt" min="233,164,-2" max="236,167,1"/>
+        <cuboid id="third-tnt" min="236,167,6" max="233,170,9"/>
+        <cuboid id="forth-tnt" min="225,168,3" max="227,172,6"/>
+        <cuboid id="fifth-tnt" min="229,171,-2" max="232,173,1"/>
+    </union>
+    <negative id="everywhere-else">
+        <union id="tnt-regions">
+            <cuboid min="158,193,-6" size="1,3,3"/>
+            <cuboid min="165,193,-9" size="1,3,3"/>
+            <cuboid min="174,193,-7" size="1,3,3"/>
+            <cuboid min="158,193,11" size="1,3,3"/>
+            <cuboid min="169,193,13" size="1,3,3"/>
+            <cuboid min="176,193,10" size="1,3,3"/>
+            <union id="velocity">
+                <cuboid min="243,126,-5" size="3,1,17"/>
+                <!--<cuboid min="240,126,7" size="5,1.5,3"/>-->
+            </union>
+        </union>
+    </negative>
+    <union id="tnt-renew">
+        <cuboid id="top" min="146,191,-10" max="189,197,17"/>
+        <cuboid id="bottom" min="246,126,-5" max="239,132,12"/>
+    </union>
+    <apply region="everywhere" use="no-dispenser"/>
+    <apply region="tnt-allowed" block-place="only-tnt"/>
+    <apply region="everywhere" block-place="allowed-place" block-break="allowed-break" block-physics="allowed-physics"/>
+    <!-- velocity -->
+    <apply region="velocity" velocity="10,15,0"/>
+    <!-- kits -->
+    <apply region="tnt-cube" kit="rocket-jumper"/>
+    <apply region="outside" kit="players"/>
+</regions>
+<score>
+    <limit>2</limit>
+    <box points="1" region="end"/>
+</score>
+<portals>
+    <portal region="no-cheat" y="-1000"/>
+    <portal region="end" destination="spawn" yaw="-90"/>
+</portals>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>1s</fuse>
+</tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+</map>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Team Parkour: Ice</name>
+<version>1.0.1</version>
+<objective>Reach the top first!</objective>
+<gamemode>arcade</gamemode>s
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<contributors>
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Map concept"/> <!-- ViceTechnicolour -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="10">Red</team>
+    <team id="blue" color="blue" max="10">Blue</team>
+    <team id="green" color="green" max="10">Green</team>
+    <team id="yellow" color="yellow" max="10">Yellow</team>
+    <team id="orange" color="gold" max="10">Orange</team>
+    <team id="purple" color="dark purple" max="10">Purple</team>
+</teams>
+<spawns>
+    <spawn team="red" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="red" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="red" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="red" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <spawn team="blue" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="blue" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="blue" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="blue" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <spawn team="green" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="green" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="green" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="green" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <spawn team="yellow" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="yellow" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="yellow" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="yellow" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <spawn team="orange" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="orange" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="orange" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="orange" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <spawn team="purple" yaw="180" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="purple" yaw="180" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="purple" yaw="0" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="purple" yaw="180" kit="invis" region="portal-check-3" filter="only-at-3"/>
+    <default yaw="180">
+        <regions>
+            <point>-120.5,34,39.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="invis">
+        <effect duration="oo">invisibility</effect>
+        <item slot="0" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="1" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="2" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="3" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="4" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="5" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+    </kit>
+</kits>
+<filters>
+    <score id="only-at-0">0</score>
+    <score id="only-at-1">1</score>
+    <score id="only-at-2">2</score>
+    <score id="only-at-3">3</score>
+</filters>
+<regions>
+    <cuboid id="below-0" min="-oo,-1,-oo" max="oo,0,oo"/>
+    <cuboid id="below-1" min="-oo,-4,-oo" max="oo,-3,oo"/>
+    <cuboid id="below-2" min="-oo,-7,-oo" max="oo,-6,oo"/>
+    <cuboid id="below-3" min="-oo,-10,-oo" max="oo,-9,oo"/>
+    <point id="spawn">-115.5,1.5,9</point>
+    <apply block="never"/>
+    <!-- Checkpoints to pass through -->
+    <cuboid id="checkpoint-1" min="-130,11,7" max="-127,14,-10"/>
+    <cuboid id="checkpoint-2" min="-100,12,-19" max="-97,15,-16"/>
+    <cuboid id="checkpoint-3" min="-117,20,-1" max="-120,23,-4"/>
+    <!-- Teleport locations for checkpoints -->
+    <point id="portal-check-1">-128.5,11.5,-8.5</point>
+    <point id="portal-check-2">-98.5,12.5,-17.5</point>
+    <point id="portal-check-3">-118.5,20.5,-2.5</point>
+</regions>
+<portals sound="false">
+    <portal destination="spawn" yaw="@180" region="below-0" filter="only-at-0"/>
+    <portal destination="portal-check-1" yaw="@180" region="below-1" filter="only-at-1"/>
+    <portal destination="portal-check-2" yaw="@0" region="below-2" filter="only-at-2"/>
+    <portal destination="portal-check-3" yaw="@180" region="below-3" filter="only-at-3"/>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+<time>8m</time>
+<broadcasts>
+    <alert after="5s" every="1m">If any members of your team pass a checkpoint, everyone will have that checkpoint!</alert>
+</broadcasts>
+<score>
+    <limit>4</limit>
+    <box points="1" filter="only-at-0" region="checkpoint-1"/>
+    <box points="1" filter="only-at-1" region="checkpoint-2"/>
+    <box points="1" filter="only-at-2" region="checkpoint-3"/>
+    <box points="1" filter="only-at-3">
+        <region>
+            <cuboid min="-117,21,-12" max="-120,24,-15"/>
+        </region>
+    </box>
+</score>
+<timelock>on</timelock>
+<itemremove>
+    <item>wood button</item>
+</itemremove>
+</map>

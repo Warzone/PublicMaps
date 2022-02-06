@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="King of the Ladder">
+<name>Ladderp II</name>
+<version>1.0.1</version>
+<objective>Control le ladder to win.</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!--Reshif -->
+    <author uuid="177803b2-797c-4089-aae1-5702ca259e2c"/> <!-- Onsole -->
+    <author uuid="069a79f4-44e9-4726-a5be-fca90e38aaf5"/> <!-- Notch -->
+    <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
+    <author uuid="a348a860-8c8b-475f-b793-d556d45252a7"/> <!-- i2 -->
+    <author>jeb_</author>
+    <author uuid="1e17bf00-029c-4886-92e5-44710d283e9d"/> <!-- cenation1369 -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- Stealth5061 -->
+    <author>Barack Obama</author>
+    <author uuid="61699b2e-d327-4a01-9f1e-0ea8c3f06bc6"/> <!-- Dinnerbone -->
+    <author uuid="52bcb4dd-a1a0-4d9b-94e0-49e145e318e4"/> <!-- Haxaraptor -->
+    <author>doge</author>
+</authors>
+<teams>
+    <team id="dolan-team" color="blue" max="69">tem dolan</team>
+    <team id="grifindoor-team" color="dark red" max="69">grifindoor</team>
+    <team id="creper-team" color="green" max="69">tem creper</team>
+    <team id="doge-team" color="yellow" max="69">tem doge</team>
+    <team id="offline-team" color="dark aqua" max="69">tem offline</team>
+    <team id="swehg-team" color="light purple" max="69">tem swehg</team>
+    <team id="fier-team" color="gold" max="69">tem fier</team>
+    <team id="purlp-team" color="dark purple" max="69">tem purlp</team>
+</teams>
+<filters>
+    <any id="play">
+        <material>glass</material>
+        <material>tnt</material>
+    </any>
+</filters>
+<regions>
+    <apply block="play"/>
+</regions>
+<kits>
+    <kit id="spawn">
+        <effect duration="4" amplifier="100">heal</effect>
+        <effect duration="4" amplifier="100">damage resistance</effect>
+        <effect duration="oo" amplifier="-2">health boost</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="dolan-team" kit="spawn">
+        <regions yaw="-90">
+            <cylinder base="-24.5,3,-7.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="grifindoor-team" kit="spawn">
+        <regions yaw="90">
+            <cylinder base="25.5,3,8.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="creper-team" kit="spawn">
+        <regions yaw="0">
+            <cylinder base="8.5,3,-24.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="doge-team" kit="spawn">
+        <regions yaw="180">
+            <cylinder base="-7.5,3,25.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="offline-team" kit="spawn">
+        <regions yaw="90">
+            <cylinder base="25.5,3,-7.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="swehg-team" kit="spawn">
+        <regions yaw="-90">
+            <cylinder base="-24.5,3,8.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="fier-team" kit="spawn">
+        <regions yaw="0">
+            <cylinder base="-7.5,3,-24.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="purlp-team" kit="spawn">
+        <regions yaw="180">
+            <cylinder base="8.5,3,25.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base=".5,73.5,.5" radius=".3" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<timelock>on</timelock>
+<king>
+    <hills>
+        <hill name="Ladder" required="false" neutral-state="false"  capture-time="1s" points="1">
+            <capture>
+                <cuboid min="-1,68,-1" max="2,72,2"/>
+            </capture>
+            <progress>
+                <cuboid min="-1,68,-1" max="2,72,2"/>
+            </progress>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>269</limit>
+</score>
+<mobs filter="always"/>
+<tnt>
+    <instantignite>on</instantignite>
+    <blockdamage>off</blockdamage>
+</tnt>
+</map>

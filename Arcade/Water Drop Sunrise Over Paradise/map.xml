@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Water Drop">
+<name>Water Drop: Sunrise Over Paradise</name>
+<phase>development</phase>
+<version>1.2.2</version>
+<objective>Get to the bottom 3 times to win!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Original map theme"/> <!-- Plastix -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Water Drop adaptation"/> <!-- mitchiii_ -->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="90" region="spawn"/>
+    <default kit="obs" yaw="90" region="spawn"/> 
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <effect duration="oo" amplifier="-2">health boost</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>sand</material>
+            <material>tnt</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<tnt>
+    <instantignite>true</instantignite>
+    <fuse>2s</fuse>
+</tnt>
+<regions>
+    <below id="dead" y="-5"/>
+    <cylinder id="spawn" base="-4.5,201.5,-125.5" radius="2" height="1"/>
+    <cylinder id="end" base="-203.5,26,-125.5" radius="6" height="4"/>
+    <apply block-place="water" block-break="water" block-physics="never"/>
+    <apply kit="void-death">
+        <region><below y="0"/></region>
+    </apply>
+</regions>
+<score>
+    <limit>3</limit>
+    <box points="1" region="end"/>
+</score>
+<portals>
+    <portal region="end" destination="spawn"/>
+    <portal region="dead" y="-1000"/>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+</map>

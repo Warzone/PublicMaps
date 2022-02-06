@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.0" game="`d`lParkour!">
+<name>Parkour: Debris</name>
+<version>1.0.4</version>
+<objective>Reach the top first!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ViceTechnicolour -->
+</authors>
+<players colors="true" max="50" show-name-tags="false"/>
+<spawns>
+    <spawn yaw="90" kit="invis">
+        <regions>
+            <point>1,1.5,-1</point>
+        </regions>
+    </spawn>
+    <default yaw="180">
+        <regions>
+            <point>-15,4,-1</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="invis">
+        <effect duration="oo">invisibility</effect>
+        <item slot="0" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="1" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="2" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="3" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="4" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="5" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+    </kit>
+</kits>
+<regions>
+    <everywhere/>
+    <point id="spawn">1,1.5,-1</point>
+    <apply block="never" region="everywhere"/>
+</regions>
+<portals sound="false">
+    <portal destination="spawn" yaw="@90">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+<time>6m</time>
+<score>
+    <limit>1</limit>
+    <box points="1">
+        <region>
+            <cuboid min="0,50,-2" max="2,49,-3"/>
+        </region>
+    </box>
+</score>
+<itemremove>
+    <item>wood button</item>
+</itemremove>
+</map>

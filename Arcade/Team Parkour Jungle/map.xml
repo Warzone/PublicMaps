@@ -1,0 +1,107 @@
+<map proto="1.4.0" game="`d`lParkour!">
+<name>Team Parkour: Jungle</name>
+<version>1.0.3</version>
+<objective>Reach the top first!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<contributors>
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Map concept"/> <!-- ViceTechnicolour -->
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Additions to the end"/> <!-- Tywnis -->
+</contributors>
+<teams>
+    <team id="red" show-name-tags="false" color="dark red" max="10">Red</team>
+    <team id="blue" show-name-tags="false" color="blue" max="10">Blue</team>
+    <team id="green" show-name-tags="false" color="green" max="10">Green</team>
+    <team id="yellow" show-name-tags="false" color="yellow" max="10">Yellow</team>
+    <team id="orange" show-name-tags="false" color="gold" max="10">Orange</team>
+    <team id="purple" show-name-tags="false" color="dark purple" max="10">Purple</team>
+</teams>
+<spawns>
+    <spawn team="red" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="red" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="red" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="blue" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="blue" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="blue" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="green" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="green" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="green" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="yellow" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="yellow" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="yellow" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="orange" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="orange" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="orange" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <spawn team="purple" yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn team="purple" yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn team="purple" yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <default yaw="0">
+        <regions>
+            <point>-9,25.5,-28</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="invis">
+        <effect duration="oo">invisibility</effect>
+        <item slot="0" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="1" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="2" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="3" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="4" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="5" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+    </kit>
+</kits>
+<filters>
+    <score id="only-at-0">0</score>
+    <score id="only-at-1">1</score>
+    <score id="only-at-2">2</score>
+</filters>
+<regions>
+    <cuboid id="finish-area" min="-10,32,-30" max="-8,33,-28"/>
+    <cuboid id="below-0" min="-oo,-1,-oo" max="oo,0,oo"/>
+    <point id="spawn">0,1.5,0</point>
+    <apply block="never"/>
+    <!-- Checkpoints to pass through -->
+    <cuboid id="checkpoint-1" min="3,14,-2" max="6,16,1"/>
+    <cuboid id="checkpoint-2" min="-21,17,19" max="-18,19,16"/>
+    <!-- Teleport locations for checkpoints -->
+    <point id="portal-check-1">4,14.5,-1</point>
+    <point id="portal-check-2">-20,17.5,17</point>
+</regions>
+<portals sound="false">
+    <portal destination="spawn" yaw="@90" region="below-0" filter="only-at-0"/>
+    <portal destination="portal-check-1" yaw="@90" region="below-0" filter="only-at-1"/>
+    <portal destination="portal-check-2" yaw="@-90" region="below-0" filter="only-at-2"/>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+<time>6m</time>
+<broadcasts>
+    <alert after="5s" every="1m">If any members of your team pass a checkpoint, everyone will have that checkpoint!</alert>
+</broadcasts>
+<score>
+    <limit>3</limit>
+    <box points="1" region="checkpoint-1" filter="only-at-0"/>
+    <box points="1" region="checkpoint-2" filter="only-at-1"/>
+    <box points="1" filter="only-at-2">
+        <region>
+            <cuboid min="-10,32,-30" max="-8,33,-28"/>
+        </region>
+    </box>
+</score>
+<timelock>on</timelock>
+<itemremove>
+    <item>wood button</item>
+</itemremove>
+</map>

@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Rocket Jumper">
+<name>Ravine</name>
+<version>1.0.2</version>
+<gamemode>arcade</gamemode>
+<objective>Complete two laps before everyone else!</objective>
+<phase>development</phase>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" /> <!-- AtlasGames !-->
+</authors>
+<contributors>
+    <contributor uuid="060baa18-2852-40d8-afcb-e61607c04be3" /> <!-- PepsiDog !-->
+</contributors>
+<players min="8" max="8" colors="true"/>
+<score>
+    <limit>2</limit>
+    <box points="1" region="win-zone" />
+</score>
+<time>5m</time>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn auto="false" delay="0s" spectate="true" blackout="false" />
+<disabledamage>
+    <damage ally="true" self="false" enemy="true" other="false">block explosion</damage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+<spawns>
+    <spawn kit="spawn-kit">
+        <regions>
+            <point yaw="-90">-28,4,-6</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="-90">-17.5,40,-2.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <clear-items/>
+        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" amount="64">tnt</item>
+        <item slot="1" amount="64">tnt</item>
+        <item slot="2" amount="64">tnt</item>
+        <item slot="3" amount="64">tnt</item>
+        <item slot="4" amount="64">tnt</item>
+        <item slot="5" amount="64">tnt</item>
+        <item slot="6" amount="64">tnt</item>
+        <item slot="7" amount="64">tnt</item>
+        <item slot="8" amount="64">tnt</item>
+        <potion duration="oo" amplifier="1">invisibility</potion>
+        <potion duration="oo" amplifier="20">resistance</potion>
+    </kit>
+    <kit id="kill-kit" force="true">
+        <potion duration="oo" amplifier="1000">harm</potion>
+        <potion duration="0s" amplifier="1">resistance</potion>
+    </kit>
+    <kit id="sack-kit-0" force="true">
+        <item prevent-sharing="true" damage="0" slot="9" name="0">ink sack</item>
+    </kit>
+    <kit id="sack-kit-1" force="true">
+        <item prevent-sharing="true" damage="1" slot="9" name="1">ink sack</item>
+    </kit>
+    <kit id="sack-kit-2" force="true">
+        <item prevent-sharing="true" damage="2" slot="9" name="2">ink sack</item>
+    </kit>
+    <kit id="sack-kit-3" force="true">
+        <item prevent-sharing="true" damage="3" slot="9" name="3">ink sack</item>
+    </kit>
+    <kit id="sack-kit-4" force="true">
+        <item prevent-sharing="true" damage="4" slot="9" name="4">ink sack</item>
+    </kit>
+    <kit id="sack-kit-5" force="true">
+        <item prevent-sharing="true" damage="5" slot="9" name="5">ink sack</item>
+    </kit>
+    <kit id="sack-kit-6" force="true">
+        <item prevent-sharing="true" damage="6" slot="9" name="6">ink sack</item>
+    </kit>
+</kits>
+<regions>
+    <cuboid id="win-zone" min="75,29,51" max="80,30,56" />
+    <above y="45" id="no-zone" />
+
+    <apply block="place-some" />
+    <apply enter="never" region="no-zone" />
+
+    <cuboid id="chckpnt-1" min="28,30,-11" max="33,31,-6" />
+    <cuboid id="chckpnt-2" min="32,30,-42" max="37,31,-37" />
+    <cuboid id="chckpnt-3" min="65,30,-46" max="70,31,-41" />
+    <cuboid id="chckpnt-4" min="102,29,-5" max="107,30,0" />
+    <cuboid id="chckpnt-5" min="97,29,17" max="102,30,22" />
+    <cuboid id="chckpnt-6" min="75,29,38" max="80,30,42" />
+
+    <apply kit="sack-kit-1" region="chckpnt-1" />
+    <apply kit="sack-kit-2" region="chckpnt-2" />
+    <apply kit="sack-kit-3" region="chckpnt-3" />
+    <apply kit="sack-kit-4" region="chckpnt-4" />
+    <apply kit="sack-kit-5" region="chckpnt-5" />
+    <apply kit="sack-kit-6" region="chckpnt-6" />
+    <apply kit="spawn-kit" region="win-zone"/>
+
+    <below id="prtl-0" y="1" />
+    <below id="prtl-1" y="1" />
+    <below id="prtl-2" y="1" />
+    <below id="prtl-3" y="1" />
+    <below id="prtl-4" y="1" />
+    <below id="prtl-5" y="1" />
+    <below id="prtl-6" y="1" />
+
+    <!-- 1st Platform Set -->
+    <cuboid id="plat-1-1" min="31,35,-39" max="37,44,-22" />
+    <cuboid id="plat-1-2" min="31,43,-39" max="37,52,-22" />
+    <cuboid id="plat-1-3" min="31,51,-39" max="37,60,-22" />
+    <cuboid id="plat-1-4" min="31,59,-39" max="37,68,-22" />
+    <cuboid id="plat-1-5" min="31,67,-39" max="37,76,-22" />
+
+    <!-- 2nd Platform Set -->
+    <cuboid id="plat-2-1" min="38,35,-47" max="64,42,-41" />
+    <cuboid id="plat-2-2" min="38,44,-47" max="64,57,-41" />
+    <cuboid id="plat-2-3" min="38,59,-47" max="64,72,-41" />
+    <cuboid id="plat-2-4" min="38,74,-47" max="64,87,-41" />
+    <cuboid id="plat-2-5" min="38,89,-47" max="64,102,-41" />
+    <cuboid id="plat-2-6" min="38,104,-47" max="64,117,-41" />
+
+    <!-- 3rd Platform Set -->
+    <cuboid id="plat-3-1" min="101,37,1" max="107,51,17" />
+    <cuboid id="plat-3-2" min="101,52,1" max="107,66,17" />
+    <cuboid id="plat-3-3" min="101,67,1" max="107,81,17" />
+    <cuboid id="plat-3-4" min="101,82,1" max="107,96,17" />
+    <cuboid id="plat-3-5" min="101,97,1" max="107,111,17" />
+</regions>
+<structures>
+    <!-- 1st Structure Set -->
+    <structure id="struct-1-1" region="plat-1-1" />
+    <structure id="struct-1-2" region="plat-1-2" />
+    <structure id="struct-1-3" region="plat-1-3" />
+    <structure id="struct-1-4" region="plat-1-4" />
+    <structure id="struct-1-5" region="plat-1-5" />
+
+    <!-- 2nd Structure Set -->
+    <structure id="struct-2-1" region="plat-2-1" />
+    <structure id="struct-2-2" region="plat-2-2" />
+    <structure id="struct-2-3" region="plat-2-3" />
+    <structure id="struct-2-4" region="plat-2-4" />
+    <structure id="struct-2-5" region="plat-2-5" />
+    <structure id="struct-2-6" region="plat-2-6" />
+
+    <!-- 3rd Structure Set -->
+    <structure id="struct-3-1" region="plat-3-1" />
+    <structure id="struct-3-2" region="plat-3-2" />
+    <structure id="struct-3-3" region="plat-3-3" />
+    <structure id="struct-3-4" region="plat-3-4" />
+    <structure id="struct-3-5" region="plat-3-5" />
+
+    <!-- 1st Dynamic Set -->
+    <dynamic structure="struct-1-1" filter="rand-1-1" location="31,27,-39" />
+    <dynamic structure="struct-1-2" filter="rand-1-2" location="31,27,-39" />
+    <dynamic structure="struct-1-3" filter="rand-1-3" location="31,27,-39" />
+    <dynamic structure="struct-1-4" filter="rand-1-4" location="31,27,-39" />
+    <dynamic structure="struct-1-5" filter="rand-1-5" location="31,27,-39" />
+
+    <!-- 2nd Dynamic Set -->
+    <dynamic structure="struct-2-1" filter="rand-2-1" location="38,28,-47" />
+    <dynamic structure="struct-2-2" filter="rand-2-2" location="38,28,-47" />
+    <dynamic structure="struct-2-3" filter="rand-2-3" location="38,28,-47" />
+    <dynamic structure="struct-2-4" filter="rand-2-4" location="38,28,-47" />
+    <dynamic structure="struct-2-5" filter="rand-2-5" location="38,28,-47" />
+    <dynamic structure="struct-2-6" filter="rand-2-6" location="38,28,-47" />
+
+    <!-- 3rd Dynamic Set -->
+    <dynamic structure="struct-3-1" filter="rand-3-1" location="101,27,1" />
+    <dynamic structure="struct-3-2" filter="rand-3-2" location="101,27,1" />
+    <dynamic structure="struct-3-3" filter="rand-3-3" location="101,27,1" />
+    <dynamic structure="struct-3-4" filter="rand-3-4" location="101,27,1" />
+    <dynamic structure="struct-3-5" filter="rand-3-5" location="101,27,1" />
+</structures>
+<filters>
+    <all id="place-some">
+        <cause>player</cause>
+        <any>
+            <material>tnt</material>
+        </any>
+    </all>
+
+    <!-- 1st Random Set -->
+    <all id="rand-1-1">
+        <random>[0,0.2)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-2">
+        <random>[0.2,0.4)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-3">
+        <random>[0.4,0.6)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-4">
+        <random>[0.6,0.8)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-5">
+        <random>[0.8,1)</random>
+        <time>1s</time>
+    </all>
+
+
+    <!-- 2nd Random Set -->
+    <all id="rand-2-1">
+        <random>[0,0.1666)</random>
+        <time>2s</time>
+    </all>
+    <all id="rand-2-2">
+        <random>[0.1666,0.3333)</random>
+        <time>2s</time>
+    </all>
+    <all id="rand-2-3">
+        <random>[0.3333,0.5)</random>
+        <time>2s</time>
+    </all>
+    <all id="rand-2-4">
+        <random>[0.5,0.6666)</random>
+        <time>2s</time>
+    </all>
+    <all id="rand-2-5">
+        <random>[0.6666,0.8333)</random>
+        <time>2s</time>
+    </all>
+    <all id="rand-2-6">
+        <random>[0.8333,1)</random>
+        <time>2s</time>
+    </all>
+
+    <!-- 3rd Random Set -->
+    <all id="rand-3-1">
+        <random>[0,0.2)</random>
+        <time>3s</time>
+    </all>
+    <all id="rand-3-2">
+        <random>[0.2,0.4)</random>
+        <time>3s</time>
+    </all>
+    <all id="rand-3-3">
+        <random>[0.4,0.6)</random>
+        <time>3s</time>
+    </all>
+    <all id="rand-3-4">
+        <random>[0.6,0.8)</random>
+        <time>3s</time>
+    </all>
+    <all id="rand-3-5">
+        <random>[0.8,1)</random>
+        <time>3s</time>
+    </all>
+
+
+    <not id="sack-0">
+        <any>
+            <carrying>
+                <item prevent-sharing="true" damage="0" name="0">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="1" name="1">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="2" name="2">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="3" name="3">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="4" name="4">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="5" name="5">ink sack</item>
+            </carrying>
+            <carrying>
+                <item prevent-sharing="true" damage="6" name="6">ink sack</item>
+            </carrying>
+        </any>
+    </not>
+    <carrying id="sack-1">
+        <item prevent-sharing="true" damage="1" name="1">ink sack</item>
+    </carrying>
+    <carrying id="sack-2">
+        <item prevent-sharing="true" damage="2" name="2">ink sack</item>
+    </carrying>
+    <carrying id="sack-3">
+        <item prevent-sharing="true" damage="3" name="3">ink sack</item>
+    </carrying>
+    <carrying id="sack-4">
+        <item prevent-sharing="true" damage="4" name="4">ink sack</item>
+    </carrying>
+    <carrying id="sack-5">
+        <item prevent-sharing="true" damage="5" name="5">ink sack</item>
+    </carrying>
+    <carrying id="sack-6">
+        <item prevent-sharing="true" damage="6" name="6">ink sack</item>
+    </carrying>
+</filters>
+<portals>
+    <portal filter="sack-0" region="prtl-0" yaw="@-90">
+        <destination>
+            <point>0.5,30,0.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-1" region="prtl-1" yaw="@-150">
+        <destination>
+            <point>30.5,30,-8.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-2" region="prtl-2" yaw="@-110">
+        <destination>
+            <point>34.5,30,-39.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-3" region="prtl-3" yaw="@-45">
+        <destination>
+            <point>67.5,30,-43.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-4" region="prtl-4" yaw="@0">
+        <destination>
+            <point>104.5,29,-2.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-5" region="prtl-5" yaw="@45">
+        <destination>
+            <point>99.5,29,19.5</point>
+        </destination>
+    </portal>
+    <portal filter="sack-6" region="prtl-6" yaw="@0">
+        <destination>
+            <point>77.5,29,40.5</point>
+        </destination>
+    </portal>
+    <portal region="win-zone" yaw="@-90">
+        <destination>
+            <point>0.5,30,0.5</point>
+        </destination>
+    </portal>
+</portals>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>1s</fuse>
+    <licensing>false</licensing>
+</tnt>
+<itemkeep>
+    <item>iron boots</item>
+    <item>ink sack</item>
+    <item>tnt</item>
+</itemkeep>
+</map>

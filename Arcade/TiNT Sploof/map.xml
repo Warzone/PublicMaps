@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>TiNT Sploof</name>
+<version>1.0.0</version>
+<objective>Kill all other players to win.</objective>
+<gamemode>ffa</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="cc2292de-fcb3-412d-9319-f3177f73b605"/> <!-- cs_ -->
+</authors>
+<time>5m</time>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<players max="30" colors="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+<spawns>
+    <spawn safe="true" spread="true" kit="everyone">
+        <regions><cylinder base="0.5,15,0.5" radius="25" height="2" /></regions>
+    </spawn>
+    <default yaw="90" safe="true">
+        <region><cylinder base="41.5,23,0.5" radius="3" height="0" /></region>
+    </default>
+</spawns>
+<kits>
+	<kit id="stone">
+		<item>stone</item>
+	</kit>
+	<kit id="dirt">
+		<item>dirt</item>
+	</kit>
+	<kit id="grass">
+		<item>grass</item>
+	</kit>
+	<kit id="bedrock">
+		<item>bedrock</item>
+		<impulse yaw="false" pitch="false">0,1.3,0</impulse>
+	</kit>
+	<kit id="everyone">
+		<item attacker-kit="stone" victim-kit="dirt">potato item</item>
+		<item projectile="test">stick</item>
+	</kit>
+</kits>
+<projectiles>
+    <projectile
+        id="test"
+        projectile="Arrow"
+        velocity="3.0"
+        throwable="false"
+        cooldown="0.2"
+        victim-kit="grass"
+        attacker-kit="bedrock"
+    />
+</projectiles>
+<respawn auto="true"/>
+</map>

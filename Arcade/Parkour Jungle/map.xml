@@ -1,0 +1,100 @@
+<map proto="1.4.0" game="`d`lParkour!">
+<name>Parkour: Jungle</name>
+<version>1.2.1</version>
+<objective>Reach the top first!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
+</authors>
+<contributors>
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Map concept"/> <!-- ViceTechnicolour -->
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Additions to the end"/> <!-- Tywnis -->
+</contributors>
+<players colors="true" max="50" show-name-tags="false"/>
+<spawns>
+    <spawn yaw="90" kit="invis" filter="only-at-0">
+        <regions>
+            <point>0,1.5,0</point>
+        </regions>
+    </spawn>
+    <spawn yaw="90" kit="invis" filter="only-at-1" region="portal-check-1"/>
+    <spawn yaw="-90" kit="invis" filter="only-at-2" region="portal-check-2"/>
+    <default yaw="0">
+        <regions>
+            <point>-9,25.5,-28</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="invis">
+        <effect duration="oo">invisibility</effect>
+        <item slot="0" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="1" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="2" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="3" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="4" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="5" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+    </kit>
+</kits>
+<filters>
+    <score id="only-at-0">0</score>
+    <score id="only-at-1">1</score>
+    <score id="only-at-2">2</score>
+</filters>
+<regions>
+    <point id="spawn">0,1.5,0</point>
+    <apply block="never"/>
+    <!-- Checkpoints to pass through -->
+    <cuboid id="checkpoint-1" min="3,14,-2" max="6,16,1"/>
+    <cuboid id="checkpoint-2" min="-21,17,19" max="-18,19,16"/>
+    <!-- Teleport locations for checkpoints -->
+    <point id="portal-check-1">4,14.5,-1</point>
+    <point id="portal-check-2">-20,17.5,17</point>
+</regions>
+<portals>
+    <portal destination="spawn" yaw="@90" filter="only-at-0">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+    <portal destination="portal-check-1" yaw="@90" filter="only-at-1">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+    <portal destination="portal-check-2" yaw="@-90" filter="only-at-2">
+        <region>
+            <below y="0"/>
+        </region>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>ENTITY_ATTACK</damage>
+</disabledamage>
+<time>6m</time>
+<broadcasts>
+    <tip after="5s" every="1m">There are checkpoints scattered throughout the course!</tip>
+    <tip after="5s" every="30s">Once you've passed a checkpoint, you can fall into the void to return to it at any point!</tip>
+</broadcasts>
+<score>
+    <limit>3</limit>
+    <box points="1" region="checkpoint-1" silent="true" filter="only-at-0"/>
+    <box points="1" region="checkpoint-2" silent="true" filter="only-at-1"/>
+    <box points="1" filter="only-at-2">
+        <region>
+            <cuboid min="-10,32,-30" max="-8,33,-28"/>
+        </region>
+    </box>
+</score>
+<timelock>on</timelock>
+<itemremove>
+    <item>wood button</item>
+</itemremove>
+</map>

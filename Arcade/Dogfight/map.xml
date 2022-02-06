@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Dogfight</name>
+<version>1.3.0</version>
+<objective>Blow up the enemy aircraft before they blow up yours!</objective>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
+</authors>
+<contributors>
+    <contributor uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Inspiration and idea (Ping Bomb I/II)"/> <!-- Flashee -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="XML and world conversion"/> <!-- TheBestGamer -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="10" max-overfill="10">Robins</team>
+    <team id="blue" color="blue" max="10" max-overfill="10">Blue Jays</team>
+</teams>
+<kits>
+    <kit id="red-kit">
+        <item slot="0" amount="8" damage="14">stained glass</item>
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+    </kit>
+    <kit id="blue-kit">
+        <item slot="0" amount="8" damage="11">stained glass</item>
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <all id="only-glass-in-map">
+        <material>stained glass</material>
+    </all>
+</filters>
+<regions>
+    <point id="red-glass-left-spawner">47.5,20.5,15.5</point>
+    <point id="red-glass-right-spawner">47.5,20.5,-14.5</point>
+    <point id="blue-glass-left-spawner">-48.5,20.5,-14.5</point>
+    <point id="blue-glass-right-spawner">-48.5,20.5,15.5</point>
+    <apply region="everywhere" block="only-glass-in-map" message="You may only place or break glass!"/>
+</regions>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="90">
+            <point>56.5,27.5,0.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-90">
+            <point>-57.5,27.5,0.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>-0.5,36,22.5</point>
+        </regions>
+    </default>
+</spawns>
+<spawners>
+    <spawner spawn-region="red-glass-left-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-red">
+        <item amount="1" damage="14" material="stained glass"/>
+    </spawner>
+    <spawner spawn-region="red-glass-right-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-red">
+        <item amount="1" damage="14" material="stained glass"/>
+    </spawner>
+    <spawner spawn-region="blue-glass-left-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-blue">
+        <item amount="1" damage="11" material="stained glass"/>
+    </spawner>
+    <spawner spawn-region="blue-glass-right-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-blue">
+        <item amount="1" damage="11" material="stained glass"/>
+    </spawner>
+</spawners>
+<world-borders center="0.5, 0.5">
+    <world-border size="160"/>
+    <world-border size="3" after="5s" duration="200s"/>
+</world-borders>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+</map>
