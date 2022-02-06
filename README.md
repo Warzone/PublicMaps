@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://warzone.network/img/warzone.svg" alt="Warzone logo" width="64" height="64">
+</p>
+
 # Warzone PublicMaps
 
 This repository contains public maps and active rotation list that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9.
@@ -5,6 +9,8 @@ This repository contains public maps and active rotation list that are found on 
 ## Contributing
 
 When creating a new map or modifying an existing map, please note some of the requirements for our maps. Pull requests from non-map developers that affect the map rotation are subject to approval and may be closed.
+
+To start contributing, you must clone this repository online, [GitHub Client (recommended for most users)](https://desktop.github.com/), [alternative GUI clients](https://git-scm.com/downloads/guis), or [Git CLI (for advanced users)](https://git-scm.com/) with the command, `git clone https://github.com/Warzone/PublicMaps.git`.
 
 ### World Version
 
