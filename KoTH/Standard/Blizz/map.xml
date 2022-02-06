@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Blizz</name>
+<version>1.3.5</version>
+<objective>You must be the first team to get to 750 points before time runs out!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="5c0d744e-2561-4e24-966c-2f5ca4a8f8eb"/> <!-- SamSafari -->
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/> <!-- Diamyx -->
+</authors>
+<teams>
+    <team color="dark green" max="12">Green</team>
+    <team color="blue" max="12">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="-45">
+        <cuboid min="195,37,316" max="193,38,318"/>
+    </spawn>
+    <spawn team="green" kit="green" yaw="135">
+        <cuboid min="338,37,465" max="340,38,463"/>
+    </spawn>
+    <default kit="all" yaw="-90">
+        <point>296.5,96,358.5</point>
+    </default>
+</spawns>
+<kits>
+    <kit name="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit name="teams" parents="all">
+        <item slot="0" unbreakable="true" attributes="generic.attackDamage:add:5" name="`bIce Pick">iron pickaxe</item>
+        <item slot="1" unbreakable="true" name="`bSnow Bow">bow</item>
+        <item slot="7" amount="32" name="`bAlaskan Sea Bass">cooked fish</item>
+        <item slot="8" amount="16">arrow</item>
+        <chestplate unbreakable="true" enchantment="protection projectile:2">chainmail chestplate</chestplate>
+        <boots unbreakable="true" name="`bIce Skates">iron boots</boots>
+        <potion duration="8" amplifier="5">damage resistance</potion>
+        <potion duration="8" amplifier="3">regeneration</potion>
+    </kit>
+    <kit name="blue" parents="teams">
+        <helmet unbreakable="true" color="334CB2" name="`bUshanka">leather helmet</helmet>
+        <leggings unbreakable="true" color="334CB2" name="`bSnow Pants">leather leggings</leggings>
+    </kit>
+    <kit name="green" parents="teams">
+        <helmet unbreakable="true" color="667F33" name="`bUshanka">leather helmet</helmet>
+        <leggings unbreakable="true" color="667F33" name="`bSnow Pants">leather leggings</leggings>
+    </kit>
+</kits>
+<filters>
+    <filter name="deny-beacon">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+    <filter name="only-tnt">
+        <block>tnt</block>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="all" min="-oo,-oo" max="oo,oo"/>
+    <cuboid name="above-58" min="-oo,58,-oo" max="oo,oo,oo"/>
+    <union name="points">
+        <cylinder base="280.5,35,439.5" radius="7" height="1"/>
+        <cylinder base="266.5,44,390.5" radius="8" height="1"/>
+        <cylinder base="252.5,35,341.5" radius="7" height="1"/>
+    </union>
+    <!-- Applied -->
+    <apply block-break="deny-all">
+        <region name="points"/>
+    </apply>
+    <apply block-break="deny-all" use="deny-beacon">
+        <region name="all"/>
+    </apply>
+    <apply enter="deny-all" message="You may not wander above the mountains!">
+        <region name="above-58"/>
+    </apply>
+</regions>
+<king>
+    <hills neutral-state="true">
+        <hill name="South" points="2" capture-time="5s" capture-rule="exclusive" scaled-time="false">
+            <capture>
+                <cylinder base="280.5,36,439.5" radius="7" height="5"/>
+            </capture>
+            <progress>
+                <cylinder base="280.5,35,439.5" radius="7" height="1"/>
+            </progress>
+            <captured>
+                <cuboid min="0,0,0" max="0,0,0"/>
+            </captured>
+            <capture-filter>
+                <filter name="only-blue"/>
+            </capture-filter>
+            <defend-filter>
+                <filter name="only-green"/>
+            </defend-filter>
+        </hill>
+        <hill name="Center" points="1" capture-time="15s" capture-rule="lead" scaled-time="true">
+            <capture>
+                <cylinder base="266.5,45,390.5" radius="7" height="5"/>
+            </capture>
+            <progress>
+                <cylinder base="266.5,44,390.5" radius="8" height="1"/>
+            </progress>
+            <captured>
+                <cuboid min="0,0,0" max="0,0,0"/>
+            </captured>
+        </hill>
+        <hill name="North" points="2" capture-time="5s" capture-rule="exclusive" scaled-time="false">
+            <capture>
+                <cylinder base="252.5,36,341.5" radius="7" height="5"/>
+            </capture>
+            <progress>
+                <cylinder base="252.5,35,341.5" radius="7" height="1"/>
+            </progress>
+            <captured>
+                <cuboid min="0,0,0" max="0,0,0"/>
+            </captured>
+            <capture-filter>
+                <filter name="only-green"/>
+            </capture-filter>
+            <defend-filter>
+                <filter name="only-blue"/>
+            </defend-filter>
+        </hill>
+    </hills>
+</king>
+<score>
+    <time>20m</time>
+    <limit>750</limit>
+    <king/>
+</score>
+<toolrepair>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>snow ball</item>
+    <item>potion</item>
+    <item>golden apple</item>
+    <item>cooked fish</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>glass bottle</item>
+    <item>tnt</item>
+    <item>diamond pickaxe</item>
+    <item>gold chestplate</item>
+    <item>gold boots</item>
+    <item>monster egg</item>
+    <item>ender pearl</item>
+    <item>bone</item>
+    <item>diamond chestplate</item>
+    <item>paper</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<tnt>
+    <power>3</power>
+    <fuse>1s</fuse>
+    <instantignite>true</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+</tnt>
+<renewables>
+    <renewable rate="30" grow="true" avoid-entities="true" particles="true" sound="true">
+        <region>
+            <everywhere/>
+        </region>
+    </renewable>
+</renewables><!-- Disable until fixed
+<modifybowprojectile>
+    <projectile>Snowball</projectile>
+    <velocityMod>1.5</velocityMod>
+</modifybowprojectile>-->
+<disabledamage>
+    <damage enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<mobs>
+    <filter>
+        <spawn>spawner egg</spawn>
+    </filter>
+</mobs>
+<gamerules>
+    <doMobLoot>false</doMobLoot>
+</gamerules>
+<!-- Gear System 3.0 -->
+<killreward>
+    <item amount="8">arrow</item>
+    <item name="`6Golden Snack">golden apple</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="2"/>
+    </filter>
+    <item damage="16368" potions="speed:36000:0:true" name="`bSwifty Potion">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="3"/>
+    </filter>
+    <item damage="374" enchantment="arrow damage:1" name="`bSnowy Sniper">bow</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="4"/>
+    </filter>
+    <item name="`bIce Pick 2.0" unbreakable="true" attributes="generic.attackDamage:add:6">diamond pickaxe</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="5"/>
+    </filter>
+    <item name="`cCold C4">tnt</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="6"/>
+    </filter>
+    <item name="`6Golden Chestplate" enchantment="protection projectile:2;protection environmental:2;durability:1">gold chestplate</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="7"/>
+    </filter>
+    <item name="`bSpeedy Boots" enchantment="protection fall:3;durability:1" attributes="generic.movementSpeed:base:0.15">gold boots</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="8"/>
+    </filter>
+    <item damage="16385" amount="2" potions="regeneration:300:0:true" name="`bRegeneration Potion">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="9"/>
+    </filter>
+    <item damage="51" amount="3" name="`bSkeletal Guardian">monster egg</item>
+    <item damage="54" amount="3" name="`bUndead Guardian">monster egg</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="10"/>
+    </filter>
+    <item name="`bEnder Teleporter">ender pearl</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="11"/>
+    </filter>
+    <item amount="3" name="`cCold C4">tnt</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="12"/>
+    </filter>
+    <item damage="374" enchantment="arrow knockback:1" name="`bStrechy Gun">bow</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="13"/>
+    </filter>
+    <item damage="95" amount="5" name="`7Fury Guardian">monster egg</item>
+    <item amount="32" name="`Guardian Snack">bone</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="14"/>
+    </filter>
+    <item damage="8261" potions="regeneration:450:0:true;damage resistance:450:0:true;heal:20:2:true" name="`bSuper Potion">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="15"/>
+    </filter>
+    <item amount="2">golden apple</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="16"/>
+    </filter>
+    <item damage="16368" potions="speed:36000:1:true" name="`bSwifty Potion II">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="17"/>
+    </filter>
+    <item damage="51" amount="10" name="`bSkeletal Guardian">monster egg</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="18"/>
+    </filter>
+    <item name="`bSuper Chestplate" enchantment="protection projectile:3;protection environmental:3;durability:1">diamond chestplate</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="19"/>
+    </filter>
+    <item name="`bIce Pick 3.1" unbreakable="true" attributes="generic.attackDamage:add:7" enchantment="knockback">diamond pickaxe</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="20"/>
+    </filter>
+    <item damage="374" enchantment="arrow damage:2" name="`bDeadly Sniper">bow</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="21"/>
+    </filter>
+    <item damage="50" amount="3" name="`aTicking Bombs">monster egg</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="22"/>
+    </filter>
+    <item name="`cCold C4" amount="5">tnt</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="23"/>
+    </filter>
+    <item damage="56" amount="3" name="`rAir Support">monster egg</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="24"/>
+    </filter>
+    <kit>
+        <double-jump/>
+    </kit>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="25"/>
+    </filter>
+    <item damage="95" amount="10" name="`7Fury Guardian">monster egg</item>
+    <item amount="32" name="`7Guardian Snack">bone</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="26"/>
+    </filter>
+    <item amount="32" name="`7Snowy Attack">snow ball</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="27"/>
+    </filter>
+    <item amount="4">golden apple</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="28"/>
+    </filter>
+    <item damage="16368" potions="speed:36000:2:true" name="`bSwifty Potion III">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="29"/>
+    </filter>
+    <item name="`cCold C4" amount="5">tnt</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="30"/>
+    </filter>
+    <item damage="51" amount="5" name="`bSkeletal Army">monster egg</item>
+    <item damage="52" amount="3" name="`bCrawling Army">monster egg</item>
+    <item damage="54" amount="7" name="`bUndead Army">monster egg</item>
+    <item damage="50" amount="3" name="`aBomb Army">monster egg</item>
+    <item damage="56" amount="3" name="`rAir Army">monster egg</item>
+    <item damage="55" amount="5" name="`aSlimy Army">monster egg</item>
+    <item name="`gCongragulations" lore="`rThere's no more rewards... sorry">paper</item>
+</killreward>
+<broadcasts>
+    <tip after="1s" every="5m">You cannot capture your own hill.. Capture the enemy hill for double points</tip>
+    <tip after="3s" every="5m">Everytime you get a kill, you will receive a special kill reward</tip>
+</broadcasts>
+</map>

@@ -1,0 +1,152 @@
+<map proto="1.4.2">
+<name>Cabin Fever</name>
+<version>1.5.6</version>
+<objective>Control the points to be the first team to 2500 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="e82504ac-8c95-4895-9dca-222f924d697c"/> <!-- TiggyLi -->
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+</authors>
+<teams>
+    <team id="green" color="dark green" max="32">Green</team>
+    <team id="yellow" color="yellow" max="32">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="0">
+            <cuboid min="23,76.5,110" max="22,76.5,111"/>
+        </region>
+    </default>
+    <spawns team="green" kit="spawn-kit">
+        <spawn yaw="135">
+            <region>
+                <cylinder base="-83.5,11,43.5" radius="3" height="1"/>
+            </region>
+        </spawn>
+        <spawn yaw="45">
+            <region>
+                <cylinder base="-83.5,11,9.5" radius="3" height="1"/>
+            </region>
+        </spawn>
+    </spawns>
+    <spawns team="yellow" kit="spawn-kit">
+        <spawn yaw="-45">
+            <region>
+                <cylinder base="129.5,11,9.5" radius="3" height="1"/>
+            </region>
+        </spawn>
+        <spawn yaw="-130">
+            <region>
+                <cylinder base="129.5,11,43.5" radius="3" height="1"/>
+            </region>
+        </spawn>
+    </spawns>
+</spawns>
+<filters>
+    <any id="cap-progress">
+        <material>stained clay:4</material>
+        <material>stained clay:9</material>
+        <material>stained clay:13</material>
+        <material>stained glass</material>
+    </any>
+    <deny id="deny-usable">
+        <material>beacon</material>
+    </deny>
+</filters>
+<regions>
+    <apply block="never" use="deny-usable"/>
+</regions>
+<portals>
+    <portal x="@37.5" y="@23" z="@36.5" yaw="@180">
+        <region>
+            <cuboid min="95,8,38" max="96,9,39"/>
+        </region>
+    </portal>
+    <portal x="@95.5" y="@7" z="@36.5" yaw="@180">
+        <region>
+            <cuboid min="37,24,38" max="38,25,39"/>
+        </region>
+    </portal>
+    <portal x="@8.5" y="@23" z="@36.5" yaw="@180">
+        <region>
+            <cuboid min="-49,8,38" max="-50,9,39"/>
+        </region>
+    </portal>
+    <portal x="@-49.5" y="@7" z="@36.5" yaw="@180">
+        <region>
+            <cuboid min="8,24,38" max="9,25,39"/>
+        </region>
+    </portal>
+</portals>
+<king>
+    <hills required="false" capture-time="5s" points="3" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false" visual-materials="cap-progress">
+        <hill name="Residential">
+            <capture>
+                <cylinder base="23,6,95" radius="5.5" height="3"/>
+            </capture>
+            <progress>
+                <cuboid min="18,4,90" max="27,6,99"/>
+            </progress>
+        </hill>
+        <hill name="Mountain">
+            <capture>
+                <cylinder base="23,38,28" radius="5.5" height="3"/>
+            </capture>
+            <progress>
+                <cuboid min="18,36,23" max="27,38,32"/>
+            </progress>
+        </hill>
+        <hill name="Forest">
+            <capture>
+                <cylinder base="23,9,-42" radius="5.5" height="3"/>
+            </capture>
+            <progress>
+                <cuboid min="18,7,-47" max="27,9,-38"/>
+            </progress>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>2500</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>glass bottle</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
