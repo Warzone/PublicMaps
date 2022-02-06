@@ -1,0 +1,219 @@
+<map proto="1.4.2">
+<name>Sinuous</name>
+<version>1.2.2</version>
+<objective>Be the first team to score 2500 points by controlling the hills!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
+    <author uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2"/> <!-- dinner1111 -->
+</authors>
+<contributors>
+    <contributor uuid="060baa18-2852-40d8-afcb-e61607c04be3" contribution="Being a shrub"/> <!-- pepsidawg00 -->
+    <contributor uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394" contribution="Ceiling help"/> <!-- moo88888888 -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<teams>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="4">heal</effect>
+    </kit>
+</kits>
+<spawns>
+    <default kit="default-kit">
+        <region yaw="90">
+            <cylinder base="192,62,-29" height="0" radius="2"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="135">
+            <cylinder base="226,10,4" height="0" radius="2"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="-45">
+            <cylinder base="158,10,-63" height="0" radius="2"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <material id="only-trapdoor">trap door</material>
+</filters>
+<regions>
+    <apply block="never" use="only-trapdoor"/>
+    <apply velocity="@0.0,2.5,0.0">
+        <region>
+            <union>
+                <cylinder base="175,7,-29" radius="1" height="1"/>
+                <cylinder base="192,7,-12" radius="1" height="1"/>
+                <cylinder base="209,7,-29" radius="1" height="1"/>
+                <cylinder base="192,7,-46" radius="1" height="1"/>
+            </union>
+        </region>
+    </apply>
+</regions>
+<portals>
+    <portal x="@164" y="@26" z="@4">
+        <region>
+            <cuboid min="171,8,21" max="173,10,23"/>
+        </region>
+    </portal>
+    <portal x="@159" y="@26" z="@-1">
+        <region>
+            <cuboid min="139,8,-10" max="141,10,-8"/>
+        </region>
+    </portal>
+    <portal x="@159" y="@26" z="@-57">
+        <region>
+            <cuboid min="139,8,-51" max="141,10,-49"/>
+        </region>
+    </portal>
+    <portal x="@164" y="@26" z="@-63">
+        <region>
+            <cuboid min="173,8,-81" max="171,10,-82"/>
+        </region>
+    </portal>
+    <portal x="@220" y="@26" z="@-63">
+        <region>
+            <cuboid min="214,8,-81" max="212,10,-82"/>
+        </region>
+    </portal>
+    <portal x="@226" y="@26" z="@-57">
+        <region>
+            <cuboid min="244,8,-49" max="245,10,-51"/>
+        </region>
+    </portal>
+    <portal x="@226" y="@26" z="@-1">
+        <region>
+            <cuboid min="244,8,-8" max="245,10,-10"/>
+        </region>
+    </portal>
+    <portal x="@220" y="@26" z="@3">
+        <region>
+            <cuboid min="212,8,22" max="214,10,23"/>
+        </region>
+    </portal>
+    <portal x="@141" y="@8" z="@-9">
+        <region>
+            <cuboid min="160,26,-2" max="158,28,-3"/>
+        </region>
+    </portal>
+    <portal x="@172" y="@8" z="@21">
+        <region>
+            <cuboid min="165,26,5" max="166,28,3"/>
+        </region>
+    </portal>
+    <portal x="@213" y="@8" z="@21">
+        <region>
+            <cuboid min="218,26,3" max="219,28,5"/>
+        </region>
+    </portal>
+    <portal x="@243" y="@8" z="@-9">
+        <region>
+            <cuboid min="225,26,-2" max="227,28,-3"/>
+        </region>
+    </portal>
+    <portal x="@243" y="@8" z="@-50">
+        <region>
+            <cuboid min="225,26,-55" max="227,28,-56"/>
+        </region>
+    </portal>
+    <portal x="@213" y="@8" z="@-80">
+        <region>
+            <cuboid min="218,26,-62" max="219,28,-64"/>
+        </region>
+    </portal>
+    <portal x="@172" y="@8" z="@-80">
+        <region>
+            <cuboid min="165,26,-62" max="166,28,-64"/>
+        </region>
+    </portal>
+    <portal x="@141" y="@8" z="@-50">
+        <region>
+            <cuboid min="160,26,-55" max="158,28,-56"/>
+        </region>
+    </portal>
+</portals>
+<king>
+    <hills required="false" capture-time="5s" points="3" time-multiplier="0" show-progress="true" neutral-state="true" decay="0" recovery="1" permanent="false">
+        <hill name="Centre">
+            <capture>
+                <cuboid min="196,13,-33" max="189,18,-26"/>
+            </capture>
+            <progress>
+                <cuboid min="196,12,-33" max="189,18,-26"/>
+            </progress>
+            <captured>
+                <cuboid min="196,13,-33" max="189,18,-26"/>
+            </captured>
+        </hill>
+        <hill name="Lime Hill">
+            <capture>
+                <cuboid min="153,10,9" max="163,15,-0"/>
+            </capture>
+            <progress>
+                <cuboid min="153,9,9" max="163,10,-0"/>
+            </progress>
+            <captured>
+                <cuboid min="153,10,9" max="163,15,-0"/>
+            </captured>
+        </hill>
+        <hill name="Magenta Hill">
+            <capture>
+                <cuboid min="221,10,-58" max="231,15,-68"/>
+            </capture>
+            <progress>
+                <cuboid min="221,9,-58" max="231,10,-68"/>
+            </progress>
+            <captured>
+                <cuboid min="221,10,-58" max="231,15,-68"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>2500</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>
