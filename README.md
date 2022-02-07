@@ -1,5 +1,5 @@
 # Warzone PublicMaps 
-<img src="https://warzone.network/img/warzone.svg" align="right" alt="Warzone Logo" width="120" height="178" style="margin-right: 50%">
+<img src="https://warzone.network/img/warzone.svg" align="right" alt="Warzone Logo" width="120" height="178">
 This repository contains public maps and active rotation list that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9. 
 <br>
 <br>
