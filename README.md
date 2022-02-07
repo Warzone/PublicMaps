@@ -1,10 +1,9 @@
-<p align="center">
-<img src="https://warzone.network/img/warzone.svg" alt="Warzone logo" width="64" height="64">
-</p>
-
-# Warzone PublicMaps
-
-This repository contains public maps and active rotation list that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9.
+# Warzone PublicMaps 
+<img src="https://warzone.network/img/warzone.svg" align="right" alt="Warzone Logo" width="120" height="178" style="margin-right: 50%">
+This repository contains public maps and active rotation list that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9. 
+<br>
+<br>
+<br>
 
 ## Contributing
 
@@ -37,12 +36,11 @@ In order to remove undesired portions of the map as well as to decrease its tota
 
 ## Support
 
-If you need any additional support with the mapmaking process, you may visit the [#mapmaking channel in the Warzone Discord server](https://warz.one/discord).
+If you need any additional support with the mapmaking process, you may visit the [#mapmaking](https://warz.one/discord) channel in the Warzone Discord server.
 
 ### Additional Resources
 
 -   [PGM Documentation](https://pgm.dev/) - The most current documentation for the latest (1.8) version of PGM. It covers the various features and modules offered by PGM as well as XML syntax. This resource is useful for beginner mapmakers that are not sure where to begin.
--   [OCN XML Documentation](https://docs.oc.tc/) - Older, but readable, documentation which contains some modules from 1.9 PGM. Some contents covered here **may not work** with the 1.8 fork of PGM used by Warzone.
 -   [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/), or [Notepad++](https://notepad-plus-plus.org/) - Some of the recommended programs for editing XML files, as it comes with syntax highlighting, autocompletion, and other tools to help you create XML files for your maps.
 -   [webNBT](https://github.com/iRath96/webNBT) or [NBT Explorer](https://github.com/jaquadro/NBTExplorer) - This will allow you to manipulate any map's `level.dat` as well as determining the version a certain map was created for.
 
