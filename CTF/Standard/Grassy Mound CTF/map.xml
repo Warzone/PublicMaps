@@ -3,145 +3,197 @@
 <version>1.0.1</version>
 <objective>Capture the other team's flag 3 times to win!</objective>
 <gamemode>ctf</gamemode>
+<time result="score" overtime="1m" max-overtime="2m">15m</time>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
 </authors>
 <teams>
-    <team id="blue-team" color="blue"     max="12">Blue</team>
-    <team id="red-team"  color="dark red" max="12">Red</team>
+    <team id="blue-team" color="blue" max="12">Blue</team>
+    <team id="red-team" color="dark red" max="12">Red</team>
 </teams>
 <kits>
-    <kit id="main-kit">
-        <clear />
-        <item slot="0" unbreakable="true" material="stone sword" />
-        <item slot="1" unbreakable="true" material="bow" />
-        <item slot="2" unbreakable="true" material="stone pickaxe" />
-        <item slot="3" unbreakable="true" material="stone axe" />
-        <item slot="4" amount="48"        material="wood" />
-        <item slot="7" amount="36"        material="arrow" />
-        <item slot="8" amount="64"        material="golden carrot" />
-        <chestplate    unbreakable="true" material="chainmail chestplate" />
-        <effect duration="3" amplifier="10">resistance</effect>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="30" unbreakable="true" material="iron spade"/>
+        <item slot="4" amount="48" material="wood"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="iron boots"/>
+        <effect duration="4" amplifier="255">resistance</effect>
     </kit>
-    <kit id="blue-kit" parents="main-kit">
-        <item     slot="5" amount="36" damage="11"  material="stained clay" />
-        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
-        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
-        <boots    unbreakable="true" color="0066cc" material="leather boots" />
+    <kit id="blue-kit" parents="spawn-kit">
+        <item slot="5" amount="36" damage="11" material="stained clay"/>
     </kit>
-    <kit id="red-kit" parents="main-kit">
-        <item     slot="5" amount="36" damage="14"  material="stained clay" />
-        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
-        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
-        <boots    unbreakable="true" color="cd0000" material="leather boots" />
+    <kit id="red-kit" parents="spawn-kit">
+        <item slot="5" amount="36" damage="14" material="stained clay"/>
+    </kit>
+    <kit id="flag-pickup" force="true">
+        <effect>slowness</effect>
+        <effect amplifier="-2">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
+    </kit>
+    <kit id="flag-dropped" force="true">
+        <effect duration="0" amplifier="0">slowness</effect>
+        <effect duration="0" amplifier="1">health boost</effect>
     </kit>
 </kits>
 <spawns>
-    <default yaw="-90">
-        <regions>
-            <cylinder base="30.5,13,227.5" radius="1.5" height="0.2" />
-        </regions>
+    <default>
+        <region yaw="-90">
+            <cylinder base="30.5,13,227.5" radius="1.5" height="0.2"/>
+        </region>
     </default>
     <spawn team="blue-team" kit="blue-kit">
-        <regions>
-            <point yaw="-90">36.5,8.5,280.5</point>
-        </regions>
+        <region yaw="-90">
+            <point>36.5,8.5,280.5</point>
+        </region>
     </spawn>
     <spawn team="red-team" kit="red-kit">
-        <regions>
-            <point yaw="90">106.5,8.5,174.5</point>
-        </regions>
+        <region yaw="90">
+            <point>106.5,8.5,174.5</point>
+        </region>
     </spawn>
 </spawns>
-<respawn delay="3s" />
 <filters>
     <team id="only-blue">blue-team</team>
     <team id="only-red">red-team</team>
-    <not id="deny-void">
-        <void />
-    </not>
-    <not id="void-break-ban">
-        <any>
-            <material>web</material>
-        </any>
-    </not>
-    <not id="deny-player-cause">
+    <deny id="deny-void">
+        <void/>
+    </deny>
+    <deny id="void-break-ban">
+        <material>web</material>
+    </deny>
+    <deny id="deny-player-cause">
         <cause>player</cause>
-    </not>
-    <not id="deny-enchant-break">
+    </deny>
+    <deny id="deny-enchant-break">
         <material>enchantment table</material>
-    </not>
+    </deny>
+    <time id="flag-respawns">0</time>
 </filters>
 <regions>
     <union id="team-spawns">
-        <cuboid id="blue-spawn" min="32,0,286" max="42,oo,273" />
-        <cuboid id="red-spawn"  min="111,0,169" max="101,oo,182" />
+        <cuboid id="blue-spawn" min="32,0,286" max="42,oo,273"/>
+        <cuboid id="red-spawn" min="111,0,169" max="101,oo,182"/>
     </union>
     <union id="return-nets">
-        <cylinder id="blue-return-platform" base="75.5,13,290.5" radius="1.5" height="6" />
-        <cylinder id="red-return-platform"  base="67.5,13,164.5" radius="1.5" height="6" />
+        <cylinder id="blue-return-platform" base="75.5,13,290.5" radius="1.5" height="6"/>
+        <cylinder id="red-return-platform" base="67.5,13,164.5" radius="1.5" height="6"/>
     </union>
-    <above id="world-limit" y="23" />
-    <apply region="return-nets"    block="never"                   message="You may not modify the flag platform" />
-    <apply region="blue-spawn"     enter="only-blue"               message="You may not enter the other team's spawn" />
-    <apply region="red-spawn"      enter="only-red"                message="You may not enter the other team's spawn" />
-    <apply region="team-spawns"    block="never"                   message="You may not modify the spawn area" />
-    <apply region="world-limit"    block-place="deny-player-cause" message="You may not place blocks that high" />
-    <apply block-place="deny-void" block-break="void-break-ban"    message="You may not interact with that material here" />
-    <apply                         block="deny-enchant-break"      message="You may not break the enchantment table" />
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the other team's spawn"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the other team's spawn"/>
+    <apply block="never" region="team-spawns" message="You may not modify the spawn area"/>
+    <apply block="never" region="return-nets" message="You may not modify the flag platform"/>
+    <apply block-place="deny-void" block-break="void-break-ban" message="You may not interact with that material here"/>
+    <apply block="deny-enchant-break" message="You may not break the enchantment table"/>
 </regions>
-<time>15m</time>
+<flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
+    <flag id="blue-flag"
+          name="Blue Flag"
+          owner="blue-team"
+          color="blue"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-dropped">
+        <post yaw="180" pickup-filter="only-red" recover-time="20s" respawn-time="8s">75.5,15,290.5</post>
+    </flag>
+    <flag id="red-flag"
+          name="Red Flag"
+          owner="red-team"
+          color="red"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-dropped">
+        <post yaw="0" pickup-filter="only-blue" recover-time="20s" respawn-time="8s">67.5,15,164.5</post>
+    </flag>
+    <flags points="1">
+        <net region="blue-return-platform" flag="red-flag" respawn-filter="flag-respawns"/>
+        <net region="red-return-platform" flag="blue-flag" respawn-filter="flag-respawns"/>
+    </flags>
+</flags>
 <score>
     <limit>3</limit>
 </score>
-<flags>
-    <flag id="blue-flag" name="Blue Flag" owner="blue-team" color="blue" pickup-filter="only-red">
-        <post yaw="180" return-time="20s" respawn-speed="8">75.5,15,290.5</post>
-        <net points="1" region="red-return-platform"/>
-    </flag>
-    <flag id="red-flag" name="Red Flag" owner="red-team" color="red" pickup-filter="only-blue">
-        <post yaw="0" return-time="20s" respawn-speed="8">67.5,15,164.5</post>
-        <net points="1" region="blue-return-platform"/>
-    </flag>
-</flags>
-<kill-rewards>
-    <kill-reward>
-        <item amount="8" material="wood" />
-        <item amount="8" material="arrow" />
-        <item amount="1" material="golden apple" />
-        <item amount="2" material="exp bottle" />
-    </kill-reward>
-    <kill-reward filter="only-blue">
-        <item amount="8" damage="11" material="stained clay" />
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item amount="8" damage="14" material="stained clay" />
-    </kill-reward>
-    <kill-reward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>seeds</item>
+    <item>gold block</item>
+    <item>coal block</item>
+    <item>string</item>
+</itemremove>
+<block-drops>
+    <rule>
         <filter>
-            <kill-streak count="6" repeat="false" />
+            <any>
+                <material>wood</material>
+                <material>stained clay</material>
+            </any>
         </filter>
-        <item damage="61" material="flint and steel" />
-        <item amount="1"  material="golden apple" />
-        <item amount="2"  material="exp bottle" />
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <kill-streak count="8" repeat="true" />
-        </filter>
-        <item amount="1" material="tnt" />
-    </kill-reward>
-</kill-rewards>
-<blockdrops>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
     <rule experience="8">
         <filter>
             <material>lapis ore</material>
         </filter>
         <drops>
-            <item amount="1" material="ink sack" damage="4" />
+            <item material="ink sack" damage="4"/>
         </drops>
     </rule>
-</blockdrops>
+</block-drops>
+<itemkeep>
+    <item>golden apple</item>
+    <item>wood</item>
+    <item>stained clay</item>
+    <item>exp bottle</item>
+    <item>flint and steel</item>
+    <item>tnt</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="12" material="wood"/>
+        <item amount="2" material="exp bottle"/>
+    </kill-reward>
+    <kill-reward filter="only-blue">
+        <item amount="8" damage="11" material="stained clay"/>
+    </kill-reward>
+    <kill-reward filter="only-red">
+        <item amount="8" damage="14" material="stained clay"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="false"/>
+        </filter>
+        <item damage="61" material="flint and steel"/>
+        <item amount="2" material="exp bottle"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="8" repeat="true"/>
+        </filter>
+        <item material="tnt"/>
+    </kill-reward>
+</kill-rewards>
 <item-mods>
     <rule>
         <match>
@@ -155,7 +207,7 @@
             <material>gold boots</material>
             <material>shears</material>
         </match>
-        <modify unbreakable="true" />
+        <modify unbreakable="true"/>
     </rule>
     <rule>
         <match>
@@ -166,28 +218,8 @@
         </modify>
     </rule>
 </item-mods>
-<itemremove>
-    <item>golden carrot</item>
-    <item>leather helmet</item>
-    <item>chainmail chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>seeds</item>
-    <item>gold block</item>
-    <item>coal block</item>
-    <item>string</item>
-    <item>arrow</item>
-    <item>wood</item>
-    <item>stained clay</item>
-</itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>exp bottle</item>
-</itemkeep>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-    <tool>stone pickaxe</tool>
-    <tool>stone axe</tool>
-</toolrepair>
+<respawn delay="3s"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

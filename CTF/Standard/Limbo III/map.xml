@@ -1,60 +1,72 @@
-<map proto="1.4.0" game="King of the Flag">
+<map proto="1.4.2" game="King of the Flag">
 <name>Limbo III</name>
-<version>1.1.3</version>
-<objective>Hold the flag for 200 seconds to win!</objective>
+<version>1.2.0</version>
+<objective>Control the flag for 180 seconds to win!</objective>
 <gamemode>kotf</gamemode>
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- VCRHeadCleaner -->
     <author uuid="b843e63b-4d8c-4606-b6da-08b3ed8534d1"/> <!-- snatimal -->
 </authors>
 <teams>
-    <team id="orange" color="gold" max="10">Orange</team>
     <team id="cyan" color="dark aqua" max="10">Cyan</team>
+    <team id="orange" color="gold" max="10">Orange</team>
 </teams>
-<gamemode>kotf</gamemode>
 <kits>
-    <kit id="spawn-kit">
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" amount="32">cooked beef</item>
-        <item slot="8" amount="16">arrow</item>
-        <effect duration="5" amplifier="4">heal</effect>
-        <effect duration="5" amplifier="4">damage resistance</effect>
-        <effect duration="oo">night vision</effect>
-        <leggings enchantment="protection projectile:1" unbreakable="true">iron leggings</leggings>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <game-mode>adventure</game-mode>
     </kit>
-    <kit id="cyan-kit" parents="spawn-kit">
-        <helmet color="4C7F99" unbreakable="true">leather helmet</helmet>
-        <chestplate color="4C7F99" unbreakable="true">leather chestplate</chestplate>
-        <boots color="4C7F99" unbreakable="true">leather boots</boots>
+    <kit id="flag-kit" force="true">
+        <effect>slowness</effect>
+        <effect amplifier="-3">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
     </kit>
-    <kit id="orange-kit" parents="spawn-kit">
-        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
-        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
-        <boots color="D87F33" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit id="obs-kit" force="true">
-        <potion effect="oo">night vision</potion>
+    <kit id="reset-health" force="true">
+        <effect duration="0" amplifier="0">slowness</effect>
+        <effect duration="0" amplifier="0">health boost</effect>
+        <effect duration="1" amplifier="10">regeneration</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="cyan" kit="cyan-kit" yaw="45" filter="flag-nada">
-        <region>
-            <cylinder base="-64.5,6,41.5" radius="2" height="1"/>
-        </region>
-    </spawn>
-    <spawn team="orange" kit="orange-kit" yaw="-135" filter="flag-nada">
-        <region>
-            <cylinder base="-111.5,6,88.5" radius="2" height="1"/>
-        </region>
-    </spawn>
-    <default kit="obs-kit" yaw="135">
-        <region>
+    <default kit="default-kit">
+        <region yaw="135">
             <cylinder base="-87.5,25,65.5" radius="1" height="1"/>
         </region>
     </default>
+    <spawn team="cyan" kit="spawn-kit" filter="flag-nada">
+        <region yaw="45">
+            <cylinder base="-64.5,6,41.5" radius="2" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="orange" kit="spawn-kit" filter="flag-nada">
+        <region yaw="-135">
+            <cylinder base="-111.5,6,88.5" radius="2" height="1"/>
+        </region>
+    </spawn>
 </spawns>
+<filters>
+    <any id="flag-nada">
+        <carrying-flag>flag</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </any>
+</filters>
 <regions>
     <apply block="never"/>
     <apply velocity="-1.7,1,-1.7">
@@ -63,50 +75,51 @@
         </region>
     </apply>
 </regions>
-<respawn spectate="true">
-    <message>
-        { translate: "death.respawn.confirmed.waiting.flagDropped" }
-    </message>
-</respawn>
-<filters>
-    <not id="flag-nada">
-        <same-team>
-            <carrying-flag>flag</carrying-flag>
-        </same-team>
-    </not>
-</filters>
+<flags>
+    <flag id="flag"
+          name="Flag"
+          color="white"
+          shared="true"
+          post="centre"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health"
+          flag-proximity-metric="none"
+          show-respawn-on-pickup="true">
+        <post id="centre" name="Centre" return-time="0s" respawn-time="15s" yaw="-45">-95.5,7,56.5</post>
+        <post id="post-a" name="Post A" return-time="0s" respawn-time="15s" yaw="-45">-121.5,6,30.5</post>
+        <post id="post-b" name="Post B" return-time="0s" respawn-time="15s" yaw="135">-52.5,4,99.5</post>
+    </flag>
+</flags>
+<score>
+    <limit>180</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
 <itemremove>
-    <item>arrow</item>
-    <item>golden apple</item>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
-    <item>iron leggings</item>
-    <item>leather boots</item>
-    <item>stone sword</item>
-    <item>bow</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
 </itemremove>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</kill-reward>
 <itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<score>
-    <limit>200</limit>
-    <kills>0</kills>
-    <deaths>0</deaths>
-</score>
-<flags>
-    <post id="post" return-time="0s" respawn-time="15s">
-        <block>-95.5,7,56.5</block>
-        <block>-121.5,6,30.5</block>
-        <block>-52.5,4,99.5</block>
-    </post>
-    <flag id="flag" name="Flag" color="white" shared="true" post="post" points-rate="1"/>
-</flags>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<respawn spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
