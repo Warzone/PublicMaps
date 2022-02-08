@@ -45,10 +45,10 @@
         <boots unbreakable="true" material="iron boots"/>
     </kit>
 </kits>
-<killreward>
+<kill-reward>
     <item material="golden apple"/>
     <item amount="10" material="arrow"/>
-</killreward>
+</kill-reward>
 <filters>
     <team id="red-only">red</team>
     <team id="blue-only">blue</team>
@@ -96,6 +96,7 @@
         <region id="blue-spawn-protection"/>
     </complement>
     <cuboid id="spawn-protection-1" min="6,20,7" max="-6,27,-7"/>
+    <cuboid id="water" min="-57,0,-21" max="58,1,22"/>
 <!-- Applied -->
     <apply enter="red-only" region="red-spawn" message="Only Red Team may enter this spawn!"/>
     <apply enter="blue-only" region="blue-spawn" message="Only Blue Team may enter this spawn!"/>
@@ -141,6 +142,20 @@
     <flag id="blue-flag" name="Blue Flag" color="blue" post="blue-flag-post"/>
     <net post="blue-flag-post" points="1" region="red-net" capture-filter="red-only"/>
 </flags>
+<renewables>
+    <renewable region="water" grow="true" particles="false" sound="false">
+        <renew-filter>
+            <any>
+                <material>stationary water</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
 <itemremove>
     <item>leather chestplate</item>
     <item>iron boots</item>
