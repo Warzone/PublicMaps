@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.3">
 <name>Blizz</name>
-<version>1.3.5</version>
+<version>1.3.6</version>
 <objective>You must be the first team to get to 750 points before time runs out!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -83,7 +83,7 @@
 </regions>
 <king>
     <hills neutral-state="true">
-        <hill name="South" points="2" capture-time="5s" capture-rule="exclusive" scaled-time="false">
+        <hill name="South" points="1" capture-time="5s" capture-rule="lead">
             <capture>
                 <cylinder base="280.5,36,439.5" radius="7" height="5"/>
             </capture>
@@ -93,14 +93,8 @@
             <captured>
                 <cuboid min="0,0,0" max="0,0,0"/>
             </captured>
-            <capture-filter>
-                <filter name="only-blue"/>
-            </capture-filter>
-            <defend-filter>
-                <filter name="only-green"/>
-            </defend-filter>
         </hill>
-        <hill name="Center" points="1" capture-time="15s" capture-rule="lead" scaled-time="true">
+        <hill name="Center" points="1" capture-time="5s" capture-rule="lead">
             <capture>
                 <cylinder base="266.5,45,390.5" radius="7" height="5"/>
             </capture>
@@ -111,7 +105,7 @@
                 <cuboid min="0,0,0" max="0,0,0"/>
             </captured>
         </hill>
-        <hill name="North" points="2" capture-time="5s" capture-rule="exclusive" scaled-time="false">
+        <hill name="North" points="1" capture-time="5s" capture-rule="lead">
             <capture>
                 <cylinder base="252.5,36,341.5" radius="7" height="5"/>
             </capture>
@@ -121,12 +115,6 @@
             <captured>
                 <cuboid min="0,0,0" max="0,0,0"/>
             </captured>
-            <capture-filter>
-                <filter name="only-green"/>
-            </capture-filter>
-            <defend-filter>
-                <filter name="only-blue"/>
-            </defend-filter>
         </hill>
     </hills>
 </king>
@@ -176,11 +164,11 @@
             <everywhere/>
         </region>
     </renewable>
-</renewables><!-- Disable until fixed
+</renewables>
 <modifybowprojectile>
     <projectile>Snowball</projectile>
     <velocityMod>1.5</velocityMod>
-</modifybowprojectile>-->
+</modifybowprojectile>
 <disabledamage>
     <damage enemy="false" other="false">block explosion</damage>
 </disabledamage>
@@ -383,7 +371,6 @@
     <item name="`gCongragulations" lore="`rThere's no more rewards... sorry">paper</item>
 </killreward>
 <broadcasts>
-    <tip after="1s" every="5m">You cannot capture your own hill.. Capture the enemy hill for double points</tip>
     <tip after="3s" every="5m">Everytime you get a kill, you will receive a special kill reward</tip>
 </broadcasts>
 </map>
