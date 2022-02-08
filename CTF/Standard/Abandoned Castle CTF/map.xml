@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Capture the Flag">
 <name>Abandoned Castle CTF</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Capture the enemy flag 3 times to win!</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -36,11 +36,6 @@
         <helmet unbreakable="true" color="7FCC19" material="leather helmet"/>
         <chestplate unbreakable="true" color="7FCC19" material="leather chestplate"/>
     </kit>
-    <kit id="kill-reward-kit">
-        <item amount="4" material="arrow"/>
-        <item material="golden apple"/>
-        <effect duration="5s" amplifier="1">speed</effect>
-    </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
@@ -72,11 +67,11 @@
 <!-- Flags -->
 <flags>
     <!-- Yellow's Flag -->
-    <post id="yellow-flag-post" pickup-filter="lime-only" recover-time="0" respawn-time="10s">10,21,-23</post>
+    <post id="yellow-flag-post" pickup-filter="lime-only" recover-time="15s" respawn-time="10s">10,21,-23</post>
     <flag id="yellow-flag" owner="yellow" name="Yellow Flag" color="yellow" post="yellow-flag-post" beam="true"/>
     <net post="yellow-flag-post" points="1" region="lime-net" capture-filter="lime-only"/>
     <!-- Lime's Flag -->
-    <post id="lime-flag-post" pickup-filter="yellow-only" recover-time="0" respawn-time="10s">10,21,95</post>
+    <post id="lime-flag-post" pickup-filter="yellow-only" recover-time="15s" respawn-time="10s">10,21,95</post>
     <flag id="lime-flag" owner="lime" name="Lime Flag" color="lime" post="lime-flag-post" beam="true"/>
     <net post="lime-flag-post" points="1" region="yellow-net" capture-filter="yellow-only"/>
 </flags>
@@ -94,8 +89,10 @@
 </itemremove>
 <!-- Kill Rewards -->
 <kill-rewards>
-    <killreward>
-        <kit id="kill-reward-kit"/>
-    </killreward>
+    <kill-reward>
+        <item amount="4" material="arrow"/>
+        <item material="golden apple"/>
+        <effect duration="5s" amplifier="1">speed</effect>
+    </kill-reward>
 </kill-rewards>
 </map>
