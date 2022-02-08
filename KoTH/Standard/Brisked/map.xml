@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Brisked</name>
-<version>1.0.12</version>
+<version>1.0.13</version>
 <objective>Collect the most points in 10 minutes!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -131,27 +131,61 @@
             <void />
         </not>
     </all>
-    <any id="objective-inclusive-nw">
-        <filter id="objective-single-nw" />
+    <all id="objective-inclusive-nw">
+        <any>
+            <filter id="objective-single-nw" />
+            <not>
+                <any>
+                    <objective team="orange-team">hill-nw</objective>
+                    <objective team="purple-team">hill-nw</objective>
+                </any>
+            </not>
+        </any>
         <not>
             <any>
-                <objective team="orange-team">hill-nw</objective>
-                <objective team="purple-team">hill-nw</objective>
+                <carrying>
+                    <item material="iron ingot" />
+                </carrying>
+                <carrying>
+                    <item material="gold ingot" />
+                </carrying>
             </any>
         </not>
-    </any>
-    <any id="objective-inclusive-se">
-        <filter id="objective-single-se" />
+    </all>
+    <all id="objective-inclusive-se">
+        <any>
+            <filter id="objective-single-se" />
+            <not>
+                <any>
+                    <objective team="orange-team">hill-se</objective>
+                    <objective team="purple-team">hill-se</objective>
+                </any>
+            </not>
+        </any>
         <not>
             <any>
-                <objective team="orange-team">hill-se</objective>
-                <objective team="purple-team">hill-se</objective>
+                <carrying>
+                    <item material="iron ingot" />
+                </carrying>
+                <carrying>
+                    <item material="gold ingot" />
+                </carrying>
             </any>
         </not>
-    </any>
+    </all>
     <all id="objective-exclusive">
         <objective any="false">hill-se</objective>
         <objective any="false">hill-nw</objective>
+        <not>
+            <any>
+                <carrying>
+                    <item material="iron ingot" />
+                </carrying>
+                <carrying>
+                    <item material="gold ingot" />
+                </carrying>
+            </any>
+        </not>
     </all>
     <objective id="objective-single-se" any="false">hill-se</objective>
     <objective id="objective-single-nw" any="false">hill-nw</objective>
