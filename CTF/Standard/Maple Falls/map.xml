@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Maple Falls</name>
+<version>1.2.1</version>
+<objective>Be the first team to capture the enemy flag 3 times!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<contributors>
+	<contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML Reformat"/> <!-- BGMP -->
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Not knowing how different 1.3 and 1.4 protos are"/> <!-- ViceTechnicolour -->
+</contributors>
+<teams>
+    <team id="cyan-team" color="dark aqua" max="5" max-overfill="6">Cyan</team>
+    <team id="magenta-team" color="light purple" max="5" max-overfill="6">Magenta</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true" enchantment="arrow infinite"/>
+        <item slot="28" material="arrow"/>
+        <chestplate material="chainmail chestplate" locked="true" unbreakable="true"/>
+        <effect duration="5" amplifier="4">heal</effect>
+        <effect duration="5" amplifier="4">damage resistance</effect>
+        <effect duration="oo">night vision</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="cyan-kit" parents="spawn-kit">
+        <helmet material="leather helmet" color="4C7F99" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" color="4C7F99" locked="true" unbreakable="true"/>
+        <boots material="leather boots" color="4C7F99" locked="true" unbreakable="true" enchantment="protection fall"/>
+    </kit>
+    <kit id="magenta-kit" parents="spawn-kit">
+        <helmet material="leather helmet" color="B24CD8" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" color="B24CD8" locked="true" unbreakable="true"/>
+        <boots material="leather boots" color="B24CD8" locked="true" unbreakable="true" enchantment="protection fall"/>
+    </kit>
+    <kit id="nv-kit">
+        <effect duration="oo">night vision</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="magenta-team" kit="magenta-kit" yaw="45">
+        <region>
+            <point>21.5,7,-29.5</point>
+        </region>
+    </spawn>
+    <spawn team="magenta-team" kit="magenta-kit" yaw="-45">
+        <region>
+            <point>-20.5,7,-29.5</point>
+        </region>
+    </spawn>
+    <spawn team="cyan-team" kit="cyan-kit" yaw="135">
+        <region>
+            <point>21.5,7,29.5</point>
+        </region>
+    </spawn>
+    <spawn team="cyan-team" kit="cyan-kit" yaw="-135">
+        <region>
+            <point>-20.5,7,29.5</point>
+        </region>
+    </spawn>
+    <default kit="nv-kit" yaw="-90">
+        <region>
+            <cylinder base="-37,28,0" radius="2" height="1"/>
+        </region>
+    </default>
+</spawns>
+<flags>
+    <flag id="magenta flag" name= "Magenta Flag" owner="magenta-team" pickup-filter="only-cyan">
+        <post yaw="0" return-time="5s" respawn-speed="5">0.5,11,-24.5</post>
+        <net points="1" region="cyan-platform"/>
+    </flag>
+    <flag id="cyan flag" name="Cyan Flag" owner="cyan-team" pickup-filter="only-magenta">
+        <post yaw="-180" return-time="5s" respawn-speed="5">0.5,11,24.5</post>
+        <net points="1" region="magenta-platform"/>
+    </flag>
+</flags>
+<time>7m</time>
+<score>
+    <limit>3</limit>
+</score>
+<filters>
+	<team id="only-cyan">cyan-team</team>
+	<team id="only-magenta">magenta-team</team>
+</filters>
+<regions>
+	<cuboid id="magenta-platform" min="-1.5,11,-22.5" max="2.5,13,-26.5"/>
+	<cuboid id="cyan-platform" min="2.5,11,22.5" max="-1.5,13,26.5"/>
+    <!-- applicators -->
+    <apply block="never" region="everywhere"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<kill-rewards>
+    <killreward>
+        <item material="golden apple"/>
+    </killreward>
+</kill-rewards>
+</map>

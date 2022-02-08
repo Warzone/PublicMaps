@@ -1,0 +1,101 @@
+<map proto="1.4.0">
+<name>Odin</name>
+<version>1.0.0</version>
+<objective>Cap the flag of the enemy 5 times!</objective>
+<score>
+	<limit>4</limit>
+	<kills>0</kills>
+</score>
+<gamemode>ctf</gamemode>
+<authors>
+	<author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
+	<author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<time result="objectives">10m</time>
+<respawn delay="4s"/>
+<teams>
+	<team id="red-team" color="dark red" max="4" max-overfill="4">Red</team>
+	<team id="blue-team" color="blue" max="4" max-overfill="4">Blue</team>
+</teams>
+<kits>
+	<kit id="spawn" force="true">
+		<item slot="0">stone sword</item>
+		<item slot="1">bow</item>
+		<item slot="2" name="Holy Fruit" amount="1">golden apple</item>
+		<item slot="8" amount="8">arrow</item>
+		<helmet unbreakable="true">gold helmet</helmet>
+		<leggings unbreakable="true">iron leggings</leggings>
+		<effect duration="1" amplifier="15">damage resistance</effect>
+	</kit>
+	<kit id="red-kit" parents="spawn">
+		<chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+		<boots color="993333" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+	</kit>
+	<kit id="blue-kit" parents="spawn">
+		<chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+		<boots color="334CB2" unbreakable="true" enchantment="protection fall:1">leather boots</boots>
+	</kit>
+	<kit id="flag-kit">
+		<effect duration="oo" amplifier="1">slowness</effect>
+	</kit>
+</kits>
+<spawns>
+	<spawn team="red-team" kit="red-kit">
+        <regions yaw="90">
+			<point>-240.5,5,285.5</point>
+		</regions>
+	</spawn>
+	<spawn team="blue-team" kit="blue-kit">
+		<regions yaw="-90">
+			<point>-280.5,5,313.5</point>
+		</regions>
+	</spawn>
+	<default>
+		<regions yaw="0">
+			<cylinder base="-260.5,14,299.5" radius="1" height="0"/>
+		</regions>
+	</default>
+</spawns>
+<filters>
+	<team id="only-blue">blue-team</team>
+	<team id="only-red">red-team</team>
+</filters>
+<regions>
+	<apply block="never"/>
+</regions>
+<flags>
+	<post id="red-post" pickup-filter="only-blue" recover-time="7s" respawn-time="3s" yaw="-45">-265,8,275</post>
+	<post id="blue-post" pickup-filter="only-red" recover-time="7s" respawn-time="3s" yaw="135">-257,8,323</post>
+	<flag id="red-flag" owner="red-team" required="false" name="Red Flag" color="red" post="red-post" carry-kit="flag-kit"
+		carry-message="You are carrying the flag! Return it to your spawn!"/>
+	<flag id="blue-flag" owner="blue-team" required="false" name="Blue Flag" color="blue" post="blue-post" carry-kit="flag-kit"
+		carry-message="You are carrying the flag! Return it to your spawn!"/>
+	<net flag="red-flag" points="1">
+		<region>
+			<cuboid min="-278,0,310" max="-283,22,317"/>
+		</region>
+	</net>
+	<net flag="blue-flag" points="1">
+		<region>
+			<cuboid min="-243,0,289" max="-238,22,282"/>
+		</region>
+	</net>
+</flags>
+<killreward>
+	<item name="Holy Fruit">golden apple</item>
+	<item amount="6">arrow</item>
+</killreward>
+<itemremove>
+	<item>gold helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+</itemremove>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

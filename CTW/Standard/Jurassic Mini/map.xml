@@ -1,0 +1,219 @@
+<map proto="1.4.0">
+<name>Jurassic Mini</name>
+<version>1.0.0</version>
+<objective>Capture the enemy's two wools!</objective>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Most of obs-spawn Dino"/> <!-- rockymine -->
+</contributors>
+<teams>
+	<team id="yellow-team" color="yellow" max="5">Yellow</team>
+	<team id="purple-team" color="dark purple" max="5">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed">stone axe</item>
+        <item slot="4" amount="32" damage="4">wood</item>
+        <item slot="5" amount="16">glass</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="28">arrow</item>
+        <item slot="29" unbreakable="true" enchantment="dig speed">iron spade</item>
+        <potion amplifier="255" duration="6s">resistance</potion>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+    </kit>
+    <kit id="yellow-kit" parents="spawn-kit">
+        <chestplate color="E5E533" unbreakable="true" material="leather chestplate"/>
+        <boots color="E5E533" unbreakable="true" material="leather boots"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <chestplate color="7F3FB2" unbreakable="true" material="leather chestplate"/>
+        <boots color="7F3FB2" unbreakable="true" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="yellow-team" kit="yellow-kit">
+        <regions yaw="180">
+            <point>-120.5,3,117.5</point>
+        </regions>
+    </spawn>
+    <spawn team="purple-team" kit="purple-kit">
+        <regions yaw="0">
+            <point>-120.5,3,3.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-170.5,25,62.5" max="-169.5,25,64.5"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <not id="no-void">
+      <void/>
+    </not>
+    <team id="only-yellow">yellow-team</team>
+    <team id="only-purple">purple-team</team>
+    <all id="only-iron">
+        <material>iron block</material>
+    </all>
+    <not id="deny-yellow-woolrooms">
+        <any>
+            <filter id="only-yellow"/>
+            <filter id="no-chest"/>
+        </any>
+    </not>
+    <not id="deny-purple-woolrooms">
+        <any>
+            <filter id="only-purple"/>
+            <filter id="no-chest"/>
+        </any>
+    </not>
+    <any id="no-chest">
+        <material>chest</material>
+    </any>
+</filters>
+<regions>
+    <union id="bridges">
+        <cuboid min="-123,5,31" max="-118,11,26"/>
+        <cuboid min="-118,5,90" max="-123,11,95"/>
+    </union>
+    <union id="buildable">
+        <rectangle min="-93,99" max="-148,22"/>
+    </union>
+    <union id="not-buildable">
+        <rectangle min="-123,22" max="-118,42"/>
+        <rectangle min="-117,42" max="-124,34"/>
+        <rectangle min="-125,35" max="-116,42"/>
+        <rectangle min="-123,99" max="-118,79"/>
+        <rectangle min="-116,79" max="-125,86"/>
+        <rectangle min="-117,79" max="-124,87"/>
+        <!-- Redstone wires on outside skybridge lanes -->
+        <rectangle min="-148,27" max="-149,46"/>
+        <rectangle min="-93,27" max="-92,46"/>
+        <rectangle min="-93,94" max="-92,75"/>
+        <rectangle min="-148,94" max="-149,75"/>
+    </union>
+    <union id="spawns">
+        <union id="yellow-spawn">
+	        	<rectangle min="-109,104" max="-132,128"/>
+	      </union>
+        <union id="purple-spawn">
+	        	<rectangle min="-132,17" max="-109,-7"/>
+      	</union>
+    </union>
+    <union id="woolrooms">
+    	  <union id="yellow-woolrooms">
+		        <rectangle min="-98,112" max="-92,121"/> <!-- Dark Grey -->
+		        <rectangle min="-149,112" max="-143,121"/> <!-- Red -->
+	      </union>
+	      <union id="purple-woolrooms">
+	        	<rectangle min="-143,9" max="-149,0"/> <!-- Lime -->
+		        <rectangle min="-98,9" max="-92,0"/> <!-- Blue -->
+	      </union>
+    </union>
+    <union id="spawner-stuff">
+        <union id="east-spawner-things">
+            <cuboid id="east-spawner" min="-92,4,60" max="-93,6,61"/>
+            <cuboid id="east-spawner-drop" min="-92.4,6.5,60.4" max="-92.6,6.5,60.6"/>
+            <cuboid id="east-spawner-activation" min="-90,3,65" max="-97,8,56"/>
+        </union>
+        <union id="west-spawner-things">
+            <cuboid id="west-spawner" min="-148,4,60" max="-149,6,61"/>
+            <cuboid id="west-spawner-drop" min="-148.4,6.5,60.4" max="-148.6,6.5,60.6"/>
+            <cuboid id="west-spawner-activation" min="-151,3,56" max="-144,8,65"/>
+        </union>
+    </union>
+    <apply block="only-iron" region="spawns" message="You may not edit the spawn!"/>
+	  <apply enter="only-yellow" region="yellow-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply enter="only-purple" region="purple-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply block="deny-yellow-woolrooms" region="yellow-woolrooms"/>
+    <apply block="deny-purple-woolrooms" region="purple-woolrooms"/>
+    <apply block="only-purple" region="yellow-woolrooms"/>
+    <apply block="only-yellow" region="purple-woolrooms"/>
+    <apply use="only-purple" region="yellow-woolrooms"/>
+    <apply use="only-yellow" region="purple-woolrooms"/>
+  	<apply enter="only-purple" region="yellow-woolrooms" message="You may not enter your own wool room!"/>
+    <apply enter="only-yellow" region="purple-woolrooms" message="You may not enter your own wool room!"/>
+    <apply block="never" region="east-spawner" message="You may not destroy the spawners!"/>
+    <apply block="never" region="west-spawner" message="You may not destroy the spawners!"/>
+    <apply block="never" region="bridges" message="You may not edit the bridge!"/>
+    <apply block-place="never" region="not-buildable" message="You may not edit the void!"/>
+    <apply block="always" region="buildable"/>
+	  <apply block-place="no-void" message="You may not edit the void!"/>
+</regions>
+<renewables>
+    <renewable rate="1" grow="false" particles="true" sound="true" avoid-entities="true" region="spawns">
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+<spawners>
+    <spawner id="east-gapple-spawner" spawn-region="east-spawner-drop" player-region="east-spawner-activation" max-entities="9999" delay="6s">
+        <item amount="1" material="golden apple"/>
+    </spawner>
+    <spawner id="west-gapple-spawner" spawn-region="west-spawner-drop" player-region="west-spawner-activation" max-entities="9999" delay="6s">
+        <item amount="1" material="golden apple"/>
+    </spawner>
+</spawners>
+<wools>
+	<wool team="yellow-team" color="lime" location="-146,7,4">
+		<monument><block>-121.5,4,105.5</block></monument>
+	</wool>
+	<wool team="yellow-team" color="blue" location="-95,7,4">
+		<monument><block>-119.5,4,105.5</block></monument>
+	</wool>
+	<wool team="purple-team" color="red" location="-146,7,117">
+		<monument><block>-121.5,4,15.5</block></monument>
+	</wool>
+	<wool team="purple-team" color="magenta" location="-95,7,117">
+		<monument><block>-119.5,4,15.5</block></monument>
+	</wool>
+</wools>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden carrot</item>
+  	<item damage="4">wood</item>
+  	<item>glass</item>
+  	<item>string</item>
+    <item>sapling</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>31</item>
+    <item>37</item>
+    <item>38</item>
+    <item>338</item>
+    <item>apple</item>
+    <item>flint</item>
+    <item>redstone</item>
+    <item>redstone torch on</item>
+    <item>seeds</item>
+</itemremove>
+<killreward>
+	  <item>golden apple</item>
+    <item amount="8" damage="4">wood</item>
+</killreward>
+<crafting>
+	<disable>iron trapdoor</disable>
+	<disable>minecart</disable>
+	<disable>boat</disable>
+</crafting>
+<timelock>on</timelock>
+<maxbuildheight>15</maxbuildheight>
+<time results="objective">20m</time>
+<respawn delay="6s" blackout="true"/>
+</map>
