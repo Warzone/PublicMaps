@@ -16,8 +16,8 @@
     <tip after="5s">Go to your left or right to craft iron armor!</tip>
 </broadcasts>
 <teams>
-    <team id="red" color="dark red" max="8" max-overfill="12">Red Team</team>
-    <team id="blue" color="blue" max="8" max-overfill="12">Blue Team</team>
+    <team id="red" color="dark red" max="8" max-overfill="12">Red</team>
+    <team id="blue" color="blue" max="8" max-overfill="12">Blue</team>
 </teams>
 <score>
     <limit>3</limit>
@@ -133,11 +133,11 @@
 </spawns>
 <flags>
 <!-- Red's Flag -->
-    <post id="red-flag-post" pickup-filter="blue-only">37.5,1,0.5</post>
+    <post id="red-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="blue-only">37.5,1,0.5</post>
     <flag id="red-flag" name="Red Flag" color="red" post="red-flag-post"/>
     <net post="red-flag-post" points="1" region="blue-net" capture-filter="blue-only"/>
 <!-- Blue's Flag -->
-    <post id="blue-flag-post" pickup-filter="red-only">-36.5,1,0.5</post>
+    <post id="blue-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="red-only">-36.5,1,0.5</post>
     <flag id="blue-flag" name="Blue Flag" color="blue" post="blue-flag-post"/>
     <net post="blue-flag-post" points="1" region="red-net" capture-filter="red-only"/>
 </flags>
@@ -157,6 +157,6 @@
     <item>iron chestplate</item>
     <item>iron leggings</item>
 </itemremove>
-<time>15m</time>
+<time>12m</time>
 <maxbuildheight>19</maxbuildheight>
 </map>
