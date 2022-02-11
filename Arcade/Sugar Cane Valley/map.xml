@@ -1,0 +1,136 @@
+<map proto="1.4.0" game="Rush">
+<name>Sugar Cane Valley</name>
+<version>1.1.4</version>
+<slug>sugar_cane_valley</slug>
+<objective>Make it to the end and destroy the Defender's monument!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
+    <!-- AtlasGames -->
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527" />
+    <!-- Yoyo_-->
+</authors>
+<contributors>
+    <contributor uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/>
+    <!-- SamSafari -->
+</contributors>
+<teams>
+    <team id="runners" color="light purple" max="25" max-overfill="40" plural="true">Runners</team>
+    <team id="defenders" color="dark blue" max="5" max-overfill="5" plural="true">Defenders</team>
+</teams>
+<spawns>
+    <spawn team="runners" kit="runner-kit" yaw="90">
+        <regions>
+            <point>56.5,87,33.5</point>
+        </regions>
+    </spawn>
+    <spawn team="defenders" kit="defender-kit" yaw="90">
+        <regions>
+            <point>63.5,85,71.5</point>
+            <point>63.5,85,-4.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="-90">-407.5,84,33.5</point>
+        </regions>
+    </default>
+</spawns>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<kits>
+    <kit id="runner-kit">
+        <helmet color="B24CD8" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="F27FA5" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="B24CD8" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="F27FA5" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="defender-kit">
+        <walk-speed>2.5</walk-speed>
+        <helmet color="293878" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="293878" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="293878" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="293878" unbreakable="true" locked="true">leather boots</boots>
+        <item slot="1" unbreakable="true" enchantment="arrow knockback:1;arrow damage:3;arrow infinite:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sponge</item>
+    <item>arrow</item>
+    <item>stick</item>
+    <item>wood</item>
+</itemremove>
+<portals>
+    <portal z="78" y="@85" yaw="@180">
+        <region>
+            <cuboid min="66,84,-6" max="-404,83,-9" />
+        </region>
+    </portal>
+    <portal z="-78" y="@85" yaw="@0">
+        <region>
+            <cuboid min="66,84,72" max="-404,83,76" />
+        </region>
+    </portal>
+</portals>
+<killreward>
+    <filter>
+        <all>
+            <team>defenders</team>
+            <kill-streak count="5" />
+        </all>
+    </filter>
+    <kit force="true">
+        <item slot="1" enchantment="arrow knockback:1;arrow damage:5;arrow infinite:1" name="`AUpgraded Bow">bow</item>
+    </kit>
+</killreward>
+<destroyables>
+    <destroyable owner="defenders" name="Monument" region="monument" materials="sponge" required="true" />
+</destroyables>
+<time result="defenders">6m</time>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<filters>
+    <any id="mon">
+        <material>sponge</material>
+    </any>
+</filters>
+<regions>
+    <cuboid id="monument" min="-411,84,30" max="-409,86,36"/>
+
+    <cuboid id="pad-1A" min="-120,84,45" max="-118,85,47" />
+    <cuboid id="pad-2A" min="-135,80,43" max="-133,81,45" />
+    <cuboid id="pad-3A" min="-134,79,35" max="-132,80,37" />
+    <cuboid id="pad-4A" min="-140,73,44" max="-138,74,46" />
+    <cuboid id="pad-1B" min="-120,84,20" max="-118,85,22" />
+    <cuboid id="pad-2B" min="-135,80,22" max="-133,81,24" />
+    <cuboid id="pad-3B" min="-134,79,30" max="-132,80,32" />
+    <cuboid id="pad-4B" min="-140,73,21" max="-138,74,23" />
+    <cuboid id="pad-Mid" min="-144,72,32" max="-141,73,35" />
+
+    <apply region="pad-2A" velocity="-4,2,-0.5" />
+    <apply region="pad-3A" velocity="-4,2,-0.5" />
+    <apply region="pad-4A" velocity="-3,2,-0.5" />
+    <apply region="pad-2B" velocity="-4,2,0.5" />
+    <apply region="pad-3B" velocity="-4,2,0.5" />
+    <apply region="pad-4B" velocity="-3,2,0.5" />
+    <apply region="pad-Mid" velocity="-2,2,0" />
+
+    <apply region="everywhere" block="mon"/>
+</regions>
+</map>

@@ -1,0 +1,200 @@
+<map proto="1.4.0" game="Ice Miners">
+<name>Ice Miners</name>
+<objective>Collect all the gold you can as you make your way down the tunnel!</objective>
+<gamemode>arcade</gamemode>
+<version>1.2.0</version>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
+    <!-- AtlasGames !-->
+</authors>
+<broadcasts>
+    <tip after="1m" every="30s">The scorebox is at the bottom of the map!</tip>
+</broadcasts>
+<players max="8" min="4" max-overfill="8" show-name-tags="false" />
+<timelock>on</timelock>
+<time>3m</time>
+<score>
+    <box region="scorebox">
+        <redeemables>
+            <item points="3">gold nugget</item>
+            <item points="5">gold ingot</item>
+            <item points="10">gold block</item>
+            <item points="10">diamond</item>
+            <item points="25">diamond block</item>
+        </redeemables>
+    </box>
+</score>
+<spawns>
+    <spawn kit="spawn-kit">
+        <regions>
+            <point yaw="-90">-21.5,101,0.5</point>
+        </regions>
+    </spawn>
+    <default kit="nightvision">
+        <regions>
+            <point yaw="-90">-21.5,101,0.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit">
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true">leather boots</boots>
+        <item slot="0" unbreakable="true" name="`6Miner's Joy" material="iron pickaxe">
+            <enchantment level="6">damage undead</enchantment>
+            <enchantment level="5">dig speed</enchantment>
+        </item>
+        <potion duration="oo" amplifier="3">resistance</potion>
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="nightvision">
+        <potion duration="oo">night vision</potion>
+    </kit>
+</kits>
+<itemremove>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>iron pickaxe</item>
+    <item>rotten flesh</item>
+    <item>carrot item</item>
+    <item>potato item</item>
+    <item>iron spade</item>
+    <item>iron ingot</item>
+</itemremove>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<portals>
+    <portal region="scorebox" y="110" />
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<damage>
+    <allow>
+        <any>
+            <entity>ZOMBIE</entity>
+        </any>
+    </allow>
+    <deny>
+        <all>
+            <attacker>
+                <cause>PLAYER</cause>
+            </attacker>
+            <victim>
+                <cause>PLAYER</cause>
+            </victim>
+        </all>
+    </deny>
+    <deny>
+        <cause>FALL</cause>
+    </deny>
+</damage>
+<regions>
+    <cuboid min="-10,0,-10" max="10,2,10" id="scorebox" />
+
+    <apply block-place="replace-ice" region="everywhere" />
+    <apply block="player-mine" region="everywhere" />
+</regions>
+<filters>
+    <all id="player-mine">
+        <cause>player</cause>
+        <any>
+            <material>diamond ore</material>
+            <material>gold ore</material>
+            <material>ice</material>
+        </any>
+    </all>
+    <all id="replace-ice">
+        <not>
+            <cause>player</cause>
+        </not>
+        <any>
+            <material>diamond ore</material>
+            <material>gold ore</material>
+            <material>stone</material>
+            <material>ice</material>
+            <material>air</material>
+            <material>water</material>
+        </any>
+    </all>
+</filters>
+<crafting>
+    <disable>gold ingot</disable>
+    <disable>gold block</disable>
+    <disable>gold nugget</disable>
+    <disable>diamond</disable>
+    <disable>diamond block</disable>
+</crafting>
+<renewables>
+    <renewable interval="10s" grow="false" particles="false" sound="true">
+        <region>
+            <everywhere/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>ice</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+                <material>water</material>
+            </any>
+        </replace-filter>
+    </renewable>
+    <renewable interval="1m" grow="false" particles="false" sound="true">
+        <region>
+            <everywhere />
+        </region>
+        <renew-filter>
+            <any>
+                <material>stone</material>
+                <material>gold ore</material>
+                <material>diamond ore</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+                <material>stone</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<block-drops>
+    <rule region="everywhere">
+        <filter>
+            <material>gold ore</material>
+        </filter>
+        <drops>
+            <item chance="1" name="`6Gold Nugget [3 Points]">gold nugget</item>
+            <item chance="0.2" name="`6Gold Ingot [5 Points]">gold ingot</item>
+            <item chance="0.05" name="`6Gold Block [10 Points]">gold block</item>
+        </drops>
+        <replacement>air</replacement>
+    </rule>
+    <rule region="everywhere">
+        <filter>
+            <material>diamond ore</material>
+        </filter>
+        <drops>
+            <item chance="1" name="`bDiamond [10 Points]">diamond</item>
+            <item chance="0.05" name="`bDiamond Block [25 Points]">diamond block</item>
+        </drops>
+        <replacement>air</replacement>
+    </rule>
+    <rule region="everywhere" punch="true" wrongtool="true">
+        <filter>
+            <material>ice</material>
+        </filter>
+        <replacement>air</replacement>
+    </rule>
+</block-drops>
+</map>

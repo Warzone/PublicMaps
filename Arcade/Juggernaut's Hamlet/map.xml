@@ -1,0 +1,251 @@
+<map proto="1.4.0" game="Juggernaut">
+<name>Juggernaut's Hamlet</name>
+<version>1.1.2</version>
+<objective>Run from the Juggernaut!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
+    <!-- AtlasGames -->
+</authors>
+<contributors>
+    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="Extra Parkour" />
+    <!-- Yoyo_-->
+</contributors>
+<broadcasts>
+    <alert after="1s" filter="runner-team">`6`lRun from the `9`lJuggernaut!</alert>
+    <alert after="15s" filter="runner-team">`6`lThe `9`lJuggernaut `6`lhas been released!</alert>
+    <alert after="10s" filter="juggernaut-team">`6`lYou will be released in 5s!</alert>
+    <alert after="12s" filter="juggernaut-team">`6`lYou will be released in 3s!</alert>
+    <alert after="13s" filter="juggernaut-team">`6`lYou will be released in 2s!</alert>
+    <alert after="14s" filter="juggernaut-team">`6`lYou will be released in 1s!</alert>
+    <alert after="15s" filter="juggernaut-team">`6`lChase down the `c`lRunners`6`l!</alert>
+</broadcasts>
+<timelock>off</timelock>
+<time result="juggernaut">150s</time>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<score>
+    <limit>1</limit>
+</score>
+<teams>
+    <team id="runners" max="7" min="3" color="red" plural="true" show-name-tags="true">Runners</team>
+    <team id="juggernaut" max="1" min="1" color="blue" show-name-tags="true">Juggernaut</team>
+</teams>
+<spawns>
+    <spawn team="runners" kit="runner-kit">
+        <regions>
+            <point yaw="-90" pitch="-15">-1.5,31,0.5</point>
+        </regions>
+    </spawn>
+    <spawn team="juggernaut" kit="juggernaut-kit">
+        <regions>
+            <point yaw="-90">-4.5,35,0.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="135">28.5,43,3.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="runner-kit">
+        <boots unbreakable="true" material="iron boots" locked="true" />
+        <item slot="0" material="stick" enchantment="knockback:2" name="Slap Stick" />
+        <item slot="2" material="iron pickaxe" enchantment="dig speed:1" unbreakable="true" />
+        <potion duration="oo" amplifier="1">invisibility</potion>
+        <item projectile="slowball" name="`aSlowball" amount="8" slot="1">egg</item>
+    </kit>
+    <kit id="juggernaut-kit">
+        <double-jump power="1.8" recharge-time="4s" />
+        <helmet material="diamond helmet" unbreakable="true" enchantment="protection environmental:4" locked="true" />
+        <chestplate material="diamond chestplate" unbreakable="true" enchantment="protection environmental:4" locked="true">
+            <attribute operation="multiply" amount="-0.63">generic.movementSpeed</attribute>
+        </chestplate>
+        <leggings material="diamond leggings" unbreakable="true" enchantment="protection environmental:4" locked="true">
+            <attribute operation="add" amount="0.3">generic.knockbackResistance</attribute>
+        </leggings>
+        <boots material="diamond boots" unbreakable="true" enchantment="protection environmental:4" locked="true" />
+        <item slot="0" material="diamond sword">
+            <enchantment level="4">damage all</enchantment>
+            <enchantment level="2">knockback</enchantment>
+        </item>
+        <potion duration="oo" amplifier="-10">jump</potion>
+    </kit>
+    <kit id="fast-break" force="true">
+        <potion duration="0" amplifier="1">slow digging</potion>
+        <potion duration="oo" amplifier="3">fast digging</potion>
+    </kit>
+</kits>
+<itemremove>
+    <item>iron pickaxe</item>
+    <item>tripwire hook</item>
+    <item>iron boots</item>
+    <item>stick</item>
+    <item>diamond helmet</item>
+    <item>string</item>
+    <item>seeds</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>diamond sword</item>
+    <item>sign</item>
+    <item>wood button</item>
+    <item>ender stone</item>
+    <item>torch</item>
+    <item>egg</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<destroyables>
+    <destroyable owner="juggernaut" materials="iron fence" name="Juggernaut Cage" show="false" completion="100%" mode-changes="true" sparks="true">
+        <region>
+            <cuboid min="-3,35,-1" max="-2,38,2" />
+        </region>
+    </destroyable>
+    <destroyable owner="juggernaut" name="Monument" region="monument" materials="sponge" required="true" sparks="true" />
+</destroyables>
+<modes>
+    <mode after="15s" material="air" name="Juggernaut will be released" show-before="10s" />
+</modes>
+<projectiles>
+    <projectile id="slowball" name="Slowball" projectile="Egg" velocity="3.5" damage="0" throwable="true" click="right">
+        <potion duration="2" amplifier="10">blindness</potion>
+        <potion duration="2" amplifier="5">slow</potion>
+    </projectile>
+</projectiles>
+<falling-blocks>
+    <rule delay="30">
+        <filter>
+            <material>stained clay:5</material>
+        </filter>
+    </rule>
+    <rule delay="30">
+        <filter>
+            <material>stained clay:4</material>
+        </filter>
+    </rule>
+    <rule delay="40">
+        <filter>
+            <material>stained clay:14</material>
+        </filter>
+    </rule>
+</falling-blocks>
+<filters>
+    <any id="only-some">
+        <all>
+            <team>juggernaut</team>
+            <any>
+                <material>web</material>
+                <material>stained glass</material>
+                <material>ender stone</material>
+            </any>
+        </all>
+        <all>
+            <team>runners</team>
+            <any>
+                <material>ender stone</material>
+                <material>tripwire hook</material>
+                <material>sponge</material>
+            </any>
+        </all>
+        <material>stationary lava</material>
+    </any>
+
+    <all id="rand-1-1">
+        <random>[0,0.33)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-2">
+        <random>[0.33,0.66)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-1-3">
+        <random>[0.66,1]</random>
+        <time>1s</time>
+    </all>
+
+    <all id="rand-2-1">
+        <random>[0,0.33)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-2-2">
+        <random>[0.33,0.66)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-2-3">
+        <random>[0.66,1]</random>
+        <time>1s</time>
+    </all>
+
+    <all id="rand-3-1">
+        <random>[0,0.33)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-3-2">
+        <random>[0.33,0.66)</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-3-3">
+        <random>[0.66,1]</random>
+        <time>1s</time>
+    </all>
+
+    <all id="rand-4-1">
+        <never/>
+    </all>
+    <all id="rand-4-2">
+        <random>[0,1]</random>
+        <time>1s</time>
+    </all>
+    <all id="rand-4-3">
+        <never/>
+    </all>
+
+    <team id="runner-team">runners</team>
+    <team id="juggernaut-team">juggernaut</team>
+</filters>
+<regions>
+    <cuboid id="monument" min="176,34,-24" max="180,40,-19" />
+
+    <cuboid id="parkour-1a" min="22,47,-15" max="29,58,-7" />
+    <cuboid id="parkour-1b" min="22,63,-15" max="29,74,-7" />
+    <cuboid id="parkour-1c" min="22,31,-15" max="29,42,-7" />
+
+    <cuboid id="parkour-2a" min="22,49,-33" max="29,54,-25" />
+    <cuboid id="parkour-2b" min="22,60,-33" max="29,65,-25" />
+    <cuboid id="parkour-2c" min="22,31,-33" max="29,36,-25" />
+
+    <cuboid id="parkour-3a" min="47,49,-45" max="56,60,-37" />
+    <cuboid id="parkour-3b" min="47,67,-45" max="56,78,-37" />
+    <cuboid id="parkour-3c" min="47,31,-45" max="56,42,-37" />
+
+    <cuboid id="parkour-4a" min="60,49,-25" max="69,56,-18" />
+    <cuboid id="parkour-4b" min="60,75,-25" max="69,82,-18" />
+    <cuboid id="parkour-4c" min="60,23,-25" max="69,30,-18" />
+
+    <cuboid id="gate-1" min="22,31,-16" max="29,33,-15.5"/>
+    <cuboid id="gate-2" min="22,31,-34" max="29,33,-33.5"/>
+    <cuboid id="gate-3" min="57.5,31,-45" max="58,33,-38"/>
+    <cuboid id="gate-4" min="67.5,23,-24" max="68,25,-19"/>
+    <cuboid id="gate-5" min="119.5,31,-25" max="120,33,-18"/>
+
+    <apply region="gate-1" enter="juggernaut-team" message="`6`lYou must do the parkour as a Runner!" /> 
+    <apply region="gate-2" enter="juggernaut-team" message="`6`lYou must do the parkour as a Runner!" /> 
+    <apply region="gate-3" enter="juggernaut-team" message="`6`lYou must do the parkour as a Runner!" /> 
+    <apply region="gate-4" enter="juggernaut-team" message="`6`lYou must do the parkour as a Runner!" /> 
+    <apply region="gate-5" enter="juggernaut-team" message="`6`lYou must do the parkour as a Runner!" /> 
+
+    <cuboid id="throne" min="176,34,-24" max="180,40,-19" />
+
+    <apply kit="fast-break" region="throne" />
+
+    <apply block-break="only-some" />
+</regions>
+</map>

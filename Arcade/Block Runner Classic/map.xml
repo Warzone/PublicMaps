@@ -1,0 +1,131 @@
+<map proto="1.4.0" game="`eProgress">
+<name>Block Runner: Classic</name>
+<version>1.0.1</version>
+<include src="void-death.xml"/>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
+</authors>
+<spawns>
+    <spawn kit="spawn">
+        <regions yaw="90">
+            <region id="spawn-location"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>-61,11.5,103</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <block id="spawn-location">-70,6,103</block>
+    <cuboid id="mon" min="-72,2,101" max="-70,3,104"/>
+    <below id="checkpoint1" x="-110"/>
+    <below id="checkpoint2" x="-176"/>
+    <below id="checkpoint3" x="-238"/>
+    <cuboid id="box-win" min="-314,10,101" max="-310,0,105"/>
+</regions>
+<objective>Be the first to the end!</objective>
+<gamemode>arcade</gamemode> 
+<blitz>
+    <lives>1</lives>    
+</blitz>
+<players max="50" colors="true"/>
+<broadcasts>
+    <alert after="2s">`6`lBlocks falling in 3 seconds</alert>
+    <alert after="3s">`6`lBlocks falling in 2 seconds</alert>
+    <alert after="4s">`6`lBlocks falling in 1 seconds</alert>
+    <alert after="5s">`6`lThe path is falling away! Run!</alert>
+</broadcasts>
+<time>2m</time>
+<score>
+    <limit>4</limit>
+    <kills>0</kills>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint1"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint2"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint3"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="box-win"/>
+        </region>
+    </box>
+</score>
+<regions>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint1"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint2"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint3"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<kits>
+    <kit id="spawn">
+        <game-mode>adventure</game-mode>
+        <effect duration="oo">invisibility</effect>
+        <effect duration="oo">fire resistance</effect>
+        <boots>gold boots</boots>
+    </kit>
+</kits>
+<structures>
+    <structure id="mon-struct" region="mon" air="false"/>
+    <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
+</structures>
+<filters>
+    <not id="countdown">
+        <time>5s</time>
+    </not>
+    <not id="all-blocks">
+        <material>air</material>
+    </not>
+</filters>
+<falling-blocks delay="4">
+    <rule>
+        <filter>
+            <filter id="all-blocks"/>
+        </filter>
+        <sticky>
+            <all>
+                <filter id="all-blocks"/>
+                <material>redstone block</material>
+            </all>
+        </sticky>
+    </rule>
+</falling-blocks>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+<gamerules>
+    <doTileDrops>false</doTileDrops>
+</gamerules>
+</map>
