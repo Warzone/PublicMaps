@@ -1,0 +1,90 @@
+<map proto="1.4.2">
+<name>Wool Terrace</name>
+<version>1.0.0</version>
+<objective>Capture the other team's flag 5 times!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+	<author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
+	<author uuid="3cce0080-9faa-48f9-82cf-64410305822a"/> <!-- ProfessorUtonium -->
+	<author uuid="ec00f0bb-1c45-4876-8f11-2b033b35c7e2"/> <!-- Arigenn -->
+	<author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Vicei -->
+	<author uuid="1c74c430-29a0-471f-b30b-cc2d9031ebcb"/> <!-- Tazz -->
+</authors>
+<contributors>
+	<contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="PGM XML"/> <!-- Crazy_ -->
+</contributors>
+<teams>
+	<team id="red" min="1" max="15" color="dark red">Red</team>
+	<team id="blue" min="1" max="15" color="blue">Blue</team>
+</teams>
+<kits>
+	<kit id="spawn">
+		<clear/>
+		<item slot="0" unbreakable="true">stone sword</item>
+		<item slot="1" unbreakable="true">bow</item>
+		<item slot="2">golden apple</item>
+		<item slot="8" amount="16">arrow</item>
+		<helmet unbreakable="true" team-color="true">leather helmet</helmet>
+		<chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+		<leggings unbreakable="true" team-color="true">leather leggings</leggings>
+		<boots unbreakable="true">iron boots</boots>
+		<effect duration="5s">damage resistance</effect>
+	</kit>
+</kits>
+<spawns>
+	<spawn team="blue" kit="spawn" yaw="135">
+		<regions>
+			<point>60.5,21,58.5</point>
+			<point>60.5,16,58.5</point>
+		</regions>
+	</spawn>
+	<spawn team="red" kit="spawn" yaw="-45">
+		<regions>
+			<point>0.5,21,-1.5</point>
+			<point>1.5,16,-0.5</point>
+		</regions>
+	</spawn>
+	<default yaw="-135">
+		<region>
+			<point>49.5,50,9.5</point>
+		</region>
+	</default>
+</spawns>
+<regions>
+	<cuboid id="red-net" min="4,21,2" max="0,25,-2"/>
+	<cuboid id="blue-net" min="61,25,59" max="57,21,55"/>
+	<apply block="never"/>
+</regions>
+<filters>
+	<team id="only-red">red</team>
+	<team id="only-blue">blue</team>
+</filters>
+<flags>
+	<post id="red-post" pickup-filter="only-blue" recover-time="7s" respawn-time="4s">12,16,10</post>
+	<post id="blue-post" pickup-filter="only-red" recover-time="7s" respawn-time="4s">48,16,46</post>
+	<flag id="red-flag" owner="red" name="Red Flag" color="red" post="red-post" required="false" carry-message="You are carrying the flag! Return it to your spawn!"/>
+	<flag id="blue-flag" owner="blue" name="Blue Flag" color="blue" post="blue-post" required="false" carry-message="You are carrying the flag! Return it to your spawn!"/>
+	<net post="red-post" points="1" region="blue-net" capture-filter="only-blue"/>
+	<net post="blue-post" points="1" region="red-net" capture-filter="only-red"/>
+</flags>
+<score>
+	<limit>5</limit>
+	<kills>0</kills>
+</score>
+<kill-rewards>
+	<kill-reward>
+		<item>golden apple</item>
+	</kill-reward>
+</kill-rewards>
+<toolrepair>
+	<tool>stone sword</tool>
+	<tool>bow</tool>
+</toolrepair>
+<itemkeep>
+	<item>golden apple</item>
+	<item>arrow</item>
+</itemkeep>
+<hunger>
+	<depletion>off</depletion>
+</hunger>
+</map>
