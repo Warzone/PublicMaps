@@ -8,7 +8,20 @@
     <author uuid="36e46b32-80ef-4fa5-b1e2-6c777736d888" contribution="Aesthetic and gameplay edits, XML"/> <!-- Elijahyap -->
 </authors>
 <kits>
-    <kit name="spawn protection">
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" amount="32">glass</item>
+        <item slot="5" damage="1" amount="32">wood</item>
+        <item slot="6" amount="16">ladder</item>
+        <item slot="7" amount="16">arrow</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
         <potion duration="3" amplifier="5">damage resistance</potion>
     </kit>
 </kits>
@@ -17,10 +30,10 @@
     <team color="dark red" max="14">Red</team>
 </teams>
 <spawns>
-    <spawn team="red" yaw="135">
+    <spawn team="red" kit="spawn" yaw="135">
         <point>50.5,6,50.5</point>
     </spawn>
-    <spawn team="blue" yaw="-45">
+    <spawn team="blue" kit="spawn" yaw="-45">
         <point>-49.5,6,-49.5</point>
     </spawn>
     <default yaw="180">
@@ -192,6 +205,17 @@
     </wool>
 </wools>
 <itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>glass</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>arrow</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
     <item>string</item>
     <item>glowstone dust</item>
     <item>clay ball</item>
@@ -199,6 +223,10 @@
     <item>cooked fish</item>
     <item>redstone wire</item>
 </itemremove>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="5">arrow</item>
+</kill-reward>
 <portals>
     <portal x="@-21.5" y="@6" z="@-51.5">
         <region name="blue-left-portal"/>
