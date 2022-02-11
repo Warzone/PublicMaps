@@ -1,63 +1,93 @@
 <?xml version="1.0"?>
-<map proto="1.3.2">
-<include src="tutorial.xml"/>
+<map proto="1.4.2">
 <name>Iris DTM</name>
-<version>1.3.2</version>
+<version>1.4.0</version>
 <objective>Break the enemy's obsidian monument in their base!</objective>
 <gamemode>dtm</gamemode>
 <authors>
     <author uuid="3a549b18-08ed-4756-a78c-b34d29a4fd87"/> <!-- Torn_Ares -->
 </authors>
 <teams>
-    <team color="dark red" max="16">Red</team>
-    <team color="blue" max="16">Blue</team>
+    <team id="red"  color="dark red" max="16">Red</team>
+    <team id="blue" color="blue"     max="16">Blue</team>
 </teams>
 <kits>
-    <kit name="teams">
-        <item slot="0" lore="`cRemember: `7This does the same damage as a stone sword!">diamond pickaxe</item>
-        <item slot="1" name="`6TNT Defuser" lore="`7Right click to defuse teammate's TNT|`7Does not work in `9water`7!">shears</item>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="5" damage="2" amount="64">log</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="12">cooked fish</item>
+        <item slot="27" amount="64">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
     </kit>
 </kits>
-<spawns kit="teams">
-    <spawn team="blue" yaw="0">
-        <cuboid min="-63,160,-100" max="-63,160,-100"/>
+<spawns>
+    <spawn team="blue" kit="default">
+        <region yaw="0">
+            <cuboid min="-63,160,-100" max="-63,160,-100"/>
+        </region>
     </spawn>
-    <spawn team="red" yaw="0">
-        <cuboid min="29,160,-100" max="29,160,-100"/>
+    <spawn team="red" kit="default">
+        <region yaw="0">
+            <cuboid min="29,160,-100" max="29,160,-100"/>
+        </region>
     </spawn>
-    <default yaw="0">
-        <cylinder base="-17,36,13" radius="3" height="0"/>
+    <default>
+        <region yaw="0">
+            <cylinder base="-17,36,13" radius="3" height="0"/>
+        </region>
     </default>
 </spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
 <regions>
-    <union name="outside-map-b">
-        <negative name="outside-map-a">
-            <rectangle name="map" min="57,-206" max="-91,-55"/>
+    <union id="outside-map-b">
+        <negative id="outside-map-a">
+            <rectangle id="map" min="57,-206" max="-91,-55"/>
         </negative>
-        <cuboid name="above-80" min="-oo,81,-oo" max="oo,oo,oo"/>
+        <cuboid id="above-80" min="-oo,81,-oo" max="oo,oo,oo"/>
     </union>
-    <apply block="deny-all" message="You may not edit the spawn pools">
-        <cuboid min="33,26,-93" max="26,oo,-86"/>
-        <cuboid min="-66,26,-86" max="-59,oo,-93"/>
-    </apply>
-    <apply block="deny-all" message="You cannot build/modify here!">
-        <region name="outside-map-b"/>
-    </apply>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-66,26,-86" max="-59,oo,-93"/>
+        <cuboid id="red-spawn-protection" min="33,26,-93" max="26,oo,-86"/>
+    </union>
+    <cuboid id="blue-monument" min="27,37,-126" max="32,31,-131"/>
+    <cuboid id="red-monument" min="-65,37,-126" max="-60,31,-131"/>
+    <apply region="outside-map-b" block="never" message="You may cannot build/modify here!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn!"/>
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy spawn!"/>
 </regions>
-<destroyables name="Monument" materials="obsidian" completion="100%">
-    <destroyable owner="blue">
-       <cuboid min="-65,37,-126" max="-60,31,-131"/>
-    </destroyable>
-    <destroyable owner="red">
-       <cuboid min="27,37,-126" max="32,31,-131"/>
-    </destroyable>
+<destroyables materials="obsidian" repairable="false" sparks="true" completion="100%">
+    <destroyable owner="blue" region="blue-monument" name="Monument"/>
+    <destroyable owner="red" region="red-monument" name="Monument"/>
 </destroyables>
-<timelock>on</timelock>
 <itemremove>
+    <item>stone sword</item>
     <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>cooked fish</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
     <item>obsidian</item>
-    <item>shears</item>
 </itemremove>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="3" material="arrow"/>
+</kill-reward>
+<timelock>on</timelock>
+<!-- Tutorial start
+<include src="tutorial.xml"/>
 <tutorial>
     <stage title="Destroy the Monument">
         <message>
@@ -90,7 +120,7 @@
     </stage>
     <stage title="Iron and TNT Supplies">
         <message>
-            <line>`rOn the side asteroid--across from the main asteroid--you will find TNT and Iron.</line>
+            <line>`rOn the side asteroid (across from the main asteroid) you will find TNT and Iron.</line>
             <line>`rUse this to your advantage and capture the enemy's asteroid.</line>
         </message>
         <teleport>
@@ -98,4 +128,5 @@
         </teleport>
     </stage>
 </tutorial>
+Tutorial end -->
 </map>
