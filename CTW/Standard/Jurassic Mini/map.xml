@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Jurassic Mini</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Capture the enemy's two wools!</objective>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
@@ -14,7 +14,8 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" unbreakable="true">iron sword</item>
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
         <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
         <item slot="2" unbreakable="true" enchantment="dig speed">iron pickaxe</item>
         <item slot="3" unbreakable="true" enchantment="dig speed">stone axe</item>
@@ -59,9 +60,6 @@
     </not>
     <team id="only-yellow">yellow-team</team>
     <team id="only-purple">purple-team</team>
-    <all id="only-iron">
-        <material>iron block</material>
-    </all>
     <not id="deny-yellow-woolrooms">
         <any>
             <filter id="only-yellow"/>
@@ -129,8 +127,8 @@
             <cuboid id="west-spawner-activation" min="-151,3,56" max="-144,8,65"/>
         </union>
     </union>
-    <apply block="only-iron" region="spawns" message="You may not edit the spawn!"/>
-	  <apply enter="only-yellow" region="yellow-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply block="never" region="spawns" message="You may not edit the spawn!"/>
+	<apply enter="only-yellow" region="yellow-spawn" message="You may not enter the opponent's spawn!"/>
     <apply enter="only-purple" region="purple-spawn" message="You may not enter the opponent's spawn!"/>
     <apply block="deny-yellow-woolrooms" region="yellow-woolrooms"/>
     <apply block="deny-purple-woolrooms" region="purple-woolrooms"/>
@@ -177,7 +175,7 @@
 	</wool>
 </wools>
 <toolrepair>
-    <tool>iron sword</tool>
+    <tool>stone sword</tool>
     <tool>bow</tool>
     <tool>iron pickaxe</tool>
     <tool>stone axe</tool>
@@ -203,6 +201,9 @@
     <item>redstone torch on</item>
     <item>seeds</item>
 </itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
 <killreward>
 	  <item>golden apple</item>
     <item amount="8" damage="4">wood</item>
