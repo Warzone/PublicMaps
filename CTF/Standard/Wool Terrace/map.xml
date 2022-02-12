@@ -1,7 +1,7 @@
 <map proto="1.4.0">
 <name>Wool Terrace</name>
-<version>1.0.2</version>
-<objective>Capture the other team's flag 5 times!</objective>
+<version>1.0.3</version>
+<objective>Capture the other team's flag 7 times!</objective>
 <gamemode>ctf</gamemode>
 <authors>
 	<author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Fouled -->
@@ -13,6 +13,9 @@
 <contributors>
 	<contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="PGM XML"/> <!-- Crazy_ -->
 </contributors>
+<broadcasts>
+    <tip after="5s" every="1m">The flag capture point is the upper level of your spawn!</tip>
+</broadcasts>
 <teams>
 	<team id="red" max="5" color="dark red">Red</team>
 	<team id="blue" max="5" color="blue">Blue</team>
@@ -38,13 +41,11 @@
 <spawns>
 	<spawn team="blue" kit="spawn" yaw="135">
 		<regions>
-			<point>60.5,21,58.5</point>
 			<point>60.5,16,58.5</point>
 		</regions>
 	</spawn>
 	<spawn team="red" kit="spawn" yaw="-45">
 		<regions>
-			<point>0.5,21,-1.5</point>
 			<point>1.5,16,-0.5</point>
 		</regions>
 	</spawn>
@@ -64,8 +65,8 @@
 	<team id="only-blue">blue</team>
 </filters>
 <flags>
-	<post id="red-post" pickup-filter="only-blue" recover-time="7s" respawn-time="4s">12,16,10</post>
-	<post id="blue-post" pickup-filter="only-red" recover-time="7s" respawn-time="4s">48,16,46</post>
+	<post id="red-post" pickup-filter="only-blue" recover-time="10s" respawn-time="15s">12,16,10</post>
+	<post id="blue-post" pickup-filter="only-red" recover-time="10s" respawn-time="15s">48,16,46</post>
 	<flag id="red-flag" owner="red" name="Red Flag" color="red" post="red-post" required="false" carry-message="You are carrying the flag! Return it to the upper level of your spawn!"/>
 	<flag id="blue-flag" owner="blue" name="Blue Flag" color="blue" post="blue-post" required="false" carry-message="You are carrying the flag! Return it to the upper level of your spawn!"/>
 	<net post="red-post" points="1" region="blue-net" capture-filter="only-blue"/>
