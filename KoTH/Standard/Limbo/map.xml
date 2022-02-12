@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Limbo</name>
+<version>1.0.1</version>
+<objective>Hold all 3 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- Pandaboy999 -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML Fixing and Initial Testing"/> <!-- ElectroidFilms -->
+</contributors>
+<teams>
+    <team color="gold" max="10">Orange</team>
+    <team color="dark aqua" max="10">Cyan</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" amount="16">cooked beef</item>
+        <potion duration="5" amplifier="4">heal</potion>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <leggings enchantment="protection projectile:1" unbreakable="true">iron leggings</leggings>
+    </kit>
+    <kit name="cyan" parents="spawn">
+        <helmet color="4C7F99" unbreakable="true">leather helmet</helmet>
+        <chestplate color="4C7F99" unbreakable="true">leather chestplate</chestplate>
+        <boots color="4C7F99" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
+        <boots color="D87F33" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-cyan">
+        <team>cyan</team>
+    </filter>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+</filters>
+<regions>
+    <apply enter="only-cyan" message="You may not enter the enemy team's portal!">
+        <cylinder base="-8.5,6,0.5" radius="3" height="3"/>
+    </apply>
+    <apply enter="only-orange" message="You may not enter the enemy team's portal!">
+        <cylinder base="9,6,0" radius="3" height="3"/>
+    </apply>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<playable>
+    <rectangle min="-oo,-oo" max="oo,oo"/>
+</playable>
+<spawns>
+    <spawn team="cyan" kit="cyan" yaw="90">
+        <cuboid min="51,7,2" max="47,7,-1"/>
+    </spawn>
+    <spawn team="orange" kit="orange" yaw="-90">
+        <cuboid min="-50,7,-1" max="-46,7,2"/>
+    </spawn>
+    <default kit="obs" yaw="180">
+        <cuboid min="-0,19,-0" max="1,19,1"/>
+    </default>
+</spawns>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<timelock>on</timelock>
+<portals>
+    <portal x="@9.5" y="@2" z="@0.5" yaw="@90">
+        <cylinder name="cyan-portal" base="-8.5,6,0.5" radius="2" height="3"/>
+    </portal>
+    <portal x="@-8.5" y="@2" z="@0.5" yaw="@-90">
+        <cylinder name="orange-portal" base="9,6,0" radius="2" height="3"/>
+    </portal>
+    <portal x="@0.5" y="@7" z="@0.5">
+        <cylinder name="double-portal-a" base="0.5,2,-8.5" radius="2" height="3"/>
+    </portal>
+    <portal x="@0.5" y="@7" z="@0.5">
+        <cylinder name="double-portal-b" base="0,2,9" radius="2" height="3"/>
+    </portal>
+</portals>
+<king>
+    <hills>
+        <hill name="Point A" capture-time="10s" points="1">
+            <capture>
+                <cuboid min="3,8,14" max="-2,12,9"/>
+            </capture>
+            <progress>
+                <cuboid min="3,8,14" max="-2,12,9"/>
+            </progress>
+            <captured>
+                <cuboid min="1,1,1" max="1,1,1"/>
+            </captured>
+        </hill>
+        <hill name="Center" capture-time="15s" points="1">
+            <capture>
+                <cuboid min="-3,2,4" max="4,5,-3"/>
+            </capture>
+            <progress>
+                <cuboid min="-3,2,4" max="4,5,-3"/>
+            </progress>
+            <captured>
+                <cuboid min="0,0,0" max="0,0,0"/>
+            </captured>
+        </hill>
+        <hill name="Point B" capture-time="10s" points="1">
+            <capture>
+                <cuboid min="-2,8,-13" max="3,12,-8"/>
+            </capture>
+            <progress>
+                <cuboid min="-2,8,-13" max="3,12,-8"/>
+            </progress>
+            <captured>
+                <cuboid min="3,3,3" max="3,3,3"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+</map>

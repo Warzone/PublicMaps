@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Greecia II</name>
+<version>1.0.1</version>
+<objective>Destroy the other team's core before they destroy yours!</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="b8539c6d-533b-4be2-8f0d-3f70431eee87"/> <!-- CatchingMC -->
+</authors>
+<teams>
+   <team id="blue-team" color="blue" max="16" max-overfill="20">Blue</team>
+   <team id="red-team" color="red" max="16" max-overfill="20">Red</team>
+</teams>
+<kits>
+    <kit name="spawn" force="true">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4">iron spade</item>
+        <item slot="5" amount="16" damage="2">wood</item>
+        <item slot="6" amount="16">quartz block</item>
+        <item slot="7" amount="32">cooked fish</item>
+        <item slot="28" amount="16">arrow</item>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="334CB2">leather helmet</helmet>
+        <chestplate color="334CB2">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="334CB2">leather boots</boots>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="993333">leather boots</boots>
+    </kit>
+</kits>
+<cores material="obsidian" leak="4">
+    <core team="blue">
+        <region><cuboid min="-520,40,513" max="-523,35,510"/></region>
+    </core>
+</cores>
+<cores material="obsidian" leak="4">
+    <core team="red">
+        <region><cuboid min="-596,40,487" max="-599,35,484"/></region>
+    </core>
+</cores>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>diamond pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>cooked fish</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>obsidian</item>
+    <item>seeds</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+</itemremove>
+<spawns>
+    <spawn team="blue" kit="blue">
+        <regions yaw="90">
+            <block name="blue-1">-484,38,484</block>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red">
+        <regions yaw="-90">
+            <block name="red-1">-634,38,512</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <block name="default">-560,57,556</block>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="deny-all" message="You may not build outside the map!">
+        <negative>
+            <cuboid name="playable" min="-642,19,520" max="-477,oo,477"/>
+        </negative>
+    </apply>
+
+    <apply block="deny-all" message="You may not edit the spawns!">
+        <cuboid name="blue-spawn" min="-496,37,496" max="-480,45,480"/>
+        <cuboid name="red-spawn"  min="-638,45,516" max="-622,37,500"/>
+    </apply>
+</regions>
+</map>

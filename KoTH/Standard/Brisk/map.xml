@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<map proto="1.3.5">
+<name>Brisk</name>
+<version>1.2.5</version>
+<objective>Get the most points by holding the hill!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- minimitch0199 -->
+</authors>
+<contributors>
+    <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="XML"/> <!-- ItsMiiOlly -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<teams>
+    <team color="dark red" max="10" max-overfill="15">Red</team>
+    <team color="blue" max="10" max-overfill="15">Blue</team>
+</teams>
+<kits>
+    <kit name="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit name="teams" parents="all">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="6" damage="1">leaves</item>
+        <item slot="8" amount="32">arrow</item>
+        <item slot="6">golden apple</item>
+        <item slot="7" amount="64">golden carrot</item>
+        <leggings unbreakable="true" locked="true">iron leggings</leggings>
+        <potion duration="3" amplifier="3">heal</potion>
+        <potion duration="5" amplifier="3">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="teams">
+        <helmet color="ff0000" locked="true">leather helmet</helmet>
+        <chestplate color="ff0000" locked="true">leather chestplate</chestplate>
+        <boots color="ff0000" locked="true">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="teams">
+        <helmet color="0000ff" locked="true">leather helmet</helmet>
+        <chestplate color="0000ff" locked="true">leather chestplate</chestplate>
+        <boots color="0000ff" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red" yaw="-90">
+        <point yaw="-180">-42.5,33,0.5</point>
+        <point yaw="0">-42.5,33,0.5</point>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="90">
+        <point yaw="-180">43.5,33,0.5</point>
+        <point yaw="0">43.5,33,0.5</point>
+    </spawn>
+    <default yaw="90" kit="all">
+        <cylinder base="38.5,21,0.5" radius="3" height="0" />
+    </default>
+</spawns>
+<filters>
+    <filter name="only-leaves">
+        <block>leaves</block>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void />
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-void" message="You may not edit the void area">
+        <negative>
+            <rectangle min="-oo,-oo" max="oo,oo" />
+        </negative>
+    </apply>
+    <apply block="only-leaves" message="You may only interact with leaves">
+        <rectangle min="-oo,-oo" max="oo,oo" />
+    </apply>
+    <!--  left and right  -->
+    <apply velocity="@0.0,2.1,0.5">
+        <cylinder base="0.5,8,-36.5" radius="1.2" height="1" />
+    </apply>
+    <apply velocity="@0.5,2,0.5">
+        <cylinder base="-18.5,6,-18.5" radius="1.2" height="1" />
+    </apply>
+    <apply velocity="@0.5,2,-0.5">
+        <cylinder base="-18.5,6,19.5" radius="1.2" height="1" />
+    </apply>
+    <apply velocity="@0,2.1,-0.5">
+        <cylinder base="0.5,8,37.5" radius="1.2" height="1" />
+    </apply>
+    <apply velocity="@-0.5,2,-0.5">
+        <cylinder base="19.5,6,19.5" radius="1.2" height="1" />
+    </apply>
+    <apply velocity="@-0.5,2,0.5">
+        <cylinder base="19.5,6,-18.5" radius="1.2" height="1" />
+    </apply>
+</regions>
+<renewables>
+    <renewable rate="3" grow="false" particles="true" sound="true" avoid-entities="false">
+        <region>
+            <complement>
+                <cylinder base="0.5,0,0.5" radius="75" height="40" />
+                <cylinder base="0.5,14,0.5" radius="7" height="6" />
+            </complement>
+        </region>
+    </renewable>
+</renewables>
+<falling-blocks>
+    <rule>
+        <filter>
+            <any>
+                <block>leaves:1</block>
+            </any>
+        </filter>
+        <sticky>
+            <any>
+                <block>stained clay:9</block>
+                <block>quartz block</block>
+                <block>double step:8</block>
+            </any>
+        </sticky>
+    </rule>
+</falling-blocks>
+<king>
+    <hills>
+        <hill name="Hill" capture-time="10s" points="1" capture-rule="lead">
+            <capture>
+                <cylinder base="0.5,20,0.5" radius="5.7" height="5" />
+            </capture>
+            <progress>
+                <cylinder base="0.5,14,0.5" radius="7" height="6" />
+            </progress>
+            <captured>
+                <cuboid min="0,0,0" max="0,0,0" />
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>500</limit>
+    <king />
+</score>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>leather helmet</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>leaves</item>
+    <item>ladder</item>
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<killreward>
+    <item amount="6">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<killreward>
+    <kill-streak count="3">
+        <item damage="1" amount="3">leaves</item>
+    </kill-streak>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

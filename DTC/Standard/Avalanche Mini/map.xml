@@ -1,0 +1,162 @@
+<map proto="1.4.0">
+<name>Avalanche Mini</name>
+<version>1.0.2</version>
+<objective>Leak lava from the enemy's obsidian core on the mountain!</objective>
+<gamemode>dtc</gamemode>
+<authors>
+     <author uuid="904bf23f-67c5-484a-ae60-61f4ec150b48" contribution="Map design"/> <!-- oib5 -->
+</authors>
+<contributors>
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Feedback"/> <!-- Stealth5061 -->
+    <contributor uuid="36dc036a-dfbc-4627-b66a-501223f08075" contribution="Core area design"/> <!-- ieatboulders2 -->
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- dinner1111 -->
+</contributors>
+<teams>
+    <team id="orange" color="gold" max="16">Orange</team>
+    <team id="purple" color="dark purple" max="16">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe">
+            <enchantment>efficiency</enchantment>
+            <enchantment>unbreaking</enchantment>
+        </item>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="31" amount="64" material="wood"/>
+        <item slot="6" material="snow ball"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <effect duration="4">damage resistance</effect>
+        <effect duration="4">heal</effect>
+    </kit>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="FFAA00" material="leather helmet"/>
+        <chestplate unbreakable="true" color="FFAA00" material="leather chestplate">
+            <enchantment>projectile_protection</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" color="FFAA00" material="leather leggings"/>
+        <boots unbreakable="true" color="151515" material="leather boots"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="AA00AA" material="leather helmet"/>
+        <chestplate unbreakable="true" color="AA00AA" material="leather chestplate">
+            <enchantment>projectile_protection</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" color="AA00AA" material="leather leggings"/>
+        <boots unbreakable="true" color="151515" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="0">
+        <region>
+            <cylinder base="-18.5,31,-60.5" radius="2" height="1"/>
+        </region>
+    </default>
+    <spawn team="orange" kit="orange-kit" yaw="270">
+        <region>
+            <cuboid min="-98.5,14,-0.5" max="-96.5,14,1.5"/>
+        </region>
+    </spawn>
+    <spawn team="purple" kit="purple-kit" yaw="90">
+        <region>
+            <cuboid min="61.5,14,1.5" max="59.5,14,-0.5"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <deny id="deny-spawner">
+        <material>mob spawner</material>
+    </deny>
+    <not id="only-orange">
+        <team>purple</team>
+    </not>
+    <not id="only-purple">
+        <team>orange</team>
+    </not>
+</filters>
+<regions>
+    <cylinder id="middle-island" base="-18.5,0,0.5" radius="4" height="14"/>
+    <negative id="no-build">
+        <union id="void-areas">
+            <rectangle id="outer-void" min="-70,31" max="33,-30"/>
+            <rectangle id="inner-void" min="8,-32" max="-45,33"/>
+        </union>
+    </negative>
+    <union id="spawns">
+        <cuboid id="orange-spawn" min="-93,17,-3" max="-101,13,4"/>
+        <cuboid id="purple-spawn" min="56,17,4" max="64,13,-3"/>
+    </union>
+    <union id="bases">
+        <union id="orange-base">
+            <cuboid min="-103,13,-5" max="-93,32,6"/>
+            <cuboid min="-94,13,15" max="-82,26,-14"/>
+        </union>
+        <union id="purple-base">
+            <cuboid min="66,13,6" max="56,32,-5"/>
+            <cuboid min="57,13,-14" max="46,26,15"/>
+        </union>
+    </union>
+    <union id="elixir-areas">
+        <cuboid min="42,4,1" max="39,8,4"/>
+        <cuboid min="-76,4,-3" max="-79,8,0"/>
+    </union>
+    <!-- Applied -->
+    <apply block="never" message="You may not modify the bases!" region="bases"/>
+    <apply enter="only-orange" message="You may not enter the enemy spawn area!" region="orange-spawn"/>
+    <apply enter="only-purple" message="You may not enter the enemy spawn area!" region="purple-spawn"/>
+    <apply block="never" message="You may not modify the middle island!" region="middle-island"/>
+    <apply block="never" message="You may not modify the elixir areas!" region="elixir-areas"/>
+    <apply block="deny-void" message="You may not edit the void area!" region="no-build"/>
+    <apply block-break="deny-spawner" message="You may not break the spawners!"/>
+</regions>
+<cores material="obsidian" leak="2" mode-changes="true">
+    <core team="orange">
+        <region>
+            <cuboid min="-89,31,2" max="-86,36,-1"/>
+        </region>
+    </core>
+    <core team="purple">
+        <region>
+            <cuboid min="49,31,-1" max="52,36,2"/>
+        </region>
+    </core>
+</cores>
+<modes>
+    <mode after="15m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode after="20m" material="packed ice" name="`3PACKED ICE CORE MODE"/>
+</modes>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>wood</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>packed ice</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<kill-reward>
+    <item>golden apple</item>
+</kill-reward>
+<maxbuildheight>44</maxbuildheight>
+</map>

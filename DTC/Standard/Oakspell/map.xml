@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Oakspell</name> 
+<version>2.0.2</version> 
+<objective>Leak lava from the enemy's obsidian core!</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer --> 
+</authors>
+<contributors>
+    <contributor uuid="8fda3d23-991f-457c-b679-45ed4b0a576d" contribution="XML"/> <!-- feidi_22 -->
+</contributors>
+<cores material="obsidian" leak="2">
+    <core team="red">
+        <cuboid min="126,7,-1" max="132,14,-7"/>
+    </core>
+    <core team="green">
+        <cuboid min="126,7,104" max="132,14,98"/>
+    </core>
+</cores>
+<teams>
+    <team color="dark red" max="10">Red</team>
+    <team color="dark green" max="10">Green</team>
+</teams>
+<rules>
+    <rule>Do not intentionally avoid the objective.</rule>
+</rules>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:2">iron axe</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="5" amount="64">log</item>
+        <item slot="6" amount="16">water lily</item>
+        <item slot="7">boat</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <potion duration="8" amplifier="1">heal</potion>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <boots color="cd0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet color="45b711" unbreakable="true">leather helmet</helmet>
+        <chestplate color="45b711" unbreakable="true">leather chestplate</chestplate>
+        <boots color="45b711" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>golden carrot</item>
+    <item>water lily</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>obsidian</item>
+    <item>boat</item>
+    <item>water lily</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+
+<spawns>
+    <spawn team="red" kit="red" yaw="0">
+        <point>129,2,-15</point>
+    </spawn>
+    <spawn team="green" kit="green" yaw="180">
+        <point>129,2,112</point>
+    </spawn>
+    <default yaw="90">
+        <cuboid min="85,23,49" max="83,23,47"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-gold">
+        <block>gold block</block>
+    </filter>
+</filters>
+<regions>
+    <!--Main Area-->
+    <rectangle name="main-area" min="104,-31" max="156,127"/>
+    <!--Spawns-->
+    <union name="spawns">
+        <rectangle name="green-spawn" min="133,108" max="125,126"/>
+        <rectangle name="red-spawn" min="125,-11" max="133,-29"/>
+    </union>
+    <apply block="only-gold" message="You may only break gold in spawns!">
+      <region name="spawns"/>
+    </apply>
+    <apply enter="only-green" message="You may not enter the enemy spawn.">
+      <region name="green-spawn"/>
+    </apply>
+    <apply enter="only-red" message="You may enter the enemy spawn.">
+      <region name="red-spawn"/>
+    </apply>
+    <apply blocks="deny-blocks">
+        <negative><region name="main-area"/></negative>
+    </apply>
+</regions>
+<maxbuildheight>35</maxbuildheight>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

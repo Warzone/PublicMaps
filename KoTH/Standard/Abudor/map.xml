@@ -1,0 +1,113 @@
+<map proto="1.4.2">
+<name>Abudor</name>
+<version>1.5</version>
+<objective>Capture the two hills to score points to win.</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Main author, idea, gameplay, aesthetics and XML."/> <!-- Timothee38 -->
+    <author uuid="b0900577-7604-4dc7-9e82-f431da31e456" contribution="Building, aesthetics, small XML work and feedback."/> <!-- Dracoheart2 -->
+</authors>
+<contributors>
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Aesthetics help, feedback and support."/> <!-- Tywnis -->
+    <contributor uuid="459fd919-0d58-401a-9601-6cab1eb721ab" contribution="XML fixing and testing."/> <!-- Reshif -->
+</contributors>
+<teams>
+    <team id="pink" color="light purple" max="12">Pink</team>
+    <team id="yellow" color="yellow" max="12">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" material="gold ingot"/>
+        <item slot="4" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="3">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="255">heal</effect>
+        <effect duration="5" amplifier="255">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="90">
+            <cuboid min="125,56,10" max="123,56,11"/>
+        </region>
+    </default>
+    <spawn team="pink" kit="spawn-kit">
+        <region yaw="90">
+            <point>172.5,12.5,10.5</point>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="spawn-kit">
+        <region yaw="-90">
+            <point>78.5,12.5,10.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+</filters>
+<regions>
+    <apply block="never" use="deny-beacon"/>
+</regions>
+<king>
+    <hills capture-time="8s" required="false" neutral-state="false" time-multiplier="0" show-progress="true" decay="0" recovery="1" points="1">
+        <hill name="North Hill">
+            <capture>
+                <cuboid min="121,11,-18" max="129,14,-10"/>
+            </capture>
+            <progress>
+                <cuboid min="121,11,-18" max="129,12,-10"/>
+            </progress>
+            <captured>
+                <cuboid min="120,11,-19" max="130,16,-9"/>
+            </captured>
+        </hill>
+        <hill name="South Hill">
+            <capture>
+                <cuboid min="121,11,32" max="129,14,39"/>
+            </capture>
+            <progress>
+                <cuboid min="121,11,32" max="129,12,39"/>
+            </progress>
+            <captured>
+                <cuboid min="120,11,31" max="130,15,40"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>500</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>glass bottle</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="6" material="arrow"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

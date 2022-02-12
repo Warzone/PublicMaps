@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Rotten Slopes</name>
+<version>1.0.0</version>
+<objective>Bring the other team's wool back to spawn.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="33b99f02-2a1a-42db-9505-6161a3b2cb7e"/> <!-- halfmaster1 -->
+    <author uuid="73268281-3d86-47b0-b3f1-c4e5806c9919"/> <!-- Extreeme -->
+    <author uuid="10c7915f-26b2-4cd6-9d42-7675a9259374"/> <!-- RabidRabbit30 -->
+</authors>
+<contributors>
+    <contributor contribution="Aesthetics Help" uuid="b492b6da-65a6-4eda-92d4-1f010af3c265"/> <!-- eza1 -->
+    <contributor contribution="Aesthetics Help" uuid="9700d226-f8bb-4b29-8819-48b1cfe2eadd"/> <!-- Inscribe -->
+    <contributor contribution="XML Help" uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336"/> <!-- BlockDrop74 -->
+    <contributor contribution="XML Help" uuid="205d1aad-c619-499b-9885-b91c372b1c13"/> <!-- Equus -->
+    <contributor contribution="Fixing" uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomRobotBoy -->
+</contributors>
+<teams>
+    <team id="green" color="dark green" max="12" max-overfill="20">Green</team>
+    <team id="purple" color="dark purple" max="12" max-overfill="20">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="32">arrow</item>
+        <item slot="2" enchantment="durability:2;dig speed:1">iron pickaxe</item>
+        <item slot="3" amount="16">glass</item>
+        <item slot="4" amount="32">log 2</item>
+        <item slot="5" amount="42">bread</item>
+        <item slot="6">golden apple</item>
+        <item slot="7" amount="8">ladder</item>
+        <item slot="8" amount="16">torch</item>
+        <leggings enchantment="protection projectile:1">iron leggings</leggings>
+        <potion duration="2" amplifier="10" ambient="true">damage resistance</potion>
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+        <helmet color="9548A8">leather helmet</helmet>
+        <chestplate color="9548A8">leather chestplate</chestplate>
+        <boots color="9548A8">leather boots</boots>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+        <helmet color="5BA848">leather helmet</helmet>
+        <chestplate color="5BA848">leather chestplate</chestplate>
+        <boots color="5BA848">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>bread</item>
+    <item>wood</item><!--only planks not logs-->
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>torch</item>
+</itemremove>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<timelock>on</timelock>
+<maxbuildheight>46</maxbuildheight>
+<filters>
+    <not id="deny-lava">
+        <any>
+            <material>stationary lava</material>
+            <material>lava</material>
+        </any>
+    </not>
+    <all id="only-web-green">
+        <material>web</material>
+        <team>green</team>
+    </all>
+    <all id="only-web-purple">
+        <material>web</material>
+        <team>purple</team>
+    </all>
+    <not id="deny-green">
+        <team>green</team>
+    </not>
+    <not id="deny-purple">
+        <team>purple</team>
+    </not>
+    <not id="deny-spawner">
+        <material>mob spawner</material>
+    </not>
+</filters>
+<regions>
+    <!-- Note http://i.imgur.com/ab50pCG.png
+    <union name="woolroom-template">
+        <rectangle min="0,0" max="4,17"/>
+        <rectangle min="0,1" max="6,16"/>
+        <rectangle min="0,2" max="7,15"/>
+        <rectangle min="0,3" max="8,14"/>
+        <rectangle min="0,5" max="9,12"/>
+        <rectangle min="0,7" max="10,10"/>
+    </union>
+    <translate name="lime-woolroom" offset="-90,45,-86">
+        <region name="woolroom-template"/>
+    </translate>
+    <translate name="magenta-woolroom" offset="7,45,-86">
+        <mirror normal="0,0,1">
+            <region name="woolroom-template"/>
+        </mirror>
+    </translate> -->
+    <rectangle id="map" min="-90,-93" max="7,-62"/>
+    <union id="magenta-woolroom">
+        <cuboid min="3,37,-86" max="7,55,-69"/>
+        <cuboid min="1,37,-85" max="3,55,-70"/>
+        <cuboid min="0,37,-84" max="1,55,-71"/>
+        <cuboid min="-1,37,-83" max="0,55,-72"/>
+        <cuboid min="-2,37,-81" max="-1,55,-74"/>
+        <cuboid min="-3,37,-79" max="-2,55,-76"/>
+    </union>
+    <mirror id="lime-woolroom" normal="1,0,0" origin="-41.5,0,-77.5">
+        <region id="magenta-woolroom"/>
+    </mirror>
+    <cylinder base="-8.5,16.5,-67.5" radius="1" height="0" id="green-spawn"/>
+    <cylinder base="-10,16,-68.5" radius="7" height="10" id="green-spawn-house"/>
+    <cylinder base="-74.5,16.5,-87.5" radius="1" height="0" id="purple-spawn"/>
+    <cylinder base="-71,16,-89.5" radius="7" height="10" id="purple-spawn-house"/>
+    <cylinder base="-42,17,-45" radius="2" height="0" id="observer-spawn"/>
+<!-- Applied -->
+    <apply block="never" message="You cannot build outside the map.">
+        <region>
+            <negative>
+                <region id="map"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="deny-purple" message="You cannot enter the enemy's woolroom!">
+        <region><region id="lime-woolroom"/></region>
+    </apply>
+    <apply block="only-web-green" message="Only green may destroy cobwebs here.">
+        <region><region id="lime-woolroom"/></region>
+    </apply>
+    <apply enter="deny-green" message="You cannot enter the enemy's woolroom!">
+        <region><region id="magenta-woolroom"/></region>
+    </apply>
+    <apply block="only-web-purple" message="Only purple may destroy cobwebs here.">
+        <region><region id="magenta-woolroom"/></region>
+    </apply>
+    <apply block="never" message="You cannot modify the spawn.">
+        <region>
+            <union>
+                <region id="green-spawn-house"/>
+                <region id="purple-spawn-house"/>
+            </union>
+        </region>
+    </apply>
+    <apply block="deny-lava" message="You cannot use the lava.">
+        <region>
+            <region id="map"/>
+        </region>
+    </apply>
+    <apply block="deny-spawner" message="You cannot break the wool spawner.">
+        <region>
+            <region id="map"/>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="green" kit="green-kit">
+        <regions yaw="90">
+            <region id="green-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <regions yaw="-90">
+            <region id="purple-spawn"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <region id="observer-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<wools>
+    <wool team="green" color="lime" location="-86.5,47,-77.5">
+        <monument><block>-7,22,-67</block></monument>
+    </wool>
+    <wool team="purple" color="magenta" location="3.5,47,-77.5">
+        <monument><block>-77,22,-89</block></monument>
+    </wool>
+</wools>
+</map>

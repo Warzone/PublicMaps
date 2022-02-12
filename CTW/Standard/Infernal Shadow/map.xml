@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Infernal Shadow</name>
+<version>1.1</version>
+<objective>Capture the wool at the enemy side and bring it back to your monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+    <author uuid="ecbc58c1-ae7f-45c4-945c-cb3ab3e104cc"/> <!-- Sbongkh -->
+<contributors>
+    <contributor uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394" contribution="Building Assistance"/> <!-- moo88888888 -->
+</contributors>
+</authors>
+<teams>
+    <team color="dark green" max="12" max-overfill="16">Green</team>
+    <team color="dark red" max="12" max-overfill="16">Red</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1;durability:1">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:1;durability:1">iron axe</item>
+        <item slot="4" amount="32">grilled pork</item>
+        <item slot="5" amount="32">log</item>
+        <item slot="6" amount="64">nether brick</item>
+        <item slot="7" amount="8">torch</item>
+        <item slot="8" amount="3">gold ingot</item>
+        <item slot="28">arrow</item>
+        <item slot="33" amount="64">nether brick</item>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet color="667F33">leather helmet</helmet>
+        <chestplate color="667F33" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="667F33">leather leggings</leggings>
+        <boots color="667F33">leather boots</boots>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings color="993333">leather leggings</leggings>
+        <boots color="993333">leather boots</boots>
+    </kit>
+</kits>
+<spawns team="green" kit="green">
+    <spawn yaw="-90">
+        <cuboid min="45,3,-1" max="48,3,2"/>
+    </spawn>
+</spawns>
+<spawns team="red" kit="red">
+    <spawn yaw="90">
+        <cuboid min="-59,3,-1" max="-56,3,2"/>
+    </spawn>
+</spawns>
+<spawns>
+    <default yaw="-90">
+        <cylinder base="-5.5,38,0.5" radius="1.5" height="0"/>
+    </default>
+</spawns>
+<wools>
+    <wools team="red">
+        <wool color="red">
+            <block>-43.5,8,0.5</block>
+        </wool>
+    </wools>
+    <wools team="green">
+        <wool color="green">
+            <block>32.5,8,0.5</block>
+        </wool>
+    </wools>
+</wools>
+<filters>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="anti-grief-g">
+        <block>web</block>
+        <filter name="only-green"/>
+    </filter>
+    <filter name="anti-grief-r">
+        <block>web</block>
+        <filter name="only-red"/>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="green-room" min="-87,-6" max="-103,7"/>
+    <rectangle name="red-room" min="76,-6" max="92,7"/>
+    <cuboid name="green-spawn" min="37,0,-6" max="54,12,7"/>
+    <cuboid name="red-spawn" min="-48,0,7" max="-65,12,-6"/>
+    <apply enter="only-green" block="only-green" message="`cYou may not access/modify the wool room you're defending!">
+        <region name="green-room"/>
+    </apply>
+    <apply enter="only-red" block="only-red" message="`cYou may not access/modify the wool room you're defending!">
+        <region name="red-room"/>
+    </apply>
+    <apply block="anti-grief-g">
+        <region name="green-room"/>
+    </apply>
+    <apply block="anti-grief-r">
+        <region name="red-room"/>
+    </apply>
+    <apply block="deny-void" message="You may not edit the void area!">
+        <negative>
+            <union>
+                <rectangle min="-22,21" max="11,-20"/>
+                <rectangle min="32,8" max="-43,-7"/>
+            </union>
+        </negative>
+    </apply>
+    <apply enter="only-green" message="You may not enter the enemy team's spawn!">
+        <union name="green-spawn-exits">
+            <cuboid min="48,10,6" max="45,12,-5"/>
+            <cuboid min="43,7,3" max="41,11,-2"/>
+        </union>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy team's spawn!">
+        <union name="red-spawn-exits">
+            <cuboid min="-59,10,-5" max="-56,12,6"/>
+            <cuboid min="-55,7,-2" max="-52,11,3"/>
+        </union>
+    </apply>
+    <apply block="deny-all" use="only-green" message="You may not modify blocks near the spawn!">
+        <region name="green-spawn"/>
+    </apply>
+    <apply block="deny-all" use="only-red" message="You may not modify blocks near the spawn!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply block="deny-all">
+        <cuboid min="-oo,25,-oo" max="oo,oo,oo"/>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron axe</tool>
+    <tool>iron pickaxe</tool>
+    <item>arrow</item>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>leather leggings</item>
+    <item>string</item>
+    <item>grilled pork</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item amount="1">gold ingot</item>
+    <item>golden apple</item>
+</killreward>
+<timelock>on</timelock>
+<autorespawn/>
+</map>
