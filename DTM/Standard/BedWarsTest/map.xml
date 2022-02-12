@@ -1,0 +1,192 @@
+<map proto="1.4.0" game="Bed Wars">
+<name>PearTest2</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
+<gamemode>dtm</gamemode>
+<gamemode>blitz</gamemode>
+<!-- Authors and Contributors -->
+<authors>
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, and custom NBT creation"/> <!-- _Pear -->
+    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map and built team spawns"/> <!-- Santiagx -->
+</authors>
+<contributors>
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain and layout"></contributor> <!-- Wesdial -->
+    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Layout and detailing"></contributor> <!-- _iMan -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain and detailing"></contributor> <!-- Qualqty -->
+    <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"></contributor> <!-- _NotMaria -->
+    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing and terrain"></contributor> <!-- DeadlyTrap -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="4">Blue</team>
+    <team id="red-team" color="dark red" max="4">Red</team>
+    <team id="green-team" color="green" max="4">Green</team>
+    <team id="yellow-team" color="yellow" max="4">Yellow</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">wooden sword</item>
+        <helmet unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" region="blue-spawn" yaw="-90"/>
+    <spawn team="red-team" region="red-spawn"/>
+    <spawn team="green-team" region="green-spawn" yaw="180"/>
+    <spawn team="yellow-team" region="yellow-spawn" yaw="90"/>
+    <default region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables repairable="false" materials="bed_block" sparks="true">
+    <destroyable name="Blue Bed" owner="blue-team" region="blue-bed" id="blue-bed-broken"/>
+    <destroyable name="Red Bed" owner="red-team" region="red-bed" id="red-bed-broken"/>
+    <destroyable name="Green Bed" owner="green-team" region="green-bed" id="green-bed-broken"/>
+    <destroyable name="Yellow Bed" owner="yellow-team" region="yellow-bed" id="yellow-bed-broken"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+    <team id="green-only">green-team</team>
+    <team id="yellow-only">yellow-team</team>
+    <any id="bed-destroyed"> <!-- Filters for Sudden Death -->
+        <any>
+            <all>
+                <team>blue</team>
+                <objective>blue-bed-broken</objective>
+            </all>
+        </any>
+        <any>
+            <all>
+                <team>red</team>
+                <objective>red-bed-broken</objective>
+            </all>
+        </any>
+        <any>
+            <all>
+                <team>green</team>
+                <objective>green-bed-broken</objective>
+            </all>
+        </any>
+        <any>
+            <all>
+                <team>yellow</team>
+                <objective>yellow-bed-broken</objective>
+            </all>
+        </any>
+    </any>
+</filters>
+<!-- Blitz and Sudden Death -->
+<blitz filter="bed-destroyed">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-bed" min="-70,9,1" max="-67,9,-1"/>
+        <cuboid id="red-bed" min="-1,9,-70" max="1,9,-67"/>
+        <cuboid id="green-bed" min="1,9,70" max="-1,9,67"/>
+        <cuboid id="yellow-bed" min="70,9,-1" max="67,9,1"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="94,0,41" max="113,oo,57"/>
+        <cuboid id="red-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
+        <cuboid id="green-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
+        <cuboid id="yellow-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
+    </union>
+    <point id="blue-spawn">-82.5,9,0.5</point>
+    <point id="red-spawn">0.5,9,-82.5</point>
+    <point id="green-spawn">0.5,9,83.5</point>
+    <point id="yellow-spawn">83.5,9,0.5</point>
+    <point id="obs-spawn">0.5,88,0.5</point>
+    <union id="diamond-generators">
+        <point id="green-blue-tower">-58,9,58</point>
+        <point id="blue-red-tower">-58,9,-58</point>
+        <point id="red-yellow-tower">58,9,-58</point>
+        <point id="yellow-green-tower">58,9,58</point>
+    </union>
+    <union id="emerald-generators">
+        <point id="top-emerald">0,23,0</point>
+        <point id="bottom-emerald">0,11,0</point>
+    </union>
+    <negative id="not-map">
+        <rectangle id="map" min="-96,-96" max="96,96"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map"                 block="never"       message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Spawners -->
+<spawners>
+    <spawner spawn-region="diamond-generators" delay="10s">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="emerald-generators" delay="30s">
+        <item amount="1" material="emerald"/>
+    </spawner>
+</spawners>
+<!-- Item Remove, Armor Keep -->
+<itemremove>
+    <item>wool</item>
+    <item>wood</item>
+    <item>ender stone</item>
+    <item>stained clay</item>
+    <item>stained glass</item>
+    <item>obsidian</item>
+    <item>wooden sword</item>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>stick</item>
+    <item>shears</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>ladder</item>
+    <item>wooden pickaxe</item>
+    <item>stone pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>wooden axe</item>
+    <item>stone axe</item>
+    <item>iron axe</item>
+    <item>diamond axe</item>
+    <item>golden apple</item>
+    <item>potion</item>
+    <item>tnt</item>
+    <item>sponge</item>
+    <item>fireball</item>
+    <item>ender pearl</item>
+    <item>water bucket</item>
+    <item>milk bucket</item>
+    <item>bed</item>
+</itemremove>
+<armorkeep>
+    <item>leather helmet</item>
+    <item>leather chestplate</item> <!-- Leather helmet and chestplate will always be present -->
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+</armorkeep>
+<!-- Misc -->
+<respawn auto="true" delay="5s"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>41</maxbuildheight>
+</map>
