@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Geiran Apple Game</name>
+<version>1.0.2</version>
+<objective>Be the one with the most kills after 5 minutes!</objective>
+<authors>
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade"/> <!-- chle_ -->
+    <author uuid="dd495aa8-26a3-4b77-b3fa-e96e2e5a0d47"/> <!--  McFanta_  -->
+</authors>
+<contributors>
+    <contributor uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!--  _3Each  -->
+    <contributor uuid="ed528509-020d-496f-8dd5-5f57715fc0de"/> <!--  drefvelin  -->
+    <contributor uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
+    <contributor uuid="6d24722c-dba4-4224-9d14-b3d08a8d9620"/> <!-- MrPetrus -->
+</contributors>
+<players min="2" max="5" colors="true"/>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="16">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions>
+            <point yaw="-75">-43.5,8.1,25.5</point>
+            <point yaw="180">39,27.1,48.5</point>
+            <point yaw="72">22.5,16.2,23.5</point>
+            <point yaw="61">32.5,10.1,-21.5</point>
+            <point yaw="-50">-9.5,10.1,-19.5</point>
+            <point yaw="-30">-36.5,9.1,-19.5</point>
+            <point yaw="119">12.5,22.1,55.5</point>
+            <point yaw="128">30.5,17.1,10.5</point>
+            <point yaw="150">26.5,27.1,55.5</point>
+            <point yaw="-153">-27.5,11.1,52.5</point>
+            <point yaw="-62">-11.5,9.1,-20.5</point>
+            <point yaw="40">44.5,24.1,5.5</point>
+            <point yaw="150">34.5,19.1,19.5</point>
+            <point yaw="21">44.5,13.1,-32.5</point>
+            <point yaw="159">45.5,19.1,-10.5</point>
+            <point yaw="90">32.5,12.1,-9</point>
+            <point yaw="0">27,18.1,20.5</point>
+            <point yaw="-90">10.5,16.1,36</point>
+            <point yaw="128">30.5,17.1,10.5</point>
+            <point yaw="-90">-19.5,8.1,16</point>
+            <point yaw="-54">-43.5,8.1,2.5</point>
+            <point yaw="24">-21.5,8.1,-28.5</point>
+            <point yaw="-59">-1.5,8.1,-10.5</point>
+        </regions>
+    </spawn>
+    <default region="default-spawn" yaw="-90"/>
+</spawns>
+<filters>
+    <all id="allowed-blocks">
+        <any>
+            <material>long grass</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+</filters>
+<regions>
+    <apply block="allowed-blocks" />
+    <block id="default-spawn">-27,28.1,60</block>
+</regions>
+<killreward>
+    <item material="golden apple" />
+    <item amount="8" material="arrow" />
+</killreward>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+    <item>seeds</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+</map>

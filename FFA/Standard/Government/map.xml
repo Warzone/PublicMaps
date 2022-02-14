@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Government Apple Game</name>
+<version>1.0.5</version>
+<objective>Kill as many players as you can in 5 minutes</objective>
+<phase>development</phase>
+<authors>
+    <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
+</authors>
+<contributors>
+    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Obstacle course"/> <!-- Timotheeee -->
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Trees and garden"/> <!--Rockymine -->
+</contributors>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<players min="2" max="5" colors="true"/>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="16">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions angle="113.5,11,134">
+            <!-- Staircase corners -->
+            <point>90,11,97</point>
+            <point>137,11,97</point>
+            <point>90,11,171</point>
+            <point>137,11,171</point>
+            <!-- Near grass exits -->
+            <point>105,7,167</point>
+            <point>105,7,101</point>
+            <!-- Above grass exits -->
+            <point>113.5,17,99</point>
+            <point>113.5,17,169</point>
+            <!-- 2nd floor side of mid -->
+            <point>136,15,134</point>
+            <!-- 1st floor side of mid -->
+            <point>88,9,134</point>
+        </regions>
+    </spawn>
+    <default yaw="-90">
+        <regions>
+            <cuboid min="70,13,136" max="68,11,132"/>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>suffocation</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>

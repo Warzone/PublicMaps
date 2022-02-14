@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Overgrown Valley</name>
+<slug>overgrown_valley_ffa</slug>
+<version>1.3.6</version>
+<objective>Be the one with the most kills after 5 minutes!</objective>
+<authors>
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade"/> <!-- chle_ -->
+    <author uuid="06a2e238-df82-49d2-8cad-9374856bad0c"/> <!--  LordDracula  -->
+</authors>
+<contributors>
+    <contributor uuid="d7cd15e2-573b-4491-b7e5-0574aeaf791c" contribution="Feedback and minor details"/> <!--  RadPan  -->
+    <contributor uuid="ed528509-020d-496f-8dd5-5f57715fc0de" contribution="Most of the custom trees"/> <!--  drefvelin  -->
+    <contributor uuid="9ccbf0e7-f32c-4966-a963-b6eef474b930" contribution="Suggestions and minor decorations"/> <!-- Danno428 -->
+</contributors>
+<rules>
+    <rule>Try your best and do not hide!</rule>
+</rules>
+<respawn delay="2s"/>
+<players max="5" max-overfill="5" show-name-tags="false"/>
+<spawns safe="true">
+    <spawn kit="spawn-kit" spread="true">
+        <regions>
+            <point yaw="-42">7.5,5,-23.5</point>
+            <point yaw="40">67.5,6,-20.5</point>
+            <point yaw="-175">64.5,7,-7.5</point>
+            <point yaw="160">72.5,13,13.5</point>
+            <point yaw="90">58.5,13,23.5</point>
+            <point yaw="127">37.5,11,23.5</point>
+            <point yaw="173">14.5,9,24.5</point>
+            <point yaw="175">1.5,5,25.5</point>
+            <point yaw="5">14.5,10,-24.5</point>
+            <point yaw="46">30.5,11,-23.5</point>
+            <point yaw="0">51.5,12,-24.5</point>
+            <point yaw="60">71.5,11,-6.5</point>
+            <point yaw="121">72.5,12,5.5</point>
+            <point yaw="172">65.5,11,21.5</point>
+            <point yaw="-179">45.5,9,15.5</point>
+        </regions>
+    </spawn>
+	<default region="default-spawn" yaw="90"/>
+</spawns>
+<score>
+    <kills>1</kills>
+</score>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+		<item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+		<item slot="8" material="arrow"/>
+        <helmet color="ffffff" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" color="ffffff" locked="true" material="leather chestplate"/>
+        <leggings color="ffffff" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="ffffff" unbreakable="true" locked="true" material="leather boots"/>
+        <potion amplifier="100" duration="3">heal</potion>
+        <potion amplifier="100" duration="3">damage resistance</potion>
+        <potion amplifier="100" duration="3">regeneration</potion>
+    </kit>
+</kits>
+<regions>
+    <cuboid id="default-spawn" min="-21.5,52.5,1.5" max="-18.5,53,0.5"/>
+    <apply block="allowed-blocks" />
+</regions>
+<time>5m</time>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<filters>
+    <all id="allowed-blocks">
+        <any>
+            <material>stained glass</material>
+            <material>leaves</material>
+            <material>torch</material>
+            <material>long grass</material>
+            <material>red rose</material>
+            <material>water lily</material>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>stained glass pane</material>
+            <material>vine</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+</filters>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>leaves</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>long grass</item>
+    <item>red rose</item>
+    <item>carpet</item>
+    <item>wool</item>
+    <item>torch</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>water lily</item>
+    <item>stained glass</item>
+    <item>seeds</item>
+</itemremove>
+</map>

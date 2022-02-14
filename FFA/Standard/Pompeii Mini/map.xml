@@ -1,0 +1,77 @@
+<map proto="1.4.0">
+<name>Pompeii: Mini</name>
+<version>1.0.1</version>
+<objective>kill as many other players as you can in 5 minutes!</objective>
+<phase>development</phase>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" />
+    <!--    GoldenOre    -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" />
+    <!-- _3each -->
+</authors>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<players min="2" max="5" colors="true"/>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="16">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions>
+            <point yaw="-180">63.5,47,58.5</point>
+            <point yaw="-80">-6,20,23.5</point>
+            <point yaw="-135">-6,20,50</point>
+            <point yaw="35">77,24,-41</point>
+            <point yaw="-170">19,33,60</point>
+            <point yaw="180">88.5,34,44.5</point>
+            <point yaw="90">89,21,-4</point>
+            <point yaw="0">37,22,-4</point>
+            <point yaw="-45">-10,23,-6</point>
+        </regions>
+    </spawn>
+    <default>
+        <region>
+            <point yaw="180">61.5,22,-14.5</point>
+        </region>
+    </default>
+</spawns>
+<regions>
+    <apply use="never" block="never" />
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<killreward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</killreward>
+<disabledamage>
+    <damage>suffocation</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>

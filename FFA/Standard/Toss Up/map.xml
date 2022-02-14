@@ -1,0 +1,114 @@
+<map proto="1.4.2">
+<name>Toss Up Apple Game</name>
+<version>1.4.1</version>
+<objective>Kill as many players as you can before 5 minutes are up!</objective>
+<gamemode>ffa</gamemode>
+<authors>
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTr -->
+</authors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<broadcasts>
+    <alert after="2s">Fall damage is disabled on this map!</alert>
+</broadcasts>
+<score>
+    <kills>1</kills>
+</score>
+<time result="score">5m</time>
+<players min="2" max="5" colors="true"/>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16">arrow</item>
+        <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate locked="true" unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings locked="true" unbreakable="true" material="chainmail leggings"/>
+        <boots locked="true" unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="2" amplifier="255">heal</effect>
+        <effect duration="2" amplifier="255">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default kit="default-kit">
+        <region yaw="-180">
+            <cuboid min="0,18,-82" max="-2,21,-80"/>
+        </region>
+    </default>
+    <spawn kit="spawn-kit" safe="true" spread="true">
+        <regions>
+            <point yaw="-85">-22.5,11,-86.5</point>
+            <point yaw="93">-21.5,11,-84.5</point>
+            <point yaw="45">0.5,11,-111.5</point>
+            <point yaw="-90">-2.5,11,-106.5</point>
+            <point yaw="62">-6.5,12,-112.5</point>
+            <point yaw="-38">-21.5,11,-111.5</point>
+            <point yaw="3.3">-28.5,22,-98.5</point>
+            <point yaw="-179">-25.5,18,-58.5</point>
+            <point yaw="50">30.5,21,-75.5</point>
+            <point yaw="-89">-21.5,22,-86.5</point>
+            <point yaw="-133">7.5,18,-53.5</point>
+            <point yaw="-137">24.5,11,-55.5</point>
+            <point yaw="178">3.5,11,-65.5</point>
+            <point yaw="-164">-13.5,11,-52.5</point>
+            <point yaw="-96">-29.5,11,-69.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <any id="allowed-blocks">
+        <material>leaves</material>
+        <material>leaves 2</material>
+        <material>torch</material>
+        <material>long grass</material>
+    </any>
+</filters>
+<regions>
+     <apply velocity="0.0,2,0.0">
+        <region>
+            <block>3,10,-106</block>
+            <block>-24,10,-86</block>
+            <block>2,10,-65</block>
+            <block>29,9,-95</block>
+        </region>
+    </apply>
+    <apply block-place="never" block-break="allowed-blocks"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>stick</item>
+    <item>seeds</item>
+    <item>dirt</item>
+    <item>armor stand</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>sapling</item>
+    <item>torch</item>
+</itemremove>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<respawn auto="true"/>
+</map>

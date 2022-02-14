@@ -1,0 +1,91 @@
+<map proto="1.4.0">
+<name>Alien</name>
+<slug>alien</slug>
+<version>1.0.6</version>
+<objective>Get the most kills within 5 minutes!</objective>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
+    <!-- AtlasGames -->
+</authors>
+<gamemode>ffa</gamemode>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<players max="5" max-overfill="5" show-name-tags="false" />
+<respawn auto="true" />
+<spawns safe="true" spread="true">
+    <spawn kit="spawn-kit">
+        <regions angle="0,10,0">
+            <point>13,2,-8</point>
+            <point>-7,1,-17</point>
+            <point>21,2,-19</point>
+            <point>23,2,12</point>
+            <point>-22,2,6</point>
+            <point>-20,11,24</point>
+            <point>-3,9,24</point>
+            <point>20,10,15</point>
+            <point>19,12,-17</point>
+            <point>-1,10,-19</point>
+            <point>-17,7,8</point>
+            <point>-19,2,-21</point>
+        </regions>
+    </spawn>
+    <default kit="obs-kit">
+        <regions>
+            <point yaw="135" pitch="18">-11.5,21,-4.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" parents="obs-kit">
+        <item slot="0" unbreakable="true" material="stone sword" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="8" amount="24" material="arrow" />
+        <helmet unbreakable="true" locked="true" color="7F3FB2" material="leather helmet" />
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate" />
+        <leggings unbreakable="true" locked="true" color="7F3FB2" material="leather leggings" />
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection fall:4" />
+        <potion duration="1m30s">absorption</potion>
+        <potion duration="3s" amplifier="5">resistance</potion>
+    </kit>
+    <kit id="kill-boost">
+        <potion duration="3s" amplifier="3">regeneration</potion>
+    </kit>
+    <kit id="obs-kit">
+        <potion duration="oo">night vision</potion>
+    </kit>
+</kits>
+<killreward>
+    <potion duration="4" amplifier="2">speed</potion>
+    <item material="ender pearl" />
+    <item amount="8" material="arrow" />
+    <kit id="kill-boost" force="true"/>
+</killreward>
+<regions>
+    <cuboid id="roof" min="-25,17,-25" max="25,30,25" />
+    <apply enter="never" region="roof" message="You cannot leave the playing field!" />
+    <apply block="never" />
+</regions>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>ender pearl</item>
+    <item>golden apple</item>
+    <item>iron boots</item>
+    <item>leather leggings</item>
+    <item>chainmail chestplate</item>
+    <item>leather helmet</item>
+    <item>arrow</item>
+    <item>stone sword</item>
+    <item>bow</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+</map>
