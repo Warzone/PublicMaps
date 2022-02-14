@@ -1,0 +1,193 @@
+<map proto="1.4.0">
+<name>Snowy Frontier</name>
+<slug>snowy_frontier</slug>
+<version>1.3.0</version>
+<objective>Gain the most points within 5 minutes</objective>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" />
+    <!--  mitchiii_  -->
+</authors>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
+<players min="3" max="5" max-overfill="5" colors="true" show-name-tags="false" />
+<respawn auto="true" />
+<spawns  safe="true">
+    <default kit="default-kit" region="default-spawn" yaw="115" />
+    <spawn   kit="spawn-kit"   spread="true">
+        <regions>
+            <point yaw="-15" >-139,8,-11</point>
+            <point yaw="23"  >-214,11,15</point>
+            <point yaw="122" >-152,11,-3</point>
+            <point yaw="109" >-165,18,42</point>
+            <point yaw="-37" >-210,15,-0</point>
+            <point yaw="-163">-177,10,61</point>
+            <point yaw="9"   >-183,12,-2</point>
+            <point yaw="85"  >-153,22,53</point>
+            <point yaw="11"  >-163,14,-20</point>
+            <point yaw="26"  >-185,12,9</point>
+            <point yaw="127" >-121,17,16</point>
+            <point yaw="-26" >-177,9,23</point>
+            <point yaw="51"  >-163,16,3</point>
+            <point yaw="-38" >-191,16,58</point>
+            <point yaw="155" >-184,8,54</point>
+            <point yaw="-135">-221,11,29</point>
+            <point yaw="130" >-202,14,49</point>
+            <point yaw="102" >-182,9,21</point>
+            <point yaw="-42" >-194,12,9</point>
+            <point yaw="119" >-154,13,15</point>
+            <point yaw="55"  >-193,9,-1</point>
+            <point yaw="142" >-183,22,69</point>
+            <point yaw="-127">-175,22,55</point>
+            <point yaw="-54" >-216,14,39</point>
+            <point yaw="113" >-164,22,56</point>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="default-kit">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true"               material="stone sword" />
+        <item slot="1" unbreakable="true"               material="bow" />
+        <item slot="2"                    amount="8"    material="stained glass" />
+        <item slot="3"                    amount="6"    material="torch" />
+        <item slot="8"                    amount="24"   material="arrow" />
+        <helmet        unbreakable="true" locked="true" material="leather helmet" />
+        <chestplate    unbreakable="true" locked="true" material="gold chestplate" />
+        <boots         unbreakable="true" locked="true" material="iron boots" />
+        <potion        duration="1m30s"                >absorption</potion>
+        <potion        duration="3s"      amplifier="5">resistance</potion>
+        <clear />
+    </kit>
+    <kit id="capture-kit" parents="capture-effects" force="true">
+        <item slot="0" unbreakable="true"               material="stone sword">
+            <enchantment level="1">sharpness</enchantment>
+        </item>
+        <helmet        unbreakable="true" locked="true" material="gold helmet" />
+        <chestplate    unbreakable="true" locked="true" material="iron chestplate" />
+        <leggings                         locked="true" material="barrier" />
+        <boots         unbreakable="true" locked="true" material="iron boots">
+            <enchantment level="1">depth strider</enchantment>
+        </boots>
+    </kit>
+    <kit id="capture-effects" force="true">
+        <potion duration="26s" amplifier="1">speed</potion>
+        <potion duration="6s"  amplifier="1">regeneration</potion>
+    </kit>
+    <kit id="kill-boost">
+        <potion duration="3s" amplifier="3">regeneration</potion>
+        <potion duration="4s" amplifier="2">speed</potion>
+        <potion duration="3s"              >night vision</potion>
+    </kit>
+</kits>
+<killreward>
+    <kit id="kill-boost" />
+    <item amount="2" material="stained glass" />
+    <item amount="4" material="arrow" />
+</killreward>
+<filters>
+    <all id="build-blocks">
+        <any id="break-blocks">
+            <material>stained glass:0</material>
+            <material>leaves</material>
+            <material>torch</material>
+            <material>long grass</material>
+            <material>ice</material>
+            <material>frosted ice</material>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>stained glass pane</material>
+            <material>snow</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder     id="default-spawn"  base="-162.5,32,50.5" radius="1" height="1" />
+    <union        id="capture-regions">
+        <cylinder id="capture-lake"   base="-196.5,9,32.5"  radius="4" height="7" />
+        <cylinder id="capture-hills"  base="-154.5,17,25.5" radius="4" height="7" />
+    </union>
+    <apply block-place="build-blocks" block-break="break-blocks" />
+</regions>
+<king>
+    <hills>
+        <hill name="Frozen Lake" id="hill-lake"  capture-time="1.5s" points="0.1" required="false" neutral-state="true" capture="capture-lake" progress="capture-lake" />
+        <hill name="Snowy Hills" id="hill-hills" capture-time="1.5s" points="0.1" required="false" neutral-state="true" capture="capture-hills" progress="capture-hills" />
+    </hills>
+</king>
+<block-drops>
+    <rule trample="true" kit="capture-kit">
+        <filter>
+            <all>
+                <cause>trample</cause>
+                <any>
+                    <objective>hill-lake</objective>
+                    <objective>hill-hills</objective>
+                </any>
+                <material>stained clay</material>
+                <not>
+                    <wearing>
+                        <item locked="true" material="barrier" />
+                    </wearing>
+                </not>
+            </all>
+        </filter>
+    </rule>
+    <rule>
+        <filter>
+            <material>snow</material>
+        </filter>
+        <drops>
+            <item amount="2" chance="0.6" material="snow ball" />
+            <item amount="1" chance="0.4" material="snow ball" />
+            <item amount="3" chance="0.1" material="snow ball" />
+        </drops>
+    </rule>
+</block-drops>
+<renewables>
+    <renewable region="capture-regions" interval="6s" grow="true" particles="true">
+        <renew-filter>
+            <material>air</material>
+        </renew-filter>
+        <replace-filter>
+            <material>stained glass</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone spade</item>
+    <item>stone axe</item>
+    <item>gold chestplate</item>
+    <item>leather helmet</item>
+    <item>iron boots</item>
+    <item>gold helmet</item>
+    <item>iron chestplate</item>
+    <item>golden apple</item>
+    <item>leaves</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>long grass</item>
+    <item>torch</item>
+    <item>arrow</item>
+    <item>stained glass</item>
+    <item>seeds</item>
+    <item>barrier</item>
+</itemremove>
+<itemkeep>
+    <item>snow ball</item>
+</itemkeep>
+</map>
