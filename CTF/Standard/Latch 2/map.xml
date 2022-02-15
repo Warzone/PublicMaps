@@ -1,0 +1,264 @@
+<map proto="1.4.0">
+<name>Latch 2</name>
+<version>0.1.7</version>
+<objective>Grab the flag and score 3 points on the enemy side</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--   mitchiii_   -->
+</authors>
+<teams>
+    <team id="redTeam"  color="dark red" max="8">Red</team>
+    <team id="blueTeam" color="blue"     max="8">Blue</team>
+</teams>
+<spawns>
+    <spawn team="redTeam"  kit="redKit"  region="redSpawn"     yaw="-90" />
+    <spawn team="blueTeam" kit="blueKit" region="blueSpawn"    yaw="90" />
+    <default               kit="all"     region="defaultSpawn" yaw="0" />
+</spawns>
+<respawn delay="5s" />
+<kits>
+    <kit id="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn" parents="all">
+        <item slot="0" unbreakable="true"     material="stone sword" />
+        <item slot="1" unbreakable="true"     material="bow" />
+        <item slot="2" unbreakable="true"     material="stone axe" />
+        <item slot="3" unbreakable="true"     material="stone spade" />
+        <item slot="4" amount="12" damage="1" material="wood" />
+        <item slot="8" amount="8"             material="arrow" />
+        <leggings      unbreakable="true"     material="iron leggings" />
+        <potion amplifier="5" duration="5">resistance</potion>
+    </kit>
+    <kit id="redKit" parents="spawn">
+        <helmet     unbreakable="true" color="FF0000" material="leather helmet" />
+        <chestplate unbreakable="true" color="FF0000" material="leather chestplate" />
+        <boots      unbreakable="true" color="FF0000" material="leather boots" />
+    </kit>
+    <kit id="blueKit" parents="spawn">
+        <helmet     unbreakable="true" color="0000FF" material="leather helmet" />
+        <chestplate unbreakable="true" color="0000FF" material="leather chestplate" />
+        <boots      unbreakable="true" color="0000FF" material="leather boots" />
+    </kit>
+</kits>
+<killreward>
+    <item            material="golden apple" />
+    <item amount="5" material="arrow" />
+    <item            material="gold ingot" />
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="2" repeat="true"/>
+    </filter>
+    <item amount="4" damage="1" material="wood" />
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="4" repeat="true"/>
+    </filter>
+    <item amount="8" damage="3" material="wood" />
+    <item                       material="web" />
+</killreward>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+            <material>gold spade</material>
+        </match>
+        <modify unbreakable="true" />
+    </rule>
+    <rule>
+        <match>
+            <material>gold leggings</material>
+        </match>
+        <modify>
+            <enchantment level="2">protection projectile</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<filters>
+    <team id="onlyRed">redTeam</team>
+    <team id="onlyBlue">blueTeam</team>
+    <material id="renewWeb">web</material>
+    <material id="onlyAir">air</material>
+    <all id="allowedBlocks">
+        <any>
+            <material>wood</material>
+            <material>wood stairs</material>
+            <material>wooden door</material>
+            <material>wood plate</material>
+            <material>wood button</material>
+            <material>wood double step</material>
+            <material>wood step</material>
+            <material>spruce wood stairs</material>
+            <material>spruce fence</material>
+            <material>spruce fence gate</material>
+            <material>spruce door</material>
+            <material>gravel</material>
+            <material>clay</material>
+            <material>long grass</material>
+            <material>web</material>
+            <material>ladder</material>
+            <material>workbench</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+    <carrying-flag id="whenCarrying">flag</carrying-flag>
+    <not id="deny-drop">
+        <flag-carried>flag</flag-carried>
+    </not>
+</filters>
+<regions>
+    <cylinder id="redSpawn"      base="-52.5,15,60.5" radius="1" height="1" />
+    <cylinder id="blueSpawn"     base="51.5,15,60.5"  radius="1" height="1" />
+    <cylinder id="defaultSpawn"  base="-0.5,15,35.5"  radius="1" height="1" />
+    <cylinder id="redNet"        base="37.5,9,60.5"   radius="1" height="1" />
+    <cylinder id="blueNet"       base="-38.5,9,60.5"  radius="1" height="1" />
+    <cuboid   id="redSpawnExits"  min="-51,-oo,47"     max="-53,oo,73" />
+    <cuboid   id="blueSpawnExits" min="49,-oo,47"      max="51,oo,73" />
+    <apply enter="onlyRed"  region="redSpawnExits"  message="`cYou may not enter `4Red`c's spawn!" />
+    <apply enter="onlyBlue" region="blueSpawnExits" message="`cYou may not enter `9Blue`c's spawn!" />
+    <apply block="allowedBlocks"                    message="`cYou may not interact with that block here!" />
+</regions>
+<score>
+    <limit>3</limit>
+</score>
+<flags>
+    <flag id="flag" name="Flag" color="purple" shared="true" carry-message="`l`bYou are carrying `l`5Flag`l`b, return to the beacon!" drop-filter="never">
+        <post id="flagPost" recover-time="0s" respawn-time="8s">
+            <block>-1,8,60</block>
+        </post>
+        <pickup-kit force="true">
+            <potion amplifier="-2" duration="oo">health boost</potion>
+            <potion amplifier="2" duration="4s">absorption</potion>
+        </pickup-kit>
+        <drop-kit force="true">
+            <potion amplifier="0">health boost</potion>
+        </drop-kit>
+        <net points="1" region="redNet"  capture-filter="onlyRed"  deny-message="You must capture the flag at the `9Blue `cbeacon!" />
+        <net points="1" region="blueNet" capture-filter="onlyBlue" deny-message="You must capture the flag at the `4Red `cbeacon!" />
+    </flag>
+</flags>
+<control-points show="false" points="0" required="false">
+    <control-point name="checkCarry" id="checkCarry" capture="everywhere" capture-time="0s" player-filter="whenCarrying" />
+</control-points>
+<structures>
+    <structure id="redBeacon" air="false">
+        <region>
+            <cuboid min="36,5,59" size="3,1,3" />
+        </region>
+    </structure>
+    <structure id="blueBeacon" air="false">
+        <region>
+            <cuboid min="-40,5,59" size="3,1,3" />
+        </region>
+    </structure>
+    <structures offset="0,0,0">
+        <dynamic structure="redBeacon">
+            <filter>
+                <all>
+                    <flag-carried>flag</flag-carried>
+                    <objective team="redTeam">checkCarry</objective>
+                </all>
+            </filter>
+        </dynamic>
+        <dynamic structure="blueBeacon">
+            <filter>
+                <all>
+                    <flag-carried>flag</flag-carried>
+                    <objective team="blueTeam">checkCarry</objective>
+                </all>
+            </filter>
+        </dynamic>
+    </structures>
+</structures>
+<renewables>
+    <renewable renew-filter="renewWeb" replace-filter="onlyAir" interval="16s" grow="false" />
+</renewables>
+<block-drops>
+    <rule>
+        <filter>
+            <any>
+                <material>gravel</material>
+            </any>
+        </filter>
+        <drops>
+            <item chance="0.08" material="gold ingot" />
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <any>
+                <material>clay</material>
+            </any>
+        </filter>
+        <drops>
+            <item chance="0.12" material="gold ingot" />
+            <item chance="0.06" material="gold ingot" />
+        </drops>
+    </rule>
+</block-drops>
+<broadcasts>
+    <tip   after="8s"                                 >`bRemember, you `ccannot `bbuild in or above water!</tip>
+    <tip   after="46s" every="2m"                     >`bGravel has a chance to drop great rewards..</tip>
+    <alert after="16s" every="1m16s" filter="onlyRed" >`bThe `aflag net `bis located on `9Blue's `bside and is signaled by the `4Red `bbeacon when the flag has been picked up!</alert>
+    <alert after="16s" every="1m16s" filter="onlyBlue">`bThe `aflag net `bis located on `4Red's `bside and is signaled by the `9Blue `bbeacon when the flag has been picked up!</alert>
+</broadcasts>
+<itemremove>
+    <item>stone sword</item>
+    <item>stone axe</item>
+    <item>stone spade</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+    <item>string</item>
+    <item>web</item>
+    <item>wood stairs</item>
+    <item>wooden door</item>
+    <item>wood plate</item>
+    <item>wood double step</item>
+    <item>wood step</item>
+    <item>spruce wood stairs</item>
+    <item>spruce fence</item>
+    <item>spruce fence gate</item>
+    <item>spruce door</item>
+    <item>ladder</item>
+    <item>wood button</item>
+    <item>workbench</item>
+    <item>gravel</item>
+    <item>flint</item>
+    <item>clay</item>
+    <item>clay ball</item>
+    <item>long grass</item>
+    <item>seeds</item>
+    <item>gold plate</item>
+    <item>gold sword</item>
+    <item>gold pickaxe</item>
+    <item>gold spade</item>
+    <item>gold axe</item>
+    <item>gold hoe</item>
+    <item>gold helmet</item>
+    <item>gold chestplate</item>
+    <item>gold leggings</item>
+    <item>gold boots</item>
+    <item>gold nugget</item>
+    <item>trap door</item>
+</itemremove>
+<itemkeep>
+    <item>gold ingot</item>
+</itemkeep>
+<maxbuildheight>13</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

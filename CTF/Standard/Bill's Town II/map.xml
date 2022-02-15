@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Bill's Town II: The Revenge of Bill</name>
+<version>1.0.0</version>
+<objective>Capture the enemy flag two times</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
+</authors>
+<flags>
+    <flag id="blue-flag" name="Blue Flag" carry-kit="flag" points="1" capture-filter="red-only">
+        <post pickup-filter="red-only">70.5,11,50.5</post>
+    </flag>
+    <flag id="red-flag" name="Red Flag" carry-kit="flag" points="1" capture-filter="blue-only">
+        <post pickup-filter="blue-only">70.5,11,468.5</post>
+    </flag>
+    <net region="red-net" flag="blue-flag"/>
+    <net region="blue-net" flag="red-flag"/>
+</flags>
+<score>
+    <limit>2</limit>
+</score>
+<teams>
+    <team id="red-team" color="dark red" max="10">Red Team</team>
+    <team id="blue-team" color="blue" max="10">Blue Team</team>
+</teams>
+<spawns>
+    <spawn team="blue-team" kit="blue">
+        <regions yaw="90">
+            <cuboid min="101,9,136" max="99,8.5,139"/>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="red">
+        <regions yaw="90">
+            <cuboid min="101,9,380" max="100,8.5,383"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cuboid min="101,9,136" max="99,8,139"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="teams">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2">stone pickaxe</item>
+        <item slot="3" amount="12" damage="1">wood</item>
+        <item slot="4">golden apple</item>
+        <item slot="5" amount="16">grilled pork</item>
+        <item slot="28" amount="12">arrow</item>
+    </kit>
+    <kit id="blue" parents="teams">
+        <leggings color="425C9A" unbreakable="true">leather leggings</leggings>
+        <helmet color="425C9A" unbreakable="true">leather helmet</helmet>
+        <boots color="425C9A" unbreakable="true">leather boots</boots>
+        <chestplate color="425C9A" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="red" parents="teams">
+        <leggings color="904247" unbreakable="true">leather leggings</leggings>
+        <helmet color="904247" unbreakable="true">leather helmet</helmet>
+        <boots color="904247" unbreakable="true">leather boots</boots>
+        <chestplate color="904247" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="flag">
+        <potion duration="oo" amplifier="1">slow</potion>
+    </kit>
+</kits>
+<regions>
+    <apply block="never" message="You may not modify blocks here!">
+        <region>
+            <cuboid min="82,12,231" max="31,60,288"/>
+        </region>
+    </apply>
+    <apply block="no-void" message="You may not modify this area!">
+        <region>
+            <complement>
+                <everywhere/>
+                <region id="middle-void"/>
+            </complement>
+        </region>
+    </apply>
+    <cuboid id="red-net" min="104,8,388" max="95,19,375"/>
+    <cuboid id="blue-net" min="104,8,131" max="95,19,144"/>
+    <cuboid id="middle-void" min="82,0,269" max="31,12,250"/>
+    <cuboid id="map" min="-30,0,5"  max="107,100,506"/>
+</regions>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="red-only">red-team</team>
+    <team id="blue-only">blue-team</team>
+</filters>
+<timelock>on</timelock>
+<maxbuildheight>36</maxbuildheight>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<killreward>
+    <item amount="4">arrow</item>
+</killreward>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+</map>
