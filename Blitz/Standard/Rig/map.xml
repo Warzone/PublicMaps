@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Rig</name>
+<version>1.0.2</version>
+<objective>Eliminate the opposing team!</objective>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>ffa</gamemode>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+</authors>
+<contributors>
+    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b" contribution="XML"/> <!-- Anthonny -->
+</contributors>
+<teams>
+    <team id="yellow"
+          color="yellow"
+          max="10" max-overfill="12">Yellow</team>
+    <team id="orange"
+          color="gold"
+          max="10" max-overfill="12">Orange</team>
+</teams>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<rage/>
+<time>5m</time>
+<kits>
+    <kit id="kitSpawn">
+        <item slot="0" enchantment="damage all:10" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow damage:10" unbreakable="true">bow</item>
+        <item slot="2">arrow</item>
+    </kit>
+    <kit id="kitYellow" parents="kitSpawn">
+        <helmet color="FFFF00" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="FFFF00" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="FFFF00" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="FFFF00" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="kitOrange" parents="kitSpawn">
+        <helmet color="CC8400" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="CC8400" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="CC8400" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="CC8400" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="yellow" kit="kitYellow">
+        <regions yaw="0">
+            <cuboid min="-17,15,-21" max="-15,15,-20"/>
+        </regions>
+    </spawn>
+    <spawn team="orange" kit="kitOrange">
+        <regions yaw="180">
+            <cuboid min="18,15,21" max="20,15,22"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>1.5,43,0.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never"/>
+</regions>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

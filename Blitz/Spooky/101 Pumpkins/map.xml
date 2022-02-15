@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<include src="blitz-global.xml"/>
+<name>101 Pumpkins</name>
+<version>1.3.1</version>
+<objective>Kill all your opponents! Each person has 2 lives</objective>
+<gamemode>blitz</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Map Idea and Design"/> <!-- xXFracXx -->
+    <author uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="Halloweenification"/> <!-- TheZaner -->
+    <author uuid="a59dce2e-79e2-4229-ab83-98c885fceb23" contribution="Halloweenification"/> <!-- XxNarwhalexX -->
+    <author uuid="ff64ebb9-24aa-4960-86c4-205244b7a407" contribution="Halloweenification"/> <!-- Super_Armor -->
+</authors>
+<contributors>
+    <contributor uuid="b55d6988-42a6-43a1-ae08-f3f693d64d2e" contribution="Helped with Map Design"/> <!-- PhoenixMatt -->
+    <contributor uuid="7eb653e0-e1d6-4d11-bea5-3e3481ecc0d1" contribution="Helped with Map Design"/> <!-- TheMasterCow -->
+    <contributor uuid="82d03646-d1a1-4383-a533-9509b130f751" contribution="Idea for Rage w/ 2 Lives"/> <!-- iLifting -->
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="Improved XML"/> <!-- dinner1111 -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Halloweenification"/> <!-- ElectroidFilms -->
+</contributors>
+<gamemode>br</gamemode>
+<rules>
+    <rule>No hiding (Crouching behind walls etc.)</rule>
+    <rule>Fire and wither damage is disabled!</rule>
+</rules>
+<teams>
+    <team color="dark green" max="10" overhead-color="dark green">Zombie</team>
+    <team color="gray" max="10" overhead-color="gray">Skeleton</team>
+    <team color="dark red" max="10" overhead-color="dark red">Spider</team>
+    <team color="dark gray" max="10" overhead-color="dark gray">Wither</team>
+</teams>
+<rage/>
+<blitz>
+    <time>10m</time>
+    <lives>2</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<spawns safe="true">
+    <spawn team="spider" kit="spider" yaw="45">
+        <cuboid min="-318,1,-335" max="-316,2,-333"/>
+    </spawn>
+    <spawn team="skeleton" kit="skeleton" yaw="135">
+        <cuboid min="-318,1,-263" max="-316,2,-261"/>
+    </spawn>
+    <spawn team="wither" kit="wither" yaw="-45">
+        <cuboid min="-390,1,-335" max="-388,2,-333"/>
+    </spawn>
+    <spawn team="zombie" kit="zombie" yaw="-135">
+        <cuboid min="-390,1,-263" max="-388,2,-261"/>
+    </spawn>
+    <default yaw="90">
+        <cylinder base="-293,25,-298" radius="3" height="0"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0" enchantment="damage all:10" name="Scythe">iron hoe</item>
+        <item slot="1" enchantment="arrow damage:10" name="Pistol">bow</item>
+        <item slot="2" amount="1">arrow</item>
+        <item slot="8" amount="16">pumpkin pie</item>
+        <potion duration="3" amplifier="1">heal</potion>
+        <potion duration="3" amplifier="10">damage resistance</potion>
+        <potion duration="oo" amplifier="1">wither</potion>
+    </kit>
+    <kit name="spider" parents="spawn">
+        <helmet damage="14">wool</helmet>
+        <chestplate color="FF0000" name="Kevlar" locked="true">leather chestplate</chestplate>
+    </kit>
+    <kit name="skeleton" parents="spawn">
+        <helmet damage="8">wool</helmet>
+        <chestplate color="AAAAAA" name="Kevlar" locked="true">leather chestplate</chestplate>
+    </kit>
+    <kit name="wither" parents="spawn">
+        <helmet damage="7">wool</helmet>
+        <chestplate color="555555" name="Kevlar" locked="true">leather chestplate</chestplate>
+    </kit>
+    <kit name="zombie" parents="spawn">
+        <helmet damage="13">wool</helmet>
+        <chestplate color="00AA00" name="Kevlar" locked="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<filters>
+    <filter name="no-wool" parents="deny-all">
+        <allow>
+            <block>fire</block>
+            <block>web</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="playarea" min="-oo,-oo" max="oo,oo"/>
+    <cuboid name="roof" min="-oo,5,-oo" max="oo,6,oo"/>
+    <apply block="no-wool">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<playable>
+    <complement>
+        <region name="playarea"/>
+        <region name="roof"/>
+    </complement>
+</playable>
+<timelock>on</timelock>
+<disabledamage>
+    <damage>fire</damage>
+    <damage>fire tick</damage>
+    <damage>wither</damage>
+</disabledamage>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>arrow</item>
+    <item>cookie</item>
+    <item>bow</item>
+    <item>iron hoe</item>
+    <item>rotten flesh</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <keep>potion</keep>
+    <keep>ender pearl</keep>
+    <keep>fire</keep>
+    <keep>painting</keep>
+    <keep>web</keep>
+</itemkeep>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn auto="true"/>
+
+<tutorial>
+    <stage title="Blitz: Rage">
+        <message>
+            <line>`4`l`oScary!`r</line>
+            <line>This is a `94 team`r `4Rage`r with `e`l2 lives`r.</line>
+            <line>In order to `awin`r, you must `4`leliminate`r the other team!</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="40">-311,24,-297</point>
+        </teleport>
+    </stage>
+    <stage title="Spawns">
+        <message>
+            <line>This is where you will spawn when the game starts.</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="10">-321,1,-266</point>
+        </teleport>
+    </stage>
+    <stage title="The Center">
+        <message>
+            <line>This is the `9center`r.</line>
+            <line>Here, `2Zombies`r will spawn equiped with `bspecial items`r that can be used in the game.</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="10">-346,1,-298</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

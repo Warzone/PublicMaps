@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Plus Side</name>
+<version>1.4.6</version>
+<objective>Defeat all of the opposing teams within 8 minutes!</objective>
+<gamemode>blitz</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="8053ed38-89d9-4096-b265-a0fcce3a1c33" contribution="Main Design, Building"/> <!-- JETUB1 -->
+    <author uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="XML Writing, Suggestions"/> <!-- BlockDrop74 -->
+</authors>
+<contributors>
+    <contributor uuid="8fda3d23-991f-457c-b679-45ed4b0a576d" contribution="v1.4 Packaging, and Pruning"/> <!-- feidi_22 -->
+    <contributor contribution="Feedback">Everyone Who Gave Feedback!</contributor>
+</contributors>
+<rules>
+    <rule>Do not camp the spawns for newly spawned players</rule>
+    <rule>Fall damage is disabled</rule>
+</rules>
+<teams>
+    <team color="dark red" max="10">Red</team>
+    <team color="blue" max="10">Blue</team>
+    <team color="green" max="10">Green</team>
+    <team color="yellow" max="10">Yellow</team>
+</teams>
+<rage/>
+<respawn auto="true"/>
+<blitz>
+    <time>8m</time>
+    <lives>2</lives>
+</blitz>
+<spawns>
+    <spawn kit="red" team="red" yaw="90">
+        <cylinder base="768, 51, 513" height="0" radius="3.5"/>
+    </spawn>
+    <spawn kit="blue" team="blue" yaw="0">
+        <cylinder base="688, 51, 433" height="0" radius="3.5"/>
+    </spawn>
+    <spawn kit="green" team="green" yaw="180">
+        <cylinder base="688, 51, 593" height="0" radius="3.5"/>
+    </spawn>
+    <spawn kit="yellow" team="yellow" yaw="-90">
+        <cylinder base="608, 51, 513" height="0" radius="3.5"/>
+    </spawn>
+    <default kit="default" yaw="135">
+        <cylinder base="742, 61, 567" height="0" radius="3"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="default">
+        <potion amplifier="2" duration="oo">speed</potion>
+        <potion amplifier="2" duration="oo">jump</potion>
+        <potion amplifier="1" duration="oo">night vision</potion>
+    </kit>
+    <kit name="spawn" parents="default">
+        <item enchantment="damage all:10" name="`7Quartz Sword" slot="0">iron sword</item>
+        <item enchantment="arrow damage:10" name="`8Cobalt Bow" slot="1">bow</item>
+        <item slot="2">arrow</item>
+        <chestplate locked="true">chainmail chestplate</chestplate>
+        <potion duration="3" amplifier="100">damage resistance</potion>
+        <potion duration="3" amplifier="100">heal</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000" locked="true">leather helmet</helmet>
+        <leggings color="cd0000" locked="true">leather leggings</leggings>
+        <boots color="cd0000" locked="true">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc" locked="true">leather helmet</helmet>
+        <leggings color="0066cc" locked="true">leather leggings</leggings>
+        <boots color="0066cc" locked="true">leather boots</boots>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet color="00cd00" locked="true">leather helmet</helmet>
+        <leggings color="00cd00" locked="true">leather leggings</leggings>
+        <boots color="00cd00" locked="true">leather boots</boots>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <helmet color="ffff00" locked="true">leather helmet</helmet>
+        <leggings color="ffff00" locked="true">leather leggings</leggings>
+        <boots color="ffff00" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<regions>
+    <rectangle max="oo,oo" min="-oo,-oo" name="playable"/>
+    <apply block-break="deny-all">
+        <rectangle max="oo,oo" min="-oo,-oo"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="688.5,36,513.5" height="1" radius="1.5"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="705.5,34,530.5" height="1" radius="1.5"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="705.5,34,496.5" height="1" radius="1.5"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="671.5,34,496.5" height="1" radius="1.5"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="671.5,34,530.5" height="1" radius="1.5"/>
+    </apply>
+</regions>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>baked potato</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<tutorial>
+    <stage title="One in a Chamber">
+        <message>
+            <line>This is a `6One in a Chamber `ror `6Rage `rmap.</line>
+            <line>Players only have `1TWO `rlives in this map</line>
+        </message>
+        <teleport>
+            <point pitch="90" yaw="135">742,70,567</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn Kit">
+        <message>
+            <line>Players spawn with a `4Sharpness `r10 Sword, a `5Power `r10 Bow, and</line>
+            <line>1 arrow.</line>
+            <line>You also spawn with your teams corresponding armor</line>
+        </message>
+        <teleport>
+            <point pitch="45" yaw="-45">745,61,570</point>
+        </teleport>
+    </stage>
+    <stage title="Team Spawnpoints">
+        <message>
+            <line>This is an example of where your team will spawn.</line>
+        </message>
+        <teleport>
+            <point pitch="90" yaw="90">766,51,513</point>
+        </teleport>
+    </stage>
+    <stage title="Jumpad">
+        <message>
+            <line>This is a `9jumpad. `rIt can be used to get back to</line>
+            <line>the top layer of this map.</line>
+        </message>
+        <teleport>
+            <point pitch="50" yaw="90">692,36,513</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

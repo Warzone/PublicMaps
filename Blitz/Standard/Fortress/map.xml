@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Fortress</name>
+<version>1.0.0</version>
+<objective>Eliminate the opposing team.</objective>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="2c1cf65f-f668-41eb-812e-091391eb2896"/> <!-- Loks --> 
+</authors>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<teams>
+   <team id="red-team" color="dark red" max="3" max-overfill="5">Red</team>
+   <team id="blue-team" color="blue" max="3" max-overfill="5">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="12">wood</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="8">cooked beef</item>
+        <item slot="9" amount="8">arrow</item>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+    </kit>
+    <kit id="red-kit" parent="spawn">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+        <boots unbreakable="true" color="B02E26">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parent="spawn">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="-90">
+            <point>-17,4,11</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="-90">
+            <point>-17,4,61</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-18.5,17,36.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <negative id="not-map">
+        <rectangle id="map" min="-25,0" max="6,-73"/>
+    </negative>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+</regions>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<maxbuildheight>11</maxbuildheight>
+</map>

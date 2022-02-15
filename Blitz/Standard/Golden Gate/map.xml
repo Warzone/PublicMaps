@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Blitz">
+<name>Golden Gate</name>
+<version>1.0.0</version>
+<objective>Eliminate the enemy team before time runs out!</objective>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" />
+    <!-- DoomRobotBoy -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="14" max-overfill="16">Red</team>
+    <team id="blue" color="blue" max="14" max-overfill="16">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90">
+            <cylinder base="-46.5,26,40.5" radius="1" height="0" />
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90">
+            <cylinder base="147.5,26,40.5" radius="1" height="0" />
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="-46.5,26,40.5" radius="1" height="0" />
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="32">bread</item>
+        <item slot="3">golden apple</item>
+        <item slot="4" id="`4Brick`7`o" projectile="brick">clay brick</item>
+        <item slot="5" amount="6" damage="2">leaves</item>
+        <item slot="6" amount="3">ladder</item>
+        <item slot="8" amount="24">arrow</item>
+        <helmet locked="true" unbreakable="true">iron helmet</helmet>
+        <leggings locked="true" unbreakable="true">chainmail leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate locked="true" color="993333" unbreakable="true">leather chestplate</chestplate>
+        <boots locked="true" color="993333" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate locked="true" color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <boots locked="true" color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="brick" name="Brick" velocity="5" damage="1" projectile="Snowball" throwable="true" cooldown="2s" />
+</projectiles>
+<killreward>
+    <item>golden apple</item>
+    <item damage="2" amount="3">leaves</item>
+</killreward>
+<filters>
+    <any id="only-some">
+        <material>leaves</material>
+        <material>ladder</material>
+        <material>long grass</material>
+        <material>yellow flower</material>
+        <material>red rose</material>
+        <material>double plant</material>
+    </any>
+    <not id="no-void">
+        <void />
+    </not>
+</filters>
+<regions>
+    <apply block="only-some">
+        <everywhere />
+    </apply>
+    <apply block="no-void">
+        <everywhere />
+    </apply>
+</regions>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time>8m</time>
+<respawn auto="true"/>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>bread</item>
+    <item>golden apple</item>
+    <item>leaves</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>seeds</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+</itemremove>
+<timelock>on</timelock>
+</map>
