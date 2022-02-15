@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Acromion</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -9,8 +9,8 @@
 </authors>
 <!-- Teams -->
 <teams>
-    <team id="blue-team" color="blue" max="50">Blue</team>
-    <team id="red-team" color="dark red" max="50">Red</team>
+    <team id="blue-team" color="blue" max="3">Blue</team>
+    <team id="red-team" color="dark red" max="3">Red</team>
 </teams>
 <!-- Kits -->
 <kits>
@@ -37,7 +37,7 @@
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
     <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
-    <default region="obs-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
 <destroyables completion="31%" repairable="false" show-progress="true" sparks="true">
@@ -53,18 +53,18 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="blue-wool" min="-49,16,-19" max="-52,20,-22"/>
-        <cuboid id="red-wool" min="14,16,-19" max="17,20,-22"/>
+        <cuboid id="blue-wool" min="-41,16,-19" max="-44,20,-22"/>
+        <cuboid id="red-wool" min="6,16,-19" max="9,20,-22"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-74,0,10" max="-82,oo,2"/>
-        <cuboid id="red-spawn-protection" min="37,0,2" max="46,oo,10"/>
+        <cuboid id="blue-spawn-protection" min="-66,0,10" max="-74,oo,2"/>
+        <cuboid id="red-spawn-protection" min="29,0,2" max="38,oo,10"/>
     </union>
-    <point id="blue-spawn">-77.5,16,6.5</point>
-    <point id="red-spawn">42.5,16,6.5</point>
-    <point id="obs-spawn">-17.5,28.5,-17.5</point>
+    <point id="blue-spawn">-69.5,16,6.5</point>
+    <point id="red-spawn">34.5,16,6.5</point>
+    <point id="obs-spawn">-17.5,6,46.5</point>
     <negative id="not-map">
-        <rectangle id="map" min="-79,-29" max="44,31"/>
+        <rectangle id="map" min="-72,-29" max="37,31"/>
     </negative>
     <!-- Applications -->
     <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
