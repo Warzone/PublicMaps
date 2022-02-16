@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Dynamight">
+<name>Dynamight Versus</name>
+<objective>Survive the TNT onslaught</objective>
+<gamemode>arcade</gamemode>
+<version>2.0.0</version>
+<authors>
+	<author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
+	<author uuid="19388047-f04b-43ac-9546-22aa69aea75c"/>
+</authors>
+<teams>
+	<team id="green-team" color="dark green" min="2" max="4" plural="true"> Green Guardsmen</team>
+	<team id="red-team" color="red" max="4" min="2" plural="true">Red Guardsmen</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+    	<regions yaw="0">
+            <point>356.5,31,-115.5</point>
+        </regions>
+    </spawn>
+	<spawn team="green-team" kit="green-kit">
+        <regions yaw="-180">
+		    <point>356.5,31,-74.5</point>
+        </regions>
+	</spawn>
+	<default>
+        <regions>
+		    <point>356.5,37,-118.5</point>
+        </regions>
+	</default>
+</spawns>
+<kits>
+	<kit id="green-kit">
+		<item slot="0" projectile="cannon" name="`cCannon">stick</item>
+		<leggings color="667F33">leather leggings</leggings>
+		<boots color="667F33">leather boots</boots>
+        <game-mode>adventure</game-mode>
+	</kit>
+	<kit id="red-kit">
+		<item slot="0" projectile="cannon" name="`cCannon">stick</item>
+		<boots color="993333">leather boots</boots>
+        <leggings color="993333">leather leggings</leggings>
+        <game-mode>adventure</game-mode>
+	</kit>
+</kits>
+<regions>
+    <below id="fallReg" y="35"/>
+    <apply block="never">
+        <region>
+            <above y="34"/>
+        </region>
+    </apply>
+
+    <above id="green-side" z="-95"/>
+    <below id="red-side" z="-95"/>
+
+    <apply filter="red-explosion" region="green-side"/>
+    <apply filter="green-explosion" region="red-side"/>
+</regions>
+<filters>
+    <all id="red-explosion">
+        <cause>explosion</cause>
+        <team>red-team</team>
+    </all>
+    <all id="green-explosion">
+        <cause>explosion</cause>
+        <team>green-team</team>
+    </all>
+</filters>
+<projectiles>
+	<projectile id="cannon" name="cannon" projectile="TNTPrimed" velocity="2.4" damage="0" click="right" cooldown="2s" throwable="false"/>
+</projectiles>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<falling-blocks>
+	<rule delay="3">
+		<filter>
+            <all>
+                <not><material>air</material></not>
+                <region id="fallReg"/>
+            </all>
+		</filter>
+	</rule>
+</falling-blocks>
+<itemremove>
+    <item>stone:6</item>
+    <item>spruce wood stairs</item>
+    <item>step</item>
+    <item>stained clay</item>
+    <item>smooth stairs</item>
+    <item>wood</item>
+</itemremove>
+<disabledamage>
+	<damage>fall</damage>
+</disabledamage>
+<blitz>
+	<life>1</life>
+</blitz>
+<time>120s</time>
+</map>
