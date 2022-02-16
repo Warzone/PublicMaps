@@ -1,0 +1,179 @@
+<map proto="1.4.0">
+<name>Cloud Nine</name>
+<version>1.2.3</version>
+<objective>Collect wool dyes from the shrines, and the string from killing players. Craft the coloured wool and place it on your monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="2fa85349-2276-4850-b7b5-d18c4f4c8376"/> <!-- Solo_Runner -->
+</authors>
+<contributors>
+    <contributor uuid="4978504c-ba2f-4b93-9890-38fbaa8e0b5e" contribution="XML"/> <!-- Hydro_Seeds -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="16">Blue</team>
+    <team id="red" color="dark red" max="16">Red</team>
+</teams>
+<kits>
+    <kit id="base-kit">
+        <effect duration="oo">night vision</effect>
+        <effect duration="oo">speed</effect>
+    </kit>
+    <kit id="spawn-kit" parents="base-kit">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" amount="64" material="golden carrot"/>
+        <!-- <item slot="3" amount="16" material="snow ball"/> -->
+        <item slot="8" amount="12" material="arrow"/>
+        <effect duration="3" amplifier="4">damage resistance</effect>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="take-speed" force="true">
+        <effect duration="0" amplifier="0">speed</effect>
+        <effect duration="oo">slow</effect>
+    </kit>
+    <kit id="give-speed" force="true">
+        <effect duration="0" amplifier="0">slow</effect>
+        <effect duration="oo">speed</effect>
+    </kit>
+    <kit id="kill-reward" force="true">
+        <effect duration="2.5" amplifier="4">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default kit="base-kit" yaw="0">
+        <region>
+            <cylinder base="0.5,54.2,0.5" radius="2" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit" yaw="0">
+        <region>
+            <cylinder base="0.5,19,-41.5" radius="2" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" yaw="180">
+        <region>
+            <cylinder base="0.5,19,42.5" radius="2" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="never"/>
+    <negative id="not-dyes">
+        <union id="dyes">
+            <circle id="lime-dye" center="44.5,0.5" radius="6"/>
+            <circle id="purple-dye" center="0.5,0.5" radius="11"/>
+            <circle id="yellow-dye" center="-43.5,0.5" radius="6"/>
+        </union>
+    </negative>
+    <apply kit="take-speed" region="dyes"/>
+    <apply kit="give-speed" region="not-dyes"/>
+</regions>
+<wools craftable="true">
+    <wools team="blue">
+        <wool color="lime" location="44.5,19,0.5">
+            <monument>
+                <block>-20.5,15,-41.5</block>
+            </monument>
+        </wool>
+        <wool color="purple" location="0.5,4,0.5">
+            <monument>
+                <block>0.5,15,-62.5</block>
+            </monument>
+        </wool>
+        <wool color="yellow" location="-43.5,19,0.5">
+            <monument>
+                <block>21.5,15,-41.5</block>
+            </monument>
+        </wool>
+    </wools>
+    <wools team="red">
+        <wool color="lime" location="44.5,19,0.5">
+            <monument>
+                <block>-20.5,15,42.5</block>
+            </monument>
+        </wool>
+        <wool color="purple" location="0.5,4,0.5">
+            <monument>
+                <block>0.5,15,63.5</block>
+            </monument>
+        </wool>
+        <wool color="yellow" location="-43.5,19,0.5">
+            <monument>
+                <block>21.5,15,42.5</block>
+            </monument>
+        </wool>
+    </wools>
+</wools>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>string</item>
+    <item>golden carrot</item>
+    <item>snow ball</item>
+    <item>arrow</item>
+    <item>wool</item>
+</itemremove>
+<kill-reward>
+    <item>string</item>
+    <item amount="6">arrow</item>
+    <kit id="kill-reward"/>
+</kill-reward>
+<modifybowprojectile>
+    <projectile>Snowball</projectile>
+</modifybowprojectile>
+<item-mods>
+    <rule>
+        <match>
+            <material>wool</material>
+        </match>
+        <modify show-can-place-on="false">
+            <can-place-on>
+                <all-blocks/>
+            </can-place-on>
+        </modify>
+    </rule>
+</item-mods>
+</map>
+<!-- <include src="tutorial.xml"/>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>This map is a `a`lCapture the Wool `r(CTW) map.</line>
+            <line>The objective is to kill the enemy for `adye `rand `astring`r.</line>
+            <line>Then you must craft the `cwool`r and place it at the monuments.</line>
+        </message>
+        <teleport>
+            <point yaw="145" pitch="10">28,26,30</point>
+        </teleport>
+    </stage>
+    <stage title="Dye Spawners">
+        <message>
+            <line>There are three dye spawners.</line>
+            <line>`aLime Dye`r, `5Purple Dye`r, and `eYellow Dye.</line>
+            <line>Watch out. Each spawner will give you slowness.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="0">-55,18,0</point>
+        </teleport>
+    </stage>
+    <stage title="Wool Monuments">
+        <message>
+            <line>Behind your base, there are the `cthree`r wool monuments.</line>
+            <line>After crafting the wool with `a4 String`r and `a1 Dye`r.</line>
+            <line>Place in on the piston block.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="0">-32,13,-41</point>
+        </teleport>
+    </stage>
+</tutorial> -->

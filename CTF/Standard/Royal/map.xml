@@ -1,0 +1,204 @@
+<map proto="1.4.2">
+<name>Royal</name>
+<version>1.0.6</version>
+<objective>Hold the flag for 250 seconds to win!</objective>
+<gamemode>kotf</gamemode>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<contributors>
+    <contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="XML"/> <!-- Poseidons -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="5">Blue</team>
+    <team id="green" color="green" max="5">Green</team>
+    <team id="red" color="dark red" max="5">Red</team>
+    <team id="yellow" color="yellow" max="5">Yellow</team>
+</teams>
+<rules>
+    <rule>Aiding member of other teams is not allowed.</rule>
+</rules>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="20" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="3">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="flag-kit" force="true">
+        <effect amplifier="-3">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
+    </kit>
+    <kit id="reset-health" force="true">
+        <effect duration="1" amplifier="0">health boost</effect>
+        <effect duration="1" amplifier="10">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="-24.5,45,129.5" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit" filter="has-flag">
+        <region yaw="90">
+            <point>57.5,13.1,129.5</point>
+        </region>
+    </spawn>
+    <spawn team="green" kit="spawn-kit" filter="has-flag">
+        <region yaw="-90">
+            <point>-56.4,13.1,129.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" filter="has-flag">
+        <region yaw="0">
+            <point>0.5,13.1,72.5</point>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="spawn-kit" filter="has-flag">
+        <region yaw="180">
+            <point>0.5,13.1,185.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <any id="has-flag">
+        <carrying-flag>flag1</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag1</carrying-flag>
+            </same-team>
+        </not>
+        <carrying-flag>flag2</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag2</carrying-flag>
+            </same-team>
+        </not>
+    </any>
+</filters>
+<regions>
+    <cuboid id="test" min="-19,13,147" max="-17,15,149"/>
+    <!-- Corners -->
+    <!--  Green Yellow Pad  -->
+    <apply velocity="-0.5,1.7,0.5" region="test"/>
+    <!--  Yellow Blue Pad  -->
+    <apply velocity="0.5,1.7,0.5">
+        <region>
+            <cuboid min="18,13,147" max="20,15,149"/>
+        </region>
+    </apply>
+    <!--  Blue Red Pad  -->
+    <apply velocity="0.5,1.7,-0.5">
+        <region>
+            <cuboid min="18,13,110" max="20,15,112"/>
+        </region>
+    </apply>
+    <!--  Red Green Pad  -->
+    <apply velocity="-0.5,1.7,-0.5">
+        <region>
+            <cuboid min="-19,13,110" max="-17,15,112"/>
+        </region>
+    </apply>
+    <!-- To Mid -->
+    <!-- Red -->
+    <apply velocity="0,1.2,1.1">
+        <region>
+            <block>0.5,27,119.5</block>
+        </region>
+    </apply>
+    <!--   Blue   -->
+    <apply velocity="-1.1,1.2,0">
+        <region>
+            <block>10.5,27,129.5</block>
+        </region>
+    </apply>
+    <!--  Green   -->
+    <apply velocity="1.1,1.2,0">
+        <region>
+            <block>-9.5,27,129.5</block>
+        </region>
+    </apply>
+    <!--  Yellow   -->
+    <apply velocity="0,1.2,-1.1">
+        <region>
+            <block>0.5,27,139.5</block>
+        </region>
+    </apply>
+   <!-- From Mid -->
+    <!-- Red -->
+    <apply velocity="0,0.7,-1.5">
+        <region>
+            <block>0.5,31,125.5</block>
+        </region>
+    </apply>
+    <!--   Blue   -->
+    <apply velocity="1.5,0.7,0">
+        <region>
+            <block>4.5,31,129.5</block>
+        </region>
+    </apply>
+    <!--  Green   -->
+    <apply velocity="-1.5,0.7,0">
+        <region>
+            <block>-3.5,31,129.5</block>
+        </region>
+    </apply>
+    <!--  Yellow   -->
+    <apply velocity="0,0.7,1.5">
+        <region>
+            <block>0.5,31,133.5</block>
+        </region>
+    </apply>
+    <apply block="never"/>
+</regions>
+<flags>
+    <post id="top-post" return-time="0s" respawn-time="10s">
+        <block>0.5,32,129.5</block>
+    </post>
+    <post id="bottom-post" return-time="0s" respawn-time="10s">
+        <block>0.5,17,129.5</block>
+    </post>
+    <flag id="flag1" name="Top Flag"  shared="true" post="top-post" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health"/>
+    <flag id="flag2" name="Bottom Flag"  shared="true" post="bottom-post" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health"/>
+</flags>
+<score>
+    <limit>200</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="10" material="arrow"/>
+</kill-reward>
+<respawn spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

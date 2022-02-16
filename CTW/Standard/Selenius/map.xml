@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Selenius</name>
+<version>1.0.3</version>
+<objective>Capture the other team's wool and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<include src="disable-boat-crafting.xml"/>
+<authors>
+    <author uuid="df5fd9f4-4840-4293-9346-5c77bf7bc08f"/> <!-- kalikakitty -->
+    <author uuid="76cf5483-a7ea-4b5d-8830-385f768c4807"/> <!-- xannallax33 -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML/Metadata"/> <!-- ElectroidFilms -->
+    <contributor uuid="af209afd-77dc-4bdb-8cf1-f1513c77bb0b" contribution="Various Things"/> <!-- TranquilSea -->
+</contributors>
+<teams>
+    <team color="dark green" max="16">Green</team>
+    <team color="yellow" max="16">Yellow</team>
+</teams>
+<spawns>
+    <spawn team="green" kit="green" yaw="180">
+        <cylinder base="33,5,26" radius="3" height="1"/>
+    </spawn>
+    <spawn team="yellow" kit="yellow" yaw="0">
+        <cylinder base="33,5,-27" radius="3" height="1"/>
+    </spawn>
+    <default yaw="-90">
+        <cylinder base="-18,14,-1" radius="1" height="1"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0" enchantment="dig speed:1;durability:3">iron axe</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="32" damage="1">wood</item>
+        <item slot="3" amount="12">arrow</item>
+        <item slot="7" amount="4">golden apple</item>
+        <item slot="8" amount="16">cooked beef</item>
+        <chestplate>iron chestplate</chestplate>
+        <leggings color="191919" unbreakable="true">leather leggings</leggings>
+        <potion duration="5" amplifier="3">heal</potion>
+        <potion duration="5" amplifier="2">damage resistance</potion>
+    </kit>
+    <kit parents="spawn" name="green">
+        <helmet color="006600" unbreakable="true">leather helmet</helmet>
+        <boots color="006600" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit parents="spawn" name="yellow">
+        <helmet color="FFCD00" unbreakable="true">leather helmet</helmet>
+        <boots color="FFCD00" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<wools>
+    <wool team="green" color="orange">
+        <block>24,6,63</block>
+    </wool>
+    <wool team="green" color="red">
+        <block>42,6,63</block>
+    </wool>
+    <wool team="yellow" color="purple">
+        <block>24,6,-64</block>
+    </wool>
+    <wool team="yellow" color="cyan">
+        <block>42,6,-64</block>
+    </wool>
+</wools>
+<filters>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-yellow">
+        <team>yellow</team>
+    </filter>
+    <filter name="only-green-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>enchantment table</block>
+                </any>
+                <team>yellow</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-yellow-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>enchantment table</block>
+                </any>
+                <team>green</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <!-- Green must get into -->
+    <union name="green-wools">
+        <rectangle name="red-wool" min="53,-36" max="65,-48"/>
+        <rectangle name="orange-wool" min="2,-36" max="14,-48"/>
+    </union>
+    <apply block="only-green" use="only-green-usage" message="Don't modify your own wool room!">
+        <region name="green-wools"/>
+    </apply>
+    <apply enter="only-green" message="Don't enter your own wool room!">
+        <region name="green-wools"/>
+    </apply>
+    <!-- Yellow must get into -->
+    <union name="yellow-wools">
+        <rectangle name="purple-wool" min="14,36" max="2,48"/>
+        <rectangle name="cyan-wool" min="65,36" max="53,48"/>
+    </union>
+    <apply block="only-yellow" use="only-yellow-usage" message="Don't modify your own wool room!">
+        <region name="yellow-wools"/>
+    </apply>
+    <apply enter="only-yellow" message="Don't enter your own wool room!">
+        <region name="yellow-wools"/>
+    </apply>
+        <rectangle name="green-spawn" min="41,19" max="25,33"/>
+        <rectangle name="yellow-spawn" min="25,-20" max="41,-34"/>
+    <apply block="deny-all" message="Don't modify the spawn!">
+        <region name="green-spawn"/>
+        <region name="yellow-spawn"/>
+    </apply>
+    <apply block="deny-all" message="Don't modify the back base!">
+        <region name="green-back"/>
+        <region name="yellow-back"/>
+    </apply>
+    <rectangle name="green-back" min="18,54" max="48,65"/>
+    <rectangle name="yellow-back" min="48,-55" max="18,-66"/>
+    <negative name="all">
+        <rectangle name="inside" min="64,-66" max="2,65"/>
+    </negative>
+    <apply block="deny-all" message="Don't build outside the map!">
+        <region name="all"/>
+    </apply>
+    <apply block="deny-all" message="Don't break the enchanting table!">
+        <block>33,8,0</block>
+        <block>33,8,-1</block>
+    </apply>
+</regions>
+<killreward>
+    <item amount="1">iron ingot</item>
+</killreward>
+<toolrepair>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>string</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>iron ingot</item>
+</itemremove>
+</map>

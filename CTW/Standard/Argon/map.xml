@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Argon</name>
+<version>1.2.6</version>
+<objective>Capture the wool from the enemies wool rooms and return them to your spawn</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2"/> <!-- dinner1111 -->
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+    <author uuid="9310b44c-55b2-4a51-8be6-151b379d3d4d"/> <!-- legobmw99 -->
+</authors>
+<teams>
+    <team color="dark aqua" max="50">Cyan</team>
+    <team color="dark purple" max="50">Purple</team>
+</teams>
+<filters>
+    <filter name="only-purple">
+        <team>purple</team>
+    </filter>
+    <filter name="only-cyan">
+        <team>cyan</team>
+    </filter>
+    <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="wool-room-blocks" parents="deny-all">
+        <allow>
+            <block>web</block>
+            <block>glass</block>
+            <block damage="2">log</block>
+            <block damage="6">log</block>
+            <block damage="10">log</block>
+            <block damage="2">wood</block>
+            <block>piston base</block>
+            <block>redstone wire</block>
+            <block damage="9">wool</block>
+            <block>smooth brick</block>
+            <block damage="10">wool</block>
+            <block>stationary water</block>
+            <block>water</block>
+        </allow>
+    </filter>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <union name="allow-void">
+        <rectangle min="-270,3" max="-157,26"/>
+        <rectangle min="-270,64" max="-157,41"/>
+        <rectangle min="-232,81" max="-195,-14"/>
+    </union>
+    <apply block-place="no-void">
+        <complement>
+            <rectangle min="oo,oo" max="-oo,-oo"/>
+            <region name="allow-void"/>
+        </complement>
+    </apply>
+    <apply block-place="deny-all">
+        <negative>
+            <rectangle min="43,-71" max="-470,138"/>
+        </negative>
+    </apply>
+    <apply block="wool-room-blocks" enter="only-cyan" use="only-cyan">
+        <circle name="lightblue" center="-106.5,115.5" radius="12.5"/>
+        <circle name="blue" center="-106.5,-48.5" radius="12.5"/>
+    </apply>
+    <apply block="wool-room-blocks" enter="only-purple" use="only-purple">
+        <circle name="magenta" center="-320.5,115" radius="12.5"/>
+        <circle name="red" center="-320.5,-48.5" radius="12.5"/>
+    </apply>
+    <apply block="deny-all" use="deny-all">
+        <block>-320.5,9,115.5</block>
+        <block>-320.5,9,-48.5</block>
+        <block>-106.5,9,-48.5</block>
+        <block>-106.5,9,115.5</block>
+        <block>-19.5,24,33.5</block>
+        <block>-407.5,9,33.5</block>
+    </apply>
+    <apply block-break="only-iron" block-place="deny-all">
+        <rectangle name="purple-spawn" min="-36,89" max="36,-22"/>
+        <rectangle name="cyan-spawn" min="-390,-22" max="-463,89"/>
+    </apply>
+    <apply enter="only-purple" block="deny-all">
+        <rectangle name="purple-spawn-enter" min="-36,37" max="-34,29"/>
+    </apply>
+    <apply enter="only-cyan" block="deny-all">
+        <rectangle name="cyan-spawn-enter" min="-390,29" max="-392,47"/>
+    </apply>
+    <apply enter="deny-all">
+        <cuboid min="-33,19,27" max="-34,oo,40"/>
+        <cuboid min="-394,19,27" max="-393,oo,40"/>
+    </apply>
+</regions>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:3;dig speed:3">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:2">iron axe</item>
+        <item slot="4" amount="64" damage="2">log</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="28" amount="64">arrow</item>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="spawn" safe="true">
+        <spawn team="cyan" yaw="270">
+            <cylinder base="-407,13,33" radius="6" height="0"/>
+        </spawn>
+        <spawn team="purple" yaw="90">
+            <cylinder base="-19,13,33" radius="6" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="90">
+        <cylinder base="-213,46,33" radius="4" height="0"/>
+    </default>
+</spawns>
+<maxbuildheight>35</maxbuildheight>
+<killreward>
+    <item amount="16">arrow</item>
+</killreward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron axe</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>golden apple</item>
+    <item>step</item>
+    <item damage="3">sapling</item>
+    <item>string</item>
+    <item>trap door</item>
+    <item>coal block</item>
+    <item>glowstone dust</item>
+    <item>cooked beef</item>
+    <item>redstone wire</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>wood</item>
+</itemremove>
+<timelock>on</timelock>
+<wools>
+    <wool team="cyan" color="light blue">
+        <block>-398.5,14,24.5</block>
+    </wool>
+    <wool team="cyan" color="blue">
+        <block>-398.5,14,42.5</block>
+    </wool>
+    <wool team="purple" color="magenta">
+        <block>-28.5,14,42.5</block>
+    </wool>
+    <wool team="purple" color="red">
+        <block>-28.5,14,24.5</block>
+    </wool>
+</wools>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
+            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
+        </message>
+        <teleport>
+            <point yaw="0">-213,26,-16</point>
+        </teleport>
+    </stage>
+    <stage title="Purple Wool Rooms">
+        <message>
+            <line>These are `5Purple Team`r's wool rooms housing `9blue `rand `blight blue`r.</line>
+            <line>`3Cyan Team `rhas `4red `rand `dmagenta`r wools.</line>
+            <line>Purple Team should defend these rooms against Cyan Team invaders who are trying to steal the wool and make it back alive.</line>
+            <line>There are special goodies inside that will help you fight your way out.</line>
+        </message>
+        <teleport>
+            <point yaw="-180" pitch="30">-106,12,-25</point>
+        </teleport>
+    </stage>
+    <stage title="Cyan Team Base">
+        <message>
+            <line>Here is the `3Cyan Team `rvictory monument and spawn where the captured wools must be placed.</line>
+            <line>Both wools must be placed to win.</line>
+        </message>
+        <teleport>
+            <point yaw="-90">-407,13,33</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Supplies">
+        <message>
+            <line>Here is the iron supply for `3Cyan Team`r. Note that `5Purple Team `rhas the same thing on their side.</line>
+            <line>You can craft iron armor to prepare yourself for battle.</line>
+        </message>
+        <teleport>
+            <point yaw="90">-425,16,33</point>
+        </teleport>
+    </stage>
+</tutorial>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

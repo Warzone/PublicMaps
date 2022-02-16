@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Tenebrous</name>
+<version>1.0.4</version>
+<objective>Capture the wool from the enemies wool rooms and return them to your victory monument</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="c95e0a45-8208-430a-a1a2-1e27333445a4"/> <!-- skippy369 -->
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924"/> <!-- Mikeg542 -->
+</authors>
+<contributors>
+    <contributor uuid="b0b3c5d5-e9bd-4984-bc07-1bd552d4b042"/> <!-- Beebou -->
+</contributors>
+<teams>
+    <team color="dark green" max="32">Green</team>
+    <team color="gold" max="32">Orange</team>
+</teams>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="orange" yaw="180">
+            <cylinder name="orange-spawn-a" base="-4,2,253" radius="3" height="0"/>
+            <cylinder name="orange-spawn-b" base="-26,2,253" radius="3" height="0"/>
+        </spawn>
+        <spawn team="green" yaw="0">
+            <cylinder name="green-spawn-a" base="-2,2,-31" radius="3" height="0"/>
+            <cylinder name="green-spawn-b" base="-26,2,-31" radius="3" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="90">
+        <cylinder name="observer-spawn" base="81,22,111" radius="2" height="0"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64">baked potato</item>
+        <item slot="5" amount="2">golden apple</item>
+        <item slot="6" amount="64" damage="1">log</item>
+    </kit>
+</kits>
+<maxbuildheight>30</maxbuildheight>
+<killreward>
+    <item amount="16">arrow</item>
+	<item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>wood</item>
+    <item>baked potato</item>
+    <item>iron sword</item>
+    <item>iron axe</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+<filters>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-iron">
+        <any>
+            <block>iron block</block>
+            <block>glowstone</block>
+        </any>
+    </filter>
+    <filter name="orange-only">
+        <team>orange</team>
+    </filter>
+    <filter name="green-only">
+        <team>green</team>
+    </filter>
+    <filter name="only-green-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>orange</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-orange-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>green</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="no-void" message="You may not modify the void area!">
+        <negative>
+            <rectangle min="-34,101" max="-70,121"/>
+            <rectangle min="4,121" max="40,101"/>
+        </negative>
+    </apply>
+    <apply enter="green-only" block="green-only no-void" use="only-green-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Blue Room   -->
+        <rectangle min="-70,208" max="-97,223"/>
+        <!--   Red Room   -->
+        <rectangle min="39,223" max="68,208"/>
+    </apply>
+    <apply block="deny-all" message="You may not mess with the portals!">
+        <rectangle min="-4,41" max="-8,25"/>
+        <rectangle min="-25,41" max="-21,25"/>
+        <rectangle min="-4,181" max="-8,197"/>
+        <rectangle min="-25,181" max="-21,197"/>
+    </apply>
+    <apply enter="orange-only" block="orange-only no-void" use="only-orange-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Lime Room   -->
+        <rectangle min="41,15" max="68,0"/>
+        <!--   Purple Room   -->
+        <rectangle min="-70,15" max="-97,0"/>
+    </apply>
+    <apply block-break="only-iron" block-place="deny-all" message="You may not modify the spawn!">
+        <rectangle min="-34,231" max="4,261"/>
+        <rectangle min="-34,-39" max="4,-9"/>
+    </apply>
+    <apply enter="orange-only" message="You may not get too close to the enemy portal!">
+        <rectangle min="-30,198" max="1,181"/>
+    </apply>
+    <apply enter="green-only" message="You may not get too close to the enemy portal!">
+        <rectangle min="-30,42" max="1,25"/>
+    </apply>
+</regions>
+<renewables rate="3" grow="true" avoid-entities="true" sound="false">
+    <renewable>
+        <region>
+            <cuboid min="-34,2,231" max="4,9,261"/>
+            <cuboid min="-34,2,-39" max="4,9,-9"/>
+        </region>
+        <renew>iron block</renew>
+    </renewable>
+</renewables>
+<portals>
+    <!--  portals in orange spawn to purple wool -->
+    <portal x="@-24" y="@11" z="@189" yaw="@90">
+        <cuboid min="-29,5,235" max="-25,2,234"/>
+    </portal>
+    <!--  portals in orange spawn to lime wool -->
+    <portal x="@-6" y="@11" z="@189" yaw="@-90">
+        <cuboid min="-5,6,235" max="-1,2,234"/>
+    </portal>
+    <!--  portals in green spawn to blue wool  -->
+    <portal x="@-24" y="@11" z="@33" yaw="@90">
+        <cuboid min="-29,2,-12" max="-25,6,-13"/>
+    </portal>
+    <!--  portals in green spawn to red wool  -->
+    <portal x="@-6" y="@11" z="@33" yaw="@-90">
+        <cuboid min="-5,2,-12" max="-1,6,-13"/>
+    </portal>
+    <!--  portal purple lane to spawn  -->
+    <portal filter="orange-only" x="@-27" z="@236" y="@2" yaw="@0">
+        <cuboid min="-23,15,187" max="-22,11,191"/>
+    </portal>
+    <!--  portal lime lane to spawn  -->
+    <portal filter="orange-only" x="@-3" z="@236" y="@2" yaw="@0">
+        <cuboid min="-7,15,191" max="-8,11,187"/>
+    </portal>
+    <!--  portal red lane to spawn  -->
+    <portal filter="green-only" x="@-3" z="@-14" y="@2" yaw="@180">
+        <cuboid min="-7,15,35" max="-8,11,31"/>
+    </portal>
+    <!--  portal blue lane to spawn  -->
+    <portal filter="green-only"  x="@-27" z="@-14" y="@2" yaw="@180">
+        <cuboid min="-23,15,31" max="-22,11,35"/>
+    </portal>
+</portals>
+<wools>
+    <wool team="green" color="red">
+        <block location="-3,3,-35"/>
+    </wool>
+    <wool team="green" color="blue">
+        <block location="-27,3,-35"/>
+    </wool>
+    <wool team="orange" color="purple">
+        <block location="-27,3,257"/>
+    </wool>
+    <wool team="orange" color="lime">
+        <block location="-3,3,257"/>
+    </wool>
+</wools>
+</map>

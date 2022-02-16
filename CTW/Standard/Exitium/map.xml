@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<map proto="1.3.1">
+<include src="tutorial.xml"/>
+<name>Exitium</name>
+<version>1.0.3</version>
+<objective>Capture and place the enemy's wools on your victory monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- Pandaboy999 -->
+</authors>
+<contributors>
+    <contributor uuid="0dab0f17-47b1-4bc6-942c-8019d49fd932" contribution="Feedback"/> <!-- GoodBobul -->
+    <contributor uuid="083ec416-c87e-438f-8732-170798b4fe93" contribution="XML"/> <!-- orky48 -->
+</contributors>
+<teams>
+    <team color="blue" max="40">Blue</team>
+    <team color="dark red" max="40">Red</team>
+</teams>
+<kits>
+    <kit name="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit name="teams" parents="all">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+        <item slot="2" enchantment="durability:1;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:1;dig speed:1">iron axe</item>
+        <item slot="4" amount="64">cooked fish</item>
+        <item slot="5" amount="64" damge="1">log</item>
+        <item slot="6" amount="64">glass</item>
+        <item slot="33" amount="64">glass</item>
+        <item slot="7" amount="64">ladder</item>
+        <item slot="35" lore="`7Drink this if your screen is black!">milk bucket</item>
+        <chestplate enchantment="protection explosions:1">chainmail chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="teams" yaw="180">
+        <point>0.5,59,135.5</point>
+    </spawn>
+    <spawn team="red" kit="teams" yaw="0">
+        <point>0.5,59,-134.5</point>
+    </spawn>
+    <default kit="all" yaw="-90">
+        <block>-41.5,32,0.5</block>
+    </default>
+</spawns>
+<filters>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-red">
+        <all>
+            <team>red</team>
+            <not>
+                <any>
+                    <cause>explosion</cause>
+                    <block>chest</block>
+                </any>
+            </not>
+        </all>
+    </filter>
+    <filter name="only-blue">
+        <all>
+            <team>blue</team>
+            <not>
+                <any>
+                    <cause>explosion</cause>
+                    <block>chest</block>
+                </any>
+            </not>
+        </all>
+    </filter>
+    <filter name="allow-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="deny-spawner-red">
+        <not>
+            <all>
+                <team>red</team>
+                <block>mob spawner</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="deny-spawner-blue">
+        <not>
+            <all>
+                <team>blue</team>
+                <block>mob spawner</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="deny-water">
+        <deny>
+            <block>water</block>
+            <block>stationary water</block>
+        </deny>
+    </filter>
+    <filter name="deny-obsidian">
+        <deny>
+            <block>obsidian</block>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                    <block>stone button</block>
+                    <block>wood button</block>
+                    <block>lever</block>
+                    <block>wood plate</block>
+                    <block>stone plate</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                    <block>stone button</block>
+                    <block>wood button</block>
+                    <block>lever</block>
+                    <block>wood plate</block>
+                    <block>stone plate</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="all" min="-oo,-oo" max="oo,oo"/>
+    <rectangle name="middle" min="18,26" max="-17,-24"/>
+    <cuboid name="above-23" min="-oo,24,-oo" max="oo,oo,oo"/>
+    <union name="spawns">
+        <rectangle name="red-spawn" min="18,-141" max="-17,-116"/>
+        <rectangle name="blue-spawn" min="-17,142" max="18,117"/>
+    </union>
+    <union name="blue-woolrooms"> <!-- Blue must enter -->
+        <rectangle name="pink-room" min="35,-98" max="52,-71"/>
+        <rectangle name="purple-room" min="-52,-98" max="-35,-71"/>
+    </union>
+    <union name="red-woolrooms"> <!-- Red must enter -->
+        <rectangle name="lime-room" min="-51,72" max="-34,99"/>
+        <rectangle name="green-room" min="36,72" max="53,99"/>
+    </union>
+    <union name="in-front-of-wool-rooms">
+        <rectangle name="in-front-of-lime-a" min="-34,99" max="-16,88"/>
+        <rectangle name="in-front-of-lime-b" min="-34,83" max="-16,71"/>
+        <rectangle name="in-front-of-green-a" min="36,72" max="18,83"/>
+        <rectangle name="in-front-of-green-b" min="36,88" max="18,99"/>
+        <rectangle name="in-front-of-purple-a" min="-35,-87" max="-17,-98"/>
+        <rectangle name="in-front-of-purple-b" min="-35,-71" max="-17,-82"/>
+        <rectangle name="in-front-of-pink-a" min="35,-98" max="17,-87"/>
+        <rectangle name="in-front-of-pink-b" min="35,-82" max="17,-70"/>
+    </union>
+    <union name="blue-spawners">
+        <block>23.5,2,34.5</block>
+        <block>-22.5,2,34.5</block>
+    </union>
+    <union name="red-spawners">
+        <block>-22.5,2,-33.5</block>
+        <block>23.5,2,-33.5</block>
+    </union>
+    <!-- Applied -->
+    <apply block="deny-void" message="`7You may not build outside the map area!">
+        <negative>
+            <region name="middle"/>
+            <region name="spawns"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="`7You may not edit above the height limit! (`c23 Blocks`7)">
+        <complement>
+            <region name="above-23"/>
+            <region name="spawns"/>
+        </complement>
+    </apply>
+    <apply block-break="allow-iron" block-place="deny-all" message="`7You may only break iron blocks in the base!">
+        <region name="spawns"/>
+    </apply>
+    <apply use="deny-water" message="`7You may not pick up the water!">
+        <region name="spawns"/>
+    </apply>
+    <apply enter="only-red" message="`7You may not enter the `cRED TEAM`7's wool room!">
+        <region name="red-woolrooms"/>
+    </apply>
+    <apply block="only-red" use="only-red-usage">
+        <region name="red-woolrooms"/>
+    </apply>
+    <apply enter="only-blue" message="`7You may not enter the `9BLUE TEAM`7's wool room!">
+        <region name="blue-woolrooms"/>
+    </apply>
+    <apply block="only-blue" use="only-blue-usage">
+        <region name="blue-woolrooms"/>
+    </apply>
+    <apply block="deny-spawner-red" message="`7You may not break your own spawners!">
+        <region name="red-spawners"/>
+    </apply>
+    <apply block="deny-spawner-blue" message="`7You may not break your own spawners!">
+        <region name="blue-spawners"/>
+    </apply>
+    <apply enter="only-red" message="`7You may not enter the `cRED TEAM`7's base!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-blue" message="`7You may not enter the `9BLUE TEAM`7's base!">
+        <region name="blue-spawn"/>
+    </apply>
+</regions>
+<wools team="blue">
+    <wool color="pink">
+        <block>1.5,12,140.5</block>
+    </wool>
+    <wool color="purple">
+        <block>-0.5,12,140.5</block>
+    </wool>
+</wools>
+<wools team="red">
+    <wool color="lime">
+        <block>-0.5,12,-139.5</block>
+    </wool>
+    <wool color="green">
+        <block>1.5,12,-139.5</block>
+    </wool>
+</wools>
+<timelock>on</timelock>
+<itemremove>
+    <item>glass</item>
+    <item>ladder</item>
+    <item>bucket</item>
+    <item>milk bucket</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>smooth brick</item>
+    <item>water bucket</item>
+    <item>sapling</item>
+    <item>glowstone dust</item>
+    <item>clay ball</item>
+    <item>hard clay</item>
+    <item>beacon</item>
+    <item>iron fence</item>
+    <item>workbench</item>
+    <item>sign</item>
+    <item>wall sign</item>
+    <item>109</item> <!-- Stone brick stairs -->
+    <item>wood step</item>
+    <item>iron plate</item>
+    <item>chainmail chestplate</item>
+    <item>mob spawner</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `aCapture the Wool `r(CTW) map.</line>
+            <line>The objective is to grab the wools on the other team's side and return it to your base.</line>
+        </message>
+        <teleport>
+            <point yaw="145" pitch="20">32.5,25,49.5</point>
+        </teleport>
+    </stage>
+    <stage title="Wool Rooms">
+        <message>
+            <line>`rHere is one of the `9Blue Team`r's wool room. They must protect it.</line>
+            <line>`rInside the wool rooms you will find chests with several supplies.</line>
+            <line>`rOne of these supplies also includes `cTNT`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="10">22.5,15,67.5</point>
+        </teleport>
+    </stage>
+    <stage title="Bases">
+        <message>
+            <line>`rThis is the base; use it to get iron blocks, TNT, and other supplies.</line>
+            <line>`rBe wise with it, you only have a limited amount!</line>
+        </message>
+        <teleport>
+            <point yaw="-130" pitch="20">0.5,20,133.5</point>
+        </teleport>
+    </stage>
+    <stage title="TNT Spawners">
+        <message>
+            <line>`rOn each team's side there is a spawner that will spawn 8 pieces of `cTNT `revery couple of seconds.</line>
+            <line>`rBe careful, the enemy can break yours!</line>
+        </message>
+        <teleport>
+            <point yaw="-150" pitch="30">-27.5,7,42.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>
