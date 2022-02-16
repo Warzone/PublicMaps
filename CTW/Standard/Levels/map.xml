@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Levels</name>
+<version>1.0.3</version>
+<objective>Capture the enemy wools and place it at your victory monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- roro28gutier -->
+    <author uuid="ed1fe2bd-0431-4a56-8c5c-d4657389dd1f"/> <!-- artur1197 -->
+    <author uuid="5df77c0e-1bc5-4fff-b41b-6763f29d4125"/> <!-- G_Marturet -->
+    <author uuid="8eb34538-a6e0-4bc0-b695-b993f3f14aaa"/> <!-- Puyi2912 -->
+</authors>
+<teams>
+    <team max="16" color="dark red">Red</team>
+    <team max="16" color="blue">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red" yaw="90" kit="teams">
+        <point>12.5,18,-35.5</point>
+    </spawn>
+    <spawn team="blue" yaw="-90" kit="teams">
+        <point>-87.5,18,-35.5</point>
+    </spawn>
+    <default yaw="0">
+        <cuboid min="-39,51,45" max="-41,51,43"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="teams">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2" enchantment="durability:3">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3">iron axe</item>
+        <item slot="4" amount="64" damage="1">log</item>
+        <item slot="5" amount="32">leaves</item>
+        <item slot="6" amount="64">pumpkin pie</item>
+    </kit>
+    <kit name="portals">
+        <potion duration="3" amplifier="3">heal</potion>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-red-chest" parents="only-red">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="only-blue-chest" parents="only-blue">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                    <block>trap door</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="middle" min="-25,14" max="-50,-8"/>
+    <rectangle name="blue-iron-bridge" min="-73,11" max="-64,19"/>
+    <rectangle name="red-iron-bridge" min="-2,11" max="-11,19"/>
+    <complement name="blue-iron">
+        <rectangle min="-57,36" max="-83,15"/>
+        <region name="blue-iron-bridge"/>
+    </complement>
+    <complement name="red-iron">
+        <rectangle min="8,36" max="-18,20"/>
+        <region name="red-iron-bridge"/>
+    </complement>
+    <circle name="blue-spawn" center="-83.5,-35.5" radius="12"/>
+    <circle name="red-spawn" center="8.5,-35.5" radius="12"/>
+    <rectangle name="red-portals" min="14,-2" max="17,1"/>
+    <rectangle name="blue-portals" min="-89,1" max="-92,-2"/>
+    <cuboid name="red-above-portal" min="5,17,-31" max="4,19,-33"/>
+        <block name="red-above-block">15.5,24,-0.5</block>
+    <cuboid name="red-below-portal" min="5,17,-38" max="4,19,-40"/>
+        <block name="red-below-block">15.5,11,-0.5</block>
+    <cuboid name="blue-above-portal" min="-80,17,-40" max="-79,19,-38"/>
+        <block name="blue-above-block">-90.5,24,-0.5</block>
+    <cuboid name="blue-below-portal" min="-80,17,-33" max="-79,19,-31"/>
+        <block name="blue-below-block">-90.5,11,-0.5</block>
+    <circle name="red-wool-rooms" center="-133.5,-0.5" radius="8"/> <!-- Red must enter -->
+    <circle name="blue-wool-rooms" center="58.5,-0.5" radius="8"/> <!-- Blue must enter -->
+    <union name="portal-protection">
+        <block>-90.5,24,-4.5</block>
+        <block>-90.5,10,-4.5</block>
+        <block>15.5,24,-4.5</block>
+        <block>15.5,10,-4.5</block>
+        <block>-90.5,23,-4.5</block>
+        <block>-90.5,9,-4.5</block>
+        <block>15.5,23,-4.5</block>
+        <block>15.5,9,-4.5</block>
+    </union>
+    <!-- Applied -->
+    <apply block="deny-void" message="You may not edit the void area!">
+        <negative>
+            <region name="middle"/>
+            <region name="red-iron-bridge"/>
+            <region name="blue-iron-bridge"/>
+        </negative>
+    </apply>
+    <apply block="deny-all">
+        <region name="blue-spawn"/>
+        <region name="red-spawn"/>
+    </apply>
+    <apply block="deny-all" message="You may not edit the portal area!">
+        <region name="blue-portals"/>
+        <region name="red-portals"/>
+        <region name="portal-protection"/>
+    </apply>
+    <apply block="only-iron" message="You may only break iron blocks here!">
+        <region name="blue-iron"/>
+        <region name="red-iron"/>
+    </apply>
+    <apply block="only-blue-chest" use="only-blue-usage">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy wool room!">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block="only-red-chest" use="only-red-usage">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy wool room!">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply kit="portals">
+        <region name="red-above-portal"/>
+        <region name="red-below-portal"/>
+        <region name="blue-above-portal"/>
+        <region name="blue-below-portal"/>
+    </apply>
+</regions>
+<portals>
+    <portal x="@-90.5" y="@24" z="@-4.5" pitch="@10" yaw="@-90" filter="only-blue">
+        <region name="blue-above-portal"/>
+        <region name="blue-below-block"/>
+    </portal>
+    <portal x="@-90.5" y="@10" z="@-4.5" pitch="@10" yaw="@-90" filter="only-blue">
+        <region name="blue-below-portal"/>
+        <region name="blue-above-block"/>
+    </portal>
+    <portal x="@15.5" y="@24" z="@-4.5" pitch="@10" yaw="@90" filter="only-red">
+        <region name="red-above-portal"/>
+        <region name="red-below-block"/>
+    </portal>
+    <portal x="@15.5" y="@10" z="@-4.5" pitch="@10" yaw="@90" filter="only-red">
+        <region name="red-below-portal"/>
+        <region name="red-above-block"/>
+    </portal>
+</portals>
+<wools>
+   <wool team="blue" color="lime">
+        <block>-94,13,-1</block>
+   </wool>
+   <wool team="blue" color="cyan">
+        <block>-94,12,-1</block>
+   </wool>
+   <wool team="red" color="yellow">
+        <block>18,13,-1</block>
+   </wool>
+   <wool team="red" color="orange">
+        <block>18,12,-1</block>
+   </wool>
+</wools>
+<timelock>on</timelock>
+<maxbuildheight>40</maxbuildheight>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>leaves</item>
+    <item>wood</item>
+    <item>pumpkin pie</item>
+    <item>arrow</item>
+    <item>string</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item amount="16">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `aCapture the Wool `r(CTW) map</line>
+            <line>`rThe objective is to grab the wools on the other team's side and return it to your `cvictory monument`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-60" pitch="10">-60,30,-22</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn Selection">
+        <message>
+            <line>`rOn this map, you get to `achoose `rwhat level you go to.</line>
+            <line>`rRun through the `cportal `rcorresponding to the sign and it will `cteleport `ryou to that level.</line>
+        </message>
+        <teleport>
+            <point yaw="50" pitch="10">12,19,-40</point>
+        </teleport>
+    </stage>
+    <stage title="Portals between Levels">
+        <message>
+            <line>`rUse the portal mid-lane to teleport you to the other level.</line>
+            <line>`rThe portal on the top will teleport you to the bottom, and vic versa.</line>
+        </message>
+        <teleport>
+            <point yaw="12" pitch="5">21,25,-25</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Access">
+        <message>
+            <line>`rBridge between the `acobwebs `rto reach the island with iron blocks.</line>
+            <line>`rUse your iron blocks `cwisely`r, you can run out!</line>
+        </message>
+        <teleport>
+            <point yaw="125" pitch="20">-40,16,35</point>
+        </teleport>
+    </stage>
+    <stage title="Red Wool Rooms">
+        <message>
+            <line>This is `cRed team's `rwool room.</line>
+            <line>Red Team has to defend their wool against the Blue Team, who will try to capture it.</line>
+            <line>Blue Team has a wool room as well which they will have to defend.</line>
+        </message>
+        <teleport>
+            <point yaw="-40" pitch="5">37,24,-27</point>
+        </teleport>
+    </stage>
+    <stage title="Victory Monument">
+        <message>
+            <line>`rPlace the `awools `rhere to win the match!</line>
+            <line>`rIt's located on the `clower level`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-70" pitch="-20">16.5,11,-1.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

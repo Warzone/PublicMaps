@@ -1,0 +1,182 @@
+<map proto="1.3.0">
+<name>Twisted</name>
+<version>1.3.5</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="ed1fe2bd-0431-4a56-8c5c-d4657389dd1f"/> <!-- artur1197 -->
+    <author uuid="06c2f980-d6b1-4908-b578-a9cf42a1418a"/> <!-- hanchulonXD1 -->
+    <author uuid="8eb34538-a6e0-4bc0-b695-b993f3f14aaa"/> <!-- Puyi2912 -->
+    <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- roro28gutier -->
+    <author uuid="5df77c0e-1bc5-4fff-b41b-6763f29d4125"/> <!-- G_Marturet -->
+</authors>
+<teams>
+    <team color="dark purple" max="36">Purple</team>
+    <team color="dark aqua" max="36">Cyan</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:1">iron axe</item>
+        <item slot="4" amount="64">log</item>
+        <item slot="5" amount="64">leaves</item>
+        <item slot="6" amount="64">baked potato</item>
+        <item slot="28">arrow</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="cyan" kit="spawn" yaw="180">
+        <cylinder base="-296,23,-1253" radius="3" height="0"/>
+    </spawn>
+    <spawn team="purple" kit="spawn" yaw="0">
+        <cylinder base="-296,23,-1431" radius="3" height="0"/>
+    </spawn>
+    <default yaw="-90">
+        <cylinder base="-240,35,-1342" radius="2" height="0"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-cyan">
+        <team>cyan</team>
+    </filter>
+    <filter name="only-purple" parents="deny-players deny-world">
+        <allow>
+            <team>purple</team>
+        </allow>
+    </filter>
+    <filter name="allow-some">
+        <any>
+            <block>iron block</block>
+            <block>diamond block</block>
+            <block>rails</block>
+            <block>ladder</block>
+        </any>
+    </filter>
+    <filter name="no-void" parents="allow-all">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-cyan-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>purple</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-purple-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>cyan</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="no-void" message="You may not build in the void!">
+        <complement>
+            <rectangle name="everything" min="-oo,-oo" max="oo,oo"/>
+        <union name="middle-build-zones">
+            <rectangle min="-336,-1365" max="-257,-1320"/>
+        </union>
+        </complement>
+    </apply>
+    <apply block="deny-all" message="You may not build in the void!">
+        <cuboid max="oo,0,oo" min="-oo,7,-oo"/>
+    </apply>
+    <apply block-break="allow-some" block-place="deny-all" message="You may not modify the base!">
+<!--  Cyan Base  -->
+        <circle center="-297,-1254" radius="22"/>
+        <rectangle min="-275,-1250" max="-271,-1257"/>
+        <rectangle min="-322,-1250" max="-319,-1257"/>
+    </apply>
+    <apply enter="only-cyan" message="You may not enter the Cyan Team's base!">
+        <rectangle min="-312,-1250" max="-311,-1257"/>
+        <rectangle min="-282,-1257" max="-281,-1250"/>
+    </apply>
+    <apply block-break="allow-some" block-place="deny-all" message="You may not modify the base!">
+<!--  Purple Base  -->
+        <circle center="-297,-1432" radius="22"/>
+        <rectangle min="-319,-1435" max="-322,-1428"/>
+        <rectangle min="-275,-1428" max="-271,-1435"/>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the Purple Team's base!">
+        <rectangle min="-282,-1434" max="-281,-1429"/>
+        <rectangle min="-311,-1428" max="-312,-1435"/>
+    </apply>
+    <apply enter="only-cyan" block="only-cyan" use="only-cyan-usage" message="You may not enter or modify your own wool rooms!">
+<!--  Light Blue Wool Room  -->
+        <circle center="-329,-1503" radius="8"/>
+<!--  Blue Wool Room  -->
+        <circle center="-265,-1503" radius="8"/>
+    </apply>
+    <apply enter="only-purple" block="only-purple" use="only-purple-usage" message="You may not enter or modify your own wool rooms!">
+<!--  Purple Wool Room  -->
+        <circle center="-265,-1183" radius="8"/>
+<!--  Pink Wool Room  -->
+        <circle center="-329,-1183" radius="8"/>
+    </apply>
+<!-- Staircases/Portals Protection -->
+    <apply block-break="allow-some" block-place="deny-all" message="You may not modify this area!">
+        <rectangle min="-295,-1220" max="-298,-1223"/>
+        <rectangle min="-295,-1284" max="-298,-1287"/>
+        <rectangle min="-295,-1398" max="-298,-1401"/>
+        <rectangle min="-295,-1462" max="-298,-1465"/>
+    </apply>
+</regions>
+<portals>
+    <portal x="@-295.5" y="@33" z="@-1400.5" yaw="@-90">
+        <cuboid min="-296,13,-1399" max="-298,15,-1401"/>
+    </portal>
+    <portal x="@-297.5" y="@13" z="@-1398.5" yaw="@90">
+        <cuboid min="-296,33,-1399" max="-298,35,-1401"/>
+    </portal>
+    <portal x="@-297.5" y="@33" z="@-1284.5" yaw="@90">
+        <cuboid min="-296,13,-1285" max="-298,15,-1287"/>
+    </portal>
+    <portal x="@-295.5" y="@13" z="@-1286.5" yaw="@-90">
+        <cuboid min="-296,33,-1285" max="-298,35,-1287"/>
+    </portal>
+</portals>
+<maxbuildheight>65</maxbuildheight>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>rails</item>
+    <item>ladder</item>
+    <item>seeds</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>leaves</item>
+    <item>baked potato</item>
+    <item>trap door</item>
+</itemremove>
+<wools>
+    <wool team="purple" color="pink">
+        <block>-297,27,-1447</block>
+    </wool>
+    <wool team="purple" color="magenta">
+        <block>-297,27,-1417</block>
+    </wool>
+    <wool team="cyan" color="light blue">
+        <block>-297,27,-1269</block>
+    </wool>
+    <wool team="cyan" color="blue">
+        <block>-297,27,-1239</block>
+    </wool>
+</wools>
+</map>

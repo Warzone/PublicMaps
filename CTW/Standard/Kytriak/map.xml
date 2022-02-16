@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<map proto="1.4.0"> 
+<name>Kytriak</name> <!-- mame's edit from TE version for mixed -->
+<version>1.4.1</version> 
+<objective>Capture the different colored wools from the enemy's base and return it to your team's monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="1c2664be-01ce-4be4-ac1c-a4dcc64b80c7" contribution="Aesthetics and General Map Design"/> <!-- xxjkr7xx -->
+    <author uuid="aabf45c7-c2e4-4060-a76b-35cea8a0e639" contribution="General Map Design"/> <!-- X3_4 -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Aethetics and General Map Design"/> <!-- Stealth5061 --> 
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="XML and some aesthetics"/> <!-- Mikeg542 --> 
+</authors>
+<teams>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="32">arrow</item>
+        <item slot="2" enchantment="dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="dig speed:1">iron axe</item>
+        <item slot="31" enchantment="dig speed:1">iron spade</item>
+        <item slot="4" amount="32" damage="1">log</item>
+        <item slot="5" amount="32">glass</item>
+        <item slot="8" amount="64">golden carrot</item>
+        <item slot="7">golden apple</item>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate unbreakable="true" color="993333">leather chestplate</chestplate>
+        <boots unbreakable="true" color="993333">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate unbreakable="true" color="6699D8">leather chestplate</chestplate>
+        <boots unbreakable="true" color="6699D8">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+    <deny id="no-void">
+        <void/>
+    </deny>
+    <deny id="only-blue">
+        <team>red</team>
+    </deny>
+    <deny id="only-red">
+        <team>blue</team>
+    </deny>
+    <material id="only-iron">iron block</material>
+    <not id="only-red-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+            </any>
+            <team>blue</team>
+        </all>
+    </not>
+    <not id="only-blue-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+            </any>
+            <team>red</team>
+        </all>
+    </not>
+</filters>
+<regions>
+    <union id="blue-wool-rooms">
+        <rectangle id="purple-wool" min="12,-795" max="37,-782"/> <!-- Left for blue-->
+        <rectangle id="pink-wool" min="-150,-795" max="-125,-782" />
+    </union>
+    <union id="red-wool-rooms">
+        <rectangle id="yellow-wool" min="-150,-1041" max="-125,-1029"/> <!-- Left for blue-->
+        <rectangle id="lime-wool" min="12,-1041" max="37,-1029" />
+    </union>
+    <union id="bases">
+        <rectangle id="blue-base" min="-95,-1107" max="-18,-1038"/>
+        <rectangle id="red-base" min="-95,-785" max="-18,-716"/>
+    </union>
+    <rectangle id="void-bridging" min="-78,-920" max="-35,-903"/>
+    <!-- Wool room protection -->
+    <apply block="only-blue" enter="only-blue" use="only-blue-usage" message="You may not enter or modify blue's wool rooms!" region="blue-wool-rooms"/>
+    <apply block="only-red" enter="only-red" use="only-red-usage" message="You may not enter or modify red's wool rooms!" region="red-wool-rooms"/>
+    <!-- Base protections -->
+    <apply enter="only-blue" message="You may not enter blue team's base!" region="blue-base"/>
+    <apply enter="only-red" message="You may not enter red team's base!" region="red-base"/>
+    <apply block-break="only-iron" message="You may only break iron blocks in the bases!" region="bases"/>
+    <apply block-place="never" message="You may not place blocks in the bases!" region="bases"/>
+    <!-- General protection -->
+    <apply block="no-void" message="You may not edit the void area">
+        <region>
+            <complement>
+                <region id="everywhere"/>
+                <region id="void-bridging"/>
+            </complement>
+        </region>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron spade</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>337</item>
+    <item>golden carrot</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>wood</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<maxbuildheight>32</maxbuildheight>
+<spawns>
+    <spawns>
+        <spawn team="red" kit="red-kit" yaw="180">
+            <region>
+                <cylinder name="red-spawn" base="-57,14,-749" radius="2" height="0"/>
+            </region>
+        </spawn>
+        <spawn team="blue" kit="blue-kit" yaw="0">
+            <region>
+                <cylinder id="blue-spawn" base="-57,14,-1075" radius="2" height="0"/>
+            </region>
+        </spawn>
+    </spawns>
+    <default yaw="90">
+        <region>
+            <cuboid id="observer-spawn" min="-118,48,-910" max="-121,48,-913"/>
+        </region>
+    </default>
+</spawns>
+<wools>
+    <wool team="red" color="lime" location="30,8,-1035">
+        <monument>
+            <block>-56,10,-722</block>
+        </monument>
+    </wool>
+    <wool team="red" color="yellow" location="-144,8,-1035">
+        <monument>
+            <block>-58,10,-722</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="purple" location="30,8,-789">
+        <monument>
+            <block>-56,10,-1102</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="pink" location="-144,8,-789">
+        <monument>
+            <block>-58,10,-1102</block>
+        </monument>
+    </wool>
+</wools>
+</map>

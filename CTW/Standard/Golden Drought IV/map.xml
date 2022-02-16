@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Golden Drought IV</name>
+<version>1.1.3</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<teams>
+    <team color="blue" max="40">Blue</team>
+    <team color="dark red" max="40">Red</team>
+</teams>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="blue" yaw="-45">
+            <cylinder base="-53.5,49,-53.5" radius="1" height="0"/>
+        </spawn>
+        <spawn team="red" yaw="135">
+            <cylinder base="53.5,49,53.5" radius="1" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="45">
+        <cylinder base="0,61,0" radius="4" height="0"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" enchantment="durability:1;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3">gold axe</item>
+        <item slot="4" amount="64">sandstone</item>
+        <item slot="5" amount="64" damage="2">wood</item>
+        <item slot="6" amount="64">ladder</item>
+        <item slot="7" amount="2">golden apple</item>
+        <item slot="8" amount="64">cooked chicken</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="31" amount="64">sandstone</item>
+        <item slot="32" amount="4">web</item>
+        <item slot="33">bucket</item>
+        <item slot="22" amount="64">sandstone</item>
+        <potion duration="10" amplifier="4">damage resistance</potion>
+    </kit>
+</kits>
+<itemremove>
+    <item>cooked chicken</item>
+    <item>sandstone</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>web</item>
+    <item>bucket</item>
+    <item>glass bottle</item>
+    <item>string</item>
+    <item>iron chestplate</item>
+    <item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>gold axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<filters>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="allow-gold">
+        <block>gold block</block>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <!-- void protection -->
+    <apply block="no-void" message="You may not edit the void area">
+        <negative>
+            <union>
+                <rectangle min="-7,-50" max="50,7"/>
+                <rectangle min="-35,-35" max="35,35"/>
+                <rectangle min="-50,-7" max="7,50"/>
+            </union>
+        </negative>
+    </apply>
+    <!-- the wools red has to get -->
+    <union name="blue-wool-rooms">
+        <rectangle name="purple" min="105,7" max="119,21"/>
+        <rectangle name="magenta" min="105,105" max="119,119"/>
+        <rectangle name="pink" min="7,105" max="21,119"/>
+    </union>
+    <!-- the wools blue has to get -->
+    <union name="red-wool-rooms">
+        <rectangle name="lime" min="-105,-7" max="-119,-21"/>
+        <rectangle name="cyan" min="-105,-105" max="-119,-119"/>
+        <rectangle name="green" min="-7,-105" max="-21,-119"/>
+    </union>
+    <!-- Spawn regions -->
+    <union name="bases">
+        <rectangle name="blue-base" min="-35,-35" max="-56,-56"/>
+        <rectangle name="red-base" min="35,35" max="56,56"/>
+    </union>
+    <!-- wool room rules -->
+    <apply block="only-blue" use="only-blue-usage">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter your own wool room.">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block="only-red" use="only-red-usage">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter your own wool room.">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply block-break="allow-gold" block-place="deny-all" message="You may only break gold blocks in the base">
+        <region name="bases"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy team's base">
+        <region name="red-base"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy team's base">
+        <region name="blue-base"/>
+    </apply>
+</regions>
+<maxbuildheight>42</maxbuildheight>
+<wools>
+    <wool team="red" color="lime">
+        <block location="36,10,38"/>
+    </wool>
+    <wool team="red" color="cyan">
+        <block location="37,10,37"/>
+    </wool>
+    <wool team="red" color="green">
+        <block location="38,10,36"/>
+    </wool>
+    <wool team="blue" color="purple">
+        <block location="-37,10,-39"/>
+    </wool>
+    <wool team="blue" color="magenta">
+        <block location="-38,10,-38"/>
+    </wool>
+    <wool team="blue" color="pink">
+        <block location="-39,10,-37"/>
+    </wool>
+</wools>
+<blockdrops>
+    <rule>
+        <filter>
+            <block>iron block</block>
+        </filter>
+        <drops>
+            <item>iron ingot</item>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <block>emerald block</block>
+        </filter>
+        <drops>
+            <item>apple</item>
+        </drops>
+    </rule>
+</blockdrops>
+<renewables>
+    <renewable grow="false" rate=".03333"> <!-- 1 per 30 seconds -->
+        <region>
+            <cylinder base="0,12,0" radius="28" height="1"/>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+        <replace>sandstone</replace>
+        <replace>wood</replace>
+        <replace>web</replace>
+        <replace>ladder</replace>
+    </renewable>
+    <renewable grow="false" rate=".003333"> <!-- 1 per 300 seconds -->
+        <region>
+            <union>
+                <block>-46,18,45</block>
+                <block>45,18,-46</block>
+            </union>
+        </region>
+        <renew>emerald block</renew>
+        <replace>air</replace>
+        <replace>sandstone</replace>
+        <replace>wood</replace>
+        <replace>web</replace>
+        <replace>ladder</replace>
+    </renewable>
+    <renewable rate="3" grow="true" avoid-entities="true" sound="false">
+        <region>
+            <cuboid min="-35,2,-35" max="-56,16,-56"/>
+            <cuboid min="35,2,35" max="56,16,56"/>
+        </region>
+        <renew>gold block</renew>
+    </renewable>
+</renewables>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold axe</material>
+        </match>
+        <modify>
+            <enchantment level="3">unbreaking</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

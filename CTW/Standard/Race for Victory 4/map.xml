@@ -1,0 +1,259 @@
+<map proto="1.3.0">
+<name>Race for Victory 4</name>
+<version>0.1</version> <!-- Changed from 1.0 to indicate that the map is not finished -->
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="map design"/> <!-- Plastix -->
+    <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="map design"/> <!-- Anxuiz -->
+    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="map design and code"/> <!-- MonsieurApple -->
+</authors>
+<teams>
+    <team color="blue" max="50">Blue</team>
+    <team color="dark red" max="50">Red</team>
+</teams>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="blue" yaw="0">
+            <cylinder base="0,11,96" radius="4" height="0"/>
+        </spawn>
+        <spawn team="red" yaw="180">
+            <cylinder base="0,11,-96" radius="4" height="0"/>
+        </spawn>
+    </spawns>
+    <default kit="all" yaw="270">
+        <cylinder base="0,58,0" radius="3" height="0"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit name="spawn" parent="all">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3;dig speed:1">iron axe</item>
+        <item slot="4" amount="64" damage="1">wood</item>
+        <item slot="22" amount="64" damage="1">wood</item>
+        <item slot="31" amount="64" damage="1">wood</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="8" amount="64">bread</item>
+    </kit>
+</kits>
+<filters>
+    <filter name="no-void">
+        <not>
+            <void/>
+            <block>beacon</block>
+        </not>
+    </filter>
+
+    <filter name="only-dispenser">
+        <any>
+            <block>dispenser</block>
+        </any>
+    </filter>
+
+    <filter name="only-blue">
+        <all>
+            <team>blue</team>
+            <not>
+                <filter name="only-dispenser"/>
+            </not>
+        </all>
+    </filter>
+
+    <filter name="only-red">
+        <all>
+            <team>red</team>
+            <not>
+                <filter name="only-dispenser"/>
+            </not>
+        </all>
+    </filter>
+
+    <filter name="only-iron">
+        <any>
+            <block>iron block</block>
+            <block>diamond block</block>
+        </any>
+    </filter>
+</filters>
+<regions>
+
+    <!-- void protection -->
+    <apply use="no-void" block="no-void">
+        <negative>
+            <rectangle min="-18,-22" max="18,22"/>
+            <region name="red-wool-rooms"/>
+            <region name="blue-wool-rooms"/>
+        </negative>
+    </apply>
+
+    <!-- portal protections -->
+    <apply block="deny-all">
+        <circle center="12,-75.5" radius="3"/>
+        <circle center="-12,-75.5" radius="3"/>
+        <circle center="12,75.5" radius="3"/>
+        <circle center="-12,75.5" radius="3"/>
+    </apply>
+
+    <apply block-place="deny-all" block-break="only-iron" message="You may not modify your supply room">
+        <rectangle min="-32,83" max="32,109"/>
+        <rectangle min="-32,-82" max="32,-108"/>
+    </apply>
+
+    <!-- the wools blue has to get -->
+    <complement name="green-wool">
+        <rectangle min="42,-74" max="54,-62"/>
+
+        <rectangle min="53,-74" max="54,-73"/>
+        <rectangle min="53,-63" max="54,-62"/>
+        <rectangle min="42,-63" max="43,-62"/>
+        <rectangle min="42,-74" max="43,-73"/>
+    </complement>
+
+    <complement name="pink-wool">
+        <rectangle min="-42,-74" max="-54,-62"/>
+
+        <rectangle min="-54,-74" max="-53,-73"/>
+        <rectangle min="-53,-63" max="-54,-62"/>
+        <rectangle min="-42,-63" max="-43,-62"/>
+        <rectangle min="-42,-74" max="-43,-73"/>
+    </complement>
+
+    <complement name="yellow-wool">
+        <rectangle min="-6,-41" max="6,-29"/>
+
+        <rectangle min="-6,-41" max="-5,-40"/>
+        <rectangle min="-6,-30" max="-5,-29"/>
+        <rectangle min="6,-30" max="5,-29"/>
+        <rectangle min="6,-41" max="5,-40"/>
+    </complement>
+
+    <!-- the wools red has to get -->
+    <complement name="purple-wool">
+        <rectangle min="42,74" max="54,62"/>
+
+        <rectangle min="53,74" max="54,73"/>
+        <rectangle min="53,63" max="54,62"/>
+        <rectangle min="42,63" max="43,62"/>
+        <rectangle min="42,74" max="43,73"/>
+    </complement>
+
+    <complement name="orange-wool">
+        <rectangle min="-42,74" max="-54,62"/>
+
+        <rectangle min="-54,74" max="-53,73"/>
+        <rectangle min="-53,63" max="-54,62"/>
+        <rectangle min="-42,63" max="-43,62"/>
+        <rectangle min="-42,74" max="-43,73"/>
+    </complement>
+
+    <complement name="cyan-wool">
+        <rectangle min="-6,41" max="6,29"/>
+
+        <rectangle min="-6,41" max="-5,40"/>
+        <rectangle min="-6,30" max="-5,29"/>
+        <rectangle min="6,30" max="5,29"/>
+        <rectangle min="6,41" max="5,40"/>
+    </complement>
+
+    <!-- the wools red has to get -->
+    <union name="red-wool-rooms">
+        <region name="purple-wool"/>
+        <region name="orange-wool"/>
+        <region name="cyan-wool"/>
+    </union>
+
+    <!-- the wools blue has to get -->
+    <union name="blue-wool-rooms">
+        <region name="green-wool"/>
+        <region name="pink-wool"/>
+        <region name="yellow-wool"/>
+    </union>
+
+    <!-- wool room rules -->
+    <apply block="only-blue" use="only-blue">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter your own wool room.">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block="only-red" use="only-red">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter your own wool room.">
+        <region name="red-wool-rooms"/>
+    </apply>
+</regions>
+<portals>
+    <!-- portals in red base -->
+    <portal x="@12" y="@7" z="@-74">
+        <cuboid min="9,11,-88" max="12,14,-87"/>
+    </portal>
+    <portal x="@-12" y="@7" z="@-74">
+        <cuboid min="-9,11,-88" max="-12,14,-87"/>
+    </portal>
+
+    <!-- portals in blue base -->
+    <portal x="@12" y="@7" z="@74">
+        <cuboid min="9,11,87" max="12,14,88"/>
+    </portal>
+    <portal x="@-12" y="@7" z="@74">
+        <cuboid min="-9,11,87" max="-12,14,88"/>
+    </portal>
+
+    <!-- portal back to blue base -->
+    <portal filter="only-blue" x="@-10.5" y="@11" z="@89">
+        <cuboid min="-11,7,75" max="-13,11,76"/>
+    </portal>
+    <portal filter="only-blue" x="@10.5" y="@11" z="@89">
+        <cuboid min="11,7,75" max="13,11,76"/>
+    </portal>
+
+    <!-- portal back to red base -->
+    <portal filter="only-red" x="@-10.5" y="@11" z="@-89">
+        <cuboid min="-11,7,-75" max="-13,11,-76"/>
+    </portal>
+    <portal filter="only-red" x="@10.5" y="@11" z="@-89">
+        <cuboid min="11,7,-75" max="13,11,-76"/>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>glass</item>
+    <item>glowstone dust</item>
+</itemremove>
+<maxbuildheight>27</maxbuildheight>
+<wools>
+    <wool team="blue" color="yellow">
+        <block location="0,13,105"/>
+    </wool>
+    <wool team="blue" color="pink">
+        <block location="-1,12,105"/>
+    </wool>
+    <wool team="blue" color="lime">
+        <block location="0,11,105"/>
+    </wool>
+
+    <wool team="red" color="cyan">
+        <block location="-1,13,-106"/>
+    </wool>
+    <wool team="red" color="purple">
+        <block location="0,12,-106"/>
+    </wool>
+    <wool team="red" color="orange">
+        <block location="-1,11,-106"/>
+    </wool>
+</wools>
+</map>

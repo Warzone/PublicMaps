@@ -1,0 +1,266 @@
+<map proto="1.4.0">
+<name>Gridlock 2</name>
+<version>1.1.1</version>
+<objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="62b6d081-8df8-4c09-aa15-71141ca7df76"/> <!-- Arzanex -->
+    <author uuid="04105de3-ecd4-4879-af0c-929715728070"/> <!-- MapleMint -->
+    <author uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!-- matic0basle -->
+</authors>
+<contributors>
+    <contributor uuid="b34f6de7-8f74-4d4b-a8dc-85e20018fb68"/> <!-- Schemetrical -->
+</contributors>
+<teams>
+    <team id="cyan" color="dark aqua" max="32">Cyan</team>
+    <team id="purple" color="dark purple" max="32">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <item slot="2" material="iron pickaxe">
+            <enchantment level="3">durability</enchantment>
+            <enchantment level="1">dig speed</enchantment>
+        </item>
+        <item slot="3" material="iron axe">
+            <enchantment level="3">durability</enchantment>
+            <enchantment level="1">dig speed</enchantment>
+        </item>
+        <item slot="4" amount="64" damage="2" material="log"/>
+        <item slot="5" amount="64">glass</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">golden carrot</item>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="purple" yaw="90">
+            <region>
+                <cylinder base="115.5,35,40.5" radius="2" height="0"/>
+            </region>
+        </spawn>
+        <spawn team="cyan" yaw="-90">
+            <region>
+                <cylinder base="-179.5,35,40" radius="2" height="0"/>
+            </region>
+        </spawn>
+    </spawns>
+    <default yaw="180">
+        <region>
+            <cuboid min="-32.5,70.5,99.5" max="-31.5,70.5,98.5"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <any id="materials">
+        <material>chest</material>
+        <material>workbench</material>
+    </any>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <deny id="only-cyan">
+        <team>purple</team>
+    </deny>
+    <deny id="only-purple">
+        <team>cyan</team>
+    </deny>
+    <all id="only-webs-c">
+        <material>web</material>
+        <team>cyan</team>
+    </all>
+    <all id="only-webs-p">
+        <material>web</material>
+        <team>purple</team>
+    </all>
+    <not id="only-cyan-usage">
+        <all>
+            <filter id="materials"/>
+            <team>purple</team>
+        </all>
+    </not>
+    <not id="only-purple-usage">
+        <all>
+            <filter id="materials"/>
+            <team>cyan</team>
+        </all>
+    </not>
+    <material id="allow-iron">iron block</material>
+</filters>
+<regions>
+    <union id="cyan-woolrooms">
+        <rectangle id="orange-wool" min="-146,35" max="-129,24"/>
+        <rectangle id="pink-wool" min="-129,57" max="-146,46"/>
+    </union>
+    <union id="purple-woolrooms">
+        <rectangle id="lime-wool" min="65,46" max="82,57"/>
+        <rectangle id="yellow-wool" min="65,35" max="82,24"/>
+    </union>
+    <union id="portal-areas">
+        <union id="cyan-portals">
+            <rectangle id="portal-left-c" max="-88,3" min="-83,6"/>
+            <rectangle id="portal-right-c" max="-83,78" min="-88,75"/>
+            <rectangle id="portal-up-left-c" max="-116,6" min="-121,3"/>
+            <rectangle id="portal-up-right-c" max="-121,75" min="-116,78"/>
+        </union>
+        <union id="purple-portals">
+            <rectangle id="portal-left-p" max="19,75" min="24,78"/>
+            <rectangle id="portal-right-p" max="19,6" min="24,3"/>
+            <rectangle id="portal-up-left-p" max="52,75" min="57,78"/>
+            <rectangle id="portal-up-right-p" max="52,3" min="57,6"/>
+        </union>
+        <union id="portal-rooms">
+            <cuboid id="cyan-portal-room" min="-103,64,47" max="-117,77,33"/>
+            <cuboid id="purple-portal-room" min="39,64,47" max="52,77,33"/>
+        </union>
+    </union>
+    <union id="spawns">
+        <rectangle id="spawn-cyan" max="-190,23" min="-165,58"/>
+        <rectangle id="spawn-purple" max="100,22" min="127,58"/>
+    </union>
+    <negative id="void">
+        <union>
+            <rectangle min="0,11" max="-64,70"/>
+            <region id="cyan-portals"/>
+            <region id="cyan-woolrooms"/>
+            <region id="purple-portals"/>
+            <region id="purple-woolrooms"/>
+            <region id="spawns"/>
+        </union>
+    </negative>
+    <!--  portal protections  -->
+    <apply block="never" region="portal-areas"/>
+    <apply block-break="allow-iron" block-place="never" message="You may only break iron blocks in the base!" region="spawns"/>
+    <!--  wool room rules  -->
+    <apply block="only-webs-c" use="only-cyan-usage" region="purple-woolrooms"/>
+    <apply enter="only-cyan" message="You may not enter your own wool room!" region="purple-woolrooms"/>
+    <apply block="only-webs-p" use="only-purple-usage" region="cyan-woolrooms"/>
+    <apply enter="only-purple" message="You may not enter your own wool room!." region="cyan-woolrooms"/>
+    <!--  void protection  -->
+    <apply block-place="deny-void" block-break="always" message="You may not edit the void area!" region="void"/>
+</regions>
+<portals>
+    <!--  portals in cyan base  -->
+    <portal x="@-109.5" y="@69" z="@40.5">
+        <region>
+            <cuboid id="cyan-spawn-tp-room" min="-172,40,43" max="-173,34,38"/>
+        </region>
+    </portal>
+    <portal x="@-118.5" y="@15" z="@74.5" yaw="@-179">
+        <region>
+            <cuboid id="tp-room-magenta" min="-113,69,44" max="-112,73,43"/>
+        </region>
+    </portal>
+    <portal x="@-118.5" y="@15" z="@6.5" yaw="@-0">
+        <region>
+            <cuboid id="tp-room-orange" min="-113,69,37" max="-112,73,38"/>
+        </region>
+    </portal>
+    <portal x="@-85.5" y="@7" z="@6.5" yaw="@-0">
+        <region>
+            <cuboid id="tp-room-blue-c" min="-106,69,37" max="-107,73,38"/>
+        </region>
+    </portal>
+    <portal x="@-85.5" y="@7" z="@74.5" yaw="@-179">
+        <region>
+            <cuboid id="tp-room-red-c" min="-106,69,44" max="-107,73,43"/>
+        </region>
+    </portal>
+    <portal x="@-179.5" y="@35" z="@40.5" filter="only-cyan">
+        <region>
+            <cuboid id="pink-spawn-room" min="-120,21,4" max="-117,14,5"/>
+        </region>
+    </portal>
+    <portal x="@-179.5" y="@35" z="@40.5" filter="only-cyan">
+        <region>
+            <cuboid id="orange-spawn-room" min="-117,21,77" max="-120,14,76"/>
+        </region>
+    </portal>
+    <!--  portals in purple base  -->
+    <portal x="@45.5" y="@69" z="@40.5">
+        <region>
+            <cuboid id="purple-spawn-tp-room" min="108,40,38" max="109,34,43"/>
+        </region>
+    </portal>
+    <portal x="@54.5" y="@15" z="@74.5" yaw="@179">
+        <region>
+            <cuboid id="tp-room-lime" min="48,69,43" max="49,73,44"/>
+        </region>
+    </portal>
+    <portal x="@54.5" y="@15" z="@6.5" yaw="@-0">
+        <region>
+            <cuboid id="tp-room-yellow" min="48,69,38" max="49,73,37"/>
+        </region>
+    </portal>
+    <portal x="@21.5" y="@7" z="@6.5" yaw="@-0">
+        <region>
+            <cuboid id="tp-room-blue-p" min="42,69,37" max="43,73,38"/>
+        </region>
+    </portal>
+    <portal x="@21.5" y="@7" z="@74.5" yaw="@179">
+        <region>
+            <cuboid id="tp-room-red-p" min="42,69,44" max="43,73,43"/>
+        </region>
+    </portal>
+    <portal x="@115.5" y="@35" z="@40.5" filter="only-purple">
+        <region>
+            <cuboid id="lime-spawn-room" min="53,20,76" max="56,14,77"/>
+        </region>
+    </portal>
+    <portal x="@115.5" y="@35" z="@40.5" filter="only-purple">
+        <region>
+            <cuboid id="yellow-spawn-room" min="56,20,5" max="53,14,4"/>
+        </region>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>wood</item>
+    <item>golden carrot</item>
+    <item>seeds</item>
+    <item>sugar cane</item>
+    <item>string</item>
+    <item>apple</item>
+    <item>sapling</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<killreward>
+    <item>golden apple</item>
+    <item amount="16">arrow</item>
+</killreward>
+<wools>
+    <wool team="cyan" color="lime" location="75,15,51">
+        <monument>
+            <block location="-189,37,39"/>
+        </monument>
+    </wool>
+    <wool team="cyan" color="yellow" location="75,15,29">
+        <monument>
+            <block location="-189,37,41"/>
+        </monument>
+    </wool>
+    <wool team="purple" color="orange" location="-140,15,29">
+        <monument>
+            <block location="124,37,41"/>
+        </monument>
+    </wool>
+    <wool team="purple" color="pink" location="-140,15,51">
+        <monument>
+            <block location="124,37,39"/>
+        </monument>
+    </wool>
+</wools>
+<maxbuildheight>35</maxbuildheight>
+</map>

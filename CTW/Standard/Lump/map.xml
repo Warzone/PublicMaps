@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Lump</name>
+<version>0.1.2</version>
+<objective>Capture the opposing team's wool!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="ae31106a-e956-449f-85ad-1e89e97480fa"/>
+    <!-- FloppyBush -->
+    <author uuid="10c1b730-49b9-4f75-9212-91facc371477"/>
+    <!-- Qixit -->
+</authors>
+<contributors>
+    <contributor contribution="Feedback" uuid="51b35b68-5f20-4cba-a7f7-0c428a4b7e26"/>
+    <!-- Frightspear -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="35" max-overfill="38">Red</team>
+    <team id="blue" color="blue" max="35" max-overfill="38">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true" potion-particles="false">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4">bucket</item>
+        <item slot="5" amount="16">log</item>
+        <item slot="6" amount="32">glass</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" lore="This can be used for crafting golden apples!">apple</item>
+        <item slot="10" amount="7">gold nugget</item>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <item slot="30" unbreakable="true">iron spade</item>
+    </kit>
+    <kit id="red-kit" parents="spawn" force="true">
+        <helmet color="ff0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="ff0000" unbreakable="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots color="ff0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="spawn" force="true">
+        <helmet color="0000ff" unbreakable="true">leather helmet</helmet>
+        <chestplate color="0000ff" unbreakable="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots color="0000ff" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="woolroom-kit" force="true" potion-particles="false">
+        <helmet unbreakable="true" enchantment="protection projectile:1">diamond helmet</helmet>
+        <boots unbreakable="true" enchantment="protection fall:2">diamond boots</boots>
+        <potion duration="oo">fast digging</potion>
+        <potion duration="oo">speed</potion>
+    </kit>
+    <kit id="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron axe</tool>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>wood</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>leather helmet</item>
+    <item>seeds</item>
+    <item>trap door</item>
+    <item>sapling</item>
+    <item>redstone</item>
+    <item>redstone lamp off</item>
+    <item>redstone block</item>
+    <item>cooked beef</item>
+    <item>glowstone dust</item>
+    <item>water lily</item>
+    <item>dirt</item>
+    <item>apple</item>
+    <item>seeds</item>
+    <item>string</item>
+    <item>carpet</item>
+    <item>glass</item>
+    <item>log</item>
+    <item>bucket</item>
+</itemremove>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="8">gold nugget</item>
+    <item amount="4">log</item>
+</kill-reward>
+<block-drops>
+    <rule>
+        <region>
+            <everywhere/>
+        </region>
+        <filter>
+            <any>
+                <material>smooth brick:1</material>
+                <material>smooth brick:2</material>
+            </any>
+        </filter>
+        <drops>
+            <item material="cobblestone"/>
+        </drops>
+    </rule>
+</block-drops>
+<wools>
+    <wool id="pink-wool-objective" team="red" color="pink" location="3,25,-79">
+        <monument><block location="46.5,15,100.5"/></monument>
+    </wool>
+    <wool id="purple-wool-objective" team="red" color="purple" location="95,25,-79">
+        <monument><block location="52.5,15,100.5"/></monument>
+    </wool>
+    <wool id="yellow-wool-objective" team="blue" color="yellow" location="95,25,120">
+        <monument><block location="46.5,15,-59.5"/></monument>
+    </wool>
+    <wool id="lime-wool-objective" team="blue" color="lime" location="3,25,120">
+        <monument><block location="52.5,15,-59.5"/></monument>
+    </wool>
+</wools>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions>
+            <block yaw="-180">49.5,15.5,105.5</block>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions>
+            <block yaw="0">49.5,15.5,-64.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <block>156.5,45,20.5</block>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+    <any id="woolroom-blocks-inside-red">
+        <material>log</material>
+        <material>wood</material>
+        <material>glass</material>
+        <material>cobble wall</material>
+        <material>cobble wall:1</material>
+        <material>web</material>
+        <material>spruce fence</material>
+    </any>
+    <any id="woolroom-blocks-inside-blue">
+        <material>log</material>
+        <material>wood</material>
+        <material>glass</material>
+        <material>cobble wall</material>
+        <material>cobble wall:1</material>
+        <material>web</material>
+        <material>spruce fence</material>
+    </any>
+    <deny id="plate-denial">
+        <all>
+            <material>stone plate</material>
+            <material>iron plate</material>
+        </all>
+    </deny>
+    <deny id="spawner-protection">
+        <material>mob spawner</material>
+    </deny>
+    <deny id="glowstone-on">
+        <material>redstone lamp on</material>
+    </deny>
+    <material id="allow-iron">iron block</material>
+    <material id="allow-wool">wool</material>
+</filters>
+<regions>
+    <union id="red-spawn">
+        <rectangle min="44,82" max="55,96"/>
+        <rectangle min="58,97" max="40,128"/>
+    </union>
+    <union id="blue-spawn">
+        <rectangle min="55,-41" max="44,-56"/>
+        <rectangle min="41,-56" max="58,-85"/>
+    </union>
+    <union id="lime-wool">
+        <rectangle min="-13,111" max="19,139"/>
+        <rectangle min="1,110" max="6,111"/>
+        <rectangle min="2,109" max="5,110"/>
+        <rectangle min="4,108" max="3,109"/>
+    </union>
+    <union id="yellow-wool">
+        <rectangle min="79,111" max="110,137"/>
+        <rectangle min="98,111" max="93,110"/>
+        <rectangle min="94,109" max="97,110"/>
+        <rectangle min="96,109" max="95,108"/>
+    </union>
+    <union id="purple-wool">
+        <rectangle min="111,-70" max="78,-96"/>
+        <rectangle min="93,-70" max="98,-69"/>
+        <rectangle min="97,-69" max="94,-68"/>
+        <rectangle min="96,-68" max="95,-67"/>
+    </union>
+    <union id="pink-wool">
+        <rectangle min="19,-70" max="-13,-98"/>
+        <rectangle min="1,-70" max="6,-69"/>
+        <rectangle min="5,-69" max="2,-68"/>
+        <rectangle min="3,-68" max="4,-67"/>
+    </union>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region>
+            <cuboid min="43,0,82" max="58,15,131"/>
+        </region>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+        <region>
+            <cuboid min="56,0,-41" max="40,15,-91"/>
+        </region>
+    </apply>
+    <apply kit="woolroom-kit">
+        <region>
+            <region id="lime-wool"/>
+            <region id="purple-wool"/>
+            <region id="pink-wool"/>
+            <region id="yellow-wool"/>
+        </region>
+    </apply>
+    <apply block="woolroom-blocks-inside-blue" message="`fYou may not `lplace/break `r`fthis block here! `e⚠">
+        <region>
+            <region id="pink-wool"/>
+            <region id="purple-wool"/>
+        </region>
+    </apply>
+    <apply block="woolroom-blocks-inside-red" message="`fYou may not `lplace/break `r`fthis block here! `e⚠">
+        <region>
+            <region id="lime-wool"/>
+            <region id="yellow-wool"/>
+        </region>
+    </apply>
+    <apply block-place="allow-wool" block-break="allow-iron" message="`fYou may only `lbreak `r`fIron Blocks in spawn! `e⚠">
+        <region>
+            <region id="red-spawn"/>
+            <region id="blue-spawn"/>
+        </region>
+    </apply>
+    <apply block="spawner-protection" region="everywhere" message="`fYou may not `lbreak `r`fspawners! `e⚠"/>
+    <apply block="deny-void" region="everywhere" message="`fYou may not `lplace/break `r`fblocks here! `e⚠"/>
+    <apply block-physics="glowstone-on" region="everywhere"/>
+    <apply enter="only-red" message="`fYou may not enter `l`4Red Team's `r`fspawn! `e⚠">
+        <region>
+            <region id="red-spawn"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="`fYou may not enter `l`1Blue Team's `r`fspawn! `e⚠">
+        <region>
+            <region id="blue-spawn"/>
+        </region>
+    </apply>
+    <apply enter="only-red" message="`fOnly `l`4Red Team `r`fmay enter this wool room! `e⚠">
+        <region>
+            <region id="pink-wool"/>
+            <region id="purple-wool"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="`fOnly `l`1Blue Team `r`fmay enter this wool room! `e⚠">
+        <region>
+            <region id="yellow-wool"/>
+            <region id="lime-wool"/>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable interval="30s" grow="true" particles="true" sound="false" avoid-entities="true">
+        <region>
+            <region id="yellow-wool"/>
+            <region id="lime-wool"/>
+            <region id="pink-wool"/>
+            <region id="purple-wool"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>log:12</material>
+            </any>
+        </renew-filter>
+    </renewable>
+    <renewable interval="2m" grow="true" particles="true" sound="false" avoid-entities="true">
+        <region>
+            <region id="red-spawn"/>
+            <region id="blue-spawn"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<maxbuildheight>35</maxbuildheight>
+<gamerules>
+    <naturalRegeneration>true</naturalRegeneration>
+</gamerules>
+</map>
