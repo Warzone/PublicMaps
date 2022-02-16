@@ -30,7 +30,7 @@ assignees: ''
 ---
 
 ### Map Checklist
->To mark as completed, replace the space between the [ ] with a `X` or click on the checkbox after submitting this pull request.
+>To mark as completed, replace the space between the [ ] with an `X` or click on the checkbox after submitting this pull request.
 - [ ] Contains a `map.xml` file with valid syntax and formatting.
 - [ ] Contains `map.png` file (290x246).
 - [ ] The map was built for (or has been converted to) Minecraft 1.8.
