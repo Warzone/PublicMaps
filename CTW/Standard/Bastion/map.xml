@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Bastion</name>
+<version>1.0.1</version>
+<objective>Capture the wool from the enemy's side and return it safely to your victory monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="e39fe3bc-b80e-46d2-81fe-d18042471989"/> <!-- EnarRikardz -->
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+</authors>
+<contributors>
+    <contributor uuid="91295196-9cd2-4963-b7ec-afd1a110edbe" contribution="Basic layout"/> <!-- PandaBattalion -->
+    <contributor uuid="5c934a59-fd50-48aa-99ff-c87e0468f639" contribution="XML"/> <!-- iamramsey -->
+    <contributor uuid="fbd17512-673f-43b4-a75d-de80342d3ab6" contribution="Build slave"/> <!-- Camellia123 -->
+</contributors>
+<teams>
+    <team color="red" max="16">Red</team>
+    <team color="blue" max="16">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:2;dig speed:2">iron pickaxe</item>
+        <item slot="3" enchantment="durability:2;dig speed:1">stone axe</item>
+        <item slot="4" amount="16" damage="1">log 2</item>
+        <item slot="5" amount="64" damage="1">cooked fish</item>
+        <item slot="6" amount="32">smooth brick</item>
+        <item slot="8">golden apple</item>
+        <item slot="28" amount="32">arrow</item>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="00308F">leather helmet</helmet>
+        <chestplate color="00308F">leather chestplate</chestplate>
+        <leggings color="00308F">leather leggings</leggings>
+        <boots color="00308F">leather boots</boots>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="CC0000">leather helmet</helmet>
+        <chestplate color="CC0000">leather chestplate</chestplate>
+        <leggings color="CC0000">leather leggings</leggings>
+        <boots color="CC0000">leather boots</boots>
+    </kit>
+</kits>
+<wools>
+    <wool team="blue" color="orange">
+        <block>-58,10,291</block>
+    </wool>
+    <wool team="red" color="purple">
+        <block>-58,10,391</block>
+    </wool>
+</wools>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="deny-void">
+        <not>
+            <void/>
+        </not>
+    </filter>
+    <filter name="allow-some" parents="deny-all">
+        <allow>
+            <block>web</block>
+            <block>fence</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <union name="wool-room">
+        <cuboid name="purple-wool" min="-66,-oo,239" max="-49,oo,250"/>
+        <cuboid name="orange-wool" min="-66,-oo,433" max="-49,oo,444"/>
+    </union>
+    <apply enter="only-red" block="allow-some" use="only-red" message="You may not access your own wool room.">
+        <region name="purple-wool"/>
+    </apply>
+    <apply enter="only-blue" block="allow-some" use="only-blue" message="You may not access your own wool room.">
+        <region name="orange-wool"/>
+    </apply>
+    <union name="buildable">
+        <complement>
+            <rectangle min="-77,239" max="-38,444"/>
+            <union name="inner-void">
+                <!-- Red -->
+                <rectangle min="-66,393" max="-49,433"/>
+                <!-- Blue -->
+                <rectangle min="-66,250" max="-49,290"/>
+            </union>
+        </complement>
+        <!-- Red left iron extension -->
+        <rectangle min="-80,380" max="-77,395"/>
+        <rectangle min="-82,381" max="-80,394"/>
+        <rectangle min="-83,382" max="-82,393"/>
+        <rectangle min="-84,392" max="-83,383"/>
+        <rectangle min="-85,385" max="-84,390"/>
+        <!-- Red right iron extension -->
+        <rectangle min="-38,380" max="-35,395"/>
+        <rectangle min="-35,381" max="-33,394"/>
+        <rectangle min="-33,382" max="-32,393"/>
+        <rectangle min="-32,392" max="-31,383"/>
+        <rectangle min="-31,385" max="-30,390"/>
+        <!-- Blue left iron extension -->
+        <rectangle min="-80,288" max="-77,303"/>
+        <rectangle min="-82,289" max="-80,302"/>
+        <rectangle min="-83,290" max="-82,301"/>
+        <rectangle min="-84,291" max="-83,300"/>
+        <rectangle min="-85,293" max="-84,398"/>
+        <!-- Blue right iron extension -->
+        <rectangle min="-38,288" max="-35,303"/>
+        <rectangle min="-35,289" max="-33,302"/>
+        <rectangle min="-33,290" max="-32,301"/>
+        <rectangle min="-32,291" max="-31,300"/>
+        <rectangle min="-31,293" max="-30,298"/>
+    </union>
+    <apply block="deny-void" message="You may not build in the void.">
+        <negative>
+            <region name="buildable"/>
+        </negative>
+    </apply>
+    <union name="spawn">
+        <cuboid name="red-spawn" min="-66,-oo,382" max="-49,14,393"/>
+        <cuboid name="blue-spawn" min="-66,-oo,290" max="-49,14,301"/>
+    </union>
+    <union name="spawn-nobuild">
+        <cuboid name="red-spawn-nobuild" min="-67,-oo,382" max="-48,14,393"/>
+        <cuboid name="blue-spawn-nobuild" min="-67,-oo,290" max="-48,14,301"/>
+    </union>
+    <apply block="deny-all" message="You may not modify the spawn areas.">
+        <region name="spawn-nobuild"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy spawn.">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the enemy spawn.">
+        <region name="blue-spawn"/>
+    </apply>
+    <cylinder name="blue-spawn-area" base="-57.5,2,295.5" radius="1" height="0"/>
+    <cylinder name="red-spawn-area" base="-57.5,2,387.5" radius="1" height="0"/>
+</regions>
+<spawns>
+    <spawns team="red" kit="red">
+        <spawn angle="-52,3.5,385.5">
+            <region name="red-spawn-area"/>
+        </spawn>
+        <spawn angle="-52,3.5,389.5">
+            <region name="red-spawn-area"/>
+        </spawn>
+        <spawn angle="-63,3.5,385.5">
+            <region name="red-spawn-area"/>
+        </spawn>
+        <spawn angle="-63,3.5,389.5">
+            <region name="red-spawn-area"/>
+        </spawn>
+    </spawns>
+    <spawns team="blue" kit="blue">
+        <spawn angle="-52,3.5,293.5">
+            <region name="blue-spawn-area"/>
+        </spawn>
+        <spawn angle="-52,3.5,297.5">
+            <region name="blue-spawn-area"/>
+        </spawn>
+        <spawn angle="-63,3.5,293.5">
+            <region name="blue-spawn-area"/>
+        </spawn>
+        <spawn angle="-63,3.5,297.5">
+            <region name="blue-spawn-area"/>
+        </spawn>
+    </spawns>
+    <default>
+        <cylinder base="-57.5,45.5,341.5" radius="2" height="0"/>
+    </default>
+</spawns>
+<timelock>on</timelock>
+<maxbuildheight>32</maxbuildheight> 
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>log</item>
+    <item>cooked fish</item>
+    <item>smooth brick</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>string</item>
+    <item>redstone</item>
+</itemremove>
+</map>

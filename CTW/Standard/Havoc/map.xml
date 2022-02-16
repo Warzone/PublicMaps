@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Havoc</name>
+<version>1.0.1</version>
+<objective>Capture both wools from the enemy's wool rooms and return them to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924"/> <!-- Mikeg542 -->
+    <author uuid="fcbc5806-e7fd-45f1-845a-22f1df93c9bf"/> <!-- Minii_ -->
+</authors>
+<contributors>
+    <contributor uuid="e1e9e6af-f826-44ce-b1e2-5efb4e5c5d9e" contribution="feedback/server"/> <!-- Zemphon -->
+    <contributor uuid="046d7a9f-2bf9-4c3c-b32e-2207c5ccbebe" contribution="feedback/minor builds"/> <!-- Scoola -->
+    <contributor uuid="d59e69c1-4ae5-4325-9f72-6a5979d9b7f2" contribution="feedback"/> <!-- MaximusEvo -->
+</contributors>
+<teams>
+    <team color="dark purple" max="40">Purple</team>
+    <team color="gold" max="40">Orange</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" enchantment="durability:3">iron pickaxe</item>
+        <item slot="3" enchantment="durability:3">iron axe</item>
+        <item slot="4" amount="64" damage="2">log</item>
+        <item slot="5" amount="32">112</item>
+        <item slot="6" amount="2">golden apple</item>
+        <item slot="7" amount="64">cooked fish</item>
+        <item slot="8" amount="1">bucket</item>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="spawn">
+        <spawn team="orange" yaw="135">
+            <cylinder base="108,11,125" radius="1" height="0"/>
+        </spawn>
+        <spawn team="purple" yaw="-45">
+            <cylinder base="-86,11,-69" radius="1" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="-135">
+        <cylinder base="-18,60,57" radius="1" height="0"/>
+    </default>
+</spawns>
+<maxbuildheight>44</maxbuildheight>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>bucket</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>iron sword</item>
+    <item>nether brick</item>
+</itemremove>
+<filters>
+    <filter name="no-void">
+        <not>
+            <void/>
+        </not>
+    </filter>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+    <filter name="only-purple">
+        <team>purple</team>
+    </filter>
+    <filter name="only-iron">
+        <block>iron block</block>
+    </filter>
+    <filter name="only-purple-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>orange</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-orange-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>purple</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="no-void" message="You may not modify the void area!">
+        <negative>
+            <rectangle min="-5,12" max="58,75"/>
+            <rectangle min="28,45" max="-35,-18"/>
+        </negative>
+    </apply>
+    <apply enter="only-orange" block="only-orange" use="only-orange-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Yellow Room   -->
+        <rectangle min="-114,11" max="-135,-10"/>
+        <!--   Red Room   -->
+        <rectangle min="-7,-98" max="-26,-117"/>
+    </apply>
+    <apply enter="only-purple" block="only-purple" use="only-purple-usage" message="You may not enter or modify your own wool rooms!">
+        <!--   Green Room   -->
+        <rectangle min="29,154" max="50,172"/>
+        <!--   Blue Room   -->
+        <rectangle min="137,46" max="155,65"/>
+    </apply>
+    <!--   spawn room protection   -->
+    <apply block="only-iron" message="You may not modify the spawn!">
+        <rectangle name="purple-storage-room" min="90,143" max="128,106"/>
+        <rectangle name="orange-storage-room" min="-105,-49" max="-65,-90"/>
+    </apply>
+    <!--   prevent teams from entering each other's spawns   -->
+    <apply enter="only-purple" block="deny-all" message="You may not enter `5Purple Team`c's spawn path!">
+        <rectangle min="25,-74" max="60,-60"/>
+        <rectangle min="-81,42" max="-94,78"/>
+    </apply>
+    <apply enter="only-orange" block="deny-all" message="You may not enter `6Orange Team`c's spawn path!">
+        <rectangle min="-3,130" max="-39,116"/>
+        <rectangle min="103,14" max="115,-22"/>
+    </apply>
+</regions>
+<wools>
+    <wool team="orange" color="red">
+        <block location="98,12,112"/>
+    </wool>
+    <wool team="orange" color="yellow">
+        <block location="95,12,115"/>
+    </wool>
+    <wool team="purple" color="blue">
+        <block location="-76,12,-56"/>
+    </wool>
+    <wool team="purple" color="green">
+        <block location="-73,12,-59"/>
+    </wool>
+</wools>
+<portals>
+    <!-- Portal to red lane -->
+    <portal x="@108" y="@19" z="@-14" yaw="@0">
+        <cuboid min="107,13,112" max="109,11,111"/>
+    </portal>
+    <!-- Portal to yellow lane -->
+    <portal x="@-31" y="@19" z="@125" yaw="@-90">
+        <cuboid min="95,13,126" max="94,11,124"/>
+    </portal>
+    <!-- Portal from red lane -->
+    <portal x="@108" y="@11" z="@125" yaw="@135">
+        <cuboid min="107,22,-16" max="109,19,-17"/>
+    </portal>
+    <!-- Portal from yellow lane -->
+    <portal x="@108" y="@11" z="@125" yaw="@135">
+        <cuboid min="-33,22,126" max="-34,19,124"/>
+    </portal>
+    <!-- Portal to blue lane -->
+    <portal x="@-86" y="@19" z="@70" yaw="@180">
+        <cuboid min="-85,13,-56" max="-87,11,-55"/>
+    </portal>
+    <!-- Portal to green lane -->
+    <portal x="@53" y="@19" z="@-69" yaw="@90">
+        <cuboid min="-73,13,-70" max="-72,11,-68"/>
+    </portal>
+    <!-- Portal from blue lane -->
+    <portal x="@-86" y="@11" z="@-69" yaw="@45">
+        <cuboid min="-85,22,72" max="-87,19,73"/>
+    </portal>
+    <!-- Portal from green lane -->
+    <portal x="@-86" y="@11" z="@-69" yaw="@45">
+        <cuboid min="55,22,-70" max="56,19,-68"/>
+    </portal>
+</portals>
+<tutorial>
+    <stage title="Capture the Wool">
+        <message>
+            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
+            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
+        </message>
+    <teleport>
+        <point yaw="-135">-21,30,60</point>
+    </teleport>
+    </stage>
+    <stage title="Wool Rooms">
+        <message>
+            <line>This is one of `5purple `rteam's wool rooms with `eyellow wool inside</line>
+            <line>Purple team needs to defend this wool and prevent Orange team from capturing the wool inside</line>
+            <line>The wool rooms have extra items inside to help you get back to your spawn</line>
+        </message>
+    <teleport>
+        <point yaw="50">-111,24,-10</point>
+    </teleport>
+    </stage>
+    <stage title="Spawns">
+        <message>
+            <line>The spawns have blocks to help build and defend and iron upstairs </line>
+            <line>Both wools must be placed back in the spawn to win.</line>
+            <line>There are two portals in the spawns that get you to the main lanes</line>
+        </message>
+    <teleport>
+        <point yaw="90">-77,11,-75</point>
+    </teleport>
+    </stage>
+    <stage title="Portals">
+        <message>
+            <line>This portal can be used to get back to your spawn.</line>
+            <line>Players leaving spawn will be teleported to this portal.</line>
+            <line>You may not enter the enemy team's portals.</line>
+        </message>
+        <teleport>
+            <point yaw="0">-86,19,65</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

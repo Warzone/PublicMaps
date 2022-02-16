@@ -1,0 +1,139 @@
+<map proto="1.4.0">
+<name>Underpass</name>
+<version>1.0.1</version>
+<objective>Take the enemy's wool back to your side and place it on your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/>
+    <!--  StealthMedia  -->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/>
+    <!--   rockymine   -->
+</authors>
+<teams>
+    <team id="yellow" color="gold" max="16" max-overfill="18">Yellow</team>
+    <team id="red" color="dark red" max="16" max-overfill="18">Red</team>
+</teams>
+<spawns>
+    <default>
+        <regions yaw="0">
+            <cylinder base="72,13.2,-31" radius="1.5" height="0"/>
+        </regions>
+    </default>
+    <spawn team="red" kit="kitRed">
+        <regions yaw="-90">
+            <cylinder base="-3.5,19.2,0.5" radius="3" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="kitYellow">
+        <regions yaw="90">
+            <cylinder base="147.5,19.2,0.5" radius="3" height="0"/>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="kitSpawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="4" amount="32">leaves</item>
+        <item slot="5" amount="1">golden apple</item>
+        <item slot="8">stone axe</item>
+        <leggings>chainmail leggings</leggings>
+        <boots>iron boots</boots>
+    </kit>
+    <kit id="kitRed" parents="kitSpawn">
+        <item slot="3" amount="32" damage="14">stained clay</item>
+        <chestplate color="d12121">leather chestplate</chestplate>
+    </kit>
+    <kit id="kitYellow" parents="kitSpawn">
+        <item slot="3" amount="32" damage="4">stained clay</item>
+        <chestplate color="f4c713">leather chestplate</chestplate>
+    </kit>
+</kits>
+<wools>
+    <wool team="yellow" color="red" location="-4,6,1">
+        <monument>
+            <block>157.5,21.5,0.5</block>
+        </monument>
+    </wool>
+    <wool team="red" color="yellow" location="147,6,1">
+        <monument>
+            <block>-13.5,21.5,0.5</block>
+        </monument>
+    </wool>
+</wools>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="onlyRed">red</team>
+    <team id="onlyYellow">yellow</team>
+</filters>
+<regions>
+    <apply block="always">
+        <region>
+            <cuboid min="91,6,9" max="53,21,-8"/>
+        </region>
+    </apply>
+    <apply enter="onlyRed">
+        <region>
+            <cylinder name="yellow-wool" base="147.5,0,0.5" height="18" radius="11"/>
+            <cylinder name="red-spawn" base="-3.5,19,0.5" height="5" radius="11"/>
+        </region>
+    </apply>
+    <apply enter="onlyYellow">
+        <region>
+            <cylinder name="red-wool" base="-3.5,0,0.5" height="18" radius="11"/>
+            <cylinder name="yellow-spawn" base="147.5,19,0.5" height="5" radius="11"/>
+        </region>
+    </apply>
+    <apply block="never">
+        <region>
+            <rectangle min="-16,-11" max="9,12"/>
+            <rectangle min="135,-11" max="160,12"/>
+        </region>
+    </apply>
+    <apply block="no-void"/>
+</regions>
+<maxbuildheight>21</maxbuildheight>
+<itemremove>
+    <item>dirt</item>
+    <item>smooth brick</item>
+    <item>spruce fence</item>
+    <item>smooth stairs</item>
+    <item>cobblestone</item>
+    <item>gravel</item>
+    <item>stained clay</item>
+    <item>wood step</item>
+    <item>spruce wood stairs</item>
+    <item>stone</item>
+    <item>seeds</item>
+    <item>apple</item>
+    <item>wood</item>
+    <item>piston base</item>
+    <item>cauldron</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>leaves</item>
+    <item>step</item>
+    <item>arrow</item>
+	<item>flint</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="10">arrow</item>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+</kill-rewards>	
+<toolrepair>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone sword</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
