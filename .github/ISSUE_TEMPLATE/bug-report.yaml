@@ -1,0 +1,44 @@
+name: Bug Report
+description: Submit a report on any map-related bugs, whether minor or game-breaking.
+title: '[Bug] '
+labels:
+  - map
+  - bug
+body:
+  - type: input
+    id: map-name
+    attributes:
+      label: Map Name
+      placeholder: 'Example: Acromion'
+    validations:
+      required: true
+  - type: dropdown
+    id: map-bug-type
+    attributes:
+      label: Bug Type
+      description: Select which type of bug is affecting the map.
+      options:
+        - Map/World build
+        - XML
+        - Other or unsure
+    validations:
+      required: true
+  - type: textarea
+    id: map-bug-description
+    attributes:
+      label: Description
+      description: >-
+        Be descriptive! It helps us determine where the bug is coming from as
+        well as finding possible solutions.
+      placeholder: >-
+        Example: On this map, the red team does not spawn with any kits while
+        the blue team does.
+    validations:
+      required: true
+  - type: textarea
+    id: map-gameplay-context
+    attributes:
+      label: Screenshots or Videos (if applicable)
+      description: >-
+        You may use image hosting services, such as Imgur, for screenshots. You
+        can also use YouTube or Streamable for video hosting.
