@@ -113,9 +113,9 @@
         <point id="red-yellow-tower">58,9,-58</point>
         <point id="yellow-green-tower">58,9,58</point>
     </union>
-    <union id="emerald-generators">
-        <point id="top-emerald">0,23,0</point>
-        <point id="bottom-emerald">0,11,0</point>
+    <union id="emerald-generators"> <!-- Spawns two block above the pad -->
+        <point id="top-emerald">0,25,0</point>
+        <point id="bottom-emerald">0,13,0</point>
     </union>
     <negative id="not-map">
         <rectangle id="map" min="-96,-96" max="96,96"/>
@@ -134,6 +134,9 @@
         <item amount="1" material="diamond"/>
     </spawner>-->
     <spawner spawn-region="bottom-emerald" player-region="everywhere" delay="30s">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="top-emerald" player-region="everywhere" delay="30s">
         <item amount="1" material="emerald"/>
     </spawner>
 </spawners>
@@ -187,6 +190,18 @@
     <item>diamond leggings</item>
     <item>diamond boots</item>
 </armorkeep>
+<!-- Crafting Control -->
+<crafting>
+  <disable>workbench</disable>
+  <disable>carpet</disable>
+  <disable>shears</disable>
+  <disable>stick</disable>
+  <disable>lever</disable>
+  <disable>flint and steel</disable>
+  <disable>clay</disable>
+  <disable>snow block</disable>
+  <disable>wool</disable>
+</crafting>
 <!-- Misc -->
 <respawn auto="true" delay="5s"/>
 <hunger>
