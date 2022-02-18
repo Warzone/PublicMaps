@@ -1,12 +1,3 @@
----
-name: Map Update
-about: Submit your changes on an existing map to Warzone.
-title: "[Update] Map Name, Version"
-labels: map, update
-assignees: ''
-
----
-
 ### Map Name
 > **Example:** Acromion
 
