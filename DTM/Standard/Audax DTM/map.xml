@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map proto="1.4.0">
+<name>Audax DTM</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+<!-- Authors and Contributors -->
+<authors>
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map creation"></author> <!-- _iMan -->
+</authors>
+<contributors>
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Map design"></contributor> <!-- Qualqty -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Map layout"></contributor> <!-- Wesdial -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"></contributor> <!-- _Pear -->
+</contributors>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="5s">You can mine iron blocks next to your spawn!</tip>
+    <tip after="10s">You can also get materials to defend your monuments at spawn!</tip>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="dasos" color="red" max="15" plural="false">Dasos</team>
+    <team id="kairos" color="yellow" max="15" plural="false">Kairos</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="6" amount="1">golden apple</item>
+        <item slot="7" amount="64">bread</item>
+        <item slot="8" amount="64">arrow</item>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <boots unbreakable="true">chainmail boots</boots>
+    </kit>
+    <kit id="dasos-kit" parents="default">
+        <item slot="3" amount="64" damage="14">stained clay</item>
+        <item slot="4" amount="64" damage="14">stained clay</item>
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02526">leather leggings</leggings>
+    </kit>
+    <kit id="kairos-kit" parents="default">
+        <item slot="3" amount="64" damage="4">stained clay</item>
+        <item slot="4" amount="64" damage="4">stained clay</item>
+        <helmet unbreakable="true" color="FED83D">leather helmet</helmet>
+        <leggings unbreakable="true" color="FED83D">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="dasos" kit="dasos-kit" yaw="90">
+        <point>102.5,36,3.5</point>
+    </spawn>
+    <spawn team="kairos" kit="kairos-kit" yaw="-90">
+        <point>-125.5,36,3.5</point>
+    </spawn>
+    <default yaw="-90">
+        <point>-11.5,75,3.5</point>
+    </default>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="dasos-only">dasos</team>
+    <team id="kairos-only">kairos</team>
+    <material id="only-iron">iron block</material>
+    <deny id="deny-players">
+          <participating/>
+    </deny>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <negative id="not-map">
+        <rectangle id="map" min="-145,-65" max="120,65"/>
+    </negative>
+    <union id="spawn-protections">
+        <cuboid name="dasos-spawn-protection" min="112,0,-24" max="92,oo,30"/>
+        <cuboid name="kairos-spawn-protection" min="-136,0,30" max="-116,oo,-24"/>
+    </union>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block-break="only-iron" block-place="deny-players" message="You are not allowed to modify terrain here."/>
+    <apply region="dasos-spawn-protection" enter="dasos-only" message="You may not enter the enemy spawn."/>
+    <apply region="kairos-spawn-protection" enter="kairos-only" message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Monuments -->
+<destroyables materials="obsidian" repairable="false" sparks="true">
+    <destroyable name="Left Monument" owner="dasos">
+        <cuboid min="50,53,-39" max="52,56,-41"/>
+    </destroyable>
+    <destroyable name="Right Monument" owner="dasos">
+        <cuboid min="52,53,45" max="50,56,47"/>
+    </destroyable>
+    <destroyable name="Left Monument" owner="kairos">
+        <cuboid min="-74,53,45" max="-76,56,47"/>
+    </destroyable>
+    <destroyable name="Right Monument" owner="kairos">
+        <cuboid min="-76,53,-39" max="-74,56,-41"/>
+    </destroyable>
+</destroyables>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>obsidian</item>
+    <item>stained clay</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>chainmail boots</item>
+    <item>bread</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>sapling</item>
+</itemremove>
+<killrewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="2"/>
+            </all>
+        </filter>
+        <item material="arrow"/>
+    </kill-reward>
+</killrewards>
+<!-- Misc -->
+<timelock>on</timelock>
+<maxbuildheight>70</maxbuildheight>
+</map>
