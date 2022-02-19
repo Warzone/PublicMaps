@@ -20,7 +20,7 @@
 </broadcasts>
 <!-- Teams -->
 <teams>
-    <team id="dasos" color="red" max="15" plural="false">Dasos</team>
+    <team id="dasos" color="dark red" max="15" plural="false">Dasos</team>
     <team id="kairos" color="yellow" max="15" plural="false">Kairos</team>
 </teams>
 <!-- Kits -->
@@ -51,13 +51,13 @@
 <!-- Spawns -->
 <spawns>
     <spawn team="dasos" kit="dasos-kit" yaw="90">
-        <point>102.5,36,3.5</point>
+        <region><point>102.5,36,3.5</point></region>
     </spawn>
     <spawn team="kairos" kit="kairos-kit" yaw="-90">
-        <point>-125.5,36,3.5</point>
+        <region><point>-125.5,36,3.5</point></region>
     </spawn>
     <default yaw="-90">
-        <point>-11.5,75,3.5</point>
+        <region><point>-11.5,75,3.5</point></region>
     </default>
 </spawns>
 <!-- Filters -->
@@ -72,13 +72,13 @@
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="dasos-spawn-protection" min="112,0,-24" max="92,oo,30"/>
+        <cuboid id="kairos-spawn-protection" min="-136,0,30" max="-116,oo,-24"/>
+    </union>
     <negative id="not-map">
         <rectangle id="map" min="-145,-65" max="120,65"/>
     </negative>
-    <union id="spawn-protections">
-        <cuboid name="dasos-spawn-protection" min="112,0,-24" max="92,oo,30"/>
-        <cuboid name="kairos-spawn-protection" min="-136,0,30" max="-116,oo,-24"/>
-    </union>
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
     <apply region="spawn-protections" block-break="only-iron" block-place="deny-players" message="You are not allowed to modify terrain here."/>
@@ -88,16 +88,16 @@
 <!-- Monuments -->
 <destroyables materials="obsidian" repairable="false" sparks="true">
     <destroyable name="Left Monument" owner="dasos">
-        <cuboid min="50,53,-39" max="52,56,-41"/>
+        <region><cuboid min="50,53,-39" max="52,56,-41"/></region>
     </destroyable>
     <destroyable name="Right Monument" owner="dasos">
-        <cuboid min="52,53,45" max="50,56,47"/>
+        <region><cuboid min="52,53,45" max="50,56,47"/></region>
     </destroyable>
     <destroyable name="Left Monument" owner="kairos">
-        <cuboid min="-74,53,45" max="-76,56,47"/>
+        <region><cuboid min="-74,53,45" max="-76,56,47"/></region>
     </destroyable>
     <destroyable name="Right Monument" owner="kairos">
-        <cuboid min="-76,53,-39" max="-74,56,-41"/>
+        <region><cuboid min="-76,53,-39" max="-74,56,-41"/></region>
     </destroyable>
 </destroyables>
 <!-- Item Remove -->
