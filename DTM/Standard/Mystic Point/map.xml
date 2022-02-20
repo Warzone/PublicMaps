@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Mystic Point</name>
+<version>1.1.3</version>
+<objective>Destroy the enemy team's left and right monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="00c06fa6-1c53-4634-931a-929efd8a52df" contribution="Map Design"/> <!-- Nadastorm -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Tunnel Asthetics"/> <!-- Stealth5061 -->
+</authors>
+<contributors>
+    <contributor uuid="90d4c2a3-137b-4965-b9e5-963ab5a23fa1" contribution="Observer Spawn Help + XML"/> <!-- Aceman1998 -->
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Tunnel + Tree Aesthetics"/> <!-- Tywnis -->
+</contributors>
+<teams>
+    <team color="dark green" max="32">Green</team>
+    <team color="blue" max="32">Blue</team>
+</teams>
+<rules>
+    <rule>Do not use ender pearls to access observer spawn.</rule>
+</rules>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3">stone axe</item>
+        <item slot="4">wood spade</item>
+        <item slot="5" amount="64">ladder</item>
+        <item slot="6" amount="64">log</item>
+        <item slot="8" amount="64">golden carrot</item>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet color="45b711">leather helmet</helmet>
+        <chestplate>chainmail chestplate</chestplate>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0000ff">leather helmet</helmet>
+        <chestplate>chainmail chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="green" kit="green" yaw="90">
+        <cylinder base="70,30,-136" radius="2" height="0"/>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="-90">
+        <cylinder base="-125,30,-138" radius="2" height="0"/>
+    </spawn>
+    <default yaw="180">
+        <cuboid min="-26.5,71,-83.5" max="-22.5,71,-79.5"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="deny-spawner">
+        <deny>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+</filters>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<regions>
+    <union name="spawn-buildings">
+        <cuboid min="57,26,-156" max="83,oo,-114"/>
+        <cuboid min="-112,26,-119" max="-138,oo,-161"/>
+    </union>
+    <!--  Prevent building outside of the playable region  -->
+    <apply block="deny-all" message="You cannot build outside of the map!">
+        <negative>
+            <rectangle min="-155,-175" max="100,-100"/>
+        </negative>
+    </apply>
+    <!-- Prevent Teams from entering opposing team's spawn -->
+    <apply enter="only-green" message="You cannot enter the enemy team spawn!">
+        <union>
+            <rectangle min="82,-151" max="62,-123"/>
+            <rectangle min="81,-120" max="68,-123"/>
+        </union>
+    </apply>
+    <apply enter="only-blue" message="You cannot enter the enemy team spawn!">
+        <union>
+            <rectangle min="-133,-125" max="-113,-155"/>
+            <rectangle min="-132,-156" max="-119,-155"/>
+        </union>
+    </apply>
+    <!--  protect spawn buildings  -->
+    <apply block="deny-all" message="You may not modify the spawn buildings!">
+        <region name="spawn-buildings"/>
+    </apply>
+    <apply block="deny-spawner" messgae="Do not break the spawner!">
+        <union>
+            <cylinder base="59,1,-142" radius="4" height="5"/>
+            <cylinder base="-114,1,-132" radius="4" height="5"/>
+        </union>
+    </apply>
+</regions>
+<destroyables owner="green" materials="obsidian" mode-changes="true">
+    <destroyable name="Right Monument">
+        <cuboid min="15,32,-115" max="13,28,-113"/>
+    </destroyable>
+    <destroyable name="Left Monument">
+        <cuboid min="30,35,-162" max="28,31,-160"/>
+    </destroyable>
+</destroyables>
+<destroyables owner="blue" materials="obsidian" mode-changes="true">
+    <destroyable name="Left Monument">
+        <cuboid min="-86,35,-116" max="-84,31,-114"/>
+    </destroyable>
+    <destroyable name="Right Monument">
+        <cuboid min="-71,32,-163" max="-69,28,-161"/>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="15m" material="gold block" name="`6GOLD MONUMENT MODE"/>
+</modes>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>obsidian</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>gold block</item>
+    <item>wood spade</item>
+    <item>golden carrot</item>
+    <item>log</item>
+    <item>golden apple</item>
+</itemremove>
+<maxbuildheight>66</maxbuildheight>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>The objective is to `3Destroy the Monument.</line>
+            <line>Your team can win by destroying the other team's `4monument, which consists of two `5obsidian blocks.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="0">-17,39,-134</point>
+        </teleport>
+    </stage>
+    <stage title="Left Monument">
+        <message>
+            <line>This is the Left Monument.</line>
+            <line>You have to break all `5obsidian`r blocks to destory this monument.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="0">7,28,-114</point>
+        </teleport>
+    </stage>
+    <stage title="Right Monument">
+        <message>
+            <line>This is the Right Monument.</line>
+            <line>You have to break all `5obsidian`r blocks to destory this monument.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="0">21,32,-160</point>
+        </teleport>
+    </stage>
+    <stage title="The Spawn Building">
+        <message>
+            <line>This is the spawn building where your team will spawn.</line>
+        </message>
+        <teleport>
+            <point yaw="-90">41,34,-135</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn Supplies">
+        <message>
+            <line>Here you can grab redstone and defending supplies from the spawn chests in your spawn.</line>
+        </message>
+        <teleport>
+            <point yaw="63" pitch="30">68,32,-137</point>
+        </teleport>
+    </stage>
+    <stage title="Iron Mines">
+        <message>
+            <line>Iron Blocks are located in the mines throughout the map.</line>
+        </message>
+        <teleport>
+            <point yaw="75" pitch="50">54,24,-166</point>
+        </teleport>
+    </stage>
+    <stage title="Coal in the Mines">
+        <message>
+            <line>Coal can be found throughout the mines and mined for experience</line>
+        </message>
+        <teleport>
+            <point yaw="135">44,4,-152</point>
+        </teleport>
+    </stage>
+    <stage title="Enchanting">
+        <message>
+            <line>The enchantment table can be found in the tower of your spawn area.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="15">69,47,-124</point>
+        </teleport>
+    </stage>
+    <stage title="Secrets of the Mines">
+        <message>
+            <line>Inside there is a condemned section which may be rewarding!</line>
+        </message>
+        <teleport>
+            <point yaw="-121" pitch="20">40,3,-136</point>
+        </teleport>
+    </stage>
+</tutorial>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

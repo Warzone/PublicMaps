@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<map proto="1.4.1">
+<name>Embankment</name>
+<version>2.0.1</version>
+<objective>Destroy the opposing teams monument.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTr -->
+    <author uuid="1e6e79ca-12a6-4a25-ae05-35cfa0ae576d"/> <!-- ezfe -->
+</authors>
+<broadcasts>
+    <tip after="4s">Friendly reminder that iron can be found by looking up!</tip>
+    <tip after="20s">Friendly reminder that iron can be found by looking up!</tip>
+    <tip after="70s">Friendly reminder that iron can be found by looking up!</tip>
+</broadcasts>
+<destroyables name="Monument" materials="obsidian" completion="100%">
+    <destroyable owner="blue-team">
+        <region><cuboid min="-165,11,-1" max="-166,14,-2"/></region>
+    </destroyable>
+    <destroyable owner="red-team">
+        <region><cuboid min="-275,11,-27" max="-276,14,-28"/></region>
+    </destroyable>
+</destroyables>
+<teams>
+    <team id="red-team" color="dark red" max="28">Red</team>
+    <team id="blue-team" color="blue" max="28">Blue</team>
+</teams>
+<kits>
+    <kit id="blocks-kit">
+        <item slot="4" amount="64">wood</item>
+        <item slot="31" amount="40">log</item>
+    </kit>
+    <kit id="tools-kit" force="true">
+        <item slot="0">iron sword</item>
+        <item slot="28">arrow</item>
+        <item slot="2" amount="1">diamond pickaxe</item>
+        <item slot="3" amount="1">iron axe</item>
+        <item slot="30" amount="1">iron spade</item>
+    </kit>
+    <kit id="common-spawn-kit" parents="tools-kit,blocks-kit" force="true">
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+    </kit>
+    <kit id="red-spawn-kit" parents="common-spawn-kit" force="true">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="8c8c8c" material="leather leggings">
+            <!--<attribute amount="-1.5">generic.armor</attribute>-->
+        </leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit id="blue-spawn-kit" parents="common-spawn-kit" force="true">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="8c8c8c" material="leather leggings">
+            <!--<attribute amount="-1.5">generic.armor</attribute>-->
+        </leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+    <kit id="common-defense-kit" parents="tools-kit,blocks-kit" force="true">
+        <helmet locked="true" prevent-sharing="true" color="0066cc">obsidian</helmet>
+        <chestplate locked="true" prevent-sharing="true" material="leather chestplate">
+            <enchantment level="3">protection</enchantment>
+        </chestplate>
+        <leggings color="8c8c8c">leather leggings</leggings>
+        <boots color="2c2c2c">leather boots</boots>
+        <item slot="1" material="bow">
+            <enchantment level="1">infinity</enchantment>
+            <enchantment level="1">power</enchantment>
+        </item>
+    </kit>
+    <kit id="red-defense-kit" parents="common-defense-kit">
+    </kit>
+    <kit id="blue-defense-kit" parents="common-defense-kit">
+    </kit>
+</kits>
+<toolrepair>
+    <tool>arrow</tool>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>cooked chicken</item>
+    <item>log</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<spawns>
+    <spawn filter="normal-spawn" team="blue-team" kit="blue-spawn-kit" safe="true">
+        <regions>
+            <point yaw="135">-165.5,16,52.5</point>
+            <point yaw="78">-154.5,17,-47.5</point>
+            <point yaw="95">-179.5,29,51.5</point>
+            <point yaw="90">-184.5,21,4.5</point>
+            <point yaw="86">-172.5,19,-24.5</point>
+            <point yaw="90">-180.5,35,-48.5</point>
+            <point yaw="91">-179.5,23,-75.5</point>
+            <point yaw="91">-156.5,38,49.5</point>
+            <point yaw="95">-150,31,-16.5</point>
+            <point yaw="88">-158,32,-83.5</point>
+        </regions>
+    </spawn>
+    <spawn filter="normal-spawn" team="red-team" kit="red-spawn-kit" safe="true">
+        <regions>
+            <point yaw="-35">-275.5,16,-82</point>
+            <point yaw="-101">-286.5,17,19.5</point>
+            <point yaw="-67">-261.5,29,-82.5</point>
+            <point yaw="-83">-256.5,21,-35.5</point>
+            <point yaw="-85">-268.5,19,-6.5</point>
+            <point yaw="-87">-279.5,28,18.5</point>
+            <point yaw="-89">-260.5,35,19.5</point>
+            <point yaw="-89">-261.5,23,46.5</point>
+            <point yaw="-90">-290.5,31,-12</point>
+            <point yaw="-89">-283.5,32,54.5</point>
+            <point yaw="-86">-259.5,35,19.5</point>
+            <point yaw="-90">-283.5,38,-78.5</point>
+        </regions>
+    </spawn>
+    <spawn filter="first-spawn" team="blue-team" kit="blue-defense-kit" safe="true">
+        <regions>
+            <point angle="-165.5,10.5,-1.5">-169.5,9,-5.5</point>
+            <point angle="-165.5,10.5,-1.5">-161.5,9,-5.5</point>
+            <point angle="-165.5,10.5,-1.5">-169.5,9,2.5</point>
+            <point angle="-165.5,10.5,-1.5">-161.5,9,2.5</point>
+        </regions>
+    </spawn>
+    <spawn filter="first-spawn" team="red-team" kit="red-defense-kit" safe="true">
+        <regions>
+            <point angle="-276.5,10.5,-27.5">-271.5,9,-23.5</point>
+            <point angle="-279.5,10.5,-27.5">-271.5,9,-23.5</point>
+            <point angle="-276.5,10.5,-27.5">-271.5,9,-31.5</point>
+            <point angle="-279.5,10.5,-27.5">-271.5,9,-31.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="0">-219.5,70,-17.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <not id="first-spawn">
+        <time>1s</time>
+    </not>
+    <time id="normal-spawn">1s</time>
+</filters>
+<regions>
+    <cylinder id="blue-monument-nearby" base="-165.5,0,-1.5" radius="10" height="oo"/>
+    <cylinder id="red-monument-nearby" base="-275.5,0,-27.5" radius="10" height="oo"/>
+    <complement id="no-monument-nearby">
+        <everywhere/>
+        <region id="red-monument-nearby"/>
+        <region id="blue-monument-nearby"/>
+    </complement>
+    <apply block-place="never" message="You may not build in the void.">
+        <region>
+            <complement>
+                <everywhere/>
+                <rectangle min="-147,56" max="-294,-84"/>
+            </complement>
+        </region>
+    </apply>
+    <apply region="red-monument-nearby" kit="red-defense-kit">
+        <filter>
+            <team>red-team</team>
+        </filter>
+    </apply>
+    <apply region="no-monument-nearby" kit="red-spawn-kit">
+        <filter>
+            <team>red-team</team>
+        </filter>
+    </apply>
+    <apply region="blue-monument-nearby" kit="blue-defense-kit">
+        <filter>
+            <team>blue-team</team>
+        </filter>
+    </apply>
+    <apply region="no-monument-nearby" kit="blue-spawn-kit">
+        <filter>
+            <team>blue-team</team>
+        </filter>
+    </apply>
+    <apply region="everywhere">
+
+    </apply>
+</regions>
+<damage>
+    <deny>
+        <all>
+            <cause>fall</cause>
+            <region id="no-monument-nearby"/>
+        </all>
+    </deny>
+</damage>
+<renewables>
+    <renewable interval="1m" grow="false" particles="false" sound="true" avoid-entities="true">
+        <region>
+            <cuboid min="-146,54,57" max="-294,55,-85"/>
+        </region>
+        <renew>iron block</renew>
+        <replace>air</replace>
+        <replace>wood</replace>
+    </renewable>
+</renewables>
+<maxbuildheight>64</maxbuildheight>
+</map>

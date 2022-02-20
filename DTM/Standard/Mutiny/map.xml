@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Mutiny</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy team's monument!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
+    <author uuid="4a57e6bc-6100-47a8-a02f-fef8c23952b4"/> <!-- Sucitare -->
+</authors>
+<contributors>
+    <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="XML"/> <!-- DoomRobotBoy -->
+</contributors>
+<teams>
+    <team color="dark red" max="18" max-overfill="22">Red</team>
+    <team color="blue" max="18" max-overfill="22">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="dig speed:6">stone axe</item>
+        <item slot="4" amount="64" damage="2">wood</item>
+        <item slot="31" amount="64" damage="2">wood</item>
+        <item slot="22" amount="64" damage="2">wood</item>
+        <item slot="13" amount="64" damage="2">wood</item>
+        <item slot="5">boat</item>
+        <item slot="6" damage="8229">potion</item>
+        <item slot="7" amount="7">gold nugget</item>
+        <item slot="8" amount="64">cooked fish</item>
+        <potion duration="3" amplifier="1">heal</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red">
+        <regions yaw="45">
+            <cylinder base="715.5,9.5,-55.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <regions yaw="135">
+            <cylinder base="715.5,9.5,90.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="699.5,47,17.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="deny-all">
+        <union name="spawns-protection">
+            <rectangle name="red-spawn-protect" min="722,-53" max="713,-62"/>
+            <rectangle name="blue-spawn-protect" min="722,88" max="713,97"/>
+        </union>
+    </apply>
+    <apply block="deny-all" message="You may not modify the void area!">
+        <negative name="playable-inverse">
+            <rectangle name="playable" min="673,-62" max="722,97"/>
+        </negative>
+    </apply>
+</regions>
+<modes>
+    <mode after="15m" material="coal block" name="`eCOAL MONUMENT MODE"/>
+</modes>
+<destroyables materials="obsidian" completion="100%" mode-changes="true">
+    <destroyables name="Front Monument">
+        <destroyable owner="red">
+            <region>
+                <cuboid min="713,18,-34" max="712,20,-35"/>
+            </region>
+        </destroyable>
+        <destroyable owner="blue">
+            <region>
+                <cuboid min="713,18,69" max="712,20,70"/>
+            </region>
+        </destroyable>
+    </destroyables>
+    <destroyables name="Back Monument">
+        <destroyable owner="red">
+            <region>
+                <cuboid min="678,11,-55" max="677,13,-56"/>
+            </region>
+        </destroyable>
+        <destroyable owner="blue">
+            <region>
+                <cuboid min="678,11,90" max="677,13,91"/>
+            </region>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<killreward>
+    <item amount="5">gold nugget</item>
+    <item damage="8229">potion</item>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="5" repeat="true"/>
+    </filter>
+    <item>tnt</item>
+</killreward>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <fuse>4s</fuse>
+</tnt>
+<maxbuildheight>32</maxbuildheight>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>glass bottle</item>
+    <item>potion</item>
+    <item>cooked fish</item>
+    <item>leather chestplate</item>
+    <item>wood</item>
+    <item>boat</item>
+    <item>glowstone dust</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>step</item>
+    <item>dirt</item>
+    <item>hard clay</item>
+    <item>cobble wall</item>
+    <item>cobblestone</item>
+    <item>mossy cobblestone</item>
+    <item>sand</item>
+    <item>obsidian</item>
+    <item>coal block</item>
+</itemremove>
+</map>

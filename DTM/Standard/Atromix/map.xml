@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Atromix</name>
+<version>1.6.6</version>
+<objective>Destroy the enemy team's front and back monuments.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="9909505b-1f0f-4af1-ae21-afbee92427ce"/> <!-- Winarve -->
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b"/> <!-- ItsMiiOlly -->
+</authors>
+<contributors>
+    <contributor uuid="374988d6-4569-444e-885a-409c2f55e310" contribution="Design help"/> <!-- Articray -->
+    <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Castle design"/> <!-- PlasmaCross -->
+    <contributor uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="XML"/> <!-- TheZaner -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Server Hosting and XML fixing"/> <!-- ElectroidFilms -->
+    <contributor uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83" contribution="Feedback and Design"/> <!-- lonelyhornet -->
+    <contributor uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Feedback and Design"/> <!-- xXFracXx -->
+</contributors>
+<teams>
+    <team color="dark red" max="14" max-overfill="20">Red</team>
+    <team color="gold" max="14" max-overfill="20">Orange</team>
+</teams>
+<destroyables name="Back Monument" materials="obsidian" mode-changes="true" completion="100%">
+    <destroyable owner="red">
+        <cuboid min="79,16,609" max="81,14,611"/>
+     </destroyable>
+     <destroyable owner="orange">
+         <cuboid min="-79,16,609" max="-81,14,611"/>
+     </destroyable>
+</destroyables>
+<destroyables name="Front Monument" materials="beacon;emerald block" mode-changes="false" completion="100%" show-progress="true">
+    <destroyable owner="red">
+        <cuboid min="24,16,608" max="28,13,612"/>
+    </destroyable>
+    <destroyable owner="orange">
+        <cuboid min="-24,16,612" max="-28,13,608"/>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="30m" material="beacon" name="`bBEACON MONUMENT MODE"/>
+    <mode after="1h" material="gold block" name="`6GOLDEN MONUMENT MODE"/>
+    <mode after="90m" material="glass" name="`fGLASS MONUMENT MODE"/>
+</modes>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:1;durability:3">iron axe</item>
+        <item slot="4" unbreakable="true" enchantment="damage all:1;dig speed:2" name="`4Red Topaz Machete">shears</item>
+        <item slot="5" amount="32">golden carrot</item>
+        <item slot="6" amount="64" damage="3">wood</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="2">iron ingot</item>
+        <item slot="28">arrow</item>
+        <item slot="33" amount="64" damage="3">wood</item>
+        <boots enchantment="protection fall:2">iron boots</boots>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333" enchantment="protection projectile:1">leather chestplate</chestplate>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet color="D87F33">leather helmet</helmet>
+        <chestplate color="D87F33" enchantment="protection projectile:1">leather chestplate</chestplate>
+    </kit>
+</kits>
+<filters>
+    <filter name="no-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="deny-some">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all" message="You may not modify spawn!">
+        <union name="spawns">
+            <circle name="orange-spawn-1" center="-65,573" radius="8"/>
+            <circle name="orange-spawn-2" center="-65,647" radius="8"/>
+            <circle name="red-spawn-1" center="66,647" radius="8"/>
+            <circle name="red-spawn-2" center="66,573" radius="8"/>
+        </union>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemies spawn!">
+        <region name="red-spawn-1"/>
+        <region name="red-spawn-2"/>
+    </apply>
+    <apply enter="only-orange" message="You may not enter the enemies spawn!">
+        <region name="orange-spawn-1"/>
+        <region name="orange-spawn-2"/>
+    </apply>
+    <apply block="no-void" message="You may not build outside the map!">
+        <complement>
+            <negative>
+                <rectangle min="-40,646" max="40,575"/>
+                <rectangle min="62,591" max="88,630"/>
+                <rectangle min="-62,591" max="-88,630"/>
+            </negative>
+            <region name="spawns"/>
+        </complement>
+    </apply>
+    <apply use="deny-some">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<spawns>
+    <spawns team="red" kit="red">
+        <spawn yaw="44">
+            <cylinder base="66,8,573" radius="3" height="0"/>
+        </spawn>
+        <spawn yaw="134">
+            <cylinder base="66,8,647" radius="3" height="0"/>
+        </spawn>
+    </spawns>
+    <spawns team="orange" kit="orange">
+        <spawn yaw="-90">
+            <cylinder base="-65,8,573" radius="3" height="0"/>
+        </spawn>
+        <spawn yaw="-90">
+            <cylinder base="-65,8,647" radius="3" height="0"/>
+        </spawn>   
+    </spawns>
+    <default yaw="0">
+        <cylinder base="0,48,610" radius="2" height="0"/>
+    </default>
+</spawns>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>shears</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+    <item>golden apple</item>
+    <item>obsidian</item>
+    <item>emerald block</item>
+    <item>iron boots</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>item frame</item>
+    <item>trap door</item>
+    <item>beacon</item>
+    <item>gold block</item>
+    <item>arrow</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+</itemremove>
+<killreward>
+    <item amount="1">golden apple</item>
+    <item amount="2">iron ingot</item>
+</killreward>
+<timelock>on</timelock>
+<maxbuildheight>29</maxbuildheight>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>`rThis is a `5Destroy the Monument`r map.</line>
+            <line>`rThe aim of the game is to `cdestroy`r the other team's `5obsidian`r, `bbeacon`r and `aemerald`r monuments.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="50">1,68,572</point>
+        </teleport>
+    </stage>
+    <stage title="Team Spawn">
+        <message>
+            <line>`rThis is where `ayour team `rwill spawn when the game starts.</line>
+            <line>`rSpawns are random, so you can spawn on either side of your team's area.</line>
+            <line>`rAlso included are chests where you can find defense items for your team!.</line>
+        </message>
+        <teleport>
+            <point yaw="-132" pitch="15">57,25,581</point>
+        </teleport>
+    </stage>
+    <stage title="Front Monument">
+        <message>
+            <line>`rThis is your `cFront Monument`r.</line>
+            <line>`r`4`lRemember`r! You have to destroy `nall pieces of the `bbeacon`r `land `aemerald`r.</line>
+        </message>
+    <teleport>
+        <point yaw="-39" pitch="15">20,17,603</point>
+    </teleport>
+    </stage>
+    <stage title="Back Monument">
+        <message>
+            <line>`rThis is your `cBack Monument`r.</line>
+            <line>`rIf you destroy both the other team's Front and Back monuments, you will win the game!</line>
+            <line>`r`4`lRemember`r! You have to destroy `nall pieces of the obsidian`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-62" pitch="15">72,18,606</point>
+        </teleport>
+    </stage>
+    <stage title="Extra Supplies">
+        <message>
+            <line>`rIn this castle, you will find `9extra supplies`r.</line>
+            <line>`rSupplies include `bextra blocks`r for attacking/defending and `bbuckets`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-129" pitch="60">45,19,589</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>
