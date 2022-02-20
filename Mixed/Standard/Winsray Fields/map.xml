@@ -1,0 +1,183 @@
+<map proto="1.4.2">
+<name>Winsray Fields</name>
+<version>1.0.4</version>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<objective>Destroy the opposing team's monument and core!</objective>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+</authors>
+<teams>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" unbreakable="true" material="iron spade">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="31" unbreakable="true" material="shears">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="5" material="wood" damage="1" amount="64"/>
+        <item slot="32" material="wood" damage="1" amount="32"/>
+        <item slot="6" material="glass" amount="48"/>
+        <item slot="7" material="bucket"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="iron leggings">
+            <enchantment>projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="4s" amplifier="255">resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cuboid min="10,63,78" max="13,63,85"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="0">
+            <point>64.5,13,-46.5</point>
+        </region>
+        <region yaw="0">
+            <point>52.5,13,-46.5</point>
+        </region>
+        <region yaw="-90">
+            <point>44,13,-36</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="180">
+            <point>103.5,13,209.5</point>
+        </region>
+        <region yaw="180">
+            <point>115.5,13,209.5</point>
+        </region>
+        <region yaw="90">
+            <point>124,13,199</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <union id="blue-spawn-area">
+            <rectangle min="54,-26" max="39,-55"/>
+            <rectangle min="69,-30" max="39,-55"/>
+            <rectangle min="73,-38" max="39,-55"/>
+        </union>
+        <union id="red-spawn-area">
+            <rectangle min="114,189" max="129,218"/>
+            <rectangle min="99,193" max="129,218"/>
+            <rectangle min="95,201" max="129,218"/>
+        </union>
+    </union>
+    <apply enter="only-blue" region="blue-spawn-area" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn-area" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="spawns" message="You may not edit the spawn!"/>
+    <apply block-place="no-void" message="You may not build in the void area!"/>
+</regions>
+<modes>
+    <mode id="gold-core" after="15m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode id="ice-core" after="40m" material="packed ice" name="`3PACKED ICE CORE MODE"/>
+</modes>
+<destroyables name="Monument" materials="gold block" show-percentage="true" completion="100%">
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="109,23,-30" max="106,19,-33"/>
+        </region>
+    </destroyable>
+    <destroyable owner="red">
+        <region>
+            <cuboid min="62,23,193" max="59,19,196"/>
+        </region>
+    </destroyable>
+</destroyables>
+<cores material="obsidian" leak="4" modes="gold-core ice-core">
+    <core team="blue">
+        <region>
+            <cuboid min="41,28,11" max="36,23,6"/>
+        </region>
+    </core>
+    <core team="red">
+        <region>
+            <cuboid min="127,28,157" max="132,23,152"/>
+        </region>
+    </core>
+</cores>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>shears</tool>
+    <tool>arrow</tool>
+    <tool>bucket</tool>
+    <tool>water bucket</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>31</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>packed ice</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>golden apple</item>
+    <item>wood</item>
+    <item>glass</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="24" damage="1" material="wood"/>
+    <item amount="12" material="glass"/>
+</kill-reward>
+<maxbuildheight>40</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
