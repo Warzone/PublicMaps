@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>Sunburn</name>
+<version>1.0.6</version>
+<objective>Control the Central Hill to win!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+    <author uuid="130be12a-f3b9-4b7d-ad39-7b45e84d3d0f"/> <!-- Veiyl -->
+</authors>
+<teams>
+    <team color="green" max="14" max-overfill="18">Green</team>
+    <team color="blue" max="14" max-overfill="18">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="32">grilled pork</item>
+        <item slot="3" amount="2">golden apple</item>
+        <item slot="8" amount="32">arrow</item>
+        <chestplate unbreakable="true">gold chestplate</chestplate>
+        <leggings unbreakable="true">gold leggings</leggings>
+    </kit>
+    <kit name="green-spawn" parents="spawn">
+        <helmet color="006600" unbreakable="true">leather helmet</helmet>
+        <boots color="006600" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="blue-spawn" parents="spawn">
+        <helmet color="0066CC" unbreakable="true">leather helmet</helmet>
+        <boots color="0066CC" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="green" yaw="90" kit="green-spawn">
+        <cuboid min="287,5,330" max="290,5,327"/>
+    </spawn>
+    <spawn team="blue" yaw="-90" kit="blue-spawn">
+        <cuboid min="200,5,327" max="197,5,330"/>
+    </spawn>
+    <default>
+        <cuboid min="242,6,383" max="245,6,386"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply enter="only-green">
+        <rectangle min="280,335" max="295,322"/>
+    </apply>
+    <apply enter="only-blue">
+        <rectangle min="207,322" max="192,335"/>
+    </apply>
+</regions>
+<king>
+    <hills>
+        <hill name="Central Hill" capture-time="15" points="1">
+            <capture>
+                <cuboid min="240,8,332" max="247,10,325"/>
+            </capture>
+            <progress>
+                <cuboid min="240,7,332" max="247,9,325"/>
+            </progress>
+            <captured>
+                <cuboid min="252,0,337" max="235,256,320"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>400</limit>
+    <king/>
+</score>
+<timelock>on</timelock>
+<killreward>
+    <item amount="1">golden apple</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>gold chestplate</item>
+    <item>gold leggings</item>
+    <item>leather boots</item>
+    <item>grilled pork</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<killreward>
+    <item amount="8">arrow</item>
+</killreward>
+<tutorial>
+    <stage title="KotH - Mini">
+        <message>
+            <line>`rThis map is a `3`lKing of the Hill`r map.</line>
+            <line>`rThe objective is to `acapture this central hill`r, by having as many of your team on it.</line>
+        </message>
+        <teleport>
+            <point yaw="-135" pitch="30">230,19,340</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>`rThis is `aGreen Team's`r spawn.</line>
+            <line>`rPlayers may exit from the `bupper or lower`r levels.</line>
+        </message>
+        <teleport>
+            <point yaw="150" pitch="20">290,8,332</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

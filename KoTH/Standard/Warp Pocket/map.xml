@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Warp Pocket</name>
+<phase>development</phase>
+<version>1.0.1</version>
+<objective>Capture and hold both of the hills to be the first team to reach 750 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="5986da63-a546-49c5-812d-d5c41a42510a"/> <!-- Lyzak -->
+</authors>
+<teams>
+    <team color="gold" max="24">Orange</team>
+    <team color="dark purple" max="24">Purple</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" damage="6" amount="64">stained clay</item>
+        <item slot="4" damage="6" amount="64">stained clay</item>
+        <item slot="30" damage="6" amount="64">stained clay</item>
+        <item slot="31" damage="6" amount="64">stained clay</item>
+        <item slot="5" damage="0" amount="64">stained glass</item>
+        <item slot="6" amount="4">workbench</item>
+        <item slot="7" damage="8229">potion</item>
+        <item slot="34" damage="8229">potion</item>
+        <item slot="25" damage="8229">potion</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="35" amount="64">cooked beef</item>
+        <chestplate>iron chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots>chainmail boots</boots>
+        <potion duration="2" amplifier="3">heal</potion>
+        <potion duration="4">damage resistance</potion>
+    </kit>
+    <kit name="orange-spawn" parents="spawn">
+        <helmet color="d87f33" unbreakable="true">leather helmet</helmet>
+    </kit>
+    <kit name="purple-spawn" parents="spawn">
+        <helmet color="7f3fb2" unbreakable="true">leather helmet</helmet>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="orange-spawn" team="orange" yaw="-45">
+        <cuboid min="-43,20,-42" max="-38,20,-37"/>
+    </spawn>
+    <spawn kit="purple-spawn" team="purple" yaw="135">
+        <cuboid min="42,20,43" max="37,20,38"/>
+    </spawn>
+    <default yaw="90">
+        <point>2.5,44,0.5</point>
+    </default>
+</spawns>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>stained clay</item>
+    <item>stained glass</item>
+    <item>workbench</item>
+    <item>potion</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+</itemremove>
+<filters>
+    <filter name="no-break">
+        <deny>
+            <block>quartz block</block>
+            <block>step:7</block>
+            <block>step:15</block>
+            <block>quartz stairs</block>
+            <block>coal block</block>
+            <block>stained clay:8</block>
+            <block>stained glass:8</block>
+            <block>stained clay:11</block>
+            <block>stained glass:10</block>
+            <block>stained clay:4</block>
+            <block>stained glass:1</block>
+            <block>stained glass:15</block>
+            <block>chest</block>
+            <block>beacon</block>
+            <block>gold block</block>
+            <block>emerald block</block>
+            <block>carpet</block>
+            <block>web</block> 
+        </deny>
+    </filter>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+    <filter name="only-purple">
+        <team>purple</team>
+    </filter>
+    <filter name="no-beacon">
+        <not>
+            <block>beacon</block>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block-break="no-break" use="no-beacon">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply block="deny-all" message="You are not allowed to build here!">
+        <negative>
+            <complement>
+                <cuboid min="-49,13,-48" max="48,30,49"/>
+                <cuboid name="purple-spawn" min="49,14,28" max="27,30,50"/>
+                <cuboid name="orange-spawn" min="-50,14,-27" max="-28,30,-49"/>
+            </complement>
+        </negative>
+        <rectangle min="27,-27" max="16,-16"/>
+        <rectangle min="-28,28" max="-17,17"/>
+    </apply>
+    <apply enter="only-orange" message="You may not enter the enemy spawn!">
+        <cuboid min="-50,14,-27" max="-28,oo,-49"/>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the enemy spawn!">
+        <cuboid min="49,14,28" max="27,oo,50"/>
+    </apply>
+</regions>
+<king>
+    <hills>
+        <hill name="Emerald Hill" capture-time="20s" points="1">
+            <capture>
+                <cuboid min="25,17,-25" max="18,32,-18"/>
+            </capture>
+            <progress>
+                <cuboid min="25,14,-25" max="18,17,-18"/>
+            </progress>
+            <captured>
+                <cuboid min="25,34,-25" max="18,40,-18"/>
+            </captured>
+        </hill>
+        <hill name="Gold Hill" capture-time="20s" points="1">
+            <capture>
+                <cuboid min="-26,17,26" max="-19,32,19"/>
+            </capture>
+            <progress>
+                <cuboid min="-26,14,26" max="-19,17,19"/>
+            </progress>
+            <captured>
+                <cuboid min="-26,34,26" max="-19,40,19"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <king/>
+    <limit>750</limit>
+</score>
+<portals protect="true" bidirectional="true">
+    <portals filter="only-orange">
+        <portal x="13" y="-5"> <!-- Left -->
+            <block>-32.5,21,-39.5</block>
+        </portal>
+        <portal x="10" y="-5" z="10"> <!-- Mid -->
+            <block>-34.5,21,-33.5</block>
+        </portal>
+        <portal y="-5" z="13"> <!-- Right -->
+            <block>-40.5,21,-31.5</block>
+        </portal>
+    </portals>
+    <portals filter="only-purple">
+        <portal x="-13" y="-5"> <!-- Left -->
+            <block>31.5,21,40.5</block>
+        </portal>
+        <portal x="-10" y="-5" z="-10"> <!-- Mid -->
+            <block>33.5,21,34.5</block>
+        </portal>
+        <portal y="-5" z="-13"> <!-- Right -->
+            <block>39.5,21,32.5</block>
+        </portal>
+    </portals>
+    <portals filter="allow-all">
+        <portal y="11">
+            <block>39.5,15,0.5</block>
+        </portal>
+        <portal y="11">
+            <block>-0.5,15,-39.5</block>
+        </portal>
+        <portal y="11">
+            <block>-40.5,15,0.5</block>
+        </portal>
+        <portal y="11">
+            <block>-0.5,15,40.5</block>
+        </portal>
+        <portal y="11"> <!-- Center -->
+            <block>-0.5,15,0.5</block>
+        </portal>
+        <portal y="-8" sound="false" bidirectional="false"> 
+            <!-- Makes players fall into void when hitting the ground -->
+            <cuboid min="-oo,5,-oo" max="oo,7,oo"/>
+        </portal>
+    </portals>
+</portals>
+</map>

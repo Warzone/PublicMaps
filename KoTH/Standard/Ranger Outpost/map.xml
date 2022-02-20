@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Ranger Outpost</name>
+<version>1.0.1</version>
+<objective>Be the first team to reach 750 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+   <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+</authors>
+<contributors>
+   <contributor uuid="36dc036a-dfbc-4627-b66a-501223f08075" contribution="Map motivation, feedback and support"/> <!-- ieatboulders2 -->
+   <contributor uuid="3a3dab52-a356-4eed-a506-a9a7e53a3f68" contribution="Map feedback"/> <!-- Akorlith -->
+</contributors>
+<teams>
+   <team color="dark aqua" max="20">Cyan</team>
+   <team color="green" max="20">Green</team>
+</teams>
+<kits>
+   <kit name="spawn">
+      <item slot="0" unbreakable="true">iron sword</item>
+      <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+      <item slot="28" amount="1">arrow</item>
+      <item slot="2" amount="32">grilled pork</item>
+      <item slot="3" damage="16373">potion</item>
+      <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
+      <boots enchantment="protection fall:2" unbreakable="true">iron boots</boots>
+      <potion duration="8" amplifier="4">damage resistance</potion>
+   </kit>
+   <kit name="cyan" parents="spawn">
+      <helmet color="4C7F99" unbreakable="true">leather helmet</helmet>
+      <leggings color="4C7F99" unbreakable="true">leather leggings</leggings>
+   </kit>
+   <kit name="green" parents="spawn">
+      <helmet color="7FCC19" unbreakable="true">leather helmet</helmet>
+      <leggings color="7FCC19" unbreakable="true">leather leggings</leggings>
+   </kit>
+</kits>
+<filters>
+   <filter name="deny-beacons">
+      <deny>
+         <block>beacon</block>
+      </deny>
+   </filter>
+   <filter name="cyan-only">
+      <team>cyan</team>
+   </filter>
+   <filter name="green-only">
+      <team>green</team>
+   </filter>
+</filters>
+<regions>
+   <cylinder name="Cyan-Spawn" base="-42,12,-39" radius="2" height="0"/>
+   <cylinder name="Cyan-Base" base="-42,12,-39" radius="7" height="20"/>
+   <cylinder name="Green-Spawn" base="42,12,39" radius="2" height="0"/>
+   <cylinder name="Green-Base" base="42,12,39" radius="7" height="20"/>
+   <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
+   <apply block="deny-all" use="deny-beacons">
+      <region name="playable"/>
+   </apply>
+   <apply enter="cyan-only" message="You may not enter the enemy team's base!">
+      <region name="Cyan-Base"/>
+   </apply>
+   <apply enter="green-only" message="You may not enter the enemy team's base!">
+      <region name="Green-Base"/>
+   </apply>
+</regions>
+<spawns>
+   <spawns yaw="-45">
+      <spawn team="cyan" kit="cyan">
+         <region name="Cyan-Spawn"/>
+      </spawn>
+   </spawns>
+   <spawns yaw="135">
+      <spawn team="green" kit="green">
+         <region name="Green-Spawn"/>
+      </spawn>
+   </spawns>
+   <default yaw="0">
+      <cylinder base="0,41,-80" radius="3" height="0"/>
+   </default>
+</spawns>
+<itemremove>
+   <item>leather helmet</item>
+   <item>iron chestplate</item>
+   <item>leather leggings</item>
+   <item>iron boots</item>
+   <item>grilled pork</item>
+   <item>arrow</item>
+   <item>glass bottle</item>
+   <item>iron sword</item>
+</itemremove>
+<toolrepair>
+   <item>potion</item>
+</toolrepair>
+<killreward>
+   <item damage="16373">potion</item>
+</killreward>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+<king>
+   <hills>
+      <hill name="Green Point" capture-time="10s" type="variable" ratio="1">
+         <capture>
+            <cylinder base="43,14,-36" radius="4" height="5"/>
+         </capture>
+         <progress>
+            <cuboid min="39,13,-32" max="47,13,-40"/>
+         </progress>
+         <captured>
+            <cuboid min="0,0,0" max="0,0,0"/>
+         </captured>
+      </hill>
+      <hill name="Forest" capture-time="15s" type="variable" ratio="1">
+         <capture>
+            <cylinder base="0,14,0" radius="5" height="5"/>
+         </capture>
+         <progress>
+            <cuboid min="4,13,4" max="-4,13,-4"/>
+         </progress>
+         <captured>
+            <cuboid min="-5,22,-5" max="5,22,5"/>
+         </captured>
+      </hill>
+      <hill name="Cyan Point" capture-time="10s" type="variable" ratio="1">
+         <capture>
+            <cylinder base="-43,14,36" radius="4" height="5"/>
+         </capture>
+         <progress>
+            <cuboid min="-47,13,40" max="-39,13,32"/>
+         </progress>
+         <captured>
+            <cuboid min="0,0,0" max="0,0,0"/>
+         </captured>
+      </hill>
+   </hills>
+</king>
+</map>
