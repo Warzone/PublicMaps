@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Sandy Wars</name>
+<version>1.0</version>
+<objective>Be the team with the most kills after 10 minutes.</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="5c79d2c9-a4f0-4343-a84b-e1720f13009b"/>
+    <!-- CoWinkKeyDinkInc -->
+</authors>
+<contributors>
+    <contributors uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="Original Map Author"/> <!-- Anxuiz -->
+</contributors>
+<teams>
+    <team color="dark red" max="24">Red</team>
+    <team color="blue" max="24">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="2" amount="2">golden apple</item>
+        <item slot="3" amount="2">tnt</item>
+        <item slot="4">flint and steel</item>
+        <item slot="5" amount="64">sand</item>
+        <item slot="6" amount="64">sand</item>
+        <item slot="7" amount="16">glass</item>
+        <potion duration="5">heal</potion>
+        <potion duration="10">damage resistance</potion>
+        <potion duration="oo">saturation</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="cd0000">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="cd0000">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="cd0000">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" enchantment="protection fall:4">gold boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet locked="true" unbreakable="true" color="0066cc">leather helmet</helmet>
+        <chestplate locked="true" unbreakable="true" color="0066cc">leather chestplate</chestplate>
+        <leggings locked="true" unbreakable="true" color="0066cc">leather leggings</leggings>
+        <boots locked="true" unbreakable="true" enchantment="protection fall:4">gold boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawns safe="true" sequential="true">
+        <spawn team="blue" kit="blue" yaw="90">
+            <cuboid min="86,9,11" max="106,128,-9"/> <!-- regular tower spawn -->
+            <cuboid min="85,6,-10" max="106,6,11"/> <!-- atop the obsidian -->
+        </spawn>
+        <spawn team="red" kit="red" yaw="-90">
+            <cuboid min="71,9,11" max="51,128,-9"/> <!-- regular tower spawn -->
+            <cuboid min="71,6,-10" max="50,6,11"/> <!-- atop the obsidian -->
+        </spawn>
+    </spawns>
+    <default yaw="180">
+        <cuboid min="82,69,54" max="74,69,46"/>
+    </default>
+</spawns>
+<playable>
+    <rectangle min="38,24" max="119,-22"/>
+</playable>
+<score>
+    <time>10m</time>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>flint and steel</tool>
+</toolrepair>
+<itemremove>
+    <item>torch</item>
+    <item>arrow</item>
+    <item>sand</item>
+    <item>golden apple</item>
+    <item>tnt</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>gold boots</item>
+</itemremove>
+<killreward>
+    <item amount="2">tnt</item>
+    <item amount="2">golden apple</item>
+    <item amount="8">glass</item>
+</killreward>
+<!-- comment out to disable sand and wool from flying when blown up -->
+<blockdrops>
+    <rule>
+        <filter>
+            <any>
+                <block>sand</block>
+                <block>wool</block>
+            </any>
+        </filter>
+        <fall-chance>0.35</fall-chance>
+        <fall-speed>1.50</fall-speed>
+        <land-chance>1.00</land-chance>
+    </rule>
+</blockdrops>
+<disabledamage>
+    <damage ally="true" self="false">block explosion</damage>
+</disabledamage>
+<tnt>
+    <yield>0</yield>
+    <licensing>off</licensing>
+</tnt>
+<gamerules>
+	<doFireTick>true</doFireTick>
+</gamerules>
+<timelock>on</timelock>
+</map>

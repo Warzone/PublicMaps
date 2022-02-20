@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Pharaoh's Catacombs</name>
+<version>1.4.7</version>
+<objective>Get the most amount of kills for your team while buying new gear!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<teams>
+    <team color="blue" max="14">Blue</team>
+    <team color="dark red" max="14">Red</team>
+</teams>
+<filters>
+    <filter name="blue-only">
+        <team>blue</team>
+    </filter>
+    <filter name="red-only">
+        <team>red</team>
+    </filter>
+    <filter name="only-tnt">
+        <block>tnt</block>
+    </filter>
+</filters>
+<playable>
+    <rectangle min="-300,-300" max="300,300"/>
+</playable>
+<regions>
+    <apply block-place="only-tnt" block-break="deny-all" message="You cannot break blocks!">
+        <rectangle min="-300,-300" max="300,300"/>
+    </apply>
+    <apply enter="blue-only" message="You may not enter blue's spawn!">
+        <cuboid min="-13,63,23" max="19,68,32"/>
+    </apply>
+    <apply enter="red-only" message="You may not enter red's spawn!">
+        <cuboid min="8,63,-27" max="19,68,-10"/>
+        <cuboid min="0,63,-27" max="7,68,-21"/>
+        <cuboid min="18,63,-25" max="23,68,-20"/>
+    </apply>
+    <apply block="deny-all" message="You may not break or place blocks here!">
+        <cuboid min="-13,84,-14" max="14,91,13"/>
+        <cuboid min="-13,63,23" max="19,68,32"/>
+        <cuboid min="8,63,-27" max="19,68,-10"/>
+        <cuboid min="0,63,-27" max="7,68,-21"/>
+        <cuboid min="18,63,-25" max="23,68,-20"/>
+    </apply>
+    <apply kit="strength">
+        <cuboid min="-1,86,-13" max="2,89,-12"/>
+        <cuboid min="-1,86,11" max="2,89,12"/>
+    </apply>
+    <apply kit="regen" enter="red-only">
+        <cuboid min="10,64,-21" max="12,67,-18"/>
+    </apply>
+    <apply kit="regen" enter="blue-only">
+        <cuboid min="8,64,24" max="11,67,26"/>
+    </apply>
+</regions>
+<portals>
+    <portal x="@9.5" y="@64" z="@28">
+        <cuboid min="-1,86,11" max="2,89,12"/>
+    </portal>
+    <portal x="@0.5" y="@85" z="@5.5">
+        <cuboid min="8,64,24" max="11,67,26"/>
+    </portal>
+    <portal x="@14" y="@64" z="@-19.5" yaw="90">
+        <cuboid min="-1,86,-13" max="2,89,-12"/>
+    </portal>
+    <portal x="@0.5" y="@85" z="@-6.5" yaw="-90">
+        <cuboid min="9,64,-21" max="12,67,-18"/>
+    </portal>
+</portals>
+<kits>
+    <kit name="obs">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" amount="64">cooked beef</item>
+        <item slot="27" amount="64">apple</item>
+        <item slot="28">arrow</item>
+        <chestplate enchantment="protection fall:4;protection projectile:2">">gold chestplate</chestplate>
+        <potion duration="540000">night vision</potion>
+    </kit>
+    <kit name="strength">
+        <potion duration="4" amplifier="1">increase damage</potion>
+    </kit>
+    <kit name="regen">
+        <potion duration="2" amplifier="10">regeneration</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="spawn" yaw="180">
+        <cylinder base="0,85,6" radius="2" height="0"/>
+    </spawn>
+    <spawn team="red" kit="spawn" yaw="0">
+        <cylinder base="0,85,-6" radius="2" height="0"/>
+    </spawn>
+    <default kit="obs" yaw="0">
+        <cylinder base="1,60,1" radius="2" height="0"/>
+    </default>
+</spawns>
+<score>
+    <time>10m</time>
+</score>
+<itemremove>
+    <item>apple</item>
+    <item>cooked beef</item>
+    <item>gold chestplate</item>
+    <item>glass bottle</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>gold chestplate</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <item>gold ingot</item>
+    <item>gold block</item>
+</itemkeep>
+<killreward>
+    <item amount="3">gold ingot</item>
+</killreward>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<multitrade/>
+</map>

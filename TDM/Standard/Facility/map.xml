@@ -1,0 +1,233 @@
+<map proto="1.4.0">
+<name>Facility</name>
+<version>1.1.3</version>
+<objective>Be the team with the most points after 10 minutes!</objective>
+<time>10m</time>
+<gamemode>tdm</gamemode>
+<gamemode>scorebox</gamemode>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall map design, XML"/> <!-- Mikeg542 -->
+</authors>
+<contributors>
+    <contributor uuid="8807d876-40f9-470f-9fcf-3eb3d146b983" contribution="Feedback"/> <!-- Skippy_Irongut -->
+    <contributor uuid="e1e9e6af-f826-44ce-b1e2-5efb4e5c5d9e" contribution="Feedback"/> <!-- Zemphon -->
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Feedback"/> <!-- Tywnis -->
+    <contributor uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Feedback"/> <!-- xXFracXx -->
+    <contributor uuid="06d2c58b-0306-46e8-8853-11c540c03bb7" contribution="Support"/> <!-- PikminWarrior -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="16">Blue</team>
+    <team id="red" color="dark red" max="16">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="3">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet color="0066cc" unbreakable="true" material="leather helmet"/>
+        <chestplate color="0066cc" unbreakable="true" material="leather chestplate"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet color="cd0000" unbreakable="true" material="leather helmet"/>
+        <chestplate color="cd0000" unbreakable="true" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="-77,15,99" radius="2" height="1"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="blue-kit">
+        <region yaw="-90">
+            <cylinder base="-113,4,157" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <region yaw="90">
+            <cylinder base="-101,4,41" radius="1" height="1"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="blue-spawn" min="-121,144" max="-93,164"/>
+        <rectangle id="red-spawn" min="-121,35" max="-93,54"/>
+    </union>
+    <union id="scoreboxes">
+        <union id="blue-scoreboxes"> <!-- blue defends -->
+            <cuboid min="-140,8,145" max="-135,12,148"/>
+            <cuboid min="-79,8,145" max="-74,12,148"/>
+        </union>
+        <union id="red-scoreboxes"> <!-- red defends -->
+            <cuboid min="-140,8,50" max="-135,12,54"/>
+            <cuboid min="-79,8,50" max="-74,12,54"/>
+        </union>
+    </union>
+    <apply enter="only-blue" message="You may not enter the enemy spawn!" region="blue-spawn"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn!" region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter your own scoreboxes!" region="red-scoreboxes"/>
+    <apply enter="only-red" message="You may not enter your own scoreboxes!" region="blue-scoreboxes"/>
+    <apply block="never" message="You may not modify blocks!"/>
+</regions>
+<score>
+    <kills>1</kills>
+    <box points="2" filter="only-blue">
+        <region>
+            <cuboid min="-140,8,50" max="-135,12,52"/>
+        </region>
+    </box>
+    <box points="2" filter="only-blue">
+        <region>
+            <cuboid min="-79,8,50" max="-74,12,52"/>
+        </region>
+    </box>
+    <box points="2" filter="only-red">
+        <region>
+            <cuboid min="-140,8,147" max="-135,12,148"/>
+        </region>
+    </box>
+    <box points="2" filter="only-red">
+        <region>
+            <cuboid min="-79,8,147" max="-74,12,148"/>
+        </region>
+    </box>
+</score>
+<portals>
+    <portal x="@-101" y="@4" z="@41" yaw="@90">
+        <region>
+            <cuboid min="-135,8,147" max="-140,12,148"/>
+        </region>
+    </portal>
+    <portal x="@-101" y="@4" z="@41" yaw="@90">
+        <region>
+            <cuboid min="-79,8,147" max="-74,12,148"/>
+        </region>
+    </portal>
+    <portal x="@-113" y="@4" z="@157" yaw="@-90">
+        <region>
+            <cuboid min="-140,8,50" max="-135,12,52"/>
+        </region>
+    </portal>
+    <portal x="@-113" y="@4" z="@157" yaw="@-90">
+        <region>
+            <cuboid min="-79,8,50" max="-74,12,52"/>
+        </region>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>blaze rod</item>
+    <item>potion</item>
+    <item>glass bottle</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item material="diamond"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3"/>
+        </filter>
+        <item damage="16421" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4"/>
+        </filter>
+        <item amount="5" material="diamond"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item damage="8229" material="potion"/>
+        <item damage="8229" material="potion"/>
+        <item damage="8194" material="potion"/>
+        <item damage="8194" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="9"/>
+        </filter>
+        <item material="diamond sword"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<include src="tutorial.xml"/>
+<tutorial>
+    <stage title="Team Death Match">
+        <message>
+            <line>This map is a `a`lTeam Death Match `r(TDM) map</line>
+            <line>The objective is to get the most points within 12 minutes.</line>
+        </message>
+        <teleport>
+            <point yaw="180" pitch="45">-107,9,112</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>`rThis is where you spawn when the match starts, you die or you get into a scorebox.</line>
+            <line>`rYou can use diamonds that spawn in the map to buy items from the villager!</line>
+        </message>
+        <teleport>
+            <point yaw="-135" pitch="0">-110,7,160</point>
+        </teleport>
+    </stage>
+    <stage title="Spawners">
+        <message>
+            <line>The spawner in the centre of the map gives `bDiamonds `r.</line>
+            <line>You can not use the diamonds to craft armor or weapons, but you can use them to buy items in your spawn.</line>
+            <line>There are also arrow spawners in the two rooms on either side in case you run out.</line>
+        </message>
+        <teleport>
+            <point yaw="180" pitch="45">-107,9,112</point>
+        </teleport>
+    </stage>
+    <stage title="Score Boxes">
+        <message>
+            <line>There are 2 scoreboxes on either side of each teams spawn. Getting into one earns you 2 points.</line>
+            <line>After entering a scorebox successfully, you will be teleported back to your spawn.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="0">-136,8,135</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<include src="tutorial.xml"/>
+<name>Atom</name>
+<version>1.0.1</version>
+<objective>Be the team with the most kills after 7 minutes!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="e5eea785-51c1-40fe-a2d0-f83d4c035cd9"/> <!-- pikpikmerchant -->
+</authors>
+<contributors>
+    <contributor uuid="e1e9e6af-f826-44ce-b1e2-5efb4e5c5d9e" contribution="XML"/> <!-- zemphon -->
+    <contributor uuid="f28e28cd-5e24-4e23-94a5-32dbb1daef34" contribution="Placed one block"/> <!-- raysohn -->
+</contributors>
+<teams>
+    <team color="green" max="16">Green</team>
+    <team color="light purple" max="16">Pink</team>
+</teams>
+<score>
+    <time>7m</time>
+</score>
+<timelock>on</timelock>
+<multitrade/>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="2" amount="2">TNT</item>
+        <item slot="3" amount="32">cooked beef</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="5" name="TNT Defuser" lore="`7Right click to defuse teammate's TNT">shears</item>
+        <leggings color="666362"  unbreakable="true">leather leggings</leggings>
+        <chestplate enchantment="protection explosions:3" unbreakable="true">leather chestplate</chestplate>
+        <potion duration="4" amplifier="5">damage resistance</potion>
+        <potion duration="4" amplifier="5">heal</potion>
+    </kit>
+    <kit name="green" parents="spawn">
+        <helmet color="7FCC19" unbreakable="true">leather helmet</helmet>
+        <boots color="7FCC19" unbreakable="true" enchantment="protection fall:2">leather boots</boots>
+    </kit>
+    <kit name="pink" parents="spawn">
+        <helmet color="7F3FB2" unbreakable="true">leather helmet</helmet>
+        <boots color="7F3FB2" unbreakable="true" enchantment="protection fall:2">leather boots</boots>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>shears</tool>
+</toolrepair>
+<spawns>
+    <spawn team="green" kit="green" yaw="0">
+        <cylinder base="7.5,7,-57.5" radius="1" height="0"/>
+    </spawn>
+    <spawn team="pink" kit="pink" yaw="180">
+        <cylinder base="-6.5,7,58.5" radius="1" height="0"/>
+    </spawn>
+    <default yaw="90">
+        <cylinder base="0.5,40,0.5" radius="1" height="0"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-tnt" parents="deny-all">
+        <allow>
+            <block>tnt</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <apply block="only-tnt">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply block="deny-all" message="You may not place TNT near the team spawns!">
+        <cylinder name="pink-spawn" base="-7,7,58" radius="10" height="oo"/>
+        <cylinder name="green-spawn" base="7,7,-58" radius="10" height="oo"/>
+    </apply>
+</regions>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+    <power>2</power>
+    <fuse>2s</fuse>
+</tnt>
+<tutorial>
+    <stage title="`a`lTeam Deathmatch (TDM)">
+        <message>
+            <line>`rThis map is a `a`lTeam Deathmatch`r.</line>
+            <line>Your objective is to `cBe the team with the most kills after 7 minutes!</line>
+        </message>
+    </stage>
+    <stage title="`3`lSpawns">
+        <message>
+            <line>`rThis is where players spawn. Players spawn with gear and armor, ready to go into battle!</line>
+        </message>
+        <teleport>
+            <point yaw="-135" pitch="45">3.5,13,-53.5</point>
+        </teleport>
+    </stage>
+    <stage title="`4`lTNT">
+        <message>
+            <line>`rTNT will ignite instantly when placed. TNT will not destroy any blocks.</line>
+            <line>`rYou spawn with 2 TNT that can be used to kill you opponents. You can get more TNT at these `cTNT spawners`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-45" pitch="40">-3.5,1,1.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

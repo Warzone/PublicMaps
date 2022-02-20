@@ -1,0 +1,128 @@
+<map proto="1.4.2">
+<name>Scrap Mettle Redux</name>
+<edition>standard</edition> <!-- based on Scrap Mettle TE; version 2.1.1 -->
+<time result="score">10m</time>
+<version>1.1</version>
+<objective>Score points by killing the other team and entering your team's goal on the other side.</objective>
+<gamemode>tdm</gamemode>
+<gamemode>scorebox</gamemode>
+<authors>
+    <author uuid="4a0780d3-d9c4-41c4-a816-e077a36f27c9"/> <!-- KasiCrafter -->
+</authors>
+<contributors>
+    <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Aesthetics and original XML"/> <!-- Plastix -->
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Edits and adaptations for casual from TE"/> <!-- Strangey -->
+    <contributor uuid="430ec559-364a-4363-ac7a-2529050440ac" contribution="Adapations for casual from TE"/> <!-- mameBT -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="7" material="iron ingot"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="leather boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+        <effect duration="6s">heal</effect>
+        <effect duration="6s">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="heal">
+        <effect duration="2s" amplifier="10">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default region="default-spawn" yaw="90"/>
+    <spawn team="blue" kit="spawn-kit" region="blue-spawn" yaw="0"/>
+    <spawn team="red" kit="spawn-kit" region="red-spawn" yaw="180"/>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <union id="spawn-regions">
+        <cylinder id="default-spawn" base="25,26,97.5" radius="5" height="0"/>
+        <cuboid id="blue-spawn" min="20,15,147" max="29,15,150"/>
+        <cuboid id="red-spawn" min="29,15,45" max="20,15,48"/>
+    </union>
+    <union id="scoreboxes">
+        <cuboid id="blue-box" min="29,14,54" max="20,19,52"/>
+        <cuboid id="red-box" min="29,14,141" max="20,19,143"/>
+    </union>
+    <apply enter="only-blue" kit="heal" region="blue-box" message="You may not enter your team's own score box!"/>
+    <apply enter="only-red" kit="heal" region="red-box" message="You may not enter your team's own score box!"/>
+    <apply block="never"/>
+</regions>
+<score>
+    <kills>1</kills>
+    <box points="3" filter="only-blue" region="blue-box"/>
+    <box points="3" filter="only-red" region="red-box"/>
+</score>
+<portals sound="false">
+    <portal filter="only-blue" region="blue-box" destination="blue-spawn" yaw="@0"/>
+    <portal filter="only-red" region="red-box" destination="red-spawn" yaw="@180"/>
+</portals>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>iron boots</item>
+    <item>iron spade</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>iron hoe</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron block</item>
+    <item>minecart</item>
+    <item>cauldron</item>
+    <item>iron door</item>
+    <item>bucket</item>
+    <item>shears</item>
+    <item>iron fence</item>
+    <item>iron trapdoor</item>
+</itemremove>
+<itemkeep>
+    <item>iron ingot</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item material="iron ingot"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<respawn delay="3s" auto="true"/>
+<item-mods>
+    <rule>
+        <match>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
