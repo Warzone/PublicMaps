@@ -10,10 +10,12 @@
     <contributor uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" contribution="Team Spawn"/> <!-- Virus53 -->
     <contributor uuid="3fa22f5e-098d-49f7-b9ad-92566f045cbc" contribution="House"/> <!-- BigTonyMC -->
     </contributors>
+<!-- Teams -->
 <teams>
      <team id="blue-team" color="blue" max="7">Blue</team>
     <team id="red-team" color="dark red" max="7">Red</team>
 </teams>
+<!-- Kits -->
 <kits>
     <kit id="default">
         <item slot="0" unbreakable="true">iron sword</item>
@@ -37,20 +39,25 @@
 	<leggings unbreakable="true" color="B02E26">leather leggings</leggings>
     </kit>
 </kits>
+<!-- Spawns -->
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="0.5" region="blue-spawn"/>
     <spawn team="red-team" kit="red-kit" yaw="-180" region="red-spawn"/>
     <default region="obs-spawn"/>
 </spawns>
+<!-- Monuments -->
 <destroyables completion="32%" repairable="false" show-progress="true">
     <destroyable name="Blue Wool" owner="blue-team" sparks="true" materials="wool" region="blue-wool"/>
     <destroyable name="Red Wool" owner="red-team" sparks="true" materials="wool" region="red-wool"/>
 </destroyables>
+<!-- Filters -->
 <filters>
     <team id="blue-only">blue-team</team>
     <team id="red-only">red-team</team>
 </filters>
+<!-- Regions -->
 <regions>
+    <!-- Definitions -->
     <union id="monuments">
         <cuboid id="blue-wool" min="35,10,99" max="21,14,102"/>
         <cuboid id="red-wool" min="-25,10,-2" max="-11,14,-6"/>
@@ -62,10 +69,10 @@
     <point id="blue-spawn">5.5,10,64.5</point>
     <point id="red-spawn">5.5,10,32.5</point>
     <point id="obs-spawn">5.5,40,48.5</point>
-
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <!-- Applications -->
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <toolrepair>
     <tool>iron sword</tool>
@@ -74,6 +81,7 @@
     <tool>stone spade</tool>
     <tool>bow</tool>
 </toolrepair>
+<!-- Item Remove -->
 <itemremove>
     <item>arrow</item>
     <item>leather helmet</item>
@@ -85,8 +93,10 @@
     <item>wool</item>
     <item>beacon</item>
 </itemremove>
+<!-- Kill Rewards -->
 <killreward>
     <item>golden apple</item>
 </killreward>
+<!-- Misc -->
 <maxbuildheight>25</maxbuildheight>
 </map> 
