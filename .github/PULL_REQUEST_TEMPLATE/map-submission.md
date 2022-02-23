@@ -1,30 +1,14 @@
----
-name: Map Submission
-about: Submit a new map to Warzone.
-title: "[GAMEMODE] Map Name"
-labels: map, submission
-assignees: ''
-
----
-
-
 ### Map Name
 > **Example:** Acromion
-
-
 
 ### Gamemode(s)
 > **Type any of the [following](https://pgm.dev/docs/modules/general/main#map-gamemode) that fits the map:** Arcade/Capture The Flag/Capture The Wool/Destroy The Core/Destroy The Monument/Destroy The Wool/Free-for-All/King of The Hill/Team Deathmatch/Competitive. If your map is meant to disable stat-tracking, use "Arcade".
 
-
 ### Description & Team Sizes
 > **Example:** This is a map with several mushroom biome islands. It can support two teams, each with three players (3v3).
 
-
-
 ### Screenshots
 > Screenshot the map from multiple views. You may use image hosting services, such as Imgur.
-
 
 ### XML
 > Link your map's XML file. You may use your own GitHub repo/fork to host it or upload it to GitHub Gist, Pastebin, and any other text storage service.
