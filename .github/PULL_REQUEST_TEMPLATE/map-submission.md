@@ -1,3 +1,13 @@
+---
+name: Map Submission
+about: Submit a new map to Warzone.
+title: "[GAMEMODE] Map Name"
+labels: map, submission
+assignees: ''
+
+---
+
+
 ### Map Name
 > **Example:** Acromion
 
