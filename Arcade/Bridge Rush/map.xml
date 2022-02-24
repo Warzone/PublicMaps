@@ -4,6 +4,7 @@
 <version>1.0.0</version>
 <objective>Rush across the map with a bridge to get into a portal located below the enemy's spawn to score as many points as possible.</objective>
 <gamemode>arcade</gamemode>
+<gamemode>scorebox</gamemode>
 <!-- Authors and Contributors -->
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map creation"/> <!-- Wesdial -->
@@ -28,16 +29,16 @@
     </kit>
     <kit id="blue-kit" parents="default">
     	<item slot="3" amount="64" damage="11">stained clay</item>
-	    <item slot="4" amount="64" damage="11">stained clay</item>
+	<item slot="4" amount="64" damage="11">stained clay</item>
         <helmet unbreakable="true" color="3C44AA" locked="true">leather helmet</helmet>
         <leggings unbreakable="true" color="3C44AA" locked="true">leather leggings</leggings>
         <boots unbreakable="true" color="3C44AA" locked="true">leather boots</boots>
     </kit>
     <kit id="red-kit" parents="default">
     	<item slot="3" amount="64" damage="14">stained clay</item>
-	    <item slot="4" amount="64" damage="14">stained clay</item>
+	<item slot="4" amount="64" damage="14">stained clay</item>
         <helmet unbreakable="true" color="B02E26" locked="true">leather helmet</helmet>
-	    <leggings unbreakable="true" color="B02E26" locked="true">leather leggings</leggings>
+	<leggings unbreakable="true" color="B02E26" locked="true">leather leggings</leggings>
         <boots unbreakable="true" color="B02E26" locked="true">leather boots</boots>
     </kit>
 </kits>
@@ -85,14 +86,9 @@
     <point id="blue-spawn">15.5,17,15.5</point>
     <point id="red-spawn">15.5,17,-84.5</point>
     <point id="obs-spawn">15.5,31,-34.5</point>
-    <negative id="not-map">
-        <rectangle id="map" min="-5,-107" max="35,37"/>
-    </negative>
     <!-- Applications -->
     <apply region="bridge-area" block="only-clay-in-map" message="You may only place or destroy stained clay blocks."/>
     <apply region="everywhere" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
-    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
