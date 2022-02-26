@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Bridge">
 <name>Bridge Rush</name>
-<version>1.0.0</version>
+<version>1.1.0</version>
 <objective>Rush across the map with a bridge to get into a portal located below the enemy's spawn to score as many points as possible.</objective>
 <gamemode>arcade</gamemode>
 <gamemode>scorebox</gamemode>
@@ -40,6 +40,9 @@
         <helmet unbreakable="true" color="B02E26" locked="true">leather helmet</helmet>
         <leggings unbreakable="true" color="B02E26" locked="true">leather leggings</leggings>
         <boots unbreakable="true" color="B02E26" locked="true">leather boots</boots>
+    </kit>
+    <kit id="void-kill" force="true">
+        <potion duration="oo" amplifier="10">instant_damage</potion>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -86,11 +89,14 @@
     <point id="blue-spawn">15.5,17,15.5</point>
     <point id="red-spawn">15.5,17,-84.5</point>
     <point id="obs-spawn">15.5,31,-34.5</point>
+    <below id="void" y="0"/>
     <!-- Applications -->
     <apply region="bridge-area" block="only-clay-in-map" message="You may only place or destroy stained clay blocks."/>
     <apply region="everywhere" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="void" kit="void-kill">
+    </apply>
 </regions>
 <!-- Item Remove -->
 <itemremove>
