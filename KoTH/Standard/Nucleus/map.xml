@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.3">
 <name>Nucleus</name>
-<version>0.2</version>
+<version>0.21</version>
 <objective>Capture and hold the nucleus!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -66,7 +66,6 @@
             <potion duration="oo" amplifier="4">health boost</potion>
             <potion duration="oo" amplifier="2">increase_damage</potion>
             <potion duration="oo" amplifier="1">slow_digging</potion>
-            <potion duration="oo" amplifier="-1">jump</potion>
             <chestplate color="1D1F1C" attributes="generic.movementSpeed:base:-0.33;generic.knockbackResistance:base:10.00" enchantment="protection_projectile:2;durability:3" locked="true">leather chestplate</chestplate>
         </kit>
     </class>
@@ -113,8 +112,11 @@
 <kits>
     <kit name="kill" force="true">
         <potion duration="oo" amplifier="-4">health boost</potion>
-        <potion duration="oo" amplifier="-10">jump</potion>
         <potion duration="oo">blindness</potion>
+    </kit>
+    <!-- due to scout's resitance pot -->
+    <kit name="if-you-live-kill" force="true">
+        <potion duration="oo" amplifier="10">instant_damage</potion>
     </kit>
     <kit name="r-spawn">
         <leggings color="C40000" locked="true">leather leggings</leggings>
@@ -182,6 +184,9 @@
     <apply use="use" block="deny-all">
         <rectangle min="-38,52" max="-14,79"/>
         <rectangle min="-38,-12" max="-14,-38"/>
+    </apply>
+    <apply kit="if-you-live-kill">
+        <cylinder base="-31,0,20" radius="20" height="3"/>
     </apply>
     <apply kit="kill">
         <cylinder base="-31,0,20" radius="20" height="20"/>
