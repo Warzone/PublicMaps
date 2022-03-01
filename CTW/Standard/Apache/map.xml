@@ -1,0 +1,130 @@
+<map proto="1.4.0">
+<name>Apache</name>
+<version>1.0.0</version>
+<objective>Capthe the wool and bring it back to your base</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="9116d3fa-1400-4ada-aecd-2eae1d73e383"/> <!-- Xuph -->
+</authors>
+<contributors>
+     <contributor uuid="6fb20a24-27f9-448d-8a77-e460c5717481"/> <!-- DaFrozenBlaze-->
+</contributors>
+<teams>
+    <team color="dark red" max="14" id="red">Red</team>
+    <team color="blue" max="14" id="blue">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item material="stone sword" unbreakable="true" slot="0"/>
+        <item material="bow" unbreakable="true" slot="1"/>
+        <item material="diamond pickaxe" unbreakable="true" slot="2"/>
+        <item material="iron axe" unbreakable="true" slot="3"/>
+        <item material="iron spade" unbreakable="true" enchantment="dig speed:2" slot="4"/>
+        <item material="wood" amount="64" slot="5"/>
+        <item material="leaves" amount="32" slot="6"/>
+        <item material="golden apple" slot="7"/>
+        <item material="cooked beef" amount="32" slot="8"/>
+        <item material="arrow" amount="32" slot="28"/>
+        <helmet material="leather helmet" unbreakable="true" team-color="true"/>
+        <chestplate material="leather chestplate" unbreakable="true" team-color="true"/>
+        <leggings material="chainmail leggings" unbreakable="true"/>
+        <boots material="leather boots" unbreakable="true" team-color="true"/>
+        <effect duration="3s" amplifier="3">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="spawn" yaw="90">
+        <region>
+            <point>110,3,27</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn" yaw="-90">
+        <region>
+            <point>-54,3,27</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <point>30,50,-20</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <not id="not-void">
+        <void/>
+    </not>
+    <all id="only-red-web">
+        <team>red</team>
+        <material>web</material>
+    </all>
+    <all id="only-blue-web">
+        <team>blue</team>
+        <material>web</material>
+    </all>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <union id="purple-cube">
+        <cuboid id="purple-wool" min="-50,8,23" max="-58,14,31"/>
+        <cuboid id="blue-spawn" min="-50,0,23" max="-58,7,31"/>
+    </union>
+    <union id="orange-cube">
+        <cuboid id="orange-wool" min="114,8,23" max="106,14,31"/>
+        <cuboid id="red-spawn" min="114,0,23" max="106,7,31"/>
+    </union>
+    <negative id="deny-block-void">
+        <rectangle id="bridge-area-mid" min="80,-1" max="-24,55"/>
+    </negative>
+    <apply block-break="only-blue-web" block-place="never" region="orange-cube" message="You may not interact with that here!"/>
+    <apply block-break="only-red-web" block-place="never" region="purple-cube" message="You may not interact with that here!"/>
+    <apply use="only-red" enter="only-red" region="purple-wool" message="Only `4Red`r may enter this wool room!"/>
+    <apply use="only-blue" enter="only-blue" region="orange-wool" message="Only `1Blue`r may enter this wool room!"/>
+    <apply enter="only-red" region="red-spawn" message="Only `4Red`r may enter their spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="Only `1Blue`r may enter their spawn!"/>
+    <apply block="not-void" region="deny-block-void" message="You may not build outside the map!"/>
+</regions>
+<wools craftable="false">
+    <wool team="blue" color="orange" location="110,9,27">
+        <monument><block>-57,4,26</block></monument>
+    </wool>
+    <wool team="red" color="purple" location="-55,9,26">
+        <monument><block>112,4,27</block></monument>
+    </wool>
+</wools>
+<maxbuildheight>20</maxbuildheight>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+        <item amount="2">iron ingot</item>
+        <item amount="4">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>leaves</item>
+    <item>cooked beef</item>
+    <item>dirt</item>
+    <item>cobblestone</item>
+    <item>gravel</item>
+    <item>flint</item>
+    <item>string</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>iron ingot</item>
+</itemkeep>
+</map>
