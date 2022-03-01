@@ -1,0 +1,100 @@
+<map proto="1.4.2">
+<name>Actrix 2</name>
+<version>1.0.0</version>
+<objective>Be the team with the most kills after 7 minutes!</objective>
+<authors>
+    <author uuid="8242e55e-cc6a-458a-b272-a2b34918045f"/> <!-- funkystudios -->
+    <author uuid="1c74c430-29a0-471f-b30b-cc2d9031ebcb"/> <!-- Tazz -->
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Wulfcaspice -->
+</authors>
+<teams>
+    <team max="8" color="dark red" id="red-team">Red</team>
+    <team max="8" color="blue" id="blue-team">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item material="iron sword" unbreakable="true" slot="0"/>
+        <item material="bow" unbreakable="true" slot="1"/>
+        <item material="golden apple" slot="2"/>
+        <item material="arrow" slot="8" amount="16"/>
+        <helmet material="leather helmet" unbreakable="true" team-color="true"/>
+        <chestplate material="leather chestplate" unbreakable="true" team-color="true"/>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots material="leather boots" unbreakable="true" team-color="true"/>
+        <effect duration="5s">resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="90">69.5,149,-758.5</point>
+        </regions>
+    </default>
+    <spawn safe="true" kit="spawn" team="red-team">
+        <regions>
+            <point yaw="-180">17.5,132,-714.5</point>
+        </regions>
+    </spawn>
+    <spawn safe="true" kit="spawn" team="blue-team">
+        <regions>
+            <point yaw="0">17.5,132,-802.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<time>12m</time>
+<score>
+    <box value="3" filter="only-red" region="scorebox-for-red"/>
+    <box value="3" filter="only-blue" region="scorebox-for-blue"/>
+    <kills>1</kills>
+</score>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" amount="1"/>
+        <item material="arrow" amount="4"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+    <cuboid id="scorebox-for-blue" min="19,125,-719" max="16,128,-717"/>
+    <cuboid id="scorebox-for-blue-webs" min="19,125,-720" max="16,128,-717"/>
+    <cuboid id="scorebox-for-red" min="16,125,-798" max="19,127,-800"/>
+    <cuboid id="scorebox-for-red-webs" min="16,125,-797" max="19,127,-800"/>
+    <block id="blue-score-exit">17.5,133,-802.5</block>
+    <block id="red-score-exit">17.5,133,-714.5</block>
+    <apply region="scorebox-for-red-webs" enter="only-red" message="You may not enter your own scorebox!"/>
+    <apply region="scorebox-for-blue-webs" enter="only-blue" message="You may not enter your own scorebox!"/>
+    <apply block="never"/>
+</regions>
+<portals>
+    <portal region="scorebox-for-red" filter="only-red" yaw="@-180">
+        <destination><region id="red-score-exit"/></destination>
+    </portal>
+    <portal region="scorebox-for-blue" filter="only-blue" yaw="@0">
+        <destination><region id="blue-score-exit"/></destination>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<world>
+    <timelock>off</timelock>
+</world>
+</map>
