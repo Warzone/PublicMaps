@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Actrix 2</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Be the team with the most kills after 7 minutes!</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -27,6 +27,9 @@
     </kit>
     <kit id="regen-max" force="true">
         <effect amplifier="10" duration="1s">regeneration</effect>
+    </kit>
+     <kit id="void-death" force="true">
+        <health>1</health>
     </kit>
 </kits>
 <spawns>
@@ -89,6 +92,9 @@
     <apply region="scorebox-for-blue-webs" enter="only-blue" message="You may not enter your own scorebox!"/>
     <apply kit="regen-max" region="scoreboxes"/>
     <apply block="never"/>
+    <apply kit="void-death">
+        <region><below y="90"/></region>
+    </apply>
 </regions>
 <portals>
     <portal region="scorebox-for-red" filter="only-red" yaw="@-180">
@@ -96,6 +102,9 @@
     </portal>
     <portal region="scorebox-for-blue" filter="only-blue" yaw="@0">
         <destination><region id="blue-score-exit"/></destination>
+    </portal>
+    <portal y="-164" sound="false">
+        <region><below y="90"/></region>
     </portal>
 </portals>
 <hunger>
