@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Bed Wars">
 <name>Bodiam Castle</name>
+<phase>development</phase>
 <version>1.0.0</version>
 <objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
 <gamemode>dtm</gamemode>
@@ -81,7 +82,16 @@
             </all>
         </any>
     </any>
-
+    <any id="breakable-blocks"> <!-- List of blocks that players can break -->
+        <material>wool</material>
+        <material>stained clay:11</material>
+        <material>stained clay:14</material>
+        <material>stained clay:13</material>
+        <material>stained clay:4</material>
+        <material>ender stone</material>
+        <material>wood</material>
+        <material>obsidian</material>
+    </any>
 </filters>
 <!-- Blitz and Sudden Death -->
 <blitz filter="bed-destroyed">
@@ -141,7 +151,7 @@
         <item amount="1" material="emerald"/>
     </spawner>
 </spawners>
-<!-- Item Remove, Armor Keep -->
+<!-- Item Remove, ItemKeep, Armor Keep -->
 <itemremove>
     <item>wool</item>
     <item>wood</item>
@@ -179,6 +189,13 @@
     <item>long grass</item>
     <item>bed</item>
 </itemremove>
+<itemkeep>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>shears</item>
+    <item>bow</item>
+</itemkeep>
 <armorkeep>
     <item>leather helmet</item>
     <item>leather chestplate</item> <!-- Leather helmet and chestplate will always be present -->
