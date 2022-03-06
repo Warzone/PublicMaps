@@ -34,6 +34,22 @@
         <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
         <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
     </kit>
+    <!-- Refer to Kits Upgrade Keys section of filter & Applications section of regions for kit handling -->
+    <kit id="chainmail-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
+        <boots unbreakable="true" locked="true">chainmail boots</boots>
+    </kit>
+    <kit id="iron-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true">iron leggings</leggings>
+        <boots unbreakable="true" locked="true">iron boots</boots>
+    </kit>
+    <kit id="diamond-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true">diamond leggings</leggings>
+        <boots unbreakable="true" locked="true">diamond boots</boots>
+    </kit>
+    <kit id="fireball-kit" force="true">
+        <item projectile="fireball-projectile">fireball</item>
+    </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
@@ -82,15 +98,56 @@
             </all>
         </any>
     </any>
-    <any id="breakable-blocks"> <!-- List of blocks that players can break -->
-        <material>wool</material>
+    <any id="breakables"> <!-- List of blocks that players can modify while keeping the map intact -->
+        <material>wool:11</material>
+        <material>wool:14</material>
+        <material>wool:5</material>
+        <material>wool:4</material>
         <material>stained clay:11</material>
         <material>stained clay:14</material>
-        <material>stained clay:13</material>
+        <material>stained clay:5</material>
         <material>stained clay:4</material>
+        <material>stained glass:11</material>
+        <material>stained glass:14</material>
+        <material>stained glass:5</material>
+        <material>stained glass:4</material>
         <material>ender stone</material>
-        <material>wood</material>
+        <material>wood:0</material>
         <material>obsidian</material>
+        <material>tnt</material>
+        <material>sponge</material>
+        <material>water</material>
+        <material>stationary water</material>
+        <material>yellow flower</material>
+        <material>red rose</material>
+        <material>double plant</material>
+        <material>long grass</material>
+        <material>bed block</material>
+    </any>
+    <deny id="tnt-immune">
+        <all>
+            <cause>explosion</cause>
+            <any>
+                <material>stained glass</material>
+                <material>bed block</material>
+            </any>
+        </all>
+    </deny>
+    <!-- Kit Upgrade Keys -->
+    <any id="chainmail-upgrade-key">
+        <carrying>
+            <item name="Chainmail Armor Upgrade">chainmail chestplate</item>
+        </carrying>
+    </any>
+    <any id="iron-upgrade-key">
+        <carrying>
+            <item name="Iron Armor Upgrade">iron chestplate</item>
+        </carrying>
+    </any>
+    <any id="diamond-upgrade-key">
+        <carrying>
+            <item name="Diamond Armor Upgrade">diamond chestplate</item>
+        </carrying>
     </any>
 </filters>
 <!-- Blitz and Sudden Death -->
@@ -108,50 +165,55 @@
         <cuboid id="yellow-bed" min="70,8,-1" max="67,10,1"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="94,0,41" max="113,oo,57"/>
-        <cuboid id="red-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
-        <cuboid id="green-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
-        <cuboid id="yellow-spawn-protection" min="94,0,-57" max="113,oo,-73"/>
+        <cylinder id="blue-spawn-protection" base="-82.5,8,0.5" radius="9" height="15"/>
+        <cylinder id="red-spawn-protection" base="0.5,8,-82.5" radius="9" height="15"/>
+        <cylinder id="green-spawn-protection" base="0.5,8,83.5" radius="9" height="15"/>
+        <cylinder id="yellow-spawn-protection" base="83.5,8,0.5" radius="9" height="15"/>
     </union>
     <point id="blue-spawn">-82.5,9,0.5</point>
     <point id="red-spawn">0.5,9,-82.5</point>
     <point id="green-spawn">0.5,9,83.5</point>
     <point id="yellow-spawn">83.5,9,0.5</point>
     <point id="obs-spawn">0.5,88,0.5</point>
+    <union id="iron-gold-generators">
+        <cuboid id="green-generator" min="" max=""/>
+        <cuboid id="blue-generator" min="" max=""/>
+        <cuboid id="red-generator" min="" max=""/>
+        <cuboid id="yellow-generator" min="" max=""/>
+    </union>
     <union id="diamond-generators">
         <point id="green-blue-tower">-58,9,58</point>
         <point id="blue-red-tower">-58,9,-58</point>
         <point id="red-yellow-tower">58,9,-58</point>
         <point id="yellow-green-tower">58,9,58</point>
     </union>
-    <union id="emerald-generators"> <!-- Spawns two block above the pad -->
-        <point id="top-emerald">0,25,0</point>
-        <point id="bottom-emerald">0,13,0</point>
+    <union id="emerald-generators"> <!-- Spawns one block above the pad -->
+        <point id="top-emerald">0.5,24,0.5</point>
+        <point id="bottom-emerald">0.5,12,0.5</point>
     </union>
     <negative id="not-map">
         <rectangle id="map" min="-96,-96" max="96,96"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"                 block="never"       message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
-    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
-    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="not-map"           block="never" message="You may not edit outside the map!"/>
+    <apply block-break="tnt-immune"/>
+    <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
+    <apply region="spawn-protections" kit="chainmail-armor-kit" filter="chainmail-upgrade-key"/>
 </regions>
 <!-- Spawners -->
 <spawners>
     <!--<spawner spawn-region="diamond-generators" player-region="everywhere" delay="10s">
         <item amount="1" material="diamond"/>
     </spawner>-->
-    <spawner spawn-region="bottom-emerald" player-region="everywhere" delay="30s">
+    <spawner spawn-region="bottom-emerald" player-region="everywhere" max-entities="4" delay="30s">
         <item amount="1" material="emerald"/>
     </spawner>
-    <spawner spawn-region="top-emerald" player-region="everywhere" delay="30s">
+    <spawner spawn-region="top-emerald" player-region="everywhere" max-entities="4" delay="30s">
         <item amount="1" material="emerald"/>
     </spawner>
 </spawners>
-<!-- Item Remove, ItemKeep, Armor Keep -->
+<!-- ItemRemove, ItemKeep, ArmorKeep -->
 <itemremove>
     <item>wool</item>
     <item>wood</item>
@@ -186,6 +248,8 @@
     <item>milk bucket</item>
     <item>seeds</item>
     <item>yellow flower</item>
+    <item>red rose</item>
+    <item>double plant</item>
     <item>long grass</item>
     <item>bed</item>
 </itemremove>
@@ -208,17 +272,40 @@
     <item>diamond leggings</item>
     <item>diamond boots</item>
 </armorkeep>
+<!-- Projectiles -->
+<projectiles>
+    <projectile id="fireball-projectile" name="Fireball Blast" projectile="Fireball" click="right" damage="50" cooldown="5s"/>
+</projectiles>
+<!-- Item Modifications -->
+<item-mods>
+    <rule>
+        <match>
+            <material>stained glass</material>
+        </match>
+        <modify name="`rBlastproof Glass" lore="`7Immune to explosions."/>
+    </rule>
+</item-mods>
 <!-- Crafting Control -->
 <crafting>
-  <disable>workbench</disable>
-  <disable>carpet</disable>
-  <disable>shears</disable>
-  <disable>stick</disable>
-  <disable>lever</disable>
-  <disable>flint and steel</disable>
-  <disable>clay</disable>
-  <disable>snow block</disable>
-  <disable>wool</disable>
+    <disable>dirt</disable>
+    <disable>stone</disable>
+    <disable>wool</disable>
+    <disable>workbench</disable>
+    <disable>carpet</disable>
+    <disable>shears</disable>
+    <disable>stick</disable>
+    <disable>lever</disable>
+    <disable>wood button</disable>
+    <disable>stone button</disable>
+    <disable>wood plate</disable>
+    <disable>stone plate</disable>
+    <disable>gold plate</disable>
+    <disable>iron plate</disable>
+    <disable>gold nugget</disable>
+    <disable>flint and steel</disable>
+    <disable>clay</disable>
+    <disable>snow block</disable>
+    <disable>wool</disable>
 </crafting>
 <!-- TNT Control -->
 <tnt>
