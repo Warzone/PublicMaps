@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Cargo</name>
-<version>1.2.10</version>
+<version>1.2.11</version>
 <objective>Capture the enemy's wools!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -34,9 +34,10 @@
         <item slot="2" unbreakable="true" material="iron axe">
             <enchantment>efficiency</enchantment>
         </item>
-        <item slot="3" amount="64" damage="2" material="wood"/>
-        <item slot="4" amount="48" material="leaves"/>
-        <item slot="5" amount="32" material="ladder"/>
+        <item slot="3" unbreakable="true" material="iron pickaxe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="48" material="leaves"/>
+        <item slot="6" amount="32" material="ladder"/>
         <item slot="7" material="golden apple"/>
         <item slot="8" amount="64" material="cooked beef"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
@@ -111,6 +112,7 @@
         <mirror id="blue-underside" region="red-underside" origin="116,44,93" normal="0,0,1"/>
         <below y="37"/>
     </union>
+    <apply block-break="only-iron" block-place="only-iron-regen" region="spawns"/>
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
     <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
@@ -121,7 +123,6 @@
     <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
     <apply block="never" region="underside" message="You may not under-bridge!"/>
     <apply block="deny-void" message="You may not build in the void!"/>
-    <apply block-break="only-iron" block-place="only-iron-regen" region="spawns"/>
 </regions>
 <renewables>
     <renewable region="spawns" renew-filter="only-iron"/>
@@ -162,6 +163,7 @@
     <tool>stone sword</tool>
     <tool>bow</tool>
     <tool>iron axe</tool>
+    <tool>iron pickaxe</tool>
     <tool>arrow</tool>
 </toolrepair>
 <itemremove>
@@ -216,4 +218,20 @@
 <gamerules>
     <doFireTick>false</doFireTick>
 </gamerules>
+    <blockdrops>
+    <rule>
+        <filter>
+            <material>iron block</material>
+        </filter>
+        <drops>
+            <item amount="9" material="iron ingot" />
+        </drops>
+    </rule>
+</blockdrops>
+<crafting>
+    <disable>iron block</disable>
+    <disable>101</disable>
+    <disable>330</disable>
+    <disable>167</disable>
+</crafting>
 </map>
