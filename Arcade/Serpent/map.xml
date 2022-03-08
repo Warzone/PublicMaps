@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Bridge">
+<name>Serpent</name>
+<version>1.0.0</version>
+<objective>Rush across the map with a bridge to get into a portal located below the enemy's spawn to score as many points as possible.</objective>
+<gamemode>arcade</gamemode>
+<gamemode>scorebox</gamemode>
+<!-- Authors -->
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map and XML Creation"/> <!-- Wesdial -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map Creation"/> <!-- _iMan -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="yellow-team" color="yellow" max="8">Yellow</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:2">diamond pickaxe</item>
+        <item slot="7" amount="8">golden apple</item>
+        <item slot="8" amount="1">arrow</item>
+        <chestplate unbreakable="true" locked="true">chainmail chestplate</chestplate>
+    </kit>
+    <kit id="yellow-kit" parents="default">
+    	<item slot="3" amount="64" damage="4">stained clay</item>
+        <item slot="4" amount="64" damage="4">stained clay</item>
+        <helmet unbreakable="true" color="E5E533" locked="true">leather helmet</helmet>
+        <leggings unbreakable="true" color="E5E533" locked="true">leather leggings</leggings>
+        <boots unbreakable="true" color="E5E533" locked="true">leather boots</boots>
+    </kit>
+    <kit id="red-kit" parents="default">
+    	<item slot="3" amount="64" damage="14">stained clay</item>
+        <item slot="4" amount="64" damage="14">stained clay</item>
+        <helmet unbreakable="true" color="B02E26" locked="true">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02E26" locked="true">leather leggings</leggings>
+        <boots unbreakable="true" color="B02E26" locked="true">leather boots</boots>
+    </kit>
+    <kit id="void-kill" force="true">
+        <potion duration="oo" amplifier="10">instant_damage</potion>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="yellow-team" kit="yellow-kit" yaw="-90" region="yellow-spawn"/>
+    <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
+    <default region="obs-spawn" yaw="90"/>
+</spawns>
+<!-- Portals and Objective -->
+<portals pitch="@0">
+    <portal region="yellow-portal" filter="red-only" destination="red-spawn" yaw="@90"/>
+    <portal region="red-portal" filter="yellow-only" destination="yellow-spawn" yaw="@-90"/>
+    <!-- To prevent stuck players in their own portals -->
+    <portal region="yellow-portal" filter="yellow-only" destination="yellow-spawn" yaw="@-90"/>
+    <portal region="red-portal" filter="red-only" destination="red-spawn" yaw="@90"/>
+</portals>
+<score>
+    <box points="1" filter="red-only" region="yellow-portal"/>
+    <box points="1" filter="yellow-only" region="red-portal"/>
+    <mercy>10</mercy>
+    <limit>15</limit>
+</score>
+<time result="score">10m</time>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow-team</team>
+    <team id="red-only">red-team</team>
+    <all id="only-clay-in-map">
+        <material>stained clay</material>
+    </all>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="yellow-spawn-protection" min="14,46,14" max="-15,oo,-13"/>
+        <cuboid id="red-spawn-protection" min="74,46,-14" max="102,oo,13"/>
+    </union>
+    <union id="scoring-portals">
+        <cuboid id="yellow-portal" min="4,36,-3" max="-2,38,3"/>
+        <cuboid id="red-portal" min="84,36,3" max="90,38,-3"/>
+    </union>
+    <rectangle id="bridge-area" min="17,-22" max="71,24"/>
+    <point id="yellow-spawn">5.5, 46, 0.5</point>
+    <point id="red-spawn">83.5, 46, 0.5</point>
+    <point id="obs-spawn">44.5, 64, 0.5</point>
+    <below id="void" y="25"/>
+    <!-- Applications -->
+    <apply region="bridge-area" block="only-clay-in-map" message="You may only place or destroy stained clay blocks."/>
+    <apply region="everywhere" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="void" kit="void-kill"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stained clay</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<!-- Kill Rewards -->
+<killrewards>
+    <kill-reward>
+        <item amount="1">arrow</item>
+    </kill-reward>
+</killrewards>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>47</maxbuildheight>
+<respawn auto="true" delay="0s"/>
+</map>
