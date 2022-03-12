@@ -8,15 +8,15 @@
 <gamemode>blitz</gamemode>
 <!-- Authors and Contributors -->
 <authors>
-    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, and custom NBT creation"/> <!-- _Pear -->
-    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map and built team spawns"/> <!-- Santiagx -->
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, &amp; custom NBT creation"/> <!-- _Pear -->
+    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map &amp; built team spawns"/> <!-- Santiagx -->
 </authors>
 <contributors>
-    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain and layout"></contributor> <!-- Wesdial -->
-    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Layout, detailing, and name suggestion"></contributor> <!-- _iMan -->
-    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain and detailing"></contributor> <!-- Qualqty -->
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain &amp; layout"></contributor> <!-- Wesdial -->
+    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Layout, detailing, &amp; name suggestion"></contributor> <!-- _iMan -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain &amp; detailing"></contributor> <!-- Qualqty -->
     <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"></contributor> <!-- _NotMaria -->
-    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing and terrain"></contributor> <!-- DeadlyTrap -->
+    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"></contributor> <!-- DeadlyTrap -->
 </contributors>
 <!-- Teams -->
 <teams>
@@ -176,20 +176,20 @@
     <point id="yellow-spawn">83.5,9,0.5</point>
     <point id="obs-spawn">0.5,88,0.5</point>
     <union id="iron-gold-generators">
-        <cuboid id="green-generator" min="" max=""/>
-        <cuboid id="blue-generator" min="" max=""/>
-        <cuboid id="red-generator" min="" max=""/>
-        <cuboid id="yellow-generator" min="" max=""/>
+        <cuboid id="green-generator" min="1,9,90" max="-1,9,88"/>
+        <cuboid id="blue-generator" min="-90,9,1" max="-88,9,-1"/>
+        <cuboid id="red-generator" min="-1,9,-90" max="1,9,-88"/>
+        <cuboid id="yellow-generator" min="90,9,-1" max="88,9,1"/>
     </union>
     <union id="diamond-generators">
-        <point id="green-blue-tower">-58,9,58</point>
-        <point id="blue-red-tower">-58,9,-58</point>
-        <point id="red-yellow-tower">58,9,-58</point>
-        <point id="yellow-green-tower">58,9,58</point>
+        <point id="green-blue-tower">-58.5,9.5,58.5</point>
+        <point id="blue-red-tower">-58.5,9.5,-58.5</point>
+        <point id="red-yellow-tower">58.5,9.5,-58.5</point>
+        <point id="yellow-green-tower">58.5,9.5,58.5</point>
     </union>
     <union id="emerald-generators"> <!-- Spawns one block above the pad -->
-        <point id="top-emerald">0.5,24,0.5</point>
-        <point id="bottom-emerald">0.5,12,0.5</point>
+        <point id="top-emerald">0.5,24.5,0.5</point>
+        <point id="bottom-emerald">0.5,12.5,0.5</point>
     </union>
     <negative id="not-map">
         <rectangle id="map" min="-96,-96" max="96,96"/>
@@ -203,14 +203,51 @@
 </regions>
 <!-- Spawners -->
 <spawners>
-    <!--<spawner spawn-region="diamond-generators" player-region="everywhere" delay="10s">
+    <!-- Diamond Generators (not implemented yet) -->
+    <!--<spawner spawn-region="green-blue-tower" player-region="everywhere" delay="10s">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="blue-red-tower" player-region="everywhere" delay="10s">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="red-yellow-tower" player-region="everywhere" delay="10s">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="yellow-green-tower" player-region="everywhere" delay="10s">
         <item amount="1" material="diamond"/>
     </spawner>-->
-    <spawner spawn-region="bottom-emerald" player-region="everywhere" max-entities="4" delay="30s">
+    <!-- Emerald Generators -->
+    <spawner spawn-region="bottom-emerald" player-region="everywhere" max-entities="6" delay="30s">
         <item amount="1" material="emerald"/>
     </spawner>
-    <spawner spawn-region="top-emerald" player-region="everywhere" max-entities="4" delay="30s">
+    <spawner spawn-region="top-emerald" player-region="everywhere" max-entities="6" delay="30s">
         <item amount="1" material="emerald"/>
+    </spawner>
+    <!-- Team Iron Generators -->
+    <spawner spawn-region="blue-generator" player-region="everywhere" max-entities="256" delay="2s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="red-generator" player-region="everywhere" max-entities="256" delay="2s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="green-generator" player-region="everywhere" max-entities="256" delay="2s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="yellow-generator" player-region="everywhere" max-entities="256" delay="2s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+    <!-- Team Gold Generators -->
+    <spawner spawn-region="blue-generator" player-region="everywhere" max-entities="256" delay="5s">
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="red-generator" player-region="everywhere" max-entities="256" delay="5s">
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="green-generator" player-region="everywhere" max-entities="256" delay="5s">
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="yellow-generator" player-region="everywhere" max-entities="256" delay="5s">
+        <item amount="1" material="gold ingot"/>
     </spawner>
 </spawners>
 <!-- ItemRemove, ItemKeep, ArmorKeep -->
@@ -280,9 +317,27 @@
 <item-mods>
     <rule>
         <match>
+            <material>stone sword</material>
+            <material>iron sword</material>
+            <material>diamond sword</material>
+            <material>bow</material>
+            <material>shears</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+    <rule>
+        <match>
             <material>stained glass</material>
         </match>
         <modify name="`rBlastproof Glass" lore="`7Immune to explosions."/>
+    </rule>
+    <rule>
+        <match>
+            <material>stick</material>
+        </match>
+        <modify name="`rKnockback Stick" unbreakable="true">
+            <enchantment level="1">Knockback</enchantment>
+        </modify>
     </rule>
 </item-mods>
 <!-- Crafting Control -->
@@ -301,6 +356,7 @@
     <disable>stone plate</disable>
     <disable>gold plate</disable>
     <disable>iron plate</disable>
+    <disable>iron trapdoor</disable>
     <disable>gold nugget</disable>
     <disable>flint and steel</disable>
     <disable>clay</disable>
