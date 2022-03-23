@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.4.0">
-<include src="tutorial.xml"/>
+<!-- <include src="tutorial.xml"/> -->
 <name>BalloonsDTM</name>
 <version>2.2.6</version>
 <objective>Destroy the enemy team's monuments!</objective>
@@ -75,15 +75,18 @@
     <negative id="not-map">
         <rectangle id="map" min="-31,-57" max="31,57"/>
     </negative>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-27,13,-21" max="-18,8,-33"/>
+        <cuboid id="red-spawn-protection" min="27,13,21" max="18,8,33"/>
+    </union>
     <union id="enchantment-tables">
         <block>21,15,0</block>
         <block>-21,15,0</block>
-    <cuboid id="blue-spawn-protection" min="-27,13,-21" max="-18,8,-33"/>
-    <cuboid id="red-spawn-protection" min="27,13,21" max="18,8,33"/>
     </union>
     <!-- Applications -->
-    <apply region="not-map" block="never" message="you may not edit outside the map!"/>
+    <apply region="not-map" block="never" message="You may not build outside of the playing field!"/>
     <apply region="enchantment-tables" block="never"/>
+    <apply region="spawn-protections" block="never" message="Don't break the spawns!"/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter `9Blue Team`c's spawn area!"/>
     <apply region="red-spawn-protection" enter="red-only" message="You may not enter `4Red Team`c's spawn area!"/>
 </regions>
@@ -142,8 +145,14 @@
         <item amount="8">arrow</item>
     </kill-reward>
 </kill-rewards>
-    <timelock>on</timelock>
 <!-- Misc -->
+<crafting>
+    <disable>leather chestplate</disable>
+    <disable>leather helmet</disable>
+    <disable>leather leggings</disable>
+    <disable>leather boots</disable>
+</crafting>
+<timelock>on</timelock>
 <maxbuildheight>31</maxbuildheight>
 <!-- Tutorial -->
 <!-- <tutorial>
