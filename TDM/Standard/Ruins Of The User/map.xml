@@ -1,0 +1,112 @@
+<map proto="1.4.0">
+<name>Ruins Of The User</name>
+<version>1.0.1</version>
+<objective>Be the team with the most points by either killing enemies, or scoring points in one of the enemy's portals located at the corner of the map whilst defending your own as well.</objective>
+<gamemode>tdm</gamemode>
+<gamemode>scorebox</gamemode>
+<time result="score">10m</time>
+<!-- Authors -->
+<authors>
+    <author uuid="fbc05e3b-2acf-427e-b598-79a0742d1a72"/> <!-- Jiloker -->
+    <author uuid="a2010860-4735-4de0-b9f3-1130961ea955"/> <!-- Flaan -->
+    <author uuid="0e561165-60bf-49e6-aa38-3db002ad7d08"/> <!-- AbusiveUser -->
+</authors>
+<!-- Broadcasts -->
+<broadcasts>
+      <tip after="45s" count="oo">You can score 2 points by entering one of the enemy's portals located at the corner of the map.</tip>
+   </broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="green-team" color="dark green" max="15">Green</team>
+    <team id="orange-team" color="gold" max="15">Orange</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="1" amplifier="255">resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="green-team" kit="spawn-kit" yaw="-90" region="green-spawn"/>
+    <spawn team="orange-team" kit="spawn-kit" yaw="90" region="orange-spawn"/>
+    <default region="obs-spawn" yaw="-0"/>
+</spawns>
+<!-- Portals & Objective -->
+<portals>
+    <portal region="green-portal-1" filter="green-only" destination="green-spawn" yaw="@-90"/>
+    <portal region="green-portal-2" filter="green-only" destination="green-spawn" yaw="@-90"/>
+    <portal region="orange-portal-1" filter="orange-only" destination="orange-spawn" yaw="@90"/>
+    <portal region="orange-portal-2" filter="orange-only" destination="orange-spawn" yaw="@90"/>
+    <!-- To prevent players from scoring points in their own portals -->
+    <portal region="orange-portal-1" filter="green-only" destination="green-spawn" yaw="@-90"/>
+    <portal region="orange-portal-2" filter="green-only" destination="green-spawn" yaw="@-90"/>
+    <portal region="green-portal-1" filter="orange-only" destination="orange-spawn" yaw="@90"/>
+    <portal region="green-portal-2" filter="orange-only" destination="orange-spawn" yaw="@90"/>
+</portals>
+<!-- Filters -->
+<filters>
+    <team id="green-only">green-team</team>
+    <team id="orange-only">orange-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="green-spawn-protection" min="815,0,555" max="805,oo,568"/>
+        <cuboid id="orange-spawn-protection" min="873,0,567" max="883,oo,554"/>
+    </union>
+    <union id="scoring-portals">
+        <!-- Green Team -->
+        <cuboid id="green-portal-1" max="868,61,542" min="871,58,538"/>
+        <cuboid id="green-portal-2" max="868,61,581" min="871,58,584"/>
+        <!-- Orange Team -->
+        <cuboid id="orange-portal-1" max="820,61,581" min="817,58,584"/>
+        <cuboid id="orange-portal-2" max="820,61,541" min="817,58,538"/>
+    </union>
+    <point id="green-spawn">809.5, 57, 561.5</point>
+    <point id="orange-spawn">879.5, 57, 561.5</point>
+    <point id="obs-spawn">844.5,75,522.5</point>
+    <!-- Applications -->
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter `aGreen's team `cspawn!"/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter `6Orange's team `cspawn!"/>
+</regions>
+<!-- Score Limit -->
+<score>
+    <box points="2" filter="green-only" region="green-portal-1"/>
+    <box points="2" filter="green-only" region="green-portal-2"/>
+    <box points="2" filter="orange-only" region="orange-portal-1"/>
+    <box points="2" filter="orange-only" region="orange-portal-2"/>
+    <kills>1</kills>
+</score>
+<!-- Itemremove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="2" material="arrow"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
