@@ -78,15 +78,20 @@
         <point id="destination-green-scorebox">879,57,561</point>
         <point id="destination-orange-scorebox">809,57,561</point>
     </union>
+    <!-- Applications -->
     <apply block="never"/>
     <apply enter="only-green" region="scorebox-orange-side" message="Only `2Green `rmay enter this scorebox!"/>
     <apply enter="only-orange" region="scorebox-green-side" message="Only `6Orange `rmay enter this scorebox!"/>
+    <apply enter="only-green" region="green-base" message="You may not enter `2Green's `rspawn!"/>
+    <apply enter="only-orange" region="orange-base" message="You may not enter `6Orange's `rspawn!"/>
 </regions>
+<!-- Scores -->
 <score>
     <kills>1</kills>
     <box points="2" filter="only-green" region="scorebox-orange-side"/>
     <box points="2" filter="only-orange" region="scorebox-green-side"/>
 </score>
+<!-- Portals -->
 <portals>
     <portal yaw="@90" region="scorebox-green-side" destination="destination-green-scorebox"/>
     <portal yaw="@-90" region="scorebox-orange-side" destination="destination-orange-scorebox"/>
@@ -105,6 +110,7 @@
     <item material="golden apple"/>
     <item amount="2" material="arrow"/>
 </kill-reward>
+<!-- Misc -->
 <hunger>
     <depletion>off</depletion>
 </hunger>
