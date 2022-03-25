@@ -41,57 +41,57 @@
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="green-team" kit="spawn-kit" yaw="-90" region="green-spawn"/>
-    <spawn team="orange-team" kit="spawn-kit" yaw="90" region="orange-spawn"/>
-    <default region="obs-spawn" yaw="-0"/>
+    <spawn team="green-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>809.5,57,561.5</point>
+        </region>
+    </spawn>
+    <spawn team="orange-team" kit="spawn-kit" yaw="90">
+        <region>
+            <point>879.5,57,561.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <point>844.5,75,522.5</point>
+        </region>
+    </default>
 </spawns>
-<!-- Portals & Objective -->
-<portals>
-    <portal region="green-portal-1" filter="green-only" destination="green-spawn" yaw="@-90"/>
-    <portal region="green-portal-2" filter="green-only" destination="green-spawn" yaw="@-90"/>
-    <portal region="orange-portal-1" filter="orange-only" destination="orange-spawn" yaw="@90"/>
-    <portal region="orange-portal-2" filter="orange-only" destination="orange-spawn" yaw="@90"/>
-    <!-- To prevent players from scoring points in their own portals -->
-    <portal region="orange-portal-1" filter="green-only" destination="green-spawn" yaw="@-90"/>
-    <portal region="orange-portal-2" filter="green-only" destination="green-spawn" yaw="@-90"/>
-    <portal region="green-portal-1" filter="orange-only" destination="orange-spawn" yaw="@90"/>
-    <portal region="green-portal-2" filter="orange-only" destination="orange-spawn" yaw="@90"/>
-</portals>
 <!-- Filters -->
 <filters>
-    <team id="green-only">green-team</team>
-    <team id="orange-only">orange-team</team>
+    <team id="only-green">green-team</team>
+    <team id="only-orange">orange-team</team>
 </filters>
 <!-- Regions -->
 <regions>
-    <!-- Definitions -->
-    <union id="spawn-protections">
-        <cuboid id="green-spawn-protection" min="815,0,555" max="805,oo,568"/>
-        <cuboid id="orange-spawn-protection" min="873,0,567" max="883,oo,554"/>
+    <cuboid id="green-base" min="814,65,568" max="805,53,554"/>
+    <cuboid id="orange-base" min="874,65,554" max="883,53,568"/>
+    <union id="scorebox-green-side">
+        <cuboid min="820,63,582" max="817,55,585"/>
+        <cuboid min="820,63,541" max="817,55,538"/>
     </union>
-    <union id="scoring-portals">
-        <!-- Green Team -->
-        <cuboid id="green-portal-1" max="868,61,542" min="871,58,538"/>
-        <cuboid id="green-portal-2" max="868,61,581" min="871,58,584"/>
-        <!-- Orange Team -->
-        <cuboid id="orange-portal-1" max="820,61,581" min="817,58,584"/>
-        <cuboid id="orange-portal-2" max="820,61,541" min="817,58,538"/>
+    <union id="scorebox-orange-side">
+        <cuboid min="869,63,541" max="872,55,538"/>
+        <cuboid min="869,63,582" max="872,55,585"/>
     </union>
-    <point id="green-spawn">809.5, 57, 561.5</point>
-    <point id="orange-spawn">879.5, 57, 561.5</point>
-    <point id="obs-spawn">844.5,75,522.5</point>
-    <!-- Applications -->
-    <apply region="green-spawn-protection" enter="green-only" message="You may not enter `aGreen's team `cspawn!"/>
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter `6Orange's team `cspawn!"/>
+    <union id="dumb-portal-points">
+        <point id="destination-green-scorebox">879,57,561</point>
+        <point id="destination-orange-scorebox">809,57,561</point>
+    </union>
+    <apply block="never"/>
+    <apply enter="only-green" region="scorebox-orange-side" message="Only `2Green `rmay enter this scorebox!"/>
+    <apply enter="only-orange" region="scorebox-green-side" message="Only `6Orange `rmay enter this scorebox!"/>
 </regions>
-<!-- Score Limit -->
 <score>
-    <box points="2" filter="green-only" region="green-portal-1"/>
-    <box points="2" filter="green-only" region="green-portal-2"/>
-    <box points="2" filter="orange-only" region="orange-portal-1"/>
-    <box points="2" filter="orange-only" region="orange-portal-2"/>
     <kills>1</kills>
+    <box points="2" filter="only-green" region="scorebox-orange-side"/>
+    <box points="2" filter="only-orange" region="scorebox-green-side"/>
 </score>
+<time>7m</time>
+<portals>
+    <portal yaw="@90" region="scorebox-green-side" destination="destination-green-scorebox"/>
+    <portal yaw="@-90" region="scorebox-orange-side" destination="destination-orange-scorebox"/>
+</portals>
 <!-- Itemremove -->
 <itemremove>
     <item>stone sword</item>
