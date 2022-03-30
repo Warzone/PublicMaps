@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<map proto="1.4.3">
+<name>Desert Country DTM</name>
+<version>1.0.0</version>
+<objective>Destroy the monument located on the opposite side.</objective>
+<!-- Map authors -->
+<authors>
+    <author uuid="b5967591-14fc-421f-a5e2-931498e10fb8"/> <!-- OCNs_OMEN -->
+    <author uuid="d1e3251c-def5-4328-a7e9-09335934d316"/> <!-- byrobo -->
+</authors>
+<gamemode>dtm</gamemode>
+<!-- Teams -->
+<teams>
+    <team id="green-team" color="green" max="16" max-overfill="19">Green</team>
+    <team id="cyan-team" color="dark aqua" max="16" max-overfill="19">Cyan</team>
+</teams>
+<!-- Spawns -->
+<spawns>
+    <!-- Green Team 1 -->
+    <spawn team="green-team" kit="green-kit" yaw="90">
+        <region><point>72.5,22,18.5</point></region>
+    </spawn>
+    <!-- Green Team 2 -->
+    <spawn team="green-team" kit="green-kit" yaw="45">
+        <region><point>72.5,22,-17.5</point></region>
+    </spawn>
+    <!-- Cyan Team 1 -->
+    <spawn team="cyan-team" kit="cyan-kit" yaw="-90">
+        <region><point>-71.5,22,-17.5</point></region> 
+    </spawn>
+    <!-- Cyan Team 1 -->
+    <spawn team="cyan-team" kit="cyan-kit" yaw="-45">
+        <region><point>-71.5,22,18.5</point></region> 
+    </spawn>
+    <!-- OBS Spawn -->
+    <default>
+        <regions yaw="0">
+            <cuboid min="1,30,-36" max="-1,30,-38"/>
+        </regions>
+    </default>
+</spawns>
+<!-- Respawn Timer -->
+<respawns>
+    <respawn delay="4s" blackout="true" filter="only-green"/>
+    <respawn delay="4s" blackout="true" filter="only-cyan"/>
+</respawns>
+<!-- Kits -->
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" amount="48" material="sandstone"/>
+        <item slot="7" amount="32" material="cooked chicken"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <effect duration="2" amplifier="5">damage resistance</effect>
+    </kit>
+    <!-- Green Kit -->
+    <kit id="green-kit" parents="spawn">
+        <helmet color="5E7C16" material="leather helmet"/>
+        <boots color="5E7C16" material="leather boots"/>
+        <leggings material="chainmail leggings"/>
+    </kit>
+    <!-- Cyan Kit -->
+    <kit id="cyan-kit" parents="spawn">
+        <helmet color="169C9C" material="leather helmet"/>
+        <boots color="169C9C" material="leather boots"/>
+        <leggings material="chainmail leggings"/>
+    </kit>
+</kits>
+<!-- Monuments -->
+<destroyables materials="obsidian" mode-changes="true" sparks="true">
+    <destroyable name="Monument" owner="cyan-team">
+        <region><cuboid min="-50,13,-1" max="-52,19,1"/></region>
+    </destroyable>
+    <destroyable name="Monument" owner="green-team">
+        <region><cuboid min="50,13,1" max="52,19,-1"/></region>
+    </destroyable>
+</destroyables>
+<!-- Monument Modes -->
+<modes>
+    <mode after="10m" material="gold block"/>
+</modes>
+<!-- Regions -->
+<regions>
+	<apply block="never" message="You are not allowed to break or place blocks here!">
+        <region>
+            <cuboid min="58,0,-30" max="100,100,30"/>
+            <cuboid min="-58,0,-30" max="-100,100,30"/>
+        </region>
+    </apply>
+    <!-- Enter Spawns -->
+    <apply enter="only-green" message="You may not enter the enemy team's base!">
+        <region><cuboid min="58,0,-30" max="100,100,30"/></region>
+    </apply>
+    <apply enter="only-cyan" message="You may not enter the enemy team's base!">
+        <region><cuboid min="-58,0,-30" max="-100,100,30"/></region>
+    </apply>
+    <!-- Void -->
+    <apply block="no-void" message="You may not modify the void area!">
+        <region>
+            <cuboid id="main-area" min="100,0,-50" max="-100,40,50"/>
+        </region>
+    </apply>
+    <!-- Applying -->
+    <apply block="iron-diamond-allow">
+        <region>
+            <region id="main-area"/>
+        </region>
+    </apply>
+    <apply block-break="blacklisted-blocks" message="You are not allowed to break this block!"/>
+</regions>
+<!-- Filters -->
+<filters>
+    <team id="only-green">green-team</team>
+    <team id="only-cyan">cyan-team</team>
+    <not id="no-void">
+        <void/>
+    </not>
+      <any id="iron-diamond-allow">
+        <material>iron block</material>
+        <material>diamond block</material>
+      </any>
+    <not id="blacklisted-blocks">
+        <any>
+            <material>emerald block</material>
+            <material>mob spawner</material>
+        </any>
+    </not>
+</filters>
+<!-- Itemremove -->
+<itemremove>
+    <item>sand</item>
+    <item>cooked chicken</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather boots</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>sandstone</item>
+    <item>obsidian</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="sandstone"/>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<timelock>on</timelock>
+<maxbuildheight>25</maxbuildheight>
+<renewables>
+    <renewable interval="2" grow="true" particles="true" sound="true">
+        <region>
+            <!-- Cyan Team -->
+            <cuboid min="-49.5,8,-6.5" max="-51.5,12,-7.5"/>
+            <cuboid min="-51.5,8,7.5" max="-49.5,12,8.5"/>
+            <!-- Green Team -->
+            <cuboid min="50.5,8,7.5" max="52.5,12,8.5"/>
+            <cuboid min="52.5,8,-6.5" max="50.5,12,-7.5"/>
+        </region>
+        <renew-filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </renew-filter>
+    </renewable>
+</renewables>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+</map>
