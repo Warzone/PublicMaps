@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Eggy Soldiers</name>
+<version>1.0.2</version>
+<gamemode>Arcade</gamemode>
+<objective>Get the most points after 2 minutes!</objective>
+<authors>
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" /> <!--  Diamyx  -->
+</authors>
+<score>
+    <kills>1</kills>
+    <deaths>1</deaths>
+</score>
+<time>2m</time>
+<respawn delay="1.5s" spectate="true"/>
+<kits>
+    <kit id="spawn">
+        <item slot="0" projectile="gun" name="`eEggun">gold hoe</item>
+        <helmet color="999999" unbreakable="true">leather helmet</helmet>
+        <chestplate color="999999" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="999999" unbreakable="true">leather leggings</leggings>
+        <boots color="999999" unbreakable="true">leather boots</boots>
+        <potion duration="oo">night vision</potion>
+        <potion duration="2" amplifier="25">damage resistance</potion>
+        <potion duration="2" amplifier="25">heal</potion>
+    </kit>
+    <kit id="obs">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<projectiles>
+    <projectile
+        id="gun"
+        name="Eggun"
+        projectile="Egg"
+        velocity="2.3"
+        damage="10"
+        throwable="false"
+        click="both"
+        cooldown="0.05"/>
+</projectiles>
+<killreward>
+    <kit force="true">
+        <potion duration="3" amplifier="5">regeneration</potion>
+    </kit>
+</killreward>
+<killreward>
+    <kit force="true">
+        <item slot="1" name="`4Rotten Egg" grenade="true" grenade-power="3" grenade-destroy="false" material="egg"/>
+    </kit>
+    <filter>
+        <kill-streak count="2" />
+    </filter>
+</killreward>
+<killreward>
+    <kit force="true">
+        <potion duration="oo" amplifier="2">health boost</potion>
+        <potion duration="2" amplfier="3">heal</potion>
+    </kit>
+    <filter>
+        <kill-streak count="5"/>
+    </filter>
+</killreward>
+<spawns>
+    <spawns kit="spawn" spread="true">
+        <spawn>
+            <regions>
+                <point yaw="180">-18.5,5,6.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="180">-37.5,5,7.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="90">-15.5,5,-7.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="90">-17.5,5,-19.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="0">-27.5,6,-27.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="0">-40.5,6,-27.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="-80">-48.5,5,-14.5</point>
+            </regions>
+        </spawn>
+        <!-- new points -->
+        <spawn>
+            <regions>
+                <point yaw="80">-6.5,4,38.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="180">-19.5,5,48.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="-80">-38.5,4,40.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="-80">-39.5,4,28.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="-80">-40.5,4,13.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="80">-14.5,4,16.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="80">-13.5,1,27.5</point>
+            </regions>
+        </spawn>
+        <spawn>
+            <regions>
+                <point yaw="-80">-41.5,4,5</point>
+            </regions>
+        </spawn>
+    </spawns>
+    <default kit="obs">
+        <regions>
+            <point yaw="0">-25.5,4,3</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never" region="everywhere"/>
+</regions>
+<players min="4" max="8" show-name-tags="false" colors="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<itemremove>
+    <item>gold hoe</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+</map>
