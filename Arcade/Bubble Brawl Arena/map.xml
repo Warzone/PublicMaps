@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<map proto="1.4.1" game="Bubble Brawl">
+    <name>Bubble Brawl: Arena</name>
+<version>1.0</version>
+<gamemode>arcade</gamemode>
+<objective>Knock all opponents out of the water!</objective>
+<authors>
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+</authors>
+<contributors>
+    <contributor contribution="Moral Support" uuid="cf1b2da8-3718-45a9-8836-bb70b0628773"/> <!-- Winnerizor -->
+</contributors>
+<broadcasts>
+    <alert after="1s">Fishing rod upgrades will be given every minute!</alert>
+    <alert after="1m">Fishing rods upgraded! `e`lKnockback II</alert>
+    <alert after="2m">Fishing rods upgraded! `6`lKnockback III</alert>
+    <alert after="3m">Fishing rods upgraded! `4`lKnockback IV</alert>
+</broadcasts>
+<players min="4" max="8" colors="true"/>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <game-mode>adventure</game-mode>
+        <item slot="0" unbreakable="true" enchantment="knockback:1">fishing rod</item>
+        <helmet unbreakable="true" locked="true" enchantment="oxygen:10;depth strider:3">diamond helmet</helmet>
+        <effect duration="oo" amplifier="1">water breathing</effect>
+        <effect duration="oo" amplifier="1">night vision</effect>
+        <effect duration="oo" amplifier="10">resistance</effect>
+        <effect duration="oo" amplifier="1">saturation</effect>
+    </kit>
+    <kit id="death-kit" force="true">
+        <effect duration="0">resistance</effect>
+        <effect duration="oo" amplifier="10">instant_damage</effect>
+    </kit>
+    <kit id="upgrade-1" force="true">
+        <item slot="0" unbreakable="true" enchantment="knockback:2" name="`e`lGood Fishing Rod">fishing rod</item>
+    </kit>
+    <kit id="upgrade-2" force="true">
+        <item slot="0" unbreakable="true" enchantment="knockback:3" name="`6`lGreat Fishing Rod">fishing rod</item>
+    </kit>
+    <kit id="upgrade-3" force="true">
+        <item slot="0" unbreakable="true" enchantment="knockback:4" name="`4`lSuper Fishing Rod">fishing rod</item>
+    </kit>
+</kits>
+<item-mods>
+    <rule>
+        <match>
+            <material>raw_fish</material>
+        </match>
+        <modify>
+            <enchantment level="5">knockback</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<filters>
+    <all id="kit-1">
+        <time>1m</time>
+        <not>
+            <any>
+                <time>2m</time>
+                <carrying><item unbreakable="true" enchantment="knockback:2" name="`e`lGood Fishing Rod">fishing rod</item></carrying>
+            </any>
+        </not>
+    </all>
+    <all id="kit-2">
+        <time>2m</time>
+        <not>
+            <any>
+                <time>3m</time>
+                <carrying><item unbreakable="true" enchantment="knockback:3" name="`6`lGreat Fishing Rod">fishing rod</item></carrying>
+            </any>
+        </not>
+    </all>
+    <all id="kit-3">
+        <time>3m</time>
+        <not>
+            <any>
+                <time>4m</time>
+                <carrying><item unbreakable="true" enchantment="knockback:4" name="`4`lSuper Fishing Rod">fishing rod</item></carrying>
+            </any>
+        </not>
+    </all>
+</filters>
+<regions>
+    <apply kit="death-kit">
+        <region>
+            <below y="18"/>
+        </region>
+    </apply>
+    <apply kit="upgrade-1" filter="kit-1">
+        <region>
+            <cuboid min="-oo,49,-oo" max="oo,48,oo"/>
+            <cuboid min="-oo,46,-oo" max="oo,45,oo"/>
+            <cuboid min="-oo,43,-oo" max="oo,42,oo"/>
+            <cuboid min="-oo,40,-oo" max="oo,39,oo"/>
+            <cuboid min="-oo,37,-oo" max="oo,36,oo"/>
+            <cuboid min="-oo,34,-oo" max="oo,33,oo"/>
+            <cuboid min="-oo,31,-oo" max="oo,30,oo"/>
+            <cuboid min="-oo,28,-oo" max="oo,27,oo"/>
+            <cuboid min="-oo,25,-oo" max="oo,24,oo"/>
+            <cuboid min="-oo,22,-oo" max="oo,21,oo"/>
+            <cuboid min="-oo,19,-oo" max="oo,18,oo"/>
+        </region>
+    </apply>
+    <apply kit="upgrade-2" filter="kit-2">
+        <region>
+            <cuboid min="-oo,49,-oo" max="oo,48,oo"/>
+            <cuboid min="-oo,46,-oo" max="oo,45,oo"/>
+            <cuboid min="-oo,43,-oo" max="oo,42,oo"/>
+            <cuboid min="-oo,40,-oo" max="oo,39,oo"/>
+            <cuboid min="-oo,37,-oo" max="oo,36,oo"/>
+            <cuboid min="-oo,34,-oo" max="oo,33,oo"/>
+            <cuboid min="-oo,31,-oo" max="oo,30,oo"/>
+            <cuboid min="-oo,28,-oo" max="oo,27,oo"/>
+            <cuboid min="-oo,25,-oo" max="oo,24,oo"/>
+            <cuboid min="-oo,22,-oo" max="oo,21,oo"/>
+            <cuboid min="-oo,19,-oo" max="oo,18,oo"/>
+        </region>
+    </apply>
+    <apply kit="upgrade-3" filter="kit-3">
+        <region>
+            <cuboid min="-oo,49,-oo" max="oo,48,oo"/>
+            <cuboid min="-oo,46,-oo" max="oo,45,oo"/>
+            <cuboid min="-oo,43,-oo" max="oo,42,oo"/>
+            <cuboid min="-oo,40,-oo" max="oo,39,oo"/>
+            <cuboid min="-oo,37,-oo" max="oo,36,oo"/>
+            <cuboid min="-oo,34,-oo" max="oo,33,oo"/>
+            <cuboid min="-oo,31,-oo" max="oo,30,oo"/>
+            <cuboid min="-oo,28,-oo" max="oo,27,oo"/>
+            <cuboid min="-oo,25,-oo" max="oo,24,oo"/>
+            <cuboid min="-oo,22,-oo" max="oo,21,oo"/>
+            <cuboid min="-oo,19,-oo" max="oo,18,oo"/>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <spawn kit="spawn-kit">
+        <regions pitch="90">
+            <cylinder base="77,60,5" radius="3" height="2"/> 
+        </regions>
+    </spawn>
+    <default>
+        <region yaw="180">
+            <point>78.5,8,83.5</point>
+        </region>
+    </default>
+</spawns>
+<itemremove>
+    <item>fishing rod</item>
+    <item>diamond helmet</item>
+</itemremove>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time>4m</time>
+<timelock>on</timelock>
+</map>
