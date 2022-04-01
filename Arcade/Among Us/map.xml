@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>AMONG US</name>
+<phase>development</phase>
+<version>1.0.1</version>
+<objective>Find the impostors, complete all the tasks, or kill all the crew members.</objective>
+<authors>
+    <author uuid="5c79d2c9-a4f0-4343-a84b-e1720f13009b"/>
+    <!-- CoWinkKeyDinkInc -->
+</authors>
+<teams>
+    <!-- everyone is the same color -->
+    <team id="imposter" show-name-tags="allies" color="gold" max="4">IMPOSTOR ඞ</team>
+    <team id="crew" show-name-tags="false" color="red" max="40">Crew ඞ</team>
+</teams>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <!-- horse armor -->
+        <item projectile="lazer" name="`asus killer" material="iron barding"/>
+        <chestplate locked="true" color="fc1500" material="leather chestplate"/>
+        <leggings locked="true" color="fc1500" material="leather leggings"/>
+        <boots locked="true" color="fc1500" material="leather boots"/>
+        <effect duration="oo">invisibility</effect>
+        <effect duration="10" amplifier="10">damage_resistance</effect>
+        <!-- uuid must be spaced format -->
+        <head slot="slot.armor.head" locked="true" name="AmoungUsDrip" uuid="7bc6c19a-03c7-46c5-8fb4-340cd76405de">
+            <skin>ewogICJ0aW1lc3RhbXAiIDogMTYxNzI0MzQ3MDA2NiwKICAicHJvZmlsZUlkIiA6ICI3YmM2YzE5YTAzYzc0NmM1OGZiNDM0MGNkNzY0MDVkZSIsCiAgInByb2ZpbGVOYW1lIiA6ICJBbW91bmdVc0RyaXAiLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWY4ZDViMTY3NWZhNWMxY2RiOTM0M2E2NWYxY2UxZWRhZjQxMzlhN2VkMjIyNTc2MDJiMTg2N2Q2YzI0NjEwYyIKICAgIH0KICB9Cn0=</skin>
+        </head>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="lazer" name="lazer" projectile="Arrow" velocity="4.0" damage="50" throwable="false" cooldown="20s"/>
+</projectiles>
+<rules>
+    <rule>Don't be sus.</rule>
+</rules>
+<spawns>
+    <default yaw="90">
+        <regions>
+            <region id="spawn"/>
+        </regions>
+    </default>
+    <spawn team="imposter" kit="spawn-kit" yaw="90">
+        <regions>
+            <region id="spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="crew" kit="spawn-kit" yaw="90">
+        <regions>
+            <region id="spawn"/>
+        </regions>
+    </spawn>
+</spawns>
+<broadcasts>
+    <alert after="1s">FRIENDLYFIRE IS ENABLED!!</alert>
+    <alert after="2s">Everyone has a 15 second cooldown to start the match.</alert>
+    <tip after="30s" every="2m">Find the white control points to complete tasks!</tip>
+    <tip after="1m" every="2m">The white control points take ten seconds to capture, imposters can uncapture them.</tip>
+    <tip after="3m">Where is the imposter?? ඞඞඞ</tip>
+</broadcasts>
+<blitz>
+    <lives>1</lives>
+    <broadcastlives>false</broadcastlives>
+</blitz>
+<time>15m</time>
+<timelock>on</timelock>
+<rage/>
+<!-- I hope this ends well xd -->
+<!-- I realized that they would be able to find the imposter easily by punching everyone so this works -->
+<!-- March 31 2022 Update: Friendly fire does not work -->
+<friendlyfire>on</friendlyfire>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>iron barding</item>
+</itemremove>
+<regions>
+    <cylinder id="spawn" base="19.5,7,19.5" radius="10" height="2"/>
+    <cuboid id="cafeteria" min="34,6,33" max="32,8,35"/>
+    <cuboid id="admin" min="-7,6,26" max="-9,8,28"/>
+    <cuboid id="admin-2" min="-7,6,47" max="-9,8,49"/>
+    <cuboid id="admin-3" min="-17,6,44" max="-15,8,46"/>
+    <cuboid id="weapons" min="21,6,59" max="19,8,61"/>
+    <cuboid id="oxygen" min="5,6,40" max="3,8,42"/>
+    <cuboid id="navigation" min="4,6,81" max="2,8,83"/>
+    <cuboid id="navigation-seat" min="2,6,92" max="0,8,94"/>
+    <cuboid id="shields" min="-37,6,51" max="-35,8,49"/>
+    <cuboid id="communications" min="-37,6,43" max="-39,8,45"/>
+    <cuboid id="communications-desk" min="-38,6,35" max="-40,8,37"/>
+    <cuboid id="storage" min="-45,6,21" max="-43,8,23"/>
+    <cuboid id="storage-fuel" min="-33,6,12" max="-35,8,14"/>
+    <cuboid id="storage-north" min="-17,6,13" max="-19,8,15"/>
+    <cuboid id="electrical" min="-23,6,-14" max="-25,8,-12"/>
+    <cuboid id="electrical-2" min="-14,6,-6" max="-16,8,-4"/>
+    <cuboid id="electrical-3" min="-12,6,-11" max="-14,8,-9"/>
+    <cuboid id="lower-engine" min="-18,6,-50" max="-20,8,-48"/>
+    <cuboid id="lower-engine-2" min="-30,6,-51" max="-32,8,-49"/>
+    <cuboid id="reactor" min="7,6,-57" max="5,8,-54"/>
+    <cuboid id="reactor-switch" min="8,6,-66" max="10,8,-64"/>
+    <cuboid id="security" min="7,6,-27" max="5,8,-29"/>
+    <cuboid id="upper-engine" min="17,6,-53" max="15,8,-51"/>
+    <cuboid id="upper-engine-2" min="29,6,-47" max="27,8,-45"/>
+    <cuboid id="hospital" min="-2,7,-5" max="-4,9,-7"/>
+    <apply block="never" region="everywhere"/>
+</regions>
+<filters>
+    <all id="only-crew">
+        <team>crew</team>
+    </all>
+</filters>
+<score>
+    <kills>0</kills>
+    <deaths>0</deaths>
+    <limit>1000</limit>
+</score>
+<!-- set sound to be specifically disabled when this is added to PGM -->
+<!-- because otherwise the scoreboard would be nice -->
+<control-points capture-rule="lead" incremental="true" show-progress="true" show="false" required="false">
+    <control-point name="Cafeteria" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="cafeteria"/></capture>
+        <progress><region id="cafeteria"/></progress>
+        <captured><region id="cafeteria"/></captured>
+    </control-point>
+    <control-point name="Admin" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="admin"/></capture>
+        <progress><region id="admin"/></progress>
+        <captured><region id="admin"/></captured>
+    </control-point>
+    <control-point name="Admin 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="admin-2"/></capture>
+        <progress><region id="admin-2"/></progress>
+        <captured><region id="admin-2"/></captured>
+    </control-point>
+    <control-point name="Admin 3" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="admin-3"/></capture>
+        <progress><region id="admin-3"/></progress>
+        <captured><region id="admin-3"/></captured>
+    </control-point>
+    <control-point name="Weapons" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="weapons"/></capture>
+        <progress><region id="weapons"/></progress>
+        <captured><region id="weapons"/></captured>
+    </control-point>
+    <control-point name="Oxygen" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="oxygen"/></capture>
+        <progress><region id="oxygen"/></progress>
+        <captured><region id="oxygen"/></captured>
+    </control-point>
+    <control-point name="Navigation" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="navigation"/></capture>
+        <progress><region id="navigation"/></progress>
+        <captured><region id="navigation"/></captured>
+    </control-point>
+    <control-point name="Navigation 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="navigation-seat"/></capture>
+        <progress><region id="navigation-seat"/></progress>
+        <captured><region id="navigation-seat"/></captured>
+    </control-point>
+    <control-point name="Shields" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="shields"/></capture>
+        <progress><region id="shields"/></progress>
+        <captured><region id="shields"/></captured>
+    </control-point>
+    <control-point name="Communications" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="communications"/></capture>
+        <progress><region id="communications"/></progress>
+        <captured><region id="communications"/></captured>
+    </control-point>
+    <control-point name="Communications 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="communications-desk"/></capture>
+        <progress><region id="communications-desk"/></progress>
+        <captured><region id="communications-desk"/></captured>
+    </control-point>
+    <control-point name="Storage" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="storage"/></capture>
+        <progress><region id="storage"/></progress>
+        <captured><region id="storage"/></captured>
+    </control-point>
+    <control-point name="Storage 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="storage-fuel"/></capture>
+        <progress><region id="storage-fuel"/></progress>
+        <captured><region id="storage-fuel"/></captured>
+    </control-point>
+    <control-point name="Storage 3" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="storage-north"/></capture>
+        <progress><region id="storage-north"/></progress>
+        <captured><region id="storage-north"/></captured>
+    </control-point>
+    <control-point name="Electrical" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="electrical"/></capture>
+        <progress><region id="electrical"/></progress>
+        <captured><region id="electrical"/></captured>
+    </control-point>
+    <control-point name="Electrical 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="electrical-2"/></capture>
+        <progress><region id="electrical-2"/></progress>
+        <captured><region id="electrical-2"/></captured>
+    </control-point>
+    <control-point name="Electrical 3" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="electrical-3"/></capture>
+        <progress><region id="electrical-3"/></progress>
+        <captured><region id="electrical-3"/></captured>
+    </control-point>
+    <control-point name="Lower Engine" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="lower-engine"/></capture>
+        <progress><region id="lower-engine"/></progress>
+        <captured><region id="lower-engine"/></captured>
+    </control-point>
+    <control-point name="Lower Engine 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="lower-engine-2"/></capture>
+        <progress><region id="lower-engine-2"/></progress>
+        <captured><region id="lower-engine-2"/></captured>
+    </control-point>
+    <control-point name="Reactor" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="reactor"/></capture>
+        <progress><region id="reactor"/></progress>
+        <captured><region id="reactor"/></captured>
+    </control-point>
+    <control-point name="Reactor 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="reactor-switch"/></capture>
+        <progress><region id="reactor-switch"/></progress>
+        <captured><region id="reactor-switch"/></captured>
+    </control-point>
+    <control-point name="Security" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="security"/></capture>
+        <progress><region id="security"/></progress>
+        <captured><region id="security"/></captured>
+    </control-point>
+    <control-point name="Upper Engine" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="upper-engine"/></capture>
+        <progress><region id="upper-engine"/></progress>
+        <captured><region id="upper-engine"/></captured>
+    </control-point>
+    <control-point name="Upper Engine 2" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="upper-engine-2"/></capture>
+        <progress><region id="upper-engine-2"/></progress>
+        <captured><region id="upper-engine-2"/></captured>
+    </control-point>
+    <control-point name="Hospital" capture-time="10s" neutral-state="true" capture-filter="only-crew">
+        <capture><region id="hospital"/></capture>
+        <progress><region id="hospital"/></progress>
+        <captured><region id="hospital"/></captured>
+    </control-point>
+</control-points>
+</map> 
