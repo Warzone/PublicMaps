@@ -9,7 +9,7 @@
 <!-- Authors and Contributors -->
 <authors>
     <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, &amp; custom NBT creation"/> <!-- _Pear -->
-    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map &amp; built team spawns"/> <!-- Santiagx -->
+    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map, built team spawns, &amp; consulting"/> <!-- Santiagx -->
 </authors>
 <contributors>
     <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain &amp; layout"></contributor> <!-- Wesdial -->
@@ -18,12 +18,20 @@
     <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"></contributor> <!-- _NotMaria -->
     <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"></contributor> <!-- DeadlyTrap -->
 </contributors>
+<!-- Match Control -->
+<respawn auto="true" delay="5s"/>
+<time result="objectives">50m</time>
+<!-- Blitz and Sudden Death -->
+<blitz filter="bed-destruction">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
 <!-- Teams -->
 <teams>
-    <team id="blue-team" color="blue" max="4">Blue</team>
-    <team id="red-team" color="dark red" max="4">Red</team>
-    <team id="green-team" color="green" max="4">Green</team>
-    <team id="yellow-team" color="yellow" max="4">Yellow</team>
+    <team id="blue-team" color="blue" min="2" max="4">Blue</team>
+    <team id="red-team" color="dark red" min="2" max="4">Red</team>
+    <team id="green-team" color="green" min="2" max="4">Green</team>
+    <team id="yellow-team" color="yellow" min="2" max="4">Yellow</team>
 </teams>
 <!-- Kits -->
 <kits>
@@ -34,7 +42,7 @@
         <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
         <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
     </kit>
-    <!-- Refer to Kits Upgrade Keys section of filter & Applications section of regions for kit handling -->
+    <!-- Refer to Kits Upgrade Tokens section of filters & applications section of regions for kit handling -->
     <kit id="chainmail-armor-kit" force="true">
         <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
         <boots unbreakable="true" locked="true">chainmail boots</boots>
@@ -68,11 +76,19 @@
 </destroyables>
 <!-- Filters -->
 <filters>
+    <!-- Testing Time Filters -->
+    <time id="1m-passed">1m</time>
+    <!-- Time Filters -->
+    <time id="6m-passed">6m</time>
+    <time id="12m-passed">12m</time>
+    <time id="18m-passed">18m</time>
+    <!-- Team Filters -->
     <team id="blue-only">blue-team</team>
     <team id="red-only">red-team</team>
     <team id="green-only">green-team</team>
     <team id="yellow-only">yellow-team</team>
-    <any id="bed-destroyed"> <!-- Filters for Sudden Death -->
+    <!-- Sudden Death/Monuments Filters  -->
+    <any id="bed-destruction">
         <any>
             <all>
                 <team>blue-team</team>
@@ -124,37 +140,43 @@
         <material>long grass</material>
         <material>bed block</material>
     </any>
-    <deny id="tnt-immune">
+    <deny id="tnt-immune"> <!-- List of blocks that will be protected against TNT explosions -->
         <all>
             <cause>explosion</cause>
             <any>
-                <material>stained glass</material>
+                <material>stained glass:11</material>
+                <material>stained glass:14</material>
+                <material>stained glass:5</material>
+                <material>stained glass:4</material>
                 <material>bed block</material>
             </any>
         </all>
     </deny>
-    <!-- Kit Upgrade Keys -->
-    <any id="chainmail-upgrade-key">
+    <!-- Kit Upgrade Tokens -->
+    <any id="chainmail-upgrade-token">
         <carrying>
             <item name="Chainmail Armor Upgrade">chainmail chestplate</item>
         </carrying>
     </any>
-    <any id="iron-upgrade-key">
+    <any id="iron-upgrade-token">
         <carrying>
             <item name="Iron Armor Upgrade">iron chestplate</item>
         </carrying>
     </any>
-    <any id="diamond-upgrade-key">
+    <any id="diamond-upgrade-token">
         <carrying>
             <item name="Diamond Armor Upgrade">diamond chestplate</item>
         </carrying>
     </any>
 </filters>
-<!-- Blitz and Sudden Death -->
-<blitz filter="bed-destroyed">
-    <lives>1</lives>
-    <broadcastLives>false</broadcastLives>
-</blitz>
+<!-- Broadcasts -->
+<broadcasts>
+    <!-- Emerald Generators notification -->
+    <alert after="1s" filter="6m-passed">`aEmerald Generators`r have been upgraded to Tier `cII`r.</alert>
+    <alert after="1s" filter="12m-passed">`aEmerald Generators`r have been upgraded to Tier `cIII`r.</alert>
+    <!-- Bed destruction notification -->
+    <alert after="1s" filter="bed-destruction">Your team's bed was destroyed! You will no longer respawn after you die.</alert>
+</broadcasts>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -175,6 +197,12 @@
     <point id="green-spawn">0.5,9,83.5</point>
     <point id="yellow-spawn">83.5,9,0.5</point>
     <point id="obs-spawn">0.5,88,0.5</point>
+    <union id="team-chests">
+        <block id="blue-team-chest">-77,9,-4</block>
+        <block id="red-team-chest">4,9,-77</block>
+        <block id="green-team-chest">-4,9,77</block>
+        <block id="yellow-team-chest">77,9,4</block>
+    </union>
     <union id="iron-gold-generators">
         <cuboid id="green-generator" min="1,9,90" max="-1,9,88"/>
         <cuboid id="blue-generator" min="-90,9,1" max="-88,9,-1"/>
@@ -187,7 +215,7 @@
         <point id="red-yellow-tower">58.5,9.5,-58.5</point>
         <point id="yellow-green-tower">58.5,9.5,58.5</point>
     </union>
-    <union id="emerald-generators"> <!-- Spawns one block above the pad -->
+    <union id="emerald-generators">
         <point id="top-emerald">0.5,24.5,0.5</point>
         <point id="bottom-emerald">0.5,12.5,0.5</point>
     </union>
@@ -199,7 +227,11 @@
     <apply region="not-map"           block="never" message="You may not edit outside the map!"/>
     <apply block-break="tnt-immune"/>
     <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
-    <apply region="spawn-protections" kit="chainmail-armor-kit" filter="chainmail-upgrade-key"/>
+    <apply region="green-team-chest"  use="never"   message="You cannot open this chest as the `aGreen Team`r has not been eliminated!"/>
+    <apply region="blue-team-chest"   use="never"   message="You cannot open this chest as the `9Blue Team`r has not been eliminated!"/>
+    <apply region="red-team-chest"    use="never"   message="You cannot open this chest as the `4Red Team`r has not been eliminated!"/>
+    <apply region="yellow-team-chest" use="never"   message="You cannot open this chest as the `eYellow Team`r has not been eliminated!"/>
+    <!-- <apply region="spawn-protections" kit="chainmail-armor-kit" filter="chainmail-upgrade-token"/> -->
 </regions>
 <!-- Spawners -->
 <spawners>
@@ -369,8 +401,10 @@
     <licensing>false</licensing>
     <friendly-defuse>false</friendly-defuse>
 </tnt>
+<disabledamage>
+    <damage ally="false" self="false" enemy="true" other="false">block explosion</damage>
+</disabledamage>
 <!-- Misc -->
-<respawn auto="true" delay="5s"/>
 <hunger>
     <depletion>off</depletion>
 </hunger>
