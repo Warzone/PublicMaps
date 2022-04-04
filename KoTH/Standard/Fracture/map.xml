@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Fracture</name>
-<version>0.2.3</version>
+<version>0.2.4</version>
 <objective>Collect the most points in 7 minutes</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -113,51 +113,13 @@
     <apply                                   block="deny-void" message="You may not build in the void" />
     <apply region="blue-spawn-protection"    enter="only-blue" message="You may not enter Blue's spawn" />
     <apply region="red-spawn-protection"     enter="only-red"  message="You may not enter Red's spawn" />
-    <apply region="blue-score-protection"    enter="only-red"  message="You may not score here" />
-    <apply region="red-score-protection"     enter="only-blue" message="You may not score here" />
+    <apply region="blue-score-protection"    enter="red-control"  message="You may only score in your scrorebox if you hold the hill" />
+    <apply region="red-score-protection"     enter="blue-control" message="You may only score in your scrorebo if you hold the hill" />
 </regions>
 <portals>
     <portal region="blue-side-score" destination="red-spawn"  yaw="@-90" filter="only-red" />
     <portal region="red-side-score"  destination="blue-spawn" yaw="@90"  filter="only-blue" />
 </portals>
-<structures air="true">
-    <structure id="blue-score-gate">
-        <region>
-            <cuboid min="172,16,217" size="1,3,6" />
-        </region>
-    </structure>
-    <structure id="red-score-gate">
-        <region>
-            <cuboid min="64,16,190" size="1,3,6" />
-        </region>
-    </structure>
-    <structure id="blue-side-beacon">
-        <region>
-            <cuboid min="175,11,223" size="1,1,1" />
-        </region>
-    </structure>
-    <structure id="red-side-beacon">
-        <region>
-            <cuboid min="61,11,189" size="1,1,1" />
-        </region>
-    </structure>
-    <structure id="blue-side-bridge">
-        <region>
-            <cuboid min="150,11,200" size="7,1,3" />
-        </region>
-    </structure>
-    <structure id="red-side-bridge">
-        <region>
-            <cuboid min="80,11,210" size="7,1,3" />
-        </region>
-    </structure>
-    <dynamic structure="blue-score-gate"  offset="0,-10,0" trigger="red-control" />
-    <dynamic structure="red-score-gate"   offset="0,-10,0" trigger="blue-control" />
-    <dynamic structure="blue-side-beacon" offset="0,0,0"   trigger="red-control" />
-    <dynamic structure="red-side-beacon"  offset="0,0,0"   trigger="blue-control" />
-    <dynamic structure="blue-side-bridge" offset="0,0,0"   trigger="blue-control" />
-    <dynamic structure="red-side-bridge"  offset="0,0,0"   trigger="red-control" />
-</structures>
 <time>7m</time>
 <score>
     <box region="blue-side-score" filter="only-red"  points="6" />
