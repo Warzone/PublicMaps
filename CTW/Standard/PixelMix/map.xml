@@ -1,0 +1,228 @@
+<map proto="1.4.2">
+<name>PixelMix</name>
+<version>2.2.5</version>
+<objective>Take the enemy's wool located at two sides of the enemy's base and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Idea, map design and XML"/> <!-- DoomRobotBoy -->
+</authors>
+<contributors>
+    <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="XML fixing"/> <!-- ollyj -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="35">Blue</team>
+    <team id="red" color="dark red" max="35">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" unbreakable="true" material="iron spade">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="32" amount="64" damage="2" material="wood"/>
+        <item slot="6" amount="64" damage="10" material="stained clay"/>
+        <item slot="7" material="golden apple"/>
+        <!-- <item slot="8" attributes="generic.movementSpeed:base:0.15" name="`bSpeed Star `6| `9+15 Speed" lore="`3Hold this for a speed boost!" material="nether star"/>  -->
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
+        <effect duration="7" amplifier="10">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="0">
+            <cylinder base="-3.5,65,-257" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="90">
+            <point>104.5,57,-187.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="-90">
+            <point>-111.5,57,-187.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <not id="blue-in-wr">
+        <any>
+            <team id="only-red">red</team>
+            <material>chest</material>
+            <void/>
+        </any>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <team id="only-blue">blue</team>
+            <material>chest</material>
+            <void/>
+        </any>
+    </not>
+    <all id="only-iron-regen">
+        <material id="only-iron">iron block</material>
+        <cause>world</cause>
+    </all>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <!-- Union "blue-side" contains all regions where any form of building is allowed or, void excluded, disallowed, on blue's side -->
+    <union id="blue-side">
+        <!-- General region -->
+        <rectangle id="front-spawn-brige" min="75,-191" max="65,-184"/>
+        <!-- North Side -->
+        <union id="north-blue-side">
+            <rectangle id="mushroom-jump" min="41,-202" max="52,-213"/>
+            <rectangle min="62,-235" max="21,-187"/>
+            <rectangle min="94,-196" max="62,-179"/>
+            <rectangle min="30,-235" max="62,-237"/>
+            <rectangle min="31,-237" max="61,-238"/>
+            <rectangle min="32,-238" max="60,-239"/>
+            <rectangle min="34,-239" max="58,-240"/>
+            <rectangle min="36,-240" max="56,-241"/>
+            <rectangle min="62,-235" max="63,-218"/>
+            <rectangle min="62,-235" max="91,-218"/>
+            <rectangle min="91,-220" max="92,-219"/>
+            <rectangle min="91,-241" max="93,-220"/>
+            <rectangle min="76,-241" max="93,-235"/>
+        </union>
+        <mirror id="south-blue-side" normal="0,0,-1" origin="-71.5,1,-187.5" region="north-blue-side"/>
+    </union>
+    <mirror id="red-side" normal="-1,0,0" origin="-3.5,1,-187.5" region="blue-side"/>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <rectangle id="blue-spawn-1" min="94,-196" max="115,-179"/>
+            <rectangle id="blue-spawn-2" min="115,-181" max="128,-194"/>
+        </union>
+        <union id="red-spawn">
+            <mirror id="red-spawn-1" normal="-1,0,0" origin="-3.5,1,-187.5" region="blue-spawn-1"/>
+            <mirror id="red-spawn-2" normal="-1,0,0" origin="-3.5,1,-187.5" region="blue-spawn-2"/>
+        </union>
+    </union>
+    <union id="iron-mines">
+        <circle id="blue-left-im" center="85.5,-202.5" radius="6.5"/>
+        <circle id="blue-right-im" center="85.5,-172.5" radius="6.5"/>
+        <circle id="red-left-im" center="-92.5,-202.5" radius="6.5"/>
+        <circle id="red-right-im" center="-92.5,-172.5" radius="6.5"/>
+    </union>
+    <union id="wool-rooms">
+        <union id="blue-wools">
+            <rectangle id="cyan-wr" min="-103,-103" max="-80,-87"/>
+            <rectangle id="light-blue-wr" min="-103,-272" max="-80,-288"/>
+        </union>
+        <union id="red-wools">
+            <rectangle id="purple-wr" min="73,-272" max="96,-288"/>
+            <rectangle id="pink-wr" min="73,-103" max="96,-87"/>
+        </union>
+    </union>
+    <complement id="void">
+        <everywhere/>
+        <region id="blue-side"/>
+        <region id="red-side"/>
+        <region id="spawns"/>
+        <region id="iron-mines"/>
+        <region id="wool-rooms"/>
+        <rectangle min="-14,-256" max="7,-119"/>
+        <rectangle min="-37,-236" max="30,-139"/>
+    </complement>
+    <apply enter="only-blue" region="blue-spawn-2" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-red" region="red-spawn-2" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-blue" region="blue-wools" message="You may not enter your own wool room!"/>
+    <apply enter="only-red" region="red-wools" message="You may not enter your own wool room!"/>
+    <apply block-break="only-iron" block-place="only-iron-regen" region="iron-mines" message="You may not modify this block here!"/>
+    <apply block="never" region="spawns" message="You may not place or break blocks here!"/>
+    <apply block="blue-in-wr" use="only-blue" region="blue-wools"/>
+    <apply block="red-in-wr" use="only-red" region="red-wools"/>
+    <apply block="no-void" region="void" message="You may not place or break blocks here!"/>
+</regions>
+<renewables>
+    <renewable region="iron-mines" renew-filter="only-iron"/>
+</renewables>
+<wools craftable="false">
+    <wool team="blue" color="cyan" location="-91.5,10,-95.5">
+        <monument>
+            <block>123,9,-189</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="light blue" location="-91.5,10,-279.5">
+        <monument>
+            <block>123,9,-187</block>
+        </monument>
+    </wool>
+    <wool team="red" color="pink" location="84.5,10,-95.5">
+        <monument>
+            <block>-131,9,-189</block>
+        </monument>
+    </wool>
+    <wool team="red" color="purple" location="84.5,10,-279.5">
+        <monument>
+            <block>-131,9,-187</block>
+        </monument>
+    </wool>
+</wools>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+    <tool>nether star</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>glowstone dust</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>stained clay</material>
+        </filter>
+        <drops>
+            <item chance="0" material="stained clay"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>golden apple</item>
+    <item>wood</item>
+    <item>stained clay</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="32" damage="2" material="wood"/>
+    <item amount="16" damage="10" material="stained clay"/>
+</kill-reward>
+<maxbuildheight>32</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

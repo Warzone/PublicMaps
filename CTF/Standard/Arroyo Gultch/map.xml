@@ -1,0 +1,128 @@
+<map proto="1.4.0">
+<name>Arroyo Gultch</name>
+<version>1.0.0</version>
+<objective>Hold the flag to gain points, first team to 250 points wins!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Main build design and gameplay aesthetics"/> <!-- samtheman43 -->
+    <author uuid="68c0280d-17d6-4c6b-b453-d1b8eb6a866d" contribution="Minor build design and aesthetics"/> <!-- ID10 -->
+</authors>
+<contributors>
+<contributor contribution="Feedback" uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/>
+<!--  Reshif  -->
+<contributor contribution="Feedback" uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/>
+<!--  Strangey  -->
+<contributor contribution="Feedback" uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/>
+<!--  Moo_  -->
+<contributor contribution="Feedback" uuid="d71152ca-187d-43c4-9901-ba001606c655"/>
+<!--  Wylt  -->
+</contributors>
+<rules>
+    <rule>Do not block glitch to somehow get outside of the map</rule>
+</rules>
+<score>
+    <limit>250</limit>
+</score>
+<flags>
+    <post id="flag-post" recover-time="5s" respawn-time="10s">196.5,90,-8.5</post>
+    <flag id="flag" name="Flag" shared="true" post="flag-post" points-rate="1" pickup-kit="pickup" drop-kit="drop"/>
+</flags>
+<teams>
+   <team id="purple-team" color="light_purple" max="10" max-overfill="10">Purple Team</team>
+   <team id="blue-team" color="blue" max="10" max-overfill="10">Blue Team</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true" parents="purple,blue">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="24" damage="1">cooked fish</item>
+        <item amount="1" slot="7" damage="0">skull item</item>
+        <item slot="8" amount="20">arrow</item>
+        <helmet locked="true" unbreakable="true">gold helmet</helmet>
+        <leggings locked="true" unbreakable="true">gold leggings</leggings>
+        <potion duration="5" amplifier="1">blindness</potion>
+        <potion duration="2" amplifier="2">slow</potion>
+    </kit>
+    <kit id="purple" filter="only-purple">
+        <chestplate locked="false" color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+        <boots locked="true" color="7F3FB2" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit id="blue" force="true" filter="only-blue">
+        <chestplate locked="false" color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <boots locked="true" color="334CB2" unbreakable="true">leather boots</boots>  
+    </kit>
+    <kit id="pickup" force="true">
+        <chestplate locked="true" unbreakable="true">diamond chestplate</chestplate>
+        <leggings locked="true" material="gold_leggings" unbreakable="true">
+            <attribute operation="add" amount="-12">generic.maxHealth</attribute>
+        </leggings>
+        <potion duration="oo" amplifier="3">slow</potion>
+    </kit>
+    <kit id="drop" force="true" parents="purple,blue">
+        <leggings locked="true" unbreakable="true">gold leggings</leggings>
+        <potion duration="0" amplifier="4">slow</potion>
+        <potion amplifier="10" duration="1">heal</potion>
+        <health>20</health>
+    </kit>
+</kits>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>cooked fish</item>
+    <item>skull item</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>diamond chestplate</item>
+    <item>gold leggings</item>
+    <item>gold helmet</item>
+</itemremove>
+<itemkeep>
+    <item>iron chestplate</item>
+</itemkeep>
+<killreward>
+    <item amount="1" slot="7" damage="0">skull item</item>
+</killreward>
+<timelock>true</timelock>
+<filters>
+    <team id="only-purple">purple-team</team>
+    <team id="only-blue">blue-team</team>
+    <not id="not-flag-carrier">
+        <carrying-flag>flag</carrying-flag>
+    </not>
+</filters>
+<regions>
+    <union id="flagBorders">
+        <rectangle id="flagBorder-purple" min="131.0,-42.0" max="132.0,25.0"/>
+        <rectangle id="flagBorder-blue" min="260.0,-42.0" max="261.0,25.0"/>
+    </union>
+    <rectangle id="purpleSpawnProt" min="42,-9" max="64,1"/>
+    <rectangle id="blueSpawnProt" min="328,-18" max="350,-6"/> 
+    <point id="purpleSpawn">43.5,72,-0.5</point>
+    <point id="blueSpawn">348.5,72,-16.5</point>
+    <point id="observerSpawn">192.5,115,-23.5</point>
+    
+    <apply block="never"/>
+    <apply enter="not-flag-carrier" region="flagBorders" message="You can't go back while holding the flag!"/>
+    <apply enter="only-purple" region="purpleSpawnProt" message="You can not enter the enemy spawn!"/>
+    <apply enter="only-blue" region="blueSpawnProt" message="You can not enter the enemy spawn!"/>
+</regions>
+<spawns>
+    <spawn team="purple-team" kit="spawn">
+        <regions yaw="-100">
+            <region id="purpleSpawn"/>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="spawn">
+        <regions yaw="80">
+            <region id="blueSpawn"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <region id="observerSpawn"/>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="4s" blackout="false"/>
+</map>

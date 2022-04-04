@@ -1,0 +1,170 @@
+<map proto="1.4.0">
+<name>Stonehaven</name>
+<version>1.0.1</version>
+<objective>Grab the enemy flag and bring it back to your flag stand!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/>
+    <!--  StealthMedia  -->
+    <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/>
+    <!--  Zelocksurian  -->
+</authors>
+<broadcasts>
+    <tip after="5s" every="2m">
+    `7Type `b`l/classes `7to view a list of available classes for this map.
+    </tip>
+    <tip after="6s" every="2m">
+    `7To select one, enter `b`l/class [classname]`7. Your class will change upon respawn.
+    </tip>
+</broadcasts>
+<teams>
+    <team id="red" color="dark red" max="10" max-overfill="12">Red</team>
+    <team id="dark aqua" color="dark aqua" max="10" max-overfill="12">Cyan</team>
+</teams>
+<score>
+    <limit>3</limit>
+</score>
+<classes family="Classes" sticky="false">
+    <class name="§4Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
+        <kit>
+            <item slot="0" name="`4Sword">stone sword</item>
+            <chestplate locked="true" enchantments="protection_projectile:2">chainmail chestplate</chestplate>
+            <helmet locked="true">chainmail helmet</helmet>
+            <potion duration="oo" amplifier="1">fire resistance</potion>
+        </kit>
+    </class>
+    <class name="§2Defense" default="false" description="Defend your flag!" icon="iron chestplate">
+        <kit>
+            <item slot="0" name="`2Sword">stone sword</item>
+            <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true">potion</item>
+            <helmet locked="true">iron helmet</helmet>
+            <chestplate locked="true">chainmail chestplate</chestplate>
+            <leggings locked="true">leather leggings</leggings>
+            <boots locked="true">iron boots</boots>
+            <potion duration="oo" amplifier="1">fire resistance</potion>
+            <potion duration="oo" amplifier="1">slow</potion>
+        </kit>
+    </class>
+    <class name="§5Support" default="false" description="Support Your Teammates!" icon="potion">
+        <kit>
+            <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2">bow</item>
+            <item slot="27" name="`5Arrow">arrow</item>
+            <item slot="1" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
+            <item slot="2" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
+            <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true">potion</item>
+            <helmet locked="true">gold helmet</helmet>
+            <boots locked="true" enchantment="protection_fall:3">gold boots</boots>
+            <potion duration="oo" amplifier="1">fire resistance</potion>          
+        </kit>
+    </class>
+</classes>
+<filters>
+    <material id="only-chests">chest</material>
+    <all id="red-pickup">
+        <filter id="only-offense"/>
+        <team>red</team>
+    </all>
+    <all id="blue-pickup">
+        <filter id="only-offense"/>
+        <team>dark aqua</team>
+    </all>
+    
+    <not id="not-red">
+        <flag-carried>red-flag</flag-carried>
+    </not>
+    <not id="not-blue">
+        <flag-carried>blue-flag</flag-carried>
+    </not>
+    
+    <class id="only-offense">§4Offense</class>
+    <class id="only-defense">§2Defense</class>
+    <class id="only-support">§5Support</class>
+</filters>
+<spawns>
+    <spawn team="red" filter="only-offense">
+        <regions yaw="180">
+            <block>23.5,12,46.5</block>
+        </regions>
+    </spawn>
+    <spawn team="red" filter="only-defense">
+        <regions yaw="-90">
+            <block>6.5,13,27.5</block>
+        </regions>        
+    </spawn>
+    <spawn team="red" filter="only-support">
+        <regions yaw="135">
+            <block>39.5,21,32.5</block>
+        </regions>        
+    </spawn>
+    <spawn team="dark aqua" filter="only-offense">
+        <regions yaw="0">
+            <block>26.5,12,-44.5</block>
+        </regions>
+    </spawn>
+    <spawn team="dark aqua" filter="only-defense">
+        <regions yaw="90">
+            <block>44.5,13,-25.5</block>
+        </regions>        
+    </spawn>
+    <spawn team="dark aqua" filter="only-support">
+        <regions yaw="-45">
+            <block>10.5,21,-30.5</block>
+        </regions>        
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base="65.5,33.1,-0.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<respawn delay="5s"/>
+<regions>
+    <cuboid id="red-net" min="22,28,45" max="25,35,48"/>
+    <cuboid id="blue-net" min="25,28,-46" max="28,35,-43"/>
+    <cuboid id="jump-red" min="10,10,16" max="11,11,18"/>
+    <cuboid id="jump-blue" min="39,10,-16" max="40,11,-14"/>
+    
+    <apply block="never" use="only-chests"/>
+    <apply velocity="0,1.75,0">
+        <region>
+            <union>
+                <region id="jump-red"/>
+                <region id="jump-blue"/>
+            </union>
+        </region>
+    </apply>
+</regions>
+<flags>
+    <!-- Blue's Flag -->
+    <flag id="blue-flag" name="Cyan Flag" color="cyan">
+        <post id="blue-flag-post" pickup-filter="red-pickup" respawn-time="30s" recover-time="0s">26,28,-45</post>
+    </flag>
+    <!-- Red's Flag -->
+    <flag id="red-flag" name="Red Flag" color="red">
+        <post id="red-flag-post" pickup-filter="blue-pickup" respawn-time="30s" recover-time="0s">23,28,46</post>
+    </flag>
+    
+    <net flag="red-flag" points="1" region="blue-net" capture-filter="not-blue" return="blue-flag"/>
+    <net flag="blue-flag" points="1" region="red-net" capture-filter="not-red" return="red-flag"/>
+</flags>
+<hunger>
+    <depletion>off</depletion>    
+</hunger>
+<itemremove>
+    <item>stone sword</item>
+    <item>gold helmet</item>
+    <item>gold boots</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail helmet</item>
+    <item>iron helmet</item>
+    <item>potion</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

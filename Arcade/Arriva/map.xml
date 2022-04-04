@@ -1,0 +1,67 @@
+<map proto="1.4.0">
+<name>Arriva</name>
+<version>1.0.1</version>
+<objective>Escape the Minotaur!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="06e0e173-4a93-4654-9769-fa7c216e353f"/> <!-- Howsie -->
+    <author uuid="81401938-25d1-437e-bb70-d2828a7a6aac"/> <!-- Shirokamii -->
+</authors>
+<teams>
+    <team id="minotaur" color="red" max="1" max-overfill="1">Minotaur</team>
+    <team id="players" color="dark aqua" max="15">Players</team>
+</teams>
+<kits>
+    <kit id="min-kit">
+        <helmet team-color="true" material="leather helmet" unbreakable="true"/>
+        <helmet team-color="true" material="leather helmet" unbreakable="true"/>
+        <chestplate team-color="true" material="leather chestplate" unbreakable="true"/>
+        <leggings team-color="true" material="leather leggings" unbreakable="true"/>
+        <boots team-color="true" material="leather boots" unbreakable="true"/>
+        <item slot="0" material="iron axe" unbreakable="true">
+            <enchantment level="100">damage all</enchantment>
+        </item>
+    </kit>
+    <kit id="players-kit">
+        <helmet team-color="true" material="leather helmet" unbreakable="true"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="minotaur" kit="min-kit" yaw="90">
+        <regions>
+            <point>-6,103,-797</point>
+        </regions>
+    </spawn>
+    <spawn team="players" kit="players-kit" yaw="135">
+        <regions>
+            <point>42,103,-779</point>
+        </regions>
+    </spawn>
+    <default yaw="180">
+        <regions>
+            <point>17,103,-815</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-players">players</team>
+</filters>
+<regions>
+    <cuboid id="endgoal" min="20,102,-819" max="14,105,-813"/>
+    <apply enter="only-players" use="only-players" region="endgoal" message="You may not enter this area!"/>
+    <apply block="never"/>
+</regions>
+<score>
+    <limit>1</limit>
+    <kills>0</kills>
+    <box region="endgoal" filter="only-players" points="1"/>
+</score>
+<time>8m</time>
+<blitz/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<broadcasts>
+    <tip filter="only-players" every="1m" after="1s">Get to the center of the maze to win!</tip>
+</broadcasts>
+</map>

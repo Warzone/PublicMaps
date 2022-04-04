@@ -1,0 +1,287 @@
+<map proto="1.3.0">
+<name>Pipe Palace</name>
+<version>1.1.2</version>
+<objective>Capture the enemy team's wools!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="904bf23f-67c5-484a-ae60-61f4ec150b48"/> <!-- oib5 -->
+    <author uuid="252154bb-2312-4bee-b306-5fb45fb20bb2"/> <!-- Vytr -->
+    <author uuid="16833ef3-faea-4538-9d8d-d30af1cecc60"/> <!-- TheJRRNinja -->
+</authors>
+<contributors>
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Aesthetics, feedback, and XML"/> <!-- Stealth5061 -->
+    <contributor uuid="36dc036a-dfbc-4627-b66a-501223f08075" contribution="Feedback"/> <!-- ieatboulders2 -->
+</contributors>
+<wools>
+    <wool team="blue" color="yellow">
+        <block>3,13,-122</block>
+    </wool>
+    <wool team="blue" color="orange">
+        <block>1,13,-122</block>
+    </wool>
+    <wool team="red" color="green">
+        <block>1,13,122</block>
+    </wool>
+    <wool team="red" color="purple">
+        <block>3,13,122</block>
+    </wool>
+</wools>
+<teams>
+    <team color="dark red" max="32" max-overfill="36">Red</team>
+    <team color="blue" max="32" max-overfill="36">Blue</team>
+</teams>
+<kits>
+    <kit name="redspawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:1">iron axe</item>
+        <item slot="4">shears</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64" damage="14">stained clay</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="32">cooked chicken</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+        <helmet color="DE0000">leather helmet</helmet>
+        <chestplate color="DE0000">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="DE0000">leather boots</boots>
+    </kit>
+    <kit name="bluespawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:1">iron axe</item>
+        <item slot="4">shears</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64" damage="11">stained clay</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="32">cooked chicken</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+        <helmet color="0005C7">leather helmet</helmet>
+        <chestplate color="0005C7">leather chestplate</chestplate>
+        <leggings>chainmail leggings</leggings>
+        <boots color="0005C7">leather boots</boots>
+    </kit>
+    <kit name="jump">
+        <potion duration="4" amplifier="5">damage_resistance</potion>
+    </kit>
+    <kit name="spawn-jump">
+        <potion duration="5" amplifier="5">damage_resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <cylinder base="87.5,63.2,0.5" height="0" radius="2.5"/>
+    </default>
+    <spawn team="blue" kit="bluespawn" yaw="0">
+        <cylinder base="2.5,12.2,-111.5" radius="6.5" height="0"/>
+    </spawn>
+    <spawn team="red" kit="redspawn" yaw="180">
+        <cylinder base="2.5,12.2,112.5" radius="6.5" height="0"/>
+    </spawn>
+</spawns>
+<filters>
+    <filter name="redonly" parents="deny-all">
+        <allow>
+            <team>red</team>
+        </allow>
+    </filter>
+    <filter name="blueonly" parents="deny-all">
+        <allow>
+            <team>blue</team>
+        </allow>
+    </filter>
+    <filter name="redwoolroom" parents="deny-all">
+        <allow>
+            <block>web</block>
+            <block>carpet</block>
+            <block>wood</block>
+            <block>wool</block>
+        </allow>
+    </filter>
+    <filter name="bluewoolroom" parents="deny-all">
+        <allow>
+            <block>web</block>
+            <block>carpet</block>
+            <block>wood</block>
+            <block>wool</block>
+        </allow>
+    </filter>
+    <filter name="no-void" parents="allow-all">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+</filters>
+<maxbuildheight>30</maxbuildheight>
+<!-- GET READY FOR TEH REGIONS -->
+<regions>
+    <apply block="no-void" message="`7You may not build in the void.">
+        <complement>
+            <rectangle min="-82,128" max="85,-128"/>
+            <!-- Blue Pipe Tunnels -->
+            <rectangle min="48,-55" max="22,-46"/>
+            <rectangle min="29,-35" max="38,-66"/>
+            <rectangle min="-2,-30" max="7,-23"/>
+            <rectangle min="-24,-35" max="-33,-66"/>
+            <rectangle min="-17,-46" max="-43,-55"/>
+            <cuboid min="-2,0,-77" max="7,10,-70"/>
+            <cuboid min="-12,0,-86" max="17,10,-77"/>
+            <!-- Blue Team's Wool Rooms -->
+            <rectangle min="-51,-84" max="-68,-103"/>
+            <rectangle min="56,-103" max="73,-84"/>
+            <!-- Blue Bridge -->
+            <cuboid min="17,10,-78" max="-12,19,-85"/>
+            <!-- Blue's Base -->
+            <rectangle min="-42,-88" max="47,-133"/>
+            <cuboid min="-2,10,-69" max="7,19,-92"/>
+            <!-- Void Gap -->
+            <rectangle min="39,25" max="-34,-23"/>
+            <rectangle min="-41,-7" max="46,8"/>
+            <!-- Red Pipe Tunnels -->
+            <rectangle min="-33,65" max="-24,37"/>
+            <rectangle min="-12,57" max="-43,47"/>
+            <rectangle min="-2,25" max="7,31"/>
+            <rectangle min="29,36" max="38,67"/>
+            <rectangle min="47,56" max="23,47"/>
+            <cuboid min="7,0,78" max="-2,10,72"/>
+            <cuboid min="17,0,87" max="-12,10,78"/>
+            <!-- Red Team's Wool Rooms -->
+            <rectangle min="-51,85" max="-68,104"/>
+            <rectangle min="56,85" max="73,104"/>
+            <!-- Red Bridge -->
+            <cuboid min="-12,10,79" max="17,19,86"/>
+            <!-- Red's Base -->
+            <rectangle min="47,89" max="-43,136"/>
+            <cuboid min="7,10,70" max="-2,20,93"/>
+        </complement>
+    </apply>
+    <apply block="deny-all" message="`7You may not modify team spawns.">
+        <rectangle min="47,89" max="-43,136"/>
+        <rectangle min="-42,-88" max="47,-133"/>
+        <cuboid min="7,10,70" max="-2,20,93"/>
+        <cuboid min="-2,10,-69" max="7,19,-92"/>
+    </apply>
+    <apply block="deny-all" message="`7You may not modify jump pads!">
+        <cylinder base="52.5,5,51.5" radius="1.5" height="20"/>
+        <cylinder base="2.5,2,51.5" radius="1.5" height="20"/>
+        <cylinder base="-47.5,5,51.5" radius="1.5" height="20"/>
+        <cylinder base="-47.5,5,-50" radius="1.5" height="20"/>
+        <cylinder base="2.5,2,-50.5" radius="1.5" height="20"/>
+        <cylinder base="52.5,5,-50.5" radius="1.5" height="20"/>
+    </apply>
+    <apply enter="redonly" message="`7You may not enter the opposing team's spawn.">
+        <rectangle min="47,89" max="-43,136"/>
+    </apply>
+    <apply enter="blueonly" message="`7You may not enter the opposing team's spawn.">
+        <rectangle min="-42,-88" max="47,-133"/>
+    </apply>
+    <apply block="bluewoolroom" message="``7YYou may not break this block in the wool room!">
+        <rectangle min="-51,85" max="-68,104"/>
+        <rectangle min="56,85" max="73,104"/>
+    </apply>
+    <apply enter="blueonly" message="`7You may not enter your own wool room!">
+        <rectangle min="-51,85" max="-68,104"/>
+        <rectangle min="56,85" max="73,104"/>
+    </apply>
+    <apply block="redwoolroom" message="`7YYou may not break this block in the wool room!">
+        <rectangle min="-51,-84" max="-68,-103"/>
+        <rectangle min="56,-103" max="73,-84"/>
+    </apply>
+    <apply enter="redonly" message="`7You may not enter your own wool room!">
+        <rectangle min="-51,-84" max="-68,-103"/>
+        <rectangle min="56,-103" max="73,-84"/>
+    </apply>
+    <apply block-break="deny-all">
+        <cuboid min="-12,10,79" max="17,19,86"/>
+        <cuboid min="17,10,-78" max="-12,19,-85"/>
+    </apply>
+    <!-- Jump Pads -->
+    <!-- Bases -->
+    <apply velocity="@0,2.8,0">
+        <cylinder base="2.5,12.2,112.5" radius="1.5" height="2"/>
+        <cylinder base="2.5,12.2,-111.5" radius="1.5" height="2"/>
+    </apply>
+    <apply velocity="@0,1.2,0">
+        <cylinder base="2.5,30,-104.5" radius="1.5" height="3"/>
+        <cylinder base="9.5,30,-111.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,-118.5" radius="1.5" height="3"/>
+        <cylinder base="-4.5,30,-111.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,105.5" radius="1.5" height="3"/>
+        <cylinder base="-4.5,30,112.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,119.5" radius="1.5" height="3"/>
+        <cylinder base="9.5,30,112.5" radius="1.5" height="3"/>
+    </apply>
+    <!-- Red's Pipes -->
+    <apply velocity="@0,2.2,0">
+        <cylinder base="2.5,2,51.5" radius="1.5" height="3"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="52.5,5,51.5" radius="1.5" height="3"/>
+        <cylinder base="-47.5,5,51.5" radius="1.5" height="3"/>
+    </apply>
+    <!-- Blue's Pipes -->
+    <apply velocity="@0,2.2,0">
+        <cylinder base="2.5,2,-50.5" radius="1.5" height="3"/>
+    </apply>
+    <apply velocity="@0,1.8,0">
+        <cylinder base="-47.5,5,-50" radius="1.5" height="3"/>
+        <cylinder base="52.5,5,-50.5" radius="1.5" height="3"/>
+    </apply>
+    <apply kit="jump">
+        <cylinder base="2.5,30,-104.5" radius="1.5" height="3"/>
+        <cylinder base="9.5,30,-111.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,-118.5" radius="1.5" height="3"/>
+        <cylinder base="-4.5,30,-111.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,105.5" radius="1.5" height="3"/>
+        <cylinder base="-4.5,30,112.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,30,119.5" radius="1.5" height="3"/>
+        <cylinder base="9.5,30,112.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,2,51.5" radius="1.5" height="3"/>
+        <cylinder base="52.5,5,51.5" radius="1.5" height="3"/>
+        <cylinder base="-47.5,5,51.5" radius="1.5" height="3"/>
+        <cylinder base="2.5,2,-50.5" radius="1.5" height="3"/>
+        <cylinder base="-47.5,5,-50" radius="1.5" height="3"/>
+        <cylinder base="52.5,5,-50.5" radius="1.5" height="3"/>
+    </apply>
+    <apply kit="spawn-jump">
+        <cylinder base="2.5,12.2,-111.5" radius="1.5" height="2"/>
+        <cylinder base="2.5,12.2,112.5" radius="1.5" height="2"/>
+    </apply>
+</regions>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>double step</item>
+    <item>step</item>
+    <item>grass</item>
+    <item>mycel</item>
+    <item>cooked chicken</item>
+    <item>log</item>
+    <item>sapling</item>
+    <item>glowstone dust</item>
+    <item>cobblestone</item>
+    <item>dirt</item>
+    <item>carpet</item>
+    <item>stained clay</item>
+    <item>sapling</item>
+    <item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <tool>shears</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron sword</tool>
+</toolrepair>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Forest Shadows</name>
+<version>1.2.4</version>
+<objective>Have the flag in your possesion as much as possible.</objective>
+<gamemode>kotf</gamemode>
+<authors>
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Main author, aesthetics, gameplay and XML."/><!-- Timothee38 -->
+    <author uuid="dbc98e9b-c799-4fde-8284-9b09970a84a9" contribution="Author, main aesthetics and gameplay." /><!-- personherson -->
+</authors>
+<contributors>
+    <contributor uuid="060baa18-2852-40d8-afcb-e61607c04be3" contribution="Server hosting and NBTEditing."/><!--pepsidawg00-->
+</contributors>
+<teams>
+   <team id="red" color="dark red" max="20" max-overfill="25">Red</team>
+   <team id="blue" color="blue" max="20" max-overfill="25">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">wood sword</item>
+        <chestplate unbreakable="true">leather chestplate</chestplate>
+        <item slot="1" amount="64">golden carrot</item>
+        <potion duration="oo">night vision</potion>
+        <health>20</health>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet color="AF002A" unbreakable="true">leather helmet</helmet>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet color="6E6EF9" unbreakable="true">leather helmet</helmet>
+    </kit>
+    <kit id="flag" force="true">
+        <potion duration="oo" amplifier="-3">health boost</potion>
+    </kit>
+    <kit id="reset-health" force="true">
+        <potion duration="1" amplifier="0">health boost</potion>
+        <potion duration="1" amplifier="10">regeneration</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="-180">
+        <regions><cuboid min="299,15,-193" max="288,15,-199"/></regions>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="0">
+        <regions><cuboid min="299,15,-239" max="287,15,-235"/></regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="0">
+        <regions><cuboid min="487,15,-239" max="499,15,-235"/></regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="-180">
+        <regions><cuboid min="499,15,-193" max="487,15,-197"/></regions>
+    </spawn>
+    <default yaw="90">
+        <regions><cuboid min="392,42,-215" max="394,42,-217"/></regions>
+    </default>
+</spawns>
+<score>
+    <limit>400</limit>
+</score>
+<flags>
+    <flag id="mid-flag" name="Flag" post="post" color="white" shared="true" points-rate="1" pickup-kit="flag" drop-kit="reset-health">
+        <post id="post" return-time="0s" respawn-time="15s">
+            <block>393,2,-217</block>
+            <block>390,16,-189</block>
+            <block>397,13,-247</block>
+        </post>
+    </flag>
+</flags>
+<filters>
+    <all id="only-blue">
+        <team>blue</team>
+        <not><carrying-flag>mid-flag</carrying-flag></not>
+    </all>
+    <all id="only-red">
+        <team>red</team>
+        <not><carrying-flag>mid-flag</carrying-flag></not>
+    </all>
+</filters>
+<regions>
+    <apply block="never">
+        <rectangle id="map" min="518,-166" max="269,-276"/>
+    </apply>
+    <cuboid id="blueTeleporter" min="427,4,-215" max="429,9,-217"/>
+    <cuboid id="redTeleporter" min="359,4,-215" max="357,9,-217"/>
+</regions>
+<portals>
+    <portal region="redTeleporter" filter="only-red">
+        <destination><point yaw="90">283,15,-216</point></destination>
+    </portal>
+    <portal region="blueTeleporter" filter="only-blue">
+        <destination><point yaw="-90">502,15,-216</point></destination>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>wood sword</tool>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>gold sword</tool>
+    <tool>diamond sword</tool>
+    <tool>leather helmet</tool>
+    <tool>leather chestplate</tool>
+    <tool>chainmail chestplate</tool>
+    <tool>gold chestplate</tool>
+    <tool>iron leggings</tool>
+    <tool>diamond boots</tool>
+</toolrepair>
+<itemkeep>
+    <item name="`6Coins" lore="`4`lUse these to trade items.">gold ingot</item>
+</itemkeep>
+<killreward>
+    <item name="`6Coins" lore="`4`lUse these to trade items.">gold ingot</item>
+</killreward>
+<itemremove>
+    <item>wood sword</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>gold sword</item>
+    <item>diamond sword</item>
+    <item>bow</item>
+    <item>gold chestplate</item>
+    <item>chainmail chestplate</item>
+    <item>iron leggings</item>
+    <item>diamond boots</item>
+</itemremove>
+<multitrade/>
+</map>

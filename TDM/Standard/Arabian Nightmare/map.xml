@@ -1,0 +1,94 @@
+<map proto="1.4.2">
+<name>Arabian Nightmare</name>
+<version>2.1.1</version>
+<objective>Be the team with the most kills after 8 minutes.</objective>
+<gamemode>tdm</gamemode>
+<time result="score">8m</time>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/> <!-- Obelistics -->
+    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- kroest -->
+</authors>
+<teams>
+    <team id="blue" color="blue" max="16">Blue</team>
+    <team id="red" color="red" max="16">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" name="Fresh 'n Healthy Fruit" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="chainmail leggings">
+            <enchantment level="3">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect>speed</effect>
+        <effect duration="3" amplifier="255">regeneration</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="180">
+            <point>0.5,31,0.5</point>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="180">
+            <point>0.5,5,48.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="0">
+            <point>0.5,5,-48.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <apply block="never" use="never"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn!">
+        <region>
+            <cylinder base="-784.5,27,-833.5" radius="3" height="5"/>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You may not enter the enemy spawn!">
+        <region>
+            <cylinder base="-784.5,27,-957.5" radius="3" height="5"/>
+        </region>
+    </apply>
+</regions>
+<score>
+    <kills>1</kills>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>wood sword</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item amount="6" material="arrow"/>
+    <item name="Fresh 'n Healthy Fruit" material="golden apple"/>
+</kill-reward>
+<respawn auto="true"/>
+<timelock>off</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

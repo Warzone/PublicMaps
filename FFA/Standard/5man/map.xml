@@ -1,0 +1,108 @@
+<map proto="1.4.0">
+<name>5man</name>
+<version>1.0.1</version>
+<objective>Get the most kills within 5 minutes!</objective>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!--Jtr-->
+</authors>
+<contributers>
+    <contributer uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="XML Source Material"/> <!--  mitchiii_  -->
+</contributers>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
+<players min="2" max="5" colors="true"/>
+<kits>
+    <kit id="default-kit">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2">golden apple</item>
+        <item slot="8" amount="16">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+    </kit>
+</kits>
+<spawns safe="true">
+    <default kit="default-kit" region="default-spawn" yaw="0" />
+    <spawn kit="spawn-kit" safe="true" spread="true">
+        <regions angle="0,8,0">
+            <point>20.5,5,-29.5</point>
+            <point>-21.5,13,-14.5</point>
+            <point>30.5,13,19.5</point>
+            <point>-12.5,5,26.6</point>
+            <point>-19.5,5,13.5</point>
+            <point>-25.5,5,-8.5</point>
+            <point>-31.5,5,-2.5</point>
+            <point>-21.5,13,-16.5</point>
+            <point>-26.5,13,-26.5</point>
+            <point>-4.5,5,-26</point>
+            <point>23.5,7,-11.5</point>
+            <point>-29.5,5,16.5</point>
+            <point>-28.5,5,11.5</point>
+            <point>23.5,7,0.5</point>
+            <point>-18.5,7,-12.5</point>
+            <point>-17.5,11,-21.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<filters>
+    <all id="allowed-blocks">
+        <any>
+            <material>stained glass</material>
+            <material>leaves</material>
+            <material>torch</material>
+            <material>long grass</material>
+            <material>red rose</material>
+            <material>water lily</material>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>stained glass pane</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="default-spawn" base="18.5,13,7.5" radius="1" height="1" />
+    <apply block="allowed-blocks" />
+</regions>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>golden apple</item>
+    <item>leather boots</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>long grass</item>
+    <item>red rose</item>
+    <item>torch</item>
+    <item>arrow</item>
+    <item>water lily</item>
+    <item>stained glass</item>
+    <item>seeds</item>
+</itemremove>
+<killreward>
+    <item material="golden apple" />
+    <item amount="8" material="arrow" />
+</killreward>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

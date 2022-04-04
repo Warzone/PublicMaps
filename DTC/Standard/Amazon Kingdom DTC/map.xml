@@ -1,0 +1,145 @@
+<map proto="1.4.0">
+<name>Amazon Kingdom DTC</name>
+<!-- Also known as Amazon Kingdom 2.0 -->
+<version>1.0.1</version>
+<objective>Destroy the enemy teams cores!</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="7e7da86e-57a8-4b90-b297-4ef05e71dbdb"/> <!--  Whitever  -->
+</authors>
+<contributors>
+    <contributor uuid="161aca4d-e536-41fb-ad51-9ac9a97cf04a"/> <!--  FLIMBI  -->
+    <contributor uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="Observer spawn, bug fixes, feedback and most of XML"/> <!--  chle_  -->
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+</teams>
+<kits>
+    <kit id="teams">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="32" damage="3">log</item>
+        <item slot="5" amount="32" damage="3">18</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64" damage="1">cooked fish</item>
+    </kit>
+    <kit id="red-kit" parents="teams">
+        <chestplate unbreakable="true" color="993333">leather chestplate</chestplate>
+        <boots unbreakable="true" color="993333">leather boots</boots>
+        <helmet unbreakable="true" color="993333">leather helmet</helmet>
+    </kit>
+    <kit id="blue-kit" parents="teams">
+        <chestplate unbreakable="true" color="334CB2">leather chestplate</chestplate>
+        <boots unbreakable="true" color="334CB2">leather boots</boots>
+        <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue-kit" yaw="-90">
+        <region>
+            <point>-336.5,42,0.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="90">
+        <region>
+            <point>0.5,42,0.5</point>
+        </region>
+    </spawn>
+    <default yaw="180">
+        <region>
+            <point>-167.5,59,97.5</point>
+        </region>
+    </default>
+</spawns>
+<timelock>on</timelock>
+<maxbuildheight>75</maxbuildheight>
+<filters>
+    <deny id="only-red">
+        <team>blue</team>
+    </deny>
+    <deny id="only-blue">
+        <team>red</team>
+    </deny>
+    <not id="deny-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="red-spawn" min="15,33" max="-13,-32"/>
+        <rectangle id="blue-spawn" min="-351,-32" max="-322,33"/>
+    </union>
+    <negative id="playable-inverse">
+        <rectangle id="playable" min="-351,-32" max="15,33"/>
+    </negative>
+    <apply block="never" message="You may not edit the the spawn!" region="spawns"/>
+    <apply enter="only-red" message="You may not enter the enemy team's spawn!" region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy team's spawn!" region="blue-spawn"/>
+    <apply block-place="deny-void" block-break="always" message="You may not modify the void area!" region="playable-inverse"/>
+</regions>
+<!-- <filters>
+    <deny id="deny-water">
+        <any>
+            <material>stationary water</material>
+            <material>water</material>
+        </any>
+    </deny>
+</filters>
+<regions>
+    <rectangle id="area" min="-500,-500" max="500,500"/>
+    <apply block-physics="deny-water" region="area"/>
+</regions> -->
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<kill-reward>
+    <item>golden apple</item>
+</kill-reward>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
+    <item>stained glass</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>vine</item>
+    <item>leaves</item>
+    <item>seeds</item>
+    <item>sapling</item>
+</itemremove>
+<toolrepair>
+    <tool>iron axe</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<cores material="obsidian" leak="4">
+    <core name="High Core" team="red">
+        <region>
+            <sphere origin="-50.5,60.5,-13.5" radius="4.5"/>
+        </region>
+    </core>
+    <core name="Low Core" team="red">
+        <region>
+            <sphere origin="-76.5,29.5,26.5" radius="4.5"/>
+        </region>
+    </core>
+    <core name="High Core" team="blue">
+        <region>
+            <sphere origin="-285.5,60.5,14.5" radius="4.5"/>
+        </region>
+    </core>
+    <core name="Low Core" team="blue">
+        <region>
+            <sphere origin="-259.5,29.5,-25.6" radius="4.5"/>
+        </region>
+    </core>
+</cores>
+</map>

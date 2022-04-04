@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>CatalystCP</name>
+<version>1.0.5</version>
+<objective>Be the first team with 1000 points to win!</objective>
+<gamemode>koth</gamemode>
+<gamemode>cp</gamemode>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+    <rule>Auto-respawn is enabled!</rule>
+</rules>
+<authors>
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Main Design, Building and XML"/> <!-- ItsMiiOlly -->
+    <author uuid="8e8340b2-d315-4d26-9178-d2145b59850c" contribution="Design, Building and Aesthetics"/> <!-- oX_W1LL_G_Xo -->
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Design and spawner magic"/> <!-- xXFracXx -->
+    <author uuid="9909505b-1f0f-4af1-ae21-afbee92427ce" contribution="Design and Aesthetics"/> <!-- Winarve -->
+</authors>
+<contributors>
+    <contributor uuid="a59dce2e-79e2-4229-ab83-98c885fceb23" contribution="Aesthetics"/> <!-- XxNarwhalexX -->
+    <contributor uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83" contribution="Feedback and Testing"/> <!-- lonelyhornet -->
+    <contributor uuid="374988d6-4569-444e-885a-409c2f55e310" contribution="Design and Feedback"/> <!-- Articray -->
+    <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Aesthetics"/> <!-- PlasmaCross -->
+</contributors>
+<teams>
+    <team color="green" max="18" max-overfill="24">Green</team>
+    <team color="blue" max="18" max-overfill="24">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="180">
+        <cuboid min="18,2,776" max="22,3,772"/>
+    </spawn>
+    <spawn team="green" kit="green" yaw="0">
+        <cuboid min="94,2,732" max="98,3,728"/>
+    </spawn>
+    <default kit="observers" yaw="-90">
+        <cylinder base="106,18,740" radius="1" height="2"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0" name="`e`lSplatbat" unbreakable="true" attributes="generic.attackDamage:add:5">gold sword</item>
+        <item slot="1" name="`c`lSniper Rifle" unbreakable="true">bow</item>
+        <item slot="2" amount="32">arrow</item>
+        <item slot="8">golden apple</item>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="5" amplifier="15">heal</potion>
+        <potion duration="5" amplifier="15">damage resistance</potion>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="6699D8" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="6699D8" unbreakable="true">leather leggings</leggings>
+        <boots color="6699D8" unbreakable="true">leather boots</boots>
+        <helmet>glass</helmet>
+    </kit>
+    <kit name="green" parents="spawn">
+        <chestplate color="667F33" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="667F33" unbreakable="true">leather leggings</leggings>
+        <boots color="667F33" unbreakable="true">leather boots</boots>
+        <helmet>glass</helmet>
+    </kit>
+    <kit name="observers">
+        <potion duration="oo" amplifier="1">speed</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-tnt">
+        <block>tnt</block>
+    </filter>
+    <filter name="deny-some">
+        <deny>
+            <block>beacon</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block-place="only-tnt" block-break="deny-all" use="deny-some">
+        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <!-- Jumpad (Small) -->
+    <apply velocity="@0,1,0">
+        <block name="green-1">106,3,758</block>
+        <block name="green-2">90,8,767</block>
+        <block name="green-3">90,8,726</block>
+        <block name="blue-1">10,3,746</block>
+        <block name="blue-2">26,8,737</block>
+        <block name="blue-3">26,8,778</block>
+    </apply>
+    <!-- Jumpad (Big) -->
+    <apply velocity="@0,1.25,-0.50">
+        <block name="green-a">40,3,739</block>
+        <block name="center-b">58,3,739</block>
+    </apply>
+    <!-- Jumpad (Big) -->
+    <apply velocity="@0,1.25,0.50">
+        <block name="blue-a">76,3,765</block>
+        <block name="center-a">58,3,765</block>
+    </apply>
+</regions>
+<king>
+    <hills>
+        <hill name="Point Alpha" capture-time="5s" points="1" show-progress="true">
+            <capture>
+                <cylinder base="76,11,775" radius="4" height="4"/>
+            </capture>
+            <progress>
+                <cuboid min="71,10,780" max="81,11,770"/>
+            </progress>
+            <captured>
+                <cuboid min="71,15,780" max="81,13,770"/>
+            </captured>
+        </hill>
+    </hills>
+    <hills>
+        <hill name="Center" capture-time="10s" points="1" show-progress="true">
+            <capture>
+                <cylinder base="58,2,752" radius="7" height="4"/>
+            </capture>
+            <progress>
+                <cuboid min="50,1,760" max="66,2,743"/>
+            </progress>
+            <captured>
+                <cuboid min="51,4,759" max="65,6,745"/>
+            </captured>
+        </hill>
+    </hills>
+    <hills>
+        <hill name="Point Beta" capture-time="5s" points="1" show-progress="true">
+            <capture>
+                <cylinder base="40,11,729" radius="4" height="4"/>
+            </capture>
+            <progress>
+                <cuboid min="35,10,734" max="45,11,724"/>
+            </progress>
+            <captured>
+                <cuboid min="35,13,734" max="45,15,724"/>
+            </captured>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>1000</limit>
+    <king/>
+</score>
+<toolrepair>
+    <tool>gold sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>glass</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+</itemremove>
+<killreward>
+    <item amount="8">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+<autorespawn/>
+</map>

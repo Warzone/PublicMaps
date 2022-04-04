@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Wuhu Island</name>
+<version>1.0.0</version>
+<objective>Reach 4000 points before the opposing teams!</objective>
+<gamemode>koth</gamemode>
+<!-- Authors and Contributors -->
+<authors>
+    <author uuid="9f9d89d3-5ce6-49bd-a60d-eb958f79ed91" contribution="Original map creation"/> <!-- tizona -->
+    <author uuid="4d4b3b1c-c141-4dda-9329-cacc33f1ea30" contribution="Built map extensions"/> <!-- Maxmos -->
+</authors>
+<contributors>
+    <!-- <contributor contribution="Map inspiration">Nintendo Co., Ltd.</contributor> -->
+    <contributor uuid="fa28ac5f-6a4c-414f-8bcd-b5f2a93470a5" contribution="Original map JSON"/> <!-- JackJack33 -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML conversion"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="yellow" color="yellow" min="3" max="100">Yellow</team>
+    <team id="green" color="green" min="3" max="100">Green</team>
+    <team id="blue" color="blue" min="3" max="100">Blue</team>
+    <team id="red" color="red" min="3" max="100">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="16">cooked beef</item>
+        <item slot="9" amount="64">arrow</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall">leather boots</boots>
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default yaw="0">
+        <region>
+            <point>-1222.5,46,459.5</point>
+        </region>
+    </default>
+    <spawn team="yellow" kit="default" yaw="90">
+        <region>
+            <point>-1152.5,31,373.5</point>
+        </region>
+    </spawn>
+    <spawn team="green" kit="default" yaw="0">
+        <region>
+            <point>-1165.5,61,354.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="default" yaw="-135">
+        <region>
+            <point>-1337.5,29,510.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="default" yaw="0">
+        <region>
+            <point>-1057.5,24,480.5</point>
+        </region>
+    </spawn>
+</spawns>
+<!-- Hills -->
+<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true">
+    <control-point name="Wuhu Town" points="1"> <!-- Alternative name: "Town" -->
+        <capture>
+            <cylinder id="wuhu-town" base="-1253.5,21,568.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="wuhu-town"/>
+        </progress>
+        <captured>
+            <region id="wuhu-town"/>
+        </captured>
+    </control-point>
+    <control-point name="The Candle" points="1"> <!-- Alternative name: "Lighthouse" -->
+        <capture>
+            <cylinder id="the-candle" base="-1371.5,32,476.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="the-candle"/>
+        </progress>
+        <captured>
+            <region id="the-candle"/>
+        </captured>
+    </control-point>
+	<control-point name="Cabana Lagoon" points="1"> <!-- Alternative name: "Club" -->
+        <capture>
+            <cylinder id="cabana-lagoon" base="-1294.5,31,321.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="cabana-lagoon"/>
+        </progress>
+        <captured>
+            <region id="cabana-lagoon"/>
+        </captured>
+    </control-point>
+    <control-point name="Stillwater Grotto" points="1"> <!-- Alternative name: "Cave" -->
+        <capture>
+            <cylinder id="stillwater-grotto" base="-1277.5,25,388.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="stillwater-grotto"/>
+        </progress>
+        <captured>
+            <region id="stillwater-grotto"/>
+        </captured>
+    </control-point>
+    <control-point name="Summer Castle" points="1"> <!-- Alternative name: "Castle" or "Summerstone Castle" -->
+        <capture>
+            <cylinder id="summer-castle" base="-1204.5,53,400.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="summer-castle"/>
+        </progress>
+        <captured>
+            <region id="summer-castle"/>
+        </captured>
+    </control-point>
+    <control-point name="Mysterious Ruins" points="1"> <!-- Alternative name: "Ruins" -->
+        <capture>
+            <cylinder id="mysterious-ruins" base="-1145.5,30,269.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="mysterious-ruins"/>
+        </progress>
+        <captured>
+            <region id="mysterious-ruins"/>
+        </captured>
+    </control-point>
+    <control-point name="Maka Wuhu" points="1"> <!-- Alternative name: "Volcano" -->
+        <capture>
+            <cylinder id="maka-wuhu" base="-1128.5,63, 369.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="maka-wuhu"/>
+        </progress>
+        <captured>
+            <region id="maka-wuhu"/>
+        </captured>
+    </control-point>
+    <control-point name="Cedar Tree Cave" points="1"> <!-- Alternative name: "Hill" or "Cedar Tree Tunnel" -->
+        <capture>
+            <cylinder id="cedar-tree-cave" base="-1119.5,45,422.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="cedar-tree-cave"/>
+        </progress>
+        <captured>
+            <region id="cedar-tree-cave"/>
+        </captured>
+    </control-point>
+    <control-point name="Cocoba Hotel" points="1"> <!-- Alternative name: "Resort" or "Tennis Court" -->
+        <capture>
+            <cylinder id="cocoba-hotel" base="-1035.5,21,437.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="cocoba-hotel"/>
+        </progress>
+        <captured>
+            <region id="cocoba-hotel"/>
+        </captured>
+    </control-point>
+    <control-point name="19th Hole Hotel" points="1"> <!-- Alternative name: "Wedge" -->
+        <capture>
+            <cylinder id="nineteeth-hole-hotel" base="-1420.5,26,883.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="nineteeth-hole-hotel"/>
+        </progress>
+        <captured>
+            <region id="nineteeth-hole-hotel"/>
+        </captured>
+    </control-point>
+</control-points>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow</team>
+    <team id="green-only">green</team>
+    <team id="blue-only">blue</team>
+    <team id="red-only">red</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="yellow-spawn-protection" min="-1150,30,369" max="-1158,36,377"/>
+        <cuboid id="green-spawn-protection" min="-1159,60,351" max="-1170,67,359"/>
+        <cuboid id="blue-spawn-protection" min="-1335,0,507" max="-1340,oo,512"/>
+        <cuboid id="red-spawn-protection" min="-1062,0,484" max="-1055,oo,477"/>
+    </union>
+    <!-- Applications -->
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
+    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
+</regions>
+<!-- Portals -->
+<portals protect="true" yaw="@90" pitch="@0">
+    <!-- Wuhu to Wedge Island -->
+    <portal>
+        <region>
+            <cuboid min="-1216,23,613" max="-1220,26,617"/>
+        </region>
+        <destination>
+            <point>-1358.5,21,901.5</point>
+        </destination>
+    </portal>
+    <!-- Wedge to Wuhu Island -->
+    <portal>
+      <region>
+          <cuboid min="-1332,23,909" max="-1328,26,913"/>
+      </region>
+      <destination>
+          <point>-1221.5,22,603.5</point>
+      </destination>
+    </portal>
+</portals>
+<!-- ItemRemove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<score>
+    <limit>4000</limit>
+</score>
+<timelock>off</timelock>
+</map>

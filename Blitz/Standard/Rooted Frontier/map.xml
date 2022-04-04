@@ -1,0 +1,105 @@
+<map proto="1.4.0">
+<name>Rooted Frontier</name>
+<version>1.1.2</version>
+<objective>Eliminate the other team!</objective>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" />
+    <!--  mitchiii_  -->
+</authors>
+<contributors>
+    <contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="Name suggestions" />
+    <!-- Poseidons -->
+</contributors>
+<blitz />
+<time>10m</time>
+<teams>
+    <team id="red-team"  color="dark red" max="25">Red</team>
+    <team id="blue-team" color="blue"     max="25">Blue</team>
+</teams>
+<spawns safe="true">
+    <spawn team="red-team"  kit="red-kit"     region="red-spawn"     yaw="140" />
+    <spawn team="blue-team" kit="blue-kit"    region="blue-spawn"    yaw="45" />
+    <default                kit="default-kit" region="default-spawn" yaw="19" />
+</spawns>
+<kits>
+    <kit id="default-kit">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true"               material="stone sword" />
+        <item slot="1" unbreakable="true"               material="bow" />
+        <item slot="3"                    amount="16"   material="torch" />
+        <item slot="8"                    amount="24"   material="arrow" />
+        <chestplate    unbreakable="true" locked="true" material="gold chestplate" />
+        <boots         unbreakable="true" locked="true" material="iron boots" />
+        <potion        duration="1m30s"   ambient="true">absorption</potion>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <item   slot="2"       damage="14"        amount="24"   material="stained glass" />
+        <helmet color="FF0000" unbreakable="true" locked="true" material="leather helmet" />
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <item   slot="2"       damage="11"        amount="24"   material="stained glass" />
+        <helmet color="0000FF" unbreakable="true" locked="true" material="leather helmet" />
+    </kit>
+</kits>
+<killreward>
+    <item material="golden apple" />
+</killreward>
+<filters>
+    <all id="allowed-blocks">
+        <any>
+            <material>stained glass</material>
+            <material>leaves</material>
+            <material>torch</material>
+            <material>long grass</material>
+            <material>red rose</material>
+            <material>water lily</material>
+            <material>water</material>
+            <material>stationary water</material>
+            <material>stained glass pane</material>
+        </any>
+        <not>
+            <void />
+        </not>
+    </all>
+</filters>
+<regions>
+    <cylinder id="default-spawn"    base="24.5,21,-14.5" radius="1" height="1" />
+    <cylinder id="red-spawn"        base="-8.5,18,74.5"  radius="3" height="1" />
+    <cylinder id="blue-spawn"       base="-8.5,18,-73.5" radius="3" height="1" />
+    <apply block="allowed-blocks" />
+</regions>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone spade</item>
+    <item>stone axe</item>
+    <item>gold chestplate</item>
+    <item>leather helmet</item>
+    <item>iron boots</item>
+    <item>golden apple</item>
+    <item>leaves</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>long grass</item>
+    <item>red rose</item>
+    <item>carpet</item>
+    <item>wool</item>
+    <item>torch</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>water lily</item>
+    <item>stained glass</item>
+    <item>seeds</item>
+</itemremove>
+<respawn auto="true"/>
+</map>

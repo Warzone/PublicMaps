@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Swamped</name>
+<version>1.1.4</version>
+<objective>Destroy the enemy's core in front of their spawn.</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall Map Design"/> <!-- Mikeg542 -->
+    <author uuid="fcbc5806-e7fd-45f1-845a-22f1df93c9bf" contribution="Many details, aesthetics, feedback etc"/> <!-- Minii_ -->
+</authors>
+<teams>
+    <team color="gold" max="36">Orange</team>
+    <team color="dark purple" max="36">Purple</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="5" amount="32">cooked fish</item>
+        <item slot="6" amount="64" damage="2">log</item>
+        <item slot="7" amount="12">vine</item>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="90">
+        <cylinder base="56,48,11" radius="2" height="0"/>
+    </default>
+    <spawn team="orange" yaw="0" kit="spawn">
+        <cylinder base="-1,4,-129" radius="2" height="0"/>
+    </spawn>
+    <spawn team="purple" yaw="180" kit="spawn">
+        <cylinder base="-2,4,129" radius="2" height="0"/>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="deny-all" message="You may not build outside the map or in spawns!">
+        <negative>
+            <rectangle min="-35,118" max="33,-118"/>
+        </negative>
+    </apply>
+</regions>
+<timelock>on</timelock>
+<maxbuildheight>48</maxbuildheight>
+<cores material="obsidian" leak="4">
+    <core team="orange">
+      <cuboid min="2,24,-87" max="-5,14,-93"/>
+    </core>
+    <core team="purple">
+        <cuboid min="2,24,87" max="-5,14,93"/>
+    </core>
+</cores>
+<toolrepair>
+    <tool>iron axe</tool>
+    <tool>iron sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>cooked fish</item>
+    <item>seeds</item>
+    <item>vine</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>golden apple</item>
+</itemremove>
+<tutorial>
+    <stage title="Destroy the Core">
+        <message>
+            <line>`rThis map is a `a`lDestroy the Core `r(DTC) map.</line>
+            <line>`rThe objective is to leak lava from the enemy's `5obsidian `rcore.</line>
+        </message>
+        <teleport>
+            <point yaw="90" pitch="50">42,48,0</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>`rYou spawn inside your base with your basic gear provided.</line>
+            <line>`rThe upper floor contains some additional supplies for defenses and bridges</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="45">11,18,110</point>
+        </teleport>
+    </stage>
+    <stage title="Armor">
+        <message>
+            <line>`bIron blocks are available throughout the map for buckets and armor</line>
+            <line>The main supply is visible here, straight ahead and down from the spawn.</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="0">-1,2,100</point>
+        </teleport>
+    </stage>
+    <stage title="The Core">
+        <message>
+            <line>This is `5obsidian `rcore, break your enemy's `5obsidian `rcore and leak the `clava `rfrom inside the core to win.</line>
+            <line>`rMake sure to defend your own to stop the enemy team from winning!</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="0">-1,20,76</point>
+        </teleport>
+    </stage>
+</tutorial>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

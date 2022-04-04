@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Immitis</name>
+<version>1.0.2</version>
+<objective>Kill the other team, and try not to die. Arrows kill instantly!</objective>
+<gamemode>tdm</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<rules>
+    <rule>Block glitching is ILLEGAL and will be punished for!</rule>
+</rules>
+<contributors>
+    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="XML"/> <!-- last_username -->
+</contributors>
+<teams>
+    <team color="dark aqua" max="12">Cyan</team>
+    <team color="dark purple" max="12">Purple</team>
+</teams>
+<filters>
+    <filter name="deny-unbreakable-blocks">
+        <deny>
+            <not>
+                <any>
+                    <block>crops</block>
+                    <block>sugar cane block</block>
+                    <block>long grass</block>
+                    <block>leaves</block>
+                    <block>yellow flower</block>
+                    <block>red rose</block>
+                    <block>sapling</block>
+                    <block>carrot</block>
+                    <block>potato</block>
+                    <block>double plant</block>
+                </any>
+            </not>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-unbreakable-blocks">
+        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<rage/>
+<kits>
+    <kit name="spawn">
+        <potion duration="4" amplifier="10">damage resistance</potion>
+		<potion duration="10" amplifier="10">increase damage</potion>
+        <item slot="0" unbreakable="true">diamond sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10" lore="`aOne-shot kill!">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <item slot="3" amount="32">bread</item>
+    </kit>
+    <kit name="cyan" parents="spawn">
+        <helmet color="009999">leather helmet</helmet>
+        <chestplate color="009999">leather chestplate</chestplate>
+        <leggings color="009999">leather leggings</leggings>
+        <boots color="009999">leather boots</boots>
+    </kit>
+    <kit name="purple" parents="spawn">
+        <helmet color="990099">leather helmet</helmet>
+        <chestplate color="990099">leather chestplate</chestplate>
+        <leggings color="990099">leather leggings</leggings>
+        <boots color="990099">leather boots</boots>
+    </kit>
+</kits>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<regions>
+    <!-- <cuboid name="cyan-spawn" min="64.5,22,-78.5" max="77.5,22,-70.5"/>
+    <cuboid name="purple-spawn" min="-12.5,24,9.5" max="-0.5,24,13.5"/> -->
+    <cylinder name="cyan-spawn" base="-1.5,9.2,-56.5" radius="1.5" height="0"/>
+    <cylinder name="purple-spawn" base="-6.5,24.2,11.5" radius="2.5" height="0"/>
+	<cylinder name="cyan-spawn-2" base="64.5,22.1,-74.5" radius="2.5" height="0"/>
+	<cylinder name="purple-spawn-2" base="30,5.1,15" radius="1.9" height="0"/>
+</regions>
+<spawns safe="true">
+    <default yaw="-135">
+        <cylinder base="-41.5,27,21.5" radius="4" height="0"/>
+    </default>
+    <spawns team="cyan" yaw="-135" kit="cyan">
+	    <spawn yaw="-45">
+            <region name="cyan-spawn"/>
+		</spawn>
+		<spawn yaw="90">
+			<region name="cyan-spawn-2"/>
+		</spawn>
+    </spawns>
+    <spawns team="purple" kit="purple">
+	    <spawn yaw="-90">
+	        <region name="purple-spawn"/>
+		</spawn>
+		<spawn yaw="135">
+		    <region name="purple-spawn-2"/>
+		</spawn>
+    </spawns>
+</spawns>
+<score>
+    <time>8m</time>
+</score>
+<itemremove>
+    <item>diamond sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>bread</item>
+</itemremove>
+</map>

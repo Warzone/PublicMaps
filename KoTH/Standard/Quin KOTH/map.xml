@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Quin KOTH</name>
+<version>1.0.1</version>
+<objective>Capture as many hills as possible with your team to reach 2000 points before the opposing teams!</objective>
+<gamemode>koth</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Created the map and XML"/> <!-- _Pear -->
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Parkour designing and JSON"/> <!-- Wesdial -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Parkour creation"/> <!-- _iMan -->
+    <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Parkour testing"/> <!-- Svnti -->
+</authors>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="1s">The higher you go, the more points you can get!</tip>
+    <tip after="2s">Fall damage is disabled on this map!</tip>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="red" color="red" max="8">Red</team>
+    <team id="orange" color="gold" max="8">Orange</team>
+    <team id="yellow" color="yellow" max="8">Yellow</team>
+    <team id="lime" color="green" max="8">Lime</team>
+    <team id="blue" color="blue" max="8">Blue</team>
+    <team id="cyan" color="dark aqua" max="8">Cyan</team>
+    <team id="pink" color="light purple" max="8">Pink</team>
+    <team id="purple" color="dark purple" max="8">Purple</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="1" material="golden apple"/>
+        <item slot="8" amount="2" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default yaw="90" region="obs-spawn"/>
+    <spawn team="red" kit="spawn-kit" yaw="-180" region="red-spawn"/>
+    <spawn team="orange" kit="spawn-kit" yaw="135" region="orange-spawn"/>
+    <spawn team="yellow" kit="spawn-kit" yaw="90" region="yellow-spawn"/>
+    <spawn team="lime" kit="spawn-kit" yaw="45" region="lime-spawn"/>
+    <spawn team="blue" kit="spawn-kit" region="blue-spawn"/>
+    <spawn team="cyan" kit="spawn-kit" yaw="-45" region="cyan-spawn"/>
+    <spawn team="pink" kit="spawn-kit" yaw="-90" region="pink-spawn"/>
+    <spawn team="purple" kit="spawn-kit" yaw="-135" region="purple-spawn"/>
+</spawns>
+<!-- Capture Points -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <!-- 1st Point -->
+    <control-point name="1st Point" points="1" capture-time="3s">
+        <capture>
+            <cylinder id="first-hill" base="-12.5,18,38.5" radius="14" height="4"/>
+        </capture>
+        <progress>
+            <region id="first-hill"/>
+        </progress>
+        <captured>
+            <region id="first-hill"/>
+        </captured>
+    </control-point>
+    <!-- 2nd Point -->
+    <control-point name="2nd Point" points="2" capture-time="4s">
+        <capture>
+            <cylinder id="second-hill" base="-12.5,27,38.5" radius="12" height="4"/>
+        </capture>
+        <progress>
+            <region id="second-hill"/>
+        </progress>
+        <captured>
+            <region id="second-hill"/>
+        </captured>
+    </control-point>
+    <!-- 3rd Point -->
+	<control-point name="3rd Point" points="3" capture-time="6s">
+        <capture>
+            <cylinder id="third-hill" base="-12.5,36,38.5" radius="8" height="4"/>
+        </capture>
+        <progress>
+            <region id="third-hill"/>
+        </progress>
+        <captured>
+            <region id="third-hill"/>
+        </captured>
+    </control-point>
+    <!-- 4th Point -->
+	<control-point name="4th Point" points="4" capture-time="7s">
+        <capture>
+            <cylinder id="fourth-hill" base="-12.5,45,38.5" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <region id="fourth-hill"/>
+        </progress>
+        <captured>
+            <region id="fourth-hill"/>
+        </captured>
+    </control-point>
+    <!-- 5th Point -->
+	<control-point name="5th Point" points="5" capture-time="8s">
+        <capture>
+            <cylinder id="fifth-hill" base="-12.5,54,38.5" radius="7" height="4"/>
+        </capture>
+        <progress>
+            <region id="fifth-hill"/>
+        </progress>
+        <captured>
+            <region id="fifth-hill"/>
+        </captured>
+    </control-point>
+</control-points>
+<!-- Filters -->
+<filters>
+    <team id="red-only">red</team>
+    <team id="orange-only">orange</team>
+    <team id="yellow-only">yellow</team>
+    <team id="lime-only">lime</team>
+    <team id="blue-only">blue</team>
+    <team id="cyan-only">cyan</team>
+    <team id="pink-only">pink</team>
+    <team id="purple-only">purple</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="red-spawn-protection" min="-16,0,68" max="-10,oo,74"/>
+        <cuboid id="orange-spawn-protection" min="14,0,59" max="8,oo,65"/>
+        <cuboid id="yellow-spawn-protection" min="17,0,41" max="23,oo,35"/>
+        <cuboid id="lime-spawn-protection" min="8,0,11" max="14,oo,17"/>
+        <cuboid id="blue-spawn-protection" min="-16,0,2" max="-10,oo,8"/>
+        <cuboid id="cyan-spawn-protection" min="-40,0,17" max="-34,oo,11"/>
+        <cuboid id="pink-spawn-protection" min="-43,0,41" max="-49,oo,35"/>
+        <cuboid id="purple-spawn-protection" min="-34,0,65" max="-40,oo,59"/>
+    </union>
+    <!-- Team Spawn Coordinates -->
+    <point id="obs-spawn">-12.5,69,38.5</point>
+    <point id="red-spawn">-12.5,20,71.5</point>
+    <point id="orange-spawn">11.5,20,62.5</point>
+    <point id="yellow-spawn">20.5,20,38.5</point>
+    <point id="lime-spawn">11.5,20,14.5</point>
+    <point id="blue-spawn">-12.5,20,5.5</point>
+    <point id="cyan-spawn">-36.5,20,14.5</point>
+    <point id="pink-spawn">-45.5,20,38.5</point>
+    <point id="purple-spawn">-36.5,20,62.5</point>
+    <!-- Applications -->
+    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="lime-spawn-protection"   enter="lime-only"   message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn-protection"   enter="cyan-only"   message="You may not enter the enemy spawn."/>
+    <apply region="pink-spawn-protection"   enter="pink-only"   message="You may not enter the enemy spawn."/>
+    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="5"/>
+            </all>
+        </filter>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Score Objective -->
+<score>
+    <limit>2000</limit>
+</score>
+<!-- Misc -->
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+</map>

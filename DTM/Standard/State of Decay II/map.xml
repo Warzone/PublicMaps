@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<include src="tutorial.xml"/>
+<name>State of Decay II</name>
+<version>1.3.2</version>
+<objective>Destroy the enemy team's cave and mountain monuments to win!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+</authors>
+<contributors>
+    <contributor uuid="36dc036a-dfbc-4627-b66a-501223f08075" contribution="Building Assistance"/> <!-- ieatboulders2 -->
+    <contributor uuid="105f6a09-f533-412b-93cb-501601763c11" contribution="The Ivorian"/> <!-- JTerwiesch -->
+</contributors>
+<teams>
+    <team color="dark aqua" max="32" max-overfill="40">Cyan</team>
+    <team color="dark red" max="32" max-overfill="40">Red</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">iron sword</item>
+        <item slot="1" name="`8Pinethorn Shortbow" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3" enchantment="durability:2;dig speed:1">iron axe</item>
+        <item slot="4">shears</item>
+        <item slot="5" amount="32">bread</item>
+        <item slot="6" amount="32" damage="1">log</item>
+        <item slot="7" amount="64" damage="1">leaves</item>
+        <item slot="8" amount="2">golden apple</item>
+        <item slot="28">arrow</item>
+        <item slot="30" enchantment="durability:2;dig speed:1">iron spade</item>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333" enchantment="protection explosions:2">leather chestplate</chestplate>
+    </kit>
+    <kit name="cyan" parents="spawn">
+        <helmet color="4C7F99">leather helmet</helmet>
+        <chestplate color="4C7F99" enchantment="protection explosions:2">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red" yaw="45">
+        <point>76,23,-9</point>
+    </spawn>
+    <spawn team="cyan" kit="cyan" yaw="-135">
+        <point>-94,23,9</point>
+    </spawn>
+    <default yaw="0">
+        <cuboid min="-8,41,-67" max="-10,41,-69"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-cyan">
+        <team>cyan</team>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all" message="You cannot modify the spawn!">
+        <circle center="76,-9" radius="3"/>
+    </apply>
+    <apply enter="only-red" message="You cannot enter the enemy spawn!">
+        <circle center="76,-9" radius="3"/>
+    </apply>
+    <apply block="deny-all" message="You cannot modify the spawn!">
+        <circle center="-94,9" radius="3"/>
+    </apply>
+    <apply enter="only-cyan" message="You cannot enter the enemy spawn!">
+        <circle center="-94,9" radius="3"/>
+    </apply>
+    <apply block="deny-all" message="You cannot build outside the map!">
+        <negative>
+            <rectangle min="-107.5,-39.5" max="90.5,40.5"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="You have reached the height limit!">
+        <cuboid min="-oo,65,-oo" max="oo,oo,oo"/>
+    </apply>
+</regions>
+<timelock>on</timelock>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>shears</item>
+    <item>log</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<killreward>
+    <item>golden apple</item>
+    <item amount="4">tnt</item>
+</killreward>
+<destroyables name="Mountain Monument" materials="gold block;obsidian" completion="100%">
+    <destroyable owner="cyan">
+        <cuboid min="-52,35,25" max="-55,31,28"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="35,35,-24" max="38,31,-27"/>
+    </destroyable>
+</destroyables>
+<destroyables name="Cave Monument" materials="gold block;obsidian" completion="100%">
+    <destroyable owner="cyan">
+        <cuboid min="-56,14,-19" max="-59,11,-22"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="39,14,20" max="42,11,23"/>
+    </destroyable>
+</destroyables>
+<tutorial>
+    <stage title="Destroy the Monument">
+        <message>
+            <line>This map is a `a`lDestroy the Monument`r map with `4TNT`r.</line>
+            <line>The objective is to `4destroy`r the other team's `aCave`r and `aMountain`r Monuments, made of `bobsidian`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-115" pitch="5">-18,30,23</point>
+        </teleport>
+    </stage>
+    <stage title="Cave Monument and Iron Mines">
+        <message>
+            <line>This is the `aCave`r Monument.</line>
+            <line>It consists of `a1`r obsidian block and `a10`r gold blocks, break them all or use TNT to win!</line>
+        </message>
+        <teleport>
+            <point yaw="150" pitch="5">46,11,25</point>
+        </teleport>
+    </stage>
+    <stage title="Mountain Monument">
+        <message>
+            <line>This is the `aMountain`r Monument.</line>
+            <line>It consists of `a2`r obsidian blocks, break them all to win!</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="25">41,35,-33</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

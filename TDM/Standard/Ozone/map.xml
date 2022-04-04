@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<map proto="1.0.0">
+<name>Ozone</name>
+<version>1.0.5</version>
+<objective>Be the team with the least amount of deaths after 10 minutes.</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Overall Map Design and XML code"/> <!-- Plastix -->
+    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="Map Design"/> <!-- MonsieurApple -->
+    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="*crunch* *crunch* *crunch*"/> <!-- IM_A_H0B0 -->
+    <author uuid="90e029a3-6873-46a7-8430-0ec3dbc42aba" contribution="Map Design and Aestethics"/> <!-- SajinZero -->
+</authors>
+<contributors>
+    <contributor uuid="2553e6f2-3a2c-440b-a6a3-39e3df7fe3ff" contribution="Feedback and Aesthetics"/> <!-- Khazhyk -->
+    <contributor uuid="3ce426cd-2ded-4f83-a9bb-46a57d68d9a5" contribution="Various Aesthethics"/> <!-- McYukon -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled</rule>
+</rules>
+<teams>
+    <!-- Hipster Team Colors -->
+    <team color="dark aqua" max="50">Cyan</team>
+    <team color="dark purple" max="50">Purple</team>
+</teams>
+<kits>
+    <kit name="spawn">
+		<clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2">golden apple</item>
+		<leggings unbreakable="true" enchantment="protection projectile:3">chainmail leggings</leggings>
+		<boots unbreakable="true">iron boots</boots>
+        <potion duration="5" amplifier="10">damage resistance</potion>
+        <potion duration="oo" amplifier="1">jump</potion>
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+	<kit name="purple" parents="spawn">
+		<helmet unbreakable="true" color="800080">leather helmet</helmet>
+		<chestplate unbreakable="true" color="800080">leather chestplate</chestplate>
+	</kit>
+	<kit name="cyan" parents="spawn">
+		<helmet color="3089A8" unbreakable="true">leather helmet</helmet>
+		<chestplate color="3089A8" unbreakable="true">leather chestplate</chestplate>
+	</kit>
+    <kit name="observers">
+        <potion duration="oo" amplifier="1">jump</potion>
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="purple" team="purple">
+        <spawn yaw="225">
+            <cylinder base="-102.5,69,103.5" radius="4" height="0"/>
+        </spawn>
+        <spawn yaw="45">
+            <cylinder base="103.5,69,-102.5" radius="4" height="0"/>
+        </spawn>
+    </spawns>
+    <spawns kit="cyan" team="cyan">
+        <spawn yaw="135">
+            <cylinder base="103.5,69,103.5" radius="4" height="0"/>
+        </spawn>
+        <spawn yaw="315">
+            <cylinder base="-102.5,69,-102.5" radius="4" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="90" kit="observers">
+        <cylinder base="0,30,0" radius="3" height="0"/>
+    </default>
+</spawns>
+<regions>
+	<apply block="deny-all">
+		<circle name="main-area" center="0.5,0.5" radius="175.5"/>
+	</apply>
+</regions>
+<playable>
+	<region name="main-area"/>
+</playable>
+<!-- Do the magic! *wizz* -->
+<modifybowprojectile>
+	<projectile>EnderPearl</projectile>
+	<velocityMod>2.5</velocityMod>
+</modifybowprojectile>
+<disabledamage>
+	<damage>fall</damage>
+</disabledamage>
+<score>
+    <time>10m</time>
+</score>
+<killreward>
+	<item>golden apple</item>
+</killreward>
+<toolrepair>
+	<tool>bow</tool>
+	<tool>stone sword</tool>
+</toolrepair>
+<itemremove>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>chainmail leggings</item>
+	<item>iron boots</item>
+</itemremove>
+<itemkeep>
+	<item>golden apple</item>
+	<item>arrow</item>
+</itemkeep>
+<hunger>
+	<depletion>off</depletion>
+</hunger>
+</map>

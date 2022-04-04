@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Empire</name>
+<version>2.3.7</version>
+<objective>Capture both wool and return them safely to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+</authors>
+<teams>
+    <team color="dark red" max="16">Red</team>
+    <team color="blue" max="16">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" unbreakable="true">iron pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:1">iron axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6" amount="64">cooked beef</item>
+        <item slot="27" amount="64">apple</item>
+        <item slot="28" amount="1">arrow</item>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet unbreakable="true" color="993333">leather helmet</helmet>
+        <chestplate unbreakable="true" color="993333" enchantment="protection projectile:1">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="993333">leather leggings</leggings>
+        <boots unbreakable="true" color="993333">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
+        <chestplate unbreakable="true" color="334CB2" enchantment="protection projectile:1">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="334CB2">leather leggings</leggings>
+        <boots unbreakable="true" color="334CB2">leather boots</boots>
+    </kit>
+</kits>
+<spawns team="blue" kit="blue">
+    <spawn yaw="0" pitch="90">
+        <point>-1.5,55,-60.5</point>
+    </spawn>
+</spawns>
+<spawns team="red" kit="red">
+    <spawn yaw="180" pitch="90">
+        <point>-1.5,55,85.5</point>
+    </spawn>
+</spawns>
+<spawns>
+    <default yaw="-90">
+        <cylinder base="-70.5,11,12.5" radius="2.5" height="0"/>
+    </default>
+</spawns>
+<wools>
+    <wools team="red">
+        <wool color="orange">
+            <block>-0.5,7,93.5</block>
+        </wool>
+        <wool color="yellow">
+            <block>-2.5,7,93.5</block>
+        </wool>
+    </wools>
+    <wools team="blue">
+        <wool color="purple">
+            <block>-0.5,7,-68.5</block>
+        </wool>
+        <wool color="lime">
+            <block>-2.5,7,-68.5</block>
+        </wool>
+    </wools>
+</wools>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="deny-spawner">
+        <deny>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+    <filter name="anti-grief-blue" parents="only-blue">
+        <deny>
+            <block>mob spawner</block>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="anti-grief-red" parents="only-red">
+        <deny>
+            <block>mob spawner</block>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>blue</team>
+            </all>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <not>
+            <all>
+                <any>
+                    <block>chest</block>
+                    <block>workbench</block>
+                </any>
+                <team>red</team>
+            </all>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-spawner">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <!--   Blue has to capture these   -->
+    <union name="blue-wool-rooms">
+        <rectangle name="lime-room" min="-22,103" max="-37,88"/>
+        <rectangle name="purple-room" min="34,88" max="19,103"/>
+    </union>
+    <!--   Red has to capture these   -->
+    <union name="red-wool-rooms">
+        <rectangle name="orange-room" min="19,-63" max="34,-78"/>
+        <rectangle name="yellow-room" min="-22,-63" max="-37,-78"/>
+    </union>
+    <apply enter="only-blue" block="only-blue" use="only-blue-usage" message="You may not access/modify your own wool room!">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply enter="only-red" block="only-red" use="only-red-usage" message="You may not access/modify your own wool room!">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply block-break="anti-grief-blue">
+        <region name="blue-wool-rooms"/>
+    </apply>
+    <apply block-break="anti-grief-red">
+        <region name="red-wool-rooms"/>
+    </apply>
+    <apply block="deny-void" message="You may not edit in the void area!">
+        <negative>
+            <rectangle min="-39,63" max="36,-38"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" enter="only-blue" use="only-blue">
+        <circle name="blue-spawn" center="-1.5,-60.5" radius="12"/>
+        <rectangle name="blue-bridge" min="-4,-44" max="1,-51"/>
+    </apply>
+    <apply block="deny-all" enter="only-red" use="only-red">
+        <circle name="red-spawn" center="-1.5,85.5" radius="12"/>
+        <rectangle name="red-bridge" min="1,69" max="-4,76"/>
+    </apply>
+    <apply block="deny-all">
+        <cuboid name="above-25" min="-oo,25,-oo" max="oo,oo,oo"/>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron axe</tool>
+    <tool>iron pickaxe</tool>
+    <item>arrow</item>
+</toolrepair>
+<itemremove>
+    <item>apple</item>
+    <item>cooked beef</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>leather leggings</item>
+    <item>redstone</item>
+    <item>golden apple</item>
+    <item>glass</item>
+    <item>wood</item>
+</itemremove>
+<itemkeep>
+    <item>gold ingot</item>
+</itemkeep>
+<killreward>
+    <item amount="7">gold nugget</item>
+    <item>golden apple</item>
+    <item amount="16">wood</item>
+</killreward>
+<timelock>on</timelock>
+<multitrade/>
+<tutorial>
+    <stage title="Capture the Wool">
+        <teleport>
+            <point yaw="-140" pitch="20">-53,30,58</point>
+        </teleport>
+        <message>
+            <line>The objective is `3Capture the Wool`r.</line>
+            <line>Your team wins when `2both wools`r are placed on the `6victory monuments`r.</line>
+            <line>This is a `8wool room`r. (There are four in this map in total)</line>
+            <line>This wool room is for the `bBlue Team`r, meaning that's where they'll need to go.</line>
+        </message>
+    </stage>
+    <stage title="Villager Trading">
+        <teleport>
+            <point yaw="-180" pitch="0">-2,6,87</point>
+        </teleport>
+        <message>
+            <line>You can use `6gold ingots`r to purchase potions from the `7villager`r at your team's spawn.</line>
+            <line>You gain `e1 `6gold ingot`r every time you kill an `4enemy`r.</line>
+            <line>Additionally, you can craft `6golden apples`r or `6golden armor`r with your `bingots`r!</line>
+        </message>
+    </stage>
+    <stage title="Wool Rooms">
+        <teleport>
+            <point yaw="-40" pitch="20">-40,18,79</point>
+        </teleport>
+        <message>
+            <line>`9Blue`r must enter, pick up a wool, and return it safely to their `8victory monument `r located at their spawn area.</line>
+            <line>`4Red Team `rshould prevent any `9Blue Team `rinvaders from entering, because there is `2 powerful gear `rinside.</line>
+        </message>
+    </stage>
+    <stage title="Victory Monument">
+        <teleport>
+            <point yaw="0" pitch="0">-2,6,87</point>
+        </teleport>
+        <message>
+            <line>Once you pick up a `bwool`r, you must `2return it safely`r to your side and</line>
+            <line>Place it on your `8victory monument`r. Once `oboth wools`r have been placed, your team will win.</line>
+        </message>
+    </stage>
+</tutorial>
+</map>

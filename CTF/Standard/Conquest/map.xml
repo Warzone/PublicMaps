@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Return the Flag">
+<name>Conquest</name>
+<version>1.0.3</version>
+<objective>First team to bring your side's flag to the enemy's side 3 times wins!</objective>
+<gamemode>ctf</gamemode>
+<!-- Author(s) and Contributor(s) -->
+<authors>
+    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f"/> <!-- Virus53 -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="yellow" color="yellow" max="10">Yellow</team>
+    <team id="green" color="green" max="10">Green</team>
+</teams>
+<!-- Match control -->
+<time>10m</time>
+<score>
+    <limit>3</limit>
+</score>
+<respawn delay="3s"/>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="1" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="yellow-kit" parents="spawn">
+        <helmet unbreakable="true" color="E5E533" material="leather helmet"/>
+        <leggings unbreakable="true" color="E5E533" material="leather leggings"/>
+        <boots unbreakable="true" color="E5E533" material="leather boots"/>
+    </kit>
+    <kit id="green-kit" parents="spawn">
+        <helmet unbreakable="true" color="7FCC19" material="leather helmet"/>
+        <leggings unbreakable="true" color="7FCC19" material="leather leggings"/>
+        <boots unbreakable="true" color="7FCC19" material="leather boots"/>
+    </kit>
+    <kit id="flag-kit">
+		<effect duration="oo" amplifier="1">slowness</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="yellow" kit="yellow-kit" yaw="165" region="yellow-spawn"/>
+    <spawn team="green" kit="green-kit" yaw="-13.5" region="green-spawn"/>
+    <default yaw="-35" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="yellow-only">yellow</team>
+    <team id="green-only">green</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="yellow-spawn-protection" min="-9,0,130" max="6,oo,143"/>
+        <cuboid id="green-spawn-protection" min="8,0,-131" max="-7,oo,-144"/>
+    </union>
+    <point id="yellow-spawn">0.5,17,137.5</point>
+    <point id="green-spawn">0.5,17,-137.5</point>
+    <point id="obs-spawn">-12.5,50,-56.5</point>
+    <!-- Applications -->
+    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Flags -->
+<flags flag-proximity-metric="none" net-proximity-metric="none">
+    <!-- Yellow's Flag -->
+    <flag id="yellow-flag" name="Yellow Flag" owner="green" pickup-filter="green-only" carry-kit="flag-kit" carry-message="You are carrying the flag! Bring it to `aGreen `rbeacon!">
+        <post id="yellow-flag-post" respawn-time="1s" recover-time="10s">19.5,9,-113.5</post>
+    </flag>
+    <net points="1" flag="yellow-flag">
+        <region>
+            <cylinder id="green-net" base="-19.5,8,113.5" radius="1" height="3"/>
+        </region>
+    </net>
+    <!-- Green's Flag -->
+    <flag id="green-flag" name="Green Flag" owner="yellow" pickup-filter="yellow-only" carry-kit="flag-kit" carry-message="You are carrying the flag! Bring it to `eYellow `rbeacon!">
+        <post id="green-flag-post" respawn-time="1s" recover-time="10s">-19.5,9,113.5</post>
+    </flag>
+    <net points="1" flag="green-flag">
+        <region>
+            <cylinder id="yellow-net" base="19.5,8,-113.5" radius="1" height="3"/>
+        </region>
+    </net>
+</flags>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <killreward>
+        <item material="golden apple"/>
+    </killreward>
+</kill-rewards>
+<!-- Misc -->
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

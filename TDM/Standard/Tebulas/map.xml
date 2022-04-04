@@ -1,0 +1,240 @@
+<map proto="1.4.0">
+<name>Tebulas</name>
+<version>1.1</version>
+<objective>Be the team with the most kills after 8 minutes!</objective>
+<gamemode>tdm</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="ddc786c1-ffb5-41da-9dd5-9ea538848612" contribution="Main build and design"/> <!-- AntandRocky -->
+    <author uuid="23518e31-4110-41ce-9732-333888ae822d" contribution="Main build and design"/> <!-- crikimaruc -->
+</authors>
+<contributors>
+    <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="XML writing, XML combination, and XML-related ideas"/> <!-- BlockDrop74 -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML writing, XML combination, and suggestions"/> <!-- ElectroidFilms -->
+    <contributor uuid="f8354649-60ee-4d23-b295-f8429d34adad" contribution="Building"/> <!-- filefish -->
+    <contributor uuid="14e8552e-836a-40a7-94ef-c43b665edd29" contribution="Building"/> <!-- Kyle_Obiyoda -->
+    <contributor uuid="4111f215-28db-4a0d-9380-ee18641d02cf" contribution="Building"/> <!-- salalu -->
+    <contributor uuid="712ce768-8c4d-4b6a-9159-92a4302d73e5" contribution="Server host"/> <!-- Ambamore2000 -->
+</contributors>
+<time result="score">8m</time>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<score>
+    <kills>1</kills>
+</score>
+<rage/>
+<teams>
+    <team id="cyan" color="dark aqua" max="12">Cyan</team>
+    <team id="lime" color="green" max="12">Lime</team>
+    <team id="orange" color="gold" max="12">Orange</team>
+    <team id="purple" color="dark purple" max="12">Purple</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" lore="`aOne-hit kill!" material="iron sword">
+            <enchantment>sharpness</enchantment>
+        </item>
+        <item slot="1" unbreakable="true" lore="`aOne-shot kill!" material="bow">
+            <enchantment>power</enchantment>
+        </item>
+        <item slot="2" material="arrow"/>
+        <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate locked="true" unbreakable="true" team-color="true" material="leather chestplate">
+            <enchantment>protection</enchantment>
+        </chestplate>
+        <leggings locked="true" unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots locked="true" unbreakable="true" team-color="true" material="leather boots"/>
+        <effect>speed</effect>
+        <effect duration="3" amplifier="255">heal</effect>
+        <effect duration="3" amplifier="255">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns angle="19,78,-59">
+    <default yaw="0" kit="default-kit">
+        <region>
+            <cuboid min="20,145,-58" max="18,145,-60"/>
+        </region>
+    </default>
+    <spawn team="cyan" kit="spawn-kit">
+        <region>
+            <cuboid min="17,77,-108" max="21,77,-108"/>
+        </region>
+    </spawn>
+    <spawn team="lime" kit="spawn-kit">
+        <region>
+            <cuboid min="21,77,-10" max="17,77,-10"/>
+        </region>
+    </spawn>
+    <spawn team="orange" kit="spawn-kit">
+        <region>
+            <cuboid min="-30,77,-61" max="-30,77,-57"/>
+        </region>
+    </spawn>
+    <spawn team="purple" kit="spawn-kit">
+        <region>
+            <cuboid min="68,77,-61" max="68,77,-57"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-cyan">cyan</team>
+    <team id="only-lime">lime</team>
+    <team id="only-orange">orange</team>
+    <team id="only-purple">purple</team>
+</filters>
+<regions>
+    <union id="spawns">
+        <cuboid id="cyan-spawn" min="9,73,-110" max="29,256,-105"/>
+        <cuboid id="lime-spawn" min="9,73,-13" max="29,256,-8"/>
+        <cuboid id="orange-spawn" min="-32,73,-69" max="-27,256,-49"/>
+        <cuboid id="purple-spawn" min="65,73,-69" max="70,256,-49"/>
+    </union>
+    <union id="jump-pads">
+        <union id="cyan-jump-pads">
+            <cuboid id="c-right-spawn" min="1,77,-102" max="5,79,-98"/> <!-- -x -->
+            <cuboid id="c-center" min="10,77,-68" max="13,79,-65"/>
+            <cuboid id="c-left-spawn-below" min="41,67,-102" max="45,69,-98"/>
+            <cuboid id="c-infront-spawn" min="26,67,-82" max="30,69,-78"/>
+            <cuboid id="c-abnormal" min="41,67,-70" max="45,69,-66"/> <!-- +z -->
+        </union>
+        <union id="lime-jump-pads">
+            <cuboid id="l-right-spawn" min="33,77,-20" max="37,79,-16"/> <!-- +x -->
+            <cuboid id="l-center" min="25,77,-54" max="27,79,-50"/>
+            <cuboid id="l-left-spawn-below" min="-7,67,-20" max="-3,69,-16"/>
+            <cuboid id="l-infront-spawn" min="8,67,-40" max="12,69,-36"/>
+            <cuboid id="l-abnormal" min="-7,67,-52" max="-3,69,-48"/> <!-- -z -->
+        </union>
+        <union id="orange-jump-pads">
+            <cuboid id="o-right-spawn" min="-24,77,-45" max="-20,79,-41"/> <!-- +z -->
+            <cuboid id="o-center" min="10,77,-53" max="13,79,-50"/>
+            <cuboid id="o-left-spawn-below" min="-24,67,-85" max="-20,69,-81"/>
+            <cuboid id="o-infront-spawn" min="-4,67,-70" max="-0,69,-66"/>
+            <cuboid id="o-abnormal" min="8,67,-85" max="12,69,-81"/> <!-- +x -->
+        </union>
+        <union id="purple-jump-pads">
+            <cuboid id="p-right-spawn" min="58,77,-77" max="62,79,-73"/> <!-- -z -->
+            <cuboid id="p-center" min="25,77,-68" max="28,79,-65"/>
+            <cuboid id="p-left-spawn-below" min="58,67,-37" max="62,69,-33"/>
+            <cuboid id="p-infront-spawn" min="38,67,-52" max="42,69,-48"/>
+            <cuboid id="p-abnormal" min="26,67,-37" max="30,69,-33"/> <!-- -x -->
+        </union>
+    </union>
+    <union id="plus-z">
+        <region id="o-right-spawn"/>
+        <region id="o-center"/>
+        <region id="o-left-spawn-below"/>
+        <region id="o-infront-spawn"/>
+        <region id="c-abnormal"/>
+    </union>
+    <union id="plus-x">
+        <region id="l-right-spawn"/>
+        <region id="l-center"/>
+        <region id="l-left-spawn-below"/>
+        <region id="l-infront-spawn"/>
+        <region id="o-abnormal"/>
+    </union>
+    <union id="minus-z">
+        <region id="p-right-spawn"/>
+        <region id="p-center"/>
+        <region id="p-left-spawn-below"/>
+        <region id="p-infront-spawn"/>
+        <region id="l-abnormal"/>
+    </union>
+    <union id="minus-x">
+        <region id="c-right-spawn"/>
+        <region id="c-center"/>
+        <region id="c-left-spawn-below"/>
+        <region id="c-infront-spawn"/>
+        <region id="p-abnormal"/>
+    </union>
+    <!-- Applied -->
+    <apply block="never" use="never"/>
+    <apply enter="only-cyan" message="`eYou may not enter the enemy spawn area!" region="cyan-spawn"/>
+    <apply enter="only-lime" message="`eYou may not enter the enemy spawn area!" region="lime-spawn"/>
+    <apply enter="only-orange" message="`eYou may not enter the enemy spawn area!" region="orange-spawn"/>
+    <apply enter="only-purple" message="`eYou may not enter the enemy spawn area!" region="purple-spawn"/>
+    <apply velocity="0,1.75,0.6" region="plus-z"/> <!-- +z -->
+    <apply velocity="0.6,1.75,0" region="plus-x"/> <!-- +x -->
+    <apply velocity="0,1.75,-0.6" region="minus-z"/> <!-- -z -->
+    <apply velocity="-0.6,1.75,0" region="minus-x"/> <!-- -x -->
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<itemkeep>
+    <item>arrow</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3"/>
+        </filter>
+        <kit force="true">
+            <effect amplifier="2">speed</effect>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="10"/>
+        </filter>
+        <kit force="true">
+            <effect amplifier="3">speed</effect>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<include src="tutorial.xml"/>
+<tutorial>
+    <stage title="Rage TDM">
+        <message>
+            <line>This map is a Rage TDM map. It includes one-hit kill swords, and bows. The objective</line>
+            <line>is to have the most kills at the end of the alloted time; 6 minutes.</line>
+        </message>
+        <teleport>
+            <point yaw="-180" pitch="90">19,120,-59</point>
+        </teleport>
+    </stage>
+    <stage title="Jumpads">
+        <message>
+            <line>There are jumpads around the map. They can be used to access higher up parts of the</line>
+            <line>map. The jumpads are found always in a square, made out of carpet, being a certain</line>
+            <line>teams color.</line>
+        </message>
+        <teleport>
+            <point yaw="135" pitch="40">63.5,84,-71.5</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn Kit and Killreward">
+        <message>
+            <line>Players spawn with one sword, and bow, which both one-hit kill as well as one arrow.</line>
+            <line>When a player gets 3 kills, they are rewarded with a speed boost! Normal kills are</line>
+            <line>rewarded with a single arrow.</line>
+        </message>
+        <teleport>
+            <point yaw="-135" pitch="10">57.5,77,-56.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

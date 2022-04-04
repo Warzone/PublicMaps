@@ -1,0 +1,110 @@
+<map proto="1.4.0">
+<name>The Hill Redux</name>
+<version>1.0.2</version>
+<objective>Capture and hold the hills!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="374988d6-4569-444e-885a-409c2f55e310" contribution="Map Creator"/> <!-- Articray -->
+    <author uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="XML and Planning"/> <!-- TheZaner -->
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Building and Planning"/> <!-- xXFracXx -->
+</authors>
+<contributors>
+    <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="MCEdit, feedback and XML fixing"/> <!-- ItsMiiOlly -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Ideas, building, server hosting, and real XML fixing"/> <!-- ElectroidFilms -->
+    <contributor uuid="a59dce2e-79e2-4229-ab83-98c885fceb23" contribution="Feedback and planning"/> <!-- XxNarwhalexX -->
+</contributors>
+<teams>
+    <team id="orange" color="gold" max="40">Orange</team>
+    <team id="purple" color="dark purple" max="40">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <leggings unbreakable="true" enchantment="projectile_protection:2" material="chainmail leggings"/>
+        <boots unbreakable="true" enchantment="feather_falling:2" material="iron boots"/>
+        <effect duration="8" amplifier="3">heal</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="FF8000" material="leather helmet"/>
+        <chestplate unbreakable="true" color="FF8000" material="leather chestplate"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="800080" material="leather helmet"/>
+        <chestplate unbreakable="true" color="800080" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="1027.5,40,-538.5" radius="2" height="1"/>
+        </region>
+    </default>
+    <spawn team="orange" kit="orange-kit">
+        <region yaw="0">
+            <cylinder base="1101.5,11,-604.5" radius="1" height="1"/>
+        </region>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <region yaw="180">
+            <cylinder base="1101.5,11,-472.5" radius="1" height="1"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <material id="only-chest">chest</material>
+</filters>
+<regions>
+    <apply block="never" use="only-chest"/>
+</regions>
+<king>
+    <hills incremental="true" show-progress="true" neutral-state="true" required="false" capture-time="7s" points="1">
+        <hill name="Hill">
+            <capture>
+                <cylinder base="1101.5,31,-538.5" radius="6.5" height="5"/>
+            </capture>
+            <progress>
+                <cylinder base="1101.5,31,-538.5" radius="6.5" height="1"/>
+            </progress>
+        </hill>
+        <hill name="Cave">
+            <capture>
+                <cylinder base="1101.5,9,-538.5" radius="8.5" height="5"/>
+            </capture>
+            <progress>
+                <cylinder base="1101.5,9,-538.5" radius="8.5" height="1"/>
+            </progress>
+        </hill>
+    </hills>
+</king>
+<score>
+    <limit>750</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>glass bottle</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
+</kill-reward>
+<respawn auto="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

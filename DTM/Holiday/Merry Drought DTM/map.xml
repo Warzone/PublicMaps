@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.0">
 <name>Merry Drought DTM</name>
-<version>1.1.4</version>
+<version>1.1.5</version>
 <objective>Destroy the obsidian monuments on the enemy side while defending your own monuments.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -82,6 +82,18 @@
         <item slot="22" amount="64">quartz block</item>
         <potion duration="10" amplifier="4">damage resistance</potion>
     </kit>
+    <kit name="red" parents="spawn">
+        <helmet unbreakable="true" color="993333">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true" color="993333">leather leggings</leggings>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true" color="334CB2">leather leggings</leggings>
+        <boots unbreakable="true">gold boots</boots>
+    </kit>
 </kits>
 <itemremove>
     <item>cooked chicken</item>
@@ -95,6 +107,10 @@
     <item>string</item>
     <item>quartz block</item>
     <item>obsidian</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>gold boots</item>
 </itemremove>
 <toolrepair>
     <tool>iron sword</tool>
@@ -104,12 +120,12 @@
     <tool>arrow</tool>
 </toolrepair>
 <spawns>
-    <spawn team="blue" kit="spawn">
+    <spawn team="blue" kit="blue">
         <point type="random" yaw="135">
             <cylinder base="136,17,-346" radius="1" height="0"/>
         </point>
     </spawn>
-    <spawn team="red" kit="spawn">
+    <spawn team="red" kit="red">
         <point type="random" yaw="315">
             <cylinder base="2,17,-481" radius="1" height="0"/>
         </point>

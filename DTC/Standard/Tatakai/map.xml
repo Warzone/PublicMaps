@@ -1,0 +1,125 @@
+<map proto="1.3.6">
+<name>Tatakai</name>
+<version>1.0.0</version>
+<objective>Leak the enemy team's core to win</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/>
+    <!-- Avaleer -->
+</authors>
+<contributors>
+    <contributor contribution="XML" uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/>
+    <!-- Diamyx  -->
+</contributors>
+<teams>
+    <team color="dark red" max="12" max-overfill="14">Red</team>
+    <team color="blue" max="12" max-overfill="14">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn" potion-particles="true">
+        <item slot="0">iron sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="2">golden apple</item>
+        <item slot="5" amount="32">wood</item>
+        <item slot="6" amount="16">glass</item>
+        <item slot="8" amount="64">carrot item</item>
+        <item slot="28">arrow</item>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <potion duration="3" amplifier="10">heal</potion>
+        <potion duration="3" amplifier="10">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="CD0000" unbreakable="true">leather helmet</helmet>
+        <leggings color="CD0000" unbreakable="true">leather leggings</leggings>
+        <boots color="CD0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
+        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red">
+        <regions yaw="180">
+            <block>-88.5,9,-163.5</block>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue">
+        <regions yaw="0">
+            <block>-88.5,9,-288.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-144,18,-227" max="-146,18,-224"/>
+        </regions>
+    </default>
+</spawns>
+<maxbuildheight>21</maxbuildheight>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+</filters>
+<regions>
+    <cuboid name="red-core" min="-90,13,-182" max="-86,9,-186"/>
+    <cuboid name="blue-core" min="-86,13,-269" max="-90,9,-265"/>
+    <union name="void">
+        <rectangle min="-79,-283" max="-97,-272"/>
+        <rectangle min="-97,-168" max="-79,-179"/>
+        <rectangle min="-112,-253" max="-131,-293"/>
+        <rectangle min="-64,-253" max="-45,-293"/>
+        <rectangle min="-64,-198" max="-45,-158"/>
+        <rectangle min="-112,-198" max="-131,-158"/>
+    </union>
+    <apply block="deny-all" message="You may not build outside the map boundaries">
+        <negative>
+            <rectangle min="-133,-156" max="-43,-295"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="You may not build in the void">
+        <region name="void"/>
+    </apply>
+    <apply enter="only-red" block="deny-all">
+        <rectangle min="-112,-173" max="-64,-158"/>
+    </apply>
+    <apply enter="only-blue" block="deny-all">
+        <rectangle min="-112,-294" max="-64,-279"/>
+    </apply>
+</regions>
+<cores material="obsidian" leak="2" mode-changes="true">
+    <core name="Red Core" team="red" region="red-core"/>
+    <core name="Blue Core" team="blue" region="blue-core"/>
+</cores>
+<modes>
+    <mode after="15m" material="gold block"/>
+</modes>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>carrot item</item>
+    <item>golden apple</item>
+</itemremove>
+</map>

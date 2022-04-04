@@ -1,0 +1,160 @@
+<map proto="1.3.6">
+<name>Bill's Town</name>
+<version>1.2.0</version>
+<objective>Get 200 points to win! Bring the neutral flag into your goal for 20 points!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
+    <!--   Yoyo_   -->
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/>
+    <!--   Diamyx   -->
+</authors>
+<teams>
+    <team color="dark purple" max="12" max-overfill="15">Purple</team>
+    <team color="gold" max="12" max-overfill="15">Orange</team>
+</teams>
+<regions>
+    <apply enter="orange-only" message="You may not enter the enemy's net!">
+        <cuboid min="956,5,-1220" max="952,10,-1218"/>
+    </apply>
+    <apply enter="purple-only" message="You may not enter the enemy's net!">
+        <cuboid min="880,5,-1199" max="876,10,-1197"/>
+    </apply>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <union name="spawns">
+        <cuboid name="purple-spawn" min="970,6,-1197" max="968,6,-1197"/>
+        <cuboid name="orange-spawn" min="864,6,-1220" max="862,6,-1220"/>
+        <cuboid name="default-spawn" min="933,21,-1189" max="934,21,-1188"/>
+    </union>
+    <union name="nets">
+        <cuboid name="orange-net" min="956,5,-1220" max="953,10,-1218"/>
+        <cuboid name="purple-net" min="879,5,-1199" max="876,10,-1197"/>
+    </union>
+</regions>
+<kits>
+    <kit name="spawn" force="true">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="16">arrow</item>
+        <item slot="3">golden apple</item>
+        <leggings locked="true">chainmail leggings</leggings>
+        <potion duration="3" amplifier="1">heal</potion>
+        <potion duration="3">damage resistance</potion>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet locked="true" color="D87F33">leather helmet</helmet>
+        <boots locked="true" enchantment="protection fall:1" color="D87F33">leather boots</boots>
+        <chestplate locked="true" color="D87F33">leather chestplate</chestplate>
+    </kit>
+    <kit name="purple" parents="spawn">
+        <helmet locked="true" color="7F3FB2">leather helmet</helmet>
+        <boots locked="true" enchantment="protection fall:1" color="7F3FB2">leather boots</boots>
+        <chestplate locked="true" color="7F3FB2">leather chestplate</chestplate>
+    </kit>
+    <kit name="vision">
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<flags>
+    <post id="post" return-time="15s">
+        <block>915.5,11,-1208.5</block>
+        <block>916.5,11,-1208.5</block>
+    </post>
+    <flag name="Flag" color="white" shared="true" post="post" respawn-time="20s">
+        <net points="20" region="orange-net" pickup-filter="orange-only"/>
+        <net points="20" region="purple-net" pickup-filter="purple-only"/>
+    </flag>
+</flags>
+<portals>
+    <portal name="orange-portal" yaw="@90" filter="orange-only">
+        <region>
+            <cuboid min="956,5,-1220" max="953,10,-1218"/>
+        </region>
+        <destination>
+            <region name="orange-spawn"/>
+        </destination>
+    </portal>
+    <portal name="purple-portal" yaw="@-90" filter="purple-only">
+        <region>
+            <cuboid min="879,5,-1199" max="876,10,-1197"/>
+        </region>
+        <destination>
+            <region name="purple-spawn"/>
+        </destination>
+    </portal>
+</portals>
+<filters>
+    <filter name="orange-only">
+        <team>orange</team>
+    </filter>
+    <filter name="purple-only">
+        <team>purple</team>
+    </filter>
+</filters>
+<score>
+    <limit>200</limit>
+    <deaths>1</deaths>
+    <kills>1</kills>
+</score>
+<respawn delay="4.5s" auto="false"/>
+<killreward>
+    <item>golden apple</item>
+    <item amount="16">arrow</item>
+</killreward>
+<spawns>
+    <spawn team="orange" kit="orange">
+        <regions yaw="-155">
+            <region name="orange-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple">
+        <regions yaw="25">
+            <region name="purple-spawn"/>
+        </regions>
+    </spawn>
+    <default kit="vision">
+        <regions yaw="180">
+            <region name="default-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+<broadcasts>
+    <tip after="2s" every="5m">`bYou gain `e`l1 `bpoint per kill, lose `e`l1 `bpoint per death and gain `e`l20 `bpoints per flag capture!</tip>
+    <tip after="5s" every="5m">`bYour team's `e`lNet `bis located on the enemy side, just follow your colored `e`lBeacon`r!</tip>
+</broadcasts>
+<tutorial>
+    <stage title="The Objective">
+        <message>
+            <line>`rThis is a Team Deathmatch + Flag Football map.</line>
+            <line>You gain `e`l1 point per kill`r, lose `e`l1 point per death`r and gain `e`l20 points per flag capture`r.</line>
+        </message>
+    </stage>
+    <stage title="The Nets">
+        <message>
+            <line>Your team's `e`lNet`r is located on the enemy side (You have to put it in this net).</line>
+            <line>When you get the flag from the center, you have to go to the `e`lbeacon`r that's your team's color, on the enemy side.</line>
+        </message>
+        <teleport>
+            <point yaw="180">877.5,8,-1197.5</point>
+        </teleport>
+    </stage>
+</tutorial>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>golden apple</item>
+    <item>chainmail leggings</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+</itemremove>
+</map>

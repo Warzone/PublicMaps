@@ -1,0 +1,242 @@
+<map proto="1.4.2">
+<name>The Last Sunset</name>
+<version>1.4.1</version>
+<objective>Capture both enemy flags two times!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomyBoy -->
+</authors>
+<broadcasts>
+    <tip after="4s" every="3m" count="oo">
+        `3`oYou have to capture the `6flags`3`o behind `6spawn`3.
+    </tip>
+    <tip after="6s" every="3m" count="oo">
+        `3`oTo make the `6flags`3`o respawn you have to capture both enemy flags first.
+    </tip>
+    <tip after="10s" every="3m" count="oo">
+        `3`oThere is a `6lilypad spawner`3`o in the center that can assist you in offense.
+    </tip>
+</broadcasts>
+<teams>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" material="iron spade"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" amount="32" material="glass"/>
+        <item slot="7" amount="32" material="vine"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="35" material="water bucket"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="3" amplifier="5">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default kit="default-kit">
+        <region yaw="0">
+            <cylinder base="-887.5,47,-452.5" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="90">
+            <point>-816.5,4,-393.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="-90">
+            <point>-958.5,4,-393.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="not-spawner">
+        <material>mob spawner</material>
+    </not>
+</filters>
+<regions>
+    <negative id="void-regions">
+        <!-- union of regions to replace the void filter, which consistently broke -->
+        <union id="void">
+            <rectangle min="-771,-310" max="-1004,-477"/>
+            <rectangle min="-770,-311" max="-1005,-476"/>
+            <rectangle min="-769,-313" max="-1006,-474"/>
+            <rectangle min="-768,-317" max="-1007,-470"/>
+            <rectangle min="-767,-322" max="-1008,-465"/>
+            <rectangle min="-766,-336" max="-1009,-451"/>
+            <rectangle min="-765,-356" max="-1010,-422"/>
+            <rectangle min="-772,-478" max="-1003,-309"/>
+            <rectangle min="-774,-479" max="-1001,-308"/>
+            <rectangle min="-777,-480" max="-998,-307"/>
+            <rectangle min="-780,-481" max="-995,-306"/>
+            <rectangle min="-784,-482" max="-991,-305"/>
+            <rectangle min="-788,-483" max="-987,-304"/>
+            <rectangle min="-793,-484" max="-982,-303"/>
+            <rectangle min="-798,-485" max="-977,-302"/>
+            <rectangle min="-807,-486" max="-968,-301"/>
+            <rectangle min="-825,-487" max="-950,-300"/>
+            <rectangle min="-851,-488" max="-924,-299"/>
+        </union>
+    </negative>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <rectangle min="-818,-411" max="-815,-376"/>
+            <rectangle min="-819,-403" max="-814,-384"/>
+            <rectangle min="-820,-402" max="-813,-385"/>
+            <rectangle min="-822,-401" max="-811,-386"/>
+            <rectangle min="-823,-400" max="-810,-387"/>
+            <rectangle min="-824,-399" max="-809,-388"/>
+            <rectangle min="-825,-396" max="-808,-391"/>
+        </union>
+        <union id="red-spawn">
+            <rectangle min="-957,-376" max="-960,-411"/>
+            <rectangle min="-956,-384" max="-961,-403"/>
+            <rectangle min="-955,-385" max="-962,-402"/>
+            <rectangle min="-953,-386" max="-963,-401"/>
+            <rectangle min="-952,-387" max="-965,-400"/>
+            <rectangle min="-951,-388" max="-966,-399"/>
+            <rectangle min="-950,-391" max="-967,-396"/>
+        </union>
+    </union>
+    <union id="all-flag-posts-y">
+        <!--  Blue  -->
+        <cylinder base="-810.5,4,-339.5" radius="2" height="4"/>
+        <cylinder base="-810.5,4,-447.5" radius="2" height="4"/>
+        <!--  Red  -->
+        <cylinder base="-964.5,4,-339.5" radius="2" height="4"/>
+        <cylinder base="-964.5,4,-447.5" radius="2" height="4"/>
+    </union>
+    <union id="beacons">
+        <rectangle min="-990.5,-394.5" max="-992.5,-392.5"/>
+        <rectangle min="-784.5,-392.5" max="-782.5,-394.5"/>
+    </union>
+    <cylinder id="blue-net" base="-783.5,4,-393.5" radius="2" height="2"/>
+    <cylinder id="red-net" base="-991.5,4,-393.5" radius="2" height="2"/>
+    <union id="signs">
+        <block>-958.5,5,-375.5</block>
+        <block>-958.5,5,-411.5</block>
+        <block>-816.5,5,-411.5</block>
+        <block>-816.5,5,-375.5</block>
+    </union>
+    <!--   Applied   -->
+    <apply block="never" message="You may not modify the void area!" region="void-regions"/>
+    <apply block="never" message="Don't destroy the signs!" region="signs"/>
+    <apply block="never" message="You many modify the area above the beacons!" region="beacons"/>
+    <apply block="never" message="You may not modify the spawn areas!" region="spawns"/>
+    <apply block="never" message="You may not modify the area around the flags!" region="all-flag-posts-y"/>
+    <apply block="not-spawner" message="You may not destroy the spawner!"/>
+</regions>
+<flags permanent="true" drop-on-water="false">
+    <flag id="north-blue-flag" name="North Blue Flag" owner="blue" color="blue">
+        <carry-message>
+            You have the flag! Return it to the island `6`lbehind spawn
+        </carry-message>
+        <post owner="blue" pickup-filter="only-red" recover-time="20s">-810.5,5,-447.5</post>
+    </flag>
+    <flag id="south-blue-flag" name="South Blue Flag" owner="blue" color="blue">
+        <carry-message>
+            You have the flag! Return it to the island `6`lbehind spawn
+        </carry-message>
+        <post owner="blue" pickup-filter="only-red" recover-time="20s">-810.5,5,-339.5</post>
+    </flag>
+    <net points="1" region="red-net" flags="south-blue-flag north-blue-flag" respawn-together="true"/>
+    <flag id="north-red-flag" name="North Red Flag" owner="red" color="red">
+        <carry-message>
+            You have the flag! Return it to the island `6`lbehind spawn
+        </carry-message>
+        <post owner="red" pickup-filter="only-blue" recover-time="20s">-964.5,5,-447.5</post>
+    </flag>
+    <flag id="south-red-flag" name="South Red Flag" owner="red" color="red">
+        <carry-message>
+            You have the flag! Return it to the island `6`lbehind spawn
+        </carry-message>
+        <post owner="red" pickup-filter="only-blue" recover-time="20s">-964.5,5,-339.5</post>
+    </flag>
+    <net points="1" region="blue-net" flags="south-red-flag north-red-flag" respawn-together="true"/>
+</flags>
+<score>
+    <limit>4</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<blockdrops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>vine</material>
+        </filter>
+        <drops>
+            <item chance="0" material="vine"/>
+        </drops>
+    </rule>
+</blockdrops>
+<itemkeep>
+    <item>wood</item>
+    <item>glass</item>
+    <item>vine</item>
+    <item>water bucket</item>
+    <item>bucket</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="16" material="wood"/>
+    <item amount="8" material="glass"/>
+</kill-reward>
+<maxbuildheight>20</maxbuildheight>
+<respawn delay="4s" auto="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<world>
+    <timelock>off</timelock>
+</world>
+</map>

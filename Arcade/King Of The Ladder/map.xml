@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="King of the Ladder">
+<name>King Of The Ladder</name>
+<version>1.0.0</version>
+<objective>Get to the top of the ladder to win!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="c2a4c847-653e-482a-b62e-d7f8b64330cb"/> <!-- Alm -->
+    <author>EDNAS</author>
+</authors>
+<teams>
+    <team id="pink" color="light purple" max="10">Pink</team>
+    <team id="blue" color="blue" max="10">Blue</team>
+    <team id="purple" color="dark purple" max="10">Purple</team>
+    <team id="orange" color="gold" max="10">Orange</team>
+</teams>
+<filters>
+    <any id="play">
+        <material>glass</material>
+        <material>tnt</material>
+    </any>
+</filters>
+<regions>
+    <apply block="play"/>
+</regions>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="7" amount="16">bread</item>
+        <item slot="8" amount="16">arrow</item>
+        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
+        <!-- <shop-opener shop-id="a-shop" slot="3"/> -->
+    </kit>
+</kits>
+<spawns>
+    <spawn team="pink" kit="spawn">
+        <regions>
+            <cuboid max="-1, 9, -20" min="1, 9, -21"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn">
+        <regions yaw="180">
+            <cuboid max="-1, 9, 21" min="1, 9, 20"/>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="spawn">
+        <regions yaw="90">
+            <cuboid max="20, 9, 1" min="21, 9, -1"/>
+        </regions>
+    </spawn>
+    <spawn team="orange" kit="spawn">
+        <regions yaw="-90">
+            <cuboid max="-20, 9, 1" min="-21, 9, -1"/>
+        </regions>
+    </spawn>
+   <default yaw="90">
+        <region><point>0.5, 45, 0.5</point></region>
+    </default>
+</spawns>
+<king>
+    <hills>
+        <hill name="Ladder" neutral-state="false" capture-time="30s" points="1">
+            <capture><cylinder base="0.5, 46 ,0.5" radius="21" height="5"/></capture>
+        <progress><cylinder base="0.5, 45, 0.5" radius="21" height="4"/></progress>
+        <captured><cylinder base="0.5, 45 ,0.5" radius="21" height="5"/></captured>
+    </hill>
+  </hills>
+</king>
+<score>
+    <limit>1</limit>
+</score>
+<mobs filter="always"/>
+<timelock>on</timelock>
+<tnt>
+    <instantignite>on</instantignite>
+    <blockdamage>off</blockdamage>
+</tnt>
+<itemremove>
+    <item>leather helmet</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>bread</item>
+</itemremove>
+ <!-- <shops>
+    <shop id="a-shop" name="Ladder Club" open-check="always">
+      <point-config>
+        <player-kill>10</player-kill>
+      </point-config>
+      <items>
+        <item check="always" name="Spanky Spade" prestige="1" price="100">
+          <description>
+            <line>Knockback V on an 11 use diamond shovel.</line>
+          </description>
+          <stack damage="1550" material="diamond spade">
+            <enchantments>
+              <enchantment level="5">knockback</enchantment>
+            </enchantments>
+          </stack>
+        </item>
+      </items>
+    </shop>
+  </shops> -->
+</map>

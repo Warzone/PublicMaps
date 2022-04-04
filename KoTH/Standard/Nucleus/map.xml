@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.3.3">
 <name>Nucleus</name>
-<version>0.18</version>
+<version>0.21</version>
 <objective>Capture and hold the nucleus!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -51,7 +51,8 @@
             <item slot="3" amount="12">arrow</item>
             <item slot="4" name="`4Bonk! `eAtomic Punch" damage="8270" potions="damage_resistance:160:10:false;weakness:160:11:true;speed:60:0:false">potion</item>
             <potion duration="oo" amplifier="1">jump</potion>
-            <chestplate color="1D1F1C" enchantments="protection environmental:1;protection projectile:1" attributes="generic.movementSpeed:base:0.33" locked="true">leather chestplate</chestplate>
+            <chestplate color="1D1F1C" enchantments="protection environmental:1;protection projectile:1" locked="true">leather chestplate</chestplate>
+            <walk-speed>1.33</walk-speed>
         </kit>
     </class>
     <class name="Heavy" description="Shooting Good." icon="anvil">
@@ -65,7 +66,6 @@
             <potion duration="oo" amplifier="4">health boost</potion>
             <potion duration="oo" amplifier="2">increase_damage</potion>
             <potion duration="oo" amplifier="1">slow_digging</potion>
-            <potion duration="oo" amplifier="-1">jump</potion>
             <chestplate color="1D1F1C" attributes="generic.movementSpeed:base:-0.33;generic.knockbackResistance:base:10.00" enchantment="protection_projectile:2;durability:3" locked="true">leather chestplate</chestplate>
         </kit>
     </class>
@@ -96,7 +96,7 @@
     </class>
     <class name="Medic" description="Prepare for your examination." icon="potion">
         <kit>
-            <item slot="0" name="`b`oBonesaw" attributes="generic.movementSpeed:base:0.10">wood sword</item>
+            <item slot="0" name="`b`oBonesaw">wood sword</item>
             <item slot="1" name="`b`oSyringe Gun">bow</item>
             <item slot="2" amount="16">bread</item>
             <item slot="3" amount="24">arrow</item>
@@ -104,15 +104,19 @@
             <item slot="5" name="`d`lUBER-CHARGE" damage="16457" potions="slow:400:1:false;regeneration:400:2:false;damage_resistance:400:10:false">potion</item>
             <potion duration="2" amplifier="3">heal</potion>
             <potion duration="oo" amplifier="1">regeneration</potion>
-            <chestplate color="1D1F1C" attributes="generic.movementSpeed:base:0.07" locked="true">leather chestplate</chestplate>
+            <chestplate color="1D1F1C" locked="true">leather chestplate</chestplate>
+            <walk-speed>1.1</walk-speed>
         </kit>
     </class>
 </classes>
 <kits>
     <kit name="kill" force="true">
         <potion duration="oo" amplifier="-4">health boost</potion>
-        <potion duration="oo" amplifier="-10">jump</potion>
         <potion duration="oo">blindness</potion>
+    </kit>
+    <!-- due to scout's resitance pot -->
+    <kit name="if-you-live-kill" force="true">
+        <potion duration="oo" amplifier="10">instant_damage</potion>
     </kit>
     <kit name="r-spawn">
         <leggings color="C40000" locked="true">leather leggings</leggings>
@@ -181,13 +185,16 @@
         <rectangle min="-38,52" max="-14,79"/>
         <rectangle min="-38,-12" max="-14,-38"/>
     </apply>
+    <apply kit="if-you-live-kill">
+        <cylinder base="-31,0,20" radius="20" height="3"/>
+    </apply>
     <apply kit="kill">
         <cylinder base="-31,0,20" radius="20" height="20"/>
     </apply>
 </regions>
 <king>
     <hills>
-        <hill name="Nucleus" capture-time="10s" points="1">
+        <hill name="Nucleus" neutral-state="false" capture-time="10s" points="1">
             <capture>
                 <cuboid min="-34,29,16" max="-27,32,23"/>
             </capture>

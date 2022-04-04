@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Acromion</name>
-<version>1.0.1</version>
+<version>1.0.4</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -9,18 +9,20 @@
 </authors>
 <!-- Teams -->
 <teams>
-    <team id="blue-team" color="blue" max="50">Blue</team>
-    <team id="red-team" color="dark red" max="50">Red</team>
+    <team id="blue-team" color="blue" max="3">Blue</team>
+    <team id="red-team" color="dark red" max="3">Red</team>
 </teams>
 <!-- Kits -->
 <kits>
     <kit id="default">
+        <clear/>
         <item slot="0" unbreakable="true">iron sword</item>
         <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron axe</item>
-        <item slot="3" amount="64">wood</item>
+        <item slot="2" material="iron pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" amount="32">wood</item>
         <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="64">arrow</item>
+        <item slot="9" amount="24">arrow</item>
         <helmet unbreakable="true">iron helmet</helmet>
         <boots unbreakable="true">iron boots</boots>
     </kit>
@@ -37,7 +39,7 @@
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
     <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
-    <default region="obs-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
 <destroyables completion="31%" repairable="false" show-progress="true" sparks="true">
@@ -53,18 +55,18 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="blue-wool" min="-49,16,-19" max="-52,20,-22"/>
-        <cuboid id="red-wool" min="14,16,-19" max="17,20,-22"/>
+        <cuboid id="blue-wool" min="-41,16,-19" max="-44,20,-22"/>
+        <cuboid id="red-wool" min="6,16,-19" max="9,20,-22"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-74,0,10" max="-82,oo,2"/>
-        <cuboid id="red-spawn-protection" min="37,0,2" max="46,oo,10"/>
+        <cuboid id="blue-spawn-protection" min="-65,0,10" max="-72,oo,2"/>
+        <cuboid id="red-spawn-protection" min="30,0,2" max="37,oo,10"/>
     </union>
-    <point id="blue-spawn">-77.5,16,6.5</point>
-    <point id="red-spawn">42.5,16,6.5</point>
-    <point id="obs-spawn">-17.5,28.5,-17.5</point>
+    <point id="blue-spawn">-69.5,16,6.5</point>
+    <point id="red-spawn">34.5,16,6.5</point>
+    <point id="obs-spawn">-17.5,6,46.5</point>
     <negative id="not-map">
-        <rectangle id="map" min="-79,-29" max="44,31"/>
+        <rectangle id="map" min="-72,-29" max="37,31"/>
     </negative>
     <!-- Applications -->
     <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
@@ -72,26 +74,31 @@
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
 </regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
 <!-- Item Remove -->
 <itemremove>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>stone axe</item>
     <item>wood</item>
     <item>cooked beef</item>
-    <item>arrow</item>
-    <item>golden apple</item>
     <item>iron helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>iron boots</item>
     <item>wool</item>
 </itemremove>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item amount="4">arrow</item>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

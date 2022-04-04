@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Chemical Reaction</name>
+<version>1.0.1</version>
+<objective>Kill the enemy players as much as you can before time runs out.</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150" contribution="Map design"/> <!-- Pandaboy999 -->
+</authors>
+<contributors>
+    <contributor uuid="d8ba993b-77dc-443d-ab5f-690f30ec8dfb" contribution="Moral Support"/> <!-- vPixel -->
+    <contributor uuid="dc930d16-9145-4ae0-9ee6-71bd4786512f" contribution="Feedback"/> <!-- Ranil -->
+    <contributor uuid="c95e0a45-8208-430a-a1a2-1e27333445a4" contribution="Terraforming"/> <!-- Skippy369 -->
+</contributors>
+<teams>
+    <team color="dark red" max="40">Red</team>
+    <team color="blue" max="40">Blue</team>
+</teams>
+<kits>
+    <kit name="teams">
+        <item slot="0" enchantment="damage all:1">diamond sword</item>
+        <item slot="1" enchantment="arrow damage:1">bow</item>
+        <item slot="2" damage="16453">potion</item>
+        <item slot="3" damage="16453">potion</item>
+        <item slot="4" damage="16453">potion</item>
+        <item slot="5" damage="8226">potion</item>
+        <item slot="6" damage="8201">potion</item>
+        <item slot="7" amount="2">ender pearl</item>
+        <item slot="8" amount="32">cooked beef</item>
+        <item slot="28" amount="32">arrow</item>
+        <item slot="30" damage="8193">potion</item>
+        <item slot="31" damage="8193">potion</item>
+        <item slot="32" damage="8226">potion</item>
+        <item slot="33" damage="8201">potion</item>
+        <item slot="13" damage="16394">potion</item>
+        <item slot="22" damage="16394">potion</item>
+        <item slot="14" damage="16392">potion</item>
+        <item slot="23" damage="16392">potion</item>
+        <helmet>diamond helmet</helmet>
+        <chestplate>diamond chestplate</chestplate>
+        <leggings>diamond leggings</leggings>
+        <boots enchantment="protection fall:1">diamond boots</boots>
+        <potion amplifier="4" duration="5">heal</potion>
+        <potion duration="15">increase damage</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="teams" yaw="180">
+        <cylinder base="-37,23,67.5" radius="3" height="1"/>
+    </spawn>
+    <spawn team="blue" kit="teams" yaw="0">
+        <cylinder base="38,23,-66.5" radius="3" height="1"/>
+    </spawn>
+    <default yaw="270">
+        <cuboid min="58,64,2" max="62,64,-1"/>
+    </default>
+</spawns>
+<regions>
+    <apply block="deny-all" use="deny-some">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<filters>
+    <filter name="deny-some">
+        <deny>
+            <block>furnace</block>
+            <block>dispenser</block>
+        </deny>
+    </filter>
+</filters>
+<playable>
+    <rectangle min="-45,-75" max="46,76"/>
+</playable>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>diamond helmet</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>cooked beef</item>
+    <item>glass bottle</item>
+    <item>cooked beef</item>
+    <item>potion</item>
+    <item>ender pearl</item>
+    <item>arrow</item>
+</itemremove>
+<killreward>
+    <item damage="16453">potion</item>
+    <item damage="16453">potion</item>
+    <item damage="8226">potion</item>
+    <item damage="8201">potion</item>
+    <item damage="16394">potion</item>
+    <item>ender pearl</item>
+    <item amount="16">arrow</item>
+</killreward>
+<timelock>on</timelock>
+<score>
+    <time>10m</time>
+</score>
+</map>

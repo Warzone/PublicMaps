@@ -1,0 +1,256 @@
+<map proto="1.4.0">
+<name>SuperPRISM</name>
+<version>1.3.5</version>
+<objective>Be the team with the most points after 5 minutes!</objective>
+<gamemode>tdm</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Idea, Main Design and XML"/> <!-- ItsMiiOlly -->
+    <author uuid="8e8340b2-d315-4d26-9178-d2145b59850c" contribution="Building and Aesthetics"/> <!-- oX_W1LL_G_Xo -->
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Building, Aesthetics and WorldEdit magic"/> <!-- xXFracXx -->
+    <author uuid="9909505b-1f0f-4af1-ae21-afbee92427ce" contribution="Aesthetics and Building"/> <!-- Winarve -->
+</authors>
+<contributors>
+    <contributor uuid="714ff88f-25d9-4754-9caa-d0f3cf24f230" contribution="Aesthetics and Feedback"/> <!-- thegoodguy -->
+    <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Aesthetics and Feedback"/> <!-- PlasmaCross -->
+    <contributor uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="XML and Server Hosting"/> <!-- TheZaner -->
+    <contributor uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83" contribution="Aesthetics, Feedback and Suggestions"/> <!-- lonelyhornet -->
+    <contributor contribution="Help and Support">The Orange Sunglasses Build Team</contributor>
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+    <rule>Auto respawn is enabled!</rule>
+</rules>
+<teams>
+   <team id="cyan" color="dark aqua" max="18">Cyan</team>
+   <team id="yellow" color="yellow" max="18">Yellow</team>
+</teams>
+<kits>
+    <kit id="all">
+        <effect duration="oo">night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="all">
+        <item slot="0" name="`e`lSplatbat" unbreakable="true" material="gold sword">
+            <enchantment level="10">sharpness</enchantment>
+        </item>
+        <item slot="1" name="`bSniper Rifle" unbreakable="true" material="bow">
+            <enchantment level="10">power</enchantment>
+        </item>
+        <item slot="2" amount="2">arrow</item>
+        <effect duration="oo" amplifier="2">speed</effect>
+        <effect duration="oo" amplifier="1">jump</effect>
+        <effect duration="5" amplifier="25">heal</effect>
+        <effect duration="5" amplifier="25">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="cyan-kit" parents="spawn-kit">
+        <helmet color="4C7F99" material="leather helmet"/>
+        <chestplate color="8f8f8f" material="leather chestplate"/>
+        <leggings color="8f8f8f" material="leather leggings"/>
+        <boots color="8f8f8f" material="leather boots"/>
+    </kit>
+    <kit id="yellow-kit" parents="spawn-kit">
+        <helmet color="daff00" material="leather helmet"/>
+        <chestplate color="8f8f8f" material="leather chestplate"/>
+        <leggings color="8f8f8f" material="leather leggings"/>
+        <boots color="8f8f8f" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default kit="all">
+        <region yaw="0">
+            <cuboid min="-1063,15,-2105" max="-1063,15,-2105"/>
+        </region>
+        <region yaw="180">
+            <cuboid min="-1101,15,-2227" max="-1101,15,-2227"/>
+        </region>
+    </default>
+    <spawn team="cyan" kit="cyan-kit" yaw="0">
+        <region>
+            <cuboid min="-1106,1,-2224" max="-1096,1,-2228"/>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="yellow-kit" yaw="180">
+        <region>
+            <cuboid min="-1058,1,-2108" max="-1068,1,-2104"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <not id="only-cyan">
+        <team>yellow</team>
+    </not>
+    <not id="only-yellow">
+        <team>cyan</team>
+    </not>
+    <material id="only-tnt">tnt</material>
+</filters>
+<regions>
+    <union id="cyan-spawn">
+        <cuboid min="-1114,0,-2213" max="-1106,6,-2206"/>
+        <cuboid min="-1094,0,-2226" max="-1087,7,-2219"/>
+    </union>
+    <union id="yellow-spawn">
+        <cuboid min="-1057,0,-2125" max="-1049,6,-2118"/>
+        <cuboid min="-1076,0,-2112" max="-1069,7,-2106"/>
+    </union>
+    <apply enter="only-cyan" message="You may not enter the enemy team's spawn!" region="cyan-spawn"/>
+    <apply enter="only-yellow" message="You may not enter the enemy team's spawn!" region="yellow-spawn"/>
+    <apply block="only-tnt"/>
+    <!-- Yellow Pads -->
+    <apply velocity="@ -0.4,1.1,0.0">
+        <region>
+            <cuboid min="-1081,1,-2116" max="-1078,2,-2113"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,-0.4">
+        <region>
+            <cuboid min="-1062,1,-2123" max="-1059,2,-2120"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.7,-0.4">
+        <region>
+            <cuboid min="-1083,1,-2161" max="-1080,2,-2158"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,0.4">
+        <region>
+            <cuboid min="-1101,1,-2153" max="-1098,2,-2150"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,-0.4">
+        <region>
+            <cuboid min="-1056,1,-2133" max="-1053,2,-2130"/>
+        </region>
+    </apply>
+    <!-- Green pads room 1 -->
+    <apply velocity="@ 0.4,1.4,0.0">
+        <region>
+            <cuboid min="-1043,1,-2164" max="-1040,2,-2161"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,0.4">
+        <region>
+            <cuboid min="-1025,1,-2177" max="-1021,2,-2174"/>
+        </region>
+    </apply>
+    <apply velocity="@ -0.4,1.4,0.0">
+        <region>
+            <cuboid min="-1029,1,-2196" max="-1026,2,-2193"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,-0.4">
+        <region>
+            <cuboid min="-1056,1,-2182" max="-1053,2,-2179"/>
+        </region>
+    </apply>
+    <!-- Green pads room 2 -->
+    <apply velocity="@ 0.0,1.4,0.4">
+        <region>
+            <cuboid min="-1110,1,-2152" max="-1107,2,-2149"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.4,1.4,0.0">
+        <region>
+            <cuboid min="-1137,1,-2138" max="-1134,2,-2135"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,-0.4">
+        <region>
+            <cuboid min="-1142,1,-2157" max="-1139,2,-2154"/>
+        </region>
+    </apply>
+    <apply velocity="@ -0.4,1.4,0.0">
+        <region>
+            <cuboid min="-1123,1,-2170" max="-1120,2,-2167"/>
+        </region>
+    </apply>
+    <!-- Cyan Pads -->
+    <apply velocity="@ 0.4,1.1,0.0">
+        <region>
+            <cuboid min="-1085,1,-2218" max="-1082,2,-2215"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,0.4">
+        <region>
+            <cuboid min="-1104,1,-2211" max="-1101,2,-2208"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.7,0.4">
+        <region>
+            <cuboid min="-1083,1,-2173" max="-1080,2,-2170"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,0.4">
+        <region>
+            <cuboid min="-1110,1,-2201" max="-1107,2,-2198"/>
+        </region>
+    </apply>
+    <apply velocity="@ 0.0,1.4,-0.4">
+        <region>
+            <cuboid min="-1065,1,-2181" max="-1062,2,-2178"/>
+        </region>
+    </apply>
+</regions>
+<item-mods>
+    <rule>
+        <match>
+            <material>tnt</material>
+        </match>
+        <modify show-can-place-on="false">
+            <can-place-on>
+                <all-blocks/>
+            </can-place-on>
+        </modify>
+    </rule>
+</item-mods>
+<portals>
+    <portal x="@-1119" y="@1" z="@-2153">
+        <region>
+            <cuboid min="-1039,1,-2179" max="-1038,6,-2178"/>
+        </region>
+    </portal>
+    <portal x="@-1045" y="@1" z="@-2179">
+        <region>
+            <cuboid min="-1125,1,-2153" max="-1124,6,-2152"/>
+        </region>
+    </portal>
+</portals>
+<itemremove>
+    <item>gold sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>tnt</item>
+    <item>glass bottle</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<kill-reward>
+    <item amount="2">arrow</item>
+</kill-reward>
+<score>
+    <kills>1</kills>
+</score>
+<time>7m</time>
+<rage/>
+<respawn auto="true"/>
+<modifybowprojectile>
+    <effect duration="2" amplifier="1">blindness</effect>
+</modifybowprojectile>
+<disabledamage>
+    <damage>fall</damage>
+    <damage ally="true" self="true" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

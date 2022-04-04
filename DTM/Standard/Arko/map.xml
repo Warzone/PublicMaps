@@ -1,0 +1,130 @@
+<map proto="1.4.0">
+<name>Arko</name>
+<version>1.1.1</version>
+<gamemode>dtm</gamemode>
+<objective>Destroy the other team’s obsidian monuments</objective>
+<authors>
+    <author uuid="a53ab2da-36ed-4886-ac2a-49696de4622f"/>
+    <!--   SailorMojo   -->
+</authors>
+<teams>
+   <team id="red" color="dark red" max="30" max-overfill="35">Red</team>
+   <team id="blue" color="blue" max="30" max-overfill="35">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow">
+            <enchantment level="1">infinity</enchantment>
+        </item>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="stone axe"/>
+        <item slot="4" amount="32" material="wood"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" amount="64" material="golden carrot"/>
+        <item slot="28" material="arrow"/>
+        <effect duration="5" amplifier="5">resistance</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate color="cd0000" material="leather chestplate"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="0066cc" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns safe="true">
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="15,5,55" max="20,5,60"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="0">
+            <cuboid min="55,5,-70" max="60,5,-65"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-54,36,-16" max="-44,40,-6"/>
+        </regions>
+    </default>
+</spawns>
+<destroyables name="Top Monument" materials="obsidian" completion="100%">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="26,24,45" max="27,27,46"/>
+        </region>
+    </destroyable>
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="48,24,-56" max="49,27,-55"/>
+        </region>
+    </destroyable>
+</destroyables>
+<destroyables name="Bottom Monument" materials="obsidian" completion="100%">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="-17,8,6" max="-16,11,7"/>
+        </region>
+    </destroyable>
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="91,8,-17" max="92,11,-16"/>
+        </region>
+    </destroyable>
+</destroyables>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <apply block="never" message="You cannot build here!">
+        <region>
+            <union>
+                <cuboid min="53,5,-71" max="62,8,-65"/>
+                <cuboid min="13,5,55" max="22,8,61"/>
+                <negative>
+                    <cuboid min="-30,0,-72" max="105,45,62"/>
+                </negative>
+            </union>
+        </region>
+    </apply>
+    <apply enter="only-red" message="You cannot enter the enemy team’s spawn!">
+        <region>
+            <cuboid min="13,5,55" max="22,8,61"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" message="You cannot enter the enemy team’s spawn">
+        <region>
+            <cuboid min="53,5,-71" max="62,8,-65"/>
+        </region>
+    </apply>
+</regions>
+<renewables>
+    <renewable rate="2" grow="false" aviod-entities="true">
+        <region>
+            <union>
+                <cuboid min="90,2,-43" max="104,23,-22"/> <!-- blue -->
+                <cuboid min="-29,2,12" max="-15,23,33"/> <!-- red -->
+            </union>
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+        <replace-filter>
+            <material>air</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>golden carrot</item>
+    <item>leather chestplate</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+</map>

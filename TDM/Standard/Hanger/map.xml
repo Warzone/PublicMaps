@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Hanger</name>
+<version>1.0.2</version>
+<objective>Be the first team to reach 100 points!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Main design, building and XML"/><!-- ItsMiiOlly -->
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Aesthetics and WorldEdit magic"/><!-- xXFracXx AKA Frac -->
+    <author uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="Aesthetics and Design"/><!-- TheZaner -->
+</authors>
+<contributors>
+    <contributor uuid="374988d6-4569-444e-885a-409c2f55e310" contribution="Wall design"/><!-- Articray -->
+    <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Design and Feedback"/><!-- PlasmaCross -->
+    <contributor uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83" contribution="Feedback"/><!-- lonelyhornet -->
+    <contributor uuid="a59dce2e-79e2-4229-ab83-98c885fceb23" contribution="Crate designs"/><!-- xXNarwhaleXx -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML Fixing and Testing"/><!-- ElectroidFilms -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+    <rule>Do not block glitch into unreachable places!</rule>
+    <rule>Spawn Camping is illegal, not to mention you'll get owned.</rule>
+</rules>
+<teams>
+    <team color="blue" max="15" max-overfill="20">Blue Team</team>
+    <team color="yellow" max="15" max-overfill="20">Yellow Team</team>
+</teams>
+<score>
+    <limit>100</limit>
+    <time>15m</time>
+</score>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="90">
+        <cylinder base="-10,1,733" radius="3" height="2"/>
+    </spawn>
+    <spawn team="yellow" kit="yellow" yaw="-90">
+        <cylinder base="-101,1,733" radius="3" height="2"/>
+    </spawn>
+    <default yaw="180">
+        <cylinder base="-55,18,733" radius="1" height="2"/>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0" name="`c`lKnife" damage="-3000" enchantment="damage all:1">iron sword</item>
+        <item slot="1" name="`c`lGun" damage="-3000" enchantment="arrow infinite:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="2" name="`c`lHealth Kit" damage="8229">potion</item>
+        <potion duration="7" amplifier="25">heal</potion>
+        <potion duration="7" amplifier="25">damage resistance</potion>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <potion duration="oo" amplifier="8">jump</potion>
+        <chestplate damage="-3000">iron chestplate</chestplate>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="1919ff" damage="-3000">leather helmet</helmet>
+        <leggings color="1919ff" damage="-3000">leather leggings</leggings>
+        <boots color="1919ff" damage="-3000">leather boots</boots>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <helmet color="ffa500" damage="-3000">leather helmet</helmet>
+        <leggings color="ffa500" damage="-3000">leather leggings</leggings>
+        <boots color="ffa500" damage="-3000">leather boots</boots>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-all">
+        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>glass bottle</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item name="`c`lHealth Kit" damage="8229">potion</item>
+</itemremove>
+<killreward>
+    <item name="`c`lHealth Kit" damage="8229">potion</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<modifybowprojectile>
+    <velocityMod>2.0</velocityMod>
+</modifybowprojectile>
+<timelock>on</timelock>
+<tutorial>
+    <stage title="Team Death Match">
+        <message>
+            <line>`rThis map is a `a`lTeam Death Match `r(TDM) map</line>
+            <line>First team to a total of `4`l100 Kills`r wins.</line>
+        </message>
+        <teleport>
+            <point angle="-59,5,735">-88,19,748</point>
+        </teleport>
+    </stage>
+    <stage title="Team Spawns">
+        <message>
+            <line>`rExits are on both `asides`r and the stairs will lead you to the Sniping Area.</line>
+        </message>
+        <teleport>
+            <point angle="-14,1,737">-6,2,728</point>
+        </teleport>
+    </stage>
+    <stage title="Sniping Area">
+        <message>
+            <line>`rSniping area is used to snipe players on the other side, you can also find your own sniping spots.</line>
+        </message>
+        <teleport>
+            <point angle="-19,8,730">-8,11,737</point>
+        </teleport>
+    </stage>
+    <stage title="The Center">
+        <message>
+        <line>`rThe Center is the main combat area. Tunnels and holes lead to it too.</line>
+        </message>
+        <teleport>
+            <point angle="-53,5,736">-47,15,746</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

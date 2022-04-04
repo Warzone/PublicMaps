@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Ingrained</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" contribution="Team Spawn"/> <!-- Virus53 -->
+    <contributor uuid="3fa22f5e-098d-49f7-b9ad-92566f045cbc" contribution="House"/> <!-- BigTonyMC -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="7">Blue</team>
+    <team id="red-team" color="dark red" max="7">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">stone pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" unbreakable="true">stone spade</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="9" amount="32">arrow</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" region="blue-spawn"/>
+    <spawn team="red-team"  kit="red-kit"  region="red-spawn" yaw="-180"/>
+    <default region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="32%" repairable="false" show-progress="true" sparks="true" materials="wool">
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
+    <destroyable name="Red Wool"  owner="red-team"  region="red-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="35,10,99"  max="21,14,102"/>
+        <cuboid id="red-wool"  min="-25,10,-2" max="-11,14,-6"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-3,0,49" max="13,oo,75"/>
+        <cuboid id="red-spawn-protection"  min="13,0,47" max="-3,oo,21"/>
+    </union>
+    <point id="blue-spawn">5.5,10,64.5</point>
+    <point id="red-spawn">5.5,10,32.5</point>
+    <point id="obs-spawn">5.5,40,48.5</point>
+    <!-- Applications -->
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+</regions>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+    <tool>bow</tool>
+</toolrepair>
+<!-- Item Remove -->
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>wool</item>
+    <item>beacon</item>
+</itemremove>
+<!-- Kill Rewards -->
+<killreward>
+    <item>golden apple</item>
+</killreward>
+<!-- Misc -->
+<maxbuildheight>25</maxbuildheight>
+</map> 

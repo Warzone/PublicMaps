@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<map proto="1.3.5">
+<name>Dracula</name> 
+<version>1.0.5</version> 
+<objective>Be the first team to reach 650 points!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="XML"/> <!-- rockymine -->
+</contributors>
+<teams>
+   <team color="red" max="8" max-overfill="10">Red</team>
+   <team color="dark_aqua" max="8" max-overfill="10">Cyan</team>
+   <team color="gold" max="8" max-overfill="10">Orange</team>
+   <team color="dark_purple" max="8" max-overfill="10">Purple</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <clear/>
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" damage="8229">potion</item>
+        <item slot="6" amount="32">arrow</item>
+        <item slot="7" amount="64">391</item>
+        <item slot="8" amount="7">gold nugget</item>
+        <chestplate>leather chestplate</chestplate>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="ff0000" unbreakable="true">leather helmet</helmet>
+        <chestplate color="ff0000" unbreakable="true">leather chestplate</chestplate>
+        <boots color="ff0000" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="dark_aqua" parents="spawn">
+        <helmet color="4C7F99" unbreakable="true">leather helmet</helmet>
+        <chestplate color="4C7F99" unbreakable="true">leather chestplate</chestplate>
+        <boots color="4C7F99" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="gold" parents="spawn">
+        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
+        <boots color="D87F33" unbreakable="true">leather boots</boots>
+    </kit>
+    <kit name="dark_purple" parents="spawn">
+        <helmet color="7F3FB2" unbreakable="true">leather helmet</helmet>
+        <chestplate color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+        <boots color="7F3FB2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red" yaw="-135">
+        <cylinder base="60,5,1024" radius="1" height="0"/>
+    </spawn>
+    <spawn team="Cyan" kit="dark_aqua" yaw="135">
+        <cylinder base="134,5,1024" radius="1" height="0"/>
+    </spawn>
+    <spawn team="Orange" kit="gold" yaw="45">
+        <cylinder base="134,5,950" radius="1" height="0"/>
+    </spawn>
+    <spawn team="Purple" kit="dark_purple" yaw="-45">
+        <cylinder base="60,5,950" radius="1" height="0"/>
+    </spawn>
+    <default yaw="0">
+        <cylinder base="98.5,36,987.5" radius="1" height="0.1"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red">
+        <not>
+            <team>Cyan</team>
+            <team>Orange</team>
+            <team>Purple</team>
+        </not>
+    </filter>
+    <filter name="only-dark_aqua">
+        <not>
+            <team>red</team>
+            <team>Orange</team>
+            <team>Purple</team>
+        </not>
+    </filter>
+    <filter name="only-gold">
+        <not>
+            <team>red</team>
+            <team>Cyan</team>
+            <team>Purple</team>
+        </not>
+    </filter>
+    <filter name="only-dark_purple">
+        <not>
+            <team>red</team>
+            <team>Cyan</team>
+            <team>Orange</team>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <union name="spawns">
+        <cylinder name="red-spawn" base="62,5,1022" radius="7" height="10"/>
+        <cylinder name="dark_aqua-spawn" base="132,5,1022" radius="7" height="10"/>
+        <cylinder name="gold-spawn" base="132,5,952" radius="7" height="10"/>
+        <cylinder name="dark_purple-spawn" base="62,5,952" radius="7" height="10"/>        
+    </union>
+    <apply block="deny-blocks">
+        <region name="spawns"/>
+    </apply>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply enter="only-red">
+        <region name="red-spawn"/>
+    </apply>
+    <apply enter="only-dark_aqua">
+        <region name="dark_aqua-spawn"/>
+    </apply>
+    <apply enter="only-gold">
+        <region name="gold-spawn"/>
+    </apply>
+    <apply enter="only-dark_purple">
+        <region name="dark_purple-spawn"/>
+    </apply>
+</regions>
+<king>
+    <hills>
+        <hill name="Middle" capture-time="20s" points="1.5">
+            <capture>
+                <cylinder base="97.5,10,987.5" radius="2" height="3"/>
+            </capture>
+            <progress>
+                <cylinder base="97.5,10,987.5" radius="3" height="1"/>
+            </progress>
+            <captured>
+                <cylinder base="97.5,10,987.5" radius="2" height="4"/>
+            </captured>
+        </hill>
+        <hill name="North-West" capture-time="10s" points="1">
+            <capture>
+                <cylinder base="81,14,971" radius="6" height="10"/>
+            </capture>
+            <progress>
+                <cylinder base="81,14,971" radius="6" height="10"/>
+            </progress>
+            <captured>
+                <cylinder base="81,14,971" radius="6" height="10"/>
+            </captured>
+        </hill>
+        <hill name="South-West" capture-time="10s" points="1">
+            <capture>
+                <cylinder base="81,14,1003" radius="6" height="10"/>
+            </capture>
+            <progress>
+                <cylinder base="81,14,1003" radius="6" height="10"/>
+            </progress>
+            <captured>
+                <cylinder base="81,14,1003" radius="6" height="10"/>
+            </captured>
+        </hill>
+        <hill name="North-East" capture-time="10s" points="1">
+            <capture>
+                <cylinder base="113,14,971" radius="6" height="10"/>
+            </capture>
+            <progress>
+                <cylinder base="113,14,971" radius="6" height="10"/>
+            </progress>
+            <captured>
+                <cylinder base="113,14,971" radius="6" height="10"/>
+            </captured> 
+        </hill>
+        <hill name="South-East" capture-time="10s" points="1">
+            <capture>
+                <cylinder base="113,14,1003" radius="6" height="10"/>
+            </capture>
+            <progress>
+                <cylinder base="113,14,1003" radius="6" height="10"/>
+            </progress>
+            <captured>
+                <cylinder base="113,14,1003" radius="6" height="10"/>
+            </captured> 
+        </hill>
+    </hills>
+</king>
+<score>
+    <kills>0</kills>
+    <deaths>0</deaths>
+    <limit>650</limit>
+</score>
+<killreward>
+    <item amount="4">gold nugget</item>
+    <item amount="4">arrow</item>
+    <item amount="1">golden apple</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather boots</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item damage="8229">potion</item>
+    <item>glass bottle</item>
+    <item>arrow</item>
+    <item>391</item>SS
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+</map>

@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Stalactite</name>
+<version>1.1.0</version>
+<objective>Reach 750 points before the opposing team!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="1154d26d-fa5d-4c42-9a38-aa3506d6ac7e"/>  <!-- Stuarts -->
+</authors>
+<contributors>
+    <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Helper"/> <!-- Vicei -->
+    <contributor uuid="68cfe240-d81c-46ae-8a93-9e3eb5d71e3e" contribution="Helper"/> <!-- Myv -->
+    <contributor uuid="282f4bab-54bb-4e2a-8345-9583c8d533ce" contribution="Helper"/> <!-- EDJM9 -->
+</contributors>
+<teams>
+    <team id="green" color="green" min="1" max="8">Green</team>
+    <team id="red" color="dark red" min="1" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="7" amount="32" material="cooked beef"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <effect duration="5" amplifier="255">damage resistance</effect>
+    </kit>
+    <kit id="green-kit" parents="default">
+        <helmet unbreakable="true" color="667F33" material="leather helmet"/>
+        <chestplate unbreakable="true" color="667F33" material="leather chestplate"/>
+        <boots unbreakable="true" color="667F33" material="leather boots"/>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet unbreakable="true" color="993333" material="leather helmet"/>
+        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
+        <boots unbreakable="true" color="993333" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="-90">
+        <region>
+            <point>-91.5,104,91.5</point>
+        </region>
+    </default>
+    <spawn team="green" kit="green-kit" yaw="0">
+        <region>
+            <point>0.5,73,-1.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="180">
+        <region>
+            <point>0.5,73,184.5</point>
+        </region>
+    </spawn>
+</spawns>
+<control-points capture-time="7s" incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Point B" points="1">
+        <capture>
+            <cylinder id="hill-b" base="41,66,48" radius="9" height="6"/>
+        </capture>
+        <progress>
+            <cylinder id="progress-hill-b" base="41,66,48" radius="9" height="150"/>
+        </progress>
+        <captured>
+            <cylinder id="captured-hill-b" base="41,66,48" radius="9" height="150"/>
+        </captured>
+    </control-point>
+    <control-point name="Center" points="1">
+        <capture>
+            <cylinder id="hill-center" base="0,75,91" radius="7" height="6"/>
+        </capture>
+        <progress>
+            <cylinder id="progress-hill-center" base="0,75,91" radius="7" height="150"/>
+        </progress>
+        <captured>
+            <cylinder id="captured-hill-center" base="0,75,91" radius="7" height="150"/>
+        </captured>
+    </control-point>
+   <control-point name="Point A" points="1">
+        <capture>
+            <cylinder id="hill-a" base="-41,66,134" radius="9" height="6"/>
+        </capture>
+        <progress>
+            <cylinder id="progress-hill-a" base="-41,66,134" radius="9" height="150"/>
+        </progress>
+        <captured>
+            <cylinder id="captured-hill-a" base="-41,66,134" radius="9" height="150"/>
+        </captured>
+    </control-point>
+</control-points>
+<filters>
+    <team id="green-only">green</team>
+    <team id="red-only">red</team>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cylinder id="green-spawn-protection" base="0.5,0,-1.5" radius="9" height="150"/>
+        <cylinder id="red-spawn-protection" base="0.5,0,184.5" radius="9" height="150"/>
+    </union>
+    <apply block="never"/>
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+</regions>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+        <item amount="12">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<respawn delay="5s"/>
+<score>
+    <limit>750</limit>
+</score>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>

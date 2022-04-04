@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Kings and Queens</name>
+<version>1.0.4</version>
+<objective>Be the team with the least deaths after the time limit is reached</objective>
+<gamemode>tdm</gamemode>
+<rules>
+    <rule>You may not shoot directly into spawn.</rule>
+</rules>
+<authors>
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Idea, main landscape, fixing the whole XML."/> <!-- Timothee38 -->
+    <author uuid="af9c1942-af66-42d1-89f9-9b677c281e03" contribution="Building, spawner/villagers editing."/> <!-- _IQ -->
+    <author uuid="90d4c2a3-137b-4965-b9e5-963ab5a23fa1" contribution="Gameplay ideas."/> <!-- Aceman1998 -->
+</authors>
+<contributors>
+    <contributor uuid="4111f215-28db-4a0d-9380-ee18641d02cf" contribution="Feedback."/> <!-- salalu -->
+    <contributor uuid="62c41f0e-133d-4192-ad33-f0896f47d23a" contribution="Help Fixing the map."/> <!-- nixter1029 -->
+</contributors>
+<time>10m</time>
+<teams>
+    <team id="blue" color="blue" max="60" max-overfill="75">Kings</team>
+    <team id="red" color="dark red" max="60" max-overfill="75">Queens</team>
+</teams>
+<kits>
+    <kit id="heal">
+        <potion duration="8" amplifier="5">heal</potion>
+        <potion duration="8" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit id="spawn" parents="heal">
+        <item slot="0" damage="-3000">stone sword</item>
+        <item slot="1" amount="24">grilled pork</item>
+        <item slot="2" amount="1">Emerald</item>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <chestplate color="334CB2" damage="-32000">leather chestplate</chestplate>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <chestplate color="993333" damage="-32000">leather chestplate</chestplate>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90"><cuboid min="263,7,43" max="266,7,46"/></regions>
+    </spawn>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90"><cuboid min="238,7,268" max="235,7,265"/></regions>
+    </spawn>
+    <default>
+        <regions  yaw="90"><cuboid min="330,71,157" max="327,71,154"/></regions>
+    </default>
+</spawns>
+<filters>
+    <any id="breakable-blocks">
+        <all>
+            <cause>player</cause>
+            <any>
+                <material>iron ore</material>
+                <material>tnt</material>
+                <material>torch</material>
+            </any>
+        </all>
+        <all>
+            <cause>explosion</cause>
+            <any>
+                <material>log</material>
+                <material>monster eggs</material>
+                <material>ladder</material>
+                <material>smooth brick</material>
+                <material>cobble wall</material>
+                <material>stained clay</material>
+                <material>step</material>
+                <material>smooth stairs</material>
+                <material>cobblestone stairs</material>
+                <material>wood stairs</material>
+                <material>sign</material>
+                <material>redstone torch on</material>
+            </any>
+        </all>
+    </any>
+    <all id="only-red">
+        <team>red</team>
+        <filter id="breakable-blocks"/>
+    </all>
+    <team id="red-only">red</team>
+    <all id="only-blue">
+        <team>blue</team>
+        <filter id="breakable-blocks"/>
+    </all>
+    <team id="blue-only">blue</team>
+</filters>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<regions>
+    <rectangle id="all" min="168,28" max="323,283"/>
+    <cuboid id="red-teleport-1" min="279,10,97" max="281,14,95"/>
+    <cuboid id="red-teleport-2" min="193,10,80" max="191,14,82"/>
+    <cuboid id="red-teleport-3" min="238,10,126" max="240,14,128"/>
+
+    <cuboid id="blue-teleport-1" min="219,10,215" max="217,14,213"/>
+    <cuboid id="blue-teleport-2" min="305,10,228" max="307,14,230"/>
+    <cuboid id="blue-teleport-3" min="260,10,184" max="258,14,182"/>
+
+    <apply block="only-red"  message="You can't destroy your own towers.">
+        <region>
+            <union id="blue-tp-towers">
+                <rectangle id="blue-tp-tower-1" min="212,208" max="225,221"/>
+                <rectangle id="blue-tp-tower-2" min="300,223" max="313,236"/>
+                <rectangle id="blue-tp-tower-3" min="253,177" max="266,190"/>
+            </union>
+        </region>
+    </apply>
+
+    <apply block="only-blue" message="You can't destroy your own towers.">
+        <region>
+            <union id="red-tp-towers">
+                <rectangle id="red-tp-tower-1" min="287,103" max="274,90"/>
+                <rectangle id="red-tp-tower-2" min="199,88" max="186,75"/>
+                <rectangle id="red-tp-tower-3" min="246,134" max="233,121"/>
+            </union>
+        </region>
+    </apply>
+
+    <union id="red-portals">
+        <region id="red-teleport-1"/>
+        <region id="red-teleport-2"/>
+        <region id="red-teleport-3"/>
+    </union>
+    <union id="blue-portals">
+        <region id="blue-teleport-1"/>
+        <region id="blue-teleport-2"/>
+        <region id="blue-teleport-3"/>
+    </union>
+
+    <apply block="never" message="You may not place blocks in your spawn.">
+        <region>
+            <union>
+                <rectangle min="246,33" max="286,63"/><!-- red spawn -->
+                <rectangle min="253,278" max="212,248"/><!-- blue spawn -->
+            </union>
+        </region>
+    </apply>
+
+    <apply enter="only-blue" message="You may not enter the ennemy spawn.">
+        <region>
+            <rectangle min="253,278" max="212,248"/><!--only blue-->
+        </region>
+    </apply>
+
+    <apply enter="only-red" message="You may not enter the ennemy spawn.">
+        <region>
+            <rectangle min="246,33" max="286,63"/>
+        </region>
+    </apply>
+
+    <apply block="breakable-blocks"/>
+</regions>
+<timelock>on</timelock>
+<multitrade/>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>grilled pork</item>
+    <item>diamond chestplate</item>
+    <item>iron chestplate</item>
+    <item>stone sword</item>
+    <item>diamond sword</item>
+    <item>iron axe</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond leggings</item>
+    <item>bone</item>
+    <item>rotten flesh</item>
+    <item>glass bottle</item>
+    <item>iron ingot</item>
+    <item>iron spade</item>
+    <item>arrow</item>
+    <item>ladder</item>
+    <item>stained clay</item>
+    <item>smooth brick</item>
+    <item>step</item>
+    <item>cobble wall</item>
+    <item>sapling</item>
+    <item>redstone torch on</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>iron sword</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>on</blockdamage>
+    <yield>0</yield>
+</tnt>
+<kill-rewards>
+    <kill-reward>
+        <item material="emerald"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <!-- TNT damages enemies and self, but not teammates -->
+    <damage ally="true" self="true" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<score>
+    <kills>1</kills>
+    <deaths>1</deaths>
+</score>
+<!--got to redo them-->
+<portals>
+    <portal region="red-portals" filter="red-only" >
+        <destination><cuboid min="263,7,43" max="266,7,46"/></destination>
+    </portal>
+    <portal region="blue-portals" filter="blue-only">
+        <destination><cuboid min="238,7,268" max="235,7,265"/></destination>
+    </portal>
+</portals>
+</map>

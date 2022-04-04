@@ -1,0 +1,264 @@
+<map proto="1.4.0">
+<name>The Arena Redux</name>
+<version>1.0.4</version>
+<objective>Be the team with the least amount of deaths after 12 minutes.</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="43b59b5d-f75c-4a5c-9146-f9d5e6cbdac4"/> <!-- Gone52 -->
+</authors>
+<contributors>
+    <contributor uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Reduxification"/> <!-- Jexel -->
+</contributors>
+<rules>
+    <rule>Spawn killing is prohibited.</rule>
+    <rule>Spawn camping is prohibited.</rule>
+</rules>
+<teams>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <helmet locked="true" team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate locked="true" team-color="true" unbreakable="true" material="leather chestplate">
+            <enchantment level="2">protection_projectile</enchantment>
+        </chestplate>
+        <leggings locked="true" unbreakable="true" material="iron leggings"/>
+        <boots locked="true" team-color="true" enchantment="protection fall:2" unbreakable="true" material="leather boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+        <attribute operation="add" amount="0.02">generic.movementSpeed</attribute>
+        <effect duration="3s" amplifier="1">heal</effect>
+        <effect duration="5s">damage resistance</effect>
+    </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
+</kits>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <not id="no-trapdoor">
+        <material>trap door</material>
+    </not>
+</filters>
+<regions>
+    <union id="not-playable">
+        <negative>
+            <rectangle id="main-area" min="-83,-62" max="84,63"/>
+            <rectangle id="blue-spawn" min="-103,-30" max="-83,31"/>
+            <rectangle id="red-spawn" min="84,-30" max="104,31"/>
+        </negative>
+        <rectangle id="blue-spawn-void1" min="-86,-25" max="-83,-4"/>
+        <rectangle id="blue-spawn-void2" min="-86,5" max="-83,26"/>
+        <rectangle id="red-spawn-void1" min="84,-25" max="87,-4"/>
+        <rectangle id="red-spawn-void2" min="84,5" max="87,26"/>
+    </union>
+    <cylinder id="spawn-default" base="0,46,0" radius="2" height="1"/>
+    <cuboid id="spawn-blue" min="-101,5,-4" max="-92,5,5"/>
+    <cuboid id="spawn-red" min="102,5,5" max="93,5,-4"/>
+    <below id="below-negative-5" y="-5"/>
+    <apply enter="never" region="not-playable" message="You may not enter this region"/>
+    <apply block="never" use="no-trapdoor"/>
+    <apply kit="void-death" region="below-negative-5"/>
+</regions>
+<spawns>
+    <default yaw="0" region="spawn-default"/>
+    <spawn team="blue" kit="spawn-kit" yaw="270" region="spawn-blue"/>
+    <spawn team="red" kit="spawn-kit" yaw="90" region="spawn-red"/>
+</spawns>
+<portals>
+    <portal y="-64" sound="false" region="below-negative-5"/>
+</portals>
+<score>
+    <kills>1</kills>
+    <deaths>0</deaths>
+</score>
+<time>12m</time>
+<itemremove>
+    <item>iron sword</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>iron leggings</item>
+    <item>potion</item>
+    <item>chainmail helmet</item>
+    <item>chainmail boots</item>
+    <item>chainmail leggings</item>
+    <item>chainmail chestplate</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <not>
+                <kill-streak min="4"/>
+            </not>
+        </filter>
+        <kit force="true">
+            <item amount="2" material="golden apple"/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <not>
+                <any>
+                    <kill-streak count="0"/>
+                    <kill-streak count="1"/>
+                    <kill-streak count="2"/>
+                    <kill-streak count="3"/>
+                </any>
+            </not>
+        </filter>
+        <kit force="true">
+            <item amount="1" material="golden apple"/>
+        </kit>
+    </kill-reward>
+    <!-- 2 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="4"/>
+        </filter>
+        <boots locked="true" unbreakable="true" material="iron boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+    </kill-reward>
+    <!-- 4 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="4"/>
+        </filter>
+        <kit force="true">
+            <item locked="true" slot="0" unbreakable="true" material="stone sword">
+                <enchantment>sharpness</enchantment>
+            </item>
+        </kit>
+    </kill-reward>
+    <!-- 8 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="8"/>
+        </filter>
+        <kit force="true">
+            <helmet locked="true" unbreakable="true" material="chainmail helmet"/>
+        </kit>
+    </kill-reward>
+    <!-- 10 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="10"/>
+        </filter>
+        <kit force="true">
+            <item slot="1" unbreakable="true" material="bow">
+                <enchantment>infinity</enchantment>
+                <enchantment>power</enchantment>
+            </item>
+        </kit>
+    </kill-reward>
+    <!-- 12 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="12"/>
+        </filter>
+        <kit force="true">
+            <leggings locked="true" unbreakable="true" material="iron leggings">
+                <enchantment>power</enchantment>
+            </leggings>
+            <attribute operation="add" amount="0.015">generic.movementSpeed</attribute>
+        </kit>
+    </kill-reward>
+    <!-- 16 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="16"/>
+        </filter>
+        <kit force="true">
+            <chestplate locked="true" unbreakable="true" material="chainmail chestplate">
+                <enchantment level="2">protection_projectile</enchantment>
+            </chestplate>
+        </kit>
+    </kill-reward>
+    <!-- 20 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="20"/>
+        </filter>
+        <kit force="true">
+            <item slot="0" locked="true" unbreakable="true" material="iron sword">
+                <attribute amount="7">generic.attackDamage</attribute>
+            </item>
+        </kit>
+    </kill-reward>
+    <!-- 22 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="22"/>
+        </filter>
+        <kit force="true">
+            <boots locked="true" unbreakable="true" enchantment="protection environmental:1;protection fall:2" material="iron boots">
+                <enchantment>protection</enchantment>
+                <enchantment level="2">feather_falling</enchantment>
+            </boots>
+        </kit>
+    </kill-reward>
+    <!-- 24 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="24"/>
+        </filter>
+        <kit force="true">
+            <helmet locked="true" unbreakable="true" material="chainmail helmet">
+                <enchantment>protection</enchantment>
+            </helmet>
+        </kit>
+    </kill-reward>
+    <!-- 28 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="28"/>
+        </filter>
+        <kit force="true">
+            <leggings locked="true" unbreakable="true" material="iron leggings">
+                <enchantment level="2">protection</enchantment>
+            </leggings>
+        </kit>
+    </kill-reward>
+    <!-- 30 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="30" repeat="true"/>
+        </filter>
+        <item material="potion" name="Enchanted potion of Faster Healing">
+            <effect duration="1m">regeneration</effect>
+        </item>
+    </kill-reward>
+    <!-- 32 kills -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="32"/>
+        </filter>
+        <kit force="true">
+            <chestplate locked="true" unbreakable="true" material="chainmail chestplate">
+                <enchantment level="2">protection</enchantment>
+                <enchantment level="2">protection_projectile</enchantment>
+            </chestplate>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="0s" auto="true"/>
+</map>

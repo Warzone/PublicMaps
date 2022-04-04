@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Afflicted</name>
+<version>1.0.6</version>
+<objective>Score the most points by controlling the 3 points!</objective>
+<gamemode>koth</gamemode>
+<rules>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+</rules>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+</authors>
+<teams>
+    <team color="dark red" max="24">Red</team>
+    <team color="blue" max="24">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true" name="`5`lSpirit Blade">stone sword</item>
+        <item slot="1" unbreakable="true" name="`5`lBloodthorned Shortbow" enchantment="arrow infinite:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <item slot="2" amount="24">grilled pork</item>
+        <item slot="3">golden apple</item>
+        <chestplate enchantment="protection projectile:1">iron chestplate</chestplate>
+        <potion duration="5" amplifier="4">heal</potion>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet unbreakable="true" color="cd0000">leather helmet</helmet>
+        <leggings unbreakable="true" color="cd0000">leather leggings</leggings>
+        <boots unbreakable="true" color="cd0000" enchantment="protection fall:2">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet unbreakable="true" color="0066cc">leather helmet</helmet>
+        <leggings unbreakable="true" color="0066cc">leather leggings</leggings>
+        <boots unbreakable="true" color="0066cc" enchantment="protection fall:2">leather boots</boots>
+    </kit>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+</kits>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leather helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>grilled pork</item>
+    <item>glass bottle</item>
+    <item>golden apple</item>
+</itemremove>
+<spawns>
+    <spawn yaw="-45" kit="red" team="red">
+        <cylinder base="59,7,70" radius="2" height="0" />
+    </spawn>
+    <spawn yaw="135" kit="blue" team="blue">
+        <cylinder base="124,7,-70" radius="2" height="0" />
+    </spawn>
+    <default yaw="-90">
+        <cylinder base="0,33,0" radius="1" height="0" />
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red" parents="deny-all">
+        <allow>
+            <team>red</team>
+        </allow>
+    </filter>
+    <filter name="only-blue" parents="deny-all"> 
+        <allow>
+            <team>blue</team>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="playable" min="-oo,-oo" max="oo,oo" />
+    <rectangle name="red-spawn" min="65,76" max="51,62" />
+    <rectangle name="blue-spawn" min="120,-75" max="134,-61" />
+    <apply block="deny-all">
+        <region name="playable" />
+    </apply>
+    <apply enter="only-blue" message="`fYou may not enter `1Blue Spawn!">
+        <region name="blue-spawn" />
+    </apply>
+    <apply enter="only-red" message="`fYou may not enter `4Red Spawn!">
+        <region name="red-spawn"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+        <region name="blue-spawn" />
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region name="red-spawn"/>
+    </apply>
+</regions>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+<king>
+    <hills>
+        <hill name="Middle" capture-time="5s" points="1">
+            <capture>
+                <cuboid min="89,6,-3" max="96,9,4" />
+            </capture>
+            <progress>
+                <cuboid min="89,5,-3" max="96,6,4" />
+            </progress>
+            <captured>
+                <cuboid min="87,11,-4" max="98,9,5" />
+            </captured>
+        </hill>
+        <hill name="Point A" capture-time="5s" points="1">
+            <capture>
+                <cuboid min="112,13,31" max="117,15,36" />
+            </capture>
+            <progress>
+                <cuboid min="112,12,31" max="117,13,36" />
+            </progress>
+            <captured>
+                <cuboid min="121,20,40" max="108,11,27" />
+            </captured>
+        </hill>
+        <hill name="Point B" capture-time="5s" points="1">
+            <capture>
+                <cuboid min="68,13,-35" max="73,16,-30" />
+            </capture>
+            <progress>
+                <cuboid min="68,12,-35" max="73,13,-30" />
+            </progress>
+            <captured>
+                <cuboid min="64,20,-39" max="77,11,-26" />
+            </captured>
+        </hill>
+    </hills>
+</king>
+<killreward>
+    <item>golden apple</item>
+</killreward>
+</map>

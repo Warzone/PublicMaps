@@ -1,0 +1,97 @@
+<map proto="1.4.0">
+<name>Clockwork</name>
+<version>1.0.1</version>
+<objective>Be the first team to reach 750 points from capturing the hills!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" />
+    <!-- Virus53 -->
+</authors>
+<teams>
+    <team id="lime-team" color="green" max="5">Lime</team>
+    <team id="purple-team" color="dark purple" max="5">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="9" amount="24">arrow</item>
+        <helmet unbreakable="true">iron helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings team-color="true" unbreakable="true">leather leggings</leggings>
+        <boots team-color="true" unbreakable="true">leather boots</boots>
+        <potion duration="5s" amplifier="10">damage resistance</potion>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<kill-reward>
+    <item>golden apple</item>
+    <item amount="4">arrow</item>
+</kill-reward>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<regions>
+    <apply region="everywhere" block="never" message="You may not modify the map!"/>
+</regions>
+<spawns>
+    <spawn yaw="135" team="lime-team" kit="spawn">
+        <region>
+            <point>21.5,11,21.5</point>
+        </region>
+    </spawn>
+    <spawn yaw="-45" team="purple-team" kit="spawn">
+        <region>
+            <point>-20.5,11,-20.5</point>
+        </region>
+    </spawn>
+    <default yaw="-135">
+        <region>
+            <point>0.5,36,0.5</point>
+        </region>
+    </default>
+</spawns>
+<control-points required="false">
+    <control-point name="North East Point" capture-time="5s">
+        <capture>
+            <cylinder base="21.5,15,-20.5" radius="5" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="21.5,14,-20.5" radius="5" height="1"/>
+        </progress>
+    </control-point>
+    <control-point name="Center" capture-time="5s">
+        <capture>
+            <cylinder base="0.5,17,0.5" radius="7" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="0.5,16,0.5" radius="7" height="1"/>
+        </progress>
+    </control-point>
+    <control-point name="South West Point" capture-time="5s">
+        <capture>
+            <cylinder base="-20.5,15,21.5" radius="5" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="-20.5,14,21.5" radius="5" height="1"/>
+        </progress>
+    </control-point>
+</control-points>
+<score>
+    <limit>750</limit>
+    <king/>
+</score>
+</map>

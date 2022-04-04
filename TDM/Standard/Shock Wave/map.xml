@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="tutorial.xml"/>
+<name>Shock Wave</name>
+<version>1.0.2</version>
+<objective>Kill the enemy to gain points for your team. The team with the most points wins!</objective>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
+</authors>
+<contributors>
+    <contributor uuid="43b92648-6b77-4868-afef-d4c4ed3f3d68" contribution="Detailed Feedback"/> <!-- Insanctuary -->
+    <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Support"/> <!-- ItsmiiOlly -->
+</contributors>
+<teams>
+    <team color="blue" max="25" max-overfill="30">Blue</team>
+    <team color="green" max="25" max-overfill="30">Green</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" amount="64">baked potato</item>
+        <item slot="3" damage="16373">potion</item> <!-- Instant Health II -->
+        <item slot="8">gold ingot</item>
+        <item slot="7" amount="24">arrow</item>
+        <potion duration="3" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="334CB2" enchantment="protection projectile:3">leather chestplate</chestplate>
+        <leggings color="334CB2">leather leggings</leggings>
+        <boots color="334CB2">leather boots</boots>
+    </kit>
+    <kit name="green" parents="spawn">
+        <chestplate color="7FCC19" enchantment="protection projectile:3">leather chestplate</chestplate>
+        <leggings color="7FCC19">leather leggings</leggings>
+        <boots color="7FCC19">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="135">
+        <cylinder base="39,1,39" radius="3" height="0"/>
+    </spawn>
+    <spawn team="green" kit="green" yaw="-45">
+        <cylinder base="-39,1,-39" radius="3" height="0"/>
+    </spawn>
+    <default yaw="180">
+        <cuboid min="1,9,-60" max="-1,9,-60"/>
+    </default>
+</spawns>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply enter="only-green" message="Don't enter the enemy base!">
+        <cuboid name="green-spawn" min="-30,0,-30" max="-46,oo,-46"/>
+    </apply>
+    <apply enter="only-blue" message="Don't enter the enemy base!">
+        <cuboid name="blue-spawn" min="31,0,31" max="47,oo,47"/>
+    </apply>
+</regions>
+<filters>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+</filters>
+<killreward>
+    <item amount="1">gold ingot</item>
+    <item amount="4">arrow</item>
+    <item damage="16373">potion</item>
+</killreward>
+<timelock>on</timelock>
+<itemremove>
+    <item>baked potato</item>
+    <item>gold sword</item>
+    <item>gold helmet</item>
+    <item>gold chestplate</item>
+    <item>gold leggings</item>
+    <item>gold boots</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>potion</item>
+    <item>glass bottle</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<score>
+    <time>10m</time>
+</score>
+<tutorial>
+    <stage title="Team Death Match (TDM)">
+        <message>
+            <line>`rThis map is a `4Team Death Match`r `l(TDM)`r map.</line>
+            <line>`rThe objective is to get as many `bpoints for your team`r by `4killing foes`r.</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="15">17,15,-16</point>
+        </teleport>
+    </stage>
+    <stage title="Gold Ingot Spawners">
+        <message>
+            <line>This is the one and only `agold ingot spawner`r.</line>
+            <line>Use the `6gold`r for armour.</line>
+            <line>Collect gold from killing enemies.</line>
+        </message>
+        <teleport>
+            <point yaw="0" pitch="50">0,19,-4</point>
+        </teleport>
+    </stage>
+    <stage title="Arrow spawners">
+        <message>
+            <line>There are `b4 arrow spawners`r in the map.</line>
+            <line>These spawn `a4 arrows`r every 8 seconds.</line>
+        </message>
+        <teleport>
+            <point yaw="45" pitch="25">25,8,-25</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

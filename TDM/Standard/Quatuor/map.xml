@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Quatuor</name>
+<version>1.0.0</version>
+<objective>Be the team with the most kills by in 5 minutes!</objective>
+<gamemode>tdm</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="23518e31-4110-41ce-9732-333888ae822d"/> <!-- crikimaruc -->
+</authors>
+<contributors>
+    <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="XML Writing"/> <!-- BlockDrop74 -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<teams>
+    <team color="gold" max="8" max-overfill="10">Orange</team>
+    <team color="yellow" max="8" max-overfill="10">Yellow</team>
+    <team color="dark aqua" max="8" max-overfill="10">Cyan</team>
+    <team color="dark purple" max="8" max-overfill="10">Purple</team>
+</teams>
+<score>
+    <time>5m</time>
+</score>
+<rage/>
+<kits>
+    <kit name="all">
+        <item slot="0" unbreakable="true" enchantment="damage all:10" lore="`aOne-hit kill!">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10" lore="`aOne-shot kill!">bow</item>
+        <item slot="2">arrow</item>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <potion duration="3" amplifier="100">heal</potion>
+        <potion duration="3" amplifier="100">damage resistance</potion>
+        <helmet unbreakable="true">gold helmet</helmet>
+    </kit>
+    <kit name="orange" parents="all">
+        <chestplate unbreakable="true" color="FF6600">leather chestplate</chestplate>
+        <boots unbreakable="true" color="FF6600">leather boots</boots>
+    </kit>
+    <kit name="yellow" parents="all">
+        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
+        <boots unbreakable="true" color="E5E533">leather boots</boots>
+    </kit>
+    <kit name="cyan" parents="all">
+        <chestplate unbreakable="true" color="2E7B7B">leather chestplate</chestplate>
+        <boots unbreakable="true" color="2E7B7B">leather boots</boots>
+    </kit>
+    <kit name="purple" parents="all">
+        <chestplate unbreakable="true" color="7729AB">leather chestplate</chestplate>
+        <boots unbreakable="true" color="7729AB">leather boots</boots>
+    </kit>
+    <kit name="observers">
+        <potion duration="oo" amplifier="2">speed</potion>
+        <potion duration="oo" amplifier="1">night vision</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="orange" kit="orange" yaw="90">
+        <cuboid min="56,83,-73" max="52,83,-77" />
+    </spawn>
+    <spawn team="yellow" kit="yellow" yaw="0">
+        <cuboid min="11,83,-122" max="7,83,-118" />
+    </spawn>
+    <spawn team="cyan" kit="cyan" yaw="-90">
+        <cuboid min="-38,83,-77" max="-34,83,-73" />
+    </spawn>
+    <spawn team="purple" kit="purple" yaw="180">
+        <cuboid min="7,83,-28" max="11,83,-32" />
+    </spawn>
+    <default kit="observers">
+        <cuboid min="11,148,-77" max="7,148,-73" />
+    </default>
+</spawns>
+<filters>
+    <filter name="only-orange">
+        <team>orange</team>
+    </filter>
+    <filter name="only-yellow">
+        <team>yellow</team>
+    </filter>
+    <filter name="only-cyan">
+        <team>cyan</team>
+    </filter>
+    <filter name="only-purple">
+        <team>purple</team>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="oo,oo" max="-oo,-oo"/>
+    </apply>
+    <apply enter="only-orange">
+        <cuboid min="45,0,-80" max="59,256,-70"/>
+    </apply>
+    <apply enter="only-yellow">
+        <cuboid min="4,0,-111" max="14,256,-125"/>
+    </apply>
+    <apply enter="only-cyan">
+        <cuboid min="-27,0,-70" max="-41,256,-80"/>
+    </apply>
+    <apply enter="only-purple">
+        <cuboid min="14,0,-39" max="4,256,-25"/>
+    </apply>
+    <apply velocity="@0,2.1,0">
+        <cuboid min="26,83,-61" max="23,84,-58"/>
+        <cuboid min="26,83,-93" max="23,84,-90"/>
+        <cuboid min="-9,83,-93" max="-6,84,-90"/>
+        <cuboid min="-9,83,-61" max="-6,84,-58"/>
+        <cuboid min="7,82,-74" max="10,84,-77"/>
+    </apply>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<killreward>
+    <item name="`bSpeed Upgrade" lore="`7Upgrades your speed to tier 2!" damage="8194" potions="speed:54000:1:true">potion</item>
+    <item>arrow</item>
+</killreward>
+<itemremove>
+    <item>gold helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>potion</item>
+    <item>glass bottle</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

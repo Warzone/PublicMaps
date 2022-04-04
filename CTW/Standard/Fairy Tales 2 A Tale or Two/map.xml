@@ -1,0 +1,246 @@
+<map proto="1.4.2">
+<name>Fairy Tales 2: A Tale or Two</name>
+<version>3.10.1</version>
+<objective>Take the enemy's wool located in bedrock castles on the enemy's side and place it in your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f"/> <!-- D347HxD -->
+</authors>
+<contributors>
+    <contributor uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Team Spawn Beautification"/> <!-- IM_A_H0B0 -->
+    <contributor uuid="ccb7a66f-ed6c-4f8d-953e-78205c33abba" contribution="Map Design"/> <!-- GabeisAwesome199 -->
+</contributors>
+<rules>
+    <rule>You many not make lava curtains or obsidian walls near the wool rooms or across entire lanes.</rule>
+</rules>
+<teams>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" unbreakable="true" material="iron spade">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="5" amount="64" damage="1" material="wood"/>
+        <item slot="32" amount="64" damage="1" material="wood"/>
+        <item slot="6" amount="64" material="glass"/>
+        <item slot="7" amount="16" material="snow ball"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="9" amount="9" damage="4" material="ink sack"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="3">damage resistance</effect>
+        <effect duration="2" amplifier="1">heal</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="270">
+            <cylinder base="59.5,12,-4.5" radius="4" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="0">
+            <cylinder base="-51,7,-94" radius="2.5" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="180">
+            <cylinder base="-51,7,84" radius="2.5" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <deny id="deny-lava">
+        <any>
+            <material>lava</material>
+            <material>stationary lava</material>
+        </any>
+    </deny>
+    <any id="materials">
+        <material>chest</material>
+        <material>sign post</material>
+        <material>wall sign</material>
+        <material>torch</material>
+        <material>ladder</material>
+    </any>
+    <not id="blue-in-wr">
+        <any>
+            <filter id="materials"/>
+            <team id="only-red">red</team>
+        </any>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <filter id="materials"/>
+            <team id="only-blue">blue</team>
+        </any>
+    </not>
+    <not id="deny-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <complement id="outside-map">
+        <everywhere/>
+        <rectangle min="-66,-127" max="-36,117"/>
+        <rectangle min="-86,-61" max="-16,51"/>
+        <rectangle min="-135,-84" max="33,-54"/>
+        <rectangle min="-135,44" max="33,74"/>
+        <union id="wool-rooms">
+            <union id="blue-wool-rooms">
+                <!-- blue must get -->
+                <rectangle id="green-room" min="33,44" max="45,74"/>
+                <rectangle id="light-gray-room" min="-147,44" max="-135,74"/>
+                <rectangle id="yellow-room" min="-66,117" max="-36,129"/>
+            </union>
+            <union id="red-wool-rooms">
+                <!-- red must get -->
+                <rectangle id="cyan-room" min="-66,-139" max="-36,-127"/>
+                <rectangle id="magenta-room" min="33,-84" max="45,-54"/>
+                <rectangle id="orange-room" min="-147,-84" max="-135,-54"/>
+            </union>
+        </union>
+    </complement>
+    <intersect id="under-wool-rooms">
+        <region id="wool-rooms"/>
+        <below y="16"/>
+    </intersect>
+    <complement id="deny-lava-block">
+        <union id="no-lava">
+            <rectangle id="blue-no-lava-main" min="-67,-102" max="-35,-87"/>
+            <rectangle id="blue-no-lava-stairs" min="-49,-87" max="-54,-73"/>
+            <rectangle id="red-no-lava-main" min="-67,77" max="-35,92"/>
+            <rectangle id="red-no-lava-stairs" min="-49,63" max="-53,77"/>
+        </union>
+        <union id="storage-rooms">
+            <cuboid id="blue-storage-room" min="-67,6,-102" max="-35,13,-87"/>
+            <cuboid id="blue-storage-room-stairs" min="-49,6,-87" max="-54,14,-73"/>
+            <cuboid id="red-storage-room" min="-67,6,77" max="-35,13,92"/>
+            <cuboid id="red-storage-room-stairs" min="-49,14,63" max="-53,6,77"/>
+        </union>
+    </complement>
+    <apply enter="never" block="never" message="You may not go underneath the wool rooms!" region="under-wool-rooms"/>
+    <apply enter="only-blue" message="You may not enter blue's storage room!" region="blue-storage-room"/>
+    <apply enter="only-red" message="You may not enter red's storage room!" region="red-storage-room"/>
+    <apply enter="only-blue" message="You may not enter your own wool rooms!" region="blue-wool-rooms"/>
+    <apply enter="only-red" message="You may not enter your own wool rooms!" region="red-wool-rooms"/>
+    <apply block="never" message="You may not break or place blocks in the storage room!" region="storage-rooms"/>
+    <apply block-place="deny-lava" message="You may not place lava around the spawn area!" region="deny-lava-block"/>
+    <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
+    <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
+    <apply block="deny-void" message="You may not build outside of the map!" region="outside-map"/>
+</regions>
+<wools>
+    <wool team="blue" color="green" location="41,18,59">
+        <monument>
+            <block>-51,8,-101</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="silver" location="-144,18,59">
+        <monument>
+            <block>-51,10,-101</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="yellow" location="-51,18,125">
+        <monument>
+            <block>-52,9,-101</block>
+        </monument>
+    </wool>
+    <wool team="red" color="cyan" location="-51,18,-136">
+        <monument>
+            <block>-52,9,90</block>
+        </monument>
+    </wool>
+    <wool team="red" color="magenta" location="41,18,-69">
+        <monument>
+            <block>-51,10,90</block>
+        </monument>
+    </wool>
+    <wool team="red" color="orange" location="-144,18,-69">
+        <monument>
+            <block>-51,8,90</block>
+        </monument>
+    </wool>
+</wools>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+    <item>redstone wire</item>
+    <item>redstone torch on</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>glass</material>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>log</material>
+        </filter>
+        <drops>
+            <item chance="0" material="log"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>wood</item>
+    <item>glass</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>ink sack</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="32" damage="1" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item damage="4" material="ink sack"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>38</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

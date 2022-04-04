@@ -1,0 +1,103 @@
+<?xml version="1.0"?> 
+<map proto="1.3.3"> 
+<name>Tired</name> 
+<version>1.2.1</version> 
+<objective>Be the team with the most kills after about 6 minutes.</objective>
+<gamemode>tdm</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors> 
+    <author uuid="03236737-c1f8-429c-83df-24b537365f5a" contribution="Block Design/Layout/Map Design"/> <!-- Guicotsch --> 
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="XML/Map Design"/> <!-- DoomRobotBoy --> 
+</authors> 
+<contributors> 
+    <contributor uuid="c2848337-b526-4db0-9130-fabd0a5c7cfb" contribution="MapDev Server Host"/> <!-- jollee999 --> 
+</contributors> 
+<rules> 
+    <rule>Fall and suffocation damage are disabled</rule> 
+</rules> 
+<teams> 
+    <team color="red" max="16" max-overfill="18">Red</team> 
+    <team color="blue" max="16" max-overfill="18">Blue</team> 
+</teams> 
+<spawns> 
+    <default kit="all" yaw="90"> 
+        <cylinder base="9.5,20,-55.5" radius="1" height="0"/>  
+    </default> 
+    <spawn team="red" kit="red" yaw="0"> 
+        <cuboid min="-11,35,-123" max="-12,35,-125"/>
+        <cuboid min="24,35,-125" max="25,35,-123"/>
+    </spawn> 
+    <spawn team="blue" kit="blue" yaw="-180"> 
+        <cuboid min="-7,35,13" max="-8,35,11"/>
+        <cuboid min="29,35,13" max="28,35,11"/>
+    </spawn> 
+</spawns> 
+<kits> 
+    <kit name="all"> 
+        <potion duration="oo">night vision</potion> 
+        <potion duration="oo" amplifier="1">speed</potion> 
+        <potion duration="oo" amplifier="3">jump</potion> 
+    </kit> 
+    <kit name="teams" parents="all"> 
+        <item slot="0" unbreakable="true" enchantment="damage all:10">iron sword</item> 
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <item slot="3" amount="64">vine</item> 
+        <potion duration="3" amplifier="100">damage resistance</potion> 
+        <potion duration="3" amplifier="100">heal</potion> 
+    </kit> 
+    <kit name="red" parents="teams"> 
+        <helmet unbreakable="true" color="993333">leather helmet</helmet> 
+        <chestplate unbreakable="true" locked="false" color="993333">leather chestplate</chestplate> 
+    </kit> 
+    <kit name="blue" parents="teams"> 
+        <helmet unbreakable="true" color="334CB2">leather helmet</helmet> 
+        <chestplate unbreakable="true" locked="false" color="334CB2">leather chestplate</chestplate> 
+    </kit> 
+</kits> 
+<filters> 
+    <filter name="only-vine"> 
+        <block>vine</block> 
+    </filter> 
+</filters> 
+<regions> 
+    <apply block="only-vine"> 
+        <rectangle min="-oo,-oo" max="oo,oo"/> 
+    </apply> 
+</regions> 
+<score> 
+    <time>6m40s</time> 
+</score> 
+<rage/> 
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove> 
+    <item>arrow</item> 
+    <item>potion</item> 
+    <item>glass bottle</item> 
+    <item>leather helmet</item> 
+    <item>leather chestplate</item> 
+    <item>vine</item>
+    <item>gold hoe</item>
+</itemremove> 
+<disabledamage> 
+    <damage>fall</damage> 
+    <damage>suffocation</damage> 
+</disabledamage>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<killreward>
+    <filter> 
+        <kill-streak count="3"/> 
+    </filter> 
+    <item name="`bSpeed Upgrade I" damage="8226" potions="speed:6000:1:true">potion</item> 
+</killreward> 
+<hunger> 
+    <depletion>off</depletion> 
+</hunger> 
+<timelock>on</timelock> 
+</map>

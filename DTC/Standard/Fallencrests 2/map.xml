@@ -1,0 +1,137 @@
+<map proto="1.3.2">
+<name>Fallencrests 2</name>
+<version>1.2.5</version>
+<objective>Leak the other team's obsidian core to win!</objective>
+<gamemode>dtc</gamemode>
+<teams>
+    <team color="yellow" max="40">Yellow</team>
+    <team color="dark red" max="40">Red</team>
+</teams>
+<authors>
+    <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
+    <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<contributors>
+    <contributor uuid="76cf5483-a7ea-4b5d-8830-385f768c4807"/> <!-- xannallax33 -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
+</contributors>
+<kits>
+    <kit name="spawn">
+        <item slot="0" unbreakable="true">diamond sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:2">iron pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" amount="64">golden carrot</item>
+        <item slot="5" amount="64">wood</item>
+        <item slot="7" amount="32">ladder</item>
+        <item slot="28">arrow</item>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <potion duration="5" amplifier="4">heal</potion>
+    </kit>
+    <kit name="r-spawn" parents="spawn">
+        <helmet unbreakable="true" color="993333">leather helmet</helmet>
+        <chestplate unbreakable="true" color="993333">leather chestplate</chestplate>
+        <boots unbreakable="true" color="993333">leather boots</boots>
+        <item slot="6" amount="64" damage="14">stained clay</item>
+    </kit>
+    <kit name="y-spawn" parents="spawn">
+        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
+        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
+        <boots unbreakable="true" color="E5E533">leather boots</boots>
+        <item slot="6" amount="64" damage="4">stained clay</item>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="r-spawn">
+        <cuboid min="12.5,18.5,42.5" max="10.5,18.5,43.5"/>
+    </spawn>
+    <spawn team="yellow" kit="y-spawn" yaw="180">
+        <cuboid min="12.5,18.5,254.5" max="14.5,18.5,253.5"/>
+    </spawn>
+    <default>
+        <cylinder base="12.5,82,148.5" radius="2" height="0"/>
+    </default>
+</spawns>
+<cores materials="obsidian" leak="4" mode-changes="true">
+    <core team="red">
+        <cuboid min="2,33,107" max="-3,38,102"/>
+    </core>
+    <core team="yellow">
+        <cuboid min="28,33,195" max="23,38,190"/>
+    </core>
+</cores>
+<modes>
+    <mode after="15m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode after="25m" material="packed ice" name="PACKED ICE CORE MODE"/>
+</modes>
+<filters>
+    <filter name="no-void">
+        <not>
+            <void/>
+        </not>
+    </filter>
+    <filter name="r-only">
+        <deny>
+            <team>yellow</team>
+        </deny>
+    </filter>
+    <filter name="y-only">
+        <deny>
+            <team>red</team>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply enter="r-only" message="`cDon't enter the enemy spawn!">
+        <cuboid name="r-spawn" min="16,16,47" max="7,oo,39"/>
+    </apply>
+    <apply enter="y-only" message="`cDon't enter the enemy spawn!">
+        <cuboid name="y-spawn" min="9,16,250" max="18,oo,258"/>
+    </apply>
+    <apply block="no-void">
+        <negative>
+            <rectangle min="50,138" max="-25,160"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="Don't modify the spawn!">
+        <region name="r-spawn"/>
+        <region name="y-spawn"/>
+    </apply>
+    <apply block="deny-all" message="You have hit the build limit over the void.">
+        <cuboid min="50,37,158" max="-25,oo,138"/>
+    </apply>
+    <apply block="deny-all" message="You have hit the build limit over the team areas.">
+        <cuboid min="50,53,33" max="-25,oo,138"/>
+    </apply>
+    <apply block="deny-all" message="You have hit the build limit over the team areas.">
+        <cuboid min="50,53,158" max="-25,oo,264"/>
+    </apply>
+</regions>
+<killreward>
+    <item>golden apple</item>
+    <item amount="32">wood</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>smooth brick</item>
+    <item>golden carrot</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>stained clay</item>
+</itemremove>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<timelock>on</timelock>
+</map>

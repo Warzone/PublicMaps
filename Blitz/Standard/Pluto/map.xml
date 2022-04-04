@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Pluto</name>
+<version>1.0.0</version>
+<objective>Eliminate the opposing team.</objective>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="e06e6ce8-9945-4379-9912-0e3f17608300"/> <!-- boats -->
+    <author uuid="8deddf84-a8bd-4ca3-84a9-6a9e8b2e4cd6"/> <!-- Vovl --> 
+    <author uuid="2dc9b2a1-6063-499b-9685-aa97b978707a"/> <!-- Luuke --> 
+</authors>
+<blitz>
+    <lives>3</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<respawn auto="true"/>
+<teams>
+   <team id="red-team" color="dark red" max="5" max-overfill="8">Red</team>
+   <team id="blue-team" color="blue" max="5" max-overfill="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="5" amount="64">glass</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="29" unbreakable="true">shears</item>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <boots unbreakable="true">iron boots</boots>
+        <effect duration="3" amplifier="50">damage_resistance</effect>
+    </kit>
+    <kit id="red-kit" parent="spawn">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+    </kit>
+    <kit id="blue-kit" parent="spawn">
+        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions yaw="168">
+            <point>14.5,75,80.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions yaw="-12">
+            <point>0.5,75,-5.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-15.5,83,37.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="red-only">red-team</team>
+    <team id="blue-only">blue-team</team>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cylinder id="red-spawn-protection" base="14.5,74,80.5" radius="6" height="8"/>
+        <cylinder id="blue-spawn-protection" base="0.5,74,-5.5" radius="6" height="8"/>
+    </union>
+    <negative id="not-map">
+        <rectangle id="map" min="-12,-14" max="27,89"/>
+    </negative>
+    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+</regions>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>glass</item>
+    <item>wood</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>shears</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<maxbuildheight>85</maxbuildheight>
+</map>

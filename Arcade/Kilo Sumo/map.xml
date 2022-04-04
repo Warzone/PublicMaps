@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Blitz: Sumo">
+<name>Kilo Sumo</name>
+<version>2.0.0</version>
+<objective>Be the last team standing by throwing everyone off the platform!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<!-- Authors & Contributors -->
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="TGM to PGM conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red" color="dark red" min="1" max="24">Red</team>
+    <team id="blue" color="blue" min="1" max="24">Blue</team>
+</teams>
+<!-- Time Limit & Lives -->
+<time>3m</time>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<!-- Broadcasts -->
+<broadcasts>
+    <alert after="20s">Watch out! The top platform is breaking!</alert>
+    <alert after="30s">The top platform has crumbled!</alert>
+    <alert after="50s">Watch out! The second layer of platforms is breaking!</alert>
+    <alert after="60s">The second layer of platforms has crumbled!</alert>
+    <alert after="80s">Watch out! The third layer of platforms is breaking!</alert>
+    <alert after="90s">The third layer of platforms has crumbled!</alert>
+    <alert after="98s">`cWatch out! The world border is getting close!</alert>
+</broadcasts>
+<!-- Kits -->
+<kits>
+    <!-- Red Kit -->
+    <kit id="red-kit">
+        <game-mode>adventure</game-mode>
+        <item slot="0" name="`cSUMO WEAPON" damage="1">ink sack</item>
+        <helmet unbreakable="true" locked="true" color="B02E26">leather helmet</helmet>
+        <effect duration="1000000" amplifier="5">saturation</effect>
+        <effect duration="1000000" amplifier="1">regeneration</effect>
+    </kit>
+    <!-- Blue Kit -->
+    <kit id="blue-kit">
+        <game-mode>adventure</game-mode>
+        <item slot="0" name="`9SUMO WEAPON" damage="4">ink sack</item>
+        <helmet unbreakable="true" locked="true" color="3C44AA">leather helmet</helmet>
+        <effect duration="1000000" amplifier="5">saturation</effect>
+        <effect duration="1000000" amplifier="1">instant_health</effect>
+    </kit>
+</kits>
+<!-- Platforms -->
+<destroyables required="false" show="false">
+    <destroyable name="First platform (White Clay)" owner="red"  materials="stained clay:0"  modes="first-white-clay-to-white-glass first-white-glass-to-air" region="first-platform"/>
+    <destroyable name="First platform (Blue Clay)"  owner="red"  materials="stained clay:11" modes="first-blue-clay-to-blue-glass first-blue-glass-to-air" region="first-platform"/>
+    <destroyable name="First platform (Red Clay)"   owner="blue" materials="stained clay:14" modes="first-red-clay-to-red-glass first-red-glass-to-air" region="first-platform"/>
+    <destroyable name="First platform (Black Clay)" owner="blue" materials="stained clay:15" modes="first-black-clay-to-black-glass first-black-glass-to-air" region="first-platform"/>
+
+    <destroyable name="Second platform (White Clay)" owner="red"  materials="stained clay:0"  modes="second-white-clay-to-white-glass second-white-glass-to-air" region="second-platform"/>
+    <destroyable name="Second platform (Black Clay)" owner="blue" materials="stained clay:15" modes="second-black-clay-to-black-glass second-black-glass-to-air" region="second-platform"/>
+    
+    <destroyable name="Third platform (White Clay)" owner="red"  materials="stained clay:0"  modes="third-white-clay-to-white-glass third-white-glass-to-air" region="third-platform"/>
+    <destroyable name="Third platform (Blue Clay)"  owner="red"  materials="stained clay:11" modes="third-blue-clay-to-blue-glass third-blue-glass-to-air" region="third-platform"/>
+    <destroyable name="Third platform (Red Clay)"   owner="blue" materials="stained clay:14" modes="third-red-clay-to-red-glass third-red-glass-to-air" region="third-platform"/>
+    <destroyable name="Third platform (Black Clay)" owner="blue" materials="stained clay:15" modes="third-black-clay-to-black-glass third-black-glass-to-air" region="third-platform"/>
+</destroyables>
+<!-- Modes -->
+<modes>
+    <mode id="first-white-clay-to-white-glass" after="20s" show-before="0" material="stained glass:0"/>
+    <mode id="first-blue-clay-to-blue-glass"   after="20s" show-before="0" material="stained glass:11"/>
+    <mode id="first-red-clay-to-red-glass"     after="20s" show-before="0" material="stained glass:14"/>
+    <mode id="first-black-clay-to-black-glass" after="20s" show-before="0" material="stained glass:15"/>
+    <mode id="first-white-glass-to-air"        after="30s" show-before="0" material="air"/>
+    <mode id="first-blue-glass-to-air"         after="30s" show-before="0" material="air"/>
+    <mode id="first-red-glass-to-air"          after="30s" show-before="0" material="air"/>
+    <mode id="first-black-glass-to-air"        after="30s" show-before="0" material="air"/>
+
+    <mode id="second-white-clay-to-white-glass" after="50s" show-before="0" material="stained glass:0"/>
+    <mode id="second-black-clay-to-black-glass" after="50s" show-before="0" material="stained glass:15"/>
+    <mode id="second-white-glass-to-air"        after="60s" show-before="0" material="air"/>
+    <mode id="second-black-glass-to-air"        after="60s" show-before="0" material="air"/>
+
+    <mode id="third-white-clay-to-white-glass" after="80s" show-before="0" material="stained glass:0"/>
+    <mode id="third-blue-clay-to-blue-glass"   after="80s" show-before="0" material="stained glass:11"/>
+    <mode id="third-red-clay-to-red-glass"     after="80s" show-before="0" material="stained glass:14"/>
+    <mode id="third-black-clay-to-black-glass" after="80s" show-before="0" material="stained glass:15"/>
+    <mode id="third-white-glass-to-air"        after="90s" show-before="0" material="air"/>
+    <mode id="third-blue-glass-to-air"         after="90s" show-before="0" material="air"/>
+    <mode id="third-red-glass-to-air"          after="90s" show-before="0" material="air"/>
+    <mode id="third-black-glass-to-air"        after="90s" show-before="0" material="air"/>
+</modes>
+<!-- World Border -->
+<world-borders center="-0.5, -0.5">
+    <world-border size="250"/>
+     <!-- The world border starts shrinking once the match starts, it will physically appear after 100 seconds. -->
+    <world-border size="3" after="0s" duration="125s" damage="100" buffer="0"/>
+</world-borders>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <cuboid id="first-platform" min="-11,80,-11" max="10,85,10"/>
+    <cuboid id="second-platform" min="-25,65,-25" max="24,70,24"/>
+    <cuboid id="third-platform" min="-11,37,-11" max="10,42,10"/>
+    <!-- Applications -->
+    <apply block="never" message="You are not allowed to modify terrain here."/>
+</regions>
+<!-- Spawns -->
+<spawns>
+    <!-- Red Team -->
+    <spawn team="red" kit="red-kit">
+        <regions yaw="-90">
+            <cuboid min="-9,84,-6" max="-7,86,5"/>
+        </regions>
+    </spawn>
+    <!-- Blue Team -->
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="90">
+            <cuboid min="6,84,-6" max="8,86,5"/>
+        </regions>
+    </spawn>
+    <!-- Obs (Spectators) Team -->
+    <default>
+        <regions>
+            <point>-0.5,139,-0.5</point>
+        </regions>
+    </default>
+</spawns>
+<!-- Itemremove -->
+<itemremove>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+</itemremove>
+<!-- Miscellaneous -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

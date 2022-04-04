@@ -1,0 +1,160 @@
+<map proto="1.3.3">
+<name>Strongbow</name>
+<version>0.6.4</version>
+<objective>Break the obsidian from the enemy team's monument.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="bada87c3-3383-42cb-973d-99032a0724b9"/> <!-- Holdfast33 -->
+</authors>
+<contributors>
+    <contributor uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4" contribution="Map Design and Aesthetic changes"/> <!-- DiamondAx -->
+    <contributor uuid="d556bcdf-57ad-4220-92f6-150a9b12380b" contribution="XML and Aesthetic changes"/> <!-- three_two -->
+    <contributor uuid="91295196-9cd2-4963-b7ec-afd1a110edbe" contribution="Server Host and Aesthetic changes"/> <!-- PandaBattalion -->
+</contributors>
+<teams>
+    <team color="dark red" max="14" max-overfill="18">Red</team>
+    <team color="blue" max="14" max-overfill="18">Blue</team>
+</teams>
+<maxbuildheight>38</maxbuildheight>
+<spawns>
+    <spawns safe="true" team="red" kit="red">
+        <spawn yaw="179">
+            <cylinder base="-251.5,16,932.5" radius="0" height="0"/>
+        </spawn>
+    </spawns>
+    <spawns safe="true" team="blue" kit="blue">
+        <spawn yaw="-179">
+            <cylinder base="-321.5,16,932.5" radius="0" height="0"/>
+        </spawn>
+    </spawns>
+    <default yaw="-179">
+        <cuboid min="-283,32,882" max="-289.5,32,886.5"/>
+    </default>
+</spawns>
+<modes>
+    <mode after="15m" material="beacon" name="`bBEACON MONUMENT MODE"/>
+    <mode after="25m" material="coal block" name="`8COAL MONUMENT MODE"/>
+</modes>
+<destroyables name="Monument" completion="100%" materials="obsidian" mode-changes="true">
+    <destroyable owner="blue">
+        <cuboid min="-363,24,914" max="-364,27,916"/>
+    </destroyable>
+    <destroyable owner="red">
+        <cuboid min="-209,24,914" max="-210,27,916"/>
+    </destroyable>
+</destroyables>
+<filters>
+    <filter name="deny-enchant">
+        <deny>
+            <block>enchantment table</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <apply block="deny-all" message="You may not build outside the map area!">
+        <negative>
+            <rectangle min="-183,908" max="-390,942"/>
+        </negative>
+    </apply>
+    <apply block="deny-all" message="Please don't break the spawns!">
+        <cylinder base="-252.5,14,930.5" height="6" radius="5"/>
+        <!--  West Red  -->
+        <cylinder base="-320.5,14,930.5" height="6" radius="5"/>
+        <!--  West Blue  -->
+    </apply>
+    <apply block="deny-enchant" message="You may not destroy the enchantment table!">
+        <rectangle min="-183,908" max="-390,942"/>
+    </apply>
+    <apply block="deny-all" message="Please don't break the stars!">
+        <cylinder base="-209,39,915.5" height="5" radius="5"/>
+        <!--  Red Star  -->
+        <cylinder base="-363.5,39,915.5" height="5" radius="5"/>
+        <!--  Blue Star  -->
+    </apply>
+</regions>
+<kits>
+    <kit name="spawn">
+        <clear/>
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="28">arrow</item>
+        <item slot="2" enchantment="dig speed:1">diamond pickaxe</item>
+        <item slot="3">iron axe</item>
+        <item slot="4" amount="64" damage="2">log</item>
+        <item slot="5" amount="64">golden carrot</item>
+        <item slot="6" amount="1">golden apple</item>
+        <item slot="7" amount="6">torch</item>
+        <item slot="9" amount="9" damage="4" material="ink sack"/>
+        <potion duration="2" amplifier="1">heal</potion>
+        <potion duration="5">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>golden carrot</item>
+    <item>grass</item>
+    <item>crops</item>
+    <item>seeds</item>
+    <item>glass</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>sapling</item>
+    <item>bedrock</item>
+    <item>obsidian</item>
+    <item>coal</item>
+    <item>coal block</item>
+    <item>beacon</item>
+    <item>arrow</item>
+    <item>gravel</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>torch</item>
+</itemremove>
+<kill-rewards>
+    <killreward>
+        <item>exp bottle</item>
+        <item>golden apple</item>
+    </killreward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item damage="4" material="ink sack"/>
+    </kill-reward>
+</kill-rewards>
+<itemkeep>
+    <item>golden apple</item>
+    <item>exp bottle</item>
+    <item>ink sack</item>
+</itemkeep>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<gamerules>
+    <doDaylightCycle>true</doDaylightCycle>
+</gamerules>
+</map>

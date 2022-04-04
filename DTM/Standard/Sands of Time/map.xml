@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Sands of Time</name>
+<version>1.0.0</version>
+<objective>Destroy the enemy's 3 monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="53af1e46-7424-485b-97de-7bf8d854a2aa"/> <!-- __BT -->
+    <author uuid="a63de09d-6fa9-436f-9070-26f5e9a4d27b"/> <!-- dragonrider455 -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3Each
+ -->
+</authors>
+<teams>
+    <team id="pink" color="light purple" max="15">Pink</team>
+    <team id="gray" color="gray" max="15">Gray</team>
+</teams>
+<spawns>
+    <default>
+        <region>
+            <block>176.5,46,1.5</block>
+        </region>
+    </default>
+    <spawn team="pink" kit="pink-kit">
+        <region yaw="-90">
+            <block>79.5,27,68.5</block>
+        </region>
+    </spawn>
+    <spawn team="gray" kit="gray-kit">
+        <region yaw="90">
+            <block>272.5,27,68.5</block>
+        </region>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" material="stone spade" unbreakable="true"/>
+        <item slot="5" amount="64" material="wood" damage="1"/>
+        <item slot="32" amount="64" material="wood" damage="1"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="grilled pork"/>
+        <chestplate unbreakable="true" material="gold chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit id="pink-kit" parents="default-kit">
+        <item slot="6" amount="32" material="stained clay" damage="2"/>
+        <helmet color="B24CD8" unbreakable="true" material="leather helmet"/>
+        <leggings color="B24CD8" unbreakable="true" material="leather leggings"/>
+    </kit>
+    <kit id="gray-kit" parents="default-kit">
+        <item slot="6" amount="32" material="stained clay" damage="8"/>
+        <helmet color="191919" unbreakable="true" material="leather helmet"/>
+        <leggings color="191919" unbreakable="true" material="leather leggings"/>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>stone spade</tool>
+</toolrepair>
+<itemremove>
+    <item>stained clay</item>
+    <item>leather helmet</item>
+    <item>gold chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+    <item>coal block</item>
+    <item>grilled pork</item>
+    <item>coal block</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemremove>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="16" material="arrow"/>
+</kill-reward>
+
+<filters>
+    <team id="only-pink">pink</team>
+    <team id="only-gray">gray</team>
+    <not id="deny-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <cylinder id="pink-spawn" base="82.5,0,68.5" radius="17" height="60"/>
+        <cylinder id="gray-spawn" base="269.5,0,68.5" radius="17" height="60"/>
+    </union>
+    <apply enter="only-pink" message="You may not enter this region." region="pink-spawn"/>
+    <apply enter="only-gray" message="You may not enter this region." region="gray-spawn"/>
+    <apply block="never" message="You may not modify terrain here." region="spawns"/>
+    <apply block-place="deny-void" message="You may not build outside the map."/>
+</regions>
+<destroyables materials="obsidian" mode-changes="true">
+    <destroyables name="Left Monument">
+        <destroyable owner="pink">
+            <region>
+                <cuboid min="116,39,97" max="117,42,96"/>
+            </region>
+        </destroyable>
+        <destroyable owner="gray">
+            <region>
+                <cuboid min="235,39,41" max="236,42,40"/>
+            </region>
+        </destroyable>
+    </destroyables>
+    <destroyables name="Middle Monument">
+        <destroyable owner="pink">
+            <region>
+                <cuboid min="150,20,69" max="151,23,68"/>
+            </region>
+        </destroyable>
+        <destroyable owner="gray">
+            <region>
+                <cuboid min="201,20,69" max="202,23,68"/>
+            </region>
+        </destroyable>
+    </destroyables>
+    <destroyables name="Right Monument">
+        <destroyable owner="pink">
+            <region>
+                <cuboid min="116,39,41" max="117,42,40"/>
+            </region>
+        </destroyable>
+        <destroyable owner="gray">
+            <region>
+                <cuboid min="235,39,97" max="236,42,96"/>
+            </region>
+        </destroyable>
+    </destroyables>
+</destroyables>
+<modes>
+    <mode after="25m" material="beacon" name="`bBEACON MONUMENT MODE"/>
+    <mode after="40m" material="coal block" name="`8COAL MONUMENT MODE"/>
+</modes>
+<maxbuildheight>45</maxbuildheight>
+</map>

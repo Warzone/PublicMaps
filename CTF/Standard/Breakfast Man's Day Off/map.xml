@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Breakfast Man's Day Off</name>
+<version>1.0</version>
+<objective>Retrieve both enemy flags two times each and carry them to your spawn.</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="cf1b2da8-3718-45a9-8836-bb70b0628773"/> <!-- Winne -->
+    <author uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+</authors>
+<contributors>
+    <contributor uuid="2fb11a11-1a1d-4b31-a7ba-2707a9ca9906"/> <!-- eeaston -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="24">Red</team>
+    <team id="blue-team" color="blue" max="24">Blue</team>
+</teams>
+<kits>
+    <kit id="spawnKit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="28" amount="48">arrow</item>
+        <item slot="2" enchantment="dig speed:1" unbreakable="true">stone pickaxe</item>
+        <item slot="3" unbreakable="true">iron spade</item>
+        <item slot="30" unbreakable="true">iron axe</item>
+        <item slot="4" amount="24">cooked mutton</item>
+        <item slot="5" amount="6" damage="1">log</item>
+        <item slot="6" amount="64">smooth brick</item>
+        <item slot="7" amount="64">smooth brick</item>
+        <item slot="8" amount="64">glass</item>
+        <boots enchantment="depth strider:2" unbreakable="true">diamond boots</boots>
+        <potion duration="oo" amplifier="2">night vision</potion>
+        <potion duration="5" amplifier="5">damage resistance</potion>
+    </kit>
+    <kit id="redKit" parents="spawnKit">
+        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+    <kit id="blueKit" parents="spawnKit">
+        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
+    </kit>
+</kits>
+<filters>
+    <any id="only-red">
+        <team>red-team</team>
+    </any>
+    <any id="only-blue">
+        <team>blue-team</team>
+    </any>
+    <not id="deny-void">
+        <void/>
+    </not>
+</filters>
+<spawns>
+    <spawn team="red-team" kit="redKit">
+        <regions yaw="90">
+            <point>287,50,24</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blueKit">
+        <regions yaw="-90">
+            <point>69,50,24</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>178,76,-81</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never" message="You may not modify the spawn!">
+        <region>
+            <rectangle id="red-spawn" min="297,4" max="274,45"/>
+            <rectangle id="blue-spawn" min="60,45" max="83,4"/>
+        </region>
+    </apply>
+    <apply block="never" message="You may not destroy the spawner!">
+        <region>
+            <block id="spawner">178.5,8,24.5</block>
+        </region>
+    </apply>
+    <apply block="deny-void" message="You may not build in the void!">
+        <region>
+            <everywhere/>
+        </region>
+    </apply>
+</regions>
+<score>
+    <limit>4</limit>
+</score>
+<flags>
+    <!-- Flags blue needs to cap -->
+    <flag id="purple-flag" name="Purple Flag" owner="red-team" color="purple">
+        <post pickup-filter="only-blue" recover-time="1m" respawn-time="5s" yaw="0">254,41,-17</post>
+    </flag>
+    <flag id="orange-flag" name="Orange Flag" owner="red-team" color="orange">
+        <post pickup-filter="only-blue" recover-time="1m" respawn-time="5s" yaw="0">254,41,65</post>
+    </flag>
+    <net points="1" flags="purple-flag orange-flag" respawn-together="true">
+        <region>
+            <cuboid min="68,37,26" max="71,38,23"/>
+        </region>
+    </net>
+    <!-- Flags Red needs to cap -->
+    <flag id="cyan-flag" name="Cyan Flag" owner="blue-team" color="cyan">
+        <post pickup-filter="only-red" recover-time="1m" respawn-time="5s" yaw="-90">102,41,65</post>
+    </flag>
+    <flag id="pink-flag" name="Pink Flag" owner="blue-team" color="pink">
+        <post pickup-filter="only-red" recover-time="1m" respawn-time="5s" yaw="-90">102,41,-17</post>
+    </flag>
+    <net points="1" flags="cyan-flag pink-flag" respawn-together="true">
+        <region>
+            <cuboid min="289,37,23" max="286,38,26"/>
+        </region>
+    </net>
+</flags>
+<respawn delay="5s"/>
+<timelock>on</timelock>
+<tnt>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+</tnt>
+<crafting>
+    <disable>bucket</disable>
+</crafting>
+<item-mods>
+    <rule>
+        <match>
+            <item>iron pickaxe</item>
+        </match>
+        <modify show-enchantments="false">
+            <enchantment level="1">efficiency</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<maxbuildheight>59</maxbuildheight>
+<itemremove>
+    <item>stone:5</item>
+    <item>stained clay:3</item>
+    <item>stained clay:9</item>
+    <item>stained clay:14</item>
+    <item>stained clay:11</item>
+    <item>stained clay:10</item>
+    <item>cobblestone</item>
+    <item>stone:4</item>
+    <item>grass</item>
+    <item>dirt</item>
+    <item>dirt:1</item>
+    <!-- Flowers -->
+    <item>38</item>
+    <item>175:1</item>
+    <item>seeds</item>
+    <item>smooth brick</item>
+    <item>smooth brick:3</item>
+    <item>double step</item>
+</itemremove>
+<!-- Repair tools and armors in spawn kit only -->
+<toolrepair>
+    <tool unbreakable="true">iron sword</tool>
+    <tool unbreakable="true">bow</tool>
+    <tool unbreakable="true" enchantment="dig speed:1">stone pickaxe</tool>
+    <tool unbreakable="true">iron spade</tool>
+    <tool unbreakable="true">iron axe</tool>
+    <tool unbreakable="true">leather chestplate</tool>
+    <tool unbreakable="true" enchantment="depth strider:2">diamond boots</tool>
+</toolrepair>
+</map>

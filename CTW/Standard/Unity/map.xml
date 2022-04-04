@@ -1,0 +1,201 @@
+<map proto="1.4.0">
+<name>Unity</name>
+<version>1.0.0</version>
+<objective>Retrieve the enemy wool and place it on your monument!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+</authors>
+<contributors>
+    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b"
+                 contribution="XML"/> <!-- Anthonny -->
+</contributors>
+<teams>
+    <team id="blue" 
+          color="blue" 
+          max="14" max-overfill="16">Blue</team>
+    <team id="red" 
+          color="dark red" 
+          max="14" max-overfill="16">Red</team>
+</teams>
+<spawns>
+    <default>
+        <regions yaw="90">
+            <cylinder base="42,41.2,20" radius="1.5" height="0"/>
+        </regions>
+    </default>
+    <spawn team="red" kit="kitRed">
+        <regions yaw="90">
+            <cylinder base="102.5,10.2,50.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="kitBlue">
+        <regions yaw="-90">
+            <cylinder base="-18.5,10.2,-10.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="kitSpawn">
+        <item slot="0">iron sword</item>
+        <item slot="1">bow</item>
+        <item slot="2" enchantment="durability:1;dig_speed:3">iron pickaxe</item>
+        <item slot="3" amount="32">cooked beef</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="19" amount="64">arrow</item>
+    </kit>
+    <kit id="kitRed" parents="kitSpawn">
+        <item slot="4" amount="64" damage="14">159</item>
+        <item slot="5" amount="64" damage="14">159</item>
+        <item slot="6" amount="32" damage="14">95</item>
+        <chestplate color="F00000" enchantment="protection_projectile:2">leather chestplate</chestplate>
+        <boots color="F00000">leather boots</boots>
+    </kit>
+    <kit id="kitBlue" parents="kitSpawn">
+        <item slot="4" amount="64" damage="11">159</item>
+        <item slot="5" amount="64" damage="11">159</item>
+        <item slot="6" amount="32" damage="11">95</item>
+        <chestplate color="0000CC" enchantment="protection_projectile:2">leather chestplate</chestplate>
+        <boots color="0000CC">leather boots</boots>
+    </kit>
+    <kit id="kitSlow">
+        <potion duration="1m" amplifier="2">slow</potion>
+        <potion duration="1m" amplifier="2">weakness</potion>
+    </kit>
+</kits>
+<wools>
+    <wool team="blue" color="red" location="62,9,92">
+        <monument><block>-21.5,12.5,-10.5</block></monument>
+    </wool>
+    <wool team="red" color="blue" location="21,9,-52">
+        <monument><block>105.5,12.5,50.5</block></monument>
+    </wool>
+</wools>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <any id="allowSome">
+        <material>workbench</material>
+        <material>chest</material>
+    </any>
+    <all id="blueWebs">
+        <team>blue</team>
+        <material>web</material>
+    </all>
+    <all id="redWebs">
+        <team>red</team>
+        <material>web</material>
+    </all>
+    <all id="blueHasWool">
+        <team>blue</team>
+        <carrying><item damage="14" material="wool"/></carrying>
+    </all>
+    <all id="redHasWool">
+        <team>red</team>
+        <carrying><item damage="11" material="wool"/></carrying>
+    </all>
+    <team id="onlyBlue">blue</team>
+    <team id="onlyRed">red</team>
+    <material id="onlyIron">iron block</material>
+</filters>
+<maxbuildheight>20</maxbuildheight>
+<regions>
+    <!-- void gaps -->
+    <apply block-place="onlyRed" block-break="always" message="Only Red Team may build here!">
+        <region>
+            <rectangle min="15,-1" max="28,14"/>
+        </region>
+    </apply>
+    <apply block-place="onlyBlue" block-break="always" message="Only Blue Team may build here!">
+        <region>
+            <rectangle min="56,26" max="69,41"/>
+        </region>
+    </apply>
+    <!-- blue slowdown -->
+    <apply filter="blueHasWool" kit="kitSlow">
+        <region>
+            <rectangle min="15,14" max="28,18"/>
+        </region>
+    </apply>
+    <!-- red slowdown -->
+    <apply filter="redHasWool" kit="kitSlow">
+        <region>
+            <rectangle min="56,22" max="69,26"/>
+        </region>
+    </apply>
+    <!-- blue spawn -->
+    <apply enter="onlyBlue" message="You may not enter the enemy's spawn">
+        <region>
+            <rectangle min="-25,-21" max="2,0"/>
+        </region>
+    </apply>
+    <apply block-break="onlyIron" block-place="never" message="You may not modify the spawns">
+        <region>
+            <rectangle min="-25,-21" max="2,0"/>
+        </region>
+    </apply>
+    <!-- red spawn -->
+    <apply enter="onlyRed" message="You may not enter the enemy's spawn">
+        <region>
+            <rectangle min="82,40" max="109,62"/>
+        </region>
+    </apply>
+    <apply block-break="onlyIron" block-place="never" message="You may not modify the spawns">
+        <region>
+            <rectangle min="82,40" max="109,62"/>
+        </region>
+    </apply>
+    <!--blue woolroom -->
+    <apply enter="onlyRed" message="You may not enter your wool room">
+        <region>
+            <circle center="21.5,-52.5" radius="9.5"/>
+        </region>
+    </apply>
+    <apply block="redWebs" message="You may not modify the wool rooms">
+        <region>
+            <circle center="21.5,-52.5" radius="9.5"/>
+        </region>
+    </apply>
+    <!-- red woolroom -->
+    <apply enter="onlyBlue" message="You may not enter your wool room">
+        <region>
+            <circle center="62.5,92.5" radius="9.5"/>
+        </region>
+    </apply>
+    <apply block="blueWebs" message="You may not modify the wool rooms">
+        <region>
+            <circle center="62.5,92.5" radius="9.5"/>
+        </region>
+    </apply>
+    <!-- global -->
+    <apply block="no-void" use="allowSome"/>
+</regions>
+<itemremove>
+    <item>string</item>
+    <item>arrow</item>
+    <item>sapling</item>
+    <item>apple</item>
+    <item>cooked beef</item>
+    <item>cobblestone</item>
+    <item>stained glass</item>
+    <item>stained clay</item>
+    <item>furnace</item>
+    <item>piston base</item>
+    <item>step</item>
+    <item>carpet</item>
+    <item>stone button</item>
+    <item>smooth brick</item>
+    <item>smooth stairs</item>
+    <item>trap door</item>
+    <item>glowstone dust</item>
+    <item>cobble wall</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>leather chestplate</tool>
+    <tool>leather boots</tool>
+</toolrepair>
+</map>
