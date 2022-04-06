@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Sylvan</name>
+<version>1.0.3</version>
+<objective>Eliminate the enemy team in less than 8 minutes.</objective>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="130be12a-f3b9-4b7d-ad39-7b45e84d3d0f"/> <!-- Veiyl -->
+</authors>
+<teams>
+    <team color="dark aqua" max="20">Cyan</team>
+    <team color="dark purple" max="20">Purple</team>
+</teams>
+<rage/>
+<blitz>
+ <time>8m</time>
+    <lives>1</lives>
+    <broadcastlives>true</broadcastlives>
+    <title>Blitz: Rage</title>
+</blitz>
+<spawns>
+    <spawn team="cyan" kit="cyan" yaw="180">
+        <cylinder base="11.5,4.0,29.5" radius="1.5" height="0"/>
+    </spawn>
+    <spawn team="purple" kit="purple" yaw="0">
+        <cylinder base="-22.5,4.0,-31.5" radius="1.5" height="0"/>
+    </spawn>
+    <default yaw="0">
+        <cylinder base="-5.5,72.5,-1.5" radius="1" height="0"/>
+    </default>
+</spawns>
+<kits>
+ <kit name="spawn">
+    <item slot="0" unbreakable="true" enchantment="damage all:5" lore="`91-Hit Kill!">iron sword</item>
+    <item slot="1" unbreakable="true" enchantment="arrow damage:5" lore="`91-Shot Kill!">bow</item>
+    <item slot="2" amount="1">arrow</item>
+    <potion duration="5" amplifier="1">heal</potion>
+    <potion duration="5" amplifier="4">damage resistance</potion>
+ </kit>
+ <kit name="cyan" parents="spawn">
+    <helmet color="4C7F99" unbreakable="true" locked="true">leather helmet</helmet>
+    <chestplate color="4C7F99" unbreakable="true" locked="true">leather chestplate</chestplate>
+    <leggings color="4C7F99" unbreakable="true" locked="true">leather leggings</leggings>
+    <boots color="4C7F99" unbreakable="true" locked="true">leather boots</boots>
+ </kit>
+    <kit name="purple" parents="spawn">
+    <helmet color="7F3FB2" unbreakable="true" locked="true">leather helmet</helmet>
+    <chestplate color="7F3FB2" unbreakable="true" locked="true">leather chestplate</chestplate>
+    <leggings color="7F3FB2" unbreakable="true" locked="true">leather leggings</leggings>
+    <boots color="7F3FB2" unbreakable="true" locked="true">leather boots</boots>
+ </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<timelock>on</timelock>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<include src="blitz-global.xml"/>
+</map>
