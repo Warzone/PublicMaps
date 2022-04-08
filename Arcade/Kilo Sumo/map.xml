@@ -40,16 +40,18 @@
         <game-mode>adventure</game-mode>
         <item slot="0" name="`cSUMO WEAPON" damage="1">ink sack</item>
         <helmet unbreakable="true" locked="true" color="B02E26">leather helmet</helmet>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">regeneration</effect>
+        <effect duration="oo" amplifier="1">regeneration</effect>
     </kit>
     <!-- Blue Kit -->
     <kit id="blue-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`9SUMO WEAPON" damage="4">ink sack</item>
         <helmet unbreakable="true" locked="true" color="3C44AA">leather helmet</helmet>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="1">instant_health</effect>
+    </kit>
+    <!-- Void Kit -->
+    <kit id="void-kit" force="true">
+        <clear items="false" armor="false" effects="true"/>
     </kit>
 </kits>
 <!-- Platforms -->
@@ -104,8 +106,10 @@
     <cuboid id="first-platform" min="-11,80,-11" max="10,85,10"/>
     <cuboid id="second-platform" min="-25,65,-25" max="24,70,24"/>
     <cuboid id="third-platform" min="-11,37,-11" max="10,42,10"/>
+    <below id="void" y="20"/>
     <!-- Applications -->
     <apply block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="void" kit="void-kit"/>
 </regions>
 <!-- Spawns -->
 <spawns>
