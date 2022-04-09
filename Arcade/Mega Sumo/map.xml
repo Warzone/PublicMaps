@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Blitz: Sumo">
 <name>Mega Sumo</name>
-<version>2.0.1</version>
+<version>2.0.2</version>
 <objective>Be the last team standing by throwing everyone off the platform!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -73,57 +73,52 @@
         <game-mode>adventure</game-mode>
         <item slot="0" name="`3`lSUMO WEAPON" damage="6">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="4C7F99">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="green-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`2`lSUMO WEAPON" damage="2">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="667F33">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="light-blue-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`b`lSUMO WEAPON" damage="12">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="6699D8">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="lime-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`a`lSUMO WEAPON" damage="10">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="7FCC19">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="orange-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`6`lSUMO WEAPON" damage="14">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="D87F33">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="purple-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`5`lSUMO WEAPON" damage="5">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="7F3FB2">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="red-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`c`lSUMO WEAPON" damage="1">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="993333">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="yellow-kit">
         <game-mode>adventure</game-mode>
         <item slot="0" name="`e`lSUMO WEAPON" damage="11">ink sack</item>
         <chestplate unbreakable="true" locked="true" color="E5E533">leather chestplate</chestplate>
-        <effect duration="1000000" amplifier="5">saturation</effect>
-        <effect duration="1000000" amplifier="1">instant_health</effect>
+        <effect duration="oo" amplifier="2">instant_health</effect>
+    </kit>
+    <kit id="void-kit" force="true">
+        <clear items="false" armor="false" effects="true"/>
     </kit>
 </kits>
 <!-- Platforms -->
@@ -147,8 +142,10 @@
     <cylinder id="second-platform" base="0.5,27,0.5" radius="16" height="5"/>
     <cylinder id="third-platform"  base="0.5,16,0.5" radius="20" height="8"/>
     <cylinder id="fourth-platform" base="0.5,8,0.5"  radius="25 " height="6"/>
+    <below id="void" y="0"/>
     <!-- Applications -->
     <apply block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="void" kit="void-kit"/>
 </regions>
 <!-- Spawns -->
 <spawns>
