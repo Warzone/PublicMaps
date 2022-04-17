@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Brisked TGM</name>
+<version>1.0.0</version>
+<objective>Reach 1200 points before the opposing team!</objective>
+<gamemode>koth</gamemode>
+<!-- Authors and Contributors -->
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
+</authors>
+<contributors>
+    <contributor uuid="7d94428f-d5f7-4d7d-8082-3c2172f80b1e" contribution="Original map modifications and JSON"/> <!-- Hazry -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"/> <!-- _Pear -->
+</contributors>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="1s">Fall damage is disabled on this map!</tip>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="purple" color="dark purple" max="16">Purple</team>
+    <team id="orange" color="gold"        max="16">Orange</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true"     material="stone sword"/>
+        <item slot="1" unbreakable="true"     material="bow"/>
+        <item slot="2" unbreakable="true"     material="shears"/>
+        <item slot="3" amount="24" damage="1" material="leaves"/>
+        <item slot="7" amount="24"            material="arrow"/>
+        <item slot="8" amount="64"            material="golden carrot"/>
+        <chestplate    unbreakable="true"     material="chainmail chestplate" locked="true"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <helmet   unbreakable="true" color="FF00EE" locked="true" material="leather helmet"/>
+        <leggings unbreakable="true" color="FF00EE" locked="true" material="leather leggings"/>
+        <boots    unbreakable="true" color="FF00EE" locked="true" material="leather boots"/>
+    </kit>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet   unbreakable="true" color="FF7200" locked="true" material="leather helmet"/>
+        <leggings unbreakable="true" color="FF7200" locked="true" material="leather leggings"/>
+        <boots    unbreakable="true" color="FF7200" locked="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default yaw="-45">
+        <region>
+            <point>-26,74,-105</point>
+        </region>
+    </default>
+    <spawn team="purple" kit="purple-kit" yaw="-135">
+        <region>
+            <point>-67.5,48,-46.5</point>
+        </region>
+    </spawn>
+    <spawn team="orange" kit="orange-kit" yaw="45">
+        <region>
+            <point>32.5,48,-146.5</point>
+        </region>
+    </spawn>
+</spawns>
+<!-- Hills -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="B Point" points="1" capture-time="6s">
+        <capture>
+            <cylinder id="b-hill" base="-33.5,29,-112.5" radius="6" height="5"/>
+        </capture>
+        <progress>
+            <region id="b-hill"/>
+        </progress>
+        <captured>
+            <region id="b-hill"/>
+        </captured>
+    </control-point>
+    <control-point name="Mid Point" points="2" capture-time="9s">
+        <capture>
+            <cylinder id="mid-hill" base="-17.5,40,-96.5" radius="6" height="4"/>
+        </capture>
+        <progress>
+            <region id="mid-hill"/>
+        </progress>
+        <captured>
+            <region id="mid-hill"/>
+        </captured>
+    </control-point>
+	<control-point name="A Point" points="1" capture-time="6s">
+        <capture>
+            <cylinder id="a-hill" base="-1.5,29,-80.5" radius="6" height="5"/>
+        </capture>
+        <progress>
+            <region id="a-hill"/>
+        </progress>
+        <captured>
+            <region id="a-hill"/>
+        </captured>
+    </control-point>
+</control-points>
+<!-- Filters -->
+<filters>
+    <team id="purple-only">purple</team>
+    <team id="orange-only">orange</team>
+    <all id="only-leaves-in-map">
+        <material>leaves</material>
+    </all>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cuboid id="purple-spawn-protection" min="-69.5,44,-53.5" max="-60.5,oo,-44.5"/>
+        <cuboid id="orange-spawn-protection" min="25.5,44,-148.5" max="34.5,oo,-139.5"/>
+    </union>
+    <union id="launchpad-protections">
+        <cuboid id="purple-pad"             min="-46,29,-68"  max="-43,oo,-71"/>
+        <cuboid id="purple-pad-destination" min="-41,47,-73"  max="-38,oo,-76"/>
+        <cuboid id="orange-pad"             min="11,29,-125"  max="8,oo,-122"/>
+        <cuboid id="orange-pad-destination" min="6,47,-120"   max="3,oo,-117"/>
+        <cuboid id="a-hill-pad"             min="19,31,-57"   max="22,oo,-60"/>
+        <cuboid id="a-hill-pad-destination" min="6,44,-70"    max="9,oo,-73"/>
+        <cuboid id="b-hill-pad"             min="-54,31,-136" max="-57,oo,-133"/>
+        <cuboid id="b-hill-pad-destination" min="-41,44,-123" max="-44,oo,-120"/>
+    </union>
+    <!-- Applications -->
+    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
+    <apply region="launchpad-protections"   block="never"              message="You may not obstruct the launchpad platforms!"/>
+    <apply region="purple-spawn-protection" enter="purple-only"        message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only"        message="You may not enter the enemy spawn."/>
+    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
+    <!-- Launchpads -->
+    <apply velocity="@0.7,2.3,-0.7">
+        <region>
+            <cylinder id="purple-pad-floor" base="-44.5,29,-69.5" radius="3" height="2"/>
+        </region>
+    </apply>
+    <apply velocity="@-0.7,2.3,0.7">
+        <region>
+            <cylinder id="orange-pad-floor" base="9.5,29,-124.5" radius="3" height="2"/>
+        </region>
+    </apply>
+    <apply velocity="@-2,2.3,-2">
+        <region>
+            <cylinder id="a-hill-pad-floor" base="20.5,31,-58.5" radius="3" height="2"/>
+        </region>
+    </apply>
+    <apply velocity="@2,2.3,2">
+        <region>
+            <cylinder id="b-hill-pad-floor" base="-55.5,31,-134.5" radius="3" height="2"/>
+        </region>
+    </apply>
+</regions>
+<!-- ItemRemove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>shears</item>
+    <item>leaves</item>
+    <item>sapling</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<score>
+    <limit>1200</limit>
+</score>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>50</maxbuildheight>
+</map>
