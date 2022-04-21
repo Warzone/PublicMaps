@@ -37,10 +37,10 @@
 <kits>
     <kit id="default">
         <item slot="0" unbreakable="true">wood sword</item>
-        <helmet unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
+        <helmet unbreakable="true" team-color="true" locked="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true" locked="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true" locked="true">leather leggings</leggings>
+        <boots unbreakable="true" team-color="true" locked="true">leather boots</boots>
     </kit>
     <!-- Refer to Kits Upgrade Tokens section of filters & applications section of regions for kit handling -->
     <kit id="chainmail-armor-kit" force="true">
@@ -76,8 +76,6 @@
 </destroyables>
 <!-- Filters -->
 <filters>
-    <!-- Testing Time Filters -->
-    <time id="1m-passed">1m</time>
     <!-- Time Filters -->
     <time id="6m-passed">6m</time>
     <time id="12m-passed">12m</time>
@@ -168,12 +166,16 @@
             <item name="Diamond Armor Upgrade">diamond chestplate</item>
         </carrying>
     </any>
+    <!-- Disable enderchests until PGM fixes it; keeping it in the map for decorative looks -->
+    <deny id="deny-enderchest">
+        <material>ender chest</material>
+    </deny>
 </filters>
 <!-- Broadcasts -->
 <broadcasts>
     <!-- Emerald Generators notification -->
-    <alert after="1s" filter="6m-passed">`aEmerald Generators`r have been upgraded to Tier `cII`r.</alert>
-    <alert after="1s" filter="12m-passed">`aEmerald Generators`r have been upgraded to Tier `cIII`r.</alert>
+    <alert after="6m">`aEmerald Generators`r have been upgraded to Tier `cII`r.</alert>
+    <alert after="12m">`aEmerald Generators`r have been upgraded to Tier `cIII`r.</alert>
     <!-- Bed destruction notification -->
     <alert after="1s" filter="bed-destruction">Your team's bed was destroyed! You will no longer respawn after you die.</alert>
 </broadcasts>
@@ -225,6 +227,7 @@
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="not-map"           block="never" message="You may not edit outside the map!"/>
+    <apply use="deny-enderchest"      message="Enderchests are temporarily disabled due to a game issue."/>
     <apply block-break="tnt-immune"/>
     <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
     <apply region="green-team-chest"  use="never"   message="You cannot open this chest as the `aGreen Team`r has not been eliminated!"/>
@@ -321,6 +324,16 @@
     <item>double plant</item>
     <item>long grass</item>
     <item>bed</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
 </itemremove>
 <itemkeep>
     <item>stone sword</item>
@@ -346,7 +359,7 @@
     <projectile id="fireball-projectile" name="Fireball Blast" projectile="Fireball" click="right" damage="50" cooldown="5s"/>
 </projectiles>
 <!-- Item Modifications -->
-<item-mods>
+<!-- <item-mods>
     <rule>
         <match>
             <material>stone sword</material>
@@ -371,7 +384,7 @@
             <enchantment level="1">Knockback</enchantment>
         </modify>
     </rule>
-</item-mods>
+</item-mods> -->
 <!-- Crafting Control -->
 <crafting>
     <disable>dirt</disable>
