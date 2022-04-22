@@ -1,19 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.3.2">
-   <name>Senex 2</name>
-   <version>2.2.1</version>
-   <objective>Destroy the enemy team's monuments!</objective>
-   <gamemode>dtm</gamemode>
-   <authors>
-      <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
-      <author uuid="24ca383e-6794-41a0-a195-7f40e21d6c3e"/> <!-- ParaPhoenix -->
-   </authors>
-   <teams>
-      <team id="orange" color="gold" max="32">Phoenix</team>
-      <team id="gray" color="dark gray" max="32">Haribo</team>
-   </teams>
-   <kits>
-      <kit name="spawn">
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Senex 2</name>
+<version>2.2.2</version>
+<objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+<!-- Authors -->
+<authors>
+    <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
+    <author uuid="24ca383e-6794-41a0-a195-7f40e21d6c3e"/> <!-- ParaPhoenix -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="orange-team" color="gold" max="32">Phoenix</team>
+    <team id="gray-team" color="dark gray" max="32">Haribo</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
          <item slot="0">stone sword</item>
          <item slot="1" enchantment="arrow infinite:1">bow</item>
          <item slot="2">diamond pickaxe</item>
@@ -22,69 +25,83 @@
          <item slot="5" amount="64">glass</item>
          <item slot="6" amount="16">cooked beef</item>
          <item slot="28" amount="1">arrow</item>
-         <potion duration="3" amplifier="5">damage resistance</potion>
-         <potion duration="3" amplifier="5">heal</potion>
-      </kit>
-      <kit name="gray" parents="spawn">
-         <helmet color="4C4C4C">leather helmet</helmet>
-      </kit>
-      <kit name="orange" parents="spawn">
-         <helmet color="D87F33">leather helmet</helmet>
-      </kit>
-   </kits>
-   <spawns>
-      <spawn team="gray" kit="gray" yaw="90">
-         <cylinder base="118.5,25,-788.5" height="0" radius="1" />
-      </spawn>
-      <spawn team="orange" kit="orange" yaw="-90">
-         <cylinder base="35.5,25,-788.5" height="0" radius="1" />
-      </spawn>
-      <default yaw="0">
-         <cylinder base="76.5,58,-788.5" height="0" radius="1" />
-      </default>
-   </spawns>
-   <regions>
-      <cylinder name="gray-spawn" base="118,24,-788" height="8" radius="8" />
-      <cylinder name="orange-spawn" base="35,24,-788" height="8" radius="8" />
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="gray-spawn" />
-      </apply>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="orange-spawn" />
-      </apply>
-   </regions>
-   <destroyables materials="obsidian">
-      <destroyable name="Left" owner="orange">
-         <block>-26,27,-770</block>
-      </destroyable>
-      <destroyable name="Right" owner="orange">
-         <block>-26,27,-808</block>
-      </destroyable>
-      <destroyable name="Left" owner="gray">
-         <block>179,27,-808</block>
-      </destroyable>
-      <destroyable name="Right" owner="gray">
-         <block>179,27,-770</block>
-      </destroyable>
-   </destroyables>
-   <toolrepair>
-      <tool>diamond pickaxe</tool>
-      <tool>bow</tool>
-      <tool>stone sword</tool>
-   </toolrepair>
-   <itemremove>
-      <item>obsidian</item>
-      <item>log</item>
-      <item>glass</item>
-      <item>sandstone</item>
-      <item>arrow</item>
-      <item>leather helmet</item>
-      <item>cooked beef</item>
-      <item>golden apple</item>
-   </itemremove>
-   <killreward>
-      <item amount="1">golden apple</item>
-   </killreward>
-   <timelock>on</timelock>
-   <maxbuildheight>48</maxbuildheight>
+         <effect duration="3" amplifier="5">damage resistance</effect>
+         <effect duration="3" amplifier="5">heal</effect>
+    </kit>
+    <kit id="gray-kit" parents="spawn">
+        <helmet unbreakable="true" color="4C4C4C" material="leather helmet"/>
+    </kit>
+    <kit id="orange-kit" parents="spawn">
+        <helmet unbreakable="true" color="D87F33" material="leather helmet"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default>
+        <regions>
+             <cylinder base="76.5,58,-788.5" height="0" radius="1"/>
+        </regions>
+    </default>
+    <spawn team="gray-team" kit="gray-kit">
+        <regions>
+            <cylinder yaw="90" base="118.5,25,-788.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+    <spawn team="orange-team" kit="orange-kit">
+        <regions>
+            <cylinder yaw="-90" base="35.5,25,-788.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+</spawns>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cylinder id="gray-spawn" base="118,24,-788" height="8" radius="8"/>
+        <cylinder id="orange-spawn" base="35,24,-788" height="8" radius="8"/>
+    </union>
+    <!-- Applications -->
+    <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
+</regions>
+<!-- Monuments -->
+<destroyables materials="obsidian">
+    <destroyable id="left-orange" name="Left" owner="orange-team">
+             <region><block>-26,27,-770</block></region>
+    </destroyable>
+    <destroyable id="right-orange" name="Right" owner="orange-team">
+             <region><block>-26,27,-808</block></region>
+    </destroyable>
+    <destroyable id="left-gray" name="Left" owner="gray-team">
+             <region><block>179,27,-808</block></region>
+    </destroyable>
+    <destroyable id="right-gray" name="Right" owner="gray-team">
+             <region><block>179,27,-770</block></region>
+    </destroyable>
+</destroyables>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Item Remove -->
+<itemremove>
+   <item>obsidian</item>
+   <item>log</item>
+   <item>glass</item>
+   <item>sandstone</item>
+   <item>arrow</item>
+   <item>leather helmet</item>
+   <item>cooked beef</item>
+   <item>golden apple</item>
+</itemremove>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<!-- Misc -->
+<timelock>on</timelock>
+<maxbuildheight>48</maxbuildheight>
 </map>
