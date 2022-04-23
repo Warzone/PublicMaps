@@ -1,0 +1,223 @@
+<map proto="1.4.0">
+<name>Ender Hill</name>
+<version>1.1.0</version>
+<objective>Craft and capture all three wools before the enemy team!</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="42b10520-7c51-4252-92d9-8b65df108b12" contribution="Concept and design"/> <!-- PieZ -->
+    <author uuid="3cce0080-9faa-48f9-82cf-64410305822a" contribution="Design"/> <!-- ProfessorUtonium -->
+    <author uuid="c2a4c847-653e-482a-b62e-d7f8b64330cb" contribution="Design"/> <!-- ALM -->
+</authors>
+<contributors>
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML for PGM"/> <!-- Crazy_ -->
+</contributors>
+<broadcasts>
+    <alert after="1s" every="60s">Collect string to craft wools at the black island at the top middle</alert>
+    <alert after="2s" every="60s">You can find dye at the coloured islands across the map</alert>
+    <tip after="30s" every="2m">Some of the islands give special potion effects, like regeneration or speed</tip>
+</broadcasts>
+<teams>
+    <team id="red-team" color="dark red" min="1" max="20">Red</team>
+    <team id="blue-team" color="blue" min="1" max="20">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red-kit">
+        <regions>
+            <point yaw="-90">-42.5,92,-3.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue-team" kit="blue-kit">
+        <regions>
+            <point yaw="90">106.5,92,-3.5</point>
+        </regions>
+    </spawn>
+    <default kit="obs">
+        <regions>
+            <point>32.5,166,-3</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="obs">
+        <effect duration="oo" amplifier="1">night vision</effect>
+    </kit>
+    <kit id="default">
+        <clear/>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" name="`5Ender Bow" material="bow"/>
+        <item slot="2" amount="16" material="snow ball"/>
+        <item slot="3" amount="16" material="snow ball"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <item slot="28" material="arrow"/>
+        <effect duration="oo" amplifier="1">night vision</effect>
+        <effect duration="5" amplifier="15">damage resistance</effect>
+    </kit>
+    <kit id="red-kit" parent="default">
+        <helmet color="993333" unbreakable="true" material="leather helmet"/>
+        <chestplate color="993333" unbreakable="true" material="leather chestplate"/>
+        <leggings color="993333" unbreakable="true" material="leather leggings"/>
+        <boots color="993333" unbreakable="true" material="leather boots">
+            <enchantment level="5">protection fall</enchantment>
+        </boots>
+    </kit>
+    <kit id="blue-kit" parent="default">
+        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
+        <chestplate color="334CB2" unbreakable="true" material="leather chestplate"/>
+        <leggings color="334CB2" unbreakable="true" material="leather leggings"/>
+        <boots color="334CB2" unbreakable="true" material="leather boots">
+            <enchantment level="5">protection fall</enchantment>
+        </boots>
+    </kit>
+    <!-- Potion effects for regions -->
+    <kit id="absorption" force="true">
+        <effect duration="50s" amplifier="3">absorption</effect>
+    </kit>
+    <kit id="speed" force="true">
+        <effect duration="50s" amplifier="2">speed</effect>
+    </kit>
+    <kit id="regen" force="true">
+        <effect duration="10s" amplifier="3">regeneration</effect>
+    </kit>
+    <kit id="health" force="true">
+        <effect duration="3s" amplifier="2">instant_health</effect>
+    </kit>
+    <kit id="poison" force="true">
+        <effect duration="10s" amplifier="2">poison</effect>
+    </kit>
+</kits>
+<modifybowprojectile>
+    <projectile>EnderPearl</projectile>
+</modifybowprojectile>
+<time>30m</time>
+<spawners>
+    <spawner spawn-region="string-spawn" player-region="string-island" max-entities="1" min-delay="5s" max-delay="9s">
+        <item>string</item>
+    </spawner>
+</spawners>
+<regions>
+    <point id="string-spawn">32.5,100,-4.5</point>
+    <cylinder id="string-island" radius="10" base="32,100,-4" height="4"/>
+    <apply block="never">
+        <negative>
+            <union>
+                <block>28,171,1</block>
+                <block>26,171,-4</block>
+                <block>28,171,-9</block>
+                <block>36,171,1</block>
+                <block>38,171,-4</block>
+                <block>36,171,-9</block>
+            </union>
+        </negative>
+    </apply>
+<!-- Regions for potion effects -->
+    <apply kit="absorption">
+        <region>
+            <union id="absorption-zone">
+                <!-- Red -->
+                <cylinder base="13,64,-4" radius="5" height="4"/>
+                <!-- Blue -->
+                <cylinder base="51,64,-4" radius="5" height="4"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="speed">
+        <region>
+            <union id="speed-zone">
+                <!-- NOTE: Directions looking from blue spawn -->
+                <!-- Right -->
+                <cylinder base="32,90,-62" radius="3" height="4"/>
+                <!-- Left -->
+                <cylinder base="32,90,54" radius="3" height="4"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="regen">
+        <region>
+            <union id="regen-zone">
+                <!-- Blue -->
+                <cylinder base="70,132,29" radius="5" height="4"/>
+                <!-- Blue -->
+                <cylinder base="70,132,-37" radius="5" height="4"/>
+                <!-- Red -->
+                <cylinder base="-6,132,29" radius="5" height="4"/>
+                <!-- Red -->
+                <cylinder base="-6,132,-37" radius="5" height="4"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="health">
+        <region>
+            <union id="health-zone">
+                <!-- Blue -->
+                <cylinder base="74,100,-4" radius="3" height="4"/>
+                <!-- Red -->
+                <cylinder base="-10,100,-4" radius="5" height="4"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="poison">
+        <region>
+            <cylinder id="poison-zone" base="32,82,-4" radius="4" height="4"/>
+        </region>
+    </apply>
+</regions>
+<!-- Proximity doesn't really work with this map  -->
+<wools team="red-team"> 
+    <wool color="blue" craftable="true" location="0,0,0">
+        <monument>
+            <block>28,171,1</block>
+        </monument>
+    </wool>
+    <wool color="yellow" craftable="true" location="0,0,0">
+        <monument>
+            <block>26,171,-4</block>
+        </monument>
+    </wool>
+    <wool color="red" craftable="true" location="0,0,0">
+        <monument>
+            <block>28,171,-9</block>
+        </monument>
+    </wool>
+</wools>
+<wools team="blue-team">
+    <wool color="blue" craftable="true" location="0,0,0">
+        <monument>
+            <block>36,171,1</block>
+        </monument>
+    </wool>
+    <wool color="yellow" craftable="true" location="0,0,0">
+        <monument>
+            <block>38,171,-4</block>
+        </monument>
+    </wool>
+    <wool color="red" craftable="true" location="0,0,0">
+        <monument>
+            <block>36,171,-9</block>
+        </monument>
+    </wool>
+</wools>
+<kill-reward>
+    <item>golden apple</item>
+</kill-reward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>wool</item>
+    <item>iron hoe</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<world>
+    <timeset>18000</timeset>
+</world>
+</map>
