@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Rig FFA: Rage</name>
+<version>1.0.9</version>
+<objective>Kill the most people in 5 minutes</objective>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<rage/>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+</authors>
+<contributors>
+    <contributor uuid="105f6a09-f533-412b-93cb-501601763c11" contribution="5x5 Conversion"/> <!-- JTr -->
+</contributors>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<players min="2" max="5" colors="true"/>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" lore="One Hit Kill">stone sword</item>
+        <item slot="1" unbreakable="true" lore="One Hit Kill">bow</item>
+        <item slot="28">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <potion duration="2.5" amplifier="10">resistance</potion>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions angle="1.5,16,0.5">
+            <cuboid min="22,15,24" max="-19,26,-23"/>
+        </regions>
+    </spawn>
+    <default yaw="0">
+        <regions>
+            <cuboid min="0,43,-1" max="2,43,-1"/>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never"/>
+</regions>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+</itemremove>
+<regions>
+    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>
