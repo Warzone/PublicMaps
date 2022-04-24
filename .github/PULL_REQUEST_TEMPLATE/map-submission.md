@@ -11,10 +11,10 @@
 > Screenshot the map from multiple views. You may use image hosting services, such as Imgur.
 
 ### XML
-> Link your map's XML file. You may use your own GitHub repo/fork to host it or upload it to GitHub Gist, Pastebin, and any other text storage service.
+> Link your map's XML file by uploading it to [GitHub Gist](https://gist.github.com/). If you have trouble using this service, you may use alternatives such as Pastebin. Please do not provide a link to a `map.xml` file located at another GitHub repository, fork, branch, issue, pull request, etc.
 
 ### Map Download
-> Provide a link to your map's [properly packaged files](https://pgm.dev/docs/guides/packaging/compiling-and-releasing) (`region/*`, `level.dat`, `map.png`, `map.xml`). You may use a file hosting service such as Google Drive, Dropbox, Mega, Mediafire, etc.
+> Provide a direct download link to your map's [properly packaged files](https://pgm.dev/docs/guides/packaging/compiling-and-releasing) (`region/*`, `level.dat`, `map.png`, `map.xml`). Please use a file hosting service such as Google Drive, Dropbox, Mega, Mediafire, etc. Do not provide link(s) to map files which are located at another GitHub repository, fork, branch, issue, pull request, etc.
 ---
 
 ### Map Checklist
