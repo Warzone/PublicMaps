@@ -25,8 +25,8 @@
     <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="8" amount="16" material="arrow"/>
-        <item slot="9" amount="64" material="cooked beef"/>
+        <item slot="7" amount="16" material="arrow"/>
+        <item slot="8" amount="64" material="cooked beef"/>
         <helmet unbreakable="true" material="iron helmet"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
     </kit>
@@ -43,61 +43,25 @@
 <spawns>
     <default yaw="90">
         <region>
-            <point>0.5,26,0.5</point>
+            <point>281.5,26,240.5</point>
         </region>
     </default>
     <spawn team="green" kit="green-kit" yaw="-135">
         <region>
-            <point>-11.5,8,22.5</point>
+            <point>244.5,8,262.5</point>
         </region>
     </spawn>
     <spawn team="purple" kit="purple-kit" yaw="45">
         <region>
-            <point>12.5,8,-21.5</point>
+            <point>268.5,8,218.5</point>
         </region>
     </spawn>
 </spawns>
 <!-- Hills -->
-<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false" visual-materials="tangible">
-    <control-point name="Green Hill" points="1">
-        <capture>
-            <union id="green-hill">
-                <cylinder id="green-hill-floor" base="0.5,10,23.5" radius="5" height="4"/>
-                <cuboid id="green-hill-display" min="13,22,40" max="-13,48,38"/>
-            </union>
-        </capture>
-        <progress>
-            <region id="green-hill"/>
-        </progress>
-        <captured>
-            <region id="green-hill"/>
-        </captured>
-    </control-point>
-    <control-point name="Central Hill" points="3">
-        <capture>
-            <cylinder id="central-hill" base="0.5,4,0.5" radius="5" height="4"/>
-        </capture>
-        <progress>
-            <region id="central-hill"/>
-        </progress>
-        <captured>
-            <region id="central-hill"/>
-        </captured>
-    </control-point>
-	<control-point name="Purple Hill" points="1">
-        <capture>
-            <union id="purple-hill">
-                <cylinder id="purple-hill-floor" base="0.5,10,-22.5" radius="5" height="4"/>
-                <cuboid id="purple-hill-display" min="-13,22,-40" max="13,48,-38"/>
-            </union>
-        </capture>
-        <progress>
-            <region id="purple-hill"/>
-        </progress>
-        <captured>
-            <region id="purple-hill"/>
-        </captured>
-    </control-point>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false" visual-materials="tangible">
+    <control-point name="Green Hill" points="1" capture-time="3s" capture="green-hill-floor" progress="green-hill-floor" captured="green-hill-display"/>
+    <control-point name="Central Hill" points="3" capture-time="5s" capture="central-hill" progress="central-hill"/>
+	<control-point name="Purple Hill" points="1" capture-time="3s" capture="purple-hill-floor" progress="purple-hill-floor" captured="purple-hill-display"/>
 </control-points>
 <!-- Filters -->
 <filters>
@@ -115,6 +79,15 @@
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
+    <union id="green-hill">
+        <cylinder id="green-hill-floor" base="256.5,10,263.5" radius="5" height="4"/>
+        <cuboid id="green-hill-display" min="269,22,278" max="243,48,280"/>
+    </union>
+    <cylinder id="central-hill" base="256.5,4,240.5" radius="5" height="4"/>
+    <union id="purple-hill">
+        <cylinder id="purple-hill-floor" base="256.5,10,217.5" radius="5" height="4"/>
+        <cuboid id="purple-hill-display" min="243,22,202" max="269,48,200"/>
+    </union>
     <union id="spawn-protections">
         <cuboid id="green-spawn-protection" min="-7,0,17" max="-15,oo,25"/>
         <cuboid id="purple-spawn-protection" min="7,0,-17" max="15,oo,-25"/>
