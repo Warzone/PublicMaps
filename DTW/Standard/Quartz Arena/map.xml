@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Destroy the Wool">
+<name>Quartz Arena</name>
+<version>1.0.0</version>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="d1873b18-8194-429b-b6d5-eb7eb897071d"/> <!-- aubfc -->
+</authors>
+<contributors>
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="XML creation"/> <!-- Wesdial -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue"     max="6">Blue</team>
+    <team id="red-team"  color="dark red" max="6">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="3" amount="32">wood</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <chestplate    unbreakable="true">chainmail chestplate</chestplate>
+        <boots         unbreakable="true">iron boots</boots>
+    </kit>
+    <kit id="blue-kit" parents="default">
+        <helmet   unbreakable="true"   color="3C44AA">leather helmet</helmet>
+        <leggings unbreakable="true"   color="3C44AA">leather leggings</leggings>
+    </kit>
+    <kit id="red-kit" parents="default">
+        <helmet   unbreakable="true"   color="B02E26">leather helmet</helmet>
+        <leggings unbreakable="true"   color="B02E26">leather leggings</leggings>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
+    <spawn team="red-team"  kit="red-kit"  yaw="90"  region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="100%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
+    <destroyable name="Red Wool"  owner="red-team"  region="red-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <all id="only-wood-or-wool-in-map">
+        <any>
+            <material>wood</material>
+            <material>wool</material>
+        </any>
+    </all>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="-779,14,163" max="-781,25,165"/>
+        <cuboid id="red-wool"  min="-781,14,131" max="-779,25,129"/>
+    </union>
+    <!-- Spawn protection -->
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection-entry" min="-797.5,0,151.5" max="-803,oo,142"/>
+        <cuboid id="red-spawn-protection-entry"  min="-764,0,143" max="-759,oo,151"/>
+    </union>
+    <!-- Spawn points -->
+    <point id="blue-spawn">-799.5,11,147.5</point>
+    <point id="red-spawn">-761.5,11,147.5</point>
+    <point id="obs-spawn">-780.5,29,147.5</point>
+    <!-- Void Filter -->
+    <union id="not-map">
+        <rectangle id="map-blue-1" min="-786,154" max="-803,168"/>
+        <rectangle id="map-blue-2" min="-786,140" max="-803,126"/>
+        <rectangle id="map-red-1" min="-776,140" max="-759,126"/>
+        <rectangle id="map-red-2" min="-776,154" max="-759,168"/>
+    </union>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection-entry" enter="only-blue" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection-entry" enter="only-red" message="You may not enter the enemy spawn."/>
+    <apply region="everywhere" block="only-wood-or-wool-in-map" message="You may only place or break wood!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Misc -->
+<maxbuildheight>94</maxbuildheight>
+</map>
