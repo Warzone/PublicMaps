@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="King of the Hill">
+<name>Target</name>
+<version>1.0.0</version>
+<objective>Reach 800 points before the opposing team!</objective>
+<gamemode>koth</gamemode>
+<!-- Authors and Contributors -->
+<authors>
+    <author uuid="14091c10-0c80-4700-bdc9-91de0518c79a" contribution="Map creation"/> <!-- n6cr -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="green" color="green" max="3">Green</team>
+    <team id="purple" color="dark purple" max="3">Purple</team>
+</teams>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="1s">Fall damage is disabled on this map!</tip>
+</broadcasts>
+<!-- Kits -->
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="7" amount="16" material="arrow"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+    </kit>
+    <kit id="green-kit" parents="spawn-kit">
+        <chestplate unbreakable="true" color="80C71F" material="leather chestplate"/>
+        <boots unbreakable="true" color="80C71F" material="leather boots"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <chestplate unbreakable="true" color="8932B8" material="leather chestplate"/>
+        <boots unbreakable="true" color="8932B8" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default yaw="90">
+        <region>
+            <point>281.5,26,240.5</point>
+        </region>
+    </default>
+    <spawn team="green" kit="green-kit" yaw="-135">
+        <region>
+            <point>244.5,8,262.5</point>
+        </region>
+    </spawn>
+    <spawn team="purple" kit="purple-kit" yaw="45">
+        <region>
+            <point>268.5,8,218.5</point>
+        </region>
+    </spawn>
+</spawns>
+<!-- Hills -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false" visual-materials="tangible">
+    <control-point name="Green Hill" points="1" capture-time="3s" capture="green-hill-floor" progress="green-hill-floor" captured="green-hill-display"/>
+    <control-point name="Central Hill" points="3" capture-time="5s" capture="central-hill" progress="central-hill"/>
+	<control-point name="Purple Hill" points="1" capture-time="3s" capture="purple-hill-floor" progress="purple-hill-floor" captured="purple-hill-display"/>
+</control-points>
+<!-- Filters -->
+<filters>
+    <team id="green-only">green</team>
+    <team id="purple-only">purple</team>
+    <any id="tangible"> <!-- List of blocks to detect and change in a hill -->
+        <material>wool:0</material>
+        <material>wool:5</material>
+        <material>wool:10</material>
+        <material>stained clay:0</material>
+        <material>stained clay:5</material>
+        <material>stained clay:10</material>
+    </any>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="green-hill">
+        <cylinder id="green-hill-floor" base="256.5,10,263.5" radius="5" height="4"/>
+        <cuboid id="green-hill-display" min="269,22,278" max="243,48,280"/>
+    </union>
+    <cylinder id="central-hill" base="256.5,4,240.5" radius="5" height="4"/>
+    <union id="purple-hill">
+        <cylinder id="purple-hill-floor" base="256.5,10,217.5" radius="5" height="4"/>
+        <cuboid id="purple-hill-display" min="243,22,202" max="269,48,200"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="green-spawn-protection" min="-7,0,17" max="-15,oo,25"/>
+        <cuboid id="purple-spawn-protection" min="7,0,-17" max="15,oo,-25"/>
+    </union>
+    <!-- Applications -->
+    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
+    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
+    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
+</regions>
+<!-- ItemRemove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Reward-->
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<score>
+    <limit>800</limit>
+</score>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>
