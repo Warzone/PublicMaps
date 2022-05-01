@@ -1,0 +1,119 @@
+<map proto="1.4.0">
+<name>Wild West</name>
+<version>1.0.0</version>
+<objective>Be the team the most kills in 8 minutes!</objective>
+<gamemode>tdm</gamemode>
+<time result="score">8m</time>
+<!-- Authors -->
+<authors>
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="2cdfed05-0a2e-4a03-87b8-94fffe557f6d"/> <!-- Tr3ys -->
+    <author uuid="086f8af2-5a74-4ab0-9222-e0aacec1a846"/> <!-- Leary_ -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="blue" color="blue"     max="16">Blue</team>
+    <team id="red"  color="dark red" max="16">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="golden apple"/>
+        <item slot="7" amount="24"        material="arrow"/>
+        <item slot="8" amount="64"        material="bread"/>
+    </kit>
+    <kit id="blue-kit" parents="spawn-kit">
+        <helmet     unbreakable="true" color="334CB2" material="leather helmet"/>
+        <chestplate unbreakable="true" color="334CB2" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="334CB2" material="leather leggings"/>
+        <boots      unbreakable="true" color="334CB2" material="leather boots"/>
+    </kit>
+    <kit id="red-kit" parents="spawn-kit">
+        <helmet     unbreakable="true" color="993333" material="leather helmet"/>
+        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
+        <leggings   unbreakable="true" color="993333" material="leather leggings"/>
+        <boots      unbreakable="true" color="993333" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue" kit="blue-kit" yaw="-135" region="blue-spawn"/>
+    <spawn team="red" kit="red-kit" yaw="-45" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cylinder id="blue-spawn-protection" base="-36,19,23"  height="7" radius="9"/>
+        <cylinder id="red-spawn-protection"  base="107,19,-63" height="7" radius="9"/>
+    </union>
+    <union id="spawners">
+        <point    id="blue-spawner">15,18,-29</point>
+        <point    id="red-spawner">55,18,-12</point>
+        <cylinder id="blue-spawner-radius" base="15,18,-29" height="5" radius="10"/>
+        <cylinder id="red-spawner-radius"  base="55,18,-12" height="5" radius="10"/>
+    </union>
+    <point  id="blue-spawn">-36.5,19,23.5</point>
+    <point  id="red-spawn">107.5,19,-63.5</point>
+    <cuboid id="obs-spawn" min="34.5,59,-57.5" max="36.5,59,-59.5"/>
+    <!-- Applications -->
+    <apply region="blue-spawn-protection" enter="only-blue"   message="You may not enter the enemy team's spawn!"/>
+    <apply region="red-spawn-protection"  enter="only-red"    message="You may not enter the enemy team's spawn!"/>
+    <apply region="everywhere"            block="never"       message="You may not modifiy the terrain in this map."/>
+</regions>
+<!-- Spawners -->
+<spawners>
+    <spawner spawn-region="blue-spawner" player-region="blue-spawner-radius" max-entities="5" min-delay="3" max-delay="5s">
+        <item amount="1" material="golden apple"/>
+    </spawner>
+    <spawner spawn-region="red-spawner" player-region="red-spawner-radius" max-entities="5" min-delay="3" max-delay="5s">
+        <item amount="1" material="golden apple"/>
+    </spawner>
+</spawners>
+<!-- Score -->
+<score>
+    <kills>1</kills>
+</score>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+        <kill-reward>
+            <filter>
+                <kill-streak count="2"/>
+            </filter>
+                <item amount="2" material="arrow"/>
+        </kill-reward>
+        <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <kit>
+            <effect amplifier="2">speed</effect>
+        </kit>
+        </kill-reward>
+</kill-rewards>
+<!-- Itemremove -->
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>bread</item>
+    <item>arrow</item>
+</itemremove>
+<!-- Itemkeep -->
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+</map>
