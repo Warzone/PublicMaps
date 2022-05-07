@@ -76,10 +76,6 @@
             <cause>world</cause>
         </all>
     </any>
-    <any id="gravity">
-        <material id="only-gravel">gravel</material>
-        <cause>world</cause>
-    </any>
 </filters>
 <regions>
     <!-- Definitions -->
@@ -87,7 +83,7 @@
         <rectangle id="map" min="-80,-14" max="80,14"/>
     </negative>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-69,0,-10" max="-80,oo,10"/>
+        <cuboid id="blue-spawn-protection" min="-68,0,-10" max="-80,oo,10"/>
         <cuboid id="red-spawn-protection" min="69,0,-10" max="80,oo,10"/>
     </union>
     <cuboid id="hill-protection" min="-4,0,6" max="5,oo,-5"/>
@@ -97,7 +93,6 @@
     <apply region="blue-spawn-protection" enter="blue-only"    message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection"  enter="red-only"     message="You may not enter the enemy spawn."/>
     <apply region="hill-protection"       block="never"        message="You are not allowed to modify terrain here."/>
-    <apply region="everywhere"            block-physics="gravity"/>
     <apply region="everywhere"            block="interactable" message="You may only place or break glass!"/>
 </regions>
 <itemremove>
