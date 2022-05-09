@@ -1,0 +1,83 @@
+<map proto="1.4.0">
+<name>Ancient Lake</name>
+<version>1.0.0</version>
+<objective>Get the most kills before the match ends</objective>
+<gamemode>tdm</gamemode>
+<authors>
+	<author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- timaeusTestified -->
+</authors>
+<teams>
+	<team id="red" color="dark red" min="1" max="20">Red</team>
+	<team id="blue" color="blue" min="1" max="20">Blue</team>
+</teams>
+<kits>
+	<kit id="play">
+		<clear/>
+		<item slot="0" unbreakable="true">iron sword</item>
+		<item slot="1" unbreakable="true">bow</item>
+		<item slot="2" unbreakable="true">diamond pickaxe</item>
+		<item slot="3" amount="48">cobblestone</item>
+		<item slot="4">golden apple</item>
+		<item slot="8" amount="28">arrow</item>
+		<helmet unbreakable="true" team-color="true">leather helmet</helmet>
+		<chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+		<leggings unbreakable="true">iron leggings</leggings>
+		<boots unbreakable="true" team-color="true">leather boots</boots>
+		<effect duration="5">damage resistance</effect>
+	</kit>
+</kits>
+<spawns>
+	<spawn kit="play" team="red" yaw="0">
+		<region><point>25.5,80,-9.5</point></region>
+	</spawn>
+	<spawn kit="play" team="blue" yaw="180">
+		<region><point>29.5,80,154.5</point></region>
+	</spawn>
+	<default yaw="-90">
+		<region><point>-36.5,128,72.5</point></region>
+	</default>
+</spawns>
+<filters>
+	<any id="only-some">
+		<material>cobblestone</material>
+		<material>double plant</material>
+		<material>long grass</material>
+	</any>
+</filters>
+<regions>
+	<apply block="only-some" message="You may only interact with cobblestone!"/>
+</regions>
+<maxbuildheight>110</maxbuildheight>
+<time>7m</time>
+<score>
+	<kills>1</kills>
+	<deaths>0</deaths>
+</score>
+<kill-rewards>
+	<kill-reward>
+		<item>golden apple</item>
+		<item amount="4">arrow</item>
+	</kill-reward>
+</kill-rewards>
+<itemremove>
+	<item>cobblestone</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>iron leggings</item>
+	<item>leather boots</item>
+	<item>double plant</item>
+	<item>long grass</item>
+</itemremove>
+<toolrepair>
+	<tool>iron sword</tool>
+	<tool>bow</tool>
+	<tool>diamond pickaxe</tool>
+</toolrepair>
+<itemkeep>
+	<item>golden apple</item>
+	<item>arrow</item>
+</itemkeep>
+<hunger>
+	<depletion>off</depletion>
+</hunger>
+</map>
