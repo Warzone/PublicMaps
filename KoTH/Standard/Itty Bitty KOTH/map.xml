@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="King of the Hill">
 <name>Itty Bitty KOTH</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Reach 600 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -69,25 +69,31 @@
 <filters>
     <team id="blue-only">blue</team>
     <team id="red-only">red</team>
-    <all id="only-glass-in-map">
+    <any id="interactable">
         <material>glass</material>
-    </all>
+        <all>
+            <material>gravel</material>
+            <cause>world</cause>
+        </all>
+    </any>
 </filters>
 <regions>
+    <!-- Definitions -->
     <negative id="not-map">
         <rectangle id="map" min="-80,-14" max="80,14"/>
     </negative>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-69,0,-10" max="-80,oo,10"/>
+        <cuboid id="blue-spawn-protection" min="-68,0,-10" max="-80,oo,10"/>
         <cuboid id="red-spawn-protection" min="69,0,-10" max="80,oo,10"/>
     </union>
     <cuboid id="hill-protection" min="-4,0,6" max="5,oo,-5"/>
-    <apply region="not-map"               block="never"             message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"             message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-only"         message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"          message="You may not enter the enemy spawn."/>
-    <apply region="hill-protection"       block="never"             message="You are not allowed to modify terrain here."/>
-    <apply region="everywhere"            block="only-glass-in-map" message="You may only place or break glass!"/>
+    <!-- Applications -->
+    <apply region="not-map"               block="never"        message="You may not edit outside the map!"/>
+    <apply region="spawn-protections"     block="never"        message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only"    message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection"  enter="red-only"     message="You may not enter the enemy spawn."/>
+    <apply region="hill-protection"       block="never"        message="You are not allowed to modify terrain here."/>
+    <apply region="everywhere"            block="interactable" message="You may only place or break glass!"/>
 </regions>
 <itemremove>
     <item>stone sword</item>
@@ -99,13 +105,14 @@
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
+    <item>stone plate</item>
 </itemremove>
 <kill-rewards>
     <kill-reward>
         <item>golden apple</item>
         <item amount="1">arrow</item>
     </kill-reward>
-</kill-rewards>>
+</kill-rewards>
 <score>
     <limit>600</limit>
 </score>
