@@ -1,111 +1,80 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.4.2">
 <name>Limbo</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Hold all 3 points!</objective>
 <gamemode>koth</gamemode>
+<!-- Author & Contributor -->
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- Pandaboy999 -->
 </authors>
 <contributors>
     <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML Fixing and Initial Testing"/> <!-- ElectroidFilms -->
 </contributors>
+<!-- Teams -->
 <teams>
-    <team color="gold" max="8">Orange</team>
-    <team color="dark aqua" max="8">Cyan</team>
+    <team id="cyan-team"   color="dark aqua" max="8">Cyan</team>
+    <team id="orange-team" color="gold"      max="8">Orange</team>
 </teams>
+<!-- Kits -->
 <kits>
-    <kit name="spawn">
+    <kit id="spawn-kit">
         <item slot="0">stone sword</item>
         <item slot="1" enchantment="arrow infinite:1">bow</item>
         <item slot="28">arrow</item>
         <item slot="2" amount="16">cooked beef</item>
-        <potion duration="5" amplifier="4">heal</potion>
-        <potion duration="5" amplifier="4">damage resistance</potion>
-        <potion duration="oo" amplifier="1">night vision</potion>
-        <leggings enchantment="protection projectile:1" unbreakable="true">iron leggings</leggings>
+        <effect duration="5"  amplifier="4">heal</effect>
+        <effect duration="5"  amplifier="4">damage resistance</effect>
+        <effect duration="oo" amplifier="1">night vision</effect>
+        <leggings enchantment="protection projectile:1" unbreakable="true" material="iron leggings"/>
     </kit>
-    <kit name="cyan" parents="spawn">
-        <helmet color="4C7F99" unbreakable="true">leather helmet</helmet>
-        <chestplate color="4C7F99" unbreakable="true">leather chestplate</chestplate>
-        <boots color="4C7F99" unbreakable="true">leather boots</boots>
+    <kit id="cyan-kit" parents="spawn-kit">
+        <helmet     unbreakable="true" color="4C7F99" material="leather helmet"/>
+        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
+        <boots      unbreakable="true" color="4C7F99" material="leather boots"/>
     </kit>
-    <kit name="orange" parents="spawn">
-        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
-        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
-        <boots color="D87F33" unbreakable="true">leather boots</boots>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet     unbreakable="true" color="D87F33" material="leather helmet"/>
+        <chestplate unbreakable="true" color="D87F33" material="leather chestplate"/>
+        <boots      unbreakable="true" color="D87F33" material="leather boots"/>
     </kit>
-    <kit name="obs">
-        <potion duration="oo" amplifier="1">night vision</potion>
+    <kit id="obs">
+        <effect duration="oo" amplifier="1">night vision</effect>
     </kit>
 </kits>
-<filters>
-    <filter name="only-cyan">
-        <team>cyan</team>
-    </filter>
-    <filter name="only-orange">
-        <team>orange</team>
-    </filter>
-</filters>
-<regions>
-    <apply enter="only-cyan" message="You may not enter the enemy team's portal!">
-        <cylinder base="-8.5,6,0.5" radius="3" height="3"/>
-    </apply>
-    <apply enter="only-orange" message="You may not enter the enemy team's portal!">
-        <cylinder base="9,6,0" radius="3" height="3"/>
-    </apply>
-    <apply block="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-</regions>
-<playable>
-    <rectangle min="-oo,-oo" max="oo,oo"/>
-</playable>
+<!-- Spawns -->
 <spawns>
-    <spawn team="cyan" kit="cyan" yaw="90">
-        <cuboid min="51,7,2" max="47,7,-1"/>
-    </spawn>
-    <spawn team="orange" kit="orange" yaw="-90">
-        <cuboid min="-50,7,-1" max="-46,7,2"/>
-    </spawn>
-    <default kit="obs" yaw="180">
-        <cuboid min="-0,19,-0" max="1,19,1"/>
+    <default kit="obs">
+        <region yaw="180">
+            <cuboid min="-0,19,-0" max="1,19,1"/>
+        </region>
     </default>
+    <spawn team="cyan-team" kit="cyan-kit">
+        <region yaw="90">
+            <cuboid min="51,7,2" max="47,7,-1"/>
+        </region>
+    </spawn>
+    <spawn team="orange-team" kit="orange-kit">
+        <region yaw="-90">
+            <cuboid min="-50,7,-1" max="-46,7,2"/>
+        </region>
+    </spawn>
 </spawns>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>arrow</item>
-    <item>golden apple</item>
-    <item>cooked beef</item>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>iron leggings</item>
-    <item>leather boots</item>
-</itemremove>
-<killreward>
-    <item amount="1">golden apple</item>
-</killreward>
-<timelock>on</timelock>
-<portals>
-    <portal x="@9.5" y="@2" z="@0.5" yaw="@90">
-        <cylinder name="cyan-portal" base="-8.5,6,0.5" radius="2" height="3"/>
-    </portal>
-    <portal x="@-8.5" y="@2" z="@0.5" yaw="@-90">
-        <cylinder name="orange-portal" base="9,6,0" radius="2" height="3"/>
-    </portal>
-    <portal x="@0.5" y="@7" z="@0.5">
-        <cylinder name="double-portal-a" base="0.5,2,-8.5" radius="2" height="3"/>
-    </portal>
-    <portal x="@0.5" y="@7" z="@0.5">
-        <cylinder name="double-portal-b" base="0,2,9" radius="2" height="3"/>
-    </portal>
-</portals>
+<!-- Filters -->
+<filters>
+     <team id="only-cyan">cyan-team</team>
+     <team id="only-orange">orange-team</team>
+</filters>  
+<!-- Regions -->
+<regions>
+    <!-- Applications -->
+    <apply region="cyan-portal"   enter="only-cyan"   message="You may not enter the enemy team's portal!"/>
+    <apply region="orange-portal" enter="only-orange" message="You may not enter the enemy team's portal!"/>
+    <apply region="everywhere"    block="never"/>
+</regions>
+<!-- Capture Points -->
 <king>
-    <hills>
-        <hill name="Point A" capture-time="5s" points="1">
+    <hills capture-time="5s" points="3">
+        <hill name="Point A">
             <capture>
                 <cuboid min="3,8,14" max="-2,12,9"/>
             </capture>
@@ -116,7 +85,7 @@
                 <cuboid min="1,1,1" max="1,1,1"/>
             </captured>
         </hill>
-        <hill name="Center" capture-time="5s" points="1">
+        <hill name="Center">
             <capture>
                 <cuboid min="-3,2,4" max="4,5,-3"/>
             </capture>
@@ -127,7 +96,7 @@
                 <cuboid min="0,0,0" max="0,0,0"/>
             </captured>
         </hill>
-        <hill name="Point B" capture-time="5s" points="1">
+        <hill name="Point B">
             <capture>
                 <cuboid min="-2,8,-13" max="3,12,-8"/>
             </capture>
@@ -140,8 +109,44 @@
         </hill>
     </hills>
 </king>
+<!-- Score Limit -->
 <score>
     <limit>750</limit>
-    <king/>
 </score>
+<!-- Toolrepair -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<!-- Itemremove -->
+<itemremove>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>cooked beef</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<portals>
+    <portal x="@9.5" y="@2" z="@0.5" yaw="@90">
+        <region><cylinder id="cyan-portal" base="-8.5,6,0.5" radius="2" height="3"/></region>
+    </portal>
+    <portal x="@-8.5" y="@2" z="@0.5" yaw="@-90">
+        <region><cylinder id="orange-portal" base="9,6,0" radius="2" height="3"/></region>
+    </portal>
+    <portal x="@0.5" y="@7" z="@0.5">
+        <region><cylinder id="double-portal-a" base="0.5,2,-8.5" radius="2" height="3"/></region>
+    </portal>
+    <portal x="@0.5" y="@7" z="@0.5">
+       <region><cylinder id="double-portal-b" base="0,2,9" radius="2" height="3"/></region>
+    </portal>
+</portals>
 </map>
