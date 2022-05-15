@@ -1,6 +1,6 @@
 <map proto="1.4.2" game="King of the Flag">
 <name>Limbo III</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <objective>Control the flag for 180 seconds to win!</objective>
 <gamemode>kotf</gamemode>
 <authors>
@@ -68,7 +68,7 @@
     </any>
 </filters>
 <regions>
-    <apply block="never"/>
+    <apply block="never" use="never"/>
     <apply velocity="-1.7,1,-1.7">
         <region>
             <cuboid min="-65,1,87" max="-67,2,85"/>
@@ -80,15 +80,16 @@
           name="Flag"
           color="white"
           shared="true"
-          post="centre"
           points-rate="1"
           pickup-kit="flag-kit"
           drop-kit="reset-health"
           flag-proximity-metric="none"
           show-respawn-on-pickup="true">
-        <post id="centre" name="Centre" return-time="0s" respawn-time="15s" yaw="-45">-95.5,7,56.5</post>
-        <post id="post-a" name="Post A" return-time="0s" respawn-time="15s" yaw="-45">-121.5,6,30.5</post>
-        <post id="post-b" name="Post B" return-time="0s" respawn-time="15s" yaw="135">-52.5,4,99.5</post>
+        <post return-time="0s" respawn-time="15s">
+            <post name="Centre Post" yaw="-45">-95.5,7,56.5</post>
+            <post name="Post A" yaw="-45">-121.5,6,30.5</post>
+            <post name="Post B" yaw="135">-52.5,4,99.5</post>
+        </post>
     </flag>
 </flags>
 <score>
@@ -103,6 +104,7 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>iron boots</item>
+    <item>banner</item>
 </itemremove>
 <itemkeep>
     <item>golden apple</item>
