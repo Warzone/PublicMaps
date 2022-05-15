@@ -1,13 +1,13 @@
 <map proto="1.4.2">
 <name>Concourse: Christmas</name>
-<version>1.2.12</version>
+<version>1.2.13</version>
 <objective>Control the flag for 200 seconds to win!</objective>
 <gamemode>kotf</gamemode>
 <authors>
-    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!--   DiamondAx   -->
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
 </authors>
 <contributors>
-    <contributor uuid="91295196-9cd2-4963-b7ec-afd1a110edbe"/> <!--   Pbat   -->
+    <contributor uuid="91295196-9cd2-4963-b7ec-afd1a110edbe"/> <!-- Pbat -->
 </contributors>
 <teams>
     <team id="green" color="green" max="24">Green</team>
@@ -31,9 +31,10 @@
         <boots unbreakable="true" material="iron boots">
             <enchantment level="2">feather_falling</enchantment>
         </boots>
-        <health>20</health>
+        <effect duration="1" amplifier="0">health boost</effect>
+        <effect duration="2" amplifier="10">regeneration</effect>
+        <effect duration="3" amplifier="255">damage resistance</effect>
         <game-mode>adventure</game-mode>
-        <effect duration="3" amplifier="10">heal</effect>
     </kit>
     <kit id="flag-kit" force="true">
         <effect>slowness</effect>
@@ -43,7 +44,6 @@
     <kit id="reset-health" force="true">
         <effect duration="0" amplifier="0">slowness</effect>
         <effect duration="0" amplifier="0">health boost</effect>
-        <effect duration="1" amplifier="10">regeneration</effect>
     </kit>
 </kits>
 <spawns>
@@ -81,15 +81,16 @@
           name="Flag"
           color="silver"
           shared="true"
-          post="centre-post"
           points-rate="1"
           pickup-kit="flag-kit"
           drop-kit="reset-health"
           flag-proximity-metric="none"
           show-respawn-on-pickup="true">
-        <post id="centre-post" return-time="0s" respawn-time="7s" name="Centre Post">3.5,15,-445.5</post>
-        <post id="green-post" return-time="0s" respawn-time="7s" name="Green Post" yaw="180">3.5,20,-415.5</post>
-        <post id="red-post" return-time="0s" respawn-time="7s" name="Red Post" yaw="0">3.5,20,-475.5</post>
+        <post return-time="0s" respawn-time="10s">
+            <post name="Centre Post">3.5,15,-445.5</post>
+            <post name="Green's Post" yaw="180">3.5,20,-415.5</post>
+            <post name="Red's Post" yaw="0">3.5,20,-475.5</post>
+        </post>
     </flag>
 </flags>
 <score>
@@ -104,6 +105,7 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>iron boots</item>
+    <item>banner</item>
 </itemremove>
 <itemkeep>
     <item>golden apple</item>

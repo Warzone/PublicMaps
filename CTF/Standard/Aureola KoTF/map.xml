@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Aureola KotF</name>
-<version>1.1.4</version>
+<version>1.1.5</version>
 <objective>Hold the flag for 200 seconds to win!</objective>
 <gamemode>kotf</gamemode>
 <authors>
@@ -16,28 +16,27 @@
     <team id="red" color="dark red" max="16">Red</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">Stone Sword</item>
-        <item slot="1" unbreakable="true">Bow</item>
-        <item slot="2" amount="2">golden apple</item>
-        <item slot="8" amount="24">arrow</item>
-        <effect duration="3" amplifier="2">heal</effect>
-        <effect duration="3">damage resistance</effect>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="24" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate">
+            <enchantment level="1">projectile_protection</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" team-color="true" material="leather leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" team-color="true" material="leather boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+        <effect duration="1" amplifier="0">health boost</effect>
+        <effect duration="2" amplifier="10">regeneration</effect>
         <effect duration="2">increase damage</effect>
+        <effect duration="3" amplifier="255">damage resistance</effect>
         <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet color="2B14C4" unbreakable="true">leather helmet</helmet>
-        <chestplate color="2B14C4" unbreakable="true" enchantment="protection projectile:1">leather chestplate</chestplate>
-        <leggings color="2B14C4" unbreakable="true">leather leggings</leggings>
-        <boots color="2B14C4" unbreakable="true" enchantment="protection fall:2">leather boots</boots>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet color="AD0000" unbreakable="true">leather helmet</helmet>
-        <chestplate color="AD0000" unbreakable="true" enchantment="protection projectile:1">leather chestplate</chestplate>
-        <leggings color="AD0000" unbreakable="true">leather leggings</leggings>
-        <boots color="AD0000" unbreakable="true" enchantment="protection fall:2">leather boots</boots>
     </kit>
     <kit id="flag-kit" force="true">
         <effect>slowness</effect>
@@ -47,23 +46,25 @@
     <kit id="reset-health" force="true">
         <effect duration="0" amplifier="0">slowness</effect>
         <effect duration="0" amplifier="0">health boost</effect>
-        <effect duration="1" amplifier="10">regeneration</effect>
     </kit>
 </kits>
 <filters>
-    <not id="no-flag">
-        <same-team>
-            <carrying-flag>flag</carrying-flag>
-        </same-team>
-    </not>
+    <any id="has-flag">
+        <carrying-flag>flag</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </any>
 </filters>
 <spawns>
-    <spawn team="red" kit="red-kit" angle="158.5,7,-1.5" filter="no-flag">
+    <spawn team="red" kit="spawn-kit" angle="158.5,7,-1.5" filter="has-flag">
         <region>
             <cuboid min="154.5,6,-5.5" max="156.5,7,-3.5"/>
         </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit" angle="212.5,7,52.5" filter="no-flag">
+    <spawn team="blue" kit="spawn-kit" angle="212.5,7,52.5" filter="has-flag">
         <region>
             <cuboid min="214.5,6,54.5" max="216.5,7,56.5"/>
         </region>
@@ -84,10 +85,11 @@
     <item>leather boots</item>
     <item>bow</item>
     <item>stone sword</item>
+    <item>banner</item>
 </itemremove>
 <kill-reward>
-    <item>golden apple</item>
-    <item amount="8">arrow</item>
+    <item material="golden apple"/>
+    <item amount="8" material="arrow"/>
 </kill-reward>
 <itemkeep>
     <item>golden apple</item>
@@ -101,19 +103,20 @@
           name="Flag"
           color="white"
           shared="true"
-          post="top-post"
           points-rate="1"
           pickup-kit="flag-kit"
           drop-kit="reset-health"
           flag-proximity-metric="closest player"
           show-respawn-on-pickup="true">
-        <post id="top-post" return-time="0s" respawn-time="15s" name="Top Post">185,15,25</post>
-        <!-- <post id="mid-post" return-time="0s" respawn-time="15s" name="Mid Post">185,6,25</post> -->
-        <post id="ne-post" return-time="0s" respawn-time="15s" name="Northeast Post" yaw="45">216,6,-6</post>
-        <post id="sw-post" return-time="0s" respawn-time="15s" name="Southwest Post" yaw="-135">154,6,56</post>
+        <post return-time="0s" respwn-time="15s">
+            <post name="Top Post">185,15,25</post>
+            <!-- <post name="Mid Post">185,6,25</post> -->
+            <post name="Northeast Post" yaw="45">216,6,-6</post>
+            <post name="Southwest Post" yaw="-135">154,6,56</post>
+        </post>
     </flag>
 </flags>
-<respawn spectate="true">
+<respawn auto="true" spectate="true">
     <message>
         {"translate":"death.respawn.confirmed.waiting.flagDropped"}
     </message>
