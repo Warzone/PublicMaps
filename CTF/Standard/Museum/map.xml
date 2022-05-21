@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Capture the Flag">
 <name>Museum</name>
-<version>1.2.1</version>
+<version>1.2.2</version>
 <objective>First team to capture the enemy flag 3 times wins!</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -72,14 +72,14 @@
     <point id="cyan-spawn">0.5,59,104</point>
     <point id="obs-spawn">0.5,53.5,0.5</point>
     <!-- Applications -->
-    <apply region="spawn-protections"          block="never"     message="You are not allowed to modify terrain here."/>
-    <apply region="orange-spawn-protection"    enter="orange-only" message="You may not enter the enemy spawn."/>
-    <apply region="cyan-spawn-protection"      enter="cyan-only"  message="You may not enter the enemy spawn."/>
+    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn-protection"   enter="cyan-only"   message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Portals -->
-<portals>
+<portals protect="true" sound="false" pitch="@0">
     <!-- Orange Left Portal -->
-    <portal protect="true" sound="false" yaw="@90" pitch="@0">
+    <portal yaw="@90">
         <region>
             <cuboid min="20,50,-20" max="21,51,-21"/>
         </region>
@@ -88,7 +88,7 @@
         </destination>
     </portal>
     <!-- Orange Right Portal -->
-    <portal protect="true" sound="false" yaw="@-90" pitch="@0">
+    <portal yaw="@-90">
       <region>
           <cuboid min="-19,50,-20" max="-20,51,-21"/>
       </region>
@@ -97,7 +97,7 @@
       </destination>
     </portal>
     <!-- Cyan Left Portal -->
-    <portal protect="true" sound="false" yaw="@-90" pitch="@0">
+    <portal yaw="@-90">
         <region>
             <cuboid min="-19,50,21" max="-20,51,22"/>
         </region>
@@ -106,7 +106,7 @@
         </destination>
     </portal>
     <!-- Cyan Right Portal -->
-    <portal protect="true" sound="false" yaw="@90" pitch="@0">
+    <portal yaw="@90">
       <region>
           <cuboid min="20,50,21" max="21,51,22"/>
       </region>
@@ -137,6 +137,7 @@
     <item>leather chestplate</item>
     <item>iron leggings</item>
     <item>leather boots</item>
+    <item>painting</item>
 </itemremove>
 <!-- Kill Rewards -->
 <kill-rewards>
