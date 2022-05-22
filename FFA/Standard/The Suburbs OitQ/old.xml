@@ -1,0 +1,116 @@
+<map proto="1.4.0">
+<name>The Suburbs</name>
+<version>1.1.0</version>
+<objective>Get the most kills in 8 minutes!</objective>
+<game-mode>FFA</game-mode>
+<authors>
+    <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/>
+    <!--   DoomyBoy   -->
+</authors>
+<respawn blackout="true"/>
+<players min="2" max="24" max-overfill="24" show-name-tags="false"/>
+<time>8m</time>
+<score>
+    <kills>1</kills>
+</score>
+<spawns>
+    <spawn kit="spawn" spread="true" safe="true">
+        <regions>
+            <point yaw="20">83.5,4,18.5</point>
+            <point yaw="30">42.5,4,26.5</point>
+            <point yaw="0">3.5,4,31.5</point>
+            <point yaw="-1">-21.5,4,63.5</point>
+            <point yaw="-90">-31.5,2,120.5</point>
+            <point yaw="30">-2.5,3,155.5</point>
+            <point yaw="-20">-17.5,3,172.5</point>
+            <point yaw="-30">-29.5,4,204.5</point>
+            <point yaw="-135">17.5,4,238.5</point>
+            <point yaw="-150">56.5,4,242.5</point>
+            <point yaw="150">111.5,4,220.5</point>
+            <point yaw="50">132.5,4,184.5</point>
+            <point yaw="150">127.5,4,179.5</point>
+            <point yaw="-145">100.5,5,160.5</point>
+            <point yaw="45">136.5,8,129.5</point>
+            <point yaw="125">143.5,8,100.5</point>
+            <point yaw="95">96.5,8,101.5</point>
+            <point yaw="60">138.5,5,64.5</point>
+            <point yaw="165">113.5,4,42.5</point>
+            <point yaw="180">59.5,5,173.5</point>
+            <point yaw="0">3.5,3,77.5</point>
+            <point yaw="-170">30.5,4,211.5</point>
+            <point yaw="150">63.5,4,192.5</point>
+            <point yaw="40">98.5,4,66.5</point>
+            <point yaw="-50">51.5,5,62.5</point>
+            <point yaw="-80">-14.5,2,96.5</point>
+            <point yaw="-90">1.5,3,142.5</point>
+            <point yaw="-140">13.5,2,93.5</point>
+            <point yaw="-80">-2.5,4,60.5</point>
+            <point yaw="0">64.5,5,87.5</point>
+            <point yaw="-100">77.5,4,157.5</point>
+            <point yaw="40">24.5,4,157.5</point>
+        </regions>
+    </spawn>
+    <default kit="all">
+        <regions>
+            <point yaw="135">41.5,13,162.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="all">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn" parents="all">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="32" material="bread"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <helmet locked="true" unbreakable="true" material="iron helmet"/>
+        <chestplate locked="true" unbreakable="true" color="B2A699" material="leather chestplate"/>
+        <leggings locked="true" unbreakable="true" color="993333" material="leather leggings"/>
+        <boots locked="true" unbreakable="true" color="B2A699" material="leather boots"/>
+        <potion duration="3" amplifier="5">damage resistance</potion>
+    </kit>
+    <kit id="kill-kit">
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+        <potion duration="3" amplifier="3">regeneration</potion>
+    </kit>
+</kits>
+<killreward>
+    <kit>
+        <kit id="kill-kit"/>
+    </kit>
+</killreward>
+<filters>
+    <any id="allow-some">
+        <material>stained glass pane</material>
+        <material>thin glass</material>
+        <material>double plant</material>
+        <material>long grass</material>
+        <material>red rose</material>
+    </any>
+</filters>
+<regions>
+    <apply block="allow-some" region="everywhere"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>bread</item>
+    <item>golden apple</item>
+    <item>seeds</item>
+    <item>carpet</item>
+    <item>double plant</item>
+    <item>red rose</item>
+</itemremove>
+<timelock>on</timelock>
+</map>
