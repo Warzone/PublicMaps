@@ -1,7 +1,7 @@
 <map proto="1.4.2">
 <name>Royal</name>
-<version>1.0.6</version>
-<objective>Hold the flag for 250 seconds to win!</objective>
+<version>1.0.7</version>
+<objective>Hold the flag for 200 seconds to win!</objective>
 <gamemode>kotf</gamemode>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
@@ -28,7 +28,7 @@
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="3">projectile_protection</enchantment>
+            <enchantment level="2">projectile_protection</enchantment>
         </leggings>
         <boots unbreakable="true" material="iron boots">
             <enchantment level="2">feather_falling</enchantment>
@@ -36,13 +36,23 @@
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="flag-kit" force="true">
+        <effect>slowness</effect>
         <effect amplifier="-3">health boost</effect>
-        <effect duration="3" amplifier="2">absorption</effect>
+        <effect duration="3s" amplifier="2">absorption</effect>
     </kit>
     <kit id="reset-health" force="true">
-        <effect duration="1" amplifier="0">health boost</effect>
-        <effect duration="1" amplifier="10">regeneration</effect>
+        <effect duration="0s" amplifier="0">slowness</effect>
+        <effect duration="1s" amplifier="0">health boost</effect>
+        <effect duration="1s" amplifier="10">regeneration</effect>
     </kit>
+    <kit id="jump">
+        <effect amplifier="255">jump</effect>
+    </kit>
+    <take kit="jump">
+        <filter>
+            <grounded/>
+        </filter>
+    </take>
 </kits>
 <spawns>
     <default>
@@ -74,103 +84,112 @@
 <filters>
     <any id="has-flag">
         <carrying-flag>flag1</carrying-flag>
-        <not>
-            <same-team>
-                <carrying-flag>flag1</carrying-flag>
-            </same-team>
-        </not>
         <carrying-flag>flag2</carrying-flag>
         <not>
             <same-team>
-                <carrying-flag>flag2</carrying-flag>
+                <any>
+                    <carrying-flag>flag1</carrying-flag>
+                    <carrying-flag>flag2</carrying-flag>
+                </any>
             </same-team>
         </not>
     </any>
 </filters>
 <regions>
-    <cuboid id="test" min="-19,13,147" max="-17,15,149"/>
     <!-- Corners -->
     <!--  Green Yellow Pad  -->
-    <apply velocity="-0.5,1.7,0.5" region="test"/>
+    <apply kit="jump" velocity="-0.5,1.7,0.5">
+        <region>
+            <cuboid min="-19,13,147" max="-17,15,149"/>
+        </region>
+    </apply>
     <!--  Yellow Blue Pad  -->
-    <apply velocity="0.5,1.7,0.5">
+    <apply kit="jump" velocity="0.5,1.7,0.5">
         <region>
             <cuboid min="18,13,147" max="20,15,149"/>
         </region>
     </apply>
     <!--  Blue Red Pad  -->
-    <apply velocity="0.5,1.7,-0.5">
+    <apply kit="jump" velocity="0.5,1.7,-0.5">
         <region>
             <cuboid min="18,13,110" max="20,15,112"/>
         </region>
     </apply>
     <!--  Red Green Pad  -->
-    <apply velocity="-0.5,1.7,-0.5">
+    <apply kit="jump" velocity="-0.5,1.7,-0.5">
         <region>
             <cuboid min="-19,13,110" max="-17,15,112"/>
         </region>
     </apply>
     <!-- To Mid -->
     <!-- Red -->
-    <apply velocity="0,1.2,1.1">
+    <apply kit="jump" velocity="0,1.2,1.1">
         <region>
             <block>0.5,27,119.5</block>
         </region>
     </apply>
     <!--   Blue   -->
-    <apply velocity="-1.1,1.2,0">
+    <apply kit="jump" velocity="-1.1,1.2,0">
         <region>
             <block>10.5,27,129.5</block>
         </region>
     </apply>
     <!--  Green   -->
-    <apply velocity="1.1,1.2,0">
+    <apply kit="jump" velocity="1.1,1.2,0">
         <region>
             <block>-9.5,27,129.5</block>
         </region>
     </apply>
     <!--  Yellow   -->
-    <apply velocity="0,1.2,-1.1">
+    <apply kit="jump" velocity="0,1.2,-1.1">
         <region>
             <block>0.5,27,139.5</block>
         </region>
     </apply>
    <!-- From Mid -->
     <!-- Red -->
-    <apply velocity="0,0.7,-1.5">
+    <apply kit="jump" velocity="0,0.7,-1.5">
         <region>
             <block>0.5,31,125.5</block>
         </region>
     </apply>
     <!--   Blue   -->
-    <apply velocity="1.5,0.7,0">
+    <apply kit="jump" velocity="1.5,0.7,0">
         <region>
             <block>4.5,31,129.5</block>
         </region>
     </apply>
     <!--  Green   -->
-    <apply velocity="-1.5,0.7,0">
+    <apply kit="jump" velocity="-1.5,0.7,0">
         <region>
             <block>-3.5,31,129.5</block>
         </region>
     </apply>
     <!--  Yellow   -->
-    <apply velocity="0,0.7,1.5">
+    <apply kit="jump" velocity="0,0.7,1.5">
         <region>
             <block>0.5,31,133.5</block>
         </region>
     </apply>
-    <apply block="never"/>
+    <apply block="never" use="never"/>
 </regions>
 <flags>
-    <post id="top-post" return-time="0s" respawn-time="10s">
-        <block>0.5,32,129.5</block>
-    </post>
-    <post id="bottom-post" return-time="0s" respawn-time="10s">
-        <block>0.5,17,129.5</block>
-    </post>
-    <flag id="flag1" name="Top Flag"  shared="true" post="top-post" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health"/>
-    <flag id="flag2" name="Bottom Flag"  shared="true" post="bottom-post" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health"/>
+    <flag id="flag1"
+          name="Top Flag"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
+        <post return-time="0s" respawn-time="10s">0.5,32,129.5</post>
+    </flag>
+    <flag id="flag2"
+          name="Bottom Flag"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
+        <post return-time="0s" respawn-time="10s">0.5,17,129.5</post>
+    </flag>
 </flags>
 <score>
     <limit>200</limit>
@@ -184,6 +203,7 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>iron boots</item>
+    <item>banner</item>
 </itemremove>
 <itemkeep>
     <item>golden apple</item>
