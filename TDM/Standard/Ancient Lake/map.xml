@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Ancient Lake</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Get the most kills before the match ends</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -38,6 +38,8 @@
 	</default>
 </spawns>
 <filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
 	<any id="only-some">
 		<material>cobblestone</material>
 		<material>double plant</material>
@@ -46,8 +48,18 @@
 		<material>yellow flower</material>
 	</any>
 </filters>
+<!-- Regions -->
 <regions>
+	<!-- Definitions -->
+	<union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="26,0,149"  max="32,oo,158"/>
+        <cuboid id="red-spawn-protection"  min="28,0,-4" max="22,oo,-14"/>
+    </union>
+	<!-- Applications -->
+	<apply block="never" region="spawn-protections" message="You may not modifiy the terrain here."/>
 	<apply block="only-some" message="You may only place down and break cobblestone!"/>
+	<apply enter="only-blue" region="blue-spawn-protection" message="You may not enter the enemy spawn."/>
+	<apply enter="only-red" region="red-spawn-protection" message="You may not enter the enemy spawn."/>
 </regions>
 <maxbuildheight>110</maxbuildheight>
 <time>7m</time>
