@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Monument">
 <name>Aerial Conquest</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Destroy the enemy's gold treasure!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -18,24 +18,26 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
+        <clear/>
         <item slot="0" unbreakable="true" enchantment="sharpness:1">iron sword</item>
         <item slot="1" unbreakable="true">bow</item>
         <item slot="2" unbreakable="true">diamond axe</item>
         <item slot="3" unbreakable="true">iron pickaxe</item>
         <item slot="8" amount="10">cooked beef</item>
         <item slot="9" amount="64">arrow</item>
-        <chestplate unbreakable="true">iron chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
+        <leggings unbreakable="true">chainmail leggings</leggings>
     </kit>
     <kit id="blue-kit" parents="default">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
+        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
         <boots unbreakable="true" color="3C44AA">leather boots</boots>
         <item slot="4" amount="64" damage="11">stained glass</item>
+        <item slot="5" amount="64" damage="11">stained glass</item>
     </kit>
     <kit id="red-kit" parents="default">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
         <boots unbreakable="true" color="B02E26">leather boots</boots>
         <item slot="4" amount="64" damage="14">stained glass</item>
+        <item slot="5" amount="64" damage="14">stained glass</item>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -54,6 +56,22 @@
     <team id="blue-only">blue-team</team>
     <team id="red-only">red-team</team>
 </filters>
+<!-- Block Drops -->
+<block-drops>
+    <rule wrong-tool="false">
+        <filter>
+            <any>
+                <material>iron block</material>
+            </any>
+        </filter>
+        <drops>
+            <item material = "gold helmet" enchantment="PROTECTION_PROJECTILE:1"/>
+            <item material = "gold boots" enchantment="PROTECTION_PROJECTILE:1"/>
+            <item material = "gold chestplate" enchantment="PROTECTION_ENVIRONMENTAL:2"/>
+        </drops>
+        <replacement>iron block</replacement>
+    </rule>
+</block-drops>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -62,8 +80,8 @@
         <cuboid id="red-gold" min="275,14,32" max="279,18,42"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="208,22,-99" max="228,26,-87"/>
-        <cuboid id="red-spawn-protection" min="283,22,43" max="263,26,31"/>
+        <cuboid id="blue-spawn-protection" min="208,22,-102" max="228,26,-82"/>
+        <cuboid id="red-spawn-protection" min="283,22,48" max="263,26,29"/>
     </union>
     <point id="blue-spawn">219.5,24,-92.5</point>
     <point id="red-spawn">272.5,23,37.5</point>
@@ -84,25 +102,30 @@
     <item>diamond axe</item>
     <item>iron pickaxe</item>
     <item>cooked beef</item>
-    <item>arrow</item>
-    <item>golden apple</item>
     <item>stained glass</item>
     <item>leather helmet</item>
-    <item>iron chestplate</item>
-    <item>iron leggings</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
     <item>leather boots</item>
     <item>gold block</item>
 </itemremove>
+<itemkeep>
+    <item>gold chestplate</item>
+    <item>gold helmet</item>
+    <item>gold boots</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item amount="4">arrow</item>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<maxbuildheight>90</maxbuildheight>
+<maxbuildheight>37</maxbuildheight>
 </map>
