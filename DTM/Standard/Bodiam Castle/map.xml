@@ -22,7 +22,7 @@
 <respawn auto="true" delay="5s"/>
 <time>50m</time>
 <!-- Blitz and Sudden Death -->
-<blitz filter="bed-destruction">
+<blitz filter="blitz-conditions">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
@@ -41,6 +41,7 @@
         <chestplate unbreakable="true" team-color="true" locked="true">leather chestplate</chestplate>
         <leggings unbreakable="true" team-color="true" locked="true">leather leggings</leggings>
         <boots unbreakable="true" team-color="true" locked="true">leather boots</boots>
+        <effect duration="4" amplifier="10">damage_resistance</effect>
     </kit>
     <!-- Team Upgrades -->
     <!-- <lend filter="apply-regeneration">
@@ -76,12 +77,15 @@
     <default region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="50%" required="false" repairable="false" materials="bed_block" show="true" sparks="true">
+<destroyables completion="50%" required="false" repairable="false" show="true" sparks="true" materials="bed_block" modes="air-mode">
     <destroyable name="Blue Bed" owner="blue-team" region="blue-bed" id="blue-bed-broken"/>
     <destroyable name="Red Bed" owner="red-team" region="red-bed" id="red-bed-broken"/>
     <destroyable name="Green Bed" owner="green-team" region="green-bed" id="green-bed-broken"/>
     <destroyable name="Yellow Bed" owner="yellow-team" region="yellow-bed" id="yellow-bed-broken"/>
 </destroyables>
+<modes>
+    <mode id="air-mode" after="30m" material="air" name="`cSUDDEN DEATH"/>
+</modes>
 <!-- Control Points (hidden) -->
 
 <!-- Filters -->
@@ -99,7 +103,13 @@
     <team id="red-only">red-team</team>
     <team id="green-only">green-team</team>
     <team id="yellow-only">yellow-team</team>
-    <!-- Sudden Death/Monuments Filters  -->
+    <!-- Sudden Death/Monuments Filters -->
+    <any id="blitz-conditions">
+        <!-- Triggers sudden death mode for a team if their bed monument is destroyed in under 30 minutes -->
+        <filter id="bed-destruction"/>
+        <!-- Triggers sudden death mode for everyone when the match lasts more than 30 minutes -->
+        <filter id="30m-passed"/>
+    </any>
     <any id="bed-destruction">
         <any>
             <all>
@@ -225,6 +235,12 @@
     <alert after="2s" filter="">The world border will appear in `c10 minutes`r.</alert>
     <alert after="" filter="">The world border has appeared and is approaching!</alert> -->
 </broadcasts>
+<!-- World Borders -->
+<world-borders center="0.5,0.5">
+    <world-border size="350"/> 
+    <!-- The world border starts shrinking after 40 minutes into the match and will take 4 mintues to reach the center. -->
+    <world-border size="12" after="40m" duration="4m" damage="5" buffer="0"/>
+</world-borders>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -301,7 +317,19 @@
     <spawner spawn-region="bottom-emerald" max-entities="6" delay="1m">
         <item amount="1" material="emerald"/>
     </spawner>
+  	<spawner spawn-region="bottom-emerald" max-entities="6" delay="1m" filter="6m-passed"> <!-- Tier 2 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="bottom-emerald" max-entities="6" delay="1m" filter="12m-passed"> <!-- Tier 3 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
     <spawner spawn-region="top-emerald" max-entities="6" delay="1m">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="top-emerald" max-entities="6" delay="1m" filter="6m-passed"> <!-- Tier 2 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="top-emerald" max-entities="6" delay="1m" filter="12m-passed"> <!-- Tier 3 -->
         <item amount="1" material="emerald"/>
     </spawner>
     <!-- Team Ingot Generators: Normal -->
@@ -332,6 +360,7 @@
     <item>stained glass</item>
     <item>obsidian</item>
     <item>carpet</item>
+    <item>stone button</item>
     <!-- Weapons -->
     <item>wood sword</item>
     <item>stone sword</item>
