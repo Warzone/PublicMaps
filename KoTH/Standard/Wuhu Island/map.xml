@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="King of the Hill">
 <name>Wuhu Island</name>
-<version>1.0.0</version>
-<objective>Reach 4000 points before the opposing teams!</objective>
+<version>1.0.1</version>
+<objective>Reach 2000 points before the opposing teams!</objective>
 <gamemode>koth</gamemode>
-<!-- Authors and Contributors -->
+<score>
+    <limit>2000</limit>
+</score>
 <authors>
     <author uuid="9f9d89d3-5ce6-49bd-a60d-eb958f79ed91" contribution="Original map creation"/> <!-- tizona -->
     <author uuid="4d4b3b1c-c141-4dda-9329-cacc33f1ea30" contribution="Built map extensions"/> <!-- Maxmos -->
@@ -14,16 +16,15 @@
     <contributor uuid="fa28ac5f-6a4c-414f-8bcd-b5f2a93470a5" contribution="Original map JSON"/> <!-- JackJack33 -->
     <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML conversion"/> <!-- _Pear -->
 </contributors>
-<!-- Teams -->
 <teams>
     <team id="yellow" color="yellow" min="3" max="100">Yellow</team>
     <team id="green" color="green" min="3" max="100">Green</team>
     <team id="blue" color="blue" min="3" max="100">Blue</team>
     <team id="red" color="red" min="3" max="100">Red</team>
 </teams>
-<!-- Kits -->
 <kits>
     <kit id="default">
+        <double-jump />
         <item slot="0" unbreakable="true">stone sword</item>
         <item slot="1" unbreakable="true">bow</item>
         <item slot="7" amount="1">golden apple</item>
@@ -32,11 +33,12 @@
         <helmet unbreakable="true">iron helmet</helmet>
         <chestplate unbreakable="true">chainmail chestplate</chestplate>
         <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall">leather boots</boots>
+        <boots material="leather boots" team-color="true">
+    		<enchantment level="3">feather_falling</enchantment>
+		</boots>
         <potion duration="oo" amplifier="1">speed</potion>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default yaw="0">
         <region>
@@ -64,7 +66,6 @@
         </region>
     </spawn>
 </spawns>
-<!-- Hills -->
 <control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true">
     <control-point name="Wuhu Town" points="1"> <!-- Alternative name: "Town" -->
         <capture>
@@ -177,30 +178,25 @@
         </captured>
     </control-point>
 </control-points>
-<!-- Filters -->
 <filters>
     <team id="yellow-only">yellow</team>
     <team id="green-only">green</team>
     <team id="blue-only">blue</team>
     <team id="red-only">red</team>
 </filters>
-<!-- Regions -->
 <regions>
-    <!-- Definitions -->
     <union id="spawn-protections">
         <cuboid id="yellow-spawn-protection" min="-1150,30,369" max="-1158,36,377"/>
         <cuboid id="green-spawn-protection" min="-1159,60,351" max="-1170,67,359"/>
         <cuboid id="blue-spawn-protection" min="-1335,0,507" max="-1340,oo,512"/>
         <cuboid id="red-spawn-protection" min="-1062,0,484" max="-1055,oo,477"/>
     </union>
-    <!-- Applications -->
     <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
     <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
     <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
     <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
 </regions>
-<!-- Portals -->
 <portals protect="true" yaw="@90" pitch="@0">
     <!-- Wuhu to Wedge Island -->
     <portal>
@@ -221,7 +217,6 @@
       </destination>
     </portal>
 </portals>
-<!-- ItemRemove -->
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -233,15 +228,17 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item>golden apple</item>
     </kill-reward>
 </kill-rewards>
-<!-- Misc -->
-<score>
-    <limit>4000</limit>
-</score>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 <timelock>off</timelock>
+<broadcasts>
+    <tip every="5m">Don't forget to double-jump</tip>
+    <alert after="30s">Fall damage is disabled</alert>
+</broadcasts>
 </map>
