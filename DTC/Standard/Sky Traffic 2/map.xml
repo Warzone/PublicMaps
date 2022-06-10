@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<map proto="1.0.0">
+<name>Sky Traffic 2</name>
+<version>1.3.6</version>
+<objective>Leak lava from the enemy's obsidian core in their yellow submarine.</objective>
+<gamemode>dtc</gamemode>
+<rules>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+    <rule>Chests can not be placed or destroyed!</rule>
+</rules>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<teams>
+    <team color="dark red" max="50">Red</team>
+    <team color="blue" max="50">Blue</team>
+</teams>
+<maxbuildheight>215</maxbuildheight>
+<kits>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit name="spawn">
+        <item slot="0">diamond sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">diamond axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="6">water bucket</item>
+        <item slot="8" amount="64">cooked fish</item>
+        <potion duration="15s" amplifier="2">regeneration</potion>
+        <potion duration="5" amplifier="10">heal</potion>
+        <chestplate enchantment="protection explosions:4">chainmail chestplate</chestplate>
+        <effect duration="5" amplifier="2">regeneration</effect>
+        <effect duration="2" amplifier="10">heal</effect>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="anti-chest-red">
+        <not>
+            <all>
+                <team>red</team>
+                <block>chest</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="anti-chest-blue">
+        <not>
+            <all>
+                <team>blue</team>
+                <block>chest</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="anti-tnt-red">
+        <not>
+            <all>
+                <team>red</team>
+                <block>tnt</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="anti-tnt-blue">
+        <not>
+            <all>
+                <team>blue</team>
+                <block>tnt</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="deny-chest">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+     <!-- Recent changes to implement spawn and chest protection -->
+    <cuboid name="red-spawn-protect" min="593,123,73" max="606,127,67"/>
+    <cuboid name="blue-spawn-protect" min="302,123,68" max="289,127,74"/>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+       <region name="blue-spawn-protect"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region name="red-spawn-protect"/>
+    </apply>
+    <!--
+    <apply block-break="deny-chest" block-place="deny-chest" message="This block can not be placed or broken on this map!">
+        <rectangle min="oo,oo" max="-oo,-oo"/>
+    </apply> -->
+    <!-- Line where recent changes end -->
+    <rectangle name="map" min="298,19" max="597,143"/>
+    <rectangle name="blue-spawn-tunnel" min="278,74" max="281,67"/>
+    <cuboid name="blue-spawn-ship" min="301,114,62" max="360,128,79"/>
+    <rectangle name="red-spawn-tunnel" min="597,67" max="614,74"/>
+    <cuboid name="red-spawn-ship" min="593,114,79" max="535,128,62"/>
+    <apply block="deny-all" message="You may not place blocks outside the map!">
+        <negative>
+            <region name="map"/>
+        </negative>
+    </apply>
+    <!-- old xml
+    <apply block-break="anti-chest-red" message="You are not allowed to break your own chests!">
+        <region name="red-spawn-ship"/>
+    </apply>
+    <apply block-break="anti-chest-blue" message="You are not allowed to break your own chests!">
+        <region name="blue-spawn-ship"/>
+    </apply>
+    <apply block-place="deny-chest">
+        <region name="blue-spawn-ship"/>
+        <region name="red-spawn-ship"/>
+    </apply> -->
+    <apply leave="deny-all" message="You may not leave the map area!">
+        <rectangle min="298,19" max="597,143"/>
+    </apply>
+    <apply enter="only-red" message="You may not enter the opposing team's spawn!">
+        <region name="red-spawn-tunnel"/>
+    </apply>
+    <apply enter="only-blue" message="You may not enter the opposing team's spawn!">
+        <region name="blue-spawn-tunnel"/>
+    </apply>
+</regions>
+<crafting>
+    <disable>boat</disable>
+    <disable>chest</disable>
+</crafting>
+<killreward>
+    <item amount="16">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>golden apple</item>
+</itemremove>
+<spawns>
+    <spawn team="red" kit="red" yaw="90">
+        <point>611.5,124,70.5</point>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="-90">
+        <point>283.5,124,70.5</point>
+    </spawn>
+    <default yaw="180">
+        <cuboid min="443,124,-20" max="452,124,-11"/>
+    </default>
+</spawns>
+<cores material="obsidian" leak="3">
+    <core team="red">
+        <cuboid min="549,133,114" max="556,139,119"/>
+    </core>
+    <core team="blue">
+        <cuboid min="339,133,114" max="346,139,119"/>
+    </core>
+</cores>
+</map>

@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+<map proto="1.0.0">
+<name>Sky Traffic</name>
+<version>1.7.6</version>
+<objective>Leak lava from the enemy's obsidian core below their ship.</objective>
+<gamemode>dtc</gamemode>
+<rules>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+    <rule>Chests can not be placed or destroyed!</rule>
+</rules>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<include src="tutorial.xml"/>
+<teams>
+    <team color="dark red" max="32">Red</team>
+    <team color="blue" max="32">Blue</team>
+</teams>
+<filters>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <!-- old xml
+    <filter name="anti-chest-red">
+        <not>
+            <all>
+                <team>red</team>
+                <block>chest</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="anti-chest-blue">
+        <not>
+            <all>
+                <team>blue</team>
+                <block>chest</block>
+            </all>
+        </not>
+    </filter> -->
+    <filter name="anti-tnt-red">
+        <not>
+            <all>
+                <team>red</team>
+                <block>tnt</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="anti-tnt-blue">
+        <not>
+            <all>
+                <team>blue</team>
+                <block>tnt</block>
+            </all>
+        </not>
+    </filter>
+    <filter name="deny-chest">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+</filters>
+<regions>
+    <!-- Recent changes to implement spawn and chest protection -->
+    <cuboid name="red-spawn-protect" min="-89,88,0" max="-84,90,-30"/>
+    <cuboid name="blue-spawn-protect" min="66,88,0" max="61,90,-29"/>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+       <region name="blue-spawn-protect"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region name="red-spawn-protect"/>
+    </apply>
+    <!--
+    <apply block-break="deny-chest" block-place="deny-chest" message="This block can not be placed or broken on this map!">
+        <rectangle min="oo,oo" max="-oo,-oo"/>
+    </apply> -->
+    <!-- Line where recent changes end -->
+    <rectangle name="map-b" min="-178,-3" max="155,240"/>
+    <rectangle name="map-l" min="-180,-5" max="157,242"/>
+    <cuboid name="above-180" min="-oo,181,-oo" max="oo,oo,oo"/>
+    <union name="anti-grief">
+        <union name="red-chests">
+            <!-- left top front -->
+            <cuboid min="-85,89,4" max="-82,91,8"/>
+            <!-- right top front -->
+            <cuboid min="-88,89,4" max="-91,91,8"/>
+            <!-- left top back -->
+            <cuboid min="-85,89,27" max="-82,91,31"/>
+            <!-- right top back -->
+            <cuboid min="-88,89,27" max="-91,91,31"/>
+            <!-- left bottom -->
+            <cuboid min="-82,83,16" max="-85,85,20"/>
+            <!-- right bottom -->
+            <cuboid min="-91,83,16" max="-88,85,20"/>
+        </union>
+        <union name="red-no-tnt">
+            <!-- front path -->
+            <cuboid min="-89,80,-3" max="-81,95,9"/>
+            <!-- back path -->
+            <cuboid min="-81,82,38" max="-93,92,16"/>
+        </union>
+        <union name="blue-chests">
+            <cuboid min="65,89,4" max="68,91,8"/>
+            <cuboid min="62,89,4" max="59,91,8"/>
+            <cuboid min="65,89,27" max="68,91,31"/>
+            <cuboid min="62,89,27" max="59,91,31"/>
+            <cuboid min="68,83,16" max="65,85,20"/>
+            <cuboid min="59,83,16" max="62,85,20"/>
+        </union>
+        <union name="blue-no-tnt">
+            <cuboid min="61,80,-3" max="69,95,9"/>
+            <cuboid min="69,82,38" max="57,92,16"/>
+        </union>
+    </union>
+    <!-- Applied -->
+    <apply block="deny-all" message="Don't edit outside the map area!">
+        <negative>
+            <region name="map-b"/>
+        </negative>
+    </apply>
+    <apply leave="deny-all" message="You may not leave the map area!">
+        <region name="map-l"/>
+    </apply>
+    <apply block="deny-all" message="You may not edit above the height limit!">
+        <region name="above-180"/>
+    </apply>
+    <!-- Old xml
+    <apply block-break="anti-chest-red" message="You are not allowed to break your own chests!">
+        <region name="red-chests"/>
+    </apply>
+    <apply block-break="anti-chest-blue" message="You are not allowed to break your own chests!">
+        <region name="blue-chests"/>
+    </apply> -->
+    <apply block-place="anti-tnt-red" message="You are not allowed to place TNT in your ship!">
+        <region name="red-no-tnt"/>
+    </apply>
+    <apply block-place="anti-tnt-blue" message="You are not allowed to place TNT in your ship!">
+        <region name="blue-no-tnt"/>
+    </apply>
+</regions>
+<kits>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit name="spawn">
+        <item slot="0">diamond sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">diamond axe</item>
+        <item slot="4" damage="1" amount="64">wood</item>
+        <item slot="5" amount="64">ladder</item>
+        <item slot="6">water bucket</item>
+        <item slot="8" amount="64">cooked fish</item>
+        <potion duration="15s" amplifier="2">regeneration</potion>
+        <potion duration="5" amplifier="10">heal</potion>
+        <chestplate enchantment="protection explosions:4">chainmail chestplate</chestplate>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000">leather helmet</helmet>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc">leather helmet</helmet>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<crafting>
+    <disable>boat</disable>
+    <disable>chest</disable>
+</crafting>
+<killreward>
+    <item amount="16">arrow</item>
+    <item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>ladder</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>golden apple</item>
+</itemremove>
+<spawns>
+    <spawn team="red" kit="red" yaw="90">
+        <cuboid min="-29.5,91,-33" max="-28.5,91,-32"/>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="-90">
+        <cuboid min="4.5,91,-33" max="5.5,91,-32"/>
+    </spawn>
+    <default yaw="180">
+        <cuboid min="-16,90,-37" max="-7,90,-28"/>
+    </default>
+</spawns>
+<cores material="obsidian" leak="4">
+    <core team="red">
+        <cuboid min="-90,86,10" max="-83,91,16"/>
+    </core>
+    <core team="blue">
+        <cuboid min="60,86,10" max="67,91,16"/>
+    </core>
+</cores>
+<tutorial>
+    <stage title="Destroy the Core">
+        <message>
+            <line>Welcome to `3Sky Traffic`r, by Reshif.</line>
+            <line>The objective is to leak lava from the other team's `ccore`r.</line>
+        </message>
+        <teleport>
+            <point pitch="3" yaw="0">-11,107,4</point>
+        </teleport>
+    </stage>
+    <stage title="The Core">
+        <message>
+            <line>This `5obsidian ball `ris the `ccore`r. You must drain lava from it to win.</line>
+            <line>It will turn to `6gold `rafter `915 `rminutes have passed, and `eglass `rafter `920`r.</line>
+        </message>
+        <teleport>
+            <point pitch="-10" yaw="24">65,85,8</point>
+        </teleport>
+    </stage>
+    <stage title="Supplies">
+        <message>
+            <line>There are `9supplies `rin your base. They contain useful items for taking on your opponents.</line>
+            <line>There are additional `9supplies `rscattered throughout the map in `4balloons`r.</line>
+        </message>
+        <teleport>
+            <point pitch="30" yaw="40">70.5,98,-3.5</point>
+        </teleport>
+    </stage>
+    <stage title="Yellow Submarine">
+        <message>
+            <line>There are `6special supplies `rinside of the `eyellow submarine`r.</line>
+            <line>These `9supplies `rincrease your power and mobility.</line>
+        </message>
+        <teleport>
+            <point pitch="15" yaw="60">1,13,47.5</point>
+        </teleport>
+    </stage>
+    <stage title="Diamonds">
+        <message>
+            <line>There are `3diamonds`r, like these, scattered throughout the map.</line>
+            <line>You can use the `3diamond blocks`r to make `2armor`r.</line>
+            <line>Use the blocks you got from `9supplies`r to bridge to them.</line>
+        </message>
+        <teleport>
+            <point yaw="90">26,111,41</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>

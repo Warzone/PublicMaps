@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<map proto="1.0.0">
+<name>Airship Battle</name>
+<version>1.2.6</version>
+<objective>Leak lava from the enemy's obsidian core into the void.</objective>
+<gamemode>dtc</gamemode>
+<authors>
+    <author uuid="30e27366-0b14-4076-8f55-0819ece49ce3"/> <!-- Dewtroid -->
+</authors>
+<rules>
+    <rule>Dispensers and chests are disabled</rule>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+</rules>
+<filters>
+    <!-- Recent changes to implement spawn and chest protection, NOTE: this map proto has bugs relating to complement regions. To navigate around these issues I had to incorporate <block>chest</block> into some of the original filters to get the intended feature for chest protection. This may be fixed in future updates. -->
+    <filter name="only-red">
+        <deny>
+            <team>blue</team>
+        </deny>
+    </filter>
+    <filter name="only-blue">
+        <deny>
+            <team>red</team>
+        </deny>
+    </filter>
+    <filter name="deny-dispenser">
+        <not>
+            <any>
+                <block>dispenser</block>
+            </any>
+        </not>
+    </filter>
+    <filter name="deny-obsidian">
+        <not>
+            <block>obsidian</block>
+        </not>
+    </filter>
+</filters>
+<teams>
+    <team color="blue" max="24">Blue</team>
+    <team color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit name="spawn">
+        <item slot="0">diamond sword</item>
+        <item slot="1">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2">diamond pickaxe</item>
+        <item slot="3">diamond axe</item>
+        <item slot="4" damage="1" amount="64">wood</item>
+        <item slot="5" amount="64">ladder</item>
+        <item slot="6">water bucket</item>
+        <item slot="8" amount="64">cooked fish</item>
+        <helmet enchantment="protection explosions:2">gold helmet</helmet>
+        <chestplate enchantment="protection explosions:4">chainmail chestplate</chestplate>
+    </kit>
+    <kit name="red" parents="spawn">
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+    </kit>
+</kits>
+<crafting>
+    <disable>chest</disable>
+</crafting>
+<regions>
+    <!-- Recent changes to implement spawn and chest protection -->
+    <cuboid name="red-spawn-protect" min="-42,87,3" max="-35,90,-36"/>
+    <cuboid name="blue-spawn-protect" min="12,87,3" max="19,90,-36"/>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+       <region name="blue-spawn-protect"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <region name="red-spawn-protect"/>
+    </apply>
+    <apply block-break="deny-dispenser" message="This block can not be placed or broken on this map!">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply block-place="deny-dispenser" message="This block can not be placed or broken on this map!">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply leave="deny-all" message="Don't exit the playing field!">
+        <rectangle min="-102,-4" max="102,125"/> <!-- Main area -->
+        <rectangle min="-36,-16" max="13,-2"/> <!-- Area between spawn tunnels -->
+    </apply>
+    <apply block="deny-all" message="Don't edit blocks outside the playing field!">
+        <negative>
+            <union name="map">
+                <rectangle min="-100,-2" max="100,123"/> <!-- Main area -->
+                <rectangle min="-36,-14" max="13,-2"/> <!-- Area between spawn tunnels -->
+            </union>
+        </negative>
+    </apply>
+    <apply block-break="deny-obsidian" message="This block can not be broken here!">
+        <complement>
+            <region name="map"/>
+            <cuboid min="13,85,23" max="18,92,30"/>
+            <cuboid min="-41,85,23" max="-36,92,30"/>
+        </complement>
+    </apply>
+</regions>
+<crafting>
+    <disable>boat</disable>
+</crafting>
+<killreward>
+    <item amount="16">arrow</item>
+    <item damage="1" amount="32">wood</item>
+	<item>golden apple</item>
+</killreward>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+</toolrepair>
+<itemremove>
+    <item>gold helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>cooked fish</item>
+    <item>ladder</item>
+    <item>gold block</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+	<item>golden apple</item>
+</itemremove>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="270">
+        <cuboid min="4.5,91,-34" max="7.5,91,-31"/>
+    </spawn>
+    <spawn team="red" kit="red" yaw="90">
+        <cuboid min="-30.5,91,-34" max="-27.5,91,-31"/>
+    </spawn>
+    <default yaw="180">
+        <cylinder base="-11.5,90,-33" radius="3" height="0"/>
+    </default>
+</spawns>
+<cores material="obsidian" leak="10">
+    <core team="blue">
+        <cuboid min="13,85,23" max="18,92,30"/>
+    </core>
+    <core team="red">
+        <cuboid min="-41,85,23" max="-36,92,30"/>
+    </core>
+</cores>
+<maxbuildheight>125</maxbuildheight>
+</map>
