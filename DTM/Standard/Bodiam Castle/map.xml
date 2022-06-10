@@ -10,13 +10,13 @@
 <authors>
     <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, &amp; custom NBT creation"/> <!-- _Pear -->
     <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map, built team spawns, &amp; consulting"/> <!-- Santiagx -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Layout, detailing, &amp; name suggestion"/> <!-- _iMan -->
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain &amp; layout"/> <!-- Wesdial -->
 </authors>
 <contributors>
-    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Terrain &amp; layout"></contributor> <!-- Wesdial -->
-    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Layout, detailing, &amp; name suggestion"></contributor> <!-- _iMan -->
-    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain &amp; detailing"></contributor> <!-- Qualqty -->
-    <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"></contributor> <!-- _NotMaria -->
-    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"></contributor> <!-- DeadlyTrap -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain &amp; detailing"/> <!-- Qualqty -->
+    <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"/> <!-- _NotMaria -->
+    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"/> <!-- DeadlyTrap -->
 </contributors>
 <!-- Match Control -->
 <respawn auto="true" delay="5s"/>
@@ -55,7 +55,7 @@
         </kit>
     </give> -->
     <!-- Refer to Kits Upgrade Tokens section of filters & applications section of regions for kit handling -->
-    <kit id="chainmail-armor-kit" force="true">
+    <!-- <kit id="chainmail-armor-kit" force="true">
         <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
         <boots unbreakable="true" locked="true">chainmail boots</boots>
     </kit>
@@ -66,7 +66,7 @@
     <kit id="diamond-armor-kit" force="true">
         <leggings unbreakable="true" locked="true">diamond leggings</leggings>
         <boots unbreakable="true" locked="true">diamond boots</boots>
-    </kit>
+    </kit> -->
 </kits>
 <!-- Spawns -->
 <spawns>
@@ -136,6 +136,26 @@
             </all>
         </any>
     </any>
+    <!-- Team Spawn Chests Filter -->
+    <any id="team-status">
+        <any id="blue-team-status">
+            <team>blue-team</team>
+            <objective any="true">blue-bed-broken</objective>
+        </any>
+        <any id="red-team-status">
+            <team>red-team</team>
+            <objective any="true">red-bed-broken</objective>
+        </any>
+        <any id="green-team-status">
+            <team>green-team</team>
+            <objective any="true">green-bed-broken</objective>
+        </any>
+        <any id="yellow-team-status">
+            <team>yellow-team</team>
+            <objective any="true">yellow-bed-broken</objective>
+        </any>
+    </any>
+    <!-- Building Filters -->
     <any id="breakables"> <!-- List of blocks that players can modify while keeping the map intact -->
         <material>wool:11</material>
         <material>wool:14</material>
@@ -268,15 +288,15 @@
         <block id="yellow-team-chest">77,9,4</block>
     </union>
     <union id="iron-gold-generators">
-        <cuboid id="green-generator" min="1,9,90" max="-1,9,88"/>
         <cuboid id="blue-generator" min="-90,9,1" max="-88,9,-1"/>
         <cuboid id="red-generator" min="-1,9,-90" max="1,9,-88"/>
+        <cuboid id="green-generator" min="1,9,90" max="-1,9,88"/>
         <cuboid id="yellow-generator" min="90,9,-1" max="88,9,1"/>
     </union>
     <union id="diamond-generators">
-        <point id="green-blue-tower">-58.5,9.5,58.5</point>
         <point id="blue-red-tower">-58.5,9.5,-58.5</point>
         <point id="red-yellow-tower">58.5,9.5,-58.5</point>
+        <point id="green-blue-tower">-58.5,9.5,58.5</point>
         <point id="yellow-green-tower">58.5,9.5,58.5</point>
     </union>
     <union id="emerald-generators">
@@ -292,10 +312,10 @@
     <apply use="deny-enderchest"      message="Enderchests are temporarily disabled due to game issues."/> <!-- TODO: Remove once enderchests are fixed -->
     <apply block-break="tnt-immune"/>
     <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
-    <apply region="green-team-chest"  use="never"   message="You cannot open this chest as the `aGreen Team`r has not been eliminated!"/>
-    <apply region="blue-team-chest"   use="never"   message="You cannot open this chest as the `9Blue Team`r has not been eliminated!"/>
-    <apply region="red-team-chest"    use="never"   message="You cannot open this chest as the `4Red Team`r has not been eliminated!"/>
-    <apply region="yellow-team-chest" use="never"   message="You cannot open this chest as the `eYellow Team`r has not been eliminated!"/>
+    <apply region="blue-team-chest"   use="blue-team-status"   message="You cannot open this chest as the `9Blue Team`r's bed has not been destroyed yet!"/>
+    <apply region="red-team-chest"    use="red-team-status"    message="You cannot open this chest as the `4Red Team`r's has not been destroyed yet!"/>
+    <apply region="green-team-chest"  use="green-team-status"  message="You cannot open this chest as the `aGreen's bed`r has not been destroyed yet!"/>
+    <apply region="yellow-team-chest" use="yellow-team-status" message="You cannot open this chest as the `eYellow Team`r's has not been destroyed yet!"/>
     <!-- <apply region="spawn-protections" kit="chainmail-armor-kit" filter="chainmail-upgrade-token"/> -->
 </regions>
 <!-- Spawners -->
