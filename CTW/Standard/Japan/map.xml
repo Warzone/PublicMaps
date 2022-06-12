@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Japan</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Bring the enemy's wool back to your own side.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -102,7 +102,7 @@
     <cuboid id="orange-woolroom" min="-77,0,39" max="-94,64,24"/>
     <cuboid id="green-woolroom" min="105,0,-65" max="122,64,-50"/>
     <rectangle id="mid" min="31,-21" max="-2,-4"/>
-
+    <!-- Applications -->
     <apply block="only-orange" message="You may not modify your side's wool room!" region="green-woolroom"/>
     <apply block="only-green" message="You may not modify your side's wool room!" region="orange-woolroom"/>
     <apply enter="only-orange" message="You may not enter your side's wool room!" region="green-woolroom"/>
@@ -111,6 +111,6 @@
     <apply enter="only-green" message="You may not enter the enemy's spawn!" region="green-spawn"/>
     <apply block="never" message="You may not modify the spawns!" region="spawns"/>
     <apply block="always" region="mid"/>
-    <apply block="no-void" message="You may not place or break blocks here!" region="everywhere"/>
+    <apply block-place="no-void" message="You may not build in the void area!" region="everywhere"/>
 </regions>
 </map>
