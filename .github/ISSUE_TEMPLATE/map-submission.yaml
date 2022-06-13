@@ -1,0 +1,86 @@
+name: 🌐 Map Submission
+description: >-
+  Submit your map so it can be played on Warzone or as part of a mapmaking
+  contest. (Only use if you are unable to create a pull request to Warzone
+  PublicMaps repository!)
+title: '[Submission] '
+labels:
+  - map
+  - contest
+body:
+  - type: input
+    id: map-name
+    attributes:
+      label: Map Name
+    validations:
+      required: true
+  - type: textarea
+    id: map-description
+    attributes:
+      label: Map Description & Gamemode
+      description: >-
+        Describe what your map is, how it should be played, and the recommended
+        team size. See https://pgm.dev/docs/modules/general/main/#map-gamemode
+        for a list of valid gamemodes.
+    validations:
+      required: true
+  - type: input
+    id: xml-link
+    attributes:
+      label: Map XML
+      description: >-
+        Link your map's XML file by uploading it to GitHub Gist. If you have
+        trouble using this service, you may use alternatives such as Pastebin.
+        Please do not provide a link to a map.xml file located at another GitHub
+        repository, fork, branch, issue, pull request, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot-link
+    attributes:
+      label: Screenshot
+      description: >-
+        Screenshot the map from multiple views. You may use image hosting
+        services, such as Imgur.
+    validations:
+      required: true
+  - type: textarea
+    id: map-download
+    attributes:
+      label: Map Download
+      description: >-
+        Provide a direct download link to your map's properly packaged files
+        (region/*, level.dat, map.png, map.xml). Please use a file hosting
+        service such as Google Drive, Dropbox, Mega, Mediafire, etc. Do not
+        provide link(s) to map files which are located at another GitHub
+        repository, fork, branch, issue, pull request, etc.
+    validations:
+      required: true
+  - type: checkboxes
+    id: map-checklist
+    attributes:
+      label: Checklist
+      description: >-
+        Ensure that you have completed these following steps before submitting a
+        map.
+      options:
+        - label: Contains a map.xml file with valid syntax and formatting.
+          required: true
+        - label: >-
+            The map.xml uses proto 1.4.0 or above (older or legacy maps are
+            exempt, so long as the XML works).
+          required: true
+        - label: The map.xml explicitly sets the gamemode (for stat-tracking).
+          required: true
+        - label: The map.xml has correctly credited the map authors and contributors.
+          required: true
+        - label: Contains map.png file (290x246).
+          required: true
+        - label: The map was built for (or has been converted to) Minecraft 1.8.
+          required: true
+        - label: Chunks have been pruned.
+          required: true
+        - label: The map has been tested on a server running PGM.
+          required: false
+        - label: I agree to submit this map under a commercial, CC BY-SA 4.0 license.
+          required: true
