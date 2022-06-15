@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Blitz: Micro Battles">
 <name>Winter Wars</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Four teams are divided onto the map and only one will remain. Gather blocks to help you build up a tower or barricade yourself. Be careful for the world border!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -71,6 +71,17 @@
     <mode id="walls-to-air" after="10s"  show-before="0" material="air"/>
     <mode id="floor-to-air" after="165s" show-before="0" material="air"/>
 </modes>
+<!-- Block Drops -->
+<blockdrops>
+    <rule>
+        <filter>
+            <material>ice</material>
+        </filter>
+        <drops>
+            <item material="ice"/>
+        </drops>
+    </rule>
+</blockdrops>
 <!-- Filters -->
 <filters>
     <all id="not-glass">
@@ -82,10 +93,10 @@
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
-    <cuboid id="floor" min="2,0,2" max="-2,37,-2"/>
+    <cuboid id="floor" min="2,0,-2" max="-2,40,-2"/>
     <union id="walls">
-        <cuboid id="first-wall"  min="1,22,20" max="-1,37,-20"/>
-        <cuboid id="second-wall" min="20,22,-1" max="-20,37,1"/>
+        <cuboid id="first-wall"  min="1,22,21" max="-1,37,-21"/>
+        <cuboid id="second-wall" min="21,22,-1" max="-21,37,1"/>
     </union>
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="20" height="40"/>
@@ -146,6 +157,7 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
+    <item>ice</item>
 </itemremove>
 <!-- World Border -->
 <world-borders center="0.5,0.5">
