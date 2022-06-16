@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Capture the Wool">
 <name>Itty Bitty CTW</name>
-<version>1.2.6</version>
+<version>1.2.7</version>
 <objective>Capture the wools and bring them back to your base!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -90,9 +90,9 @@
     <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy spawn."/>
     <apply region="blue-wool-rooms" enter="only-red" message="You may not enter your own wool room!"/>
-    <apply region="blue-wool-rooms" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-wool-rooms" block="never" use="only-red" message="You are not allowed to modify terrain here."/>
     <apply region="red-wool-rooms" enter="only-blue" message="You may not enter your own wool room!"/>
-    <apply region="red-wool-rooms" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="red-wool-rooms" block="never" use="only-blue" message="You are not allowed to modify terrain here."/>
     <apply region="everywhere" block="only-wood-in-map" message="You may only place or break wood!"/>
 </regions>
 <!-- Item Remove -->
