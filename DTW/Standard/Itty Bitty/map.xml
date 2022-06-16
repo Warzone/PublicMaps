@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Itty Bitty</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
     <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
 </authors>
 <contributors>
-    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
 <!-- Teams -->
 <teams>
@@ -37,7 +37,7 @@
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="90" region="blue-spawn"/>
     <spawn team="red-team" kit="red-kit" yaw="-90" region="red-spawn"/>
-    <default yaw="14" region="obs-spawn"/>
+    <default yaw="14.5" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
 <destroyables completion="100%" repairable="false" show-progress="true" sparks="true">
@@ -60,40 +60,44 @@
     <!-- Definitions -->
     <!-- Wool monuments -->
     <union id="blue-wool">
-        <block>25,23,25</block>
-        <block>25,23,39</block>
-        <block>25,24,25</block>
-        <block>25,24,39</block>
-        <block>26,26,32</block>
-        <block>29,26,28</block>
-        <block>30,26,36</block>
-        <block>26,27,32</block>
-        <block>29,27,28</block>
-        <block>30,27,36</block>
+        <!-- Lower Front -->
+        <block>25,2,25</block>
+        <block>25,2,39</block>
+        <block>25,3,25</block>
+        <block>25,3,39</block>
+        <!-- Upper Rear -->
+        <block>26,5,32</block>
+        <block>29,5,28</block>
+        <block>30,5,36</block>
+        <block>26,6,32</block>
+        <block>29,6,28</block>
+        <block>30,6,36</block>
     </union>
     <union id="red-wool">
-        <block>-1,23,25</block>
-        <block>-1,23,39</block>
-        <block>-1,24,25</block>
-        <block>-1,24,39</block>
-        <block>-2,26,32</block>
-        <block>-5,26,28</block>
-        <block>-6,26,36</block>
-        <block>-2,27,32</block>
-        <block>-5,27,28</block>
-        <block>-6,27,36</block>
+        <!-- Lower Rear -->
+        <block>-1,2,25</block>
+        <block>-1,2,39</block>
+        <block>-1,3,25</block>
+        <block>-1,3,39</block>
+        <!-- Upper Rear -->
+        <block>-2,5,32</block>
+        <block>-5,5,28</block>
+        <block>-6,5,36</block>
+        <block>-2,6,32</block>
+        <block>-5,6,28</block>
+        <block>-6,6,36</block>
     </union>
     <!-- Spawn protection -->
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection-entry" min="24,0,31" max="28,25,34"/>
-        <cuboid id="red-spawn-protection-entry" min="-3,0,31" max="1,25,34"/>
-        <cuboid id="blue-spawn-protection-build" min="23,23,29" max="28,26,36"/>
-        <cuboid id="red-spawn-protection-build" min="-3,23,29" max="2,26,36"/>
+        <cuboid id="blue-spawn-protection-entry" min="24,0,31" max="28,4,34"/>
+        <cuboid id="red-spawn-protection-entry" min="-3,0,31" max="1,4,34"/>
+        <cuboid id="blue-spawn-protection-build" min="23,2,29" max="28,5,36"/>
+        <cuboid id="red-spawn-protection-build" min="-3,2,29" max="2,5,36"/>
     </union>
     <!-- Spawn points -->
-    <point id="blue-spawn">26.5,23,32.5</point>
-    <point id="red-spawn">-1.5,23,32.5</point>
-    <point id="obs-spawn">12.5,35,14.5</point>
+    <point id="blue-spawn">26.5,2,32.5</point>
+    <point id="red-spawn">-1.5,2,32.5</point>
+    <point id="obs-spawn">12.5,14,14.5</point>
     <negative id="not-map">
         <rectangle id="map" min="-8,23" max="33,42"/>
     </negative>
@@ -117,5 +121,5 @@
     <item>wool</item>
 </itemremove>
 <!-- Misc -->
-<maxbuildheight>30</maxbuildheight>
+<maxbuildheight>9</maxbuildheight>
 </map>
