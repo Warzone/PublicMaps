@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Vortex</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -9,7 +9,7 @@
     <author uuid="b3d091f3-d94f-4546-a908-6a513d260615"/> <!-- Goriest -->
 </authors>
 <contributors>
-    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
 <!-- Teams -->
 <teams>
@@ -23,8 +23,8 @@
         <item slot="1" unbreakable="true">bow</item>
         <item slot="2" unbreakable="true">iron pickaxe</item>
         <item slot="3" unbreakable="true">iron axe</item>
-	<item slot="4" amount="64">wood</item>
-	<item slot="8" amount="64">golden carrot</item>
+	    <item slot="4" amount="64">wood</item>
+	    <item slot="8" amount="64">golden carrot</item>
         <item slot="28" amount="32">arrow</item>
         <leggings unbreakable="true">chainmail leggings</leggings>
     </kit>
@@ -36,7 +36,7 @@
     <kit id="red-kit" parents="default">
         <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
         <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
-	<boots unbreakable="true" color="B02E26">leather boots</boots>
+	    <boots unbreakable="true" color="B02E26">leather boots</boots>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -91,14 +91,14 @@
 <!-- Renewables -->
 <renewables>
     <renewable region="gold-blocks" rate="1" particles="true" grow="true" sound="false" avoid-players="2">
-      <renew-filter>
-          <material>gold block</material>
-      </renew-filter>
-      <replace-filter>
-	  <any>
-              <material>air</material>
-              <material>wood</material>
-	  </any>
+        <renew-filter>
+            <material>gold block</material>
+        </renew-filter>
+        <replace-filter>
+	        <any>
+                <material>air</material>
+                <material>wood</material>
+            </any>
       </replace-filter>
     </renewable>
 </renewables>
@@ -128,9 +128,12 @@
 <kill-rewards>
     <kill-reward>
         <item amount="1">golden apple</item>
-	<item amount="2">arrow</item>
+        <item amount="2">arrow</item>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
+<crafting>
+    <disable>shears</disable>
+</crafting>
 <maxbuildheight>40</maxbuildheight>
 </map>
