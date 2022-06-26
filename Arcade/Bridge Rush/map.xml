@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Bridge">
 <name>Bridge Rush</name>
-<version>1.1.2</version>
+<version>1.1.3</version>
 <objective>Rush across the map with a bridge to get into a portal located below the enemy's spawn to score as many points as possible.</objective>
 <gamemode>arcade</gamemode>
 <gamemode>scorebox</gamemode>
@@ -41,8 +41,11 @@
         <leggings unbreakable="true" color="B02E26" locked="true">leather leggings</leggings>
         <boots unbreakable="true" color="B02E26" locked="true">leather boots</boots>
     </kit>
-    <kit id="void-kill" force="true">
-        <potion duration="oo" amplifier="10">instant_damage</potion>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
+    <kit id="regen-max" force="true">
+        <effect amplifier="10" duration="1s">regeneration</effect>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -96,6 +99,7 @@
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
     <apply region="void" kit="void-kill"/>
+    <apply region="scoring-portals" kit="regen-max"/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
