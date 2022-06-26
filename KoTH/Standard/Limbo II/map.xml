@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Limbo II</name>
-<version>1.0.9</version>
+<version>1.0.10</version>
 <edition>standard</edition>
 <objective>Be the first team to 2500 points!</objective>
 <gamemode>koth</gamemode>
@@ -54,6 +54,10 @@
         </region>
     </spawn>
 </spawns>
+<filters>
+    <team id="only-cyan">cyan</team>
+    <team id="only-orange">orange</team>
+</filters>
 <regions>
     <apply velocity="@0,1.7,-0.1">
         <region>
@@ -65,6 +69,12 @@
             <cuboid min="-1,6,-26" max="2,9,-23"/>
         </region>
     </apply>
+    <union id="spawn-protections">
+        <cuboid id="cyan-spawn-protection"   min="46,0,8"   max="60,oo,-8"/>
+        <cuboid id="orange-spawn-protection" min="-46,0,-8" max="-60,oo,8"/>
+    </union>
+	<apply enter="only-cyan"   region="cyan-spawn-protection"   message="You may not enter the enemy spawn."/>
+	<apply enter="only-orange" region="orange-spawn-protection" message="You may not enter the enemy spawn."/>
     <apply block="never" use="never"/>
 </regions>
 <king>
