@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Snowy Wars</name>
-<version>1.5.3</version>
+<version>1.5.4</version>
 <objective>Break the enemy's monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -69,16 +69,26 @@
             <material>ice</material>
         </all>
     </deny>
+    <not id="not-blue">
+        <team id="only-blue">blue</team>
+    </not>
+    <not id="not-red">
+        <team id="only-red">red</team>
+    </not>
 </filters>
 <regions>
     <cuboid id="blue-monument" min="-596,10,361" max="-595,12,362"/>
     <cuboid id="red-monument" min="-596,10,247" max="-595,12,248"/>
     <negative id="not-spawns">
         <union id="spawns">
-            <cylinder base="-619.5,10,349.5" height="6" radius="7"/> <!-- West Blue -->
-            <cylinder base="-571.5,10,349.5" height="6" radius="7"/> <!-- East -->
-            <cylinder base="-619.5,10,259.5" height="6" radius="7"/> <!-- West Red -->
-            <cylinder base="-571.5,10,259.5" height="6" radius="7"/> <!-- East -->
+            <union id="blue-spawns">
+                <cylinder base="-619.5,10,349.5" height="6" radius="7"/> <!-- West Blue -->
+                <cylinder base="-571.5,10,349.5" height="6" radius="7"/> <!-- East -->
+            </union>    
+            <union id="red-spawns">
+                <cylinder base="-619.5,10,259.5" height="6" radius="7"/> <!-- West Red -->
+                <cylinder base="-571.5,10,259.5" height="6" radius="7"/> <!-- East -->
+            </union>
         </union>
     </negative>
     <complement id="void">
@@ -96,6 +106,8 @@
     </complement>
     <apply kit="reset-resitance-kit" region="not-spawns"/>
     <apply enter="never"  region="obs-spawn" message="You may not enter the observers spawn area!"/>
+    <apply enter="not-red"  region="blue-spawns" message="You may not enter the enemy's spawn areas!"/>
+    <apply enter="not-blue"  region="red-spawns" message="You may not enter the enemy's spawn areas!"/>
     <apply block="no-melting"/>
     <apply block="never" region="spawns" message="You may not break or place blocks in the spawn regions!"/>
     <apply block="never" region="void" message="You may not build outside of the playing field!"/>
