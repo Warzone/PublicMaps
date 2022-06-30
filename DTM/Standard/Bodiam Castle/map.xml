@@ -18,6 +18,8 @@
     <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain &amp; detailing"/> <!-- Qualqty -->
     <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"/> <!-- _NotMaria -->
     <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"/> <!-- DeadlyTrap -->
+    <contributor uuid="18b20c8e-1122-4e75-a680-863c718a3186" contribution="Map testing"/> <!-- UmbreoClaw -->
+    <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Map testing"/> <!-- Preinstalled -->
 </contributors>
 <!-- Match Control -->
 <respawn auto="true" delay="5s"/>
@@ -36,13 +38,16 @@
 </teams>
 <!-- Kits -->
 <kits>
-    <kit id="default">
-        <item slot="0" unbreakable="true">wood sword</item>
+    <kit id="default" reset-ender-pearls="true" parents="starter-sword">
+        <!-- <item slot="0" unbreakable="true">wood sword</item> -->
         <helmet unbreakable="true" team-color="true" locked="true">leather helmet</helmet>
         <chestplate unbreakable="true" team-color="true" locked="true">leather chestplate</chestplate>
         <leggings unbreakable="true" team-color="true" locked="true">leather leggings</leggings>
         <boots unbreakable="true" team-color="true" locked="true">leather boots</boots>
         <effect duration="4s" amplifier="10">damage_resistance</effect>
+    </kit>
+    <kit id="starter-sword">
+        <item slot="0" unbreakable="true">wood sword</item>
     </kit>
     <!-- Team Upgrades -->
     <!-- <lend filter="apply-regeneration">
@@ -100,10 +105,10 @@
     <time id="40m-passed">40m</time>
     <time id="50m-passed">50m</time>
     <!-- Team Filters -->
-    <team id="blue-only">blue-team</team>
-    <team id="red-only">red-team</team>
-    <team id="green-only">green-team</team>
-    <team id="yellow-only">yellow-team</team>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <team id="only-green">green-team</team>
+    <team id="only-yellow">yellow-team</team>
     <!-- Sudden Death/Monuments Filters -->
     <any id="blitz-conditions">
         <!-- Triggers sudden death mode for a team if their bed monument is destroyed in under 30 minutes -->
@@ -198,6 +203,29 @@
             </any>
         </all>
     </deny>
+    <!-- Sword Upgrade -->
+    <any id="has-wood-sword">
+        <carrying>
+            <item unbreakable="true" material="wood sword"/>
+        </carrying>
+    </any>
+    <any id="upgraded-sword">
+        <!-- <not> -->
+            <carrying>
+                <item unbreakable="true" material="stone sword"/>
+            </carrying>
+        <!-- </not> -->
+        <!-- <not> -->
+            <carrying>
+                <item unbreakable="true" material="iron sword"/>
+            </carrying>
+        <!-- </not> -->
+        <!-- <not> -->
+            <carrying>
+                <item unbreakable="true" material="diamond sword"/>
+            </carrying>
+        <!-- </not> -->
+    </any>
     <!-- Team Upgrade Tokens -->
     <!-- <carrying id="set-regen">
         <item material="beacon" name="Regeneration Beacon"/>
@@ -236,10 +264,6 @@
             <item name="Diamond Armor Upgrade">diamond chestplate</item>
         </carrying>
     </any> -->
-    <!-- Disable enderchests until PGM fixes it; keeping it in the map for decoration -->
-    <deny id="deny-enderchest">
-        <material>ender chest</material>
-    </deny>
 </filters>
 <!-- Broadcasts -->
 <broadcasts>
@@ -309,7 +333,6 @@
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="not-map"           block="never" message="You may not edit outside the map!"/>
-    <apply use="deny-enderchest"      message="Enderchests are temporarily disabled due to game issues."/> <!-- TODO: Remove once enderchests are fixed -->
     <apply block-break="tnt-immune"/>
     <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
     <apply region="blue-team-chest"   use="blue-team-status"   message="You cannot open this chest as the `9Blue's Bed`r has not been destroyed yet!"/>
@@ -429,9 +452,20 @@
     <item>diamond boots</item>
 </itemremove>
 <itemkeep>
+    <!-- Swords -->
     <item>stone sword</item>
     <item>iron sword</item>
     <item>diamond sword</item>
+    <!-- Tools -->
+    <item>wood pickaxe</item>
+    <item>stone pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>gold pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>wood axe</item>
+    <item>stone axe</item>
+    <item>iron axe</item>
+    <item>diamond axe</item>
     <item>shears</item>
     <item>bow</item>
 </itemkeep>
@@ -483,7 +517,7 @@
     <yield>0</yield>
 </tnt>
 <disabledamage>
-    <damage ally="false" self="false" enemy="true" other="false">block explosion</damage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
 </disabledamage>
 <!-- Misc -->
 <hunger>
@@ -513,7 +547,7 @@
 <!-- Tools -->
 <!-- /summon Villager -83.5 9 7.5 {CustomName:"Tools",CustomNameVisible:1,NoGravity:1b,Profession:3,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:20},sell:{id:shears,Count:1,tag:{Unbreakable:1b}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}},sell:{id:diamond_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:diamond_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[180f,0f],PersistenceRequired:1,NoAI:1,Silent:1} -->
 <!-- Utilities -->
-<!-- /summon Villager -81.5 9 7.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:40},sell:{id:firework_charge,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[180f,0f],NoAI:1,Silent:1} -->
+<!-- /summon Villager -81.5 9 7.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[180f,0f],NoAI:1,Silent:1} -->
 <!-- Team Upgrades -->
 <!-- -->
 
@@ -525,7 +559,7 @@
 <!-- Tools -->
 <!-- /summon Villager -6.5 9 -83.5 {CustomName:"Tools",CustomNameVisible:1,NoGravity:1b,Profession:3,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:20},sell:{id:shears,Count:1,tag:{Unbreakable:1b}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}},sell:{id:diamond_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:diamond_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[-90f,0f],PersistenceRequired:1,NoAI:1,Silent:1} -->
 <!-- Utilities -->
-<!-- /summon Villager -6.5 9 -81.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:40},sell:{id:firework_charge,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[-90f,0f],NoAI:1,Silent:1} -->
+<!-- /summon Villager -6.5 9 -81.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[-90f,0f],NoAI:1,Silent:1} -->
 <!-- Team Upgrades -->
 <!-- -->
 
@@ -537,7 +571,7 @@
 <!-- Tools -->
 <!-- /summon Villager 7.5 9 84.5 {CustomName:"Tools",CustomNameVisible:1,NoGravity:1b,Profession:3,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:20},sell:{id:shears,Count:1,tag:{Unbreakable:1b}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}},sell:{id:diamond_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:diamond_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[90f,0f],PersistenceRequired:1,NoAI:1,Silent:1} -->
 <!-- Utilities -->
-<!-- /summon Villager 7.5 9 82.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:40},sell:{id:firework_charge,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[90f,0f],NoAI:1,Silent:1} -->
+<!-- /summon Villager 7.5 9 82.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[90f,0f],NoAI:1,Silent:1} -->
 <!-- Team Upgrades  -->
 <!-- -->
 
@@ -549,6 +583,6 @@
 <!-- Tools -->
 <!-- /summon Villager 84.5 9 -6.5 {CustomName:"Tools",CustomNameVisible:1,NoGravity:1b,Profession:3,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:20},sell:{id:shears,Count:1,tag:{Unbreakable:1b}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:iron_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:golden_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}},sell:{id:diamond_pickaxe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},sell:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:10},buyB:{id:wooden_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},buyB:{id:stone_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:1s}]}},sell:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},buyB:{id:iron_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:2s}]}},sell:{id:diamond_axe,Count:1,tag:{Unbreakable:1b,ench:[{id:32s,lvl:3s}]}}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[0f,0f],PersistenceRequired:1,NoAI:1,Silent:1} -->
 <!-- Utilities -->
-<!-- /summon Villager 82.5 9 -6.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:iron_ingot,Count:40},sell:{id:firework_charge,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[0f,0f],NoAI:1,Silent:1} -->
+<!-- /summon Villager 82.5 9 -6.5 {CustomName:"Utilities",CustomNameVisible:1,NoGravity:1b,Profession:1,Offers:{Recipes:[{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:3},sell:{id:golden_apple,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:8},sell:{id:tnt,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:emerald,Count:4},sell:{id:ender_pearl,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:water_bucket,Count:1}},{rewardExp:0b,maxUses:2147483647,uses:0,buy:{id:gold_ingot,Count:6},sell:{id:sponge,Count:4}}]},Attributes:[{Name:generic.movementSpeed,Base:0.0},{Name:generic.knockbackResistance,Base:1.0}],Invulnerable:1,Rotation:[0f,0f],NoAI:1,Silent:1} -->
 <!-- Team Upgrades  -->
 <!-- -->
