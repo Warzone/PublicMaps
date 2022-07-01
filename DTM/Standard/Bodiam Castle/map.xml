@@ -83,11 +83,11 @@
     <default region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="50%" required="false" repairable="false" show="true" sparks="true" materials="bed_block" modes="air-mode">
-    <destroyable name="Blue Bed" owner="blue-team" region="blue-bed" id="blue-bed-broken"/>
-    <destroyable name="Red Bed" owner="red-team" region="red-bed" id="red-bed-broken"/>
-    <destroyable name="Green Bed" owner="green-team" region="green-bed" id="green-bed-broken"/>
-    <destroyable name="Yellow Bed" owner="yellow-team" region="yellow-bed" id="yellow-bed-broken"/>
+<destroyables completion="25%" required="false" repairable="false" show="true" sparks="true" materials="bed_block" modes="air-mode">
+    <destroyable name="Blue Bed" owner="blue-team" region="blue-beds" id="blue-bed-broken"/>
+    <destroyable name="Red Bed" owner="red-team" region="red-beds" id="red-bed-broken"/>
+    <destroyable name="Green Bed" owner="green-team" region="green-beds" id="green-bed-broken"/>
+    <destroyable name="Yellow Bed" owner="yellow-team" region="yellow-beds" id="yellow-bed-broken"/>
 </destroyables>
 <modes>
     <mode id="air-mode" after="30m" material="air" name="`cSUDDEN DEATH"/>
@@ -206,25 +206,26 @@
     <!-- Sword Upgrade -->
     <any id="has-wood-sword">
         <carrying>
-            <item unbreakable="true" material="wood sword"/>
+            <item material="wood sword"/>
         </carrying>
     </any>
     <any id="upgraded-sword">
-        <!-- <not> -->
+        <everywhere/>
+        <not>
             <carrying>
-                <item unbreakable="true" material="stone sword"/>
+                <item material="stone sword"/>
             </carrying>
-        <!-- </not> -->
-        <!-- <not> -->
+        </not>
+        <not>
             <carrying>
-                <item unbreakable="true" material="iron sword"/>
+                <item material="iron sword"/>
             </carrying>
-        <!-- </not> -->
-        <!-- <not> -->
+        </not>
+        <not>
             <carrying>
-                <item unbreakable="true" material="diamond sword"/>
+                <item material="diamond sword"/>
             </carrying>
-        <!-- </not> -->
+        </not>
     </any>
     <!-- Team Upgrade Tokens -->
     <!-- <carrying id="set-regen">
@@ -289,10 +290,22 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="blue-bed" min="-70,8,1" max="-67,10,-1"/>
-        <cuboid id="red-bed" min="-1,8,-70" max="1,10,-67"/>
-        <cuboid id="green-bed" min="1,8,70" max="-1,10,67"/>
-        <cuboid id="yellow-bed" min="70,8,-1" max="67,10,1"/>
+        <union id="blue-beds">
+            <cuboid id="blue-bed" min="-70,8,1" max="-67,10,-1"/>
+            <cuboid id="blue-bed-indicator" min="-3,0,1" max="-1,2,-2"/>
+        </union>
+        <union id="red-beds">
+            <cuboid id="red-bed" min="-1,8,-70" max="1,10,-67"/>
+            <cuboid id="red-bed-indicator" min="-1,0,1" max="0,2,-1"/>
+        </union>
+        <union id="green-beds">
+            <cuboid id="green-bed" min="1,8,70" max="-1,10,67"/>
+            <cuboid id="green-bed-indicator" min="0,0,1" max="1,2,-1"/>
+        </union>
+        <union id="yellow-beds">
+            <cuboid id="yellow-bed" min="70,8,-1" max="67,10,1"/>
+            <cuboid id="yellow-bed-indicator" min="1,0,1" max="2,2,-1"/>
+        </union>
     </union>
     <union id="spawn-protections">
         <cylinder id="blue-spawn-protection" base="-82.5,8,0.5" radius="9" height="15"/>
