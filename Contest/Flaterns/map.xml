@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.2">
 <name>Flaterns</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Hold the flag for 180 seconds to win!.</objective>
 <gamemode>kotf</gamemode>
 <authors>
@@ -22,7 +22,7 @@
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="shears"/>
-        <item slot="3" amount="16" material="leaves_2"/>
+        <item slot="3" amount="8" material="leaves_2"/>
         <item slot="4" amount="1" material="golden apple"/>
         <item slot="8" amount="32" material="cooked beef"/>
         <item slot="9" amount="16" material="arrow"/>
@@ -95,17 +95,17 @@
         <cylinder id="green-spawn-protection" base="0.5,0,-65.5" radius="6" height="oo"/>
         <cylinder id="orange-spawn-protection" base="0.5,0,65.5" radius="6" height="oo"/>
     </union>
-	<union id="flag-regions">
-		<cuboid id="top-flag-platform" min="-5,38,5" max="5,42,-5"/>
-		<cuboid id="bottom-flag-platform" min="-4,19,-4" max="4,29,4"/>
-	</union>
-	<union id="map-limit">
-		<cuboid id="left-side" min="31,8,76" max="34,oo,-76"/>
-		<cuboid id="right-side" min="-30,8,76" max="-34,oo,-76"/>
-		<cuboid id="green-side" min="35,8,-72" max="-35,oo,-76"/>
-		<cuboid id="orange-side" min="-35,8,72" max="35,oo,76"/>
-	</union>
-    <union id="launchpad-protections">
+    <union id="flag-regions">
+        <cuboid id="top-flag-platform" min="-4,38,5" max="5,42,-4"/>
+        <cuboid id="bottom-flag-platform" min="-3,19,-3" max="4,29,4"/>
+    </union>
+    <union id="map-limit">
+        <cuboid id="left-side" min="31,8,76" max="34,oo,-76"/>
+        <cuboid id="right-side" min="-30,8,76" max="-34,oo,-76"/>
+        <cuboid id="green-side" min="35,8,-72" max="-35,oo,-76"/>
+        <cuboid id="orange-side" min="-35,8,72" max="35,oo,76"/>
+    </union>
+    <union id="launchpad-opening-protections">
         <cuboid id="green-mid-left-opening" min="25,33,-33" max="20,oo,-28"/>
         <cuboid id="green-mid-right-opening" min="-20,33,-33" max="-25,oo,-28"/>
         <cuboid id="orange-mid-left-opening" min="-25,33,33" max="-20,oo,28"/>
@@ -113,10 +113,32 @@
         <cuboid id="down-center-left-opening" min="26,33,-3" max="20,oo,3"/>
         <cuboid id="down-center-right-opening" min="-26,33,3" max="-20,oo,-3"/>
     </union>
+    <union id="launchpad-protections">
+    <!-- Green -->
+        <cuboid id="green-spawn-pad" min="-2,28,-48" max="3,32,-50"/>
+        <cuboid id="green-midleft-pad" min="23,27,-27" max="20,30,-30"/>
+        <cuboid id="green-midright-pad" min="-22,27,-27" max="-19,30,-30"/>
+        <cuboid id="green-midcenter-pad" min="2,28,-26" max="-1,32,-28"/>
+        <cuboid id="green-downleft-pad" min="19,20,-43" max="16,23,-46"/>
+        <cuboid id="green-downright-pad" min="-18,20,-43" max="-15,23,-46"/>
+        <cuboid id="green-downcenter-pad" min="-1,22,-9" max="2,24,-6"/>
+    <!-- Bottom Center -->
+        <cuboid id="downcenter-west" min="-21,21,-1" max="-24,24,2"/>
+        <cuboid id="downcenter-east" min="22,21,2" max="25,24,-1"/>
+    <!-- Orange -->
+        <cuboid id="orange-spawn-pad" min="3,28,49" max="-2,32,51"/>
+        <cuboid id="orange-midleft-pad" min="-19,27,31" max="-22,30,28"/>
+        <cuboid id="orange-midright-pad" min="23,27,31" max="20,30,28"/>
+        <cuboid id="orange-midcenter-pad" min="-1,28,29" max="2,31,27"/>
+        <cuboid id="orange-downleft-pad" min="-18,20,44" max="-15,23,47"/>
+        <cuboid id="orange-downright-pad" min="19,20,47" max="16,23,44"/>
+        <cuboid id="orange-downcenter-pad" min="-1,22,7" max="2,24,10"/>
+    </union>
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-	<apply region="flag-regions" block="never" message="You are not allowed to modify terrain here."/>
-	<apply region="map-limit" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="flag-regions" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="map-limit" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="launchpad-opening-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
     <apply region="launchpad-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
     <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
     <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
@@ -126,7 +148,7 @@
     <!-- Spawn Pad -->
     <apply velocity="0,1,-0.2">
         <region>
-            <cuboid id="green-spawn-pad-trigger" min="-3,28,-49" max="3,29,-51"/>
+            <cuboid id="green-spawn-pad-trigger" min="-2,28,-49" max="3,29,-51"/>
         </region>
     </apply>
     <!-- Mid-Left Pad -->
@@ -144,7 +166,7 @@
     <!-- Mid-Center Pad -->
     <apply velocity="0,1.4,1">
         <region>
-            <cuboid id="green-mid-center-pad-trigger" min="2,29,-29" max="-2,30,-27"/>
+            <cuboid id="green-mid-center-pad-trigger" min="2,29,-28" max="-1,30,-27"/>
         </region>
     </apply>
     <!-- Down-Left Pad -->
@@ -160,19 +182,19 @@
         </region>
     </apply>
     <!-- DOWN-CENTER PADS -->
-    <!-- Down-Left Pad -->
+    <!-- Down-East Pad -->
     <apply velocity="-0.2,1.2,0">
         <region>
-            <cuboid id="green-down-center-left-pad-trigger" min="21,22,-2" max="25,23,2"/>
+            <cuboid id="green-down-center-east-pad-trigger" min="22,21,2" max="25,24,-1"/>
         </region>
     </apply>
-    <!-- Down-Right Pad -->
+    <!-- Down-West Pad -->
     <apply velocity="0.2,1.2,0">
         <region>
-            <cuboid id="green-down-center-right-pad-trigger" min="-21,22,2" max="-25,23,-2"/>
+            <cuboid id="green-down-center-west-pad-trigger" min="-21,21,-1" max="-24,24,2"/>
         </region>
     </apply>
-    <!-- Down-Center Pad -->
+    <!-- Down-MidCenter Pad -->
     <apply velocity="0,1.2,0.1">
         <region>
             <block id="green-down-center-mid-pad-trigger">0,22,-8</block>
@@ -182,7 +204,7 @@
     <!-- Spawn Pad -->
     <apply velocity="0,1,0.2">
         <region>
-            <cuboid id="orange-spawn-pad-trigger" min="3,28,49" max="-3,29,51"/>
+            <cuboid id="orange-spawn-pad-trigger" min="3,28,50" max="-2,29,51"/>
         </region>
     </apply>
     <!-- Mid-Left Pad -->
@@ -200,7 +222,7 @@
     <!-- Mid-Center Pad -->
     <apply velocity="0,1.4,-1">
         <region>
-            <cuboid id="orange-mid-center-pad-trigger" min="-2,29,29" max="2,30,27"/>
+            <cuboid id="orange-mid-center-pad-trigger" min="-2,29,29" max="2,30,28"/>
         </region>
     </apply>
     <!-- Down-Left Pad -->
