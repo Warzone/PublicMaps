@@ -1,0 +1,117 @@
+<map proto="1.4.0" game="`f`lRush">
+<name>Rainbow Road</name>
+<version>1.0.0</version>
+<slug>rainbow_road</slug>
+<objective>Runners must run to the end of the track and destroy the sponge monument without getting killed by the defenders.</objective>
+<time result="defenders-team">3m</time>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<authors>
+    <author uuid="62b6d081-8df8-4c09-aa15-71141ca7df76"/> <!-- Arzanex -->
+</authors>
+<contributors>
+    <contributor uuid="10c1b730-49b9-4f75-9212-91facc371477" contribution="XML"/> <!-- Qixit -->
+</contributors>
+<broadcasts>
+    <alert after="1s" filter="only-runners">`c`l`k0`f`lDestroy the sponge block monument at the end of the track to win!`c`l`k0</alert>
+    <alert after="5s">`c`l`k0  `f`lBe wary of the world border! Coming into contact with it will damage you!  `c`l`k0</alert>
+</broadcasts>
+<teams>
+   <team id="defenders-team" plural="true" show-name-tags="enemies" color="gray" max="5" max-overfill="7">Defenders</team>
+   <team id="runners-team" plural="true" show-name-tags="allies" color="white" max="40" max-overfill="43">Runners</team>
+</teams>
+<spawns>
+    <spawn team="defenders-team" kit="defenders-kit">
+        <regions yaw="180">
+            <cuboid min="-39,14,-1086" max="-31,14,-1088"/>
+        </regions>
+    </spawn>
+    <spawn team="runners-team" kit="runners-kit">
+        <regions yaw="180">
+            <cuboid min="-36,12.5,-1095" max="-34,12.5,-1097"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <block>-33,36,-1543</block>
+        </regions>
+    </default>
+</spawns>
+<destroyables id="monument" name="Monument" materials="sponge" completion="100%" sparks="true" required="true">
+    <destroyable owner="defenders-team">
+       <region><cuboid min="-35,29,-1528" max="-31,20,-1529"/></region>
+    </destroyable>
+</destroyables>
+<world-borders center="-33.5, -1527.5" damage="2">
+    <world-border size="1000" after="0s"/>
+    <world-border size="40" after="1s" duration="3m"/>
+    <world-border when="sponge-destroyed" size="1000"/>
+</world-borders>
+<timelock>on</timelock>
+<kits>
+    <kit id="gamemode-kit" force="true">
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="runners-kit" force="true"> 
+        <game-mode>adventure</game-mode>
+        <helmet color="191919" locked="true">leather helmet</helmet>
+        <chestplate color="4C4C4C" locked="true">leather chestplate</chestplate> 
+        <leggings color="4C4C4C" locked="true">leather leggings</leggings>
+        <boots color="191919" locked="true">leather boots</boots>
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+    <kit id="defenders-kit" force="true">
+        <game-mode>adventure</game-mode>
+        <helmet color="F27FA5" locked="true">leather helmet</helmet>
+        <chestplate color="667F33" locked="true">leather chestplate</chestplate> 
+        <leggings color="7F3FB2" locked="true">leather leggings</leggings>
+        <boots color="4C7F99" locked="true">leather boots</boots>
+        <potion duration="oo" amplifier="2">speed</potion>
+        <potion duration="oo" amplifier="2">regeneration</potion>
+        <item slot="0" unbreakable="true" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:3;ARROW_INFINITE:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+    </kit>
+</kits>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<portals>
+    <!-- Left Side -->
+    <portal x="@-78.5" y="@17" z="@-1109.5">
+        <region><cuboid min="-36,16,-1093" max="-40,11,-1092"/></region>
+    </portal>
+    <!-- Right Side -->
+    <portal x="@8.5" y="@17" z="@-1108.5">
+        <region><cuboid min="-31,10,-1092" max="-34,16,-1093"/></region>
+    </portal>
+</portals>
+<filters>
+    <team id="only-runners">runners-team</team>
+    <material id="sponge-break">sponge</material>
+    <objective id="sponge-destroyed">monument</objective>
+</filters>
+<regions>
+    <apply block="sponge-break">
+        <everywhere />
+    </apply>
+    <apply kit="gamemode-kit">
+        <region>
+            <rectangle min="-29,-1519" max="-38,-1531"/>
+        </region>
+    </apply>
+</regions>
+</map>

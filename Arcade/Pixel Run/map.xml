@@ -1,0 +1,355 @@
+<map proto="1.4.0">
+<name>Pixel Run</name>
+<version>1.0.0</version>
+<slug>pixel_run</slug>
+<objective>
+    Runners must get from one side of the map to the other without getting killed by the Defenders.
+</objective>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/>
+    <!--  GoldenOre  -->
+</authors>
+<contributors>
+  <contributor contribution="XML" uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
+</contributors>
+<rules>
+  <rule>Fall damage is Disabled.</rule>
+</rules>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<include src="blitz-global.xml"/>
+<teams>
+    <team color="dark red" id="runners" max="25" max-overfill="30" plural="true">Runners</team>
+    <team color="gold" id="defenders" max="4" plural="true">Defenders</team>
+</teams>
+<regions>
+    <union id="spawns">
+        <cuboid id="attacker-spawn" min="237,42,23" max="240,42,18"/> <!-- facing east-->
+        <block id="defender-spawn">256.5,53,20.5</block> <!-- facing east-->
+    </union>
+    <union id="defender-portals-from-spawn">
+        <cuboid id="defender-portal-from-spawn-left" min="257,52,17" max="262,57,16"/>
+        <translate id="defender-portal-from-spawn-right" offset="0,0,8"><region id="defender-portal-from-spawn-left"/></translate> 
+    </union>
+    <union id="left-side-portals">
+        <cuboid id="left-side-portal1" min="241,22,-28" max="344,23,-30"/>
+        <cuboid id="left-side-portal2" min="372,10,2" max="416,11,0"/>
+        <cuboid id="left-side-portal3" min="434,51,-25" max="506,52,-27"/>
+        <cuboid id="left-side-portal4" min="519,27,-20" max="754,19,-20" />
+    </union>
+    <union id="left-side-portals-last3">
+        <cuboid id="last-left-side-portal1" min="520,20,-19" max="624,18,-20" />
+        <cuboid id="last-left-side-portal2" min="625,21,-19" max="689,19,-20" />
+        <cuboid id="last-left-side-portal3" min="690,22,-19" max="755,20,-20" />
+    </union>
+    <translate offset="0,0,77" id="right-side-portals-last3">
+        <region id="left-side-portals-last3"/>
+    </translate>
+    <union id="right-side-portals">
+        <cuboid id="right-side-portal1" min="241,22,66" max="344,23,68"/>
+        <cuboid id="right-side-portal2" min="372,10,36" max="416,11,38"/>
+        <cuboid id="right-side-portal3" min="434,52,64" max="506,51,66"/>
+        <cuboid id="right-side-portal4" min="519,27,57" max="754,19,57" />
+    </union>
+    <union id="right-portals">
+        <cuboid id="right-portal1" min="344,20,65" max="345,26,68" />
+        <cuboid id="right-portal2" min="372,15,35" max="373,10,38" />
+        <cuboid id="right-portal3" min="416,15,35" max="417,10,38" />
+        <cuboid id="right-portal4" min="434,50,65" max="435,56,62" />
+        <cuboid id="right-portal5" min="506,50,65" max="507,57,62" />
+        <cuboid id="right-portal6" min="519,22,55" max="519,24,57" />
+    </union>
+    <union id="left-portals">
+        <cuboid id="left-portal1" min="344,20,-27" max="345,26,-30" />
+        <cuboid id="left-portal2" min="372,10,1" max="373,15,4" />
+        <cuboid id="left-portal3" min="416,15,1" max="417,10,4" />
+        <cuboid id="left-portal4" min="434,56,-24" max="435,50,-27" />
+        <cuboid id="left-portal5" min="506,50,-24" max="507,55,-27" />
+        <cuboid id="left-portal6" min="520,21,-20" max="519,24,-18" />
+    </union>
+    <union id="pipe-side-platforms">
+        <cuboid id="pipe-side-platforms-left" min="371, 17, 5" max="417, 7, -0"/>
+        <cuboid  id="pipe-side-platforms-right" min="371, 17, 33" max="417, 7, 39"/>
+    </union>
+    <apply enter="not-attackers">
+        <region>
+            <region id="pipe-side-platforms"/>
+        </region>
+    </apply>
+    <cuboid id="capture-hill" min="853,35,20" max="855,38,18"/>
+    <cuboid id="jump-pad" min="429,12,19" max="430,11,20"/>
+    <apply block="never">
+        <everywhere/>
+    </apply>
+    <apply velocity="0,15,0">
+        <region>
+            <region id="jump-pad"/>
+        </region>
+    </apply>
+
+     <apply kit="runners-red">
+        <region>
+            <rectangle min="769,-10" max="774,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-orange">
+        <region>
+            <rectangle min="775,-10" max="780,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-yellow">
+        <region>
+            <rectangle min="781,-10" max="786,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-green">
+        <region>
+            <rectangle min="787,-10" max="792,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-blue">
+        <region>
+            <rectangle min="793,-10" max="795,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-indigo">
+        <region>
+            <rectangle min="796,-10" max="801,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-violet">
+        <region>
+            <rectangle min="802,-10" max="807,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-red">
+        <region>
+            <rectangle min="808,-10" max="813,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-orange">
+        <region>
+            <rectangle min="814,-10" max="819,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-yellow">
+        <region>
+            <rectangle min="820,-10" max="825,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-green">
+        <region>
+            <rectangle min="826,-10" max="831,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-blue">
+        <region>
+            <rectangle min="832,-10" max="837,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-indigo">
+        <region>
+            <rectangle min="838,-10" max="843,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-violet">
+        <region>
+            <rectangle min="844,-10" max="849,50"/>
+        </region>
+    </apply>
+    <apply kit="runners-red">
+        <region>
+            <rectangle min="850,-10" max="855,50"/>
+        </region>
+    </apply>
+</regions>
+<filters>
+    <not id="not-attackers">
+        <team>runners</team>
+    </not>
+</filters>
+<control-points>
+    <control-point name="Capture point" capture-time="2s">
+        <capture><region id="capture-hill"/></capture>
+        <progress><region id="capture-hill"/></progress>
+        <captured><region id="capture-hill"/></captured>
+    </control-point>
+</control-points>
+<gamerules>
+    <naturalRegeneration>true</naturalRegeneration>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<kits>
+   <kit id="spawn" force="true">
+       <saturation>20</saturation>
+       <foodlevel>20</foodlevel>
+   </kit>
+   <kit id="runners-kit">
+       <helmet color="993333">leather helmet</helmet>
+       <chestplate color="993333">leather chestplate</chestplate>
+       <leggings color="993333">leather leggings</leggings>
+       <boots color="993333" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="defenders-kit">
+       <helmet color="D87F33">leather helmet</helmet>
+       <chestplate color="D87F33">leather chestplate</chestplate>
+       <leggings color="D87F33">leather leggings</leggings>
+       <boots color="D87F33" enchantment="depth strider:2">leather boots</boots>
+       <item slot="1" unbreakable="true" enchantment="ARROW_DAMAGE:3;ARROW_INFINITE:1">bow</item>
+       <item slot="28" amount="1">arrow</item>
+       <potion duration="oo" amplifier="3">speed</potion>
+   </kit>
+   <kit id="runners-red" force="true">
+       <helmet color="FF0000">leather helmet</helmet>
+       <chestplate color="FF0000">leather chestplate</chestplate>
+       <leggings color="FF0000">leather leggings</leggings>
+       <boots color="FF0000" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-orange" force="true">
+       <helmet color="FFA500">leather helmet</helmet>
+       <chestplate color="FFA500">leather chestplate</chestplate>
+       <leggings color="FFA500">leather leggings</leggings>
+       <boots color="FFA500" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-yellow" force="true">
+       <helmet color="FFFF00">leather helmet</helmet>
+       <chestplate color="FFFF00">leather chestplate</chestplate>
+       <leggings color="FFFF00">leather leggings</leggings>
+       <boots color="FFFF00" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-green" force="true">
+       <helmet color="00FF00">leather helmet</helmet>
+       <chestplate color="00FF00">leather chestplate</chestplate>
+       <leggings color="00FF00">leather leggings</leggings>
+       <boots color="00FF00" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-blue" force="true">
+       <helmet color="0000FF">leather helmet</helmet>
+       <chestplate color="0000FF">leather chestplate</chestplate>
+       <leggings color="0000FF">leather leggings</leggings>
+       <boots color="0000FF" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-indigo" force="true">
+       <helmet color="4b0082">leather helmet</helmet>
+       <chestplate color="4b0082">leather chestplate</chestplate>
+       <leggings color="4b0082">leather leggings</leggings>
+       <boots color="4b0082" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="runners-violet" force="true">
+       <helmet color="551A8B">leather helmet</helmet>
+       <chestplate color="551A8B">leather chestplate</chestplate>
+       <leggings color="551A8B">leather leggings</leggings>
+       <boots color="551A8B" enchantment="depth strider:2">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+</kits>
+<spawns>
+    <spawn team="runners" kit="runners-kit">
+        <regions yaw="-90">
+            <region id="attacker-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="defenders" kit="defenders-kit">
+        <regions yaw="-90">
+            <block>258.5,52,20.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <region id="attacker-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<time result="defenders">5m</time>
+<portals>
+    <portal x="@242" y="@24" z="@-27.5" yaw="@-90">
+        <region><region id="defender-portal-from-spawn-left"/></region>
+    </portal>
+    <portal x="@242" y="@24" z="@65.5" yaw="@-90">
+        <region><region id="defender-portal-from-spawn-right"/></region>
+    </portal>
+    <portal x="@344" y="@24" z="@-27" yaw="@90">
+        <region><region id="left-portal2"/></region>
+    </portal>
+    <portal x="@374" y="@12" z="@3" yaw="@-90">
+        <region><region id="left-portal1"/></region>
+    </portal>
+    <portal x="@415" y="@12" z="@3" yaw="@90">
+        <region><region id="left-portal4"/></region>
+    </portal>
+    <portal x="@436" y="@53" z="@-24" yaw="@-90">
+        <region><region id="left-portal3"/></region>
+    </portal>
+    <portal x="@504" y="@53" z="@-24" yaw="@90">
+        <region><region id="left-portal6"/></region>
+    </portal>
+    <portal x="@521" y="@21" z="@-17" yaw="@-90">
+        <region><region id="left-portal5"/></region>
+    </portal>
+    <portal x="@344" y="@24" z="@65" yaw="@90">
+        <region><region id="right-portal2"/></region>
+    </portal>
+    <portal x="@374" y="@12" z="@35" yaw="@-90">
+        <region><region id="right-portal1"/></region>
+    </portal>
+    <portal x="@415" y="@12" z="@35" yaw="@90">
+        <region><region id="right-portal4"/></region>
+    </portal>
+    <portal x="@436" y="@53" z="@62" yaw="@-90">
+        <region><region id="right-portal3"/></region>
+    </portal>
+    <portal x="@504" y="@53" z="@62" yaw="@90">
+        <region><region id="right-portal6"/></region>
+    </portal>
+    <portal x="@521" y="@21" z="@55" yaw="@-90">
+        <region><region id="right-portal5"/></region>
+    </portal>
+    <portal z="96" y="2" yaw="@180">
+        <region><region id="left-side-portal1"/></region>
+    </portal>
+    <portal z="-96" y="2" yaw="@0">
+        <region><region id="right-side-portal1"/></region>
+    </portal>
+    <portal z="34" y="2" yaw="@180">
+        <region><region id="left-side-portal2"/></region>
+    </portal>
+    <portal z="-34" y="2" yaw="@0">
+        <region><region id="right-side-portal2"/></region>
+    </portal>
+    <portal z="90" y="2" yaw="@180">
+        <region><region id="left-side-portal3"/></region>
+    </portal>
+    <portal z="-90" y="2" yaw="@0">
+        <region><region id="right-side-portal3"/></region>
+    </portal>
+    <portal z="75" y="2" yaw="@180">
+        <region><region id="left-side-portals-last3"/></region>
+    </portal>
+    <portal z="-75" y="2" yaw="@0">
+        <region><region id="right-side-portals-last3"/></region>
+    </portal>
+</portals>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+</map>

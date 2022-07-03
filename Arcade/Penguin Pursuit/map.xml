@@ -1,0 +1,132 @@
+<map proto="1.4.0">
+<name>Penguin Pursuit</name>
+<version>1.0</version>
+<slug>penguin_pursuit</slug>
+<objective>The Runners must get from one side of the map to the other without getting killed by the Shooters.</objective>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="0347bb56-8ade-410e-9f32-31d54eb10598"/><!--  jadsaa  -->
+    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/><!--  kroest/pistolento/gerrard  -->
+</authors>
+<blitz>
+	<lives>1</lives>
+	<broadcastLives>false</broadcastLives>
+</blitz>
+<include src="blitz-global.xml"/>
+<teams>
+    <team color="light purple" id="runners" max="30" max-overfill="30" plural="true">Runners</team>
+    <team color="dark blue" id="defenders" max="4" plural="true">Shooters</team>
+</teams>
+<regions>
+    <apply block="never">
+        <everywhere/>
+    </apply>
+    <apply velocity="0.0,1.6,0.0">
+        <region>
+            <cuboid min="213,35,-17" max="211,36,-13"/>
+            <cuboid min="213,35,36" max="211,36,40"/>
+            <cuboid min="285,35,-17" max="283,36,-13"/>
+            <cuboid min="285,35,36" max="283,36,40"/>
+        </region>
+    </apply>
+    <apply velocity="10.0,2.0,0.0">
+        <region>
+            <cuboid min="98,53,15" max="101,54,12"/>
+        </region>
+    </apply>
+    <apply kit="regen">
+        <region>
+            <cuboid min="200,30,10" max="201,40,14"/>
+        </region>
+    </apply>
+</regions>
+<filters>
+    <not id="not-attackers">
+        <team>runners</team>
+    </not>
+</filters>
+<control-points>
+    <control-point name="Capture Point" capture-time="0s">
+        <capture><cuboid id="capture-point" min="381,47,18" max="388,50,4"/></capture>
+    </control-point>
+</control-points>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<kits>
+   <kit id="regen">
+       <health>20</health>
+       <saturation>20</saturation>
+       <foodlevel>20</foodlevel>
+   </kit>
+   <kit id="runners-kit">
+       <helmet color="993333">leather helmet</helmet>
+       <chestplate color="993333">leather chestplate</chestplate>
+       <leggings color="993333">leather leggings</leggings>
+       <boots color="993333" enchantment="depth strider:3">leather boots</boots>
+       <potion duration="oo" amplifier="1">speed</potion>
+   </kit>
+   <kit id="defenders-kit">
+       <helmet color="D87F33">leather helmet</helmet>
+       <chestplate color="D87F33">leather chestplate</chestplate>
+       <leggings color="D87F33">leather leggings</leggings>
+       <boots color="D87F33" enchantment="depth strider:2">leather boots</boots>
+       <item slot="1" unbreakable="true" enchantment="ARROW_DAMAGE:3;ARROW_INFINITE:1">bow</item>
+       <item slot="28" amount="1">arrow</item>
+       <potion duration="oo" amplifier="3">speed</potion>
+   </kit>
+</kits>
+<spawns>
+    <spawn team="runners" kit="runners-kit">
+        <regions yaw="-90">
+            <block>15.5,36,12.5</block>
+        </regions>
+    </spawn>
+    <spawn team="defenders" kit="defenders-kit">
+        <regions yaw="-90">
+            <block>19.5,45,-13.5</block>
+            <block>19.5,45,37.5</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <block>20.5,73.5,12.5</block>
+        </regions>
+    </default>
+</spawns>
+<time result="defenders">5m</time>
+<portals>
+    <portal x="0" y="3" z="-58" >
+        <region><cuboid id="right-first" min="23,43,42" max="211,44,41"/></region>
+    </portal>
+    <portal x="0" y="3" z="-58" >
+        <region><cuboid id="right-second" min="211,34,42" max="285,35,41"/></region>
+    </portal>
+    <portal x="0" y="3" z="-58" >
+        <region><cuboid id="right-third" min="285,43,42" max="387,44,41"/></region>
+    </portal>
+    <portal x="0" y="3" z="58" >
+        <region><cuboid id="left-first" min="23,43,-18" max="211,44,-19"/></region>
+    </portal>
+    <portal x="0" y="3" z="58" >
+        <region><cuboid id="left-second" min="211,34,-18" max="285,35,-19"/></region>
+    </portal>
+    <portal x="0" y="3" z="58" >
+        <region><cuboid id="left-third" min="285,43,-18" max="387,44,-19"/></region>
+    </portal>
+</portals>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<kill-rewards>
+    <item slot="8" material="nether star"/>
+</kill-rewards>
+</map>

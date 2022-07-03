@@ -1,0 +1,273 @@
+<map proto="1.4.0">
+<name>A Journey Through History</name>
+<version>1.0.4</version>
+<slug>a_journey_through_history</slug>
+<objective>Runners must get from one side of the map to the other without getting killed by the Defenders.</objective>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+    <rule>Don't camp!</rule>
+</rules>
+<time result="defenders">5m</time>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<include src="blitz-global.xml" />
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Paleolithic, Neolithic, Chinese Empire, The New World, and The Present stages." />
+    <!--   GoldenOre   -->
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="Stone Age stage." />
+    <!--   breadandcinnamon   -->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Industrial Revolution stage." />
+    <!--   rockymine   -->
+    <author uuid="7e7da86e-57a8-4b90-b297-4ef05e71dbdb" contribution="French Revolution stage." />
+    <!--   Whitever   -->
+    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880" contribution="Egyptian Empire and Roman/Greece stages." />
+    <!--   KroestV2   -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="American Revolution stage." />
+    <!--   _3Each  -->
+    <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" contribution="World War stage." />
+    <!--   Oxinous  -->
+    <author uuid="86a53ac5-11db-4435-b672-ea3773c31082" contribution="The End of The World stage." />
+    <!--   issac7227   -->
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="The Middle Age stage." />
+    <!--   chle_   -->
+</authors>
+<teams>
+    <team color="dark red" id="runners" max="25" max-overfill="30" plural="true">Runners</team>
+    <team color="dark_gray" id="defenders" max="4" plural="true">Defenders</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <saturation>20</saturation>
+        <foodlevel>20</foodlevel>
+    </kit>
+    <kit id="runners-kit">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333">leather chestplate</chestplate>
+        <leggings color="993333">leather leggings</leggings>
+        <boots color="993333" enchantment="depth strider:2">leather boots</boots>
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
+    <kit id="defenders-kit">
+        <helmet color="191919">leather helmet</helmet>
+        <chestplate color="191919">leather chestplate</chestplate>
+        <leggings color="191919">leather leggings</leggings>
+        <boots color="191919" enchantment="depth strider:2">leather boots</boots>
+        <item slot="1" unbreakable="true" enchantment="ARROW_INFINITE:1;power:1">bow</item>
+        <item slot="28" amount="1">arrow</item>
+        <potion duration="oo" amplifier="3">speed</potion>
+    </kit>
+    <kit id="shield" force="true">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333">leather chestplate</chestplate>
+        <leggings color="993333">leather leggings</leggings>
+        <boots color="993333" enchantment="depth strider:2">leather boots</boots>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <clear-items />
+    </kit>
+    <kit id="boat" force="true">
+        <helmet color="993333">leather helmet</helmet>
+        <chestplate color="993333">leather chestplate</chestplate>
+        <leggings color="993333">leather leggings</leggings>
+        <boots color="993333" enchantment="depth strider:2">leather boots</boots>
+        <potion duration="oo" amplifier="1">speed</potion>
+        <item slot="0" amount="1">boat</item>
+        <clear-items />
+    </kit>
+</kits>
+<spawns>
+    <spawn team="runners" kit="runners-kit">
+        <regions yaw="0">
+            <block>-15,31,-1286</block>
+        </regions>
+    </spawn>
+    <spawn team="defenders" kit="defenders-kit">
+        <regions yaw="0">
+            <block>-14,64,-1292</block>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <cylinder base="-15,31,-1286" radius="1" height="0" />
+        </regions>
+    </default>
+</spawns>
+<gamerules>
+    <naturalRegeneration>true</naturalRegeneration>
+</gamerules>
+<filters>
+    <any id="monument">
+        <material>sponge</material>
+    </any>
+</filters>
+<regions>
+    <apply region="everywhere" block="monument" />
+    <apply kit="shield">
+        <region>
+            <rectangle min="-20,-813" max="-9,-812" />
+        </region>
+    </apply>
+    <apply kit="boat">
+        <region>
+            <rectangle min="-12,-729" max="-19,-730" />
+        </region>
+    </apply>
+</regions>
+<destroyables name="Monument" materials="sponge" completion="100%">
+    <destroyable owner="defenders">
+        <region>
+            <block>-16,38,-189</block>
+        </region>
+    </destroyable>
+</destroyables>
+<portals>
+    <portal x="@35.5" y="@33" z="@-1273.5" yaw="@0">
+        <region>
+            <cuboid min="-12,66,-1288" max="-14,63,-1290" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" z="@-1274.5" yaw="@0">
+        <region>
+            <cuboid min="-15,66,-1289" max="-17,63,-1290" />
+        </region>
+    </portal>
+    <portal x="@4.5" y="@34" z="@-944.5" yaw="@0">
+        <region>
+            <cuboid min="37,36,-977" max="34,33,-978" />
+        </region>
+    </portal>
+    <portal x="@-35.5" y="@34" z="@-944.5" yaw="@0">
+        <region>
+            <cuboid min="-64,36,-977" max="-67,33,-978" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" z="@-979.5" yaw="@180">
+        <region>
+            <cuboid min="3,37,-947" max="6,34,-946" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" z="@-979.5" yaw="@180">
+        <region>
+            <cuboid min="-37,37,-947" max="-34,34,-946" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" z="@-898.5" yaw="@0">
+        <region>
+            <cuboid min="6,37,-916" max="3,34,-917" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" z="@-898.5" yaw="@0">
+        <region>
+            <cuboid min="-34,37,-916" max="-37,34,-917" />
+        </region>
+    </portal>
+    <portal x="@4.5" y="@34" z="@-918.5" yaw="@180">
+        <region>
+            <cuboid min="34,36,-901" max="37,33,-900" />
+        </region>
+    </portal>
+    <portal x="@-35.5" y="@34" z="@-918.5" yaw="@180">
+        <region>
+            <cuboid min="-67,36,-901" max="-64,33,-900" />
+        </region>
+    </portal>
+    <portal x="@-2.5" y="@29" z="@-289.5" yaw="@90">
+        <region>
+            <cuboid min="37,36,-324" max="34,33,-325" />
+        </region>
+    </portal>
+    <portal x="@-27.5" y="@29" z="@-289.5" yaw="@-90">
+        <region>
+            <cuboid min="-64,36,-324" max="-67,33,-325" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" z="@-326.5" yaw="@180">
+        <region>
+            <cuboid min="-0,32,-291" max="-1,29,-288" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" z="@-326.5" yaw="@180">
+        <region>
+            <cuboid min="-30,32,-288" max="-29,29,-291" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" z="@-258.5" yaw="@0">
+        <region>
+            <cuboid min="-0,32,-281" max="-1,29,-278" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" z="@-258.5" yaw="@0">
+        <region>
+            <cuboid min="-30,32,-278" max="-29,29,-281" />
+        </region>
+    </portal>
+    <portal x="@-2.5" y="@29" z="@-278" yaw="@90">
+        <region>
+            <cuboid min="34,36,-261" max="37,33,-260" />
+        </region>
+    </portal>
+    <portal x="@-27.5" y="@29" z="@-279.5" yaw="@-90">
+        <region>
+            <cuboid min="-67,36,-261" max="-64,33,-260" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="38,32,-1275" max="37,31,-978" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="-68,32,-978" max="-67,31,-1275" />
+        </region>
+    </portal>
+    <portal x="@-35.5" y="@34" yaw="@0">
+        <region>
+            <cuboid min="7,33,-945" max="6,32,-918" />
+        </region>
+    </portal>
+    <portal x="@4.5" y="@34" yaw="@0">
+        <region>
+            <cuboid min="-38,33,-918" max="-37,32,-945" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="38,32,-900" max="37,31,-325" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="-68,32,-325" max="-67,31,-900" />
+        </region>
+    </portal>
+    <portal x="@-65.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="38,32,-260" max="37,31,-211" />
+        </region>
+    </portal>
+    <portal x="@35.5" y="@33" yaw="@0">
+        <region>
+            <cuboid min="-68,32,-211" max="-67,31,-260" />
+        </region>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sign</item>
+    <item>boat</item>
+</itemremove>
+</map>

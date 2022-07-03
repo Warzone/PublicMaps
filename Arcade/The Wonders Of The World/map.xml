@@ -1,0 +1,414 @@
+<map proto="1.4.2">
+<name>The Wonders of the World</name>
+<version>1.2.0</version>
+<objective>Runners must break the monument at the end of the map without getting killed by the defenders.</objective>
+<gamemode>ad</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+    <rule>Camping is illegal.</rule>
+</rules>
+<time result="defenders">5m</time>
+<blitz/>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Portal XML, Petra, Map Captain."/>
+    <!-- GoldenOre -->
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Great Wall of China, XML."/>
+    <!-- Jexel -->
+    <author uuid="a37e4da3-1c6c-4dc9-b085-63783406a963" contribution="Stonehenge."/>
+    <!-- Cand -->
+    <author uuid="4faf501d-f965-4f07-887e-24cd66a4f7b0" contribution="Hanging Gardens."/>
+    <!-- ApplePies -->
+    <author uuid="73744a16-ca6c-4db4-a293-4c0ea8c6a6ba" contribution="Parthenon"/>
+    <!-- Olynyk -->
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Colosseum"/>
+    <!-- samthecat43 -->
+    <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" contribution="Chichen Itza"/>
+    <!-- Oxinous -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="Leaning Tower"/>
+    <!-- _3Each -->
+    <author uuid="625b72d4-65b7-4089-9273-060bd25ff1ab" contribution="Arc De Triomphe"/>
+    <!-- Hockey_ -->
+    <author uuid="396229db-3e91-415f-be44-8bacc9fcbc9f" contribution="Big Ben"/>
+    <!-- CIPato -->
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="The Tower Bridge"/>
+    <!-- _Bread__ -->
+    <author uuid="f876b863-1ccd-4ae2-acad-8a09e2209e81" contribution="Eiffel Tower"/>
+    <!-- _DISTRACTION_ -->
+    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="Golden Gate Bridge"/>
+    <!-- Ny_ -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="XML Help"/>
+    <!--    triplezko   -->
+</contributors>
+<teams>
+    <team color="yellow" id="runners" max="30" max-overfill="35" plural="true">Runners</team>
+    <team color="white" id="defenders" max="4" max-overfill="5" plural="true">Defenders</team>
+</teams>
+<kits>
+    <kit id="spawn" force="true">
+        <saturation>20</saturation>
+        <foodlevel>20</foodlevel>
+    </kit>
+    <kit id="runners-kit">
+        <helmet color="E5E533" material="leather helmet"/>
+        <chestplate color="E5E533" material="leather chestplate"/>
+        <leggings color="E5E533" material="leather leggings"/>
+        <boots color="E5E533" material="leather boots">
+            <enchantment level="3">depth strider</enchantment>
+        </boots>
+        <effect duration="oo">speed</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="defenders-kit">
+        <helmet color="FFFFFF" material="leather helmet"/>
+        <chestplate color="FFFFFF" material="leather chestplate"/>
+        <leggings color="FFFFFF" material="leather leggings"/>
+        <boots color="FFFFFF" material="leather boots">
+            <enchantment level="3">depth strider</enchantment>
+        </boots>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment level="1">infinity</enchantment>
+            <enchantment level="1">arrow knockback</enchantment>
+        </item>
+        <item slot="28" locked="true" material="arrow"/>
+        <walk-speed>3.0</walk-speed>
+        <effect duration="oo">regeneration</effect>
+    </kit>
+    <kit id="runners-kit-wall" force="true">
+        <item material="arrow"/>
+        <item unbreakable="true" material="bow">
+            <enchantment level="3">arrow knockback</enchantment>
+            <enchantment level="5">damage all</enchantment>
+        </item>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <give filter="end-bridge">
+        <kit force="true">
+            <game-mode>survival</game-mode>
+        </kit>
+    </give>
+    <lend filter="give-wither-filter">
+        <kit force="true">
+            <effect duration="oo" amplifier="3">wither</effect>
+        </kit>
+    </lend>
+    <lend filter="blindness-petra">
+        <kit force="true">
+            <effect duration="oo">blindness</effect>
+        </kit>
+    </lend>
+    <kit id="void-death" force="true">
+        <health>1</health>
+        <effect duration="1" amplifier="100">poison</effect>
+    </kit>
+</kits>
+<broadcasts>
+    <alert after="4s" every="2m">Camping is not allowed! Runners must try to destroy the monument!</alert>
+</broadcasts>
+<spawns>
+    <spawn team="runners" kit="runners-kit" yaw="90" region="runners-spawn"/>
+    <spawn team="defenders" kit="defenders-kit" yaw="180" region="defenders-spawn"/>
+    <default yaw="90" region="runners-spawn"/>
+</spawns>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<filters>
+    <material id="monument">sponge</material>
+    <all id="give-wither-filter">
+        <team>runners</team>
+        <time>12s</time>
+        <region id="runners-spawn-region"/>
+    </all>
+    <all id="end-bridge">
+        <team>runners</team>
+        <region id="end-bridge-region"/>
+    </all>
+    <not id="deny-dispenser">
+        <material>dispenser</material>
+    </not>
+    <all id="runners-team">
+        <team>runners</team>
+    </all>
+    <all id="blindness-petra">
+        <region id="blindness-region"/>
+        <team>runners</team>
+    </all>
+    <not id="deny-defenders">
+        <team>defenders</team>
+    </not>
+</filters>
+<destroyables name="Monument" materials="bedrock" mode-changes="true">
+    <destroyable owner="defenders" region="defenders-monument"/>
+</destroyables>
+<modes>
+    <mode after="12s" material="sponge" show-before="10s" name="Kicking Runners out of Their Spawn"/>
+</modes>
+<portals>
+    <portal y="-100" sound="false" region="void-death-region"/>
+    <!-- Left Portals-->
+    <portal x="@68.5" y="@36" z="@-173.5" yaw="@90">
+        <region>
+            <cuboid min="80,9,-172" max="81,6,-175"/>
+        </region>
+    </portal>
+    <portal x="@83.5" y="@6" z="@-173.5" yaw="@-90">
+        <region>
+            <cuboid min="70,39,-172" max="71,36,-175"/>
+        </region>
+    </portal>
+    <portal x="@-50.5" y="@55" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-36,39,-172" max="-35,36,-175"/>
+        </region>
+    </portal>
+    <portal x="@-33.5" y="@36" z="@-173.5" yaw="@-90">
+        <region>
+            <cuboid min="-48,58,-219" max="-49,55,-216"/>
+        </region>
+    </portal>
+    <portal x="@-89.5" y="@77" z="@-216.5" yaw="@90">
+        <region>
+            <cuboid min="-49,57,-207" max="-52,54,-208"/>
+        </region>
+    </portal>
+    <portal x="@-50.5" y="@55" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-87,79,-214" max="-89,76,-215"/>
+        </region>
+    </portal>
+    <portal x="@-147.5" y="@80" z="@-173.5" yaw="@90">
+        <region>
+            <cuboid min="-137,84,-211" max="-136,82,-212"/>
+        </region>
+    </portal>
+    <portal x="@-132.5" y="@81" z="@-212.5" yaw="@-90">
+        <region>
+            <cuboid min="-145,83,-175" max="-146,80,-172"/>
+        </region>
+    </portal>
+    <portal x="@-307.5" y="@90" z="@-217.5" yaw="@-90">
+        <region>
+            <cuboid min="-252,83,-172" max="-251,80,-175"/>
+        </region>
+    </portal>
+    <portal x="@-310.5" y="@77" z="@-173.5" yaw="@90">
+        <region>
+            <cuboid min="-312,92,-216" max="-311,90,-217"/>
+        </region>
+    </portal>
+    <portal x="@-248.5" y="@80" z="@-173.5" yaw="@-90">
+        <region>
+            <cuboid min="-308,80,-175" max="-309,77,-172"/>
+        </region>
+    </portal>
+    <portal x="@-388.5" y="@89" z="@-188.5" yaw="@90">
+        <region>
+            <cuboid min="-370,80,-172" max="-369,77,-175"/>
+        </region>
+    </portal>
+    <portal x="@-367.5" y="@77" z="@-173.5" yaw="@-90">
+        <region>
+            <cuboid min="-385,92,-190" max="-386,89,-187"/>
+        </region>
+    </portal>
+    <portal x="@-464.5" y="@76" z="@-173.5" yaw="@90">
+        <region>
+            <cuboid min="-444,92,-187" max="-443,89,-190"/>
+        </region>
+    </portal>
+    <portal x="@-441.5" y="@89" z="@-188.5" yaw="@-90">
+        <region>
+            <cuboid min="-462,79,-175" max="-463,76,-172"/>
+        </region>
+    </portal>
+    <!-- Left Side Portals-->
+    <portal y="@6" z="@-261.5" yaw="@0">
+        <region>
+            <cuboid min="150,6,-171" max="81,5,-172"/>
+        </region>
+    </portal>
+    <portal y="@36" z="@-261.5" yaw="@0">
+        <region>
+            <cuboid min="70,36,-171" max="-35,35,-172"/>
+        </region>
+    </portal>
+    <portal y="@80" z="@-261.5" yaw="@0">
+        <region>
+            <cuboid min="-146,80,-171" max="-251,79,-172"/>
+        </region>
+    </portal>
+    <portal y="@77" z="@-261.5" yaw="@0">
+        <region>
+            <cuboid min="-309,77,-171" max="-369,76,-172"/>
+        </region>
+    </portal>
+    <portal y="@89" z="@-246.5" yaw="@0">
+        <region>
+            <cuboid min="-388,89,-186" max="-441,88,-187"/>
+        </region>
+    </portal>
+    <portal y="@76" z="@-261.5" yaw="@0">
+        <region>
+            <cuboid min="-463,76,-171" max="-700,75,-172"/>
+        </region>
+    </portal>
+    <!-- Right Portals-->
+    <portal x="@68.5" y="@36" z="@-261.5" yaw="@90">
+        <region>
+            <cuboid min="80,9,-260" max="81,6,-263"/>
+        </region>
+    </portal>
+    <portal x="@83.5" y="@6" z="@-261.5" yaw="@-90">
+        <region>
+            <cuboid min="70,39,-260" max="71,36,-263"/>
+        </region>
+    </portal>
+    <portal x="@-50.5" y="@55" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-36,39,-260" max="-35,36,-263"/>
+        </region>
+    </portal>
+    <portal x="@-89.5" y="@77" z="@-216.5" yaw="@90">
+        <region>
+            <cuboid min="-52,57,-228" max="-49,54,-227"/>
+        </region>
+    </portal>
+    <portal x="@-50.5" y="@55" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-87,79,-218" max="-89,76,-219"/>
+        </region>
+    </portal>
+    <portal x="@-147.5" y="@80" z="@-261.5" yaw="@90">
+        <region>
+            <cuboid min="-137,84,-213" max="-136,82,-214"/>
+        </region>
+    </portal>
+    <portal x="@-132.5" y="@81" z="@-212.5" yaw="@-90">
+        <region>
+            <cuboid min="-145,83,-263" max="-146,80,-260"/>
+        </region>
+    </portal>
+    <portal x="@-307.5" y="@90" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-252,83,-260" max="-251,80,-263"/>
+        </region>
+    </portal>
+    <portal x="@-310.5" y="@77" z="@-261.5" yaw="@90">
+        <region>
+            <cuboid min="-312,93,-218" max="-311,90,-219"/>
+        </region>
+    </portal>
+    <portal x="@-248.5" y="@80" z="@-261.5" yaw="@-90">
+        <region>
+            <cuboid min="-308,80,-260" max="-309,77,-263"/>
+        </region>
+    </portal>
+    <portal x="@-394.5" y="@89" z="@-246.5" yaw="@90">
+        <region>
+            <cuboid min="-370,80,-260" max="-369,77,-263"/>
+        </region>
+    </portal>
+    <portal x="@-367.5" y="@77" z="@-261.5" yaw="@-90">
+        <region>
+            <cuboid min="-385,92,-248" max="-386,89,-245"/>
+        </region>
+    </portal>
+    <portal x="@-464.5" y="@76" z="@-261.5" yaw="@90">
+        <region>
+            <cuboid min="-444,92,-245" max="-443,89,-248"/>
+        </region>
+    </portal>
+    <portal x="@-441.5" y="@89" z="@-246.5" yaw="@-90">
+        <region>
+            <cuboid min="-462,79,-263" max="-463,76,-260"/>
+        </region>
+    </portal>
+    <!-- Right Side Portals-->
+    <portal y="@6" z="@-173.5" yaw="@180">
+        <region>
+            <cuboid min="150,6,-263" max="81,5,-264"/>
+        </region>
+    </portal>
+    <portal y="@36" z="@-173.5" yaw="@180">
+        <region>
+            <cuboid min="70,36,-263" max="-35,35,-264"/>
+        </region>
+    </portal>
+    <portal y="@80" z="@-173.5" yaw="@180">
+        <region>
+            <cuboid min="-146,80,-263" max="-251,79,-264"/>
+        </region>
+    </portal>
+    <portal y="@77" z="@-173.5" yaw="@180">
+        <region>
+            <cuboid min="-309,77,-263" max="-369,76,-264"/>
+        </region>
+    </portal>
+    <portal y="@89" z="@-188.5" yaw="@180">
+        <region>
+            <cuboid min="-388,89,-248" max="-441,88,-249"/>
+        </region>
+    </portal>
+    <portal y="@76" z="@-173.5" yaw="@180">
+        <region>
+            <cuboid min="-463,76,-263" max="-700,75,-264"/>
+        </region>
+    </portal>
+    <!-- Eiffel Tower Portal-->
+    <portal x="@-635.5" y="@77.1" z="@-217.5" yaw="@90">
+        <region>
+            <cuboid min="-618,135,-216" max="-617,133,-219"/>
+        </region>
+    </portal>
+</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>block explosion</damage>
+</disabledamage>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<regions>
+    <union id="no-defenders">
+        <cuboid min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
+        <cuboid min="-142.0,2,-200.0" max="-144.0,99,-237.0"/>
+    </union>
+    <union id="jump-pads-strong">
+        <cuboid id="jump-pad-left" min="-79,45,-208" max="-90,47,-209"/>
+        <cuboid id="jump-pad-right" min="-79,45,-227" max="-80,47,-226"/>
+    </union>
+    <cuboid id="jump-pad-weak" min="-82,65,-218" max="-83,67,-217"/>
+    <cuboid id="void-death-region" min="-49,33,-230" max="-84,35,-205"/>
+    <cuboid id="blindness-region" min="-43,33,-230" max="-84,70,-205"/>
+    <rectangle id="end-bridge-region" min="-694.0,-213.0" max="-714.0,-227.0"/>
+    <point id="runners-spawn">153.5,7.1,-214.5</point>
+    <point id="defenders-spawn">148.5,6.1,-173.5</point>
+    <block id="defenders-monument">-707,78,-218</block>
+    <cuboid id="great-wall" min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
+    <rectangle id="runners-spawn-region" min="150.0,-203.0" max="157.0,-232.0"/>
+    <apply velocity="0.0,3.0,0.0" region="jump-pads-strong"/>
+    <apply velocity="-0.4,1.8,0.2" region="jump-pad-weak"/>
+    <apply kit="runners-kit-wall" region="great-wall" filter="runners-team"/>
+    <apply kit="void-death" region="void-death-region"/>
+    <apply block="monument" use="deny-dispenser"/>
+    <apply enter="deny-defenders" region="no-defenders" message="`7This region is disabled."/>
+</regions>
+<mobs>
+    <filter>
+        <all>
+            <spawn>spawner</spawn>
+            <mob>skeleton</mob>
+        </all>
+    </filter>
+</mobs>
+</map>
