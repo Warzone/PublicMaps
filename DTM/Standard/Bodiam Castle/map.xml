@@ -2,7 +2,7 @@
 <map proto="1.4.2" game="Bed Wars">
 <name>Bodiam Castle</name>
 <created>2022-01-22</created>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
 <gamemode>dtm</gamemode>
 <gamemode>blitz</gamemode>
@@ -31,10 +31,10 @@
 </blitz>
 <!-- Teams -->
 <teams>
-    <team id="blue-team" color="blue" min="1" max="4">Blue</team>
-    <team id="red-team" color="red" min="1" max="4">Red</team>
-    <team id="green-team" color="green" min="1" max="4">Green</team>
-    <team id="yellow-team" color="yellow" min="1" max="4">Yellow</team>
+    <team id="blue-team" color="blue" min="1" max="4" max-overfill="6">Blue</team>
+    <team id="red-team" color="red" min="1" max="4" max-overfill="6">Red</team>
+    <team id="green-team" color="green" min="1" max="4" max-overfill="6">Green</team>
+    <team id="yellow-team" color="yellow" min="1" max="4" max-overfill="6">Yellow</team>
 </teams>
 <!-- Kits -->
 <kits>
@@ -389,19 +389,19 @@
         <item amount="1" material="emerald"/>
     </spawner>
     <!-- Team Ingot Generators: Normal -->
-    <spawner spawn-region="blue-generator" max-entities="256" delay="2s">
+    <spawner spawn-region="blue-generator" max-entities="128" delay="2s">
         <item amount="4" material="iron ingot"/>
         <item amount="1" material="gold ingot"/>
     </spawner>
-    <spawner spawn-region="red-generator" max-entities="256" delay="2s">
+    <spawner spawn-region="red-generator" max-entities="128" delay="2s">
         <item amount="4" material="iron ingot"/>
         <item amount="1" material="gold ingot"/>
     </spawner>
-    <spawner spawn-region="green-generator" max-entities="256" delay="2s">
+    <spawner spawn-region="green-generator" max-entities="128" delay="2s">
         <item amount="4" material="iron ingot"/>
         <item amount="1" material="gold ingot"/>
     </spawner>
-    <spawner spawn-region="yellow-generator" max-entities="256" delay="2s">
+    <spawner spawn-region="yellow-generator" max-entities="128" delay="2s">
         <item amount="4" material="iron ingot"/>
         <item amount="1" material="gold ingot"/>
     </spawner>
@@ -409,11 +409,6 @@
 <!-- ItemRemove, ItemKeep, ArmorKeep -->
 <itemremove>
     <!-- Blocks -->
-    <item>wool</item>
-    <item>wood</item>
-    <item>ender stone</item>
-    <item>stained clay</item>
-    <item>stained glass</item>
     <item>obsidian</item>
     <item>carpet</item>
     <item>stone button</item>
@@ -480,7 +475,6 @@
     <item>iron axe</item>
     <item>diamond axe</item>
     <item>shears</item>
-    <item>bow</item>
 </itemkeep>
 <armorkeep>
     <item>leather helmet</item>
@@ -527,10 +521,11 @@
     <instantignite>on</instantignite>
     <licensing>false</licensing>
     <friendly-defuse>false</friendly-defuse>
+    <fuse>3s</fuse>
     <yield>0</yield>
 </tnt>
 <disabledamage>
-    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+    <damage ally="true" self="true" enemy="false" other="false">block explosion</damage>
 </disabledamage>
 <!-- Misc -->
 <hunger>
