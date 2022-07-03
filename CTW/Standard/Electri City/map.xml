@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Electri City</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Retrieve the wool from the enemy's side and place it on your team's monument</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -89,26 +89,20 @@
 		<rectangle id="red-spawn" min="51.5,-36.5" max="59.5,-44.5"/>
 	</union>
 	<union id="wool-rooms">
-		<union id="red-rooms">
-			<rectangle id="yellow-room" min="67,-69" max="58,-57"/>
-			<rectangle id="orange-room" min="59,-12" max="71,-21"/>
-		</union>
-	</union>
-	<union id="blue-rooms">
+		<rectangle id="yellow-room" min="67,-69" max="58,-57"/>
 		<rectangle id="purple-room" min="-64,-69" max="-55,-57"/>
-		<rectangle id="cyan-room" min="-56,-12" max="-68,-21"/>
 	</union>
 	<apply block="never" message="You may not edit the spawn areas!" region="spawns"/>
 	<apply use="only-red" region="red-spawn"/>
 	<apply use="only-blue" region="blue-spawn"/>
 	<apply enter="only-red" message="You may not enter the enemy spawn!" region="red-spawn"/>
 	<apply enter="only-blue" message="You may not enter the enemy spawn!" region="blue-spawn"/>
-	<apply enter="only-red" message="You may not enter your own wool room!" region="blue-rooms"/>
-	<apply enter="only-blue" message="You may not enter your own wool room!" region="red-rooms"/>
-	<apply use="only-red" region="blue-rooms"/>
-	<apply use="only-blue" region="red-rooms"/>
-	<apply block="red-webs" message="You may not interact with the wool rooms!" region="blue-rooms"/>
-	<apply block="blue-webs" message="You may not interact with the wool rooms!" region="red-rooms"/>
+	<apply enter="only-red" message="You may not enter your own wool room!" region="purple-room"/>
+	<apply enter="only-blue" message="You may not enter your own wool room!" region="yellow-room"/>
+	<apply use="only-red" region="purple-room"/>
+	<apply use="only-blue" region="yellow-room"/>
+	<apply block="red-webs" message="You may not interact with the wool rooms!" region="purple-room"/>
+	<apply block="blue-webs" message="You may not interact with the wool rooms!" region="yellow-room"/>
 	<apply block="deny-spawner" message="Don't destroy the arrow spawner!" region="everywhere"/>
 	<apply block="not-void" message="You may not edit outside the map!" region="everywhere"/>
 </regions>
@@ -116,14 +110,8 @@
 	<wool color="yellow" location="-54,7,17">
 		<monument><block>-55.579,8,-41.502</block></monument>
 	</wool>
-	<wool color="orange" location="-54,7,-41">
-		<monument><block>-55.587,8,-39.509</block></monument>
-	</wool>
 </wools>
 <wools team="red">
-	<wool color="cyan" location="-418,7,17">
-		<monument><block>58.511,8,-39.497</block></monument>
-	</wool>
 	<wool color="purple" location="-418,7,-41">
 		<monument><block>58.383,8,-41.455</block></monument>
 	</wool>
