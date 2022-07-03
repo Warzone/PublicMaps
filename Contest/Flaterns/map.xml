@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.2">
 <name>Flaterns</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Hold the flag for 180 seconds to win!.</objective>
 <gamemode>kotf</gamemode>
 <authors>
@@ -92,8 +92,8 @@
 <regions>
     <!-- Definitions -->
     <union id="spawn-protections">
-        <cylinder id="green-spawn-protection" base="0.5,0,-65.5" radius="6" height="oo"/>
-        <cylinder id="orange-spawn-protection" base="0.5,0,65.5" radius="6" height="oo"/>
+        <cylinder id="green-spawn-protection" base="0.5,0,-65.5" radius="8" height="oo"/>
+        <cylinder id="orange-spawn-protection" base="0.5,0,65.5" radius="8" height="oo"/>
     </union>
     <union id="flag-regions">
         <cuboid id="top-flag-platform" min="-4,38,5" max="5,42,-4"/>
@@ -136,6 +136,7 @@
     </union>
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="spawn-protections" enter="not-carrier" message="You are not allowed to enter while holding flag here."/>
     <apply region="flag-regions" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="map-limit" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="launchpad-opening-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
