@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Electri City</name>
-<version>1.0.5</version>
+<version>1.0.4</version>
 <objective>Retrieve the wool from the enemy's side and place it on your team's monument</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -76,28 +76,51 @@
 			<material>stained glass</material>
 		</any>
 	</all>
-	<not id="not-void">
-        <void/>
-    </not>
-	<deny id="deny-spawner">
+	<not id="no-void">
+		<void/>
+	</not>
+	<not id="deny-spawner">
         <material>mob spawner</material>
-    </deny>
+    </not>
 </filters>
 <regions>
-	<union id="spawns">
-		<rectangle id="blue-spawn" min="-48.5,-44.5" max="-56.5,-36.5"/>
-		<rectangle id="red-spawn" min="51.5,-36.5" max="59.5,-44.5"/>
-	</union>
-	<union id="wool-rooms">
-		<union id="red-rooms">
-			<rectangle id="yellow-room" min="67,-69" max="58,-57"/>
-			<rectangle id="orange-room" min="59,-12" max="71,-21"/>
+	<everywhere/>
+	<negative id="void">
+		<union id="bridging">
+			<rectangle min="33.5,-83.5" max="16.5,-75.5"/>
+			<rectangle min="-13.5,-75.5" max="-30.5,-83.5"/>
+			<rectangle min="-46.5,-83.5" max="-52.5,-75.5"/>
+			<rectangle min="-44.5,-20.5" max="-32.5,-12.5"/>
+			<rectangle min="-22.5,-20.5" max="-11.5,-12.5"/>
+			<rectangle min="-1.5,-20.5" max="4.5,-12.5"/>
+			<rectangle min="14.5,-20.5" max="25.5,-12.5"/>
+			<rectangle min="35.5,-12.5" max="47.5,-20.5"/>
+			<rectangle min="49.5,-75.5" max="55.5,-83.5"/>
+			<rectangle min="41.5,-66.5" max="33.5,-75.5"/>
+			<rectangle min="25.5,-66.5" max="15.5,-57.5"/>
+			<rectangle min="-22.5,-58.5" max="-12.5,-66.5"/>
+			<rectangle min="-22.5,-44.5" max="-12.5,-36.5"/>
+			<rectangle min="15.5,-36.5" max="25.5,-44.5"/>
+			<rectangle min="25.5,-58.5" max="15.5,-66.5"/>
+			<rectangle min="-12.5,-57.5" max="-4.5,-46.5"/>
+			<rectangle min="7.5,-46.5" max="15.5,-57.5"/>
+			<rectangle min="-38.5,-66.5" max="-30.5,-75.5"/>
 		</union>
-	</union>
-	<union id="blue-rooms">
-		<rectangle id="purple-room" min="-64,-69" max="-55,-57"/>
-		<rectangle id="cyan-room" min="-56,-12" max="-68,-21"/>
-	</union>
+		<union id="spawns">
+			<rectangle id="blue-spawn" min="-48.5,-44.5" max="-56.5,-36.5"/>
+			<rectangle id="red-spawn" min="51.5,-36.5" max="59.5,-44.5"/>
+		</union>
+		<union id="wool-rooms">
+			<union id="red-rooms">
+				<rectangle id="yellow-room" min="67,-69" max="58,-57"/>
+				<rectangle id="orange-room" min="59,-12" max="71,-21"/>
+			</union>
+			<union id="blue-rooms">
+				<rectangle id="purple-room" min="-64,-69" max="-55,-57"/>
+				<rectangle id="cyan-room" min="-56,-12" max="-68,-21"/>
+			</union>
+		</union>
+	</negative>
 	<apply block="never" message="You may not edit the spawn areas!" region="spawns"/>
 	<apply use="only-red" region="red-spawn"/>
 	<apply use="only-blue" region="blue-spawn"/>
@@ -110,7 +133,7 @@
 	<apply block="red-webs" message="You may not interact with the wool rooms!" region="blue-rooms"/>
 	<apply block="blue-webs" message="You may not interact with the wool rooms!" region="red-rooms"/>
 	<apply block="deny-spawner" message="Don't destroy the arrow spawner!" region="everywhere"/>
-	<apply block="not-void" message="You may not edit outside the map!" region="everywhere"/>
+	<apply block-place="no-void" block-break="always" message="You may not edit the void area!" region="void"/>
 </regions>
 <wools team="blue">
 	<wool color="yellow" location="-54,7,17">
