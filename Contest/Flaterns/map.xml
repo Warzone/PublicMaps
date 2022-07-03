@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.2">
 <name>Flaterns</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Hold the flag for 180 seconds to win!.</objective>
 <gamemode>kotf</gamemode>
 <authors>
@@ -95,6 +95,10 @@
         <cylinder id="green-spawn-protection" base="0.5,0,-65.5" radius="8" height="oo"/>
         <cylinder id="orange-spawn-protection" base="0.5,0,65.5" radius="8" height="oo"/>
     </union>
+    <union id="spawn-flag-protections">
+        <cylinder id="green-spawn-flag-protection" base="0.5,0,-65.5" radius="9" height="oo"/>
+        <cylinder id="orange-spawn-flag-protection" base="0.5,0,65.5" radius="9" height="oo"/>
+    </union>
     <union id="flag-regions">
         <cuboid id="top-flag-platform" min="-4,38,5" max="5,42,-4"/>
         <cuboid id="bottom-flag-platform" min="-3,19,-3" max="4,29,4"/>
@@ -136,7 +140,7 @@
     </union>
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="spawn-protections" enter="not-carrier" message="You are not allowed to enter while holding flag here."/>
+    <apply region="spawn-flag-protections" enter="not-carrier" message="You are not allowed to enter while holding flag here."/>
     <apply region="flag-regions" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="map-limit" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="launchpad-opening-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
@@ -247,7 +251,7 @@
     </apply>
 </regions>
 <flags>
-    <flag id="flag" name="Flag" shared="true" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health" flag-proximity-metric="none" show-respawn-on-pickup="true">
+    <flag id="flag" name="Flag" shared="true" points-rate="1" pickup-kit="flag-kit" color="white" drop-kit="reset-health" flag-proximity-metric="none" show-respawn-on-pickup="true">
         <post return-time="0s" respawn-time="10s">
             <post name="Top" yaw="-90">0.5,40,0.5</post>
             <post name="Bottom" yaw="90">0.5,22,0.5</post>
