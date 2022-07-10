@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Pyramid Scheme</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Be the first team to reach 750 points!</objective>
 <gamemode>koth</gamemode>
 <edition>standard</edition> <!-- very different than competitive/ranked edition -->
@@ -44,8 +44,18 @@
         </regions>
     </spawn>
 </spawns>
+<filters>
+    <team id="blue-only">blue-team</team>
+    <team id="red-only">red-team</team>
+</filters>
 <regions>
+    <union id="spawn-protections">
+        <cylinder id="blue-spawn-protection" base="-70.5,30,-18.5" radius="7" height="5"/>
+        <cylinder id="red-spawn-protection" base="-18.5,30,-70.5" radius="7" height="5"/>
+    </union>
     <apply block="never"/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <king>
     <hills required="false" capture-time="5s" points="1" time-multiplier="0" show-progress="true" neutral-state="true" recovery="1" decay="0" permanent="false">
