@@ -19,6 +19,7 @@ To start contributing, you must clone this repository online, [GitHub Client (re
     -   This can be achieved manually or by using [a script to automate](https://github.com/mitchts/nbt-converter) the process.
 
 ### Chunk Pruning
+
 In order to remove undesired portions of the map as well as to decrease its total file size, the map needs to be pruned before it can be accepted into the repository.
 
 -   This means that **all** chunks excluding the map itself should be deleted from the world.
