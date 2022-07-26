@@ -1,7 +1,7 @@
 # Warzone PublicMaps 
 <img src="https://warzone.network/img/warzone.svg" align="right" alt="Warzone Logo" width="120" height="178">
 
-This repository contains public maps and an active rotation list that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9. Non-commercial maps or maps used under the explicit permission of their author(s) are hosted at [PrivateMaps](https://github.com/Warzone/PrivateMaps). For changes, updates, or any other modification intended for privately-hosted maps, please contact a Map Developer on Warzone.
+This repository contains public maps and active rotation lists that are found on [Warzone](https://warz.one). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9. Non-commercial maps or maps used under the explicit permission of their author(s) are hosted at [PrivateMaps](https://github.com/Warzone/PrivateMaps). For changes, updates, or any other modification intended for privately-hosted maps, please contact a Map Developer on Warzone.
 <br>
 <br>
 <br>
