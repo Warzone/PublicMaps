@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<include src="blitz-global.xml"/>
+<include src="tutorial.xml"/>
+<name>Gooseberry</name>
+<version>1.0.10</version>
+<objective>Get the most kills for your team after 3 minutes!</objective>
+<gamemode>rage</gamemode>
+<gamemode>tdm</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83"/> <!-- lonelyhornet -->
+</authors>
+<contributors>
+    <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="XML and Feedback"/> <!-- ItsMiiOlly -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Fixing bad XML"/> <!-- ElectroidFilms -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<teams>
+    <team color="dark purple" max="15" max-overfill="18">Purple</team>
+    <team color="dark aqua" max="15" max-overfill="18">Cyan</team>
+</teams>
+<blitz>
+    <time>3m</time>
+    <lives>1</lives>
+    <title>Blitz: Rage</title>
+</blitz>
+<rage/>
+<kits>
+    <kit name="spawn">
+        <item slot="0" enchantment="damage all:10" lore="`61 hit kill!">iron sword</item>
+        <item slot="1" enchantment="arrow damage:10;arrow fire:1" lore="`61 shot kill!">bow</item>
+        <item slot="2" amount="1">arrow</item>
+        <potion duration="8" amplifier="1">heal</potion>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+    <apply enter="deny-all" message="`cYou may not leave the main area!">
+        <cuboid min="-oo,20,-oo" max="oo,oo,oo"/>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="purple" kit="spawn" yaw="-90">
+        <cuboid min="18,17,-145" max="22,17,-143"/>
+    </spawn>
+    <spawn team="cyan" kit="spawn" yaw="90">
+        <cuboid min="38,17,-55" max="32,17,-56"/>
+    </spawn>
+    <default yaw="-90">
+        <cuboid min="-40,35,-101" max="-39,35,-98"/>
+    </default>
+</spawns>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+<tutorial>
+<stage title="Blitz: Rage">
+    <message>
+        <line>This is a `915v15`r `4Rage`r map</line>
+        <line>`cCareful`r! Weapons are `4`l1 hit kills`r and you only get `4`lone`r life!</line>
+    </message>
+    <teleport>
+        <point yaw="-90" pitch="40">-26,37,-99</point>
+    </teleport>
+</stage>
+<stage title="Spawn">
+    <message>
+        <line>This is where your team will spawn when the game starts.</line>
+    </message>
+<teleport>
+    <point yaw="119" pitch="10">29,17,-140</point>
+</teleport>
+</stage>
+<stage title="Center">
+    <message>
+        <line>This is the `acenter`r, where most of the combat will take place.</line>
+        <line>`cCareful`r! It's very open out there.</line>
+    </message>
+    <teleport>
+        <point yaw="44" pitch="40">36,12,-111</point>
+    </teleport>
+</stage>
+</tutorial>
+</map>

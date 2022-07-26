@@ -1,0 +1,102 @@
+<map proto="1.4.0">
+<name>Bifrost</name>
+<version>1.1.1</version>
+<authors>
+    <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" />
+    <!--  Oxinous  -->
+    <author uuid="8e958e3a-0cc0-4d52-83eb-a3ac0a52b297" />
+    <!--  MontiG  -->
+</authors>
+<objective>Kill everyone you see, survive as much as you can.</objective>
+<gamemode>ffa</gamemode>
+<gamemode>arcade</gamemode>
+<gamemode>rage</gamemode>
+<phase>development</phase>
+<score>
+    <kills>1</kills>
+</score>
+<time>10m</time>
+<broadcasts>
+    <alert after="6s">Welcome to Bifrost, a FFA map. You have 10m to kill as much players as you can and try to survive. The players with the most kills after the time ends wins!</alert>
+</broadcasts>
+<players min="2" max="20" max-overfill="24" />
+<spawns>
+    <spawn kit="spawn" spread="true">
+        <regions>
+            <point yaw="-90">183,73,96</point>
+            <point yaw="-90">163,87,85</point>
+            <point yaw="-90">148,73,109</point>
+            <point yaw="-90">135,75,120</point>
+            <point yaw="-90">105,72,113</point>
+            <point yaw="-90">84,75,110</point>
+            <point yaw="-90">67,73,130</point>
+            <point yaw="-90">41,82,143</point>
+            <point yaw="-90">64,73,161</point>
+            <point yaw="-90">79,74,140</point>
+            <point yaw="-90">92,72,181</point>
+            <point yaw="-90">119,72,185</point>
+            <point yaw="-90">105,76,191</point>
+            <point yaw="-90">130,76,200</point>
+            <point yaw="-90">139,73,214</point>
+            <point yaw="-90">151,75,239</point>
+            <point yaw="-90">110,86,235</point>
+            <point yaw="-90">65,79,185</point>
+            <point yaw="-90">50,84,128</point>
+            <point yaw="-90">67,81,105</point>
+            <point yaw="-90">145,72,140</point>
+            <point yaw="-90">214,74,115</point>
+            <point yaw="-90">40,93,126</point>
+            <point yaw="-90">120,76,104</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="-90">155,75,160</point>
+        </regions>
+    </default>
+</spawns>
+<respawn auto="true" delay="3s" spectate="false" blackout="false" />
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" amount="16">arrow</item>
+        <item slot="7" amount="32">bread</item>
+        <item slot="8" amount="1">golden apple</item>
+        <helmet color="545454" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate unbreakable="true" color="545454" locked="true">leather chestplate</chestplate>
+        <leggings unbreakable="true">chainmail leggings</leggings>
+        <boots color="545454" unbreakable="true">leather boots</boots>
+        <potion duration="3" amplifier="10">damage resistance</potion>
+    </kit>
+</kits>
+<kill-rewards>
+    <item amount="8" slot="28">arrow</item>
+    <item amount="1">golden apple</item>
+</kill-rewards>
+<itemremove>
+    <item>chainmail leggings</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>bread</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>iron sword</item>
+    <item>bow</item>
+</itemremove>
+<regions>
+    <apply block="redstone"/>
+</regions>
+<filters>
+    <not id="redstone">
+        <cause>PLAYER</cause>
+    </not>    
+</filters>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<timelock>on</timelock>
+</map>

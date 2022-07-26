@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<map proto="1.3.2">
+<name>Ion</name>
+<version>1.1.3</version>
+<objective>Destroy the other team's 2 cores!</objective>
+<gamemode>dtc</gamemode>
+<rules>
+    <rule>Players have resistance and reduced knockback in spawn!</rule>
+</rules>
+<authors>
+    <author uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83"/> <!-- lonelyhornet -->
+</authors>
+<contributors>
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
+</contributors>
+<teams>
+    <team color="dark red" max="40">Red</team>
+    <team color="blue" max="40">Blue</team>
+</teams>
+<kits>
+    <kit name="teams">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="28" amount="64">arrow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3">stone axe</item>
+        <item slot="4" amount="64">wood</item>
+        <item slot="31" amount="64">wood</item>
+        <item slot="22" amount="64">wood</item>
+        <item slot="5" amount="64">ladder</item>
+        <item slot="6">water bucket</item>
+        <item slot="7">golden apple</item>
+        <item slot="8" amount="64">cooked beef</item>
+        <potion duration="5" amplifier="25">heal</potion>
+    </kit>
+    <kit name="spawn-protection">
+        <potion amplifier="10" duration="oo">damage resistance</potion>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit name="red" parents="teams">
+        <chestplate color="993333">leather chestplate</chestplate>
+        <leggings color="993333">leather leggings</leggings>
+    </kit>
+    <kit name="blue" parents="teams">
+        <chestplate color="334CB2">leather chestplate</chestplate>
+        <leggings color="334CB2">leather leggings</leggings>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="-90">
+        <point>47.5,41,0.5</point>
+    </spawn>
+    <spawn team="red" kit="red" yaw="90">
+        <point>279.5,41,0.5</point>
+    </spawn>
+    <default yaw="0">
+        <cylinder base="163.3,63,-69" radius="1" height="0"/>
+    </default>
+</spawns>
+<filters>
+    <filter name="only-red" parents="deny-all">
+        <allow>
+            <team>red</team>
+        </allow>
+    </filter>
+    <filter name="only-blue" parents="deny-all"> 
+        <allow>
+            <team>blue</team>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <negative name="map-sides">
+        <rectangle min="64,47" max="263,-46"/>
+    </negative>
+    <cuboid name="above-35" min="-oo,35,-oo" max="oo,oo,oo"/>
+    <circle name="red-drop" center="274.5,0.5" radius="8"/>
+    <circle name="blue-drop" center="52.5,0.5" radius="8"/>
+    <apply block="deny-all" message="Don't modify/build anything outside the main area!">
+        <region name="above-35"/>
+        <region name="map-sides"/>
+    </apply>
+    <apply block="deny-all" message="Don't modify the spawn areas!">
+        <region name="red-drop"/>
+        <region name="blue-drop"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-blue">
+        <cylinder base="52.5,8,0.5" radius="6" height="20"/>
+    </apply>
+    <apply lend-kit="spawn-protection" filter="only-red">
+        <cylinder base="274.5,8,0.5" radius="6" height="20"/>
+    </apply>
+</regions>
+<cores material="obsidian" leak="3" mode-changes="true">
+    <core name="Right Core" team="red">
+        <cuboid min="259,15,36" max="252,22,43"/>
+    </core>
+    <core name="Left Core" team="red">
+        <cuboid min="259,15,-35" max="252,22,-42"/>
+    </core>
+    <core name="Right Core" team="blue">
+        <cuboid min="68,15,-35" max="75,22,-42"/>
+    </core>
+    <core name="Left Core" team="blue">
+        <cuboid min="68,15,36" max="75,22,43"/>
+    </core>
+</cores>
+<modes>
+    <mode after="15m" material="gold block" name="`6GOLD CORE MODE"/>
+    <mode after="30m" material="glass" name="`bGLASS CORE MODE"/>
+</modes>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>string</item>
+    <item>obsidian</item>
+    <item>gold block</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>water bucket</item>
+    <item>cooked beef</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>emerald block</item>
+</itemremove>
+<timelock>on</timelock>
+</map>

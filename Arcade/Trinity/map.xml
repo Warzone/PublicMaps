@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<map proto="1.3.5">
+<include src="blitz-global.xml"/>
+<name>Trinity</name>
+<version>1.0.1</version>
+<objective>Eliminate the other team before the time is up.</objective>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ParaSpider -->
+    <author uuid="0b8f95fa-0f40-4f28-9fd0-b8e243bb6800"/> <!-- Slicorn -->
+    <author uuid="3cce0080-9faa-48f9-82cf-64410305822a"/> <!-- Sethskye -->
+</authors>
+<contributors>
+    <contributor uuid="e71a0925-c6f9-462d-b864-bf3b652d152f"/> <!-- ScriptingCookies -->
+    <contributor uuid="f866f386-3d9d-493c-8de8-87b493cab8be"/> <!-- alexanderjoe10 -->
+</contributors>
+<blitz>
+    <time>5m</time>
+    <lives>2</lives>
+    <title>Blitz: Rage</title>
+</blitz>
+<rage/>
+<teams>
+    <team color="dark red" max="15" max-overfill="18">Red</team>
+    <team color="blue" max="15" max-overfill="18">Blue</team>
+</teams>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<toolrepair>
+    <tool>diamond sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<killreward>
+    <item amount="1">arrow</item>
+</killreward>
+<kits>
+    <kit name="spawn">
+        <game-mode>adventure</game-mode>
+        <item slot="0" enchantment="damage all:10" lore="`91-Hit Kill!">diamond sword</item>
+        <item slot="1" enchantment="arrow damage:10" lore="`91-Shot Kill!">bow</item>
+        <item slot="2" amount="1">arrow</item>
+        <potion duration="5" amplifier="1">heal</potion>
+        <potion duration="5" amplifier="4">damage resistance</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <helmet color="cd0000" locked="true">leather helmet</helmet>
+        <chestplate color="cd0000" locked="true">leather chestplate</chestplate>
+        <leggings color="cd0000" locked="true">leather leggings</leggings>
+        <boots color="cd0000" locked="true">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc" locked="true">leather helmet</helmet>
+        <chestplate color="0066cc" locked="true">leather chestplate</chestplate>
+        <leggings color="0066cc" locked="true">leather leggings</leggings>
+        <boots color="0066cc" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-all">
+       <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<spawns>
+    <spawn team="red" kit="red" yaw="0">
+        <cuboid min="7,3,3" max="5,3,5"/>
+    </spawn>
+    <spawn team="blue" kit="blue" yaw="180">
+        <cuboid min="7,3,127" max="5,3,125"/>
+    </spawn>
+    <default yaw="90">
+        <cuboid min="47,64,66" max="49,64,64"/>
+    </default>
+</spawns>
+</map>
