@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<map proto="1.4.2">
+<name>Flaterns</name>
+<version>1.0.4</version>
+<objective>Hold the flag for 180 seconds to win!.</objective>
+<gamemode>kotf</gamemode>
+<authors>
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
+</authors>
+<broadcasts>
+	<tip after="2s">`eGold blocks `rwill launch you into the air!</tip>
+	<tip after="3s">Fall damage is disabled on this map!</tip>
+	<tip after="3s">Blocks only placed by 'Players' can be broken</tip>
+</broadcasts>
+<teams>
+    <team id="green" color="green" max="12">Green</team>
+    <team id="orange" color="gold" max="12">Orange</team>
+</teams>
+<kits>
+	<kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="shears"/>
+        <item slot="3" amount="8" material="leaves_2"/>
+        <item slot="4" amount="1" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked beef"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:4" material="iron boots"/>
+        <potion duration="4s" amplifier="255">resistance</potion>
+        <potion duration="oo">speed</potion>
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="green-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="26E54C" material="leather helmet"/>
+        <chestplate unbreakable="true" color="26E54C" material="leather chestplate"/>
+    </kit>
+    <kit id="orange-kit" parents="spawn-kit">
+        <helmet unbreakable="true" color="F19E2D" material="leather helmet"/>
+        <chestplate unbreakable="true" color="F19E2D" material="leather chestplate"/>
+    </kit>
+    <kit id="flag-kit" force="true">
+        <effect duration="0s" amplifier="0">speed</effect>
+        <effect duration="4s" amplifier="2">absorption</effect>
+        <effect amplifier="-3">health boost</effect>
+    </kit>
+    <kit id="reset-health" force="true">
+        <effect duration="oo" amplifier="0">speed</effect>
+        <effect duration="1s" amplifier="0">health boost</effect>
+        <effect duration="1s" amplifier="12">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="90">
+            <point>44.5,52,0.5</point>
+        </region>
+    </default>
+    <spawn team="green" kit="green-kit" filter="has-flag">
+        <region yaw="0">
+            <point>0.5,30,-65.5</point>
+        </region>
+    </spawn>
+    <spawn team="orange" kit="orange-kit" filter="has-flag">
+        <region yaw="180">
+            <point>0.5,30,66.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="green-only">green</team>
+    <team id="orange-only">orange</team>
+    <not id="not-carrier">
+        <carrying-flag>flag</carrying-flag>
+    </not>
+    <any id="has-flag">
+        <carrying-flag>flag</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </any>
+    <any id="only-leaves-in-map">
+        <material>leaves_2</material>
+    </any>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+</filters>
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cylinder id="green-spawn-protection" base="0.5,0,-65.5" radius="8" height="oo"/>
+        <cylinder id="orange-spawn-protection" base="0.5,0,65.5" radius="8" height="oo"/>
+    </union>
+    <union id="spawn-flag-protections">
+        <cylinder id="green-spawn-flag-protection" base="0.5,0,-65.5" radius="9" height="oo"/>
+        <cylinder id="orange-spawn-flag-protection" base="0.5,0,65.5" radius="9" height="oo"/>
+    </union>
+    <union id="flag-regions">
+        <cuboid id="top-flag-platform" min="-4,38,5" max="5,42,-4"/>
+        <cuboid id="bottom-flag-platform" min="-3,19,-3" max="4,29,4"/>
+    </union>
+    <union id="map-limit">
+        <cuboid id="left-side" min="31,8,76" max="34,oo,-76"/>
+        <cuboid id="right-side" min="-30,8,76" max="-34,oo,-76"/>
+        <cuboid id="green-side" min="35,8,-72" max="-35,oo,-76"/>
+        <cuboid id="orange-side" min="-35,8,72" max="35,oo,76"/>
+    </union>
+    <union id="launchpad-opening-protections">
+        <cuboid id="green-mid-left-opening" min="25,33,-33" max="20,oo,-28"/>
+        <cuboid id="green-mid-right-opening" min="-20,33,-33" max="-25,oo,-28"/>
+        <cuboid id="orange-mid-left-opening" min="-25,33,33" max="-20,oo,28"/>
+        <cuboid id="orange-mid-right-opening" min="20,33,33" max="25,oo,28"/>
+        <cuboid id="down-center-left-opening" min="26,33,-3" max="20,oo,3"/>
+        <cuboid id="down-center-right-opening" min="-26,33,3" max="-20,oo,-3"/>
+    </union>
+    <union id="launchpad-protections">
+    <!-- Green -->
+        <cuboid id="green-spawn-pad" min="-2,28,-48" max="3,32,-50"/>
+        <cuboid id="green-midleft-pad" min="23,27,-27" max="20,30,-30"/>
+        <cuboid id="green-midright-pad" min="-22,27,-27" max="-19,30,-30"/>
+        <cuboid id="green-midcenter-pad" min="2,28,-26" max="-1,32,-28"/>
+        <cuboid id="green-downleft-pad" min="19,20,-43" max="16,23,-46"/>
+        <cuboid id="green-downright-pad" min="-18,20,-43" max="-15,23,-46"/>
+        <cuboid id="green-downcenter-pad" min="-1,22,-9" max="2,24,-6"/>
+    <!-- Bottom Center -->
+        <cuboid id="downcenter-west" min="-21,21,-1" max="-24,24,2"/>
+        <cuboid id="downcenter-east" min="22,21,2" max="25,24,-1"/>
+    <!-- Orange -->
+        <cuboid id="orange-spawn-pad" min="3,28,49" max="-2,32,51"/>
+        <cuboid id="orange-midleft-pad" min="-19,27,31" max="-22,30,28"/>
+        <cuboid id="orange-midright-pad" min="23,27,31" max="20,30,28"/>
+        <cuboid id="orange-midcenter-pad" min="-1,28,29" max="2,31,27"/>
+        <cuboid id="orange-downleft-pad" min="-18,20,44" max="-15,23,47"/>
+        <cuboid id="orange-downright-pad" min="19,20,47" max="16,23,44"/>
+        <cuboid id="orange-downcenter-pad" min="-1,22,7" max="2,24,10"/>
+    </union>
+    <!-- Applications -->
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="spawn-flag-protections" enter="not-carrier" message="You are not allowed to enter while holding flag here."/>
+    <apply region="flag-regions" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="map-limit" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="launchpad-opening-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
+    <apply region="launchpad-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply block="only-leaves-in-map" message="You can only modify acacia leaves placed by a player!"/>
+    <apply use="deny-beacon"/>
+    <!-- Green --> 
+    <!-- Spawn Pad -->
+    <apply velocity="0,1,-0.2">
+        <region>
+            <cuboid id="green-spawn-pad-trigger" min="-2,28,-49" max="3,29,-51"/>
+        </region>
+    </apply>
+    <!-- Mid-Left Pad -->
+    <apply velocity="0.7,1.5,-0.7">
+        <region>
+            <block id="green-mid-left-pad-trigger">21,28,-29</block>
+        </region>
+    </apply>
+    <!-- Mid-Right Pad-->
+    <apply velocity="-0.7,1.5,-0.7">
+        <region>
+            <block id="green-mid-right-pad-trigger">-21,28,-29</block>
+        </region>
+    </apply>
+    <!-- Mid-Center Pad -->
+    <apply velocity="0,1.4,1">
+        <region>
+            <cuboid id="green-mid-center-pad-trigger" min="2,29,-28" max="-1,30,-27"/>
+        </region>
+    </apply>
+    <!-- Down-Left Pad -->
+    <apply velocity="0,1.5,.2">
+        <region>
+            <block id="green-down-left-pad-trigger">17,21,-45</block>
+        </region>
+    </apply>
+    <!-- Down-Right Pad -->
+    <apply velocity="0,1.5,.2">
+        <region>
+            <block id="green-down-right-pad-trigger">-17,21,-45</block>
+        </region>
+    </apply>
+    <!-- DOWN-CENTER PADS -->
+    <!-- Down-East Pad -->
+    <apply velocity="-0.2,1.2,0">
+        <region>
+            <cuboid id="green-down-center-east-pad-trigger" min="22,21,2" max="25,24,-1"/>
+        </region>
+    </apply>
+    <!-- Down-West Pad -->
+    <apply velocity="0.2,1.2,0">
+        <region>
+            <cuboid id="green-down-center-west-pad-trigger" min="-21,21,-1" max="-24,24,2"/>
+        </region>
+    </apply>
+    <!-- Down-MidCenter Pad -->
+    <apply velocity="0,1.2,0.1">
+        <region>
+            <block id="green-down-center-mid-pad-trigger">0,22,-8</block>
+        </region>
+    </apply>
+    <!-- Orange-->
+    <!-- Spawn Pad -->
+    <apply velocity="0,1,0.2">
+        <region>
+            <cuboid id="orange-spawn-pad-trigger" min="3,28,50" max="-2,29,51"/>
+        </region>
+    </apply>
+    <!-- Mid-Left Pad -->
+    <apply velocity="-0.7,1.5,0.7">
+        <region>
+            <block id="orange-mid-left-pad-trigger">-21,28,29</block>
+        </region>
+    </apply>
+    <!-- Mid-Right Pad -->
+    <apply velocity="0.7,1.5,0.7">
+        <region>
+            <block id="orange-mid-right-pad-trigger">21,28,29</block>
+        </region>
+    </apply>
+    <!-- Mid-Center Pad -->
+    <apply velocity="0,1.4,-1">
+        <region>
+            <cuboid id="orange-mid-center-pad-trigger" min="-2,29,29" max="2,30,28"/>
+        </region>
+    </apply>
+    <!-- Down-Left Pad -->
+    <apply velocity="0,1.5,-0.2">
+        <region>
+            <block id="orange-down-left-pad-trigger">-17,21,45</block>
+        </region>
+    </apply>
+    <!-- Down-Right Pad -->
+    <apply velocity="0,1.5,-0.2">
+        <region>
+            <block id="orange-down-right-pad-trigger">17,21,45</block>
+        </region>
+    </apply>
+    <!-- DOWN-CENTER PADS -->
+    <!-- Down-Center Pad -->
+    <apply velocity="0,1.2,-0.1">
+        <region>
+            <block id="orange-down-center-mid-pad-trigger">0,22,8</block>
+        </region>
+    </apply>
+</regions>
+<flags>
+    <flag id="flag" name="Flag" shared="true" points-rate="1" pickup-kit="flag-kit" color="white" drop-kit="reset-health" flag-proximity-metric="none" show-respawn-on-pickup="true">
+        <post return-time="0s" respawn-time="10s">
+            <post name="Top" yaw="-90">0.5,40,0.5</post>
+            <post name="Bottom" yaw="90">0.5,22,0.5</post>
+        </post>
+    </flag>
+</flags>
+<score>
+    <limit>180</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>shears</tool>
+</toolrepair>
+<itemremove>
+    <item>sapling</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>banner</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="2" material="arrow"/>
+</kill-reward>
+<respawn spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>42</maxbuildheight>
+</map>

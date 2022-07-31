@@ -1,0 +1,213 @@
+<map proto="1.4.0">
+<name>Mega Cacti Terror</name>
+<version>1.1.1</version>
+<objective>Be the last man standing!</objective>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/>
+</authors>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<players min="2" max="64">Players</players>
+<blitz/>
+<time>4m</time>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <health>1</health>
+        <item slot="0" amount="16" material="cactus"/>
+        <item slot="1" unbreakable="true" material="fishing rod"/>
+        <effect duration="oo" amplifier="-4">health boost</effect>
+        <effect duration="oo" amplifier="1">slow digging</effect>
+        <effect duration="oo" amplifier="20">weakness</effect>
+        <effect duration="3" amplifier="20">damage resistance</effect>
+    </kit> 
+</kits>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<spawns>
+    <spawn kit="spawn-kit">
+        <region angle="-497.5,14,325.5">
+            <cuboid min="-534,13,289" size="73,0,73"/>
+        </region>
+    </spawn>
+    <default>
+        <region angle="-497.5,14,325.5">
+            <cuboid min="-534,13,289" size="73,0,73"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <any id="allowed-interactions">
+        <all>
+            <not>
+                <any>
+                    <cause>player</cause>
+                    <cause>explosion</cause>
+                </any>
+            </not>
+            <any>
+                <material>gravel</material>
+            </any>
+        </all>
+        <all>
+            <cause>explosion</cause>
+            <material>cactus</material>
+        </all>
+        <all>
+            <cause>player</cause>
+            <any>
+                <material>cactus</material>
+                <material>tnt</material>
+            </any>
+        </all>
+    </any>
+    <not id="no-cactus">
+        <material>cactus</material>
+    </not>
+    <not id="trigger-arena">
+        <time>3s</time>
+    </not>
+</filters>
+<regions>
+    <cuboid id="r-1" min="-500,11,323" size="4,2,4"/>
+    <complement id="r-2"><cuboid id="s-2" min="-501,11,322" size="6,2,6"/><region id="r-1"/></complement>
+    <complement id="r-3"><cuboid id="s-3" min="-502,11,321" size="8,2,8"/><region id="s-2"/></complement>
+    <complement id="r-4"><cuboid id="s-4" min="-503,11,320" size="10,2,10"/><region id="s-3"/></complement>
+    <complement id="r-5"><cuboid id="s-5" min="-504,11,319" size="12,2,12"/><region id="s-4"/></complement>
+    <complement id="r-6"><cuboid id="s-6" min="-505,11,318" size="14,2,14"/><region id="s-5"/></complement>
+    <complement id="r-7"><cuboid id="s-7" min="-506,11,317" size="16,2,16"/><region id="s-6"/></complement>
+    <complement id="r-8"><cuboid id="s-8" min="-507,11,316" size="18,2,18"/><region id="s-7"/></complement>
+    <complement id="r-9"><cuboid id="s-9" min="-508,11,315" size="20,2,20"/><region id="s-8"/></complement>
+    <complement id="r-10"><cuboid id="s-10" min="-509,11,314" size="22,2,22"/><region id="s-9"/></complement>
+    <complement id="r-11"><cuboid id="s-11" min="-510,11,313" size="24,2,24"/><region id="s-10"/></complement>
+    <complement id="r-12"><cuboid id="s-12" min="-511,11,312" size="26,2,26"/><region id="s-11"/></complement>
+    <complement id="r-13"><cuboid id="s-13" min="-512,11,311" size="28,2,28"/><region id="s-12"/></complement>
+    <complement id="r-14"><cuboid id="s-14" min="-513,11,310" size="30,2,30"/><region id="s-13"/></complement>
+    <complement id="r-15"><cuboid id="s-15" min="-514,11,309" size="32,2,32"/><region id="s-14"/></complement>
+    <complement id="r-16"><cuboid id="s-16" min="-515,11,308" size="34,2,34"/><region id="s-15"/></complement>
+    <complement id="r-17"><cuboid id="s-17" min="-516,11,307" size="36,2,36"/><region id="s-16"/></complement>
+    <complement id="r-18"><cuboid id="s-18" min="-517,11,306" size="38,2,38"/><region id="s-17"/></complement>
+    <complement id="r-19"><cuboid id="s-19" min="-518,11,305" size="40,2,40"/><region id="s-18"/></complement>
+    <complement id="r-20"><cuboid id="s-20" min="-519,11,304" size="42,2,42"/><region id="s-19"/></complement>
+    <complement id="r-21"><cuboid id="s-21" min="-520,11,303" size="44,2,44"/><region id="s-20"/></complement>
+    <complement id="r-22"><cuboid id="s-22" min="-521,11,302" size="46,2,46"/><region id="s-21"/></complement>
+    <complement id="r-23"><cuboid id="s-23" min="-522,11,301" size="48,2,48"/><region id="s-22"/></complement>
+    <complement id="r-24"><cuboid id="s-24" min="-523,11,300" size="50,2,50"/><region id="s-23"/></complement>
+    <complement id="r-25"><cuboid id="s-25" min="-524,11,299" size="52,2,52"/><region id="s-24"/></complement>
+    <complement id="r-26"><cuboid id="s-26" min="-525,11,298" size="54,2,54"/><region id="s-25"/></complement>
+    <complement id="r-27"><cuboid id="s-27" min="-526,11,297" size="56,2,56"/><region id="s-26"/></complement>
+    <complement id="r-28"><cuboid id="s-28" min="-527,11,296" size="58,2,58"/><region id="s-27"/></complement>
+    <complement id="r-29"><cuboid id="s-29" min="-528,11,295" size="60,2,60"/><region id="s-28"/></complement>
+    <complement id="r-30"><cuboid id="s-30" min="-529,11,294" size="62,2,62"/><region id="s-29"/></complement>
+    <complement id="r-31"><cuboid id="s-31" min="-530,11,293" size="64,2,64"/><region id="s-30"/></complement>
+    <complement id="r-32"><cuboid id="s-32" min="-531,11,292" size="66,2,66"/><region id="s-31"/></complement>
+    <complement id="r-33"><cuboid id="s-33" min="-532,11,291" size="68,2,68"/><region id="s-32"/></complement>
+    <complement id="r-34"><cuboid id="s-34" min="-533,11,290" size="70,2,70"/><region id="s-33"/></complement>
+    <complement id="r-35"><cuboid id="s-35" min="-534,11,289" size="72,2,72"/><region id="s-34"/></complement>
+    <point id="trigger-n">-497.5,12,287.5</point>
+    <point id="trigger-s">-497.5,12,363.5</point>
+    <point id="trigger-e">-459.5,12,325.5</point>
+    <point id="trigger-w">-535.5,12,325.5</point>
+    <point id="center">-497.5,13,325.5</point>
+    <above id="playable-region" y="10"/>
+    <below id="lava-region" y="10"/>
+    <apply region="playable-region" block="allowed-interactions"/>
+    <apply region="lava-region" block="never"/>
+</regions>
+<falling-blocks>
+    <rule delay="1">
+        <filter>
+            <any>
+                <material>stone:6</material>
+                <material>cactus</material>
+            </any>
+        </filter>
+    </rule>
+    <rule delay="80">
+        <filter>
+            <all>
+                <any>
+                    <material>bedrock</material>
+                    <material>sand</material>
+                </any>
+                <any>
+                    <all><region id="r-35"/></all>
+                    <all><region id="r-34"/><time>4s</time></all>
+                    <all><region id="r-33"/><time>8s</time></all>
+                    <all><region id="r-32"/><time>12s</time></all>
+                    <all><region id="r-31"/><time>16s</time></all>
+                    <all><region id="r-30"/><time>20s</time></all>
+                    <all><region id="r-29"/><time>24s</time></all>
+                    <all><region id="r-28"/><time>28s</time></all>
+                    <all><region id="r-27"/><time>32s</time></all>
+                    <all><region id="r-26"/><time>36s</time></all>
+                    <all><region id="r-25"/><time>40s</time></all>
+                    <all><region id="r-24"/><time>44s</time></all>
+                    <all><region id="r-23"/><time>48s</time></all>
+                    <all><region id="r-22"/><time>52s</time></all>
+                    <all><region id="r-21"/><time>56s</time></all>
+                    <all><region id="r-20"/><time>60s</time></all>
+                    <all><region id="r-19"/><time>64s</time></all>
+                    <all><region id="r-18"/><time>68s</time></all>
+                    <all><region id="r-17"/><time>72s</time></all>
+                    <all><region id="r-16"/><time>76s</time></all>
+                    <all><region id="r-15"/><time>80s</time></all>
+                    <all><region id="r-14"/><time>84s</time></all>
+                </any>
+            </all>
+        </filter>
+    </rule>
+    <rule delay="40">
+        <filter>
+            <all>
+                <any>
+                    <material>bedrock</material>
+                    <material>sand</material>
+                </any>
+                <any>
+                    <all><region id="r-13"/><time>86s</time></all>
+                    <all><region id="r-12"/><time>88s</time></all>
+                    <all><region id="r-11"/><time>90s</time></all>
+                    <all><region id="r-10"/><time>92s</time></all>
+                    <all><region id="r-9"/><time>94s</time></all>
+                    <all><region id="r-8"/><time>96s</time></all>
+                    <all><region id="r-7"/><time>98s</time></all>
+                    <all><region id="r-6"/><time>100s</time></all>
+                    <all><region id="r-5"/><time>102s</time></all>
+                    <all><region id="r-4"/><time>104s</time></all>
+                    <all><region id="r-3"/><time>106s</time></all>
+                    <all><region id="r-2"/><time>108s</time></all>
+                    <all><region id="r-1"/><time>110s</time></all>
+                </any>
+            </all>
+        </filter>
+    </rule>
+</falling-blocks>
+<spawners>
+    <spawner spawn-region="trigger-n" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
+    <spawner spawn-region="trigger-s" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
+    <spawner spawn-region="trigger-e" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
+    <spawner spawn-region="trigger-w" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
+    <spawner spawn-region="center"    player-region="playable-region" delay="15s"><item material="snow ball"/></spawner>
+</spawners>
+<kill-rewards>
+    <kill-reward>
+        <item material="cactus" amount="4"/>
+        <item material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<tnt>
+    <fuse>2s</fuse>
+    <power>2</power>
+    <blockdamage>true</blockdamage>
+    <instantignite>true</instantignite>
+</tnt>
+<itemkeep>
+    <item>cactus</item>
+    <item>fishing rod</item>
+    <item>snow ball</item>
+</itemkeep>
+</map>
