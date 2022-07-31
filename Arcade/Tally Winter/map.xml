@@ -16,16 +16,16 @@
     <team color="dark aqua" id="cyan" min="1" max="16">Cyan</team>
     <team color="red"       id="red"  min="1" max="16">Red</team>
 </teams>
-<time>20m</time>
+<time>16m</time>
 <respawn delay="3s" auto="true" spectate="true"/>
-<blitz filter="10m-passed">
+<blitz filter="7m-passed">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
 <broadcasts>
     <alert after="1s">Prepare for battle by gathering tools, weapons, resources and armor!</alert>
-    <alert after="2s">The walls will drop in `c10 minutes`r!</alert>
-    <alert after="5m">The walls will drop in `c5 minutes`r!</alert>
+    <alert after="2s">The walls will drop in `c7 minutes`r!</alert>
+    <alert after="5m">The walls will drop in `c2 minutes`r!</alert>
     <alert after="9m">The walls will drop in `c1 minute`r!</alert>
     <alert after="590s">The walls will drop in `c10 seconds`r!</alert>
     <alert after="595s">The walls will drop in `c5 seconds`r!</alert>
@@ -33,7 +33,7 @@
     <alert after="597s">The walls will drop in `c3 seconds`r!</alert>
     <alert after="598s">The walls will drop in `c2 seconds`r!</alert>
     <alert after="599s">The walls will drop in `c1 second`r!</alert>
-    <alert after="10m">The walls have dropped! You have `c1 life`r left. The last team standing wins!</alert>
+    <alert after="7m">The walls have dropped! You have `c1 life`r left. The last team standing wins!</alert>
 </broadcasts>
 <spawns>
     <spawn team="blue">
@@ -192,8 +192,14 @@
     <mode id="walls-to-air" after="10m" show-before="0" material="air"/>
 </modes>
 <filters>
-    <time id="10m-passed">10m</time>
+    <time id="7m-passed">7m</time>
 </filters>
+<!-- World Border -->
+<world-borders center="14, -56">
+    <world-border size="60"/>
+     <!-- The world border starts shrinking after 7 minutes into the match and will take another 7 mintues to reach the center. -->
+    <world-border size="14" after="7m" duration="7m" damage="3" buffer="0"/>
+</world-borders>
 <regions>
     <union id="spawn-protections">
         <cuboid id="blue-spawn-protection" min="-23,78,-117" max="-16,84,-95"/>
