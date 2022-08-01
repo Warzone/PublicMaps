@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Sarc</name>
-<version>1.1.2</version>
+<version>1.1.3</version>
 <objective>Be the first to score 300 points!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -53,11 +53,15 @@
     </any>
 </filters>
 <regions>
+    <cuboid id="red-spawn" min="-241,2,-250" max="-232,6,-241"/>
+    <cuboid id="blue-spawn" min="-204,2,-297" max="-213,6,-306"/>
     <cuboid id="hill-a-base" min="-229,5,-285" max="-234,10,-280"/>
     <cuboid id="hill-b-base" min="-211,5,-267" max="-216,10,-262"/>
     <cylinder id="hill-a-indicator" base="-231.5,17,-282.5" radius="2" height="8"/>
     <cylinder id="hill-b-indicator" base="-213.5,17,-264.5" radius="2" height="8"/>
     <apply block="block-whitelist" message="You may not interact with that material here"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn"/>
 </regions>
 <king>
     <hills incremental="true" show-progress="true" neutral-state="false" capture-rule="majority" required="false" capture-time="5s" points="1">
