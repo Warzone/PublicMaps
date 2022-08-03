@@ -1,31 +1,24 @@
 <map proto="1.4.2" game="Walls">
-<name>Swamp Land</name>
+<name>Tetris Jungle</name>
 <version>1.0.0</version>
 <objective>Prepare for battle by gathering resources and armor. Watch out for the walls to drop!</objective>
 <gamemode>arcade</gamemode>
-<!-- Authors & Contributor -->
 <authors>
-    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
-    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+    <author uuid="be49b1a8-600e-4751-9725-a8aead777363"/> <!-- IzJust4Fun -->
+    <author uuid="297428a6-b482-4558-99f5-b413067ed48d"/> <!-- berryjm -->
 </authors>
-<contributors>
-    <contributor uuid="c48598a7-c085-4e0f-b242-48c7fc452089" contribution="Helped with terrain, and walls"/> <!-- FlammingFreak296 -->
-</contributors>
-<!-- Teams -->
 <teams>
-    <team color="blue"   id="blue"   min="1" max="8">Blue</team>
-    <team color="green"  id="green"  min="1" max="8">Green</team>
-    <team color="yellow" id="yellow" min="1" max="8">Yellow</team>
-    <team color="red"    id="red"    min="1" max="8">Red</team>
+    <team color="dark aqua"    id="cyan"   min="1" max="16">Cyan</team>
+    <team color="light purple" id="pink"   min="1" max="16">Pink</team>
+    <team color="gold"         id="orange" min="1" max="16">Orange</team>
+    <team color="green"        id="lime"   min="1" max="16">Lime</team>
 </teams>
-<!-- Time & Blitz -->
 <time>16m</time>
 <respawn delay="3s" auto="true" spectate="true"/>
 <blitz filter="7m-passed">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
-<!-- Alerts -->
 <broadcasts>
     <alert after="1s">Prepare for battle by gathering tools, weapons, resources and armor!</alert>
     <alert after="2s">The walls will drop in `c7 minutes`r!</alert>
@@ -40,41 +33,65 @@
     <alert after="7m">The walls have dropped! You have `c1 life`r left. The last team standing wins!</alert>
     <alert after="7m">The world border is now shrinking, `cget to safety`r!</alert>
 </broadcasts>
-<!-- Spawns -->
 <spawns>
-    <spawn team="blue">
-        <region yaw="45">
-            <point>65.5,74,-55.5</point>
+    <spawn team="cyan">
+        <region yaw="0">
+            <point>-712.5,78,-1264.5</point>
         </region>
     </spawn>
-    <spawn team="green">
-        <region yaw="-45">
-            <point>-48.5,74,-55.5 </point>
+    <spawn team="pink">
+        <region yaw="90">
+            <point>-613.5,78,-1234.5</point>
         </region>
     </spawn>
-    <spawn team="yellow">
-        <region yaw="-135">
-            <point>-48.5,74,62.5</point>
+    <spawn team="orange">
+        <region yaw="180">
+            <point>-643.5,78,-1135.5</point>
         </region>
     </spawn>
-    <spawn team="red">
-        <region yaw="135">
-            <point>65.5,74,62.5</point>
+    <spawn team="lime">
+        <region yaw="145">
+            <point>-742.5,78,-1165.5</point>
         </region>
     </spawn>
     <default>
         <region yaw="90">
-            <point>8.5,115,3.5</point>
+            <point>-678.5,96,-1199.5</point>
         </region>
     </default>
 </spawns>
-<!-- Kits / Classes -->
 <classes family="Walls">
+    <class name="Archer" description="Snipe your foes from long distances!" longdescription="Snipe your foes from long distances!" icon="bow">
+        <kit force="true">
+            <item unbreakable="true" slot="0" amount="1" material="bow">
+                <enchantment level="1">power</enchantment>
+            </item>
+            <item slot="1" amount="32" material="arrow"/>
+            <item slot="2" amount="12" material="cooked beef"/>
+            <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        </kit>
+    </class>
     <class name="Beastmaster" description="Fight with your mini army by your side!" longdescription="Fight with your mini army by your side!" icon="bone">
         <kit force="true">
             <item slot="0" amount="5" material="monster egg" damage="95"/>
             <item slot="1" amount="32" material="bone"/>
             <item slot="2" amount="12" material="cooked beef"/>
+        </kit>
+    </class>
+    <class name="Builder" description="Build with blocks to help defend your team's base." longdescription="Build with blocks to help defend your team's base." icon="log">
+        <kit force="true">
+            <item slot="0" amount="32" material="log"/>
+            <item slot="1" amount="12" material="cooked beef"/>
+            <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        </kit>
+    </class>
+    <class name="Cactus" description="Prickle your enemies to death with your spikey thorns!" longdescription="Prickle your enemies to death with your spikey thorns!" icon="cactus">
+        <kit force="true">
+            <item slot="0" amount="1" material="book">
+                <enchantment level="1">thorns</enchantment>
+            </item>
+            <item slot="1" amount="12" material="cooked beef"/>
+            <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         </kit>
     </class>
     <class name="Cleric" description="Heal you and your friends with your health potions!" longdescription="Heal you and your friends with your health potions!" icon="potion">
@@ -110,6 +127,13 @@
             <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         </kit>
     </class>
+    <class name="Heavy" description="Reduce incoming damage!" longdescription="Reduce incoming damage!" icon="diamond chestplate">
+        <kit force="true">
+            <item slot="0" amount="12" material="cooked beef"/>
+            <chestplate unbreakable="true" material="chainmail chestplate"/>
+            <boots unbreakable="true" material="chainmail boots"/>
+        </kit>
+    </class>
     <class name="Lumberjack" description="Deal heavy damage and with haste, nothing will stand in your way." longdescription="Deal heavy damage and with haste, nothing will stand in your way." icon="iron axe">
         <kit force="true">
             <item slot="0" amount="1" material="stone axe">
@@ -130,7 +154,7 @@
     </class>
     <class name="Pyro" description="Light your enemies on fire!" longdescription="Light your enemies on fire!" icon="fireball">
         <kit force="true">
-        	<item slot="0" amount="4" material="fireball"/>
+          <item slot="0" amount="4" material="fireball"/>
             <item slot="1" amount="1" material="blaze rod">
                 <enchantment level="1">fire aspect</enchantment>
             </item>
@@ -159,61 +183,50 @@
         </kit>
     </class>
 </classes>
-<!-- Walls -->
 <destroyables required="false" show="false">
-    <destroyable name="Walls" owner="blue" materials="clay" modes="walls-to-air" region="walls"/>
+    <destroyable name="Walls" owner="cyan" materials="wool;nether brick" modes="walls-to-air" region="walls"/>
 </destroyables>
-<!-- Walls will turn to air 10 minutes into the match -->
 <modes>
     <mode id="walls-to-air" after="7m" show-before="1m" name="Walls dropping" material="air"/>
 </modes>
 <filters>
     <time id="7m-passed">7m</time>
-    <!-- Walls Filter -->
-    <deny id="no-clay">
-        <material>clay</material>
-    </deny>
 </filters>
 <!-- World Border -->
-<world-borders center="8.5, 3.5">
-    <world-border size="150"/>
+<world-borders center="-679, -1200">
+    <world-border size="140"/>
      <!-- The world border starts shrinking after 7 minutes into the match and will take another 7 mintues to reach the center. -->
-    <world-border size="7" after="7m" duration="7m" damage="3" buffer="0"/>
+    <world-border size="14" after="7m" duration="7m" damage="3" buffer="0"/>
 </world-borders>
-<!-- Regions -->
 <regions>
-    <!-- Defenitions -->
     <union id="spawn-protections">
-        <cylinder id="blue-spawn-protection"   base="65,73,-56"  radius="6" height="12"/>
-        <cylinder id="green-spawn-protection"  base="-49,73,-56" radius="6" height="12"/>
-        <cylinder id="yellow-spawn-protection" base="-49,73,62"  radius="6" height="12"/>
-        <cylinder id="red-spawn-protection"    base="65,73,62"   radius="6" height="12"/>
+        <cuboid id="cyan-spawn-protection"   min="-706,74,-1260" max="-720,94,-1270"/>
+        <cuboid id="pink-spawn-protection"   min="-608,74,-1227" max="-618,94,-1242"/>
+        <cuboid id="orange-spawn-protection" min="-636,74,-1130" max="-651,94,-1140"/>
+        <cuboid id="lime-spawn-protection"   min="-738,74,-1158" max="-748,94,-1173"/>
     </union>
     <union id="walls">
-        <cuboid id="blue-left-wall"    min="77,0,-6"  max="15,115,-4"/>
-        <cuboid id="blue-right-wall"   min="17,0,-65" max="15,115,-4"/>
-        <cuboid id="green-left-wall"   min="-1,0,-65" max="1,115,-4"/>
-        <cuboid id="green-right-wall"  min="-60,0,-6" max="1,115,-4"/>
-        <cuboid id="yellow-left-wall"  min="-60,0,12" max="1,115,10"/>
-        <cuboid id="yellow-right-wall" min="-1,0,71"  max="1,115,10"/>
-        <cuboid id="red-left-wall"     min="17,0,71"  max="15,115,10"/>
-        <cuboid id="red-right-wall"    min="77,0,12"  max="15,115,10"/>
+        <cuboid id="cyan-left-wall"    min="-686,78,-1209" max="-687,160,-1261"/>
+        <cuboid id="cyan-front-wall"   min="-687,78,-1208" max="-739,160,-1209"/>
+        <cuboid id="pink-left-wall"    min="-617,78,-1208" max="-669,160,-1209"/>
+        <cuboid id="pink-front-wall"   min="-670,78,-1209" max="-669,160,-1261"/>
+        <cuboid id="orange-left-wall"  min="-670,78,-1139" max="-669,160,-1191"/>
+        <cuboid id="orange-front-wall" min="-617,78,-1192" max="-669,160,-1191"/>
+        <cuboid id="lime-left-wall"    min="-739,78,-1192" max="-687,160,-1191"/>
+        <cuboid id="lime-front-wall"   min="-687,78,-1191" max="-686,160,-1139"/>
     </union>
     <negative id="not-map">
-        <rectangle id="map" min="-59,-63" max="76,70"/>
+        <rectangle id="map" min="-739,-1261" max="-617,-1139"/>
     </negative>
-    <!-- Applications -->
-    <apply region="not-map" enter="never" message="You may not exit the map!"/>
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="not-map" enter="never" message="You may not exit the map!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <!-- Prevent players from breaking the walls -->
-    <apply region="everywhere" block-break="no-clay" message="You may not destroy the walls!"/>
+    <apply region="walls" block-break="never" message="You may not destroy the walls!"/>
 </regions>
-<!-- Misc -->
 <mobs>
     <filter>
         <spawn>spawner egg</spawn>
     </filter>
 </mobs>
-<maxbuildheight>88</maxbuildheight>
+<maxbuildheight>145</maxbuildheight>
 </map>
