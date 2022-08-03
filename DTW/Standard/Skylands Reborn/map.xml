@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
 <name>Skylands Reborn</name>
-<version>2.0.2</version>
+<version>2.0.3</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -12,12 +12,10 @@
 <contributors>
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
 </contributors>
-<!-- Teams -->
 <teams>
     <team id="blue-team" color="blue" max="10">Blue</team>
     <team id="red-team" color="dark red" max="10">Red</team>
 </teams>
-<!-- Kits -->
 <kits>
     <kit id="default">
 	    <clear/>
@@ -41,25 +39,20 @@
 	<leggings unbreakable="true" color="B02E26">leather leggings</leggings>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
     <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
     <default region="obs-spawn"/>
 </spawns>
-<!-- Monuments -->
 <destroyables completion="25%" repairable="false" show-progress="true" sparks="true">
     <destroyable name="Blue Wool" owner="blue-team" materials="wool" region="blue-wool"/>
     <destroyable name="Red Wool" owner="red-team" materials="wool" region="red-wool"/>
 </destroyables>
-<!-- Filters -->
 <filters>
     <team id="blue-only">blue-team</team>
     <team id="red-only">red-team</team>
 </filters>
-<!-- Regions -->
 <regions>
-    <!-- Definitions -->
     <union id="monuments">
         <cuboid id="blue-wool" min="19,19,-16"  max="22,24,-19"/>
         <cuboid id="red-wool" min="67,19,45" max="70,24,48"/>
@@ -78,14 +71,12 @@
     <negative id="not-map">
         <rectangle id="map" min="-26,-27" max="115,57"/>
     </negative>
-    <!-- Applications -->
     <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
     <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
     <apply region="portal-protections"    block="never"     message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
 </regions>
-<!-- Portals -->
 <portals>
     <!-- Blue Portal -->
     <portal protect="true" sound="false" yaw="@0" pitch="@0">
@@ -106,7 +97,10 @@
       </destination>
     </portal>
 </portals>
-<!-- Item Remove -->
+<broadcasts>
+    <alert after="5s" filter="blue-only" every="3m">There's a cross-map portal located on the island right of spawn!</alert>
+    <alert after="5s" filter="red-only" every="3m">There's a cross-map portal located on the island right of spawn!</alert>
+</broadcasts>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
@@ -120,18 +114,15 @@
     <item>iron boots</item>
     <item>wool</item>
 </itemremove>
-<!-- Item Keep -->
 <itemkeep>
     <item>golden apple</item>
 </itemkeep>
-<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item amount="1">golden apple</item>
         <item amount="1">arrow</item>
     </kill-reward>
 </kill-rewards>
-<!-- Misc -->
 <world>
     <timeset>14000</timeset>
     <timelock>on</timelock>
