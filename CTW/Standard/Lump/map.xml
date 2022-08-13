@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0">
 <name>Lump</name>
-<version>0.1.2</version>
+<version>0.1.3</version>
 <objective>Capture the opposing team's wool!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -181,6 +181,14 @@
     <material id="allow-wool">wool</material>
 </filters>
 <regions>
+    <point id="pink-spawner">3.5,14,-79.5</point>
+    <point id="yellow-spawner">95.5,14,120.5</point>
+    <point id="purple-spawner">95.5,14,-79.5</point>
+    <point id="lime-spawner">3.5,14,120.5</point>
+    <cylinder id="pink-spawning" base="3,13,-79" radius="3" height="6"/>
+    <cylinder id="yellow-spawning" base="95,13,120" radius="3" height="6"/>
+    <cylinder id="purple-spawning" base="95,13,-79" radius="3" height="6"/>
+    <cylinder id="lime-spawning" base="3,13,120" radius="3" height="6"/>
     <union id="red-spawn">
         <rectangle min="44,82" max="55,96"/>
         <rectangle min="58,97" max="40,128"/>
@@ -275,6 +283,20 @@
         </region>
     </apply>
 </regions>
+<spawners>
+    <spawner spawn-region="pink-spawner" player-region="pink-spawning" min-delay="2.5s" max-delay="2.6s" filter="only-red">
+        <item amount="1" damage="6" material="wool"/>
+    </spawner>
+    <spawner spawn-region="yellow-spawner" player-region="yellow-spawning" min-delay="2.5s" max-delay="2.6s" filter="only-blue">
+        <item amount="1" damage="4" material="wool"/>
+    </spawner>
+    <spawner spawn-region="purple-spawner" player-region="purple-spawning" min-delay="2.5s" max-delay="2.6s" filter="only-red">
+        <item amount="1" damage="10" material="wool"/>
+    </spawner>
+    <spawner spawn-region="lime-spawner" player-region="lime-spawning" min-delay="2.5s" max-delay="2.6s" filter="only-blue">
+        <item amount="1" damage="5" material="wool"/>
+    </spawner>
+</spawners>
 <renewables>
     <renewable interval="30s" grow="true" particles="true" sound="false" avoid-entities="true">
         <region>

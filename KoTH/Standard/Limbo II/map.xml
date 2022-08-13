@@ -1,8 +1,8 @@
 <map proto="1.4.2">
 <name>Limbo II</name>
-<version>1.0.10</version>
+<version>1.0.11</version>
 <edition>standard</edition>
-<objective>Be the first team to 2500 points!</objective>
+<objective>Be the first team to 750 points!</objective>
 <gamemode>koth</gamemode>
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- VCRHeadCleaner -->
@@ -36,7 +36,23 @@
         <effect duration="5" amplifier="4">damage resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
+    <kit id="Jump-pad-fall-damage">
+        <effect>water_breathing</effect>
+    </kit>
+    <take kit="Jump-pad-fall-damage">
+        <filter>
+            <grounded/>
+        </filter>
+    </take>
 </kits>
+<damage>
+    <deny id="nofall">
+        <all>
+            <cause>fall</cause>
+            <effect>water_breathing</effect>
+        </all>
+    </deny>
+</damage>
 <spawns>
     <default kit="default-kit">
         <region yaw="180">
@@ -54,31 +70,18 @@
         </region>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-cyan">cyan</team>
-    <team id="only-orange">orange</team>
-</filters>
 <regions>
-    <apply velocity="@0,1.7,-0.1">
-        <region>
-            <cuboid min="-1,6,24" max="2,9,27"/>
-        </region>
-    </apply>
-    <apply velocity="@0,1.7,0.1">
-        <region>
-            <cuboid min="-1,6,-26" max="2,9,-23"/>
-        </region>
-    </apply>
-    <union id="spawn-protections">
-        <cuboid id="cyan-spawn-protection"   min="46,0,8"   max="60,oo,-8"/>
-        <cuboid id="orange-spawn-protection" min="-46,0,-8" max="-60,oo,8"/>
+    <union id="jump-pads">
+        <cuboid id="south-pad" min="-1,6,25" max="2,9,27"/>
+        <cuboid id="north-pad" min="-1,6,-26" max="2,9,-24"/>
     </union>
-	<apply enter="only-cyan"   region="cyan-spawn-protection"   message="You may not enter the enemy spawn."/>
-	<apply enter="only-orange" region="orange-spawn-protection" message="You may not enter the enemy spawn."/>
+    <apply velocity="@0,1.7,-0.1" region="south-pad"/>
+    <apply velocity="@0,1.7,0.1" region="north-pad"/>
+    <apply kit="Jump-pad-fall-damage" region="jump-pads"/>
     <apply block="never" use="never"/>
 </regions>
 <king>
-    <hills required="false" capture-time="5s" points="3" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
+    <hills required="false" capture-time="5s" points="1" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
         <hill name="Point A">
             <capture>
                 <cuboid min="-2,18,9" max="3,22,14"/>
@@ -115,7 +118,7 @@
     </hills>
 </king>
 <score>
-    <limit>2500</limit>
+    <limit>750</limit>
 </score>
 <toolrepair>
     <tool>stone sword</tool>
