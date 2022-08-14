@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<map proto="1.3.6">
+<name>Barf Box</name>
+<version>3.2.3</version>
+<gamemode>Arcade</gamemode>
+<objective>Mine blocks of team color.</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<contributors>
+    <contributor uuid="6e347123-c684-4d7e-996c-44d4924ff172" contribution="XML"/> <!-- SheriffSoco -->
+</contributors>
+<rules>
+    <rule>Fall Damage is disabled</rule>
+</rules>
+<teams>
+    <team id="red" color="dark red" min="1" max="2">Red</team>
+    <team id="blue" color="blue" min="1" max="2">Blue</team>
+    <team id="green" color="green" min="1" max="2">Green</team>
+    <team id="yellow" color="yellow" min="1" max="2">Yellow</team>
+</teams>
+<spawns>
+    <spawn team="red" kit="red" angle="-66.5,48,-0.5">
+        <regions>
+            <region name="red-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="blue" region="blue-spawn" angle="-66.5,48,-0.5">
+        <regions>
+            <region name="blue-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="green" kit="green" region="green-spawn" angle="-66.5,48,-0.5">
+        <regions>
+            <region name="green-spawn"/>
+        </regions>
+    </spawn>
+    <spawn team="yellow" kit="yellow" region="yellow-spawn" angle="-66.5,48,-0.5">
+        <regions>
+            <region name="yellow-spawn"/>
+        </regions>
+    </spawn>
+    <default yaw="90" region="obs-spawn">
+        <regions>
+            <region name="obs-spawn"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn" potion-particles="false">
+        <item slot="0" enchantment="knockback:2" name="KB Stick">stick</item>
+        <item slot="1" damage="-3000">iron pickaxe</item>
+        <potion duration="oo" amplifier="2">regeneration</potion>
+        <potion duration="oo" amplifier="1">night_vision</potion>
+    </kit>
+    <kit name="red" parents="spawn">
+        <chestplate color="cd0000">leather chestplate</chestplate>
+        <leggings color="cd0000">leather leggings</leggings>
+        <boots color="cd0000">leather boots</boots>
+        <item slot="8" damage="14" name="`cRed Team">wool</item>
+        <potion duration="oo" amplifier="1">night_vision</potion>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="0066cc">leather chestplate</chestplate>
+        <leggings color="0066cc">leather leggings</leggings>
+        <boots color="0066cc">leather boots</boots>
+        <item slot="8" damage="11" name="`9Blue Team">wool</item>
+        <potion duration="oo" amplifier="1">night_vision</potion>
+    </kit>
+    <kit name="green" parents="spawn">
+        <chestplate color="00cd00">leather chestplate</chestplate>
+        <leggings color="00cd00">leather leggings</leggings>
+        <boots color="00cd00">leather boots</boots>
+        <item slot="8" damage="13" name="`2Green Team">wool</item>
+        <potion duration="oo" amplifier="1">night_vision</potion>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <chestplate color="ffff00">leather chestplate</chestplate>
+        <leggings color="ffff00">leather leggings</leggings>
+        <boots color="ffff00">leather boots</boots>
+        <item slot="8" damage="4" name="`eYellow Team">wool</item>
+        <potion duration="oo" amplifier="1">night_vision</potion>
+    </kit>
+</kits>
+<score>
+    <time>2m</time>
+    <box filter="only-red" region="portals">
+        <redeemables>
+            <item points="20" damage="0">2256</item>
+            <item points="5" damage="14">redstone</item>
+            <item points="1" damage="4">gold ingot</item>
+            <item points="1" damage="5">emerald</item>
+            <item points="1" damage="11">351</item>
+        </redeemables>
+    </box>
+    <box filter="only-blue" region="portals">
+        <redeemables>
+            <item points="20" damage="0">2256</item>
+            <item points="1" damage="14">redstone</item>
+            <item points="1" damage="4">gold ingot</item>
+            <item points="1" damage="5">emerald</item>
+            <item points="5" damage="11">351</item>
+        </redeemables>
+    </box>
+    <box filter="only-green" region="portals">
+        <redeemables>
+            <item points="20" damage="0">2256</item>
+            <item points="1" damage="14">redstone</item>
+            <item points="1" damage="4">gold ingot</item>
+            <item points="5" damage="5">emerald</item>
+            <item points="1" damage="11">351</item>
+        </redeemables>
+    </box>
+    <box filter="only-yellow" region="portals">
+        <redeemables>
+            <item points="20" damage="0">2256</item>
+            <item points="1" damage="14">redstone</item>
+            <item points="5" damage="4">gold ingot</item>
+            <item points="1" damage="5">emerald</item>
+            <item points="1" damage="11">351</item>
+        </redeemables>
+    </box>
+</score>
+<filters>
+    <filter name="only-red">
+        <team>red</team>
+    </filter>
+    <filter name="only-blue">
+        <team>blue</team>
+    </filter>
+    <filter name="only-green">
+        <team>green</team>
+    </filter>
+    <filter name="only-yellow">
+        <team>yellow</team>
+    </filter>
+    <filter name="only-tnt">
+        <block>tnt</block>
+    </filter>
+</filters>
+<regions>
+    <cuboid name="box" min="-76,2,-10" max="-57,21,9"/>
+    <union name="portals">
+        <cylinder name="s-portal" base="-66.5,1,19.5" radius="4" height="0.5"/>
+        <cylinder name="w-portal" base="-86.5,1,-0.5" radius="4" height="0.5"/>
+        <cylinder name="n-portal" base="-66.5,1,-20.5" radius="4" height="0.5"/>
+        <cylinder name="e-portal" base="-46.5,1,-0.5" radius="4" height="0.5"/>
+    </union>
+    <cylinder name="portal" base="-66.5,1,-0.5" radius="25" height="0.5"/>
+    <union name="spawns">
+        <cylinder name="red-spawn" base="-88,48,20" radius="5" height="1"/>
+        <cylinder name="blue-spawn" base="-88,48,-22" radius="5" height="1"/>
+        <cylinder name="green-spawn" base="-46,48,-22" radius="5" height="1"/>
+        <cylinder name="yellow-spawn" base="-46,48,20" radius="5" height="1"/>
+        <block name="obs-spawn">-67,25,-1</block>
+    </union>
+    <apply block-break="deny-all" message="You can only destroy what's in the Barf Box!">
+        <negative>
+            <region name="box"/>
+        </negative>
+    </apply>
+    <apply block-place="only-tnt" message="You can only place TNT!">
+        <rectangle min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<portals>
+    <portal region="n-portal" filter="only-red" x="@-87.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="n-portal" filter="only-blue" x="@-87.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="n-portal" filter="only-green" x="@-45.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="n-portal" filter="only-yellow" x="@-45.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="s-portal" filter="only-red" x="@-87.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="s-portal" filter="only-blue" x="@-87.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="s-portal" filter="only-green" x="@-45.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="s-portal" filter="only-yellow" x="@-45.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="w-portal" filter="only-red" x="@-87.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="w-portal" filter="only-blue" x="@-87.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="w-portal" filter="only-green" x="@-45.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="w-portal" filter="only-yellow" x="@-45.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="e-portal" filter="only-red" x="@-87.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+    <portal region="e-portal" filter="only-blue" x="@-87.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="e-portal" filter="only-green" x="@-45.5" y="@48.5" z="@-21.5" angle="-67,25,-1"/>
+    <portal region="e-portal" filter="only-yellow" x="@-45.5" y="@48.5" z="@20.5" angle="-67,25,-1"/>
+</portals>
+<renewables>
+    <renewable rate="8" grow="true" particles="true" sound="true" avoid-entities="true">
+        <region>
+            <region name="box"/>
+        </region>
+        <shuffle>stained clay:4</shuffle>
+        <shuffle>stained clay:5</shuffle>
+        <shuffle>stained clay:11</shuffle>
+        <shuffle>stained clay:14</shuffle>
+    </renewable>
+</renewables>
+<blockdrops>
+    <rule>
+        <filter>
+            <all>
+                <block>stained clay</block>
+                <random>(0.0,0.05]</random>
+            </all>
+        </filter>
+        <replacement>stained clay:0</replacement>
+    </rule>
+    <rule>
+        <filter>
+            <block>stained clay:4</block>
+        </filter>
+        <drops>
+            <item>gold ingot</item>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <block>stained clay:14</block>
+        </filter>
+        <drops>
+            <item>redstone</item>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <block>stained clay:11</block>
+        </filter>
+        <drops>
+            <item damage="4">351</item>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <block>stained clay:5</block>
+        </filter>
+        <drops>
+            <item>emerald</item>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <block>stained clay:0</block>
+        </filter>
+        <drops>
+            <item>2256</item>
+        </drops>
+    </rule>
+</blockdrops>
+<killreward>
+    <item>tnt</item>
+</killreward>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stick</item>
+    <item>iron pickaxe</item>
+    <item>tnt</item>
+    <item>wool</item>
+    <item>CLAY_BRICK</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>block explosion</damage>
+</disabledamage>
+<tnt>
+    <instantignite>true</instantignite>
+    <blockdamage>true</blockdamage>
+    <yield>1</yield>
+    <fuse>1s</fuse>
+    <power>3</power>
+    <licensing>false</licensing>
+</tnt>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<broadcasts>
+    <tip after="1s">Mine your team's Color Blocks and redeem the item it drops in the 4 portals.</tip>
+    <tip after="15s">White blocks which drop music disks are worth quadruple `c(x4)</tip>
+    <tip after="30s">Mine your team's Color Blocks and redeem the item it drops in the 4 portals.</tip>
+    <tip after="45s">Mine your team's Color Blocks and redeem the item it drops in the 4 portals.</tip>
+    <tip after="60s">White blocks which drop music disks are worth quadruple `c(x4)</tip>
+    <tip after="2m">White blocks which drop music disks are worth quadruple `c(x4)</tip>
+    <tip after="4m">Mine your team's Color Blocks and redeem the item it drops in the 4 portals.</tip>
+</broadcasts>
+</map>
