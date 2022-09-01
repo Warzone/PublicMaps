@@ -1,0 +1,96 @@
+<map proto="1.4.2">
+<name>Dodgeball Test</name>
+<version>0.2</version>
+<objective>Control the flag for 300 seconds to win!</objective>
+<gamemode>kotf</gamemode>
+<gamemode>arcade</gamemode>
+<rage/>
+<authors>
+    <author uuid="811968c3-0a9f-4cb5-80af-19ce37141341"/> <!-- BennyDoesStuff  -->
+</authors>
+<teams>
+    <team id="blue" color="blue" min="5" max="15">Blue</team>
+    <team id="red" color="red" min="5" max="15">Red</team>
+</teams>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <point>-12.5,10,8.5</point>
+        </region>
+    </default>
+    <spawn team="blue" kit="default">
+        <region yaw="180">
+            <point>8,9,47</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="default">
+        <region yaw="0">
+            <point>9,9,-30</point>
+        </region>
+    </spawn>
+</spawns>
+<flags>
+    <flag id="flag"
+          name="Flag"
+          color="white"
+          shared="true"
+          points-rate="1"
+          flag-proximity-metric="none"
+          show-respawn-on-pickup="true">
+        <post return-time="0s" respawn-time="10s">
+            <post name="Post 1" yaw="90">8,5,8</post>
+            <post name="Post 2" yaw="90">-4,5,8</post>
+            <post name="Post 3" yaw="90">20,5,8</post>
+        </post>
+    </flag>
+</flags>
+<score>
+    <limit>300</limit>
+</score>
+<kits>
+    <kit id="default">
+        <item material="bow" slot="1" unbreakable="true">
+            <enchantment level="1">infinity</enchantment>
+            <enchantment level="10">power</enchantment>
+            <enchantment level="10">sharpness</enchantment>
+        </item>
+        <item slot="8" amount="1" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+        <effect duration="5" amplifier="100">regeneration</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>banner</item>
+    <item>bow</item>
+    <item>arrow</item>
+</itemremove>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <cuboid id="blue-side" min="-14,0,10" max="31,20,45"/>
+    <cuboid id="red-side" min="-14,0,-28" max="31,20,7"/>
+    <apply region="blue-side" enter="only-blue" message="You may not enter this region."/>
+    <apply region="red-side" enter="only-red" message="You may not enter this region."/>
+    <apply block="never" use="never"/>
+</regions>
+<respawn spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
