@@ -1,7 +1,6 @@
 <map proto="1.4.0" game="`eProgress">
 <name>Block Runner: Classic</name>
 <version>1.0.1</version>
-<include src="void-death.xml"/>
 <authors>
     <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
@@ -84,6 +83,9 @@
             </negative>
         </region>
     </apply>
+    <apply kit="void-death">
+        <region><below y="-5"/></region>
+    </apply>
 </regions>
 <kits>
     <kit id="spawn">
@@ -92,11 +94,19 @@
         <effect duration="oo">fire resistance</effect>
         <boots>gold boots</boots>
     </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
 </kits>
 <structures>
     <structure id="mon-struct" region="mon" air="false"/>
     <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
 </structures>
+<portals>
+    <portal y="-64" sound="false">
+        <region><below y="-5"/></region>
+    </portal>
+</portals>
 <filters>
     <not id="countdown">
         <time>5s</time>
