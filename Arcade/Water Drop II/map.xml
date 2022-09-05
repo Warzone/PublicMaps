@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Water Drop">
+<name>Water Drop: II</name>
+<version>1.0.4</version>
+<objective>Water drop your way to the finish line!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a"/> <!-- Flashee -->
+</authors>
+<contributors>
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="Basis for XML"/> <!-- BGM -->
+</contributors>
+<rules>
+    <rule>Do not use water to glitch out of the map.</rule>
+    <rule>Do not help other players with your water bucket.</rule>
+    <rule>Do not abuse any glitch you could find in the map.</rule>
+    <rule>PVP is allowed.</rule>
+</rules>
+<players min="1" max="50" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="-180" region="players-spawn"/>
+    <default kit="obs">
+        <regions yaw="-180">
+            <point>-2.5,251,37.5</point>
+        </regions>
+    </default>    
+</spawns>
+<kits>
+    <kit id="players" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater Drop!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater Drop!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater Drop!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true">leather boots</boots>
+        <potion duration="oo" amplifier="2">speed</potion>
+        <potion duration="oo" amplifier="50">weakness</potion>
+        <health>6</health>
+        <max-health>6</max-health>
+    </kit>
+    <kit id="enable-pvp" force="true">
+        <potion duration="1" amplifier="50">weakness</potion>
+    </kit>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+</kits>
+<regions>
+    <point id="testing-spawn">-2,12,-96</point>
+    <cuboid id="players-spawn" min="-6.5,251,27.5" max="1.5,252,29.5"/>
+    <cuboid id="jump-area" min="-5.0,11,-103.0" max="0,13,-98.0"/>
+    <above id="too-high" y="260"/>
+    <negative id="not-spawn">
+        <cuboid min="-15,230,10" max="10,255,48"/>
+    </negative>
+    <cuboid id="anti-glitch" min="-15,254,5" max="10,255,48"/>
+    <apply block="only-water" block-physics="never"/>
+    <apply kit="enable-pvp" region="not-spawn"/>
+    <apply enter="never" region="anti-glitch" message="This shortcut is blocked!"/>
+</regions>
+<filters>
+    <all id="only-water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<portals>
+    <portal x="0" y="239" z="-8" region="jump-area"/>
+</portals>
+<score>
+    <box points="1">
+        <region><cuboid id="finish" min="-7,55,-188" max="1.5,57,-185.5"/></region>
+    </box>
+    <limit>1</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+</itemremove>
+<broadcasts>
+    <alert after="1s">PvP is disabled in the spawn area!</alert>
+</broadcasts>
+</map>

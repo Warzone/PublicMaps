@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Water Drop">
+<name>Water Drop: Original</name>
+<version>1.2.3</version>
+<objective>Water drop your way to the finish line!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a"/> <!-- Flashee -->
+</authors>
+<contributors>
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65" contribution="XML"/> <!-- BGM -->
+</contributors>
+<rules>
+    <rule>Do not use water to glitch out of the map.</rule>
+    <rule>Do not help other players with your water bucket.</rule>
+    <rule>Do not abuse any glitch you could find in the map.</rule>
+</rules>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="0" region="players-spawn"/>
+    <default kit="obs">
+        <regions yaw="0"><point>8.5,244,6.5</point></regions>
+    </default>    
+</spawns>
+<kits>
+    <kit id="players">
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="8" locked="true" material="potion" name="`b`lDrink to Restart">
+            <effect amplifier="50">harm</effect>
+        </item>
+        <boots color="7fcc19" locked="true" unbreakable="true">leather boots</boots>
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="removal" force="true">
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="8" locked="true" material="potion" name="`b`lDrink to Restart">
+            <effect amplifier="50">harm</effect>
+        </item>
+        <boots color="993333" locked="true" unbreakable="true">leather boots</boots>
+        <game-mode>adventure</game-mode>
+        <clear-items />
+    </kit>
+    <kit id="buckets-back" force="true">
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="8" locked="true" material="potion" name="`b`lDrink to Restart">
+            <effect amplifier="50">harm</effect>
+        </item>
+        <boots color="7fcc19" locked="true" unbreakable="true">leather boots</boots>
+        <game-mode>survival</game-mode>
+        <clear-items />
+    </kit>
+    <kit id="mortal">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+</kits>
+<regions>
+    <rectangle id="everything" min="oo,oo" max="-oo,-oo"/>
+    <cuboid id="players-spawn" min="11.5,244,19.5" max="5.5,244,19.5"/>
+    <rectangle id="cobweb-buckets-removal" min="12.5,71.5" max="4.5,72.5"/>
+    <rectangle id="cobweb-buckets-back" min="12.5,108.5" max="4.5,107.5"/>
+    <cuboid id="mortal-area" min="4.5,41,101.5" max="12.5,40,95.5"/>
+    <apply block-place="water" block-break="water" block-physics="never" region="everything"/>
+    <apply kit="removal" region="cobweb-buckets-removal"/>
+    <apply kit="buckets-back" region="cobweb-buckets-back"/>
+    <apply kit="mortal" region="mortal-area"/>
+</regions>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+</filters>
+<score>
+    <box points="1">
+        <region><cuboid id="finish" min="11,7,114" max="5,9,112"/></region>
+    </box>
+    <limit>1</limit>
+</score>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>glass bottle</item>
+    <item>barrier</item>
+    <item>potion</item>
+</itemremove>
+</map>
