@@ -1,6 +1,6 @@
 <map proto="1.4.0">
 <name>Flooded Halcyon</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Destroy the other team’s two monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <!-- Author -->
@@ -49,13 +49,13 @@
 <!-- Spawns -->
 <spawns>
     <spawn team="red" kit="red-kit" yaw="-180">
-        <region><point>14.5,74,-761.5</point></region>
+        <region><point>14.5,10,-761.5</point></region>
     </spawn>
     <spawn team="purple" kit="purple-kit">
-        <region><point>14.5,74,-871.5</point></region>
+        <region><point>14.5,10,-871.5</point></region>
     </spawn>
     <default yaw="-90">
-        <region><point>-34.5,85,-816.5</point></region>
+        <region><point>-34.5,21,-816.5</point></region>
     </default>
 </spawns>
 <!-- Filters -->
@@ -67,11 +67,11 @@
 <regions>
     <!-- Definitions -->
     <negative id="playable">
-        <rectangle min="52,-892" max="-24,-742"/>
+        <rectangle min="58,-888" max="-27,-745"/>
     </negative>
     <union id="spawn-protections">
-        <cylinder id="red-spawn-protection" base="14.5,66,-761.5" height="19" radius="10" />
-        <cylinder id="purple-spawn-protection" base="14.5,66,-871.5" height="19" radius="10" />
+        <cylinder id="red-spawn-protection" base="14.5,0,-761.5" height="19" radius="10" />
+        <cylinder id="purple-spawn-protection" base="14.5,0,-871.5" height="19" radius="10" />
     </union>
     <!-- Applications -->
     <apply enter="only-red" region="red-spawn-protection" message="You may not enter `4Red Team`c's spawn area!"/>
@@ -82,16 +82,16 @@
 <!-- Monuments -->
 <destroyables materials="obsidian">
     <destroyable name="Left Monument" owner="purple">
-        <region><block>-13,74,-861</block></region>
+        <region><block>-13,10,-861</block></region>
     </destroyable>
     <destroyable name="Right Monument" owner="purple">
-        <region><block>41,74,-861</block></region>
+        <region><block>41,10,-861</block></region>
     </destroyable>
     <destroyable name="Left Monument" owner="red">
-        <region><block>41,74,-773</block></region>
+        <region><block>41,10,-773</block></region>
     </destroyable>
     <destroyable name="Right Monument" owner="red">
-        <region><block>-13,74,-773</block></region>
+        <region><block>-13,10,-773</block></region>
     </destroyable>
 </destroyables>
 <!-- Item-Remove -->
