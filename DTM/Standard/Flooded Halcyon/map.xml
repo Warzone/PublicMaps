@@ -1,0 +1,131 @@
+<map proto="1.4.0">
+<name>Flooded Halcyon</name>
+<version>1.0.1</version>
+<objective>Destroy the other team’s two monuments to win!</objective>
+<gamemode>dtm</gamemode>
+<!-- Author -->
+<authors>
+    <author uuid="8242e55e-cc6a-458a-b272-a2b34918045f"/>
+    <!-- funkystudios -->
+</authors>
+<!-- Teams -->
+<teams>
+   <team id="red" color="dark red" max="8">Red</team>
+   <team id="purple" color="dark purple" max="8">Purple</team>
+</teams>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="5s">Iron blocks are behind spawn!</tip>
+</broadcasts>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1;durability:3">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone axe</item>
+        <item slot="4" amount="64">apple</item>
+        <item slot="5" amount="1">golden apple</item>
+        <item slot="6" amount="32">log</item>
+        <item slot="7" amount="64">glass</item>
+        <item slot="28" amount="16">arrow</item>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+        <effect duration="5" amplifier="5">heal</effect>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
+        <chestplate unbreakable="true" color="B02E26" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots unbreakable="true" color="B02E26">leather boots</boots>
+    </kit>
+    <kit id="purple-kit" parents="spawn">
+        <helmet unbreakable="true" color="7F3FB2">leather helmet</helmet>
+        <chestplate unbreakable="true" color="7F3FB2" enchantment="protection projectile:2">leather chestplate</chestplate>
+        <leggings unbreakable="true">iron leggings</leggings>
+        <boots unbreakable="true" color="7F3FB2">leather boots</boots>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="-180">
+        <region><point>14.5,74,-761.5</point></region>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <region><point>14.5,74,-871.5</point></region>
+    </spawn>
+    <default yaw="-90">
+        <region><point>-34.5,85,-816.5</point></region>
+    </default>
+</spawns>
+<!-- Filters -->
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-purple">purple</team>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <negative id="playable">
+        <rectangle min="52,-892" max="-24,-742"/>
+    </negative>
+    <union id="spawn-protections">
+        <cylinder id="red-spawn-protection" base="14.5,66,-761.5" height="19" radius="10" />
+        <cylinder id="purple-spawn-protection" base="14.5,66,-871.5" height="19" radius="10" />
+    </union>
+    <!-- Applications -->
+    <apply enter="only-red" region="red-spawn-protection" message="You may not enter `4Red Team`c's spawn area!"/>
+    <apply enter="only-purple" region="purple-spawn-protection" message="You may not enter `5Purple Team`c's spawn area!"/>
+    <apply block="never" region="spawn-protections" message="You may not modify the spawn area."/>
+    <apply block="never" region="playable" message="You may not build outside of the playing field!"/>
+</regions>
+<!-- Monuments -->
+<destroyables materials="obsidian">
+    <destroyable name="Left Monument" owner="purple">
+        <region><block>-13,74,-861</block></region>
+    </destroyable>
+    <destroyable name="Right Monument" owner="purple">
+        <region><block>41,74,-861</block></region>
+    </destroyable>
+    <destroyable name="Left Monument" owner="red">
+        <region><block>41,74,-773</block></region>
+    </destroyable>
+    <destroyable name="Right Monument" owner="red">
+        <region><block>-13,74,-773</block></region>
+    </destroyable>
+</destroyables>
+<!-- Item-Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>stone axe</item>
+    <item>obsidian</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>ladder</item>
+    <item>apple</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+</itemkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+        <item amount="4">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<timelock>on</timelock>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<maxbuildheight>93</maxbuildheight>
+</map>
