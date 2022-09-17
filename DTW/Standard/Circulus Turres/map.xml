@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <map proto="1.4.0" game="Destroy the Wool">
-<name>Haunted Towers</name>
-<version>1.1.3</version>
+<name>Circulus Turres</name>
+<version>1.1.5</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
-<created>2021-10-01</created>
+<created>2021-06-04</created>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
@@ -100,7 +100,7 @@
         <rectangle id="map" min="-134,55" max="134,-55"/>
     </negative>
     <!-- Applications -->
-    <apply region="spawn-protections"        block-break="only-iron" block-place="only-iron-regen" message="You may only modify iron blocks in spawn!"/>
+    <apply region="spawn-protections"        block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in spawn!"/>
     <apply region="not-map"                  block="never"           message="You may not edit outside the map!"/>
     <apply region="spawn-protections"        block="never"           message="You are not allowed to modify terrain here."/>
     <apply region="diamond-protections"      block="never"           message="You are not allowed to modify terrain here."/>
@@ -109,7 +109,7 @@
 </regions>
 <!-- Renewables -->
 <renewables>
-    <renewable interval="3" grow="true" particles="true" sound="true" avoid-players="2" region="spawn-protections" renew-filter="only-iron"/>
+    <renewable interval="3" grow="true" particles="false" sound="false" avoid-players="2" region="spawn-protections" renew-filter="only-iron"/>
 </renewables>
 <!-- Item Remove -->
 <itemremove>
