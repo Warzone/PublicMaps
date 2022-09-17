@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<map proto="1.3.3">
+<name>Secluded Palace</name>
+<version>1.2.0</version>
+<objective>Eliminate the other team before 5 minutes is up</objective>
+<authors>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527" />
+    <!--  yoyo_power  -->
+    <author uuid="337ae91f-960b-4562-906d-f52f9e56d392" />
+    <!--  aalhond  -->
+</authors>
+<contributors>
+    <contributor uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25" contribution="Initial XML" />
+    <!--  matic0basle  -->
+    <contributor uuid="af9c1942-af66-42d1-89f9-9b677c281e03" contribution="Fixing initial XML and testing the map" />
+    <!--  _IQ  -->
+</contributors>
+<gamemode>rage</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<blitz>
+    <time>5m</time>
+    <lives>1</lives>
+    <title>Blitz: Rage</title>
+</blitz>
+<rage />
+<include src="blitz-global.xml" />
+<teams>
+    <team color="blue" max="16" max-overfill="18">Blue</team>
+    <team color="gold" max="16" max-overfill="18">Yellow</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="0">
+        <point>740.5,5,-1261.5</point>
+    </spawn>
+    <spawn team="yellow" kit="yellow" yaw="180">
+        <point>758.5,5,-1174.5</point>
+    </spawn>
+    <default yaw="-90">
+        <point>682.5,41,-1218.5</point>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn">
+        <item slot="0" enchantment="damage all:10" lore="`91-Hit Kill!">iron sword</item>
+        <item slot="1" enchantment="arrow damage:10" lore="`91-Shot Kill!">bow</item>
+        <item slot="2" amount="1">arrow</item>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <helmet color="0066cc" locked="true">leather helmet</helmet>
+        <chestplate color="0066cc" locked="true">leather chestplate</chestplate>
+        <leggings color="0066cc" locked="true">leather leggings</leggings>
+        <boots color="0066cc" locked="true">leather boots</boots>
+    </kit>
+    <kit name="yellow" parents="spawn">
+        <helmet color="e5e533" locked="true">leather helmet</helmet>
+        <chestplate color="e5e533" locked="true">leather chestplate</chestplate>
+        <leggings color="e5e533" locked="true">leather leggings</leggings>
+        <boots color="e5e533" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-all">
+        <rectangle min="-oo,-oo" max="oo,oo" />
+    </apply>
+</regions>
+<timelock>on</timelock>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>sapling</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+</map>

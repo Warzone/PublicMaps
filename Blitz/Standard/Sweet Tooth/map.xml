@@ -1,0 +1,91 @@
+<map proto="1.3.6">
+<!-- <include src="blitz-global.xml"/> -->
+<name>Sweet Tooth</name>
+<version>1.0.6</version>
+<objective>Elimate the enemy team before time runs out!</objective>
+<gamemode>rage</gamemode>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/>
+    <!--   GoldenOre   -->
+    <author uuid="0eadbe6d-0a2e-41c6-aec3-e1ba291fb266"/>
+    <!-- Cheesedaman   -->
+</authors>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+</rules>
+<teams>
+    <team id="lime" color="Green" max="20" max-overfill="25">Lime</team>
+    <team id="blue" color="Blue" max="20" max-overfill="25">Blue</team>
+</teams>
+<spawns>
+    <spawn team="blue" kit="blue">
+        <regions yaw="90">
+            <point>71.5,52,3.5</point>
+        </regions>
+    </spawn>
+    <spawn team="lime" kit="lime">
+        <regions yaw="-90">
+            <point>-69.5,52,-4.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <block>1.5,68,0.5</block>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit name="spawn" force="true">
+        <item slot="0" enchantment="damage all:10">gold sword</item>
+        <item slot="1" enchantment="arrow damage:10">bow</item>
+        <item slot="2" amount="1">arrow</item>
+        <item slot="3" amount="14">golden carrot</item>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit name="lime" parents="spawn">
+        <chestplate color="00FF00">leather chestplate</chestplate>
+        <boots>gold boots</boots>
+        <helmet>gold helmet</helmet>
+        <leggings color="00FF00">leather leggings</leggings>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <chestplate color="0000FF">leather chestplate</chestplate>
+        <boots>gold boots</boots>
+        <helmet>gold helmet</helmet>
+        <leggings color="0000FF">leather leggings</leggings>
+    </kit>
+</kits>
+<regions>
+    <apply block="deny-blocks">
+        <rectangle name="map" min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<blitz>
+    <time>5m</time>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+    <title>Blitz: Rage</title>
+</blitz>
+<rage/>
+<itemremove>
+    <item>golden carrot</item>
+    <item>gold sword</item>
+    <item>arrow</item>
+    <item>bow</item>
+    <item>leather chestplate</item>
+    <item>gold boots</item>
+    <item>gold helmet</item>
+    <item>leather leggings</item>
+</itemremove>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+</map>
