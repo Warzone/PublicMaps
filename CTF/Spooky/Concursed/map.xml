@@ -1,0 +1,126 @@
+<map proto="1.4.2">
+<name>Concursed</name>
+<version>1.2.12</version>
+<phase>development</phase>
+<objective>Control the flag for 200 seconds to win!</objective>
+<gamemode>kotf</gamemode>
+<authors>
+    <author uuid="3143b9d9-cea7-465f-97fc-8de59fbbb3a4"/> <!-- DiamondAx -->
+</authors>
+<contributors>
+    <contributor uuid="91295196-9cd2-4963-b7ec-afd1a110edbe"/> <!-- Pbat -->
+    <contributor uuid="a90be681-0d8d-4d76-9094-c609a5d4596a" contribution="Halloween-ification"/> <!-- alejitox -->
+    <contributor uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5" contribution="Halloween-ification"/> <!-- Kiyara -->
+</contributors>
+<teams>
+    <team id="cyan" color="dark aqua" max="24">Cyan</team>
+    <team id="purple" color="dark purple" max="24">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="20" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment level="2">feather_falling</enchantment>
+        </boots>
+        <effect duration="1" amplifier="0">health boost</effect>
+        <effect duration="2" amplifier="10">regeneration</effect>
+        <effect duration="3" amplifier="255">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="flag-kit" force="true">
+        <effect>slowness</effect>
+        <effect amplifier="-3">health boost</effect>
+        <effect duration="3" amplifier="2">absorption</effect>
+    </kit>
+    <kit id="reset-health" force="true">
+        <effect duration="0" amplifier="0">slowness</effect>
+        <effect duration="0" amplifier="0">health boost</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="0">
+            <point>3.5,53,-445.5</point>
+        </region>
+    </default>
+    <spawn team="cyan" kit="spawn-kit" filter="has-flag">
+        <region angle="3.5,8,-431.5">
+            <cuboid min="1.5,8,-443.5" max="5.5,8,-441.5"/>
+        </region>
+    </spawn>
+    <spawn team="purple" kit="spawn-kit" filter="has-flag">
+        <region angle="3.5,9,-459.5">
+            <cuboid min="1.5,8,-449.5" max="5.5,8,-447.5"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <any id="has-flag">
+        <carrying-flag>flag</carrying-flag>
+        <not>
+            <same-team>
+                <carrying-flag>flag</carrying-flag>
+            </same-team>
+        </not>
+    </any>
+</filters>
+<regions>
+    <apply block="never" use="never"/>
+</regions>
+<flags>
+    <flag id="flag"
+          name="Flag"
+          color="green"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health"
+          flag-proximity-metric="none"
+          show-respawn-on-pickup="true">
+        <post return-time="0s" respawn-time="10s">
+            <post name="Centre Post">3.5,15,-445.5</post>
+            <post name="Cyan's Post" yaw="180">3.5,20,-415.5</post>
+            <post name="Purple's Post" yaw="0">3.5,20,-475.5</post>
+        </post>
+    </flag>
+</flags>
+<score>
+    <limit>200</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>banner</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="10" material="arrow"/>
+</kill-reward>
+<respawn spectate="true" auto="true">
+    <message>
+        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
+    </message>
+</respawn>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

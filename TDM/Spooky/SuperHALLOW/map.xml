@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<!-- <include src="tutorial.xml"/> -->
+<name>SuperHALLOW</name>
+<version>1.3.5</version>
+<phase>development</phase>
+<objective>Be the team with the most points after 6 minutes!</objective>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<gamemode>tdm</gamemode>
+<authors>
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Idea, Main Design and XML"/> <!-- ItsMiiOlly -->
+    <author uuid="8e8340b2-d315-4d26-9178-d2145b59850c" contribution="Building and Aesthetics"/> <!-- oX_W1LL_G_Xo -->
+    <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Building, Aesthetics and WorldEdit magic"/> <!-- xXFracXx -->
+    <author uuid="9909505b-1f0f-4af1-ae21-afbee92427ce" contribution="Aesthetics and Building"/> <!-- Winarve -->
+    <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Halloweenification"/> <!-- ElectroidFilms -->
+</authors>
+<contributors>
+    <contributor uuid="714ff88f-25d9-4754-9caa-d0f3cf24f230" contribution="Aesthetics and Feedback"/> <!-- thegoodguy -->
+    <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Aesthetics and Feedback"/> <!-- PlasmaCross -->
+    <contributor uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="XML and Server Hosting"/> <!-- TheZaner -->
+    <contributor uuid="dee1cc51-66d2-4c5e-a8d4-403dcd1d8c83" contribution="Feedback and Suggestions"/> <!-- lonelyhornet -->
+    <contributor contribution="Help and Support">The Orange Sunglasses Build Team</contributor>
+</contributors>
+<teams>
+   <team color="dark purple" max="20">Treat</team>
+   <team color="gold" max="20">Trick</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0" name="`e`lSplatbat" enchantment="damage all:10;durability:10" unbreakable="true">gold sword</item>
+        <item slot="1" name="`b`lSniper Rifle" enchantment="arrow damage:10" unbreakable="true">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <potion duration="oo" amplifier="2">speed</potion>
+        <potion duration="oo">night vision</potion>
+        <potion duration="oo" amplifier="1">jump</potion>
+        <potion duration="5" amplifier="25">heal</potion>
+        <potion duration="5" amplifier="25">damage resistance</potion>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit name="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+        <potion duration="oo" amplifier="1">jump</potion>
+    </kit>
+    <kit name="purple" parents="spawn">
+        <helmet damage="1">397</helmet>
+    </kit>
+    <kit name="orange" parents="spawn">
+        <helmet>jack o lantern</helmet>
+    </kit>
+</kits>
+<filters>
+    <filter name="only-purple" parents="deny-players">
+        <allow>
+            <team>treat</team>
+        </allow>
+    </filter>
+    <filter name="only-orange" parents="deny-players">
+        <allow>
+            <team>trick</team>
+        </allow>
+    </filter>
+    <filter name="only-tnt" parents="deny-blocks">
+        <allow>
+            <block>tnt</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <apply enter="only-orange" message="You may not enter the enemy team's spawn!">
+        <cuboid min="-1114,0,-2213" max="-1106,6,-2206"/>
+    </apply>
+    <apply enter="only-orange" message="You may not enter the enemy team's spawn!">
+        <cuboid min="-1094,0,-2226" max="-1087,7,-2219"/>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the enemy team's spawn!">
+        <cuboid min="-1057,0,-2125" max="-1049,6,-2118"/>
+    </apply>
+    <apply enter="only-purple" message="You may not enter the enemy team's spawn!">
+        <cuboid min="-1076,0,-2112" max="-1069,7,-2106"/>
+    </apply>
+    <apply block="only-tnt" message="You may not modify the map!">
+        <cuboid min="-oo,-oo,-oo" max="oo,oo,oo"/>
+    </apply>
+    <!-- Orange Pads -->
+    <apply velocity="@ -0.4,1.1,0.0"><cuboid min="-1081,1,-2116" max="-1078,2,-2113"/></apply>
+    <apply velocity="@ 0.0,1.4,-0.4"><cuboid min="-1062,1,-2123" max="-1059,2,-2120"/></apply>
+    <apply velocity="@ 0.0,1.7,-0.4"><cuboid min="-1083,1,-2161" max="-1080,2,-2158"/></apply>
+    <apply velocity="@ 0.0,1.4,0.4"><cuboid min="-1101,1,-2153" max="-1098,2,-2150"/></apply>
+    <apply velocity="@ 0.0,1.4,-0.4"><cuboid min="-1056,1,-2133" max="-1053,2,-2130"/></apply>
+    <!-- Green pads room 1 -->
+    <apply velocity="@ 0.4,1.4,0.0"><cuboid min="-1043,1,-2164" max="-1040,2,-2161"/></apply>
+    <apply velocity="@ 0.0,1.4,0.4"><cuboid min="-1025,1,-2177" max="-1021,2,-2174"/></apply>
+    <apply velocity="@ -0.4,1.4,0.0"><cuboid min="-1029,1,-2196" max="-1026,2,-2193"/></apply>
+    <apply velocity="@ 0.0,1.4,-0.4"><cuboid min="-1056,1,-2182" max="-1053,2,-2179"/></apply>
+    <!-- Green pads room 2 -->
+    <apply velocity="@ 0.0,1.4,0.4"><cuboid min="-1110,1,-2152" max="-1107,2,-2149"/></apply>
+    <apply velocity="@ 0.4,1.4,0.0"><cuboid min="-1137,1,-2138" max="-1134,2,-2135"/></apply>
+    <apply velocity="@ 0.0,1.4,-0.4"><cuboid min="-1142,1,-2157" max="-1139,2,-2154"/></apply>
+    <apply velocity="@ -0.4,1.4,0.0"><cuboid min="-1123,1,-2170" max="-1120,2,-2167"/></apply>
+    <!-- Purple Pads -->
+    <apply velocity="@ 0.4,1.1,0.0"><cuboid min="-1085,1,-2218" max="-1082,2,-2215"/></apply>
+    <apply velocity="@ 0.0,1.4,0.4"><cuboid min="-1104,1,-2211" max="-1101,2,-2208"/></apply>
+    <apply velocity="@ 0.0,1.7,0.4"><cuboid min="-1083,1,-2173" max="-1080,2,-2170"/></apply>
+    <apply velocity="@ 0.0,1.4,0.4"><cuboid min="-1110,1,-2201" max="-1107,2,-2198"/></apply>
+    <apply velocity="@ 0.0,1.4,-0.4"><cuboid min="-1065,1,-2181" max="-1062,2,-2178"/></apply>
+</regions>
+<playable>
+    <cuboid min="-1153,58,-2087" max="-1000,0,-2255"/>
+</playable>
+<spawns>
+    <spawn team="treat" kit="purple" yaw="180">
+        <cuboid min="-1058,1,-2108" max="-1068,1,-2104"/>
+    </spawn>
+    <spawn team="trick" kit="orange" yaw="0">
+        <cuboid min="-1106,1,-2224" max="-1096,1,-2228"/>
+    </spawn>
+    <default yaw="0" kit="obs">
+        <cylinder base="-1062,14,-2103" radius="1" height="1"/>
+    </default>
+</spawns>
+<portals>
+    <portal x="@-1119" y="@1" z="@-2153">
+        <cuboid min="-1039,1,-2179" max="-1038,6,-2178"/>
+    </portal>
+
+    <portal x="@-1045" y="@1" z="@-2179">
+        <cuboid min="-1125,1,-2153" max="-1124,6,-2152"/>
+    </portal>
+</portals>
+<item-mods>
+    <rule>
+        <match>
+            <material>TNT</material>
+        </match>
+        <modify name="`4Landmine"/>
+    </rule>
+</item-mods>
+<toolrepair>
+    <tool>gold sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>glass bottle</item>
+    <item>jack o lantern</item>
+    <item damage="1">397</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>rotten flesh</item>
+    <item>carrot</item>
+    <item>iron ingot</item>
+    <item>iron boots</item>
+</itemremove>
+<score>
+    <time>5m</time>
+</score>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<timelock>on</timelock>
+<rage/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<killreward>
+    <item amount="2">arrow</item>
+</killreward>
+<friendlyfirerefund>on</friendlyfirerefund>
+ <tutorial>
+    <stage title="Team Death Match">
+        <message>
+            <line>This is a `6`ospooooky`r §9Team Death Match§r based off the map "§bSuperPRISM Reactor§r" from §2Uberstrike§r.</line>
+            <line>In order to win, your team must get the §nmost points§r after §46 minutes§r.</line>
+            <line>But, there's a catch! §4§lAll weapons§r are '§c1-hit kills'§r, which means you can kill/die in §41 hit§r.</line>
+            <line>Be careful! `2Zombies`r spawn from all over the place. `4Kill`r them and you will be rewarded with `cTNT`r.</line>
+        </message>
+        <teleport>
+            <point yaw="50" pitch="10">-1065,12,-21</point>
+        </teleport>
+    </stage>
+    <stage title="Spawn">
+        <message>
+            <line>This is where you will spawn when the game starts.</line>
+            <line>There are two lanes you can go down in order to enter the arena!</line>
+        </message>
+        <teleport>
+            <point yaw="25" pitch="68">-1100,5,-2227</point>
+        </teleport>
+    </stage>
+    <stage title="Jump pads">
+        <message>
+            <line>These are the §6jump pads§r. When you walk on them, they will §bboost§r you up to the upper floors.</line>
+            <line>§nRemember!§n Fall damage is §ldisabled§r, so you don't take damage when you fall off a high building.</line>
+        </message>
+        <teleport>
+            <point yaw="-132" pitch="0">-1062,2,-2119</point>
+        </teleport>
+    </stage>
+    <stage title="The Center">
+        <message>
+            <line>This is the §ecenter§l, this is where most of the combat takes place.</line>
+            <line>If you're lucky enough, you can gather the items from inside that chest!</line>
+        </message>
+        <teleport>
+            <point yaw="136" pitch="0">-1076,17,-2160</point>
+        </teleport>
+    </stage>
+    <stage title="The Green Rooms">
+        <message>
+            <line>This is the `2green room`r. Here you can `cteleport`r to the other team's room/side by going in the `bwater`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-133" pitch="20">-1047,12,-2169</point>
+        </teleport>
+    </stage>
+</tutorial>
+</map>
