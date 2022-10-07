@@ -1,0 +1,76 @@
+<map proto="1.4.2">
+<name>Mega Cacti Mania</name>
+<version>1.2.1</version>
+<objective>Eliminate the other players before the time is up.</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="dd8c3d79-3930-41f6-a815-621dc3d52649"/> <!-- StanleyTheCow -->
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="XML, Map Builder"/> <!-- zzuf -->
+</authors>
+<contributors>
+    <contributor uuid="5c79d2c9-a4f0-4343-a84b-e1720f13009b" contribution="XML help"/> <!-- CoWinkKeyDinkInc -->
+</contributors>
+<rules>
+    <rule>Don't die.</rule>
+    <rule>Fall damage is disabled.</rule>
+</rules>
+<gamemode>blitz</gamemode>
+<gamemode>ffa</gamemode>
+<players min="1" max="30" max-overfill="34"/>
+<time>3m</time>
+<blitz/>
+<broadcasts>
+    <alert after="1s">Border starts closing in at `f1m`r!</alert>
+    <alert after="1m">The border is `c`lclosing in`r!</alert>
+</broadcasts>
+<spawns>
+    <spawn kit="players-kit" spread="true" safe="true">
+        <regions angle="0.5,20.5,1.5">
+            <cylinder id="players-spawn" base="0.5,19.5,1.5" radius="20" height="1"/> 
+        </regions>
+    </spawn>
+    <default yaw="-180">
+        <regions>
+            <cuboid id="obs-spawn" min="-1,77,0" max="2,77,3"/>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="players-kit" force="true">
+        <clear/>
+        <health>1</health>
+        <item slot="0" amount="16" material="cactus"/>
+        <item slot="1" unbreakable="true" amount="1" material="fishing rod"/>
+        <effect amplifier="-4" duration="oo">health boost</effect>
+        <effect amplifier="255" duration="3s">resistance</effect>
+        <effect amplifier="255" duration="3s">fire resistance</effect>
+        <effect amplifier="14" duration="oo">jump_boost</effect> <!-- og: 4 -->
+    </kit>
+</kits>
+<regions>
+    <negative id="outside-area">
+        <cuboid min="21,19,-19" max="-20,29,22"/>
+    </negative>
+    <apply block="never" region="outside-area" message="You may not interact with blocks outside the playing area."/>
+</regions>
+<timelock>on</timelock>
+<disabledamage>
+    <damage>entity attack</damage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemkeep>
+    <item>cactus</item>
+    <item>fishing rod</item>
+</itemkeep>
+<world-borders center="0.5, 1.5">
+    <world-border size="512"/>
+    <world-border size="60" after="50s" duration="1s"/>
+    <world-border size="6.5" after="1m" duration="90s" damage="20"/>
+</world-borders>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+</map>
