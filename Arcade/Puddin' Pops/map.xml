@@ -1,0 +1,145 @@
+<map proto="1.4.0" game="Puddin' Pops">
+<name>Puddin' Pops</name>
+<version>1.2.2</version>
+<objective>Retreive as many pudding pops as you can!</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
+    <!-- AtlasGames !-->
+</authors>
+<include src="void-death.xml"/>
+<players min="4" max="8" max-overfill="8" show-name-tags="false" colors="true"/>
+<broadcasts>
+    <alert after="3s" every="30s">`6`lRun to the end of the course to bring back the Puddin' Pops!</alert>
+</broadcasts>
+<score>
+    <limit>3</limit>
+    <box region="scorebox">
+        <redeemables>
+            <item points="1" damage="3">ink sack</item>
+        </redeemables>
+    </box>
+</score>
+<spawns>
+    <spawn kit="spawn-kit">
+        <regions yaw="0">
+            <point>-5,3,0</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <point>18.5,22,47.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <boots color="664C33" locked="true">leather boots</boots>
+        <leggings color="664C33" locked="true">leather leggings</leggings>
+        <potion duration="oo" amplifier="1">invisibility</potion>
+        <game-mode>adventure</game-mode>
+        <item slot="0" amount="1">air</item>
+        <item slot="1" amount="1">air</item>
+        <item slot="2" amount="1">air</item>
+        <item slot="3" amount="1">air</item>
+        <item slot="4" amount="1">air</item>
+        <item slot="5" amount="1">air</item>
+        <item slot="6" amount="1">air</item>
+        <item slot="7" amount="1">air</item>
+        <item slot="8" amount="1">air</item>
+    </kit>
+    <kit id="pudding" force="true">
+        <chestplate name="Puddin' Pops" damage="3" locked="true">ink sack</chestplate>
+        <item slot="0" amount="1" damage="12">stained clay</item>
+        <item slot="1" amount="1" damage="12">stained clay</item>
+        <item slot="2" amount="1" damage="12">stained clay</item>
+        <item slot="3" amount="1" damage="12">stained clay</item>
+        <item slot="4" amount="1" damage="12">stained clay</item>
+        <item slot="5" amount="1" damage="12">stained clay</item>
+        <item slot="6" amount="1" damage="12">stained clay</item>
+        <item slot="7" amount="1" damage="12">stained clay</item>
+        <item slot="8" amount="1" damage="12">stained clay</item>
+    </kit>
+</kits>
+<regions>
+    <cuboid id="pops" min="-11,0,85" max="1,6,89" />
+    <cuboid id="scorebox" min="-12,0,-3" max="3,6,3" />
+    <cuboid id="parkour" min="-27,0,4" max="23,11,84" />
+    <below id="below-0" y="0"/>
+    <below id="below-1" y="1"/>
+    <apply kit="pudding" region="pops"/>
+    <apply kit="spawn-kit" region="scorebox"/>
+</regions>
+<filters>
+    <wearing id="carrying-pop"><item damage="3" name="Puddin' Pops">ink sack</item></wearing>
+    <not id="not-carrying-pop"><wearing><item damage="3" name="Puddin' Pops">ink sack</item></wearing></not>
+</filters>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<renewables>
+    <renewable interval="5s" grow="true" particles="true" sound="true" region="everywhere">
+        <renew-filter>
+            <any>
+                <material damage="0">wood</material>
+                <material damage="1">wood</material>
+                <material damage="12">stained clay</material>
+                <material damage="7">stained clay</material>
+                <material damage="8">stained clay</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material damage="0">wood</material>
+                <material damage="1">wood</material>
+                <material damage="12">stained clay</material>
+                <material damage="7">stained clay</material>
+                <material damage="8">stained clay</material>
+                <material>air</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<block-drops>
+    <rule trample="true" region="parkour">
+        <filter>
+            <any>
+                <material>wood:0</material>
+                <material>wood:1</material>
+                <material damage="12">stained clay</material>
+                <material damage="7">stained clay</material>
+                <material damage="8">stained clay</material>
+            </any>
+        </filter>
+        <replacement>clay</replacement>
+    </rule>
+</block-drops>
+<portals>
+    <portal region="below-1" filter="carrying-pop" yaw="@180" pitch="@0">
+        <destination><point>-6,3,87</point></destination>
+    </portal>
+    <portal region="below-0" filter="not-carrying-pop" yaw="@0" pitch="@0">
+        <destination><point>-5,3,0</point></destination>
+    </portal>
+</portals>
+<itemremove>
+    <item damage="3">banner</item>
+    <item>sign</item>
+    <item>leather boots</item>
+    <item>leather leggings</item>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+</itemremove>
+<falling-blocks>
+    <rule delay="30">
+        <filter>
+            <material>clay</material>
+        </filter>
+    </rule>
+</falling-blocks>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+<time>3m</time>
+</map>

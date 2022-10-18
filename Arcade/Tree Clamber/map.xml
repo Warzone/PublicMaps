@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="Tree Clamber">
+<name>Tree Clamber</name>
+<objective>Get to the top!</objective>
+<gamemode>arcade</gamemode>
+<version>1.0.3</version>
+<broadcasts>
+    <tip after="7s" every="30s">Plant trees on the dirt and use the bonemeal to grow them.</tip>
+    <tip after="4s" every="30s">You can only place dirt on leaves.</tip>
+    <tip after="1s" every="30s">Use your double-jump to climb the trees!</tip>
+</broadcasts>
+<authors>
+	<author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
+</authors>
+<players min="4" max="8" colors="true"/>
+<score>
+    <limit>10</limit>
+    <box points="10">
+        <region>
+            <cuboid min="-1,89,-2" max="2,90,1"/>
+        </region>
+    </box>
+</score>
+<spawns>
+	<spawn kit="spawn-kit" spread="true" outside="true" angle="0,33,0">
+        <regions>
+		    <point>-32,29,1</point>
+            <point>-26,29,-26</point>
+            <point>2,29,-35</point>
+            <point>24,29,-23</point>
+            <point>41,29,0</point>
+            <point>27,29,24</point>
+            <point>0,29,36</point>
+            <point>-22,29,24</point>
+        </regions>
+	</spawn>
+	<default>
+        <regions yaw="180">
+		    <point>0.5,6,0.5</point>
+        </regions>
+	</default>
+</spawns>
+<kits>
+	<kit id="spawn-kit">
+		<leggings color="667F33">leather leggings</leggings>
+		<boots color="667F33">leather boots</boots>
+        <game-mode>adventure</game-mode>
+        <item slot="4" amount="64">dirt</item>
+        <item slot="3" amount="64">sapling</item>
+        <item slot="5" amount="64">sapling</item>
+        <item slot="2" amount="64" damage="15">351</item>
+        <item slot="1" amount="64" damage="15">351</item>
+        <item slot="0" unbreakable="true">shears</item>
+        <item slot="6" amount="64" damage="15">351</item>
+        <item slot="7" amount="64" damage="15">351</item>
+        <item slot="8" amount="64" damage="15">351</item>
+        <double-jump power="4"/>
+	</kit>
+</kits>
+<item-mods>
+    <rule>
+        <match>
+            <material>dirt</material>
+        </match>
+        <modify>
+            <can-place-on>
+                <material>leaves</material>
+            </can-place-on>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material>sapling</material>
+        </match>
+        <modify>
+            <can-place-on>
+                <material>dirt</material>
+            </can-place-on>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material damage="15">351</material>
+        </match>
+        <modify>
+            <can-place-on>
+                <material>sapling</material>
+            </can-place-on>
+        </modify>
+    </rule>
+    <rule>
+        <match>
+            <material damage="15">351</material>
+            <material>dirt</material>
+            <material>sapling</material>
+            <material>shears</material>
+        </match>
+        <modify>
+            <can-destroy>
+                <material>leaves</material>
+            </can-destroy>
+        </modify>
+    </rule>
+</item-mods>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>dirt</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sapling</item>
+    <item>351</item>
+    <item>leaves</item>
+</itemremove>
+<disabledamage>
+	<damage>fall</damage>
+</disabledamage>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time>180s</time>
+</map>
