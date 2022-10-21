@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Limbo II</name>
-<version>1.0.11</version>
+<version>1.0.12</version>
 <edition>standard</edition>
 <objective>Be the first team to 750 points!</objective>
 <gamemode>koth</gamemode>
@@ -36,23 +36,7 @@
         <effect duration="5" amplifier="4">damage resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
-    <kit id="Jump-pad-fall-damage">
-        <effect>water_breathing</effect>
-    </kit>
-    <take kit="Jump-pad-fall-damage">
-        <filter>
-            <grounded/>
-        </filter>
-    </take>
 </kits>
-<damage>
-    <deny id="nofall">
-        <all>
-            <cause>fall</cause>
-            <effect>water_breathing</effect>
-        </all>
-    </deny>
-</damage>
 <spawns>
     <default kit="default-kit">
         <region yaw="180">
@@ -77,7 +61,6 @@
     </union>
     <apply velocity="@0,1.7,-0.1" region="south-pad"/>
     <apply velocity="@0,1.7,0.1" region="north-pad"/>
-    <apply kit="Jump-pad-fall-damage" region="jump-pads"/>
     <apply block="never" use="never"/>
 </regions>
 <king>
@@ -142,4 +125,30 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<filters> <!-- Disables fall damage when using jump pads, reenables it after landing -->
+    <all id="reset-antifall">
+        <not>
+            <region id="jump-pads"/>
+        </not>
+        <variable var="fall_variable">1</variable>
+        <grounded/>
+    </all>
+</filters>
+<actions>
+    <set id="fall-var-0" var="fall_variable" value="0" scope="player"/>
+    <set id="fall-var-1" var="fall_variable" value="1" scope="player"/>
+    <trigger filter="jump-pads" trigger="fall-var-1" scope="player"/>
+    <trigger filter="reset-antifall" trigger="fall-var-0" scope="player"/>
+</actions>
+<variables>
+    <variable id="fall_variable" scope="player"/>
+</variables>
+<damage>
+    <deny id="nofall">
+        <all>
+            <cause>fall</cause>
+            <variable var="fall_variable">1</variable>
+        </all>
+    </deny>
+</damage>
 </map>
