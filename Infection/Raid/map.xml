@@ -1,6 +1,6 @@
-<map proto="1.4.0" game="Infection">
+<map proto="1.4.2" game="Infection">
 <name>Raid</name>
-<version>1.2.4</version>
+<version>1.2.5</version>
 <objective>Try not to get killed by the infected. Humans win by default after the timer ends.</objective>
 <gamemode>arcade</gamemode>
 <authors>
@@ -80,15 +80,15 @@
     </spawn>
     <default>
         <regions yaw="180">
-            <point>-980,57,-990</point>
+            <point>-980.5,57,-990.5</point>
         </regions>
     </default>
 </spawns>
 <broadcasts>
     <alert after="1s">The infected will be released after 10 seconds!</alert>
     <alert after="10s">The infected have been released!</alert>
-    <tip after="3s" filter="only-humans">You are a Human, You must survive for as long as possible against the infected. If you die, you will become part of the Infected!</tip>
-    <tip after="3s" filter="only-infected">You are Infected, You must kill all of the Humans to win!</tip>
+    <tip after="3s" filter="only-humans">You are a Human, you must survive for as long as possible against the infected. If you die, you will become part of the Infected!</tip>
+    <tip after="3s" filter="only-infected">You are Infected, you must kill all of the Humans to win!</tip>
 </broadcasts>
 <damage>
     <deny>
@@ -112,16 +112,18 @@
     <not id="deny-void">
         <void/>
     </not>
+    <deny id="deny-dirt-trample">
+        <material>soil</material> <!-- farmland -->
+    </deny>
     <not id="deny-ender-chest">
         <material>ender chest</material>
     </not>
 </filters>
+<regions>
+    <apply block="deny-dirt-trample"/>
+</regions>
 <control-points>
-    <control-point id="win-point" name="Infected Win!" required="true" capture-time="10s" show-progress="true">
-        <capture>
-            <everywhere/>
-        </capture>
-    </control-point>
+    <control-point id="win-point" name="Infected Win!" required="true" capture-time="0s" show-progress="true" capture="everywhere"/>
 </control-points>
 <itemremove>
     <item>leather helmet</item>

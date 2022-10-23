@@ -1,12 +1,12 @@
 <map proto="1.4.2">
 <name>Grassy Mound CTF</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Capture the other team's flag 3 times to win!</objective>
 <gamemode>ctf</gamemode>
-<time result="score" overtime="1m" max-overtime="2m">15m</time>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
 </authors>
+<time result="score" overtime="1m" max-overtime="2m">15m</time>
 <teams>
     <team id="blue-team" color="blue" max="12">Blue</team>
     <team id="red-team" color="dark red" max="12">Red</team>
@@ -28,7 +28,7 @@
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="iron boots"/>
-        <effect duration="4" amplifier="255">resistance</effect>
+        <effect duration="4s" amplifier="255">resistance</effect>
     </kit>
     <kit id="blue-kit" parents="spawn-kit">
         <item slot="5" amount="36" damage="11" material="stained clay"/>
@@ -39,11 +39,11 @@
     <kit id="flag-pickup" force="true">
         <effect>slowness</effect>
         <effect amplifier="-2">health boost</effect>
-        <effect duration="3" amplifier="2">absorption</effect>
+        <effect duration="3s" amplifier="2">absorption</effect>
     </kit>
     <kit id="flag-dropped" force="true">
-        <effect duration="0" amplifier="0">slowness</effect>
-        <effect duration="0" amplifier="1">health boost</effect>
+        <effect duration="0s">slowness</effect>
+        <effect duration="0s">health boost</effect>
     </kit>
 </kits>
 <spawns>
@@ -70,7 +70,10 @@
         <void/>
     </deny>
     <deny id="void-break-ban">
-        <material>web</material>
+        <all>
+            <material>web</material>
+            <void/>
+        </all>
     </deny>
     <deny id="deny-player-cause">
         <cause>player</cause>

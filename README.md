@@ -30,7 +30,7 @@ In order to remove undesired portions of the map as well as to decrease its tota
 
 ### XML Creation
 
--   All maps must include a valid `map.xml` to function properly with PGM. The map protocol must be `1.4.0` or above.
+-   All maps must include a valid `map.xml` to function properly with PGM. The map protocol must be `1.4.2` (older maps are exempt from this requirement).
 -   The map version **must** follow the [Semantic Versioning](https://semver.org/) standard.
     -   For example, all new maps will begin at version `1.0.0`. You must increase the version number accordingly with any updates toward that map.
 -   Refer to [Additional Resources](#additional-resources) on following proper XML format.
