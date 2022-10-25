@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<map proto="1.4.2" game="Infection">
+<map>
 <!-- Created by Cazadorian -->
-<!-- Include version 1.0.1 --> 
+<!-- Include version 1.0.3 --> 
 <objective>Survive against the Zombies for 8 minutes!</objective>
 <time result="human-team">8m</time>
 <gamemode>arcade</gamemode>
+<game>Infection</game>
 <blitz filter="never" join-filter="always">
     <broadcastLives>false</broadcastLives>
 </blitz>
@@ -14,8 +15,8 @@
     <tip after="20s" every="2m">Zombies are able to double-jump every 7 seconds.</tip>
 </broadcasts>
 <teams>
-    <team id="human-team" color="gold" plural="true" min="1" max="30">Humans</team>
     <team id="zombie-team" color="dark green" show-name-tags="false" plural="true" min="1" max="8">Zombies</team>
+    <team id="human-team" color="gold" plural="true" min="1" max="30">Humans</team>
 </teams>
 <kits>
     <kit id="human-kit">
@@ -56,9 +57,6 @@
 <regions>
     <apply block="deny-participating"/>
 </regions>
-<destroyables name="cage" required="false" show="false" materials="stained_glass" modes="zombie-release">
-    <destroyable owner="zombie-team" region="zombie-cage"/>
-</destroyables>
 <itemremove>
     <item>arrow</item>
     <item>leather helmet</item>
