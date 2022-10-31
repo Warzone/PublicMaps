@@ -1,4 +1,4 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Acear I</name>
 <version>1.2.3</version>
 <objective>First team to capture the enemy flag 3 times wins!</objective>
@@ -97,7 +97,7 @@
     </complement>
     <cuboid id="spawn-protection-1" min="6,20,7" max="-6,27,-7"/>
     <cuboid id="water" min="-57,0,-21" max="58,1,22"/>
-<!-- Applied -->
+    <!-- Applied -->
     <apply enter="red-only" region="red-spawn" message="Only Red Team may enter this spawn!"/>
     <apply enter="blue-only" region="blue-spawn" message="Only Blue Team may enter this spawn!"/>
     <apply block="never" message="You may not edit the spawn area" region="spawn-protection-1"/>
@@ -133,11 +133,11 @@
     </default>
 </spawns>
 <flags>
-<!-- Red's Flag -->
+    <!-- Red's Flag -->
     <post id="red-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="blue-only">37.5,1,0.5</post>
     <flag id="red-flag" name="Red Flag" color="red" post="red-flag-post"/>
     <net post="red-flag-post" points="1" region="blue-net" capture-filter="blue-only"/>
-<!-- Blue's Flag -->
+    <!-- Blue's Flag -->
     <post id="blue-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="red-only">-36.5,1,0.5</post>
     <flag id="blue-flag" name="Blue Flag" color="blue" post="blue-flag-post"/>
     <net post="blue-flag-post" points="1" region="red-net" capture-filter="red-only"/>

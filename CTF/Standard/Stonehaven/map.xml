@@ -1,21 +1,15 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Stonehaven</name>
 <version>1.0.1</version>
 <objective>Grab the enemy flag and bring it back to your flag stand!</objective>
 <gamemode>ctf</gamemode>
 <authors>
-    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/>
-    <!--  StealthMedia  -->
-    <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/>
-    <!--  Zelocksurian  -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+    <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/> <!-- Zelocksurian -->
 </authors>
 <broadcasts>
-    <tip after="5s" every="2m">
-    `7Type `b`l/classes `7to view a list of available classes for this map.
-    </tip>
-    <tip after="6s" every="2m">
-    `7To select one, enter `b`l/class [classname]`7. Your class will change upon respawn.
-    </tip>
+    <tip after="5s" every="2m">`7Type `b`l/classes `7to view a list of available classes for this map.</tip>
+    <tip after="6s" every="2m">`7To select one, enter `b`l/class [classname]`7. Your class will change upon respawn.</tip>
 </broadcasts>
 <teams>
     <team id="red" color="dark red" max="10" max-overfill="12">Red</team>
@@ -25,7 +19,7 @@
     <limit>3</limit>
 </score>
 <classes family="Classes" sticky="false">
-    <class name="§4Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
+    <class name="Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
         <kit>
             <item slot="0" name="`4Sword">stone sword</item>
             <chestplate locked="true" enchantments="protection_projectile:2">chainmail chestplate</chestplate>
@@ -33,7 +27,7 @@
             <potion duration="oo" amplifier="1">fire resistance</potion>
         </kit>
     </class>
-    <class name="§2Defense" default="false" description="Defend your flag!" icon="iron chestplate">
+    <class name="Defense" default="false" description="Defend your flag!" icon="iron chestplate">
         <kit>
             <item slot="0" name="`2Sword">stone sword</item>
             <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true">potion</item>
@@ -45,7 +39,7 @@
             <potion duration="oo" amplifier="1">slow</potion>
         </kit>
     </class>
-    <class name="§5Support" default="false" description="Support Your Teammates!" icon="potion">
+    <class name="Support" default="false" description="Support your teammates!" icon="potion">
         <kit>
             <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2">bow</item>
             <item slot="27" name="`5Arrow">arrow</item>
@@ -123,7 +117,6 @@
     <cuboid id="blue-net" min="25,28,-46" max="28,35,-43"/>
     <cuboid id="jump-red" min="10,10,16" max="11,11,18"/>
     <cuboid id="jump-blue" min="39,10,-16" max="40,11,-14"/>
-    
     <apply block="never" use="only-chests"/>
     <apply velocity="0,1.75,0">
         <region>
@@ -143,7 +136,6 @@
     <flag id="red-flag" name="Red Flag" color="red">
         <post id="red-flag-post" pickup-filter="blue-pickup" respawn-time="30s" recover-time="0s">23,28,46</post>
     </flag>
-    
     <net flag="red-flag" points="1" region="blue-net" capture-filter="not-blue" return="blue-flag"/>
     <net flag="blue-flag" points="1" region="red-net" capture-filter="not-red" return="red-flag"/>
 </flags>
