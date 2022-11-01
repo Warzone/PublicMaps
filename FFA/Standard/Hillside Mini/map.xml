@@ -1,0 +1,183 @@
+<map proto="1.4.0">
+<name>Hillside Mini</name>
+<slug>hillside_mini_5x5</slug>
+<version>1.2.1</version>
+<objective>Kill as many players as you can in 5 minutes!</objective>
+<gamemode>ffa</gamemode>
+<authors>
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samthecat43 -->
+</authors>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+    <rule>Hunger is disabled.</rule>
+</rules>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<players min="3" max="5" max-overfill="5" show-name-tags="true"/>
+<spawns>
+    <default kit="obs">
+        <region yaw="90">
+            <point yaw="90">82.5,36,96.5</point>
+        </region>
+    </default>
+    <spawn kit="player" spread="true">
+        <regions>
+            <point yaw="-139">7.5,16,62.5</point>
+            <point yaw="37">123.5,38,89.5</point>
+            <point yaw="3">109.5,38,2.5</point>
+            <point yaw="-23">6.5,37,110.5</point>
+            <point yaw="-40">6.5,15,45.5</point>
+            <point yaw="107">43.5,37,135.5</point>
+            <point yaw="-20">3.5,36,76.5</point>
+            <point yaw="156">15.5,38,129.5</point>
+            <point yaw="168">36.5,26,114.5</point>
+            <point yaw="-92">26.5,25,105.5</point>
+            <point yaw="-87">75.5,37,112.5</point>
+            <point yaw="-158">45.5,27,99.5</point>
+            <point yaw="-87">27.5,27,73.5</point>
+            <point yaw="-33">52.5,25,66.5</point>
+            <point yaw="140">64.5,35,109.5</point>
+            <point yaw="150">109.5,34,46.5</point>
+            <point yaw="1">80.5,38,17.5</point>
+            <point yaw="-50">68.5,35,40.5</point>
+            <point yaw="-79">67.5,40,44.5</point>
+            <point yaw="-116">74.5,38,131.5</point>
+            <point yaw="-43">80.5,36,96.5</point>
+            <point yaw="121">118.5,37,116.5</point>
+            <point yaw="159">96.5,37,134.5</point>
+            <point yaw="14">119.5,42,84.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="player">
+        <item slot="0" unbreakable="true" locked="true">wood sword</item>
+        <item slot="1" unbreakable="true" locked="true">bow</item>
+        <item slot="2" unbreakable="true">stone pickaxe</item>
+        <item slot="3" amount="16">cobblestone</item>
+        <item slot="8" amount="6">arrow</item>
+        <effect duration="3s" amplifier="10">resistance</effect>
+        <helmet color="FDD22E" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="FDD22E" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true">iron leggings</leggings>
+        <boots color="FDD22E" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="kill">
+        <potion duration="3" amplifier="3">regeneration</potion>
+        <potion duration="4" amplifier="2">speed</potion>
+    </kit>
+    <kit id="obs">
+        <effect duration="oo" amplifier="1">night vision</effect>
+    </kit>
+</kits>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>suffocation</damage>
+</disabledamage>
+<respawn delay="2s" blackout="false"/>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <any id="placeable">
+        <material>cobblestone</material>
+        <material>tnt</material>
+    </any>
+    <any id="apply-some">
+        <material>cobblestone</material>
+        <material>leaves</material>
+        <material>leaves 2</material>
+        <material>double plant</material>
+        <material>31</material>
+        <material>hay block</material>
+        <material>tnt</material>
+    </any>
+</filters>
+<tnt>
+    <instantignite>true</instantignite>
+    <blockdamage>true</blockdamage>
+    <power>4</power>
+    <fuse>2</fuse>
+    <friendly-defuse>false</friendly-defuse>
+    <licensing>false</licensing>
+</tnt>
+<regions>
+    <apply block-break="apply-some" message="You aren't allowed to do that!"/>
+        <region id="everywhere"/>
+    <apply block-place="placeable" message="You can't place that here!"/>
+        <region id="everywhere"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <kit>
+            <potion duration="3" amplifier="3">regeneration</potion>
+            <potion duration="4" amplifier="2">speed</potion>
+        </kit>    
+            <item amount="8">cobblestone</item>
+            <item amount="5" material="arrow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item amount="1">tnt</item>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+    <damage self="false">block explosion</damage>
+</disabledamage>
+<block-drops>
+    <rule>
+        <!-- 100% of blocks broken by an explosion get turned into falling/flying blocks -->
+        <fall-chance>1.0</fall-chance>
+        <!-- 50% of the falling blocks will be placed when they land -->
+        <land-chance>1.0</land-chance>
+   </rule>
+    <!-- Increase the speed of flying blocks by 50% in the central region -->
+    <rule fall-speed="1.0">
+        <region>
+            <region id="everywhere"/>
+        </region>
+   </rule>
+</block-drops>
+<falling-blocks>
+    <rule>
+        <filter>
+            <any>
+                <material>cobblestone</material>      
+                <material>brick</material>
+                <material>brick stairs</material>
+                <material damage="4">44</material>
+                <material>gravel</material>
+            </any>
+        </filter>
+    </rule>
+</falling-blocks>
+<itemremove>
+    <item>wood sword</item>
+    <item>bow</item>
+    <item>iron helmet</item>
+    <item>iron leggings</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>seeds</item>
+    <item>wood sword</item>
+    <item>stone pickaxe</item>
+    <item>cobblestone</item>
+    <item>beetroot</item>
+    <item>sapling</item>
+    <item damage="4">44</item>
+    <item>brick stairs</item>
+    <item damage="1">350</item>
+</itemremove>
+<timelock>on</timelock>
+</map>
