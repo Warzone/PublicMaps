@@ -1,0 +1,95 @@
+<map proto="1.4.0" game="Rage">
+    <name>Netherrage</name>
+    <version>1.0.0</version>
+    <objective>Be the last team standing!</objective>
+    <gamemode>rage</gamemode>
+    <gamemode>arcade</gamemode>
+    <gamemode>blitz</gamemode>
+    <authors>
+        <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Infection idea + XML Help" />
+        <!-- AtlasGames -->
+    </authors>
+    <rage/>
+    <time>4m</time>
+    <hunger>
+        <depletion>off</depletion>
+    </hunger>
+    <blitz>
+        <lives>2</lives>
+    </blitz>
+    <teams>
+        <team id="ghast-team" color="white" max="12" max-overfill="16">Ghast</team>
+        <team id="blaze-team" color="yellow" max="12" max-overfill="16">Blaze</team>
+        <team id="skele-team" color="gray" max="12" max-overfill="16">Nether Skeleton</team>
+        <team id="magma-team" color="dark red" max="12" max-overfill="16">Magma Cube</team>
+    </teams>
+    <spawns>
+        <spawn team="ghast-team" kit="ghast-kit">
+            <regions>
+                <point yaw="135">37.5,10,80.5</point>
+            </regions>
+        </spawn>
+        <spawn team="blaze-team" kit="blaze-kit">
+            <regions>
+                <point yaw="-135">-117.5,10,29.5</point>
+            </regions>
+        </spawn>
+        <spawn team="skele-team" kit="skele-kit">
+            <regions>
+                <point yaw="-45">-66.5,10,-125.5</point>
+            </regions>
+        </spawn>
+        <spawn team="magma-team" kit="magma-kit">
+            <regions>
+                <point yaw="45">88.5,10,-74.5</point>
+            </regions>
+        </spawn>
+        <default>
+            <regions>
+                <point yaw="90">-12.5,31,-22.5</point>
+            </regions>
+        </default>
+    </spawns>
+    <kits>
+        <kit id="spawn">
+            <potion duration="oo" amplifier="1">speed</potion>
+            <item slot="0" enchantment="damage all:10" unbreakable="true">iron sword</item>
+            <item slot="1" enchantment="arrow damage:10" unbreakable="true">bow</item>
+            <item slot="2" amount="2">arrow</item>
+            <chestplate unbreakable="true">chainmail chestplate</chestplate>
+            <leggings color="191919" unbreakable="true">leather leggings</leggings>
+            <boots color="191919" unbreakable="true">leather boots</boots>
+        </kit>
+        <kit id="ghast-kit" parent="spawn">
+            <helmet color="FFFFFF" unbreakable="true">leather helmet</helmet>
+        </kit>
+        <kit id="blaze-kit" parent="spawn">
+            <helmet color="E5E533" unbreakable="true">leather helmet</helmet>
+        </kit>
+        <kit id="skele-kit" parent="spawn">
+            <helmet color="4C4C4C" unbreakable="true">leather helmet</helmet>
+        </kit>
+        <kit id="magma-kit" parent="spawn">
+            <helmet color="B24CD8" unbreakable="true">leather helmet</helmet>
+        </kit>
+    </kits>
+    <itemremove>
+        <item>iron sword</item>
+        <item>bow</item>
+        <item>arrow</item>
+        <item>chainmail chestplate</item>
+        <item>leather leggings</item>
+        <item>leather boots</item>
+        <item>leather helmet</item>
+    </itemremove>
+    <itemkeep>
+        <item>nether star</item>
+    </itemkeep>
+    <kill-reward>
+        <item>arrow</item>
+        <item slot="8">nether star</item>
+    </kill-reward>
+    <regions>
+        <apply block="never" />
+    </regions>
+</map>
