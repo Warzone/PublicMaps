@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<map proto="1.4.0" game="FFA">
+<name>Hillside</name>
+<version>1.1.1</version>
+<objective>The player with the most kills after 15 minutes wins.</objective>
+<gamemode>ffa</gamemode>
+<phase>development</phase>
+<!-- Major map authors. -->
+<authors>
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samthecat43 -->
+</authors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+    <rule>Players have double jump!</rule>
+    <rule>You may team with other players.</rule>
+    <rule>Hunger is disabled.</rule>
+</rules>
+<time>10m</time>
+<players min="2" max="100" max-overfill="110" show-name-tags="false"/>
+<score>
+    <kills>1</kills>
+</score>
+<broadcasts>
+    <alert after="2s">`aWelcome to`r `e`lHillside FFA`r`b!</alert>
+    <tip after="7" every="1m">`9Every kill awards you:</tip>
+    <tip after="8" every="1m">`a20`r `9extra blocks</tip>
+    <tip after="9" every="1m">`a8`r `9extra arrows</tip>
+    <tip after="10" every="1m">`9and an extra block of`r `e`lTNT</tip>
+    <tip after="56" every="84s">`3Every 5-kill streak you get a `5Rocket `bto throw at enemies!</tip>
+</broadcasts>
+<kits>
+    <kit id="obs">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="player" force="true">
+            <item slot="0" material="iron pickaxe" unbreakable="true" show-can-destroy="true" show-unbreakable="false">
+                <can-destroy>
+                    <material damage="4">stained clay</material>
+                    <material damage="3">stone</material>
+                    <material damage="5">stone</material>
+                    <material>stone</material>
+                    <material>leaves</material>
+                    <material>ladder</material>
+                </can-destroy>
+            </item>
+            <item slot="1" unbreakable="true">bow</item>
+                <item slot="2" material="iron spade" unbreakable="true" show-can-destroy="true" show-unbreakable="false">
+                    <can-destroy>
+                        <material>dirt</material>
+                        <material>grass</material>
+                        <material>gravel</material>
+                    </can-destroy>
+                </item>
+            <item slot="3" material="stained clay" amount="48" damage="4">
+                <can-place-on>
+                    <material>stained clay</material>
+                    <material>grass</material>
+                    <material>stone</material>
+                    <material>gravel</material>
+                    <material damage="5">stone</material>
+                    <material damage="3">stone</material>
+                    <material>162</material>
+                    <material>5</material>
+                    <material damage="1">5</material>
+                    <material>126</material>
+                    <material damage="1">126</material>
+                    <material>17</material>
+                    <material damage="3">44</material>
+                    <material>67</material>
+                    <material>dirt</material>
+                </can-place-on>
+            </item>
+            <item slot="4" material="ladder" amount="12">
+                <can-place-on>
+                    <material>stained clay</material>
+                    <material>grass</material>
+                    <material>stone</material>
+                    <material>gravel</material>
+                    <material damage="5">stone</material>
+                    <material damage="3">stone</material>
+                    <material>162</material>
+                    <material>5</material>
+                    <material damage="1">5</material>
+                    <material>126</material>
+                    <material damage="1">126</material>
+                    <material>17</material>
+                    <material damage="3">44</material>
+                    <material>67</material>
+                    <material>dirt</material>
+                </can-place-on>
+            </item>
+            <item slot="7" amount="1">golden apple</item>
+            <item slot="8" material="tnt" amount="3">
+                <can-place-on>
+                    <material>stained clay</material>
+                    <material>grass</material>
+                    <material>stone</material>
+                    <material>gravel</material>
+                    <material damage="5">stone</material>
+                    <material damage="3">stone</material>
+                    <material>162</material>
+                    <material>5</material>
+                    <material damage="1">5</material>
+                    <material>126</material>
+                    <material damage="1">126</material>
+                    <material>17</material>
+                    <material damage="3">44</material>
+                    <material>67</material>
+                    <material>dirt</material>
+                </can-place-on>
+            </item>
+             <item slot="28" amount="24">arrow</item>
+            <helmet locked="true" damage="4">stained clay</helmet>
+            <chestplate unbreakable="true" color="E5E533" locked="true">leather chestplate</chestplate>
+            <boots material="diamond boots" unbreakable="true" locked="true">
+                <enchantment level="2">blast_protection</enchantment>
+            </boots>
+            <potion duration="2" amplifier="10">damage resistance</potion>
+            <potion duration="oo">night vision</potion>
+            <potion duration="oo" amplifier="1">speed</potion>
+            <double-jump power="3" recharge-time="3s" recharge-before-landing="true"/>
+            <health>16</health>
+            <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<regions>
+    <cuboid id="central-region" min="0,1,0" max="306,154,327"/>
+    <apply block="no-void"/>
+</regions>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+</filters>
+<spawns>
+    <default kit="obs">
+        <region yaw="90">
+            <cylinder base="119,78,164" radius="2" height="0"/>
+        </region>
+    </default>
+    <spawn kit="player" spread="true" safe="true">
+        <region>
+        	<region id="central-region"/>
+        </region>
+    </spawn>
+</spawns>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <!-- Disable fall damage -->
+    <damage>fall</damage>
+    <damage enemy="false" other="false">block explosion</damage>
+</disabledamage>    
+<maxbuildheight>220</maxbuildheight>
+<kill-reward>
+    <item material="stained clay" amount="20" damage="4">
+        <can-place-on>
+            <material>stained clay</material>
+            <material>grass</material>
+            <material>stone</material>
+            <material>gravel</material>
+            <material damage="5">stone</material>
+            <material damage="3">stone</material>
+            <material>162</material>
+            <material>5</material>
+            <material damage="1">5</material>
+            <material>126</material>
+            <material damage="1">126</material>
+            <material>17</material>
+            <material damage="3">44</material>
+            <material>67</material>
+            <material>dirt</material>
+        </can-place-on>
+    </item>
+    <item material="tnt">
+        <can-place-on>
+            <material>stained clay</material>
+            <material>grass</material>
+            <material>stone</material>
+            <material>gravel</material>
+            <material damage="5">stone</material>
+            <material damage="3">stone</material>
+            <material>162</material>
+            <material>5</material>
+            <material damage="1">5</material>
+            <material>126</material>
+            <material damage="1">126</material>
+            <material>17</material>
+            <material damage="3">44</material>
+            <material>67</material>
+            <material>dirt</material>
+        </can-place-on>
+    </item>
+    <item amount="8">arrow</item>
+    <item amount="1">golden apple</item>
+</kill-reward>
+<killreward>
+      <filter>
+        <kill-streak count="5"/>
+      </filter>
+      <item name="`5Rocket" amount="1" grenade="true" grenade-power="3" grenade-destroy="true" grenade-fire="true">ender pearl</item>
+</killreward>
+<itemremove>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>snow ball</item>
+    <item>ender pearl</item>
+    <item>tnt</item>
+    <item>ladder</item>
+    <item damage="4">stained clay</item>
+    <item>grass</item>
+    <item damage="5">stone</item>
+    <item>gravel</item>
+    <item damage="3">stone</item>
+    <item>dirt</item>
+    <item>stone</item>
+    <item>water_lily</item>
+    <item>seeds</item>
+    <item>iron pickaxe</item>
+    <item>iron spade</item>
+    <item>diamond boots</item>
+    <item>leather chestplate</item>
+    <item>potion</item>
+    <item>leaves</item>
+    <item>log 2</item>
+    <item>flint</item>
+    <item>cobblestone</item>
+    <item>sign</item>
+    <item>bow</item>
+    <item>wood</item>
+    <item>log</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>seeds</item>
+</itemremove>
+<tnt>
+    <instantignite>true</instantignite>
+    <blockdamage>true</blockdamage>
+    <power>4</power>
+    <fuse>2</fuse>
+    <friendly-defuse>false</friendly-defuse>
+    <licensing>false</licensing>
+</tnt>
+<respawn delay="3s" blackout="false" auto="true" spectate="true" message="Ouch, You Died!"/>
+</map>
