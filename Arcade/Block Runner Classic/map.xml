@@ -1,6 +1,7 @@
 <map proto="1.4.0" game="`eProgress">
 <name>Block Runner: Classic</name>
-<version>1.0.1</version>
+<!-- lets use tripwire to replace xml -->
+<version>1.0.2</version>
 <authors>
     <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
@@ -18,7 +19,7 @@
 </spawns>
 <regions>
     <block id="spawn-location">-70,6,103</block>
-    <cuboid id="mon" min="-72,2,101" max="-70,3,104"/>
+    <!-- <cuboid id="mon" min="-72,2,101" max="-70,3,104"/> -->
     <below id="checkpoint1" x="-110"/>
     <below id="checkpoint2" x="-176"/>
     <below id="checkpoint3" x="-238"/>
@@ -31,10 +32,11 @@
 </blitz>
 <players max="50" colors="true"/>
 <broadcasts>
-    <alert after="2s">`6`lBlocks falling in 3 seconds</alert>
+    <!-- <alert after="s">`6`lBlocks falling in 3 seconds</alert>
     <alert after="3s">`6`lBlocks falling in 2 seconds</alert>
     <alert after="4s">`6`lBlocks falling in 1 seconds</alert>
-    <alert after="5s">`6`lThe path is falling away! Run!</alert>
+    <alert after="5s">`6`lThe path is falling away! Run!</alert> -->
+    <alert after="1s">`6`lThe path is falling away! Run!</alert>
 </broadcasts>
 <time>2m</time>
 <score>
@@ -98,19 +100,19 @@
         <health>1</health>
     </kit>
 </kits>
-<structures>
+<!-- <structures>
     <structure id="mon-struct" region="mon" air="false"/>
     <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
-</structures>
+</structures> -->
 <portals>
     <portal y="-64" sound="false">
         <region><below y="-5"/></region>
     </portal>
 </portals>
 <filters>
-    <not id="countdown">
+    <!-- <not id="countdown">
         <time>5s</time>
-    </not>
+    </not> -->
     <not id="all-blocks">
         <material>air</material>
     </not>
