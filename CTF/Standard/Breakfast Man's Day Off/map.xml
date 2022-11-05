@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Breakfast Man's Day Off</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Retrieve both enemy flags two times each and carry them to your spawn.</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -40,12 +40,8 @@
     </kit>
 </kits>
 <filters>
-    <any id="only-red">
-        <team>red-team</team>
-    </any>
-    <any id="only-blue">
-        <team>blue-team</team>
-    </any>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
     <not id="deny-void">
         <void/>
     </not>
@@ -79,11 +75,7 @@
             <block id="spawner">178.5,8,24.5</block>
         </region>
     </apply>
-    <apply block="deny-void" message="You may not build in the void!">
-        <region>
-            <everywhere/>
-        </region>
-    </apply>
+    <apply block="deny-void" message="You may not build in the void!"/>
 </regions>
 <score>
     <limit>4</limit>
@@ -133,7 +125,6 @@
         </modify>
     </rule>
 </item-mods>
-<maxbuildheight>59</maxbuildheight>
 <itemremove>
     <item>stone:5</item>
     <item>stained clay:3</item>
@@ -164,4 +155,5 @@
     <tool unbreakable="true">leather chestplate</tool>
     <tool unbreakable="true" enchantment="depth strider:2">diamond boots</tool>
 </toolrepair>
+<maxbuildheight>59</maxbuildheight>
 </map>
