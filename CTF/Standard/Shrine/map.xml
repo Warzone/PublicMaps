@@ -1,6 +1,6 @@
-<map proto="1.3.6">
+<map proto="1.4.2">
 <name>Shrine</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Capture the enemy flag and control the center flag to reach the score limit first.</objective>
 <gamemode>ctf</gamemode>
 <phase>development</phase>
@@ -16,115 +16,57 @@
 </contributors>
 <broadcasts>
     <tip after="1s">This map is a KotF/CTF map. You have to capture the flags to gain points.</tip>
-    <tip after="3s">Capture the Orange/Cyan Flags in your team's spawn. Each capture awards the team 30 points.</tip>
+    <tip after="3s">Capture the enemy's flags in your team's spawn. Each capture awards your team 30 points.</tip>
     <tip after="5s">The Shrine flag needs to be captured and protected at the emerald block, located in the center of your team's side.</tip>
     <tip after="7s">To win you have to be the first team to reach 220 points. Good luck!</tip>
-    <tip after="5m">You have to capture the flags to gain points.</tip>
-    <tip after="302s">Capture the Orange/Cyan Flags in your team's spawn. Each capture awards the team 30 points.</tip>
-    <tip after="304s">The Shrine flag needs to be captured and protected at the emerald block, located in the center of your team's side.</tip>
 </broadcasts>
 <score>
     <limit>220</limit>
-    <kills>0</kills>
-    <deaths>0</deaths>
 </score>
 <teams>
     <team id="orange" color="gold" max="18" max-overfill="22">Orange</team>
     <team id="cyan" color="dark aqua" max="18" max-overfill="22">Cyan</team>
 </teams>
 <kits>
-    <kit name="spawn">
+    <kit id="spawn">
         <clear/>
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="2" amount="48">bread</item>
-        <item slot="3" amount="1">golden apple</item>
-        <item slot="28" amount="32">arrow</item>
-        <item slot="4" name="Speed Boost" damage="16386" potions="speed:20:2:false">potion</item>
-        <leggings damage="-3000">chainmail leggings</leggings>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" amount="48" material="bread"/>
+        <item slot="3" amount="1" material="golden apple"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <item slot="4" name="Speed Boost" damage="16386" potions="speed:20:2:false" material="potion"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
         <potion duration="5" amplifier="10">heal</potion>
         <potion duration="5" amplifier="10">damage resistance</potion>
     </kit>
-    <kit name="orange-kit" parents="spawn">
-        <helmet color="D87F33" damage="-3000">leather helmet</helmet>
-        <chestplate color="D87F33" damage="-3000">leather chestplate</chestplate>
-        <boots color="D87F33" damage="-3000">leather boots</boots>
+    <kit id="orange-kit" parents="spawn">
+        <helmet color="D87F33" unbreakable="true" material="leather helmet"/>
+        <chestplate color="D87F33" unbreakable="true" material="leather chestplate"/>
+        <boots color="D87F33" unbreakable="true" material="leather boots"/>
     </kit>
-    <kit name="cyan-kit" parents="spawn">
-        <helmet color="4C7F99" damage="-3000">leather helmet</helmet>
-        <chestplate color="4C7F99" damage="-3000">leather chestplate</chestplate>
-        <boots color="4C7F99" damage="-3000">leather boots</boots>
+    <kit id="cyan-kit" parents="spawn">
+        <helmet color="4C7F99" unbreakable="true" material="leather helmet"/>
+        <chestplate color="4C7F99" unbreakable="true" material="leather chestplate"/>
+        <boots color="4C7F99" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
-<filters>
-    <filter name="only-orange">
-        <team>orange</team>
-    </filter>
-    <filter name="only-cyan">
-        <team>cyan</team>
-    </filter>
-</filters>
-<regions>
-    <rectangle name="map" min="oo,oo" max="-oo,-oo"/>
-    <union name="orange-spawns">
-        <cylinder base="164.5,11,125.5" radius="0" height="0"/>
-        <cylinder base="252.5,11,125.5" radius="0" height="0"/>
-    </union>
-    <union name="cyan-spawns">
-        <cylinder base="164.5,11,317.5" radius="0" height="0"/>
-        <cylinder base="252.5,11,317.5" radius="0" height="0"/>
-    </union>
-    <union name="orange-spawns-protection">
-        <cuboid min="158,9,140" max="165,14,139"/>
-        <cuboid min="164,9,139" max="172,14,138"/>
-        <cuboid min="171,9,138" max="177,14,137"/>
-        <cuboid min="258,9,140" max="252,14,139"/>
-        <cuboid min="253,9,139" max="245,14,138"/>
-        <cuboid min="246,9,138" max="240,14,137"/>
-    </union>
-    <union name="cyan-spawns-protection">
-        <cuboid min="259,9,303" max="252,14,304"/>
-        <cuboid min="253,9,304" max="245,14,305"/>
-        <cuboid min="246,9,305" max="240,14,306"/>
-        <cuboid min="158,9,303" max="165,14,304"/>
-        <cuboid min="164,9,304" max="172,14,305"/>
-        <cuboid min="171,9,305" max="177,14,306"/>
-    </union>
-    <cuboid name="orange-wool-room" min="198,11,330" max="219,16,329"/>
-    <cuboid name="cyan-wool-room" min="198,11,114" max="219,16,113"/>
-    <union name="orange-nets">
-        <block>252.5,11,125.5</block>
-        <block>164.5,11,125.5</block>
-    </union>
-    <union name="cyan-nets">
-        <block>252.5,11,317.5</block>
-        <block>164.5,11,317.5</block>
-    </union>
-    <block name="orange-shrine-net">208.5,10,174.5</block>
-    <block name="cyan-shrine-net">208.5,10,324.5</block>
-    <!-- Applied -->
-    <apply block="deny-all">
-        <region name="map"/>
-    </apply>
-    <apply enter="only-orange" message="Only Orange Team is allowed here!">
-        <region name="orange-spawns-protection"/>
-        <region name="orange-wool-room"/>
-    </apply>
-    <apply enter="only-cyan" message="Only Cyan Team is allowed here!">
-        <region name="cyan-spawns-protection"/>
-        <region name="cyan-wool-room"/>
-    </apply>
-</regions>
 <spawns>
     <spawn team="orange" kit="orange-kit">
-        <regions yaw="0">
-            <region name="orange-spawns"/>
-        </regions>
+        <region yaw="0">
+            <point>164.5,11,125.5</point>
+        </region>
+        <region yaw="0">
+            <point>252.5,11,125.5</point>
+        </region>
     </spawn>
     <spawn team="cyan" kit="cyan-kit">
-        <regions yaw="180">
-            <region name="cyan-spawns"/>
-        </regions>
+        <region yaw="180">
+            <point>164.5,11,317.5</point>
+        </region>
+        <region yaw="180">
+            <point>252.5,11,317.5</point>
+        </region>
     </spawn>
     <default>
         <regions yaw="-90">
@@ -132,6 +74,48 @@
         </regions>
     </default>
 </spawns>
+<filters>
+    <team id="only-orange">orange</team>
+    <team id="only-cyan">cyan</team>
+</filters>
+<regions>
+    <union id="orange-areas">
+        <union id="orange-spawns-protection">
+            <cuboid min="158,9,140" max="165,14,139"/>
+            <cuboid min="164,9,139" max="172,14,138"/>
+            <cuboid min="171,9,138" max="177,14,137"/>
+            <cuboid min="258,9,140" max="252,14,139"/>
+            <cuboid min="253,9,139" max="245,14,138"/>
+            <cuboid min="246,9,138" max="240,14,137"/>
+        </union>
+        <cuboid id="orange-wool-room" min="198,11,330" max="219,16,329"/>
+    </union>
+    <union id="cyan-areas">
+        <union id="cyan-spawns-protection">
+            <cuboid min="259,9,303" max="252,14,304"/>
+            <cuboid min="253,9,304" max="245,14,305"/>
+            <cuboid min="246,9,305" max="240,14,306"/>
+            <cuboid min="158,9,303" max="165,14,304"/>
+            <cuboid min="164,9,304" max="172,14,305"/>
+            <cuboid min="171,9,305" max="177,14,306"/>
+        </union>
+        <cuboid id="cyan-wool-room" min="198,11,114" max="219,16,113"/>
+    </union>
+    <union id="orange-nets">
+        <cuboid min="250,11,127" max="254,14,123"/>
+        <cuboid min="162,11,127" max="166,14,123"/>
+    </union>
+    <union id="cyan-nets">
+        <cuboid min="166,11,315" max="162,14,319"/>
+        <cuboid min="254,11,315" max="250,14,319"/>
+    </union>
+    <cuboid id="orange-shrine-net" min="207,9,175" max="209,12,173"/>
+    <cuboid id="cyan-shrine-net" min="209,9,267" max="207,12,269"/>
+    <!-- Applications -->
+    <apply block="never"/>
+    <apply region="orange-areas" enter="only-orange" message="Only `6Orange Team`r is allowed here!"/>
+    <apply region="cyan-areas" enter="only-cyan" message="Only `3Cyan Team`r is allowed here!"/>
+</regions>
 <flags>
     <post id="center-post" recover-time="0s" respawn-time="8s">208.5,9,221.5</post>
     <post id="orange-post" recover-time="3s" respawn-time="0s" owner="orange" yaw="0" points-rate="1" pickup-filter="only-cyan">208.5,10,268.5</post>
@@ -145,29 +129,19 @@
         <drop-kit force="true">
             <potion duration="0">slow</potion>
         </drop-kit>
-        <carry-message>Capture the flag on the emerald block in the center of your team's side.</carry-message>
+        <carry-message>Capture the flag at the emerald block in the center of your team's side.</carry-message>
     </flag>
-    <flag id="orange-flag" name="Orange Flag" color="ORANGE" shared="true">
+    <flag id="orange-flag" name="Orange Flag" color="orange" shared="true">
         <post recover-time="2s" respawn-time="5s" pickup-filter="only-cyan">208.5,11,103.5</post>
         <net points="30" region="orange-nets"/>
-        <carry-message>You are carrying the flag! Capture it in your spawn.</carry-message>
+        <carry-message>You are carrying the flag! Take it to your spawn.</carry-message>
     </flag>
-    <flag id="cyan-flag" name="Cyan Flag" color="CYAN" shared="true">
+    <flag id="cyan-flag" name="Cyan Flag" color="cyan" shared="true">
         <post recover-time="2s" respawn-time="5s" pickup-filter="only-orange">208.5,11,339.5</post>
         <net points="30" region="cyan-nets"/>
-        <carry-message>You are carrying the flag! Capture it in your spawn.</carry-message>
+        <carry-message>You are carrying the flag! Take it to your spawn.</carry-message>
     </flag>
 </flags>
-<killreward>
-    <item amount="10">arrow</item>
-    <item damage="8193" potions="regeneration:140:0:false;heal:1:0:false">potion</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="3" repeat="true"/>
-    </filter>
-    <item>golden apple</item>
-</killreward>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -185,4 +159,16 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="10" material="arrow"/>
+        <item damage="8193" potions="regeneration:140:0:false;heal:1:0:false" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true"/>
+        </filter>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 </map>
