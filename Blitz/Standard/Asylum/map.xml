@@ -1,0 +1,69 @@
+<map proto="1.4.0" game="Frenzy">
+<name>Asylum</name>
+<version>1.0.0</version>
+<objective>Eliminate the opposing team.</objective>
+<gamemode>blitz</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="68cfe240-d81c-46ae-8a93-9e3eb5d71e3e"/> <!-- Myv -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<teams>
+   <team id="red" color="red" max="10">Red</team>
+   <team id="blue" color="blue" max="10">Blue</team>
+</teams>
+<kits>
+    <kit id="default" force="true">
+        <item slot="0" unbreakable="true">wood sword</item>
+        <item slot="1" unbreakable="true">bow</item>
+        <item slot="8" amount="12">bread</item>
+        <item slot="28" amount="16">arrow</item>
+        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings team-color="true" unbreakable="true">leather leggings</leggings>
+        <boots team-color="true" unbreakable="true">leather boots</boots>
+        <effect duration="3" amplifier="50">damage_resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="default">
+        <regions yaw="-45">
+            <point>-35.5,70,-20.5</point>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="default">
+        <regions yaw="135">
+            <point>1.5,70,25.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>-17,113,-33</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <apply block="never" region="everywhere"/>
+</regions>
+<itemremove>
+    <item>bread</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <item>wood sword</item>
+    <item>bow</item>
+</toolrepair>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="2" material="arrow"/>
+</kill-reward>
+</map>
