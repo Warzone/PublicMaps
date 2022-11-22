@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<map proto="1.3.0">
+<name>Connected Christmas</name>
+<version>1.0.3</version>
+<objective>Capture the wool and return it to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- Kroest -->
+</authors>
+<contributors>
+    <contributor uuid="10c1b730-49b9-4f75-9212-91facc371477" contribution="help with the xml"/> <!-- Qixit -->
+</contributors>
+<teams>
+    <team color="dark red" max="19" max-overfill="22">Red</team>
+    <team color="blue" max="19" max-overfill="22">Blue</team>
+</teams>
+<kits>
+    <kit name="spawn">
+        <item slot="0">stone sword</item>
+        <item slot="1" enchantment="arrow infinite">bow</item>
+        <item slot="2" enchantment="durability:4;dig speed:1">iron pickaxe</item>
+        <item slot="3" enchantment="durability:4;dig speed:1">iron axe</item>
+        <item slot="4" amount="16">SMOOTH_BRICK</item>
+        <item slot="5" amount="32" damage="2">wood</item>
+        <item slot="8" amount="32">golden carrot</item>
+        <item slot="28" amount="1">arrow</item>
+        <potion duration="5" amplifier="3">heal</potion>	
+        <chestplate enchantment="protection projectile:2" damage="-3000">chainmail chestplate</chestplate>		
+    </kit>
+    <kit name="red" parents="spawn">
+        <leggings  color="993333" damage="-3000">leather leggings</leggings>
+        <boots enchantment="protection fall:2;protection environmental:1" color="993333" damage="-3000">leather boots</boots>
+    </kit>
+    <kit name="blue" parents="spawn">
+        <leggings  color="6E6EF9" damage="-3000">leather leggings</leggings>
+        <boots enchantment="protection fall:2;protection environmental:1" color="6E6EF9" damage="-3000">leather boots</boots>
+    </kit>
+</kits>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+	<item>chainmail chestplate</item>
+	<item>leather boots</item>
+	<item>leather leggings</item>
+    <item>wood</item>
+    <item>string</item>
+    <item>chainmail chestplate</item>
+    <item>web</item>
+    <item>golden carrot</item>
+</itemremove>
+<spawns>
+    <spawn team="blue" kit="blue" yaw="0">
+        <point>11.5,7,-115</point>
+    </spawn>
+    <spawn team="red" kit="red" yaw="180">
+        <point>-8.5,7,116</point>
+    </spawn>
+    <default yaw="90">
+        <point>0.5,73,0.5</point>
+    </default>
+</spawns>
+<filters>
+    <filter name="red">
+        <team>red</team>
+    </filter>
+    <filter name="blue">
+        <team>blue</team>
+    </filter>
+    <filter name="anti-grief-red" parents="red">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="anti-grief-blue" parents="blue">
+        <deny>
+            <block>chest</block>
+        </deny>
+    </filter>
+    <filter name="deny-void">
+        <deny>
+            <void/>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+    <filter name="no-spawner">
+        <deny>
+            <block>mob spawner</block>
+        </deny>
+    </filter>
+    <filter name="only-red-usage">
+        <block>web</block>
+        <not>
+            <team>blue</team>
+        </not>
+    </filter>
+    <filter name="only-blue-usage">
+        <block>web</block>
+        <not>
+            <team>red</team>
+        </not>
+    </filter>
+</filters>
+<regions>
+    <rectangle name="all" min="-oo,-oo" max="oo,oo"/>
+    <union name="bridgezone">
+        <rectangle min="-17,19" max="20,-18"/>
+    </union>
+    <union name="bases">
+		<cylinder name="red-base" base="-8.5,0,116" radius="5" height="100"/>
+		<cylinder name="blue-base" base="11.5,0,-115" radius="5" height="100"/>
+    </union>
+    <union name="wool-monuments">
+        <cylinder base="1.5,6,116.5" radius="5" height="100"/>
+        <cylinder base="1.5,6,-116.5" radius="5" height="100"/>
+    </union>
+    <union name="red-wools">
+	<!-- Red must enter -->
+		<cuboid name="blue-wool" min="-26,0,1" max="-47,oo,-11"/>
+		<cuboid name="lime-wool" min="29,0,1" max="50,oo,-11"/>
+	</union>
+	<!-- blue must enter -->
+    <union name="blue-wools">		
+		<cuboid name="pink-wool" min="-26,0,0" max="-47,oo,12"/>
+		<cuboid name="magenta-wool" min="29,0,0" max="50,oo,12"/>
+	</union>
+    <!-- Applied -->
+    <apply enter="red" message="You cannot enter the enemy base!">
+        <region name="red-base"/>
+    </apply>
+    <apply enter="blue" message="You cannot enter the enemy base!">
+        <region name="blue-base"/>
+    </apply>
+	<apply block="deny-all">
+        <region name="wool-monuments"/>
+		<region name="blue-base"/>
+        <region name="red-base"/>	
+	</apply>
+    <apply enter="anti-grief-red" message="You cannot enter your own wool room!">
+        <region name="red-wools"/>
+    </apply>
+    <apply enter="anti-grief-blue" message="You cannot enter your own wool room!">
+        <region name="blue-wools"/>
+    </apply>
+    <apply block="only-red-usage">
+        <region name="red-wools"/>
+    </apply>
+    <apply block="only-blue-usage">
+        <region name="blue-wools"/>
+    </apply>
+    <apply block="deny-void" message="You cannot build outside the map area!">
+        <negative>
+            <region name="bridgezone"/>
+        </negative>
+    </apply>
+</regions>
+<wools team="blue">
+    <wool color="pink">
+        <block>0,7,-116</block>
+    </wool>
+    <wool color="magenta">
+        <block>0,7,-115</block>
+    </wool>
+</wools>    
+<wools team="red">
+    <wool color="lime">
+        <block>2,7,116</block>
+    </wool>
+    <wool color="green">
+        <block>2,7,115</block>
+    </wool>
+</wools>
+<maxbuildheight>30</maxbuildheight>
+<itemremove>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+</itemremove>
+<killreward>
+	<item amount="8" damage="2">wood</item>
+	<item amount="1">golden apple</item>
+</killreward>
+</map>
