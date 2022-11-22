@@ -1,0 +1,153 @@
+<map proto="1.4.2">
+<name>Frosted Hallows</name>
+<version>1.0.4</version>
+<objective>Holiday cheer everywhere!. Can you make it to the wool rooms?</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="be49b1a8-600e-4751-9725-a8aead777363"/> <!-- izjust4fun -->
+    <author uuid="297428a6-b482-4558-99f5-b413067ed48d"/> <!-- CrazyClownz -->
+</authors>
+<teams>
+	<team id="green" color="green" max="16">Green</team>
+	<team id="orange" color="gold" max="16">Orange</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <clear/>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>``
+        <item slot="28" material="arrow"/>
+        <item slot="2" enchantment="durability:3;dig speed:1" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:3;dig speed:1" material="iron axe"/>
+	    <item slot="4" amount="64" damage="1" material="wood"/>
+	    <item slot="5" amount="32" material="glass"/>
+	    <item slot="6" material="bucket"/>
+	    <item slot="7" amount="1" material="golden apple"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <potion duration="5" amplifier="1">heal</potion>
+	<leggings material="chainmail leggings"/>
+    </kit>
+    <kit id="kit-green" parents="spawn">
+        <chestplate color="AA0000" material="leather chestplate"/>
+        <boots color="AA0000" material="leather boots"/>
+    </kit>
+    <kit id="kit-orange" parents="spawn">
+        <chestplate color="5555FF" material="leather chestplate"/>
+        <boots color="5555FF" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="green" kit="kit-green">
+    	<region yaw="0">
+        	<cuboid min="-1277.5,11,-1130.5" max="-1281.5,11,-1131.5"/>
+        </region>
+    </spawn>
+    <spawn team="orange" kit="kit-orange">
+    	<region yaw="-180">
+        	<cuboid min="-1277.5,11,-873.5" max="-1281.5,11,-874.5"/>
+        </region>
+    </spawn>
+    <default>
+    	<region yaw="90">
+       		<cuboid min="-1208.5,41,-1000" max="-1210.5,41,-1004.5"/>
+       	</region>
+    </default>
+</spawns>
+<filters>
+	<team id="only-orange">orange</team>
+    <team id="only-green">green</team>
+	<not id="no-void">
+        <void/>
+    </not>
+	<any id="only-iron">
+		<material>iron block</material>
+	</any>
+	<all id="green-web">
+		<team>orange</team>
+		<material>web</material>
+	</all>
+	<all id="orange-web">
+		<team>green</team>
+		<material>web</material>
+	</all>
+</filters>
+<regions>
+	<negative id="void">
+        <!--Mid -->
+		<rectangle min="-1259.5,-974.5" max="-1299.5,-929.5"/>
+		<rectangle min="-1259.5,-1029.5" max="-1299.5,-1075.5"/>
+		<union id="spawns">
+            <cylinder id="orange-spawn" base="-1279.5,0,-862.5" radius="21" height="oo"/>
+            <cylinder id="green-spawn" base="-1279.5,0,-1142.5" radius="21" height="oo"/>
+        </union>
+        <union id="wool-rooms">
+            <union id="orange-woolrooms">
+                <rectangle name="magenta-wool" min="-1331.5,-890.5" max="-1341.5,-899.5"/>
+                <rectangle name="pink-wool" min="-1217.5,-809.5," max="-1227.5,-899.5"/>
+            </union>
+            <union id="green-woolrooms">            
+                <rectangle name="light_blue-wool" min="-1331.5,-1114.5" max="-1341.5,-1105.5"/>
+                <rectangle name="cyan-wool" min="-1217.5,-1114.5," max="-1227.5,-1105.5"/>
+            </union>
+        </union>
+        <union id="wool-placements">
+            <block location="-1286,12,-1130" id="magenta-wool"/>
+            <block location="-1274,12,-1130" id="pink-wool"/>
+            <block location="-1286,12,-876" id="light_blue-wool"/>
+            <block location="-1274,12,-876" id="cyan-wool"/>
+        </union>
+	</negative>
+    <apply block-place="no-void" message="You may not edit the void area!" region="void"/>
+    <apply block="only-iron" message="You may only break iron in the spawns!" region="spawns"/>
+    <apply enter="only-green" message="You may not enter the enemy spawn!" region="green-spawn"/>
+    <apply enter="only-orange" message="You may not enter the enemy spawn!" region="orange-spawn"/>
+    <apply block="green-web" message="You may only break webs in the woolroom!" region="green-woolrooms"/>
+    <apply enter="only-orange" message="You may not enter your own woolroom!" region="green-woolrooms"/>
+    <apply block="orange-web" message="You may only break webs in the woolroom!" region="orange-woolrooms"/>
+    <apply enter="only-green" message="You may not enter your own woolroom!" region="orange-woolrooms"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item amount="32" damage="1" material="wood"/>
+	<item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
+<wools craftable="false">
+	<wool team="green" color="magenta" location="-1286,12,-1130" monument="magenta-wool"/>
+	<wool team="green" color="pink" location="-1274,12,-1130" monument="pink-wool"/>
+	<wool team="orange" color="light_blue" location="-1286,12,-876" monument="light_blue-wool"/>
+	<wool team="orange" color="cyan" location="-1274,12,-876" monument="cyan-wool"/>
+</wools>
+<!--
+<beacons>
+  <beacon location="-1336.5,22,-1109.5" particle-count="60" color="light_blue"/>
+  <beacon location="-1222.5,22,-1109.5" particle-count="60" color="cyan"/>
+  <beacon location="-1222.5,22,-895.5"  particle-count="60"color="pink"/>
+  <beacon location="-1336.5,22,-895.5" particle-count="60" color="magenta"/>
+</beacons>
+-->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>cooked beef</item>
+    <item>melon</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+    <item>flint</item>
+    <item>bucket</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
+</itemkeep>
+<maxbuildheight>26</maxbuildheight>
+</map>
