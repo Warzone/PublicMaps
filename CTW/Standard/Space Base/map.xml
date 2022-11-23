@@ -1,6 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Space Base</name>
 <version>1.2.3</version>
+<created>2021-01-24</created>
 <objective>Collect the enemy's wool and return them to your monument!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -59,8 +60,8 @@
         <potion amplifier="25" duration="oo">night vision</potion>
     </kit>
     <kit id="spawn">
-        <item slot="0" name="`6`l`oEnergy Blade" unbreakable="true">iron sword</item>
-        <item slot="1" name="`b`oRifle">bow</item>
+        <item slot="0" name="`6`l`oEnergy Blade" unbreakable="true" material="iron sword"/>
+        <item slot="1" name="`b`oRifle" material="bow"/>
         <item slot="2" name="`9`oMaxi-Miner 2000" unbreakable="true" material="diamond pickaxe">
             <enchantment level="6">dig_speed</enchantment>
         </item>
@@ -69,33 +70,32 @@
         <potion duration="oo" amplifier="1">night vision</potion>
         <potion duration="3" amplifier="25">heal</potion>
         <potion duration="3" amplifier="25">damage resistance</potion>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <chestplate color="4C4C4C" unbreakable="true">leather chestplate</chestplate>
-        <boots color="4C4C4C" unbreakable="true">leather boots</boots>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <chestplate color="4C4C4C" unbreakable="true" material="leather chestplate"/>
+        <boots color="4C4C4C" unbreakable="true" material="leather boots"/>
         <fly-speed>10</fly-speed>
         <!-- Important! gamemode -->
         <game-mode>survival</game-mode>
     </kit>
     <kit id="blue-kit" parents="spawn">
-        <helmet color="002fff" unbreakable="true">leather helmet</helmet>
-        <item slot="3" damage="3" amount="64">stained clay</item>
-        <item slot="4" damage="3" amount="16">stained glass</item>
-
+        <helmet color="002fff" unbreakable="true" material="leather helmet"/>
+        <item slot="3" damage="3" amount="64" material="stained clay"/>
+        <item slot="4" damage="3" amount="16" material="stained glass"/>
     </kit>
     <kit id="red-kit" parents="spawn">
-        <helmet color="ff0000" unbreakable="true">leather helmet</helmet>
-        <item slot="3" damage="6" amount="64">stained clay</item>
-        <item slot="4" damage="6" amount="16">stained glass</item>
+        <helmet color="ff0000" unbreakable="true" material="leather helmet"/>
+        <item slot="3" damage="6" amount="64" material="stained clay"/>
+        <item slot="4" damage="6" amount="16" material="stained glass"/>
     </kit>
         <kit id="yellow-kit" parents="spawn">
-        <helmet color="ffdd00" unbreakable="true">leather helmet</helmet>
-        <item slot="3" damage="1" amount="64">stained clay</item>
-        <item slot="4" damage="1" amount="16">stained glass</item>
+        <helmet color="ffdd00" unbreakable="true" material="leather helmet"/>
+        <item slot="3" damage="1" amount="64" material="stained clay"/>
+        <item slot="4" damage="1" amount="16" material="stained glass"/>
     </kit>
         <kit id="green-kit" parents="spawn">
-        <helmet color="04ba3d" unbreakable="true">leather helmet</helmet>
-        <item slot="3" damage="5" amount="64">stained clay</item>
-        <item slot="4" damage="5" amount="16">stained glass</item>
+        <helmet color="04ba3d" unbreakable="true" material="leather helmet"/>
+        <item slot="3" damage="5" amount="64" material="stained clay"/>
+        <item slot="4" damage="5" amount="16" material="stained glass"/>
     </kit>
     <kit id="anti-speed">
         <!-- 0 times faster than a normal player -->
@@ -137,13 +137,13 @@
         <material>stone button</material>
         <material>iron plate</material>
         <material>iron fence</material>
-        <material>IRON DOOR BLOCK</material>
-        <material>IRON TRAPDOOR</material>
-        <material>CAULDRON</material>
-        <material>ANVIL</material>
+        <material>iron door block</material>
+        <material>iron trapdoor</material>
+        <material>cauldron</material>
+        <material>anvil</material>
         <material>web</material>
         <material>wool</material>
-        <material>TNT</material>
+        <material>tnt</material>
         <material>carpet</material>
     </any>
     <not id="no-iron-blocks">
@@ -171,23 +171,20 @@
         </any>
     </not>
     <deny id="deny-use">
-        <any>
-            <material>beacon</material>
-        </any>
+        <material>beacon</material>
     </deny>
     <deny id="tnt-only">
         <all>
             <cause>player</cause>
             <not>
                 <any>
-                    <!--List blocks you wanna allow placing -->
+                    <!-- List blocks to allow placing -->
                     <material>TNT</material>
                 </any>
             </not>
         </all>
     </deny>
 </filters>
-
 <regions>
 <!-- Regions -->
     <!-- Entery based -->
@@ -198,54 +195,48 @@
         <cuboid id="green-woolroom" min="-120,19,7" max="-137,oo,-6"/>
         <cuboid id="blue-woolroom" min="-6,19,-120" max="7,oo,-137"/>
     </union>
-    
     <block id="spawn-blue">0,42,-160</block>
     <block id="spawn-red">160,42,0</block>
     <block id="spawn-yellow">0,42,160</block>
     <block id="spawn-green">-160,42,0</block>
-	
 	<!-- Portals & Velocity -->
 	<block id="bullet-red">83,43,-16</block>
 	<block id="bullet-yellow">16,43,83</block>
 	<block id="bullet-green">-83,43,16</block>
 	<block id="bullet-blue">-16,43,-83</block>
-	
 	<point id="exit-red">83.5,44,-15.5</point>
 	<point id="exit-yellow">16.5,44,83.5</point>
 	<point id="exit-green">-82.5,44,16.5</point>
 	<point id="exit-blue">-15.5,44,-82.5</point>
-	
 	<cuboid id="portal-red" min="138,41,-15" max="137,43,-17"/>
 	<cuboid id="portal-yellow" min="16,41,137" max="17,43,136"/>
 	<cuboid id="portal-green" min="-137,41,16" max="-136,43,17"/>
 	<cuboid id="portal-blue" min="-15,41,-137" max="-16,43,-136"/>
-	
 	<cuboid id="alt-portal-red" min="138,41,16" max="137,43,17"/>
 	<cuboid id="alt-portal-yellow" min="-15,41,137" max="-16,43,136"/>
 	<cuboid id="alt-portal-green" min="-137,41,-15" max="-136,43,-17"/>
 	<cuboid id="alt-portal-blue" min="16,41,-137" max="17,43,-136"/>
     <!--  Spawner regions  -->
     <cuboid id="spawner1" min="-3,15,4" max="4,16,-3"/>
-
     <!-- Rules Applied (order is important!) -->
     <apply enter="not-red" message="You may not enter your own woolroom!">
         <region>
-                <region id="red-woolroom"/>
+            <region id="red-woolroom"/>
         </region>
     </apply>
     <apply enter="not-yellow" message="You may not enter your own woolroom!">
         <region>
-                <region id="yellow-woolroom"/>
+            <region id="yellow-woolroom"/>
         </region>
     </apply>
     <apply enter="not-green" message="You may not enter your own woolroom!">
         <region>
-                <region id="green-woolroom"/>
+            <region id="green-woolroom"/>
         </region>
     </apply>
     <apply enter="not-blue" message="You may not enter your own woolroom!">
         <region>
-                <region id="blue-woolroom"/>
+            <region id="blue-woolroom"/>
         </region>
     </apply>
     <apply block="never" message="You have reached the maximum build height!">
@@ -270,36 +261,25 @@
             </negative>
         </region>
     </apply>
-        <!-- Red Base -->
-
+    <!-- Red Base -->
     <apply velocity=" -1.5,1,1.5" kit="small-fall" region="bullet-red"/>
-
-                <!-- Yellow Base -->
-
+    <!-- Yellow Base -->
     <apply velocity="-1.5,1,-1.5" kit="small-fall" region="bullet-yellow"/>
-	
-            <!-- Green Base -->
-
+    <!-- Green Base -->
     <apply velocity=" 1.5,1,-1.5" kit="small-fall" region="bullet-green"/>
-	
-                <!-- Blue Base -->
-
+    <!-- Blue Base -->
     <apply velocity="1.5,1,1.5" kit="small-fall" region="bullet-blue"/>
 </regions>
 <portals>
     <!-- portals from spawn to map -->
-
-	
 	<portal region="portal-red" destination="exit-red" filter="only-red"/>
     <portal region="portal-yellow" destination="exit-yellow" filter="only-yellow"/>
     <portal region="portal-green" destination="exit-green" filter="only-green"/>
     <portal region="portal-blue" destination="exit-blue" filter="only-blue"/>
-	
-		<portal region="alt-portal-red" destination="exit-red" filter="only-red"/>
+	<portal region="alt-portal-red" destination="exit-red" filter="only-red"/>
     <portal region="alt-portal-yellow" destination="exit-yellow" filter="only-yellow"/>
     <portal region="alt-portal-green" destination="exit-green" filter="only-green"/>
     <portal region="alt-portal-blue" destination="exit-blue" filter="only-blue"/>
-	
 </portals>
 <!--  Spawners  -->
 <spawners>
@@ -342,38 +322,38 @@
     <depletion>off</depletion>
 </hunger>
 <kill-rewards>
-    <killreward>
+    <kill-reward>
         <item amount="8">arrow</item>
         <item amount="1">golden apple</item>
-    </killreward>
-    <killreward>
+    </kill-reward>
+    <kill-reward>
         <filter>
             <team>red</team>
         </filter>
         <item amount="4" damage="6">stained glass</item>
         <item amount="8" damage="6">stained clay</item>
-    </killreward>
-    <killreward>
+    </kill-reward>
+    <kill-reward>
         <filter>
             <team>yellow</team>
         </filter>
         <item amount="4" damage="1">stained glass</item>
         <item amount="8" damage="1">stained clay</item>
-    </killreward>
-    <killreward>
+    </kill-reward>
+    <kill-reward>
         <filter>
             <team>green</team>
         </filter>
         <item amount="4" damage="5">stained glass</item>
         <item amount="8" damage="5">stained clay</item>
-    </killreward>
-    <killreward>
+    </kill-reward>
+    <kill-reward>
         <filter>
             <team>blue</team>
         </filter>
         <item amount="4" damage="3">stained glass</item>
         <item amount="8" damage="3">stained clay</item>
-    </killreward>
+    </kill-reward>
 </kill-rewards>
 <!-- wool monuments -->
 <renewables>
