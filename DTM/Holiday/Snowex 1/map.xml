@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>Snowex 1</name>
+<version>1.1.0</version>
+<objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+<!-- Author -->
+<authors>
+    <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="lime-team" color="green" max="12">Lime</team>
+    <team id="cyan-team" color="dark aqua" max="12">Cyan</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="spawn">
+         <clear/>
+         <item slot="0" unbreakable="true">stone sword</item>
+         <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+         <item slot="2" unbreakable="true">diamond pickaxe</item>
+         <item slot="3" unbreakable="true">stone axe</item>
+         <item slot="4" amount="32">glass</item>
+         <item slot="5" amount="64">sandstone</item>
+         <item slot="6" amount="64">wood</item>
+         <item slot="7">golden apple</item>
+         <item slot="8" amount="32">cooked beef</item>
+         <item slot="28" amount="1">arrow</item>
+         <effect duration="5" amplifier="5">damage resistance</effect>
+         <effect duration="5" amplifier="5">heal</effect>
+    </kit>
+    <kit id="lime-kit" parents="spawn">
+        <helmet unbreakable="true" color="7FCC19" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7FCC19" material="leather chestplate"/>
+        <leggings unbreakable="true" color="7FCC19" material="leather leggings"/>
+        <boots unbreakable="true" color="7FCC19" material="leather boots"/>
+    </kit>
+    <kit id="cyan-kit" parents="spawn">
+        <helmet unbreakable="true" color="4C7F99" material="leather helmet"/>
+        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
+        <leggings unbreakable="true" color="4C7F99" material="leather leggings"/>
+        <boots unbreakable="true" color="4C7F99" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default>
+        <regions>
+             <cylinder base="82.5,37,-811.5" height="0" radius="1" />
+        </regions>
+    </default>
+    <spawn team="cyan-team" kit="cyan-kit">
+        <regions>
+            <cylinder yaw="90" base="129.5,20,-744.5" height="0" radius="1" />
+        </regions>
+    </spawn>
+    <spawn team="lime-team" kit="lime-kit">
+        <regions>
+            <cylinder yaw="-90" base="35.5,20,-744.5" height="0" radius="1" />
+        </regions>
+    </spawn>
+</spawns>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <negative id="playable">
+        <rectangle id="map" min="-19,-762" max="183,-726"/>
+    </negative>
+    <union id="spawn-protections">
+        <cylinder id="cyan-spawn" base="129.5,19,-744.5" height="6" radius="8"/>
+        <cylinder id="lime-spawn" base="35.5,19,-744.5" height="6" radius="8"/>
+    </union>
+    <!-- Applications -->
+    <apply region="playable" block="never" message="You may not edit outside the map."/>
+    <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
+</regions>
+<!-- Monuments -->
+<destroyables materials="obsidian">
+    <destroyable id="left-lime" name="Left" owner="lime-team">
+             <region><block>-12,23,-733</block></region>
+    </destroyable>
+    <destroyable id="right-lime" name="Right" owner="lime-team">
+             <region><block>-12,23,-755</block></region>
+    </destroyable>
+    <destroyable id="left-cyan" name="Left" owner="cyan-team">
+             <region><block>176,23,-755</block></region>
+    </destroyable>
+    <destroyable id="right-cyan" name="Right" owner="cyan-team">
+             <region><block>176,23,-733</block></region>
+    </destroyable>
+</destroyables>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Item Remove -->
+<itemremove>
+    <item>obsidian</item>
+    <item>sandstone</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>cooked beef</item>
+</itemremove>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<!-- Item Keep --> 
+<itemkeep>
+    <item>glass</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>golden apple</item>
+</itemkeep>
+<!-- Misc -->
+<timelock>on</timelock>
+<maxbuildheight>38</maxbuildheight>
+</map>
