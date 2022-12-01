@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Crackerpull</name> <!-- Ringpull -->
-<version>1.0.0</version>  <!-- Regular 1.2 -->
+<version>1.0.1</version>  <!-- Regular 1.2 -->
 <objective>Capture the enemy team's wool!</objective>
 <created>2022-11-23</created>
 <gamemode>ctw</gamemode>
@@ -61,21 +61,35 @@
    </wool>
 </wools>
 <filters>
-    <all id="red-in-wr">
-        <team id="only-red">red</team>
-        <filter id="wr-filter"/>
-    </all>
-    <all id="blue-in-wr">
-        <team id="only-blue">blue</team>
-        <filter id="wr-filter"/>
-    </all>
-    <blocks region="wool-rooms" id="wr-filter">
+    <not id="blue-in-wr">
         <any>
-            <material>air</material>
-            <material>web</material>
-            <material>redstone wire</material>
+            <team id="only-red">red</team>
+            <filter id="wr-filter"/>
         </any>
-    </blocks>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <team id="only-blue">blue</team>
+            <filter id="wr-filter"/>
+        </any>
+    </not>
+    <any id="wr-filter">
+        <material>chest</material>
+        <material>snow block</material>
+        <material>dark oak stairs</material>
+        <material>wood step</material>
+        <material>stained clay</material>
+        <material>stained glass:1</material>
+        <material>stained glass:9</material>
+        <material>stained glass pane</material>
+        <material>redstone wire</material>
+        <material>redstone torch on</material>
+        <material>wool</material>
+        <material>cobble wall</material>
+        <material>beacon</material>
+        <material>carpet</material>
+        <material>piston base</material>
+    </any>
     <not id="deny-void">
        <void/>
     </not>
