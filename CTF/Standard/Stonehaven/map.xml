@@ -21,33 +21,33 @@
 <classes family="Classes" sticky="false">
     <class name="Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
         <kit>
-            <item slot="0" name="`4Sword">stone sword</item>
-            <chestplate locked="true" enchantments="protection_projectile:2">chainmail chestplate</chestplate>
-            <helmet locked="true">chainmail helmet</helmet>
+            <item slot="0" name="`4Sword" material="stone sword"/>
+            <chestplate locked="true" enchantments="protection_projectile:2" material="chainmail chestplate"/>
+            <helmet locked="true" material="chainmail helmet"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>
         </kit>
     </class>
     <class name="Defense" default="false" description="Defend your flag!" icon="iron chestplate">
         <kit>
-            <item slot="0" name="`2Sword">stone sword</item>
-            <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true">potion</item>
-            <helmet locked="true">iron helmet</helmet>
-            <chestplate locked="true">chainmail chestplate</chestplate>
-            <leggings locked="true">leather leggings</leggings>
-            <boots locked="true">iron boots</boots>
+            <item slot="0" name="`2Sword" material="stone sword"/>
+            <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true" material="potion"/>
+            <helmet locked="true" material="iron helmet"/>
+            <chestplate locked="true" material="chainmail chestplate"/>
+            <leggings locked="true" material="leather leggings"/>
+            <boots locked="true" material="iron boots"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>
             <potion duration="oo" amplifier="1">slow</potion>
         </kit>
     </class>
     <class name="Support" default="false" description="Support your teammates!" icon="potion">
         <kit>
-            <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2">bow</item>
-            <item slot="27" name="`5Arrow">arrow</item>
-            <item slot="1" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
-            <item slot="2" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
-            <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true">potion</item>
-            <helmet locked="true">gold helmet</helmet>
-            <boots locked="true" enchantment="protection_fall:3">gold boots</boots>
+            <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2" material="bow"/>
+            <item slot="27" name="`5Arrow" material="arrow"/>
+            <item slot="1" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true" material="potion"/>
+            <item slot="2" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true" material="potion"/>
+            <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true" material="potion"/>
+            <helmet locked="true" material="gold helmet"/>
+            <boots locked="true" enchantment="protection_fall:3" material="gold boots"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>          
         </kit>
     </class>
@@ -69,10 +69,9 @@
     <not id="not-blue">
         <flag-carried>blue-flag</flag-carried>
     </not>
-    
-    <class id="only-offense">§4Offense</class>
-    <class id="only-defense">§2Defense</class>
-    <class id="only-support">§5Support</class>
+    <class id="only-offense">Offense</class>
+    <class id="only-defense">Defense</class>
+    <class id="only-support">Support</class>
 </filters>
 <spawns>
     <spawn team="red" filter="only-offense">
@@ -156,7 +155,9 @@
     <item>arrow</item>
     <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item>golden apple</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 </map>
