@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Blizz</name>
 <version>1.3.8</version>
 <objective>You must be the first team to get to 750 points before time runs out!</objective>
@@ -15,31 +14,31 @@
 <!-- Teams -->
 <teams>
     <team id="green" color="dark green" max="12">Green</team>
-    <team id="blue"  color="blue"       max="12">Blue</team>
+    <team id="blue" color="blue" max="12">Blue</team>
 </teams>
 <kits>
     <kit id="obs">
         <effect duration="oo">night vision</effect>
     </kit>
     <kit id="teams">
-        <item slot="0" attributes="generic.attackDamage:add:5" name="`bIce Pick">iron pickaxe</item>
-        <item slot="1" unbreakable="true" name="`bSnow Bow">bow</item>
-        <item slot="7" amount="32" name="`bAlaskan Sea Bass">cooked fish</item>
-        <item slot="8" amount="16">arrow</item>
-        <chestplate unbreakable="true" enchantment="protection projectile:2">chainmail chestplate</chestplate>
-        <boots name="`bIce Skates">iron boots</boots>
+        <item slot="0" attributes="generic.attackDamage:add:5" name="`bIce Pick" material="iron pickaxe"/>
+        <item slot="1" unbreakable="true" name="`bSnow Bow" material="bow"/>
+        <item slot="7" amount="32" name="`bAlaskan Sea Bass" material="cooked fish"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <chestplate unbreakable="true" enchantment="protection projectile:2" material="chainmail chestplate"/>
+        <boots name="`bIce Skates" material="iron boots"/>
         <effect duration="8" amplifier="5">damage resistance</effect>
         <effect duration="8" amplifier="3">regeneration</effect>
     </kit>
     <kit id="blue-kit" parents="teams">
-        <helmet   unbreakable="true" color="334CB2" material="leather helmet"/>
+        <helmet unbreakable="true" color="334CB2" material="leather helmet"/>
         <leggings unbreakable="true" color="334CB2" material="leather leggings"/>
-        <boots    unbreakable="true" color="334CB2" material="leather boots"/>
+        <boots unbreakable="true" color="334CB2" material="leather boots"/>
     </kit>
     <kit id="green-kit" parents="teams">
-        <helmet   unbreakable="true" color="667F33" material="leather helmet"/>
+        <helmet unbreakable="true" color="667F33" material="leather helmet"/>
         <leggings unbreakable="true" color="667F33" material="leather leggings"/>
-        <boots    unbreakable="true" color="667F33" material="leather boots"/>
+        <boots unbreakable="true" color="667F33" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -61,51 +60,47 @@
     </spawn>
 </spawns>
 <!-- Hills -->
-<king>
-    <hills neutral-state="true">
-        <hill name="South" points="1" capture-time="5s" capture-rule="lead">
-            <capture>
-                <cylinder base="280.5,36,439.5" radius="7" height="5"/>
-            </capture>
-            <progress>
-                <cylinder base="280.5,35,439.5" radius="7" height="1"/>
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0"/>
-            </captured>
-        </hill>
-        <hill name="Center" points="1" capture-time="5s" capture-rule="lead">
-            <capture>
-                <cylinder base="266.5,45,390.5" radius="7" height="5"/>
-            </capture>
-            <progress>
-                <cylinder base="266.5,44,390.5" radius="8" height="1"/>
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0"/>
-            </captured>
-        </hill>
-        <hill name="North" points="1" capture-time="5s" capture-rule="lead">
-            <capture>
-                <cylinder base="252.5,36,341.5" radius="7" height="5"/>
-            </capture>
-            <progress>
-                <cylinder base="252.5,35,341.5" radius="7" height="1"/>
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="South" points="1">
+        <capture>
+            <cylinder base="280.5,36,439.5" radius="7" height="5"/>
+        </capture>
+        <progress>
+            <cylinder base="280.5,35,439.5" radius="7" height="1"/>
+        </progress>
+        <captured>
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </captured>
+    </control-point>
+    <control-point name="Center" points="1">
+        <capture>
+            <cylinder base="266.5,45,390.5" radius="7" height="5"/>
+        </capture>
+        <progress>
+            <cylinder base="266.5,44,390.5" radius="8" height="1"/>
+        </progress>
+        <captured>
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </captured>
+    </control-point>
+    <control-point name="North" points="1">
+        <capture>
+            <cylinder base="252.5,36,341.5" radius="7" height="5"/>
+        </capture>
+        <progress>
+            <cylinder base="252.5,35,341.5" radius="7" height="1"/>
+        </progress>
+        <captured>
+            <cuboid min="0,0,0" max="0,0,0"/>
+        </captured>
+    </control-point>
+</control-points>
 <!-- Filters -->
 <filters>
     <deny id="deny-beacon">
         <material>beacon</material>
     </deny>
-    <all id="only-tnt">
-        <material>tnt</material>
-    </all>
+    <material id="only-tnt">tnt</material>
 </filters>
 <!-- Regions -->
 <regions>
@@ -181,194 +176,194 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="8">arrow</item>
-        <item name="`6Golden Snack">golden apple</item>
+        <item amount="8" material="arrow"/>
+        <item name="`6Golden Snack" material="golden apple"/>
     </kill-reward>
     <kill-reward>
         <filter>
             <kill-streak count="2"/>
         </filter>
-        <item damage="16368" potions="speed:36000:0:true" name="`bSwifty Potion">potion</item>
+        <item damage="16368" potions="speed:36000:0:true" name="`bSwifty Potion" material="potion"/>
     </kill-reward>
-    <killreward>
-    <filter>
-        <kill-streak count="3"/>
-    </filter>
-    <item damage="374" enchantment="arrow damage:1" name="`bSnowy Sniper">bow</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="4"/>
-    </filter>
-    <item name="`bIce Pick 2.0" unbreakable="true" attributes="generic.attackDamage:add:6">diamond pickaxe</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="5"/>
-    </filter>
-    <item name="`cCold C4">tnt</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="6"/>
-    </filter>
-    <item name="`6Golden Chestplate" enchantment="protection projectile:2;protection environmental:2;durability:1">gold chestplate</item>
-</killreward>
-<!-- <killreward>
-    <filter>
-        <kill-streak count="7"/>
-    </filter>
-    <item name="`bSpeedy Boots" enchantment="protection fall:3;durability:1" attributes="generic.movementSpeed:base:0.15">gold boots</item>
-</killreward>  -->
-<killreward>
-    <filter>
-        <kill-streak count="8"/>
-    </filter>
-    <item damage="16385" amount="2" potions="regeneration:300:0:true" name="`bRegeneration Potion">potion</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="9"/>
-    </filter>
-    <item damage="51" amount="3" name="`bSkeletal Guardian">monster egg</item>
-    <item damage="54" amount="3" name="`bUndead Guardian">monster egg</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="10"/>
-    </filter>
-    <item name="`bEnder Teleporter">ender pearl</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="11"/>
-    </filter>
-    <item amount="3" name="`cCold C4">tnt</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="12"/>
-    </filter>
-    <item damage="374" enchantment="arrow knockback:1" name="`bStrechy Gun">bow</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="13"/>
-    </filter>
-    <item damage="95" amount="5" name="`7Fury Guardian">monster egg</item>
-    <item amount="32" name="`Guardian Snack">bone</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="14"/>
-    </filter>
-    <item damage="8261" potions="regeneration:450:0:true;damage resistance:450:0:true;heal:20:2:true" name="`bSuper Potion">potion</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="15"/>
-    </filter>
-    <item amount="2">golden apple</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="16"/>
-    </filter>
-    <item damage="16368" potions="speed:36000:1:true" name="`bSwifty Potion II">potion</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="17"/>
-    </filter>
-    <item damage="51" amount="10" name="`bSkeletal Guardian">monster egg</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="18"/>
-    </filter>
-    <item name="`bSuper Chestplate" enchantment="protection projectile:3;protection environmental:3;durability:1">diamond chestplate</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="19"/>
-    </filter>
-    <item name="`bIce Pick 3.1" unbreakable="true" attributes="generic.attackDamage:add:7" enchantment="knockback">diamond pickaxe</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="20"/>
-    </filter>
-    <item damage="374" enchantment="arrow damage:2" name="`bDeadly Sniper">bow</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="21"/>
-    </filter>
-    <item damage="50" amount="3" name="`aTicking Bombs">monster egg</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="22"/>
-    </filter>
-    <item name="`cCold C4" amount="5">tnt</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="23"/>
-    </filter>
-    <item damage="56" amount="3" name="`rAir Support">monster egg</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="24"/>
-    </filter>
-    <kit>
-        <double-jump/>
-    </kit>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="25"/>
-    </filter>
-    <item damage="95" amount="10" name="`7Fury Guardian">monster egg</item>
-    <item amount="32" name="`7Guardian Snack">bone</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="26"/>
-    </filter>
-    <item amount="32" name="`7Snowy Attack">snow ball</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="27"/>
-    </filter>
-    <item amount="4">golden apple</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="28"/>
-    </filter>
-    <item damage="16368" potions="speed:36000:2:true" name="`bSwifty Potion III">potion</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="29"/>
-    </filter>
-    <item name="`cCold C4" amount="5">tnt</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="30"/>
-    </filter>
-    <item damage="51" amount="5" name="`bSkeletal Army">monster egg</item>
-    <item damage="52" amount="3" name="`bCrawling Army">monster egg</item>
-    <item damage="54" amount="7" name="`bUndead Army">monster egg</item>
-    <item damage="50" amount="3" name="`aBomb Army">monster egg</item>
-    <item damage="56" amount="3" name="`rAir Army">monster egg</item>
-    <item damage="55" amount="5" name="`aSlimy Army">monster egg</item>
-    <item name="`gCongragulations" lore="`rThere's no more rewards... sorry">paper</item>
-</killreward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3"/>
+        </filter>
+        <item damage="374" enchantment="arrow damage:1" name="`bSnowy Sniper" material="bow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4"/>
+        </filter>
+        <item name="`bIce Pick 2.0" unbreakable="true" attributes="generic.attackDamage:add:6" material="diamond pickaxe"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item name="`cCold C4" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6"/>
+        </filter>
+        <item name="`6Golden Chestplate" enchantment="protection projectile:2;protection environmental:2;durability:1" material="gold chestplate"/>
+    </kill-reward>
+    <!-- <kill-reward>
+        <filter>
+            <kill-streak count="7"/>
+        </filter>
+        <item name="`bSpeedy Boots" enchantment="protection fall:3;durability:1" attributes="generic.movementSpeed:base:0.15" material="gold boots"/>
+    </kill-reward> -->
+    <kill-reward>
+        <filter>
+            <kill-streak count="8"/>
+        </filter>
+        <item damage="16385" amount="2" potions="regeneration:300:0:true" name="`bRegeneration Potion" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="9"/>
+        </filter>
+        <item damage="51" amount="3" name="`bSkeletal Guardian" material="monster egg"/>
+        <item damage="54" amount="3" name="`bUndead Guardian" material="monster egg"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="10"/>
+        </filter>
+        <item name="`bEnder Teleporter" material="ender pearl"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="11"/>
+        </filter>
+        <item amount="3" name="`cCold C4" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="12"/>
+        </filter>
+        <item damage="374" enchantment="arrow knockback:1" name="`bStrechy Gun" material="bow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="13"/>
+        </filter>
+        <item damage="95" amount="5" name="`7Fury Guardian" material="monster egg"/>
+        <item amount="32" name="`Guardian Snack" material="bone"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="14"/>
+        </filter>
+        <item damage="8261" potions="regeneration:450:0:true;damage resistance:450:0:true;heal:20:2:true" name="`bSuper Potion" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="15"/>
+        </filter>
+        <item amount="2" material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="16"/>
+        </filter>
+        <item damage="16368" potions="speed:36000:1:true" name="`bSwifty Potion II" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="17"/>
+        </filter>
+        <item damage="51" amount="10" name="`bSkeletal Guardian" material="monster egg"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="18"/>
+        </filter>
+        <item name="`bSuper Chestplate" enchantment="protection projectile:3;protection environmental:3;durability:1" material="diamond chestplate"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="19"/>
+        </filter>
+        <item name="`bIce Pick 3.1" unbreakable="true" attributes="generic.attackDamage:add:7" enchantment="knockback" material="diamond pickaxe"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="20"/>
+        </filter>
+        <item damage="374" enchantment="arrow damage:2" name="`bDeadly Sniper" material="bow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="21"/>
+        </filter>
+        <item damage="50" amount="3" name="`aTicking Bombs" material="monster egg"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="22"/>
+        </filter>
+        <item name="`cCold C4" amount="5" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="23"/>
+        </filter>
+        <item damage="56" amount="3" name="`rAir Support" material="monster egg"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="24"/>
+        </filter>
+        <kit>
+            <double-jump/>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="25"/>
+        </filter>
+        <item damage="95" amount="10" name="`7Fury Guardian" material="monster egg"/>
+        <item amount="32" name="`7Guardian Snack" material="bone"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="26"/>
+        </filter>
+        <item amount="32" name="`7Snowy Attack" material="snow ball"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="27"/>
+        </filter>
+        <item amount="4" material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="28"/>
+        </filter>
+        <item damage="16368" potions="speed:36000:2:true" name="`bSwifty Potion III" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="29"/>
+        </filter>
+        <item name="`cCold C4" amount="5" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="30"/>
+        </filter>
+        <item damage="51" amount="5" name="`bSkeletal Army" material="monster egg"/>
+        <item damage="52" amount="3" name="`bCrawling Army" material="monster egg"/>
+        <item damage="54" amount="7" name="`bUndead Army" material="monster egg"/>
+        <item damage="50" amount="3" name="`aBomb Army" material="monster egg"/>
+        <item damage="56" amount="3" name="`rAir Army" material="monster egg"/>
+        <item damage="55" amount="5" name="`aSlimy Army" material="monster egg"/>
+        <item name="`gCongragulations" lore="`rThere's no more rewards... sorry" material="paper"/>
+    </kill-reward>
 </kill-rewards>
 <!-- Misc -->
 <gamerules>
