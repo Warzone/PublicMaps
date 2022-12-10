@@ -7,13 +7,13 @@
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
 </authors>
 <teams>
-    <team id="redTeam"  color="dark red" max="5">Red</team>
-    <team id="blueTeam" color="blue"     max="5">Blue</team>
+    <team id="redTeam" color="dark red" max="5">Red</team>
+    <team id="blueTeam" color="blue" max="5">Blue</team>
 </teams>
 <spawns>
-    <spawn team="redTeam"  kit="redKit"  region="redSpawn"     yaw="180" />
-    <spawn team="blueTeam" kit="blueKit" region="blueSpawn"    yaw="0" />
-    <default               kit="all"     region="defaultSpawn" yaw="90" />
+    <spawn team="redTeam" kit="redKit" region="redSpawn" yaw="180" />
+    <spawn team="blueTeam" kit="blueKit" region="blueSpawn" yaw="0" />
+    <default kit="all" region="defaultSpawn" yaw="90" />
 </spawns>
 <respawn delay="5s" />
 <kits>
@@ -23,45 +23,47 @@
     <kit id="spawn" parents="all">
         <item slot="0" unbreakable="true" material="stone sword" />
         <item slot="1" unbreakable="true" material="bow" />
-        <item slot="8" amount="12"        material="arrow" />
-        <leggings      unbreakable="true" material="iron leggings" />
+        <item slot="8" amount="12" material="arrow" />
+        <leggings unbreakable="true" material="iron leggings" />
         <potion amplifier="5" duration="5">resistance</potion>
     </kit>
     <kit id="redKit" parents="spawn">
         <item slot="2" amount="3" damage="14" material="stained glass" />
-        <helmet     unbreakable="true" color="FF0000" material="leather helmet" />
+        <helmet unbreakable="true" color="FF0000" material="leather helmet" />
         <chestplate unbreakable="true" color="FF0000" material="leather chestplate" />
-        <boots      unbreakable="true" color="FF0000" material="leather boots" />
+        <boots unbreakable="true" color="FF0000" material="leather boots" />
     </kit>
     <kit id="blueKit" parents="spawn">
         <item slot="2" amount="3" damage="11" material="stained glass" />
-        <helmet     unbreakable="true" color="0000FF" material="leather helmet" />
+        <helmet unbreakable="true" color="0000FF" material="leather helmet" />
         <chestplate unbreakable="true" color="0000FF" material="leather chestplate" />
-        <boots      unbreakable="true" color="0000FF" material="leather boots" />
+        <boots unbreakable="true" color="0000FF" material="leather boots" />
     </kit>
 </kits>
-<killreward>
-    <item            material="golden apple" />
-    <item amount="5" material="arrow" />
-</killreward>
-<killreward>
-    <filter>
-        <all>
-            <team>redTeam</team>
-            <kill-streak count="2" repeat="true"/>
-        </all>
-    </filter>
-    <item amount="2" damage="14" material="stained glass" />
-</killreward>
-<killreward>
-    <filter>
-        <all>
-            <team>blueTeam</team>
-            <kill-streak count="2" repeat="true"/>
-        </all>
-    </filter>
-    <item amount="2" damage="11" material="stained glass" />
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple" />
+        <item amount="5" material="arrow" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <team>redTeam</team>
+                <kill-streak count="2" repeat="true"/>
+            </all>
+        </filter>
+        <item amount="2" damage="14" material="stained glass" />
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <team>blueTeam</team>
+                <kill-streak count="2" repeat="true"/>
+            </all>
+        </filter>
+        <item amount="2" damage="11" material="stained glass" />
+    </kill-reward>
+</kill-rewards>
 <filters>
     <team id="onlyRed">redTeam</team>
     <team id="onlyBlue">blueTeam</team>
@@ -79,18 +81,18 @@
     <carrying-flag id="whenCarrying">flag</carrying-flag>
 </filters>
 <regions>
-    <cylinder  id="redSpawn"       base="1.5,12,38.5"  radius="2" height="1" />
-    <cylinder  id="blueSpawn"      base="1.5,12,-35.5" radius="2" height="1" />
-    <cylinder  id="defaultSpawn"   base="27.5,15,1.5"  radius="1" height="1" />
-    <cylinder  id="redNet"         base="1.5,6,-28.5"  radius="1" height="1" />
-    <cylinder  id="blueNet"        base="1.5,6,31.5"   radius="1" height="1" />
-    <cylinder  id="denyPost"       base="1.5,6,1.5"    radius="2" height="12" />
-    <rectangle id="redProtection"  min="-5,42"  max="8,36" />
+    <cylinder id="redSpawn" base="1.5,12,38.5" radius="2" height="1" />
+    <cylinder id="blueSpawn" base="1.5,12,-35.5" radius="2" height="1" />
+    <cylinder id="defaultSpawn" base="27.5,15,1.5" radius="1" height="1" />
+    <cylinder id="redNet" base="1.5,6,-28.5" radius="1" height="1" />
+    <cylinder id="blueNet" base="1.5,6,31.5" radius="1" height="1" />
+    <cylinder id="denyPost" base="1.5,6,1.5" radius="2" height="12" />
+    <rectangle id="redProtection" min="-5,42" max="8,36" />
     <rectangle id="blueProtection" min="-5,-34" max="8,-40" />
     <apply block="allowedBlocks" message="You may not break/place that block here!" />
-    <apply enter="onlyRed"  region="redProtection" />
+    <apply enter="onlyRed" region="redProtection" />
     <apply enter="onlyBlue" region="blueProtection" />
-    <apply block="never"    region="denyPost" message="You may not build around the flag post" />
+    <apply block="never" region="denyPost" message="You may not build around the flag post" />
 </regions>
 <score>
     <limit>2</limit>
@@ -107,14 +109,14 @@
         <drop-kit force="true">
             <potion amplifier="0">health boost</potion>
         </drop-kit>
-        <net points="1" region="redNet"  capture-filter="onlyRed" deny-message="You must capture the flag at the `9Blue `cbeacon!" />
+        <net points="1" region="redNet" capture-filter="onlyRed" deny-message="You must capture the flag at the `9Blue `cbeacon!" />
         <net points="1" region="blueNet" capture-filter="onlyBlue" deny-message="You must capture the flag at the `4Red `cbeacon!" />
     </flag>
 </flags>
 <control-points show="false" points="0" required="false">
     <control-point name="checkCarry" id="checkCarry" capture="everywhere" capture-time="0s" player-filter="whenCarrying" />
 </control-points>
-<structures>
+<!-- <structures>
     <structure id="redBeacon" air="false">
         <region>
             <cuboid min="0,2,-30" size="3,1,3" />
@@ -143,12 +145,12 @@
             </filter>
         </dynamic>
     </structures>
-</structures>
+</structures> -->
 <renewables>
     <renewable renew-filter="renewWeb" interval="16s" grow="false" />
 </renewables>
 <broadcasts>
-    <tip   after="8s"                                 >`bRemember, you `ccannot `bbuild in or above water!</tip>
+    <tip after="8s">`bRemember, you `ccannot `bbuild in or above water!</tip>
     <alert after="16s" every="1m16s" filter="onlyRed" >`bThe `aflag net `bis located on `9Blue's `bside and is signaled by the `4Red `bbeacon when the flag has been picked up!</alert>
     <alert after="16s" every="1m16s" filter="onlyBlue">`bThe `aflag net `bis located on `4Red's `bside and is signaled by the `9Blue `bbeacon when the flag has been picked up!</alert>
 </broadcasts>
