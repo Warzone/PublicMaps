@@ -1,9 +1,7 @@
-<?xml version="1.0"?>
 <map proto="1.4.0">
 <name>Artholis</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Capture the opposing team's flags!</objective>
-<gamemode>ctf</gamemode>
 <authors>
 	<author contribution="Original map" uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
     <author contribution="XML coding and packaging, CTF gamemode transition, various map changes" uuid="10c1b730-49b9-4f75-9212-91facc371477"/> <!-- Qixit -->
@@ -155,7 +153,7 @@
     <apply block-physics="never">
         <region id="flag-area"/>
     </apply>
-    	<rectangle id="red-spawn" min="-242,245" max="-247,250"/>
+    <rectangle id="red-spawn" min="-242,245" max="-247,250"/>
     <cuboid id="red-net" min="-242,4,245" max="-247,8,250"/>
     <rectangle id="blue-spawn" min="-242,65" max="-247,70"/>
     <cuboid id="blue-net" min="-242,4,65" max="-247,8,70"/>
@@ -201,22 +199,22 @@
     <structures offset="0,-6,0">
         <dynamic structure="red-left-flag-structure">
             <filter>
-                <objective>left-red-flag</objective>
+                <completed>left-red-flag</completed>
             </filter>
         </dynamic>
         <dynamic structure="red-right-flag-structure">
             <filter>
-                <objective>right-red-flag</objective>
+                <completed>right-red-flag</completed>
             </filter>
         </dynamic>
         <dynamic structure="blue-left-flag-structure">
             <filter>
-                <objective>left-blue-flag</objective>
+                <completed>left-blue-flag</completed>
             </filter>
         </dynamic>
         <dynamic structure="blue-right-flag-structure">
             <filter>
-                <objective>right-blue-flag</objective>
+                <completed>right-blue-flag</completed>
             </filter>
         </dynamic>
     </structures>
