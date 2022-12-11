@@ -1,0 +1,219 @@
+<map proto="1.4.2">
+<name>Wit's End: Christmas</name>
+<version>1.2.9</version>
+<objective>Capture the enemy team's wools and return them to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="Christmas-ification"/> <!-- Xerocoles -->
+    <contributor uuid="dbe909c6-2b15-4528-b12a-c77ed4031496" contribution="Building Help"/> <!-- teheggy -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="gold axe"/>
+        <item slot="4" amount="64" material="quartz block"/>
+        <item slot="31" amount="64" material="quartz block"/>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="33" material="water bucket"/>
+        <item slot="6" amount="32" material="ladder"/>
+        <item slot="8" material="golden apple"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <effect duration="4" amplifier="4">damage resistance</effect>
+        <effect duration="4" amplifier="4">heal</effect>
+    </kit>
+</kits>
+<filters>
+    <not id="blue-in-wr">
+        <any>
+            <team id="only-red">red</team>
+            <material>chest</material>
+        </any>
+    </not>
+    <not id="red-in-wr">
+        <any>
+            <team id="only-blue">blue</team>
+            <material>chest</material>
+        </any>
+    </not>
+    <not id="no-void">
+        <void/>
+    </not>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+    <deny id="deny-spawner">
+        <any>
+            <material>mob spawner</material>
+            <material>daylight detector</material>
+        </any>
+    </deny>
+    <all id="only-gold-regen">
+        <material id="only-gold">gold block</material>
+        <cause>world</cause>
+    </all>
+</filters>
+<regions>
+    <cylinder id="spawn-obs" base="0,30,-53" radius="1" height="0"/>
+    <cylinder id="spawn-blue" base="140,5,0" radius="3" height="0"/>
+    <cylinder id="spawn-red" base="-140,5,0" radius="3" height="0"/>
+    <union id="bases">
+        <rectangle id="blue-spawn" min="126,-10" max="146,10"/>
+        <rectangle id="red-spawn" min="-146,-10" max="-126,10"/>
+    </union>
+    <union id="wool-rooms">
+        <union id="blue-wool-rooms"> <!-- blue must get -->
+            <rectangle id="orange-wr" min="-78,42" max="-90,54"/>
+            <rectangle id="yellow-wr" min="-78,-54" max="-90,-42"/>
+        </union>
+        <union id="red-wool-rooms"> <!-- red must get -->
+            <rectangle id="cyan-wr" min="78,42" max="90,54"/>
+            <rectangle id="light-blue-wr" min="78,-54" max="90,-42"/>
+        </union>
+    </union>
+    <complement id="void-region">
+        <everywhere/>
+        <rectangle min="-78,-30" max="78,30"/>
+    </complement>
+    <apply use="deny-beacon"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply block-break="only-gold" block-place="only-gold-regen" region="bases" message="You may only break gold blocks in the bases!"/>
+    <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
+    <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
+    <apply block="deny-spawner" message="You may not break this block!"/>
+    <apply block-place="no-void" region="void-region" message="You may not build in the void!"/>
+</regions>
+<spawns>
+    <default kit="default-kit" region="spawn-obs" yaw="0"/>
+    <spawn team="blue" kit="spawn-kit" region="spawn-blue" yaw="90"/>
+    <spawn team="red" kit="spawn-kit" region="spawn-red" yaw="-90"/>
+</spawns>
+<renewables>
+    <renewable renew-filter="only-gold" region="bases"/>
+</renewables>
+<wools craftable="false">
+    <wool team="blue" color="orange" location="-84,5,48">
+        <monument>
+            <block>142,6,4</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="yellow" location="-84,5,-48">
+        <monument>
+            <block>142,6,-5</block>
+        </monument>
+    </wool>
+    <wool team="red" color="cyan" location="84,5,48">
+        <monument>
+            <block>-143,6,4</block>
+        </monument>
+    </wool>
+    <wool team="red" color="light blue" location="84,5,-48">
+        <monument>
+            <block>-143,6,-5</block>
+        </monument>
+    </wool>
+</wools>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>gold axe</tool>
+    <tool>arrow</tool>
+    <tool>bucket</tool>
+    <tool>water bucket</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>string</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+    <item>stick</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <material>quartz block</material>
+        </filter>
+        <drops>
+            <item chance="0" material="quartz block"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>ladder</material>
+        </filter>
+        <drops>
+            <item chance="0" material="ladder"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>quartz block</item>
+    <item>wood</item>
+    <item>ladder</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="32" material="quartz block"/>
+    <item amount="16" damage="2" material="wood"/>
+</kill-reward>
+<item-mods>
+    <rule>
+        <match>
+            <material>gold helmet</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+    <rule>
+        <match>
+            <material>gold chestplate</material>
+        </match>
+        <modify unbreakable="true">
+            <enchantment>projectile_protection</enchantment>
+        </modify>
+    </rule>
+</item-mods>
+<maxbuildheight>28</maxbuildheight>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>on</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <fuse>2.5s</fuse>
+    <power>4</power>
+</tnt>
+<world>
+    <timeset>18000</timeset>
+</world>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

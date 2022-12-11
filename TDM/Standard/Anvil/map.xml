@@ -1,9 +1,10 @@
 <map proto="1.4.2">
 <name>Anvil</name>
 <version>1.2.1</version>
+<created>2020-08-09</created>
+<objective>Welcome to Anvil Facilities! Your goal is to be the team with the most points after 10 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>scorebox</gamemode>
-<objective>Welcome to Anvil Facilities! Your goal is to be the team with the most points after 10 minutes!</objective>
 <authors>
     <author uuid="1aad55f7-2dea-4f22-85ca-ad9de3a78609" contribution="Map author and creator"/> <!-- Technodono -->
 </authors>
@@ -68,13 +69,7 @@
     </spawn>
 </spawns>
 <projectiles> 
-    <projectile
-        id="arrow"
-        name="crossbow bolt"
-        velocity="4"
-        damage="7"
-        throwable="true"
-        cooldown="3s"/>
+    <projectile id="arrow" name="crossbow bolt" velocity="4" damage="7" throwable="true" cooldown="3s"/>
 </projectiles>
 <filters>
     <team id="only-blue">blue</team>
@@ -122,7 +117,7 @@
             <cuboid id="red-goal-right" min="-19,21,-17" max="-21,24,-14"/>
         </union>
     </union>
-    <!--  Other regions  -->
+    <!-- Other regions -->
     <union id="spawner-stuff">
         <cuboid id="spawner-drop" min="49,17,-1" max="52,19,2"/>
         <cylinder id="spawner-activate" base="50.5,16,0.5" radius="3" height="6"/>
@@ -180,7 +175,7 @@
     <portal region="blue-goals" destination="blue-spawn" filter="only-blue"/>
     <portal region="red-goals" destination="red-spawn" filter="only-red"/>
 </portals>
-<!--  Spawners  -->
+<!-- Spawners -->
 <spawners>
     <spawner id="centre-gapple" spawn-region="spawner-drop" player-region="spawner-activate" max-entities="2" min-delay="10s" max-delay="15s">
         <item material="golden apple"/>
@@ -209,11 +204,13 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-    <item amount="3" projectile="arrow" name="`rCrossbow" lore="`r`7Right-click to fire!" material="firework charge"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+        <item amount="3" projectile="arrow" name="`rCrossbow" lore="`r`7Right-click to fire!" material="firework charge"/>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage ally="true" self="true" enemy="false" other="false">block explosion</damage>
 </disabledamage>

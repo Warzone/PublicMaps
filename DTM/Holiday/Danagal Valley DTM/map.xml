@@ -1,0 +1,130 @@
+<map proto="1.4.0">
+<name>Danagal Valley DTM</name>
+<version>1.0.1</version>
+<gamemode>dtm</gamemode>
+<objective>Destroy both of the opposing monuments to win!</objective>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
+</authors>
+<contributors>
+    <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="Christmas-ification"/> <!-- Xerocoles -->
+</contributors>
+<teams>
+	<team id="red" color="green" max="8">Green</team>
+	<team id="blue" color="blue" max="8">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">iron axe</item>
+        <item slot="4" amount="48" damage="5">wood</item>
+        <item slot="6" amount="12">vine</item>
+        <item slot="7" amount="1">golden apple</item>
+        <item slot="8" amount="32">cooked fish</item>
+		<item slot="28" amount="1">arrow</item>
+        <item slot="30" unbreakable="true">stone spade</item>
+        <potion duration="3" amplifier="3">heal</potion>
+        <potion duration="6">damage resistance</potion>
+		<leggings unbreakable="true">chainmail leggings</leggings>
+    </kit>
+	<kit id="red-kit" parents="spawn">
+		<helmet color="01DF01" unbreakable="true">leather helmet</helmet>
+	    <chestplate color="01DF01" unbreakable="true">leather chestplate</chestplate>
+        <boots color="01DF01" unbreakable="true">leather boots</boots>
+    </kit>
+	<kit id="blue-kit" parents="spawn">
+	    <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
+		<chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
+        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="0">
+            <cuboid min="-90.5,24,130.5" max="-92.5,24,132.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <regions yaw="180">
+            <cuboid min="-92.5,24,274.5" max="-90,24,272.5"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-92.5,8,140.5" max="-91,8,142.5"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+	<team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+	<not id="no-void">
+        <void/>
+    </not>
+</filters>
+<regions>
+	<negative id="void">
+		<union id="spawns">
+			<rectangle id="blue-spawn" min="-75.5,139.5" max="-107.5,126.5"/>
+			<rectangle id="red-spawn" min="-75.5,277.5" max="-107.5,265.5"/>
+		</union>
+	</negative>
+		<apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+		<apply block="never" message="You may not edit spawn" region="spawns"/>
+		<apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+		<apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+</regions>
+<destroyables completion="100%" mode-changes="true"  materials="obsidian">
+	<destroyable owner="red" name="Monument">
+		<region>
+			<cuboid min="-92.5,22,230.5" max="-90.5,25,232.5"/>
+		</region>
+	</destroyable>
+	<destroyable owner="blue" name="Monument">
+		<region>
+			<cuboid min="-92.5,22,172.5" max="-90.5,25,174.5"/>
+		</region>
+	</destroyable>
+</destroyables>
+<modes>
+    <mode after="15m" material="beacon" name="`bBeacon `0Monument `6Mode"/>
+    <mode after="20m" material="gold block" name="`6Gold `0Monument `6Mode"/>
+    <mode after="30m" material="coal block" name="`0Coal `0Monument `6Mode"/>
+</modes>
+<maxbuildheight>36</maxbuildheight>
+<itemremove>
+    <item>cooked fish</item>
+    <item>obsidian</item>
+    <item damage="5">wood</item>
+    <item>string</item>
+    <item>glowstone dust</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>sugar cane</item>
+    <item>clay ball</item>
+    <item>stone plate</item>
+    <item>sand</item>
+    <item>wood</item>
+	<item>leather helmet</item>
+	<item>leather chestplate</item>
+	<item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+	<item>red rose</item>
+    <item>arrow</item>
+    <item>snow ball</item>
+    <item>vine</item>
+</itemremove>
+<kill-reward>
+	<item material="golden apple"/>
+</kill-reward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>stone spade</tool>
+</toolrepair>
+</map>

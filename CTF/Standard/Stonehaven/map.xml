@@ -1,21 +1,15 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Stonehaven</name>
 <version>1.0.1</version>
 <objective>Grab the enemy flag and bring it back to your flag stand!</objective>
 <gamemode>ctf</gamemode>
 <authors>
-    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/>
-    <!--  StealthMedia  -->
-    <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/>
-    <!--  Zelocksurian  -->
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+    <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/> <!-- Zelocksurian -->
 </authors>
 <broadcasts>
-    <tip after="5s" every="2m">
-    `7Type `b`l/classes `7to view a list of available classes for this map.
-    </tip>
-    <tip after="6s" every="2m">
-    `7To select one, enter `b`l/class [classname]`7. Your class will change upon respawn.
-    </tip>
+    <tip after="5s" every="2m">`7Type `b`l/classes `7to view a list of available classes for this map.</tip>
+    <tip after="6s" every="2m">`7To select one, enter `b`l/class [classname]`7. Your class will change upon respawn.</tip>
 </broadcasts>
 <teams>
     <team id="red" color="dark red" max="10" max-overfill="12">Red</team>
@@ -25,35 +19,35 @@
     <limit>3</limit>
 </score>
 <classes family="Classes" sticky="false">
-    <class name="§4Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
+    <class name="Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
         <kit>
-            <item slot="0" name="`4Sword">stone sword</item>
-            <chestplate locked="true" enchantments="protection_projectile:2">chainmail chestplate</chestplate>
-            <helmet locked="true">chainmail helmet</helmet>
+            <item slot="0" name="`4Sword" material="stone sword"/>
+            <chestplate locked="true" enchantments="protection_projectile:2" material="chainmail chestplate"/>
+            <helmet locked="true" material="chainmail helmet"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>
         </kit>
     </class>
-    <class name="§2Defense" default="false" description="Defend your flag!" icon="iron chestplate">
+    <class name="Defense" default="false" description="Defend your flag!" icon="iron chestplate">
         <kit>
-            <item slot="0" name="`2Sword">stone sword</item>
-            <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true">potion</item>
-            <helmet locked="true">iron helmet</helmet>
-            <chestplate locked="true">chainmail chestplate</chestplate>
-            <leggings locked="true">leather leggings</leggings>
-            <boots locked="true">iron boots</boots>
+            <item slot="0" name="`2Sword" material="stone sword"/>
+            <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true" material="potion"/>
+            <helmet locked="true" material="iron helmet"/>
+            <chestplate locked="true" material="chainmail chestplate"/>
+            <leggings locked="true" material="leather leggings"/>
+            <boots locked="true" material="iron boots"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>
             <potion duration="oo" amplifier="1">slow</potion>
         </kit>
     </class>
-    <class name="§5Support" default="false" description="Support Your Teammates!" icon="potion">
+    <class name="Support" default="false" description="Support your teammates!" icon="potion">
         <kit>
-            <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2">bow</item>
-            <item slot="27" name="`5Arrow">arrow</item>
-            <item slot="1" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
-            <item slot="2" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true">potion</item>
-            <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true">potion</item>
-            <helmet locked="true">gold helmet</helmet>
-            <boots locked="true" enchantment="protection_fall:3">gold boots</boots>
+            <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2" material="bow"/>
+            <item slot="27" name="`5Arrow" material="arrow"/>
+            <item slot="1" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true" material="potion"/>
+            <item slot="2" name="`5Firts Aid Potion" damage="16453" potions="heal:1:1:true" material="potion"/>
+            <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true" material="potion"/>
+            <helmet locked="true" material="gold helmet"/>
+            <boots locked="true" enchantment="protection_fall:3" material="gold boots"/>
             <potion duration="oo" amplifier="1">fire resistance</potion>          
         </kit>
     </class>
@@ -75,10 +69,9 @@
     <not id="not-blue">
         <flag-carried>blue-flag</flag-carried>
     </not>
-    
-    <class id="only-offense">§4Offense</class>
-    <class id="only-defense">§2Defense</class>
-    <class id="only-support">§5Support</class>
+    <class id="only-offense">Offense</class>
+    <class id="only-defense">Defense</class>
+    <class id="only-support">Support</class>
 </filters>
 <spawns>
     <spawn team="red" filter="only-offense">
@@ -123,7 +116,6 @@
     <cuboid id="blue-net" min="25,28,-46" max="28,35,-43"/>
     <cuboid id="jump-red" min="10,10,16" max="11,11,18"/>
     <cuboid id="jump-blue" min="39,10,-16" max="40,11,-14"/>
-    
     <apply block="never" use="only-chests"/>
     <apply velocity="0,1.75,0">
         <region>
@@ -143,7 +135,6 @@
     <flag id="red-flag" name="Red Flag" color="red">
         <post id="red-flag-post" pickup-filter="blue-pickup" respawn-time="30s" recover-time="0s">23,28,46</post>
     </flag>
-    
     <net flag="red-flag" points="1" region="blue-net" capture-filter="not-blue" return="blue-flag"/>
     <net flag="blue-flag" points="1" region="red-net" capture-filter="not-red" return="red-flag"/>
 </flags>
@@ -164,7 +155,9 @@
     <item>arrow</item>
     <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item>golden apple</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 </map>
