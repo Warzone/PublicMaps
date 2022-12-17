@@ -1,0 +1,137 @@
+<map proto="1.4.0">
+<name>Pumpkin Spice Latte: Venti</name>
+<version>1.2.5</version>
+<objective>Be the player with the most kills after 5 minutes!</objective>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/>
+</authors>
+<contributors>
+    <contributor contribution="moral support" uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/>
+</contributors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<score>
+    <kills>1</kills>
+</score>
+<time>6m</time>
+<players min="2" max="16" max-overfill="18" show-name-tags="true"/>
+<rage/>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" enchantment="damage all:10" lore="Instant Kill">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:10" lore="One Shot Kill">bow</item>
+        <item slot="2" amount="2">arrow</item>
+        <chestplate color="667F33" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <boots color="667F33" unbreakable="true" locked="true">leather boots</boots>
+        <potion duration="2" amplifier="20">damage resistance</potion>
+        <potion duration="oo" amplifier="20">NIGHT_VISION</potion>
+    </kit>
+</kits>
+<killreward>
+    <item>arrow</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<regions>
+    <apply block="never">
+        <everywhere />
+    </apply>
+    <apply velocity="-2,1.8,0">
+        <region>
+            <cuboid id="jumpad-1" min="9,3,-1" max="6,4,2"/>
+        </region>
+    </apply>
+    <apply velocity="2,1.8,0">
+        <region>
+            <cuboid id="jumpad-2" min="-8,3,2" max="-5,4,-1"/>
+        </region>
+    </apply>
+    <apply velocity="0,2,-1">
+        <region>
+            <cuboid id="jumpad-3" min="2,14,10" max="-1,15,7"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.8,3.5">
+        <region>
+            <cuboid id="jumpad-4" min="-1,14,-10" max="2,15,-7"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.8,1">
+        <region>
+            <cuboid id="jumpad-5" min="-1,28,-2" max="2,29,1"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.8,-3.5">
+        <region>
+            <cuboid id="jumpad-6" min="2,28,14" max="-1,29,11"/>
+        </region>
+    </apply>
+    <apply velocity="4,1.8,0">
+        <region>
+            <cuboid id="jumpad-7" min="-11,40,2" max="-8,41,-1"/>
+        </region>
+    </apply>
+    <apply velocity="-1.5,2,0">
+        <region>
+            <cuboid id="jumpad-8" min="12,40,-1" max="9,41,2"/>
+        </region>
+    </apply>
+    <apply velocity="1,1.8,0">
+        <region>
+           <cuboid id="jumpad-9" min="-2,53,2" max="1,54,-1"/>
+        </region>
+    </apply>
+    <apply velocity="-3.5,1.8,0">
+        <region>
+            <cuboid id="jumpad-10" min="14,53,-1" max="11,54,2"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.8,3">
+        <region>
+            <cuboid id="jumpad-11" min="-1,66,-12" max="2,67,-9"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.8,-3">
+        <region>
+            <cuboid id="jumpad-12" min="2,66,13" max="-1,67,10"/>
+        </region>
+    </apply>
+</regions>
+<spawns>
+    <spawn kit="spawn" safe="true" spread="true">
+        <regions yaw="0">
+            <cylinder base="0,3,0" radius="20" height="63"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions angle="0,81,0">
+            <cylinder base="0,79,0" radius="20" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<portals>
+    <portal y="-70">
+        <region>
+            <cuboid min="-1,75,-1" max="1,77,2"/>
+        </region>
+    </portal>
+</portals>
+</map>
