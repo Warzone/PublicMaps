@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Pandora</name>
+<created>2022-08-04</created>
 <version>1.0.0</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
@@ -18,18 +18,18 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron axe</item>
-        <item slot="3" amount="64" damage="1">wood</item>
-        <item slot="30" amount="64" damage="1">wood</item>
-        <item slot="6" amount="1">golden apple</item>
-        <item slot="7" amount="64">golden carrot</item>
-        <item slot="8" amount="24">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="64" damage="1" material="wood"/>
+        <item slot="30" amount="64" damage="1" material="wood"/>
+        <item slot="6" amount="1" material="golden apple"/>
+        <item slot="7" amount="64" material="golden carrot"/>
+        <item slot="8" amount="24" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
         <effect duration="3s" amplifier="10">damage_resistance</effect>
     </kit>
 </kits>
@@ -40,7 +40,7 @@
     <default region="obs-spawn" yaw="90"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="25%" repairable="false" show-progress="true" sparks="true" materials="wool">
+<destroyables completion="25%" repairable="false" materials="wool" show-progress="true" sparks="true">
     <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
     <destroyable name="White Wool" owner="white-team" region="white-wool"/>
 </destroyables>
@@ -67,9 +67,9 @@
         <rectangle id="map" min="108,43" max="-107,-42"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"                block="never"      message="You may not edit outside the map."/>
-    <apply region="spawn-protections"      block="never"      message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection"  enter="blue-only"  message="You may not enter the enemy spawn."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="white-spawn-protection" enter="white-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove/Repair -->
@@ -99,8 +99,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

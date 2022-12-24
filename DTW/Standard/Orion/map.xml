@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Orion</name>
+<created>2017-12-09</created>
 <version>1.0.0</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
@@ -18,23 +18,23 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron axe</item>
-        <item slot="3" amount="64">wood</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="32">arrow</item>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+        <helmet unbreakable="true" color="3C44AA" material="leather helmet"/>
+        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -44,11 +44,11 @@
     <default yaw="-180" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="16%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Left Wool" owner="blue-team" materials="wool" region="left-blue-wool"/>
-    <destroyable name="Right Wool" owner="blue-team" materials="wool" region="right-blue-wool"/>
-    <destroyable name="Left Wool" owner="red-team" materials="wool" region="left-red-wool"/>
-    <destroyable name="Right Wool" owner="red-team" materials="wool" region="right-red-wool"/>
+<destroyables completion="16%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -75,10 +75,10 @@
         <rectangle id="map" min="-47,-4" max="47,-186"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
@@ -98,8 +98,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Vortex</name>
+<created>2019-08-30</created>
 <version>1.0.3</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
-<created>2019-08-30</created>
 <authors>
     <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b"/> <!-- slees -->
     <author uuid="b3d091f3-d94f-4546-a908-6a513d260615"/> <!-- Goriest -->
@@ -20,24 +19,24 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-	    <item slot="4" amount="64">wood</item>
-	    <item slot="8" amount="64">golden carrot</item>
-        <item slot="28" amount="32">arrow</item>
-        <leggings unbreakable="true">chainmail leggings</leggings>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
-        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+        <helmet unbreakable="true" color="3C44AA" material="leather helmet"/>
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+        <boots unbreakable="true" color="3C44AA" material="leather boots"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
-	    <boots unbreakable="true" color="B02E26">leather boots</boots>
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
+	    <boots unbreakable="true" color="B02E26" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -47,9 +46,9 @@
     <default region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="28%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Light Blue Wool" owner="blue-team" materials="wool" region="light-blue-wool"/>
-    <destroyable name="Red Wool" owner="red-team" materials="wool" region="red-wool"/>
+<destroyables completion="28%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Light Blue Wool" owner="blue-team" region="light-blue-wool"/>
+    <destroyable name="Red Wool" owner="red-team" region="red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -60,7 +59,7 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="light-blue-wool" min="-59,24,-8"  max="-62,28,-15"/>
+        <cuboid id="light-blue-wool" min="-59,24,-8" max="-62,28,-15"/>
         <cuboid id="red-wool" min="60,24,9" max="63,28,16"/>
     </union>
     <union id="spawn-protections">
@@ -75,7 +74,7 @@
         <cuboid id="blue-gold" min="-53,19,13" max="-57,23,22"/>
         <cuboid id="red-gold" min="54,19,-12" max="58,23,-21"/>
     </union>
-    <cuboid id="anti-under-bridge" min="-oo,0,-oo" max="oo,18,oo"/>
+    <below id="anti-under-bridge" y="18"/>  
     <point id="blue-spawn">-64.5,25,19.5</point>
     <point id="red-spawn">65.5,25,-18.5</point>
     <point id="obs-spawn">0.5,65,0.5</point>
@@ -83,15 +82,15 @@
         <rectangle id="map" min="70,-25" max="-69,26"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
-    <apply region="anti-under-bridge"     block="never"     message="You may not bridge here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="anti-under-bridge" block="never" message="You may not bridge here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Renewables -->
 <renewables>
-    <renewable region="gold-blocks" rate="1" particles="true" grow="true" sound="false" avoid-players="2">
+    <renewable region="gold-blocks" sound="false">
         <renew-filter>
             <material>gold block</material>
         </renew-filter>
@@ -128,8 +127,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item amount="1" material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
