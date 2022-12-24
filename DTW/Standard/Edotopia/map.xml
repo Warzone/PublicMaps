@@ -1,15 +1,15 @@
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Edotopia</name>
+<created>2021-05-18</created>
 <version>1.0.2</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
-<created>2021-05-18</created>
 <authors>
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
     <author uuid="12ca20d4-b363-45d9-b013-e591b65fb8ae"/> <!-- Satura -->
 </authors>
 <contributors>
-    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
 <!-- Teams -->
 <teams>
@@ -19,26 +19,26 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">stone axe</item>
-        <item slot="3" unbreakable="true">stone pickaxe</item>
-        <item slot="4" damage="1" amount="64">wood</item>
-        <item slot="31" damage="1" amount="64">wood</item>
-        <item slot="32" damage="1" amount="64">wood</item>
-        <item slot="5" amount="1">golden apple</item>
-        <item slot="7" amount="16">ladder</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="24">arrow</item>
-        <helmet unbreakable="true">iron helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone axe"/>
+        <item slot="3" unbreakable="true" material="stone pickaxe"/>
+        <item slot="4" damage="1" amount="64" material="wood"/>
+        <item slot="31" damage="1" amount="64" material="wood"/>
+        <item slot="32" damage="1" amount="64" material="wood"/>
+        <item slot="5" amount="1" material="golden apple"/>
+        <item slot="7" amount="16" material="ladder"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="24" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
     </kit>
     <kit id="blue-kit" parent="default">
-        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
     </kit>
     <kit id="red-kit" parent="default">
-        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -48,11 +48,11 @@
     <default region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="42%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Left Wool"  owner="blue-team" materials="wool" region="left-blue-wool"/>
-    <destroyable name="Right Wool" owner="blue-team" materials="wool" region="right-blue-wool"/>
-    <destroyable name="Left Wool"  owner="red-team" materials="wool" region="left-red-wool"/>
-    <destroyable name="Right Wool" owner="red-team" materials="wool" region="right-red-wool"/>
+<destroyables completion="42%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -63,14 +63,14 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="left-blue-wool"  min="-39,81,-101"  max="-42,85,-104"/>
+        <cuboid id="left-blue-wool" min="-39,81,-101" max="-42,85,-104"/>
         <cuboid id="right-blue-wool" min="40,81,-101" max="43,85,-104"/>
-        <cuboid id="left-red-wool"  min="40,81,102"  max="43,85,105"/>
-        <cuboid id="right-red-wool" min="-39,81,102"   max="-42,85,105"/>
+        <cuboid id="left-red-wool" min="40,81,102" max="43,85,105"/>
+        <cuboid id="right-red-wool" min="-39,81,102" max="-42,85,105"/>
     </union>
     <union id="spawn-protections">
         <cuboid id="blue-spawn-protection" min="8,74,-103" max="-8,oo,-121"/>
-        <cuboid id="red-spawn-protection" min="-8,74, 103" max="8,oo,121"/>
+        <cuboid id="red-spawn-protection" min="-8,74,103" max="8,oo,121"/>
     </union>
     <point id="blue-spawn">0.5,78,-112.5</point>
     <point id="red-spawn">0.5,78,113.5</point>
@@ -79,10 +79,10 @@
         <rectangle id="map" min="-51,-118" max="52,119"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
@@ -104,16 +104,14 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-	<item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
-		<kill-reward>
+	<kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5"/>
-            </all>
+            <kill-streak count="5"/>
         </filter>
-        <item damage="1" amount="32">wood</item>
+        <item damage="1" amount="32" material="wood"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

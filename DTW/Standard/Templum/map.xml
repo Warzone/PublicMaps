@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Templum</name>
+<created>2021-04-15</created>
 <version>1.4.2</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
-<created>2021-04-15</created>
 <authors>
     <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
     <author uuid="1fc24e45-8ce8-4749-922f-fc9e8c59cf74"/> <!-- yhan -->
@@ -24,24 +23,24 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-        <item slot="4" amount="64" damage="2">wood</item>
-        <item slot="5" amount="64" damage="2">wood</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="17" amount="32">arrow</item>
-	<helmet unbreakable="true">iron helmet</helmet>
-        <leggings unbreakable="true">iron leggings</leggings>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="17" amount="32" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <leggings unbreakable="true" material="iron leggings"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
-        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+        <boots unbreakable="true" color="3C44AA" material="leather boots"/>
     </kit>
     <kit id="yellow-kit" parents="default">
-        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
-        <boots unbreakable="true" color="E5E533">leather boots</boots>
+        <chestplate unbreakable="true" color="E5E533" material="leather chestplate"/>
+        <boots unbreakable="true" color="E5E533" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -51,11 +50,11 @@
     <default yaw="90" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="25%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Left Wool" owner="blue-team" materials="wool" region="left-blue-wool"/>
-    <destroyable name="Right Wool" owner="blue-team" materials="wool" region="right-blue-wool"/>
-    <destroyable name="Left Wool" owner="yellow-team" materials="wool" region="left-yellow-wool"/>
-    <destroyable name="Right Wool" owner="yellow-team" materials="wool" region="right-yellow-wool"/>
+<destroyables completion="25%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="yellow-team" region="left-yellow-wool"/>
+    <destroyable name="Right Wool" owner="yellow-team" region="right-yellow-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -66,9 +65,9 @@
 <regions>
     <!-- Definitions -->
     <union id="monuments">
-        <cuboid id="left-blue-wool" min="-35,33,-90"  max="-38,39,-93"/>
+        <cuboid id="left-blue-wool" min="-35,33,-90" max="-38,39,-93"/>
         <cuboid id="right-blue-wool" min="36,33,-90" max="39,39,-93"/>
-        <cuboid id="left-yellow-wool" min="36,33,91"  max="39,39,94"/>
+        <cuboid id="left-yellow-wool" min="36,33,91" max="39,39,94"/>
         <cuboid id="right-yellow-wool" min="-35,33,91" max="-38,39,94"/>
     </union>
     <union id="spawn-protections">
@@ -82,9 +81,9 @@
         <rectangle id="map" min="-46,-111" max="47,112"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"                 block="never"       message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
@@ -106,16 +105,14 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5"/>
-            </all>
+            <kill-streak count="5"/>
         </filter>
-        <item amount="16" damage="2">wood</item>
+        <item amount="16" damage="2" material="wood"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

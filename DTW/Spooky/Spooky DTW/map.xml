@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Spooky DTW</name>
+<created>2017-10-22</created>
 <version>1.0.1</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
@@ -18,22 +18,22 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron axe</item>
-        <item slot="3" unbreakable="true">stone pickaxe</item>
-	    <item slot="4" amount="64" damage="1">stained glass</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="32">arrow</item>
-        <chestplate unbreakable="true">diamond chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
-        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" unbreakable="true" material="stone pickaxe"/>
+        <item slot="4" amount="64" damage="1" material="stained glass"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <chestplate unbreakable="true" material="diamond chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <helmet locked="true" material="skull item" damage="0"/>
+        <helmet locked="true" damage="0" material="skull item"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <helmet locked="true" material="skull item" damage="1"/>
+        <helmet locked="true" damage="1" material="skull item"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -43,9 +43,9 @@
     <default region="obs-spawn" yaw="90"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="25%" repairable="false" show-progress="true">
-    <destroyable name="Blue Wool" owner="blue-team" sparks="true" materials="wool" region="blue-wool"/>
-    <destroyable name="Red Wool" owner="red-team" sparks="true" materials="wool" region="red-wool"/>
+<destroyables completion="25%" repairable="false" materials="wool" show-progress="true" sparks="true"> 
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
+    <destroyable name="Red Wool" owner="red-team" region="red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -70,10 +70,10 @@
         <rectangle id="map" min="-50,-100" max="64,95"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
@@ -94,8 +94,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-	<item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
