@@ -1,21 +1,17 @@
 <map proto="1.4.0">
 <name>Arroyo Gultch</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Hold the flag to gain points, first team to 250 points wins!</objective>
-<gamemode>ctf</gamemode>
+<gamemode>kotf</gamemode>
 <authors>
     <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Main build design and gameplay aesthetics"/> <!-- samtheman43 -->
     <author uuid="68c0280d-17d6-4c6b-b453-d1b8eb6a866d" contribution="Minor build design and aesthetics"/> <!-- ID10 -->
 </authors>
 <contributors>
-<contributor contribution="Feedback" uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/>
-<!--  Reshif  -->
-<contributor contribution="Feedback" uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/>
-<!--  Strangey  -->
-<contributor contribution="Feedback" uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/>
-<!--  Moo_  -->
-<contributor contribution="Feedback" uuid="d71152ca-187d-43c4-9901-ba001606c655"/>
-<!--  Wylt  -->
+<contributor contribution="Feedback" uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!--  Reshif  -->
+<contributor contribution="Feedback" uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!--  Strangey  -->
+<contributor contribution="Feedback" uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!--  Moo_  -->
+<contributor contribution="Feedback" uuid="d71152ca-187d-43c4-9901-ba001606c655"/> <!--  Wylt  -->
 </contributors>
 <rules>
     <rule>Do not block glitch to somehow get outside of the map</rule>
@@ -80,9 +76,11 @@
 <itemkeep>
     <item>iron chestplate</item>
 </itemkeep>
-<killreward>
-    <item amount="1" slot="7" damage="0">skull item</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" slot="7" damage="0">skull item</item>
+    </kill-reward>
+</kill-rewards>
 <timelock>true</timelock>
 <filters>
     <team id="only-purple">purple-team</team>
@@ -101,7 +99,6 @@
     <point id="purpleSpawn">43.5,72,-0.5</point>
     <point id="blueSpawn">348.5,72,-16.5</point>
     <point id="observerSpawn">192.5,115,-23.5</point>
-    
     <apply block="never"/>
     <apply enter="not-flag-carrier" region="flagBorders" message="You can't go back while holding the flag!"/>
     <apply enter="only-purple" region="purpleSpawnProt" message="You can not enter the enemy spawn!"/>
