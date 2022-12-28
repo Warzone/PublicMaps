@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0">
 <name>Snowex 2</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
 <!-- Authors -->
@@ -39,17 +39,17 @@
 <spawns>
     <default>
         <regions>
-             <cylinder base="76.5,58,-788.5" height="0" radius="1"/>
+             <cylinder yaw="180" base="80.5,51,-732.5" height="0" radius="1"/>
         </regions>
     </default>
     <spawn team="gray-team" kit="gray-kit">
         <regions>
-            <cylinder yaw="90" base="118.5,25,-788.5" height="0" radius="1"/>
+            <cylinder yaw="90" base="35.5,25,-788.5" height="0" radius="1"/>
         </regions>
     </spawn>
     <spawn team="orange-team" kit="orange-kit">
         <regions>
-            <cylinder yaw="-90" base="35.5,25,-788.5" height="0" radius="1"/>
+            <cylinder yaw="-90" base="125.5,25,-788.5" height="0" radius="1"/>
         </regions>
     </spawn>
 </spawns>
@@ -57,8 +57,8 @@
 <regions>
     <!-- Definitions -->
     <union id="spawn-protections">
-        <cylinder id="gray-spawn" base="118,24,-788" height="8" radius="8"/>
-        <cylinder id="orange-spawn" base="35,24,-788" height="8" radius="8"/>
+        <cylinder id="orange-spawn" base="125,24,-788" height="8" radius="8"/>
+        <cylinder id="gray-spawn" base="35,24,-788" height="8" radius="8"/>
     </union>
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
@@ -66,16 +66,16 @@
 <!-- Monuments -->
 <destroyables materials="obsidian">
     <destroyable id="left-orange" name="Left" owner="orange-team">
-             <region><block>-26,27,-770</block></region>
+             <region><block>-18,28,-770</block></region>
     </destroyable>
     <destroyable id="right-orange" name="Right" owner="orange-team">
-             <region><block>-26,27,-808</block></region>
+             <region><block>-18,28,-808</block></region>
     </destroyable>
     <destroyable id="left-gray" name="Left" owner="gray-team">
-             <region><block>179,27,-808</block></region>
+             <region><block>178,28,-808</block></region>
     </destroyable>
     <destroyable id="right-gray" name="Right" owner="gray-team">
-             <region><block>179,27,-770</block></region>
+             <region><block>178,28,-770</block></region>
     </destroyable>
 </destroyables>
 <!-- Kill Rewards -->
