@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Penguin's Colony</name>
+<created>2021-11-28</created>
 <version>1.0.4</version>
 <objective>Reach 750 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
@@ -101,19 +101,17 @@
 <filters>
     <team id="blue-only">blue</team>
     <team id="red-only">red</team>
-    <all id="only-leaves-in-map">
-        <material>leaves</material>
-    </all>
+    <material id="only-leaves-in-map">leaves</material>
 </filters>
 <regions>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-45,-oo,-259"  max="-17,oo,-230"/>
-        <cuboid id="red-spawn-protection"  min="-136,-oo,-254" max="-111,oo,-225"/>
+        <cuboid id="blue-spawn-protection" min="-45,-oo,-259" max="-17,oo,-230"/>
+        <cuboid id="red-spawn-protection" min="-136,-oo,-254" max="-111,oo,-225"/>
     </union>
-    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection"   enter="blue-only"          message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"    enter="red-only"           message="You may not enter the enemy spawn."/>
-    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="everywhere" block="only-leaves-in-map" message="You may only place or break leaves!"/>
 </regions>
 <itemremove>
     <item>stone sword</item>
@@ -132,8 +130,8 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="6">arrow</item>
+        <item material="golden apple"/>
+        <item amount="6" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <score>

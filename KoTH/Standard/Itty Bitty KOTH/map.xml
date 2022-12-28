@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Itty Bitty KOTH</name>
+<created>2018-12-16</created>
 <version>1.0.4</version>
 <objective>Reach 600 points before the opposing team!</objective>
 <gamemode>arcade</gamemode>
@@ -89,12 +89,12 @@
     </union>
     <cuboid id="hill-protection" min="-4,0,6" max="5,oo,-5"/>
     <!-- Applications -->
-    <apply region="not-map"               block="never"        message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"        message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-only"    message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"     message="You may not enter the enemy spawn."/>
-    <apply region="hill-protection"       block="never"        message="You are not allowed to modify terrain here."/>
-    <apply region="everywhere"            block="interactable" message="You may only place or break glass!"/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="hill-protection" block="never" message="You are not allowed to modify terrain here."/>
+    <apply block="interactable" message="You may only place or break glass!"/>
 </regions>
 <itemremove>
     <item>stone sword</item>
@@ -110,8 +110,8 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item>golden apple</item>
-        <item amount="1">arrow</item>
+        <item material="golden apple"/>
+        <item material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <score>

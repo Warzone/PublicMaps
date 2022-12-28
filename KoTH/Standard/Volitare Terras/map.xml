@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Volitare Terras</name>
+<created>2021-05-24</created>
 <version>1.0.2</version>
 <objective>Reach 900 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
@@ -102,9 +102,7 @@
 <filters>
     <team id="green-only">green</team>
     <team id="orange-only">orange</team>
-    <all id="only-leaves-in-map">
-        <material>leaves</material>
-    </all>
+    <material id="only-leaves-in-map">leaves</material>
 </filters>
 <regions>
     <union id="spawn-protections">
@@ -117,15 +115,15 @@
         <cuboid id="orange-portal" min="19,71,-18" max="30,77,-29"/>
         <cuboid id="orange-portal-destination" min="30,92,-29" max="35,96,-34"/>
     </union>
-    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
-    <apply region="portal-protections"      block="never"              message="You may not obstruct the portal platforms!"/>
-    <apply region="green-spawn-protection"  enter="green-only"         message="You may not enter the enemy spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only"        message="You may not enter the enemy spawn."/>
-    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="portal-protections" block="never" message="You may not obstruct the portal platforms!"/>
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="everywhere" block="only-leaves-in-map" message="You may only place or break leaves!"/>
 </regions>
-<portals>
+<portals protect="true" sound="false" pitch="@0">
     <!-- Green Portal -->
-    <portal protect="true" sound="false" yaw="@-135" pitch="@0">
+    <portal yaw="@-135">
         <region>
             <cuboid min="-23,72,24" max="-24,73,25"/>
         </region>
@@ -134,7 +132,7 @@
         </destination>
     </portal>
     <!-- Orange Portal -->
-    <portal protect="true" sound="false" yaw="@45" pitch="@0">
+    <portal yaw="@45">
       <region>
           <cuboid min="23,72,-24" max="24,73,-25"/>
       </region>
@@ -160,15 +158,13 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item>golden apple</item>
+        <item material="golden apple"/>
     </kill-reward>
-		<kill-reward>
+	<kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5"/>
-            </all>
+            <kill-streak count="5"/>
         </filter>
-        <item amount="5">arrow</item>
+        <item amount="5" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <score>
