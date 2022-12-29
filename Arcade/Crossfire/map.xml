@@ -1,31 +1,24 @@
-<map proto="1.4.0">
+<map proto="1.4.2" game="Rush">
 <name>Crossfire</name>
-<version>1.5.10</version>
+<version>1.5.11</version>
 <slug>crossfire</slug>
 <objective>Runners must get to the other side of the map without getting killed by the Defenders.</objective>
 <gamemode>arcade</gamemode>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
-<game>Rush</game>
 <authors>
-    <!--  SheriffSoco  -->
-    <author uuid="6e347123-c684-4d7e-996c-44d4924ff172"/>
+    <author uuid="6e347123-c684-4d7e-996c-44d4924ff172"/> <!-- SheriffSoco -->
 </authors>
 <contributors>
-    <!--BlockDrop74 -->
-    <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="Feedback"/>
-    <!-- dinner1111 -->
-    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="Feedback"/>
-    <!-- Avaleer -->
-    <contributor uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141" contribution="Minor Terraforming"/>
-    <!-- Yoyo__ / yoyo_power -->
-    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="Help with Observer Spawn"/>
-    <!-- Anthonny -->
-    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b" contribution="XML Help"/>
+    <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="Feedback"/> <!-- BlockDrop74 -->
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="Feedback"/> <!-- dinner1111 -->
+    <contributor uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141" contribution="Minor Terraforming"/> <!-- Avaleer -->
+    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="Help with Observer Spawn"/> <!-- Yoyo__ / yoyo_power -->
+    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b" contribution="XML Help"/> <!-- Anthonny -->
 </contributors>
 <rules>
-    <rule>Fall Damage is disabled.</rule>
-    <rule>Do NOT hide in the houses!</rule>
+    <rule>Fall damage is disabled.</rule>
+    <rule>Do not hide in the houses!</rule>
 </rules>
 <destroyables>
     <destroyable owner="defenders" name="Monument" region="monument" materials="sponge" required="true"/>
@@ -45,20 +38,20 @@
         <foodlevel>20</foodlevel>
     </kit>
     <kit id="magenta" parents="hunger">
-        <helmet color="EBD2F5">leather helmet</helmet>
-        <chestplate color="EBD2F5">leather chestplate</chestplate>
-        <leggings color="EBD2F5">leather leggings</leggings>
-        <boots color="FFFFFF">leather boots</boots>
-        <item slot="0" damage="61">wood sword</item>
-        <item slot="1">boat</item>
+        <helmet color="EBD2F5" material="leather helmet"/>
+        <chestplate color="EBD2F5" material="leather chestplate"/>
+        <leggings color="EBD2F5" material="leather leggings"/>
+        <boots color="FFFFFF" material="leather boots"/>
+        <item slot="0" damage="61" material="wood sword"/>
+        <item slot="1" material="boat"/>
     </kit>
     <kit id="dark-blue" parents="hunger">
-        <helmet color="293878">leather helmet</helmet>
-        <chestplate color="293878">leather chestplate</chestplate>
-        <leggings color="293878">leather leggings</leggings>
-        <boots color="191919">leather boots</boots>
+        <helmet color="293878" material="leather helmet"/>
+        <chestplate color="293878" material="leather chestplate"/>
+        <leggings color="293878" material="leather leggings"/>
+        <boots color="191919" material="leather boots"/>
         <potion duration="600" amplifier="2">speed</potion>
-        <item slot="1" unbreakable="true" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:3;ARROW_INFINITE:1">bow</item>
+        <item slot="1" unbreakable="true" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:3;ARROW_INFINITE:1" material="bow"/>
         <item slot="28" amount="1">arrow</item>
         <walk-speed>1.5</walk-speed>
     </kit>
@@ -76,17 +69,19 @@
 <toolrepair>
     <tool>wood sword</tool>
 </toolrepair>
-<killreward>
-    <filter>
-        <all>
-            <team>defenders</team>
-            <kill-streak count="3"/>
-        </all>
-    </filter>
-    <kit force="true">
-        <item slot="1" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:5;ARROW_INFINITE:1" name="`AUpgraded Bow">bow</item>
-    </kit>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <all>
+                <team>defenders</team>
+                <kill-streak count="3"/>
+            </all>
+        </filter>
+        <kit force="true">
+            <item slot="1" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:5;ARROW_INFINITE:1" name="`AUpgraded Bow" material="bow"/>
+        </kit>
+    </kill-reward>
+</kill-rewards>
 <timelock>on</timelock>
 <filters>
     <!-- parents="deny-all" -->
@@ -95,9 +90,7 @@
         <material>sponge</material>
     </any>
     <!-- parents="deny-players" -->
-    <allow id="defenders-only">
-        <team>defenders</team>
-    </allow>
+    <team id="defenders-only">defenders</team>
 </filters>
 <regions>
     <block id="monument">756.5,45,1085.5</block>
@@ -107,8 +100,8 @@
     <cuboid id="Runner-Spawn" min="748,47.5,437" max="765,47.5,442"/>
     <cuboid id="Defender-Spawn" min="756,87,405" max="757,87,406"/>
     <cuboid id="Observer-Spawn" min="756,95,375" max="757,95,376"/>
-    <rectangle id="Heal-1" min="742,761" max="770,762"/>
-    <!--  Portal Regions  -->
+    <rectangle id="heal-1" min="742,761" max="770,762"/>
+    <!-- Portal Regions -->
     <union id="Spawn-A">
         <cuboid min="761,86,405" max="762,87,409"/>
         <cuboid min="759,86,408" max="762,87,409"/>
@@ -118,20 +111,14 @@
         <cuboid min="751,86,408" max="754,87,409"/>
     </union>
     <block id="Start-A">787.5,48,441.5</block>
-    <!--  yaw:-45  -->
+    <!-- yaw:-45 -->
     <block id="Start-B">725.5,48,441.5</block>
-    <!--  yaw:45  -->
+    <!-- yaw:45 -->
     <cuboid id="Portal-A" min="792,47,468" max="793,48,1032"/>
     <cuboid id="Portal-B" min="720,47,468" max="721,48,1032"/>
-    <apply block="monument-cobwebs" message="You may only break cobwebs!">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply kit="heal">
-        <region id="Heal-1"/>
-    </apply>
-    <apply enter="never" message="You may not re-enter your spawn">
-        <region id="spawnHouse"/>
-    </apply>
+    <apply block="monument-cobwebs" message="You may only break cobwebs!"/>
+    <apply region="heal-1" kit="heal"/>
+    <apply region="spawnHouse" enter="never" message="You may not re-enter your spawn"/>
 </regions>
 <spawns>
     <spawn team="runners" kit="magenta">

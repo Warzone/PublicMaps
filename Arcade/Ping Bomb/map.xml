@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
 <map proto="1.4.2">
 <name>Ping Bomb</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Blow up the enemy side before they blow up yours!</objective>
+<gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <authors>
     <author uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Design"/> <!-- Flashee -->
@@ -16,11 +16,11 @@
 </teams>
 <kits>
     <kit id="spawn">
-        <item slot="0" amount="9">ender stone</item>
+        <item slot="0" amount="9" material="ender stone"/>
         <potion duration="oo" amplifier="1">night vision</potion>
         <potion duration="oo" amplifier="-3">health boost</potion>
     </kit>
-      <kit id="obs">
+    <kit id="obs">
         <potion duration="oo" amplifier="1">night vision</potion>
     </kit>
 </kits>
@@ -51,9 +51,7 @@
     </default>
 </spawns>
 <filters>
-    <any id="only-ender-stone">
-        <material>ender stone</material>
-    </any>
+    <material id="only-ender-stone">ender stone</material>
 </filters>
 <regions>
     <apply block="never" message="Don't build outside of the map">
@@ -64,9 +62,11 @@
             </negative>
         </region>
     </apply> 
-    <apply block="only-ender-stone" region="everywhere" message="You may not break the map!"/>
+    <apply block="only-ender-stone" message="You may not break the map!"/>
 </regions>
-<killreward>
-    <item>diamond</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="diamond"/>
+    </kill-reward>
+</kill-rewards>
 </map>

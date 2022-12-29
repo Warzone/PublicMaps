@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Blitz: Micro Battles">
+<map proto="1.4.2" game="Blitz: Micro Battles">
 <name>Cozy Cove</name>
-<version>1.1.2</version>
+<created>2021-10-25</created>
+<version>1.1.3</version>
 <objective>Four teams are divided onto the map and only one will remain. Gather blocks to help you build up a tower or barricade yourself. Be careful for the world border!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -9,10 +9,10 @@
     <author uuid="edbd4cdb-63a5-4cec-944c-2b6bda56f51f"/> <!-- Owehttamy -->
 </authors>
 <teams>
-    <team id="blue"   color="dark aqua" max="8">Blue</team>
-    <team id="green"  color="green"     max="8">Green</team>
-    <team id="red"    color="red"       max="8">Red</team>
-    <team id="yellow" color="yellow"    max="8">Yellow</team>
+    <team id="blue" color="dark aqua" max="8">Blue</team>
+    <team id="green" color="green" max="8">Green</team>
+    <team id="red" color="red" max="8">Red</team>
+    <team id="yellow" color="yellow" max="8">Yellow</team>
 </teams>
 <time>170s</time>
 <broadcasts>
@@ -27,38 +27,38 @@
 </blitz>
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">stone pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" unbreakable="true">stone spade</item>
-        <item slot="8" amount="8">apple</item>
-        <item slot="28" amount="8">arrow</item>
-        <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" unbreakable="true" material="stone spade"/>
+        <item slot="8" amount="8" material="apple"/>
+        <item slot="28" amount="8" material="arrow"/>
+        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="334CB2">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="334CB2">leather boots</boots>
+        <chestplate unbreakable="true" locked="true" color="334CB2" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="334CB2" material="leather boots"/>
     </kit>
     <kit id="green-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="667F33">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="667F33">leather boots</boots>
+        <chestplate unbreakable="true" locked="true" color="667F33" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="667F33" material="leather boots"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="993333">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="993333">leather boots</boots>
+        <chestplate unbreakable="true" locked="true" color="993333" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="993333" material="leather boots"/>
     </kit>
     <kit id="yellow-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="E5E533">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="E5E533">leather boots</boots>
+        <chestplate unbreakable="true" locked="true" color="E5E533" material="leather chestplate"/>
+        <boots unbreakable="true" locked="true" color="E5E533" material="leather boots"/>
     </kit>
 </kits>
 <destroyables required="false" show="false">
-    <destroyable name="Walls" owner="blue"  materials="glass" modes="walls-to-air" region="walls"/>
+    <destroyable name="Walls" owner="blue" materials="glass" modes="walls-to-air" region="walls"/>
     <destroyable name="Floor" owner="green" materials="lava;stationary lava;stone;stained clay" modes="floor-to-air" region="floor"/>
 </destroyables>
 <modes>
-    <mode id="walls-to-air" after="10s"  show-before="0" material="air"/>
+    <mode id="walls-to-air" after="10s" show-before="0" material="air"/>
     <mode id="floor-to-air" after="165s" show-before="0" material="air"/>
 </modes>
 <filters>
@@ -71,14 +71,14 @@
 <regions>
     <cuboid id="floor" min="27,0,27" max="30,25,30"/>
     <union id="walls">
-        <cuboid id="first-wall"  min="28,5,1" max="29,14,56"/>
+        <cuboid id="first-wall" min="28,5,1" max="29,14,56"/>
         <cuboid id="second-wall" min="1,5,28" max="56,14,29"/>
     </union>
     <negative id="not-map">
         <cylinder id="map" base="28,0,28" radius="27" height="25"/>
     </negative>
-    <apply region="map"     block="not-glass" message="You cannot break the walls."/>
-    <apply region="not-map" block="never"     message="You cannot build outside of the map."/>
+    <apply region="map" block="not-glass" message="You cannot break the walls."/>
+    <apply region="not-map" block="never" message="You cannot build outside of the map."/>
 </regions>
 <spawns>
     <spawn team="blue" kit="blue-kit">

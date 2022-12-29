@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Not So Itty Bitty</name>
-<version>1.0.2</version>
+<created>2018-03-05</created>
+<version>1.0.3</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>arcade</gamemode>
 <gamemode>dtm</gamemode>
@@ -9,7 +9,7 @@
     <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
 </authors>
 <contributors>
-    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"></contributor> <!-- TheBestGamer -->
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
 <!-- Teams -->
 <teams>
@@ -19,24 +19,24 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">stone axe</item>
-        <item slot="2" amount="64">wood</item>
-        <item slot="3" amount="64">wood</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <boots unbreakable="true">iron boots</boots>
-        <effect duration="1000000" amplifier="4">speed</effect>
-        <effect duration="3" amplifier="1000000">damage resistance</effect>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="stone axe"/>
+        <item slot="2" amount="64" material="wood"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="oo" amplifier="4">speed</effect>
+        <effect duration="3" amplifier="100000">damage resistance</effect>
     </kit>
     <kit id="blue-kit" parents="default">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+        <helmet unbreakable="true" color="3C44AA" material="leather helmet"/>
+        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -46,9 +46,9 @@
     <default yaw="180" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="100%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Blue Wool" owner="blue-team" materials="wool" region="blue-wool"/>
-    <destroyable name="Red Wool" owner="red-team" materials="wool" region="red-wool"/>
+<destroyables repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
+    <destroyable name="Red Wool" owner="red-team" region="red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
