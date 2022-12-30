@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Rig FFA</name>
-<version>1.0.9</version>
+<version>1.0.10</version>
 <objective>Kill the most people in 5 minutes</objective>
 <gamemode>ffa</gamemode>
 <authors>
@@ -18,14 +17,14 @@
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="28">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
         <potion duration="2.5" amplifier="10">resistance</potion>
     </kit>
 </kits>
@@ -44,9 +43,11 @@
 <regions>
     <apply block="never"/>
 </regions>
-<killreward>
-    <item>golden apple</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -59,9 +60,6 @@
     <item>leather boots</item>
     <item>golden apple</item>
 </itemremove>
-<regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
-</regions>
 <hunger>
     <depletion>off</depletion>
 </hunger>

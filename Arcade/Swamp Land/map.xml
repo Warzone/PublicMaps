@@ -1,9 +1,10 @@
-<?xml version="1.0"?>
 <map proto="1.4.2" game="Walls">
 <name>Swamp Land</name>
-<version>1.0.1</version>
+<created>2022-07-02</created>
+<version>1.0.2</version>
 <objective>Prepare for battle by gathering resources and armor. Watch out for the walls to drop!</objective>
 <gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
 <!-- Authors & Contributor -->
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
@@ -14,10 +15,10 @@
 </contributors>
 <!-- Teams -->
 <teams>
-    <team color="blue"   id="blue"   min="1" max="8">Blue</team>
-    <team color="green"  id="green"  min="1" max="8">Green</team>
+    <team color="blue" id="blue" min="1" max="8">Blue</team>
+    <team color="green" id="green" min="1" max="8">Green</team>
     <team color="yellow" id="yellow" min="1" max="8">Yellow</team>
-    <team color="red"    id="red"    min="1" max="8">Red</team>
+    <team color="red" id="red" min="1" max="8">Red</team>
 </teams>
 <!-- Time & Blitz -->
 <time>16m</time>
@@ -180,27 +181,26 @@
 <!-- World Border -->
 <world-borders center="8.5, 3.5">
     <world-border size="150"/>
-     <!-- The world border starts shrinking after 7 minutes into the match and will take another 7 mintues to reach the center. -->
     <world-border size="7" after="7m" duration="7m" damage="3" buffer="0"/>
 </world-borders>
 <!-- Regions -->
 <regions>
     <!-- Defenitions -->
     <union id="spawn-protections">
-        <cylinder id="blue-spawn-protection"   base="65,73,-56"  radius="6" height="12"/>
-        <cylinder id="green-spawn-protection"  base="-49,73,-56" radius="6" height="12"/>
-        <cylinder id="yellow-spawn-protection" base="-49,73,62"  radius="6" height="12"/>
-        <cylinder id="red-spawn-protection"    base="65,73,62"   radius="6" height="12"/>
+        <cylinder id="blue-spawn-protection" base="65,73,-56" radius="6" height="12"/>
+        <cylinder id="green-spawn-protection" base="-49,73,-56" radius="6" height="12"/>
+        <cylinder id="yellow-spawn-protection" base="-49,73,62" radius="6" height="12"/>
+        <cylinder id="red-spawn-protection" base="65,73,62" radius="6" height="12"/>
     </union>
     <union id="walls">
-        <cuboid id="blue-left-wall"    min="77,0,-6"  max="15,115,-4"/>
-        <cuboid id="blue-right-wall"   min="17,0,-65" max="15,115,-4"/>
-        <cuboid id="green-left-wall"   min="-1,0,-65" max="1,115,-4"/>
-        <cuboid id="green-right-wall"  min="-60,0,-6" max="1,115,-4"/>
-        <cuboid id="yellow-left-wall"  min="-60,0,12" max="1,115,10"/>
-        <cuboid id="yellow-right-wall" min="-1,0,71"  max="1,115,10"/>
-        <cuboid id="red-left-wall"     min="17,0,71"  max="15,115,10"/>
-        <cuboid id="red-right-wall"    min="77,0,12"  max="15,115,10"/>
+        <cuboid id="blue-left-wall" min="77,0,-6" max="15,115,-4"/>
+        <cuboid id="blue-right-wall" min="17,0,-65" max="15,115,-4"/>
+        <cuboid id="green-left-wall" min="-1,0,-65" max="1,115,-4"/>
+        <cuboid id="green-right-wall" min="-60,0,-6" max="1,115,-4"/>
+        <cuboid id="yellow-left-wall" min="-60,0,12" max="1,115,10"/>
+        <cuboid id="yellow-right-wall" min="-1,0,71" max="1,115,10"/>
+        <cuboid id="red-left-wall" min="17,0,71" max="15,115,10"/>
+        <cuboid id="red-right-wall" min="77,0,12" max="15,115,10"/>
     </union>
     <negative id="not-map">
         <rectangle id="map" min="-59,-63" max="76,70"/>
@@ -210,7 +210,7 @@
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <!-- Prevent players from breaking the walls -->
-    <apply region="everywhere" block-break="no-clay" message="You may not destroy the walls!"/>
+    <apply block-break="no-clay" message="You may not destroy the walls!"/>
 </regions>
 <!-- Misc -->
 <mobs>

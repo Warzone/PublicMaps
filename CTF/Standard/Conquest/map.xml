@@ -1,7 +1,7 @@
 <map proto="1.4.2" game="Return the Flag">
 <name>Conquest</name>
 <created>2022-02-27</created>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>First team to bring your side's flag to the enemy's side 3 times wins!</objective>
 <gamemode>ctf</gamemode>
 <!-- Author(s) and Contributor(s) -->
@@ -67,9 +67,9 @@
     <point id="green-spawn">0.5,17,-137.5</point>
     <point id="obs-spawn">-12.5,50,-56.5</point>
     <!-- Applications -->
-    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
+    <apply block="never"/>
     <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
-    <apply region="green-spawn-protection"  enter="green-only"  message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Flags -->
 <flags flag-proximity-metric="none" net-proximity-metric="none">
@@ -106,9 +106,9 @@
 </itemremove>
 <!-- Kill Rewards -->
 <kill-rewards>
-    <killreward>
+    <kill-reward>
         <item material="golden apple"/>
-    </killreward>
+    </kill-reward>
 </kill-rewards>
 <!-- Misc -->
 <disabledamage>

@@ -1,11 +1,10 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Eggy Soldiers</name>
-<version>1.0.3</version>
-<gamemode>arcade</gamemode>
+<version>1.0.4</version>
 <objective>Get the most points after 2 minutes!</objective>
+<gamemode>arcade</gamemode>
 <authors>
-    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" /> <!--  Diamyx  -->
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" /> <!-- Diamyx -->
 </authors>
 <score>
     <kills>1</kills>
@@ -15,11 +14,11 @@
 <respawn delay="1.5s" spectate="true"/>
 <kits>
     <kit id="spawn">
-        <item slot="0" projectile="gun" name="`eEggun">gold hoe</item>
-        <helmet color="999999" unbreakable="true">leather helmet</helmet>
-        <chestplate color="999999" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="999999" unbreakable="true">leather leggings</leggings>
-        <boots color="999999" unbreakable="true">leather boots</boots>
+        <item slot="0" projectile="gun" name="`eEggun" material="gold hoe"/>
+        <helmet color="999999" unbreakable="true" material="leather helmet"/>
+        <chestplate color="999999" unbreakable="true" material="leather chestplate"/>
+        <leggings color="999999" unbreakable="true" material="leather leggings"/>
+        <boots color="999999" unbreakable="true" material="leather boots"/>
         <potion duration="oo">night vision</potion>
         <potion duration="2" amplifier="25">damage resistance</potion>
         <potion duration="2" amplifier="25">heal</potion>
@@ -29,38 +28,32 @@
     </kit>
 </kits>
 <projectiles>
-    <projectile
-        id="gun"
-        name="Eggun"
-        projectile="Egg"
-        velocity="2.3"
-        damage="10"
-        throwable="false"
-        click="both"
-        cooldown="0.05"/>
+    <projectile id="gun" name="Eggun" projectile="Egg" velocity="2.3" damage="10" throwable="false" click="both" cooldown="0.05"/>
 </projectiles>
-<killreward>
-    <kit force="true">
-        <potion duration="3" amplifier="5">regeneration</potion>
-    </kit>
-</killreward>
-<killreward>
-    <kit force="true">
-        <item slot="1" name="`4Rotten Egg" grenade="true" grenade-power="3" grenade-destroy="false" material="egg"/>
-    </kit>
-    <filter>
-        <kill-streak count="2" />
-    </filter>
-</killreward>
-<killreward>
-    <kit force="true">
-        <potion duration="oo" amplifier="2">health boost</potion>
-        <potion duration="2" amplfier="3">heal</potion>
-    </kit>
-    <filter>
-        <kill-streak count="5"/>
-    </filter>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <kit force="true">
+            <potion duration="3" amplifier="5">regeneration</potion>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <kit force="true">
+            <item slot="1" name="`4Rotten Egg" grenade="true" grenade-power="3" grenade-destroy="false" material="egg"/>
+        </kit>
+        <filter>
+            <kill-streak count="2" />
+        </filter>
+    </kill-reward>
+    <kill-reward>
+        <kit force="true">
+            <potion duration="oo" amplifier="2">health boost</potion>
+            <potion duration="2" amplfier="3">heal</potion>
+        </kit>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+    </kill-reward>
+</kill-rewards>
 <spawns>
     <spawns kit="spawn" spread="true">
         <spawn>
@@ -147,7 +140,7 @@
     </default>
 </spawns>
 <regions>
-    <apply block="never" region="everywhere"/>
+    <apply block="never"/>
 </regions>
 <players min="2" max="8" show-name-tags="false" colors="true"/>
 <hunger>

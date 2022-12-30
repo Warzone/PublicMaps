@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Audax DTM</name>
-<version>1.0.1</version>
+<created>2022-02-21</created>
+<version>1.0.2</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
 <!-- Authors and Contributors -->
 <authors>
-    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map creation"></author> <!-- _iMan -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map creation"/> <!-- _iMan -->
 </authors>
 <contributors>
-    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Map design"></contributor> <!-- Qualqty -->
-    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map layout"></contributor> <!-- Wesdial -->
-    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"></contributor> <!-- _Pear -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Map design"/> <!-- Qualqty -->
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map layout"/> <!-- Wesdial -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
 </contributors>
 <!-- Broadcasts -->
 <broadcasts>
@@ -26,26 +26,24 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="6" amount="1">golden apple</item>
-        <item slot="7" amount="64">bread</item>
-        <item slot="8" amount="64">arrow</item>
-        <chestplate unbreakable="true">iron chestplate</chestplate>
-        <boots unbreakable="true">chainmail boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" amount="64" team-color="true" material="stained clay"/>
+        <item slot="4" amount="64" team-color="true" material="stained clay"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="64" material="bread"/>
+        <item slot="8" amount="64" material="arrow"/>
+        <chestplate unbreakable="true" material="iron chestplate"/>
+        <boots unbreakable="true" material="chainmail boots"/>
     </kit>
     <kit id="dasos-kit" parents="default">
-        <item slot="3" amount="64" damage="14">stained clay</item>
-        <item slot="4" amount="64" damage="14">stained clay</item>
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <leggings unbreakable="true" color="B02526">leather leggings</leggings>
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <leggings unbreakable="true" color="B02526" material="leather leggings"/>
     </kit>
     <kit id="kairos-kit" parents="default">
-        <item slot="3" amount="64" damage="4">stained clay</item>
-        <item slot="4" amount="64" damage="4">stained clay</item>
-        <helmet unbreakable="true" color="FED83D">leather helmet</helmet>
-        <leggings unbreakable="true" color="FED83D">leather leggings</leggings>
+        <helmet unbreakable="true" color="FED83D" material="leather helmet"/>
+        <leggings unbreakable="true" color="FED83D" material="leather leggings"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -66,7 +64,7 @@
     <team id="kairos-only">kairos</team>
     <material id="only-iron">iron block</material>
     <deny id="deny-players">
-          <participating/>
+        <participating/>
     </deny>
 </filters>
 <!-- Regions -->
@@ -86,7 +84,7 @@
     <apply region="kairos-spawn-protection" enter="kairos-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Monuments -->
-<destroyables materials="obsidian" repairable="false" sparks="true">
+<destroyables repairable="false" materials="obsidian" sparks="true">
     <destroyable name="Left Monument" owner="dasos">
         <region><cuboid min="50,53,-39" max="52,56,-41"/></region>
     </destroyable>
@@ -118,13 +116,11 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
+        <item material="golden apple"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="2"/>
-            </all>
+            <kill-streak count="2"/>
         </filter>
         <item material="arrow"/>
     </kill-reward>
