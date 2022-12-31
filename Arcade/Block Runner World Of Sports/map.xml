@@ -1,18 +1,21 @@
 <map proto="1.4.0" game="`eProgress">
-<name>Block Runner: Classic dev</name>
+<name>Block Runner: World of Sports</name>
 <version>1.0.0</version>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
+<contributors>
+    <contributor uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Concept and XML"/> <!-- AtlasGames -->
+</contributors>
 <spawns>
     <spawn kit="spawn">
-        <regions yaw="90">
+        <regions yaw="-90">
             <region id="spawn-location"/>
         </regions>
     </spawn>
     <default>
-        <regions yaw="90">
-            <point>-61,11.5,103</point>
+        <regions yaw="-90">
+            <point>-35.5,13,10.5</point>
         </regions>
     </default>
 </spawns>
@@ -21,13 +24,12 @@
 <blitz>
     <lives>1</lives>    
 </blitz>
-<players max="50" colors="true"/>
+<players min="4" max="8" colors="true"/>
 <broadcasts>
     <alert after="2s">`6`lBlocks falling in 3 seconds</alert>
     <alert after="3s">`6`lBlocks falling in 2 seconds</alert>
     <alert after="4s">`6`lBlocks falling in 1 seconds</alert>
     <alert after="5s">`6`lThe path is falling away! Run!</alert>
-    <alert after="1s">`6`lThe path is falling away! Run!</alert>
 </broadcasts>
 <time>2m</time>
 <score>
@@ -55,12 +57,12 @@
     </box>
 </score>
 <regions>
-    <block id="spawn-location">-70,6,103</block>
-    <cuboid id="mon" min="-72,2,101" max="-70,3,104"/>
-    <below id="checkpoint1" x="-110"/>
-    <below id="checkpoint2" x="-176"/>
-    <below id="checkpoint3" x="-238"/>
-    <cuboid id="box-win" min="-314,10,101" max="-310,0,105"/>
+    <cuboid id="spawn-location" min="-35.5,13,7" max="-35.5,13,13"/>
+    <cuboid id="mon" min="-38,1,12" max="-37,0,9"/>
+    <above id="checkpoint1" x="53"/>
+    <above id="checkpoint2" x="109"/>
+    <above id="checkpoint3" x="148"/>
+    <cuboid id="box-win" min="196,12,3" max="205,19,17"/>
     <apply enter="never">
         <region>
             <negative>
@@ -82,9 +84,6 @@
             </negative>
         </region>
     </apply>
-    <apply kit="void-death">
-        <region><below y="-5"/></region>
-    </apply>
 </regions>
 <kits>
     <kit id="spawn">
@@ -93,19 +92,11 @@
         <effect duration="oo">fire resistance</effect>
         <boots>gold boots</boots>
     </kit>
-    <kit id="void-death" force="true">
-        <health>1</health>
-    </kit>
 </kits>
 <structures>
     <structure id="mon-struct" region="mon" air="false"/>
     <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
 </structures>
-<portals>
-    <portal y="-64" sound="false">
-        <region><below y="-5"/></region>
-    </portal>
-</portals>
 <filters>
     <not id="countdown">
         <time>5s</time>
@@ -138,3 +129,4 @@
     <doTileDrops>false</doTileDrops>
 </gamerules>
 </map>
+
