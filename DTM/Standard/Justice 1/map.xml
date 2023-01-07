@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.4.2">
 	<name>Justice 1</name>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
     <gamemode>dtm</gamemode>
 	<objective>Destroy the enemy's monument(s) to win!</objective>
 	<authors>
@@ -25,7 +25,7 @@
 		</spawn>
 		<default>
 			<regions yaw="90">
-				<cylinder base="-86, 155, -48" height="1" radius="1"/>
+				<cylinder base="-86, 156, -48" height="1" radius="1"/>
 			</regions>
 		</default>
 	</spawns>
@@ -83,16 +83,20 @@
 			</region>
 		</destroyable>
 	</destroyables>
-	<regions>
-		<cylinder name="yellow-spawn" base="-2, 82, -107" height="7" radius="10" />
-		<cylinder name="red-spawn" base="-2, 82, 11" height="7" radius="10" />
-		<apply block-break="never" block-place="never" message="You may not modify the spawn area.">
-			<region name="yellow-spawn" />
-		</apply>
-		<apply block-break="never" block-place="never" message="You may not modify the spawn area.">
-			<region name="red-spawn" />
-		</apply>
-	</regions>
+    
+    <filters>
+        <team id="yellow-only">yellow</team>
+        <team id="red-only">red</team>
+    </filters>
+    <regions>
+        <union id="spawn-protections">
+            <cylinder id="yellow-spawn-protection" base="-2,82,-107" radius="10" height="oo"/>
+            <cylinder id="red-spawn-protection" base="-2,82,11" radius="10" height="oo"/>
+        </union>
+        <apply region="spawn-protections"       block="never"     message="You are not allowed to modify terrain here."/>
+        <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
+        <apply region="red-spawn-protection"    enter="red-only" message="You may not enter the enemy spawn."/>
+    </regions>
 	<itemremove>
 		<item>leather helmet</item>
 		<item>leather chestplate</item>
