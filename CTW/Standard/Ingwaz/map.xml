@@ -1,8 +1,8 @@
 <map proto="1.4.2">
 <name>Ingwaz</name>
-<version>1.0.2</version>
-<objective>Capture the enemy's wool!</objective>
 <created>2022-03-23</created>
+<version>1.0.3</version>
+<objective>Capture the enemy's wool!</objective>
 <gamemode>ctw</gamemode>
 <authors>
     <author uuid="2ca8072f-74be-4798-85b8-bbce03aa91af"/> <!-- Tywnis -->
@@ -30,43 +30,36 @@
 </spawns>
 <kits>
     <kit id="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="2">iron pickaxe</item>
-        <item slot="3">iron axe</item>
-        <item slot="4" amount="64">baked potato</item>
-        <item slot="7" damage="1" amount="24">wood</item>
-        <item slot="8" amount="24">arrow</item>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="iron pickaxe"/>
+        <item slot="3" material="iron axe"/>
+        <item slot="4" amount="64" material="baked potato"/>
+        <item slot="7" damage="1" amount="24" material="wood"/>
+        <item slot="8" amount="24" material="arrow"/>
         <potion duration="3" amplifier="2">heal</potion>
         <potion duration="3">damage resistance</potion>
     </kit>
     <kit id="bluekit" parents="spawn">
-        <helmet color="0066cc">leather helmet</helmet>
-        <chestplate color="D5D5D5">leather chestplate</chestplate>
-        <leggings color="0066cc">leather leggings</leggings>
-        <boots color="D5D5D5">leather boots</boots>
+        <helmet color="0066cc" material="leather helmet"/>
+        <chestplate color="D5D5D5" material="leather chestplate"/>
+        <leggings color="0066cc" material="leather leggings"/>
+        <boots color="D5D5D5" material="leather boots"/>
     </kit>
     <kit id="redkit" parents="spawn">
-        <helmet color="cd0000">leather helmet</helmet>
-        <chestplate color="D5D5D5">leather chestplate</chestplate>
-        <leggings color="cd0000">leather leggings</leggings>
-        <boots color="D5D5D5">leather boots</boots>
+        <helmet color="cd0000" material="leather helmet"/>
+        <chestplate color="D5D5D5" material="leather chestplate"/>
+        <leggings color="cd0000" material="leather leggings"/>
+        <boots color="D5D5D5" material="leather boots"/>
     </kit>
 </kits>
-<killrewards>
-    <killreward>
-        <filter>
-            <kill-streak count="1" repeat="true"/>
-        </filter>
-        <item>arrow</item>
-    </killreward>
-    <killreward>
-        <filter>
-            <kill-streak count="2" repeat="true"/>
-        </filter>
-        <item>golden apple</item>
-    </killreward>
-</killrewards>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+        <item amount="8" material="wood" damage="1"/>
+    </kill-reward>
+</kill-rewards>
 <filters>
     <deny id="deny-players">
         <participating/>

@@ -1,0 +1,137 @@
+<map proto="1.4.0" game="`eProgress">
+<name>Block Runner: Halloween</name>
+<version>1.0.0</version>
+<slug>block_runner_halloween</slug>
+<authors>
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad"/> <!-- breadandcinnamon -->
+    <author uuid="cbd5c47c-1137-4f02-93dd-626a46bdd779"/> <!-- Kaskito -->
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b"/> <!-- Jexel -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b"/> <!-- _3each -->
+</authors>
+<contributors>
+    <contributor uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Concept and XML"/> <!-- AtlasGames -->
+</contributors>
+<spawns>
+    <spawn kit="spawn">
+        <regions yaw="-90">
+            <region id="spawn-location"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-17,7,-11</point>
+        </regions>
+    </default>
+</spawns>
+<objective>Be the first to the end!</objective>
+<gamemode>arcade</gamemode> 
+<blitz>
+    <lives>1</lives>    
+</blitz>
+<players min="2" max="8" colors="true"/>
+<broadcasts>
+    <alert after="2s">`6`lBlocks falling in 3 seconds</alert>
+    <alert after="3s">`6`lBlocks falling in 2 seconds</alert>
+    <alert after="4s">`6`lBlocks falling in 1 seconds</alert>
+    <alert after="5s">`6`lThe path is falling away! Run!</alert>
+</broadcasts>
+<time>2m</time>
+<score>
+    <limit>4</limit>
+    <kills>0</kills>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint1"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint2"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="checkpoint3"/>
+        </region>
+    </box>
+    <box points="1" silent="true">
+        <region>
+            <region id="box-win"/>
+        </region>
+    </box>
+</score>
+<regions>
+    <block id="spawn-location">-17,7,-11</block>
+    <cuboid id="mon" min="-19,4,-10" size="1,1,1"/>
+    <above id="checkpoint1" x="27"/>
+    <above id="checkpoint2" x="72"/>
+    <above id="checkpoint3" x="117"/>
+    <cuboid id="box-win" min="164,9,-10" max="161,7,-7"/>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint1"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint2"/>
+            </negative>
+        </region>
+    </apply>
+    <apply enter="never">
+        <region>
+            <negative>
+                <region id="checkpoint3"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<kits>
+    <kit id="spawn">
+        <game-mode>adventure</game-mode>
+        <effect duration="oo">invisibility</effect>
+        <effect duration="oo">fire resistance</effect>
+        <boots>gold boots</boots>
+    </kit>
+</kits>
+<structures>
+    <structure id="mon-struct" region="mon" air="false"/>
+    <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
+</structures>
+<filters>
+    <not id="countdown">
+        <time>5s</time>
+    </not>
+    <not id="all-blocks">
+        <material>air</material>
+    </not>
+</filters>
+<falling-blocks delay="4">
+    <rule>
+        <filter>
+            <filter id="all-blocks"/>
+        </filter>
+        <sticky>
+            <all>
+                <filter id="all-blocks"/>
+                <material>redstone block</material>
+            </all>
+        </sticky>
+    </rule>
+</falling-blocks>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+<gamerules>
+    <doTileDrops>false</doTileDrops>
+</gamerules>
+</map>
+

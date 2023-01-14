@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Dogfight</name>
-<version>1.3.0</version>
+<created>2021-04-15</created>
+<version>1.3.1</version>
 <objective>Blow up the enemy aircraft before they blow up yours!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -12,37 +12,23 @@
     <contributor uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Inspiration and idea (Ping Bomb I/II)"/> <!-- Flashee -->
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="XML and world conversion"/> <!-- TheBestGamer -->
 </contributors>
+<blitz>
+    <lives>1</lives>
+</blitz>
 <teams>
     <team id="red" color="dark red" max="10" max-overfill="10">Robins</team>
     <team id="blue" color="blue" max="10" max-overfill="10">Blue Jays</team>
 </teams>
 <kits>
     <kit id="red-kit">
-        <item slot="0" amount="8" damage="14">stained glass</item>
-        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
+        <item slot="0" amount="8" damage="14" material="stained glass"/>
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
     </kit>
     <kit id="blue-kit">
-        <item slot="0" amount="8" damage="11">stained glass</item>
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
+        <item slot="0" amount="8" damage="11" material="stained glass"/>
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
     </kit>
 </kits>
-<blitz>
-    <lives>1</lives>
-</blitz>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
-    <all id="only-glass-in-map">
-        <material>stained glass</material>
-    </all>
-</filters>
-<regions>
-    <point id="red-glass-left-spawner">47.5,20.5,15.5</point>
-    <point id="red-glass-right-spawner">47.5,20.5,-14.5</point>
-    <point id="blue-glass-left-spawner">-48.5,20.5,-14.5</point>
-    <point id="blue-glass-right-spawner">-48.5,20.5,15.5</point>
-    <apply region="everywhere" block="only-glass-in-map" message="You may only place or break glass!"/>
-</regions>
 <spawns>
     <spawn team="red" kit="red-kit">
         <regions yaw="90">
@@ -60,17 +46,29 @@
         </regions>
     </default>
 </spawns>
-<spawners>
-    <spawner spawn-region="red-glass-left-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-red">
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+    <material id="only-glass-in-map">stained glass</material>
+</filters>
+<regions>
+    <point id="red-glass-left-spawner">47.5,20.5,15.5</point>
+    <point id="red-glass-right-spawner">47.5,20.5,-14.5</point>
+    <point id="blue-glass-left-spawner">-48.5,20.5,-14.5</point>
+    <point id="blue-glass-right-spawner">-48.5,20.5,15.5</point>
+    <apply block="only-glass-in-map" message="You may only place or break glass!"/>
+</regions>
+<spawners player-region="everywhere">
+    <spawner spawn-region="red-glass-left-spawner" max-entities="1" delay="1s" filter="only-red">
         <item amount="1" damage="14" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="red-glass-right-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-red">
+    <spawner spawn-region="red-glass-right-spawner" max-entities="1" delay="1s" filter="only-red">
         <item amount="1" damage="14" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="blue-glass-left-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-blue">
+    <spawner spawn-region="blue-glass-left-spawner" max-entities="1" delay="1s" filter="only-blue">
         <item amount="1" damage="11" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="blue-glass-right-spawner" player-region="everywhere" max-entities="1" delay="1s" filter="only-blue">
+    <spawner spawn-region="blue-glass-right-spawner" max-entities="1" delay="1s" filter="only-blue">
         <item amount="1" damage="11" material="stained glass"/>
     </spawner>
 </spawners>
