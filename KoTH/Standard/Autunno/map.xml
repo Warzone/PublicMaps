@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.4.2">
 <!-- <include id="tutorial"/> -->
 <name>Autunno</name>
-<version>1.1.4</version>
+<version>1.1.5</version>
 <objective>Control all the hills!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -12,34 +11,100 @@
     <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="XML"/> <!-- ElectroidFilms -->
 </contributors>
 <teams>
-    <team color="blue" max="20">Blue</team>
-    <team color="dark red" max="20">Red</team>
+    <team id="blue" color="blue" max="20">Blue</team>
+    <team id="red" color="dark red" max="20">Red</team>
 </teams>
 <rules>
     <rule>Fall damage is disabled!</rule>
 </rules>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" amount="16">apple</item>
-        <item slot="8" amount="2">golden apple</item>
-        <item slot="27" amount="1">arrow</item>
-        <leggings unbreakable="true">iron leggings</leggings>
+    <kit id="default">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" amount="16" material="apple"/>
+        <item slot="8" amount="2" material="golden apple"/>
+        <item slot="27" material="arrow"/>
+        <leggings unbreakable="true" material="iron leggings"/>
         <potion duration="6" amplifier="3">heal</potion>
         <potion duration="6" amplifier="3">damage resistance</potion>
     </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
-        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    <kit id="blue-kit" parents="default">
+        <chestplate color="334CB2" unbreakable="true" material="leather chestplate"/>
+        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
+        <boots color="334CB2" unbreakable="true" material="leather boots"/>
     </kit>
-    <kit name="red" parents="spawn">
-        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="993333" unbreakable="true">leather helmet</helmet>
-        <boots color="993333" unbreakable="true">leather boots</boots>
+    <kit id="red-kit" parents="default">
+        <chestplate color="993333" unbreakable="true" material="leather chestplate"/>
+        <helmet color="993333" unbreakable="true" material="leather helmet"/>
+        <boots color="993333" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
+<spawns>
+    <spawn team="blue" kit="blue-kit" yaw="-90">
+        <region>
+            <cylinder base="-135,23,-96" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit" yaw="90">
+        <region>
+            <cylinder base="22,23,-95" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cylinder base="-57,45,-96" radius="1" height="0"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <rectangle id="blue-spawn" min="-126,-104" max="-140,-87"/>
+    <rectangle id="red-spawn" min="13,-87" max="26,-104"/>
+    <apply block="never"/>
+    <apply region="blue-spawn" enter="only-blue"/>
+    <apply region="red-spawn" enter="only-red"/>
+</regions>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Hill A" capture-time="10s" points="1">
+        <capture>
+            <cylinder id="hill-a" base="-28.5,10,-87.5" radius="5" height="6"/>
+        </capture>
+        <progress>
+            <region id="hill-a"/>
+        </progress>
+        <captured>
+            <region id="hill-a"/>
+        </captured>
+    </control-point>
+    <control-point name="Center" capture-time="15s" points="1.5">
+        <capture>
+            <cuboid id="hill-center" min="-51,5,-90" max="-62,10,-101"/>
+        </capture>
+        <progress>
+            <region id="hill-center"/>
+        </progress>
+        <captured>
+            <region id="hill-center"/>
+        </captured>
+    </control-point>
+    <control-point name="Hill B" capture-time="10s" points="1">
+        <capture>
+            <cylinder id="hill-b" base="-83.5,10,-102.5" radius="5" height="6"/>
+        </capture>
+        <progress>
+            <region id="hill-b"/>
+        </progress>
+        <captured>
+            <region id="hill-b"/>
+        </captured>
+    </control-point>
+</control-points>
+<score>
+    <limit>750</limit>
+</score>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -53,88 +118,16 @@
     <item>glass bottle</item>
     <item>arrow</item>
 </itemremove>
-<killreward>
-    <item amount="1">golden apple</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 <timelock>on</timelock>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
-<filters>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-</filters>
-<regions>
-    <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    <rectangle name="blue-spawn" min="-126,-104" max="-140,-87"/>
-    <rectangle name="red-spawn" min="13,-87" max="26,-104"/>
-    <apply block="deny-all">
-        <region name="playable"/>
-    </apply>
-    <apply enter="only-blue">
-        <region name="blue-spawn"/>
-    </apply>
-    <apply enter="only-red">
-        <region name="red-spawn"/>
-    </apply>
-</regions>
-<spawns>
-    <spawn team="blue" kit="blue" yaw="-90">
-        <cylinder base="-135,23,-96" radius="1" height="0"/>
-    </spawn>
-    <spawn team="red" kit="red" yaw="90">
-        <cylinder base="22,23,-95" radius="1" height="0"/>
-    </spawn>
-    <default yaw="-90">
-        <cylinder base="-57,46,-96" radius="1" height="0"/>
-    </default>
-</spawns>
-<king>
-    <hills>
-        <hill name="Hill A" capture-time="10s" ratio="1">
-            <capture>
-                <cylinder base="-29,11,-88" radius="4" height="5"/>
-            </capture>
-            <progress>
-                <cuboid min="-24,9,-83" max="-34,11,-93"/>
-            </progress>
-            <captured>
-                <cuboid min="-24,16,-93" max="-34,16,-83"/>
-            </captured>
-        </hill>
-        <hill name="Center" capture-time="15s" ratio="1">
-            <capture>
-                <cuboid min="-52.5,6,-98.5" max="-59.5,10,-91.5"/>
-            </capture>
-            <progress>
-                <cuboid min="-52.5,4,-98.5" max="-59.5,6,-91.5"/>
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0"/>
-            </captured>
-        </hill>
-        <hill name="Hill B" capture-time="10s" ratio="1">
-            <capture>
-                <cylinder base="-84,11,-103" radius="4" height="5"/>
-            </capture>
-            <progress>
-                <cuboid min="-89,9,-108" max="-79,11,-98"/>
-            </progress>
-            <captured>
-                <cuboid min="-79,16,-108" max="-89,16,-98"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
-<score>
-    <limit>750</limit>
-    <king/>
-</score>
-<tutorial>
+<!-- <tutorial>
     <stage title="King of the Hill (KotH)">
         <message>
             <line>`rThis map is a `a`lKing of the Hill `r(KotH) map</line>
@@ -153,5 +146,5 @@
             <point yaw="-66" pitch="10">-93,13,-105</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>

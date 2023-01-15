@@ -75,7 +75,7 @@
             <region id="b-hill"/>
         </captured>
     </control-point>
-    <control-point name="Mid Point" points="1">
+    <control-point name="Mid Point" points="1.5">
         <capture>
             <cylinder id="mid-hill" base="-78.5,43,-241.5" radius="7" height="4"/>
         </capture>
@@ -105,13 +105,13 @@
 </filters>
 <regions>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-45,-oo,-259" max="-17,oo,-230"/>
-        <cuboid id="red-spawn-protection" min="-136,-oo,-254" max="-111,oo,-225"/>
+        <rectangle id="blue-spawn-protection" min="-45,-259" max="-17,-230"/>
+        <rectangle id="red-spawn-protection" min="-136,-254" max="-111,-235"/>
     </union>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
     <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
-    <apply region="everywhere" block="only-leaves-in-map" message="You may only place or break leaves!"/>
+    <apply block="only-leaves-in-map" message="You may only place or break leaves!"/>
 </regions>
 <itemremove>
     <item>stone sword</item>
