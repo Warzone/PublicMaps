@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Brisked TGM</name>
+<created>2022-04-17</created>
 <version>1.0.0</version>
 <objective>Reach 1200 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
@@ -19,27 +19,27 @@
 <!-- Teams -->
 <teams>
     <team id="purple" color="dark purple" max="16">Purple</team>
-    <team id="orange" color="gold"        max="16">Orange</team>
+    <team id="orange" color="gold" max="16">Orange</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" unbreakable="true"     material="stone sword"/>
-        <item slot="1" unbreakable="true"     material="bow"/>
-        <item slot="2" unbreakable="true"     material="shears"/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="shears"/>
         <item slot="3" amount="24" damage="1" material="leaves"/>
-        <item slot="7" amount="24"            material="arrow"/>
-        <item slot="8" amount="64"            material="golden carrot"/>
-        <chestplate    unbreakable="true"     material="chainmail chestplate" locked="true"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <chestplate unbreakable="true" material="chainmail chestplate" locked="true"/>
     </kit>
     <kit id="purple-kit" parents="spawn-kit">
-        <helmet   unbreakable="true" color="FF00EE" locked="true" material="leather helmet"/>
+        <helmet unbreakable="true" color="FF00EE" locked="true" material="leather helmet"/>
         <leggings unbreakable="true" color="FF00EE" locked="true" material="leather leggings"/>
-        <boots    unbreakable="true" color="FF00EE" locked="true" material="leather boots"/>
+        <boots unbreakable="true" color="FF00EE" locked="true" material="leather boots"/>
     </kit>
     <kit id="orange-kit" parents="spawn-kit">
-        <helmet   unbreakable="true" color="FF7200" locked="true" material="leather helmet"/>
+        <helmet unbreakable="true" color="FF7200" locked="true" material="leather helmet"/>
         <leggings unbreakable="true" color="FF7200" locked="true" material="leather leggings"/>
-        <boots    unbreakable="true" color="FF7200" locked="true" material="leather boots"/>
+        <boots unbreakable="true" color="FF7200" locked="true" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -100,9 +100,7 @@
 <filters>
     <team id="purple-only">purple</team>
     <team id="orange-only">orange</team>
-    <all id="only-leaves-in-map">
-        <material>leaves</material>
-    </all>
+    <material id="only-leaves-in-map">leaves</material>
 </filters>
 <!-- Regions -->
 <regions>
@@ -112,21 +110,21 @@
         <cuboid id="orange-spawn-protection" min="25.5,44,-148.5" max="34.5,oo,-139.5"/>
     </union>
     <union id="launchpad-protections">
-        <cuboid id="purple-pad"             min="-46,29,-68"  max="-43,oo,-71"/>
-        <cuboid id="purple-pad-destination" min="-41,47,-73"  max="-38,oo,-76"/>
-        <cuboid id="orange-pad"             min="11,29,-125"  max="8,oo,-122"/>
-        <cuboid id="orange-pad-destination" min="6,47,-120"   max="3,oo,-117"/>
-        <cuboid id="a-hill-pad"             min="19,31,-57"   max="22,oo,-60"/>
-        <cuboid id="a-hill-pad-destination" min="6,44,-70"    max="9,oo,-73"/>
-        <cuboid id="b-hill-pad"             min="-54,31,-136" max="-57,oo,-133"/>
+        <cuboid id="purple-pad" min="-46,29,-68"  max="-43,oo,-71"/>
+        <cuboid id="purple-pad-destination" min="-41,47,-73" max="-38,oo,-76"/>
+        <cuboid id="orange-pad" min="11,29,-125" max="8,oo,-122"/>
+        <cuboid id="orange-pad-destination" min="6,47,-120" max="3,oo,-117"/>
+        <cuboid id="a-hill-pad" min="19,31,-57" max="22,oo,-60"/>
+        <cuboid id="a-hill-pad-destination" min="6,44,-70" max="9,oo,-73"/>
+        <cuboid id="b-hill-pad" min="-54,31,-136" max="-57,oo,-133"/>
         <cuboid id="b-hill-pad-destination" min="-41,44,-123" max="-44,oo,-120"/>
     </union>
     <!-- Applications -->
-    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
-    <apply region="launchpad-protections"   block="never"              message="You may not obstruct the launchpad platforms!"/>
-    <apply region="purple-spawn-protection" enter="purple-only"        message="You may not enter the enemy spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only"        message="You may not enter the enemy spawn."/>
-    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="launchpad-protections" block="never" message="You may not obstruct the launchpad platforms!"/>
+    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply block="only-leaves-in-map" message="You may only place or break leaves!"/>
     <!-- Launchpads -->
     <apply velocity="@0.7,2.3,-0.7">
         <region>
@@ -167,7 +165,7 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item>golden apple</item>
+        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

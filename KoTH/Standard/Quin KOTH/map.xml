@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Quin KOTH</name>
+<created>2021-12-25</created>
 <version>1.0.1</version>
 <objective>Capture as many hills as possible with your team to reach 2000 points before the opposing teams!</objective>
-<gamemode>koth</gamemode>
 <gamemode>arcade</gamemode>
+<gamemode>koth</gamemode>
 <authors>
     <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Created the map and XML"/> <!-- _Pear -->
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Parkour designing and JSON"/> <!-- Wesdial -->
@@ -32,13 +32,13 @@
     <kit id="spawn-kit" force="true">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" amount="1" material="golden apple"/>
+        <item slot="2" material="golden apple"/>
         <item slot="8" amount="2" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <potion duration="oo" amplifier="1">night vision</potion>
+        <potion duration="oo">night vision</potion>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -151,14 +151,14 @@
     <point id="pink-spawn">-45.5,20,38.5</point>
     <point id="purple-spawn">-36.5,20,62.5</point>
     <!-- Applications -->
-    <apply region="everywhere"              block="never"       message="You are not allowed to modify terrain here."/>
-    <apply region="red-spawn-protection"    enter="red-only"    message="You may not enter the enemy spawn."/>
+    <apply block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
     <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
     <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
-    <apply region="lime-spawn-protection"   enter="lime-only"   message="You may not enter the enemy spawn."/>
-    <apply region="blue-spawn-protection"   enter="blue-only"   message="You may not enter the enemy spawn."/>
-    <apply region="cyan-spawn-protection"   enter="cyan-only"   message="You may not enter the enemy spawn."/>
-    <apply region="pink-spawn-protection"   enter="pink-only"   message="You may not enter the enemy spawn."/>
+    <apply region="lime-spawn-protection" enter="lime-only" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy spawn."/>
+    <apply region="pink-spawn-protection" enter="pink-only" message="You may not enter the enemy spawn."/>
     <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
@@ -175,13 +175,11 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
+        <item material="golden apple"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5"/>
-            </all>
+            <kill-streak count="5"/>
         </filter>
         <item material="arrow"/>
     </kill-reward>

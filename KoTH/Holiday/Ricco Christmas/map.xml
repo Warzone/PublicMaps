@@ -1,14 +1,14 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Ricco Christmas</name>
-<version>1.0</version>
+<created>2021-11-02</created>
+<version>1.0.0</version>
 <objective>Be the first team to reach 1200 points from capturing the hills!</objective>
 <gamemode>koth</gamemode>
 <authors>
-    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b" />
-    <!-- Henrs -->
+    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b" /> <!-- Henrs -->
 </authors>
 <contributors>
-    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit"/> <!-- Wesdial -->
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit" /> <!-- Wesdial -->
 </contributors>
 <teams>
     <team id="red-team" color="dark red" max="16">Red</team>
@@ -16,44 +16,42 @@
 </teams>
 <kits>
     <kit id="spawn">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" amount="16">leaves</item>
-        <item slot="3" unbreakable="true">shears</item>
-        <item slot="7" amount="24">arrow</item>
-        <item slot="8" amount="64">golden carrot</item>
-        <helmet unbreakable="true">iron helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="16" material="leaves"/>
+        <item slot="3" unbreakable="true" material="shears"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
         <potion duration="5s" amplifier="10">damage resistance</potion>
     </kit>
     <kit id="red" parents="spawn">
-        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
-        <boots color="cd0000" unbreakable="true">leather boots</boots>
+        <leggings color="cd0000" unbreakable="true" material="leather leggings"/>
+        <boots color="cd0000" unbreakable="true" material="leather boots"/>
     </kit>
     <kit id="green" parents="spawn">
-        <leggings color="e5e533" unbreakable="true">leather leggings</leggings>
-        <boots color="e5e533" unbreakable="true">leather boots</boots>
+        <leggings color="e5e533" unbreakable="true" material="leather leggings"/>
+        <boots color="e5e533" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
-<kill-reward>
-    <item>golden apple</item>
-    <item amount="8">arrow</item>
-    <item amount="8">leaves</item>
-</kill-reward>
-<itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>leaves</item>
-    <item>shears</item>
-    <item>arrow</item>
-    <item>golden carrot</item>
-    <item>iron helmet</item>
-    <item>chainmail chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>golden apple</item>
-    <item>sapling</item>
-</itemremove>
+<spawns>
+    <spawn yaw="0" team="red-team" kit="red">
+        <region>
+            <point>-11.5,6,-48.5</point>
+        </region>
+    </spawn>
+    <spawn yaw="180" team="green-team" kit="green">
+        <region>
+            <point>12.5,6,49.5</point>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <point>0.5,40,0.5</point>
+        </region>
+    </default>
+</spawns>
 <filters>
     <all id="only-leaves-in-map">
         <not>
@@ -73,23 +71,6 @@
     <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7void`e!"/>
     <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
 </regions>
-<spawns>
-    <spawn yaw="0" team="red-team" kit="red">
-        <region>
-            <point>-11.5,6,-48.5</point>
-        </region>
-    </spawn>
-    <spawn yaw="180" team="green-team" kit="green">
-        <region>
-            <point>12.5,6,49.5</point>
-        </region>
-    </spawn>
-    <default yaw="90">
-        <region>
-            <point>0.5,40,0.5</point>
-        </region>
-    </default>
-</spawns>
 <control-points required="false">
     <control-point name="Point A" capture-time="5s">
         <capture>
@@ -116,6 +97,27 @@
         </progress>
     </control-point>
 </control-points>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leaves</item>
+    <item>shears</item>
+    <item>arrow</item>
+    <item>golden carrot</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>golden apple</item>
+    <item>sapling</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+        <item amount="8" material="leaves"/>
+    </kill-reward>
+</kill-rewards>
 <score>
     <limit>1200</limit>
 </score>
