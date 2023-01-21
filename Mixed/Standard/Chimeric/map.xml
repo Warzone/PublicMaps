@@ -1,0 +1,210 @@
+<map proto="1.4.0">
+<name>Chimeric</name>
+<version>1.0.11</version>
+<objective>Destroy the other team's monument, then capture their wool and return it to your base.</objective>
+<authors>
+    <author uuid="f876b863-1ccd-4ae2-acad-8a09e2209e81"/>
+    <!--  _DISTRACTION_  -->
+    <author uuid="af56fc4a-51d2-4a6e-b020-2c6d272b9cbf"/>
+    <!--  Ale  -->
+</authors>
+<broadcasts>
+    <alert after="1s" every="2m">You may not enter the wool room lane until you have broken the other team's monument!</alert>
+    <tip after="10s" every="2m">The wool room is located on the top of the map, behind each teams' spawns!</tip>
+    <tip after="20s" every="2m">You have Haste II while on your team's side, to help with defense!</tip>
+</broadcasts>
+<teams>
+    <team id="red" color="dark red" max="11">Red</team>
+    <team id="blue" color="blue" max="11">Blue</team>
+</teams>
+<maxbuildheight>66</maxbuildheight>
+<spawns>
+    <spawn team="red" kit="red-kit" yaw="-90">
+        <region>
+            <cylinder base="-80,8,0" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="blue-kit" yaw="90">
+        <region>
+            <cylinder base="80,8,0" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="180">
+        <region>
+            <point>-0,85,1</point>
+        </region>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true">stone sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
+        <item slot="2" unbreakable="true">stone pickaxe</item>
+        <item slot="3" unbreakable="true" enchantment="dig speed:2">stone axe</item>
+        <item slot="4" amount="32">cooked fish</item>
+        <item slot="5" amount="2">golden apple</item>
+        <item slot="6" amount="64">wood</item>
+        <item slot="7" amount="32">glass</item>
+        <item slot="28">arrow</item>
+        <potion duration="5" amplifier="5">regeneration</potion>
+        <potion duration="oo" amplifier="2">haste</potion>
+    </kit>
+    <kit id="blue-kit" parents="spawn">
+        <helmet unbreakable="true" color="0066cc">leather helmet</helmet>
+        <chestplate unbreakable="true" color="0066cc">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="0066cc">leather leggings</leggings>
+        <boots unbreakable="true" color="0066cc">leather boots</boots>
+    </kit>
+    <kit id="red-kit" parents="spawn">
+        <helmet unbreakable="true" color="cd0000">leather helmet</helmet>
+        <chestplate unbreakable="true" color="cd0000">leather chestplate</chestplate>
+        <leggings unbreakable="true" color="cd0000">leather leggings</leggings>
+        <boots unbreakable="true" color="cd0000">leather boots</boots>
+    </kit>
+    <kit id="home-kit">
+        <potion duration="oo" amplifier="2">haste</potion>
+    </kit>
+</kits>
+<kill-reward>
+    <item>golden apple</item>
+</kill-reward>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>golden apple</item>
+    <item>beacon</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>obsidian</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>ender stone</item>
+</itemremove>
+<timelock>on</timelock>
+<destroyables id="Monument" repairable="false" sparks="true" show-progress="true" materials="ender stone;emerald block;stained glass" completion="100%">
+    <destroyable id="blue-monument" name="Monument" owner="blue">
+       <region><cylinder base="47.5,12,0.5" radius="2" height="3"/></region>
+    </destroyable>
+    <destroyable id="red-monument" name="Monument" owner="red">
+       <region><cylinder base="-47.5,12,-0.5" radius="2" height="3"/></region>
+    </destroyable>
+</destroyables>
+<wools team="red">
+    <wool color="cyan" location="134,57,0">
+        <monument><block>-42,9,6</block></monument>
+    </wool>
+</wools>
+<wools team="blue">
+    <wool color="magenta" location="-134,57,0">
+        <monument><block>41,9,-7</block></monument>
+    </wool>
+</wools>
+<respawn delay="4s"/>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <any id="only-red-until-monument-gone">
+        <team>red</team>
+        <objective>red-monument</objective>
+    </any>
+    <any id="only-blue-until-monument-gone">
+        <team>blue</team>
+        <objective>blue-monument</objective>
+    </any>
+    <not id="no-chests">
+        <material>chest</material>
+    </not>
+    <all id="blue-no-chests">
+        <filter id="only-blue"/>
+        <filter id="no-chests"/>
+    </all>
+    <all id="red-no-chests">
+        <filter id="only-red"/>
+        <filter id="no-chests"/>
+    </all>
+</filters>
+<regions>
+    <apply block="never" message="You may not build below the map!">
+        <region>
+            <union>
+                <cuboid min="85,44,10" max="93,0,-10"/>
+                <cuboid min="87,47,10" max="89,0,-10"/>
+                <cuboid min="89,49,10" max="93,0,-10"/>
+                <cuboid min="93,50,10" max="125,0,-10"/>
+                <!-- Other side -->
+                <cuboid min="-85,44,10" max="-93,0,-10"/>
+                <cuboid min="-87,47,10" max="-89,0,-10"/>
+                <cuboid min="-89,49,10" max="-93,0,-10"/>
+                <cuboid min="-93,50,10" max="-125,0,-10"/>
+            </union>
+        </region>
+    </apply>
+    <apply block="never" message="You may not edit the spawn!">
+        <region>
+            <union>
+                <cuboid min="-83,7,-9" max="-77,12,9"/>
+                <cuboid min="83,7,9" max="77,12,-9"/>
+            </union>
+        </region>
+    </apply>
+    <apply block="never" message="You have reached the build height limit over the central area.">
+        <region>
+            <cuboid min="-68,27,-oo" max="68,oo,oo"/>
+        </region>
+    </apply>
+    <apply block="always">
+        <region>
+            <union>
+                <rectangle min="75,10" max="125,-10"/>
+                <rectangle min="-125,10" max="-75,-10"/>
+                <rectangle min="-21,-17" max="21,-9"/>
+                <rectangle min="21,17" max="-21,9"/>
+                <cuboid min="125,51,-10" max="128,oo,10"/>
+                <cuboid min="-125,51,-10" max="-128,oo,10"/>
+            </union>
+        </region>
+    </apply>
+    <apply enter="only-red-until-monument-gone" message="The monument must be broken before you can enter this area!">
+        <region>
+            <rectangle min="-oo,-oo" max="-72,oo"/>
+        </region>
+    </apply>
+    <apply enter="only-blue-until-monument-gone" message="The monument must be broken before you can enter this area!">
+        <region>
+            <rectangle min="72,-oo" max="oo,oo"/>
+        </region>
+    </apply>
+    <apply enter="only-blue" block="blue-no-chests" message="You may not do that!">
+        <region>
+            <cuboid min="-140,54,-10" max="-128,67,10"/>
+        </region>
+    </apply>
+    <apply enter="only-red" block="red-no-chests" message="You may not do that!">
+        <region>
+            <cuboid min="128,54,-10" max="140,67,10"/>
+        </region>
+    </apply>
+    <apply filter="only-red" lend-kit="home-kit">
+        <region>
+            <rectangle min="-oo,-oo" max="-21,oo"/>
+        </region>
+    </apply>
+    <apply filter="only-blue" lend-kit="home-kit">
+        <region>
+            <rectangle min="21,-oo" max="oo,oo"/>
+        </region>
+    </apply>
+    <apply block="no-void" message="You may not build outside the map!" region="everywhere"/>
+</regions>
+</map>
