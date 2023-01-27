@@ -1,0 +1,107 @@
+<map proto="1.4.2" game="Spleef">
+<name>Snowflake!</name>
+<version>1.1.2</version>
+<objective>Spleef everyone on the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="38cc237d-9272-4e01-ad24-f5b0110130c1"/> <!-- Strucken -->
+    <author uuid="99b8a2a4-cb22-4ba1-a683-7cd90a02aac5"/> <!-- Junr -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="2">Red</team>
+    <team id="green" color="green" max="2">Blue</team>
+</teams>
+<time>70s</time>
+<broadcasts>
+    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="2s">`eHitting the world border kills you. You have 60 seconds.</alert>
+    <alert after="5s">`eGood luck!</alert>
+</broadcasts>
+<kits>
+    <kit id="red-kit">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
+        <item slot="1" unbreakable="true" damage="1">ink sack</item>
+        <item slot="2" unbreakable="true" damage="1">ink sack</item>
+        <item slot="3" unbreakable="true" damage="1">ink sack</item>
+        <item slot="4" unbreakable="true" damage="1">ink sack</item>
+        <item slot="5" unbreakable="true" damage="1">ink sack</item>
+        <item slot="6" unbreakable="true" damage="1">ink sack</item>
+        <item slot="7" unbreakable="true" damage="1">ink sack</item>
+        <item slot="8" unbreakable="true" damage="1">ink sack</item>
+        <helmet unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+    <kit id="green-kit">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
+        <item slot="1" unbreakable="true" damage="2">ink sack</item>
+        <item slot="2" unbreakable="true" damage="2">ink sack</item>
+        <item slot="3" unbreakable="true" damage="2">ink sack</item>
+        <item slot="4" unbreakable="true" damage="2">ink sack</item>
+        <item slot="5" unbreakable="true" damage="2">ink sack</item>
+        <item slot="6" unbreakable="true" damage="2">ink sack</item>
+        <item slot="7" unbreakable="true" damage="2">ink sack</item>
+        <item slot="8" unbreakable="true" damage="2">ink sack</item>
+        <helmet unbreakable="true" locked="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" locked="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" locked="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" locked="true" team-color="true">leather boots</boots>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <material id="only-snow-in-map">snow block</material>
+</filters>
+<regions>
+    <apply block="only-snow-in-map" message="You may only break snow blocks."/>
+</regions>
+<spawns>
+    <spawn team="red" kit="red-kit">
+        <region yaw="135">
+            <cylinder base="14.5,19,17.5" height="0" radius="2"/>
+        </region>
+        <region yaw="-135">
+            <cylinder base="-16.5,19,16.5" height="0" radius="2"/>
+        </region>
+    </spawn>
+    <spawn team="green" kit="green-kit">
+        <region yaw="-45">
+            <cylinder base="-15.5,19,-14.5" height="0" radius="2"/>
+        </region>
+        <region yaw="45">
+            <cylinder base="15.5,19,-13.5" height="0" radius="2"/>
+        </region>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-44.5,42,1.5</point>
+        </regions>
+    </default>
+</spawns>
+<itemremove>
+    <item>diamond spade</item>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+</itemremove>
+<world-borders center="-0.5, 1.5">
+    <world-border size="64"/>
+    <world-border size="2" after="0s" duration="60s" damage="200" buffer="0"/>
+</world-borders>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>
