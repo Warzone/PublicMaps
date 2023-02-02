@@ -1,104 +1,88 @@
 <map proto="1.4.2" game="Spleef">
-    <name>Snow Stadium</name>
-    <created>2023-01-24</created>
-    <version>1.0.9</version>
-    <objective>Spleef the enemy team!</objective>
-    <gamemode>arcade</gamemode>
-    <gamemode>blitz</gamemode>
-    <authors>
-        <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
-    </authors>
-    <contributors>
-        <contributor uuid="2c222e01-fc43-4a35-8a61-9b4af9202094" contribution="Fixing up EVERYTHING"/> <!-- Quanteey -->
-    </contributors>
-    <teams>
-        <team id="Pink" color="light_purple" max="50">Pink</team>
-        <team id="Lime" color="green" max="50">Lime</team>
-    </teams>
-    <time>120s</time>
-    <broadcasts>
-        <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
-        <alert after="2s">`eHitting the world border kills you.</alert>
-        <alert after="5s">`eGood luck!</alert>
-    </broadcasts>
-    <kits>
-        <kit id="Pink-kit">
-            <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
-            <item slot="1" unbreakable="true" damage="6">wool</item>
-            <item slot="2" unbreakable="true" damage="6">wool</item>
-            <item slot="3" unbreakable="true" damage="6">wool</item>
-            <item slot="4" unbreakable="true" damage="6">wool</item>
-            <item slot="5" unbreakable="true" damage="6">wool</item>
-            <item slot="6" unbreakable="true" damage="6">wool</item>
-            <item slot="7" unbreakable="true" damage="6">wool</item>
-            <item slot="8" unbreakable="true" damage="6">wool</item>
-            <helmet unbreakable="true" locked="true" color="F27FA5">leather helmet</helmet>
-            <chestplate unbreakable="true" locked="true" color="F27FA5">leather chestplate</chestplate>
-            <leggings unbreakable="true" locked="true" color="F27FA5">leather leggings</leggings>
-            <boots unbreakable="true" locked="true" color="F27FA5">leather boots</boots>
-            <effect duration="5" amplifier="255">slow digging</effect>
-        </kit>
-        <kit id="Lime-kit">
-            <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
-            <item slot="1" unbreakable="true" damage="5">wool</item>
-            <item slot="2" unbreakable="true" damage="5">wool</item>
-            <item slot="3" unbreakable="true" damage="5">wool</item>
-            <item slot="4" unbreakable="true" damage="5">wool</item>
-            <item slot="5" unbreakable="true" damage="5">wool</item>
-            <item slot="6" unbreakable="true" damage="5">wool</item>
-            <item slot="7" unbreakable="true" damage="5">wool</item>
-            <item slot="8" unbreakable="true" damage="5">wool</item>
-            <helmet unbreakable="true" locked="true" color="7FCC19">leather helmet</helmet>
-            <chestplate unbreakable="true" locked="true" color="7FCC19">leather chestplate</chestplate>
-            <leggings unbreakable="true" locked="true" color="7FCC19">leather leggings</leggings>
-            <boots unbreakable="true" locked="true" color="7FCC19">leather boots</boots>
-            <effect duration="5" amplifier="255">slow digging</effect>
-        </kit>
-    </kits>
-    <blitz>
-        <lives>1</lives>
-    </blitz>
-    <filters>
-        <material id="only-snow-in-map">snow block</material>
-    </filters>
-    <regions>
-        <apply block="only-snow-in-map" message="You may only break snow blocks."/>
-    </regions>
-    <spawns>
-        <spawn team="Pink" kit="Pink-kit" spread="true">
-            <regions yaw="180">
-                <cuboid min="32,24,-36" max="34,24,-36"/>
-            </regions>
-        </spawn>
-        <spawn team="Lime" kit="Lime-kit" spread="true">
-            <regions>
-                <cuboid min="32,24,-82" max="34,24,-82"/>
-            </regions>
-        </spawn>
-        <default>
-            <regions yaw="-90">
-                <point>33.,36,-58.5</point>
-            </regions>
-        </default>
-    </spawns>
-    <itemremove>
-        <item>diamond spade</item>
-        <item>ink sack</item>
-        <item>leather helmet</item>
-        <item>leather chestplate</item>
-        <item>leather leggings</item>
-        <item>leather boots</item>
-        <item>snow ball</item>
-    </itemremove>
-    <world-borders center="33.5, -58.5">
-        <world-border size="55"/>
-        <world-border size="2" after="30s" duration="90s" damage="200" buffer="0"/>
-    </world-borders>
-    <hunger>
-        <depletion>off</depletion>
-    </hunger>
-    <disabledamage>
-        <damage>fall</damage>
-        <damage>entity attack</damage>
-    </disabledamage>
+<name>Snow Stadium</name>
+<created>2023-01-24</created>
+<version>1.0.10</version>
+<objective>Spleef the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<contributors>
+    <contributor uuid="2c222e01-fc43-4a35-8a61-9b4af9202094" contribution="Fixing up EVERYTHING"/> <!-- Quanteey -->
+</contributors>
+<teams>
+    <team id="pink" color="light_purple" max="50">Pink</team>
+    <team id="lime" color="green" max="50">Lime</team>
+</teams>
+<time>210s</time>
+<broadcasts>
+    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="2s">`eHitting the world border kills you.</alert>
+    <alert after="5s">`eGood luck!</alert>
+</broadcasts>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
+        <item slot="1" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="2" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="3" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="4" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="5" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="6" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="7" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="8" unbreakable="true" team-color="true" material="wool"/>
+        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <material id="only-snow-in-map">snow block</material>
+</filters>
+<regions>
+    <apply block="only-snow-in-map" message="You may only break snow blocks."/>
+</regions>
+<spawns>
+    <spawn team="pink" kit="default" spread="true">
+        <regions yaw="180">
+            <cuboid min="32,24,-36" max="34,24,-36"/>
+        </regions>
+    </spawn>
+    <spawn team="lime" kit="default" spread="true">
+        <regions>
+            <cuboid min="32,24,-82" max="34,24,-82"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>33.,36,-58.5</point>
+        </regions>
+    </default>
+</spawns>
+<itemremove>
+    <item>diamond spade</item>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+</itemremove>
+<world-borders center="33.5, -58.5">
+    <world-border size="55"/>
+    <world-border size="2" after="2m" duration="90s" damage="200" buffer="0"/>
+</world-borders>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
 </map>
