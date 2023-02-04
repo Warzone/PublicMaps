@@ -1,12 +1,11 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Halcyon</name>
 <version>2.2.5</version>
-<objective>Destroy the other team’s two monuments to win!</objective>
+<objective>Destroy the other team's two monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <!-- Author -->
 <authors>
-    <author uuid="8242e55e-cc6a-458a-b272-a2b34918045f"/>
-    <!-- funkystudios -->
+    <author uuid="8242e55e-cc6a-458a-b272-a2b34918045f"/> <!-- funkystudios -->
 </authors>
 <!-- Teams -->
 <teams>
@@ -21,41 +20,46 @@
 <kits>
     <kit id="spawn">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true" enchantment="dig speed:1;durability:3">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" amount="64">apple</item>
-        <item slot="5" amount="1">golden apple</item>
-        <item slot="6" amount="32">log</item>
-        <item slot="7" amount="64">glass</item>
-        <item slot="28" amount="16">arrow</item>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed:1;durability:3" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="apple"/>
+        <item slot="5" material="golden apple"/>
+        <item slot="6" amount="32" material="log"/>
+        <item slot="7" amount="64" material="glass"/>
+        <item slot="28" amount="16" material="arrow"/>
+        <leggings unbreakable="true" material="iron leggings"/>
         <effect duration="5" amplifier="5">damage resistance</effect>
         <effect duration="5" amplifier="5">heal</effect>
     </kit>
     <kit id="red-kit" parents="spawn">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <chestplate unbreakable="true" color="B02E26" enchantment="protection projectile:2">leather chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
-        <boots unbreakable="true" color="B02E26">leather boots</boots>
+        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
+        <chestplate unbreakable="true" color="B02E26" enchantment="protection projectile:2" material="leather chestplate"/>
+        <boots unbreakable="true" color="B02E26" material="leather boots"/>
     </kit>
     <kit id="purple-kit" parents="spawn">
-        <helmet unbreakable="true" color="7F3FB2">leather helmet</helmet>
-        <chestplate unbreakable="true" color="7F3FB2" enchantment="protection projectile:2">leather chestplate</chestplate>
-        <leggings unbreakable="true">iron leggings</leggings>
-        <boots unbreakable="true" color="7F3FB2">leather boots</boots>
+        <helmet unbreakable="true" color="7F3FB2" material="leather helmet"/>
+        <chestplate unbreakable="true" color="7F3FB2" enchantment="protection projectile:2" material="leather chestplate"/>
+        <boots unbreakable="true" color="7F3FB2" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
     <spawn team="red" kit="red-kit" yaw="-180">
-        <region><point>14.5,74,-761.5</point></region>
+        <region>
+            <point>14.5,74,-761.5</point>
+        </region>
     </spawn>
     <spawn team="purple" kit="purple-kit">
-        <region><point>14.5,74,-871.5</point></region>
+        <region>
+            <point>14.5,74,-871.5</point>
+        </region>
     </spawn>
     <default yaw="-90">
-        <region><point>-34.5,85,-816.5</point></region>
+        <region>
+            <point>-34.5,85,-816.5</point>
+        </region>
     </default>
 </spawns>
 <!-- Filters -->
@@ -82,16 +86,24 @@
 <!-- Monuments -->
 <destroyables materials="obsidian">
     <destroyable name="Left Monument" owner="purple">
-        <region><block>-13,74,-861</block></region>
+        <region>
+            <block>-13,74,-861</block>
+        </region>
     </destroyable>
     <destroyable name="Right Monument" owner="purple">
-        <region><block>41,74,-861</block></region>
+        <region>
+            <block>41,74,-861</block>
+        </region>
     </destroyable>
     <destroyable name="Left Monument" owner="red">
-        <region><block>41,74,-773</block></region>
+        <region>
+            <block>41,74,-773</block>
+        </region>
     </destroyable>
     <destroyable name="Right Monument" owner="red">
-        <region><block>-13,74,-773</block></region>
+        <region>
+            <block>-13,74,-773</block>
+        </region>
     </destroyable>
 </destroyables>
 <!-- Item-Remove -->
@@ -118,8 +130,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="4">arrow</item>
+        <item material="golden apple"/>
+        <item amount="4" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
