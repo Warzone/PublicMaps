@@ -1,0 +1,81 @@
+<map proto="1.4.2" game="Spleef">
+<name>Taiga Spleef</name>
+<created>2023-02-10</created>
+<version>1.0.0</version>
+<objective>Spleef the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Detailing and XML"/> <!-- Preinstalled -->
+</authors>
+<contributors>
+    <contributor uuid="bb53a84a-89c6-493f-ad94-824bc4cba39a" contribution="Map inspiration"/> <!-- _Void_xx -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="10">Blue</team>
+    <team id="red" color="dark red" max="10">Red</team>
+</teams>
+<time>210s</time>
+<broadcasts>
+    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="2s">`eHitting the world border kills you.</alert>
+    <alert after="5s">`eGood luck!</alert>
+    <alert after="60s">`eThe border is now shrinking, watch out!</alert>
+</broadcasts>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather helmet"/>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <material id="only-snow-in-map">snow block</material>
+</filters>
+<regions>
+    <apply block="only-snow-in-map" message="You may only break snow blocks."/>
+</regions>
+<spawns>
+    <spawn team="red" kit="default" spread="true">
+        <regions yaw="0">
+            <cuboid min="33,25,-71" max="43,25,-71"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="default" spread="true">
+        <regions yaw = "180">
+            <cuboid min="43,25,-8" max="33,25,-8"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-180">
+            <point>38.5, 39, -3.5</point>
+        </regions>
+    </default>
+</spawns>
+<itemremove>
+    <item>diamond spade</item>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+</itemremove>
+<world-borders center="38.5, -40.5">
+    <world-border size="90"/>
+    <world-border size="2" after="60s" duration="90s" damage="200" buffer="0"/>
+</world-borders>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>
