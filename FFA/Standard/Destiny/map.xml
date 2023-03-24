@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map proto="1.4.0">
 <name>Destiny</name>
-<version>1.0.0</version>
+<version>1.1.0</version>
 <objective>Get the most kills before time ends!</objective>
 <created>2016-03-29</created>
 <gamemode>ffa</gamemode>
@@ -54,8 +54,17 @@
 </disabledamage>
 <respawn delay="1s" blackout="true"/>
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="allowed-blocks" region="everywhere" message="You may not edit the map!"/>
 </regions>
+<filters>
+    <all id="allowed-blocks">
+        <any>
+            <material>sugar cane block</material>
+            <material>long grass</material>
+            <material>torch</material>
+        </any>
+    </all>
+</filters>
 <killreward>
     <item amount="3" material="arrow"/>
     <item amount="1" material="golden apple"/>
@@ -68,6 +77,10 @@
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>arrow</item>
+    <item>long grass</item>
+    <item>sugar cane</item>
+    <item>seeds</item>
+    <item>torch</item>
 </itemremove>
 <timelock>on</timelock>
 </map>
