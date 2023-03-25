@@ -1,16 +1,16 @@
-<map proto="1.4.2">
+<map proto="1.4.2" game="Flag Assault">
 <name>The Big Dig</name>
-<version>1.0.3</version>
+<version>1.0.6</version>
 <objective>Score your flag in the enemy goals, Most points wins!</objective>
-<gamemode>arcade</gamemode>
+<created>2022-05-06</created>
 <time overtime="1s" max-overtime="2m">8m</time>
 <authors>
-    <author uuid="1aad55f7-2dea-4f22-85ca-ad9de3a78609"/> <!--  Technodono  -->
+    <author uuid="1aad55f7-2dea-4f22-85ca-ad9de3a78609"/> <!-- Technodono -->
 </authors>
 <rules>
     <rule>Fall damage is disabled!</rule>
 </rules>
-<game>Flag Runners</game>
+<gamemode>ctf</gamemode>
 <!-- Tips -->
 <broadcasts>
     <tip after="1s" every="2m">Remeber to defend your teams goals from the enemy flag carrier!</tip>
@@ -42,7 +42,7 @@
     </kit>
     <kit id="blue-kit" parents="spawn">
         <helmet color="004aff" unbreakable="true" material="leather helmet"/>
-        <chestplate color="004aff" unbreakable="true" material="leather leggings"/>
+        <chestplate color="004aff" unbreakable="true" material="leather chestplate"/>
     </kit>
     <kit id="flag-pickup" force="true">
         <max-health>10</max-health>
@@ -52,13 +52,7 @@
     </kit>
 </kits>
 <projectiles> 
-    <projectile
-        id="arrow"
-        name="crossbow bolt"
-        velocity="4"
-        damage="7"
-        throwable="true"
-        cooldown="3s"/>
+    <projectile id="arrow" name="crossbow bolt" velocity="4" damage="7" throwable="true" cooldown="3s"/>
 </projectiles>
 <!-- Spawns and respawns -->
 <spawns>
@@ -72,7 +66,7 @@
             <block id="blue-spawnpoint">79,4,1</block>
         </region>
     </spawn>
-    <default yaw="0">
+    <default>
         <region>
             <block id="obs-spawnpoint">0,10,30</block>
         </region>
@@ -80,9 +74,7 @@
 </spawns>
 <!-- spawn region stuff   -->
 <regions>
-    <apply block="never">
-        <everywhere/>
-    </apply>
+    <apply block="never"/>
     <!-- Enter -->
     <apply enter="blue-not-flag" region="blue-spawn" message="You may not enter the opposing team's spawn!"/>
     <apply enter="red-not-flag" region="red-spawn" message="You may not enter the opposing team's spawn!"/>
@@ -184,11 +176,13 @@
     <item>arrow</item>
     <item>firework charge</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="3" projectile="arrow" name="`rCrossbow" lore="`r`7Right-click to fire!" material="firework charge"/>
-    <item amount="4" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="3" projectile="arrow" name="`rCrossbow" lore="`r`7Right-click to fire!" material="firework charge"/>
+        <item amount="4" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
