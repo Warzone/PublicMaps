@@ -1,10 +1,7 @@
-<?xml version="1.0"?>
-<map>
-<!-- Created by OCN map developers, converted by TheBestGamer -->
-<!-- Include version 1.0.0 -->
-<game>Survival Games</game> 
-<objective>Be the last player standing!</objective>
-<gamemode>arcade</gamemode>
+<!-- Include version 1.1.0 -->
+<map proto="1.4.2" game="Survival Games">
+<gamemode>sg</gamemode>
+<objective>Be the last player standing</objective>
 <time>15m</time>
 <blitz>
     <lives>1</lives>
@@ -13,8 +10,6 @@
 <players min="8" max="24" max-overfill="24"/>
 <respawn freeze="30s"/>
 <broadcasts>
-    <alert after="270s">All chests will be refilled in 30 seconds!</alert>
-    <alert after="570s">All chests will be refilled in 30 seconds!</alert>
     <alert after="5m" every="5m">All chests have been refilled!</alert>
 </broadcasts>
 <kits>
@@ -122,6 +117,18 @@
     <item>seeds</item>
 </itemremove>
 <filters>
+    <countdown duration="30s" message="Chests will refill in {0}">
+        <all>
+            <time>4m30s</time>
+            <match-running/>
+        </all>
+    </countdown>
+    <countdown duration="30s" message="Chests will refill in {0}">
+        <all>
+            <time>9m30s</time>
+            <match-running/>
+        </all>
+    </countdown>
     <any id="chest-refill">
         <all>
             <time>5m</time>
@@ -144,8 +151,6 @@
         <material>vine</material>
         <material>long grass</material>
         <material>double plant</material>
-        <material>yellow flower</material>
-        <material>red rose</material>
     </any>
     <material id="chests">chest</material>
 </filters>
