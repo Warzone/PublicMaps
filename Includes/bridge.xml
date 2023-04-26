@@ -1,0 +1,246 @@
+<map proto="1.4.2">
+<!-- [#####|#####] -->
+<!-- Bridge gamemode include file -->
+<!-- Created by zzuf -->
+<!-- Version 2023.04.16-1 -->
+<gamemode>arcade</gamemode>
+<game>Bridge</game>
+<respawn auto="true" delay="0s"/>
+<modifybowprojectile pickup-filter="never"/>
+<time result="score" show="false">15m</time>
+<broadcasts>
+    <alert after="10m">`7If neither team reaches 5 points, the match will end in `c`l5 minutes`7!</alert>
+    <alert after="13m">`7If neither team reaches 5 points, the match will end in `c`l2 minutes`7!</alert>
+    <alert after="14m">`7If neither team reaches 5 points, the match will end in `c`l1 minute`7!</alert>
+    <alert after="14m30s">`7If neither team reaches 5 points, the match will end in `c`l30 seconds`7!</alert>
+</broadcasts>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" enchantment="dig speed:2" unbreakable="true"/>
+        <item slot="3" material="stained clay" team-color="true" amount="64"/>
+        <item slot="4" material="stained clay" team-color="true" amount="64"/>
+        <item slot="5" material="golden apple" amount="8" consumable="bridge-apple"/>
+        <item slot="8" material="arrow"/>
+        <effect>invisibility</effect>
+        <effect amplifier="255">slow_digging</effect>
+    </kit>
+    <kit id="armor-kit" force="true">
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
+        <leggings material="leather leggings" team-color="true" unbreakable="true"/>
+        <boots material="leather boots" team-color="true" unbreakable="true"/>
+    </kit>
+    <kit id="remove-effects-kit" force="true">
+        <effect duration="0">invisibility</effect>
+        <effect duration="0">slow_digging</effect>
+        <health>20</health> <!-- In case the void-death kit gets applied just before teleporting to spawns -->
+    </kit>
+    <kit id="pre-round-kit" force="true">
+        <effect>invisibility</effect>
+        <effect amplifier="255">slow_digging</effect>
+    </kit>
+    <kit id="arrow-kit" force="true">
+        <item material="arrow"/>
+    </kit>
+    <kit id="absorption-reset-kit" force="true">
+        <effect duration="0" amplifier="1">absorption</effect>
+    </kit>
+    <kit id="bridge-apple-kit" force="true">
+        <health>20</health>
+        <effect duration="2m">absorption</effect>
+    </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+        <effect duration="0s" amplifier="0">regeneration</effect>
+        <effect duration="0s" amplifier="0">absorption</effect>
+    </kit>
+    <give kit="spawn-kit" filter="during-buytime"/>
+    <give kit="absorption-reset-kit" filter="on-buytime"/>
+    <lend kit="pre-round-kit" filter="on-buytime"/>
+    <give kit="arrow-kit" filter="arrow-regen"/>
+    <give kit="armor-kit" filter="not-on-buytime"/>
+    <give kit="remove-effects-kit" filter="not-on-buytime"/>
+</kits>
+<filters>
+    <deny id="deny-void">
+        <void/>
+    </deny>
+    <all id="only-team-one">
+        <team>team-one</team>
+        <participating/>
+    </all>
+    <all id="only-team-two">
+        <team>team-two</team>
+        <participating/>
+    </all>
+    <all id="team-one-about-to-score">
+        <team>team-one</team>
+        <region id="team-two-big-scorebox"/>
+        <variable var="can_score">1</variable>
+        <match-running/>
+        <alive/>
+    </all>
+    <all id="team-two-about-to-score">
+        <team>team-two</team>
+        <region id="team-one-big-scorebox"/>
+        <variable var="can_score">1</variable>
+        <match-running/>
+        <alive/>
+    </all>
+    <all id="team-one-scored">
+        <team>team-one</team>
+        <region id="team-two-portal"/>
+        <variable var="can_score">1</variable>
+        <match-running/>
+        <alive/>
+        <participating/>
+    </all>
+    <all id="team-two-scored">
+        <team>team-two</team>
+        <region id="team-one-portal"/>
+        <variable var="can_score">1</variable>
+        <match-running/>
+        <alive/>
+        <participating/>
+    </all>
+    <variable id="round-0" var="round_status">0</variable>
+    <variable id="round-1" var="round_status">1</variable>
+    <all id="should-teleport">
+        <variable var="can_score">0</variable>
+        <participating/>
+        <match-running/>
+        <alive/>
+    </all>
+    <variable id="can-score" var="can_score">1</variable>
+    <after id="after-round-1" duration="0.1" filter="round-1"/>
+    <after id="during-buytime" duration="0.1" filter="on-buytime"/>
+    <variable id="round-2" var="round_status">2</variable>
+    <entity id="all-arrows">Arrow</entity>
+    <all id="on-buytime">
+        <variable var="buytime">1</variable>
+        <alive/>
+        <participating/>
+    </all>
+    <all id="not-on-buytime">
+        <variable var="buytime">0</variable>
+        <alive/>
+        <participating/>
+    </all>
+    <after id="cage-time" message="`0&#62;&#62; `fNext round begins in {0} `0&#60;&#60;" duration="5s" filter="round-0"/>
+    <all id="no-arrows">
+        <not>
+            <carrying><item material="arrow" ignore-metadata="true"/></carrying>
+        </not>
+        <participating/>
+        <alive/>
+    </all>
+    <all id="more-than-1-arrow">
+        <carrying><item material="arrow" amount="2" ignore-metadata="true"/></carrying>
+        <participating/>
+    </all>
+    <after id="arrow-regen" duration="3.5s" message="`7&#62;&#62; `fNew arrow in {0} `7&#60;&#60;" filter="no-arrows"/>
+    <match-started id="match-start"/>
+    <deny id="deny-other-blocks">
+        <filter id="other-blocks"/>
+    </deny>
+</filters>
+<consumables>
+    <consumable id="bridge-apple" on="eat" override="true" action="bridge-apple-kit"/>
+</consumables>
+<variables>
+    <variable id="can_score" scope="match" default="1"/>
+    <variable id="round_status" scope="match" default="2"/>
+    <variable id="buytime" scope="match" default="0"/>
+</variables>
+<actions>
+    <action id="increment-round" scope="player">
+        <switch-scope outer="player" inner="match">
+            <message text="`5# # # # # # # # # #"/>
+            <message text="`5# #    `6`lGOAL!    `5# #"/>
+            <message text="`5# # # # # # # # # #"/>
+            <set var="can_score" value="0"/>
+            <set var="round_status" value="1"/>
+            <set var="buytime" value="1"/>
+            <fill region="cages" material="stained glass"/>
+            <kill-entities filter="all-arrows"/>
+            <!-- Scoring message -->
+            <message title="`f`lGOAL!" subtitle="`7The next round will begin shortly." fade-in="0.5" stay="1" fade-out="0.5"/>
+        </switch-scope>
+    </action>
+    <action id="remove-cages" scope="match">
+        <fill region="cages" material="air"/>
+        <set var="can_score" value="1"/>
+        <set var="buytime" value="0"/>
+        <message title="`aGo!" fade-in="0.1" stay="0.5" fade-out="0.1"/>
+        <switch-scope outer="match" inner="player">
+            <replace-item>
+                <find material="ink sack" damage="5" locked="true"/>
+                <replace material="air"/>
+            </replace-item>
+        </switch-scope>
+    </action>
+    <action id="reset-counter" scope="match">
+        <set var="round_status" value="0"/>
+    </action>
+    <action id="remove-arrow" scope="player">
+        <replace-item>
+            <find material="arrow"/>
+            <replace material="air"/>
+        </replace-item>
+    </action>
+    <trigger filter="team-one-scored" action="increment-round" scope="player"/>
+    <trigger filter="team-two-scored" action="increment-round" scope="player"/>
+    <trigger filter="cage-time" action="remove-cages" scope="match"/>
+    <trigger filter="after-round-1" action="reset-counter" scope="match"/>
+    <trigger filter="more-than-1-arrow" action="remove-arrow" scope="player"/>
+</actions>
+<regions>
+    <apply block-place="never" region="not-buildable" message="You may not place blocks here!"/>
+    <apply block-break="never" region="not-buildable" message="You may not break that block!"/>
+    <apply block-break="deny-other-blocks" message="You may not break that block!"/>
+    <translate id="team-one-big-scorebox" offset="0,0.5,0"><region id="team-one-portal"/></translate>
+    <translate id="team-two-big-scorebox" offset="0,0.5,0"><region id="team-two-portal"/></translate>
+    <apply leave="not-on-buytime" region="cages" message="The next round will begin shortly!"/>
+    <below id="void" y="-5"/>
+    <apply kit="void-death" region="void"/>
+</regions>
+<portals>
+    <portal y="@-110" sound="false" region="void"/>
+</portals>
+<score>
+    <box points="1" region="team-one-portal" filter="team-two-about-to-score"/>
+    <box points="1" region="team-two-portal" filter="team-one-about-to-score"/>
+    <limit>5</limit>
+</score>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>arrow</item>
+    <item>stained clay</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>
