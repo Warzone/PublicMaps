@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="King of the Hill">
+<map proto="1.4.2">
 <name>Halloween Terras</name>
+<created>2021-10-06</created>
 <version>1.0.1</version>
 <objective>Reach 900 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
@@ -8,13 +8,13 @@
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
 </authors>
-<broadcasts>
-    <tip after="1s">Fall damage is disabled on this map!</tip>
-</broadcasts>
 <contributors>
     <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Map inspiration (Brisked)"/> <!-- mitchiii -->
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
+<broadcasts>
+    <tip after="1s">Fall damage is disabled on this map!</tip>
+</broadcasts>
 <teams>
     <team id="green" color="green" max="25">Yesil</team>
     <team id="orange" color="gold" max="25">Mol</team>
@@ -60,6 +60,28 @@
         </region>
     </spawn>
 </spawns>
+<filters>
+    <team id="green-only">green</team>
+    <team id="orange-only">orange</team>
+    <material id="only-leaves-in-map">leaves</material>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="green-spawn-protection" min="1162,117,1654" max="1176,oo,1640"/>
+        <cuboid id="orange-spawn-protection" min="1271,117,1545" max="1285,oo,1531"/>
+    </union>
+    <union id="portal-protections">
+        <cuboid id="green-portal" min="1194,93,1622" max="1205,102,1611"/>
+        <cuboid id="green-portal-destination" min="1190,118,1623" max="1193,122,1626"/>
+        <cuboid id="orange-portal" min="1242,93,1574" max="1253,102,1563"/>
+        <cuboid id="orange-portal-destination" min="1254,118,1559" max="1257,122,1562"/>
+    </union>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="portal-protections" block="never" message="You may not obstruct the portal platforms!"/>
+    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="everywhere" block="only-leaves-in-map" message="You may only place or break leaves!"/>
+</regions>
 <control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false">
     <control-point name="B Point" points="1">
         <capture>
@@ -99,33 +121,9 @@
         </captured>
     </control-point>
 </control-points>
-<filters>
-    <team id="green-only">green</team>
-    <team id="orange-only">orange</team>
-    <all id="only-leaves-in-map">
-        <material>leaves</material>
-    </all>
-</filters>
-<regions>
-    <union id="spawn-protections">
-        <cuboid id="green-spawn-protection" min="1162,117,1654" max="1176,oo,1640"/>
-        <cuboid id="orange-spawn-protection" min="1271,117,1545" max="1285,oo,1531"/>
-    </union>
-    <union id="portal-protections">
-        <cuboid id="green-portal" min="1194,93,1622" max="1205,102,1611"/>
-        <cuboid id="green-portal-destination" min="1190,118,1623" max="1193,122,1626"/>
-        <cuboid id="orange-portal" min="1242,93,1574" max="1253,102,1563"/>
-        <cuboid id="orange-portal-destination" min="1254,118,1559" max="1257,122,1562"/>
-    </union>
-    <apply region="spawn-protections"       block="never"              message="You are not allowed to modify terrain here."/>
-    <apply region="portal-protections"      block="never"              message="You may not obstruct the portal platforms!"/>
-    <apply region="green-spawn-protection"  enter="green-only"         message="You may not enter the enemy spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only"        message="You may not enter the enemy spawn."/>
-    <apply region="everywhere"              block="only-leaves-in-map" message="You may only place or break leaves!"/>
-</regions>
-<portals>
+<portals protect="true" sound="false" pitch="@0">
     <!-- Green Portal -->
-    <portal protect="true" sound="false" yaw="@45" pitch="@0">
+    <portal yaw="@45">
         <region>
             <cuboid min="1199,98,1616" max="1200,99,1617"/>
         </region>
@@ -134,7 +132,7 @@
         </destination>
     </portal>
     <!-- Orange Portal -->
-    <portal protect="true" sound="false" yaw="@-135" pitch="@0">
+    <portal yaw="@-135">
       <region>
           <cuboid min="1247,98,1568" max="1248,99,1569"/>
       </region>
@@ -160,15 +158,13 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item>golden apple</item>
+        <item material="golden apple"/>
     </kill-reward>
-		<kill-reward>
+	<kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5"/>
-            </all>
+            <kill-streak count="5"/>
         </filter>
-        <item amount="5">arrow</item>
+        <item amount="5" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <score>

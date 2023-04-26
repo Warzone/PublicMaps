@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Hillside Daydream</name>
-<version>1.0.3</version>
+<version>1.0.6</version>
 <objective>Capture each wool from the enemy teams!</objective>
 <created>2022-02-19</created>
 <gamemode>ctw</gamemode>
@@ -129,6 +129,7 @@
             <material>wool:5</material>
             <material>wool:14</material>
             <material>wool:4</material>
+            <material>wool:7</material>
         </any>
     </deny>
     <not id="not-spawns">
@@ -137,11 +138,11 @@
 </filters>
 <regions>
     <union id="spawn-points">
-        <cylinder id="blue-spawn-point" base="-99.5,15.2,-34.5" radius="1.5" height="0"/>
-        <cylinder id="green-spawn-point" base="99.5,15.2,34.5" radius="1.5" height="0"/>
-        <cylinder id="red-spawn-point" base="-34.5,15.2,99.5" radius="1.5" height="0"/>
-        <cylinder id="yellow-spawn-point" base="34.5,15.2,-99.5" radius="1.5" height="0"/>
-        <cylinder id="obs-spawn-point" base="0,56.2,0" radius="2" height="0"/>
+        <cylinder id="blue-spawn-point" base="-99.5,15,-34.5" radius="1.5" height="0"/>
+        <cylinder id="green-spawn-point" base="99.5,15,34.5" radius="1.5" height="0"/>
+        <cylinder id="red-spawn-point" base="-34.5,15,99.5" radius="1.5" height="0"/>
+        <cylinder id="yellow-spawn-point" base="34.5,15,-99.5" radius="1.5" height="0"/>
+        <cylinder id="obs-spawn-point" base="0,56,0" radius="2" height="0"/>
     </union>
     <union id="spawns">
         <rectangle id="blue-spawn" min="-111,-47" max="-88,-22"/>
@@ -184,6 +185,7 @@
         <everywhere/>
         <rectangle min="-53,-53" max="53,53"/> <!-- mid -->
     </complement>
+    <below y="1" id="void-filter-protection"/>
     <!-- applicators -->
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-green" region="green-spawn" message="You may not enter the enemy's spawn!"/>
@@ -201,6 +203,7 @@
     <apply block="never" region="spawner-protection" message="You may not edit the spawner!"/>
     <apply block-place="deny-wool" message="You may only place wool at the victory monument!"/>
     <apply block-place="block-place-void-filter" block-break="block-break-void-filter" region="not-build-area" message="You may not edit the void!"/>
+    <apply block="deny-wool" region="void-filter-protection"/>
 </regions>
 <wools craftable="false">
     <wool team="blue-team" color="lime" monument="blue-team-green-wool" location="58.5,15.2,96.5"/>
@@ -249,6 +252,7 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
+    <item>wool:7</item>
 </itemremove>
 <block-drops>
     <rule>

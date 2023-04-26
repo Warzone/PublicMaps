@@ -1,0 +1,119 @@
+<map proto="1.4.2">
+<name>Foliage</name>
+<created>2023-01-29</created>
+<version>1.0.0</version>
+<objective>Reach the end first!</objective>
+<gamemode>arcade</gamemode>
+<time>5m</time>
+<authors>
+    <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516"/> <!-- Preinstalled -->
+</authors>
+<players colors="true" min="1" max="50" show-name-tags="false"/>
+<spawns>
+    <spawn yaw="0" kit="spawn-kit" filter="score-0" region="spawn"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-1" region="spawn-1"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-2" region="spawn-2"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-3" region="spawn-3"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-4" region="spawn-4"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-5" region="spawn-5"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-6" region="spawn-6"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-7" region="spawn-7"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-8" region="spawn-8"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-9" region="spawn-9"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-10" region="spawn-10"/>
+    <spawn yaw="0" kit="spawn-kit" filter="score-11" region="spawn-11"/>
+    <default yaw="0" kit="obs-kit" region="obs-spawn"/>
+</spawns>
+<kits>
+    <kit id="obs-kit">
+        <potion duration="oo">night vision</potion>
+    </kit>
+    <kit id="spawn-kit" parent="obs-kit">
+        <effect duration="oo">invisibility</effect>
+        <boots unbreakable="true" locked="true" material="leather boots"/>
+    </kit>
+</kits>
+<filters>
+    <score id="score-0">0</score>
+    <score id="score-1">1</score>
+    <score id="score-2">2</score>
+    <score id="score-3">3</score>
+    <score id="score-4">4</score>
+    <score id="score-5">5</score>
+    <score id="score-6">6</score>
+    <score id="score-7">7</score>
+    <score id="score-8">8</score>
+    <score id="score-9">9</score>
+    <score id="score-10">10</score>
+    <score id="score-11">11</score>
+</filters>
+<regions>
+    <point id="obs-spawn">0,16,-3</point>
+    <point id="spawn">0,16,-3</point>
+    <below id="return-area" y="0"/>
+    <cuboid id="area-1" min="5,16,12" max="-5,oo,16"/>
+    <cuboid id="area-2" min="5,16,26" max="-5,oo,30"/>
+    <cuboid id="area-3" min="5,16,41" max="-5,oo,45"/>
+    <cuboid id="area-4" min="5,16,55" max="-5,oo,59"/>
+    <cuboid id="area-5" min="5,16,69" max="-5,oo,73"/>
+    <cuboid id="area-6" min="5,16,83" max="-5,oo,87"/>
+    <cuboid id="area-7" min="5,16,97" max="-5,oo,101"/>
+    <cuboid id="area-8" min="5,16,111" max="-5,oo,115"/>
+    <cuboid id="area-9" min="5,16,125" max="-5,oo,129"/>
+    <cuboid id="area-10" min="5,16,139" max="-5,oo,143"/>
+    <cuboid id="area-11" min="5,16,153" max="-5,oo,157"/>
+    <cuboid id="area-12" min="5,16,167" max="-5,oo,175"/>
+    <point id="spawn-1">0.5,16,13.5</point>
+    <point id="spawn-2">0.5,16,27.5</point>
+    <point id="spawn-3">0.5,16,42.5</point>
+    <point id="spawn-4">0.5,16,56.5</point>
+    <point id="spawn-5">0.5,16,70.5</point>
+    <point id="spawn-6">0.5,16,84.5</point>
+    <point id="spawn-7">0.5,16,98.5</point>
+    <point id="spawn-8">0.5,16,112.5</point>
+    <point id="spawn-9">0.5,16,126.5</point>
+    <point id="spawn-10">0.5,16,140.5</point>
+    <point id="spawn-11">0.5,16,154.5</point>
+    <apply block="never" use="never"/>
+</regions>
+<portals yaw="@0">
+    <portal destination="spawn" filter="score-0" region="return-area"/>
+    <portal destination="spawn-1" filter="score-1" region="return-area"/>
+    <portal destination="spawn-2" filter="score-2" region="return-area"/>
+    <portal destination="spawn-3" filter="score-3" region="return-area"/>
+    <portal destination="spawn-4" filter="score-4" region="return-area"/>
+    <portal destination="spawn-5" filter="score-5" region="return-area"/>
+    <portal destination="spawn-6" filter="score-6" region="return-area"/>
+    <portal destination="spawn-7" filter="score-7" region="return-area"/>
+    <portal destination="spawn-8" filter="score-8" region="return-area"/>
+    <portal destination="spawn-9" filter="score-9" region="return-area"/>
+    <portal destination="spawn-10" filter="score-10" region="return-area"/>
+    <portal destination="spawn-11" filter="score-11" region="return-area"/>
+</portals>
+<score>
+    <limit>12</limit>
+    <box points="1" region="area-1" silent="true" filter="score-0"/>
+    <box points="1" region="area-2" silent="true" filter="score-1"/>
+    <box points="1" region="area-3" silent="true" filter="score-2"/>
+    <box points="1" region="area-4" silent="true" filter="score-3"/>
+    <box points="1" region="area-5" silent="true" filter="score-4"/>
+    <box points="1" region="area-6" silent="true" filter="score-5"/>
+    <box points="1" region="area-7" silent="true" filter="score-6"/>
+    <box points="1" region="area-8" silent="true" filter="score-7"/>
+    <box points="1" region="area-9" silent="true" filter="score-8"/>
+    <box points="1" region="area-10" silent="true" filter="score-9"/>
+    <box points="1" region="area-11" silent="true" filter="score-10"/>
+    <box points="1" region="area-12" silent="true" filter="score-11"/>
+</score>
+<itemremove>
+    <item>leather boots</item>
+</itemremove>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>

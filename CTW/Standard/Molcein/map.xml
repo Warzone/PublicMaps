@@ -1,12 +1,10 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
 <name>Molcein</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Capture the wools needed for your team.</objective>
 <gamemode>ctw</gamemode>
 <authors>
-    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="Map design, build and XML" /> <!--  chle_  -->
+    <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="Map design, build and XML" /> <!-- chle_ -->
 </authors>
 <contributors>
     <contributor uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Feedback" /> <!-- Obelistics -->
@@ -133,38 +131,40 @@
         <boots unbreakable="true" color="D87F33">leather boots</boots>
     </kit>
 </kits>
-<killreward>
-    <item amount="1">golden apple</item>
-</killreward>
-<killreward>
-    <filter>
-        <team>lime-team</team>
-    </filter>
-    <item amount="10" damage="5">stained clay</item>
-    <item amount="6" damage="5">stained glass</item>
-</killreward>
-<killreward>
-    <filter>
-        <team>magenta-team</team>
-    </filter>
-    <item amount="10" damage="2">stained clay</item>
-    <item amount="6" damage="2">stained glass</item>
-</killreward>
-<killreward>
-    <filter>
-        <team>orange-team</team>
-    </filter>
-    <item amount="10" damage="1">stained clay</item>
-    <item amount="6" damage="1">stained glass</item>
-</killreward>
-<killreward>
-    <filter>
-        <team>yellow-team</team>
-    </filter>
-    <item amount="10" damage="4">stained clay</item>
-    <item amount="6" damage="4">stained glass</item>
-</killreward>
-<!--   Drops 12 diamonds when broken   -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="1">golden apple</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <team>lime-team</team>
+        </filter>
+        <item amount="10" damage="5">stained clay</item>
+        <item amount="6" damage="5">stained glass</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <team>magenta-team</team>
+        </filter>
+        <item amount="10" damage="2">stained clay</item>
+        <item amount="6" damage="2">stained glass</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <team>orange-team</team>
+        </filter>
+        <item amount="10" damage="1">stained clay</item>
+        <item amount="6" damage="1">stained glass</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <team>yellow-team</team>
+        </filter>
+        <item amount="10" damage="4">stained clay</item>
+        <item amount="6" damage="4">stained glass</item>
+    </kill-reward>
+</kill-rewards>
+<!-- Drops 12 diamonds when broken -->
 <blockdrops>
     <rule>
         <filter>
@@ -189,55 +189,55 @@
 </renewables>
 <maxbuildheight>18</maxbuildheight>
 <filters>
-    <!--   Inclusive filters for each team for the spawns   -->
+    <!-- Inclusive filters for each team for the spawns -->
     <team id="only-lime">lime-team</team>
     <team id="only-orange">orange-team</team>
     <team id="only-magenta">magenta-team</team>
     <team id="only-yellow">yellow-team</team>
-    <!--   Negated filters for each team for the wool rooms   -->
+    <!-- Negated filters for each team for the wool rooms -->
     <not id="deny-lime"><team>lime-team</team></not>
     <not id="deny-orange"><team>orange-team</team></not>
     <not id="deny-magenta"><team>magenta-team</team></not>
     <not id="deny-yellow"><team>yellow-team</team></not>
-    <!--   Block drops filter for diamond   -->
+    <!-- Block drops filter for diamond -->
     <material id="only-diamond">diamond block</material>
-    <!--   Renewables filter for replacing blocks   -->
+    <!-- Renewables filter for replacing blocks -->
     <material id="only-air">air</material>
-    <!--   Negated filter to stop all edits over void   -->
+    <!-- Negated filter to stop all edits over void -->
     <deny id="deny-void">
         <void/>
     </deny>
-    <!--   Lapis block filter   -->
+    <!-- Lapis block filter -->
     <deny id="deny-lapis">
         <any>
             <material>22</material>
         </any>
     </deny>
-    <!--   Prevent "safties" to be placed on the map   -->
+    <!-- Prevent "safties" to be placed on the map -->
     <deny id="no-safties">
         <any>
             <material>wool</material>
         </any>
     </deny>
-    <!--   Allows players to only destroy quartz pillars and signs in the woolrooms   -->
+    <!-- Allows players to only destroy quartz pillars and signs in the woolrooms -->
     <any id="allow-some">
         <material>155:2</material>
         <material>sign</material>
     </any>
 </filters>
-<!--  Prevent carpets from being crafted  -->
+<!-- Prevent carpets from being crafted -->
 <crafting>
     <disable>carpet</disable>
 </crafting>
 <regions>
-    <!--  Victory Monuments  -->
+    <!-- Victory Monuments -->
     <union id="victory-monuments">
         <rectangle id="lime-victory" min="-13,278" max="-17,287"/>
         <rectangle id="yellow-victory" min="-149,146" max="-158,142"/>
         <rectangle id="magenta-victory" min="-13,10" max="-17,1"/>
         <rectangle id="orange-victory" min="118,142" max="127,146"/>
     </union>
-    <!--   Spawns   -->
+    <!-- Spawns -->
     <union id="spawns">
         <union id="lime-team-spawns">
             <rectangle id="lime-spawn1" min="53,243" max="59,250"/>
@@ -256,7 +256,7 @@
             <rectangle id="orange-spawn2" min="90,213" max="83,219"/>
         </union>
     </union>
-    <!--  Portal destination room from supplyroom  -->
+    <!-- Portal destination room from supplyroom -->
     <union id="portal-desinations">
         <circle id="lime-destination1" center="32,209" radius="7"/>
         <circle id="lime-destination2" center="-63,209" radius="7"/>
@@ -267,7 +267,7 @@
         <circle id="orange-destination1" center="49,96" radius="7"/>
         <circle id="orange-destination2" center="49,192" radius="7"/>
     </union>
-    <!--   No void   -->
+    <!-- No void -->
     <negative id="playable-void">
         <complement id="center-outer">
             <circle id="radius-64" center="-15.5,144.5" radius="64"/>
@@ -287,7 +287,7 @@
         <rectangle id="orange-ironblocks2" min="83,184" max="61,211"/>
     </negative>
     <above y="20" id="supply-room"/>
-    <!--  woolrooms  -->
+    <!-- woolrooms -->
     <union id="supplyrooms">
         <cuboid id="lime-supply-room" min="0,39,200" max="-31,26,221"/>
         <cuboid id="yellow-supply-room" min="-71,39,160" max="-92,26,128"/>
@@ -318,10 +318,10 @@
         <cuboid id="me" min="-21.5,35,86.5" max="-22.5,33,86.5"/>
         <cuboid id="oe" min="42.5,35,138.5" max="42.5,33,137.5"/>
     </union>
-    <!--  Applied  -->
+    <!-- Applied -->
     <apply kit="wool-gear" region="supplyrooms"/>
     <apply block-break="allow-some" block-place="never" region="supplyrooms" message="You may only modify quartz pillars and signs in the woolroom!"/>
-    <apply block-place="no-safties" region="everywhere" message="You may only place the wool at the victory monument!"/>
+    <apply block-place="no-safties" message="You may only place the wool at the victory monument!"/>
     <apply block="never" region="wool-rooms" message="You may not edit the portalroom!"/>
     <apply block="never" region="portal-desinations" message="You may not edit the portal destinations houses!"/>
     <apply block="never" region="victory-monuments" message="You may not edit the victory monuments!"/>
@@ -445,7 +445,7 @@
     <item>sapling</item>
     <item>31:1</item>
 </itemremove>
-<tutorial>
+<!-- <tutorial>
     <stage title="Capture the Wool">
         <message>
             <line>`rThis map is a `a`l4 Team Capture the Wool (CTW) `rmap.</line>
@@ -491,5 +491,5 @@
             <point yaw="14" pitch="0">-15.5,9.5,269.5</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>

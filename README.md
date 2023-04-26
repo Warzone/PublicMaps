@@ -43,7 +43,7 @@ If you need any additional support with the mapmaking process, you may visit the
 
 -   [PGM Documentation](https://pgm.dev/) - The most current documentation for the latest (1.8) version of PGM. It covers the various features and modules offered by PGM as well as XML syntax. This resource is useful for beginner mapmakers that are not sure where to begin.
 -   [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/), or [Notepad++](https://notepad-plus-plus.org/) - Some of the recommended programs for editing XML files, as it comes with syntax highlighting, autocompletion, and other tools to help you create XML files for your maps.
--   [webNBT](https://github.com/iRath96/webNBT) or [NBT Explorer](https://github.com/jaquadro/NBTExplorer) - This website will allow you to edit a Minecraft world’s level.dat file, which lets you have a control over specific settings not normally present in-game. It can also let you determine what Minecraft version a map was created for.
+-   [webNBT](https://github.com/iRath96/webNBT) or [NBT Explorer](https://github.com/jaquadro/NBTExplorer) - This website will allow you to edit a Minecraft world's level.dat file, which lets you have a control over specific settings not normally present in-game. It can also let you determine what Minecraft version a map was created for.
 
 ## License
 

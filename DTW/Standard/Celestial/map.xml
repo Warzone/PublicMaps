@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Destroy the Wool">
+<map proto="1.4.2" game="Destroy the Wool">
 <name>Celestial</name>
+<created>2018-05-27</created>
 <version>1.0.1</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
@@ -19,22 +19,22 @@
 <!-- Kits -->
 <kits>
     <kit id="default">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">iron axe</item>
-        <item slot="3" amount="64">log</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="32">arrow</item>
-        <helmet unbreakable="true">iron helmet</helmet>
-        <boots unbreakable="true">iron boots</boots>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="64" material="log"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <boots unbreakable="true" material="iron boots"/>
     </kit>
     <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
-        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
+        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
     </kit>
     <kit id="red-kit" parents="default">
-        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
-        <leggings unbreakable="true" color="B02E26">leather leggings</leggings>
+        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
+        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -44,11 +44,11 @@
     <default region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
-<destroyables completion="31%" repairable="false" show-progress="true" sparks="true">
-    <destroyable name="Left Wool" owner="blue-team" materials="wool" region="left-blue-wool"/>
-    <destroyable name="Right Wool" owner="blue-team" materials="wool" region="right-blue-wool"/>
-    <destroyable name="Left Wool" owner="red-team" materials="wool" region="left-red-wool"/>
-    <destroyable name="Right Wool" owner="red-team" materials="wool" region="right-red-wool"/>
+<destroyables completion="31%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
 </destroyables>
 <!-- Filters -->
 <filters>
@@ -75,17 +75,17 @@
         <rectangle id="map" min="67,167" max="335,340"/>
     </negative>
     <!-- Applications -->
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
     <item>iron axe</item>
-		<item>log</item>
+    <item>log</item>
     <item>wood</item>
     <item>cooked beef</item>
     <item>arrow</item>
@@ -99,8 +99,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
-	<item amount="2">arrow</item>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

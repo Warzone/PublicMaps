@@ -1,0 +1,85 @@
+<map proto="1.4.2" game="Spleef">
+<name>Spleef Dojo</name>
+<created>2023-01-27</created>
+<version>1.0.2</version>
+<objective>Spleef the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<teams>
+    <team id="cyan" color="dark_aqua" max="50">Cyan</team>
+    <team id="magenta" color="light_purple" max="50">Magenta</team>
+</teams>
+<time>210s</time>
+<broadcasts>
+    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="2s">Touching the world border will kill you!</alert>
+    <alert after="5s">Good luck!</alert>
+</broadcasts>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
+        <item slot="1" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="2" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="3" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="4" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="5" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="6" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="7" unbreakable="true" team-color="true" material="wool"/>
+        <item slot="8" unbreakable="true" team-color="true" material="wool"/>
+        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="255">slow digging</effect>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <material id="only-snow-in-map">snow block</material>
+</filters>
+<regions>
+    <apply block="only-snow-in-map" message="You may only break snow blocks."/>
+</regions>
+<spawns>
+    <spawn team="cyan" kit="default" spread="true">
+        <regions yaw="-90">
+            <cuboid min="-26,1,0" max="-26,1,2"/>
+        </regions>
+    </spawn>
+    <spawn team="magenta" kit="default" spread="true">
+        <regions yaw="90"> 
+            <cuboid min="27,1,0" max="27,1,2"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="0">
+            <point>0.5,37,1.5</point>
+        </regions>
+    </default>
+</spawns>
+<itemremove>
+    <item>diamond spade</item>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>snow ball</item>
+</itemremove>
+<world-borders center="0.5, 1.5">
+    <world-border size="60"/>
+    <world-border size="2" after="2m" duration="90s" damage="200" buffer="0"/>
+</world-borders>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>

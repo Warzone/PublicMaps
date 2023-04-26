@@ -2,23 +2,18 @@
 <name>Infinite</name>
 <version>1.0.5</version>
 <objective>Eliminate your opponents!</objective>
-<gamemode>rage</gamemode>
-<gamemode>blitz</gamemode>
+<gamemode>br</gamemode>
 <gamemode>arcade</gamemode>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
-    <!-- AtlasGames -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
 <contributors>
-    <contributor contribution="XML" uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b"/>
-    <!-- Anthonny -->
+    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b" contribution="XML"/> <!-- Anthonny -->
 </contributors>
 <blitz>
     <time>5m</time>
     <lives>2</lives>
-    <title>Blitz: Rage</title>
 </blitz>
-<!-- <include src="blitz-global.xml"/> -->
 <rage/>
 <teams>
     <team color="dark red" max="12" max-overfill="15">Red</team>
@@ -89,13 +84,17 @@
 		<region name="map"/>
 	</apply>
 </regions>
-<killreward>
-    <item>arrow</item>
-</killreward>
-<killreward>
-    <filter><kill-streak count="2"/></filter>
-    <item>ender pearl</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item>arrow</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item>ender pearl</item>
+    </kill-reward>
+</kill-rewards>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>

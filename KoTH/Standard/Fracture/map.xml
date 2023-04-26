@@ -11,8 +11,8 @@
     <tip after="32s" every="5m">`bCapture the `9Middle `bto open the scorebox!</tip>
 </broadcasts>
 <teams>
-    <team id="blue-team" color="blue"     max="12" max-overfill="12">Blue</team>
-    <team id="red-team"  color="dark red" max="12" max-overfill="12">Red</team>
+    <team id="blue-team" color="blue" max="12" max-overfill="12">Blue</team>
+    <team id="red-team" color="dark red" max="12" max-overfill="12">Red</team>
 </teams>
 <kits>
     <kit id="main-kit">
@@ -25,25 +25,25 @@
         <item slot="3" unbreakable="true" material="stone axe">
             <enchantment level="1">efficiency</enchantment>
         </item>
-        <item slot="5" amount="12"        material="wood" />
-        <item slot="7" amount="24"        material="arrow" />
-        <item slot="8" amount="64"        material="golden carrot" />
-        <chestplate    unbreakable="true" material="chainmail chestplate">
+        <item slot="5" amount="12" material="wood" />
+        <item slot="7" amount="24" material="arrow" />
+        <item slot="8" amount="64" material="golden carrot" />
+        <chestplate unbreakable="true" material="chainmail chestplate">
             <enchantment level="1">blast_protection</enchantment>
         </chestplate>
-        <boots         unbreakable="true" material="iron boots" />
+        <boots unbreakable="true" material="iron boots" />
         <effect duration="3" amplifier="10">resistance</effect>
         <effect duration="3" amplifier="10">regeneration</effect>
         <effect duration="3" amplifier="3">haste</effect>
     </kit>
     <kit id="blue-kit" parents="main-kit">
-        <item     slot="4" amount="4" damage="11"   material="stained glass" />
-        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
+        <item slot="4" amount="4" damage="11" material="stained glass" />
+        <helmet unbreakable="true" color="0066cc" material="leather helmet" />
         <leggings unbreakable="true" color="0066cc" material="leather leggings" />
     </kit>
     <kit id="red-kit" parents="main-kit">
-        <item     slot="4" amount="4" damage="14"   material="stained glass" />
-        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
+        <item slot="4" amount="4" damage="14" material="stained glass" />
+        <helmet unbreakable="true" color="cd0000" material="leather helmet" />
         <leggings unbreakable="true" color="cd0000" material="leather leggings" />
     </kit>
     <lend filter="captured-hill">
@@ -54,8 +54,8 @@
 </kits>
 <spawns>
     <default region="default-spawn" yaw="180" />
-    <spawn   region="blue-spawn"    yaw="90"  team="blue-team" kit="blue-kit" />
-    <spawn   region="red-spawn"     yaw="-90" team="red-team"  kit="red-kit" />
+    <spawn region="blue-spawn" yaw="90" team="blue-team" kit="blue-kit" />
+    <spawn region="red-spawn" yaw="-90" team="red-team" kit="red-kit" />
 </spawns>
 <respawns>
     <respawn delay="4s" filter="captured-hill" />
@@ -90,40 +90,40 @@
     </any>
 </filters>
 <regions>
-    <block  id="default-spawn">118.5,24,158.5</block>
-    <block  id="blue-spawn"   >173.5,9,200.5</block>
-    <block  id="red-spawn"    >63.5,9,212.5</block>
-    <below  id="bottom-layer" y="2" />
-    <cuboid id="central-point-capture"    min="122,0,210" max="115,12,203" />
+    <block id="default-spawn">118.5,24,158.5</block>
+    <block id="blue-spawn">173.5,9,200.5</block>
+    <block id="red-spawn">63.5,9,212.5</block>
+    <below id="bottom-layer" y="2" />
+    <cuboid id="central-point-capture" min="122,0,210" max="115,12,203" />
     <cuboid id="central-point-protection" min="122,0,210" max="115,9,203" />
-    <cuboid id="blue-side-score"      min="175,3,223" max="173,5,216" />
-    <cuboid id="red-side-score"       min="62,3,190" max="64,5,196" />
-    <cuboid id="observer-spawn"       min="110,11,161" max="129,40,150" />
+    <cuboid id="blue-side-score" min="175,3,223" max="173,5,216" />
+    <cuboid id="red-side-score" min="62,3,190" max="64,5,196" />
+    <cuboid id="observer-spawn" min="110,11,161" max="129,40,150" />
     <union  id="area-protection">
         <cuboid id="blue-score-protection" min="172,13,204" max="178,0,228" />
-        <cuboid id="red-score-protection"  min="64,13,208"  max="59,0,185" />
+        <cuboid id="red-score-protection" min="64,13,208" max="59,0,185" />
         <cuboid id="blue-spawn-protection" min="178,oo,205" max="171,0,198" />
-        <cuboid id="red-spawn-protection"  min="59,oo,208"  max="66,0,215" />
+        <cuboid id="red-spawn-protection" min="59,oo,208" max="66,0,215" />
     </union>
     <cylinder id="reduce-center" base="118.5,13,206.5" radius="12" height="28" />
-    <apply region="area-protection"          block="never"     message="You may not interact with that material here" />
-    <apply region="bottom-layer"             block-break="deny-island-bottom-layer" block-physics="never" message="You may not interact with that material here" />
-    <apply region="reduce-center"            block-place="never"     message="You have reached the maximum build height for the center (`f13 `cblocks)" />
+    <apply region="area-protection" block="never" message="You may not interact with that material here" />
+    <apply region="bottom-layer" block-break="deny-island-bottom-layer" block-physics="never" message="You may not interact with that material here" />
+    <apply region="reduce-center" block-place="never" message="You have reached the maximum build height for the center (`f13 `cblocks)" />
     <apply region="central-point-protection" block-break="deny-hill" message="You may not interact with that material here" />
-    <apply                                   block="deny-void" message="You may not build in the void" />
-    <apply region="blue-spawn-protection"    enter="only-blue" message="You may not enter Blue's spawn" />
-    <apply region="red-spawn-protection"     enter="only-red"  message="You may not enter Red's spawn" />
-    <apply region="blue-score-protection"    enter="red-control"  message="You may only score in your scrorebox if you hold the hill" />
-    <apply region="red-score-protection"     enter="blue-control" message="You may only score in your scrorebo if you hold the hill" />
+    <apply block="deny-void" message="You may not build in the void" />
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter Blue's spawn" />
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter Red's spawn" />
+    <apply region="blue-score-protection" enter="red-control" message="You may only score in your scrorebox if you hold the hill" />
+    <apply region="red-score-protection" enter="blue-control" message="You may only score in your scrorebo if you hold the hill" />
 </regions>
 <portals>
-    <portal region="blue-side-score" destination="red-spawn"  yaw="@-90" filter="only-red" />
-    <portal region="red-side-score"  destination="blue-spawn" yaw="@90"  filter="only-blue" />
+    <portal region="blue-side-score" destination="red-spawn" yaw="@-90" filter="only-red" />
+    <portal region="red-side-score" destination="blue-spawn" yaw="@90" filter="only-blue" />
 </portals>
 <time>7m</time>
 <score>
-    <box region="blue-side-score" filter="only-red"  points="6" />
-    <box region="red-side-score"  filter="only-blue" points="6" />
+    <box region="blue-side-score" filter="only-red" points="6" />
+    <box region="red-side-score" filter="only-blue" points="6" />
 </score>
 <control-points required="false">
     <control-point id="central-point" name="Middle" neutral-state="true" capture-rule="majority" capture-time="4s" decay="0.4" points="0.4" capture="central-point-capture" progress="central-point-capture" captured="observer-spawn" />
@@ -131,14 +131,14 @@
 <kill-rewards>
     <kill-reward>
         <item amount="8" material="arrow" />
-        <item            material="golden apple" />
+        <item material="golden apple" />
     </kill-reward>
     <kill-reward>
         <filter>
             <kill-streak count="2" repeat="true" />
         </filter>
         <item amount="6" material="wood" />
-        <item            material="iron ingot" />
+        <item material="iron ingot" />
     </kill-reward>
     <kill-reward>
         <filter>

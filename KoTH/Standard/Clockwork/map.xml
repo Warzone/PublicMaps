@@ -1,11 +1,11 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Clockwork</name>
+<created>2022-02-19</created>
 <version>1.0.1</version>
 <objective>Be the first team to reach 750 points from capturing the hills!</objective>
 <gamemode>koth</gamemode>
 <authors>
-    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" />
-    <!-- Virus53 -->
+    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" /> <!-- Virus53 -->
 </authors>
 <teams>
     <team id="lime-team" color="green" max="5">Lime</team>
@@ -14,39 +14,17 @@
 <kits>
     <kit id="spawn">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="9" amount="24">arrow</item>
-        <helmet unbreakable="true">iron helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <leggings team-color="true" unbreakable="true">leather leggings</leggings>
-        <boots team-color="true" unbreakable="true">leather boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="9" amount="24" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
         <potion duration="5s" amplifier="10">damage resistance</potion>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<kill-reward>
-    <item>golden apple</item>
-    <item amount="4">arrow</item>
-</kill-reward>
-<itemkeep>
-    <item>arrow</item>
-    <item>golden apple</item>
-</itemkeep>
-<itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>iron helmet</item>
-    <item>chainmail chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-</itemremove>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<regions>
-    <apply region="everywhere" block="never" message="You may not modify the map!"/>
-</regions>
 <spawns>
     <spawn yaw="135" team="lime-team" kit="spawn">
         <region>
@@ -64,6 +42,9 @@
         </region>
     </default>
 </spawns>
+<regions>
+    <apply block="never" message="You may not modify the map!"/>
+</regions>
 <control-points required="false">
     <control-point name="North East Point" capture-time="5s">
         <capture>
@@ -94,4 +75,25 @@
     <limit>750</limit>
     <king/>
 </score>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="4" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

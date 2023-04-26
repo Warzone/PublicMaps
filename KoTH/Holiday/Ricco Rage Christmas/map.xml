@@ -1,0 +1,134 @@
+<map proto="1.4.2">
+<name>Ricco Rage Christmas</name>
+<created>2022-12-21</created>
+<version>2.0.0</version>
+<objective>Be the first team to reach 1200 points!</objective>
+<gamemode>koth</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b" contributation="Map Author" /> <!-- Henrs -->
+    <author uuid="53af1e46-7424-485b-97de-7bf8d854a2aa" contribution="Rage Version" /> <!-- __BT -->
+</authors>
+<contributors>
+    <contributor uuid="5fa68d7e-a2e8-4ff4-8bb6-c4d6d53cdfdf" contribution="Inspiration" /> <!-- Prolav -->
+    <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Inspiration" /> <!-- Preinstalled -->
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit" /> <!-- Wesdial -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" max="16">Red</team>
+    <team id="yellow-team" color="yellow" max="16">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn">
+        <item slot="0" unbreakable="true" enchantments="damage_all:10" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantments="arrow_damage:10" material="bow"/>
+        <item slot="2" amount="16" material="leaves"/>
+        <item slot="3" unbreakable="true" material="shears"/>
+        <item slot="7" amount="1" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <potion duration="5s" amplifier="10">damage resistance</potion>
+    </kit>
+    <kit id="red" parents="spawn">
+        <leggings color="cd0000" unbreakable="true" material="leather leggings"/>
+        <boots color="cd0000" unbreakable="true" material="leather boots"/>
+    </kit>
+    <kit id="yellow" parents="spawn">
+        <leggings color="e5e533" unbreakable="true" material="leather leggings"/>
+        <boots color="e5e533" unbreakable="true" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn yaw="0" team="red-team" kit="red">
+        <region>
+            <point>-11.5,6,-48.5</point>
+        </region>
+    </spawn>
+    <spawn yaw="180" team="yellow-team" kit="yellow">
+        <region>
+            <point>12.5,6,49.5</point>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <point>0.5,40,0.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <all id="only-leaves-in-map">
+        <not>
+            <void/>
+        </not>
+        <material>leaves</material>
+    </all>
+</filters>
+<regions>
+    <union id="spawns">
+        <cuboid min="-14,6,51" max="-9,16,-46"/>
+        <cuboid min="15,6,52" max="10,16,47"/>
+    </union>
+    <above id="playable" y="1"/>
+    <below id="non-playable" y="1"/>
+    <apply region="spawns" block="never" message="`eYou may not build in the `cSpawns`e!"/>
+    <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7void`e!"/>
+    <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
+</regions>
+<control-points required="false" incremental="true">
+    <control-point name="Point A" capture-time="3s" points="1">
+        <capture>
+            <cuboid min="26,2,-23" max="19,4,-16"/>
+        </capture>
+        <progress>
+            <cuboid min="26,2,-23" max="19,4,-16"/>
+        </progress>
+    </control-point>
+    <control-point name="Middle" capture-time="3s" points="1">
+        <capture>
+            <cuboid min="-3,7,4" max="4,10,-3"/>
+        </capture>
+        <progress>
+            <cuboid min="-3,7,4" max="4,10,-3"/>
+        </progress>
+    </control-point>
+    <control-point name="Point B" capture-time="3s" points="1">
+        <capture>
+            <cuboid min="-25,2,24" max="-18,4,17"/>
+        </capture>
+        <progress>
+            <cuboid min="-25,2,24" max="-18,4,17"/>
+        </progress>
+    </control-point>
+</control-points>
+<rage/>
+<score>
+    <limit>1200</limit>
+    <kills>1</kills>
+</score>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>leaves</item>
+    <item>shears</item>
+    <item>arrow</item>
+    <item>iron helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>sapling</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item amount="8" material="leaves"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>14</maxbuildheight>
+</map>

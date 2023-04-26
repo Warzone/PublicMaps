@@ -1,0 +1,129 @@
+<map proto="1.4.2">
+<name>Crayons</name>
+<created>2023-01-29</created>
+<version>1.0.0</version>
+<objective>Reach 500 points before the opposing team!</objective>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516"/> <!-- Preinstalled -->
+</authors>
+<contributors>
+    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Feedback and changes"/> <!-- _iMan -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="3">Blue</team>
+    <team id="red" color="dark red" max="3">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" amount="8" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+        <effect duration="5" amplifier="255">resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="180">
+        <region>
+            <point>-0.5,62,33.5</point>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit" yaw="90">
+        <region>
+            <point>30.5,40,0.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>-29.5,40,0.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <union id="launchpads">
+        <block id="left-jump">0.5,37,-9.5</block>
+        <block id="right-jump">0.5,37,10.5</block>
+    </union>
+    <apply velocity="0,1.9,0" region="left-jump"/>
+    <apply velocity="0,1.9,0" region="right-jump"/>
+    <apply block="never"/>
+</regions>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Middle Hill" points="1.5" capture-time="10s">
+        <capture>
+            <cylinder id="middle-hill" base="0.5,51,0.5" radius="5" height="6"/>
+        </capture>
+        <progress>
+            <region id="middle-hill"/>
+        </progress>
+        <captured>
+            <region id="middle-hill"/>
+        </captured>
+    </control-point>
+    <control-point name="Red Hill" capture-time="5s">
+        <capture>
+            <cylinder id="red-hill" base="-15.5,36,-7.5" radius="4" height="6"/>
+        </capture>
+        <progress>
+            <region id="red-hill"/>
+        </progress>
+        <captured>
+            <region id="red-hill"/>
+        </captured>
+    </control-point>
+    <control-point name="Blue Hill" capture-time="5s">
+        <capture>
+            <cylinder id="blue-hill" base="16.5,36,8.5" radius="4" height="6"/>
+        </capture>
+        <progress>
+            <region id="blue-hill"/>
+        </progress>
+        <captured>
+            <region id="blue-hill"/>
+        </captured>
+    </control-point>
+</control-points>
+<score>
+    <limit>500</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>

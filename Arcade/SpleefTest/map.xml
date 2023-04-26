@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Spleef">
+<map proto="1.4.2" game="Spleef">
 <name>SpleefTest</name>
-<version>1.0.0</version>
+<created>2021-04-07</created>
+<version>1.0.1</version>
 <objective>Spleef everyone on the enemy team!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -20,7 +20,7 @@
 </broadcasts>
 <kits>
     <kit id="red-kit">
-        <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
+        <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
         <item slot="1" unbreakable="true" damage="1">ink sack</item>
         <item slot="2" unbreakable="true" damage="1">ink sack</item>
         <item slot="3" unbreakable="true" damage="1">ink sack</item>
@@ -56,12 +56,10 @@
     <lives>1</lives>
 </blitz>
 <filters>
-    <all id="only-snow-in-map">
-        <material>snow block</material>
-    </all>
+    <material id="only-snow-in-map">snow block</material>
 </filters>
 <regions>
-    <apply region="everywhere" block="only-snow-in-map" message="You may only break snow blocks."/>
+    <apply block="only-snow-in-map" message="You may only break snow blocks."/>
 </regions>
 <spawns>
     <spawn team="red" kit="red-kit">
