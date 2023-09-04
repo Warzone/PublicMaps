@@ -22,11 +22,11 @@ To start contributing, you must clone this repository online, [GitHub Client (re
 
 In order to remove undesired portions of the map as well as to decrease its total file size, the map needs to be pruned before it can be accepted into the repository.
 
--   This means that **all** chunks excluding the map itself should be deleted from the world.
+-   This means that **all** chunks, excluding the map itself, should be deleted from the world.
 -   This can be achieved with third-party programs such as [MCASelector](https://github.com/Querz/mcaselector), [MCEdit-Unified](https://github.com/Podshot/MCEdit-Unified), or [MCEdit 2.0](https://github.com/mcedit/mcedit2).
--   **Note:** When using MCASelector, please make sure you select the `region` folder inside a world folder to edit a world, not the entire world folder.
+    -   **Note:** PGM Documentation has a [tutorial for chunk pruning](https://pgm.dev/docs/guides/preparing/pruning-chunks).
 -   After pruning the map, please make sure that you only include the required world files (`region/*`, `level.dat`, `map.png`, `map.xml`).
-    -   For more information about cleaning the world files and preparing the map for publication, [view this page on PGM Documentation](https://pgm.dev/docs/guides/packaging/cleaning-files).
+    -   For more information about cleaning the world files and preparing the map for publication, [view this page on PGM Documentation](https://pgm.dev/docs/guides/preparing/cleaning-files).
 
 ### XML Creation
 
@@ -51,6 +51,6 @@ Maps in this repository are made available under the [**CC BY-SA 4.0** license](
 
 ## Acknowledgements
 
-This repository represents the combined efforts of PGM contributors, map makers, and map developers since the original release of the plugin. Without them, this repository would not exist. Additionally, we'd like to credit the following:
+This repository represents the combined efforts of several contributors, map makers, and map developers since the original release of PGM in 2012 and [TGM](https://github.com/WarzoneMC/tgm) in 2017. Without them, this repository and Warzone would not exist. Additionally, we'd like to credit the following:
 -   [MCResourcePile](https://mcresourcepile.github.io/) - for their hard work compiling and archiving hundreds of maps from several communities, making them available for public download and use.
 -   Overcast Community's [PublicMaps](https://github.com/OvercastCommunity/PublicMaps) - for their continued efforts in maintaining and updating commercial map files, making them available for everyone.
