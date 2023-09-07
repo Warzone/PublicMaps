@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Frosted Hallows</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <objective>Holiday cheer everywhere!. Can you make it to the wool rooms?</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -19,13 +19,13 @@
         <item slot="28" material="arrow"/>
         <item slot="2" enchantment="durability:3;dig speed:1" material="iron pickaxe"/>
         <item slot="3" enchantment="durability:3;dig speed:1" material="iron axe"/>
-	    <item slot="4" amount="64" damage="1" material="wood"/>
-	    <item slot="5" amount="32" material="glass"/>
-	    <item slot="6" material="bucket"/>
-	    <item slot="7" amount="1" material="golden apple"/>
+        <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" material="bucket"/>
+        <item slot="7" amount="1" material="golden apple"/>
         <item slot="8" amount="64" material="cooked beef"/>
         <potion duration="5" amplifier="1">heal</potion>
-	<leggings material="chainmail leggings"/>
+    <leggings material="chainmail leggings"/>
     </kit>
     <kit id="kit-green" parents="spawn">
         <chestplate color="AA0000" material="leather chestplate"/>
@@ -38,56 +38,56 @@
 </kits>
 <spawns>
     <spawn team="green" kit="kit-green">
-    	<region yaw="0">
+    	<region>
         	<cuboid min="-1277.5,11,-1130.5" max="-1281.5,11,-1131.5"/>
         </region>
     </spawn>
     <spawn team="orange" kit="kit-orange">
-    	<region yaw="-180">
-        	<cuboid min="-1277.5,11,-873.5" max="-1281.5,11,-874.5"/>
+        <region yaw="-180">
+            <cuboid min="-1277.5,11,-873.5" max="-1281.5,11,-874.5"/>
         </region>
     </spawn>
     <default>
-    	<region yaw="90">
-       		<cuboid min="-1208.5,41,-1000" max="-1210.5,41,-1004.5"/>
-       	</region>
+        <region yaw="90">
+            <cuboid min="-1208.5,41,-1000" max="-1210.5,41,-1004.5"/>
+        </region>
     </default>
 </spawns>
 <filters>
-	<team id="only-orange">orange</team>
+    <team id="only-orange">orange</team>
     <team id="only-green">green</team>
-	<not id="no-void">
+    <not id="no-void">
         <void/>
     </not>
-	<any id="only-iron">
-		<material>iron block</material>
-	</any>
-	<all id="green-web">
-		<team>orange</team>
-		<material>web</material>
-	</all>
-	<all id="orange-web">
-		<team>green</team>
-		<material>web</material>
-	</all>
+    <any id="only-iron">
+        <material>iron block</material>
+    </any>
+    <all id="green-web">
+        <team>orange</team>
+        <material>web</material>
+    </all>
+    <all id="orange-web">
+        <team>green</team>
+        <material>web</material>
+    </all>
 </filters>
 <regions>
-	<negative id="void">
+    <negative id="void">
         <!--Mid -->
-		<rectangle min="-1259.5,-974.5" max="-1299.5,-929.5"/>
-		<rectangle min="-1259.5,-1029.5" max="-1299.5,-1075.5"/>
-		<union id="spawns">
+        <rectangle min="-1259.5,-974.5" max="-1299.5,-929.5"/>
+        <rectangle min="-1259.5,-1029.5" max="-1299.5,-1075.5"/>
+        <union id="spawns">
             <cylinder id="orange-spawn" base="-1279.5,0,-862.5" radius="21" height="oo"/>
             <cylinder id="green-spawn" base="-1279.5,0,-1142.5" radius="21" height="oo"/>
         </union>
         <union id="wool-rooms">
             <union id="orange-woolrooms">
-                <rectangle name="magenta-wool" min="-1331.5,-890.5" max="-1341.5,-899.5"/>
-                <rectangle name="pink-wool" min="-1217.5,-809.5," max="-1227.5,-899.5"/>
+                <rectangle id="magenta-wool" min="-1331.5,-890.5" max="-1341.5,-899.5"/>
+                <rectangle id="pink-wool" min="-1217.5,-809.5," max="-1227.5,-899.5"/>
             </union>
             <union id="green-woolrooms">            
-                <rectangle name="light_blue-wool" min="-1331.5,-1114.5" max="-1341.5,-1105.5"/>
-                <rectangle name="cyan-wool" min="-1217.5,-1114.5," max="-1227.5,-1105.5"/>
+                <rectangle id="light_blue-wool" min="-1331.5,-1114.5" max="-1341.5,-1105.5"/>
+                <rectangle id="cyan-wool" min="-1217.5,-1114.5," max="-1227.5,-1105.5"/>
             </union>
         </union>
         <union id="wool-placements">
@@ -96,7 +96,7 @@
             <block location="-1286,12,-876" id="light_blue-wool"/>
             <block location="-1274,12,-876" id="cyan-wool"/>
         </union>
-	</negative>
+    </negative>
     <apply block-place="no-void" message="You may not edit the void area!" region="void"/>
     <apply block="only-iron" message="You may only break iron in the spawns!" region="spawns"/>
     <apply enter="only-green" message="You may not enter the enemy spawn!" region="green-spawn"/>
@@ -110,21 +110,21 @@
     <kill-reward>
         <item amount="1" material="golden apple"/>
         <item amount="32" damage="1" material="wood"/>
-	<item amount="16" material="glass"/>
+    <item amount="16" material="glass"/>
     </kill-reward>
 </kill-rewards>
 <wools craftable="false">
-	<wool team="green" color="magenta" location="-1286,12,-1130" monument="magenta-wool"/>
-	<wool team="green" color="pink" location="-1274,12,-1130" monument="pink-wool"/>
-	<wool team="orange" color="light_blue" location="-1286,12,-876" monument="light_blue-wool"/>
-	<wool team="orange" color="cyan" location="-1274,12,-876" monument="cyan-wool"/>
+    <wool team="green" color="magenta" location="-1286,12,-1130" monument="magenta-wool"/>
+    <wool team="green" color="pink" location="-1274,12,-1130" monument="pink-wool"/>
+    <wool team="orange" color="light_blue" location="-1286,12,-876" monument="light_blue-wool"/>
+    <wool team="orange" color="cyan" location="-1274,12,-876" monument="cyan-wool"/>
 </wools>
 <!--
 <beacons>
-  <beacon location="-1336.5,22,-1109.5" particle-count="60" color="light_blue"/>
-  <beacon location="-1222.5,22,-1109.5" particle-count="60" color="cyan"/>
-  <beacon location="-1222.5,22,-895.5"  particle-count="60"color="pink"/>
-  <beacon location="-1336.5,22,-895.5" particle-count="60" color="magenta"/>
+    <beacon location="-1336.5,22,-1109.5" particle-count="60" color="light_blue"/>
+    <beacon location="-1222.5,22,-1109.5" particle-count="60" color="cyan"/>
+    <beacon location="-1222.5,22,-895.5"  particle-count="60"color="pink"/>
+    <beacon location="-1336.5,22,-895.5" particle-count="60" color="magenta"/>
 </beacons>
 -->
 <toolrepair>

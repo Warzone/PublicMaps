@@ -1,26 +1,25 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Immitis FFA</name>
-<version>0.6</version>
+<version>1.0.7</version>
+<objective>Kill everyone, and try not to die. Swords and arrows kill instantly!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
+<authors>
+    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
+</authors>
+<contributors>
+    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="XML"/> <!-- last_username -->
+</contributors>
 <rage/>
 <score>
     <kills>1</kills>
 </score>
 <time>8m</time>
-<objective>Kill everyone, and try not to die. Swords and arrows kill instantly!</objective>
 <players min="2" max="30" max-overfill="32" show-name-tags="false"/>
-<authors>
-    <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
-</authors>
 <rules>
     <rule>Block glitching is ILLEGAL and will be punished for!</rule>
 </rules>
-<contributors>
-    <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="XML"/> <!-- last_username -->
-</contributors>
 <filters>
     <deny id="deny-unbreakable-blocks">
         <not>
@@ -40,30 +39,27 @@
     </deny>
 </filters>
 <regions>
-    <apply block="deny-unbreakable-blocks">
-        <region>
-            <rectangle id="playable" min="-oo,-oo" max="oo,oo"/>
-        </region>
-    </apply>
+    <apply block="deny-unbreakable-blocks"/>
 </regions>
 <kits>
     <kit id="spawn-kit" discard-potion-bottles="false">
-        <potion duration="1" amplifier="10">damage resistance</potion>
+        <effect duration="1" amplifier="10">damage resistance</effect>
         <double-jump recharge-before-landing="true" power="3" recharge-time="8s"/>
+        <item slot="0" unbreakable="true" enchantments="damage_all:10" material="diamond sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:100" lore="`aOne-shot kill!" material="bow"/>
+        <item slot="2" material="arrow"/>
         <helmet show-unbreakable="false" unbreakable="true" color="D87F33" material="leather helmet"/>
         <chestplate show-unbreakable="false" unbreakable="true" color="D87F33" material="leather chestplate"/>
         <leggings show-unbreakable="false" unbreakable="true" color="D87F33" material="leather leggings"/>
         <boots show-unbreakable="false" unbreakable="true" color="D87F33" material="leather boots"/>
-
-        <item slot="0" unbreakable="true" enchantments="damage_all:10">diamond sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow damage:100" lore="`aOne-shot kill!">bow</item>
-        <item slot="2" amount="1">arrow</item>
     </kit>
 </kits>
-<killreward>
-    <item>arrow</item>
-    <potion duration="6" amplifier="1">speed</potion>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <effect duration="6" amplifier="1">speed</effect>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
