@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Arko</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <gamemode>dtm</gamemode>
 <objective>Destroy the other team's obsidian monuments</objective>
 <authors>
@@ -14,7 +14,7 @@
     <kit id="spawn" force="true">
         <item slot="0" material="iron sword"/>
         <item slot="1" material="bow">
-            <enchantment level="1">infinity</enchantment>
+            <enchantment>infinity</enchantment>
         </item>
         <item slot="2" material="diamond pickaxe"/>
         <item slot="3" material="stone axe"/>
@@ -38,7 +38,7 @@
         </regions>
     </spawn>
     <spawn team="blue" kit="blue-kit">
-        <regions yaw="0">
+        <regions>
             <cuboid min="55,5,-70" max="60,5,-65"/>
         </regions>
     </spawn>
@@ -48,7 +48,7 @@
         </regions>
     </default>
 </spawns>
-<destroyables name="Top Monument" materials="obsidian" completion="100%">
+<destroyables name="Top Monument" materials="obsidian">
     <destroyable owner="red">
         <region>
             <cuboid min="26,24,45" max="27,27,46"/>
@@ -60,7 +60,7 @@
         </region>
     </destroyable>
 </destroyables>
-<destroyables name="Bottom Monument" materials="obsidian" completion="100%">
+<destroyables name="Bottom Monument" materials="obsidian">
     <destroyable owner="red">
         <region>
             <cuboid min="-17,8,6" max="-16,11,7"/>
@@ -82,7 +82,7 @@
             <union>
                 <cuboid min="53,5,-71" max="62,8,-65"/>
                 <cuboid min="13,5,55" max="22,8,61"/>
-                <negative>
+                <negative id="negative-cuboid">
                     <cuboid min="-30,0,-72" max="105,45,62"/>
                 </negative>
             </union>
@@ -100,7 +100,7 @@
     </apply>
 </regions>
 <renewables>
-    <renewable rate="2" grow="false" aviod-entities="true">
+    <renewable rate="2" grow="false">
         <region>
             <union>
                 <cuboid min="90,2,-43" max="104,23,-22"/> <!-- blue -->
