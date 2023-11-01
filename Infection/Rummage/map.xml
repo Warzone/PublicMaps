@@ -1,18 +1,18 @@
 <map proto="1.4.2" game="Infection">
 <name>Rummage</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Try not to get killed by the infected. Humans win by default after the timer ends.</objective>
 <gamemode>arcade</gamemode>
 <authors>
-    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880"/> <!-- Kroest-->
-    <author uuid="7e7da86e-57a8-4b90-b297-4ef05e71dbdb"/> <!-- Whitever-->
-    <author uuid="6d24722c-dba4-4224-9d14-b3d08a8d9620"/> <!-- MrPetrus-->
+    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880"/> <!-- Kroest -->
+    <author uuid="7e7da86e-57a8-4b90-b297-4ef05e71dbdb"/> <!-- Whitever -->
+    <author uuid="6d24722c-dba4-4224-9d14-b3d08a8d9620"/> <!-- MrPetrus -->
 </authors>
 <contributors>
-    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="Xml base and tips"/><!-- Yoyo_-->
+    <contributor uuid="07fa10c6-f564-4630-861e-fe134ae27527" contribution="XML base and tips"/> <!-- Yoyo_-->
 </contributors>
 <teams>
-    <team id="human-team"    color="blue"  show-name-tags="allies" plural="true" min="3" max="50" max-overfill="50">Humans</team>
+    <team id="human-team" color="blue" show-name-tags="allies" plural="true" min="3" max="50" max-overfill="50">Humans</team>
     <team id="infected-team" color="green" show-name-tags="allies" plural="true" min="1" max="5" max-overfill="5">Infected</team>
 </teams>
 <time result="human-team">7m</time>
@@ -30,7 +30,7 @@
         <item slot="1" unbreakable="true" material="bow" name="`2`lInfection Bow"/>
         <item slot="28" material="arrow" amount="64"/>
         <effect duration="oo" amplifier="2">jump</effect>
-        <effect duration="5" amplifier="1">increase damage</effect>
+        <effect duration="5">increase damage</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="infected-kit-start">
@@ -44,7 +44,7 @@
         <effect duration="10" amplifier="1000">weakness</effect>
         <effect duration="10" amplifier="1000">slow</effect>
         <effect duration="10" amplifier="129">jump</effect>
-        <effect duration="10" amplifier="1">blindness</effect>
+        <effect duration="10">blindness</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="human-kit">
@@ -130,11 +130,7 @@
     </not>
 </filters>
 <control-points>
-    <control-point id="win-point" name="Infected Win!" required="true" capture-time="10s" show-progress="true">
-        <capture>
-            <everywhere/>
-        </capture>
-    </control-point>
+    <control-point id="win-point" name="Infected Win!" required="true" capture-time="10s" show-progress="true" capture="everywhere"/>
 </control-points>
 <itemremove>
     <item>leather helmet</item>
