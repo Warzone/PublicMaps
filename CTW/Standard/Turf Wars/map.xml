@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Turf Wars</name>
-<version>2.0.2</version>
+<version>2.0.3</version>
 <objective>Capture the other team's wools to win the game!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -8,10 +8,10 @@
     <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
 </authors>
 <contributors>
-    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contributor="Map feedback"/> <!-- ElectroidFilms -->
-    <contributor uuid="c2a4c847-653e-482a-b62e-d7f8b64330cb" contributon="Map feedback"/> <!-- NathanTheBook -->
-    <contributor uuid="fb820bf4-5157-4d7b-8cca-e8ec759b87cd" contributor="Aesthetics and feedback"/> <!-- Vetches -->
-    <contributor uuid="94d2a023-182e-4d61-864c-1e895d164e50" contributor="Map feedback and minor aesthetics"/> <!-- DirkyJerky -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Map feedback"/> <!-- ElectroidFilms -->
+    <contributor uuid="c2a4c847-653e-482a-b62e-d7f8b64330cb" contribution="Map feedback"/> <!-- NathanTheBook -->
+    <contributor uuid="fb820bf4-5157-4d7b-8cca-e8ec759b87cd" contribution="Aesthetics and feedback"/> <!-- Vetches -->
+    <contributor uuid="22bf3563-3a08-4867-ae71-e265d6cf2990" contribution="Map feedback and minor aesthetics"/> <!-- DirkyJerky -->
 </contributors>
 <teams>
     <team id="blue" color="blue" max="32">Blue</team>
@@ -138,10 +138,6 @@
         <rectangle id="right-lane" min="29,-29" max="41,30"/>
         <rectangle id="mid-island-connection" min="26,-12" max="-25,1"/>
     </complement>
-    <union id="spawn-drops">
-        <circle center="0.5,-142.5" radius="5"/>
-        <circle center="0.5,131.5" radius="5"/>
-    </union>
     <union id="water-lanes">
         <union id="blue-lanes">
             <union id="orange-wr-lane">
@@ -171,7 +167,6 @@
     <apply enter="only-blue" region="blue-wools" message="You may not enter your team's own wool rooms!"/>
     <apply enter="only-red" region="red-wools" message="You may not enter your team's own wool rooms!"/>
     <apply block="never" region="mid-spawner" message="You may not place blocks around the spawner!"/>
-    <apply block="never" region="spawn-drops"/>
     <apply block-break="only-iron" block-place="never" region="bases" message="You may only break iron blocks in the base!"/>
     <apply block="blue-in-wr" use="only-blue" region="blue-wools"/>
     <apply block="red-in-wr" use="only-red" region="red-wools"/>
@@ -269,8 +264,8 @@
     <respawn delay="3s" filter="before-1h-after-45m"/>
     <respawn delay="3.5s" filter="after-1h"/>
 </respawns>
-<!-- <include id="tutorial"/> -->
-<tutorial>
+<!-- include src="tutorial.xml"/ -->
+<!-- <tutorial>
     <stage title="Capture the Wool">
         <message>
             <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
@@ -317,5 +312,5 @@
             <point yaw="180">0,15,-121.5</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>
