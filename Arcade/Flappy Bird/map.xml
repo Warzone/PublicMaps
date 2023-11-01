@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Flappy Bird">
+<map proto="1.4.2" game="Flappy Bird">
 <name>Flappy Bird</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Jump and do not hit the pipes!</objective>
 <gamemode>arcade</gamemode>
 <authors>
@@ -9,9 +8,6 @@
     <author uuid="2a2c4c30-ecf6-4e4a-b5bc-be8cf033563e"/> <!-- Felipu_feliu -->
 </authors>
 <players min="2" max="60" show-name-tags="false" colors="true"/>
-<blitz>
-    <lives>1</lives>
-</blitz>
 <time>68s</time>
 <broadcasts>
     <tip after="1s">Double tapping will make you jump</tip>
@@ -88,19 +84,11 @@
     </not>
 </filters>
 <projectiles>
-    <projectile
-        id="egg"
-        name="Egg Launcher"
-        projectile="Egg"
-        velocity="4"
-        damage="1"
-        throwable="false"
-        cooldown="1s"
-        potion="slowness:30:2:false;blindness:30:2:false"/>
+    <projectile id="egg" name="Egg Launcher" projectile="Egg" velocity="4" damage="1" throwable="false" cooldown="1s" potion="slowness:30:2:false;blindness:30:2:false"/>
 </projectiles>
 <kits>
     <kit id="spawn">
-        <item slot="0" projectile="egg" name="`aStun Gun">diamond barding</item>
+        <item slot="0" projectile="egg" name="`aStun Gun" material="diamond barding"/>
         <double-jump recharge-before-landing="true" recharge-time="0s" power="3"/>
         <potion duration="1s" amplifier="50">slowness</potion>
         <potion duration="oo" amplifier="2">speed</potion>
@@ -108,66 +96,66 @@
         <potion duration="oo" amplifier="5">regeneration</potion>
     </kit>
     <kit id="1">
-        <item slot="9" name="1-gate">flint</item>
+        <item slot="9" name="1-gate" material="flint"/>
     </kit>
     <kit id="2">
-        <item slot="10" name="2-gate">flint</item>
+        <item slot="10" name="2-gate" material="flint"/>
     </kit>
     <kit id="3">
-        <item slot="11" name="3-gate">flint</item>
+        <item slot="11" name="3-gate" material="flint"/>
     </kit>
     <kit id="4">
-        <item slot="12" name="4-gate">flint</item>
+        <item slot="12" name="4-gate" material="flint"/>
     </kit>
     <kit id="5">
-        <item slot="13" name="5-gate">flint</item>
+        <item slot="13" name="5-gate" material="flint"/>
     </kit>
     <kit id="6">
-        <item slot="14" name="6-gate">flint</item>
+        <item slot="14" name="6-gate" material="flint"/>
     </kit>
     <kit id="7">
-        <item slot="15" name="7-gate">flint</item>
+        <item slot="15" name="7-gate" material="flint"/>
     </kit>
     <kit id="8">
-        <item slot="16" name="8-gate">flint</item>
+        <item slot="16" name="8-gate" material="flint"/>
     </kit>
     <kit id="9">
-        <item slot="17" name="9-gate">flint</item>
+        <item slot="17" name="9-gate" material="flint"/>
     </kit>
     <kit id="10">
-        <item slot="18" name="10-gate">flint</item>
+        <item slot="18" name="10-gate" material="flint"/>
     </kit>
     <kit id="11">
-        <item slot="19" name="11-gate">flint</item>
+        <item slot="19" name="11-gate" material="flint"/>
     </kit>
     <kit id="12">
-        <item slot="20" name="12-gate">flint</item>
+        <item slot="20" name="12-gate" material="flint"/>
     </kit>
     <kit id="13">
-        <item slot="21" name="13-gate">flint</item>
+        <item slot="21" name="13-gate" material="flint"/>
     </kit>
     <kit id="14">
-        <item slot="22" name="14-gate">flint</item>
+        <item slot="22" name="14-gate" material="flint"/>
     </kit>
     <kit id="15">
-        <item slot="23" name="15-gate">flint</item>
+        <item slot="23" name="15-gate" material="flint"/>
     </kit>
     <kit id="16">
-        <item slot="24" name="16-gate">flint</item>
+        <item slot="24" name="16-gate" material="flint"/>
     </kit>
     <kit id="17">
-        <item slot="25" name="17-gate">flint</item>
+        <item slot="25" name="17-gate" material="flint"/>
     </kit>
     <kit id="18">
-        <item slot="26" name="18-gate">flint</item>
+        <item slot="26" name="18-gate" material="flint"/>
     </kit>
     <kit id="19">
-        <item slot="27" name="19-gate">flint</item>
+        <item slot="27" name="19-gate" material="flint"/>
     </kit>
 </kits>
 <disabledamage> 
-    <cause>lava</cause>
-    <cause>fire</cause>
+    <damage>lava</damage>
+    <damage>fire</damage>
 </disabledamage>
 <spawns>
     <default>
@@ -176,7 +164,7 @@
         </regions>
     </default>
     <spawns kit="spawn">
-        <spawn yaw="0">
+        <spawn>
             <regions>
                 <block>0.5,28,-201.5</block>
             </regions>
@@ -184,201 +172,6 @@
     </spawns>
 </spawns>
 <regions>
-    <apply block="block">
-        <region>
-            <rectangle max="oo,oo" min="-oo,-oo"/>
-        </region>
-    </apply>
-    <apply enter="gate-1" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-1"/>
-        </region>
-    </apply>
-    <apply enter="gate-2" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-2"/>
-        </region>
-    </apply>
-    <apply enter="gate-3" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-3"/>
-        </region>
-    </apply>
-    <apply enter="gate-4" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-4"/>
-        </region>
-    </apply>
-    <apply enter="gate-5" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-5"/>
-        </region>
-    </apply>
-    <apply enter="gate-6" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-6"/>
-        </region>
-    </apply>
-    <apply enter="gate-7" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-7"/>
-        </region>
-    </apply>
-    <apply enter="gate-8" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-8"/>
-        </region>
-    </apply>
-    <apply enter="gate-9" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-9"/>
-        </region>
-    </apply>
-    <apply enter="gate-10" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-10"/>
-        </region>
-    </apply>
-    <apply enter="gate-11" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-11"/>
-        </region>
-    </apply>
-    <apply enter="gate-12" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-12"/>
-        </region>
-    </apply>
-    <apply enter="gate-13" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-13"/>
-        </region>
-    </apply>
-    <apply enter="gate-14" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-14"/>
-        </region>
-    </apply>
-    <apply enter="gate-15" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-15"/>
-        </region>
-    </apply>
-    <apply enter="gate-16" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-16"/>
-        </region>
-    </apply>
-    <apply enter="gate-17" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-17"/>
-        </region>
-    </apply>
-    <apply enter="gate-18" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-18"/>
-        </region>
-    </apply>
-    <apply enter="gate-19" message="You may not go back into the pipe">
-        <region>
-            <region id="Pipe-19"/>
-        </region>
-    </apply>
-    <apply kit="1">
-        <region>
-            <region id="Pipe-1"/>
-        </region>
-    </apply>
-    <apply kit="2">
-        <region>
-            <region id="Pipe-2"/>
-        </region>
-    </apply>
-    <apply kit="3">
-        <region>
-            <region id="Pipe-3"/>
-        </region>
-    </apply>
-    <apply kit="4">
-        <region>
-            <region id="Pipe-4"/>
-        </region>
-    </apply>
-    <apply kit="5">
-        <region>
-            <region id="Pipe-5"/>
-        </region>
-    </apply>
-    <apply kit="6">
-        <region>
-            <region id="Pipe-6"/>
-        </region>
-    </apply>
-    <apply kit="7">
-        <region>
-            <region id="Pipe-7"/>
-        </region>
-    </apply>
-    <apply kit="8">
-        <region>
-            <region id="Pipe-8"/>
-        </region>
-    </apply>
-    <apply kit="9">
-        <region>
-            <region id="Pipe-9"/>
-        </region>
-    </apply>
-    <apply kit="10">
-        <region>
-            <region id="Pipe-10"/>
-        </region>
-    </apply>
-    <apply kit="11">
-        <region>
-            <region id="Pipe-11"/>
-        </region>
-    </apply>
-    <apply kit="12">
-        <region>
-            <region id="Pipe-12"/>
-        </region>
-    </apply>
-    <apply kit="13">
-        <region>
-            <region id="Pipe-13"/>
-        </region>
-    </apply>
-    <apply kit="14">
-        <region>
-            <region id="Pipe-14"/>
-        </region>
-    </apply>
-    <apply kit="15">
-        <region>
-            <region id="Pipe-15"/>
-        </region>
-    </apply>
-    <apply kit="16">
-        <region>
-            <region id="Pipe-16"/>
-        </region>
-    </apply>
-    <apply kit="17">
-        <region>
-            <region id="Pipe-17"/>
-        </region>
-    </apply>
-    <apply kit="18">
-        <region>
-            <region id="Pipe-18"/>
-        </region>
-    </apply>
-    <apply kit="19">
-        <region>
-            <region id="Pipe-19"/>
-        </region>
-    </apply>
     <cuboid id="Pipe-1" min="-5.0,22.0,-182.0" max="6.0,29.0,-170.0"/>
     <cuboid id="Pipe-2" min="-5.0,16.0,-158.0" max="6.0,23.0,-146.0"/>
     <cuboid id="Pipe-3" min="-5.0,22.0,-134.0" max="6.0,29.0,-122.0"/>
@@ -399,11 +192,50 @@
     <cuboid id="Pipe-18" min="-5.0,16.0,229.0" max="6.0,23.0,241.0"/>
     <cuboid id="Pipe-19" min="-5.0,33.0,255.0" max="6.0,39.0,267.0"/>
     <cuboid id="Pipe-20" min="-5.0,16.0,281.0" max="6.0,23.0,293.0"/>
+    <apply block="block"/>
+    <!-- Pipe Barrier -->
+    <apply region="Pipe-1" enter="gate-1" message="You may not go back into the pipe"/>
+    <apply region="Pipe-2" enter="gate-2" message="You may not go back into the pipe"/>
+    <apply region="Pipe-3" enter="gate-3" message="You may not go back into the pipe"/>
+    <apply region="Pipe-4" enter="gate-4" message="You may not go back into the pipe"/>
+    <apply region="Pipe-5" enter="gate-5" message="You may not go back into the pipe"/>
+    <apply region="Pipe-6" enter="gate-6" message="You may not go back into the pipe"/>
+    <apply region="Pipe-7" enter="gate-7" message="You may not go back into the pipe"/>
+    <apply region="Pipe-8" enter="gate-8" message="You may not go back into the pipe"/>
+    <apply region="Pipe-9" enter="gate-9" message="You may not go back into the pipe"/>
+    <apply region="Pipe-10" enter="gate-10" message="You may not go back into the pipe"/>
+    <apply region="Pipe-11" enter="gate-11" message="You may not go back into the pipe"/>
+    <apply region="Pipe-12" enter="gate-12" message="You may not go back into the pipe"/>
+    <apply region="Pipe-13" enter="gate-13" message="You may not go back into the pipe"/>
+    <apply region="Pipe-14" enter="gate-14" message="You may not go back into the pipe"/>
+    <apply region="Pipe-15" enter="gate-15" message="You may not go back into the pipe"/>
+    <apply region="Pipe-16" enter="gate-16" message="You may not go back into the pipe"/>
+    <apply region="Pipe-17" enter="gate-17" message="You may not go back into the pipe"/>
+    <apply region="Pipe-18" enter="gate-18" message="You may not go back into the pipe"/>
+    <apply region="Pipe-19" enter="gate-19" message="You may not go back into the pipe"/>
+    <!-- Kit Application -->
+    <apply region="Pipe-1" kit="1"/>
+    <apply region="Pipe-2" kit="2"/>
+    <apply region="Pipe-3" kit="3"/>
+    <apply region="Pipe-4" kit="4"/>
+    <apply region="Pipe-5" kit="5"/>
+    <apply region="Pipe-6" kit="6"/>
+    <apply region="Pipe-7" kit="7"/>
+    <apply region="Pipe-8" kit="8"/>
+    <apply region="Pipe-9" kit="9"/>
+    <apply region="Pipe-10" kit="10"/>
+    <apply region="Pipe-11" kit="11"/>
+    <apply region="Pipe-12" kit="12"/>
+    <apply region="Pipe-13" kit="13"/>
+    <apply region="Pipe-14" kit="14"/>
+    <apply region="Pipe-15" kit="15"/>
+    <apply region="Pipe-16" kit="16"/>
+    <apply region="Pipe-17" kit="17"/>
+    <apply region="Pipe-18" kit="18"/>
+    <apply region="Pipe-19" kit="19"/>
 </regions>
 <score>
     <limit>20</limit>
-    <kills>0</kills>
-    <deaths>0</deaths>
     <box points="1" silent="true">
         <region>
             <region id="Pipe-1"/>
