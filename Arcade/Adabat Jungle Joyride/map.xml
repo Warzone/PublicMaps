@@ -1,6 +1,6 @@
 <map proto="1.4.2" game="Progress">
 <name>Adabat: Jungle Joyride</name>
-<version>1.0.3</version>
+<version>1.0.7</version>
 <created>2022-06-03</created>
 <gamemode>arcade</gamemode>
 <objective>Be the first to reach the temple!</objective>
@@ -22,7 +22,7 @@
 <spawns>
     <spawn yaw="90" filter="you-just-started" kit="spawn-kit">
         <region>
-            <cylinder base="2.4,51,0" radius="2" height="1"/>
+            <cylinder base="2.5,50,0.5" radius="2" height="0"/>
         </region>
     </spawn>
     <spawn yaw="90" filter="should-spawn-at-stage-2-now" region="stage-2" kit="runner"/>
@@ -30,46 +30,45 @@
     <spawn yaw="180" filter="should-spawn-at-stage-5-now" region="stage-5" kit="runner"/>
     <default>
         <region yaw="-90">
-            <cylinder base="42.678,47,0" radius="5" height="0"/>
+            <cylinder base="42.5,47,0.5" radius="3" height="0"/>
         </region>
     </default>
 </spawns>
 <world>
-    <!-- Sets map to midnight -->
     <timeset>9000</timeset>
-</world>
-<world>
-    <timelock>on</timelock>  <!-- Defaults to on -->
+    <timelock>on</timelock>
 </world>
 <kits>
     <kit id="default-kit" force="true">
-        <effect duration="oo" amplifier="1">speed</effect>
+        <effect>speed</effect>
     </kit>
     <kit id="spawn-kit" force="true">
-        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots">"leather boots"</boots>
+        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots"/>
         <effect duration="10s">invisibility</effect>
-	<walk-speed>3</walk-speed>
+        <game-mode>adventure</game-mode>
+        <walk-speed>3</walk-speed>
     </kit>
     <kit id="runner" force="true">
-        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots">"leather boots"</boots>
-	<walk-speed>3</walk-speed>
+        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
+        <walk-speed>3</walk-speed>
     </kit>
     <kit id="boost-speed" force="true">
         <effect duration="2s">night vision</effect>
         <effect duration="2s" amplifier="3">speed</effect>
-        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots">"leather boots"</boots>
-	<walk-speed>3</walk-speed>
+        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots"/>
+        <walk-speed>3</walk-speed>
     </kit>
     <kit id="cave-speed" force="true">
-        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots">"leather boots"</boots>
-	<walk-speed>2</walk-speed>
+        <boots unbreakable="true" color="ed2202" locked="true" material="leather boots"/>
+        <walk-speed>2</walk-speed>
     </kit>
     <kit id="remove-effects" force="true">
         <effect duration="1">speed</effect>
     </kit>
 </kits>
 <regions>
-    <apply block="not-players"/>
+    <apply block="only-sand"/>
     <!-- Special rules -->
     <cuboid id="pier" min="4,51,3" max="-0,54,-2"/>
     <apply kit="spawn-kit" region="pier"/>
@@ -134,7 +133,7 @@
     </apply>
     <apply velocity="0, 1.5,-1.8">
         <region>
-            <cuboid min="16,47,-299" max="22,49,-303"/>
+            <cuboid min="18,49,-302" max="21,50,-301"/>
         </region>
     </apply>
     <apply velocity="-3.5, 1.7, 0">
@@ -157,25 +156,25 @@
             <cylinder base="-916, 62, 151" radius="2.5" height="2"/>
         </region>
     </apply>
-	<apply velocity="3.0, 2, 0">
+    <apply velocity="3.0, 2, 0">
         <region>
             <cuboid min="-33,50,-345" max="-31,52.5,-341"/>
         </region>
     </apply>
-	<apply velocity="0, 1.8, -2.9">
+    <apply velocity="0, 1.8, -2.9">
         <region>
-            <cuboid min="-1,48,-344" max="2,50,-346"/>
+            <cuboid min="-1,50,-344" max="2,51,-346"/>
         </region>
     </apply>
     <!-- New stage destinations -->
     <point id="stage-1">1,50,0</point>
-	<point id="stage-1c">-126,50,2</point>
+    <point id="stage-1c">-126,50,2</point>
     <point id="stage-2">-932,49,32</point>
     <point id="stage-3">-998,80,361</point>
     <point id="stage-4">24,49,-262</point>
-	<point id="stage-4.5">19,49,-193</point>
+    <point id="stage-4.5">19,49,-193</point>
     <point id="stage-5">-689,62,302</point>
-	<point id="stage-6">-772,63,331</point>
+    <point id="stage-6">-772,63,331</point>
     <point id="stage-7">-891,48,357</point>
     <!-- Portals/score boxes at end of stage -->
     <cuboid id="end-stage-1" min="-830,48,4" max="-831,52,-9"/>
@@ -186,7 +185,7 @@
     <cuboid id="end-stage-6" min="-693,62,304" max="-694,63,299"/>
     <cuboid id="end-stage-7" min="-891,48,357" max="-905,58,302"/>
     <cuboid id="ocean1" min="54,44,-77" max="-125,46,76"/>
-	<cuboid id="ocean1.5" min="-126,46,76" max="-812,43,-76"/>
+    <cuboid id="ocean1.5" min="-126,46,76" max="-812,43,-76"/>
     <cuboid id="valley1" min="-883,9,61" max="-996,4,199"/>
     <cuboid id="lavapits" min="-1025,41,146" max="-994,44,102"/>
     <cuboid id="ocean2" min="-56,47,-284" max="63,44,-432"/>
@@ -198,9 +197,12 @@
     <apply region="end-stage-7" message="You've won! A 30s countdown began as soon as the first player completed. Stick around until then!"/>
 </regions>
 <filters>
-    <not id="not-players">
-        <cause>player</cause>
-    </not>
+    <all id="only-sand">
+        <not>
+            <cause>player</cause>
+        </not>
+        <material>sand</material>
+    </all>
     <score id="you-just-started">0</score>
     <score id="should-spawn-at-stage-2-now">1</score>
     <score id="should-spawn-at-stage-4-now">2</score>
@@ -211,7 +213,7 @@
     <portal destination="stage-4.5" region="end-stage-3" yaw="@-180"/>
     <portal destination="stage-5" region="end-stage-5" yaw="@-90"/>
     <portal destination="stage-1" region="ocean1" yaw="@90"/>
-	<portal destination="stage-1c" region="ocean1.5" yaw="@90"/>
+    <portal destination="stage-1c" region="ocean1.5" yaw="@90"/>
     <portal destination="stage-2" region="valley1" yaw="@0"/>
     <portal destination="stage-2" region="lavapits" yaw="@0"/>
     <portal destination="stage-4" region="ocean2" yaw="@-180"/>
@@ -220,12 +222,12 @@
     <portal destination="stage-5" region="lavapool3" yaw="@-90"/>
     <portal destination="stage-6" region="valley2" yaw="@90"/>
 </portals> 
-<score> <!-- Getting the 4th triggers a 30s capture of a hill to give the final point -->
+<score> <!-- Getting the 4th triggers a 30s capture of a hill to give the final point (hasn't been true in a long time) -->
     <limit>4</limit>
-    <box points="1" silent="true" region="end-stage-1"/>
-    <box points="1" silent="true" region="end-stage-3"/>
-    <box points="1" silent="true" region="end-stage-5"/>
-    <box points="1" silent="true" region="end-stage-7"/>
+    <box points="1" silent="true" region="end-stage-1" filter="you-just-started"/>
+    <box points="1" silent="true" region="end-stage-3" filter="should-spawn-at-stage-2-now"/>
+    <box points="1" silent="true" region="end-stage-5" filter="should-spawn-at-stage-4-now"/>
+    <box points="1" silent="true" region="end-stage-7" filter="should-spawn-at-stage-5-now"/>
 </score>
 <control-points>
     <control-point name="Final 30s" show="false" permanent="true" capture-time="30s" points="1" required="false" recovery="0" capture="end-stage-7">
@@ -258,6 +260,6 @@
     <item>leather boots</item>
     <item>sapling</item>
     <item>sand</item>
+    <item>stone plate</item>
 </itemremove>
-<timelock>on</timelock>
 </map>
