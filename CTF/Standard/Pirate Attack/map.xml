@@ -1,11 +1,11 @@
 <map proto="1.4.2">
 <name>Pirate Attack</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Capture the flag 3 times.</objective>
+<gamemode>ctf</gamemode>
 <authors>
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
-<gamemode>ctf</gamemode>
 <teams>
     <team id="red" color="dark red" max="36" max-overfill="40">Red</team>
     <team id="blue" color="blue" max="36" max-overfill="40">Blue</team>
@@ -33,8 +33,8 @@
             <game-mode>adventure</game-mode>
             <item slot="0" name="`lSharpened Sword" material="iron sword"/>
             <item slot="1" name="`lSniper Riffle" projectile="sniper" material="armor stand">
-                <attribute slot="slot.weapon.mainhand" operation="add" amount="-4">generic.movementSpeed</attribute>
-                <attribute slot="slot.weapon.offhand" operation="add" amount="-4">generic.movementSpeed</attribute>
+                <!-- <attribute slot="slot.weapon.mainhand" operation="add" amount="-4">generic.movementSpeed</attribute>
+                <attribute slot="slot.weapon.offhand" operation="add" amount="-4">generic.movementSpeed</attribute> -->
             </item>
             <item slot="2" amount="1" material="golden apple"/>
             <helmet material="iron helmet"/>
@@ -136,10 +136,10 @@
     </not>
 </filters>
 <flags>
-    <flag id="red-flag" name="Red Flag" color="red" owner="red" carry-message="Bring the Flag back to the `1Blue Beacon!">
+    <flag id="red-flag" name="Red Flag" color="red" owner="red" carry-message="Bring the Flag back to the `1Blue Beacon`r!">
         <post respawn-time="20" pickup-filter="only-blue">-29.5,37,41.5</post>
     </flag>
-    <flag id="blue-flag" name="Blue Flag" color="blue" owner="blue" carry-message="Bring the Flag back to the `4Red Beacon!">
+    <flag id="blue-flag" name="Blue Flag" color="blue" owner="blue" carry-message="Bring the Flag back to the `4Red Beacon`r!">
         <post respawn-time="20" pickup-filter="only-red">-61.5,37,-118.5</post>
     </flag>
     <flags points="1">
