@@ -1,7 +1,7 @@
 <map proto="1.4.2" game="Flag Assault">
 <name>Royal Rumble II</name>
-<version>2.0.5</version>
-<objective>Score your flag in the enemy hoops, Most points wins!</objective>
+<version>2.0.7</version>
+<objective>Score your flag in the enemy hoops, most points wins!</objective>
 <created>2022-02-13</created>
 <authors>
     <author uuid="1aad55f7-2dea-4f22-85ca-ad9de3a78609"/> <!-- Technodono -->
@@ -12,7 +12,7 @@
 <gamemode>ctf</gamemode>
 <!-- Tips -->
 <broadcasts>
-    <tip after="1s" every="2m">Remeber to defend your teams rings from the enemy flag carrier!</tip>
+    <tip after="1s" every="2m">Remember to defend your teams rings from the enemy flag carrier!</tip>
 </broadcasts>
 <!-- Teams and Kits -->
 <teams>
@@ -28,8 +28,10 @@
         <item slot="8" amount="12" material="arrow"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <boots unbreakable="true" material="chainmail boots"/>
-		<potion duration="2" amplifier="10">regeneration</potion>
-		<potion duration="2" amplifier="10">damage_resistance</potion>
+        <effect duration="2" amplifier="10">regeneration</effect>
+        <effect duration="2" amplifier="10">damage_resistance</effect>
+        <!-- Gamemode -->
+        <game-mode>adventure</game-mode>
     </kit>
     <kit id="red-kit" parents="spawn">
         <helmet color="ff0000" unbreakable="true" material="leather helmet"/>
@@ -142,15 +144,13 @@
     <item>golden apple</item>
     <item>firework charge</item>
 </itemremove>
+<!-- Disable fall damage -->
 <disabledamage>
-    <!-- Disable fall damage -->
     <damage>fall</damage>
 </disabledamage>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<!-- Gamemode -->
-<game-mode>adventure</game-mode>
 <!-- Keep it at night -->
 <timelock>on</timelock>
 <!-- Scoring and Flag settings -->
