@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Ender Hill</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Craft and capture all three wools before the enemy team!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -98,16 +98,18 @@
     <point id="string-spawn">32.5,100,-4.5</point>
     <cylinder id="string-island" radius="10" base="32,100,-4" height="4"/>
     <apply block="never">
-        <negative>
-            <union>
-                <block>28,171,1</block>
-                <block>26,171,-4</block>
-                <block>28,171,-9</block>
-                <block>36,171,1</block>
-                <block>38,171,-4</block>
-                <block>36,171,-9</block>
-            </union>
-        </negative>
+        <region>
+            <negative>
+                <union>
+                    <block>28,171,1</block>
+                    <block>26,171,-4</block>
+                    <block>28,171,-9</block>
+                    <block>36,171,1</block>
+                    <block>38,171,-4</block>
+                    <block>36,171,-9</block>
+                </union>
+            </negative>
+        </region>
     </apply>
 <!-- Regions for potion effects -->
     <apply kit="absorption">
@@ -196,9 +198,11 @@
         </monument>
     </wool>
 </wools>
-<kill-reward>
-    <item>golden apple</item>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
