@@ -1,88 +1,72 @@
-<map proto="1.3.6">
-<name>Pride</name> 
-<version>1.0.1</version> 
-<objective>Elimate The Enemy Team Before Time Runs Out!</objective>
-<gamemode>rage</gamemode>
+<map proto="1.4.2">
+<name>Pride</name>
+<version>1.0.3</version>
+<objective>Eliminate the enemy team before time runs out!</objective>
 <gamemode>arcade</gamemode>
-<gamemode>blitz</gamemode>
+<gamemode>br</gamemode>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
-    <!--  AtlasGames  -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
 <teams>
-   <team color="red" max="25" max-overfill="30">Red</team>
-   <team color="blue" max="25" max-overfill="30">Blue</team>
+    <team id="red" color="red" max="25" max-overfill="30">Red</team>
+    <team id="blue" color="blue" max="25" max-overfill="30">Blue</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0" enchantment="damage all:10">iron sword</item>
-        <item slot="1" enchantment="arrow damage:10">bow</item>
-        <item slot="2">iron axe</item>
-        <item slot="4" amount="16">bread</item>
-        <item slot="3" amount="16">wood</item>
-        <item slot="8">arrow</item>
-        <potion duration="5" amplifier="25">heal</potion>
-        <potion duration="5" amplifier="25">damage resistance</potion>
-        <potion duration="oo" amplifier="1">speed</potion>
-    </kit>
-    <kit name="red" parents="spawn">
-        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
-        <boots unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
-        <boots color="334CB2" unbreakable="true">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" enchantment="damage all:10" material="iron sword"/>
+        <item slot="1" enchantment="arrow damage:10" material="bow"/>
+        <item slot="2" material="iron axe"/>
+        <item slot="4" amount="16" material="bread"/>
+        <item slot="3" amount="16" material="wood"/>
+        <item slot="8" material="arrow"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="25">heal</effect>
+        <effect duration="5" amplifier="25">damage resistance</effect>
+        <effect>speed</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red">
+    <spawn team="red" kit="spawn-kit">
         <regions yaw="90">
-            <block>48,15,18</block>
+            <point>48.5,15,18.5</point>
         </regions>
     </spawn>
-    <spawn team="blue" kit="blue">
+    <spawn team="blue" kit="spawn-kit">
         <regions yaw="-90">
-            <block>-46,15,-16</block>
+            <point>-45.5,15,-15.5</point>
         </regions>
     </spawn>
     <default>
         <regions yaw="90">
-            <block>1,65,6</block>
+            <point>1.5,65,6.5</point>
         </regions>
     </default>
 </spawns>
 <filters>
-	<filter name="allow-some" parents="deny-players">
-		<allow>
-			<block>wood</block>
-		</allow>
-	</filter>
+    <material id="allow-some">wood</material>
 </filters>
 <regions>
-    <rectangle name="spawn1" min="-52,-22" max="-39,-8"/>
-    <rectangle name="spawn2" min="40,11" max="54,25"/>
-	<cylinder name="playable" base="0,10,0" radius="47" height="246"/>
-    <union name="map">
-        <region name="playable"/>
-        <region name="spawn1"/>
-        <region name="spawn2"/>
+    <union id="map">
+        <cylinder id="playable" base="0,10,0" radius="47" height="246"/>
+        <rectangle id="spawn1" min="-52,-22" max="-39,-8"/>
+        <rectangle id="spawn2" min="40,11" max="54,25"/>
     </union>
-    <apply block="allow-some">
-		<region name="playable"/>
-	</apply>
-	<apply block="deny-all" enter="deny-players" message="You may not leave or modify map boundaries and spawns!">
-		<negative>
-			<region name="playable"/>
-		</negative>
-	</apply>
+    <apply region="playable" block="allow-some" message="You can only interact with oak wood planks!"/>
+    <apply block="never" enter="never" message="You may not leave or modify map boundaries and spawns!">
+        <region>
+            <negative id="not-playable">
+                <region id="playable"/>
+            </negative>
+        </region>
+    </apply>
 </regions>
-<rage/>
+<time>4m</time>
 <blitz>
-    <time>4m</time>
-    <title>Blitz: Rage</title>
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
+<rage/>
 <itemremove>
     <item>bread</item>
     <item>iron sword</item>
@@ -94,10 +78,13 @@
     <item>nether star</item>
     <item>wood</item>
 </itemremove>
-<killreward>
-    <item>arrow</item>
-    <item>nether star</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item material="nether star"/>
+    </kill-reward>
+</kill-rewards>
 <timelock>on</timelock>
 <maxbuildheight>45</maxbuildheight>
+<respawn auto="true"/>
 </map>
