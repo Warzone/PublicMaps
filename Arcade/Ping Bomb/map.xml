@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Ping Bomb</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Blow up the enemy side before they blow up yours!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -9,43 +9,32 @@
     <author uuid="17feaec5-9616-49d8-a507-83026050dd8f" contribution="Design"/> <!-- ShinyDialga -->
     <author uuid="453003c1-d3a2-4b0a-b491-1205e503de90" contribution="Idea"/> <!-- majjus_ -->
 </authors>
-<time>5m</time>
 <teams>
     <team id="red" color="dark red" max="5" max-overfill="6">Red</team>
     <team id="blue" color="blue" max="5" max-overfill="6">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn" parents="obs">
         <item slot="0" amount="9" material="ender stone"/>
-        <potion duration="oo" amplifier="1">night vision</potion>
-        <potion duration="oo" amplifier="-3">health boost</potion>
+        <effect duration="oo" amplifier="-3">health boost</effect>
     </kit>
     <kit id="obs">
-        <potion duration="oo" amplifier="1">night vision</potion>
+        <effect>night vision</effect>
     </kit>
 </kits>
-<blitz>
-    <lives>1</lives>
-</blitz>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<gamerules>
-    <naturalRegeneration>false</naturalRegeneration>
-</gamerules>
 <spawns>
-    <spawn team="red" kit="spawn">
-        <regions yaw="180">
+    <spawn team="red" kit="spawn" yaw="180">
+        <regions>
             <cuboid min="-9,31,32" max="10,31,32"/>
         </regions>
     </spawn>
     <spawn team="blue" kit="spawn">
-        <regions yaw="0">
+        <regions>
             <cuboid min="-9,31,-32" max="10,31,-32"/>
         </regions>
     </spawn>
-    <default kit="obs">
-        <regions yaw="90">
+    <default kit="obs" yaw="90">
+        <regions>
             <cuboid min="23,55,-5" max="23,55,5"/>
         </regions>
     </default>
@@ -54,19 +43,26 @@
     <material id="only-ender-stone">ender stone</material>
 </filters>
 <regions>
-    <apply block="never" message="Don't build outside of the map">
-        <region>
-            <negative>
-                <cuboid name="red-region" min="12,24,21" max="-11,36,36"/>
-                <cuboid name="blue-region" min="12,24,-21" max="-11,36,-35"/>
-            </negative>
-        </region>
-    </apply> 
+    <negative id="outside-map">
+        <cuboid id="red-region" min="12,24,21" max="-11,36,36"/>
+        <cuboid id="blue-region" min="12,24,-21" max="-11,36,-35"/>
+    </negative>
+    <apply region="outside-map" block="never" message="Don't build outside of the map"/>
     <apply block="only-ender-stone" message="You may not break the map!"/>
 </regions>
+<time>5m</time>
+<blitz>
+    <lives>1</lives>
+</blitz>
 <kill-rewards>
     <kill-reward>
         <item material="diamond"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
 </map>
