@@ -1,131 +1,70 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Artholis</name>
-<version>1.0.3</version>
+<version>1.0.5</version>
 <objective>Capture the opposing team's flags!</objective>
 <gamemode>ctf</gamemode>
 <authors>
     <author contribution="Original map" uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
     <author contribution="XML coding and packaging, CTF gamemode transition, various map changes" uuid="10c1b730-49b9-4f75-9212-91facc371477"/> <!-- Qixit -->
 </authors>
+<respawn delay="0.1s" blackout="false" spectate="false"/>
+<maxbuildheight>22</maxbuildheight>
 <teams>
-	<team id="blue-team" color="blue" max="32" max-overfill="35">Blue</team>
-	<team id="red-team" color="red" max="32" max-ovefill="35">Red</team>
+    <team id="blue-team" color="blue" max="32" max-overfill="35">Blue</team>
+    <team id="red-team" color="red" max="32" max-overfill="35">Red</team>
 </teams>
 <spawns>
-    <spawn team="red-team" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions yaw="-180">
-            <block>-244.5,6,247.5</block>
+            <point>-244.5,4.5,247.5</point>
         </regions>
     </spawn>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions yaw="0"> 
-            <block>-244.5,6,67.5</block>
+            <point>-244.5,4.5,67.5</point>
         </regions>
     </spawn>
     <default>
         <regions yaw="180">
-            <block>-244.486,40,157.559</block>
+            <point>-244.5,40,157.5</point>
         </regions>
     </default>
 </spawns>
 <kits>
-	<kit id="spawn" force="true">
-		<item slot="0" unbreakable="true">stone sword</item>
-		<item slot="1" unbreakable="true">bow</item>
-		<item slot="2" unbreakable="true" enchantment="dig speed:2">iron pickaxe</item>
-		<item slot="3" amount="8">sandstone</item>
-		<item slot="4" amount="4" damage="2">log</item>
-		<item slot="7" amount="2">golden apple</item>
-		<item slot="8" amount="64">cooked chicken</item>
-		<item slot="28" amount="32">arrow</item>
-		<potion duration="7" amplifier="8">heal</potion>
-        <potion duration="10" amplifier="2">speed</potion>
-        <potion duration="0.5" amplifier="1">night vision</potion>
-		<chestplate unbreakable="true" enchantment="depth strider:1">gold chestplate</chestplate>
-	</kit>
-	<kit id="red-kit" parents="spawn">
-		<helmet unbreakable="true" color="993333">leather helmet</helmet>
-		<leggings unbreakable="true" color="993333">leather leggings</leggings>
-		<boots unbreakable="true" color="993333">leather boots</boots>
-	</kit>
-	<kit id="blue-kit" parents="spawn">
-		<helmet unbreakable="true" color="334CB2">leather helmet</helmet>
-		<leggings unbreakable="true" color="334CB2">leather leggings</leggings>
-		<boots unbreakable="true" color="334CB2">leather boots</boots>
-	</kit>
-	<kit id="flag" force="true">
-        <potion duration="oo" amplifier="-3">health boost</potion>
-        <potion duration="oo" amplifier="1">slow</potion>
-        <potion duration="3" amplifier="10">regeneration</potion>
-        <chestplate unbreakable="true" enchantment="depth strider:-5">diamond chestplate</chestplate>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed:2" material="iron pickaxe"/>
+        <item slot="3" amount="8" material="sandstone"/>
+        <item slot="4" amount="4" damage="2" material="log"/>
+        <item slot="7" amount="2" material="golden apple"/>
+        <item slot="8" amount="64" material="cooked chicken"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <effect duration="7" amplifier="8">heal</effect>
+        <effect duration="10" amplifier="2">speed</effect>
+        <effect duration="0.5">night vision</effect>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" enchantment="depth strider" material="gold chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+    <kit id="flag" force="true">
+        <effect duration="oo" amplifier="-3">health boost</effect>
+        <effect>slow</effect>
+        <effect duration="3" amplifier="10">regeneration</effect>
+        <chestplate unbreakable="true" enchantment="depth strider:-5" material="diamond chestplate"/>
     </kit>
     <kit id="renew" force="true">
-        <potion duration="1" amplifier="10">health boost</potion>
-        <potion duration="1" amplifier="0">slow</potion>
-        <potion duration="5" amplifier="2">regeneration</potion>
-        <chestplate unbreakable="true" enchantment="depth strider:3">iron chestplate</chestplate>
+        <effect duration="1" amplifier="10">health boost</effect>
+        <effect duration="1" amplifier="0">slow</effect>
+        <effect duration="5" amplifier="2">regeneration</effect>
+        <chestplate unbreakable="true" enchantment="depth strider:3" material="iron chestplate"/>
     </kit>
 </kits>
-<respawn delay="0.1s" blackout="false" spectate="false"/>
-<killreward>
-	<item amount="16">arrow</item>
-	<item amount="3" damage="2">log</item>
-	<item amount="2">golden apple</item>
-	<potion duration="3" amplifier="1">speed</potion>
-    <potion duration="0.5" amplifier="1">night vision</potion>
-</killreward>
-<kill-reward>
-    <filter>
-        <kill-streak count="2"/>
-    </filter>
-    <item material="tnt"/>
-</kill-reward>
-<tnt>
-    <instantignite>on</instantignite>
-    <fuse>4s</fuse>
-    <power>3</power>
-</tnt>
-<disabledamage>
-    <damage ally="false" self="false" enemy="true" other="true">block explosion</damage>
-</disabledamage>
-<itemremove>
-	<item>cooked chicken</item>
-    <item>diamond chestplate</item>
-	<item>arrow</item>
-	<item>wood button</item>
-	<item>cauldron item</item>
-	<item>note block</item>
-	<item>seeds</item>
-	<item>flower pot</item>
-	<item>gold chestplate</item>
-	<item>leather helmet</item>
-	<item>leather leggings</item>
-	<item>leather boots</item>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>dirt</item>
-    <item>sand</item>
-    <item>wood button</item>
-    <item>chest</item>
-    <item>iron axe</item>
-    <item>iron pickaxe</item>
-    <item damage="2">log</item>
-    <item>cobble wall</item>
-    <item>nether fence</item>
-    <item>flower pot</item>
-    <item>sapling</item>
-    <item>string</item>
-    <item>piston base</item>
-    <item>glowstone dust</item>
-    <item>sandstone</item>
-    <item>flower pot</item>
-    <item damage="2">wood</item>
-</itemremove>
-<maxbuildheight>22</maxbuildheight>
 <filters>
-	<team id="only-red">red-team</team>
+    <team id="only-red">red-team</team>
     <team id="only-blue">blue-team</team>
-	<not id="deny-void">
+    <not id="deny-void">
         <void />
     </not>
     <deny id="water-placement">
@@ -135,10 +74,12 @@
 <regions>
     <apply block="water-placement" message="You may not place water here!">
         <region>
-            <rectangle id="left-red-flag-area" min="-282,253" max="-303,232"/>
-            <rectangle id="right-red-flag-area" min="-207,232" max="-186,253"/>
-            <rectangle id="left-blue-flag-area" min="-207,83" max="-186,62"/>
-            <rectangle id="right-blue-flag-area" min="-282,62" max="-303,83"/>
+            <union id="flag-area">
+                <rectangle id="left-red-flag-area" min="-282,253" max="-303,232"/>
+                <rectangle id="right-red-flag-area" min="-207,232" max="-186,253"/>
+                <rectangle id="left-blue-flag-area" min="-207,83" max="-186,62"/>
+                <rectangle id="right-blue-flag-area" min="-282,62" max="-303,83"/>
+            </union>
         </region>
     </apply>
     <apply block="never">
@@ -151,9 +92,7 @@
             <cylinder base="-196.5,0,242.5" radius="2" height="oo"/>
         </region>
     </apply>
-    <apply block-physics="never">
-        <region id="flag-area"/>
-    </apply>
+    <apply region="flag-area" block-physics="never"/>
     <rectangle id="red-spawn" min="-242,245" max="-247,250"/>
     <cuboid id="red-net" min="-242,4,245" max="-247,8,250"/>
     <rectangle id="blue-spawn" min="-242,65" max="-247,70"/>
@@ -199,24 +138,24 @@
     </structure>
     <structures offset="0,-6,0">
         <dynamic structure="red-left-flag-structure">
-            <filter>
+            <trigger>
                 <completed>left-red-flag</completed>
-            </filter>
+            </trigger>
         </dynamic>
         <dynamic structure="red-right-flag-structure">
-            <filter>
+            <trigger>
                 <completed>right-red-flag</completed>
-            </filter>
+            </trigger>
         </dynamic>
         <dynamic structure="blue-left-flag-structure">
-            <filter>
+            <trigger>
                 <completed>left-blue-flag</completed>
-            </filter>
+            </trigger>
         </dynamic>
         <dynamic structure="blue-right-flag-structure">
-            <filter>
+            <trigger>
                 <completed>right-blue-flag</completed>
-            </filter>
+            </trigger>
         </dynamic>
     </structures>
 </structures>
@@ -225,7 +164,7 @@
 </crafting>
 <renewables>
     <renewable interval="400" grow="false" particles="true" sound="true" avoid-entities="true">
-		<region>
+        <region>
             <rectangle id="iron-deposit-1" min="-247,210" max="-242,205"/>
             <rectangle id="iron-deposit-2" min="-248,111" max="-241,104"/>
         </region>
@@ -320,4 +259,62 @@
         </detect>
     </proximity-alarm>
 </proximity-alarms>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" material="arrow"/>
+        <item amount="3" damage="2" material="log"/>
+        <item amount="2" material="golden apple"/>
+        <kit>
+            <effect duration="3">speed</effect>
+            <effect duration="0.5">night vision</effect>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<tnt>
+    <instantignite>on</instantignite>
+    <fuse>4s</fuse>
+    <power>3</power>
+</tnt>
+<disabledamage>
+    <damage ally="false" self="false" enemy="true" other="true">block explosion</damage>
+</disabledamage>
+<itemremove>
+    <item>cooked chicken</item>
+    <item>diamond chestplate</item>
+    <item>arrow</item>
+    <item>wood button</item>
+    <item>cauldron item</item>
+    <item>note block</item>
+    <item>seeds</item>
+    <item>flower pot</item>
+    <item>gold chestplate</item>
+    <item>leather helmet</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>dirt</item>
+    <item>sand</item>
+    <item>wood button</item>
+    <item>chest</item>
+    <item>iron axe</item>
+    <item>iron pickaxe</item>
+    <item>log:2</item>
+    <item>cobble wall</item>
+    <item>nether fence</item>
+    <item>flower pot</item>
+    <item>sapling</item>
+    <item>string</item>
+    <item>piston base</item>
+    <item>glowstone dust</item>
+    <item>sandstone</item>
+    <item>flower pot</item>
+    <item>wood:2</item>
+</itemremove>
 </map>
