@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>The Last Sunset</name>
-<version>1.4.1</version>
+<version>1.4.3</version>
 <objective>Capture both enemy flags two times!</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -32,10 +32,10 @@
         <item slot="3" unbreakable="true" material="iron axe">
             <enchantment>efficiency</enchantment>
         </item>
-        <item slot="4" material="iron spade"/>
-        <item slot="5" amount="64" material="wood"/>
-        <item slot="6" amount="32" material="glass"/>
-        <item slot="7" amount="32" material="vine"/>
+        <item slot="30" material="iron spade"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" amount="32" material="vine"/>
         <item slot="8" material="golden apple"/>
         <item slot="35" material="water bucket"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
@@ -47,18 +47,38 @@
 </kits>
 <spawns>
     <default kit="default-kit">
-        <region yaw="0">
+        <region>
             <cylinder base="-887.5,47,-452.5" radius="1" height="0"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue" kit="spawn-kit" filter="face-neither">
         <region yaw="90">
-            <point>-816.5,4,-393.5</point>
+            <block>-817,4,-394</block>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red" kit="spawn-kit" filter="face-neither">
         <region yaw="-90">
-            <point>-958.5,4,-393.5</point>
+            <block>-959,4,-394</block>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" filter="only-face-north">
+        <region yaw="180">
+            <block>-817,4,-394</block>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" filter="only-face-north">
+        <region yaw="180">
+            <block>-959,4,-394</block>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" filter="only-face-south">
+        <region yaw="0">
+            <block>-817,4,-394</block>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" filter="only-face-south">
+        <region>
+            <block>-959,4,-394</block>
         </region>
     </spawn>
 </spawns>
@@ -67,6 +87,18 @@
     <team id="only-red">red</team>
     <not id="not-spawner">
         <material>mob spawner</material>
+    </not>
+    <not id="face-neither">
+        <any>
+            <all id="only-face-north">
+                <flag-captured>south-blue-flag</flag-captured>
+                <flag-captured>south-red-flag</flag-captured>
+            </all>
+            <all id="only-face-south">
+                <flag-captured>north-blue-flag</flag-captured>
+                <flag-captured>north-red-flag</flag-captured>
+            </all>
+        </any>
     </not>
 </filters>
 <regions>
@@ -133,7 +165,6 @@
         <block>-816.5,5,-411.5</block>
         <block>-816.5,5,-375.5</block>
     </union>
-    <!-- Applied -->
     <apply block="never" message="You may not modify the void area!" region="void-regions"/>
     <apply block="never" message="Don't destroy the signs!" region="signs"/>
     <apply block="never" message="You many modify the area above the beacons!" region="beacons"/>
@@ -141,7 +172,7 @@
     <apply block="never" message="You may not modify the area around the flags!" region="all-flag-posts-y"/>
     <apply block="not-spawner" message="You may not destroy the spawner!"/>
 </regions>
-<flags permanent="true" drop-on-water="false">
+<flags drop-on-water="false">
     <flag id="north-blue-flag" name="North Blue Flag" owner="blue" color="blue">
         <carry-message>
             You have the flag! Return it to the island `6`lbehind spawn
@@ -189,26 +220,13 @@
 <blockdrops>
     <rule>
         <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>vine</material>
-        </filter>
-        <drops>
-            <item chance="0" material="vine"/>
         </drops>
     </rule>
 </blockdrops>
@@ -220,13 +238,15 @@
     <item>bucket</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="16" material="wood"/>
-    <item amount="8" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="wood"/>
+        <item amount="8" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>20</maxbuildheight>
-<respawn delay="4s" auto="true"/>
+<respawn delay="3s"/>
 <hunger>
     <depletion>off</depletion>
 </hunger>
