@@ -1,61 +1,28 @@
 <map proto="1.4.2">
 <name>Eggy Soldiers</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <objective>Get the most points after 2 minutes!</objective>
 <gamemode>arcade</gamemode>
 <authors>
     <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" /> <!-- Diamyx -->
 </authors>
-<score>
-    <kills>1</kills>
-    <deaths>1</deaths>
-</score>
-<time>2m</time>
-<respawn delay="1.5s" spectate="true"/>
+<players min="2" max="8" show-name-tags="false" colors="true"/>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit" parents="obs">
         <item slot="0" projectile="gun" name="`eEggun" material="gold hoe"/>
         <helmet color="999999" unbreakable="true" material="leather helmet"/>
         <chestplate color="999999" unbreakable="true" material="leather chestplate"/>
         <leggings color="999999" unbreakable="true" material="leather leggings"/>
         <boots color="999999" unbreakable="true" material="leather boots"/>
-        <potion duration="oo">night vision</potion>
-        <potion duration="2" amplifier="25">damage resistance</potion>
-        <potion duration="2" amplifier="25">heal</potion>
+        <effect duration="2" amplifier="25">damage resistance</effect>
+        <effect duration="2" amplifier="25">heal</effect>
     </kit>
     <kit id="obs">
-        <potion duration="oo" amplifier="1">night vision</potion>
+        <effect>night vision</effect>
     </kit>
 </kits>
-<projectiles>
-    <projectile id="gun" name="Eggun" projectile="Egg" velocity="2.3" damage="10" throwable="false" click="both" cooldown="0.05"/>
-</projectiles>
-<kill-rewards>
-    <kill-reward>
-        <kit force="true">
-            <potion duration="3" amplifier="5">regeneration</potion>
-        </kit>
-    </kill-reward>
-    <kill-reward>
-        <kit force="true">
-            <item slot="1" name="`4Rotten Egg" grenade="true" grenade-power="3" grenade-destroy="false" material="egg"/>
-        </kit>
-        <filter>
-            <kill-streak count="2" />
-        </filter>
-    </kill-reward>
-    <kill-reward>
-        <kit force="true">
-            <potion duration="oo" amplifier="2">health boost</potion>
-            <potion duration="2" amplfier="3">heal</potion>
-        </kit>
-        <filter>
-            <kill-streak count="5"/>
-        </filter>
-    </kill-reward>
-</kill-rewards>
 <spawns>
-    <spawns kit="spawn" spread="true">
+    <spawns kit="spawn-kit" spread="true">
         <spawn>
             <regions>
                 <point yaw="180">-18.5,5,6.5</point>
@@ -78,12 +45,12 @@
         </spawn>
         <spawn>
             <regions>
-                <point yaw="0">-27.5,6,-27.5</point>
+                <point>-27.5,6,-27.5</point>
             </regions>
         </spawn>
         <spawn>
             <regions>
-                <point yaw="0">-40.5,6,-27.5</point>
+                <point>-40.5,6,-27.5</point>
             </regions>
         </spawn>
         <spawn>
@@ -135,20 +102,21 @@
     </spawns>
     <default kit="obs">
         <regions>
-            <point yaw="0">-25.5,4,3</point>
+            <point>-25.5,4,3</point>
         </regions>
     </default>
 </spawns>
 <regions>
     <apply block="never"/>
 </regions>
-<players min="2" max="8" show-name-tags="false" colors="true"/>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
+<score>
+    <kills>1</kills>
+    <deaths>1</deaths>
+</score>
+<time>2m</time>
+<projectiles>
+    <projectile id="gun" name="Eggun" projectile="Egg" velocity="2.3" damage="10" throwable="false" click="both" cooldown="0.05"/>
+</projectiles>
 <itemremove>
     <item>gold hoe</item>
     <item>leather helmet</item>
@@ -156,4 +124,35 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <kit force="true">
+            <potion duration="3" amplifier="5">regeneration</potion>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <kit force="true">
+            <item slot="1" name="`4Rotten Egg" grenade="true" grenade-power="3" grenade-destroy="false" material="egg"/>
+        </kit>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+    </kill-reward>
+    <kill-reward>
+        <kit force="true">
+            <potion duration="oo" amplifier="2">health boost</potion>
+            <potion duration="2" amplifier="3">heal</potion>
+        </kit>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<respawn delay="1.5s" spectate="true"/>
 </map>
