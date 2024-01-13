@@ -4,12 +4,12 @@
 <name>Donut Spleef</name>
 <!-- マップバージョン -->
 <version>1.0.5</version>
-<created>2020-12-21</created>
 <!-- マップの説明 -->
 <objective>Spleef everyone on the enemy team!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <!-- ゲームルール -->
+<created>2020-12-21</created>
 <rules>
     <rule>All team griefing rules are void.</rule>
 </rules>
@@ -41,7 +41,7 @@
 <!-- アイテムの削除 -->
 <itemremove>
     <item>diamond spade</item>
-    <irem>snow ball</irem>
+    <item>snow ball</item>
     <item>snow block</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
@@ -71,20 +71,17 @@
 </spawns>
 <!-- フィルター -->
 <filters>
-    <any id="spleefable">
+    <any id="only-some">
         <material>gravel</material>
         <material>snow block</material>
         <!-- podzol -->
         <material>dirt:2</material>
         <material>mycel</material>
     </any>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
 </filters>
 <!-- リージョン -->
 <regions>
-    <apply block-break="spleefable" block-place="deny-players" message="You can only break snow and dirt!"/>
+    <apply block-break="only-some" message="You can only break snow and dirt!"/>
 </regions>
 <!-- ゲームモード -->
 <blitz>
@@ -153,7 +150,4 @@
         </replace-filter>
     </renewable>
 </renewables>
-<crafting>
-    <disable>snow block</disable>
-</crafting>
 </map>
