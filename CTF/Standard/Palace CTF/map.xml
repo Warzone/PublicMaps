@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Palace CTF</name>
-<version>1.2</version>
+<version>1.2.2</version>
 <objective>Have the most flag captures in 12 minutes!</objective>
 <gamemode>ctf</gamemode>
 <time result="score" overtime="1m" max-overtime="2m">12m</time>
@@ -16,8 +16,8 @@
     <contributor uuid="337ae91f-960b-4562-906d-f52f9e56d392" /> <!-- Aalhond -->
 </contributors>
 <teams>
-    <team id="red" color="dark red" max="20">Red</team>
-    <team id="yellow" color="yellow" max="20">Yellow</team>
+    <team id="red" color="dark red" max="24">Red</team>
+    <team id="yellow" color="yellow" max="24">Yellow</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -25,28 +25,27 @@
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" material="golden apple"/>
-        <item slot="8" amount="20" material="arrow"/>
+        <item slot="8" amount="12" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">projectile_protection</enchantment>
+            <enchantment level="3">projectile_protection</enchantment>
         </leggings>
         <boots unbreakable="true" material="iron boots">
             <enchantment level="2">feather_falling</enchantment>
         </boots>
-        <effect duration="2">heal</effect>
-        <effect duration="4">damage resistance</effect>
+        <effect duration="4s" amplifier="255">damage resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="flag-pickup" force="true">
         <effect ambient="true">slowness</effect>
         <effect amplifier="-1" ambient="true">health boost</effect>
-        <effect duration="2" amplifier="3" ambient="true">regeneration</effect>
+        <effect duration="2s" amplifier="3" ambient="true">regeneration</effect>
     </kit>
     <kit id="flag-drop" force="true">
-        <effect amplifier="0" duration="0" ambient="true">slowness</effect>
-        <effect duration="0" amplifier="0" ambient="true">health boost</effect>
-        <effect duration="1" amplifier="10" ambient="true">regeneration</effect>
+        <effect duration="0s" ambient="true">slowness</effect>
+        <effect duration="0s" ambient="true">health boost</effect>
+        <effect duration="1s" amplifier="10" ambient="true">regeneration</effect>
     </kit>
 </kits>
 <spawns>
@@ -71,13 +70,13 @@
     <cuboid id="yellow-net" min="764,8,-1251" max="759,5,-1246"/>
     <apply block="never" use="deny-access"/>
 </regions>
-<flags>
-    <flag id="red-flag" name="Red Flag" color="red" pickup-kit="flag-pickup" drop-kit="flag-drop" respawn-time="10s">
-        <post pickup-filter="only-yellow">762.5,6,-1082.5</post>
+<flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
+    <flag id="red-flag" name="Red Flag" color="red" pickup-kit="flag-pickup" drop-kit="flag-drop">
+        <post respawn-time="10s" pickup-filter="only-yellow">762.5,6,-1082.5</post>
         <net points="1" region="yellow-net"/>
     </flag>
-    <flag id="yellow-flag" name="Yellow Flag" color="yellow" pickup-kit="flag-pickup" drop-kit="flag-drop" respawn-time="10s">
-        <post pickup-filter="only-red">762.5,6,-1248.5</post>
+    <flag id="yellow-flag" name="Yellow Flag" color="yellow" pickup-kit="flag-pickup" drop-kit="flag-drop">
+        <post respawn-time="10s" pickup-filter="only-red">762.5,6,-1248.5</post>
         <net points="1" region="red-net"/>
     </flag>
 </flags>
@@ -99,10 +98,12 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="10" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="6" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawn delay="4s" auto="true"/>
 <hunger>
     <depletion>off</depletion>
