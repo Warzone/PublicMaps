@@ -1,15 +1,15 @@
 <map proto="1.4.2">
 <name>Chestnut</name> <!-- August 2020 -->
-<version>1.0.3</version>
+<version>1.0.5</version>
 <objective>Capture the enemy's wool and bring it back to your base!</objective>
 <gamemode>ctw</gamemode>
-<time results="objective">20m</time>
+<time result="objectives">20m</time>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="5">Blue</team>
-    <team id="red" color="dark red" max="5">Red</team>
+    <team id="blue" color="blue" max="8">Blue</team>
+    <team id="red" color="dark red" max="8">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -27,18 +27,13 @@
         </item>
         <item slot="4" unbreakable="true" material="iron spade"/>
         <item slot="5" damage="5" amount="48" material="wood"/>
+        <item slot="6" team-color="true" amount="24" material="stained glass"/>
         <item slot="8" material="golden apple"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="iron leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect amplifier="255" duration="3s">resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <item slot="6" damage="11" amount="24">stained glass</item>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <item slot="6" damage="14" amount="24">stained glass</item>
     </kit>
 </kits>
 <spawns>
@@ -47,12 +42,12 @@
             <cuboid min="-4.5,34,11.5" max="-5.5,34,9.5"/>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue" kit="spawn-kit">
         <region yaw="0">
             <cuboid min="-38.5,13,-34.5" max="-38.5,13,-34.5"/>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red" kit="spawn-kit">
         <region yaw="180">
             <cuboid min="-38.5,13,55.5" max="-38.5,13,55.5"/>
         </region>
@@ -127,6 +122,7 @@
 </wools>
 <toolrepair>
     <tool>stone sword</tool>
+    <tool>iron sword</tool>
     <tool>bow</tool>
     <tool>iron pickaxe</tool>
     <tool>iron axe</tool>
@@ -177,12 +173,7 @@
     <kill-reward>
         <item material="golden apple"/>
         <item amount="12" damage="5" material="wood"/>
-    </kill-reward>
-    <kill-reward filter="only-blue">
-        <item amount="6" damage="11" material="stained glass"/>
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item amount="6" damage="14" material="stained glass"/>
+        <item amount="6" team-color="true" material="stained glass"/>
     </kill-reward>
 </kill-rewards>
 <maxbuildheight>16</maxbuildheight>
