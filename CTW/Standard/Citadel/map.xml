@@ -1,7 +1,7 @@
-<map proto="1.4.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
+<!-- include src="tutorial.xml"/ -->
 <name>Citadel</name>
-<version>1.3.4</version>
+<version>1.3.6</version>
 <objective>Attackers must capture the wool before the time limit runs out</objective>
 <gamemode>ctw</gamemode>
 <gamemode>ad</gamemode>
@@ -19,21 +19,13 @@
     <team id="defenders" color="blue" max="14" max-overfill="16" plural="true">Defenders</team>
 </teams>
 <spawns>
-    <default>
-        <regions yaw="-90">
-            <region id="observer-spawn"/>
-        </regions>
-    </default>
+    <default region="observer-spawn" yaw="-90"/>
     <spawn team="attackers" kit="attacker" safe="true">
-        <regions yaw="0">
+        <regions>
             <cylinder base="88.5,21,-47.5" radius="2" height="0"/>
         </regions>
     </spawn>
-    <spawn team="defenders" kit="defender">
-        <regions yaw="180">
-            <region id="defender-spawn"/>
-        </regions>
-    </spawn>
+    <spawn team="defenders" kit="defender" region="defender-spawn" yaw="180"/>
 </spawns>
 <wools>
     <wool team="attackers" color="blue" location="-134.5,75,-45.5">
@@ -238,12 +230,12 @@
     <item>bread</item>
     <item>cooked fish</item>
     <item>arrow</item>
-    <item damage="0">wood</item>
+    <item>wood:0</item>
     <item>glass</item>
-    <item damage="3">stained clay</item>
-    <item damage="9">stained clay</item>
-    <item damage="14">stained clay</item>
-    <item damage="0">potion</item>
+    <item>stained clay:3</item>
+    <item>stained clay:9</item>
+    <item>stained clay:14</item>
+    <item>potion:0</item>
     <item>stone sword</item>
     <item>iron sword</item>
     <item>bow</item>
@@ -260,9 +252,9 @@
     <item>clay ball</item>
     <item>iron fence</item>
     <item>sign</item>
-    <item damage="7">carpet</item>
-    <item damage="8">carpet</item>
-    <item damage="14">carpet</item>
+    <item>carpet:7</item>
+    <item>carpet:8</item>
+    <item>carpet:14</item>
     <item>wood button</item>
     <item>flint</item>
     <item>leather leggings</item>
@@ -281,8 +273,8 @@
     <item>iron axe</item>
     <item>web</item>
     <item>glass bottle</item>
-    <item damage="14">stained clay</item>
-    <item damage="11">stained clay</item>
+    <item>stained clay:14</item>
+    <item>stained clay:11</item>
     <item>chainmail leggings</item>
     <item>potion</item>
     <item>stone spade</item>
@@ -303,20 +295,12 @@
 <maxbuildheight>77</maxbuildheight>
 <timelock>on</timelock>
 <broadcasts>
-    <alert after="0s">
-        `e`lThe Defenders get 30 seconds to prepare!
-    </alert>
-    <tip after="7s" every="4m">
-        `bThe `cVictory Monument`b is located on the ship. `cAttackers`b must retrieve the wool and take it there
-    </tip>
-    <tip after="14s" every="5m">
-        `bThe `9Wool Room`b is signaled by the `lbeacon`b
-    </tip>
-    <tip after="21s" every="6m">
-        `cAttackers`b get `b`lTNT `bon kill, which auto-ignites
-    </tip>
+    <alert after="0s">`e`lThe Defenders get 30 seconds to prepare!</alert>
+    <tip after="7s" every="4m">`bThe `cVictory Monument`b is located on the ship. `cAttackers`b must retrieve the wool and take it there</tip>
+    <tip after="14s" every="5m">`bThe `9Wool Room`b is signaled by the `lbeacon`b</tip>
+    <tip after="21s" every="6m">`cAttackers`b get `b`lTNT `bon kill, which auto-ignites</tip>
 </broadcasts>
-<tutorial>
+<!-- <tutorial>
     <stage title="Attack and Defend CTW">
         <message>
             <line>`rThis map is an `a`lAttack and Defend, Capture the Wool`r map</line>
@@ -358,5 +342,5 @@
             <point yaw="0" pitch="10">-134,78,-70</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>
