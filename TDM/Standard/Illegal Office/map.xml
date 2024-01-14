@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Illegal Office</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Be the team with the most points after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -17,23 +17,15 @@
         <item material="bow" slot="1"/>
         <item material="diamond pickaxe" slot="2"/>
         <item amount="2" material="golden apple" slot="3"/>
-        <item amount="64" color="red" material="wool" slot="4"/>
-        <item amount="64" color="blue" material="wool" slot="5"/>
+        <item amount="64" team-color="true" material="wool" slot="4"/>
+        <item amount="64" team-color="true" material="wool" slot="5"/>
         <item amount="16" material="pumpkin pie" slot="6"/>
         <item material="stick" slot="27"/>
         <item amount="64" material="arrow" slot="28"/>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
-        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
+        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
+        <chestplate team-color="true" unbreakable="true">leather chestplate</chestplate>
         <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots color="cd0000" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
-        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots color="0066cc" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
+        <boots team-color="true" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
     </kit>
 </kits>
 <itemremove>
@@ -52,12 +44,12 @@
     <tool>diamond pickaxe</tool>
 </toolrepair>
 <spawns>
-    <spawn team="red" kit="red-kit" yaw="45">
+    <spawn team="red" kit="spawn" yaw="45">
         <region>
             <cylinder base="22.5, 51, -75.5" radius="0" height="0"/>
         </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit" yaw="-135">
+    <spawn team="blue" kit="spawn" yaw="-135">
         <region>
             <cylinder base="-42.5, 51, 47.5" radius="0" height="0"/>
         </region>
