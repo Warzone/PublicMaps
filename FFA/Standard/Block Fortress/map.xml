@@ -1,13 +1,14 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Block Fortress</name>
-<version>1.3.2</version>
-<objective>Free for All | Blitz</objective>
+<version>1.3.3</version>
+<objective>Get the most kills within 5 minutes!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>rage</gamemode>
 <gamemode>ffa</gamemode>
 <authors>
     <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- Stealth5061 -->
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8"/> <!-- Plastix -->
 </authors>
-<players max="50"/>
 <score>
     <kills>1</kills>
 </score>
@@ -16,23 +17,23 @@
 <rage/>
 <kits>
     <kit id="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <helmet>iron helmet</helmet>
-        <chestplate enchantment="protection projectile:2">leather chestplate</chestplate>
-        <leggings>leather leggings</leggings>
-        <boots enchantment="protection fall:1">leather boots</boots>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <helmet material="iron helmet"/>
+        <chestplate enchantment="protection projectile:2" material="leather chestplate"/>
+        <leggings material="leather leggings"/>
+        <boots enchantment="protection fall" material="leather boots"/>
         <effect duration="2s" amplifier="10">resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
     <kit id="speed">
-        <potion duration="20" amplifier="1">speed</potion>
+        <effect duration="20">speed</effect>
     </kit>
     <kit id="regen">
-        <potion duration="4" amplifier="1">regeneration</potion>
+        <effect duration="4">regeneration</effect>
     </kit>
 </kits>
-<respawn auto="true"/>
 <spawns>
     <spawn kit="spawn" spread="true" safe="true">
         <regions>
@@ -52,7 +53,7 @@
             <cuboid min="-31,3,-29" max="-29,4,-31"/>
             <cuboid min="29,3,-31" max="31,4,-29"/>
             <cuboid min="31,3,29" max="29,4,31"/>
-    </region>
+        </region>
     </apply>
     <apply kit="regen">
         <region>
@@ -64,9 +65,6 @@
     </apply>
     <apply block="never"/>
 </regions>
-<kill-reward>
-    <item material="golden apple"/>
-</kill-reward>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -79,7 +77,13 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<respawn auto="true"/>
 </map>
