@@ -18,7 +18,7 @@
     <team id="blue" color="blue" max="11">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
         <item slot="2" unbreakable="true" material="stone pickaxe"/>
@@ -40,12 +40,12 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red-kit" yaw="-90">
+    <spawn team="red" kit="spawn-kit" yaw="-90">
         <region>
             <cylinder base="-80,8,0" radius="1" height="0"/>
         </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit" yaw="90">
+    <spawn team="blue" kit="spawn-kit" yaw="90">
         <region>
             <cylinder base="80,8,0" radius="1" height="0"/>
         </region>
@@ -156,12 +156,12 @@
     <apply block="no-void" message="You may not build outside the map!"/>
 </regions>
 <destroyables name="Monument" repairable="false" sparks="true" show-progress="true" materials="ender stone;emerald block;stained glass">
-    <destroyable id="blue-monument" name="Monument" owner="blue">
+    <destroyable id="blue-monument" owner="blue">
         <region>
             <cylinder base="47.5,12,0.5" radius="2" height="3"/>
         </region>
     </destroyable>
-    <destroyable id="red-monument" name="Monument" owner="red">
+    <destroyable id="red-monument" owner="red">
         <region>
             <cylinder base="-47.5,12,-0.5" radius="2" height="3"/>
         </region>
