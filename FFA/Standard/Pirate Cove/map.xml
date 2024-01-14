@@ -1,7 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Pirate Cove</name>
 <slug>pirate_cove_5x5</slug>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Kill as many other players as you can in 5 minutes!</objective>
 <created>2016-04-22</created>
 <gamemode>ffa</gamemode>
@@ -9,7 +9,7 @@
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" /> <!-- GoldenOre -->
 </authors>
 <contributors>
-    <contributor contribution="Feedback and minor building help." uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" />
+    <contributor uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="Feedback and minor building help" />
 </contributors>
 <score>
     <kills>1</kills>
@@ -18,8 +18,8 @@
 <players max="5" max-overfill="5" show-name-tags="false" />
 <spawns>
     <default>
-        <region>
-            <point yaw="-45">-6.5,31,-38.5</point>
+        <region yaw="-45">
+            <point>-6.5,31,-38.5</point>
         </region>
     </default>
     <spawn kit="player" spread="true">
@@ -38,29 +38,32 @@
 </spawns>
 <kits>
     <kit id="player">
-        <item slot="0" unbreakable="true" locked="true">stone sword</item>
-        <item slot="1" unbreakable="true" locked="true">bow</item>
-        <item slot="8" amount="8">arrow</item>
+        <item slot="0" unbreakable="true" locked="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" locked="true" material="bow"/>
+        <item slot="8" amount="8" material="arrow"/>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" material="gold chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
         <effect duration="3s" amplifier="10">resistance</effect>
-        <helmet color="E5E533" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate color="E5E533" unbreakable="true" locked="true">gold chestplate</chestplate>
-        <leggings color="E5E533" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="E5E533" unbreakable="true" locked="true">leather boots</boots>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <regions>
-    <apply block="never" />
+    <apply block="never"/>
 </regions>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<respawn delay="5s" blackout="true" />
-<kill-reward>
-    <item amount="6" material="arrow" />
-    <kit>
-        <effect duration="8" amplifier="3">regeneration</effect>
-    </kit>
-</kill-reward>
+<respawn delay="5s" blackout="true"/>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6" material="arrow"/>
+        <kit>
+            <effect duration="8" amplifier="3">regeneration</effect>
+        </kit>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage>fall</damage>
     <damage>suffocation</damage>
