@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
 <map proto="1.4.2" game="`5`lLAZERTAG">
 <name>LT Facility</name>
-<version>1.1.5</version>
+<version>1.1.6</version>
 <objective>Be the team with the most kills after 7 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
@@ -11,44 +10,30 @@
     <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="LAZERTAG Conversion"/> <!-- Ny_ -->
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Original Map"/> <!-- Mikeg542 -->
 </authors>
-<rage/>
-<score>
-    <kills>1</kills>
-</score>
 <teams>
     <team id="blue" color="blue" max="30">Blue</team>
     <team id="red" color="dark red" max="30">Red</team>
 </teams>
 <kits>
-    <kit id="spawn" force="true">
+    <kit id="spawn" parents="obs">
         <item material="bow" slot="0" locked="true" unbreakable="true" name="`5Laser Gun">
             <enchantment level="10">power</enchantment>
             <enchantment level="10">sharpness</enchantment>
-            <enchantment level="1">infinity</enchantment>
+            <enchantment>infinity</enchantment>
         </item>
-        <item slot="1">arrow</item>
+        <item slot="1" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet" locked="true"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate" locked="true"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings" locked="true"/>
         <boots unbreakable="true" team-color="true" material="leather boots" locked="true"/>
-        <double-jump recharge-before-landing="true" enabled="true" power="2"/>
-        <effect>night vision</effect>
-        <effect duration="oo" amplifier="2">speed</effect>
+        <effect amplifier="2">speed</effect>
         <effect duration="3" amplifier="255">damage resistance</effect>
+        <double-jump recharge-before-landing="true" enabled="true" power="2"/>
     </kit>
     <kit id="obs">
         <effect>night vision</effect>
     </kit>
 </kits>
-<itemremove>
-    <item>leather leggings</item>
-    <item>bow</item>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>arrow</item>
-</itemremove>
 <spawns>
     <spawn team="blue" kit="spawn">
         <region yaw="180">
@@ -66,10 +51,6 @@
         </regions>
     </default>
 </spawns>
-<time>7m</time>
-<score>
-    <kills>1</kills>
-</score>
 <filters>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
@@ -82,7 +63,9 @@
     <apply enter="only-blue" message="You may not enter the enemy spawn!" region="blue-spawn"/>
     <apply enter="only-red" message="You may not enter the enemy spawn!" region="red-spawn"/>
     <apply block="never" message="You may not modify blocks!">
-         <rectangle min="-149,167" max="-63,35"/>
+        <region>
+            <rectangle min="-149,167" max="-63,35"/>
+        </region>
     </apply>
     <apply velocity="0.0,0.8,0.0">
         <region>
@@ -96,14 +79,28 @@
         <region>
             <cuboid min="-112,4,77" max="-114,5,74"/>
         </region>
-    </apply><apply velocity="0.0,1.1,-0.5">
+    </apply>
+    <apply velocity="0.0,1.1,-0.5">
         <region>
             <cuboid min="-101,4,122" max="-99,5,125"/>
         </region>
     </apply>
 </regions>
+<time>7m</time>
+<rage/>
+<score>
+    <kills>1</kills>
+</score>
+<itemremove>
+    <item>leather leggings</item>
+    <item>bow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+</itemremove>
 <timelock>on</timelock>
-<multitrade/>
 <hunger>
     <depletion>off</depletion>
 </hunger>
