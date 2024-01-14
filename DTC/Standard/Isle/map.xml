@@ -1,80 +1,82 @@
-<map proto="1.3.5">
+<map proto="1.4.2">
 <name>Isle</name>
-<version>1.3.3</version>
+<version>1.3.5</version>
 <objective>Leak the enemy team's core.</objective>
 <gamemode>dtc</gamemode>
 <authors>
-    <author uuid="e931b4b3-479f-4761-8808-4c4b2ed69b0f"/>
-    <!--  Theta_  -->
+    <author uuid="e931b4b3-479f-4761-8808-4c4b2ed69b0f"/> <!-- Theta_ -->
 </authors>
 <contributors>
-    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="XML"/>
-    <!--  Timothee38  -->
+    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="XML"/> <!-- Timothee38 -->
 </contributors>
+<teams>
+    <team id="magenta" color="light purple" max="10" max-overfill="12">Magenta</team>
+    <team id="blue" color="blue" max="10" max-overfill="12">Blue</team>
+</teams>
 <kits>
-    <kit name="spawn" force="true">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" enchantement="dig speed:2;durability:3">iron pickaxe</item>
-        <item slot="3" enchantement="dig speed:2;durability:3">iron axe</item>
-        <item slot="8" amount="64">pumpkin pie</item>
-        <item slot="7" amount="1">golden apple</item>
-        <item slot="4" amount="32">vine</item>
-        <item slot="5" amount="24">log</item>
-        <item slot="6" amount="16" damage="0">stained glass</item>
-        <item slot="25" amount="1">boat</item>
-        <item slot="34" amount="64">arrow</item>
-        <potion duration="5" amplifier="1">heal</potion>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" enchantment="dig speed:2;durability:3" material="iron pickaxe"/>
+        <item slot="3" enchantment="dig speed:2;durability:3" material="iron axe"/>
+        <item slot="8" amount="64" material="pumpkin pie"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="4" amount="32" material="vine"/>
+        <item slot="5" amount="24" material="log"/>
+        <item slot="6" amount="16" damage="0" material="stained glass"/>
+        <item slot="25" material="boat"/>
+        <item slot="34" amount="64" material="arrow"/>
+        <effect duration="5">heal</effect>
     </kit>
 </kits>
-<teams>
-    <team color="light purple" max="10" max-overfill="12">Magenta</team>
-    <team color="blue" max="10" max-overfill="12">Blue</team>
-</teams>
 <spawns>
-    <spawn team="magenta" kit="spawn" yaw="-135">
-        <point>223,39,785</point>
+    <spawn team="magenta" kit="spawn-kit" yaw="-135">
+        <regions>
+            <point>223.0,39,785.0</point>
+        </regions>
     </spawn>
-    <spawn team="blue" kit="spawn" yaw="45">
-        <point>207,39,603</point>
+    <spawn team="blue" kit="spawn-kit" yaw="45">
+        <regions>
+            <point>207.0,39,603.0</point>
+        </regions>
     </spawn>
     <default yaw="-90">
-        <cuboid min="285,87,692" max="281,87,695"/>
+        <regions>
+            <cuboid min="285,87,692" max="281,87,695"/>
+        </regions>
     </default>
 </spawns>
 <cores material="obsidian" leak="3">
     <core team="blue">
-        <cuboid min="208,49,645" max="216,57,653"/>
+        <region>
+            <cuboid min="208,49,645" max="216,57,653"/>
+        </region>
     </core>
     <core team="magenta">
-        <cuboid min="221,49,742" max="214,58,735"/>
+        <region>
+            <cuboid min="221,49,742" max="214,58,735"/>
+        </region>
     </core>
 </cores>
 <filters>
-    <filter name="deny-spawner-break">
-        <not>
-            <block>mob spawner</block>
-        </not>
-    </filter>
+    <not id="deny-spawner-break">
+        <material>mob spawner</material>
+    </not>
 </filters>
 <regions>
-    <circle name="spawn1" center="205,605" radius="4"/>
-    <circle name="spawn2" center="225,783" radius="4"/>
-    <apply block="deny-all">
-        <region name="spawn1"/>
-        <region name="spawn2"/>
-    </apply>
-    <rectangle name="total-region" min="-oo,-oo" max="oo,oo"/>
-    <apply block="deny-spawner-break">
-        <region name="total-region"/>
-    </apply>
+    <union id="spawns">
+        <circle id="spawn1" center="205,605" radius="4"/>
+        <circle id="spawn2" center="225,783" radius="4"/>
+    </union>
+    <apply region="spawns" block="never"/>
+    <apply block="deny-spawner-break"/>
 </regions>
 <itemremove>
     <item>log</item>
     <item>wood</item>
     <item>stained glass</item>
     <item>obsidian</item>
-    <item damage="1">sapling</item>
+    <item>sapling:1</item>
     <item>pumpkin pie</item>
     <item>vine</item>
     <item>boat</item>
