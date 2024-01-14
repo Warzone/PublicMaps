@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Winsray Fields</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <gamemode>dtc</gamemode>
 <gamemode>dtm</gamemode>
 <objective>Destroy the opposing team's monument and core!</objective>
@@ -50,10 +50,10 @@
         </region>
     </default>
     <spawn team="blue" kit="spawn-kit">
-        <region yaw="0">
+        <region>
             <point>64.5,13,-46.5</point>
         </region>
-        <region yaw="0">
+        <region>
             <point>52.5,13,-46.5</point>
         </region>
         <region yaw="-90">
@@ -101,7 +101,7 @@
     <mode id="gold-core" after="15m" material="gold block" name="`6GOLD CORE MODE"/>
     <mode id="ice-core" after="40m" material="packed ice" name="`3PACKED ICE CORE MODE"/>
 </modes>
-<destroyables name="Monument" materials="gold block" show-percentage="true" completion="100%">
+<destroyables name="Monument" materials="gold block" show-progress="true">
     <destroyable owner="blue">
         <region>
             <cuboid min="109,23,-30" max="106,19,-33"/>
@@ -171,11 +171,13 @@
     <item>wood</item>
     <item>glass</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="24" damage="1" material="wood"/>
-    <item amount="12" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="24" damage="1" material="wood"/>
+        <item amount="12" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>40</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
