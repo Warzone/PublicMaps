@@ -1,17 +1,18 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Alien</name>
-<version>1.0.6</version>
-<objective>Get the most kills before time ends!</objective>
+<slug>alien</slug>
+<version>1.0.7</version>
+<objective>Get the most kills within 5 minutes!</objective>
+<created>2016-03-05</created>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
-    <!-- AtlasGames -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" /> <!-- AtlasGames -->
 </authors>
 <gamemode>ffa</gamemode>
 <score>
     <kills>1</kills>
 </score>
-<time>4m</time>
-<players min="2" max="6" show-name-tags="false" />
+<time>5m</time>
+<players max="5" max-overfill="5" show-name-tags="false" />
 <respawn auto="true" />
 <spawns safe="true" spread="true">
     <spawn kit="spawn-kit">
@@ -45,22 +46,24 @@
         <chestplate unbreakable="true" locked="true" material="chainmail chestplate" />
         <leggings unbreakable="true" locked="true" color="7F3FB2" material="leather leggings" />
         <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection fall:4" />
-        <potion duration="1m30s">absorption</potion>
-        <potion duration="3s" amplifier="5">resistance</potion>
+        <effect duration="1m30s">absorption</effect>
+        <effect duration="3s" amplifier="5">resistance</effect>
     </kit>
-    <kit id="kill-boost">
-        <potion duration="3s" amplifier="3">regeneration</potion>
+    <kit id="kill-boost" force="true">
+        <effect duration="3s" amplifier="3">regeneration</effect>
+        <effect duration="4s" amplifier="2">speed</effect>
     </kit>
     <kit id="obs-kit">
-        <potion duration="oo">night vision</potion>
+        <effect>night vision</effect>
     </kit>
 </kits>
-<killreward>
-    <potion duration="4" amplifier="2">speed</potion>
-    <item material="ender pearl" />
-    <item amount="8" material="arrow" />
-    <kit id="kill-boost" force="true"/>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="ender pearl" />
+        <item amount="8" material="arrow" />
+        <kit id="kill-boost"/>
+    </kill-reward>
+</kill-rewards>
 <regions>
     <cuboid id="roof" min="-25,17,-25" max="25,30,25" />
     <apply enter="never" region="roof" message="You cannot leave the playing field!" />
