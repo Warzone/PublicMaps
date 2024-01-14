@@ -1,131 +1,119 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.3.2">
-   <name>Rendezvous Redux</name>
-   <version>2.2.5</version>
-   <objective>Destroy the enemy team's monuments!</objective>
-   <gamemode>dtm</gamemode>
-   <authors>
-      <author>Haribo98</author>
-      <!-- Haribo98 -->
-      <author>Pavlo</author>
-      <!-- Pavlo -->
-   </authors>
-   <teams>
-      <team color="dark red" max="16">Red</team>
-      <team color="blue" max="16">Blue</team>
-   </teams>
-   <kits>
-      <kit name="spawn">
-         <clear/>
-         <item slot="0">iron sword</item>
-         <item slot="1" enchantment="arrow infinite:1">bow</item>
-         <item slot="2" enchantment="durability:3">diamond pickaxe</item>
-         <item slot="3">stone axe</item>
-         <item slot="4" amount="2">golden apple</item>
-         <item slot="5" amount="32">cooked fish</item>
-         <item slot="6" amount="64">glass</item>
-         <item slot="7" amount="32">log</item>
-         <item slot="28" amount="1">arrow</item>
-         <potion duration="5" amplifier="5">damage resistance</potion>
-         <potion duration="5" amplifier="5">heal</potion>
-      </kit>
-      <kit name="red" parents="spawn">
-        <helmet color="993333" unbreakable="true">leather helmet</helmet>
-        <chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="993333" unbreakable="true">leather leggings</leggings>
-        <boots color="993333" unbreakable="true">leather boots</boots>
-      </kit>
-      <kit name="blue" parents="spawn">
-        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
-        <chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
-        <boots color="334CB2" unbreakable="true">leather boots</boots>
-      </kit>
-   </kits>
-   <spawns>
-      <spawn team="red" kit="red" yaw="90">
-         <cylinder base="67.5,27,-798.5" height="0" radius="1" />
-      </spawn>
-      <spawn team="blue" kit="blue" yaw="-90">
-         <cylinder base="-42.5,27,-798.5" height="0" radius="1" />
-      </spawn>
-      <default yaw="0">
-         <cylinder base="12.5,54,-898.5" height="0" radius="1" />
-      </default>
-   </spawns>
-   <filters>
-      <filter name="only-red">
-         <team>red</team>
-      </filter>
-      <filter name="only-blue">
-         <team>blue</team>
-      </filter>
-   </filters>
-   <regions>
-       <cuboid name="red-spawn-enter" min="56,33,-802" max="61,37,-794"/>
-       <cuboid name="blue-spawn-enter" min="-37,33,-802" max="-32,37,-794"/>
-       <cuboid name="red-spawn-tunnel" min="57,25,-802" max="73,33,-794"/>
-       <cuboid name="blue-spawn-tunnel" min="-49,33,-802" max="-33,25,-794"/>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="red-spawn-enter" />
-      </apply>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="blue-spawn-enter" />
-      </apply>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="red-spawn-tunnel" />
-      </apply>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="blue-spawn-tunnel" />
-      </apply>
-      <apply enter="only-red" message="You may not enter `cRed Team`c's spawn area!">
-         <region name="red-spawn-tunnel" />
-      </apply>
-      <apply enter="only-blue" message="You may not enter `9Blue Team`c's spawn area!">
-         <region name="blue-spawn-tunnel" />
-      </apply>
-   </regions>
-   <destroyables materials="obsidian">
-      <destroyable name="Left" owner="red">
-         <block>108,37,-832</block>
-      </destroyable>
-      <destroyable name="Right" owner="red">
-         <block>108,37,-764</block>
-      </destroyable>
-      <destroyable name="Left" owner="blue">
-         <block>-84,37,-764</block>
-      </destroyable>
-      <destroyable name="Right" owner="blue">
-         <block>-84,37,-832</block>
-      </destroyable>
-   </destroyables>
-   <toolrepair>
-      <tool>diamond pickaxe</tool>
-      <tool>bow</tool>
-      <item>shears</item>
-      <tool>iron sword</tool>
-      <tool>stone axe</tool>
-   </toolrepair>
-   <itemremove>
-      <item>obsidian</item>
-      <item>log</item>
-      <item>wood</item>
-      <item>glass</item>
-      <item>arrow</item>
-      <item>leather helmet</item>
-      <item>leather chestplate</item>
-      <item>leather leggings</item>
-      <item>leather boots</item>
-      <item>apple</item>
-      <item>cooked fish</item>
-   </itemremove>
-   <itemkeep>
-       <item>golden apple</item>
-   </itemkeep>
-   <killreward>
-      <item amount="1">golden apple</item>
-      <item amount="16">arrow</item>
-   </killreward>
-   <timelock>on</timelock>
-   <maxbuildheight>55</maxbuildheight>
+<map proto="1.4.2">
+<name>Rendezvous Redux</name>
+<version>2.3.0</version>
+<objective>Destroy the enemy team's monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="f391227e-626f-4076-a389-95e2b922d167"/> <!-- Haribo98 (ParaPenguin) -->
+    <author uuid="378952b5-808f-4a33-911e-39c7ba153b38"/> <!-- Pavlo -->
+</authors>
+<teams>
+   <team id="red" color="dark red" max="32">Red</team>
+   <team id="blue" color="blue" max="32">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" enchantment="durability:3" material="diamond pickaxe"/>
+        <item slot="3" material="stone axe"/>
+        <item slot="4" amount="2" material="golden apple"/>
+        <item slot="5" amount="32" material="cooked fish"/>
+        <item slot="6" amount="64" material="glass"/>
+        <item slot="7" amount="32" material="log"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+        <effect duration="5" amplifier="5">heal</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="spawn-kit" yaw="90">
+        <regions>
+            <cylinder base="67.5,27,-798.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="-90">
+        <regions>
+            <cylinder base="-42.5,27,-798.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="12.5,54,-898.5" height="0" radius="1"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<regions>
+    <union id="spawn-entrances">
+        <cuboid id="red-spawn-enter" min="56,33,-802" max="61,37,-794"/>
+        <cuboid id="blue-spawn-enter" min="-37,33,-802" max="-32,37,-794"/>
+    </union>
+    <union id="spawn-tunnels">
+        <cuboid id="red-spawn-tunnel" min="57,25,-802" max="73,33,-794"/>
+        <cuboid id="blue-spawn-tunnel" min="-49,33,-802" max="-33,25,-794"/>
+    </union>
+    <apply region="red-spawn-tunnel" enter="only-red" message="You may not enter `4Red`c's spawn area!"/>
+    <apply region="blue-spawn-tunnel" enter="only-blue" message="You may not enter `9Blue`c's spawn area!"/>
+    <apply region="spawn-entrances" block="never" message="You may not modify the spawn area."/>
+    <apply region="spawn-tunnels" block="never" message="You may not modify the spawn tunnel."/>
+</regions>
+<destroyables materials="obsidian">
+    <destroyable name="Left" owner="red">
+        <region>
+            <block>108,37,-832</block>
+        </region>
+    </destroyable>
+    <destroyable name="Right" owner="red">
+        <region>
+            <block>108,37,-764</block>
+        </region>
+    </destroyable>
+    <destroyable name="Left" owner="blue">
+        <region>
+            <block>-84,37,-764</block>
+        </region>
+    </destroyable>
+    <destroyable name="Right" owner="blue">
+        <region>
+            <block>-84,37,-832</block>
+        </region>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>shears</tool>
+    <tool>iron sword</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>obsidian</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>apple</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<maxbuildheight>55</maxbuildheight>
 </map>
