@@ -1,7 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Hillside Mini</name>
 <slug>hillside_mini_5x5</slug>
-<version>1.2.2</version>
+<version>1.2.3</version>
 <objective>Kill as many players as you can in 5 minutes!</objective>
 <gamemode>ffa</gamemode>
 <authors>
@@ -11,15 +11,32 @@
     <rule>Fall damage is disabled.</rule>
     <rule>Hunger is disabled.</rule>
 </rules>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
 <players min="2" max="5" max-overfill="5" show-name-tags="true"/>
+<kits>
+    <kit id="player">
+        <item slot="0" unbreakable="true" material="wood sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" amount="16" material="cobblestone"/>
+        <item slot="8" amount="6" material="arrow"/>
+        <helmet color="FDD22E" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate color="FDD22E" unbreakable="true" locked="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" material="iron leggings"/>
+        <boots color="FDD22E" unbreakable="true" locked="true" material="leather boots"/>
+        <effect duration="3" amplifier="10">resistance</effect>
+    </kit>
+    <kit id="kill">
+        <effect duration="3" amplifier="3">regeneration</effect>
+        <effect duration="4" amplifier="2">speed</effect>
+    </kit>
+    <kit id="obs">
+        <effect>night vision</effect>
+    </kit>
+</kits>
 <spawns>
-    <default kit="obs">
-        <region yaw="90">
-            <point yaw="90">82.5,36,96.5</point>
+    <default kit="obs" yaw="90">
+        <region>
+            <point>82.5,36,96.5</point>
         </region>
     </default>
     <spawn kit="player" spread="true">
@@ -51,34 +68,6 @@
         </regions>
     </spawn>
 </spawns>
-<kits>
-    <kit id="player">
-        <item slot="0" unbreakable="true" locked="true">wood sword</item>
-        <item slot="1" unbreakable="true" locked="true">bow</item>
-        <item slot="2" unbreakable="true">stone pickaxe</item>
-        <item slot="3" amount="16">cobblestone</item>
-        <item slot="8" amount="6">arrow</item>
-        <effect duration="3s" amplifier="10">resistance</effect>
-        <helmet color="FDD22E" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate color="FDD22E" unbreakable="true" locked="true">leather chestplate</chestplate>
-        <leggings unbreakable="true" locked="true">iron leggings</leggings>
-        <boots color="FDD22E" unbreakable="true" locked="true">leather boots</boots>
-    </kit>
-    <kit id="kill">
-        <potion duration="3" amplifier="3">regeneration</potion>
-        <potion duration="4" amplifier="2">speed</potion>
-    </kit>
-    <kit id="obs">
-        <effect duration="oo" amplifier="1">night vision</effect>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>suffocation</damage>
-</disabledamage>
-<respawn delay="2s" blackout="false"/>
 <filters>
     <not id="no-void">
         <void/>
@@ -92,46 +81,19 @@
         <material>leaves</material>
         <material>leaves 2</material>
         <material>double plant</material>
-        <material>31</material>
+        <material>long grass</material>
         <material>hay block</material>
         <material>tnt</material>
     </any>
 </filters>
-<tnt>
-    <instantignite>true</instantignite>
-    <blockdamage>true</blockdamage>
-    <power>4</power>
-    <fuse>2</fuse>
-    <friendly-defuse>false</friendly-defuse>
-    <licensing>false</licensing>
-</tnt>
 <regions>
     <apply block-break="apply-some" message="You aren't allowed to do that!"/>
-        <region id="everywhere"/>
     <apply block-place="placeable" message="You can't place that here!"/>
-        <region id="everywhere"/>
 </regions>
-<kill-rewards>
-    <kill-reward>
-        <kit>
-            <potion duration="3" amplifier="3">regeneration</potion>
-            <potion duration="4" amplifier="2">speed</potion>
-        </kit>    
-            <item amount="8">cobblestone</item>
-            <item amount="5" material="arrow"/>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <kill-streak count="2" repeat="true"/>
-        </filter>
-        <item amount="1">tnt</item>
-    </kill-reward>
-</kill-rewards>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-    <damage self="false">block explosion</damage>
-</disabledamage>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <block-drops>
     <rule>
         <!-- 100% of blocks broken by an explosion get turned into falling/flying blocks -->
@@ -142,7 +104,7 @@
     <!-- Increase the speed of flying blocks by 50% in the central region -->
     <rule fall-speed="1.0">
         <region>
-            <region id="everywhere"/>
+            <everywhere/>
         </region>
    </rule>
 </block-drops>
@@ -153,12 +115,25 @@
                 <material>cobblestone</material>      
                 <material>brick</material>
                 <material>brick stairs</material>
-                <material damage="4">44</material>
+                <material>step:4</material>
                 <material>gravel</material>
             </any>
         </filter>
     </rule>
 </falling-blocks>
+<tnt>
+    <instantignite>true</instantignite>
+    <blockdamage>true</blockdamage>
+    <power>4</power>
+    <fuse>2</fuse>
+    <friendly-defuse>false</friendly-defuse>
+    <licensing>false</licensing>
+</tnt>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+    <damage self="false">block explosion</damage>
+</disabledamage>
 <itemremove>
     <item>wood sword</item>
     <item>bow</item>
@@ -174,9 +149,32 @@
     <item>stone pickaxe</item>
     <item>cobblestone</item>
     <item>sapling</item>
-    <item damage="4">44</item>
+    <item>step:4</item>
     <item>brick stairs</item>
-    <item damage="1">350</item>
+    <item>cooked fish:1</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <kit>
+            <effect duration="3" amplifier="3">regeneration</effect>
+            <effect duration="4" amplifier="2">speed</effect>
+        </kit>    
+        <item amount="8" material="cobblestone"/>
+        <item amount="5" material="arrow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>suffocation</damage>
+</disabledamage>
 <timelock>on</timelock>
+<respawn delay="2s" blackout="false"/>
 </map>
