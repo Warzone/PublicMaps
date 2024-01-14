@@ -1,15 +1,32 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Secluded Caverns: FFA</name>
-<version>1.0.0</version>
-<objective>Get the most kills before 10 minutes is up</objective>
+<version>1.0.1</version>
+<objective>Get the most kills before 8 minutes is up</objective>
 <gamemode>ffa</gamemode>
 <authors>
-    <!--
-    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
-    -->
-    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- Yoyo_ -->
 </authors>
 <players min="2" max="16"/>
+<kits>
+    <kit id="spawn">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" amount="18" material="arrow"/>
+        <helmet color="cd0000" material="leather helmet"/>
+        <chestplate color="cd0000" material="leather chestplate"/>
+        <leggings color="cd0000" material="leather leggings"/>
+        <boots material="leather boots">
+            <enchantment level="4">feather_falling</enchantment>
+        </boots>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="kill-reward">
+        <item slot="2" material="golden apple"/>
+        <item amount="12" material="arrow"/>
+        <effect duration="3" amplifier="4">regeneration</effect>
+    </kit>
+</kits>
 <spawns>
     <default yaw="90">
         <regions>
@@ -39,42 +56,14 @@
         </regions>
     </spawn>
 </spawns>
-<kits>
-    <kit id="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="3" amount="18">arrow</item>
-        <helmet color="cd0000" damage="-3000">leather helmet</helmet>
-        <chestplate color="cd0000" damamge="-3000">leather chestplate</chestplate>
-        <leggings color="cd0000" damage="-3000">leather leggings</leggings>
-        <boots material="leather boots">
-            <enchantment level="4">feather_falling</enchantment>
-        </boots>
-    </kit>
-    <kit id="kill-reward">
-        <item slot="2">golden apple</item>
-        <potion duration="3" amplifier="4">regeneration</potion>
-        <item amount="12">arrow</item>
-    </kit>
-</kits>
-<kill-rewards>
-    <kill-reward kit="kill-reward"/>
-</kill-rewards>
+<regions>
+    <apply block="never"/>
+</regions>
 <score>
     <kills>1</kills>
     <deaths>1</deaths>
 </score>
 <time>8m</time>
-<regions>
-    <apply block="never">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-</regions>
-<timelock>on</timelock>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -88,7 +77,14 @@
     <item>leather boots</item>
     <item>golden apple</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward kit="kill-reward"/>
+</kill-rewards>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
