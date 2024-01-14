@@ -1,10 +1,8 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="FFA">
+<map proto="1.4.2">
 <name>Hillside</name>
-<version>1.1.1</version>
-<objective>The player with the most kills after 15 minutes wins.</objective>
+<version>1.1.5</version>
+<objective>The player with the most kills after 7 minutes wins.</objective>
 <gamemode>ffa</gamemode>
-<phase>development</phase>
 <!-- Major map authors. -->
 <authors>
     <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samthecat43 -->
@@ -15,8 +13,8 @@
     <rule>You may team with other players.</rule>
     <rule>Hunger is disabled.</rule>
 </rules>
-<time>10m</time>
-<players min="2" max="100" max-overfill="110" show-name-tags="false"/>
+<time>7m</time>
+<players min="2" max="90" max-overfill="100" show-name-tags="false"/>
 <score>
     <kills>1</kills>
 </score>
@@ -30,14 +28,14 @@
 </broadcasts>
 <kits>
     <kit id="obs">
-        <potion duration="oo">night vision</potion>
+        <effect>night vision</effect>
     </kit>
     <kit id="player" force="true">
             <item slot="0" material="iron pickaxe" unbreakable="true" show-can-destroy="true" show-unbreakable="false">
                 <can-destroy>
-                    <material damage="4">stained clay</material>
-                    <material damage="3">stone</material>
-                    <material damage="5">stone</material>
+                    <material>stained clay:4</material>
+                    <material>stone:3</material>
+                    <material>stone:5</material>
                     <material>stone</material>
                     <material>leaves</material>
                     <material>ladder</material>
@@ -57,15 +55,15 @@
                     <material>grass</material>
                     <material>stone</material>
                     <material>gravel</material>
-                    <material damage="5">stone</material>
-                    <material damage="3">stone</material>
+                    <material>stone:5</material>
+                    <material>stone:3</material>
                     <material>162</material>
                     <material>5</material>
-                    <material damage="1">5</material>
+                    <material>5:1</material>
                     <material>126</material>
-                    <material damage="1">126</material>
+                    <material>126:1</material>
                     <material>17</material>
-                    <material damage="3">44</material>
+                    <material>44:3</material>
                     <material>67</material>
                     <material>dirt</material>
                 </can-place-on>
@@ -76,15 +74,15 @@
                     <material>grass</material>
                     <material>stone</material>
                     <material>gravel</material>
-                    <material damage="5">stone</material>
-                    <material damage="3">stone</material>
+                    <material>stone:5</material>
+                    <material>stone:3</material>
                     <material>162</material>
                     <material>5</material>
-                    <material damage="1">5</material>
+                    <material>5:1</material>
                     <material>126</material>
-                    <material damage="1">126</material>
+                    <material>126:1</material>
                     <material>17</material>
-                    <material damage="3">44</material>
+                    <material>44:3</material>
                     <material>67</material>
                     <material>dirt</material>
                 </can-place-on>
@@ -96,22 +94,22 @@
                     <material>grass</material>
                     <material>stone</material>
                     <material>gravel</material>
-                    <material damage="5">stone</material>
-                    <material damage="3">stone</material>
+                    <material>stone:5</material>
+                    <material>stone:3</material>
                     <material>162</material>
                     <material>5</material>
-                    <material damage="1">5</material>
+                    <material>5:1</material>
                     <material>126</material>
-                    <material damage="1">126</material>
+                    <material>126:1</material>
                     <material>17</material>
-                    <material damage="3">44</material>
+                    <material>44:3</material>
                     <material>67</material>
                     <material>dirt</material>
                 </can-place-on>
             </item>
-             <item slot="28" amount="24">arrow</item>
-            <helmet locked="true" damage="4">stained clay</helmet>
-            <chestplate unbreakable="true" color="E5E533" locked="true">leather chestplate</chestplate>
+            <item slot="28" amount="24" material="arrow"/>
+            <helmet locked="true" damage="4" material="stained clay"/>
+            <chestplate unbreakable="true" color="E5E533" locked="true" material="leather chestplate"/>
             <boots material="diamond boots" unbreakable="true" locked="true">
                 <enchantment level="2">blast_protection</enchantment>
             </boots>
@@ -153,54 +151,56 @@
     <damage enemy="false" other="false">block explosion</damage>
 </disabledamage>    
 <maxbuildheight>220</maxbuildheight>
-<kill-reward>
-    <item material="stained clay" amount="20" damage="4">
-        <can-place-on>
-            <material>stained clay</material>
-            <material>grass</material>
-            <material>stone</material>
-            <material>gravel</material>
-            <material damage="5">stone</material>
-            <material damage="3">stone</material>
-            <material>162</material>
-            <material>5</material>
-            <material damage="1">5</material>
-            <material>126</material>
-            <material damage="1">126</material>
-            <material>17</material>
-            <material damage="3">44</material>
-            <material>67</material>
-            <material>dirt</material>
-        </can-place-on>
-    </item>
-    <item material="tnt">
-        <can-place-on>
-            <material>stained clay</material>
-            <material>grass</material>
-            <material>stone</material>
-            <material>gravel</material>
-            <material damage="5">stone</material>
-            <material damage="3">stone</material>
-            <material>162</material>
-            <material>5</material>
-            <material damage="1">5</material>
-            <material>126</material>
-            <material damage="1">126</material>
-            <material>17</material>
-            <material damage="3">44</material>
-            <material>67</material>
-            <material>dirt</material>
-        </can-place-on>
-    </item>
-    <item amount="8">arrow</item>
-    <item amount="1">golden apple</item>
-</kill-reward>
-<killreward>
-      <filter>
-        <kill-streak count="5"/>
-      </filter>
-      <item name="`5Rocket" amount="1" grenade="true" grenade-power="3" grenade-destroy="true" grenade-fire="true">ender pearl</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="stained clay" amount="20" damage="4">
+            <can-place-on>
+                <material>stained clay</material>
+                <material>grass</material>
+                <material>stone</material>
+                <material>gravel</material>
+                <material>stone:5</material>
+                <material>stone:3</material>
+                <material>162</material>
+                <material>5</material>
+                <material>5:1</material>
+                <material>126</material>
+                <material>126:1</material>
+                <material>17</material>
+                <material>44:3</material>
+                <material>67</material>
+                <material>dirt</material>
+            </can-place-on>
+        </item>
+        <item material="tnt">
+            <can-place-on>
+                <material>stained clay</material>
+                <material>grass</material>
+                <material>stone</material>
+                <material>gravel</material>
+                <material>stone:5</material>
+                <material>stone:3</material>
+                <material>162</material>
+                <material>5</material>
+                <material>5:1</material>
+                <material>126</material>
+                <material>126:1</material>
+                <material>17</material>
+                <material>44:3</material>
+                <material>67</material>
+                <material>dirt</material>
+            </can-place-on>
+        </item>
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+            <filter>
+                <kill-streak count="5"/>
+            </filter>
+            <item name="`5Rocket" grenade="true" grenade-power="3" grenade-destroy="true" grenade-fire="true" material="ender pearl"/>
+    </kill-reward>
+</kill-rewards>
 <itemremove>
     <item>golden apple</item>
     <item>arrow</item>
@@ -208,11 +208,11 @@
     <item>ender pearl</item>
     <item>tnt</item>
     <item>ladder</item>
-    <item damage="4">stained clay</item>
+    <item>stained clay:4</item>
     <item>grass</item>
-    <item damage="5">stone</item>
+    <item>stone:5</item>
     <item>gravel</item>
-    <item damage="3">stone</item>
+    <item>stone:3</item>
     <item>dirt</item>
     <item>stone</item>
     <item>water_lily</item>
