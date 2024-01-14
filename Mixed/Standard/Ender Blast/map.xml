@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Ender Blast</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Destroy 75% of the enemy's endstone cuboid to enter the wool room inside of it, then return the wool back to your side</objective>
 <gamemode>ctw</gamemode>
 <gamemode>dtm</gamemode>
@@ -13,57 +13,57 @@
     <contributor uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Remastered XML" /> <!-- mitchiii_ -->
 </contributors>
 <broadcasts>
-    <tip after="20s" repeat="true">The wool room is inside the enemy endstone Cuboid</tip>
-    <tip after="1m"  repeat="true">The Cuboid can only be broken with TNT</tip>
-    <tip after="3m"  repeat="true">You may only enter the wool room when the Cuboid is destroyed</tip>
-    <tip after="5m"  repeat="true">You get endstone blocks every kill, use it to repair your Cuboid monument</tip>
+    <tip after="20s">The wool room is inside the enemy endstone Cuboid</tip>
+    <tip after="1m">The Cuboid can only be broken with TNT</tip>
+    <tip after="3m">You may only enter the wool room when the Cuboid is destroyed</tip>
+    <tip after="5m">You get endstone blocks every kill, use it to repair your Cuboid monument</tip>
 </broadcasts>
 <!-- Team Information -->
 <teams>
-    <team id="blue-team" color="blue"     max="20">Blue</team>
-    <team id="red-team"  color="dark red" max="20">Red</team>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+    <team id="red-team" color="dark red" max="20">Red</team>
 </teams>
 <kits>
     <kit id="default-kit">
-        <potion duration="oo">night vision</potion>
-        <potion duration="oo">saturation</potion>
+        <effect>night vision</effect>
+        <effect>saturation</effect>
     </kit>
     <kit id="main-kit" parents="default-kit">
-        <item slot="0"  unbreakable="true" material="diamond pickaxe" />
-        <item slot="1"  unbreakable="true" material="bow" />
-        <item slot="2"  amount="64"        material="nether fence" />
-        <item slot="4"  amount="64"        material="redstone" />
-        <item slot="5"  amount="64"        material="stone button" />
-        <item slot="6"  amount="64"        material="tnt" />
-        <item slot="7"  amount="16"        material="redstone block" />
-        <item slot="8"                     material="water bucket" />
-        <item slot="11" amount="64"        material="step" />
-        <item slot="15" amount="64"        material="tnt" />
-        <item slot="16" amount="64"        material="tnt" />
-        <item slot="17"                    material="water bucket" />
-        <item slot="20" amount="64"        material="trap door" />
-        <item slot="24" amount="64"        material="tnt" />
-        <item slot="25" amount="64"        material="tnt" />
-        <item slot="26"                    material="water bucket" />
-        <item slot="27" amount="64"        material="vine" />
-        <item slot="28" amount="36"        material="arrow" />
-        <item slot="29" amount="64"        material="ladder" />
-        <item slot="32" amount="64"        material="stone plate" />
-        <item slot="33" amount="64"        material="tnt" />
-        <item slot="34" amount="64"        material="tnt" />
-        <item slot="35"                    material="water bucket" />
-        <helmet unbreakable="true"         material="iron helmet">
+        <item slot="0" unbreakable="true" material="diamond pickaxe" />
+        <item slot="1" unbreakable="true" material="bow" />
+        <item slot="2" amount="64" material="nether fence" />
+        <item slot="4" amount="64" material="redstone" />
+        <item slot="5" amount="64" material="stone button" />
+        <item slot="6" amount="64" material="tnt" />
+        <item slot="7" amount="16" material="redstone block" />
+        <item slot="8" material="water bucket" />
+        <item slot="11" amount="64" material="step" />
+        <item slot="15" amount="64" material="tnt" />
+        <item slot="16" amount="64" material="tnt" />
+        <item slot="17" material="water bucket" />
+        <item slot="20" amount="64" material="trap door" />
+        <item slot="24" amount="64" material="tnt" />
+        <item slot="25" amount="64" material="tnt" />
+        <item slot="26" material="water bucket" />
+        <item slot="27" amount="64" material="vine" />
+        <item slot="28" amount="36" material="arrow" />
+        <item slot="29" amount="64" material="ladder" />
+        <item slot="32" amount="64" material="stone plate" />
+        <item slot="33" amount="64" material="tnt" />
+        <item slot="34" amount="64" material="tnt" />
+        <item slot="35" material="water bucket" />
+        <helmet unbreakable="true" material="iron helmet">
             <enchantment level="3">blast_protection</enchantment>
             <enchantment level="3">aqua_affinity</enchantment>
         </helmet>
-        <boots unbreakable="true"          material="iron boots">
+        <boots unbreakable="true" material="iron boots">
             <enchantment level="3">feather_falling</enchantment>
         </boots>
-        <potion amplifier="5" duration="oo">damage resistance</potion>
+        <effect amplifier="5">damage resistance</effect>
         <walk-speed>4</walk-speed>
     </kit>
     <kit id="blue-kit" parents="main-kit">
-        <item slot="3"  amount="64" damage="3" material="stained clay" />
+        <item slot="3" amount="64" damage="3" material="stained clay" />
         <item slot="12" amount="64" damage="3" material="stained clay" />
         <item slot="13" amount="64" damage="3" material="stained clay" />
         <item slot="21" amount="64" damage="3" material="stained clay" />
@@ -71,10 +71,10 @@
         <item slot="30" amount="64" damage="3" material="stained clay" />
         <item slot="31" amount="64" damage="3" material="stained clay" />
         <chestplate color="334CB2" unbreakable="true" material="leather chestplate" />
-        <leggings   color="334CB2" unbreakable="true" material="leather leggings" />
+        <leggings color="334CB2" unbreakable="true" material="leather leggings" />
     </kit>
     <kit id="red-kit"  parents="main-kit">
-        <item slot="3"  amount="64" damage="6" material="stained clay" />
+        <item slot="3" amount="64" damage="6" material="stained clay" />
         <item slot="12" amount="64" damage="6" material="stained clay" />
         <item slot="13" amount="64" damage="6" material="stained clay" />
         <item slot="21" amount="64" damage="6" material="stained clay" />
@@ -82,17 +82,17 @@
         <item slot="30" amount="64" damage="6" material="stained clay" />
         <item slot="31" amount="64" damage="6" material="stained clay" />
         <chestplate color="993333" unbreakable="true" material="leather chestplate" />
-        <leggings   color="993333" unbreakable="true" material="leather leggings" />
+        <leggings color="993333" unbreakable="true" material="leather leggings" />
     </kit>
     <kit id="remove-effects" force="true">
-        <potion amplifier="5" duration="0">damage resistance</potion>
+        <effect amplifier="5" duration="0">damage resistance</effect>
         <walk-speed>1</walk-speed>
     </kit>
 </kits>
 <spawns>
-    <default                region="default-spawn" kit="default-kit" yaw="180" />
-    <spawn team="blue-team" region="blue-spawn"    kit="blue-kit"    yaw="-90" />
-    <spawn team="red-team"  region="red-spawn"     kit="red-kit"     yaw="90" />
+    <default region="default-spawn" kit="default-kit" yaw="180" />
+    <spawn team="blue-team" region="blue-spawn" kit="blue-kit" yaw="-90" />
+    <spawn team="red-team" region="red-spawn" kit="red-kit" yaw="90" />
 </spawns>
 <filters>
     <team id="only-blue">blue-team</team>
@@ -158,94 +158,94 @@
 </filters>
 <regions>
     <!-- Left is North, Right is South -->
-    <cylinder   id="default-spawn"        base="-79.5,63,2.5" radius="1" height="1" />
-    <cylinder   id="blue-spawn"           base="-65.5,51,1.5" radius="3" height="1" />
-    <cylinder   id="red-spawn"            base="-93.5,51,1.5" radius="3" height="1" />
-    <negative   id="outside-playable-area">
-        <cuboid id="playable-area"        min="-169,-oo,-45" max="10,47,48" />
+    <cylinder id="default-spawn" base="-79.5,63,2.5" radius="1" height="1" />
+    <cylinder id="blue-spawn" base="-65.5,51,1.5" radius="3" height="1" />
+    <cylinder id="red-spawn" base="-93.5,51,1.5" radius="3" height="1" />
+    <negative id="outside-playable-area">
+        <cuboid id="playable-area" min="-169,-oo,-45" max="10,47,48" />
     </negative>
-    <above      id="above-spawn"          y="54" />
-    <union      id="blue-spawn-platforms">
-        <mirror id="blue-left-platform"   region="red-left-platform"   origin="-79.5,0,0.5" normal="1,0,0" />
-        <mirror id="blue-right-platform"  region="red-right-platform"  origin="-79.5,0,0.5" normal="1,0,0" />
+    <above id="above-spawn" y="54" />
+    <union id="blue-spawn-platforms">
+        <mirror id="blue-left-platform" region="red-left-platform" origin="-79.5,0,0.5" normal="1,0,0" />
+        <mirror id="blue-right-platform" region="red-right-platform" origin="-79.5,0,0.5" normal="1,0,0" />
     </union>
-    <union      id="blue-spawn-stairs">
-        <mirror id="blue-left-stair"      region="red-left-stair"      origin="-79.5,0,0.5" normal="1,0,0" />
-        <mirror id="blue-right-stair"     region="red-right-stair"     origin="-79.5,0,0.5" normal="1,0,0" />
+    <union id="blue-spawn-stairs">
+        <mirror id="blue-left-stair" region="red-left-stair" origin="-79.5,0,0.5" normal="1,0,0" />
+        <mirror id="blue-right-stair" region="red-right-stair" origin="-79.5,0,0.5" normal="1,0,0" />
     </union>
-    <mirror     id="blue-cuboid-region"   region="red-cuboid-region"   origin="-79.5,0,0.5" normal="1,0,0" />
-    <mirror     id="blue-cuboid-inside-o" region="red-cuboid-inside-o"   origin="-79.5,0,0.5" normal="1,0,0" />
-    <mirror     id="blue-cuboid-inside"   region="red-cuboid-inside"   origin="-79.5,0,0.5" normal="1,0,0" />
-    <union      id="red-spawn-platforms">
-        <cuboid id="red-left-platform"    min="-130,0,28"    max="-137,12,35" />
-        <cuboid id="red-right-platform"   min="-130,0,-32"   max="-137,12,-25" />
+    <mirror id="blue-cuboid-region" region="red-cuboid-region" origin="-79.5,0,0.5" normal="1,0,0" />
+    <mirror id="blue-cuboid-inside-o" region="red-cuboid-inside-o" origin="-79.5,0,0.5" normal="1,0,0" />
+    <mirror id="blue-cuboid-inside" region="red-cuboid-inside" origin="-79.5,0,0.5" normal="1,0,0" />
+    <union id="red-spawn-platforms">
+        <cuboid id="red-left-platform" min="-130,0,28" max="-137,12,35" />
+        <cuboid id="red-right-platform" min="-130,0,-32" max="-137,12,-25" />
     </union>
-    <union      id="red-spawn-stairs">
-        <cuboid id="red-left-stair"       min="-136,6,-25"   max="-131,14,-19" />
-        <cuboid id="red-right-stair"      min="-136,6,22"    max="-131,14,28" />
+    <union id="red-spawn-stairs">
+        <cuboid id="red-left-stair" min="-136,6,-25" max="-131,14,-19" />
+        <cuboid id="red-right-stair" min="-136,6,22" max="-131,14,28" />
     </union>
-    <cuboid     id="red-cuboid-region"    min="-140,9,8"     max="-127,37,-5" />
-    <cuboid     id="red-cuboid-inside-o"  min="-137,8,-2"    max="-130,34,5" />
-    <cuboid     id="red-cuboid-inside"    min="-136,8,-1"    max="-131,34,4" />
-    <union      id="wool-monuments">
-        <block  id="red-wool-region"      location="-151.5,12,1.5" />
-        <mirror id="blue-wool-region"     region="red-wool-region"     origin="-79.5,0,0.5" normal="1,0,0" />
+    <cuboid id="red-cuboid-region" min="-140,9,8" max="-127,37,-5" />
+    <cuboid id="red-cuboid-inside-o" min="-137,8,-2" max="-130,34,5" />
+    <cuboid id="red-cuboid-inside" min="-136,8,-1" max="-131,34,4" />
+    <union id="wool-monuments">
+        <block id="red-wool-region" location="-151.5,12,1.5" />
+        <mirror id="blue-wool-region" region="red-wool-region" origin="-79.5,0,0.5" normal="1,0,0" />
     </union>
-    <union      id="around-cuboids">
-        <cuboid id="around-red-cuboid"    min="-119,-oo,16"            max="-148,oo,-13" />
-        <mirror id="around-blue-cuboid"   region="around-red-cuboid"   origin="-79.5,0,0.5" normal="1,0,0" />
+    <union id="around-cuboids">
+        <cuboid id="around-red-cuboid" min="-119,-oo,16" max="-148,oo,-13" />
+        <mirror id="around-blue-cuboid" region="around-red-cuboid" origin="-79.5,0,0.5" normal="1,0,0" />
     </union>
-    <union      id="around-wool-monuments">
-        <cuboid id="around-red-monument"  min="-153,10,3"              max="-150,14,0" />
+    <union id="around-wool-monuments">
+        <cuboid id="around-red-monument" min="-153,10,3" max="-150,14,0" />
         <mirror id="around-blue-monuemtn" region="around-red-monument" origin="-79.5,0,0.5" normal="1,0,0" />
     </union>
     <union id="portal-regions">
-        <mirror id="blue-left"  region="red-right" origin="-79.5,0,0.5" normal="1,0,0"/>
-        <mirror id="blue-right" region="red-left"  origin="-79.5,0,0.5" normal="1,0,0"/>
-        <cuboid id="red-left"   min="-135,50,29"   max="-132,54,33" />
-        <cuboid id="red-right"  min="-135,50,-30"  max="-132,54,-27"/>
+        <mirror id="blue-left" region="red-right" origin="-79.5,0,0.5" normal="1,0,0"/>
+        <mirror id="blue-right" region="red-left" origin="-79.5,0,0.5" normal="1,0,0"/>
+        <cuboid id="red-left" min="-135,50,29" max="-132,54,33" />
+        <cuboid id="red-right" min="-135,50,-30" max="-132,54,-27"/>
     </union>
     <complement id="wool-not-allowed-here">
         <region id="playable-area" />
         <region id="wool-monuments" />
     </complement>
     <!-- Block Rules -->
-    <apply region="portal-regions"                         kit="remove-effects" />
-    <apply region="above-spawn"          enter="never"                                     message="You may not climb above the map boundaries" />
-    <apply region="outside-playable-area"                  block="never"                   messgae="You may not interact with blocks outside of the map boundaries" />
-    <apply region="blue-spawn-platforms" enter="only-blue" block="never"                   message="`cYou may not interact with `9Blue`c's spawn" />
-    <apply region="blue-spawn-stairs"                      block="never"                   message="`cYou may not interact with `9Blue`c's spawn" />
-    <apply region="red-spawn-platforms"  enter="only-red"  block="never"                   message="`cYou may not interact with `4Red`c's spawn" />
-    <apply region="red-spawn-stairs"                       block="never"                   message="`cYou may not interact with `4Red`c's spawn" />
-    <apply region="blue-cuboid-inside"                     block="never" />
-    <apply region="red-cuboid-inside"                      block="never" />
-    <apply region="around-wool-monuments"                  block="never" />
-    <apply region="blue-cuboid-inside-o"                   block="woolroom-blocks-blue" />
-    <apply region="red-cuboid-inside-o"                    block="woolroom-blocks-red" />
-    <apply region="blue-cuboid-region"                     use="deny-before-red-monument" />
-    <apply region="red-cuboid-region"                      use="deny-before-blue-monument" />
-    <apply region="around-cuboids"                         block="bad-blocks" />
-    <apply region="playable-area"                          block="tnt-immune" />
-    <apply region="blue-cuboid-inside" enter="only-red"                                    message="`cYou may not enter `4Red`c's woolroom!" />
-    <apply region="red-cuboid-inside"  enter="only-blue"                                   message="`cYou may not enter `9Blue`c's woolroom!" />
+    <apply region="portal-regions" kit="remove-effects" />
+    <apply region="above-spawn" enter="never" message="You may not climb above the map boundaries" />
+    <apply region="outside-playable-area" block="never" message="You may not interact with blocks outside of the map boundaries" />
+    <apply region="blue-spawn-platforms" enter="only-blue" block="never" message="`cYou may not interact with `9Blue`c's spawn" />
+    <apply region="blue-spawn-stairs" block="never" message="`cYou may not interact with `9Blue`c's spawn" />
+    <apply region="red-spawn-platforms" enter="only-red"  block="never" message="`cYou may not interact with `4Red`c's spawn" />
+    <apply region="red-spawn-stairs" block="never" message="`cYou may not interact with `4Red`c's spawn" />
+    <apply region="blue-cuboid-inside" block="never" />
+    <apply region="red-cuboid-inside" block="never" />
+    <apply region="around-wool-monuments" block="never" />
+    <apply region="blue-cuboid-inside-o" block="woolroom-blocks-blue" />
+    <apply region="red-cuboid-inside-o" block="woolroom-blocks-red" />
+    <apply region="blue-cuboid-region" use="deny-before-red-monument" />
+    <apply region="red-cuboid-region" use="deny-before-blue-monument" />
+    <apply region="around-cuboids" block="bad-blocks" />
+    <apply region="playable-area" block="tnt-immune" />
+    <apply region="blue-cuboid-inside" enter="only-red" message="`cYou may not enter `4Red`c's woolroom!" />
+    <apply region="red-cuboid-inside" enter="only-blue" message="`cYou may not enter `9Blue`c's woolroom!" />
 </regions>
 <!-- Objectives -->
 <destroyables name="Cuboid" completion="75%" materials="ender stone" show-progress="true" sparks="true">
     <destroyable id="blue-cuboid" owner="blue-team" region="blue-cuboid-region" />
-    <destroyable id="red-cuboid"  owner="red-team"  region="red-cuboid-region" />
+    <destroyable id="red-cuboid" owner="red-team" region="red-cuboid-region" />
 </destroyables>
 <wools>
     <wool id="blue-wool" team="blue-team" color="blue" monument="blue-wool-region" location="-133.5,17,-1.5" />
-    <wool id="red-wool"  team="red-team"  color="red"  monument="red-wool-region"  location="-25.5,17,1.5" />
+    <wool id="red-wool" team="red-team" color="red" monument="red-wool-region" location="-25.5,17,1.5" />
 </wools>
 <portals y="-43" pitch="@0">
     <portals filter="only-blue">
         <portal region="blue-right" yaw="@180" />
-        <portal region="blue-left"  yaw="@0" />
+        <portal region="blue-left" yaw="@0" />
     </portals>
     <portals filter="only-red">
         <portal region="red-right" yaw="@0" />
-        <portal region="red-left"  yaw="@180" />
+        <portal region="red-left" yaw="@180" />
     </portals>
 </portals>
 <itemremove>
@@ -286,14 +286,16 @@
     <item>quartz block</item>
     <item>ender stone</item>
 </itemremove>
-<kill-reward>
-    <item amount="12">arrow</item>
-    <item amount="16">tnt</item>
-    <item amount="8">ender stone</item>
-    <kit>
-        <effect amplifier="2" duration="5">regeneration</effect>
-    </kit>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" material="arrow"/>
+        <item amount="16" material="tnt"/>
+        <item amount="8" material="ender stone"/>
+        <kit>
+            <effect amplifier="2" duration="5">regeneration</effect>
+        </kit>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage self="false" ally="true" enemy="false" other="false">block explosion</damage>
 </disabledamage>
