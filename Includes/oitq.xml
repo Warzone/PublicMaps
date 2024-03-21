@@ -1,0 +1,205 @@
+<map proto="1.4.2">
+<!--
+      \
+      |\
+    >-|-|->
+      |/
+      /
+-->
+<!-- One in the Quiver gamemode include file -->
+<!-- Created by zzuf -->
+<!-- Version 2023.12.10-2 -->
+<gamemode>rage</gamemode>
+<gamemode>ffa</gamemode>
+<gamemode>arcade</gamemode>
+<constants>
+    <constant id="time-limit">3</constant> <!-- Time limit in minutes -->
+    <constant id="base-kit">default-players-kit</constant> <!-- The base kit that all classes will have -->
+    <constant id="extra-kit">default-extra-kit</constant> <!-- For small additions to the base kit, useful if you just want to add stuff to the default one -->
+    <constant id="game-title">One in the Quiver</constant> <!-- Gamemode title - Modify if your map combines other gamemodes with OITQ -->
+    <constant id="classes-amount">3</constant> <!-- Amount of classes the map has -->
+</constants>
+<game>${game-title}</game>
+<modifybowprojectile pickup-filter="never"/>
+<rage/>
+<time result="score">${time-limit}m</time>
+<respawn auto="true"/>
+<score>
+    <kills>1</kills>
+</score>
+<broadcasts>
+    <alert after="1s" every="1m">`7Swords `c`ldo not `7kill in one hit, but bow shots `a`ldo`7!`r</alert>
+    <tip after="2s" every="1m">`7You can tap your jump key twice to use your `fdouble jumps`7! Time them carefully to quickly move around!`r</tip>
+</broadcasts>
+<kits>
+    <kit id="default-players-kit">
+        <effect duration="1s" amplifier="255" ambient="true">damage resistance</effect>
+        <double-jump power="2" recharge-time="0.5s" recharge-before-landing="true"/>
+        <game-mode>adventure</game-mode>
+        <action>
+            <kit id="${extra-kit}"/>
+        </action>
+    </kit>
+    <kit id="default-extra-kit">
+        <item slot="9" material="air"/>
+    </kit>
+    <kit id="obs-kit">
+        <book show-other="false">
+            <title>`e`lHow to Play</title>
+            <author>zzuf</author>
+            <pages>
+                <page>
+                    `2» `lONE IN THE
+                    `2`lQUIVER`0
+                    
+                    Swords `cdon't`0 kill in one
+                    hit, but bow shots `2do`0!
+                    
+                    Time your `7double
+                    `7jumps`0 carefully to
+                    `ochain`0 them and fly
+                    around!
+                    
+                    Play using one of `6${classes-amount}`0
+                    available classes!
+                </page>
+            </pages>
+        </book>
+    </kit>
+    <give kit="obs-kit" filter="is-observer"/>
+</kits>
+<classes family="oitq">
+    <class name="Archer" description="Stone sword! Quick double jumps!" longdescription="Stone sword, insta-kill bow and double jumps!" icon="bow" default="true">
+        <kit parents="${base-kit}">
+            <item slot="0" unbreakable="true" name="`7`lRegular `rBowie Knife" lore="`8Multiple Hit Kill" material="stone sword"/>
+            <item slot="1" unbreakable="true" name="`c`lMo`6`ldd`e`led `rRepeater" lore="`8One Hit Kill" enchantment="power:10" show-enchantments="false" material="bow"/>
+            <item slot="2" material="arrow"/>
+        </kit>
+    </class>
+    <class name="Brawler" description="Iron sword! No bow!" longdescription="Iron sword! No bow!" icon="potion:9">
+        <kit parents="${base-kit}">
+            <item slot="0" unbreakable="true" name="`c`lSharpened `rBowie Knife" lore="`8Multiple Hit Kill" material="iron sword"/>
+        </kit>
+    </class>
+    <class name="Speedster" description="Wooden sword! Speed! No bow!" longdescription="Wooden sword! Speed! No bow!" icon="potion:2">
+        <kit parents="${base-kit}">
+            <item slot="0" unbreakable="true" name="`c`lSharpened `rStick" lore="`8Multiple Hit Kill" material="wood sword"/>
+            <effect duration="oo" ambient="true">speed</effect>
+        </kit>
+    </class>
+</classes>
+<filters>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
+    <observing id="is-observer"/>
+</filters>
+<regions>
+    <apply block="deny-players"/>
+</regions>
+<actions>
+    <action id="killstreak-sound" scope="player">
+        <sound key="mob.enderdragon.growl" volume="1" pitch="0.8"/>
+    </action>
+</actions>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <class>Archer</class>
+        </filter>
+        <item amount="1" material="arrow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `b`lTriple kill! `f(3 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `a`lKilling Spree! `f(5 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="10" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `e`lRampage! `f(10 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="15" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `6`lDominating! `f(15 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="20" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `c`lUnstoppable! `f(20 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="30" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `4`lGODLIKE! `f(30 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="50" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `0`l`kzzuf`r `f(50 kills)"/>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>wood sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>bone</item>
+    <item>rotten flesh</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
