@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Armature</name>
-<version>1.0.3</version>
+<version>1.0.7</version>
 <objective>Destroy the enemy's monument and repair yours!</objective>
 <gamemode>dtm</gamemode>
 <created>2022-11-19</created>
@@ -8,8 +8,8 @@
     <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128"/> <!-- zzuf -->
 </authors>
 <broadcasts>
-    <tip after="2s" every="4m">Pick up `eGold Blocks`r from the spawner at middle to repair your monument!</tip>
-    <tip after="4s" every="4m">Keep in mind that you'll also get Slowness 5 for a bit!</tip>
+    <tip after="2s" every="4m">`3Pick up `eGold Blocks`3 from the spawner at middle to repair your monument!</tip>
+    <tip after="4s" every="4m">`3Keep in mind that you'll also get `7Slowness 5`3 for a bit!</tip>
 </broadcasts>
 <teams>
     <team id="red-team" color="dark red" max="12">Red</team>
@@ -31,7 +31,7 @@
     <default>
         <regions>
             <point yaw="180">0.5,32,32.5</point> <!-- South -->
-            <point yaw="0">0.5,32,-31.5</point> <!-- North -->
+            <point>0.5,32,-31.5</point> <!-- North -->
         </regions>
     </default>
 </spawns>
@@ -44,7 +44,7 @@
         <item slot="3" material="shears" unbreakable="true"/>
         <item slot="4" amount="64" material="wool" team-color="true"/>
         <item slot="5" amount="32" material="glass"/>
-        <item slot="6" amount="2" name="`rAuto-Igniting TNT" lore="`cDoes not damage nearby blocks" enchantment="thorns:5" material="tnt"/>
+        <item slot="6" name="`rAuto-Igniting TNT" lore="`cDoes not damage nearby blocks" enchantment="thorns:5" material="tnt"/>
         <item slot="8" material="golden apple"/>
         <item slot="28" amount="1" material="arrow"/>
         <item slot="30" material="stone spade" unbreakable="true"/>
@@ -112,13 +112,13 @@
     </negative>
     <apply block-place="deny-gold-block" region="not-monuments" message="You may only place `eGold Blocks`r in your damaged monument!"/>
 </regions>
-<destroyables materials="gold block" show-progress="true" completion="100%" required="true" repairable="true">
+<destroyables materials="gold block" show-progress="true" required="true" repairable="true">
     <destroyable owner="red-team" name="Red Monument" region="red-monument"/>
     <destroyable owner="yellow-team" name="Yellow Monument" region="yellow-monument"/>
 </destroyables>
 <spawners>
     <spawner spawn-region="middle-spawner-point" player-region="middle-spawner-area" delay="40" max-entities="1">
-        <item material="gold block" amount="1"/>
+        <item material="gold block" amount="1" prevent-sharing="true"/>
         <potion duration="30" amplifier="5" damage="10">
             <effect>slowness</effect>
         </potion>
@@ -172,15 +172,8 @@
                 <material>stone:0</material>
                 <material>stone:5</material>
                 <material>stone:6</material>
+                <material>double_step:8</material>
             </any>
-        </filter>
-        <drops>
-            <item chance="1" material="cobblestone"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material damage="8">double_step</material>
         </filter>
         <drops>
             <item chance="1" material="cobblestone"/>
@@ -199,6 +192,7 @@
     <instantignite>true</instantignite>
     <fuse>2s</fuse>
     <blockdamage>false</blockdamage>
+    <friendly-defuse>off</friendly-defuse>
 </tnt>
 <kill-rewards>
     <kill-reward>
@@ -210,4 +204,7 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+</disabledamage>
 </map>
