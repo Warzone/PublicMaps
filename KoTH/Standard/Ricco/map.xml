@@ -1,45 +1,94 @@
 <map proto="1.4.2">
 <name>Ricco</name>
-<created>2019-09-02</created>
-<version>1.0.2</version>
-<objective>Be the first team to reach 1200 points from capturing the hills!</objective>
+<variant id="christmas" world="christmas">Christmas</variant>
+<variant id="rage">Rage</variant>
+<variant id="rage_christmas" world="christmas">Rage Christmas</variant>
+<version>2.2.0</version>
+<objective>Be the first team to reach 1200 points by capturing the hills!</objective>
 <gamemode>koth</gamemode>
+<if variant="rage,rage_christmas">
+    <gamemode>rage</gamemode>
+    <gamemode>arcade</gamemode>
+</if>
+<if variant="default">
+    <created>2019-09-02</created>
+</if>
+<if variant="christmas">
+    <created>2021-11-02</created>
+</if>
+<if variant="rage">
+    <created>2022-06-11</created>
+</if>
+<if variant="rage_christmas">
+    <created>2022-12-21</created>
+</if>
+<!-- Finer map controls -->
+<if variant="default,rage">
+    <constant id="yellow-team-color">Yellow</constant>
+</if>
+<unless variant="default,rage">
+    <constant id="yellow-team-color">Green</constant>
+</unless>
+<if variant="default,christmas"> <!-- Targets non-Rage variants -->
+    <constant id="sword-enchantment" delete="true"/>
+    <constant id="bow-enchantment" delete="true"/>
+    <constant id="arrow-amount">24</constant>
+    <constant id="hill-capture-time">5s</constant>
+</if>
+<if variant="rage,rage_christmas"> <!-- Targets Rage variants -->
+    <constant id="sword-enchantment">damage_all:10</constant>
+    <constant id="bow-enchantment">arrow_damage:10</constant>
+    <constant id="arrow-amount" delete="true"/>
+    <constant id="hill-capture-time">3s</constant>
+</if>
+<!-- Authors and Contributors -->
 <authors>
-    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b" /> <!-- Henrs -->
+    <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b"/> <!-- Henrs -->
+    <if variant="rage,rage_christmas">
+        <author uuid="53af1e46-7424-485b-97de-7bf8d854a2aa" contribution="Rage version"/> <!-- __BT -->
+    </if>
 </authors>
+<contributors>
+    <if variant="rage,rage_christmas">
+        <contributor uuid="5fa68d7e-a2e8-4ff4-8bb6-c4d6d53cdfdf" contribution="Inspiration"/> <!-- Prolav -->
+        <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Inspiration"/> <!-- Preinstalled -->
+    </if>
+    <if variant="christmas,rage_christmas">
+        <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit"/> <!-- Wesdial -->
+    </if>
+</contributors>
+<!-- Teams -->
 <teams>
     <team id="red-team" color="dark red" max="16">Red</team>
-    <team id="yellow-team" color="yellow" max="16">Yellow</team>
+    <team id="yellow-team" color="${yellow-team-color}" max="16">${yellow-team-color}</team>
 </teams>
+<!-- Kits -->
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="0" unbreakable="true" enchantments="${sword-enchantment}" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantments="${bow-enchantment}" material="bow"/>
         <item slot="2" amount="16" material="leaves"/>
         <item slot="3" unbreakable="true" material="shears"/>
-        <item slot="7" amount="24" material="arrow"/>
-        <item slot="8" amount="64" material="golden carrot"/>
+        <item slot="7" amount="${arrow-amount}" material="arrow"/>
+        <unless variant="rage,rage_christmas">
+            <item slot="8" amount="64" material="golden carrot"/>
+        </unless>
         <helmet unbreakable="true" material="iron helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
-        <potion duration="5s" amplifier="10">damage resistance</potion>
-    </kit>
-    <kit id="red" parents="spawn">
-        <leggings color="cd0000" unbreakable="true" material="leather leggings"/>
-        <boots color="cd0000" unbreakable="true" material="leather boots"/>
-    </kit>
-    <kit id="yellow" parents="spawn">
-        <leggings color="e5e533" unbreakable="true" material="leather leggings"/>
-        <boots color="e5e533" unbreakable="true" material="leather boots"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="255">damage resistance</effect>
     </kit>
 </kits>
+<!-- Spawns -->
 <spawns>
-    <spawn team="red-team" kit="red">
+    <spawn team="red-team" kit="spawn-kit">
         <region>
             <point>-11.5,6,-48.5</point>
         </region>
     </spawn>
-    <spawn yaw="180" team="yellow-team" kit="yellow">
+    <spawn yaw="180" team="yellow-team" kit="spawn-kit">
         <region>
             <point>12.5,6,49.5</point>
         </region>
@@ -50,6 +99,7 @@
         </region>
     </default>
 </spawns>
+<!-- Filters -->
 <filters>
     <all id="only-leaves-in-map">
         <not>
@@ -58,6 +108,7 @@
         <material>leaves</material>
     </all>
 </filters>
+<!-- Regions -->
 <regions>
     <union id="spawns">
         <cuboid min="-14,6,51" max="-9,16,-46"/>
@@ -65,12 +116,13 @@
     </union>
     <above id="playable" y="1"/>
     <below id="non-playable" y="1"/>
-    <apply region="spawns" block="never" message="`eYou may not build in the `cSpawns`e!"/>
-    <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7void`e!"/>
+    <apply region="spawns" block="never" message="`eYou may not build in the `cspawns`e!"/>
+    <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7the void`e!"/>
     <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
 </regions>
-<control-points required="false" incremental="true">
-    <control-point name="Point A" capture-time="5s">
+<!-- Control Points -->
+<control-points required="false" incremental="true" capture-time="${hill-capture-time}">
+    <control-point name="Point A">
         <capture>
             <cuboid min="26,2,-23" max="19,4,-16"/>
         </capture>
@@ -78,7 +130,7 @@
             <cuboid min="26,2,-23" max="19,4,-16"/>
         </progress>
     </control-point>
-    <control-point name="Middle" capture-time="5s">
+    <control-point name="Middle">
         <capture>
             <cuboid min="-3,7,4" max="4,10,-3"/>
         </capture>
@@ -86,7 +138,7 @@
             <cuboid min="-3,7,4" max="4,10,-3"/>
         </progress>
     </control-point>
-    <control-point name="Point B" capture-time="5s">
+    <control-point name="Point B">
         <capture>
             <cuboid min="-25,2,24" max="-18,4,17"/>
         </capture>
@@ -95,9 +147,23 @@
         </progress>
     </control-point>
 </control-points>
+<!-- Map Control -->
+<if variant="rage,rage_christmas">
+    <rage/>
+    <hunger>
+        <depletion>off</depletion>
+    </hunger>
+    <disabledamage>
+        <damage>fall</damage>
+    </disabledamage>
+</if>
 <score>
     <limit>1200</limit>
+    <if variant="rage,rage_christmas">
+        <kills>1</kills>
+    </if>
 </score>
+<!-- Misc -->
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -116,8 +182,13 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
-        <item amount="8" material="arrow"/>
+        <if variant="default,christmas">
+            <item material="golden apple"/>
+            <item amount="8" material="arrow"/>
+        </if>
+        <if variant="rage,rage_christmas">
+            <item material="arrow"/>
+        </if>
         <item amount="8" material="leaves"/>
     </kill-reward>
 </kill-rewards>
