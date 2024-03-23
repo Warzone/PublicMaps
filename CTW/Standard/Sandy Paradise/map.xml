@@ -1,9 +1,28 @@
 <map proto="1.4.2">
 <name>Sandy Paradise</name>
-<created>2021-06-27</created>
-<version>1.0.3</version>
+<variant id="christmas" world="christmas" override="true">Snowy Paradise</variant>
+<variant id="halloween" world="halloween" override="true">Spooky Paradise</variant>
+<version>1.1.0</version>
 <objective>Capture the wools and bring them back to your base!</objective>
 <gamemode>ctw</gamemode>
+<if variant="default">
+    <created>2021-06-27</created>
+    <constant id="cyan-team-name">Cyan</constant>
+    <constant id="green-team-name">Green</constant>
+    <constant id="green-team-color">green</constant>
+</if>
+<if variant="christmas">
+    <created>2021-11-20</created>
+    <constant id="cyan-team-name">Cyan</constant>
+    <constant id="green-team-name">Yellow</constant>
+    <constant id="green-team-color">yellow</constant>
+</if>
+<if variant="halloween">
+    <created>2021-10-02</created>
+    <constant id="cyan-team-name">Caeruleam</constant>
+    <constant id="green-team-name">Viridis</constant>
+    <constant id="green-team-color">green</constant>
+</if>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- FlammingFreak296 -->
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- Wesdial -->
@@ -15,8 +34,8 @@
 </contributors>
 <!-- Teams -->
 <teams>
-    <team id="cyan-team" color="dark aqua" max="40">Cyan</team>
-    <team id="green-team" color="green" max="40">Green</team>
+    <team id="cyan-team" color="dark aqua" max="40">${cyan-team-name}</team>
+    <team id="green-team" color="${green-team-color}" max="40">${green-team-name}</team>
 </teams>
 <!-- Kits -->
 <kits>
@@ -46,21 +65,17 @@
 </spawns>
 <!-- Wools -->
 <wools craftable="false">
-    <!-- cyan Team -->
-    <wool team="cyan-team" monument="cyan-team-orange-wool" color="orange" location="158,72,2"/>
-    <wool team="cyan-team" monument="cyan-team-red-wool" color="red" location="158,72,-2"/>
-    <!-- green Team -->
-    <wool team="green-team" monument="green-team-pink-wool" color="pink" location="-158,72,-2"/>
-    <wool team="green-team" monument="green-team-purple-wool" color="purple" location="-158,72,2"/>
+    <!-- Cyan Team -->
+    <wool team="cyan-team" monument="cyan-team-orange-wool" color="orange" location="158,8,2"/>
+    <wool team="cyan-team" monument="cyan-team-red-wool" color="red" location="158,8,-2"/>
+    <!-- Green Team -->
+    <wool team="green-team" monument="green-team-pink-wool" color="pink" location="-158,8,-2"/>
+    <wool team="green-team" monument="green-team-purple-wool" color="purple" location="-158,8,2"/>
 </wools>
 <!-- Filters -->
 <filters>
-    <not id="not-cyan">
-        <team id="only-cyan">cyan-team</team>
-    </not>
-    <not id="not-green">
-        <team id="only-green">green-team</team>
-    </not>
+    <team id="only-cyan">cyan-team</team>
+    <team id="only-green">green-team</team>
     <not id="not-void">
         <void/>
     </not>
@@ -82,24 +97,24 @@
         <rectangle id="orange-red-wool-lane" min="132,-50" max="168,51"/>
     </union>
     <!-- Spawns -->
-    <point id="cyan-spawn">-128.5,73,0.5</point>
-    <point id="green-spawn">129.5,73,0.5</point>
-    <point id="obs-spawn">0.5,106,100.5</point>
+    <point id="cyan-spawn">-128.5,9,0.5</point>
+    <point id="green-spawn">129.5,9,0.5</point>
+    <point id="obs-spawn">0.5,42,100.5</point>
     <!-- Wool Monuments -->
     <!-- Cyan Team -->
-    <block id="cyan-team-orange-wool">-132,74,-2</block>
-    <block id="cyan-team-red-wool">-132,74,2</block>
-    <!-- green Team -->
-    <block id="green-team-pink-wool">132,74,-2</block>
-    <block id="green-team-purple-wool">132,74,2</block>
+    <block id="cyan-team-orange-wool">-132,10,-2</block>
+    <block id="cyan-team-red-wool">-132,10,2</block>
+    <!-- Green Team -->
+    <block id="green-team-pink-wool">132,10,-2</block>
+    <block id="green-team-purple-wool">132,10,2</block>
     <negative id="not-map">
         <rectangle id="map" min="-167,-76" max="168,77"/>
     </negative>
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="cyan-spawn-protection" enter="only-cyan" message="You may not enter the enemy spawn."/>
-    <apply region="green-spawn-protection" enter="only-green" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn-protection" enter="only-cyan" message="You may not enter the enemy's spawn."/>
+    <apply region="green-spawn-protection" enter="only-green" message="You may not enter the enemy's spawn."/>
     <apply region="cyan-team-wool-rooms" enter="only-green" message="You may not enter your own wool room!"/>
     <apply region="cyan-team-wool-rooms" block="only-green" message="You are not allowed to modify terrain here."/>
     <apply region="green-team-wool-rooms" enter="only-cyan" message="You may not enter your own wool room!"/>
