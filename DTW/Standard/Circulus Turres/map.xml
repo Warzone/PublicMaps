@@ -1,9 +1,15 @@
 <map proto="1.4.2" game="Destroy the Wool">
 <name>Circulus Turres</name>
-<created>2021-06-04</created>
-<version>1.1.5</version>
+<variant id="halloween" world="halloween" override="true">Haunted Turres</variant>
+<version>1.2.0</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
+<if variant="default">
+    <created>2021-06-04</created>
+</if>
+<if variant="halloween">
+    <created>2021-10-01</created>
+</if>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
@@ -13,8 +19,8 @@
 </contributors>
 <!-- Broadcasts -->
 <broadcasts>
-    <tip after="1s">Defensive supplies are in the towers!</tip>
-    <tip after="1s" every="1m">Iron blocks regenerate on this map!</tip>
+    <tip after="1s" every="5m">Defensive supplies are inside the towers located at your spawn.</tip>
+    <tip after="2s" every="5m">Iron blocks regenerate on this map!</tip>
 </broadcasts>
 <!-- Teams -->
 <teams>
@@ -28,33 +34,22 @@
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="iron pickaxe"/>
         <item slot="3" material="golden apple"/>
+        <item slot="4" amount="64" team-color="true" material="stained clay"/>
+        <item slot="31" amount="64" team-color="true" material="stained clay"/>
+        <item slot="32" amount="64" team-color="true" material="stained clay"/>
+        <item slot="5" amount="64" team-color="true" material="stained glass"/>
         <item slot="8" amount="64" material="cooked beef"/>
         <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
-    </kit>
-    <kit id="aliquam-kit" parent="default">
-        <item slot="4" amount="64" damage="4" material="stained clay"/>
-        <item slot="31" amount="64" damage="4" material="stained clay"/>
-        <item slot="32" amount="64" damage="4" material="stained clay"/>
-        <item slot="5" amount="64" damage="4" material="stained glass"/>
-        <helmet unbreakable="true" color="D87F33" material="leather helmet"/>
-        <leggings unbreakable="true" color="D87F33" material="leather leggings"/>
-        <boots unbreakable="true" color="D87F33" material="leather boots"/>
-    </kit>
-    <kit id="purpura-kit" parent="default">
-        <item slot="4" amount="64" damage="10" material="stained clay"/>
-        <item slot="31" amount="64" damage="10" material="stained clay"/>
-        <item slot="32" amount="64" damage="10" material="stained clay"/>
-        <item slot="5" amount="64" damage="10" material="stained glass"/>
-        <helmet unbreakable="true" color="7F3FB2" material="leather helmet"/>
-        <leggings unbreakable="true" color="7F3FB2" material="leather leggings"/>
-        <boots unbreakable="true" color="7F3FB2" material="leather boots"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="aliquam-team" kit="aliquam-kit" yaw="-90" region="aliquam-spawn"/>
-    <spawn team="purpura-team" kit="purpura-kit" yaw="90" region="purpura-spawn"/>
+    <spawn team="aliquam-team" kit="default" yaw="-90" region="aliquam-spawn"/>
+    <spawn team="purpura-team" kit="default" yaw="90" region="purpura-spawn"/>
     <default yaw="180" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
@@ -97,16 +92,16 @@
         <rectangle id="map" min="-134,55" max="134,-55"/>
     </negative>
     <!-- Applications -->
-    <apply region="spawn-protections" block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in spawn!"/>
-    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="aliquam-spawn-protection" enter="aliquam-only" message="You may not enter the enemy's spawn."/>
+    <apply region="purpura-spawn-protection" enter="purpura-only" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block-break="only-iron" block-place="only-iron-regen" message="You may only modify iron blocks in spawn!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="diamond-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="aliquam-spawn-protection" enter="aliquam-only" message="You may not enter the enemy spawn."/>
-    <apply region="purpura-spawn-protection" enter="purpura-only" message="You may not enter the enemy spawn."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
 </regions>
 <!-- Renewables -->
 <renewables>
-    <renewable interval="3" grow="true" particles="false" sound="false" avoid-players="2" region="spawn-protections" renew-filter="only-iron"/>
+    <renewable interval="6" grow="true" particles="false" sound="false" avoid-players="2" region="spawn-protections" renew-filter="only-iron"/>
 </renewables>
 <!-- Item Remove -->
 <itemremove>
