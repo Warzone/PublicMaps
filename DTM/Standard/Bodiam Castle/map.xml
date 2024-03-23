@@ -1,12 +1,8 @@
-<map proto="1.4.2" game="Bed Wars">
+<map proto="1.4.2">
+<include id="4-team-bedwars"/>
+<version>2.0.5</version>
 <name>Bodiam Castle</name>
 <created>2022-01-22</created>
-<version>1.1.1</version>
-<objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
-<gamemode>arcade</gamemode>
-<gamemode>dtm</gamemode>
-<gamemode>blitz</gamemode>
-<!-- Authors and Contributors -->
 <authors>
     <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map, XML, &amp; custom NBT creation"/> <!-- _Pear -->
     <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Inspired the map, built team spawns, &amp; consulting"/> <!-- Santiagx -->
@@ -15,713 +11,114 @@
 </authors>
 <contributors>
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Map XML advisory"/> <!-- Cazadorian -->
+    <contributor uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b" contribution="Map detailing &amp; feedback"/> <!-- Tundren -->
+    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"/> <!-- DeadlyTrap -->
     <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Terrain &amp; detailing"/> <!-- Qualqty -->
     <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="European castles expert"/> <!-- _NotMaria -->
-    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map testing &amp; terrain"/> <!-- DeadlyTrap -->
     <contributor uuid="18b20c8e-1122-4e75-a680-863c718a3186" contribution="Map testing"/> <!-- UmbreoClaw -->
     <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Map testing"/> <!-- Preinstalled -->
 </contributors>
-<!-- Match Control -->
-<respawn auto="true" delay="5s"/>
-<time>50m</time>
-<!-- Blitz and Sudden Death -->
-<blitz filter="blitz-conditions">
-    <lives>1</lives>
-    <broadcastLives>false</broadcastLives>
-</blitz>
-<!-- Teams -->
 <teams>
-    <team id="blue-team" color="blue" max="4" max-overfill="8">Blue</team>
-    <team id="red-team" color="red" max="4" max-overfill="8">Red</team>
-    <team id="green-team" color="green" max="4" max-overfill="8">Green</team>
-    <team id="yellow-team" color="yellow" max="4" max-overfill="8">Yellow</team>
+    <team id="team-one" color="blue" max="4">Blue</team> <!-- Default is blue -->
+    <team id="team-two" color="red" max="4">Red</team> <!-- Default is red -->
+    <team id="team-three" color="green" max="4">Green</team> <!-- Default is green -->
+    <team id="team-four" color="yellow" max="4">Yellow</team> <!-- Default is yellow -->
 </teams>
-<!-- Kits -->
-<kits>
-    <kit id="default" reset-ender-pearls="true">
-        <helmet unbreakable="true" team-color="true" locked="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" locked="true" material="leather chestplate"/>
-        <leggings unbreakable="true" team-color="true" locked="true" material="leather leggings"/>
-        <boots unbreakable="true" team-color="true" locked="true" material="leather boots"/>
-        <effect duration="4s" amplifier="10">damage_resistance</effect>
-        <item material="wood sword" unbreakable="true"/>
-    </kit>
-    <!-- Armor Upgrades -->
-    <kit id="chainmail-armor-kit" force="true">
-        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
-        <boots unbreakable="true" locked="true" material="chainmail boots"/>
-    </kit>
-    <kit id="iron-armor-kit" force="true">
-        <leggings unbreakable="true" locked="true" material="iron leggings"/>
-        <boots unbreakable="true" locked="true" material="iron boots" />
-    </kit>
-    <kit id="diamond-armor-kit" force="true">
-        <leggings unbreakable="true" locked="true" material="diamond leggings"/>
-        <boots unbreakable="true" locked="true" material="diamond boots" />
-    </kit>
-    <!-- Projectiles -->
-    <kit id="fireball" deduct-items="false">
-        <item projectile="throwable-fireball" material="fireball" name="`rFireball"/>
-    </kit>
-</kits>
-<!-- Spawns -->
 <spawns>
-    <spawn team="blue-team" kit="default" region="blue-spawn" yaw="-90"/>
-    <spawn team="red-team" kit="default" region="red-spawn"/>
-    <spawn team="green-team" kit="default" region="green-spawn" yaw="180"/>
-    <spawn team="yellow-team" kit="default" region="yellow-spawn" yaw="90"/>
-    <default region="obs-spawn"/>
+    <spawn team="team-one" kit="default" region="team-one-spawn" yaw="90"/>
+    <spawn team="team-two" kit="default" region="team-two-spawn"/>
+    <spawn team="team-three" kit="default" region="team-three-spawn" yaw="180"/>
+    <spawn team="team-four" kit="default" region="team-four-spawn" yaw="-90"/>
+    <default region="obs-spawn" yaw="135"/>
 </spawns>
-<!-- Monuments -->
-<destroyables completion="25%" required="false" repairable="false" show="true" sparks="true" materials="bed_block" modes="air-mode">
-    <destroyable name="Blue Bed" owner="blue-team" region="blue-beds" id="blue-bed-broken"/>
-    <destroyable name="Red Bed" owner="red-team" region="red-beds" id="red-bed-broken"/>
-    <destroyable name="Green Bed" owner="green-team" region="green-beds" id="green-bed-broken"/>
-    <destroyable name="Yellow Bed" owner="yellow-team" region="yellow-beds" id="yellow-bed-broken"/>
-</destroyables>
-<modes>
-    <mode id="air-mode" after="30m" material="air" name="`cSUDDEN DEATH"/>
-</modes>
-<!-- Filters -->
-<filters>
-    <!-- Time Filters -->
-    <time id="6m-passed">6m</time>
-    <time id="12m-passed">12m</time>
-    <time id="18m-passed">18m</time>
-    <time id="24m-passed">24m</time>
-    <time id="30m-passed">30m</time>
-    <time id="40m-passed">40m</time>
-    <time id="50m-passed">50m</time>
-    <!-- Emerald Timers -->
-    <not id="emerald-1">
-        <time>12m</time>
-    </not>
-    <not id="emerald-2">
-        <any>
-            <filter id="emerald-1"/>
-            <time>24m</time>
-        </any>
-    </not>
-    <time id="emerald-3">24m</time>
-    <!-- Team Filters -->
-    <team id="only-blue">blue-team</team>
-    <team id="only-red">red-team</team>
-    <team id="only-green">green-team</team>
-    <team id="only-yellow">yellow-team</team>
-    <!-- Sudden Death/Monuments Filters -->
-    <any id="blitz-conditions">
-        <!-- Triggers sudden death mode for a team if their bed monument is destroyed in under 30 minutes -->
-        <filter id="bed-destruction"/>
-        <!-- Triggers sudden death mode for everyone when the match lasts more than 30 minutes -->
-        <filter id="30m-passed"/>
-    </any>
-    <any id="bed-destruction">
-        <any>
-            <all>
-                <team>blue-team</team>
-                <objective any="true">blue-bed-broken</objective>
-            </all>
-        </any>
-        <any>
-            <all>
-                <team>red-team</team>
-                <objective any="true">red-bed-broken</objective>
-            </all>
-        </any>
-        <any>
-            <all>
-                <team>green-team</team>
-                <objective any="true">green-bed-broken</objective>
-            </all>
-        </any>
-        <any>
-            <all>
-                <team>yellow-team</team>
-                <objective any="true">yellow-bed-broken</objective>
-            </all>
-        </any>
-    </any>
-    <!-- Team Spawn Chests Filter -->
-    <any id="team-status">
-        <any id="blue-team-status">
-            <team>blue-team</team>
-            <objective any="true">blue-bed-broken</objective>
-        </any>
-        <any id="red-team-status">
-            <team>red-team</team>
-            <objective any="true">red-bed-broken</objective>
-        </any>
-        <any id="green-team-status">
-            <team>green-team</team>
-            <objective any="true">green-bed-broken</objective>
-        </any>
-        <any id="yellow-team-status">
-            <team>yellow-team</team>
-            <objective any="true">yellow-bed-broken</objective>
-        </any>
-    </any>
-    <!-- Building Filters -->
-    <any id="breakables"> <!-- List of blocks that players can modify while keeping the map intact -->
-        <material>wool:11</material>
-        <material>wool:14</material>
-        <material>wool:5</material>
-        <material>wool:4</material>
-        <material>stained clay:11</material>
-        <material>stained clay:14</material>
-        <material>stained clay:5</material>
-        <material>stained clay:4</material>
-        <material>stained glass:11</material>
-        <material>stained glass:14</material>
-        <material>stained glass:5</material>
-        <material>stained glass:4</material>
-        <material>ender stone</material>
-        <material>wood:0</material>
-        <material>obsidian</material>
-        <material>tnt</material>
-        <material>sponge</material>
-        <material>water</material>
-        <material>stationary water</material>
-        <material>yellow flower</material>
-        <material>red rose</material>
-        <material>double plant</material>
-        <material>long grass</material>
-        <all>
-            <cause>player</cause>
-            <material>bed_block</material>
-        </all>
-    </any>
-    <deny id="tnt-immune"> <!-- List of blocks that will be protected against TNT explosions -->
-        <all>
-            <cause>explosion</cause>
-            <any>
-                <material>stained glass:11</material>
-                <material>stained glass:14</material>
-                <material>stained glass:5</material>
-                <material>stained glass:4</material>
-                <material>bed block</material>
-            </any>
-        </all>
-    </deny>
-    <!-- Tool visibility filters -->
-    <not id="not-wood-pickaxe">
-        <any>
-            <carrying>
-                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-        </any>
-    </not>
-    <not id="not-iron-pickaxe">
-        <any>
-            <carrying>
-                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                    <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-gold-pickaxe">
-        <any>
-            <carrying>
-                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                    <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-diamond-pickaxe">
-        <any>
-            <carrying>
-                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                   <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-wood-axe">
-        <any>
-            <carrying>
-                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-        </any>
-    </not>
-    <not id="not-stone-axe">
-        <any>
-            <carrying>
-                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                    <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-iron-axe">
-        <any>
-            <carrying>
-                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
-            </carrying>
-            <carrying>
-               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                    <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-diamond-axe">
-        <any>
-            <carrying>
-                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
-            </carrying>
-            <carrying>
-               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
-            </carrying>
-            <not>
-                <carrying>
-                    <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
-                </carrying>
-            </not>
-        </any>
-    </not>
-    <not id="not-shears">
-        <carrying ignore-metadata="true">
-            <item material="shears"/>
-        </carrying>
-    </not>
-    <!-- Armour visibility filters -->
-    <all id="chainmail-set-0">
-        <not>
-            <any>
-                <wearing ignore-metadata="true">
-                    <item material="chainmail boots"/>
-                </wearing>
-                <wearing ignore-metadata="true">
-                    <item material="iron boots"/>
-                </wearing>
-                <wearing ignore-metadata="true">
-                    <item material="diamond boots"/>
-                </wearing>
-            </any>
-        </not>
-    </all>
-    <all id="iron-set-0">
-        <not>
-            <any>
-                <wearing ignore-metadata="true">
-                    <item material="iron boots"/>
-                </wearing>
-                <wearing ignore-metadata="true">
-                    <item material="diamond boots"/>
-                </wearing>
-            </any>
-        </not>
-    </all>
-    <all id="diamond-set-0">
-        <not>
-            <any>
-                <wearing ignore-metadata="true">
-                    <item material="diamond boots"/>
-                </wearing>
-            </any>
-        </not>
-    </all>
-</filters>
-<!-- Broadcasts -->
-<broadcasts>
-    <!-- Emerald Generators notification -->
-    <alert after="6m">`2Emerald Generators`r have been upgraded to Tier `cII`r.</alert>
-    <alert after="12m">`2Emerald Generators`r have been upgraded to Tier `cIII`r.</alert>
-    <!-- Sudden Death notification -->
-    <alert after="30m">The world border will appear in `c10 minutes`r.</alert>
-    <alert after="40m">The world border has appeared and is approaching!</alert>
-</broadcasts>
-<!-- World Borders -->
-<world-borders center="0.5,0.5">
-    <world-border size="350"/> 
-    <!-- The world border starts shrinking after 40 minutes into the match and will take 4 mintues to reach the center. -->
-    <world-border size="12" after="40m" duration="4m" damage="5" buffer="0"/>
-</world-borders>
-<!-- Regions -->
 <regions>
-    <!-- Definitions -->
-    <union id="monuments">
-        <union id="blue-beds">
-            <cuboid id="blue-bed" min="-70,8,1" max="-67,10,-1"/>
-            <cuboid id="blue-bed-indicator" min="-3,0,1" max="-1,2,-2"/>
-        </union>
-        <union id="red-beds">
-            <cuboid id="red-bed" min="-1,8,-70" max="1,10,-67"/>
-            <cuboid id="red-bed-indicator" min="-1,0,1" max="0,2,-1"/>
-        </union>
-        <union id="green-beds">
-            <cuboid id="green-bed" min="1,8,70" max="-1,10,67"/>
-            <cuboid id="green-bed-indicator" min="0,0,1" max="1,2,-1"/>
-        </union>
-        <union id="yellow-beds">
-            <cuboid id="yellow-bed" min="70,8,-1" max="67,10,1"/>
-            <cuboid id="yellow-bed-indicator" min="1,0,1" max="2,2,-1"/>
-        </union>
+    <union id="team-beds">
+        <cuboid id="team-one-bed" min="77,29,1" max="74,31,-1"/>
+        <cuboid id="team-two-bed" min="1,29,-77" max="-1,31,-74"/>
+        <cuboid id="team-three-bed" min="-1,29,77" max="1,31,74"/>
+        <cuboid id="team-four-bed" min="-77,29,-1" max="-74,31,1"/>
     </union>
-    <union id="spawn-protections">
-        <cylinder id="blue-spawn-protection" base="-82.5,8,0.5" radius="9" height="15"/>
-        <cylinder id="red-spawn-protection" base="0.5,8,-82.5" radius="9" height="15"/>
-        <cylinder id="green-spawn-protection" base="0.5,8,83.5" radius="9" height="15"/>
-        <cylinder id="yellow-spawn-protection" base="83.5,8,0.5" radius="9" height="15"/>
+    <union id="spawn-protections"> <!-- Small area around the spawn points where block placing is disabled -->
+        <cylinder id="team-one-spawn-protection" base="93.5,29,0.5" radius="9" height="15"/>
+        <cylinder id="team-two-spawn-protection" base="0.5,29,-92.5" radius="9" height="15"/>
+        <cylinder id="team-three-spawn-protection" base="0.5,29,93.5" radius="9" height="15"/>
+        <cylinder id="team-four-spawn-protection" base="-92.5,29,0.5" radius="9" height="15"/>
     </union>
-    <point id="blue-spawn">-82.5,9,0.5</point>
-    <point id="red-spawn">0.5,9,-82.5</point>
-    <point id="green-spawn">0.5,9,83.5</point>
-    <point id="yellow-spawn">83.5,9,0.5</point>
-    <point id="obs-spawn">0.5,88,0.5</point>
+    <point id="team-one-spawn">93.5,30,0.5</point>
+    <point id="team-two-spawn">0.5,30,-92.5</point>
+    <point id="team-three-spawn">0.5,30,93.5</point>
+    <point id="team-four-spawn">-92.5,30,0.5</point>
+    <union id="base-regions"> <!-- Used as regions for regeneration and traps -->
+        <rectangle id="team-one-base-region" min="68,-15" max="106,15"/>
+        <rectangle id="team-two-base-region" min="-15,-68" max="15,-106"/>
+        <rectangle id="team-three-base-region" min="15,68" max="-15,106"/>
+        <rectangle id="team-four-base-region" min="-68,15" max="-106,-15"/>
+    </union>
+    <point id="obs-spawn">13.5,52,13.5</point>
     <union id="team-chests">
-        <block id="blue-team-chest">-77,9,-4</block>
-        <block id="red-team-chest">4,9,-77</block>
-        <block id="green-team-chest">-4,9,77</block>
-        <block id="yellow-team-chest">77,9,4</block>
+        <block id="team-one-chest">87,31,3</block>
+        <block id="team-two-chest">3,31,-87</block>
+        <block id="team-three-chest">-3,31,87</block>
+        <block id="team-four-chest">-87,31,-3</block>
     </union>
     <union id="iron-gold-generators">
-        <cuboid id="blue-generator" min="-90,9,1" max="-88,9,-1"/>
-        <cuboid id="red-generator" min="-1,9,-90" max="1,9,-88"/>
-        <cuboid id="green-generator" min="1,9,90" max="-1,9,88"/>
-        <cuboid id="yellow-generator" min="90,9,-1" max="88,9,1"/>
+        <cylinder id="team-one-generator" base="99.5,30,0.5" radius="1" height="1"/>
+        <cylinder id="team-two-generator" base="0.5,30,-98.5" radius="1" height="1"/>
+        <cylinder id="team-three-generator" base="0.5,30,99.5" radius="1" height="1"/>
+        <cylinder id="team-four-generator" base="-98.5,30,0.5" radius="1" height="1"/>
     </union>
     <union id="diamond-generators">
-        <point id="blue-red-tower">-58.5,9.5,-58.5</point>
-        <point id="red-yellow-tower">58.5,9.5,-58.5</point>
-        <point id="green-blue-tower">-58.5,9.5,58.5</point>
-        <point id="yellow-green-tower">58.5,9.5,58.5</point>
+        <point id="diamond-a">58.5,30.5,-57.5</point>
+        <point id="diamond-b">-57.5,30.5,-57.5</point>
+        <point id="diamond-c">58.5,30.5,58.5</point>
+        <point id="diamond-d">-57.5,30.5,58.5</point>
     </union>
     <union id="emerald-generators">
-        <point id="top-emerald">0.5,24.5,0.5</point>
-        <point id="bottom-emerald">0.5,12.5,0.5</point>
+        <point id="emerald-a">0.5,43.5,0.5</point>
+        <point id="emerald-b">0.5,31.5,0.5</point>
     </union>
-    <negative id="not-map">
-        <rectangle id="map" min="-96,-96" max="96,96"/>
+    <union id="emedia-generator-protection"> <!-- These base values should be identical to their spawner's point region -->
+        <cylinder id="diamond-a-protection" base="58.5,29,-57.5" radius="3" height="5"/>
+        <cylinder id="diamond-b-protection" base="-57.5,29,-57.5" radius="3" height="5"/>
+        <cylinder id="diamond-c-protection" base="58.5,29,58.5" radius="3" height="5"/>
+        <cylinder id="diamond-d-protection" base="-57.5,29,58.5" radius="3" height="5"/>
+        <cylinder id="emerald-a-protection" base="0.5,43,0.5" radius="3" height="5"/>
+        <cylinder id="emerald-b-protection" base="0.5,31,0.5" radius="3" height="5"/>
+    </union>
+    <negative id="not-map"> <!-- This covers the entire map's playable space -->
+        <rectangle id="map" min="-106,-106" max="106,106"/>
     </negative>
-    <!-- Applications -->
-    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="not-map"           block="never" message="You may not edit outside the map!"/>
-    <apply block-break="tnt-immune"/>
-    <apply block="breakables"         message="You can only modify blocks placed by a player!"/>
-    <apply region="blue-team-chest"   use="blue-team-status"   message="You cannot open this chest as `9Blue's Bed`r has not been destroyed yet!"/>
-    <apply region="red-team-chest"    use="red-team-status"    message="You cannot open this chest as `4Red's Bed`r has not been destroyed yet!"/>
-    <apply region="green-team-chest"  use="green-team-status"  message="You cannot open this chest as `aGreen's Bed`r has not been destroyed yet!"/>
-    <apply region="yellow-team-chest" use="yellow-team-status" message="You cannot open this chest as `eYellow's Bed`r has not been destroyed yet!"/>
+    <cuboid id="original-block-protection" min="-106,0,-106" max="106,73,106"/> <!-- This protects all blocks as part of the original map, it should have the same x and z as the map region and the height should be build height -->
+    <below id="below-map" y="23"/>
+    <apply region="team-one-chest" use="team-one-status" message="You cannot open this chest as `9Blue's Bed`r has not been destroyed yet!"/> <!-- If you have renamed the teams, change the message text otherwise leave untouched -->
+    <apply region="team-two-chest" use="team-two-status" message="You cannot open this chest as `4Red's Bed`r has not been destroyed yet!"/>
+    <apply region="team-three-chest" use="team-three-status" message="You cannot open this chest as `aGreen's Bed`r has not been destroyed yet!"/>
+    <apply region="team-four-chest" use="team-four-status" message="You cannot open this chest as `eYellow's Bed`r has not been destroyed yet!"/>
+    <apply region="below-map" block="never" message="You may not build below the map!"/>
 </regions>
-<!-- Spawners -->
-<spawners player-region="everywhere">
-    <!-- Emerald Generators -->
-    <spawner spawn-region="bottom-emerald" max-entities="5" delay="1m" filter="emerald-1">
-        <item amount="1" material="emerald"/>
-    </spawner>
-  	<spawner spawn-region="bottom-emerald" max-entities="5" delay="40s" filter="emerald-2"> <!-- Tier 2 -->
-        <item amount="1" material="emerald"/>
-    </spawner>
-    <spawner spawn-region="bottom-emerald" max-entities="5" delay="20s" filter="emerald-3"> <!-- Tier 3 -->
-        <item amount="1" material="emerald"/>
-    </spawner>
-    <spawner spawn-region="top-emerald" max-entities="5" delay="1m" filter="emerald-1">
-        <item amount="1" material="emerald"/>
-    </spawner>
-    <spawner spawn-region="top-emerald" max-entities="5" delay="40s" filter="emerald-2"> <!-- Tier 2 -->
-        <item amount="1" material="emerald"/>
-    </spawner>
-    <spawner spawn-region="top-emerald" max-entities="5" delay="20s" filter="emerald-3"> <!-- Tier 3 -->
-        <item amount="1" material="emerald"/>
-    </spawner>
-    <!-- Team Ingot Generators: Normal -->
-    <spawner spawn-region="blue-generator" max-entities="128" delay="2s">
-        <item amount="4" material="iron ingot"/>
-        <item amount="1" material="gold ingot"/>
-    </spawner>
-    <spawner spawn-region="red-generator" max-entities="128" delay="2s">
-        <item amount="4" material="iron ingot"/>
-        <item amount="1" material="gold ingot"/>
-    </spawner>
-    <spawner spawn-region="green-generator" max-entities="128" delay="2s">
-        <item amount="4" material="iron ingot"/>
-        <item amount="1" material="gold ingot"/>
-    </spawner>
-    <spawner spawn-region="yellow-generator" max-entities="128" delay="2s">
-        <item amount="4" material="iron ingot"/>
-        <item amount="1" material="gold ingot"/>
-    </spawner>
-</spawners>
-<!-- Interactive Shops -->
-<shops>
-    <shop id="item-shop" name="Items">
-        <category id="blocks" name="`aBlocks" material="hard clay"> 
-            <item material="wool" damage="14" filter="only-red" amount="16" price="4" currency="iron ingot" color="white"/>
-            <item material="wool" damage="11" filter="only-blue" amount="16" price="4" currency="iron ingot" color="white"/>
-            <item material="wool" damage="5" filter="only-green" amount="16" price="4" currency="iron ingot" color="white"/>
-            <item material="wool" damage="4" filter="only-yellow" amount="16" price="4" currency="iron ingot" color="white"/>
-            <item material="stained clay" damage="14" filter="only-red" amount="16" price="12" currency="iron ingot" color="white"/>
-            <item material="stained clay" damage="11" filter="only-blue" amount="16" price="12" currency="iron ingot" color="white"/>
-            <item material="stained clay" damage="5" filter="only-green" amount="16" price="12" currency="iron ingot" color="white"/>
-            <item material="stained clay" damage="4" filter="only-yellow" amount="16" price="12" currency="iron ingot" color="white"/>
-            <item material="stained glass" damage="14" filter="only-red" amount="4" price="12" currency="iron ingot" color="white"/>
-            <item material="stained glass" damage="11" filter="only-blue" name="`rBlastproof Glass" lore="`7Immune to explosions." amount="4" price="12" currency="iron ingot" color="white"/>
-            <item material="stained glass" damage="5" filter="only-green" name="`rBlastproof Glass" lore="`7Immune to explosions." amount="4" price="12" currency="iron ingot" color="white"/>
-            <item material="stained glass" damage="4" filter="only-yellow" name="`rBlastproof Glass" lore="`7Immune to explosions." amount="4" price="12" currency="iron ingot" color="white"/>
-            <item material="ender stone" amount="12" price="24" currency="iron ingot" color="white"/>
-            <item material="wood" amount="16" price="4" currency="gold ingot"/>
-            <item material="obsidian" amount="4" price="4" currency="emerald" color="dark green"/>
-        </category>
-        <category id="melee" name="`aMelee" material="gold sword">
-            <item material="stone sword" unbreakable="true" amount="1" price="10" currency="iron ingot" color="white"/>
-            <item material="iron sword" unbreakable="true" amount="1" price="7" currency="gold ingot"/>
-            <item material="diamond sword" unbreakable="true" amount="1" price="3" currency="emerald" color="dark green"/>
-            <item material="stick" name="`rKnockback Stick" enchantment="knockback:1" amount="1" price="5" currency="gold ingot"/>
-        </category>
-        <category id="armor" name="`aArmor" material="chainmail boots">
-            <item material="chainmail boots" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-armor-kit" filter="chainmail-set-0" color="white"/>
-            <item material="iron boots" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-armor-kit" filter="iron-set-0"/>
-            <item material="diamond boots" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-armor-kit" filter="diamond-set-0" color="dark green"/>
-        </category>
-        <category id="tools" name="`aTools" material="stone pickaxe">
-            <item material="shears" name="`rPermanent Shears" lore="`7Great for getting rid of wool." unbreakable="true" price="20" currency="iron ingot" filter="not-shears" color="white"/>
-            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/> 
-            <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-pickaxe">
-                <payment price="10" currency="iron ingot" color="white"/>
-                <payment price="1" currency="wood pickaxe"/>
-            </item>
-            <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2" amount="1" filter="not-gold-pickaxe">
-                <payment price="3" currency="gold ingot"/>
-                <payment price="1" currency="iron pickaxe"/>
-            </item>
-            <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-pickaxe">
-                <payment price="6" currency="gold ingot"/>
-                <payment price="1" currency="gold pickaxe"/>
-            </item>
-            <item material="wood axe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-axe" color="white"/>
-            <item material="stone axe" unbreakable="true" enchantment="efficiency:1" amount="1" filter="not-stone-axe">
-                <payment price="10" currency="iron ingot" color="white"/>
-                <payment price="1" currency="wood axe"/>
-            </item>
-            <item material="iron axe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-axe">
-                <payment price="3" currency="gold ingot"/>
-                <payment price="1" currency="stone axe"/>
-            </item>
-            <item material="diamond axe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-axe">
-                <payment price="6" currency="gold ingot"/>
-                <payment price="1" currency="iron axe"/>
-            </item>
-        </category>
-        <category id="ranged" name="`aRanged" material="bow">
-            <item material="arrow" amount="6" price="2" currency="gold ingot"/>
-            <item material="bow" unbreakable="true" amount="1" price="12" currency="gold ingot"/>
-            <item material="bow" unbreakable="true" enchantment="power:1" name="`rPower Bow" amount="1" price="20" currency="gold ingot"/>
-            <item material="bow" unbreakable="true" enchantment="power:1;punch:1" name="`rPower &amp; Punch Bow" amount="1" price="6" currency="emerald" color="dark green"/>
-        </category>
-        <category id="potions" name="`aPotions" material="brewing stand item">
-            <item material="potion" damage="2" amount="1" price="1" currency="emerald" color="dark green">
-                <effect duration="45s" amplifier="2">speed</effect>
-            </item>
-            <item material="potion" damage="11" amount="1" price="1" currency="emerald" color="dark green">
-                <effect duration="45s" amplifier="5">jump_boost</effect>
-            </item>
-            <!-- <item material="potion" damage="14" amount="1" price="2" currency="emerald" color="dark green">
-                <effect duration="30s">invisibility</effect>
-            </item> -->
-        </category>
-        <category id="utilities" name="`aUtilities" material="tnt">
-            <item material="golden apple" amount="1" price="3" currency="gold ingot"/>
-            <item material="fireball" name="`rFireball Blast" lore="`7Right-click to launch! Great for|`7knocking off enemies walking on|`7thin bridges." price="40" currency="iron ingot" color="white" kit="fireball"/>
-            <item material="tnt" lore="`7Instantly ignites once placed." amount="1" price="8" currency="gold ingot"/>
-            <item material="ender pearl" lore="`7The quickest way to invade enemy bases." amount="1" price="4" currency="emerald" color="dark green"/>
-            <item material="water bucket" lore="`7Great for slowing down approaching|`7enemies. Can also protect|`7against TNT." amount="1" price="6" currency="gold ingot"/>
-            <item material="sponge" lore="`7Great for soaking up water." amount="4" price="6" currency="gold ingot"/>
-        </category>
-    </shop>
-</shops>
+<destroyables completion="25%" required="false" repairable="false" show="true" sparks="true" materials="bed_block">  <!-- If you have renamed the teams, change the destroyable name otherwise leave untouched -->
+    <destroyable name="§9Blue §9Bed" owner="team-one" region="team-one-bed" id="team-one-bed-broken" scoreboard-filter="team-one-scoreboard-filter"/>
+    <destroyable name="§cRed §cBed" owner="team-two" region="team-two-bed" id="team-two-bed-broken" scoreboard-filter="team-two-scoreboard-filter"/>
+    <destroyable name="§aGreen §aBed" owner="team-three" region="team-three-bed" id="team-three-bed-broken" scoreboard-filter="team-three-scoreboard-filter"/>
+    <destroyable name="§eYellow §eBed" owner="team-four" region="team-four-bed" id="team-four-bed-broken" scoreboard-filter="team-four-scoreboard-filter"/>
+</destroyables>
+<world-borders center="0.5,0.5">
+    <world-border size="400"/> 
+    <world-border size="12" after="40m" duration="4m" damage="5" buffer="0"/>
+</world-borders>
 <shopkeepers>
-    <shopkeepers name="`b`lItem Shop" mob="Villager" shop="item-shop">
-        <shopkeeper yaw="0">-82.5,9,-6.5</shopkeeper> <!-- Blue -->
-        <shopkeeper yaw="90">7.5,9,-82.5</shopkeeper> <!-- Red -->
-        <shopkeeper yaw="-90">-6.5,9,83.5</shopkeeper> <!-- Green -->
-        <shopkeeper yaw="-180">83.5,9,7.5</shopkeeper> <!-- Yellow -->
+    <shopkeepers name="`b`lItem Shop" shop="item-shop"> 
+        <shopkeeper yaw="180">93.5,30,7.5</shopkeeper> <!-- Team One -->
+        <shopkeeper yaw="90">7.5,30,-92.5</shopkeeper> <!-- Team Two -->
+        <shopkeeper yaw="-90">-6.5,30,93.5</shopkeeper> <!-- Team Three -->
+        <shopkeeper yaw="0">-92.5,30,-6.5</shopkeeper> <!-- Team Four -->
+    </shopkeepers>
+    <shopkeepers name="`b`lUpgrade Shop" shop="upgrade-shop">
+        <shopkeeper yaw="0">93.5,30,-6.5</shopkeeper> <!-- Team One -->
+        <shopkeeper yaw="-90">-6.5,30,-92.5</shopkeeper> <!-- Team Two -->
+        <shopkeeper yaw="90">7.5,30,93.5</shopkeeper> <!-- Team Three -->
+        <shopkeeper yaw="180">-92.5,30,7.5</shopkeeper> <!-- Team Four -->
     </shopkeepers>
 </shopkeepers>
-<!-- ItemRemove, ItemKeep, ArmorKeep -->
-<itemremove>
-    <!-- Blocks -->
-    <item>obsidian</item>
-    <!-- Weapons -->
-    <item>wood sword</item>
-    <item>stone sword</item>
-    <item>iron sword</item>
-    <item>diamond sword</item>
-    <item>bow</item>
-    <item>arrow</item>
-    <item>stick</item>
-    <!-- Tools -->
-    <item>shears</item>
-    <item>ladder</item>
-    <item>wood pickaxe</item>
-    <item>stone pickaxe</item>
-    <item>iron pickaxe</item>
-    <item>gold pickaxe</item>
-    <item>diamond pickaxe</item>
-    <item>wood axe</item>
-    <item>stone axe</item>
-    <item>iron axe</item>
-    <item>diamond axe</item>
-    <item>stone sword</item>
-    <item>iron sword</item>
-    <item>diamond sword</item>
-    <!-- Misc -->
-    <item>golden apple</item>
-    <item>potion</item>
-    <item>tnt</item>
-    <item>sponge</item>
-    <item>fireball</item>
-    <item>ender pearl</item>
-    <item>water bucket</item>
-    <item>milk bucket</item>
-    <item>bed</item>
-    <item>seeds</item>
-    <item>red rose</item>
-    <item>yellow flower</item>
-    <item>double plant</item>
-    <!-- Armor -->
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>chainmail leggings</item>
-    <item>chainmail boots</item>
-    <item>iron leggings</item>
-    <item>iron boots</item>
-    <item>diamond leggings</item>
-    <item>diamond boots</item>
-</itemremove>
-<itemkeep>
-    <!-- Tools -->
-    <item>wood pickaxe</item>
-    <item>stone pickaxe</item>
-    <item>iron pickaxe</item>
-    <item>gold pickaxe</item>
-    <item>diamond pickaxe</item>
-    <item>wood axe</item>
-    <item>stone axe</item>
-    <item>iron axe</item>
-    <item>diamond axe</item>
-    <item>shears</item>
-</itemkeep>
-<armorkeep>
-    <item>leather helmet</item>
-    <item>leather chestplate</item> <!-- Leather helmet and chestplate will always be present -->
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>chainmail leggings</item>
-    <item>chainmail boots</item>
-    <item>iron leggings</item>
-    <item>iron boots</item>
-    <item>diamond leggings</item>
-    <item>diamond boots</item>
-</armorkeep>
-<!-- Projectiles -->
-<projectiles>
-    <projectile id="throwable-fireball" name="Fireball" projectile="Fireball" click="right" damage="8" cooldown="2s"/>
-</projectiles>
-<!-- Crafting Control -->
-<crafting>
-    <disable>dirt</disable>
-    <disable>stone</disable>
-    <disable>wool</disable>
-    <disable>workbench</disable>
-    <disable>carpet</disable>
-    <disable>shears</disable>
-    <disable>stick</disable>
-    <disable>lever</disable>
-    <disable>wood button</disable>
-    <disable>stone button</disable>
-    <disable>wood plate</disable>
-    <disable>stone plate</disable>
-    <disable>gold plate</disable>
-    <disable>iron plate</disable>
-    <disable>iron trapdoor</disable>
-    <disable>gold nugget</disable>
-    <disable>flint and steel</disable>
-    <disable>clay</disable>
-    <disable>snow block</disable>
-    <disable>wool</disable>
-</crafting>
-<!-- TNT Control -->
-<tnt>
-    <instantignite>on</instantignite>
-    <licensing>false</licensing>
-    <friendly-defuse>false</friendly-defuse>
-    <fuse>3s</fuse>
-    <yield>0</yield>
-    <power>2.0</power>
-</tnt>
-<disabledamage>
-    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
-</disabledamage>
-<!-- Misc -->
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<maxbuildheight>41</maxbuildheight>
+<maxbuildheight>61</maxbuildheight>
 </map>

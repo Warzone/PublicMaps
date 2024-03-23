@@ -1,0 +1,1658 @@
+<map proto="1.4.2">
+<!-- Created by Cazadorian, built upon work by _Pear and ElectroidFilms -->
+<!-- Include version number : v1.1.2 --> 
+<phase>development</phase>
+<objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
+<gamemode>bedwars</gamemode>
+<respawn auto="true" delay="5s"/>
+<time>50m</time>
+<!-- Blitz and Sudden Death --> 
+<blitz filter="blitz-conditions" join-filter="joining-filter" scoreboard-filter="blitz-conditions">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<kits>
+    <kit id="default" reset-ender-pearls="true">
+        <helmet unbreakable="true" team-color="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" locked="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" locked="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" locked="true" material="leather boots"/>
+        <effect duration="4s" amplifier="10">damage_resistance</effect>
+        <item material="wood sword" unbreakable="true"/>
+    </kit>
+    <!-- Team Upgrades -->
+    <give filter="apply-haste-1">
+        <kit>
+            <effect>fast digging</effect>
+        </kit>
+    </give>
+    <give filter="apply-haste-2">
+        <kit>
+            <effect amplifier="2">fast digging</effect>
+        </kit>
+    </give>
+    <lend filter="apply-regen">
+        <kit>
+            <effect>regeneration</effect>
+        </kit>
+    </lend>
+    <lend filter="apply-fatigue">
+        <kit>
+            <effect duration="10s">slow digging</effect>
+        </kit>
+    </lend>
+    <take filter="apply-alarm">
+        <kit>
+            <effect>invisibility</effect>
+        </kit>
+    </take>
+    <give filter="apply-freeze">
+        <kit>
+            <effect duration="5s">slowness</effect>
+            <effect duration="5s">blindness</effect>
+        </kit>
+    </give>
+    <!-- Sword Upgrades -->
+    <kit id="stone-sword-sharp0" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="stone sword" unbreakable="true"/>
+    </kit>
+    <kit id="iron-sword-sharp0" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="iron sword" unbreakable="true"/>
+    </kit>
+    <kit id="diamond-sword-sharp0" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="diamond sword" unbreakable="true"/>
+    </kit>
+    <kit id="stone-sword-sharp1" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="stone sword" unbreakable="true" enchantment="sharpness"/>
+    </kit>
+    <kit id="iron-sword-sharp1" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="iron sword" unbreakable="true" enchantment="sharpness"/>
+    </kit>
+    <kit id="diamond-sword-sharp1" deduct-tools="false">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+        <item material="diamond sword" unbreakable="true" enchantment="sharpness"/>
+    </kit>
+    <!-- Armor Upgrades -->
+    <kit id="chainmail-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots"/>
+    </kit>
+    <kit id="iron-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="iron leggings"/>
+        <boots unbreakable="true" locked="true" material="iron boots" />
+    </kit>
+    <kit id="diamond-armor-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="diamond leggings"/>
+        <boots unbreakable="true" locked="true" material="diamond boots" />
+    </kit>
+    <kit id="chainmail-prot1-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="chainmail leggings" enchantment="protection:1"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots" enchantment="protection:1" />
+    </kit>
+    <kit id="iron-prot1-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="iron leggings" enchantment="protection:1"/>
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection:1" />
+    </kit>
+    <kit id="diamond-prot1-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="diamond leggings" enchantment="protection:1"/>
+        <boots unbreakable="true" locked="true" material="diamond boots" enchantment="protection:1"/>
+    </kit>
+    <kit id="chainmail-prot2-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="chainmail leggings" enchantment="protection:2"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots" enchantment="protection:2"/>
+    </kit>
+    <kit id="iron-prot2-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="iron leggings" enchantment="protection:2"/>
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection:2"/>
+    </kit>
+    <kit id="diamond-prot2-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="diamond leggings" enchantment="protection:2"/>
+        <boots unbreakable="true" locked="true" material="diamond boots" enchantment="protection:2"/>
+    </kit>
+    <kit id="chainmail-prot3-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="chainmail leggings" enchantment="protection:3"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots" enchantment="protection:3"/>
+    </kit>
+    <kit id="iron-prot3-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="iron leggings" enchantment="protection:3"/>
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection:3"/>
+    </kit>
+    <kit id="diamond-prot3-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="diamond leggings" enchantment="protection:3"/>
+        <boots unbreakable="true" locked="true" material="diamond boots" enchantment="protection:3"/>
+    </kit>
+    <kit id="chainmail-prot4-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="chainmail leggings" enchantment="protection:4"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots" enchantment="protection:4"/>
+    </kit>
+    <kit id="iron-prot4-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="iron leggings" enchantment="protection:4"/>
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection:4"/>
+    </kit>
+    <kit id="diamond-prot4-kit" force="true">
+        <leggings unbreakable="true" locked="true" material="diamond leggings" enchantment="protection:4"/>
+        <boots unbreakable="true" locked="true" material="diamond boots" enchantment="protection:4"/>
+    </kit>
+    <!-- Projectiles -->
+    <kit id="fireball" deduct-items="false">
+        <item projectile="throwable-fireball" material="fireball" name="`rFireball"/>
+    </kit>
+</kits>
+<actions>
+    <!-- Upgrade variables -->
+    <set id="haste-dummy-1" var="haste_variable" value="1" scope="player"/>
+    <set id="haste-dummy-2" var="haste_variable" value="2" scope="player"/>
+    <set id="regen-dummy" var="regen_variable" value="1" scope="player"/>
+    <set id="sharpness-dummy" var="sharpness_variable" value="1" scope="player"/>
+    <set id="protection-dummy-1" var="protection_variable" value="1" scope="player"/>
+    <set id="protection-dummy-2" var="protection_variable" value="2" scope="player"/>
+    <set id="protection-dummy-3" var="protection_variable" value="3" scope="player"/>
+    <set id="protection-dummy-4" var="protection_variable" value="4" scope="player"/>
+    <set id="generator-dummy-1" var="generator_variable" value="1" scope="player"/>
+    <set id="generator-dummy-2" var="generator_variable" value="2" scope="player"/>
+    <set id="generator-dummy-3" var="generator_variable" value="3" scope="player"/>
+    <set id="generator-dummy-4" var="generator_variable" value="4" scope="player"/>
+    <set id="freeze-dummy" var="freeze_variable" value="1" scope="player"/>
+    <set id="fatigue-dummy" var="fatigue_variable" value="1" scope="player"/>
+    <set id="alarm-dummy" var="alarm_variable" value="1" scope="player"/>
+    <!-- Sudden death variable handling -->
+    <action id="sudden-death" expose="true" filter="sudden-death-unstarted" scope="match">
+        <set var="sudden_death_variable" value="1"/>
+    </action>
+    <trigger action="sudden-death" scope="match">
+        <filter>
+            <time>29m</time>
+        </filter>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after message="`cSudden Death `rWill Begin In {0}" duration="60s" filter="sudden-death-counting"/>
+        </filter>
+        <action>
+            <message id="sudden-death-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+                <title>`cSUDDEN `cDEATH!</title>
+                <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+            </message>
+            <set var="sudden_death_variable" value="2"/>
+            <fill region="team-beds" material="air" events="true"/>
+        </action>
+    </trigger>
+    <!-- Sharpness replacements -->
+    <action id="sharpness-replacements" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="wood sword"/>
+            <replace material="wood sword" unbreakable="true" enchantment="sharpness"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="stone sword"/>
+            <replace material="stone sword" unbreakable="true" enchantment="sharpness"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron sword"/>
+            <replace material="iron sword" unbreakable="true" enchantment="sharpness"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond sword"/>
+            <replace material="diamond sword" unbreakable="true" enchantment="sharpness"/>
+        </replace-item>
+    </action>
+    <!-- Protection replacements -->
+    <action id="protection-replacement-1" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="leather boots"/>
+            <replace material="leather boots" team-color="true" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="leather leggings"/>
+            <replace material="leather leggings" team-color="true" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail boots"/>
+            <replace material="chainmail boots" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail leggings"/>
+            <replace material="chainmail leggings" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron boots"/>
+            <replace material="iron boots" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron leggings"/>
+            <replace material="iron leggings" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond boots"/>
+            <replace material="diamond boots" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond leggings"/>
+            <replace material="diamond leggings" unbreakable="true" enchantment="protection"/>
+        </replace-item>
+    </action>
+    <action id="protection-replacement-2" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="leather boots"/>
+            <replace material="leather boots" unbreakable="true" team-color="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="leather leggings"/>
+            <replace material="leather leggings" unbreakable="true" team-color="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail boots"/>
+            <replace material="chainmail boots" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail leggings"/>
+            <replace material="chainmail leggings" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron boots"/>
+            <replace material="iron boots" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron leggings"/>
+            <replace material="iron leggings" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond boots"/>
+            <replace material="diamond boots" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond leggings"/>
+            <replace material="diamond leggings" unbreakable="true" enchantment="protection:2"/>
+        </replace-item>
+    </action>
+    <action id="protection-replacement-3" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="leather boots"/>
+            <replace material="leather boots" unbreakable="true" team-color="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="leather leggings"/>
+            <replace material="leather leggings" unbreakable="true" team-color="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail boots"/>
+            <replace material="chainmail boots" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail leggings"/>
+            <replace material="chainmail leggings" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron boots"/>
+            <replace material="iron boots" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron leggings"/>
+            <replace material="iron leggings" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond boots"/>
+            <replace material="diamond boots" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond leggings"/>
+            <replace material="diamond leggings" unbreakable="true" enchantment="protection:3"/>
+        </replace-item>
+    </action>
+    <action id="protection-replacement-4" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="leather boots"/>
+            <replace material="leather boots" unbreakable="true" team-color="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="leather leggings"/>
+            <replace material="leather leggings" unbreakable="true" team-color="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail boots"/>
+            <replace material="chainmail boots" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="chainmail leggings"/>
+            <replace material="chainmail leggings" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron boots"/>
+            <replace material="iron boots" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="iron leggings"/>
+            <replace material="iron leggings" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond boots"/>
+            <replace material="diamond boots" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond leggings"/>
+            <replace material="diamond leggings" unbreakable="true" enchantment="protection:4"/>
+        </replace-item>
+    </action>
+    <!-- Tool downgrades -->
+    <action id="tool-downgrades" scope="player">
+        <replace-item>
+            <find material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+            <replace material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
+        </replace-item>
+        <replace-item>
+            <find material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+            <replace material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+        </replace-item>
+        <replace-item>
+            <find material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            <replace material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+        </replace-item>
+        <replace-item>
+            <find material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+            <replace material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
+        </replace-item>
+        <replace-item>
+            <find material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+            <replace material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+        </replace-item>
+        <replace-item>
+            <find material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
+            <replace material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+        </replace-item>
+    </action>
+    <!-- Item removal actions -->
+    <action id="remove-empty-bucket" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="bucket"/>
+            <replace material="air"/>
+        </replace-item>
+    </action>
+    <trigger filter="carrying-empty-bucket" trigger="remove-empty-bucket" scope="player"/>
+    <!-- Upgrade alerts -->
+    <message id="sharpness-alert-1" text="`bYour sword has been upgraded to `4`lSharpness I`r`b!"/>
+    <trigger filter="sharpness-1" trigger="sharpness-alert-1" scope="player"/>
+    <message id="protection-alert-1" text="`bYour armour has been upgraded to `9`lProtection I`r`b!"/>
+    <trigger filter="protection-1" trigger="protection-alert-1" scope="player"/>
+    <message id="protection-alert-2" text="`bYour armour has been upgraded to `9`lProtection II`r`b!"/>
+    <trigger filter="protection-2" trigger="protection-alert-2" scope="player"/>
+    <message id="protection-alert-3" text="`bYour armour has been upgraded to `9`lProtection III`r`b!"/>
+    <trigger filter="protection-3" trigger="protection-alert-3" scope="player"/>
+    <message id="protection-alert-4" text="`bYour armour has been upgraded to `9`lProtection IV`r`b!"/>
+    <trigger filter="protection-4" trigger="protection-alert-4" scope="player"/>
+    <message id="generator-alert-1" text="`bYour resource generator has been upgraded to `e`lLevel I`r`b!"/>
+    <trigger filter="generator-1" trigger="generator-alert-1" scope="player"/>
+    <message id="generator-alert-2" text="`bYour resource generator has been upgraded to `e`lLevel II`r`b!"/>
+    <trigger filter="generator-2" trigger="generator-alert-2" scope="player"/>
+    <message id="generator-alert-3" text="`bYour resource generator has been upgraded to `e`lLevel III`r`b!"/>
+    <trigger filter="generator-3" trigger="generator-alert-3" scope="player"/>
+    <message id="generator-alert-4" text="`bYour resource generator has been upgraded to `e`lLevel IV`r`b!"/>
+    <trigger filter="generator-4" trigger="generator-alert-4" scope="player"/>
+    <message id="haste-alert-1" text="`bYour team now has `e`lHaste I`r`b!"/>
+    <trigger filter="haste-1" trigger="haste-alert-1" scope="player"/>
+    <message id="haste-alert-2" text="`bYour team now has `e`lHaste II`r`b!"/>
+    <trigger filter="haste-2" trigger="haste-alert-2" scope="player"/>
+    <message id="regeneration-alert-1" text="`bYour team's base now has `d`lRegeneration I`r`b!"/>
+    <trigger filter="regen-1" trigger="regeneration-alert-1" scope="player"/>
+    <message id="freeze-alert-1" text="`bYour team's base now has a `3`lFreeze Trap`r`b!"/>
+    <trigger filter="freeze-1" trigger="freeze-alert-1" scope="player"/>
+    <message id="fatigue-alert-1" text="`bYour team's base now has a `7`lMining Fatigue Trap`r`b!"/>
+    <trigger filter="fatigue-1" trigger="fatigue-alert-1" scope="player"/>
+    <message id="alarm-alert-1" text="`bYour team's base now has an `d`lAlarm Trap`r`b!"/>
+    <trigger filter="alarm-1" trigger="alarm-alert-1" scope="player"/>
+    <!-- Enchantment triggers -->
+    <trigger filter="apply-sharpness" trigger="sharpness-replacements" scope="player"/>
+    <trigger filter="apply-protection-1" trigger="protection-replacement-1" scope="player"/>
+    <trigger filter="apply-protection-2" trigger="protection-replacement-2" scope="player"/>
+    <trigger filter="apply-protection-3" trigger="protection-replacement-3" scope="player"/>
+    <trigger filter="apply-protection-4" trigger="protection-replacement-4" scope="player"/>
+    <trigger filter="respawned" trigger="tool-downgrades" scope="player"/>
+    <!-- Destruction alert -->
+    <message id="destroy-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+        <title>`cBED `cDESTROYED!</title>
+        <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+    </message>
+    <trigger filter="bed-destroy-message" trigger="destroy-title" scope="player"/>
+    <!-- Magic Milk actions -->
+    <action id="immune-to-trap" scope="player">
+        <set var="trap_immunity_variable" value="2"/>
+        <message text="`bYou are immune to traps for `c30 seconds`b!"/>
+        <!-- This will be triggered by "trap-immunity-consumable" -->
+    </action>
+    <action id="not-immune-to-trap" scope="player">
+        <set var="trap_immunity_variable" value="1"/>
+        <message text="`bYou are now vulnerable to traps as your immunity worn off!"/>
+    </action>
+    <trigger action="not-immune-to-trap" filter="after-trap-immunity" scope="player"/>
+    <action id="outside-of-base" scope="player">
+        <!-- Reset trap immunity variable if player are outside of their base -->
+        <set var="trap_immunity_variable" value="0"/>
+    </action>
+    <trigger action="outside-of-base" filter="outside-any-base" scope="player"/>
+</actions>
+<variables>
+    <variable id="trap_immunity_variable" scope="player"/>
+    <variable id="haste_variable" scope="team"/>
+    <variable id="regen_variable" scope="team"/>
+    <variable id="sharpness_variable" scope="team"/>
+    <variable id="protection_variable" scope="team"/>
+    <variable id="generator_variable" scope="team"/>
+    <variable id="freeze_variable" scope="team"/>
+    <variable id="fatigue_variable" scope="team"/>
+    <variable id="alarm_variable" scope="team"/>
+    <variable id="sudden_death_variable" scope="match"/>
+</variables>
+<filters>
+    <!-- Time Filters -->
+    <not id="diamond-1">
+        <time>6m</time>
+    </not>
+    <not id="diamond-2">
+        <any>
+            <filter id="diamond-1"/>
+            <time>18m</time>
+        </any>
+    </not>
+    <time id="diamond-3">18m</time>
+    <not id="emerald-1">
+        <time>12m</time>
+    </not>
+    <not id="emerald-2">
+        <any>
+            <filter id="emerald-1"/>
+            <time>24m</time>
+        </any>
+    </not>
+    <time id="emerald-3">24m</time>
+    <!-- Magic Milk immunity -->
+    <after id="after-trap-immunity" duration="30s">
+        <variable var="trap_immunity_variable">2</variable>
+    </after>
+    <all id="outside-any-base">
+        <variable var="trap_immunity_variable">1</variable>
+        <not>
+            <any>
+                <region id="team-one-base-region"/>
+                <region id="team-two-base-region"/>
+                <region id="team-three-base-region"/>
+                <region id="team-four-base-region"/>
+            </any>
+        </not>
+    </all>
+    <!-- Team Filters -->
+    <team id="only-team-one">team-one</team>
+    <team id="only-team-two">team-two</team>
+    <team id="only-team-three">team-three</team>
+    <team id="only-team-four">team-four</team>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
+    <alive id="respawned"/>
+    <!-- Sudden Death/Monuments Filters -->
+    <any id="blitz-conditions">
+        <!-- Triggers blitz for a team if their bed monument is destroyed in under 30 minutes -->
+        <filter id="bed-destruction"/>
+        <!-- Failsafe to guarantee blitz after 30m sudden death happens -->
+        <time>30m</time>
+    </any>
+    <any id="bed-destruction">
+        <all>
+            <team>team-one</team>
+            <objective any="true">team-one-bed-broken</objective>
+        </all>
+        <all>
+            <team>team-two</team>
+            <objective any="true">team-two-bed-broken</objective>
+        </all>
+        <all>
+            <team>team-three</team>
+            <objective any="true">team-three-bed-broken</objective>
+        </all>
+        <all>
+            <team>team-four</team>
+            <objective any="true">team-four-bed-broken</objective>
+        </all>
+    </any>
+    <not id="joining-filter">
+        <any>
+            <completed>team-one-bed-broken</completed>
+            <completed>team-two-bed-broken</completed>
+            <completed>team-three-bed-broken</completed>
+            <completed>team-four-bed-broken</completed>
+        </any>
+    </not>
+    <not id="team-one-scoreboard-filter">
+        <completed>team-one-bed-broken</completed>
+    </not>
+    <not id="team-two-scoreboard-filter">
+        <completed>team-two-bed-broken</completed>
+    </not>
+    <not id="team-three-scoreboard-filter">
+        <completed>team-three-bed-broken</completed>
+    </not>
+    <not id="team-four-scoreboard-filter">
+        <completed>team-four-bed-broken</completed>
+    </not>
+    <all id="bed-destroy-message">
+        <filter id="bed-destruction"/>
+        <not>
+            <filter id="sudden-death-enabled"/>
+        </not>
+    </all>
+    <variable id="sudden-death-unstarted" var="sudden_death_variable">0</variable>
+    <variable id="sudden-death-counting" var="sudden_death_variable">1</variable>
+    <variable id="sudden-death-enabled" var="sudden_death_variable">2</variable>
+    <!-- Team Spawn Chests Filter -->
+    <any id="team-one-status">
+        <team>team-one</team>
+        <objective any="true">team-one-bed-broken</objective>
+    </any>
+    <any id="team-two-status">
+        <team>team-two</team>
+        <objective any="true">team-two-bed-broken</objective>
+    </any>
+    <any id="team-three-status">
+        <team>team-three</team>
+        <objective any="true">team-three-bed-broken</objective>
+    </any>
+    <any id="team-four-status">
+        <team>team-four</team>
+        <objective any="true">team-four-bed-broken</objective>
+    </any>
+    <!-- Building Filters -->
+    <deny id="original-block-protection-filter">  <!-- List of blocks in the original map that players can modify while keeping the map intact -->
+        <blocks region="original-block-protection">
+            <not>
+                <any>
+                    <material>air</material>
+                    <material>water</material>
+                    <material>stationary water</material>
+                    <material>yellow flower</material>
+                    <material>red rose</material>
+                    <material>red mushroom</material>
+                    <material>brown mushroom</material>
+                    <material>double plant</material>
+                    <material>long grass</material>
+                    <material>dead bush</material>
+                    <material>bed block</material>
+                </any>
+            </not>
+        </blocks>
+    </deny>
+    <deny id="tnt-immune"> <!-- List of blocks that will be protected against TNT explosions -->
+        <all>
+            <cause>explosion</cause>
+            <any>
+                <material>stained glass</material>
+                <material>bed block</material>
+            </any>
+        </all>
+    </deny>
+    <deny id="prevent-interact"> <!-- List of blocks that players cannot interact with -->
+        <any>
+            <material>workbench</material>
+            <material>furnace</material>
+            <material>beacon</material>
+            <material>anvil</material>
+        </any>
+    </deny>
+    <!-- Team Upgrade Systems -->
+    <all id="apply-sharpness">
+        <variable var="sharpness_variable">1</variable>
+        <alive/>
+    </all>
+    <all id="apply-protection-1">
+        <variable var="protection_variable">1</variable>
+        <alive/>
+    </all>
+    <all id="apply-protection-2">
+        <variable var="protection_variable">2</variable>
+        <alive/>
+    </all>
+    <all id="apply-protection-3">
+        <variable var="protection_variable">3</variable>
+        <alive/>
+    </all>
+    <all id="apply-protection-4">
+        <variable var="protection_variable">4</variable>
+        <alive/>
+    </all>
+    <all id="apply-haste-1">
+        <variable var="haste_variable">1</variable>
+        <alive/>
+    </all>
+    <all id="apply-haste-2">
+        <variable var="haste_variable">2</variable>
+        <alive/>
+    </all>
+    <all id="apply-regen">
+        <variable var="regen_variable">1</variable>
+        <alive/>
+        <any>
+            <all>
+                <team>team-one</team>
+                <region id="team-one-base-region"/>
+            </all>
+            <all>
+                <team>team-two</team>
+                <region id="team-two-base-region"/>
+            </all>
+            <all>
+                <team>team-three</team>
+                <region id="team-three-base-region"/>
+            </all>
+            <all>
+                <team>team-four</team>
+                <region id="team-four-base-region"/>
+            </all>
+        </any>
+    </all>
+    <!-- Traps -->
+    <all id="team-one-trap">
+        <not>
+            <team>team-one</team>
+        </not>
+        <not>
+            <completed>team-one-bed-broken</completed>
+        </not>
+        <variable var="trap_immunity_variable">0</variable>
+        <region id="team-one-base-region"/>
+    </all>
+    <all id="team-two-trap">
+        <not>
+            <team>team-two</team>
+        </not>
+        <not>
+            <completed>team-two-bed-broken</completed>
+        </not>
+        <variable var="trap_immunity_variable">0</variable>
+        <region id="team-two-base-region"/>
+    </all>
+    <all id="team-three-trap">
+        <not>
+            <team>team-three</team>
+        </not>
+        <not>
+            <completed>team-three-bed-broken</completed>
+        </not>
+        <variable var="trap_immunity_variable">0</variable>
+        <region id="team-three-base-region"/>
+    </all>
+    <all id="team-four-trap">
+        <not>
+            <team>team-four</team>
+        </not>
+        <not>
+            <completed>team-four-bed-broken</completed>
+        </not>
+        <variable var="trap_immunity_variable">0</variable>
+        <region id="team-four-base-region"/>
+    </all>
+    <all id="apply-freeze">
+        <alive/>
+        <any>
+            <all>
+                <filter id="team-one-trap"/>
+                <region id="team-one-base-region"/>
+                <variable var="freeze_variable" team="team-one">1</variable>
+            </all>
+            <all>
+                <filter id="team-two-trap"/>
+                <region id="team-two-base-region"/>
+                <variable var="freeze_variable" team="team-two">1</variable>
+            </all>
+            <all>
+                <filter id="team-three-trap"/>
+                <region id="team-three-base-region"/>
+                <variable var="freeze_variable" team="team-three">1</variable>
+            </all>
+            <all>
+                <filter id="team-four-trap"/>
+                <region id="team-four-base-region"/>
+                <variable var="freeze_variable" team="team-four">1</variable>
+            </all>
+        </any>
+    </all>
+    <all id="apply-fatigue">
+        <alive/>
+        <any>
+            <all>
+                <filter id="team-one-trap"/>
+                <variable var="fatigue_variable" team="team-one">1</variable>
+            </all>
+            <all>
+                <filter id="team-two-trap"/>
+                <variable var="fatigue_variable" team="team-two">1</variable>
+            </all>
+            <all>
+                <filter id="team-three-trap"/>
+                <variable var="fatigue_variable" team="team-three">1</variable>
+            </all>
+            <all>
+                <filter id="team-four-trap"/>
+                <variable var="fatigue_variable" team="team-four">1</variable>
+            </all>
+        </any>
+    </all>
+    <all id="apply-alarm">
+        <any>
+            <all>
+                <filter id="team-one-trap"/>
+                <variable var="alarm_variable" team="team-one">1</variable>
+            </all>
+            <all>
+                <filter id="team-two-trap"/>
+                <variable var="alarm_variable" team="team-two">1</variable>
+            </all>
+            <all>
+                <filter id="team-three-trap"/>
+                <variable var="alarm_variable" team="team-three">1</variable>
+            </all>
+            <all>
+                <filter id="team-four-trap"/>
+                <variable var="alarm_variable" team="team-four">1</variable>
+            </all>
+        </any>
+    </all>
+    <!-- Resource generator upgrades -->
+    <variable id="team-two-generator-1" var="generator_variable" team="team-two">[1,oo)</variable>
+    <variable id="team-one-generator-1" var="generator_variable" team="team-one">[1,oo)</variable>
+    <variable id="team-three-generator-1" var="generator_variable" team="team-three">[1,oo)</variable>
+    <variable id="team-four-generator-1" var="generator_variable" team="team-four">[1,oo)</variable>
+    <variable id="team-two-generator-2" var="generator_variable" team="team-two">[2,oo)</variable>
+    <variable id="team-one-generator-2" var="generator_variable" team="team-one">[2,oo)</variable>
+    <variable id="team-three-generator-2" var="generator_variable" team="team-three">[2,oo)</variable>
+    <variable id="team-four-generator-2" var="generator_variable" team="team-four">[2,oo)</variable>
+    <variable id="team-two-generator-3" var="generator_variable" team="team-two">[3,oo)</variable>
+    <variable id="team-one-generator-3" var="generator_variable" team="team-one">[3,oo)</variable>
+    <variable id="team-three-generator-3" var="generator_variable" team="team-three">[3,oo)</variable>
+    <variable id="team-four-generator-3" var="generator_variable" team="team-four">[3,oo)</variable>
+    <variable id="team-two-generator-4" var="generator_variable" team="team-two">[4,oo)</variable>
+    <variable id="team-one-generator-4" var="generator_variable" team="team-one">[4,oo)</variable>
+    <variable id="team-three-generator-4" var="generator_variable" team="team-three">[4,oo)</variable>
+    <variable id="team-four-generator-4" var="generator_variable" team="team-four">[4,oo)</variable>
+    <!-- Upgrade visibility filters -->
+    <variable id="haste-0" var="haste_variable">0</variable>
+    <variable id="haste-1" var="haste_variable">1</variable>
+    <variable id="haste-2" var="haste_variable">2</variable>
+    <variable id="protection-0" var="protection_variable">0</variable>
+    <variable id="protection-1" var="protection_variable">1</variable>
+    <variable id="protection-2" var="protection_variable">2</variable>
+    <variable id="protection-3" var="protection_variable">3</variable>
+    <variable id="protection-4" var="protection_variable">4</variable>
+    <variable id="generator-0" var="generator_variable">0</variable>
+    <variable id="generator-1" var="generator_variable">1</variable>
+    <variable id="generator-2" var="generator_variable">2</variable>
+    <variable id="generator-3" var="generator_variable">3</variable>
+    <variable id="generator-4" var="generator_variable">4</variable>
+    <variable id="sharpness-0" var="sharpness_variable">0</variable>
+    <variable id="sharpness-1" var="sharpness_variable">1</variable>
+    <variable id="regen-0" var="regen_variable">0</variable>
+    <variable id="freeze-0" var="freeze_variable">0</variable>
+    <variable id="fatigue-0" var="fatigue_variable">0</variable>
+    <variable id="alarm-0" var="alarm_variable">0</variable>
+    <variable id="regen-1" var="regen_variable">1</variable>
+    <variable id="freeze-1" var="freeze_variable">1</variable>
+    <variable id="fatigue-1" var="fatigue_variable">1</variable>
+    <variable id="alarm-1" var="alarm_variable">1</variable>
+    <!-- Item removal filters -->
+    <carrying id="carrying-empty-bucket" ignore-metadata="true">
+        <item material="bucket"/>
+    </carrying>
+    <!-- Tool visibility filters -->
+    <not id="not-wood-pickaxe">
+        <any>
+            <carrying>
+                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+        </any>
+    </not>
+    <not id="not-iron-pickaxe">
+        <any>
+            <carrying>
+                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                    <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-gold-pickaxe">
+        <any>
+            <carrying>
+                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+               <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                    <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-diamond-pickaxe">
+        <any>
+            <carrying>
+                <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                   <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-wood-axe">
+        <any>
+            <carrying>
+                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+        </any>
+    </not>
+    <not id="not-stone-axe">
+        <any>
+            <carrying>
+                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                    <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-iron-axe">
+        <any>
+            <carrying>
+                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+               <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                    <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-diamond-axe">
+        <any>
+            <carrying>
+                <item material="wood axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+                <item material="stone axe" unbreakable="true" enchantment="efficiency:1"/>
+            </carrying>
+            <carrying>
+               <item material="diamond axe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+            <not>
+                <carrying>
+                    <item material="iron axe" unbreakable="true" enchantment="efficiency:2"/>
+                </carrying>
+            </not>
+        </any>
+    </not>
+    <not id="not-shears">
+        <carrying ignore-metadata="true">
+            <item material="shears"/>
+        </carrying>
+    </not>
+    <!-- Armour visibility filters -->
+    <all id="chainmail-set-0">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="chainmail boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-0"/>
+    </all>
+    <all id="iron-set-0">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-0"/>
+    </all>
+    <all id="diamond-set-0">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-0"/>
+    </all>
+    <all id="chainmail-set-1">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="chainmail boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-1"/>
+    </all>
+    <all id="iron-set-1">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-1"/>
+    </all>
+    <all id="diamond-set-1">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-1"/>
+    </all>
+    <all id="chainmail-set-2">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="chainmail boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-2"/>
+    </all>
+    <all id="iron-set-2">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-2"/>
+    </all>
+    <all id="diamond-set-2">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-2"/>
+    </all>
+    <all id="chainmail-set-3">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="chainmail boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-3"/>
+    </all>
+    <all id="iron-set-3">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-3"/>
+    </all>
+    <all id="diamond-set-3">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-3"/>
+    </all>
+    <all id="chainmail-set-4">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="chainmail boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-4"/>
+    </all>
+    <all id="iron-set-4">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="iron boots"/>
+                </wearing>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-4"/>
+    </all>
+    <all id="diamond-set-4">
+        <not>
+            <any>
+                <wearing ignore-metadata="true">
+                    <item material="diamond boots"/>
+                </wearing>
+            </any>
+        </not>
+        <filter id="protection-4"/>
+    </all>
+</filters>
+<broadcasts>
+    <!-- Diamond Generators notification -->
+    <alert after="6m">`bDiamond Generators`r have been upgraded to Tier `cII`r.</alert>
+    <alert after="18m">`bDiamond Generators`r have been upgraded to Tier `cIII`r.</alert>
+    <!-- Emerald Generators notification -->
+    <alert after="12m">`2Emerald Generators`r have been upgraded to Tier `cII`r.</alert>
+    <alert after="24m">`2Emerald Generators`r have been upgraded to Tier `cIII`r.</alert>
+    <!-- Sudden Death notification -->
+    <alert after="30m">The world border will appear in `c10 minutes`r.</alert>
+    <alert after="40m">The world border has appeared and is approaching!</alert>
+</broadcasts>
+<!-- Regions -->
+<regions>
+    <!-- Applications -->
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here!"/>
+    <apply region="emedia-generator-protection" block="never" message="You are not allowed to block the spawners!"/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply block-break="tnt-immune" use="prevent-interact"/>
+    <apply block="original-block-protection-filter" message="You can only modify blocks placed by a player!"/>
+</regions>
+<proximity-alarms>
+    <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="team-one-base-region" detect="apply-alarm" notify="only-team-one"/>
+    <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="team-two-base-region" detect="apply-alarm" notify="only-team-two"/>
+    <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="team-four-base-region" detect="apply-alarm" notify="only-team-four"/>
+    <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="team-three-base-region" detect="apply-alarm" notify="only-team-three"/>
+</proximity-alarms>
+<!-- Spawners -->
+<spawners player-region="everywhere">
+    <spawner spawn-region="diamond-a" max-entities="8" delay="30s" filter="diamond-1">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-b" max-entities="8" delay="30s" filter="diamond-1">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-c" max-entities="8" delay="30s" filter="diamond-1">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-d" max-entities="8" delay="30s" filter="diamond-1">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-a" max-entities="8" delay="20s" filter="diamond-2"> <!-- Tier 2 -->
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-b" max-entities="8" delay="20s" filter="diamond-2">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-c" max-entities="8" delay="20s" filter="diamond-2">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-d" max-entities="8" delay="20s" filter="diamond-2">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-a" max-entities="8" delay="10s" filter="diamond-3"> <!-- Tier 3 -->
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-b" max-entities="8" delay="10s" filter="diamond-3">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-c" max-entities="8" delay="10s" filter="diamond-3">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <spawner spawn-region="diamond-d" max-entities="8" delay="10s" filter="diamond-3">
+        <item amount="1" material="diamond"/>
+    </spawner>
+    <!-- Emerald Generators -->
+    <spawner spawn-region="emerald-a" max-entities="5" delay="1m" filter="emerald-1">
+        <item amount="1" material="emerald"/>
+    </spawner>
+  	<spawner spawn-region="emerald-a" max-entities="5" delay="40s" filter="emerald-2"> <!-- Tier 2 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="emerald-a" max-entities="5" delay="20s" filter="emerald-3"> <!-- Tier 3 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="emerald-b" max-entities="5" delay="1m" filter="emerald-1">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="emerald-b" max-entities="5" delay="40s" filter="emerald-2"> <!-- Tier 2 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="emerald-b" max-entities="5" delay="20s" filter="emerald-3"> <!-- Tier 3 -->
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <!-- Team Ingot Generators: Normal -->
+    <spawner spawn-region="team-one-generator" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-two-generator" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-three-generator" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-four-generator" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <!-- Team Ingot Generators: Tier 1 -->
+    <spawner spawn-region="team-one-generator" filter="team-one-generator-1" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-two-generator" filter="team-two-generator-1" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-three-generator" filter="team-three-generator-1" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-four-generator" filter="team-four-generator-1" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <!-- Team Ingot Generators: Tier 2 -->
+    <spawner spawn-region="team-one-generator" filter="team-one-generator-2" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-two-generator" filter="team-two-generator-2" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-three-generator" filter="team-three-generator-2" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-four-generator" filter="team-four-generator-2" max-entities="64" delay="4s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <!-- Team Ingot Generators: Tier 3 -->
+    <spawner spawn-region="team-one-generator" filter="team-one-generator-3" max-entities="3" delay="1m">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="team-two-generator" filter="team-two-generator-3" max-entities="3" delay="1m">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="team-three-generator" filter="team-three-generator-3" max-entities="3" delay="1m">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <spawner spawn-region="team-four-generator" filter="team-four-generator-3" max-entities="3" delay="1m">
+        <item amount="1" material="emerald"/>
+    </spawner>
+    <!-- Team Ingot Generators: Tier 4 -->
+    <spawner spawn-region="team-one-generator" filter="team-one-generator-4" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-two-generator" filter="team-two-generator-4" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-three-generator" filter="team-three-generator-4" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+    <spawner spawn-region="team-four-generator" filter="team-four-generator-4" max-entities="128" delay="2s">
+        <item amount="4" material="iron ingot"/>
+        <item amount="1" material="gold ingot"/>
+    </spawner>
+</spawners>
+<!-- Interactive Shops -->
+<shops>
+    <shop id="item-shop" name="Items">
+        <category id="quickbuy" name="`aQuick Buy" material="nether star">
+            <item material="wool" team-color="true" amount="16" price="4" currency="iron ingot" color="white"/>
+            <item material="wood" amount="16" price="4" currency="gold ingot"/>
+            <item material="stone sword" unbreakable="true" amount="1" price="10" currency="iron ingot" kit="stone-sword-sharp0" filter="sharpness-0" color="white"/>
+            <item material="iron sword" unbreakable="true" amount="1" price="7" currency="gold ingot" kit="iron-sword-sharp0" filter="sharpness-0"/>
+            <item material="stone sword" unbreakable="true" enchantment="sharpness" amount="1" price="10" kit="stone-sword-sharp1" currency="iron ingot" filter="sharpness-1" color="white"/>
+            <item material="iron sword" unbreakable="true" enchantment="sharpness" amount="1" price="7" kit="iron-sword-sharp1" currency="gold ingot" filter="sharpness-1"/>
+            <item material="chainmail boots" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-armor-kit" filter="chainmail-set-0" color="white"/>
+            <item material="iron boots" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-armor-kit" filter="iron-set-0"/>
+            <item material="chainmail boots" enchantment="protection" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot1-kit" filter="chainmail-set-1" color="white"/>
+            <item material="iron boots" enchantment="protection" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot1-kit" filter="iron-set-1"/>
+            <item material="chainmail boots" enchantment="protection:2" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot2-kit" filter="chainmail-set-2" color="white"/>
+            <item material="iron boots" enchantment="protection:2" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot2-kit" filter="iron-set-2"/>
+            <item material="chainmail boots" enchantment="protection:3" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot3-kit" filter="chainmail-set-3" color="white"/>
+            <item material="iron boots" enchantment="protection:3" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot3-kit" filter="iron-set-3"/>
+            <item material="chainmail boots" enchantment="protection:4" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot4-kit" filter="chainmail-set-4" color="white"/>
+            <item material="iron boots" enchantment="protection:4" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot4-kit" filter="iron-set-4"/>
+            <item material="golden apple" amount="1" price="3" currency="gold ingot"/>
+            <item material="shears" name="`rPermanent Shears" lore="`7Great for getting rid of wool." unbreakable="true" price="20" currency="iron ingot" filter="not-shears" color="white"/>
+            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/> 
+            <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-pickaxe">
+                <payment price="10" currency="iron ingot" color="white"/>
+                <payment price="1" currency="wood pickaxe"/>
+            </item>
+            <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2" amount="1" filter="not-gold-pickaxe">
+                <payment price="3" currency="gold ingot"/>
+                <payment price="1" currency="iron pickaxe"/>
+            </item>
+            <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-pickaxe">
+                <payment price="6" currency="gold ingot"/>
+                <payment price="1" currency="gold pickaxe"/>
+            </item>
+            <item material="wood axe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-axe" color="white"/>
+            <item material="stone axe" unbreakable="true" enchantment="efficiency:1" amount="1" filter="not-stone-axe">
+                <payment price="10" currency="iron ingot" color="white"/>
+                <payment price="1" currency="wood axe"/>
+            </item>
+            <item material="iron axe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-axe">
+                <payment price="3" currency="gold ingot"/>
+                <payment price="1" currency="stone axe"/>
+            </item>
+            <item material="diamond axe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-axe">
+                <payment price="6" currency="gold ingot"/>
+                <payment price="1" currency="iron axe"/>
+            </item>
+            <item material="fireball" name="`rFireball" lore="`7Right-click to launch! Great for|`7knocking off enemies walking on|`7thin bridges." price="40" currency="iron ingot" kit="fireball" color="white"/>
+            <item material="tnt" lore="`7Instantly ignites once placed." amount="1" price="8" currency="gold ingot"/>
+        </category>
+        <category id="blocks" name="`aBlocks" material="hard clay"> 
+            <item material="wool" team-color="true" amount="16" price="4" currency="iron ingot" color="white"/>
+            <item material="stained clay" team-color="true" amount="16" price="12" currency="iron ingot" color="white"/>
+            <item material="stained glass" team-color="true" name="`rBlastproof Glass" amount="4" price="12" currency="iron ingot" color="white"/>
+            <item material="ender stone" amount="12" price="24" currency="iron ingot" color="white"/>
+            <item material="ladder" amount="8" price="4" currency="iron ingot" color="white"/>
+            <item material="wood" amount="16" price="4" currency="gold ingot"/>
+            <item material="obsidian" amount="4" price="4" currency="emerald" color="dark green"/>
+        </category>
+        <category id="melee" name="`aMelee" material="gold sword">
+            <item material="stone sword" unbreakable="true" amount="1" price="10" currency="iron ingot" kit="stone-sword-sharp0" filter="sharpness-0" color="white"/>
+            <item material="iron sword" unbreakable="true" amount="1" price="7" currency="gold ingot" kit="iron-sword-sharp0" filter="sharpness-0"/>
+            <item material="diamond sword" unbreakable="true" amount="1" price="3" currency="emerald" kit="diamond-sword-sharp0" filter="sharpness-0" color="dark green"/>
+            <item material="stone sword" unbreakable="true" enchantment="sharpness" amount="1" price="10" kit="stone-sword-sharp1" currency="iron ingot" filter="sharpness-1" color="white"/>
+            <item material="iron sword" unbreakable="true" enchantment="sharpness" amount="1" price="7" kit="iron-sword-sharp1" currency="gold ingot" filter="sharpness-1"/>
+            <item material="diamond sword" unbreakable="true" enchantment="sharpness" amount="1" price="3" kit="diamond-sword-sharp1" currency="emerald" filter="sharpness-1" color="dark green"/>
+            <item material="stick" name="`rKnockback Stick" enchantment="knockback:1" amount="1" price="5" currency="gold ingot"/>
+        </category>
+        <category id="armor" name="`aArmor" material="chainmail boots">
+            <item material="chainmail boots" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-armor-kit" filter="chainmail-set-0" color="white"/>
+            <item material="iron boots" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-armor-kit" filter="iron-set-0"/>
+            <item material="diamond boots" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-armor-kit" filter="diamond-set-0" color="dark green"/>
+            <item material="chainmail boots" enchantment="protection" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot1-kit" filter="chainmail-set-1" color="white"/>
+            <item material="iron boots" enchantment="protection" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot1-kit" filter="iron-set-1"/>
+            <item material="diamond boots" enchantment="protection" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-prot1-kit" filter="diamond-set-1" color="dark green"/>
+            <item material="chainmail boots" enchantment="protection:2" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot2-kit" filter="chainmail-set-2" color="white"/>
+            <item material="iron boots" enchantment="protection:2" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot2-kit" filter="iron-set-2"/>
+            <item material="diamond boots" enchantment="protection:2" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-prot2-kit" filter="diamond-set-2" color="dark green"/>
+            <item material="chainmail boots" enchantment="protection:3" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot3-kit" filter="chainmail-set-3" color="white"/>
+            <item material="iron boots" enchantment="protection:3" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot3-kit" filter="iron-set-3"/>
+            <item material="diamond boots" enchantment="protection:3" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-prot3-kit" filter="diamond-set-3" color="dark green"/>
+            <item material="chainmail boots" enchantment="protection:4" name="`rPermanent Chainmail Armor" price="30" currency="iron ingot" kit="chainmail-prot4-kit" filter="chainmail-set-4" color="white"/>
+            <item material="iron boots" enchantment="protection:4" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot4-kit" filter="iron-set-4"/>
+            <item material="diamond boots" enchantment="protection:4" name="`rPermanent Diamond Armor" price="6" currency="emerald" kit="diamond-prot4-kit" filter="diamond-set-4" color="dark green"/>
+        </category>
+        <category id="tools" name="`aTools" material="stone pickaxe">
+            <item material="shears" name="`rPermanent Shears" lore="`7Great for getting rid of wool." unbreakable="true" price="20" currency="iron ingot" filter="not-shears" color="white"/>
+            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/> 
+            <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-pickaxe">
+                <payment price="10" currency="iron ingot" color="white"/>
+                <payment price="1" currency="wood pickaxe"/>
+            </item>
+            <item material="gold pickaxe" unbreakable="true" enchantment="efficiency:3;sharpness:2" amount="1" filter="not-gold-pickaxe">
+                <payment price="3" currency="gold ingot"/>
+                <payment price="1" currency="iron pickaxe"/>
+            </item>
+            <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-pickaxe">
+                <payment price="6" currency="gold ingot"/>
+                <payment price="1" currency="gold pickaxe"/>
+            </item>
+            <item material="wood axe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-axe" color="white"/>
+            <item material="stone axe" unbreakable="true" enchantment="efficiency:1" amount="1" filter="not-stone-axe">
+                <payment price="10" currency="iron ingot" color="white"/>
+                <payment price="1" currency="wood axe"/>
+            </item>
+            <item material="iron axe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-axe">
+                <payment price="3" currency="gold ingot"/>
+                <payment price="1" currency="stone axe"/>
+            </item>
+            <item material="diamond axe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-axe">
+                <payment price="6" currency="gold ingot"/>
+                <payment price="1" currency="iron axe"/>
+            </item>
+        </category>
+        <category id="ranged" name="`aRanged" material="bow">
+            <item material="arrow" amount="4" price="2" currency="gold ingot"/>
+            <item material="bow" unbreakable="true" amount="1" price="12" currency="gold ingot"/>
+            <item material="bow" unbreakable="true" enchantment="power:1" name="`rPower Bow" amount="1" price="20" currency="gold ingot"/>
+            <item material="bow" unbreakable="true" enchantment="power:1;punch:1" name="`rPower &amp; Punch Bow" amount="1" price="6" currency="emerald" color="dark green"/>
+            <item material="fishing rod" unbreakable="true" amount="1" price="6" currency="gold ingot"/>
+        </category>
+        <category id="potions" name="`aPotions" material="brewing stand item">
+            <item material="potion" name="`rSpeed II (0:45)" damage="2" amount="1" price="1" currency="emerald" color="dark green">
+                <effect duration="45s" amplifier="2">speed</effect>
+            </item>
+            <item material="potion" name="`rJump Boost V (0:45)" damage="11" amount="1" price="1" currency="emerald" color="dark green">
+                <effect duration="45s" amplifier="5">jump_boost</effect>
+            </item>
+            <item material="potion" name="`rInvisibility (0:30)" damage="14" amount="1" price="2" currency="emerald" color="dark green">
+                <effect duration="30s">invisibility</effect>
+            </item>
+        </category>
+        <category id="utilities" name="`aUtilities" material="tnt">
+            <item material="golden apple" amount="1" price="3" currency="gold ingot"/>
+            <item material="fireball" name="`rFireball" lore="`7Right-click to launch! Great for|`7knocking off enemies walking on|`7thin bridges." price="40" currency="iron ingot" kit="fireball" color="white"/>
+            <item material="tnt" lore="`7Instantly ignites once placed." amount="1" price="8" currency="gold ingot"/>
+            <item material="ender pearl" lore="`7The quickest way to invade enemy bases." amount="1" price="3" currency="emerald" color="dark green"/>
+            <item material="water bucket" lore="`7Great for slowing down approaching|`7enemies. Can also protect|`7against TNT." amount="1" price="6" currency="gold ingot"/>
+            <item material="milk bucket" name="`r`aMagic Milk" lore="`7Avoid triggering traps for 30|`7seconds after consuming." amount="1" price="4" consumable="trap-immunity-consumable" currency="gold ingot"/>
+            <item material="sponge" amount="4" price="6" currency="gold ingot"/>
+        </category>
+    </shop>
+    <shop id="upgrade-shop" name="Team Upgrades">
+        <category id="upgrades" name="`aTeam Upgrades" material="beacon">
+            <item material="iron sword" name="`4`lSharpened Swords" lore="`7Your team permanently gains|`7Sharpness I on all swords and|`7axes." price="8" currency="diamond" action="sharpness-dummy" filter="sharpness-0" color="aqua"/>
+            <item material="leather chestplate" name="`e`lReinforced Armor I" lore="`7Your team permanently gains|`7Protection I on all armor pieces." action="protection-dummy-1" filter="protection-0">
+                <payment price="5" currency="diamond" color="aqua"/>
+            </item>
+            <item material="chainmail chestplate" name="`e`lReinforced Armor II" lore="`7Your team permanently gains|`7Protection II on all armor pieces." price="10" currency="diamond" action="protection-dummy-2" filter="protection-1" color="aqua"/>
+            <item material="gold chestplate" name="`e`lReinforced Armor III" lore="`7Your team permanently gains|`7Protection III on all armor pieces." price="20" currency="diamond" action="protection-dummy-3" filter="protection-2" color="aqua"/>
+            <item material="diamond chestplate" name="`e`lReinforced Armor IV" lore="`7Your team permanently gains|`7Protection IV on all armor pieces." price="30" currency="diamond" action="protection-dummy-4" filter="protection-3" color="aqua"/>
+            <item material="gold pickaxe" name="`6`lHaste I" lore="`7All players on your team|`7permanently gain Haste I." price="4" currency="diamond" action="haste-dummy-1" filter="haste-0" color="aqua"/>
+            <item material="diamond pickaxe" name="`6`lHaste II" lore="`7All players on your team|`7permanently gain Haste II." price="6" currency="diamond" action="haste-dummy-2" filter="haste-1" color="aqua"/>
+            <item material="iron ingot" name="`b`lResource Generator Upgrade I" lore="`7This upgrade increases your resource|`7generator's speed to 150%." price="4" currency="diamond" action="generator-dummy-1" filter="generator-0" color="aqua"/> 
+            <item material="gold ingot" name="`b`lResource Generator Upgrade II" lore="`7This upgrade increases your resource|`7generator's speed to 200%." price="8" currency="diamond" action="generator-dummy-2" filter="generator-1" color="aqua"/>
+            <item material="emerald" name="`b`lResource Generator Upgrade III" lore="`7This upgrade will spawn emeralds in your|`7resource generator." price="12" currency="diamond" action="generator-dummy-3" filter="generator-2" color="aqua"/> 
+            <item material="gold block" name="`b`lResource Generator Upgrade IV" lore="`7This upgrade increases your resource|`7generator's speed to 300%." price="16" currency="diamond" action="generator-dummy-4" filter="generator-3" color="aqua"/>
+            <item material="beacon" name="`c`lRegenerative Pool" lore="`7Creates a Regeneration field|`7around your base." price="3" currency="diamond" action="regen-dummy" filter="regen-0" color="aqua"/>
+        </category>
+        <category id="upgrades" name="`aTraps" material="tripwire hook">
+            <item material="ice" name="`3`lFreeze Trap" lore="`7Enemies who enter your base will receive|`75 seconds of Slowness and Blindness." price="2" currency="diamond" action="freeze-dummy" filter="freeze-0" color="aqua"/>
+            <item material="redstone torch on" name="`d`lAlarm Trap" lore="`7Enemies who enter your base will|`7set off a Proximity Alarm and|`7be revealed if invisible." price="1" currency="diamond" action="alarm-dummy" filter="alarm-0" color="aqua"/>
+            <item material="poisonous potato" name="`7`lMining Fatigue Trap" lore="`7Enemies who enter your base will|`7receive Mining Fatigue." price="4" currency="diamond" action="fatigue-dummy" filter="fatigue-0" color="aqua"/>
+        </category>
+    </shop>
+</shops>
+<!-- ItemRemove, ItemKeep, ArmorKeep -->
+<itemremove>
+    <!-- Blocks -->
+    <item>obsidian</item>
+    <item>beacon</item>
+    <item>item frame</item>
+    <!-- Weapons -->
+    <item>wood sword</item>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>diamond sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>stick</item>
+    <item>fishing rod</item>
+    <!-- Tools -->
+    <item>shears</item>
+    <item>ladder</item>
+    <item>wood pickaxe</item>
+    <item>stone pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>gold pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>wood axe</item>
+    <item>stone axe</item>
+    <item>iron axe</item>
+    <item>diamond axe</item>
+    <!-- Misc -->
+    <item>golden apple</item>
+    <item>potion</item>
+    <item>tnt</item>
+    <item>sponge</item>
+    <item>fireball</item>
+    <item>ender pearl</item>
+    <item>water bucket</item>
+    <item>milk bucket</item>
+    <item>bed</item>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>red mushroom</item>
+    <item>brown mushroom</item>
+    <item>long grass</item>
+    <item>dead bush</item>
+    <item>double plant</item>
+    <!-- Armor -->
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+</itemremove>
+<itemkeep>
+    <!-- Tools -->
+    <item>wood pickaxe</item>
+    <item>stone pickaxe</item>
+    <item>iron pickaxe</item>
+    <item>gold pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>wood axe</item>
+    <item>stone axe</item>
+    <item>iron axe</item>
+    <item>diamond axe</item>
+    <item>shears</item>
+</itemkeep>
+<armorkeep>
+    <item>leather helmet</item>
+    <item>leather chestplate</item> <!-- Leather helmet and chestplate will always be present -->
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+</armorkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item material="diamond"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Consumables -->
+<consumables>
+    <consumable id="trap-immunity-consumable" action="immune-to-trap" on="eat" override="true"/>
+</consumables>
+<!-- Projectiles -->
+<projectiles>
+    <projectile id="throwable-fireball" name="Fireball" projectile="Fireball" click="right" damage="8" cooldown="2s"/>
+</projectiles>
+<!-- Crafting Control -->
+<crafting>
+    <disable>dirt</disable>
+    <disable>stone</disable>
+    <disable>wool</disable>
+    <disable>workbench</disable>
+    <disable>carpet</disable>
+    <disable>shears</disable>
+    <disable>stick</disable>
+    <disable>lever</disable>
+    <disable>wood button</disable>
+    <disable>stone button</disable>
+    <disable>wood plate</disable>
+    <disable>stone plate</disable>
+    <disable>gold plate</disable>
+    <disable>iron plate</disable>
+    <disable>iron trapdoor</disable>
+    <disable>gold nugget</disable>
+    <disable>flint and steel</disable>
+    <disable>clay</disable>
+    <disable>snow block</disable>
+    <disable>wool</disable>
+</crafting>
+<!-- TNT Control -->
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>false</licensing>
+    <friendly-defuse>false</friendly-defuse>
+    <fuse>3s</fuse>
+    <yield>1</yield>
+    <power>4.0</power>
+</tnt>
+<enderchest>
+    <dropoff region="team-one-generator" filter="only-team-one"/>
+    <dropoff region="team-two-generator" filter="only-team-two"/>
+    <dropoff region="team-three-generator" filter="only-team-three"/>
+    <dropoff region="team-four-generator" filter="only-team-four"/>
+</enderchest>
+<disabledamage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
