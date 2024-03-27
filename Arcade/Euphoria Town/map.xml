@@ -1,12 +1,13 @@
 <map proto="1.4.2">
 <name>Euphoria Town</name>
 <created>2021-12-07</created>
-<version>1.0.2</version>
+<version>1.1.0</version>
 <objective>After terrorizing a town for years, a group of trained hunters had decided to hunt down the beasts and eliminate them once and for all. The beasts are not going down without a fight, are you the hunter or the beast?</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
+<!-- Authors & Contributors -->
 <authors>
-   <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="JSON to XML and world conversion" /> <!-- Wesdial -->
+   <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Base Map &amp; JSON to XML and world conversion" /> <!-- Wesdial -->
 </authors>
 <contributors>
    <contributor uuid="edbd4cdb-63a5-4cec-944c-2b6bda56f51f" contribution="Windmill Mechanic" /> <!-- Owehttamy -->
@@ -18,28 +19,26 @@
 </blitz>
 <time>10m</time>
 <respawn auto="true" />
-<filters>
-   <team id="only-hunters">hunters</team>
-   <team id="only-beasts">beasts</team>
-</filters>
+<!-- Teams -->
 <teams>
    <team id="hunters" min="5" max="24" color="blue" plural="true" show-name-tags="true">Hunters</team>
    <team id="beasts" min="1" max="5" color="green" plural="true" show-name-tags="true">Beasts</team>
 </teams>
+<!-- Spawns -->
 <spawns>
    <spawn team="beasts" filter="after-1s" kit="death">
-      <regions yaw="56.4">
-         <point>61.5,39,-36.5</point>
+      <regions yaw="55.5">
+         <point>60.5,39,-39.5</point>
       </regions>
    </spawn>
    <spawn team="beasts" filter="before-1s" kit="beasts-kit">
-      <regions yaw="56.4">
-         <point>61.5,39,-36.5</point>
+      <regions yaw="55.5">
+         <point>60.5,39,-39.5</point>
       </regions>
    </spawn>
    <spawn team="hunters" kit="hunters-kit">
       <regions yaw="180">
-         <point>-1.5,30,59.560</point>
+         <cuboid min="-3.5,30,58.5" max="-0.5,30,56.5"/>
       </regions>
    </spawn>
    <default kit="default-kit">
@@ -48,7 +47,10 @@
       </regions>
    </default>
 </spawns>
+<!-- Filters & Regions -->
 <filters>
+   <team id="only-hunters">hunters</team>
+   <team id="only-beasts">beasts</team>
    <not id="before-1s">
       <time id="after-1s">1s</time>
    </not>
@@ -56,6 +58,7 @@
 <regions>
    <apply block="never" />
 </regions>
+<!-- Kits -->
 <kits>
    <kit id="default-kit">
       <effect>night vision</effect>
@@ -74,7 +77,7 @@
       <effect amplifier="100" duration="oo">instant_damage</effect>
    </kit>
    <kit id="beasts-kit" parents="default-kit">
-      <double-jump power="1.8" recharge-time="7s" />
+      <double-jump power="1.8" recharge-time="8s" />
       <shield health="2" delay="10s" />
       <helmet material="diamond helmet" unbreakable="true" enchantment="protection environmental:1" locked="true" />
       <chestplate material="diamond chestplate" unbreakable="true" enchantment="protection environmental:1" locked="true" />
@@ -86,9 +89,13 @@
       <item slot="2" material="golden apple" amount="8" />
    </kit>
 </kits>
+<!-- Tips -->
 <broadcasts>
    <tip after="45s" count="oo" filter="only-beasts">Double tap the spacebar button to double jump as a beast!</tip>
+   <tip after="3s" filter="only-beasts">Try to survive for 10 minutes or eliminate all the hunters. But be careful, you only have 2 lives!</tip>
+   <tip after="3s" filter="only-hunters">Try to find the beasts and eliminate them. But be careful, you only have 2 lives!</tip>
 </broadcasts>
+<!-- Itemremove -->
 <itemremove>
    <item>iron sword"</item>
    <item>leather boots</item>
@@ -104,6 +111,7 @@
    <item>arrow</item>
    <item>golden apple</item>
 </itemremove>
+<!-- Misc -->
 <hunger>
    <depletion>off</depletion>
 </hunger>
