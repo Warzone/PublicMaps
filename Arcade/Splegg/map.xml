@@ -1,0 +1,86 @@
+<map proto="1.4.2">
+<name>Splegg</name>
+<version>1.0.0</version>
+<objective>Use your Egg Shooter to break blocks under your enemies!</objective>
+<authors>
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f"/>
+</authors>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<players max="20" colors="true"/>
+<spawns>
+    <spawn kit="default">
+        <regions>
+            <cylinder base="0,68,0" radius="20" height="1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="0,68,0" radius="20" height="1"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <all id="await-5s">
+        <time>5s</time>
+        <participating/>
+    </all>
+</filters>
+<kits>
+    <kit id="default" force="true">
+        <game-mode>adventure</game-mode>
+        <max-health>1</max-health>
+        <double-jump power="3" recharge-time="10s" recharge-before-landing="true"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet" locked="true"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate" locked="true"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings" locked="true"/>
+        <boots team-color="true" unbreakable="true" material="leather boots" locked="true"/>
+    </kit>
+    <kit id="Egg-Shooter" parents="default">
+        <item projectile="eggs" name="`aEgg Shooter" material="diamond hoe"/>
+    </kit>
+</kits>
+<world>
+    <timeset>6000</timeset>
+</world>
+<actions>
+    <trigger scope="player" filter="await-5s">
+        <action>
+            <kit id="Egg-Shooter"/>
+        </action>
+    </trigger>
+    <trigger scope="player">
+        <filter>
+            <all>
+                <match-started/>
+                <participating/>
+            </all>
+        </filter>
+        <action>
+            <message text="`6You will recieve your Egg Shooter in 5 seconds!"/>
+        </action>
+    </trigger>
+</actions>
+<projectiles>
+    <projectile id="eggs"
+    name="eggs"
+    projectile="Egg"
+    throwable="false"
+    velocity="2.0">
+    <destroy-filter>
+        <not>
+            <material>barrier</material>
+        </not>
+    </destroy-filter>
+</projectile>
+</projectiles>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+    <damage>projectile</damage>
+</disabledamage>
+</map>
