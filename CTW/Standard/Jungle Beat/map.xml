@@ -1,6 +1,7 @@
 <map proto="1.4.2">
 <name>Jungle Beat</name>
-<version>1.9</version>
+<variant id="halloween" world="halloween" override="true">Jungle Spook</variant>
+<version>1.10.0</version>
 <objective>Capture the wool from the enemy's wool rooms and return them to your spawn!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -47,18 +48,28 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
+        <region>
             <cylinder id="obs-spawn" base="77,64,-28" radius="2" height="0"/>
         </region>
     </default>
     <spawn team="orange" kit="spawn-kit">
         <regions yaw="-90">
-            <point>96.5,7,53.5</point>
+            <unless variant="halloween">
+                <point>96.5,7,53.5</point>
+            </unless>
+            <if variant="halloween">
+                <point>80.5,7,53.5</point>
+            </if>
         </regions>
     </spawn>
     <spawn team="purple" kit="spawn-kit">
         <region yaw="90">
-            <point>-95.5,7,53.5</point>
+            <unless variant="halloween">
+                <point>-95.5,7,53.5</point>
+            </unless>
+            <if variant="halloween">
+                <point>-79.5,7,53.5</point>
+            </if>
         </region>
     </spawn>
 </spawns>
@@ -100,14 +111,30 @@
     <!-- Supply rooms -->
     <union id="spawns">
         <union id="orange-spawn-room">
-            <cuboid id="orange-spawn-inner" min="88,6,46" max="108,13,61"/> <!-- Main -->
+            <unless variant="halloween">
+                <cuboid id="orange-spawn-inner" min="88,6,46" max="108,13,61"/> <!-- Main -->
+            </unless>
+            <if variant="halloween">
+                <union id="orange-spawn-inner">
+                    <cuboid min="89,6,46" max="108,13,61"/> <!-- Main -->
+                    <cuboid min="79,6,50" max="89,13,57"/> <!-- Spawn tunnel -->
+                </union>
+            </if>
             <cuboid min="104,13,55" max="107,17,61"/> <!-- Left side overhang -->
             <cuboid min="104,13,46" max="107,17,52"/> <!-- Right side overhang -->
             <cuboid min="104,13,52" max="107,16,55"/> <!-- Center column thing -->
             <cuboid min="104,12,43" max="108,16,64"/> <!-- Stairs -->
         </union>
         <union id="purple-spawn-room">
-            <cuboid id="purple-spawn-inner" min="-104,6,46" max="-87,13,61"/> <!-- Main -->
+            <unless variant="halloween">
+                <cuboid id="purple-spawn-inner" min="-104,6,46" max="-87,13,61"/> <!-- Main -->
+            </unless>
+            <if variant="halloween">
+                <union id="purple-spawn-inner">
+                    <cuboid min="-107,6,46" max="-88,13,61"/> <!-- Main -->
+                    <cuboid min="-88,6,50" max="-78,13,57"/> <!-- Spawn tunnel -->
+                </union>
+            </if>
             <cuboid min="-106,13,55" max="-103,17,61"/> <!-- Right side overhang -->
             <cuboid min="-106,13,46" max="-103,17,52"/> <!-- Left side overhang -->
             <cuboid min="-106,13,52" max="-103,16,55"/> <!-- Center column thing -->
@@ -148,23 +175,35 @@
     <apply block="never" region="sides" message="You may not build outside of the map!"/>
     <apply block="deny-void" region="void" message="You may not build outside of the map!"/>
 </regions>
+<unless variant="halloween">
+    <constant id="orange-wool-a">red</constant>
+    <constant id="orange-wool-b">yellow</constant>
+    <constant id="purple-wool-a">blue</constant>
+    <constant id="purple-wool-b">cyan</constant>
+</unless>
+<if variant="halloween">
+    <constant id="orange-wool-a">red</constant>
+    <constant id="orange-wool-b">lime</constant>
+    <constant id="purple-wool-a">blue</constant>
+    <constant id="purple-wool-b">green</constant>
+</if>
 <wools craftable="false">
-    <wool team="orange" color="red" location="-174.5,29,28.5">
+    <wool team="orange" color="${orange-wool-a}" location="-174.5,29,28.5">
         <monument>
             <block>107.5,10.5,54.5</block>
         </monument>
     </wool>
-    <wool team="orange" color="yellow" location="-174.5,29,78.5">
+    <wool team="orange" color="${orange-wool-b}" location="-174.5,29,78.5">
         <monument>
             <block>107.5,10.5,52.5</block>
         </monument>
     </wool>
-    <wool team="purple" color="blue" location="175.5,29,28.5">
+    <wool team="purple" color="${purple-wool-a}" location="175.5,29,28.5">
         <monument>
             <block>-106.5,10.5,54.5</block>
         </monument>
     </wool>
-    <wool team="purple" color="cyan" location="175.5,29,78.5">
+    <wool team="purple" color="${purple-wool-b}" location="175.5,29,78.5">
         <monument>
             <block>-106.5,10.5,52.5</block>
         </monument>
@@ -196,6 +235,9 @@
     <item>red rose</item>
     <item>seeds</item>
     <item>string</item>
+    <if variant="halloween">
+        <item>obsidian</item>
+    </if>
 </itemremove>
 <block-drops>
     <rule>
@@ -246,8 +288,13 @@
     <item amount="16" material="glass"/>
 </kill-reward>
 <maxbuildheight>48</maxbuildheight>
+<if variant="halloween">
+    <crafting>
+        <disable>bed</disable>
+    </crafting>
+</if>
 </map>
-<!-- <include id="tutorial"/>
+<!-- include src="tutorial.xml"/>
 <tutorial>
     <stage title="Capture the Wool">
         <message>
