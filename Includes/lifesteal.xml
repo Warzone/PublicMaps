@@ -1,0 +1,115 @@
+<map proto="1.4.2">
+<!--       /| ________________  -->
+<!-- O|===|* >________________> -->
+<!--       \|                   -->
+<!-- Lifesteal Blitz gamemode include file -->
+<!-- Created by zzuf -->
+<!-- Version 2024.01.28-1 -->
+<game>Blitz: Lifesteal</game>
+<constants>
+    <constant id="extra-lives">1</constant> <!-- Lives you get after a kill -->
+    <constant id="total-lives">1</constant> <!-- Total lives you can get per spawn -->
+    <constant id="max-lives">1</constant> <!-- Maximum amount of lives you can have at once -->
+    <constant id="max-lives-enabled">0</constant> <!-- 0: off, 1: on -->
+    <constant id="tutorial-word1">life</constant>
+    <constant id="tutorial-word2">life</constant>
+</constants>
+<filters>
+    <all id="is-dead">
+        <dead/>
+        <match-running/>
+    </all>
+    <variable id="earned-total" var="extra_lives">${total-lives}</variable>
+</filters>
+<kits>
+    <kit id="add-life-kit">
+        <action>
+            <set var="blitz_lives" value="blitz_lives+${extra-lives}"/>
+            <set var="extra_lives" value="extra_lives+1"/>
+            <message title="" text=" `e⚠ `aYou have earned an extra life! `b`o{lives}`7`o lives remaining.">
+                <replacements>
+                    <decimal id="lives" value="blitz_lives"/>
+                </replacements>
+            </message>
+            <sound key="fireworks.twinkle"/>
+        </action>
+    </kit>
+    <kit id="obs-kit">
+        <book show-other="false">
+            <title>`e`lHow to Play</title>
+            <author>zzuf</author>
+            <pages>
+                <page>
+                    `2» `lLIFESTEAL`0
+                    `2» gamemode`0
+                    
+                    This is a `9Blitz`0 match,
+                    and every time you
+                    get a kill you can get
+                    extra lives!
+                    
+                    In `nthis map`0, each kill
+                    grants you `6${extra-lives}`0 ${tutorial-word1},
+                    with a limit of `4${total-lives}`0 extra
+                    ${tutorial-word2} per spawn!
+                </page>
+            </pages>
+        </book>
+    </kit>
+    <give kit="obs-kit" filter="is-observer"/>
+</kits>
+<filters>
+    <observing id="is-observer"/>
+</filters>
+<variables>
+    <lives id="blitz_lives"/>
+    <variable id="extra_lives" scope="player" default="0"/>
+    <variable id="max_lives" scope="player" default="${max-lives}"/>
+    <variable id="max_lives_enabled" scope="match" default="${max-lives-enabled}"/>
+</variables>
+<actions>
+    <trigger filter="is-dead" scope="player">
+        <action scope="player">
+            <set var="extra_lives" value="0"/>
+        </action>
+    </trigger>
+    <trigger filter="earned-total" scope="player">
+        <action scope="player">
+            <message title="" text=" `e⚠ `cYou won't earn any additional lives until you respawn."/>
+        </action>
+    </trigger>
+</actions>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <any>
+                <all>
+                    <variable var="max_lives_enabled">0</variable>
+                    <variable var="extra_lives">[0,${total-lives})</variable>
+                </all>
+                <all>
+                    <variable var="max_lives_enabled">1</variable>
+                    <variable var="extra_lives">[0,${total-lives})</variable>
+                    <not>
+                        <variable var="blitz_lives">[${max-lives},oo)</variable>
+                    </not>
+                </all>
+            </any>
+        </filter>
+        <kit id="add-life-kit"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <variable var="max_lives_enabled">1</variable>
+                <variable var="blitz_lives">${max-lives}</variable>
+            </all>
+        </filter>
+        <kit>
+            <action>
+                <message text=" `e⚠ `cYou have reached the maximum amount of lives this map allows."/>
+            </action>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+</map>
