@@ -1,49 +1,57 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Diramu Valley DTM</name>
-<version>1.0.4</version>
+<variant id="christmas" world="christmas" override="true">Danagal Valley DTM</variant>
+<version>1.1.2</version>
 <gamemode>dtm</gamemode>
 <objective>Destroy both of the opposing monuments to win!</objective>
+<created>2018-01-29</created>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
 </authors>
+<if variant="christmas">
+    <contributors>
+        <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="Christmas-ification"/> <!-- Xerocoles -->
+    </contributors>
+</if>
 <teams>
-    <team id="red" color="dark red" max="8">Red</team>
+    <unless variant="christmas">
+        <team id="red" color="dark red" max="8">Red</team>
+    </unless>
+    <if variant="christmas">
+        <team id="red" color="green" max="8">Green</team>
+    </if>
     <team id="blue" color="blue" max="8">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-        <item slot="4" amount="48" damage="5">wood</item>
-        <item slot="6" amount="12">vine</item>
-        <item slot="7" amount="1">golden apple</item>
-        <item slot="8" amount="32">cooked fish</item>
-        <item slot="28" amount="1">arrow</item>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="48" damage="5" material="wood"/>
+        <item slot="6" amount="12" material="vine"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked fish"/>
+        <item slot="28" material="arrow"/>
+        <if variant="christmas">
+            <item slot="30" unbreakable="true" material="stone spade"/>
+        </if>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <potion duration="3" amplifier="3">heal</potion>
         <potion duration="6">damage resistance</potion>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
-        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
-        <boots color="cd0000" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
-        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
-        <boots color="0066cc" unbreakable="true">leather boots</boots>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue" kit="blue-kit">
-        <regions yaw="0">
+    <spawn team="blue" kit="spawn-kit">
+        <regions>
             <cuboid min="-90.5,24,130.5" max="-92.5,24,132.5"/>
         </regions>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red" kit="spawn-kit">
         <regions yaw="180">
             <cuboid min="-92.5,24,274.5" max="-90,24,272.5"/>
         </regions>
@@ -55,6 +63,9 @@
     </default>
 </spawns>
 <filters>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
     <not id="no-void">
@@ -68,18 +79,19 @@
             <rectangle id="red-spawn" min="-75.5,277.5" max="-107.5,265.5"/>
         </union>
     </negative>
-        <apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
-        <apply block="never" message="You may not edit spawn" region="spawns"/>
-        <apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
-        <apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
+    <apply use="deny-beacon"/>
+    <apply block-place="no-void" message="You may not place blocks in this area" region="void"/>
+    <apply block="never" message="You may not edit spawn" region="spawns"/>
+    <apply enter="only-red" message="You may not enter the enemy spawn" region="red-spawn"/>
+    <apply enter="only-blue" message="You may not enter the enemy spawn" region="blue-spawn"/>
 </regions>
-<destroyables completion="100%" mode-changes="true"  materials="obsidian">
-    <destroyable owner="red" name="Monument">
+<destroyables name="Monument" mode-changes="true" materials="obsidian" repairable="false">
+    <destroyable owner="red">
         <region>
             <cuboid min="-92.5,22,230.5" max="-90.5,25,232.5"/>
         </region>
     </destroyable>
-    <destroyable owner="blue" name="Monument">
+    <destroyable owner="blue">
         <region>
             <cuboid min="-92.5,22,172.5" max="-90.5,25,174.5"/>
         </region>
@@ -94,7 +106,7 @@
 <itemremove>
     <item>cooked fish</item>
     <item>obsidian</item>
-    <item damage="5">wood</item>
+    <item>wood:5</item>
     <item>string</item>
     <item>glowstone dust</item>
     <item>apple</item>
@@ -110,10 +122,12 @@
     <item>leather boots</item>
     <item>red rose</item>
     <item>arrow</item>
+    <item>beacon</item>
+    <if variant="christmas">
+        <item>snow ball</item>
+        <item>vine</item>
+    </if>
 </itemremove>
-<kill-reward>
-    <item material="golden apple"/>
-</kill-reward>
 <itemkeep>
     <item>golden apple</item>
 </itemkeep>
@@ -122,5 +136,13 @@
     <tool>bow</tool>
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
+    <if variant="christmas">
+        <tool>stone spade</tool>
+    </if>
 </toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
 </map>
