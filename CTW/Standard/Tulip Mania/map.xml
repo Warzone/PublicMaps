@@ -1,27 +1,48 @@
 <map proto="1.4.2">
 <name>Tulip Mania</name>
-<version>1.0.4</version>
+<variant id="halloween" world="halloween" override="true">Witch Mania</variant>
+<version>1.1.1</version>
 <objective>Capture the enemy team's wool!</objective>
-<created>2022-09-17</created>
+<if variant="default">
+    <created>2022-09-17</created>
+</if>
+<if variant="halloween">
+    <created>2023-09-28</created>
+</if>
 <gamemode>ctw</gamemode>
 <authors>
     <author uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Layout, theming, XML"/> <!-- Cazadorian -->
     <author uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b" contribution="Aesthetics"/> <!-- Tundren -->
+    <if variant="halloween">
+        <author uuid="b2539be1-8f98-4375-b653-9d91cd04c30e" contribution="Aesthetics"/> <!-- Mewzzy -->
+    </if>
 </authors>
-<contributors>
-    <contributor uuid="b2539be1-8f98-4375-b653-9d91cd04c30e" contribution="Aesthetics"/> <!-- Mewzzy -->
-</contributors>
+<if variant="default">
+    <contributors>
+        <contributor uuid="b2539be1-8f98-4375-b653-9d91cd04c30e" contribution="Aesthetics"/> <!-- Mewzzy -->
+    </contributors>
+</if>
+<constants>
+    <constant id="observers-kit" delete="true"/>
+</constants>
+<if variant="halloween">
+    <constant id="observers-kit">default-kit</constant>
+</if>
 <teams>
     <team id="purple" color="dark purple" max="8">Purple</team>
     <team id="orange" color="gold" max="8">Orange</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="${observers-kit}">
         <clear/>
         <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow" enchantment="infinity"/>
-        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe" enchantment="efficiency"/>
         <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" material="stained glass" team-color="true" amount="48"/>
         <item slot="5" amount="32" material="wood"/>
         <item slot="7" material="golden apple"/>
         <item slot="8" material="water bucket"/>
@@ -34,25 +55,19 @@
         <boots unbreakable="true" team-color="true" material="leather boots" />
         <effect duration="4" amplifier="255">damage resistance</effect>
     </kit>
-    <kit id="orange-kit" parent="spawn-kit">
-        <item slot="4" material="stained glass" damage="1" amount="48"/>
-    </kit>
-    <kit id="purple-kit" parent="spawn-kit">
-        <item slot="4" material="stained glass" damage="10" amount="48"/>
-    </kit>
 </kits>
 <spawns>
-    <default yaw="0">
+    <default kit="${observers-kit}">
         <regions>
             <point>3.5,61,35.5</point>
         </regions>
     </default>
-    <spawn team="orange" kit="orange-kit" yaw="180">
+    <spawn team="orange" kit="spawn-kit" yaw="180">
         <regions>
             <point>3.5,13,89.5</point>
         </regions>
     </spawn>
-    <spawn team="purple" kit="purple-kit" yaw="0">
+    <spawn team="purple" kit="spawn-kit">
         <regions>
             <point>3.5,13,-18.5</point>
         </regions>
@@ -109,8 +124,6 @@
         <region id="spawn-protection"/>
         <region id="wool-rooms"/>
         <rectangle id="middle" min="-7,22" max="14,49"/>
-        <rectangle id="orange-gap" min="-38,58" max="-25,41"/>
-        <rectangle id="purple-gap" min="32,30" max="45,13"/>
     </negative>
     <apply enter="only-purple" region="purple-prot" message="You may not enter the opponent's spawn!"/>
     <apply enter="only-orange" region="orange-prot" message="You may not enter the opponent's spawn!"/>
@@ -124,7 +137,7 @@
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
-    <tool>iron pickaxe</tool>
+    <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
     <tool>iron spade</tool>
     <tool>shears</tool>
@@ -140,6 +153,14 @@
     <item>sapling</item>
     <item>dirt</item>
     <item>stained clay</item>
+    <if variant="halloween">
+        <item>soul sand</item>
+        <item>brown mushroom</item>
+        <item>wool:13</item>
+        <item>quartz block</item>
+        <item>prismarine</item>
+        <item>dark oak stairs</item>
+    </if>
 </itemremove>
 <itemkeep>
     <item>arrow</item>
@@ -167,14 +188,7 @@
     <kill-reward>
         <item material="golden apple"/>
         <item amount="16" material="wood"/>
-    </kill-reward>
-    <kill-reward>
-       <kill-reward filter="only-purple">
-           <item amount="8" material="stained glass" damage="10" />
-       </kill-reward>
-       <kill-reward filter="only-orange">
-           <item amount="8" material="stained glass" damage="1" />
-       </kill-reward>
+        <item amount="8" material="stained glass" team-color="true"/>
     </kill-reward>
 </kill-rewards>
 </map>
