@@ -1,8 +1,14 @@
 <map proto="1.4.2">
 <name>Hobbit CTW</name>
-<version>1.0.3</version>
+<variant id="christmas" world="christmas" override="true">Hobbitmas</variant>
+<version>1.0.9</version>
 <objective>Take the enemy's wool located near their base and place it back at your spawn!</objective>
-<created>2023-01-24</created>
+<unless variant="christmas">
+    <created>2023-01-24</created>
+</unless>
+<if variant="christmas">
+    <created>2023-11-03</created>
+</if>
 <maxbuildheight>23</maxbuildheight>
 <gamemode>ctw</gamemode>
 <authors>
@@ -22,22 +28,33 @@
     <spawn team="blue-team" kit="spawn-kit" yaw="-90" region="blue-spawn"/>
     <default>
         <regions>
-            <point yaw="180">150.5,36,213.5</point>
+            <unless variant="christmas">
+                <point yaw="180">150.5,36,213.5</point>
+            </unless>
+            <if variant="christmas">
+                <cylinder yaw="-90" base="110.5,36,213.5" height="0" radius="1.5"/>
+            </if>
         </regions>
     </default>
 </spawns>
 <kits>
-    <kit id="spawn-kit" force="true">
+    <kit id="spawn-kit">
         <clear/>
         <item slot="0" material="iron sword" unbreakable="true"/>
         <item slot="1" material="bow" unbreakable="true"/>
         <item slot="2" material="iron pickaxe" unbreakable="true"/>
         <item slot="3" material="iron axe" unbreakable="true"/>
-        <item slot="4" material="iron spade" unbreakable="true"/>
-        <item slot="5" material="wood" damage="1" amount="32"/>
-        <item slot="6" material="glass" amount="32"/>
+        <item slot="4" material="wood" damage="1" amount="32"/>
+        <item slot="5" material="glass" amount="32"/>
         <item slot="8" material="golden apple"/>
         <item slot="28" material="arrow" amount="32"/>
+        <item slot="29" material="shears" unbreakable="true"/>
+        <unless variant="christmas">
+            <item slot="30" material="iron spade" unbreakable="true"/>
+        </unless>
+        <if variant="christmas">
+            <item slot="30" material="stone spade" unbreakable="true"/>
+        </if>
         <helmet material="leather helmet" team-color="true" unbreakable="true"/>
         <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
         <leggings material="chainmail leggings" enchantment="protection projectile" unbreakable="true"/>
@@ -54,9 +71,6 @@
     </kit>
 </kits>
 <filters>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
     <deny id="deny-red">
         <team id="only-red">red-team</team>
     </deny>
@@ -67,7 +81,7 @@
         <void/>
     </deny>
     <material id="only-gold-block">gold block</material>
-    <blocks id="only-wool-room" region="wool-rooms">
+    <blocks id="only-wool-room" region="wool-room-blocks">
         <any>
             <material>air</material>
             <material>web</material>
@@ -81,15 +95,14 @@
             <rectangle min="165,241" max="136,186"/>
             <rectangle min="157,206" max="144,221"/>
         </complement>
-        <region id="red-wool-room"/>
-        <region id="blue-wool-room"/>
+        <region id="wool-room-blocks"/>
         <region id="red-spawn-area"/>
         <region id="blue-spawn-area"/>
     </negative>
     <apply block="no-void" region="void-area" message="You may not edit the void!"/>
     <!-- Spawns -->
-    <point id="red-spawn" yaw="90">182.5,11,177.5</point>
-    <point id="blue-spawn" yaw="-90">118.5,11,249.5</point>
+    <point id="red-spawn">182.5,11,177.5</point>
+    <point id="blue-spawn">118.5,11,249.5</point>
     <cuboid id="obs-spawn" min="147,34,210" size="7,4,7"/>
     <apply block="never" region="obs-spawn" message="You may not modify the observer's spawn!"/>
     <!-- Red -->
@@ -108,8 +121,12 @@
     <apply enter="deny-red" region="blue-spawn-area" message="You may not enter your enemies' spawn!"/>
     <!-- Wool rooms -->
     <union id="wool-rooms">
-        <cuboid id="blue-wool-room" min="163,0,275" max="176,128,290"/> <!-- Contains blue wool -->
-        <cuboid id="red-wool-room" min="138,0,152" max="124,128,137"/> <!-- Contains red wool -->
+        <rectangle id="blue-wool-room" min="163,275" max="176,290"/> <!-- Contains blue wool -->
+        <rectangle id="red-wool-room" min="138,152" max="124,137"/> <!-- Contains red wool -->
+    </union>
+    <union id="wool-room-blocks">
+        <cuboid id="blue-wool-room-blocks" min="163,0,275" max="176,34,290"/> <!-- Contains blue wool -->
+        <cuboid id="red-wool-room-blocks" min="138,0,152" max="124,34,137"/> <!-- Contains red wool -->
     </union>
     <!-- Gold area -->
     <union id="gold-area">
@@ -118,10 +135,9 @@
     </union>
     <apply block="deny-red" region="red-wool-room" message="You may not modify the wool room!"/>
     <apply block="deny-blue" region="blue-wool-room" message="You may not modify the wool room!"/>
-    <apply block="only-wool-room" region="wool-rooms" message="You may not modify the wool room!"/>
+    <apply block="only-wool-room" region="wool-room-blocks" message="You may not modify the wool room!"/>
     <apply enter="only-blue" region="red-wool-room" message="You may not enter your team's wool room!"/>
     <apply enter="only-red" region="blue-wool-room" message="You may not enter your team's wool room!"/>
-    <apply block="only-gold-block" region="gold-area" message="You may only break gold blocks here!"/>
     <apply kit="wool-room-armor" region="wool-rooms"/>
     <apply kit="wool-room-kit" region="wool-rooms"/>
     <point id="red-wool-spawner">130.5,14.2,143.5</point>
@@ -154,6 +170,8 @@
     <item>iron pickaxe</item>
     <item>iron axe</item>
     <item>iron spade</item>
+    <item>stone spade</item>
+    <item>shears</item>
     <item>arrow</item>
     <item>wood</item>
     <item>glass</item>
@@ -165,6 +183,7 @@
     <item>chainmail leggings</item>
     <item>leather boots</item>
     <item>string</item>
+    <item>snow ball</item>
 </itemremove>
 <toolrepair>
     <tool>iron sword</tool>
@@ -177,7 +196,7 @@
     <kill-reward>
         <item material="golden apple"/>
         <item material="arrow" amount="8"/>
-        <item material="wood" amount="8"/>
+        <item material="wood" damage="1" amount="8"/>
         <item material="glass" amount="8"/>
     </kill-reward>
 </kill-rewards>
@@ -187,10 +206,15 @@
 <block-drops>
     <rule filter="only-gold-block">
         <drops>
-            <item material="gold chestplate" unbreakable="true"/>
+            <item material="gold chestplate" unbreakable="true">
+                <enchantment level="2">protection projectile</enchantment>
+            </item>
         </drops>
     </rule>
 </block-drops>
+<gamerules>
+    <randomTickSpeed>0</randomTickSpeed>
+</gamerules>
 <hunger>
     <depletion>off</depletion>
 </hunger>
