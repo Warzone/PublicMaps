@@ -1,20 +1,16 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Water Drop">
+<map proto="1.4.2" game="Water Drop">
 <name>Water Drop: Long Shot</name>
-<phase>development</phase>
-<version>1.3.0</version>
-<objective>Carry the flag to the end!</objective>
+<version>1.5.2</version>
+<objective>Grab the flag and return it to your spawn!</objective>
+<created>2019-04-01</created>
 <gamemode>arcade</gamemode>
+<include id="void-death"/>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Original map theme"/> <!-- StealthMedia -->
     <author uuid="4a0780d3-d9c4-41c4-a816-e077a36f27c9" contribution="Original map theme"/> <!-- KasiCrafter -->
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Water Drop adaptation"/> <!-- mitchiii_ -->
 </authors>
-<broadcasts>
-    <tip after="3s">`r`bWater Drop your flag carrier all the way down to the end!</tip>
-    <tip after="8s">`r`bWatch out for the arrow fire from the opposing team!</tip>
-    <tip after="13s">`r`bWhen your flag carrier dies, your side is `r`c`lcompletely `r`c`lreset`r`b!</tip>
-</broadcasts>
 <teams>
     <team id="blue-team" color="blue" max="30">Blue</team>
     <team id="red-team" color="dark red" max="30">Red</team>
@@ -22,132 +18,98 @@
 <spawns>
     <spawn team="blue-team" kit="players" yaw="90" region="blue-spawn"/>
     <spawn team="red-team" kit="players" yaw="90" region="red-spawn"/>
-    <default kit="obs" yaw="90">
-        <regions>
-            <cylinder base="-110.5,132.5,-234.5" radius="6" height="0.1"/>
-            <cylinder base="-110.5,132.5,-206.5" radius="6" height="0.1"/>
-        </regions>
-    </default> 
+    <default yaw="90" region="obs-spawn"/>
 </spawns>
 <kits>
-    <kit id="obs">
-        <potion duration="oo" amplifier="2">speed</potion>
-        <fly flying="true"/>
-    </kit>
     <kit id="players">
         <clear/>
-        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket" prevent-sharing="true"/>
-        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket" prevent-sharing="true"/>
-        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket" prevent-sharing="true"/>
-        <item slot="3" material="bow" unbreakable="true" locked="true" name="`c`lAnti-Water-Dropper Bow!" prevent-sharing="true"/>
-        <item slot="8" material="arrow" amount="6"/>
-        <game-mode>survival</game-mode>
-    </kit>
-    <kit id="flag-carrier" force="true">
-        <clear/>
-        <game-mode>adventure</game-mode>
-        <helmet locked="true" unbreakable="true" material="gold helmet"/>
-        <chestplate locked="true" unbreakable="true" material="gold chestplate"/>
-        <leggings locked="true" unbreakable="true" material="gold leggings"/>
-        <boots locked="true" unbreakable="true" material="gold boots">
-            <enchantment level="5">protection projectile</enchantment>
-        </boots>
-    </kit>
-    <kit id="force-kill">
-        <potion duration="1" amplifier="100">harm</potion>
+        <action>
+            <set var="can_jump" value="0"/>
+        </action>
+        <item slot="0" material="stone axe" unbreakable="true" prevent-sharing="true"/>
+        <item slot="1" material="bow" unbreakable="true" name="`c`lAnti-Water-Dropper Bow!" prevent-sharing="true"/>
+        <item slot="2" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
+        <item slot="3" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
+        <item slot="4" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
+        <item slot="8" material="arrow" amount="16"/>
+        <chestplate material="leather chestplate" locked="true" unbreakable="true" team-color="true">
+            <enchantment>protection projectile</enchantment>
+        </chestplate>
+        <boots material="leather boots" locked="true" unbreakable="true" team-color="true"/>
     </kit>
 </kits>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <kill-reward>
-    <item material="arrow" amount="3"/>
-    <item material="water bucket" locked="true" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
-    <potion duration="8">absorption</potion>
+    <item material="arrow" amount="8"/>
+    <item material="wood" damage="1" amount="8"/>
+    <kit>
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="bucket"/>
+                <replace material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
+            </replace-item>
+        </action>
+    </kit>
 </kill-reward>
 <filters>
-    <all id="water">
-        <any>
-            <material>water</material>
-            <material>stationary water</material>
-        </any>
-        <not>
-            <cause>world</cause>
-        </not>
-    </all>
-    <any id="water-break">
-        <filter id="water"/>
+    <match-started id="match-started"/>
+    <participating id="participating"/>
+    <any id="placeable">
         <all>
             <any>
                 <material>water</material>
                 <material>stationary water</material>
             </any>
-            <any>
-                <all>
-                    <region id="blue-side"/>
-                    <not>
-                        <flag-carried>blue-flag</flag-carried>
-                    </not>
-                </all>
-                <all>
-                    <region id="red-side"/>
-                    <not>
-                        <flag-carried>red-flag</flag-carried>
-                    </not>
-                </all>
-            </any>
+            <not>
+                <cause>world</cause>
+            </not>
         </all>
+        <all>
+            <material>wood:2</material>
+            <not>
+                <void/>
+            </not>
+        </all>
+        <material id="only-fire">fire</material>
     </any>
-    <all id="teleport-blue">
-        <team>blue-team</team>
-        <flag-returned>blue-flag</flag-returned>
-    </all>
-    <all id="teleport-red">
-        <team>red-team</team>
-        <flag-returned>red-flag</flag-returned>
-    </all>
 </filters>
 <regions>
     <union id="spawns">
-        <cylinder id="blue-spawn" base="-110.5,132.5,-234.5" radius="0.1" height="0.1"/>
-        <cylinder id="red-spawn" base="-110.5,132.5,-206.5" radius="0.1" height="0.1"/>
+        <cylinder id="blue-spawn" base="-74.5,150,-234.5" radius="0.1" height="0.1"/>
+        <cylinder id="red-spawn" base="-74.5,150,-206.5" radius="0.1" height="0.1"/>
     </union>
-    <cylinder id="obs-spawn" base="-110.5,146,-220" radius="3" height="1"/>
+    <cylinder id="obs-spawn" base="-59.5,161,-220.5" radius="2" height="0.1"/>
     <negative id="everywhere-else">
         <union id="sides">
-            <cuboid id="blue-side" min="-277,20,-241" size="160,107,13"/>
-            <cuboid id="red-side" min="-277,20,-213" size="160,107,13"/>
+            <cuboid id="blue-side" min="-96,0,-227" max="-285,152,-242"/>
+            <cuboid id="red-side" min="-96,0,-199" max="-285,152,-214"/>
         </union>
     </negative>
+    <rectangle id="lane-middle" min="oo,-220" max="-oo,-221"/>
+    <union id="return-checkpoint">
+        <cylinder base="-277.5,13,-234.5" radius="3" height="3"/>
+        <cylinder base="-277.5,13,-206.5" radius="3" height="3"/>
+    </union>
+    <apply region="lane-middle" enter="never" message="You may not cross to the other team's side!"/>
     <apply region="everywhere-else" block="never"/>
-    <apply block-place="water" block-break="water-break" block-physics="never" use="never"/>
+    <apply block="placeable" block-physics="only-fire"/>
 </regions>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<itemremove>
-    <item>bucket</item>
-    <item>water bucket</item>
-    <item>leather boots</item>
-    <item>barrier</item>
-    <item>bow</item>
-    <item>arrow</item>
-    <item>gold helmet</item>
-    <item>gold chestplate</item>
-    <item>gold leggings</item>
-    <item>gold boots</item>
-</itemremove>
-<flags pickup-kit="flag-carrier" drop-kit="force-kill" drop-filter="never">
+<flags drop-filter="never">
     <flag id="blue-flag" name="Blue Flag" owner="red-team" color="blue">
-        <post yaw="90" recover-time="0" respawn-time="1">-110.5,132.5,-234.5</post>
+        <post yaw="90" recover-time="0" respawn-time="1">-278,13,-235</post>
         <net points="1">
             <region>
-                <cylinder base="-270.5,12,-234.5" radius="2" height="2"/>
+                <cuboid min="-92,157,-226" max="-69,147,-243"/>
             </region>
         </net>
     </flag>
     <flag id="red-flag" name="Red Flag" owner="blue-team" color="red">
-        <post yaw="90" recover-time="0" respawn-time="1">-110.5,132.5,-206.5</post>
+        <post yaw="90" recover-time="0" respawn-time="1">-278,13,-207</post>
         <net points="1">
             <region>
-                <cylinder base="-270.5,12,-206.5" radius="2" height="2"/>
+                <cuboid min="-92,157,-198" max="-69,147,-215"/>
             </region>
         </net>
     </flag>
@@ -155,19 +117,62 @@
 <score>
     <limit>1</limit>
 </score>
-<renewables>
-    <renewable interval="1" region="sides">
-        <renew-filter>
-            <any>
-                <material>air</material>
-            </any>
-        </renew-filter>
-        <replace-filter>
-            <any>
-                <material>water</material>
-                <material>stationary water</material>
-            </any>
-        </replace-filter>
-    </renewable>
-</renewables>
+<variables>
+    <variable id="can_jump" default="0" scope="player"/>
+</variables>
+<actions>
+    <trigger scope="player" filter="all(return-checkpoint, participating)">
+        <action>
+            <set var="can_jump" value="1"/>
+            <kit force="true">
+                <chestplate material="gold chestplate" locked="true" unbreakable="true">
+                    <enchantment>protection projectile</enchantment>
+                </chestplate>
+            </kit>
+            <message text=" "/>
+            <message text="`eJump, jump, jump!"/>
+            <message text=" "/>
+        </action>
+    </trigger>
+    <trigger scope="player">
+        <filter>
+            <pulse period="0.1s" duration="0.05s">
+                <all>
+                    <variable var="can_jump">1</variable>
+                    <grounded/>
+                </all>
+            </pulse>
+        </filter>
+        <action>
+            <kit>
+                <effect amplifier="16" duration="1s">jump</effect>
+            </kit>
+        </action>
+    </trigger>
+</actions>
+<projectiles>
+    <projectile id="fireball" name="fireball" projectile="SmallFireball" velocity=".5" damage="3" throwable="true" cooldown="0s"/>
+</projectiles>
+<lootables>
+    <loot id="fireballs">
+        <any count="5" unique="false">
+            <item material="fireball" projectile="fireball"/>
+        </any>
+        <item material="water bucket"/>
+    </loot>
+    <fill loot="fireballs" filter="sides" refill-trigger="match-started" refill-clear="true"/>
+</lootables>
+<itemremove>
+    <item>wood</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+    <item>stone axe</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>gold chestplate</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+</itemremove>
 </map>
