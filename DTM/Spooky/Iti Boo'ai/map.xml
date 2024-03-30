@@ -1,8 +1,9 @@
 <map proto="1.4.2">
-<name>Iti Mo'ai</name>
-<version>1.2.2</version>
+<name>Iti Boo'ai</name>
+<version>1.0</version>  <!-- Regular 1.2.2 -->
+<phase>development</phase>
 <objective>Destroy the enemy's emerald monument!</objective>
-<created>2022-03-15</created>
+<created>2022-09-03</created>
 <gamemode>dtm</gamemode>
 <authors>
     <author uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Layout, theming, XML"/> <!-- Cazadorian -->
@@ -10,11 +11,14 @@
     <author uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b" contribution="Aesthetics, layout, theming"/> <!-- Tundren --> 
 </authors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="dark red" max="16">Red</team>
+    <team id="orange" color="gold" max="16">Orange</team>
+    <team id="purple" color="dark purple" max="16">Purple</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parent="default-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow" enchantment="infinity"/>
@@ -34,37 +38,37 @@
         <boots unbreakable="true" team-color="true" material="leather boots" />
         <effect duration="4" amplifier="255">damage resistance</effect>
     </kit>
-    <kit id="blue-kit" parent="spawn-kit">
-        <item slot="5" material="stained glass" damage="11" amount="64"/>
+    <kit id="orange-kit" parent="spawn-kit">
+        <item slot="5" material="stained glass" damage="1" amount="64"/>
     </kit>
-    <kit id="red-kit" parent="spawn-kit">
-        <item slot="5" material="stained glass" damage="14" amount="64"/>
+    <kit id="purple-kit" parent="spawn-kit">
+        <item slot="5" material="stained glass" damage="10" amount="64"/>
     </kit>
 </kits>
 <spawns>
-    <default yaw="90">
+    <default kit="default-kit" yaw="90">
         <region>
             <point>-50.5,25,72.5</point>
         </region>
     </default>
-    <spawn team="red" kit="red-kit" yaw="90">
+    <spawn team="purple" kit="purple-kit" yaw="90">
         <regions>
             <point>43.5,12,2.5</point>
         </regions>
     </spawn>
-    <spawn team="blue" kit="blue-kit" yaw="-90">
+    <spawn team="orange" kit="orange-kit" yaw="-90">
         <regions>
             <point>-150.5,12,2.5</point>
         </regions>
     </spawn>
 </spawns>
 <destroyables>
-    <destroyable name="Red Monument" id="red-monument" show-progress="true" materials="emerald block" completion="100%" required="true" owner="red" modes="gold-mode clay-mode">
+    <destroyable name="Purple Monument" id="purple-monument" show-progress="true" materials="emerald block" completion="100%" required="true" owner="purple" modes="gold-mode clay-mode">
         <region>
            <cuboid min="1,19,1" max="4,16,4"/>
         </region>
     </destroyable>
-    <destroyable name="Blue Monument" id="blue-monument" show-progress="true" materials="emerald block" completion="100%" required="true" owner="blue" modes="gold-mode clay-mode">
+    <destroyable name="Orange Monument" id="orange-monument" show-progress="true" materials="emerald block" completion="100%" required="true" owner="orange" modes="gold-mode clay-mode">
         <region>
            <cuboid min="-108,19,4" max="-111,16,1"/>
         </region>
@@ -75,19 +79,19 @@
     <mode id="clay-mode" after="40m" name="`eCLAY MONUMENT MODE" material="stained clay:4"/>
 </modes>
 <filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
+    <team id="only-orange">orange</team>
+    <team id="only-purple">purple</team>
     <not id="deny-void">
        <void/>
     </not>
 </filters>
 <regions>
     <union id="spawn-protection">
-        <union id="red-spawn-protection">
-            <rectangle id="red-protection" min="38,7" max="48,-2"/>
+        <union id="purple-spawn-protection">
+            <rectangle id="purple-protection" min="38,7" max="48,-2"/>
         </union>
-        <union id="blue-spawn-protection">
-            <rectangle id="blue-protection" min="-145,7" max="-155,-2"/>
+        <union id="orange-spawn-protection">
+            <rectangle id="orange-protection" min="-145,7" max="-155,-2"/>
         </union>
     </union>
     <rectangle id="middle" min="-93,-31" max="-14,36"/>
@@ -96,8 +100,8 @@
         <region id="middle"/>
     </negative>
     <!-- filtering -->
-    <apply enter="only-blue" region="blue-spawn-protection" message="You may not enter the opponent's spawn!"/>
-    <apply enter="only-red" region="red-spawn-protection" message="You may not enter the opponent's spawn!"/>
+    <apply enter="only-orange" region="orange-spawn-protection" message="You may not enter the opponent's spawn!"/>
+    <apply enter="only-purple" region="purple-spawn-protection" message="You may not enter the opponent's spawn!"/>
     <apply block="never" region="spawn-protection" message="You may not modify the spawns!"/>
     <apply block-place="deny-void" region="void-area" message="You may not build in the void area!"/>
 </regions>
@@ -122,6 +126,11 @@
     <item>emerald block</item>
     <item>gold block</item>
     <item>stained clay:4</item>
+    <item>dark oak stairs</item>
+    <item>nether stalk</item>
+    <item>sapling</item>
+    <item>brown mushroom</item>
+    <item>smooth brick</item>
 </itemremove>
 <itemkeep>
     <item>iron sword</item>
@@ -157,11 +166,11 @@
         <item amount="16" material="wood" damage="3"/>
     </kill-reward>
     <kill-reward>
-       <kill-reward filter="only-blue">
-           <item amount="16" material="stained glass" damage="11" />
+       <kill-reward filter="only-orange">
+           <item amount="16" material="stained glass" damage="1" />
        </kill-reward>
-       <kill-reward filter="only-red">
-           <item amount="16" material="stained glass" damage="14" />
+       <kill-reward filter="only-purple">
+           <item amount="16" material="stained glass" damage="10" />
        </kill-reward>
     </kill-reward>
 </kill-rewards>
