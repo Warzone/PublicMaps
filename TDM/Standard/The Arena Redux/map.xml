@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>The Arena Redux</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <objective>Be the team with the least amount of deaths after 12 minutes.</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -70,7 +70,7 @@
     <apply kit="void-death" region="below-negative-5"/>
 </regions>
 <spawns>
-    <default yaw="0" region="spawn-default"/>
+    <default region="spawn-default"/>
     <spawn team="blue" kit="spawn-kit" yaw="270" region="spawn-blue"/>
     <spawn team="red" kit="spawn-kit" yaw="90" region="spawn-red"/>
 </spawns>
@@ -131,9 +131,11 @@
         <filter>
             <kill-streak count="4"/>
         </filter>
-        <boots locked="true" unbreakable="true" material="iron boots">
-            <enchantment level="2">feather_falling</enchantment>
-        </boots>
+        <kit force="true">
+            <boots locked="true" unbreakable="true" material="iron boots">
+                <enchantment level="2">feather_falling</enchantment>
+            </boots>
+        </kit>
     </kill-reward>
     <!-- 4 kills -->
     <kill-reward>
