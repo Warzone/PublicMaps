@@ -1,16 +1,21 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>2014: Rage FFA</name>
-<version>1.2.10</version>
+<variant id="halloween" world="halloween" override="true">The Lobby: Halloween</variant>
+<if variant="default">
+    <created>2018-07-06</created>
+</if>
+<if variant="halloween">
+    <created>2020-10-12</created>
+</if>
+<version>1.3.1</version>
 <objective>Get the most kills after 5 minutes!</objective>
-<created>2018-07-06</created>
+<gamemode>arcade</gamemode>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
 <authors>
     <author uuid="19388047-f04b-43ac-9546-22aa69aea75c" contribution="Lobby Builder"/> <!-- Bleanny -->
     <author uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="Map concept and XML"/> <!-- Crazy_ -->
 </authors>
-<gamemode>arcade</gamemode>
-<gamemode>ffa</gamemode>
-<gamemode>rage</gamemode>
 <rules>
     <rule>Fall damage is disabled.</rule>
 </rules>
@@ -33,37 +38,54 @@
 <broadcasts>
     <alert after="1s" every="1m">The terrain will slowly regenerate, so go nuts with the explosives!</alert>
     <tip after="25s" every="2m">Different types of explosive items are given as a reward for kill streaks!</tip>
-    <tip after="40s" every="1m">The ender pearl acts like a kamikaze; you'll probably die on impact.</tip>
+    <tip after="40s" every="1m">The ender pearl acts like a kamikaze; you'll die on impact.</tip>
 </broadcasts>
 <spawns>
     <spawn kit="play" spread="true" safe="true">
         <regions>
-            <cuboid min="46.5,13,46.5" max="-46.5,50,-46.5"/>
+            <unless variant="halloween">
+                <cylinder base="-1,12,-1" radius="46" height="38"/>
+            </unless>
+            <if variant="halloween">
+                <cylinder base="-1257.5,3,1552.5" radius="65" height="25"/>
+            </if>
         </regions>
     </spawn>
-    <default>
-        <regions>
-            <point>0,27.5,0</point>
-        </regions>
-    </default>
+    <unless variant="halloween">
+        <default>
+            <regions>
+                <point>0,27.5,0</point>
+            </regions>
+        </default>
+    </unless>
+    <if variant="halloween">
+        <default>
+            <regions yaw="90">
+                <point>-1286.5,7.5,1544.5</point>
+            </regions>
+        </default>
+    </if>
 </spawns>
 <respawns>
     <respawn auto="true" delay="2.5s"/>
 </respawns>
 <kits>
     <kit id="play">
-        <chestplate unbreakable="true" locked="true">chainmail chestplate</chestplate>
-        <leggings unbreakable="true" locked="true">iron leggings</leggings>
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" locked="true" material="iron leggings"/>
         <boots unbreakable="true" locked="true" material="chainmail boots">
             <enchantment level="5">depth_strider</enchantment>
         </boots>
-        <item slot="0" enchantments="damage_all:10">iron sword</item>
-        <item slot="1" enchantments="arrow_damage:10">bow</item>
-        <item slot="2" amount="2">arrow</item>
-        <potion duration="2" amplifier="10">resistance</potion>
-        <item slot="3" amount="3" grenade="true" name="Grenade" grenade-power="1.5">snow ball</item>
+        <item slot="0" enchantments="damage_all:10" material="iron sword"/>
+        <item slot="1" enchantments="arrow_damage:10" material="bow"/>
+        <item slot="2" amount="2" material="arrow"/>
+        <effect duration="2" amplifier="10">resistance</effect>
+        <item slot="3" amount="3" grenade="true" name="Grenade" grenade-power="1.5" material="snow ball"/>
         <double-jump enabled="true" recharge-before-landing="true" power="3.5"/>
-        <potion time="oo" amplifier="1">speed</potion>
+        <effect>speed</effect>
+        <if variant="halloween">
+            <effect>fire resistance</effect>
+        </if>
     </kit>
 </kits>
 <projectiles>
@@ -72,61 +94,55 @@
 <regions>
     <apply velocity="0,1.5,0">
         <region>
-            <cuboid max="1,15,-1" min="-1,16,1"/> <!-- center lauchpad -->
+            <unless variant="halloween">
+                <cuboid max="1,15,-1" min="-1,16,1"/> <!-- center lauchpad -->
+            </unless>
+            <if variant="halloween">
+                <cuboid max="-1259,10,1550" min="-1256,8,1554"/> <!-- center lauchpad -->
+            </if>
         </region>
     </apply>
 </regions>
 <tnt>
     <instantignite>on</instantignite>
-    <power>7.5</power>
+    <power>5</power>
     <fuse>2s</fuse>
 </tnt>
 <kill-rewards>
     <kill-reward>
-        <item amount="1">arrow</item>
-        <item amount="1" grenade="true" name="Grenade" grenade-power="1.5">snow ball</item>
+        <item material="arrow"/>
+        <item grenade="true" name="Grenade" grenade-power="1.5" material="snow ball"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="2"/>
-            </all>
+            <kill-streak count="2"/>
         </filter>
-        <item amount="2" grenade="true" name="Chicken Bomb" grenade-power="3">egg</item>
-        <item amount="1" grenade="true" name="Molotov Cocktail" grenade-fire="true" grenade-destroy="false" grenade-power="1" damage="16429">potion</item>
+        <item amount="2" grenade="true" name="Chicken Bomb" grenade-power="3" material="egg"/>
+        <!--<item amount="1" grenade="true" name="Molotov Cocktail" grenade-fire="true" grenade-destroy="false" grenade-power="1" damage="16429">potion</item>-->
     </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="3" repeat="true"/>
-            </all>
+            <kill-streak count="3" repeat="true"/>
         </filter>
-        <item amount="1" grenade="true" name="Tele-boomer" lore="You might want to think twice about using this one..." grenade-power="7.5">ender pearl</item>
+        <item grenade="true" name="Tele-boomer" lore="You might want to think twice about using this one..." grenade-power="7.5" material="ender pearl"/>
     </kill-reward>
-  <kill-reward>
-    <filter>
-      <all>
-        <kill-streak count="4" repeat="true"/>
-      </all>
-    </filter>
-    <item projectile="fireball" grenade="true" grenade-power="4" name="`aFireball Wand" material="blaze rod"/>
-  </kill-reward>
     <kill-reward>
         <filter>
-            <all>
-                <kill-streak count="5" repeat="true"/>
-            </all>
+            <kill-streak count="4" repeat="true"/>
         </filter>
-        <item amount="2">tnt</item>
+        <item projectile="fireball" grenade="true" grenade-power="4" name="`aFireball Wand" material="blaze rod"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5" repeat="true"/>
+        </filter>
+        <item amount="2" material="tnt"/>
     </kill-reward>
 </kill-rewards>
 <renewables>
-    <renewable sound="false" interval="20s" particles="false">
-        <!-- Each block renews after approx 20 seconds -->
-        <region>
-            <everywhere/>
-        </region>
-        <!-- These are the blocks that will renew -->
+    <renewable region="everywhere" sound="false" interval="20s" particles="false">
+        <!-- Each block renews after approx 20 seconds.
+             These are the blocks that will renew -->
         <renew-filter>
             <any>
                 <material>wool</material>
@@ -162,14 +178,31 @@
                 <material>beacon</material>
                 <material>jack o lantern</material>
                 <material>sandstone</material>
+                <if variant="halloween">
+                    <material>nether fence</material>
+                    <material>leaves_2</material>
+                    <material>log_2</material>
+                    <material>torch</material>
+                    <material>sign</material>
+                    <material>beacon</material>
+                    <material>pumpkin</material>
+                    <material>lever</material>
+                    <material>anvil</material>
+                </if>
             </any>
         </renew-filter>
         <!-- These blocks can be replaced by renewing blocks -->
         <replace-filter>
             <any>
                 <material>air</material>
-                <material>water</material>
-                <material>stationary water</material>
+                <unless variant="halloween">
+                    <material>water</material>
+                    <material>stationary water</material>
+                </unless>
+                <if variant="halloween">
+                    <material>lava</material>
+                    <material>stationary lava</material>
+                </if>
                 <material>fire</material>
             </any>
         </replace-filter>
