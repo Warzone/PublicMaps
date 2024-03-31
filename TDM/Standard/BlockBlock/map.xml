@@ -1,141 +1,186 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
 <name>BlockBlock</name>
-<version>1.3.13</version>
-<objective>Get the most kills in 7 minutes!</objective>
+<variant id="rage" world="rage" override="true">BlockRAGE</variant>
+<version>1.6.3</version>
+<objective>Get the most kills in 8 minutes!</objective>
+<time result="score">8m</time>
 <gamemode>tdm</gamemode>
+<gamemode>scorebox</gamemode>
+<unless variant="rage">
+    <include id="conquest"/>
+    <constant id="damage-resistance">3s</constant>
+    <constant id="respawn-timer">2s</constant>
+    <constant id="kit">base-kit</constant>
+</unless>
+<if variant="rage">
+    <rage/>
+    <gamemode>rage</gamemode>
+    <constant id="kit">spawn-kit</constant>
+</if>
 <authors>
     <author uuid="5986da63-a546-49c5-812d-d5c41a42510a"/> <!-- Lyzak -->
 </authors>
 <contributors>
     <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- Stealth5061 -->
     <contributor uuid="fe19a0fe-5961-46e1-b98e-b2b6658f8ba2"/> <!-- YukonAppleGeek -->
+    <if variant="rage">
+        <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112"/> <!-- last_username -->
+    </if>
 </contributors>
 <teams>
-    <team color="blue" max="32">Blue</team>
-    <team color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="28" amount="1">arrow</item>
-        <item slot="2" amount="32">pumpkin pie</item>
-        <item slot="3" damage="16373">potion</item> <!-- Potion of instant health II -->
-        <potion duration="2" amplifier="1">heal</potion>
-        <potion duration="5">damage resistance</potion>
-        <chestplate unbreakable="true">gold chestplate</chestplate>
-        <game-mode>adventure</game-mode>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="993333" unbreakable="true">leather helmet</helmet>
-        <leggings color="993333" unbreakable="true">leather leggings</leggings>
-        <boots color="993333" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="334CB2" unbreakable="true">leather helmet</helmet>
-        <leggings color="334CB2" unbreakable="true">leather leggings</leggings>
-        <boots color="334CB2" unbreakable="true">leather boots</boots>
-    </kit>
+    <if variant="rage">
+        <kit id="spawn-kit">
+            <clear/>
+            <item slot="0" unbreakable="true" material="iron sword">
+                <enchantment>sharpness</enchantment>
+            </item>
+            <item slot="1" unbreakable="true" lore="`aAll-purpose instant killing device" material="bow">
+                <enchantment>power</enchantment>
+                <enchantment>sharpness</enchantment>
+            </item>
+            <item slot="2" amount="2" material="arrow"/>
+            <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
+            <chestplate locked="true" unbreakable="true" team-color="true" material="leather chestplate"/>
+            <leggings locked="true" unbreakable="true" team-color="true" material="leather leggings"/>
+            <boots locked="true" unbreakable="true" team-color="true" material="leather boots"/>
+            <effect>speed</effect>
+            <effect duration="3s" amplifier="255">regeneration</effect>
+            <effect duration="3s" amplifier="255">damage resistance</effect>
+            <max-health>6</max-health>
+            <game-mode>adventure</game-mode>
+        </kit>
+    </if>
 </kits>
 <spawns>
-    <spawn team="blue" kit="blue" yaw="90">
-        <region name="blue-spawn-room"/>
-    </spawn>
-    <spawn team="red" kit="red" yaw="-90">
-        <region name="red-spawn-room"/>
-    </spawn>
-    <default yaw="56">-48.5,27.5,0.5</default>
+    <default>
+        <region yaw="56">
+            <point>-48.5,27.5,0.5</point>
+        </region>
+    </default>
+    <spawn team="blue" kit="${kit}" yaw="90" region="blue-spawn-room"/>
+    <spawn team="red" kit="${kit}" yaw="-90" region="red-spawn-room"/>
 </spawns>
-<killreward>
-    <item damage="16373">potion</item> <!-- Potion of instant health II -->
-</killreward>
-<regions>
-    <cuboid name="blue-spawn-room" min="22.5,1,24.5" max="27.5,1,28.5"/>
-    <cuboid name="red-spawn-room" min="-26.5,1,-27.5" max="-21.5,1,-23.5"/>
-    <apply block-place="only-tnt" block-break="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply enter="only-blue" message="You may not score on your own team's score box!">
-        <cuboid name="blue-goal" min="-7,0,-44" max="-2,5,-39"/>
-    </apply>
-    <apply enter="only-red" message="You may not score on your own team's score box!">
-        <cuboid name="red-goal" min="2,0,40" max="8,5,45"/>
-    </apply>
-    <apply block="deny-all" message="`b`k#### `r`c`lBLOCK GLITCHING RESULTS IN A BAN `r`b`k####">
-        <region name="blue-goal"/>
-        <region name="red-goal"/>
-    </apply>
-    <cuboid name="blue-score-zone" min="-7,1,-44" max="-2,2,-41.5"/>
-    <cuboid name="red-score-zone" min="2,1,42.5" max="8,2,45"/>
-</regions>
 <filters>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-tnt">
-        <block>tnt</block>
-    </filter>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <material id="only-tnt">tnt</material>
 </filters>
-<tnt>
-    <instantignite>on</instantignite>
-    <licensing>off</licensing>
-    <friendly-defuse>off</friendly-defuse>
-    <blockdamage>off</blockdamage>
-</tnt>
+<regions>
+    <union id="spawns">
+        <cuboid id="blue-spawn-room" min="22.5,1,24.5" max="27.5,1,28.5"/>
+        <cuboid id="red-spawn-room" min="-26.5,1,-27.5" max="-21.5,1,-23.5"/>
+    </union>
+    <union id="goals">
+        <cuboid id="blue-goal" min="-7,0,-44" max="-2,5,-39"/>
+        <cuboid id="red-goal" min="2,0,40" max="8,5,45"/>
+    </union>
+    <union id="scorebox">
+        <cuboid id="blue-score-zone" min="-7,1,-44" max="-2,2,-41.5"/>
+        <cuboid id="red-score-zone" min="2,1,42.5" max="8,2,45"/>
+    </union>
+    <apply enter="only-blue" region="blue-goal" message="You may not score on your own team's score box!"/>
+    <apply enter="only-red" region="red-goal" message="You may not score on your own team's score box!"/>
+    <apply block="never" region="spawns"/>
+    <apply block="never" region="goals"/>
+    <apply block-place="only-tnt" block-break="never" use="never"/>
+</regions>
 <score>
-    <time overtime="30s" max-overtime="10m">7m</time>
-    <box value="10" filter="only-blue" cooldown="5">
-        <region name="blue-score-zone"/>
-    </box>
-    <box value="10" filter="only-red" cooldown="5">
-        <region name="red-score-zone"/>
-    </box>
+    <kills>1</kills>
+    <box points="10" region="blue-score-zone" filter="only-blue"/>
+    <box points="10" region="red-score-zone" filter="only-red"/>
 </score>
 <portals>
     <!-- portals from score zones to bases -->
-    <portal x="30" z="69.25" yaw="@90" filter="only-blue">
-        <region name="blue-score-zone"/>
-    </portal>
-    <portal x="-30" z="-69.25" yaw="@-90" filter="only-red">
-        <region name="red-score-zone"/>
-    </portal>
+    <portal x="30" z="69.25" yaw="@90" filter="only-blue" region="blue-score-zone"/>
+    <portal x="-30" z="-69.25" yaw="@-90" filter="only-red" region="red-score-zone"/>
 </portals>
-<toolrepair>
-    <tool>bow</tool>
-    <tool>stone sword</tool>
-</toolrepair>
-<itemremove>
-    <item>arrow</item>
-    <item>leather helmet</item>
-    <item>gold chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>pumpkin pie</item>
-    <item>potion</item>
-    <item>glass bottle</item>
-</itemremove>
-<item-mods>
-    <rule>
-        <match>
-            <material>tnt</material>
-        </match>
-        <modify show-can-place-on="false">
-            <can-place-on>
-                <all-blocks/>
-            </can-place-on>
-        </modify>
-    </rule>
-</item-mods>
+<unless variant="rage">
+    <item-mods>
+        <rule>
+            <match>
+                <material>tnt</material>
+            </match>
+            <modify show-can-place-on="false">
+                <can-place-on>
+                    <all-blocks/>
+                </can-place-on>
+            </modify>
+        </rule>
+    </item-mods>
+    <itemkeep>
+        <item>tnt</item>
+    </itemkeep>
+    <kill-rewards>
+        <kill-reward>
+            <filter>
+                <kill-streak count="3" repeat="true"/>
+            </filter>
+            <item material="tnt"/>
+        </kill-reward>
+    </kill-rewards>
+</unless>
+<if variant="rage">
+    <toolrepair>
+        <tool>iron sword</tool>
+        <tool>bow</tool>
+    </toolrepair>
+    <itemremove>
+        <item>leather helmet</item>
+        <item>leather chestplate</item>
+        <item>leather leggings</item>
+        <item>leather boots</item>
+    </itemremove>
+    <itemkeep>
+        <item>arrow</item>
+    </itemkeep>
+    <kill-rewards>
+        <kill-reward>
+            <item material="arrow"/>
+        </kill-reward>
+        <kill-reward>
+            <filter>
+                <kill-streak count="3"/>
+            </filter>
+            <kit>
+                <effect amplifier="2">speed</effect>
+            </kit>
+        </kill-reward>
+        <kill-reward>
+            <filter>
+                <kill-streak count="10"/>
+            </filter>
+            <kit>
+                <effect amplifier="3">speed</effect>
+            </kit>
+        </kill-reward>
+    </kill-rewards>
+    <hunger>
+        <depletion>off</depletion>
+    </hunger>
+    <gamerules>
+        <naturalRegeneration>false</naturalRegeneration>
+    </gamerules>
+</if>
+<tnt>
+    <instantignite>on</instantignite>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<disabledamage>
+    <damage>fall</damage>
+    <damage ally="true" self="false" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<!-- include src="tutorial.xml"/>
 <tutorial>
     <stage title="Team Death Match">
         <message>
-            <line>`rThis map is a `a`lTeam Death Match `r(TDM) map with `bscoreboxes`r.</line>
-            <line>The objective is to get the most `bpoints `rin `615 `rminutes.</line>
+            <line>`rThis map is a `a`lRage TDM map with `bscoreboxes`r.</line>
+            <line>The objective is to get the most `bpoints `rin `68 `rminutes.</line>
+            <line>After a kill, you get a `bspeed boost`r. As you get more and more kills, your speed boost `cincreases`r.</line>
         </message>
         <teleport>
             <point angle="-15,22,-3">-44,41,-2</point>
@@ -177,13 +222,5 @@
             <point angle="-4,1,-39">-5,4,-32</point>
         </teleport>
     </stage>
-    <stage title="Spawner Pad">
-        <message>
-            <line>`rThis `bspawner `rrandomly spawns special `apower-up items `rthat will aid you in your fight.</line>
-        </message>
-        <teleport>
-            <point angle="0,7,0">-2,16,-3</point>
-        </teleport>
-    </stage>
-</tutorial>
+</tutorial> -->
 </map>
