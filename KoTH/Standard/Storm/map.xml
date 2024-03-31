@@ -1,122 +1,93 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.4.2">
 <name>Storm</name>
-<version>0.1.4</version>
-<objective>Take control of all three hills!</objective>
+<variant id="classic" world="classic">Classic</variant>
+<version>2.0</version>
+<include id="conquest"/>
+<constant id="respawn-timer">3s</constant>
+<constant id="damage-resistance">4s</constant>
+<objective>Control the hills to be the first to ${score} points!</objective>
 <gamemode>koth</gamemode>
 <authors>
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8"/> <!-- Plastix -->
     <author uuid="5986da63-a546-49c5-812d-d5c41a42510a"/> <!-- Lyzak -->
     <author uuid="90e029a3-6873-46a7-8430-0ec3dbc42aba"/> <!-- SajinZero -->
 </authors>
-<!-- <include id="tutorial"/> -->
 <teams>
-    <team color="dark red" max="32">Red</team>
-    <team color="blue" max="32">Blue</team>
+    <team id="blue" color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
 </teams>
-<kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28" amount="1">arrow</item>
-        <item slot="3" amount="1">golden apple</item>
-        <item slot="2" amount="64">baked potato</item>
-        <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
-        <potion duration="5">heal</potion>
-        <potion duration="10" amplifier="4">damage resistance</potion>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="cd0000" unbreakable="true">leather helmet</helmet>
-        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
-        <boots color="cd0000" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="0066cc" unbreakable="true">leather helmet</helmet>
-        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
-        <boots color="0066cc" unbreakable="true">leather boots</boots>
-    </kit>
-</kits>
 <filters>
-    <filter name="deny-beacons" parents="allow-all">
-        <deny><block>beacon</block></deny>
-    </filter>
+    <deny id="no-gui">
+        <any>
+            <material>beacon</material>
+            <material>hopper</material>
+            <material>furnace</material>
+        </any>
+    </deny>
 </filters>
 <regions>
-    <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    <cylinder name="red-spawn" base="49,4,66" radius="4" height="0"/>
-    <cylinder name="blue-spawn" base="-48,4,-65" radius="4" height="0"/>
-    <apply block="deny-all" use="deny-beacons"><region name="playable"/></apply>
+    <cylinder id="spawn-default" base="95,60,0" radius="3" height="0"/>
+    <cylinder id="blue-spawn" base="-48,3,-65" radius="4" height="0"/>
+    <cylinder id="red-spawn" base="49,3,66" radius="4" height="0"/>
+    <apply block="never" use="no-gui"/>
 </regions>
-<killreward>
-    <item>golden apple</item>
-</killreward>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>iron chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>arrow</item>
-    <item>ladder</item>
-    <item>baked potato</item>
-    <item>golden apple</item>
-    <item>glass bottle</item>
-</itemremove>
 <spawns>
-    <spawns yaw="90">
-        <spawn team="red" kit="red"><region name="red-spawn"/></spawn>
-    </spawns>
-    <spawns yaw="270">
-        <spawn team="blue" kit="blue"><region name="blue-spawn"/></spawn>
-    </spawns>
-    <default yaw="90">
-        <cylinder base="95,60,0" radius="3" height="0"/>
-    </default>
+    <default yaw="90" region="spawn-default"/>
+    <spawn team="blue" kit="base-kit" region="blue-spawn"/>
+    <spawn team="red" kit="base-kit" yaw="180" region="red-spawn"/>
 </spawns>
+<constants>
+    <unless variant="classic">
+        <constant id="mid-capture-time">5</constant>
+        <constant id="a-b-capture-time">5</constant>
+        <constant id="mid-points">3.5</constant>
+        <constant id="a-b-points">2.75</constant>
+        <constant id="score">2500</constant>
+    </unless>
+    <if variant="classic">
+        <constant id="mid-capture-time">15</constant>
+        <constant id="a-b-capture-time">10</constant>
+        <constant id="mid-points">1</constant>
+        <constant id="a-b-points">1</constant>
+        <constant id="score">750</constant>
+    </if>
+</constants>
 <king>
-    <hills>
-        <hill name="Point A" capture-time="10s" ratio="1">
+    <hills required="false" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
+        <hill name="Hill A" capture-time="${a-b-capture-time}" points="${a-b-points}">
             <capture>
                 <cuboid min="37,12,-38" max="46,15,-29"/>
             </capture>
             <progress>
-                <cuboid min="37,11,-38" max="45,11,-30"/>
+                <cuboid min="36,11,-39" max="48,17,-27"/>
             </progress>
-            <captured>
-                <cuboid min="36,11,-39" max="48,16,-27"/>
-            </captured>
         </hill>
-        <hill name="Middle" capture-time="15s" ratio="1">
+        <hill name="Middle" capture-time="${mid-capture-time}" points="${mid-points}">
             <capture>
                 <cuboid min="-4,4,-4" max="5,7,5"/>
             </capture>
             <progress>
-                <cuboid min="-4,3,-4" max="4,3,4"/>
+                <cuboid min="-5,3,-5" max="6,10,6"/>
             </progress>
-            <captured>
-                <cuboid min="-5,3,-5" max="5,8,5"/>
-            </captured>
         </hill>
-        <hill name="Point B" capture-time="10s" ratio="1">
+        <hill name="Hill B" capture-time="${a-b-capture-time}" points="${a-b-points}">
             <capture>
                 <cuboid min="-45,12,30" max="-36,15,39"/>
             </capture>
             <progress>
-                <cuboid min="-45,11,30" max="-37,11,38"/>
+                <cuboid min="-46,11,29" max="-34,17,41"/>
             </progress>
-            <captured>
-                <cuboid min="-46,11,29" max="-34,16,41"/>
-            </captured>
         </hill>
     </hills>
 </king>
 <score>
-    <limit>750</limit>
-    <king/>
+    <limit>${score}</limit>
 </score>
+<world>
+    <timeset>18000</timeset>
+</world>
+</map>
+<!-- include src="tutorial.xml"/>
 <tutorial>
     <stage title="King of the Hill">
         <message>
@@ -155,5 +126,4 @@
             <point yaw="0" pitch="15">-28.5,6,16.5</point>
         </teleport>
     </stage>
-</tutorial>
-</map>
+</tutorial> -->
