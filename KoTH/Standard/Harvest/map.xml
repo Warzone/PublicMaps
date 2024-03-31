@@ -1,8 +1,15 @@
 <map proto="1.4.2">
 <name>Harvest</name>
-<version>1.1.6</version>
+<variant id="halloween" world="halloween" override="true">Harvested</variant>
+<version>1.2.0</version>
 <objective>Be the first team to reach 500 points!</objective>
 <gamemode>koth</gamemode>
+<if variant="default">
+    <created>2021-01-21</created>
+</if>
+<if variant="halloween">
+    <created>2022-09-15</created>
+</if>
 <authors>
     <author contribution="Map author and XML" uuid="53af1e46-7424-485b-97de-7bf8d854a2aa"/> <!-- BTKing -->
 </authors>
@@ -32,6 +39,8 @@
         <item slot="2" material="golden apple"/>
         <item slot="7" material="emerald"/>
         <item slot="8" amount="16" material="arrow"/>
+        <helmet show-unbreakable="false" unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate show-unbreakable="false" unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings show-unbreakable="false" unbreakable="true" material="chainmail leggings">
             <enchantment level="2">projectile_protection</enchantment>
         </leggings>
@@ -40,22 +49,6 @@
         </boots>
         <game-mode>adventure</game-mode>
     </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <helmet show-unbreakable="false" unbreakable="true" color="6699D8" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" color="6699D8" material="leather chestplate"/>
-    </kit>
-    <kit id="orange-kit" parents="spawn-kit">
-        <helmet show-unbreakable="false" unbreakable="true" color="D87F33" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" color="D87F33" material="leather chestplate"/>
-    </kit>
-    <kit id="pink-kit" parents="spawn-kit">
-        <helmet show-unbreakable="false" unbreakable="true" color="F27FA5" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" color="F27FA5" material="leather chestplate"/>
-    </kit>
-    <kit id="yellow-kit" parents="spawn-kit">
-        <helmet show-unbreakable="false" unbreakable="true" color="E5E533" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" color="E5E533" material="leather chestplate"/>
-    </kit>
 </kits>
 <spawns>
     <default>
@@ -63,22 +56,22 @@
             <point>206.5,6,-32.5</point>
         </region>
     </default>
-    <spawn safe="true" kit="blue-kit" team="blue">
+    <spawn safe="true" kit="spawn-kit" team="blue">
         <region yaw="90">
             <point>303.5,20,-32.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="orange-kit" team="orange">
+    <spawn safe="true" kit="spawn-kit" team="orange">
         <region yaw="180">
             <point>206.5,20,64.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="pink-kit" team="pink">
+    <spawn safe="true" kit="spawn-kit" team="pink">
         <region>
             <point>206.5,20,-129.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="yellow-kit" team="yellow">
+    <spawn safe="true" kit="spawn-kit" team="yellow">
         <region yaw="-90">
             <point>109.5,20,-32.5</point>
         </region>
