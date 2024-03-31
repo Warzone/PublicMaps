@@ -1,8 +1,10 @@
 <map proto="1.4.2">
 <name>Ricco</name>
 <variant id="christmas" world="christmas">Christmas</variant>
+<variant id="halloween" world="halloween">Halloween</variant>
 <variant id="rage">Rage</variant>
 <variant id="rage_christmas" world="christmas">Rage Christmas</variant>
+<variant id="rage_halloween" world="halloween">Rage Halloween</variant>
 <version>2.2.0</version>
 <objective>Be the first team to reach 1200 points by capturing the hills!</objective>
 <gamemode>koth</gamemode>
@@ -16,11 +18,17 @@
 <if variant="christmas">
     <created>2021-11-02</created>
 </if>
+<if variant="halloween">
+    <created>2024-03-31</created>
+</if>
 <if variant="rage">
     <created>2022-06-11</created>
 </if>
 <if variant="rage_christmas">
     <created>2022-12-21</created>
+</if>
+<if variant="rage_halloween">
+    <created>2024-03-31</created>
 </if>
 <!-- Finer map controls -->
 <if variant="default,rage">
@@ -29,13 +37,13 @@
 <unless variant="default,rage">
     <constant id="yellow-team-color">Green</constant>
 </unless>
-<if variant="default,christmas"> <!-- Targets non-Rage variants -->
+<if variant="default,christmas,halloween"> <!-- Targets non-Rage variants -->
     <constant id="sword-enchantment" delete="true"/>
     <constant id="bow-enchantment" delete="true"/>
     <constant id="arrow-amount">24</constant>
     <constant id="hill-capture-time">5s</constant>
 </if>
-<if variant="rage,rage_christmas"> <!-- Targets Rage variants -->
+<if variant="rage,rage_christmas,rage_halloween"> <!-- Targets Rage variants -->
     <constant id="sword-enchantment">damage_all:10</constant>
     <constant id="bow-enchantment">arrow_damage:10</constant>
     <constant id="arrow-amount" delete="true"/>
@@ -53,8 +61,8 @@
         <contributor uuid="5fa68d7e-a2e8-4ff4-8bb6-c4d6d53cdfdf" contribution="Inspiration"/> <!-- Prolav -->
         <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Inspiration"/> <!-- Preinstalled -->
     </if>
-    <if variant="christmas,rage_christmas">
-        <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit"/> <!-- Wesdial -->
+    <if variant="christmas,rage_christmas,halloween,rage_halloween">
+        <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas / Halloween edit"/> <!-- Wesdial -->
     </if>
 </contributors>
 <!-- Teams -->
@@ -111,12 +119,12 @@
 <!-- Regions -->
 <regions>
     <union id="spawns">
-        <cuboid min="-14,6,51" max="-9,16,-46"/>
-        <cuboid min="15,6,52" max="10,16,47"/>
+        <cuboid min="-8.5,6,-41.5" max="-14.5,16,-52.5"/>
+        <cuboid min="9.5,6,42.5" max="15.5,16,53.5"/>
     </union>
     <above id="playable" y="1"/>
     <below id="non-playable" y="1"/>
-    <apply region="spawns" block="never" message="`eYou may not build in the `cspawns`e!"/>
+    <apply region="spawns" block="never" message="`eYou may not build in `cSpawn`e!"/>
     <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7the void`e!"/>
     <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
 </regions>
@@ -182,11 +190,11 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <if variant="default,christmas">
+        <if variant="default,christmas,halloween">
             <item material="golden apple"/>
             <item amount="8" material="arrow"/>
         </if>
-        <if variant="rage,rage_christmas">
+        <if variant="rage,rage_christmas,rage_halloween">
             <item material="arrow"/>
         </if>
         <item amount="8" material="leaves"/>
