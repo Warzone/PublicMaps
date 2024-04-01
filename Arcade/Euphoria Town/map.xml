@@ -1,10 +1,16 @@
 <map proto="1.4.2">
 <name>Euphoria Town</name>
-<created>2021-12-07</created>
-<version>1.1.0</version>
+<variant id="christmas" world="christmas">Christmas</variant>
+<version>1.2.0</version>
 <objective>After terrorizing a town for years, a group of trained hunters had decided to hunt down the beasts and eliminate them once and for all. The beasts are not going down without a fight, are you the hunter or the beast?</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
+<if variant="default">
+   <created>2021-12-07</created>
+</if>
+<if variant="christmas">
+    <created>2024-04-01</created>
+</if>
 <!-- Authors & Contributors -->
 <authors>
    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Base Map &amp; JSON to XML and world conversion" /> <!-- Wesdial -->
@@ -64,10 +70,10 @@
       <effect>night vision</effect>
    </kit>
    <kit id="hunters-kit" parents="default-kit">
-      <boots unbreakable="true" material="leather boots" locked="true" enchantment="protection environmental:2" color="334CB2" />
-      <leggings unbreakable="true" material="leather leggings" enchantment="protection environmental:2" locked="true" color="334CB2" />
+      <boots unbreakable="true" material="leather boots" locked="true" enchantment="protection environmental:2" team-color="true" />
+      <leggings unbreakable="true" material="leather leggings" enchantment="protection environmental:2" locked="true" team-color="true" />
       <chestplate unbreakable="true" material="iron chestplate" enchantment="protection environmental:1" locked="true" />
-      <helmet unbreakable="true" material="leather helmet" enchantment="protection environmental:2" locked="true" color="334CB2" />
+      <helmet unbreakable="true" material="leather helmet" enchantment="protection environmental:2" locked="true" team-color="true" />
       <item slot="0" material="iron sword" enchantment="sharpness" name="Excalibur" />
       <item slot="1" material="bow" enchantment="power" unbreakable="true" />
       <item slot="2" material="golden apple" amount="2" />
