@@ -1,0 +1,126 @@
+<map proto="1.4.2">
+<name>Amusement Park</name>
+<created>2024-04-04</created>
+<version>1.0.0</version>
+<objective>Be the first player to reach the end!</objective>
+<gamemode>arcade</gamemode>
+<time>10m</time>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+</authors>
+<!-- Spawn Definitions -->
+<spawns>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-0"  region="spawn"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-1"  region="spawn-1"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-2"  region="spawn-2"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-3"  region="spawn-3"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-4"  region="spawn-4"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-5"  region="spawn-5"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-6"  region="spawn-6"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-7"  region="spawn-7"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-8"  region="spawn-8"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-9"  region="spawn-9"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-10" region="spawn-10"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-11" region="spawn-11"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-12" region="spawn-12"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-13" region="spawn-13"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-14" region="spawn-14"/>
+    <spawn yaw="-90" kit="spawn-kit" filter="score-15" region="spawn-15"/>
+    <default yaw="90" kit="obs-kit" region="obs-spawn"/>
+</spawns>
+<players colors="true" min="1" max="50" show-name-tags="false"/>
+<kits>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parent="obs-kit">
+        <effect>invisibility</effect>
+        <boots unbreakable="true" locked="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Scoring -->
+<filters>
+    <score id="score-0">0</score>
+    <score id="score-1">1</score>
+    <score id="score-2">2</score>
+    <score id="score-3">3</score>
+    <score id="score-4">4</score>
+    <score id="score-5">5</score>
+    <score id="score-6">6</score>
+    <score id="score-7">7</score>
+    <score id="score-8">8</score>
+    <score id="score-9">9</score>
+    <score id="score-10">10</score>
+    <score id="score-11">11</score>
+    <score id="score-12">12</score>
+    <score id="score-13">13</score>
+    <score id="score-14">14</score>
+    <score id="score-15">15</score>
+</filters>
+<!-- Regions -->
+<regions>
+    <point id="obs-spawn">0.5,7,0.5</point>
+    <point id="spawn">0.5,7,0.5</point>
+    <cuboid id="stage-1"  min="29,6,-4"   max="34,oo,4"/>
+    <cuboid id="stage-2"  min="52,6,-4"   max="57,oo,4"/>
+    <cuboid id="stage-3"  min="80,6,-4"   max="85,oo,4"/>
+    <cuboid id="stage-4"  min="108,6,-4"  max="113,oo,4"/>
+    <cuboid id="stage-5"  min="136,6,-4"  max="141,oo,4"/>
+    <cuboid id="stage-6"  min="164,6,-4"  max="169,oo,4"/>
+    <cuboid id="stage-7"  min="192,6,-4"  max="197,oo,4"/>
+    <cuboid id="stage-8"  min="220,6,-4"  max="225,oo,4"/>
+    <cuboid id="stage-9"  min="248,6,-4"  max="253,oo,4"/>
+    <cuboid id="stage-10" min="276,6,-4"  max="281,oo,4"/>
+    <cuboid id="stage-11" min="304,6,-4"  max="309,oo,4"/>
+    <cuboid id="stage-12" min="332,6,-4"  max="337,oo,4"/>
+    <cuboid id="stage-13" min="360,6,-4"  max="365,oo,4"/>
+    <cuboid id="stage-14" min="388,6,-4"  max="393,oo,4"/>
+    <cuboid id="stage-15" min="417,6,-4"  max="426,oo,4"/>
+    <point id="spawn-1">31.5,7,0.5</point>
+    <point id="spawn-2">54.5,7,0.5</point>
+    <point id="spawn-3">82.5,7,0.5</point>
+    <point id="spawn-4">110.5,7,0.5</point>
+    <point id="spawn-5">138.5,7,0.5</point>
+    <point id="spawn-6">166.5,7,0.5</point>
+    <point id="spawn-7">194.5,7,0.5</point>
+    <point id="spawn-8">22.5,7,0.5</point>
+    <point id="spawn-9">250.5,7,0.5</point>
+    <point id="spawn-10">278.5,7,0.5</point>
+    <point id="spawn-11">306.5,7,0.5</point>
+    <point id="spawn-12">334.5,7,0.5</point>
+    <point id="spawn-13">362.5,7,0.5</point>
+    <point id="spawn-14">390.5,7,0.5</point>
+    <point id="spawn-15">420.5,6,0.5</point>
+    <apply block="never" use="never"/>
+</regions>
+<!-- Score points -->
+<score>
+    <limit>15</limit>
+    <box points="1" region="stage-1"  silent="true"   filter="score-0"/>
+    <box points="1" region="stage-2"  silent="true"   filter="score-1"/>
+    <box points="1" region="stage-3"  silent="true"   filter="score-2"/>
+    <box points="1" region="stage-4"  silent="true"   filter="score-3"/>
+    <box points="1" region="stage-5"  silent="true"   filter="score-4"/>
+    <box points="1" region="stage-6"  silent="true"   filter="score-5"/>
+    <box points="1" region="stage-7"  silent="true"   filter="score-6"/>
+    <box points="1" region="stage-8"  silent="true"   filter="score-7"/>
+    <box points="1" region="stage-9"  silent="true"   filter="score-8"/>
+    <box points="1" region="stage-10" silent="true"   filter="score-9"/>
+    <box points="1" region="stage-11" silent="true"   filter="score-10"/>
+    <box points="1" region="stage-12" silent="true"   filter="score-11"/>
+    <box points="1" region="stage-13" silent="true"   filter="score-12"/>
+    <box points="1" region="stage-14" silent="true"   filter="score-13"/>
+    <box points="1" region="stage-15" silent="false"  filter="score-14"/>
+</score>
+<itemremove>
+    <item>leather boots</item>
+</itemremove>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>
