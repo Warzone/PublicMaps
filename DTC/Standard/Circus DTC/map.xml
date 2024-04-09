@@ -1,6 +1,7 @@
 <map proto="1.4.2">
 <name>Circus DTC</name>
-<version>1.3</version>
+<variant id="halloween" world="halloween">Halloween</variant>
+<version>1.4.1</version>
 <objective>Leak the opposing circus's cannonball (core) mid-flight while defending your own!</objective>
 <gamemode>dtc</gamemode>
 <authors>
@@ -29,6 +30,7 @@
         </item>
         <item slot="30" unbreakable="true" material="iron spade"/>
         <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="5" amount="48" team-color="true" material="stained clay"/>
         <item slot="6" amount="32" material="ladder"/>
         <item slot="7" material="water bucket"/>
         <item slot="8" material="golden apple"/>
@@ -41,20 +43,14 @@
         <effect duration="4">heal</effect>
         <effect duration="4">damage resistance</effect>
     </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <item slot="5" amount="48" damage="11" material="stained clay"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <item slot="5" amount="48" damage="14" material="stained clay"/>
-    </kit>
 </kits>
 <spawns>
     <default>
         <region yaw="-90">
-            <cuboid min="-827,70,77" max="-829,73,79"/>
+            <cylinder base="-825.5,69,78.5" height="0" radius="4"/>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue" kit="spawn-kit">
         <region yaw="135">
             <point>-741.5,18,110.5</point>
         </region>
@@ -62,7 +58,7 @@
             <point>-741.5,18,46.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red" kit="spawn-kit">
         <region yaw="-135">
             <point>-910.5,18,110.5</point>
         </region>
@@ -167,6 +163,10 @@
     <item>sugar_cane</item>
     <item>water_lily</item>
     <item>ink_sack</item>
+    <if variant="halloween">
+        <item>soul sand</item>
+        <item>nether stalk</item>
+    </if>
 </itemremove>
 <block-drops>
     <rule>
@@ -213,13 +213,8 @@
     <kill-reward>
         <item material="golden apple"/>
         <item amount="16" damage="1" material="wood"/>
+        <item amount="12" team-color="true" material="stained clay"/>
         <item amount="16" material="arrow"/>
-    </kill-reward>
-    <kill-reward filter="only-blue">
-        <item amount="12" damage="11" material="stained clay"/>
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item amount="12" damage="14" material="stained clay"/>
     </kill-reward>
 </kill-rewards>
 <maxbuildheight>26</maxbuildheight>
