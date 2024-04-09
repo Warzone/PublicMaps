@@ -1,118 +1,140 @@
 <map proto="1.4.2">
 <name>Desert Sanctuary</name>
-<version>1.5.4</version>
-<objective>Control the flag for 200 seconds to win!</objective>
-<gamemode>kotf</gamemode>
+<version>1.6.4</version>
+<variant id="5v5" world="5v5">5v5</variant>
+<variant id="7v7" world="7v7">7v7</variant>
+<variant id="halloween" world="halloween" override="true">Deserted Sanctuary</variant>
+<variant id="christmas" world="christmas" override="true">Christmas Sanctuary</variant>
+<unless variant="5v5,7v7">
+    <include id="kotf"/>
+    <constant id="mid-post-filter">always</constant>
+    <constant id="team-size">20</constant>
+    <constant id="max-overfill" delete="true"/>
+</unless>
+<if variant="5v5,7v7">
+    <include id="kotf-comp"/>
+    <constant id="mid-post-filter">never</constant>
+</if>
+<unless variant="halloween">
+    <constant id="team-1-color">blue</constant>
+    <constant id="team-1-name">Blue</constant>
+    <constant id="team-2-color">dark red</constant>
+    <constant id="team-2-name">Red</constant>
+    <constant id="flag-color">purple</constant>
+</unless>
+<if variant="halloween">
+    <constant id="team-1-color">dark purple</constant>
+    <constant id="team-1-name">Purple</constant>
+    <constant id="team-2-color">gold</constant>
+    <constant id="team-2-name">Orange</constant>
+    <constant id="flag-color">lime</constant>
+</if>
+<if variant="5v5">
+    <constant id="team-size">5</constant>
+    <constant id="max-overfill">5</constant>
+    <constant id="respawn-timer">4s</constant>
+</if>
+<if variant="7v7">
+    <constant id="team-size">7</constant>
+    <constant id="max-overfill">7</constant>
+    <constant id="respawn-timer">5s</constant>
+</if>
+<constant id="damage-resistance">7.5s</constant>
+<objective>Control the flag for ${score} seconds to win!</objective>
 <authors>
-    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- Strangey -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
     <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
 </authors>
 <contributors>
-    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/> <!-- Timotheeee -->
+    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/> <!-- Timothee38 -->
+    <if variant="5v5">
+        <contributor uuid="f1352a57-4fe3-4f0c-b867-56b771fc1a0f" contribution="5v5 edit"/> <!-- teagod -->
+    </if>
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="24">Blue</team>
-    <team id="red" color="dark red" max="24">Red</team>
+    <team id="team-1" color="${team-1-color}" max="${team-size}" max-overfill="${max-overfill}">${team-1-name}</team>
+    <team id="team-2" color="${team-2-color}" max="${team-size}" max-overfill="${max-overfill}">${team-2-name}</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
-        <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
-        <item slot="8" amount="20" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">projectile_protection</enchantment>
-        </leggings>
-        <boots unbreakable="true" material="iron boots">
-            <enchantment level="2">feather_falling</enchantment>
-        </boots>
-        <effect duration="1" amplifier="0">health boost</effect>
-        <effect duration="2" amplifier="10">regeneration</effect>
-        <game-mode>adventure</game-mode>
+    <kit id="default-kit">
+        <clear items="false" armor="false" effects="true"/> <!-- kits can't be empty, so this is here as a close-to-no-op -->
+        <if variant="christmas">
+            <effect>night vision</effect>
+        </if>
     </kit>
-    <kit id="flag-kit" force="true">
-        <effect>slowness</effect>
-        <effect amplifier="-3">health boost</effect>
-        <effect duration="3" amplifier="2">absorption</effect>
-    </kit>
-    <kit id="reset-health" force="true">
-        <effect duration="0" amplifier="0">slowness</effect>
-        <effect duration="0" amplifier="0">health boost</effect>
+    <kit id="spawn-kit" parents="default-kit,base-kit">
+        <unless variant="5v5">
+            <action>
+                <replace-item ignore-metadata="true">
+                    <find material="iron boots"/>
+                    <replace unbreakable="true" enchantment="feather_falling:2" material="iron boots"/>
+                </replace-item>
+            </action>
+        </unless>
+        <if variant="christmas">
+            <action>
+                <replace-item>
+                    <find unbreakable="true" material="stone sword"/>
+                    <replace unbreakable="true" name="`bFrost Bite" material="stone sword"/>
+                </replace-item>
+                <replace-item>
+                    <find unbreakable="true" material="bow"/>
+                    <replace unbreakable="true" name="`bFrozen Bow" material="bow"/>
+                </replace-item>
+            </action>
+        </if>
     </kit>
 </kits>
 <spawns>
-    <default>
-        <region yaw="90">
-            <cylinder base="11.5,51,24.5" radius="2" height="0"/>
-        </region>
-    </default>
-    <spawn team="blue" kit="spawn-kit" filter="has-flag">
-        <region yaw="0">
-            <point>11.5,16,-47.5</point>
-        </region>
-    </spawn>
-    <spawn team="red" kit="spawn-kit" filter="has-flag">
-        <region yaw="180">
-            <point>11.5,16,96.5</point>
-        </region>
-    </spawn>
+    <default kit="default-kit" region="default-spawn" yaw="90"/>
+    <spawn team="team-1" kit="spawn-kit" filter="has-flag" region="team-1-spawn" yaw="0"/>
+    <spawn team="team-2" kit="spawn-kit" filter="has-flag" region="team-2-spawn" yaw="180"/>
 </spawns>
-<filters>
-    <any id="has-flag">
-        <carrying-flag>flag</carrying-flag>
-        <not>
-            <same-team>
-                <carrying-flag>flag</carrying-flag>
-            </same-team>
-        </not>
-    </any>
-</filters>
 <regions>
+    <unless variant="5v5,christmas">
+        <cylinder id="default-spawn" base="11.5,51,24.5" radius="2" height="0"/>
+    </unless>
+    <if variant="christmas">
+        <cylinder id="default-spawn" base="70.5,51,24.5" radius="2" height="0"/>
+    </if>
+    <unless variant="5v5">
+        <point id="team-1-spawn">11.5,16,-47.5</point>
+        <point id="team-2-spawn">11.5,16,96.5</point>
+    </unless>
+    <if variant="5v5">
+        <cylinder id="default-spawn" base="0.5,51,0.5" radius="2" height="0"/>
+        <point id="team-1-spawn">0.5,16,-61.5</point>
+        <point id="team-2-spawn">0.5,16,62.5</point>
+    </if>
     <apply block="never" use="never"/>
 </regions>
 <flags>
-    <flag id="flag" name="Flag" color="purple" shared="true" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health" flag-proximity-metric="none" show-respawn-on-pickup="true">
-        <post return-time="0s" respawn-time="20s">
-            <post name="Mid Post">11.5,9,24.5</post>
-            <post name="East Post" yaw="-90">36.5,14,24.5</post>
-            <post name="West Post" yaw="90">-13.5,14,24.5</post>
+    <flag id="flag"
+          name="Flag"
+          color="${flag-color}"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health"
+          flag-proximity-metric="none"
+          show-respawn-on-pickup="${announce-post-pickup}">
+        <post return-time="0s" respawn-time="${flag-respawn-timer}">
+            <unless variant="5v5">
+                <post name="Mid Post" respawn-filter="${mid-post-filter}">11.5,9,24.5</post>
+                <post name="East Post" yaw="-90">36.5,14,24.5</post>
+                <post name="West Post" yaw="90">-13.5,14,24.5</post>
+            </unless>
+            <if variant="5v5">
+                <post name="Mid Post" respawn-filter="${mid-post-filter}">0.5,9,0.5</post>
+                <post name="East Post" yaw="-90">23.5,14,0.5</post>
+                <post name="West Post" yaw="90">-22.5,14,0.5</post>
+            </if>
         </post>
     </flag>
 </flags>
-<score>
-    <limit>200</limit>
-</score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
-    <item>banner</item>
-</itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="10" material="arrow"/>
-</kill-reward>
-<respawn spectate="true" auto="true">
-    <message>
-        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
-    </message>
-</respawn>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<world>
-    <timeset>1000</timeset>
-</world>
+<unless variant="christmas,halloween">
+    <world>
+        <timeset>1000</timeset>
+    </world>
+</unless>
 </map>
