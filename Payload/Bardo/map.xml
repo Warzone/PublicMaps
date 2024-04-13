@@ -1,0 +1,228 @@
+<map proto="1.4.2">
+<name>Bardo</name>
+<version>1.0.0</version>
+<objective>Attackers must escort the payload to a designated delivery point while the Defenders try to stop them.</objective>
+<created>2024-04-13</created>
+<!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
+<gamemode>arcade</gamemode>
+<gamemode>payload</gamemode>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Layout, XML, Design"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Minor Detailing"/> <!-- _Pear -->
+</contributors>
+<time result="blue">10m25s</time>
+<broadcasts>
+    <alert after="2s" filter="only-red">Your spawn gates will open up after 25 seconds have passed, push the payload to the end of the map to win!</alert>
+    <alert after="2s" filter="only-blue">Locate the payload by following the red light in the sky, and try to stop the Attackers from getting the Paylaoad to the end of the map!</alert>
+    <alert after="21s" filter="only-red">Your spawn gates will open up in `c5 seconds`7!</alert>
+    <alert after="22s" filter="only-red">Your spawn gates will open up in `c4 seconds`7!</alert>
+    <alert after="23s" filter="only-red">Your spawn gates will open up in `c3 seconds`7!</alert>
+    <alert after="24s" filter="only-red">Your spawn gates will open up in `c2 seconds`7!</alert>
+    <alert after="25s" filter="only-red">Your spawn gates will open up in `c1 seconds`7!</alert>
+    <alert after="26s" filter="only-red">`lYour spawn gates have opened up. Push the cart to the end to win!</alert>
+    <tip after="30s" every="2m">Golden apple and arrow spawners are located under both bridges!</tip>
+</broadcasts>
+<teams>
+    <team id="red" color="dark red" max="10">Attackers</team>
+    <team id="blue" color="blue" max="10">Defenders</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots" enchantment="feather_falling"/>
+        <effect duration="3s" amplifier="255">resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="red-kit" parent="spawn-kit">
+        <item slot="8" amount="10" material="arrow"/>
+    </kit>
+    <kit id="blue-kit" parent="spawn-kit">
+        <item slot="8" amount="20" material="arrow"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <point>-0.5,50,-1.5</point>
+        </region>
+    </default>
+    <spawns team="red" kit="red-kit">
+        <spawn id="red-first" filter="first-spawn">
+            <region yaw="45">
+                <point>39.5,5,-38.5</point>
+            </region>
+        </spawn>
+        <spawn id="red-second" filter="second-spawn">
+            <region>
+                <point>-7.5,4,-56.5</point>
+            </region>
+        </spawn>
+        <spawn id="red-third" filter="third-spawn">
+            <region yaw="90">
+                <point>58.5,4,0.5</point>
+            </region>
+        </spawn>
+    </spawns>
+    <spawns team="blue" kit="blue-kit">
+        <spawn id="blue-first" filter="first-spawn">
+            <region yaw="-45">
+                <point>-45.5,4,-43.5</point>
+            </region>
+        </spawn>
+        <spawn  id="blue-second" filter="second-spawn">
+            <region yaw="-90">
+                <point>-62.5,4,0.5</point>
+            </region>
+        </spawn>
+        <spawn id="blue-third" filter="third-spawn">
+            <region yaw="-135">
+                <point>-38.5,5,39.5</point>
+            </region>
+        </spawn>
+    </spawns>
+</spawns>
+<regions>
+    <union id="spawners">
+        <union id="gapple-spawners">
+            <union id="first-gapple">
+                <point id="first-gap-point">-7.5,5,-12</point>
+                <cylinder id="first-gap-player" base="-7.5,5,-12" radius="3" height="3"/>
+            </union>
+            <union id="second-gapple">
+                <point id="second-gap-point">35.5,5,28.5</point>
+                <cylinder id="second-gap-player" base="35.5,5,28.5" radius="3" height="3"/>
+            </union>
+        </union>
+        <union id="arrow-spawners">
+            <union id="first-arrow">
+                <point id="first-arrow-point">-7.5,5,-12</point>
+                <cylinder id="first-arrow-player" base="-7.5,5,-12" radius="3" height="3"/>
+            </union>
+            <union id="second-arrow">
+                <point id="second-arrow-point">35.5,5,28.5</point>
+                <cylinder id="second-arrow-player" base="35.5,5,28.5" radius="3" height="3"/>
+            </union>
+        </union>
+    </union>
+    <union id="gates">
+        <union id="1st-red-gates">
+            <cuboid id="main-gate" min="25,3,-30" max="30,7,-26"/>
+            <cuboid id="right-gate" min="27,3,-36" max="25,8,-34"/>
+            <cuboid id="left-gate" min="34,3,-27" max="36,8,-25"/>
+        </union>
+        <cuboid id="2nd-red-gate" min="-2,3,-44" max="-4,8,-48"/>
+        <cuboid id="3rd-red-gate" min="43,3,7" max="47,8,5"/>
+    </union>
+    <union id="captured-display-regions">
+        <cuboid id="first-captured-region" min="-1,3,-22" max="-5,4,-26"/>
+        <cuboid id="second-captured-region" min="19,3,8" max="21,4,12"/>
+    </union>
+    <cuboid id="blue-first-spawn-protection" min="-33,0,-37" max="-40,oo,-29"/>
+    <cuboid id="blue-second-spawn-protection" min="-44,0,-6" max="-49,oo,6"/>
+    <cuboid id="blue-third-spawn-protection" min="-21,0,31" max="-31,oo,22"/>
+    <union id="red-spawn-protection">
+        <cuboid id="red-first-spawn-protection" min="21,0,-44" max="44,oo,-21"/>
+        <cuboid id="red-second-spawn-protection" min="-3,0,-44" max="-13,oo,-47"/>
+        <cuboid id="red-third-spawn-protection" min="43,0,6" max="49,oo,-6"/>
+    </union>
+    <apply block="never" use="never"/>
+    <apply enter="first-blue-spawn-entry" region="blue-first-spawn-protection" message="You may not enter the enemy's spawn!"/>
+    <apply enter="second-blue-spawn-entry" region="blue-second-spawn-protection" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-third-spawn-protection" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn-protection" message="You may not enter the enemy's spawn!"/>
+</regions>
+<filters>
+    <not id="first-spawn">
+        <completed>first-checkpoint</completed>
+    </not>
+    <all id="second-spawn">
+        <completed>first-checkpoint</completed>
+        <not>
+            <completed>second-checkpoint</completed>
+        </not>
+    </all>
+    <all id="third-spawn">
+        <completed id="first-checkpoint-completed">first-checkpoint</completed>
+        <completed id="second-checkpoint-completed">second-checkpoint</completed>
+    </all>
+    <any id="first-blue-spawn-entry">
+        <completed>first-checkpoint</completed>
+        <team>blue</team>
+    </any>
+    <any id="second-blue-spawn-entry">
+        <completed>second-checkpoint</completed>
+        <team>blue</team>
+    </any>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<actions>
+    <message id="spawns-forward-1" text="`b`lCheckpoint `cA `b`lhas been captured. Spawns have been moved to accommodate, new spawn gates have opened!"/>
+    <message id="spawns-forward-2" text="`b`lCheckpoint `cB `b`lhas been captured. Spawns have been moved to accommodate, new spawn gates have opened!"/>
+    <trigger filter="first-checkpoint-completed" trigger="spawns-forward-1" scope="player"/>
+    <trigger filter="second-checkpoint-completed" trigger="spawns-forward-2" scope="player"/>
+</actions>
+<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="60s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
+  <payload id="first-checkpoint" name="Checkpoint A" location="23,4,-23" captured="first-captured-region" display-filter="first-spawn"/>
+  <payload id="second-checkpoint" name="Checkpoint B" location="-3,2,-24" captured="second-captured-region" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
+  <payload id="third-checkpoint" name="Checkpoint C" location="20,2,10" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
+</payloads>
+<destroyables show="false" required="false">
+    <!-- Gates, will eventually be phased out in favour of structures -->
+    <destroyable region="1st-red-gates" id="warmup-gates-monument" name="warmupgates" owner="blue" materials="iron fence" modes="warmup-gates-mode"/>
+    <destroyable region="2nd-red-gate"  id="second-gates-monument" name="secondgates" owner="blue" materials="iron fence" modes="first-checkpoint-gates"/>
+    <destroyable region="3rd-red-gate"  id="third-gates-monuments" name="thirdgates"  owner="blue" materials="iron fence" modes="second-checkpoint-gates"/>
+</destroyables>
+<modes>
+    <mode after="25s" show-before="25s" id="warmup-gates-mode" name="Attackers will be released" material="air"/>
+    <mode after="0s" filter="first-checkpoint-completed" show-before="0" id="first-checkpoint-gates" material="air"/>
+    <mode after="0s" filter="second-checkpoint-completed" show-before="0" id="second-checkpoint-gates" material="air"/>
+</modes>
+<spawners>
+    <spawner spawn-region="first-gap-point" player-region="first-gap-player" delay="8s">
+        <item material="golden apple" amount="1"/>
+    </spawner>
+    <spawner spawn-region="second-gap-point" player-region="second-gap-player" delay="8s">
+        <item material="golden apple" amount="1"/>
+    </spawner>
+    <spawner spawn-region="first-arrow-point" player-region="first-arrow-player" delay="2s">
+        <item material="arrow" amount="3"/>
+    </spawner>
+    <spawner spawn-region="second-arrow-point" player-region="second-arrow-player" delay="2s">
+        <item material="arrow" amount="3"/>
+    </spawner>
+</spawners>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+    <item amount="6" material="arrow"/>
+</kill-reward>
+<respawns>
+    <respawn delay="4s" filter="only-red"/>
+    <respawn delay="5s" filter="only-blue"/>
+</respawns>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
