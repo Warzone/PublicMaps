@@ -1,0 +1,70 @@
+<map proto="1.4.2">
+<name>Deadwood</name>
+<version>1.0.9</version>
+<include id="oitq"/>
+<objective>Be the player with the highest amount of kills after ${time-limit} minutes!</objective>
+<authors>
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Map Builder, XML"/> <!-- zzuf -->
+    <author uuid="d37bd0ab-17b3-4be0-9e89-c3afa8cdf946" contribution="Map Builder"/> <!-- Metacognitive -->
+</authors>
+<created>2022-09-24</created>
+<players max="10" colors="true"/>
+<spawns>
+    <spawn spread="true">
+        <regions>
+            <!-- sheriff's office -->
+            <point yaw="90">19.5,4,-13.5</point> 
+            <!-- mine entrance -->
+            <point yaw="-90">-38.5,4,1.5</point>
+            <!-- church -->
+            <point yaw="180">-0,6,28</point>
+            <!-- carriages -->
+            <point yaw="90">-16.5,5,-10.5</point> <!-- saloon -->
+            <point yaw="-90">32.5,5,-4.5</point> <!-- barber -->
+            <!-- post office -->
+            <point yaw="135">16.5,6,22.5</point>
+            <!-- graveyard -->
+            <point yaw="-180">13.5,4,33.5</point>
+            <!-- bank -->
+            <point yaw="-90">-18.5,5,-25.5</point>
+            <point yaw="90">-12,14,-25</point> <!-- roof -->
+            <!-- water tower -->
+            <point yaw="90">6.5,13,-31.5</point>
+            <!-- saloon -->
+            <point yaw="90">-22.5,10,25.5</point>
+            <point yaw="-45">-12.5,10,14.5</point>
+            <point yaw="-90">-20,14.5,26</point> <!-- roof -->
+            <!-- barber roof -->
+            <point yaw="90">27,12.5,-17</point>
+        </regions>
+    </spawn>
+    <default yaw="0">
+        <region>
+            <cuboid id="obs-spawn" min="-24.5,4,-16.5" max="-26.5,4,-17.5"/>
+        </region>
+    </default>
+</spawns>
+<regions>
+    <negative id="deadwood">
+        <region id="gallows"/>
+        <region id="grave"/>
+    </negative>
+    <union id="gallows">
+        <cuboid id="gallows-lever" min="1,6,2" max="0,7,1"/>
+        <rectangle id="gallows-piston" min="1,1" max="0,0"/>
+    </union>
+    <cuboid id="sheriff-door" min="20.5,4,-20" max="21,6,-19"/>
+    <cuboid id="grave" min="7,2,32" max="6,3,34"/>
+    <above y="19" id="ceiling"/>
+    <apply use="never" region="deadwood"/>
+    <apply enter="never" region="sheriff-door" message="`f&#60;`6❖`bDeadwood Sheriff`f&#62;: Where do you think you're going?"/>
+    <apply enter="never" region="ceiling"/>
+</regions>
+<portals>
+    <portal x="@18.5" y="@4" z="@-25.5" yaw="@90">
+        <region>
+            <cuboid min="-13,6,21" max="-14,7,22"/>
+        </region>
+    </portal>
+</portals>
+</map>
