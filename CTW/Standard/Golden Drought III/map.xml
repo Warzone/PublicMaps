@@ -1,6 +1,8 @@
 <map proto="1.4.2">
 <name>Golden Drought III</name>
-<version>1.3</version>
+<variant id="christmas" world="christmas" override="true">Merry Drought III</variant>
+<variant id="halloween" world="halloween" override="true">Spooky Drought III</variant>
+<version>1.4.1</version>
 <objective>Capture the enemy wools and return them to your victory monument.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -8,10 +10,22 @@
 </authors>
 <contributors>
     <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Building help"/> <!-- Tywnis -->
+    <if variant="christmas">
+        <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Christmas edit"/> <!-- Cazadorian -->
+    </if>
+    <if variant="halloween">
+        <contributor uuid="15c75bdd-005f-40f6-9e20-1ecf48bb51e5" contribution="Halloween Edition"/> <!-- Kiyara -->
+    </if>
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="dark red" max="16">Red</team>
+    <unless variant="halloween">
+        <team id="blue" color="blue" max="20">Blue</team>
+        <team id="red" color="dark red" max="20">Red</team>
+    </unless>
+    <if variant="halloween">
+        <team id="blue" color="dark purple" max="20">Purple</team>
+        <team id="red" color="dark green" max="20">Green</team>
+    </if>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -25,15 +39,22 @@
             <enchantment>efficiency</enchantment>
         </item>
         <item slot="3" unbreakable="true" material="gold axe"/>
-        <item slot="4" amount="64" material="sandstone"/>
-        <item slot="31" amount="64" material="sandstone"/>
-        <item slot="5" amount="64" damage="2" material="wood"/>
+        <unless variant="christmas">
+            <item slot="4" amount="64" material="sandstone"/>
+            <item slot="31" amount="64" material="sandstone"/>
+            <item slot="5" amount="64" damage="2" material="wood"/>
+            <item slot="8" amount="64" material="cooked beef"/>
+        </unless>
+        <if variant="christmas">
+            <item slot="4" amount="64" material="quartz block"/>
+            <item slot="31" amount="64" material="quartz block"/>
+            <item slot="5" amount="64" damage="1" material="wood"/>
+            <item slot="8" amount="64" material="golden carrot"/>
+        </if>
         <item slot="32" amount="4" material="web"/>
         <item slot="6" amount="32" material="ladder"/>
         <item slot="33" material="bucket"/>
         <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="cooked beef"/>
-        <helmet unbreakable="true" material="iron helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
     </kit>
     <kit id="no-bg-kit" force="true">
@@ -78,9 +99,9 @@
     <deny id="no-spawner">
         <material>mob spawner</material>
     </deny>
-    <not id="deny-void">
+    <deny id="deny-void">
         <void/>
-    </not>
+    </deny>
 </filters>
 <regions>
     <union id="no-bg">
@@ -126,13 +147,19 @@
         <rectangle id="mid-vertical" min="-58,-30" max="58,30"/>
         <rectangle id="mid-horizontal" min="-45,-31" max="45,31"/>
         <union id="bases">
-            <rectangle id="blue-base" min="65,-11" max="87,11"/>
-            <rectangle id="red-base" min="-87,-11" max="-65,11"/>
+            <union id="blue-base">
+                <rectangle min="65,-11" max="87,11"/>
+                <mirror region="red-base-tunnel" origin="0,0,0" normal="1,0,0"/> <!-- tunnel -->
+            </union>
+            <union id="red-base">
+                <rectangle min="-87,-11" max="-65,11"/>
+                <rectangle id="red-base-tunnel" min="-87,4" max="-123,-4"/> <!-- tunnel -->
+            </union>
         </union>
     </complement>
     <apply kit="no-bg-kit" region="no-bg"/>
-    <apply enter="only-blue" use="only-blue" region="blue-base" message="You may not enter the enemy base!"/>
-    <apply enter="only-red" use="only-red" region="red-base" message="You may not enter the enemy base!"/>
+    <apply enter="only-blue" region="blue-base" message="You may not enter the enemy base!"/>
+    <apply enter="only-red" region="red-base" message="You may not enter the enemy base!"/>
     <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
     <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
     <apply block-break="only-gold" block-place="only-gold-regen" region="bases" message="You may only break gold blocks in the bases!"/>
@@ -155,16 +182,25 @@
             <block>66,15,-1</block>
         </monument>
     </wool>
-    <wool team="red" color="green" location="121.5,9.5,-24">
-        <monument>
-            <block>-67,15,-1</block>
-        </monument>
-    </wool>
     <wool team="red" color="lime" location="121.5,9.5,24">
         <monument>
             <block>-67,15,0</block>
         </monument>
     </wool>
+    <unless variant="halloween">
+        <wool team="red" color="green" location="121.5,9.5,-24">
+            <monument>
+                <block>-67,15,-1</block>
+            </monument>
+        </wool>
+    </unless>
+    <if variant="halloween">
+        <wool team="red" color="cyan" location="121.5,9.5,-24">
+            <monument>
+                <block>-67,15,-1</block>
+            </monument>
+        </wool>
+    </if>
 </wools>
 <toolrepair>
     <tool>stone sword</tool>
@@ -175,22 +211,46 @@
     <tool>bucket</tool>
 </toolrepair>
 <itemremove>
-    <item>iron helmet</item>
     <item>leather chestplate</item>
-    <item>cooked beef</item>
+    <unless variant="christmas">
+        <item>cooked beef</item>
+    </unless>
+    <if variant="christmas">
+        <item>golden carrot</item>
+    </if>
     <item>string</item>
     <item>web</item>
     <item>glass bottle</item>
 </itemremove>
 <block-drops>
-    <rule>
-        <filter>
-            <material>sandstone</material>
-        </filter>
-        <drops>
-            <item chance="0" material="sandstone"/>
-        </drops>
-    </rule>
+    <unless variant="christmas">
+        <rule>
+            <filter>
+                <material>sandstone</material>
+            </filter>
+            <drops>
+                <item chance="0" material="sandstone"/>
+            </drops>
+        </rule>
+    </unless>
+    <if variant="christmas">
+        <rule>
+            <filter>
+                <material>quartz block</material>
+            </filter>
+            <drops>
+                <item chance="0" material="quartz block"/>
+            </drops>
+        </rule>
+        <rule>
+            <filter>
+                <material>snow block</material>
+            </filter>
+            <drops>
+                <item chance="0" material="snow ball"/>
+            </drops>
+        </rule>
+    </if>
     <rule>
         <filter>
             <material>wood</material>
@@ -210,15 +270,28 @@
 </block-drops>
 <itemkeep>
     <item>golden apple</item>
-    <item>sandstone</item>
+    <unless variant="christmas">
+        <item>sandstone</item>
+    </unless>
+    <if variant="christmas">
+        <item>quartz block</item>
+    </if>
     <item>wood</item>
     <item>ladder</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" material="sandstone"/>
-    <item amount="16" damage="2" material="wood"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <unless variant="christmas">
+            <item amount="32" material="sandstone"/>
+            <item amount="16" damage="2" material="wood"/>
+        </unless>
+        <if variant="christmas">
+            <item amount="32" material="quartz block"/>
+            <item amount="16" damage="1" material="wood"/>
+        </if>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>37</maxbuildheight>
 <item-mods>
     <rule>
@@ -250,5 +323,8 @@
         <ingredient symbol="G">gold block</ingredient>
         <ingredient symbol="A">apple</ingredient>
     </shaped>
+    <if variant="christmas">
+        <disable>gold spade</disable>
+    </if>
 </crafting>
 </map>
