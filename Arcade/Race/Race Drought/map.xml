@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<map proto="1.3.0" game="Race">
+<name>Race: Drought</name>
+<version>1.1.5</version>
+<objective>Score points by completing laps around the track.</objective>
+<gamemode>arcade</gamemode>
+<authors>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+</authors>
+<players max="50" colors="true"/>
+<kits>
+    <kit name="base">
+        <potion duration="oo" amplifier="100" ambient="true">heal</potion>
+        <potion duration="oo" amplifier="4" ambient="true">damage_resistance</potion>
+    </kit>
+</kits>
+<classes family="Cars" sticky="true" restrict="false">
+    <class name="Touring Car" description="4/5 speed, knockback 1 and efficiency 2 shears" icon="iron boots" default="true">
+        <kit parents="base">
+            <item slot="0" enchantment="knockback:1;dig_speed:2">shears</item>
+            <boots enchantment="protection_explosions:100" damage="-3000">iron boots</boots>
+            <walk-speed>1.5</walk-speed>
+        </kit>
+    </class>
+    <class name="Formula One" description="5/5 speed, snowballs, no shears" icon="chainmail boots">
+        <kit parents="base">
+            <item slot="0" amount="127">snow ball</item>
+            <boots enchantment="protection_explosions:100" damage="-3000">chainmail boots</boots>
+            <walk-speed>1.55</walk-speed>
+        </kit>
+    </class>
+    <class name="Buggy" description="2/5 speed, jump boost and regular shears" icon="leather boots">
+        <kit parents="base">
+            <item slot="0">shears</item>
+            <potion duration="oo" amplifier="1" ambient="true">jump</potion>
+            <boots enchantment="protection_explosions:100" damage="-3000">leather boots</boots>
+            <walk-speed>1.4</walk-speed>
+        </kit>
+    </class>
+    <class name="Hot Rod" description="3/5 speed, fire aspect and extra webs, hyperspeed shears" icon="gold boots">
+        <kit parents="base">
+            <item slot="0" enchantment="fire_aspect:1;dig_speed:10">shears</item>
+            <item slot="1" amount="32">web</item>
+            <boots enchantment="protection_explosions:100" damage="-3000">gold boots</boots>
+            <walk-speed>1.45</walk-speed>
+        </kit>
+    </class>
+    <class name="Truck" description="1/5 speed, knockback 2 and extra TNT, no shears" icon="diamond boots">
+        <kit parents="base">
+            <item slot="0" enchantment="knockback:2">stick</item>
+            <item slot="1" amount="32">tnt</item>
+            <boots enchantment="protection_explosions:100" damage="-3000">diamond boots</boots>
+            <walk-speed>1.35</walk-speed>
+        </kit>
+    </class>
+</classes>
+<filters>
+    <filter name="play" parents="deny-all">
+        <allow>
+            <block>web</block>
+            <block>tnt</block>
+        </allow>
+    </filter>
+</filters>
+<regions>
+    <apply block="play">
+        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
+    </apply>
+</regions>
+<mobs>
+    <filter>
+        <spawn>spawner egg</spawn>
+    </filter>
+</mobs>
+<crafting>
+    <disable>snow block</disable>
+</crafting>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<timelock>on</timelock>
+<toolrepair>
+    <tool>wood sword</tool>
+</toolrepair>
+<itemremove>
+    <item>string</item>
+    <item>iron boots</item>
+    <item>chainmail boots</item>
+    <item>leather boots</item>
+    <item>gold boots</item>
+    <item>diamond boots</item>
+    <item>shears</item>
+    <item>wool</item>
+</itemremove>
+<tnt>
+    <instantignite>on</instantignite>
+</tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<portals>
+    <portal x="0" y="-6.5" z="3.5">
+        <cuboid min="-7,14,-2" max="7,18,-1"/>
+    </portal>
+    <portal x="@0" y="@7.5" z="@3" yaw="@0">
+        <cuboid min="-100,-5,-100" max="100,0,100"/>
+    </portal>
+</portals>
+<regions>
+    <cuboid name="spawn" min="-7,7.5,2" max="7,8.5,4"/>
+</regions>
+<score>
+    <kills>0</kills>
+    <limit>3</limit>
+    <box value="1">
+        <cuboid min="-7,14,-2" max="7,18,-1"/>
+    </box>
+</score>
+<spawns>
+    <spawn yaw="0"><region name="spawn"/></spawn>
+    <default yaw="0"><region name="spawn"/></default>
+</spawns>
+</map>
