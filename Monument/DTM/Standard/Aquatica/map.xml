@@ -1,22 +1,43 @@
 <map proto="1.4.2">
 <name>Aquatica</name>
-<version>1.4.2</version>
+<variant id="halloween" world="halloween" override="true">SpOOkatica</variant>
+<version>1.5.2</version>
 <objective>Destroy the enemy team's emerald monument!</objective>
+<if variant="default">
+    <created>2022-03-12</created>
+</if>
+<if variant="halloween">
+    <created>2022-10-08</created>
+</if>
 <gamemode>dtm</gamemode>
-<created>2022-03-12</created>
 <authors>
-    <author uuid="b2539be1-8f98-4375-b653-9d91cd04c30e"/> <!-- Mewzzy -->
+    <author uuid="b2539be1-8f98-4375-b653-9d91cd04c30e" contribution="Original map designer"/> <!-- Mewzzy -->
+    <author uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b" contribution="Halloween redesign"/> <!-- Tundren -->
 </authors>
 <contributors>
-    <contributor uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b"/> <!-- Tundren -->
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4"/> <!-- Cazadorian -->
 </contributors>
+<constants>
+    <constant id="observers-kit" delete="true"/>
+</constants>
+<if variant="halloween">
+    <constant id="observers-kit">default-kit</constant>
+</if>
 <teams>
-    <team id="blue" color="blue" max="7">Blue</team>
-    <team id="red" color="dark red" max="7">Red</team>
+    <unless variant="halloween">
+        <team id="blue" color="blue" max="7">Blue</team>
+        <team id="red" color="dark red" max="7">Red</team>
+    </unless>
+    <if variant="halloween">
+        <team id="blue" color="gold" max="7">Orange</team>
+        <team id="red" color="dark purple" max="7">Purple</team>
+    </if>
 </teams>
 <kits>
-    <kit id="spawn-kit">
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="${observers-kit}">
         <clear/>
         <item slot="0" material="stone sword" unbreakable="true"/>
         <item slot="1" material="bow" unbreakable="true">
@@ -44,19 +65,34 @@
     </kit>
 </kits>
 <spawns>
-    <default yaw="90">
+    <default kit="${observers-kit}" yaw="90">
         <regions>
-            <point>47.5,15,3.5</point>
+            <if variant="default">
+                <point>47.5,15,3.5</point>
+            </if>
+            <if variant="halloween">
+                <point>47.5,14,3.5</point>
+            </if>
         </regions>
     </default>
-    <spawn team="red" kit="spawn-kit" yaw="0">
+    <spawn team="red" kit="spawn-kit">
         <regions>
-            <point>2.5,13,-83.5</point>
+            <if variant="default">
+                <point>2.5,13,-83.5</point>
+            </if>
+            <if variant="halloween">
+                <point>2.5,14,-83.5</point>
+            </if>
         </regions>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="-180">
+    <spawn team="blue" kit="spawn-kit" yaw="180">
         <regions>
-            <point>-1.5,13,90.5</point>
+            <if variant="default">
+                <point>-1.5,13,90.5</point>
+            </if>
+            <if variant="halloween">
+                <point>-3.5,14,88.5</point>
+            </if>
         </regions>
     </spawn>
 </spawns>
@@ -69,8 +105,13 @@
 </filters>
 <regions>
     <union id="spawn-protection">
-        <rectangle id="red-protection" min="5,-51" max="10,-87"/>
-        <rectangle id="blue-protection" min="6,58" max="-9,94"/>
+        <rectangle id="red-protection" min="-5,-51" max="10,-87"/>
+        <if variant="default">
+            <rectangle id="blue-protection" min="6,58" max="-9,94"/>
+        </if>
+        <if variant="halloween">
+            <rectangle id="blue-protection" min="6,56" max="-9,94"/>
+        </if>
     </union>
     <complement id="void-area">
         <everywhere/>
@@ -79,18 +120,28 @@
     </complement>
     <apply block="never" region="spawn-protection" message="You may not modify spawns!"/>
     <apply enter="only-blue" region="blue-protection" message="You may not enter the opponent's spawn!"/>
-    <apply enter="only-red" region="red-protection" message="You may not enter the opponent's spawn!"/>>
+    <apply enter="only-red" region="red-protection" message="You may not enter the opponent's spawn!"/>
     <apply block-place="deny-void" region="void-area" message="You may not build in the void area!"/>
 </regions>
-<destroyables name="Monument" materials="emerald_block" show-progress="true" completion="100%" required="true" modes="gold-mode clay-mode">
+<destroyables name="Monument" materials="emerald block" show-progress="true" required="true" modes="gold-mode clay-mode">
     <destroyable owner="blue">
         <region>
-            <cuboid min="15,10,49" max="18,14,52"/>
+            <if variant="default">
+                <cuboid min="15,10,49" max="18,14,52"/>
+            </if>
+            <if variant="halloween">
+                <cuboid min="12,11,46" max="16,16,50"/>
+            </if>
         </region>
     </destroyable>
     <destroyable owner="red">
         <region>
-            <cuboid min="-14,10,-42" max="-17,14,-45"/>
+            <if variant="default">
+                <cuboid min="-14,10,-42" max="-17,14,-45"/>
+            </if>
+            <if variant="halloween">
+                <cuboid min="-14,11,-42" max="-18,16,-46"/>
+            </if>
         </region>
     </destroyable>
 </destroyables>
@@ -165,10 +216,12 @@
     <item>golden apple</item>
     <item>wood</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="24" damage="2" material="wood"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="24" damage="2" material="wood"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>20</maxbuildheight>
 <respawn delay="3s"/>
 <hunger>
