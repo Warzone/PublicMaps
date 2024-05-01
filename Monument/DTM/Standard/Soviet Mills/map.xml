@@ -1,0 +1,120 @@
+<map proto="1.4.2">
+<name>Soviet Mills</name>
+<variant id="halloween" world="halloween" override="true">Soviet Chills</variant>
+<version>1.3.3</version>
+<objective>Destroy 75% of the team's spherical monument.</objective>
+<gamemode>dtm</gamemode>
+<if variant="default">
+    <created>2012-09-16</created>
+</if>
+<authors>
+    <author uuid="c97373ef-4582-4350-8993-8a78f2775c29"/> <!-- Eclipsen -->
+    <author uuid="e39fe3bc-b80e-46d2-81fe-d18042471989"/> <!-- EnarRikardz -->
+    <if variant="halloween">
+        <author uuid="82c796a5-c033-43be-af30-fa06496995f9"/> <!-- IM_A_H0B0 -->
+        <author uuid="19388047-f04b-43ac-9546-22aa69aea75c"/> <!-- bleangamer -->
+    </if>
+</authors>
+<contributors>
+    <contributor uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="Terraforming and gameplay"/> <!-- Anxuiz -->
+    <if variant="halloween">
+        <contributor uuid="5ca79703-1be6-4dca-9073-59d024eb8bb0" contribution="Humourous Gravestones"/> <!-- koipen -->
+    </if>
+</contributors>
+<teams>
+    <team id="red" color="dark red" max="40">Red</team>
+    <team id="blue" color="blue" max="40">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="2" enchantment="durability:3;dig speed" material="iron pickaxe"/>
+        <item slot="3" material="iron axe"/>
+        <item slot="4" amount="64" material="bread"/>
+        <item slot="5" amount="64" damage="1" material="leaves"/>
+        <item slot="6" amount="64" damage="1" material="log"/>
+        <effect duration="10" amplifier="2">heal</effect>
+        <effect duration="20">damage resistance</effect>
+        <chestplate team-color="true" material="leather chestplate"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="spawn-kit" yaw="270">
+        <regions>
+            <cuboid min="-46.5,54,144.5" max="-44.5,54,146.5"/>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="spawn-kit" yaw="270">
+        <regions>
+            <cuboid min="-46.5,54,-178.5" max="-45.5,54,-176.5"/>
+        </regions>
+    </spawn>
+    <default yaw="270">
+        <regions>
+            <cylinder base="101,74,-16" radius="4" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <deny id="deny-ice">
+        <material>ice</material>
+    </deny>
+</filters>
+<regions>
+    <!-- protect spawn buildings -->
+    <apply block="never" message="You may not modify the spawn buildings">
+        <region>
+            <cuboid id="blue-spawn-building" min="-50,52,132" max="-41,62,150"/>
+            <cuboid id="red-spawn-building" min="-50,52,-182" max="-41,62,-164"/>
+        </region>
+    </apply>
+    <apply block="never">
+        <region>
+            <negative id="not-playable">
+                <rectangle id="playable" min="-50,-182" max="50,150"/>
+            </negative>
+        </region>
+    </apply>
+    <apply region="playable" block="deny-ice"/>
+    <apply block="never" message="You may not build over the battlefield">
+        <region>
+            <cuboid min="-50,30,-48" max="50,oo,16"/>
+        </region>
+    </apply>
+</regions>
+<destroyables completion="75%" name="Monument" repairable="false">
+    <destroyable owner="blue" materials="smooth brick;wool:11">
+        <region>
+            <cuboid id="blue-monument" min="8,49,115" max="17,58,124"/>
+        </region>
+    </destroyable>
+    <destroyable owner="red" materials="smooth brick;wool:14">
+        <region>
+            <cuboid id="red-monument" min="8,49,-156" max="17,58,-147"/>
+        </region>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>bread</item>
+    <item>log</item>
+    <item>leaves</item>
+    <item>wood</item>
+    <item>golden apple</item>
+</itemremove>
+<maxbuildheight>69</maxbuildheight>
+<kill-rewards>
+    <kill-reward>
+        <item>golden apple</item>
+    </kill-reward>
+</kill-rewards>
+</map>
