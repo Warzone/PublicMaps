@@ -1,6 +1,7 @@
 <map proto="1.4.2">
 <name>Persisto</name>
-<version>1.4.4</version>
+<variant id="halloween" world="halloween" override="true">PerSpookySto</variant>
+<version>1.5.0</version>
 <objective>Capture both wools to win!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -13,9 +14,17 @@
     <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Generic aesthetic help"/> <!-- Plastix -->
     <contributor uuid="260004f0-996b-4539-ba21-df4ee6336b63" contribution="Feedback and map help"/> <!-- Captain_Elliott -->
 </contributors>
+<if variant="default">
+    <constant id="blue-team-name">Blue</constant>
+    <constant id="red-team-name">Red</constant>
+</if>
+<if variant="halloween">
+    <constant id="blue-team-name">Treats</constant>
+    <constant id="red-team-name">Tricks</constant>
+</if>
 <teams>
-    <team id="blue" color="blue" max="12">Blue</team>
-    <team id="red" color="dark red" max="12">Red</team>
+    <team id="blue" color="blue" max="16">${blue-team-name}</team>
+    <team id="red" color="dark red" max="16">${red-team-name}</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -45,12 +54,12 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
-            <point>-38.5,24,86.5</point>
+        <region>
+            <point>-38.5,23,86.5</point>
         </region>
     </default>
     <spawn team="blue" kit="spawn-kit">
-        <region yaw="0">
+        <region>
             <cuboid min="10,10,24" max="13,10,26"/>
         </region>
     </spawn>
@@ -204,11 +213,13 @@
     <item>glass</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" damage="2" material="wood"/>
-    <item amount="16" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="32" damage="2" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>18</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
