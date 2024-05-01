@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Bardo</name>
-<version>1.0.0</version>
+<version>1.1.0</version>
 <objective>Attackers must escort the payload to a designated delivery point while the Defenders try to stop them.</objective>
 <created>2024-04-13</created>
 <!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
@@ -22,7 +22,7 @@
     <alert after="24s" filter="only-red">Your spawn gates will open up in `c2 seconds`7!</alert>
     <alert after="25s" filter="only-red">Your spawn gates will open up in `c1 seconds`7!</alert>
     <alert after="26s" filter="only-red">`lYour spawn gates have opened up. Push the cart to the end to win!</alert>
-    <tip after="30s" every="2m">Golden apple and arrow spawners are located under both bridges!</tip>
+    <tip after="40s" every="2m">Golden apple &amp; arrow spawners are located under both bridges surrounded by `6Gold Blocks!</tip>
 </broadcasts>
 <teams>
     <team id="red" color="dark red" max="10">Attackers</team>
@@ -96,21 +96,21 @@
         <union id="gapple-spawners">
             <union id="first-gapple">
                 <point id="first-gap-point">-7.5,5,-12</point>
-                <cylinder id="first-gap-player" base="-7.5,5,-12" radius="3" height="3"/>
+                <cylinder id="first-gap-player" base="-7.5,5,-12" radius="5" height="3"/>
             </union>
             <union id="second-gapple">
                 <point id="second-gap-point">35.5,5,28.5</point>
-                <cylinder id="second-gap-player" base="35.5,5,28.5" radius="3" height="3"/>
+                <cylinder id="second-gap-player" base="35.5,5,28.5" radius="5" height="3"/>
             </union>
         </union>
         <union id="arrow-spawners">
             <union id="first-arrow">
                 <point id="first-arrow-point">-7.5,5,-12</point>
-                <cylinder id="first-arrow-player" base="-7.5,5,-12" radius="3" height="3"/>
+                <cylinder id="first-arrow-player" base="-7.5,5,-12" radius="5" height="3"/>
             </union>
             <union id="second-arrow">
                 <point id="second-arrow-point">35.5,5,28.5</point>
-                <cylinder id="second-arrow-player" base="35.5,5,28.5" radius="3" height="3"/>
+                <cylinder id="second-arrow-player" base="35.5,5,28.5" radius="5" height="3"/>
             </union>
         </union>
     </union>
@@ -172,7 +172,7 @@
     <trigger filter="first-checkpoint-completed" trigger="spawns-forward-1" scope="player"/>
     <trigger filter="second-checkpoint-completed" trigger="spawns-forward-2" scope="player"/>
 </actions>
-<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="60s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
+<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="50s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
   <payload id="first-checkpoint" name="Checkpoint A" location="23,4,-23" captured="first-captured-region" display-filter="first-spawn"/>
   <payload id="second-checkpoint" name="Checkpoint B" location="-3,2,-24" captured="second-captured-region" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
   <payload id="third-checkpoint" name="Checkpoint C" location="20,2,10" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
@@ -195,10 +195,10 @@
     <spawner spawn-region="second-gap-point" player-region="second-gap-player" delay="8s">
         <item material="golden apple" amount="1"/>
     </spawner>
-    <spawner spawn-region="first-arrow-point" player-region="first-arrow-player" delay="2s">
+    <spawner spawn-region="first-arrow-point" player-region="first-arrow-player" delay="3s">
         <item material="arrow" amount="3"/>
     </spawner>
-    <spawner spawn-region="second-arrow-point" player-region="second-arrow-player" delay="2s">
+    <spawner spawn-region="second-arrow-point" player-region="second-arrow-player" delay="3s">
         <item material="arrow" amount="3"/>
     </spawner>
 </spawners>
@@ -219,8 +219,8 @@
     <item amount="6" material="arrow"/>
 </kill-reward>
 <respawns>
-    <respawn delay="4s" filter="only-red"/>
-    <respawn delay="5s" filter="only-blue"/>
+    <respawn delay="5s" filter="only-red"/>
+    <respawn delay="7s" filter="only-blue"/>
 </respawns>
 <hunger>
     <depletion>off</depletion>
