@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.4.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
 <name>BalloonsDTM</name>
-<version>2.2.7</version>
+<variant id="halloween" world="halloween">Halloween</variant>
+<variant id="christmas" world="xmas">Xmas</variant> <!-- Preferred Christmas map -->
+<variant id="christmas-legacy-ocn" world="christmas-ocn">Christmas</variant>
+<version>2.3.1</version>
 <objective>Destroy the enemy team's monument!</objective>
 <gamemode>dtm</gamemode>
-<!-- Authors and Contributors -->
+<if variant="default">
+    <created>2014-05-20</created>
+</if>
+<if variant="halloween">
+    <created>2015-10-24</created>
+</if>
+<if variant="christmas">
+    <created>2021-12-02</created>
+</if>
+<if variant="christmas-legacy-ocn">
+    <created>2014-12-08</created>
+</if>
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- Pandaboy999 -->
 </authors>
@@ -14,96 +26,123 @@
     <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML Help"/> <!-- Dinner1111 -->
     <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Aesthetics"/> <!-- Stealth5061 -->
     <contributor uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="Renewables"/> <!-- BlockDrop74 -->
+    <if variant="christmas">
+        <contributor uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b" contribution="Christmas Edit"/> <!-- Tundren -->
+    </if>
 </contributors>
-<!-- Teams -->
+<constants>
+    <constant id="observers-kit" delete="true"/>
+</constants>
+<if variant="halloween">
+    <constant id="observers-kit">obs-pumpkin</constant>
+</if>
 <teams>
     <team id="red" color="dark red" max="12">Red</team>
     <team id="blue" color="blue" max="12">Blue</team>
 </teams>
-<!-- Kits -->
 <kits>
-    <kit id="spawn">
-        <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true" enchantment="dig speed:3">stone axe</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="5" amount="64">glass</item>
-        <item slot="6" amount="32">ladder</item>
-        <item slot="7" amount="1">golden apple</item>
-        <item slot="8" amount="64">bread</item>
-        <item slot="9" amount="16" damage="4">ink sack</item>
-        <item slot="28" amount="16">arrow</item>
-        <item slot="31" amount="32">wood</item>
-        <item slot="29" unbreakable="true" enchantment="dig speed:3">stone spade</item>
+    <kit id="obs-pumpkin">
+        <helmet material="jack o lantern"/>
+    </kit>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" enchantment="dig speed:3" material="stone axe"/>
+        <unless variant="christmas-legacy-ocn">
+            <item slot="4" amount="64" material="wood"/>
+            <item slot="5" amount="64" material="glass"/>
+            <item slot="7" material="golden apple"/>
+            <item slot="8" amount="64" material="bread"/>
+            <item slot="31" amount="32" material="wood"/>
+        </unless>
+        <if variant="christmas-legacy-ocn">
+            <item slot="4" amount="64" material="bread"/>
+            <item slot="5" amount="32" material="log"/>
+            <item slot="7" amount="64" material="glass"/>
+            <item slot="8" amount="2" material="golden apple"/>
+            <item slot="34" amount="64" material="glass"/>
+        </if>
+        <item slot="6" amount="32" material="ladder"/>
+        <item slot="9" amount="16" damage="4" material="ink sack"/>
+        <item slot="28" amount="16" material="arrow"/>
+        <item slot="29" unbreakable="true" enchantment="dig speed:3" material="stone spade"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" enchantment="protection projectile:2" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="5" amplifier="5">damage resistance</effect>
         <effect duration="5" amplifier="5">heal</effect>
     </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet unbreakable="true" color="0066cc">leather helmet</helmet>
-        <chestplate unbreakable="true" color="0066cc" enchantment="protection projectile:2">leather chestplate</chestplate>
-        <leggings unbreakable="true" color="0066cc">leather leggings</leggings>
-        <boots unbreakable="true" color="0066cc">leather boots</boots>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet unbreakable="true" color="cd0000">leather helmet</helmet>
-        <chestplate unbreakable="true" color="cd0000" enchantment="protection projectile:2">leather chestplate</chestplate>
-        <leggings unbreakable="true" color="cd0000">leather leggings</leggings>
-        <boots unbreakable="true" color="cd0000">leather boots</boots>
-    </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
-    <spawn team="blue" kit="blue-kit" yaw="-90">
-        <region><point>-22.5,9,-26.5</point></region>
+    <spawn team="red" kit="spawn-kit" yaw="90">
+        <regions>
+            <cylinder base="23.5,9,27.5" height="0" radius="2"/>
+        </regions>
     </spawn>
-    <spawn team="red" kit="red-kit" yaw="90">
-        <region><point>23.5,9,27.5</point></region>
+    <spawn team="blue" kit="spawn-kit" yaw="-90">
+        <regions>
+            <cylinder base="-22.5,9,-26.5" height="0" radius="2"/>
+        </regions>
     </spawn>
-    <default yaw="-90">
-        <region><point>0.4,63,0.5</point></region>
+    <default kit="${observers-kit}">
+        <regions>
+            <point>0.5,63,0.5</point>
+        </regions>
     </default>
 </spawns>
-<!-- Filters -->
 <filters>
-    <team id="blue-only">blue</team>
-    <team id="red-only">red</team>
+    <if variant="halloween">
+        <deny id="deny-spawner-break">
+            <material>mob spawner</material>
+        </deny>
+    </if>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
 </filters>
-<!-- Regions -->
 <regions>
-    <!-- Definitions -->
     <negative id="not-map">
         <rectangle id="map" min="-31,-57" max="31,57"/>
     </negative>
-    <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="-27,13,-21" max="-18,8,-33"/>
-        <cuboid id="red-spawn-protection" min="27,13,21" max="18,8,33"/>
-    </union>
+    <cuboid id="red-spawn" min="27,13,21" max="18,8,33"/>
+    <cuboid id="blue-spawn" min="-27,13,-21" max="-18,8,-33"/>
     <union id="enchantment-tables">
         <block>21,15,0</block>
         <block>-21,15,0</block>
     </union>
-    <!-- Applications -->
     <apply region="not-map" block="never" message="You may not build outside of the playing field!"/>
+    <apply region="red-spawn" block="never" message="Don't break the spawns!"/>
+    <apply region="blue-spawn" block="never" message="Don't break the spawns!"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter `4Red Team`c's spawn area!"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter `9Blue Team`c's spawn area!"/>
+    <if variant="halloween">
+        <apply block="deny-spawner-break"/>
+    </if>
     <apply region="enchantment-tables" block="never"/>
-    <apply region="spawn-protections" block="never" message="Don't break the spawns!"/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter `9Blue Team`c's spawn area!"/>
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter `4Red Team`c's spawn area!"/>
 </regions>
-<!-- Monuments -->
-<destroyables materials="obsidian" repairable="false" sparks="true">
-    <destroyable name="Monument" owner="blue">
-        <region><cuboid min="-1,20,-47" max="1,23,-49"/></region>
+<destroyables name="Monument" materials="obsidian">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="-1,20,49" max="1,23,47"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument" owner="red">
-        <region><cuboid min="-1,20,49" max="1,23,47"/></region>
+    <destroyable owner="blue">
+        <region>
+            <cuboid min="-1,20,-47" max="1,23,-49"/>
+        </region>
     </destroyable>
 </destroyables>
-<gamerules>
-    <doFireTick>false</doFireTick>
-</gamerules>
-<!-- Tool Repair & Itemremove -->
+<if variant="halloween">
+    <mobs>
+        <filter>
+            <any>
+                <spawn>spawner</spawn>
+                <spawn>custom</spawn>
+            </any>
+        </filter>
+    </mobs>
+</if>
 <toolrepair>
     <tool>diamond pickaxe</tool>
     <tool>bow</tool>
@@ -116,48 +155,54 @@
     <item>seeds</item>
     <item>flint</item>
     <item>obsidian</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>arrow</item>
     <item>coal</item>
     <item>redstone</item>
-    <item>351:4</item>
+    <item>ink sack:4</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>ladder</item>
     <item>bread</item>
-    <item>emerald</item>
+    <unless variant="christmas">
+        <item>emerald</item>
+    </unless>
+    <if variant="christmas,christmas-legacy-ocn">
+        <item>diamond</item>
+    </if>
     <item>dispenser</item>
     <item>burning furnace</item>
     <item>ink sack</item>
-</itemremove>
-<itemkeep>
-    <item>arrow</item>
     <item>golden apple</item>
-    <item>log</item>
-    <item>wood</item>
-    <item>glass</item>
-</itemkeep>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item amount="1">golden apple</item>
-        <item amount="16">wood</item>
-        <item amount="8">glass</item>
-        <item amount="8">gold nugget</item>
-        <item amount="1">exp bottle</item>
-        <item amount="8">arrow</item>
-    </kill-reward>
-</kill-rewards>
-<!-- Misc -->
+</itemremove>
 <crafting>
     <disable>leather chestplate</disable>
     <disable>leather helmet</disable>
     <disable>leather leggings</disable>
     <disable>leather boots</disable>
 </crafting>
+<kill-rewards>
+    <kill-reward>
+        <unless variant="christmas-legacy-ocn">
+            <item material="golden apple"/>
+            <item amount="16" material="wood"/>
+            <item amount="8" material="glass"/>
+        </unless>
+        <item amount="8" material="gold nugget"/>
+        <item material="exp bottle"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
 <timelock>on</timelock>
 <maxbuildheight>31</maxbuildheight>
-<!-- Tutorial -->
+<!-- include src="tutorial.xml"/ -->
 <!-- <tutorial>
     <stage title="Destroy the Monument">
         <teleport>
