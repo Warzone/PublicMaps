@@ -1,11 +1,11 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Brisked</name>
-<version>1.0.15</version>
+<version>1.0.14</version>
 <objective>Collect the most points in 10 minutes!</objective>
+<created>2015-03-14</created>
 <gamemode>koth</gamemode>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" />
-    <!-- mitchiii_ -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
 </authors>
 <rules>
     <rule>Fall damage is disabled!</rule>
@@ -21,83 +21,79 @@
 </broadcasts>
 <score>
     <kills>1</kills>
-    <box kit="return-reward" region="purple-depot" filter="only-purple">
+    <box region="purple-depot" filter="only-purple">
         <redeemables>
-            <item points="6">iron block</item>
-            <item points="12">gold block</item>
-            <item points="0">iron ingot</item>
-            <item points="0">gold ingot</item>
+            <item points="6">iron ingot</item>
+            <item points="12">gold ingot</item>
         </redeemables>
     </box>
-    <box kit="return-reward" region="orange-depot" filter="only-orange">
+    <box region="orange-depot" filter="only-orange">
         <redeemables>
-            <item points="6">iron block</item>
-            <item points="12">gold block</item>
-            <item points="0">iron ingot</item>
-            <item points="0">gold ingot</item>
+            <item points="6">iron ingot</item>
+            <item points="12">gold ingot</item>
         </redeemables>
     </box>
 </score>
 <time>600</time>
 <teams>
     <team id="purple-team" color="dark purple" max="16" max-overfill="20">Purple</team>
-    <team id="orange-team" color="gold"        max="16" max-overfill="20">Orange</team>
+    <team id="orange-team" color="gold" max="16" max-overfill="20">Orange</team>
 </teams>
 <kits>
     <kit id="all">
         <effect duration="oo">night vision</effect>
     </kit>
     <kit id="spawn" parents="all">
-        <item slot="0" unbreakable="true"    material="stone sword" />
-        <item slot="1" unbreakable="true"    material="bow" />
-        <item slot="2" amount="8" damage="1" material="leaves" />
-        <item slot="5"                       material="clay brick" locked="true" name="`cYou are not currently holding any tokens!" lore="`r`7Gain control of the hill, then collect tokens to gain extra points!" />
-        <item slot="7"                       material="golden apple" />
-        <item slot="8" amount="18"           material="arrow" />
-        <chestplate    unbreakable="true"    material="gold chestplate" locked="true" />
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="8" damage="1" material="leaves"/>
+        <item slot="5" material="clay brick" locked="true" name="`cYou are not currently holding any tokens!" lore="`r`7Gain control of the hill, then collect tokens to gain extra points!"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="18" material="arrow"/>
+        <chestplate unbreakable="true" material="gold chestplate" locked="true"/>
         <effect duration="8s" amplifier="10">heal</effect>
         <effect duration="8s" amplifier="10">damage resistance</effect>
-        <clear />
+        <clear/>
     </kit>
     <kit id="purple-kit" parents="spawn">
-        <leggings unbreakable="true" color="FF00EE" locked="true" material="leather leggings" />
-        <boots    unbreakable="true" color="FF00EE" locked="true" material="leather boots" />
+        <leggings unbreakable="true" color="FF00EE" locked="true" material="leather leggings"/>
+        <boots unbreakable="true" color="FF00EE" locked="true" material="leather boots"/>
     </kit>
     <kit id="orange-kit" parents="spawn">
-        <leggings unbreakable="true" color="FF7200" locked="true" material="leather leggings" />
-        <boots    unbreakable="true" color="FF7200" locked="true" material="leather boots" />
+        <leggings unbreakable="true" color="FF7200" locked="true" material="leather leggings"/>
+        <boots unbreakable="true" color="FF7200" locked="true" material="leather boots"/>
     </kit>
     <kit id="return-reward" force="true">
-        <item slot="5"                    locked="true" material="clay brick" name="`cYou are not currently holding any tokens!" lore="`r`7Gain control of the hill, then collect tokens to gain extra points!" />
-        <helmet                                         material="air" />
-        <chestplate    unbreakable="true" locked="true" material="gold chestplate" enchantment="protection environmental:1" />
-        <boots         unbreakable="true" locked="true" material="iron boots" />
+        <item slot="5" locked="true" material="clay brick" name="`cYou are not currently holding any tokens!" lore="`r`7Gain control of the hill, then collect tokens to gain extra points!"/>
+        <helmet material="air"/>
+        <chestplate unbreakable="true" locked="true" material="gold chestplate" enchantment="protection environmental:1"/>
+        <boots unbreakable="true" locked="true" material="iron boots"/>
     </kit>
     <kit id="give-black" force="true">
-        <item slot="5"                    locked="true" material="gold ingot" name="`aYou are currently holding a `6Gold Token`a! `8(`9+12 points`8)" lore="`r`7Return to your team's `lscorebox `r`7located under your spawn!" />
-        <helmet        damage="1"         locked="true" material="gold block" />
-        <chestplate    unbreakable="true" locked="true" material="chainmail chestplate" />
-        <boots         unbreakable="true" locked="true" material="gold boots" />
+        <item slot="5" locked="true" material="gold ingot" name="`aYou are currently holding a `6Gold Token`a! `8(`9+12 points`8)" lore="`r`7Return to your team's `lscorebox `r`7located under your spawn!"/>
+        <helmet damage="1" locked="true" material="gold block"/>
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" locked="true" material="gold boots"/>
     </kit>
     <kit id="give-dark-grey" force="true">
-        <item slot="5"                    locked="true" material="iron ingot" name="`aYou are currently holding an `7Iron Token`a! `8(`9+6 points`8)" lore="`r`7Return to your team's `lscorebox `r`7located under your spawn!" />
-        <helmet        damage="0"         locked="true" material="iron block" />
-        <chestplate    unbreakable="true" locked="true" material="chainmail chestplate" />
-        <boots         unbreakable="true" locked="true" material="gold boots" />
+        <item slot="5" locked="true" material="iron ingot" name="`aYou are currently holding an `7Iron Token`a! `8(`9+6 points`8)" lore="`r`7Return to your team's `lscorebox `r`7located under your spawn!"/>
+        <helmet damage="0" locked="true" material="iron ingot"/>
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" locked="true" material="gold boots"/>
     </kit>
 </kits>
 <spawns>
     <spawns team="purple-team" kit="purple-kit">
-        <spawn region="purple-spawn" yaw="-90" />
-        <spawn region="purple-spawn" yaw="180" />
+        <spawn region="purple-spawn" yaw="-90"/>
+        <spawn region="purple-spawn" yaw="180"/>
     </spawns>
     <spawns team="orange-team" kit="orange-kit">
-        <spawn region="orange-spawn" yaw="90" />
-        <spawn region="orange-spawn" yaw="0" />
+        <spawn region="orange-spawn" yaw="90"/>
+        <spawn region="orange-spawn" yaw="0"/>
     </spawns>
     <default yaw="-45" kit="all">
         <regions>
-            <cylinder base="-27.5,74.5,-106.5" radius="3" height="0" />
+            <cylinder base="-27.5,74.5,-106.5" radius="3" height="0"/>
         </regions>
     </default>
 </spawns>
@@ -105,24 +101,24 @@
     <team id="only-orange">orange-team</team>
     <team id="only-purple">purple-team</team>
     <all id="orange-box">
-        <filter id="only-orange" />
+        <filter id="only-orange"/>
         <any>
             <wearing>
-                <item material="gold block" />
+                <item material="gold block"/>
             </wearing>
             <wearing>
-                <item material="iron block" />
+                <item material="iron block"/>
             </wearing>
         </any>
     </all>
     <all id="purple-box">
-        <filter id="only-purple" />
+        <filter id="only-purple"/>
         <any>
             <wearing>
-                <item material="gold block" />
+                <item material="gold block"/>
             </wearing>
             <wearing>
-                <item material="iron block" />
+                <item material="iron block"/>
             </wearing>
         </any>
     </all>
@@ -132,11 +128,11 @@
             <material>tnt</material>
         </any>
         <not>
-            <void />
+            <void/>
         </not>
     </all>
     <any id="objective-inclusive-nw">
-        <filter id="objective-single-nw" />
+        <filter id="objective-single-nw"/>
         <not>
             <any>
                 <objective team="orange-team">hill-nw</objective>
@@ -145,7 +141,7 @@
         </not>
     </any>
     <any id="objective-inclusive-se">
-        <filter id="objective-single-se" />
+        <filter id="objective-single-se"/>
         <not>
             <any>
                 <objective team="orange-team">hill-se</objective>
@@ -161,41 +157,43 @@
     <objective id="objective-single-nw" any="false">hill-nw</objective>
 </filters>
 <regions>
-    <apply block="only-leaves" message="You may not interact with this material" />
+    <apply block="only-leaves" message="You may not interact with this material"/>
     <!-- Scorebox regions -->
     <union id="team-depots">
-        <cuboid id="orange-depot" min="33,40,-148" max="29,42,-144" />
-        <cuboid id="purple-depot" min="-69,40,-46" max="-65,42,-50" />
+        <cuboid id="orange-depot" min="33,40,-148" max="29,42,-144"/>
+        <cuboid id="purple-depot" min="-69,40,-46" max="-65,42,-50"/>
     </union>
     <!-- Team spawn points -->
     <point id="purple-spawn">-66.5,48.5,-47.5</point>
     <point id="orange-spawn">31.5,48.5,-145.5</point>
     <!-- Hill capture region -->
-    <cylinder id="hill-se-capture" base="-1.5,29,-80.5"   radius="5" height="3" />
-    <cylinder id="hill-nw-capture" base="-33.5,29,-112.5" radius="5" height="3" />
+    <cylinder id="hill-se-capture" base="-1.5,29,-80.5"   radius="5" height="3"/>
+    <cylinder id="hill-nw-capture" base="-33.5,29,-112.5" radius="5" height="3"/>
     <!-- Hill progress region -->
-    <cylinder id="hill-se-progress" base="-1.5,21,-80.5"   radius="7" height="15" />
-    <cylinder id="hill-nw-progress" base="-33.5,21,-112.5" radius="7" height="15" />
+    <cylinder id="hill-se-progress" base="-1.5,21,-80.5"   radius="7" height="15"/>
+    <cylinder id="hill-nw-progress" base="-33.5,21,-112.5" radius="7" height="15"/>
     <!-- Hill captured region -->
-    <cuboid id="se-jump-complete" min="4,20,-75"    max="29,38,-50" />
-    <cuboid id="nw-jump-complete" min="-40,20,-119" max="-65,38,-144" />
-    <cylinder id="wool-island-complete" base="-17.5,19,-96.5" radius="4" height="19" />
+    <cuboid id="se-jump-complete" min="4,20,-75"    max="29,38,-50"/>
+    <cuboid id="nw-jump-complete" min="-40,20,-119" max="-65,38,-144"/>
+    <cylinder id="wool-island-complete" base="-17.5,19,-96.5" radius="4" height="19"/>
     <!-- Jump pad regions -->
-    <cylinder id="nw-pad"  base="-55.5,31,-134.5" radius="1.2" height="1" />
-    <cylinder id="ne-pad"  base="9.5,29,-123.5"   radius="1.2" height="1" />
-    <cylinder id="se-pad"  base="-44.5,29,-69.5"  radius="1.2" height="1" />
-    <cylinder id="sw-pad"  base="20.5,31,-58.5"   radius="1.2" height="1" />
-    <cylinder id="mid-pad" base="-17.5,26,-96.5"  radius="1"   height="1" />
+    <cylinder id="nw-pad"  base="-55.5,31,-134.5" radius="1.2" height="1"/>
+    <cylinder id="ne-pad"  base="9.5,29,-123.5"   radius="1.2" height="1"/>
+    <cylinder id="se-pad"  base="-44.5,29,-69.5"  radius="1.2" height="1"/>
+    <cylinder id="sw-pad"  base="20.5,31,-58.5"   radius="1.2" height="1"/>
+    <cylinder id="mid-pad" base="-17.5,26,-96.5"  radius="1"   height="1"/>
     <!-- Apply impulse to players -->
-    <apply velocity="@-0.7,2.3,0.7" region="ne-pad" />
-    <apply velocity="@0.7,2.3,-0.7" region="se-pad" />
-    <apply velocity="@2,2.3,2"      region="nw-pad"  filter="objective-inclusive-nw" />
-    <apply velocity="@-2,2.3,-2"    region="sw-pad"  filter="objective-inclusive-se" />
-    <apply velocity="@0,2.5,0"      region="mid-pad" filter="objective-exclusive" />
+    <apply velocity="@-0.7,2.3,0.7" region="ne-pad"/>
+    <apply velocity="@0.7,2.3,-0.7" region="se-pad"/>
+    <apply velocity="@2,2.3,2"      region="nw-pad"  filter="objective-inclusive-nw"/>
+    <apply velocity="@-2,2.3,-2"    region="sw-pad"  filter="objective-inclusive-se"/>
+    <apply velocity="@0,2.5,0"      region="mid-pad" filter="objective-exclusive"/>
     <!-- Apply skull kits to players -->
-    <apply kit="give-dark-grey" region="wool-island-complete" filter="objective-single-se" />
-    <apply kit="give-dark-grey" region="wool-island-complete" filter="objective-single-nw" />
-    <apply kit="give-black"     region="wool-island-complete" filter="objective-exclusive" />
+    <apply kit="give-dark-grey" region="wool-island-complete" filter="objective-single-se"/>
+    <apply kit="give-dark-grey" region="wool-island-complete" filter="objective-single-nw"/>
+    <apply kit="give-black"     region="wool-island-complete" filter="objective-exclusive"/>
+    <apply kit="return-reward" region="purple-depot" filter="only-purple"/>
+    <apply kit="return-reward" region="orange-depot" filter="only-orange"/>
 </regions>
 <falling-blocks>
     <rule>
@@ -213,27 +211,27 @@
         </sticky>
     </rule>
 </falling-blocks>
-<control-points capture-time="9s" points="0.5" points-growth="480" capture-rule="lead" show-progress="true" required="false" decay="0.1" recovery-rate="0">
-    <control-point id="hill-nw" name="North West Hill" capture="hill-nw-capture" progress="hill-nw-progress" captured="nw-jump-complete" />
-    <control-point id="hill-se" name="South East Hill" capture="hill-se-capture" progress="hill-se-progress" captured="se-jump-complete" />
+<control-points capture-time="12s" points="0.5" points-growth="480" capture-rule="lead" show-progress="true" required="false" decay="0.1">
+    <control-point id="hill-nw" name="North West Hill" capture="hill-nw-capture" progress="hill-nw-progress" captured="nw-jump-complete"/>
+    <control-point id="hill-se" name="South East Hill" capture="hill-se-capture" progress="hill-se-progress" captured="se-jump-complete"/>
 </control-points>
 <portals>
-    <portal region="team-depots" destination="purple-spawn" filter="only-purple" yaw="-90" pitch="0" />
-    <portal region="team-depots" destination="orange-spawn" filter="only-orange" yaw="90"  pitch="0" />
+    <portal region="team-depots" destination="purple-spawn" filter="only-purple" yaw="-90" pitch="0"/>
+    <portal region="team-depots" destination="orange-spawn" filter="only-orange" yaw="90"  pitch="0"/>
 </portals>
 <proximity-alarms>
     <proximity-alarm region="wool-island-complete" flare-radius="6">
         <detect>
             <any>
                 <all>
-                    <filter id="only-orange" />
+                    <filter id="only-orange"/>
                     <any>
                         <objective team="orange-team">hill-nw</objective>
                         <objective team="orange-team">hill-se</objective>
                     </any>
                 </all>
                 <all>
-                    <filter id="only-purple" />
+                    <filter id="only-purple"/>
                     <any>
                         <objective team="purple-team">hill-nw</objective>
                         <objective team="purple-team">hill-se</objective>
@@ -244,17 +242,20 @@
     </proximity-alarm>
 </proximity-alarms>
 <killreward>
-    <item amount="6" material="arrow" />
-    <item damage="1" amount="3" material="leaves" />
-</killreward>
-<killreward>
-    <item material="golden apple" />
+    <item amount="6" material="arrow"/>
+    <item damage="1" amount="3" material="leaves"/>
 </killreward>
 <killreward>
     <filter>
-        <kill-streak count="5" repeat="true" />
+        <kill-streak count="2" repeat="true"/>
     </filter>
-    <item material="tnt" />
+    <item material="golden apple"/>
+</killreward>
+<killreward>
+    <filter>
+        <kill-streak count="5" repeat="true"/>
+    </filter>
+    <item material="tnt"/>
 </killreward>
 <itemremove>
     <item>stone sword</item>
@@ -296,4 +297,4 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
-</map> 
+</map>
