@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <map proto="1.3.5">
 <name>Brisk</name>
-<version>1.2.5</version>
+<version>1.2.6</version>
 <objective>Get the most points by holding the hill!</objective>
+<created>2014-07-04</created>
 <gamemode>koth</gamemode>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- minimitch0199 -->
@@ -14,8 +15,8 @@
     <rule>Fall damage is disabled!</rule>
 </rules>
 <teams>
-    <team color="dark red" max="10">Red</team>
-    <team color="blue" max="10">Blue</team>
+    <team color="dark red" max="10" max-overfill="15">Red</team>
+    <team color="blue" max="10" max-overfill="15">Blue</team>
 </teams>
 <kits>
     <kit name="all">
@@ -162,9 +163,10 @@
     <item>golden apple</item>
 </killreward>
 <killreward>
-    <kill-streak count="3">
-        <item damage="1" amount="3">leaves</item>
-    </kill-streak>
+    <filter>
+        <kill-streak count="3"/>
+    </filter>
+    <item amount="3">leaves</item>
 </killreward>
 <disabledamage>
     <damage>fall</damage>
