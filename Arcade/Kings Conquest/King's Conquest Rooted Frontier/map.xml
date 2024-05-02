@@ -1,0 +1,47 @@
+<map proto="1.4.2">
+<name>King's Conquest: Rooted Frontier</name>
+<version>1.1.0</version>
+<include id="kings-conquest"/>
+<constants>
+    <constant id="team-size">24</constant>
+    <constant id="team-one-spawn">-8.5,18,-73.5</constant>
+    <constant id="team-one-yaw">0</constant>
+    <constant id="team-two-spawn">-8.5,18,74.5</constant>
+    <constant id="team-two-yaw">180</constant>
+</constants>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
+</authors>
+<spawns>
+    <default yaw="-90">
+        <regions>
+            <cylinder base="-61.5,38,0.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <deny id="deny-world">
+        <all>
+            <not>
+                <any>
+                    <cause>player</cause>
+                    <cause>explosion</cause>
+                </any>
+            </not>
+            <any>
+                <material>double plant</material>
+                <material>long grass</material>
+            </any>
+        </all>
+    </deny>
+</filters>
+<regions>
+    <apply block="deny-world" block-physics="deny-world"/>
+</regions>
+<itemremove>
+    <item>double plant</item>
+    <item>seeds</item>
+</itemremove>
+<maxbuildheight>38</maxbuildheight>
+<timelock>on</timelock>
+</map>

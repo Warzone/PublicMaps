@@ -1,0 +1,54 @@
+<map proto="1.4.2">
+<name>King's Conquest: Proelium</name>
+<version>1.1.0</version>
+<include id="kings-conquest"/>
+<constants>
+    <constant id="team-size">24</constant>
+    <constant id="team-one-spawn">3.5,21,-55.5</constant>
+    <constant id="team-one-yaw">180</constant>
+    <constant id="team-two-spawn">3.5,21,-234.5</constant>
+    <constant id="team-two-yaw">0</constant>
+</constants>
+<authors>
+    <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- PepsiDog -->
+</authors>
+<contributors>
+    <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="Name and original XML beautification"/> <!-- dinner1111 -->
+    <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0" contribution="Original XML refinification"/> <!-- ElectroidFilms -->
+    <contributor uuid="e37f18f1-117b-47db-8806-6d3a0854b518" contribution="Original XML helpification"/> <!-- Chicky -->
+    <contributor uuid="d341db34-f1ab-406e-b290-da6a6703565e" contribution="Minor map help"/> <!-- CheetoPuf -->
+    <contributor uuid="c1ea235d-4224-46e4-ba4a-638838f6d039" contribution="House design inspiration"/> <!-- Daffy_Duck01 -->
+</contributors>
+<spawns>
+    <default yaw="90">
+        <regions>
+            <cylinder base="-119,44,-145" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <deny id="deny-world">
+        <all>
+            <not>
+                <any>
+                    <cause>player</cause>
+                    <cause>explosion</cause>
+                </any>
+            </not>
+            <any>
+                <material>double plant</material>
+                <material>long grass</material>
+            </any>
+        </all>
+    </deny>
+</filters>
+<regions>
+    <apply block="deny-world" block-physics="deny-world"/>
+</regions>
+<itemremove>
+    <item>double plant</item>
+    <item>seeds</item>
+</itemremove>
+<maxbuildheight>38</maxbuildheight>
+<timelock>on</timelock>
+</map>

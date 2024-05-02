@@ -1,0 +1,52 @@
+<map proto="1.4.2">
+<name>King's Conquest: Easterly Meadows</name>
+<version>1.1.0</version>
+<include id="kings-conquest"/>
+<constants>
+    <constant id="team-size">24</constant>
+    <constant id="team-one-spawn">114,14,10</constant>
+    <constant id="team-one-yaw">90</constant>
+    <constant id="team-two-spawn">-102,14,10</constant>
+    <constant id="team-two-yaw">-90</constant>
+</constants>
+<authors>
+    <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerorca -->
+</authors>
+<spawns>
+    <default yaw="-180">
+        <regions>
+            <cylinder base="6.5,64.5,84.5" radius="1" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <deny id="deny-world">
+        <all>
+            <not>
+                <any>
+                    <cause>player</cause>
+                    <cause>explosion</cause>
+                </any>
+            </not>
+            <any>
+                <material>double plant</material>
+                <material>long grass</material>
+            </any>
+        </all>
+    </deny>
+</filters>
+<regions>
+    <apply block="deny-world" block-physics="deny-world"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item material="egg" amount="3" grenade="true" grenade-power="1.2" grenade-fire="false" grenade-destroy="false"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>double plant</item>
+    <item>seeds</item>
+</itemremove>
+<maxbuildheight>36</maxbuildheight>
+<timelock>on</timelock>
+</map>
