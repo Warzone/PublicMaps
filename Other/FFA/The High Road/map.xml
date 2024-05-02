@@ -1,90 +1,130 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>The High Road</name>
-<version>1.0.5</version>
+<variant id="cummins" world="cummins" override="true">Cummins Turbo Diesel</variant>
+<version>1.0.8</version>
 <objective>Get the most kills in 8 minutes!</objective>
-<time>8m</time>
-<authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" /><!-- AtlasGames -->
-</authors>
+<time result="score">8m</time>
+<unless variant="cummins">
+    <authors>
+        <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
+    </authors>
+</unless>
+<if variant="cummins">
+    <phase>development</phase>
+    <authors>
+        <author uuid="57c4813e-ecc2-4aee-9479-8d58991d1a0c"/> <!-- CincoDeMayo -->
+        <author uuid="556fd070-7c92-4742-a061-c352b30728f8"/> <!-- PhantomOrion -->
+        <author uuid="76b4cc36-f899-4c42-8ad5-f9ba48ffd4c4"/> <!-- slayersource -->
+    </authors>
+    <contributors>
+        <contributor uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Original map creator"/> <!-- AtlasGames -->
+        <contributor uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
+        <contributor uuid="c657a674-09cb-4d42-adff-c00e2d92743e"/> <!-- Inharu -->
+        <contributor uuid="3947c68f-9050-4676-ad25-62eb2b4d79ba"/> <!-- Rosstheboss1211 -->
+    </contributors>
+</if>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
 <gamemode>arcade</gamemode>
 <rage/>
-<players min="2" max="24" max-overfill="32"/>
+<players min="2" max="24"/>
 <kits>
     <kit id="spawn-kit">
-        <double-jump />
-        <item slot="0" enchantments="damage_all:10" material="diamond sword"/>
-        <item slot="1" enchantments="arrow_damage:10" material="bow"/>
+        <double-jump/>
+        <item slot="0" unbreakable="true" material="diamond sword">
+            <enchantment>sharpness</enchantment>
+        </item>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>power</enchantment>
+            <enchantment>sharpness</enchantment>
+        </item>
         <item slot="2" amount="2" material="arrow"/>
-        <chestplate unbreakable="true" material="iron chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings"/>
-        <boots unbreakable="true" material="iron boots"/>
-        <effect duration="3" amplifier="10">resistance</effect>
+        <chestplate locked="true" unbreakable="true" material="iron chestplate"/>
+        <leggings locked="true" unbreakable="true" material="chainmail leggings"/>
+        <boots locked="true" unbreakable="true" material="iron boots"/>
+        <effect duration="3s" amplifier="255">resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="speed-kit" force="true">
-        <boots unbreakable="true" material="gold boots"/>
+        <boots locked="true" unbreakable="true" material="gold boots"/>
         <effect amplifier="2">speed</effect>
     </kit>
     <kit id="super-speed-kit" force="true">
-        <helmet unbreakable="true" material="gold helmet"/>
+        <helmet locked="true" unbreakable="true" material="gold helmet"/>
         <effect amplifier="3">speed</effect>
     </kit>
-    <!-- <kit id="kill-reward">
-        <effect duration="3" amplifier="3">regeneration</effect>
-    </kit> -->
 </kits>
 <spawns>
     <default>
         <region yaw="180">
-            <point>29.5, 61, -25.5</point>
+            <point>29.5,61,-25.5</point>
         </region>
     </default>
     <spawn kit="spawn-kit" spread="true">
         <regions>
-            <point yaw="90">29.5, 61, -25.5</point>
-            <!-- <point yaw="-140">19.5, 49, -9.5</point> -->
-            <point yaw="-120">31.5, 47, -21.5</point>
-            <point yaw="40">27.5, 55, -49.5</point>
-            <point yaw="50">13.5, 62, -40.5</point>
-            <point yaw="-130">11.5, 65, -18.5</point>
-            <point yaw="150">9.5, 70, 9.5</point>
-            <point yaw="-140">-10.5, 73, 11.5</point>
-            <point yaw="-150">-28.5, 78, 9.5</point>
-            <point yaw="-130">-52.5, 82, -7.5</point>
-            <!-- <point yaw="170">-57.5, 75, -21.5</point> -->
-            <point yaw="-140">-48.5, 64, -61.5</point>
-            <point yaw="-50">-34, 77, -77.5</point>
-            <point yaw="-45">-0.5, 72, -83.5</point>
-            <point yaw="45">23, 72, -86</point>
-            <point yaw="0">41.5, 85, -82.5</point>
-            <point yaw="90">53.5, 87, -72.5</point>
-            <point yaw="90">53, 90, -65</point>
-            <point yaw="90">51, 84, -57</point>
-            <point yaw="130">34.5, 77, -37.5</point>
-            <point yaw="-90">-46.5, 80, -59.5</point>
-            <point yaw="-126">-36.5, 75, -57.5</point>
-            <point yaw="-60">14, 75, -56</point>
-            <point yaw="90">11, 81, -80</point>
-            <point yaw="90">55, 98, -68</point>
+            <point yaw="90">29.5,61,-25.5</point>
+            <point yaw="-140">19.5,49,-9.5</point>
+            <point yaw="-120">31.5,47,-21.5</point>
+            <point yaw="40">27.5,55,-49.5</point>
+            <point yaw="50">13.5,62,-40.5</point>
+            <point yaw="-130">11.5,65,-18.5</point>
+            <point yaw="150">9.5,70,9.5</point>
+            <point yaw="-140">-10.5,73,11.5</point>
+            <point yaw="-150">-28.5,78,9.5</point>
+            <point yaw="-130">-52.5,82,-7.5</point>
+            <point yaw="170">-57.5,75,-21.5</point>
+            <point yaw="-140">-48.5,64,-61.5</point>
+            <point yaw="-50">-34,77,-77.5</point>
+            <unless variant="cummins">
+                <point yaw="-45">-0.5,72,-83.5</point>
+                <point yaw="45">23,72,-86</point>
+            </unless>
+            <if variant="cummins">
+                <point yaw="-45">-1.5,71,-80.5</point>
+                <point yaw="-45">13.5,71,-83.5</point>
+            </if>
+            <point>41.5,85,-82.5</point>
+            <unless variant="cummins">
+                <point yaw="90">53.5,87,-72.5</point>
+                <point yaw="90">53,90,-65</point>
+            </unless>
+            <if variant="cummins">
+                <point yaw="45">53.5,87,-72.5</point>
+                <point yaw="90">56,85,-63</point>
+            </if>
+            <point yaw="90">51,84,-57</point>
+            <point yaw="130">34.5,77,-37.5</point>
+            <point yaw="-90">-46.5,80,-59.5</point>
+            <point yaw="-126">-36.5,75,-57.5</point>
+            <unless variant="cummins">
+                <point yaw="-60">14,75,-56</point>
+                <point yaw="90">11,81,-80</point>
+                <point yaw="90">55,98,-68</point>
+            </unless>
+            <if variant="cummins">
+                <point yaw="-60">17.5,76,-53.5</point>
+                <point>23.5,82,-73.5</point>
+                <point yaw="30">33,84,-79</point>
+            </if>
         </regions>
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-access">
-        <material>trap door</material>
-    </not>
+    <deny id="deny-access">
+        <any>
+            <material>trap door</material>
+            <material>anvil</material>
+        </any>
+    </deny>
 </filters>
 <regions>
     <cuboid id="j-1" min="-22,66,10" max="-19,67,13"/>
     <cuboid id="j-2" min="22,71,-83" max="25,72,-80"/>
     <cuboid id="j-3" min="39,48,-26" max="42,49,-23"/>
-    <apply velocity="0.1, 2, -0.2" region="j-1"/>
-    <apply velocity="0.2, 2, 0.2" region="j-2"/>
-    <apply velocity="-0.4, 2, 0" region="j-3"/>
-    <apply use="deny-access"/>
-    <apply block="never"/>
+    <apply velocity="0.1,2,-0.2" region="j-1"/>
+    <apply velocity="0.2,2,0.2" region="j-2"/>
+    <apply velocity="-0.4,2,0" region="j-3"/>
+    <apply block="never" use="deny-access"/>
 </regions>
 <score>
     <kills>1</kills>
@@ -108,21 +148,18 @@
 <kill-rewards>
     <kill-reward>
         <item material="arrow"/>
-        <item slot="7" amount="1" name="Kill Streak" material="emerald"/>
-        <item slot="8" amount="1" name="Kill Counter" material="nether star"/>
-        <!-- <kit id="kill-reward"/> -->
+        <item name="Kill Streak" material="emerald"/>
+        <item name="Kill Counter" material="nether star"/>
     </kill-reward>
-    <kill-reward>
+    <kill-reward kit="speed-kit">
         <filter>
             <kill-streak count="3"/>
         </filter>
-        <kit id="speed-kit"/>
     </kill-reward>
-    <kill-reward>
+    <kill-reward kit="super-speed-kit">
         <filter>
             <kill-streak count="10"/>
         </filter>
-        <kit id="super-speed-kit"/>
     </kill-reward>
 </kill-rewards>
 <timelock>off</timelock>
