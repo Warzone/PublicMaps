@@ -1,8 +1,38 @@
 <map proto="1.4.2">
 <name>Aureola</name>
-<version>1.1.4</version>
-<objective>Be the team with the most points after 10 minutes</objective>
-<gamemode>tdm</gamemode>
+<variant id="rage" world="rage">Rage</variant>
+<variant id="kotf" world="kotf">KotF</variant>
+<version>1.2.0</version>
+<if variant="default">
+    <objective>Be the team with the most points after 10 minutes</objective>
+    <gamemode>tdm</gamemode>
+    <time>10m</time>
+    <score>
+        <kills>1</kills>
+    </score>
+    <constant id="spawn-filter-value" delete="true"/>
+</if>
+<if variant="rage">
+    <objective>Eliminate the other team before the time runs out!</objective>
+    <gamemode>br</gamemode>
+    <gamemode>arcade</gamemode>
+    <time>5m</time>
+    <blitz>
+        <lives>1</lives>
+        <broadcastLives>false</broadcastLives>
+    </blitz>
+    <rage/>
+    <respawn auto="true"/>
+    <constant id="spawn-filter-value" delete="true"/>
+</if>
+<if variant="kotf">
+    <include id="kotf"/>
+    <constant id="score">180</constant>
+    <objective>Hold the flag for ${score} seconds to win!</objective>
+    <constant id="damage-resistance">3s</constant>
+    <constant id="flag-respawn-timer">15s</constant>
+    <constant id="spawn-filter-value">has-flag</constant>
+</if>
 <authors>
     <author uuid="91295196-9cd2-4963-b7ec-afd1a110edbe" contribution="Map design and layout, XML"/> <!-- PandaBattalion -->
     <author uuid="e39fe3bc-b80e-46d2-81fe-d18042471989" contribution="Building help"/> <!-- EnarRikardz -->
@@ -16,90 +46,103 @@
     <team id="red" color="dark red" max="13" max-overfill="17">Red</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" amount="2" material="golden apple"/>
-        <item slot="28" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" enchantment="protection projectile" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
-        <boots unbreakable="true" enchantment="protection fall:2" team-color="true" material="leather boots"/>
-        <effect duration="3" amplifier="2">heal</effect>
-        <effect duration="3">damage resistance</effect>
-        <effect duration="2">increase damage</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
+    <unless variant="kotf">
+        <kit id="spawn-kit">
+            <if variant="default">
+                <item slot="0" unbreakable="true" material="stone sword"/>
+                <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+                <item slot="2" amount="2" material="golden apple"/>
+                <item slot="28" material="arrow"/>
+            </if>
+            <if variant="rage">
+                <item slot="0" unbreakable="true" enchantment="damage all:10" material="iron sword"/>
+                <item slot="1" unbreakable="true" enchantment="arrow damage:10" material="bow"/>
+                <item slot="2" material="arrow"/>
+            </if>
+            <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
+            <chestplate locked="true" unbreakable="true" team-color="true" enchantment="protection projectile" material="leather chestplate"/>
+            <leggings locked="true" unbreakable="true" team-color="true" material="leather leggings"/>
+            <boots locked="true" unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
+            <effect duration="3" amplifier="2">heal</effect>
+            <effect duration="3">damage resistance</effect>
+            <effect duration="2">increase damage</effect>
+            <game-mode>adventure</game-mode>
+        </kit>
+    </unless>
+    <if variant="kotf">
+        <kit id="spawn-kit" parent="base-kit">
+            <action>
+                <replace-item ignore-metadata="true">
+                    <find material="chainmail leggings"/>
+                    <replace unbreakable="true" enchantment="projectile_protection:2" material="chainmail leggings"/>
+                </replace-item>
+                <replace-item ignore-metadata="true">
+                    <find material="iron boots"/>
+                    <replace unbreakable="true" enchantment="feather_falling" material="iron boots"/>
+                </replace-item>
+            </action>
+            <effect duration="2s">strength</effect>
+        </kit>
+    </if>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit" angle="158.5,7,-1.5">
+    <spawn team="red" kit="spawn-kit" angle="158.5,7,-1.5" filter="${spawn-filter-value}">
         <regions>
             <cuboid min="154.5,6,-5.5" max="156.5,7,-3.5"/>
         </regions>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" angle="212.5,7,52.5">
+    <spawn team="blue" kit="spawn-kit" angle="212.5,7,52.5" filter="${spawn-filter-value}">
         <regions>
             <cuboid min="214.5,6,54.5" max="216.5,7,56.5"/>
         </regions>
     </spawn>
     <default angle="126.5,33,25.5">
         <regions>
-            <cuboid min="120.5,32,24.5" max="122.5,33,26.5"/>
+            <cuboid min="120.5,32,24.5" max="122.5,32,26.5"/>
         </regions>
     </default>
 </spawns>
 <regions>
-    <apply block="never"/>
+    <apply block="never" use="never"/>
 </regions>
-<time>10m</time>
-<score>
-    <kills>1</kills>
-</score>
-<toolrepair>
-    <tool>bow</tool>
-    <tool>stone sword</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<!-- <tutorial>
-    <stage title="Team Deathmatch">
-        <message>
-            <line>`rThis is a `6`lTeam Deathmatch `rmap</line>
-            <line>The objective is to have the most points at the end of 10 minutes</line>
-        </message>
-        <teleport>
-            <point angle="185.5,15,25.5">185.5,50,25.5</point>
-        </teleport>
-    </stage>
-    <stage title="Blue Spawn">
-        <message>
-            <line>`rThis is where the `9Blue `rTeam spawns</line>
-        </message>
-        <teleport>
-            <point angle="212.5,7,52.5">209.5,10,49.5</point>
-        </teleport>
-    </stage>
-    <stage title="Red Spawn">
-        <message>
-            <line>`rThis is where the `4Red `rTeam spawns</line>
-        </message>
-        <teleport>
-            <point angle="158.5,7,-1.5">161.5,10,1.5</point>
-        </teleport>
-    </stage>
-</tutorial> -->
+<if variant="kotf">
+    <flags>
+        <flag id="flag" name="Flag" color="white" shared="true" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health" flag-proximity-metric="none" show-respawn-on-pickup="${announce-post-pickup}">
+            <post return-time="0s" respawn-time="${flag-respawn-timer}">
+                <post name="Top Post">185,15,25</post>
+                <!-- <post name="Mid Post">185,6,25</post> -->
+                <post name="Northeast Post" yaw="45">216,6,-6</post>
+                <post name="Southwest Post" yaw="-135">154,6,56</post>
+            </post>
+        </flag>
+    </flags>
+</if>
+<unless variant="kotf">
+    <toolrepair>
+        <tool>bow</tool>
+        <tool>stone sword</tool>
+        <tool>iron sword</tool>
+    </toolrepair>
+    <itemremove>
+        <item>leather helmet</item>
+        <item>leather chestplate</item>
+        <item>leather leggings</item>
+        <item>leather boots</item>
+        <item>golden apple</item>
+        <item>arrow</item>
+    </itemremove>
+    <kill-rewards>
+        <kill-reward>
+            <if variant="default">
+                <item material="golden apple"/>
+            </if>
+            <if variant="rage">
+                <item material="arrow"/>
+            </if>
+        </kill-reward>
+    </kill-rewards>
+    <hunger>
+        <depletion>off</depletion>
+    </hunger>
+</unless>
 </map>
