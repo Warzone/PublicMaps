@@ -1,0 +1,217 @@
+<map proto="1.4.2">
+<name>We Sell Mushrooms CTF</name>
+<version>1.1.2</version>
+<objective>Capture both enemy flags two times!</objective>
+<gamemode>ctf</gamemode>
+<edition>standard</edition>
+<authors>
+    <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
+    <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Original author, CTF edits"/> <!-- Strangey -->
+</authors>
+<contributors>
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042"/> <!-- triplezko -->
+    <contributor uuid="fd4e2236-23a7-4e3c-a6ab-a656cff18aea"/> <!-- ImEast -->
+    <contributor uuid="d71152ca-187d-43c4-9901-ba001606c655"/> <!-- wylt -->
+    <contributor uuid="d563101f-4e74-4f14-8707-b8f32c54902b"/> <!-- Winnerizor -->
+    <contributor uuid="430ec559-364a-4363-ac7a-2529050440ac" contribution="CTF XML"/> <!-- mameBT -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="30">Blue</team>
+    <team id="red" color="dark red" max="30">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="iron axe">
+            <enchantment>efficiency</enchantment>
+        </item>
+        <item slot="4" material="iron spade"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" amount="32" material="glass"/>
+        <item slot="7" amount="24" material="ladder"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+    </kit>
+    <kit id="flag-pickup" force="true">
+        <effect amplifier="2">slowness</effect>
+    </kit>
+    <kit id="flag-drop" force="true">
+        <effect duration="0" amplifier="0">slowness</effect>
+    </kit>
+    <kit id="entry-lend" force="true">
+        <effect>regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="90">
+            <cylinder base="-248.5,59,15.5" radius="0.5" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="-135">
+            <point>-343,2,110</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="45">
+            <point>-154,2,-79</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <all id="only-iron-regen">
+        <cause>world</cause>
+        <material id="only-iron">iron block</material>
+    </all>
+    <deny id="deny-void">
+        <void/>
+    </deny>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="blue-spawn" min="-352,84" max="-317,119"/>
+        <rectangle id="red-spawn" min="-180,-88" max="-145,-53"/>
+    </union>
+    <union id="flag-posts">
+        <union id="blue-defence">
+            <cuboid id="cyan-base" min="-275,17,83" max="-268,27,90"/>
+            <cuboid id="lime-base" min="-323,17,35" max="-316,27,42"/>
+        </union>
+        <union id="red-defence">
+            <cuboid id="orange-base" min="-181,17,-11" max="-174,27,-4"/>
+            <cuboid id="yellow-base" min="-229,17,-59" max="-222,27,-52"/>
+        </union>
+    </union>
+    <union id="flag-nets">
+        <cylinder id="blue-net" base="-343,2,110" radius="7" height="5"/>
+        <cylinder id="red-net" base="-154,2,-79" radius="7" height="5"/>
+    </union>
+    <complement id="void">
+        <everywhere/>
+        <rectangle id="mid" min="-289,-25" max="-208,56"/>
+        <rectangle id="blue-side" min="-315,9" max="-242,82"/>
+        <rectangle id="red-side" min="-255,-51" max="-182,22"/>
+    </complement>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy spawn!"/>
+    <apply lend-kit="entry-lend" region="red-defence" filter="only-blue"/>
+    <apply lend-kit="entry-lend" region="blue-defence" filter="only-red"/>
+    <apply block-break="only-iron" block-place="only-iron-regen" region="spawns" message="You may only destroy iron blocks in spawn!"/>
+    <apply block="never" region="flag-posts" message="You may not build directly around the flags!"/>
+    <apply block="deny-void" region="void" message="You may not build outside of the map!"/>
+</regions>
+<renewables>
+    <renewable renew-filter="only-iron" region="spawns"/>
+</renewables>
+<flags>
+    <flag id="cyan-flag"
+          name="Cyan Flag"
+          owner="blue"
+          color="cyan"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-drop">
+        <carry-message>You have the flag! Return it to your spawn!</carry-message>
+        <post owner="blue" pickup-filter="only-red" recover-time="15s">-319.5,19,38.5</post>
+    </flag>
+    <flag id="lime-flag"
+          name="Lime Flag"
+          owner="blue"
+          color="lime"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-drop">
+        <carry-message>You have the flag! Return it to your spawn!</carry-message>
+        <post owner="blue" pickup-filter="only-red" recover-time="15s">-271.5,19,86.5</post>
+    </flag>
+    <net points="1" region="red-net" flags="cyan-flag lime-flag" respawn-together="true"/>
+    <flag id="orange-flag"
+          name="Orange Flag"
+          owner="red"
+          color="orange"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-drop">
+        <carry-message>You have the flag! Return it to your spawn!</carry-message>
+        <post owner="red" pickup-filter="only-blue" recover-time="15s">-177.5,19,-7.5</post>
+    </flag>
+    <flag id="yellow-flag"
+          name="Yellow Flag"
+          owner="red"
+          color="yellow"
+          pickup-kit="flag-pickup"
+          drop-kit="flag-drop">
+        <carry-message>You have the flag! Return it to your spawn!</carry-message>
+        <post owner="red" pickup-filter="only-blue" recover-time="15s">-225.5,19,-55.5</post>
+    </flag>
+    <net points="1" region="blue-net" flags="orange-flag yellow-flag" respawn-together="true"/>
+</flags>
+<score>
+    <limit>4</limit>
+</score>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>banner</item>
+</itemremove>
+<blockdrops>
+    <rule>
+        <filter>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+                <material>ladder</material>
+            </any>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+</blockdrops>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>ladder</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="wood"/>
+        <item amount="8" material="glass"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>31</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
