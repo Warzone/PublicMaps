@@ -1,42 +1,34 @@
-<?xml version="1.0"?>
-<map proto="1.3.2">
+<map proto="1.4.2">
 <name>Easter Egg Hunt</name>
-<version>1.1.2</version>
+<version>1.1.3</version>
 <objective>Capture all 10 eggs (wools) and return them to the victory monument!</objective>
 <gamemode>arcade</gamemode>
 <authors>
-    <author>Reshif</author>
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
 </authors>
 <contributors>
-    <contributor>Eclipsen</contributor>
-    <contributor>Lyzak</contributor>
-    <contributor>MonsieurApple</contributor>
-    <contributor>Plastix</contributor>
-    <contributor>IM_A_H0B0</contributor>
-    <contributor>Anxuiz</contributor>
-    <contributor>dewtroid</contributor>
-    <contributor>MCSpider</contributor>
-    <contributor>MCYukon</contributor>
-    <contributor>pepsidawg00</contributor>
-    <contributor>OurLoneHero</contributor>
-    <contributor>Oversoul96</contributor>
-    <contributor>SH4D0W_HAWK</contributor>
+    <contributor uuid="c97373ef-4582-4350-8993-8a78f2775c29"/> <!-- Eclipsen -->
+    <contributor uuid="5986da63-a546-49c5-812d-d5c41a42510a"/> <!-- Lyzak -->
+    <contributor uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be"/> <!-- MonsieurApple -->
+    <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8"/> <!-- Plastix -->
+    <contributor uuid="82c796a5-c033-43be-af30-fa06496995f9"/> <!-- IM_A_H0B0 -->
+    <contributor uuid="25961a08-c90c-4abd-b136-dad90e89c2eb"/> <!-- Anxuiz -->
+    <contributor uuid="30e27366-0b14-4076-8f55-0819ece49ce3"/> <!-- dewtroid -->
+    <contributor uuid="e5953ddf-c1fc-4405-9ac9-6939631cd185"/> <!-- MCSpider -->
+    <contributor uuid="3ce426cd-2ded-4f83-a9bb-46a57d68d9a5"/> <!-- MCYukon -->
+    <contributor uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
+    <contributor uuid="27cf0cdd-c294-4163-a536-18e11360cc7b"/> <!-- OurLoneHero -->
+    <contributor uuid="73711d58-d786-4007-8c95-c93b1311de1a"/> <!-- Oversoul96 -->
+    <contributor uuid="1379cb6e-f291-4498-9807-e636f9674ac0"/> <!-- SH4D0W_HAWK -->
 </contributors>
 <rules>
     <rule>Don't be ridiculously cheap, skybridging 50 blocks away from the map is a bit silly</rule>
 </rules>
 <teams>
-    <team color="gold" max="200">Players</team>
+    <team id="players" color="gold" max="200">Players</team>
 </teams>
-<autorespawn/>
-<spawns bedspawn="on">
-    <spawns>
-        <spawn team="Players" yaw="0" kit="spawn"><cylinder base="1,22.2,0" radius="2" height="1"/></spawn>
-    </spawns>
-    <default yaw="0"><cylinder base="1,22.2,0" radius="2" height="1"/></default>
-</spawns>
 <kits>
-    <kit name="spawn">
+    <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="28" amount="64" material="arrow"/>
@@ -54,40 +46,98 @@
         <effect duration="16s" amplifier="10">strength</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="players" kit="spawn-kit">
+        <region>
+            <cylinder base="1,22.2,0" radius="2" height="1"/>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <cylinder base="1,22.2,0" radius="2" height="1"/>
+        </region>
+    </default>
+</spawns>
 <filters>
-    <filter name="only-torch">
-        <block>torch</block>
-    </filter>
+    <material id="only-torch">torch</material>
 </filters>
 <regions>
     <apply block="only-torch">
-        <rectangle name="spawn" min="-9,-10" max="11,10"/>
-        <rectangle name="viridun" min="-oo,475" max="oo,oo"/>
+        <region>
+            <rectangle id="spawn" min="-9,-10" max="11,10"/>
+            <rectangle id="viridun" min="-oo,475" max="oo,oo"/>
+        </region>
     </apply>
 </regions>
-<mobs>
-    <filter name="allow-all"/>
-</mobs>
-<wools team="players" craftable="false">
-    <wool color="white"><block>-4,23,-10</block></wool>
-    <wool color="magenta"><block>-3,23,-10</block></wool>
-    <wool color="purple"><block>-2,23,-10</block></wool>
-    <wool color="blue"><block>-1,23,-10</block></wool>
-    <wool color="yellow"><block>0,23,-10</block></wool>
-    <wool color="gray"><block>1,23,-10</block></wool>
-    <wool color="red"><block>2,23,-10</block></wool>
-    <wool color="light blue"><block>3,23,-10</block></wool>
-    <wool color="cyan"><block>4,23,-10</block></wool>
-    <wool color="green"><block>5,23,-10</block></wool>
+<wools team="players" craftable="false" location="0,0,0">
+    <wool color="white">
+        <monument>
+            <block>-4,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="magenta">
+        <monument>
+            <block>-3,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="purple">
+        <monument>
+            <block>-2,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="blue">
+        <monument>
+            <block>-1,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="yellow">
+        <monument>
+            <block>0,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="gray">
+        <monument>
+            <block>1,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="red">
+        <monument>
+            <block>2,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="light blue">
+        <monument>
+            <block>3,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="cyan">
+        <monument>
+            <block>4,23,-10</block>
+        </monument>
+    </wool>
+    <wool color="green">
+        <monument>
+            <block>5,23,-10</block>
+        </monument>
+    </wool>
 </wools>
 <portals>
     <portal x="@122" y="@32" z="@671" yaw="90">
-        <cuboid min="-16,41,478" max="-10,47,479"/>
+        <region>
+            <cuboid min="-16,41,478" max="-10,47,479"/>
+        </region>
     </portal>
     <portal x="@-13" y="@42" z="@477" yaw="270">
-        <cuboid min="123,31,668" max="124,37,674"/>
+        <region>
+            <cuboid min="123,31,668" max="124,37,674"/>
+        </region>
     </portal>
 </portals>
+<mobs>
+    <filter>
+        <always/>
+    </filter>
+</mobs>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
@@ -99,4 +149,5 @@
     <item>red rose</item>
     <item>yellow flower</item>
 </itemremove>
+<respawn auto="true"/>
 </map>
