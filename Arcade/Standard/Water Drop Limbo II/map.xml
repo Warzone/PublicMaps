@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<map proto="1.4.2" game="Water Drop">
+<name>Water Drop: Limbo II</name>
+<version>1.4.1</version>
+<objective>Get the most points in 3 minutes!</objective>
+<created>2019-04-01</created>
+<gamemode>Arcade</gamemode>
+<authors>
+    <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150" contribution="Original map theme"/>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Water Drop adaptation"/> <!-- mitchiii_ -->
+</authors>
+<players min="1" max="60" colors="true"/>
+<spawns>
+    <spawn kit="players" yaw="90" region="spawn">
+        <regions>
+            <point yaw="45">106.5,250,-60.5</point>
+            <point yaw="135">106.5,250,-60.5</point>
+        </regions>
+    </spawn>
+    <default kit="obs" yaw="90" region="spawn"/>
+</spawns>
+<kits>
+    <kit id="obs">
+        <potion duration="oo" amplifier="2">speed</potion>
+    </kit>
+    <kit id="players">
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <effect duration="2s" amplifier="5">resistance</effect>
+        <effect duration="oo" amplifier="-2">health boost</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <potion duration="oo" amplifier="2">weakness</potion>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="force-kill">
+        <potion duration="1" amplifier="100">harm</potion>
+    </kit>
+    <kit id="void-death" force="true">
+        <health>1</health>
+    </kit>
+</kits>
+<filters>
+    <all id="water">
+        <any>
+            <material>water</material>
+            <material>stationary water</material>
+        </any>
+        <not>
+            <cause>world</cause>
+        </not>
+    </all>
+    <not id="holding-a"><objective>point-a</objective></not>
+    <not id="holding-b"><objective>point-b</objective></not>
+    <not id="holding-c"><objective>point-c</objective></not>
+    <not id="holding-d"><objective>point-d</objective></not>
+    <not id="holding-e"><objective>point-e</objective></not>
+    <not id="holding-f"><objective>point-f</objective></not>
+    <not id="holding-g"><objective>point-g</objective></not>
+    <not id="holding-h"><objective>point-h</objective></not>
+    <not id="holding-i"><objective>point-i</objective></not>
+    <not id="holding-j"><objective>point-j</objective></not>
+    <not id="holding-k"><objective>point-k</objective></not>
+    <not id="holding-l"><objective>point-l</objective></not>
+    <not id="holding-m"><objective>point-m</objective></not>
+    <not id="holding-n"><objective>point-n</objective></not>
+</filters>
+<regions>
+    <block id="spawn">106.5,250,-60.5</block>
+    <cuboid id="point-a-region" min="39,223,-39" size="5,5,5"/>
+    <cuboid id="point-b-region" min="39,223,-87" size="5,5,5"/>
+    <cuboid id="point-c-region" min="47,220,-63" size="5,5,5"/>
+    <cuboid id="point-d-region" min="14,208,-63" size="5,5,5"/>
+    <cuboid id="point-e-region" min="-27,190,-63" size="5,5,5"/>
+    <cuboid id="point-f-region" min="-61,164,-74" size="5,5,5"/>
+    <cuboid id="point-g-region" min="-61,164,-52" size="5,5,5"/>
+    <cuboid id="point-h-region" min="-71,139,-63" size="5,5,5"/>
+    <cuboid id="point-i-region" min="-110,112,-63" size="5,5,5"/>
+    <cuboid id="point-j-region" min="-110,81,-63" size="5,5,5"/>
+    <cuboid id="point-k-region" min="-154,76,-63" size="5,5,5"/>
+    <cuboid id="point-l-region" min="-187,53,-52" size="5,5,5"/>
+    <cuboid id="point-m-region" min="-187,53,-74" size="5,5,5"/>
+    <cuboid id="point-n-region" min="-197,30,-63" size="5,5,5"/>
+    <union id="jumps">
+        <union id="top-jumps">
+            <cylinder id="cyan-jump-top" base="92.5,240,-51.5" radius="2" height="3"/>
+            <cylinder id="oran-jump-top" base="92.5,240,-69.5" radius="2" height="3"/>
+        </union>
+        <union id="middle-jumps">
+            <cylinder id="cyan-jump-middle" base="54.5,216,-36.5" radius="2" height="3"/>
+            <cylinder id="oran-jump-middle" base="54.5,216,-84.5" radius="2" height="3"/>
+        </union>
+        <union id="bottom-jumps">
+            <cylinder id="cyan-jump-bottom" base="-45.5,158,-49.5" radius="2" height="3"/>
+            <cylinder id="oran-jump-bottom" base="-45.5,158,-71.5" radius="2" height="3"/>
+        </union>
+    </union>
+    <cylinder id="end-jump" base="-206.5,31,-60.5" radius="2" height="3"/>
+    <below id="end-net" x="-230"/>
+    <point id="end-to-start-point">153.5,285,-60.5</point>
+    <cylinder id="end-to-start-jump" base="153.5,276,-60.5" radius="5" height="5"/>
+    <apply region="top-jumps" velocity="-1.2,1.7,0" block="never"/>
+    <apply region="middle-jumps" velocity="-0.1,1.7,0" block="never"/>
+    <apply region="bottom-jumps" velocity="-0.1,1.7,0" block="never"/>
+    <apply region="end-jump" velocity="-10,10,0"/>
+    <apply region="end-to-start-jump" velocity="-3,5,0"/>
+    <apply block-place="water" block-break="water" block-physics="never"/>
+    <apply kit="void-death">
+        <region><below y="0"/></region>
+    </apply>
+</regions>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+<damage>
+    <deny>
+        <region id="jumps"/>
+    </deny>
+</damage>
+<portals sound="false">
+    <portal region="end-net" destination="end-to-start-point"/>
+    <portal y="-64">
+        <region><below y="-5"/></region>
+    </portal>
+</portals>
+<score><!--
+    <box points="25" region="portal"/>-->
+</score>
+<control-points required="false" points="5" neutral-state="false" capture-time="0.1s" capture-rule="lead" show="false">
+    <control-point id="point-a" name="Point A" capture="point-a-region" captured="point-a-region" player-filter="holding-a"/>
+    <control-point id="point-b" name="Point B" capture="point-b-region" captured="point-b-region" player-filter="holding-b"/>
+    <control-point id="point-c" name="Point C" capture="point-c-region" captured="point-c-region" player-filter="holding-c"/>
+    <control-point id="point-d" name="Point D" capture="point-d-region" captured="point-d-region" player-filter="holding-d"/>
+    <control-point id="point-e" name="Point E" capture="point-e-region" captured="point-e-region" player-filter="holding-e"/>
+    <control-point id="point-f" name="Point F" capture="point-f-region" captured="point-f-region" player-filter="holding-f"/>
+    <control-point id="point-g" name="Point G" capture="point-g-region" captured="point-g-region" player-filter="holding-g"/>
+    <control-point id="point-h" name="Point H" capture="point-h-region" captured="point-h-region" player-filter="holding-h"/>
+    <control-point id="point-i" name="Point I" capture="point-i-region" captured="point-i-region" player-filter="holding-i"/>
+    <control-point id="point-j" name="Point J" capture="point-j-region" captured="point-j-region" player-filter="holding-j"/>
+    <control-point id="point-k" name="Point K" capture="point-k-region" captured="point-k-region" player-filter="holding-k"/>
+    <control-point id="point-l" name="Point L" capture="point-l-region" captured="point-l-region" player-filter="holding-l"/>
+    <control-point id="point-m" name="Point M" capture="point-m-region" captured="point-m-region" player-filter="holding-m"/>
+    <control-point id="point-n" name="Point N" capture="point-n-region" captured="point-n-region" player-filter="holding-n"/>
+</control-points>
+<time>3m</time>
+</map>
