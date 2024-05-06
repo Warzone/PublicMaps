@@ -1,0 +1,239 @@
+<map proto="1.4.2">
+<name>Scrap Mettle: Classic</name>
+<version>1.4.10</version>
+<slug>scrap_mettle</slug>
+<phase>development</phase>
+<gamemode>tdm</gamemode>
+<objective>Score points by killing the other team and entering your team's goal on the other side.</objective>
+<authors>
+    <author uuid="4a0780d3-d9c4-41c4-a816-e077a36f27c9"/> <!-- KasiCrafter -->
+</authors>
+<contributors>
+    <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Aesthetics and XML"/> <!-- Plastix -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="40">Blue</team>
+    <team id="red" color="dark red" max="40">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="7" material="iron ingot"/> <!-- the scrap metal of Scrap Mettle -->
+        <item slot="8" amount="16" material="arrow"/>
+        <item slot="35" material="stick"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:2" material="iron boots"/>
+        <effect duration="6">heal</effect>
+        <effect duration="6">damage resistance</effect>
+        <effect duration="15" amplifier="2">speed</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue" kit="spawn-kit" yaw="180" region="blue-spawn"/>
+    <spawn team="red" kit="spawn-kit" region="red-spawn"/>
+    <default yaw="90">
+        <regions>
+            <cylinder base="25,26,97.5" radius="5" height="0"/>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+</filters>
+<regions>
+    <cuboid id="blue-spawn" min="5,14,237" max="45,14,243"/>
+    <cuboid id="red-spawn" min="5,14,-47" max="45,14,-42"/>
+    <union id="doors">
+        <union id="blue-doors">
+            <cuboid id="blue-right-trench-protect" min="8,10,135" max="14,14,141"/>
+            <cuboid id="blue-left-trench-protect" min="36,10,135" max="42,14,141"/>
+            <cuboid id="blue-left-near-base-protect" min="46,10,212" max="50,13,214"/>
+            <cuboid id="blue-right-near-base-protect" min="0,10,212" max="4,13,214"/>
+        </union>
+        <union id="red-doors">
+            <cuboid id="red-right-trench-protect" min="36,10,55" max="41,13,61"/>
+            <cuboid id="red-left-trench-protect" min="8,10,55" max="13,13,61"/>
+            <cuboid id="red-left-near-base-protect" min="0,10,-18" max="4,13,-16"/>
+            <cuboid id="red-right-near-base-protect" min="46,10,-18" max="48,12,-16"/>
+        </union>
+    </union>
+    <union id="goals">
+        <cuboid id="blue-score-protect" min="16,8,-36" max="33,13,-33"/>
+        <cuboid id="red-score-protect" min="16,8,228" max="34,13,232"/>
+    </union>
+    <union id="zones">
+        <union id="blue-zones">
+            <cuboid id="blue-score-zone-left" min="16,8,-36" max="23,9,-34"/>
+            <cuboid id="blue-score-zone-right" min="27,8,-36" max="33,9,-34"/>
+            <cuboid id="blue-score-zone-center" min="23,8,-36" max="27,9,-34"/>
+            <cuboid id="blue-score-zone" min="16,8,-36" max="34,9,-34"/>
+        </union>
+        <union id="red-zones">
+            <cuboid id="red-score-zone-left" min="27,8,230.5" max="35,9,232"/>
+            <cuboid id="red-score-zone-right" min="16,8,230.5" max="23,9,232"/>
+            <cuboid id="red-score-zone-center" min="23,8,230.5" max="27,9,232"/>
+            <cuboid id="red-score-zone" min="16,8,230" max="34,9,232"/>
+        </union>
+    </union>
+    <rectangle id="playable" min="-11,-56" max="61,251"/>
+    <apply region="blue-score-protect" enter="only-blue" message="You may not score in your own goal."/>
+    <apply region="blue-doors" enter="only-blue" message="This door can only be used by Blue."/>
+    <apply region="red-score-protect" enter="only-red" message="You may not score in your own goal."/>
+    <apply region="red-doors" enter="only-red" message="This door can only be used by Red."/>
+    <apply region="playable" block="never"/>
+</regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+    <!-- "Left" and "Right" relative to looking TOWARDS spawn's back wall. -->
+    <box value="3" region="blue-score-zone-left" filter="only-blue"/>
+    <box value="3" region="blue-score-zone-right" filter="only-blue"/>
+    <box value="5" region="blue-score-zone-center" filter="only-blue"/>
+    <box value="3" region="red-score-zone-left" filter="only-red"/>
+    <box value="3" region="red-score-zone-right" filter="only-red"/>
+    <box value="5" region="red-score-zone-center" filter="only-red"/>
+</score>
+<portals>
+    <!-- portals from score zones to bases -->
+    <portal destination="blue-spawn" region="blue-score-zone" filter="only-blue"/>
+    <portal destination="red-spawn" region="red-score-zone" filter="only-red"/>
+    <!-- portals from one side to the other through emergency exits -->
+    <portal x="-64">
+        <region>
+            <rectangle min="57,-oo" max="oo,oo"/>
+        </region>
+    </portal>
+    <portal x="64">
+        <region>
+            <rectangle min="-oo,-oo" max="-8,oo"/>
+        </region>
+    </portal>
+    <!-- red center emergency exits -->
+    <portal x="-19" z="1" yaw="180">
+        <region>
+            <cuboid min="33,2,53" max="36,5,55"/>
+        </region>
+    </portal>
+    <portal x="19" z="1" yaw="180">
+        <region>
+            <cuboid min="14,2,53" max="17,5,55"/>
+        </region>
+    </portal>
+    <!-- blue center emergency exits -->
+    <portal x="-19" z="-1" yaw="180">
+        <region>
+            <cuboid min="33,2,141" max="36,5,143"/>
+        </region>
+    </portal>
+    <portal x="19" z="-1" yaw="180">
+        <region>
+            <cuboid min="14,2,141" max="17,5,143"/>
+        </region>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron block</item>
+    <item>iron sword</item>
+    <item>iron spade</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>iron hoe</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>minecart</item>
+    <item>rails</item>
+    <item>cauldron</item>
+    <item>iron door</item>
+    <item>bucket</item>
+    <item>shears</item>
+    <item>iron fence</item>
+    <item>stick</item>
+</itemremove>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="iron ingot"/>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<!-- <tutorial>
+    <stage title="Team Death Match">
+        <message>
+            <line>`rThis map is a `a`lTeam Death Match `r(TDM) map with scoreboxes.</line>
+            <line>The objective is to get the most points in `615 `rminutes.</line>
+            <line>You are rewarded `biron ingots `rfor `ckills `rwhich you can craft into `6weapons `rand `6armor`r.</line>
+        </message>
+        <teleport>
+            <point yaw="-90" pitch="15">-4,19,97.5</point>
+        </teleport>
+    </stage>
+    <stage title="Team Spawn">
+        <message>
+            <line>`rEach team spawns on `9ice `rfacing a wool patch.</line>
+            <line>The `6scorebox `ris directly under the spawn. Don't let your enemy enter your scorebox!</line>
+            <line>Run forward into battle!</line>
+        </message>
+        <teleport>
+            <point angle="24,14,237">25,15,221</point>
+        </teleport>
+    </stage>
+    <stage title="The Battle Field">
+        <message>
+            <line>`rThe two teams will come out from opposite sides and fight in the middle.</line>
+            <line>There are sniping spots to the `5left`r, `5right `rand `5back`r.</line>
+        </message>
+        <teleport>
+            <point angle="24,5,97">29,19,110</point>
+        </teleport>
+    </stage>
+    <stage title="Team-Only Doors">
+        <message>
+            <line>`rDoors surrounded with a colored wool are `c`lteam-only `rand can only be entered by the team whoose color is displayed.</line>
+        </message>
+        <teleport>
+            <point angle="38,10,59">39,12,66</point>
+        </teleport>
+    </stage>
+    <stage title="Emergency Exits">
+        <message>
+            <line>`rDownstairs from the battlefield are `a`lemergency exits`r, they will teleport you to the opposite side of the map.</line>
+            <line>Use them to quickly evade your enemy!</line>
+        </message>
+        <teleport>
+            <point yaw="0">14.5,2,138.5</point>
+        </teleport>
+    </stage>
+    <stage title="Score Boxes">
+        <message>
+            <line>`rGet to the other team's side and into this area to score points.</line>
+            <line>The scorebox will automatically teleport you back to your own side when you score.</line>
+            <line>The middle scorebox is smaller, but gives you more points!</line>
+        </message>
+        <teleport>
+            <point angle="24,10,228">31,11,219</point>
+        </teleport>
+    </stage>
+</tutorial> -->
+</map>
