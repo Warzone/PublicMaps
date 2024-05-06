@@ -1,0 +1,274 @@
+<map proto="1.4.2">
+<gamemode>arcade</gamemode>
+<game>Laps</game>
+<phase>development</phase>
+<respawn auto="true" delay="0s"/>
+<!-- Race gamemode include file -->
+<!-- Modified by zzuf - Original classes taken from the race.xml file from the Overcast Network -->
+<!-- Version 2023.08.20-1 -->
+<constants>
+    <constant id="laps">3</constant>
+    <constant id="food-level">20</constant> <!-- Food level after race starts-->
+    <constant id="jump-boost-duration">0</constant> <!-- Negative jump boost duration after race starts -->
+    <constant id="game-mode">survival</constant>
+    <constant id="checkpoints">0</constant>
+    <constant id="checkpoint-1-center">0,0</constant>
+    <constant id="checkpoint-1-radius">0</constant>
+    <constant id="checkpoint-2-center">0,0</constant>
+    <constant id="checkpoint-2-radius">0</constant>
+</constants>
+<players max="50" colors="true"/>
+<kits>
+    <kit id="spawn-kit" force="true">
+        <clear/>
+        <foodlevel>${food-level}</foodlevel>
+        <effect duration="${jump-boost-duration}" amplifier="-10" ambient="false">jump</effect>
+        <helmet material="wool" team-color="true" locked="true"/>
+        <effect duration="oo" amplifier="100" ambient="false">heal</effect>
+        <effect duration="oo" amplifier="4" ambient="false">damage resistance</effect>
+        <game-mode>${game-mode}</game-mode>
+        <action>
+            <kit id="reset-lap-kit"/>
+            <kit id="countdown-kit"/>
+        </action>
+    </kit>
+    <kit id="countdown-kit" force="true">
+        <foodlevel>6</foodlevel>
+        <effect duration="oo" amplifier="10" ambient="false">slow</effect>
+        <effect duration="oo" amplifier="-10" ambient="false">jump</effect>
+    </kit>
+    <give kit="countdown-kit" filter="during-countdown"/>
+    <kit id="remove-effects-kit" force="true">
+        <foodlevel>${food-level}</foodlevel>
+        <effect duration="0" amplifier="10" ambient="false">slow</effect>
+        <effect duration="${jump-boost-duration}" amplifier="-10" ambient="false">jump</effect>
+    </kit>
+    <give kit="remove-effects-kit" filter="race-started"/>
+    <give kit="remove-effects-kit" filter="respawned"/>
+    <kit id="lap-completed-kit" force="true">
+        <action>
+            <message text=" `e⚠ `aYou have completed a lap!"/>
+            <kit id="reset-lap-kit"/>
+        </action>
+    </kit>
+    <give kit="lap-completed-kit" filter="finish-line-participating"/>
+    <kit id="lap-cheated-kit" force="true">
+        <action>
+            <message text=" `e⚠ `cYou did not get all the checkpoints!"/>
+            <kit id="reset-lap-kit"/>
+        </action>
+    </kit>
+    <give kit="lap-cheated-kit" filter="finish-line-no-checkpoints"/>
+    <kit id="reset-lap-kit">
+        <action>
+            <set var="checkpoint_progress" value="0"/>
+        </action>
+    </kit>
+    <kit id="void-kit" force="true">
+        <clear effects="true" items="false" armor="false"/>
+    </kit>
+    <give kit="void-kit" filter="below-level-player"/> <!-- Fallback: If a map doesn't use portals, remove resistance/instant health so that players can die -->
+</kits>
+<broadcasts>
+    <alert after="1s" filter="race-not-started">`fThe countdown is starting!`r</alert>
+    <alert after="5s" filter="race-not-started">`4`l3`r</alert>
+    <alert after="6s" filter="race-not-started">`c`l2`r</alert>
+    <alert after="7s" filter="race-not-started">`e`l1`r</alert>
+    <alert after="8s" filter="race-not-started">`a`lGO`r</alert>
+</broadcasts>
+<classes family="Cars" sticky="true" restrict="false">
+    <class name="Touring Car" description="4/5 speed, knockback 1 and efficiency 2 shears" icon="iron boots" default="true">
+        <kit parents="spawn-kit">
+            <item slot="0" enchantment="knockback:1;dig_speed:2" material="shears" show-can-destroy="false"><can-destroy><material>web</material></can-destroy></item>
+            <boots name="`fTouring Car" attributes="generic.movementSpeed:base:0.50" unbreakable="true" material="iron boots" locked="true" show-enchantments="false" show-attributes="false"/>
+        </kit>
+    </class>
+    <class name="Formula One" description="5/5 speed, snowballs, no shears" icon="chainmail boots">
+        <kit parents="spawn-kit">
+            <item slot="0" amount="127" material="snow ball"/>
+            <boots name="`fFormula One" attributes="generic.movementSpeed:base:0.55" unbreakable="true" material="chainmail boots" locked="true" show-enchantments="false" show-attributes="false"/>
+        </kit>
+    </class>
+    <class name="Buggy" description="2/5 speed and efficiency 3 shears" icon="leather boots">
+        <kit parents="spawn-kit" force="true">
+            <item slot="0" enchantment="dig_speed:3" material="shears" show-can-destroy="false"><can-destroy><material>web</material></can-destroy></item>
+            <boots name="`fBuggy" attributes="generic.movementSpeed:base:0.40" unbreakable="true" material="leather boots" locked="true" show-enchantments="false" show-attributes="false"/>
+        </kit>
+    </class>
+    <class name="Hot Rod" description="3/5 speed, fire aspect and extra webs, hyperspeed shears" icon="gold boots">
+        <kit parents="spawn-kit">
+            <item slot="0" enchantment="fire_aspect:1;dig_speed:10" material="shears" show-can-destroy="false"><can-destroy><material>web</material></can-destroy></item>
+            <item slot="1" amount="10" material="web" show-can-place-on="false"><can-place-on><all-blocks/></can-place-on></item>
+            <boots name="`fHot Rod" attributes="generic.movementSpeed:base:0.45" unbreakable="true" material="gold boots" locked="true" show-enchantments="false" show-attributes="false"/>
+        </kit>
+    </class>
+    <class name="Truck" description="1/5 speed, knockback 2 and extra TNT, no shears" icon="diamond boots">
+        <kit parents="spawn-kit">
+            <item slot="0" enchantment="knockback:2" material="stick"/>
+            <item slot="1" amount="10" material="tnt" show-can-place-on="false"><can-place-on><all-blocks/></can-place-on></item>
+            <boots name="`fTruck" attributes="generic.movementSpeed:base:0.35" unbreakable="true" material="diamond boots" locked="true" show-enchantments="false" show-attributes="false"/>
+        </kit>
+    </class>
+</classes>
+<filters>
+    <any id="allowed-blocks">
+        <all>
+            <any>
+                <allow>
+                    <any>
+                        <material>web</material>
+                        <material>tnt</material>
+                    </any>
+                </allow>
+                <deny id="deny-players">
+                    <participating/>
+                </deny>
+            </any>
+            <all>
+                <not>
+                    <filter id="during-countdown"/>
+                </not>
+            </all>
+        </all>
+    </any>
+    <apply block="allowed-blocks"/>
+    <match-started id="match-start"/>
+    <all id="match-start-countdown">
+        <filter id="match-start"/>
+        <filter id="race-not-started"/>
+    </all>
+    <after id="race-start" duration="8s" message="`f`lGet ready!" filter="match-start-countdown"/>
+    <all id="finish-line-participating">
+        <region id="finish-line"/>
+        <participating/>
+        <match-running/>
+        <filter id="all-checkpoints"/>
+    </all>
+    <all id="finish-line-no-checkpoints">
+        <region id="finish-line"/>
+        <participating/>
+        <match-running/>
+        <not>
+            <filter id="all-checkpoints"/>
+        </not>
+    </all>
+    <all id="during-countdown">
+        <variable id="race-not-started" var="race_started">0</variable>
+        <after duration="0.05" filter="match-start"/>
+        <participating/>
+        <match-running/>
+    </all>
+    <all id="race-started">
+        <variable var="race_started">1</variable>
+        <participating/>
+        <match-running/>
+    </all>
+    <all id="below-level-player">
+        <region id="below-level"/>
+        <participating/>
+    </all>
+    <variable id="all-checkpoints" var="checkpoint_progress">${checkpoints}</variable>
+    <variable id="0-checkpoints" var="checkpoint_progress">0</variable>
+    <variable id="1-checkpoint" var="checkpoint_progress">1</variable>
+    <all id="checkpoint-1-filter">
+        <region id="checkpoint-1"/>
+        <any>
+            <filter id="0-checkpoints"/>
+            <filter id="all-checkpoints"/>
+        </any>
+    </all>
+    <all id="checkpoint-2-filter">
+        <region id="checkpoint-2"/>
+        <filter id="1-checkpoint"/>
+    </all>
+    <alive id="is-alive"/>
+    <all id="respawned">
+        <filter id="race-started"/>
+        <after duration="0.05" filter="is-alive"/>
+    </all>
+</filters>
+<regions>
+    <below y="-20" id="below-level"/>
+    <union id="checkpoints">
+        <circle id="checkpoint-1" center="${checkpoint-1-center}" radius="${checkpoint-1-radius}"/>
+        <circle id="checkpoint-2" center="${checkpoint-2-center}" radius="${checkpoint-2-radius}"/>
+    </union>
+</regions>
+<variables>
+    <variable id="race_started" scope="match" default="0"/> <!-- default="1" to disable countdown -->
+    <variable id="checkpoint_progress" scope="player" default="0"/>
+</variables>
+<actions>
+    <action id="start-race" scope="match">
+        <set var="race_started" value="1"/>
+    </action>
+    <trigger action="start-race" filter="race-start" scope="match"/>
+    <action id="1st-checkpoint" scope="player">
+        <set var="checkpoint_progress" value="1"/>
+    </action>
+    <trigger action="1st-checkpoint" filter="checkpoint-1-filter" scope="player"/>
+    <action id="2nd-checkpoint" scope="player">
+        <set var="checkpoint_progress" value="2"/>
+    </action>
+    <trigger action="2nd-checkpoint" filter="checkpoint-2-filter" scope="player"/>
+</actions>
+<score>
+    <limit>${laps}</limit>
+    <kills>0</kills>
+    <box value="1" silent="true" region="finish-line" filter="all-checkpoints"/>
+</score>
+<tnt>
+    <instantignite>on</instantignite>
+    <blockdamage>false</blockdamage>
+</tnt>
+<mobs>
+    <filter>
+        <spawn>spawner egg</spawn>
+    </filter>
+</mobs>
+<damage>
+    <deny>
+        <filter id="during-countdown"/>
+    </deny>
+</damage>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<crafting>
+    <disable>snow block</disable>
+</crafting>
+<toolrepair>
+    <tool>wood sword</tool>
+</toolrepair>
+<itemkeep>
+    <item>snow ball</item>
+    <item>tnt</item>
+    <item>web</item>
+</itemkeep>
+<itemremove>
+    <item>string</item>
+    <item>iron boots</item>
+    <item>chainmail boots</item>
+    <item>leather boots</item>
+    <item>gold boots</item>
+    <item>diamond boots</item>
+    <item>shears</item>
+    <item>wool</item>
+    <item>slime ball</item>
+    <item>bone</item>
+    <item>raw beef</item>
+</itemremove>
+<renewables>
+    <renewable interval="10s" grow="false" particles="false" sound="false" avoid-players="0">
+        <renew-filter>
+            <material>air</material>
+        </renew-filter>
+        <replace-filter>
+            <material>web</material>
+        </replace-filter>
+    </renewable>
+</renewables>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
