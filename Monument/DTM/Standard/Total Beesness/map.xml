@@ -1,8 +1,8 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Total Beesness</name>
-<version>1.0.1</version>
-<objective>Destroy the enemies monuments!</objective>
+<version>1.0.3</version>
 <gamemode>dtm</gamemode>
+<objective>Destroy the enemies monuments!</objective>
 <!-- Map authors & contributors. -->
 <authors>
     <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Map author"/> <!-- Obelistics -->
@@ -135,7 +135,7 @@
     </rule>
 </block-drops>
 <!-- Destroyables -->
-<destroyables show-progress="true" completion="100%" required="true">
+<destroyables show-progress="true" completion="100%" required="true" repairable="false">
     <destroyable owner="orange-team" materials="gold block" name="Left Monument" modes="mode-1-edge mode-2-edge">
         <region>
             <cuboid min="19,18,-34" max="17,16,-32"/>
@@ -170,9 +170,9 @@
 <!-- Modes -->
 <modes>
     <mode after="15m" material="coal block" id="mode-1-edge" name="BEESWAX MODE"/>
-    <mode after="15m" material="gold block" id="mode-1-center" name="BEESWAX MODE"/>
+    <mode after="15m" show-before="0" material="gold block" id="mode-1-center" name="BEESWAX MODE"/>
     <mode after="25m" material="glass" id="mode-2-edge" name="HONEYCOMB MODE"/>
-    <mode after="25m" material="coal block" id="mode-2-center" name="HONEYCOMB MODE"/>
+    <mode after="25m" show-before="0" material="coal block" id="mode-2-center" name="HONEYCOMB MODE"/>
     <mode after="35m" material="glass" id="mode-3-center" name="HONEY MODE"/>
 </modes>
 <toolrepair>
@@ -192,6 +192,7 @@
     <item>leather boots</item>
     <item>emerald block</item>
     <item>gold block</item>
+    <item>coal block</item>
     <item>stained clay</item>
     <item>wood</item>
     <item>leaves</item>
