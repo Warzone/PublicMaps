@@ -1,8 +1,8 @@
-<map proto="1.3.3">
+<map proto="1.4.2">
 <name>Haunted Corridors</name>
-<version>1.1</version>
-<objective>The team with the most amount of kills after 10 minutes wins!</objective>
+<version>1.1.1</version>
 <gamemode>tdm</gamemode>
+<objective>The team with the most amount of kills after 10 minutes wins!</objective>
 <authors>
     <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
     <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
@@ -11,82 +11,72 @@
     <contributor uuid="7dee9c20-f1c4-4577-bf57-6f392e398b6d"/> <!-- Crafthappy2000 -->
 </contributors>
 <teams>
-    <team color="dark red" max="32">Red</team>
-    <team color="blue" max="32">Blue</team>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue" color="blue" max="32">Blue</team>
 </teams>
-<spawns>
-    <spawn team="red" kit="red" yaw="90">
-        <cylinder base="106,8.5,38" radius="3" height="0"/>
-    </spawn>
-    <spawn team="blue" kit="blue" yaw="-90">
-        <cylinder base="-112,8.5,38" radius="3" height="0"/>
-    </spawn>
-    <default yaw="-90">
-        <block>79,20.5,38</block>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" amount="64">golden carrot</item>
-        <item slot="3" damage="8229">potion</item>
-        <item slot="28">arrow</item>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <helmet unbreakable="true">gold helmet</helmet>
-        <potion duration="3" amplifier="4">heal</potion>
-        <potion duration="3" amplifier="4">damage resistance</potion>
-    </kit>
-    <kit name="red" parents="spawn">
-        <chestplate color="b2324b" enchantment="protection projectile:1" unbreakable="true">leather chestplate</chestplate>
-        <boots color="b2324b" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="334cb2" enchantment="protection projectile:1" unbreakable="true">leather chestplate</chestplate>
-        <boots color="334cb2" unbreakable="true">leather boots</boots>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" enchantment="protection projectile" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="3" amplifier="4">heal</effect>
+        <effect duration="3" amplifier="4">damage resistance</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="red" kit="spawn-kit" yaw="90">
+        <regions>
+            <cylinder base="106.0,8,38.0" radius="3" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="-90">
+        <regions>
+            <cylinder base="-112.0,8,38.0" radius="3" height="0"/>
+        </regions>
+    </spawn>
+    <default yaw="-90">
+        <regions>
+            <point>79.0,20,38.0</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <material id="only-torch">torch</material>
+</filters>
+<regions>
+    <apply block="only-torch"/>
+</regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
 <itemremove>
-    <item>gold helmet</item>
+    <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
-    <item>leather boots</item>
-    <item>glass bottle</item>
-    <item>golden carrot</item>
-    <item>torch</item>
-    <item>potion</item>
+    <item>iron boots</item>
 </itemremove>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
-    <tool>arrow</tool>
 </toolrepair>
-<score>
-    <time>10m</time>
-</score>
-<filters>
-    <filter name="allow-torches">
-        <block>torch</block>
-    </filter>
-</filters>
-<regions>
-    <apply block="allow-torches">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-</regions>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item damage="8229">potion</item>
-        <item amount="2">torch</item>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <kill-streak count="5"/>
-        </filter>
-        <kit force="true">
-            <potion duration="oo" amplifier="1">speed</potion>
-        </kit>
+        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <timelock>on</timelock>
 </map>
