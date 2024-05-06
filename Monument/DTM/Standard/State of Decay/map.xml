@@ -1,10 +1,8 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
 <name>State of Decay</name>
-<version>1.0.4</version>
-<objective>Destroy the enemy team's obsidian monument to win!</objective>
+<version>1.0.5</version>
 <gamemode>dtm</gamemode>
+<objective>Destroy the enemy team's obsidian monument to win!</objective>
 <authors>
     <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
 </authors>
@@ -12,82 +10,79 @@
     <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- Dinner1111 -->
 </contributors>
 <teams>
-    <team color="gold" max="24">Orange</team>
-    <team color="dark red" max="24">Red</team>
+    <team id="orange" color="gold" max="24">Orange</team>
+    <team id="red" color="dark red" max="24">Red</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0" name="`7Rusted Dagger">stone sword</item>
-        <item slot="1" name="`7Pinethorn Shortbow" enchantment="arrow infinite:1">bow</item>
-        <item slot="2">diamond pickaxe</item>
-        <item slot="3">stone axe</item>
-        <item slot="4" amount="32">bread</item>
-        <item slot="32" amount="64" name="`7Decaying Leaves" damage="1">leaves</item>
-        <item slot="5" amount="32" damage="1">log</item>
-        <item slot="6" amount="3">tnt</item>
-        <item slot="7" name="`6TNT Defuser" lore="`7Right click to defuse teammate's TNT|`7Does not work in `9water`7!">shears</item>
-        <item slot="8" name="`7Darkleaf Apple" amount="2">golden apple</item>
-        <item slot="28">arrow</item>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="993333">leather helmet</helmet>
-        <chestplate color="993333" enchantment="protection explosions:2">leather chestplate</chestplate>
-        <boots color="993333" enchantment="protection fall:1">leather boots</boots>
-    </kit>
-    <kit name="orange" parents="spawn">
-        <helmet color="E5E533">leather helmet</helmet>
-        <chestplate color="E5E533" enchantment="protection explosions:2">leather chestplate</chestplate>
-        <boots color="E5E533" enchantment="protection fall:1">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" name="`7Rusted Dagger" material="stone sword"/>
+        <item slot="1" name="`7Pinethorn Shortbow" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="stone axe"/>
+        <item slot="4" amount="32" material="bread"/>
+        <item slot="32" amount="64" name="`7Decaying Leaves" damage="1" material="leaves"/>
+        <item slot="5" amount="32" damage="1" material="log"/>
+        <item slot="6" amount="3" material="tnt"/>
+        <item slot="7" name="`6TNT Defuser" lore="`7Right click to defuse teammate's TNT|`7Does not work in `9water`7!" material="shears"/>
+        <item slot="8" name="`7Darkleaf Apple" amount="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <helmet team-color="true" material="leather helmet"/>
+        <chestplate team-color="true" enchantment="protection explosions:2" material="leather chestplate"/>
+        <boots team-color="true" enchantment="protection fall" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red" yaw="-45">
-        <point>-31,19,-101</point>
+    <spawn team="red" kit="spawn-kit" yaw="-45">
+        <regions>
+            <point>-31,19,-101</point>
+        </regions>
     </spawn>
-    <spawn team="orange" kit="orange" yaw="135">
-        <point>32,19,54</point>
+    <spawn team="orange" kit="spawn-kit" yaw="135">
+        <regions>
+            <point>32,19,54</point>
+        </regions>
     </spawn>
     <default yaw="-90">
-        <cuboid min="-0,44,-24" max="1,44,-22"/>
+        <regions>
+            <cuboid min="-0,44,-24" max="2,44,-21"/>
+        </regions>
     </default>
 </spawns>
 <filters>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-orange">
-        <team>orange</team>
-    </filter>
+    <team id="only-red">red</team>
+    <team id="only-orange">orange</team>
 </filters>
 <regions>
-    <apply block="deny-all">
-        <negative>
-            <rectangle min="-50,-123" max="50,75"/>
-        </negative>
+    <union id="bases">
+        <circle id="red-base" center="-30,-100" radius="8"/>
+        <circle id="orange-base" center="31,53" radius="8"/>
+    </union>
+    <negative id="playable-inverse">
+        <rectangle min="-50,-123" max="50,75"/>
+    </negative>
+    <apply region="red-base" enter="only-red" message="You may not enter the enemy's base!"/>
+    <apply region="orange-base" enter="only-orange" message="You may not enter the enemy's base!"/>
+    <apply block="never">
+        <region>
+            <cuboid min="15.5,14,-30.5" max="20.5,21,-26.5"/>
+            <cuboid min="15.5,14,16.5" max="-17.5,21,-18.5"/>
+        </region>
     </apply>
-    <apply block="deny-all">
-        <cuboid min="15.5,14,-30.5" max="19.5,20,-27.5"/>
-        <cuboid min="15.5,14,16.5" max="-18.5,20,-19.5"/>
-    </apply>
-    <apply block="deny-all" enter="only-red" message="You cannot enter/modify the enemy base!">
-        <circle center="-30,-100" radius="8"/>
-    </apply>
-    <apply block="deny-all" enter="only-orange" message="You cannot enter/modify the enemy base!">
-        <circle center="31,53" radius="8"/>
-    </apply>
+    <apply region="bases" block="never" message="You may not build here!"/>
+    <apply region="playable-inverse" block="never"/>
 </regions>
-<killreward>
-    <item amount="3">tnt</item>
-    <item>golden apple</item>
-</killreward>
-<timelock>on</timelock>
-<maxbuildheight>30</maxbuildheight>
-<tnt>
-    <instantignite>on</instantignite>
-    <licensing>off</licensing>
-    <friendly-defuse>off</friendly-defuse>
-    <blockdamage>off</blockdamage>
-</tnt>
+<destroyables name="Monument" materials="obsidian">
+    <destroyable owner="red">
+        <region>
+            <cuboid min="-1,19,-77" max="0,22,-76"/>
+        </region>
+    </destroyable>
+    <destroyable owner="orange">
+        <region>
+            <cuboid min="1,19,29" max="2,22,30"/>
+        </region>
+    </destroyable>
+</destroyables>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
@@ -106,15 +101,21 @@
     <tool>diamond pickaxe</tool>
     <tool>stone axe</tool>
 </toolrepair>
-<destroyables name="Monument" materials="obsidian" completion="100%">
-    <destroyable owner="red">
-        <cuboid min="-1,21,-77" max="-1,19,-77"/>
-    </destroyable>
-    <destroyable owner="orange">
-        <cuboid min="1,21,29" max="1,19,29"/>
-    </destroyable>
-</destroyables>
-<tutorial>
+<kill-rewards>
+    <kill-reward>
+        <item amount="3" material="tnt"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+</tnt>
+<timelock>on</timelock>
+<maxbuildheight>30</maxbuildheight>
+<!-- <tutorial>
     <stage title="Destroy the Monument">
         <message>
             <line>§rThis map is a §a§lDestroy the Monument §r(DTM) map.</line>
@@ -134,5 +135,5 @@
             <point yaw="-41" pitch="15">-8,25,18</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>
