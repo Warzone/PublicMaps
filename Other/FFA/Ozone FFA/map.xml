@@ -1,0 +1,107 @@
+<map proto="1.4.2">
+<name>Ozone FFA</name>
+<version>1.0.2</version>
+<gamemode>ffa</gamemode>
+<objective>Kill the most players in 10 minutes!</objective>
+<time>10m</time>
+<authors>
+    <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Overall map design and XML"/> <!-- Plastix -->
+    <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="Map design"/> <!-- MonsieurApple -->
+    <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="*crunch* *crunch* *crunch*"/> <!-- IM_A_H0B0 -->
+    <author uuid="90e029a3-6873-46a7-8430-0ec3dbc42aba" contribution="Map design and aestethics"/> <!-- SajinZero -->
+</authors>
+<contributors>
+    <contributor uuid="2553e6f2-3a2c-440b-a6a3-39e3df7fe3ff" contribution="Feedback and aesthetics"/> <!-- Khazhyk -->
+    <contributor uuid="3ce426cd-2ded-4f83-a9bb-46a57d68d9a5" contribution="Various aesthethics"/> <!-- McYukon -->
+</contributors>
+<gamemode>ffa</gamemode>
+<players min="2" max="80" colors="true"/>
+<score>
+    <kills>1</kills>
+</score>
+<rules>
+    <rule>Fall damage is disabled</rule>
+</rules>
+<broadcasts>
+    <alert after="2s">Fall damage is disabled on this map! Bows shoot ender pearls!</alert>
+</broadcasts>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="3">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="10">damage resistance</effect>
+        <effect>speed</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region>
+            <cylinder base="0.5,30,0.5" radius="3" height="0"/>
+        </region>
+    </default>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions angle="0.5,10,0.5">
+            <!-- The 4 towers -->
+            <cylinder base="103.5,2,103.5" radius="13" height="77"/>
+            <cylinder base="103.5,2,-102.5" radius="13" height="77"/>
+            <cylinder base="-102.5,2,103.5" radius="13" height="77"/>
+            <cylinder base="-102.5,2,-102.5" radius="13" height="77"/>
+            <!-- Repeat this region to increase probability of PGM choosing this one -->
+            <cylinder base="0.5,110,0.5" radius="146" height="0"/>
+            <cylinder base="0.5,110,0.5" radius="146" height="0"/>
+            <cylinder base="0.5,110,0.5" radius="146" height="0"/>
+            <cylinder base="0.5,110,0.5" radius="146" height="0"/>
+            <cylinder base="0.5,110,0.5" radius="146" height="0"/>
+            <!-- The floating ring at the top -->
+            <cylinder base="0.5,2,0.5" radius="163" height="20"/>
+            <cylinder base="0.5,2,0.5" radius="163" height="20"/>
+        </regions>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="never"/>
+</regions>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>golden apple</item>
+</itemkeep>
+<kill-reward>
+    <item material="golden apple"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<!-- Do the magic! *wizz* -->
+<modifybowprojectile>
+    <projectile>EnderPearl</projectile>
+    <velocityMod>2.5</velocityMod>
+</modifybowprojectile>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<gamerules>
+    <doMobSpawning>false</doMobSpawning>
+</gamerules>
+<respawn auto="true" spectate="true"/>
+</map>
