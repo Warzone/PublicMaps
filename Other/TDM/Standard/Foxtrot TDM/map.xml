@@ -1,16 +1,15 @@
-<?xml version="1.0"?>
-<map proto="1.3.3">
+<map proto="1.4.2">
 <name>Foxtrot: TDM</name>
-<version>1.0.0</version>
-<objective>Be the Team with the most points after 5 min</objective>
+<version>1.0.1</version>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
 <gamemode>arcade</gamemode>
+<objective>Be the Team with the most points after 5 min</objective>
 <authors>
     <author uuid="82d03646-d1a1-4383-a533-9509b130f751"/> <!-- iLifting -->
 </authors>
 <contributors>
-    <contributor uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!-- Matic0B -->
+    <contributor uuid="48924ea3-3aad-4e16-838c-368d8d9e0a25"/> <!-- matic0basle -->
     <contributor uuid="8fd93764-6206-46c8-95c1-a6d764343461"/> <!-- gibbodaman -->
     <contributor uuid="f6e61e24-5143-4ab9-b269-d765c3ffb216"/> <!-- RedstoneVEVO -->
     <contributor uuid="33e00444-5c7b-4767-a28e-177c3041c74d"/> <!-- michael12lp -->
@@ -19,82 +18,85 @@
     <rule>Fall damage is disabled!</rule>
 </rules>
 <teams>
-    <team color="dark green" max="20" max-overfill="30">Green</team>
-    <team color="dark purple" max="20" max-overfill="30">Purple</team>
+    <team id="green" color="dark green" max="20" max-overfill="30">Green</team>
+    <team id="purple" color="dark purple" max="20" max-overfill="30">Purple</team>
 </teams>
-<rage/>
-<score>
-    <time>5m</time>
-</score>
-<spawns>
-    <spawn team="green" kit="green" yaw="180">
-        <point>75.5,30,168.5</point>
-        <point>21.5,30,168.5</point>
-    </spawn>
-    <spawn team="purple" kit="purple" yaw="-0">
-        <point>75.5,30,-11.5</point>
-        <point>21.5,30,-11.5</point>
-    </spawn>
-    <default yaw="90">
-        <point>104,37,78</point>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" enchantment="damage all:10" lore="`91-Hit Kill!">iron sword</item>
-        <item slot="1" enchantment="arrow damage:10" lore="`91-Shot Kill!">bow</item>
-        <item slot="2" amount="1">arrow</item>
-        <potion duration="3" amplifier="100">heal</potion>
-        <potion duration="3" amplifier="100">damage resistance</potion>
-        <potion duration="oo" amplifier="1">speed</potion>
-    </kit>
-    <kit name="green" parents="spawn">
-        <helmet color="667F33">leather helmet</helmet>
-        <chestplate color="667F33">leather chestplate</chestplate>
-        <leggings color="667F33">leather leggings</leggings>
-        <boots color="667F33">leather boots</boots>
-    </kit>
-    <kit name="purple" parents="spawn">
-        <helmet color="7F3FB2">leather helmet</helmet>
-        <chestplate color="7F3FB2">leather chestplate</chestplate>
-        <leggings color="7F3FB2">leather leggings</leggings>
-        <boots color="7F3FB2">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" enchantment="damage all:10" lore="`91-Hit Kill!" material="iron sword"/>
+        <item slot="1" enchantment="arrow damage:10" lore="`91-Shot Kill!" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <helmet team-color="true" material="leather helmet"/>
+        <chestplate team-color="true" material="leather chestplate"/>
+        <leggings team-color="true" material="leather leggings"/>
+        <boots team-color="true" material="leather boots"/>
+        <effect duration="3" amplifier="100">heal</effect>
+        <effect duration="3" amplifier="100">damage resistance</effect>
+        <effect>speed</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <spawn team="green" kit="spawn-kit" yaw="180">
+        <regions>
+            <point>75.5,30,168.5</point>
+            <point>21.5,30,168.5</point>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="spawn-kit">
+        <regions>
+            <point>75.5,30,-11.5</point>
+            <point>21.5,30,-11.5</point>
+        </regions>
+    </spawn>
+    <default yaw="90">
+        <regions>
+            <point>104,37,78</point>
+        </regions>
+    </default>
+</spawns>
 <regions>
-    <apply block="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
     <!-- green front pads -->
     <apply velocity="@-2,3,-5">
-        <cuboid min="81,6,105" max="88,7,112"/>
+        <region>
+            <cuboid min="81,6,105" max="88,7,112"/>
+        </region>
     </apply>
     <apply velocity="@2,3,-5">
-        <cuboid min="0,6,112" max="16,7,105"/>
+        <region>
+            <cuboid min="0,6,112" max="16,7,105"/>
+        </region>
     </apply>
     <!-- purple front pads -->
     <apply velocity="@-4,3,7">
-        <cuboid min="81,6,52" max="88,7,45"/>
+        <region>
+            <cuboid min="81,6,52" max="88,7,45"/>
+        </region>
     </apply>
     <apply velocity="@2,3,5">
-        <cuboid min="16,6,45" max="9,7,52"/>
+        <region>
+            <cuboid min="16,6,45" max="9,7,52"/>
+        </region>
     </apply>
     <!-- green back pads -->
     <apply velocity="@0,3,-4">
-        <cylinder base="48,2,141" radius="3" height="2"/>
+        <region>
+            <cylinder base="48,2,141" radius="3" height="2"/>
+        </region>
     </apply>
     <!-- purple back pads -->
     <apply velocity="0,3,4">
-        <cylinder base="48,2,15" radius="3" height="2"/>
+        <region>
+            <cylinder base="48,2,15" radius="3" height="2"/>
+        </region>
     </apply>
+    <apply block="never"/>
 </regions>
-<timelock>on</timelock>
-<killreward>
-    <item amount="1">arrow</item>
-</killreward>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
+<rage/>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
@@ -105,7 +107,16 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
+<timelock>on</timelock>
 </map>
