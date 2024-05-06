@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.3.2">
+<map proto="1.4.2">
 <name>Shave</name>
-<version>1.1.0</version>
-<objective>Shave off the other team's beard to win.</objective>
+<variant id="christmas" world="christmas">Santa</variant>
+<version>1.2.1</version>
 <gamemode>arcade</gamemode>
+<objective>Shave off the other team's beard to win.</objective>
 <rules>
     <rule>Players have resistance and reduced knockback in spawn!</rule>
 </rules>
@@ -16,128 +16,155 @@
     <contributor uuid="bd029cbe-ec66-48cb-8760-6509c1607328"/> <!-- hoodedredstoner -->
 </contributors>
 <teams>
-    <team color="blue" max="8" max-overfill="10">Blue</team>
-    <team color="dark red" max="8" max-overfill="10">Red</team>
+    <team id="blue" color="blue" max="8" max-overfill="10">Blue</team>
+    <team id="red" color="dark red" max="8" max-overfill="10">Red</team>
 </teams>
 <kits>
-    <kit name="spawnkit">
-        <item slot="0" name="`bRazor" enchantment="damage all:5;durability:5;dig speed:1">shears</item>
-        <item slot="1">bow</item>
-        <item slot="2" amount="64">arrow</item>
-        <item slot="6" amount="32">ladder</item>
-        <item slot="7">golden apple</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <helmet name="`8Hair Net">chainmail helmet</helmet>
+    <kit id="spawn-kit">
+        <item slot="0" name="`r`bRazor" enchantment="damage all:5;durability:5;dig speed" material="shears"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" amount="64" material="arrow"/>
+        <unless variant="christmas">
+            <item slot="4" team-color="true" amount="64" material="stained glass"/>
+        </unless>
+        <if variant="christmas">
+            <item slot="4" amount="64" material="snow block"/>
+        </if>
+        <item slot="5" team-color="true" amount="64" material="wool"/>
+        <item slot="6" amount="32" material="ladder"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="31" team-color="true" amount="64" material="stained glass"/>
+        <item slot="32" team-color="true" amount="64" material="wool"/>
+        <helmet name="`8Hair Net" material="chainmail helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
-    <kit name="spawn-protection">
-        <potion amplifier="10" duration="oo">damage resistance</potion>
+    <kit id="spawn-protection">
+        <effect amplifier="10" duration="oo">damage resistance</effect>
         <knockback-reduction>1</knockback-reduction>
-    </kit>
-    <kit name="red-kit" parents="spawnkit">
-        <chestplate color="cd0000" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="cd0000" unbreakable="true">leather leggings</leggings>
-        <boots color="cd0000" unbreakable="true">leather boots</boots>
-        <item slot="4" damage="14" amount="64">stained glass</item>
-        <item slot="5" damage="14" amount="64">wool</item>
-        <item slot="31" damage="14" amount="64">stained glass</item>
-        <item slot="32" damage="14" amount="64">wool</item>
-    </kit>
-    <kit name="blue-kit" parents="spawnkit">
-        <chestplate color="0066cc" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="0066cc" unbreakable="true">leather leggings</leggings>
-        <boots color="0066cc" unbreakable="true">leather boots</boots>
-        <item slot="4" damage="11" amount="64">stained glass</item>
-        <item slot="5" damage="11" amount="64">wool</item>
-        <item slot="31" damage="11" amount="64">stained glass</item>
-        <item slot="32" damage="11" amount="64">wool</item>
     </kit>
 </kits>
 <spawns>
-    <spawn kit="blue-kit" team="blue" yaw="-179">
-        <block>-4,123,-67</block>
-        <block>-3,123,-67</block>
+    <spawn kit="spawn-kit" team="blue" yaw="-180">
+        <regions>
+            <unless variant="christmas">
+                <point>-3.5,123,-66.5</point>
+            </unless>
+            <if variant="christmas">
+                <point>-3.5,127,-77.5</point>
+            </if>
+        </regions>
     </spawn>
-    <spawn kit="red-kit" team="red" yaw="180">
-        <block>-4,123,-24</block>
-        <block>-3,123,-24</block>
+    <spawn kit="spawn-kit" team="red" yaw="180">
+        <regions>
+            <unless variant="christmas">
+                <point>-3.5,123,-23.5</point>
+            </unless>
+            <if variant="christmas">
+                <point>-3.5,127,-13.5</point>
+            </if>
+        </regions>
     </spawn>
     <default yaw="90">
-        <cylinder base="-4,101,-45.5" radius="2" height="0" />
+        <regions>
+            <unless variant="christmas">
+                <cylinder base="-3.5,101,-45.5" radius="2" height="0"/>
+            </unless>
+            <if variant="christmas">
+                <cylinder base="-3.5,102,-45.5" radius="2" height="0"/>
+            </if>
+        </regions>
     </default>
 </spawns>
 <filters>
-    <filter name="only-spawnkit-blocks" parents="deny-blocks">
-        <allow>
-            <block>stained glass:11</block>
-            <block>stained glass:14</block>
-            <block>wool:11</block>
-            <block>wool:14</block>
-            <block>wool:12</block>
-            <block>wool:4</block>
-            <block>ladder</block>
-        </allow>
-    </filter>
-    <filter name="only-red" parents="deny-all">
-        <allow>
-            <team>red</team>
-        </allow>
-    </filter>
-    <filter name="only-blue" parents="deny-all"> 
-        <allow>
-            <team>blue</team>
-        </allow>
-    </filter>
+    <any id="only-spawnkit-blocks">
+        <material>stained glass:11</material>
+        <material>stained glass:14</material>
+        <material>wool:11</material>
+        <material>wool:14</material>
+        <material>wool:12</material>
+        <material>wool:4</material>
+        <material>ladder</material>
+        <if variant="christmas">
+            <material>snow block</material>
+            <material>wool:8</material>
+        </if>
+    </any>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
 </filters>
 <regions>
-    <union name="spawns">
-        <circle name="red-spawn" center="-3,-67" radius="6" />
-        <circle name="blue-sawn" center="-3,-24" radius="6" />
+    <union id="spawns">
+        <unless variant="christmas">
+            <rectangle id="red-spawn" min="-10,-20" max="2,-31"/>
+            <rectangle id="blue-spawn" min="2,-72" max="-10,-61"/>
+        </unless>
+        <if variant="christmas">
+            <rectangle id="red-spawn" max="-11,-9" min="3,-20"/>
+            <rectangle id="blue-spawn" max="-11,-71" min="3,-82"/>
+        </if>
     </union>
-    <union name="men">
-        <rectangle name="blue-man" min="-25,-75" max="16,-99"/>
-        <rectangle name="red-man" min="-25,6" max="16,-18"/>
+    <union id="men">
+        <unless variant="christmas">
+            <rectangle id="blue-man" min="-25,-75" max="16,-99"/>
+            <rectangle id="red-man" min="-25,6" max="16,-18"/>
+        </unless>
+        <if variant="christmas">
+            <rectangle id="blue-man" min="-25,-82" max="16,-103"/>
+            <rectangle id="red-man" min="-25,12" max="16,-9"/>
+        </if>
     </union>
-    <apply enter="only-red" message="You may not enter `4Red Spawn!">
-        <region name="blue-sawn"/>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter `9Blue`r's spawn!"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter `4Red`r's spawn!"/>
+    <apply region="blue-spawn" lend-kit="spawn-protection" filter="only-red"/>
+    <apply region="red-spawn" lend-kit="spawn-protection" filter="only-blue"/>
+    <apply region="spawns" block="never" message="You may not modify the spawn areas!"/>
+    <apply block="never" message="You are not allowed to place blocks in this area!">
+        <region>
+            <unless variant="christmas">
+                <rectangle id="denied-area" min="2,-61" max="-11,-31"/>
+            </unless>
+            <if variant="christmas">
+                <rectangle id="denied-area" min="3,-71" max="-11,-20"/>
+            </if>
+        </region>
     </apply>
-    <apply enter="only-blue" message="You may not enter `1Blue Spawn!">
-        <region name="red-spawn"/>
+    <apply block="never" message="You may not place blocks outside the area!">
+        <region>
+            <negative id="outside-playable">
+                <rectangle id="playable" min="-25,-99" max="16,6"/>
+            </negative>
+        </region>
     </apply>
-    <apply lend-kit="spawn-protection" filter="only-red">
-        <region name="blue-sawn"/>
-    </apply>
-    <apply lend-kit="spawn-protection" filter="only-blue">
-        <region name="red-spawn"/>
-    </apply>
-    <apply block="deny-all" message="You may not modify the spawn areas!">
-        <region name="spawns" />
-    </apply>
-    <apply block="deny-all" message="You are not allowed to place in this area!">
-        <rectangle name="denied-area" min="2,-61" max="-11,-31"/>
-    </apply>
-    <apply block="deny-all" message="You may not place outside the area!">
-        <negative>
-            <rectangle min="-25,-99" max="16,6"/>
-        </negative>
-    </apply>
-    <apply block="only-spawnkit-blocks" message="You may not modify these blocks!">
-        <region name="men"/>
-    </apply>
+    <apply region="men" block="only-spawnkit-blocks" message="You may not modify these blocks!"/>
 </regions>
-<!-- <playable>
-    <rectangle min="-25,-99" max="16,6"/>
-</playable> -->
-<destroyables>
-    <destroyables name="Beard" show-progress="true" completion="100%" materials="wool:4">
-        <destroyable owner="blue">
-            <cuboid min="5,70,-90" max="-13,81,-92" />
+<destroyables name="Beard" show-progress="true">
+    <unless variant="christmas">
+        <destroyable owner="blue" materials="wool:4">
+            <region>
+                <cuboid min="5,70,-90" max="-13,81,-92"/>
+            </region>
         </destroyable>
-    </destroyables>
-    <destroyables name="Beard" show-progress="true" completion="100%" materials="wool:12">
-        <destroyable owner="red">
-            <cuboid min="5,70,-2" max="-13,81,0" />
+        <destroyable owner="red" materials="wool:12">
+            <region>
+                <cuboid min="5,70,-2" max="-13,81,0"/>
+            </region>
         </destroyable>
-    </destroyables>
+    </unless>
+    <if variant="christmas">
+        <destroyable owner="blue" materials="wool:8">
+            <region>
+                <cuboid min="5,64,-89" max="-13,81,-91"/>
+            </region>
+        </destroyable>
+        <destroyable owner="red" materials="wool:8">
+            <region>
+                <cuboid min="5,64,-2" max="-13,81,0"/>
+            </region>
+        </destroyable>
+    </if>
 </destroyables>
 <itemremove>
     <item>wool</item>
