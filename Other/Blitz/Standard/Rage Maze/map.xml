@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.3.3">
+<map proto="1.4.2">
 <name>Rage Maze</name>
-<version>1.0.3</version>
+<version>1.0.5</version>
 <objective>Eliminate all of the enemy teams before 5 minutes!</objective>
-<gamemode>br</gamemode>
 <gamemode>arcade</gamemode>
+<gamemode>br</gamemode>
 <authors>
     <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
 </authors>
@@ -12,81 +11,59 @@
     <rule>Fall damage is disabled on this map!</rule>
 </rules>
 <teams>
-    <team color="dark red" max="20">Red</team>
-    <team color="blue" max="20">Blue</team>
-    <team color="green" max="20">Green</team>
-    <team color="yellow" max="20">Yellow</team>
+    <team id="red" color="dark red" max="20">Red</team>
+    <team id="blue" color="blue" max="20">Blue</team>
+    <team id="green" color="green" max="20">Green</team>
+    <team id="yellow" color="yellow" max="20">Yellow</team>
 </teams>
 <rage/>
-<blitz>
-    <time>5m</time>
-    <lives>1</lives>
-</blitz>
+<blitz/>
+<time>5m</time>
 <spawns>
-    <spawn team="red" kit="red" yaw="45">
-        <cuboid max="42,6,-42" min="40,6,-40"/>     
+    <spawn team="red" kit="spawn-kit" yaw="45">
+        <region><cuboid max="42,6,-42" min="40,6,-40"/></region>
     </spawn>
-    <spawn team="blue" kit="blue" yaw="-45">
-        <cuboid max="-43,6,-42" min="-41,6,-40"/>       
+    <spawn team="blue" kit="spawn-kit" yaw="-45">
+        <region><cuboid max="-43,6,-42" min="-41,6,-40"/></region>
     </spawn>
-    <spawn team="green" kit="green" yaw="135">
-        <cuboid max="42,6,43" min="40,6,41"/>       
+    <spawn team="green" kit="spawn-kit" yaw="135">
+        <region><cuboid max="42,6,43" min="40,6,41"/></region>
     </spawn>
-    <spawn team="yellow" kit="yellow" yaw="-135">
-        <cuboid max="-43,6,43" min="-41,6,41"/>     
+    <spawn team="yellow" kit="spawn-kit" yaw="-135">
+        <region><cuboid max="-43,6,43" min="-41,6,41"/></region>
     </spawn>
     <default yaw="90">
-        <cylinder base="0.5,6,0.5" radius="2" height="0"/>
+        <region><cylinder base="0.5,6,0.5" radius="2" height="0"/></region>
     </default>
 </spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" enchantment="damage all:10">iron sword</item>
-        <item slot="1" enchantment="arrow damage:10">bow</item>
-        <item slot="7" amount="1" name="`6Maze Cookie">cookie</item>
-        <item slot="8" amount="8">bread</item>
-        <item slot="28" amount="1">arrow</item>
-        <potion duration="5" amplifier="10">heal</potion>
-        <potion duration="5" amplifier="10">damage resistance</potion>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="FF0000" locked="true">leather helmet</helmet>
-        <chestplate color="FF0000" locked="true">leather chestplate</chestplate>
-        <leggings color="FF0000" locked="true">leather leggings</leggings>
-        <boots color="FF0000" locked="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="0000FF" locked="true">leather helmet</helmet>
-        <chestplate color="0000FF" locked="true">leather chestplate</chestplate>
-        <leggings color="0000FF" locked="true">leather leggings</leggings>
-        <boots color="0000FF" locked="true">leather boots</boots>
-    </kit>
-    <kit name="green" parents="spawn">
-        <helmet color="00FF00" locked="true">leather helmet</helmet>
-        <chestplate color="00FF00" locked="true">leather chestplate</chestplate>
-        <leggings color="00FF00" locked="true">leather leggings</leggings>
-        <boots color="00Ff00" locked="true">leather boots</boots>
-    </kit>
-    <kit name="yellow" parents="spawn">
-        <helmet color="FFFF00" locked="true">leather helmet</helmet>
-        <chestplate color="FFFF00" locked="true">leather chestplate</chestplate>
-        <leggings color="FFFF00" locked="true">leather leggings</leggings>
-        <boots color="FFFF00" locked="true">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" enchantment="damage all:10" material="iron sword" unbreakable="true"/>
+        <item slot="1" enchantment="arrow damage:10" material="bow" unbreakable="true"/>
+        <item slot="7" amount="1" name="`eMaze Cookie" material="cookie"/>
+        <item slot="8" amount="8" material="bread"/>
+        <item slot="28" amount="1" material="arrow"/>
+        <effect duration="5" amplifier="10">heal</effect>
+        <effect duration="5" amplifier="10">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+        <helmet team-color="true" locked="true" material="leather helmet" unbreakable="true"/>
+        <chestplate team-color="true" locked="true" material="leather chestplate" unbreakable="true"/>
+        <leggings team-color="true" locked="true" material="leather leggings" unbreakable="true"/>
+        <boots team-color="true" locked="true" material="leather boots" unbreakable="true"/>
     </kit>
 </kits>
 <regions>
-    <apply block="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
+    <apply block="never"/>
     <apply velocity="@0,6,0">
-        <cuboid max="-1,5,2" min="1,7,0"/>
+        <region>
+            <cuboid max="-1,5,2" min="1,7,0"/>
+        </region>
     </apply>
 </regions>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
 </toolrepair>
-<timelock>on</timelock>
 <itemremove>
     <item>bread</item>
     <item>cookie</item>
@@ -95,19 +72,36 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<mobs>
-    <filter parents="deny-all">
-        <allow>
-            <mob>zombie</mob>
-            <spawn>spawner egg</spawn>
-        </allow>
-    </filter>
-</mobs>
+<actions>
+    <trigger scope="player"> <!-- item-mods wouldn't work unless dropped -->
+        <filter>
+            <pulse period="0.1" duration="0.05">
+                <carrying ignore-metadata="true">
+                    <item material="monster egg"/>
+                </carrying>
+            </pulse>
+        </filter>
+        <action scope="player">
+            <replace-item ignore-metadata="true">
+                <find material="monster egg"/>
+                <replace name="`aMaze Scout" material="monster egg" damage="54" show-can-place-on="false">
+                    <can-place-on>
+                        <all-blocks/>
+                    </can-place-on>
+                </replace>
+            </replace-item>
+        </action>
+    </trigger>
+</actions>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
-<killreward>
-    <item amount="1">arrow</item>
-    <item amount="1" name="`6Maze Cookie">cookie</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item name="`eMaze Cookie" material="cookie"/>
+    </kill-reward>
+</kill-rewards>
+<!-- include src="blitz-global.xml"/ -->
+<respawn auto="true"/>
 </map>
