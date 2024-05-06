@@ -1,110 +1,122 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.3.2">
-   <name>Frostbite</name>
-   <version>2.2.2</version>
-   <objective>Destroy the enemy team's monuments!</objective>
-   <gamemode>dtm</gamemode>
-   <authors>
-      <author>Haribo98</author>
-      <!-- Haribo98 -->
-   </authors>
-   <teams>
-      <team id="red" color="dark red" max="32">Red</team>
-      <team id="purple" color="dark purple" max="32">Purple</team>
-   </teams>
-   <kits>
-      <kit name="spawn">
-         <chestplate>chainmail chestplate</chestplate>
-         <leggings>gold leggings</leggings>
-         <item slot="0">iron sword</item>
-         <item slot="1">bow</item>
-         <item slot="2" enchantment="dig speed:1;durability:3">diamond pickaxe</item>
-         <item slot="3" amount="2">golden apple</item>
-         <item slot="4" amount="32">cooked fish</item>
-         <item slot="5" amount="64">glass</item>
-         <item slot="6" amount="32">log</item>
-         <item slot="28" amount="48">arrow</item>
-         <potion duration="5" amplifier="5">damage resistance</potion>
-         <potion duration="5" amplifier="5">heal</potion>
-      </kit>
-      <kit name="red" parents="spawn">
-         <helmet color="993333">leather helmet</helmet>
-         <boots color="993333">leather boots</boots>
-      </kit>
-      <kit name="purple" parents="spawn">
-         <helmet color="7F3FB2">leather helmet</helmet>
-         <boots color="7F3FB2">leather boots</boots>
-      </kit>
-   </kits>
-   <spawns>
-      <spawn team="red" kit="red" yaw="-90">
-         <cylinder base="-45.5,35, -813.5" height="0" radius="1" />
-      </spawn>
-      <spawn team="purple" kit="purple" yaw="90">
-         <cylinder base="116.5,35,-695.5" height="0" radius="1" />
-      </spawn>
-      <default yaw="0">
-         <cylinder base="-16.5,68,-737.5" height="0" radius="1" />
-      </default>
-   </spawns>
-   <regions>
-       <cylinder name="red-spawn" base="-45.5,32, -813.5" height="9" radius="9" />
-       <cylinder name="purple-spawn" base="116.5,32,-695.5" height="9" radius="9" />
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="red-spawn" />
-      </apply>
-      <apply block="deny-all" message="You may not modify the spawn area.">
-         <region name="purple-spawn" />
-      </apply>
-   </regions>
-   <destroyables materials="obsidian">
-      <destroyable name="Back Left" owner="purple">
-         <block>124,55,-704</block>
-      </destroyable>
-      <destroyable name="Back Right" owner="purple">
-         <block>124,55,-688</block>
-      </destroyable>
-      <destroyable name="Front Left" owner="purple">
-         <block>108,50,-705</block>
-      </destroyable>
-      <destroyable name="Front Right" owner="purple">
-         <block>108,50,-687</block>
-      </destroyable>
-      <destroyable name="Back Left" owner="red">
-         <block>-54,55,-806</block>
-      </destroyable>
-      <destroyable name="Back Right" owner="red">
-         <block>-54,55,-822</block>
-      </destroyable>
-      <destroyable name="Front Left" owner="red">
-         <block>-38,50,-805</block>
-      </destroyable>
-      <destroyable name="Front Right" owner="red">
-         <block>-38,50,-823</block>
-      </destroyable>
-   </destroyables>
-   <toolrepair>
-      <tool>diamond pickaxe</tool>
-      <tool>bow</tool>
-      <tool>iron sword</tool>
-   </toolrepair>
-   <itemremove>
-      <item>obsidian</item>
-      <item>log</item>
-      <item>glass</item>
-      <item>arrow</item>
-      <item>leather helmet</item>
-      <item>chainmail chestplate</item>
-      <item>gold leggings</item>
-      <item>leather boots</item>
-      <item>apple</item>
-      <item>cooked fish</item>
-      <item>golden apple</item>
-   </itemremove>
-   <killreward>
-      <item amount="1">golden apple</item>
-      <item amount="16">arrow</item>
-   </killreward>
-   <timelock>on</timelock>
-   <maxbuildheight>67</maxbuildheight>
+<map proto="1.4.2">
+<name>Frostbite</name>
+<version>2.2.3</version>
+<phase>development</phase>
+<objective>Destroy the enemy team's monuments!</objective>
+<authors>
+    <author uuid="f391227e-626f-4076-a389-95e2b922d167"/> <!-- Haribo98 (ParaPenguin) -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="32">Red</team>
+    <team id="purple" color="dark purple" max="32">Purple</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" enchantment="dig speed;durability:3" material="diamond pickaxe"/>
+        <item slot="3" amount="2" material="golden apple"/>
+        <item slot="4" amount="32" material="cooked fish"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" amount="32" material="log"/>
+        <item slot="28" amount="48" material="arrow"/>
+        <helmet team-color="true" material="leather helmet"/>
+        <chestplate material="chainmail chestplate"/>
+        <leggings material="gold leggings"/>
+        <boots team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+        <effect duration="5" amplifier="5">heal</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="red" kit="spawn-kit" yaw="-90">
+        <regions>
+            <cylinder base="-45.5,35,-813.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="spawn-kit" yaw="90">
+        <regions>
+            <cylinder base="116.5,35,-695.5" height="0" radius="1"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <cylinder base="-16.5,68,-737.5" height="0" radius="1"/>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <cylinder id="red-spawn" base="-45.5,32, -813.5" height="9" radius="9"/>
+    <cylinder id="purple-spawn" base="116.5,32,-695.5" height="9" radius="9"/>
+    <apply region="red-spawn" block="never" message="You may not modify the spawn area."/>
+    <apply region="purple-spawn" block="never" message="You may not modify the spawn area."/>
+</regions>
+<destroyables materials="obsidian">
+    <destroyable name="Back Left" owner="purple">
+        <region>
+            <block>124,55,-704</block>
+        </region>
+    </destroyable>
+    <destroyable name="Back Right" owner="purple">
+        <region>
+            <block>124,55,-688</block>
+        </region>
+    </destroyable>
+    <destroyable name="Front Left" owner="purple">
+        <region>
+            <block>108,50,-705</block>
+        </region>
+    </destroyable>
+    <destroyable name="Front Right" owner="purple">
+        <region>
+            <block>108,50,-687</block>
+        </region>
+    </destroyable>
+    <destroyable name="Back Left" owner="red">
+        <region>
+            <block>-54,55,-806</block>
+        </region>
+    </destroyable>
+    <destroyable name="Back Right" owner="red">
+        <region>
+            <block>-54,55,-822</block>
+        </region>
+    </destroyable>
+    <destroyable name="Front Left" owner="red">
+        <region>
+            <block>-38,50,-805</block>
+        </region>
+    </destroyable>
+    <destroyable name="Front Right" owner="red">
+        <region>
+            <block>-38,50,-823</block>
+        </region>
+    </destroyable>
+</destroyables>
+<toolrepair>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>iron sword</tool>
+</toolrepair>
+<itemremove>
+    <item>obsidian</item>
+    <item>log</item>
+    <item>glass</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>gold leggings</item>
+    <item>leather boots</item>
+    <item>apple</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<maxbuildheight>67</maxbuildheight>
 </map>
