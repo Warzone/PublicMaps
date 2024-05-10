@@ -1,0 +1,186 @@
+<map proto="1.4.2">
+<name>Connected II</name>
+<version>1.0.1</version>
+<objective>Capture the wool and return it to your victory monument.</objective>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880" contribution="Map layout"/> <!-- Kroest -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Built most of the map"/> <!-- ogel -->
+</authors>
+<teams>
+    <team id="red" color="dark red" max="32" max-overfill="36">Red</team>
+    <team id="green" color="green" max="32" max-overfill="36">Green</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" enchantment="durability:4;dig speed" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:4;dig speed" material="iron axe"/>
+        <item slot="4" enchantment="durability:4;dig speed" material="iron spade"/>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="8" amount="32" material="golden carrot"/>
+        <item slot="28" material="arrow"/>
+        <chestplate enchantment="protection projectile:2" damage="-3000" material="chainmail chestplate"/>
+        <leggings damage="-3000" team-color="true" material="leather leggings"/>
+        <boots damage="-3000" team-color="true" enchantment="protection environmental" material="leather boots"/>
+        <effect duration="5" amplifier="3">heal</effect>
+        <effect amplifier="-1">health boost</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="green" kit="spawn-kit">
+        <regions yaw="90">
+            <point>140,163,-31</point>
+        </regions>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <regions yaw="-90">
+            <point>0,163,-31</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>70,68,46</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <!-- <team id="only-red">red</team>
+    <team id="only-green">green</team> -->
+    <deny id="deny-chest">
+        <material>chest</material>
+    </deny>
+    <not id="deny-void">
+        <all>
+            <void/>
+            <material>mob spawner</material>
+        </all>
+    </not>
+    <not id="no-spawner">
+        <material>mob spawner</material>
+    </not>
+    <all id="only-red-usage">
+        <material>web</material>
+        <not>
+            <team id="only-green">green</team>
+        </not>
+    </all>
+    <all id="only-green-usage">
+        <material>web</material>
+        <not>
+            <team id="only-red">red</team>
+        </not>
+    </all>
+</filters>
+<regions>
+    <negative id="outside-bridgezone">
+        <cuboid id="bridgezone" min="23,44,-60" max="117,65,-2"/>
+    </negative>
+    <union id="deny-jump">
+        <rectangle min="26,0" max="114,-2"/>
+        <rectangle min="26,-60" max="114,-62"/>
+    </union>
+    <union id="bases">
+        <cuboid id="green-base" min="116,35,-36" max="146,oo,-26"/>
+        <cylinder id="red-cylinder" base="2,0,-31" radius="9" height="oo"/>
+        <cuboid id="red-base" min="24,35,-36" max="-6,oo,-26"/>
+        <cylinder id="green-cylinder" base="138,0,-31" radius="9" height="oo"/>
+    </union>
+    <union id="red-wools">
+    <!-- Red must enter -->
+        <rectangle id="cyan-wool" min="86,-87" max="70,-62"/>
+        <rectangle id="lime-wool" min="86,25" max="70,0"/>
+    </union>
+    <!-- green must enter -->
+    <union id="green-wools">
+        <rectangle id="red-wool" min="54,25" max="70,0"/>
+        <rectangle id="magenta-wool" min="54,-87" max="70,-62"/>
+    </union>
+    <!-- Applied -->
+    <apply region="deny-jump" enter="never" message="You may not jump!"/>
+    <apply region="red-base" enter="only-red" message="You may not enter the enemy's base!"/>
+    <apply region="green-base" enter="only-green" message="You may not enter the enemy's base!"/>
+    <apply region="red-wools" enter="only-red" message="You may not enter your own wool room!"/>
+    <apply region="green-wools" enter="only-red" message="You may not enter your own wool room!"/>
+    <apply region="red-wools" block="only-red-usage"/>
+    <apply region="green-wools" block="only-green-usage"/>
+    <apply region="bases" block="never"/>
+    <apply region="outside-bridgezone" block="deny-void" message="You may not build outside the map area!"/>
+</regions>
+<wools>
+    <wools team="green">
+        <wool color="red" location="74.5,45,-74.5">
+            <monument>
+                <block>-7,23,-31</block>
+            </monument>
+        </wool>
+        <wool color="magenta" location="65.5,45,12.5">
+            <monument>
+                <block>-7,23,-32</block>
+            </monument>
+        </wool>
+    </wools>
+    <wools team="red">
+        <wool color="lime" location="65.5,45,-74.5">
+            <monument>
+                <block>146,23,-32</block>
+            </monument>
+        </wool>
+        <wool color="cyan" location="74.5,45,12.5">
+            <monument>
+                <block>146,23,-31</block>
+            </monument>
+        </wool>
+    </wools>
+</wools>
+<portals>
+    <portal x="@71.5" y="@34" z="@-75.5" yaw="-90">
+        <region>
+            <cuboid min="71,22,-73" max="72,24,-76"/>
+        </region>
+    </portal>
+    <portal x="@71.5" y="@34" z="@12.5" yaw="-90">
+        <region>
+            <cuboid min="71,22,14" max="72,24,11"/>
+        </region>
+    </portal>
+    <portal x="@68.5" y="@34" z="@12.5" yaw="90">
+        <region>
+            <cuboid min="69,22,14" max="68,24,11"/>
+        </region>
+    </portal>
+    <portal x="@68.5" y="@34" z="@-75.5" yaw="90">
+        <region>
+            <cuboid min="69,22,-76" max="68,24,-73"/>
+        </region>
+    </portal>
+</portals>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>chainmail chestplate</item>
+    <item>leather boots</item>
+    <item>leather leggings</item>
+    <item>wood</item>
+    <item>string</item>
+    <item>chainmail chestplate</item>
+    <item>golden carrot</item>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" damage="2" material="wood"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>65</maxbuildheight>
+<respawn delay="0" spectate="false"/>
+</map>
