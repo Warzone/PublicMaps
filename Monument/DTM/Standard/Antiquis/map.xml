@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Antiquis</name>
-<version>1.2.6</version>
+<version>1.2.8</version>
 <objective>Destroy the enemy's obsidian monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -10,6 +10,9 @@
     <team id="blue-team" color="blue" max="16">Blue</team>
     <team id="red-team" color="dark red" max="16">Red</team>
 </teams>
+<broadcasts>
+    <tip after="5s" every="10m">Combine `f4 `4Infused Shards`r in a crafting area to get one `4Infused Plate`r! This allows you to craft pickaxe upgrades in your `e2x2`r inventory crafting grid.</tip>
+</broadcasts>
 <kits>
     <kit id="pickaxe" filter="upgraded-pickaxe">
         <item slot="2" material="wood pickaxe" unbreakable="true"/>
@@ -35,21 +38,21 @@
 <spawns>
     <default yaw="-90">
         <region>
-            <cuboid min="-72,20,-2" max="-68,21,2"/>
+            <cuboid min="-72,20,-2" max="-68,20,2"/>
         </region>
     </default>
-    <spawn team="blue-team" kit="spawn-kit" yaw="0">
+    <spawn team="blue-team" kit="spawn-kit">
         <region>
-            <cuboid min="-2,11,-70" max="2,12,-66"/>
+            <cuboid min="-2,11,-70" max="2,11,-66"/>
         </region>
     </spawn>
     <spawn team="red-team" kit="spawn-kit" yaw="180">
         <region>
-            <cuboid min="-2,11,70" max="2,12,66"/>
+            <cuboid min="-2,11,70" max="2,11,66"/>
         </region>
     </spawn>
 </spawns>
-<destroyables name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+<destroyables name="Monument" materials="obsidian" mode-changes="true" repairable="false">
     <destroyable owner="blue-team">
         <region>
             <cuboid min="0,8,-41" max="1,10,-40"/>
@@ -189,7 +192,8 @@
     <item>beacon</item>
     <item>coal block</item>
     <item>packed ice</item>
-    <!-- item keep for traded items necessitates itemremove for golden apple and kit blocks -->\
+    <item>emerald block</item>
+    <!-- item keep for traded items necessitates itemremove for golden apple and kit blocks -->
     <item>wood</item>
     <item>golden apple</item>
 </itemremove>
