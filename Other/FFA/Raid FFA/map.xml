@@ -1,0 +1,208 @@
+<map proto="1.4.2">
+<name>Raid FFA</name>
+<variant id="guns">Guns</variant>
+<version>1.0.6</version>
+<objective>Be the player with the most kills in 6 minutes!</objective>
+<created>2023-05-12</created>
+<authors>
+    <author uuid="27ac2daf-3c38-4b8e-9448-46f221bb612a"/> <!-- N11cK -->
+    <author uuid="39a9e1b5-1e1d-40c0-8c16-69a9568efa72"/> <!-- Teejers -->
+    <author uuid="811968c3-0a9f-4cb5-80af-19ce37141341"/> <!-- BennyDoesStuff -->
+    <author uuid="42195cb9-b21b-42f5-b938-5ef46f303fcd"/> <!-- _Bill -->
+    <author uuid="b13b0b00-a8f9-422b-8963-b3d18bf80aa6"/> <!-- Bearinx -->
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa" contribution="Re-remaster"/> <!-- Eliminate -->
+</authors>
+<contributors>
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Re-remaster XML and Guns variant"/> <!-- zzuf -->
+</contributors>
+<players max="48" colors="true"/>
+<time result="score">6m</time>
+<unless variant="guns">
+    <gamemode>rage</gamemode>
+    <gamemode>arcade</gamemode>
+    <rage/>
+</unless>
+<if variant="guns">
+    <gamemode>ffa</gamemode>
+    <gamemode>arcade</gamemode>
+    <broadcasts>
+        <tip after="1s" every="2m">Hover your cursor over each weapon to learn about its stats!</tip>
+        <tip after="2s" every="2m">Get `f2 grenades`r per `c2 kills`r!</tip>
+    </broadcasts>
+</if>
+<spawns>
+    <default>
+        <region yaw="180">
+            <point>-980.5,62,-969.5</point>
+        </region>
+    </default>
+    <spawn kit="spawn-kit" spread="true">
+        <regions>
+            <point yaw="-125">-1062.5,47,-1051.5</point>
+            <point yaw="-25">-1058.5,47,-1059.5</point>
+            <point yaw="45">-1037.5,48,-1047.5</point>
+            <point yaw="-135">-1029.5,49,-1006.5</point>
+            <point yaw="90">-1024.5,49,-1023.5</point>
+            <point yaw="40">-1017.5,49,-1030.5</point>
+            <point yaw="45">-1008.5,49,-1026.5</point>
+            <point yaw="0">-1022,49,-1016.5</point>
+            <point yaw="0">-1011,51,-1008.5</point>
+            <point yaw="0">-1008.5,51,-1017.5</point>
+            <point yaw="-135">-998.5,47,-999.5</point>
+            <point yaw="115">-959.5,47,-1006.5</point>
+            <point yaw="-45">-1001.5,48,-1029.5</point>
+            <point yaw="90">-949.5,49,-1026.5</point>
+            <point yaw="-90">-959.5,47,-1043.5</point>
+            <point yaw="-135">-961.5,47,-1048.5</point>
+            <point yaw="45">-963.5,47,-1060.5</point>
+            <point yaw="135">-969.5,47,-1042.5</point>
+            <point yaw="-135">-996.5,47,-1042.5</point>
+            <point yaw="-45">-996.5,47,-1060.5</point>
+            <point yaw="135">-1002.5,47,-1046.5</point>
+            <point yaw="-90">-1020.5,47,-1050.5</point>
+            <point yaw="-50">-1012.5,47,-1059.5</point>
+            <point yaw="-115">-1017.5,47,-1063.5</point>
+            <point yaw="180">-1004.5,47,-1070.5</point>
+            <point yaw="-45">-1019.5,43,-1109.5</point>
+            <point yaw="-45">-1000.5,43,-1098.5</point>
+            <point yaw="180">-999.5,43,-1088.5</point>
+            <point yaw="180">-987.5,43,-1077.5</point>
+            <point yaw="180">-972.5,43,-1077.5</point>
+            <point yaw="90">-961.5,43,-1092</point>
+            <point yaw="-40">-960.5,50,-1094.5</point>
+            <point yaw="135">-955.5,49,-1083.5</point>
+            <point yaw="-135">-936.5,45,-1074.5</point>
+            <point yaw="-90">-947,50,-1073.5</point>
+            <point yaw="-45">-948.5,51,-1062.5</point>
+            <point yaw="135">-927.5,45,-1039.5</point>
+            <point yaw="-45">-936.5,45,-1061.5</point>
+            <point yaw="135">-909.5,45,-1034.5</point>
+            <point yaw="45">-909.5,45,-1067.5</point>
+            <point yaw="0">-980.5,45,-1072.5</point>
+            <point yaw="-45">-950.7,47,-1056.5</point>
+            <point yaw="-45">-1027.5,47,-1073.5</point>
+            <point yaw="-90">-1047.5,48,-1062.5</point>
+            <point yaw="45">-1021.5,43,-1105.5</point>
+            <point yaw="135">-1021.5,43,-1082.5</point>
+            <point yaw="-135">-1046.5,44,-1078.5</point>
+            <point yaw="135">-1033.5,43,-1073.5</point>
+        </regions>
+    </spawn>
+</spawns>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <game-mode>adventure</game-mode>
+        <unless variant="guns">
+            <item slot="0" unbreakable="true" material="iron sword" enchantment="damage all:10"/>
+            <item slot="1" unbreakable="true" material="bow" enchantment="power:10"/>
+            <item slot="28" material="arrow"/>
+        </unless>
+        <if variant="guns">
+            <item slot="0" unbreakable="true" material="gold barding" name="`fSkorpion EVO" lore="`7Fast rate of fire, low damage" projectile="evoskorpion"/>
+            <item slot="1" unbreakable="true" material="iron hoe" name="`fFive-seven" lore="`7Medium rate of fire, medium damage" projectile="fiveseven"/>
+            <item slot="2" unbreakable="true" material="iron barding" name="`fDSR 50" lore="`7Slow rate of fire, `cinstakill" projectile="dsr50"/>
+            <item slot="8" material="golden apple"/>
+        </if>
+        <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
+        <effect duration="2" amplifier="255">heal</effect>
+        <effect duration="2" amplifier="255">damage resistance</effect>
+    </kit>
+</kits>
+<projectiles>
+    <projectile
+        id="grenade"
+        name="Grenade"
+        projectile="Fireball"
+        velocity="3.5"
+        damage="10"
+        throwable="true"
+        cooldown="3s"/>
+    <projectile
+        id="evoskorpion"
+        name="Skorpion EVO"
+        projectile="Egg"
+        velocity="3.5"
+        damage="3.5"
+        throwable="false"
+        cooldown="0s"/>
+    <projectile
+        id="fiveseven"
+        name="Five-seven"
+        projectile="Snowball"
+        velocity="3.5"
+        damage="5"
+        throwable="false"
+        cooldown="1s"/>
+    <projectile
+        id="dsr50"
+        name="DSR 50"
+        projectile="SmallFireball"
+        velocity="5.5"
+        damage="40"
+        throwable="false"
+        precise="true"
+        cooldown="10s"/>
+</projectiles>
+<regions>
+    <above id="ceiling" y="54"/>
+    <apply enter="never" region="ceiling"/>
+    <apply block="never"/>
+    <apply use="never">
+        <region>
+            <negative>
+                <block>-1037,43,-1106</block>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<gamerules>
+    <doTileDrops>false</doTileDrops>
+</gamerules>
+<score>
+    <kills>1</kills>
+</score>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>iron barding</tool>
+    <tool>iron hoe</tool>
+    <tool>gold barding</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemkeep>
+    <item>iron barding</item>
+    <item>iron hoe</item>
+    <item>gold barding</item>
+    <item>golden apple</item>
+    <item>fireball</item>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <unless variant="guns">
+            <item material="arrow"/>
+        </unless>
+        <if variant="guns">
+            <item material="golden apple"/>
+        </if>
+    </kill-reward>
+    <if variant="guns">
+        <kill-reward>
+            <filter>
+                <kill-streak count="2"/>
+            </filter>
+            <item material="fireball" amount="2" name="`fGrenade" projectile="grenade"/>
+        </kill-reward>
+    </if>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
