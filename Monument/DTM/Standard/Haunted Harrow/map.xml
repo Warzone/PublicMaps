@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.4.1">
+<map proto="1.4.2">
 <name>Haunted Harrow</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
+<created>2015-10-23</created>
 <objective>Destroy the enemy's pumpkins to win!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -9,9 +9,24 @@
     <author uuid="99fa5c84-9f49-4231-b16f-5a83fe858ff0"/> <!-- NinjaTrev -->
 </authors>
 <teams>
-    <team id="red"  color="dark red" min="1" max="8">Red</team>
-    <team id="blue" color="blue"     min="1" max="8">Blue</team>
+    <team id="red" color="dark red" max="8">Red</team>
+    <team id="blue" color="blue" max="8">Blue</team>
 </teams>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
 <spawns>
     <spawn team="red" kit="default">
         <regions yaw="-90">
@@ -29,49 +44,13 @@
         </regions>
     </default>
 </spawns>
-<kits>
-    <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">stone pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <item slot="9" amount="16">arrow</item>
-        <helmet     unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings   unbreakable="true">chainmail leggings</leggings>
-        <boots      unbreakable="true" team-color="true">leather boots</boots>
-    </kit>
-</kits>
-<kill-rewards>
-    <kill-reward>
-        <item amount="1" material="golden apple"/>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <all>
-                <kill-streak count="2"/>
-            </all>
-        </filter>
-        <item amount="8" material="arrow"/>
-    </kill-reward>
-</kill-rewards>
-<destroyables show-progress="true" repairable="false" owner="red" completion="50%" sparks="true">
-    <destroyable name="Left Pumpkin" region="red-left-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
-    <destroyable name="Right Pumpkin" region="red-right-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
-</destroyables>
-    <destroyables show-progress="true" repairable="false" owner="blue" completion="50%" sparks="true">
-    <destroyable name="Left Pumpkin" region="blue-left-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
-    <destroyable name="Right Pumpkin" region="blue-right-pumpkin" materials="log;stained clay;red sandstone;stone slab2"/>
-</destroyables>
 <filters>
     <team id="only-red">red</team>
     <team id="only-blue">blue</team>
 </filters>
 <regions>
     <union id="spawn-protections">
-        <rectangle id="red-spawn"  min="-149,-50" max="-162,-37"/>
+        <rectangle id="red-spawn" min="-149,-50" max="-162,-37"/>
         <rectangle id="blue-spawn" min="-28,-32"  max="-15,-46"/>
     </union>
     <union id="monuments">
@@ -83,11 +62,21 @@
     <negative id="not-map">
         <rectangle id="map" min="-170,-82" max="-9,-3"/>
     </negative>
-    <apply region="not-map"   block="never"              message="You may not edit outside the map!"/>
-    <apply block="never"      region="spawn-protections" message="You are not allowed to modify terrain here."/>
-    <apply enter="only-red"   region="red-spawn"         message="You may not enter the enemy spawn."/>
-    <apply enter="only-blue"  region="blue-spawn"        message="You may not enter the enemy spawn."/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn."/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn."/>
+    <apply block="never" region="spawn-protections" message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
 </regions>
+<destroyables show-progress="true" repairable="false" completion="50%" materials="log;stained clay;red sandstone;stone slab2" sparks="true">
+    <destroyables owner="red">
+        <destroyable name="Left Pumpkin" region="red-left-pumpkin"/>
+        <destroyable name="Right Pumpkin" region="red-right-pumpkin"/>
+    </destroyables>
+    <destroyables owner="blue">
+        <destroyable name="Left Pumpkin" region="blue-left-pumpkin"/>
+        <destroyable name="Right Pumpkin" region="blue-right-pumpkin"/>
+    </destroyables>
+</destroyables>
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -105,5 +94,16 @@
     <item>red sandstone</item>
     <item>stone slab2</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>66</maxbuildheight>
 </map>
