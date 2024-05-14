@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.4.2">
 <name>Formorgar 2</name>
-<version>1.1.2</version>
-<objective>Destroy the enemy's monument(s) to win!</objective>
+<variant id="christmas" world="christmas" override="true">A Quiet Night in Formorgar 2</variant>
+<version>1.2.0</version>
+<objective>Destroy the enemy's monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <authors>
     <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
@@ -13,82 +13,68 @@
     <team id="purple" color="dark purple" max="20">Purple</team>
     <team id="yellow" color="yellow" max="20">Yellow</team>
 </teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="64" material="cooked beef"/>
+        <item slot="8" amount="4" material="exp bottle"/>
+        <item slot="9" amount="64" material="arrow"/>
+        <item slot="10" material="lapis block"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
 <spawns>
-    <spawn team="purple" kit="pkit">
+    <spawn team="purple" kit="spawn-kit">
         <regions yaw="180">
-            <point>7.5, 81, 234.5</point>
+            <point>7.5,81,234.5</point>
         </regions>
     </spawn>
-    <spawn team="yellow" kit="ykit">
-        <regions yaw="0">
-            <point>7.5, 81, 24.5</point>
+    <spawn team="yellow" kit="spawn-kit">
+        <regions>
+            <point>7.5,81,24.5</point>
         </regions>
     </spawn>
     <default>
         <regions yaw="-90">
-            <point>-70.5, 110, 129.5</point>
+            <point>-70.5,110,129.5</point>
         </regions>
     </default>
 </spawns>
-<kits>
-    <kit id="both">
-        <clear/>
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="5" amount="64">wood</item>
-        <item slot="6" amount="1">golden apple</item>
-        <item slot="7" amount="64">cooked beef</item>
-        <item slot="8" amount="4">exp bottle</item>
-        <item slot="9" amount="64">arrow</item>
-        <item slot="10" amount="1">lapis block</item>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <boots unbreakable="true">iron boots</boots>
-    </kit>
-    <kit id="pkit" parents="both">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <leggings unbreakable="true" color="3C44AA">leather leggings</leggings>
-    </kit>
-    <kit id="ykit" parents="both">
-        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
-        <leggings unbreakable="true" color="E5E533">leather leggings</leggings>
-    </kit>
-</kits>
-<kill-rewards>
-    <kill-reward>
-        <item amount="1" material="golden apple"/>
-        <item amount="4" material="exp bottle"/>
-        <item amount="2">arrow</item>
-    </kill-reward>
-</kill-rewards>
-<destroyables owner="yellow" completion="100%" sparks="true">
-    <destroyable name="Monument A" region="yellow-monument-a" materials="obsidian"/>
-    <destroyable name="Monument B" region="yellow-monument-b" materials="obsidian"/>
-</destroyables>
-    <destroyables owner="purple" completion="100%" sparks="true">
-    <destroyable name="Monument A" region="purple-monument-a" materials="obsidian"/>
-    <destroyable name="Monument B" region="purple-monument-b" materials="obsidian"/>
-</destroyables>
 <filters>
     <team id="only-yellow">yellow</team>
     <team id="only-purple">purple</team>
 </filters>
 <regions>
-    <cuboid id="yellow-spawn" min="-3, 0, 15" max="17, oo, 46"/>
-    <cuboid id="purple-spawn" min="-3, 0, 212" max="17, oo, 243"/>
-    <union id="monuments">
-        <block id="yellow-monument-a">-23, 87, 7</block>
-        <block id="yellow-monument-b">37, 87, 7</block>
-        <block id="purple-monument-a">37, 87, 251</block>
-        <block id="purple-monument-b">-23, 87, 251</block>
+    <union id="spawns">
+        <rectangle id="yellow-spawn" min="-3,15" max="17,46"/>
+        <rectangle id="purple-spawn" min="-3,212" max="17,243"/>
     </union>
-    <apply block="never" enter="only-yellow" region="yellow-spawn" message="You can not modify blocks or enter here!"/>
-    <apply block="never" enter="only-purple" region="purple-spawn" message="You can not modify blocks or enter here!"/>
-    <apply enter="only-yellow" region="yellow-spawn"/>
-    <apply enter="only-purple" region="purple-spawn"/>
+    <union id="monuments">
+        <block id="yellow-monument-a">-23,87,7</block>
+        <block id="yellow-monument-b">37,87,7</block>
+        <block id="purple-monument-a">37,87,251</block>
+        <block id="purple-monument-b">-23,87,251</block>
+    </union>
+    <apply enter="only-yellow" region="yellow-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-purple" region="purple-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="spawns" message="You may not modify blocks here!"/>
 </regions>
+<destroyables materials="obsidian" sparks="true">
+    <destroyable owner="yellow" name="Monument A" region="yellow-monument-a"/>
+    <destroyable owner="yellow" name="Monument B" region="yellow-monument-b"/>
+    <destroyable owner="purple" name="Monument A" region="purple-monument-a"/>
+    <destroyable owner="purple" name="Monument B" region="purple-monument-b"/>
+</destroyables>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
@@ -108,5 +94,12 @@
     <item>wood</item>
     <item>golden apple</item>
 </itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="4" material="exp bottle"/>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>110</maxbuildheight>
 </map>
