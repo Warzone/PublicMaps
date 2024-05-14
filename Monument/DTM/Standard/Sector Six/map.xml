@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.4.2">
 <name>Sector Six</name>
-<version>1.1.1</version>
+<variant id="christmas" world="christmas" override="true">Sector Twenty Five</variant>
+<version>1.2.0</version>
 <gamemode>dtm</gamemode>
 <objective>Destroy the enemy monuments to win!</objective>
 <authors>
@@ -12,26 +12,26 @@
    <team id="cyan-team" color="dark aqua" min="2" max="25" max-overfill="28">Cyan</team>
 </teams>
 <spawns>
-    <spawn team="orange-team" kit="okit">
+    <spawn team="orange-team" kit="default">
         <regions yaw="0">
-            <point>0.5,36,-154.5</point>
+            <point>0.5,11,-154.5</point>
         </regions>
     </spawn>
-    <spawn team="cyan-team" kit="ckit">
+    <spawn team="cyan-team" kit="default">
         <regions yaw="180">
-            <point>0.5,36,0.5</point>
+            <point>0.5,11,0.5</point>
         </regions>
     </spawn>
     <default>
         <regions yaw="90">
-            <point>106.5,84,-74.5</point>
+            <point>106.5,59,-74.5</point>
         </regions>
     </default>
 </spawns>
 <kits>
-    <kit id="def" force="true">
+    <kit id="default" force="true">
         <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
         <item slot="2" unbreakable="true" material="diamond pickaxe"/>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="64" material="wood"/>
@@ -39,24 +39,15 @@
         <item slot="7" amount="1" material="golden apple"/>
         <item slot="8" amount="64" material="cooked beef"/>
         <item slot="9" amount="1" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" enchantment="protection environmental" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" material="iron boots"/>
-    </kit>
-    <kit id="okit" parents="def">
-        <helmet unbreakable="true" color="D87F33" enchantment="protection environmental:1" material="leather helmet"/>
-        <leggings unbreakable="true" color="D87F33" material="leather leggings"/>
-    </kit>
-    <kit id="ckit" parents="def">
-        <helmet unbreakable="true" color="4C7F99" enchantment="protection environmental:1" material="leather helmet"/>
-        <leggings unbreakable="true" color="4C7F99" material="leather leggings"/>
-    </kit>
-    <kit id="k-r">
-        <item material="golden apple"/>
     </kit>
 </kits>
 <kill-rewards>
     <kill-reward>
-        <kit id="k-r"/>
+        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <filters>
@@ -68,21 +59,21 @@
 </filters>
 <regions>
     <union id="monuments">
-        <block id="o-r-m">71,38,-155</block>
-        <block id="o-b-m">0,38,-226</block>
-        <block id="o-l-m">-71,38,-155</block>
-        <block id="c-r-m">-71,38,0</block>
-        <block id="c-b-m">0,38,71</block>
-        <block id="c-l-m">71,38,0</block>
+        <block id="o-r-m">71,14,-155</block>
+        <block id="o-b-m">0,14,-226</block>
+        <block id="o-l-m">-71,14,-155</block>
+        <block id="c-r-m">-71,14,0</block>
+        <block id="c-b-m">0,14,71</block>
+        <block id="c-l-m">71,14,0</block>
     </union>
     <union id="spawn-protections">
-        <cylinder id="orange-spawn" base="0.5,34,-155.5" height="20" radius="12" />
-        <cylinder id="cyan-spawn" base="0.5,34,0.5" height="20" radius="12" />
+        <cylinder id="orange-spawn" base="0.5,10,-155.5" height="20" radius="12" />
+        <cylinder id="cyan-spawn" base="0.5,10,0.5" height="20" radius="12" />
     </union>
-    <apply region="spawn-protections" block="never"       message="You are not allowed to modify terrain here."/>
-    <apply region="orange-spawn"      enter="only-orange" message="You may not enter the enemy spawn."/>
-    <apply region="cyan-spawn"        enter="only-cyan"   message="You may not enter the enemy spawn."/>
-    <!-- the map have blocks 36 to set the build areas -->
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="orange-spawn" enter="only-orange" message="You may not enter the enemy spawn."/>
+    <apply region="cyan-spawn" enter="only-cyan" message="You may not enter the enemy spawn."/>
+    <!-- Uses block 36 -->
     <apply block="no-void" message="You may not modify blocks outside the playing area!"/>
 </regions>
 <destroyables owner="orange-team" completion="100%" sparks="true">
@@ -110,5 +101,5 @@
     <item>wood</item>
     <item>arrow</item>
 </itemremove>
-<maxbuildheight>70</maxbuildheight>
+<maxbuildheight>46</maxbuildheight>
 </map>
