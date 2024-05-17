@@ -2,7 +2,7 @@
 <!-- [#####|#####] -->
 <!-- Bridge gamemode include file -->
 <!-- Created by zzuf -->
-<!-- Version 2024.04.06-1 -->
+<!-- Version 2024.05.16-1 -->
 <gamemode>bridge</gamemode>
 <respawn auto="true" delay="0s"/>
 <modifybowprojectile pickup-filter="never"/>
@@ -291,7 +291,7 @@
     <variable id="can_score" scope="match" default="1"/>
     <variable id="round_status" scope="match" default="2"/>
     <variable id="buytime" scope="match" default="0"/>
-    <variable id="overtime" scope="match" default="${overtime-default}"/>
+    <variable id="overtime" scope="match" default="${overtime-default}"/> <!-- 0: Off, 1: On, 2: First to score -->
     <score id="team_score"/>
     <with-team id="team_one_score" var="team_score" team="team-one"/>
     <with-team id="team_two_score" var="team_score" team="team-two"/>
@@ -319,6 +319,7 @@
             <action id="set-buytime"/>
             <kill-entities filter="remove-entities"/>
         </switch-scope>
+        <action id="tiebreaker-win"/>
     </action>
     <action id="set-buytime" scope="match" filter="pre_round=1">
         <set var="buytime" value="1"/>
@@ -531,6 +532,20 @@
             <set var="time_limit" value="0"/>
         </action>
     </trigger>
+    <trigger scope="match">
+        <filter>
+            <all>
+                <variable var="overtime">2</variable>
+            </all>
+        </filter>
+        <action>
+            <message text=" `e⚠ `b`lTIEBREAKER! `7First team to score `awins `7the match."/>
+            <!-- If score/mercy limits are ever made into variables, change scores + those instead -->
+        </action>
+    </trigger>
+    <action id="tiebreaker-win" scope="player" filter="overtime=2">
+        <set var="team_score" value="${score-limit}"/>
+    </action>
 </actions>
 <regions>
     <apply block-place="deny-participating" region="not-buildable">
