@@ -1,0 +1,69 @@
+<map proto="1.4.2">
+<name>Limitless</name>
+<version>1.0.3</version>
+<objective>Jump into the enemy team's portal, located below their spawn point!</objective>
+<created>2023-03-15</created>
+<include id="bridge"/>
+<constants>
+    <constant id="map-origin">0.5,0,0.5</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">32.5,19,0.5</constant>
+    <constant id="team-one-yaw">90</constant>
+    <constant id="team-two-spawn">-31.5,19,0.5</constant>
+    <constant id="team-two-yaw">-90</constant>
+</constants>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+    <author uuid="357ccee9-f178-496f-905f-26b6075a338e"/> <!-- Vand -->
+</authors>
+<contributors> 
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="XML"/> <!-- zzuf -->
+</contributors>
+<teams>
+    <team id="team-one" color="dark red" max="5">Red</team>
+    <team id="team-two" color="blue" max="5">Blue</team>
+</teams>
+<filters>
+    <any id="block-list">
+        <material>stained clay:11</material>
+        <material>stained clay:14</material>
+        <material>stained clay:0</material>
+    </any>
+</filters>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="180">0.5,32,31.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <negative id="not-buildable">
+        <complement>
+            <cuboid min="-22,4,21" max="23,19,-20"/>
+            <region id="clay-areas"/>
+        </complement>
+    </negative>
+    <complement id="clay-areas">
+        <union>
+            <union id="red-areas">
+                <cuboid min="18,11,13" max="23,12,3"/>
+                <cuboid min="18,11,-12" max="23,12,-2"/>
+            </union>
+            <mirror id="blue-areas" region="red-areas" origin="${map-origin}" normal="1,0,0"/>
+        </union>
+        <union id="red-void-bits">
+            <rectangle min="18,8" max="20,-7"/>
+            <rectangle min="20,3" max="22,-2"/>
+        </union>
+        <mirror region="red-void-bits" origin="${map-origin}" normal="1,0,0"/>
+    </complement>
+    <cuboid id="team-one-portal" min="35,7,-1" size="3,1,3"/>
+    <mirror id="team-two-portal" region="team-one-portal" origin="${map-origin}" normal="1,0,0"/>
+    <!-- Round cages -->
+    <union id="cages">
+        <cylinder id="team-one-spawn-cage" base="${team-one-spawn}" height="3" radius="2"/>
+        <cylinder id="team-two-spawn-cage" base="${team-two-spawn}" height="3" radius="2"/>
+    </union>
+</regions>
+</map>

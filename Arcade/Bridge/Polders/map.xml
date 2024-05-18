@@ -1,0 +1,54 @@
+<map proto="1.4.2">
+<name>Polders</name>
+<version>1.0.3</version>
+<objective>Jump into the enemy team's portal, located below their spawn point!</objective>
+<created>2023-03-20</created>
+<include id="bridge"/>
+<constants>
+    <constant id="map-origin">0.5,0,1.5</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">-44.5,20,1.5</constant>
+    <constant id="team-one-yaw">-90</constant>
+    <constant id="team-two-spawn">45.5,20,1.5</constant>
+    <constant id="team-two-yaw">90</constant>
+</constants>
+<authors>
+    <author uuid="6863869b-4b8c-4445-b778-a8e016775ae4"/> <!-- Cazadorian -->
+</authors>
+<contributors> 
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Original XML and include"/> <!-- zzuf -->
+</contributors>
+<teams>
+    <team id="team-one" color="dark purple" max="5">Purple</team>
+    <team id="team-two" color="gold" max="5">Orange</team>
+</teams>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="0">0.5,21,-24.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <any id="block-list">
+        <material>stained clay:1</material>
+        <material>stained clay:10</material>
+        <material>stained clay:0</material>
+    </any>
+</filters>
+<regions>
+    <negative id="not-buildable">
+        <complement>
+            <cuboid id="middle" min="37,18,-12" max="-36,0,15"/>
+            <cylinder id="purple-inside" base="-37.5,10,1.5" height="10" radius="5"/>
+            <cylinder id="orange-inside" base="38.5,10,1.5" height="10" radius="5"/>
+        </complement>
+    </negative>
+    <cuboid id="team-one-portal" min="-39,6,0" max="-42,7,3"/>
+    <mirror id="team-two-portal" region="team-one-portal" origin="${map-origin}" normal="1,0,0"/>
+    <union id="cages">
+        <cuboid id="team-one-spawn-cage" min="-42,20,0" max="-43,23,3"/>
+        <cuboid id="team-two-spawn-cage" min="43,20,0" max="44,23,3"/>
+    </union>
+</regions>
+</map>

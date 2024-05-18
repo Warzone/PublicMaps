@@ -1,0 +1,167 @@
+<map proto="1.4.2">
+<name>Double Cross</name>
+<version>1.2.2</version>
+<objective>Jump into the enemy team's portal, located below their beacon!</objective>
+<created>2023-03-21</created>
+<include id="bridge"/>
+<constants>
+    <constant id="score-limit">7</constant>
+    <constant id="mercy-limit">5</constant>
+    <constant id="map-origin">0.5,0,0.5</constant>
+    <constant id="void-plane">1</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">-69.5,35,0.5</constant>
+    <constant id="team-one-yaw">-90</constant>
+    <constant id="team-two-spawn">70.5,35,0.5</constant>
+    <constant id="team-two-yaw">90</constant>
+    <!-- Double Cross -->
+    <constant id="purple-north">-44.5,23,-29.5</constant>
+    <constant id="purple-south">-44.5,23,30.5</constant>
+    <constant id="yellow-north">45.5,23,-29.5</constant>
+    <constant id="yellow-south">45.5,23,30.5</constant>
+</constants>
+<authors>
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128"/> <!-- zzuf -->
+</authors>
+<teams>
+    <team id="team-one" color="dark purple" max="18">Purple</team>
+    <team id="team-two" color="yellow" max="18">Yellow</team>
+</teams>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="0">0.5,40,-54.5</point>
+            <point yaw="180">0.5,40,55.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="adventure-kit">
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="survival-kit">
+        <game-mode>survival</game-mode>
+    </kit>
+</kits>
+<filters>
+    <any id="block-list">
+        <material>stained clay:10</material>
+        <material>stained clay:4</material>
+        <material>stained clay:0</material>
+        <material>long grass</material>
+        <material>double plant</material>
+        <material>stationary water</material>
+        <material>water</material>
+    </any>
+    <deny id="deny-physics">
+        <any>
+            <material>redstone wire</material>
+            <material>wall sign</material>
+            <material>sign post</material>
+        </any>
+    </deny>
+</filters>
+<regions>
+    <negative id="not-buildable">
+        <complement>
+            <union>
+                <cuboid min="43,5,-35" max="-42,18,36"/>
+                <cuboid id="team-one-south-small-area" min="-42,5,22" max="-46,18,15"/>
+                <mirror id="team-one-north-small-area" region="team-one-south-small-area" origin="${map-origin}" normal="0,0,1"/>
+                <mirror region="team-one-south-small-area" origin="${map-origin}" normal="1,0,0"/>
+                <mirror region="team-one-north-small-area" origin="${map-origin}" normal="1,0,0"/>
+            </union>
+            <union id="team-one-buildings">
+                <complement id="team-one-south-building">
+                    <union>
+                        <rectangle min="-28,22" max="-47,36"/>
+                        <rectangle min="-21,27" max="-28,36"/>
+                        <cuboid min="-22,7,25" size="1,3,1"/>
+                    </union>
+                    <cuboid min="-21,12,29" max="-28,15,31"/> <!-- tunnel -->
+                </complement>
+                <rectangle min="-28,-9" max="-42,10"/> <!-- spawn platform -->
+                <rectangle min="-23,-3" max="-24,4"/> <!-- center decoration -->
+                <rectangle min="-48,10" max="-41,-9"/> <!-- behind spawn -->
+                <mirror region="team-one-south-building" origin="${map-origin}" normal="0,0,1"/>
+            </union>
+            <mirror region="team-one-buildings" origin="${map-origin}" normal="1,0,0"/>
+        </complement>
+    </negative>
+    <!-- Portals -->
+    <cuboid id="team-one-portal" min="-43,5,-1" size="3,1,3"/>
+    <mirror id="team-two-portal" region="team-one-portal" origin="${map-origin}" normal="1,0,0"/>
+    <!-- Spawn points -->
+    <complement id="cages">
+        <union>
+            <cylinder base="${purple-north}" height="4" radius="3"/>
+            <cylinder base="${purple-south}" height="4" radius="3"/>
+            <cylinder base="${yellow-north}" height="4" radius="3"/>
+            <cylinder base="${yellow-south}" height="4" radius="3"/>
+        </union>
+        <union>
+            <cylinder base="${purple-north}" height="3" radius="2"/>
+            <cylinder base="${purple-south}" height="3" radius="2"/>
+            <cylinder base="${yellow-north}" height="3" radius="2"/>
+            <cylinder base="${yellow-south}" height="3" radius="2"/>
+        </union>
+    </complement>
+    <!-- Double Cross -->
+    <negative id="survival-area">
+        <union id="adventure-area">
+            <rectangle id="team-one-bg" min="-42,-14" max="-58,15"/>
+            <mirror region="team-one-bg" origin="${map-origin}" normal="1,0,0"/>
+            <negative>
+                <cuboid min="-50,0,-38" max="51,22,39"/>
+            </negative>
+            <rectangle id="purple-south-3x3" min="-25,39" max="-22,36"/>
+            <mirror id="purple-north-3x3" region="purple-south-3x3" origin="${map-origin}" normal="0,0,1"/>
+            <mirror region="purple-south-3x3" origin="${map-origin}" normal="1,0,0"/>
+            <mirror region="purple-north-3x3" origin="${map-origin}" normal="1,0,0"/>
+        </union>
+    </negative>
+    <union id="rooves">
+        <union id="team-one-hut">
+            <cuboid min="-32,22,-6" max="-43,oo,7"/>
+            <cuboid min="-42,18,-5" max="-47,oo,6"/>
+        </union>
+    <mirror region="team-one-hut" origin="${map-origin}" normal="1,0,0"/>
+    </union>
+    <apply enter="never" region="rooves"/>
+    <apply kit="survival-kit" region="survival-area"/>
+    <apply kit="adventure-kit" region="adventure-area"/>
+    <apply use="never" block-physics="deny-physics"/>
+    <!-- Double Cross Portals -->
+    <cuboid id="purple-spawn-north-portal" min="-66,35,-3" size="1,3,1"/>
+    <mirror id="purple-spawn-south-portal" region="purple-spawn-north-portal" origin="${map-origin}" normal="0,0,1"/>
+    <mirror id="yellow-spawn-north-portal" region="purple-spawn-north-portal" origin="${map-origin}" normal="1,0,0"/>
+    <mirror id="yellow-spawn-south-portal" region="purple-spawn-south-portal" origin="${map-origin}" normal="1,0,0"/>
+    <point id="purple-north">${purple-north}</point>
+    <point id="purple-south">${purple-south}</point>
+    <point id="yellow-north">${yellow-north}</point>
+    <point id="yellow-south">${yellow-south}</point>
+    <cuboid id="purple-hut-north-portal" min="-51,18,-21" size="1,3,1"/>
+    <mirror id="purple-hut-south-portal" region="purple-hut-north-portal" origin="${map-origin}" normal="0,0,1"/>
+    <mirror id="yellow-hut-north-portal" region="purple-hut-north-portal" origin="${map-origin}" normal="1,0,0"/>
+    <mirror id="yellow-hut-south-portal" region="purple-hut-south-portal" origin="${map-origin}" normal="1,0,0"/>
+    <point id="purple-hut-dest">-39.5,18,0.5</point>
+    <point id="yellow-hut-dest">40.5,18,0.5</point>
+</regions>
+<portals>
+    <!-- Spawns -->
+    <portal destination="purple-north" region="purple-spawn-north-portal" yaw="@-45" pitch="@0"/>
+    <portal destination="purple-south" region="purple-spawn-south-portal" yaw="@-135" pitch="@0"/>
+    <portal destination="yellow-north" region="yellow-spawn-north-portal" yaw="@45" pitch="@0"/>
+    <portal destination="yellow-south" region="yellow-spawn-south-portal" yaw="@135" pitch="@0"/>
+    <!-- Hut -->
+    <portal destination="purple-hut-dest" filter="only-team-one" region="purple-hut-north-portal" yaw="@${team-one-yaw}" pitch="@0"/>
+    <portal destination="purple-hut-dest" filter="only-team-one" region="purple-hut-south-portal" yaw="@${team-one-yaw}" pitch="@0"/>
+    <portal destination="yellow-hut-dest" filter="only-team-two" region="yellow-hut-north-portal" yaw="@${team-two-yaw}" pitch="@0"/>
+    <portal destination="yellow-hut-dest" filter="only-team-two" region="yellow-hut-south-portal" yaw="@${team-two-yaw}" pitch="@0"/>
+</portals>
+<itemremove>
+    <item>seeds</item>
+    <item>stone plate</item>
+    <item>sand</item>
+</itemremove>
+</map>
