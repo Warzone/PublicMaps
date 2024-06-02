@@ -1,0 +1,111 @@
+<map proto="1.4.2">
+<name>Space Armada</name>
+<version>1.0.0</version>
+<created>2018-04-01</created>
+<objective>Destroy the enemy's nexus monument located in their ship. Make sure your nexus monument is defended from intruders.</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+    <author uuid="8e96ab64-74fa-46ab-b436-d35187e118af"/> <!-- Mega_Rascal -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML conversion"/> <!-- _Pear -->
+</contributors>
+<teams>
+    <team id="fed-team" color="blue" max="50">Federation</team>
+    <team id="pirates-team" color="gold" max="50">Space Pirates</team>
+</teams>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone axe"/>
+        <item slot="3" amount="64" team-color="true" material="stained glass"/>
+        <item slot="4" amount="64" team-color="true" material="stained glass"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="fed-team" kit="default">
+        <regions yaw="-90">
+            <point>-19.5,25,2.5</point>
+        </regions>
+    </spawn>
+    <spawn team="pirates-team" kit="default">
+        <regions yaw="90">
+            <point>-207.5,25,116.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point>-113.5,78,59.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-fed">fed-team</team>
+    <team id="only-pirates">pirates-team</team>
+    <material id="only-beacon">beacon</material>
+</filters>
+<regions>
+    <union id="spawn-areas">
+        <union id="fed-spawns">
+            <cuboid id="fed-spawn-center" min="-11,21,1" max="-24,27,4"/>
+            <cuboid id="fed-spawn-right" min="-15,24,4" max="-23,26,6"/>
+            <cuboid id="fed-spawn-left" min="-15,24,1" max="-23,26,-1"/>
+        </union>
+        <union id="pirate-spawns">
+            <cuboid id="pirate-spawn-center" min="-204,27,115" max="-217,21,118"/>
+            <cuboid id="pirate-spawn-right" min="-212,24,115" max="-204,26,113"/>
+            <cuboid id="pirate-spawn-left" min="-212,24,118" max="-204,26,120"/>
+        </union>
+    </union>
+    <union id="spawn-protection">
+        <cuboid id="fed-spawn-protection" min="-10,21,1" max="-24,27,4"/>
+        <cuboid id="pirate-spawn-protection" min="-204,27,115" max="-217,21,118"/>
+    </union>
+    <union id="nexus-monuments">
+        <cuboid id="fed-nexus" min="-23,12,-5" max="-54,19,9"/>
+        <cuboid id="pirate-nexus" min="-175,19,108" max="-205,12,123"/>
+    </union>
+    <apply region="fed-spawns" enter="only-fed" message="You may not enter the enemy's spawn."/>
+    <apply region="pirate-spawns" enter="only-pirates" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protection" block="never" message="You may not modify the terrain here."/>
+    <apply use="deny(only-beacon)"/>
+</regions>
+<!-- TODO: Try to get PGM support for pumpkin monument that must be broken 25 times before it counts as destroyed for TGM behavior -->
+<destroyables name="Nexus" materials="ender stone" sparks="true" repairable="false">
+    <destroyable owner="fed-team" region="fed-nexus"/>
+    <destroyable owner="pirates-team" region="pirate-nexus"/>
+</destroyables>
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>stone axe</item>
+    <item>stained glass</item>
+    <item>cooked beef</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>ender stone</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<crafting>
+    <disable>wood pickaxe</disable>
+</crafting>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<maxbuildheight>59</maxbuildheight>
+</map>
