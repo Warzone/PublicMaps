@@ -1,0 +1,189 @@
+<map proto="1.4.2">
+<name>2015: Minehut Rage</name>
+<created>2015-10-23</created>
+<version>1.0.0</version>
+<objective>Get the most kills after 5 minutes!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
+<authors>
+    <author uuid="2dc9b2a1-6063-499b-9685-aa97b978707a"/> <!-- Luuke -->
+</authors>
+<contributors>
+    <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="2014 Rage FFA XML and inspiration"/> <!-- Crazy_ -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map restoration and adaptation"/> <!-- _Pear -->
+</contributors>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+</rules>
+<rage/>
+<gamerules>
+    <doTileDrops>false</doTileDrops>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<players min="2" max="50" colors="true"/>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<broadcasts>
+    <alert after="1s" every="1m">The lobby will slowly regenerate, so go nuts with the explosives!</alert>
+    <tip after="2s" every="3m">Don't forget to double jump!</tip>
+    <tip after="25s" every="2m">Different types of explosive items are given as a reward for kill streaks!</tip>
+    <tip after="40s" every="1m">The ender pearl acts like a kamikaze; you'll die on impact.</tip>
+</broadcasts>
+<spawns>
+    <spawn kit="play" spread="true" safe="true">
+        <regions angle="14.5,40,-8.5">
+            <cylinder base="14.5,25,-8.5" radius="32" height="30"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="-90">
+            <point>-7.5,26,4.5</point>
+        </regions>
+    </default>
+</spawns>
+<respawns>
+    <respawn auto="true" delay="2.5s"/>
+</respawns>
+<kits>
+    <kit id="play">
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" locked="true" material="iron leggings"/>
+        <boots unbreakable="true" locked="true" material="chainmail boots">
+            <enchantment level="5">depth_strider</enchantment>
+        </boots>
+        <item slot="0" enchantments="damage_all:10" material="iron sword"/>
+        <item slot="1" enchantments="arrow_damage:10" material="bow"/>
+        <item slot="2" amount="2" material="arrow"/>
+        <effect duration="2" amplifier="10">resistance</effect>
+        <item slot="3" amount="3" grenade="true" name="Grenade" grenade-power="1.6" material="snow ball"/>
+        <double-jump enabled="true" recharge-before-landing="true" power="3.5"/>
+        <effect>speed</effect>
+    </kit>
+</kits>
+<projectiles>
+    <projectile id="fireball" name="fireball" projectile="LargeFireball" velocity="3.5" damage="50" throwable="true"/>
+</projectiles>
+<tnt>
+    <instantignite>on</instantignite>
+    <power>5</power>
+    <fuse>2s</fuse>
+</tnt>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item grenade="true" name="Grenade" grenade-power="1.6" material="snow ball"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item amount="3" grenade="true" name="Chicken Bomb" grenade-power="3" material="egg"/>
+        <item amount="1" grenade="true" name="Molotov Cocktail" grenade-fire="true" grenade-destroy="false" grenade-power="1.5" damage="16429">potion</item>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true"/>
+        </filter>
+        <item grenade="true" name="Tele-boomer" lore="You might want to think twice about using this one..." grenade-power="7.5" material="ender pearl"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4" repeat="true"/>
+        </filter>
+        <item projectile="fireball" grenade="true" grenade-power="4" name="`aFireball Wand" material="blaze rod"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5" repeat="true"/>
+        </filter>
+        <item amount="2" material="tnt"/>
+        <kit force="true">
+            <effect amplifier="2">speed</effect>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="10"/>
+        </filter>
+        <kit force="true">
+            <effect amplifier="3">speed</effect>
+            <effect>jump_boost</effect>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<renewables>
+    <renewable region="everywhere" sound="false" interval="20s" particles="false">
+        <!-- Each block renews after approx 20 seconds.
+             These are the blocks that will renew -->
+        <renew-filter>
+            <any>
+                <material>workbench</material>
+                <material>brewing stand</material>
+                <material>cauldron</material>
+                <material>bed block</material>
+                <material>chest</material>
+                <material>wooden door</material>
+                <material>ladder</material>
+                <material>thin glass</material>
+                <material>cobble wall</material>
+                <material>fence</material>
+                <material>smooth stairs</material>
+                <material>wood step</material>
+                <material>yellow flower</material>
+                <material>double step</material>
+                <material>red rose</material>
+                <material>spruce wood stairs</material>
+                <material>cobblestone</material>
+                <material>step</material>
+                <material>smooth brick</material>
+                <material>wood</material>
+                <material>stationary water</material>
+                <material>long grass</material>
+                <material>dirt</material>
+                <material>log</material>
+                <material>grass</material>
+                <material>leaves</material>
+                <material>stone</material>
+            </any>
+        </renew-filter>
+        <!-- These blocks can be replaced by renewing blocks -->
+        <replace-filter>
+            <any>
+                <material>air</material>
+                <material>water</material>
+                <material>stationary water</material>
+                <material>fire</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>chainmail chestplate</item>
+    <item>iron leggings</item>
+    <item>chainmail boots</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>egg</item>
+    <item>snow ball</item>
+    <item>ender pearl</item>
+    <item>tnt</item>
+    <item>skull</item>
+    <item>potion</item>
+    <item>blaze rod</item>
+</itemremove>
+<itemkeep>
+    <item>ender pearl</item>
+    <item>blaze rod</item>
+    <item>tnt</item>
+</itemkeep>
+</map>
