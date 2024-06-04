@@ -1,8 +1,9 @@
-<map proto="1.4.2" game="Flappy Bird">
+<map proto="1.4.2">
 <name>Flappy Bird</name>
-<version>1.0.2</version>
+<version>1.0.4</version>
 <objective>Jump and do not hit the pipes!</objective>
 <gamemode>arcade</gamemode>
+<game>Flappy Bird</game>
 <authors>
     <author uuid="205d1aad-c619-499b-9885-b91c372b1c13"/> <!-- Equus -->
     <author uuid="2a2c4c30-ecf6-4e4a-b5bc-be8cf033563e"/> <!-- Felipu_feliu -->
@@ -18,13 +19,22 @@
     <alert after="6s">1..</alert>
     <alert after="6.5s">GO!</alert>
 </broadcasts>
+<spawns>
+    <default>
+        <regions yaw="-90">
+            <cylinder base="23,17,-159" radius="1" height="0"/>
+        </regions>
+    </default>
+    <spawns kit="spawn">
+        <spawn>
+            <regions>
+                <point>0.5,27,-201.5</point>
+            </regions>
+        </spawn>
+    </spawns>
+</spawns>
 <filters>
-    <not id="block">
-        <all>
-            <material>stained glass</material>
-            <cause>player</cause>
-        </all>
-    </not>
+    <participating id="participating"/>
     <not id="gate-1">
         <carrying><item name="1-gate">flint</item></carrying>
     </not>
@@ -82,18 +92,35 @@
     <not id="gate-19">
         <carrying><item name="19-gate">flint</item></carrying>
     </not>
+    <score id="score-0">0</score>
+    <score id="score-1">1</score>
+    <score id="score-2">2</score>
+    <score id="score-3">3</score>
+    <score id="score-4">4</score>
+    <score id="score-5">5</score>
+    <score id="score-6">6</score>
+    <score id="score-7">7</score>
+    <score id="score-8">8</score>
+    <score id="score-9">9</score>
+    <score id="score-10">10</score>
+    <score id="score-11">11</score>
+    <score id="score-12">12</score>
+    <score id="score-13">13</score>
+    <score id="score-14">14</score>
+    <score id="score-15">15</score>
+    <score id="score-16">16</score>
+    <score id="score-17">17</score>
+    <score id="score-18">18</score>
+    <score id="score-19">19</score>
 </filters>
-<projectiles>
-    <projectile id="egg" name="Egg Launcher" projectile="Egg" velocity="4" damage="1" throwable="false" cooldown="1s" potion="slowness:30:2:false;blindness:30:2:false"/>
-</projectiles>
 <kits>
     <kit id="spawn">
         <item slot="0" projectile="egg" name="`aStun Gun" material="diamond barding"/>
         <double-jump recharge-before-landing="true" recharge-time="0s" power="3"/>
-        <potion duration="1s" amplifier="50">slowness</potion>
-        <potion duration="oo" amplifier="2">speed</potion>
-        <potion duration="10s" amplifier="50">damage resistance</potion>
-        <potion duration="oo" amplifier="5">regeneration</potion>
+        <effect duration="1s" amplifier="50">slowness</effect>
+        <effect duration="oo" amplifier="2">speed</effect>
+        <effect duration="10s" amplifier="50">damage resistance</effect>
+        <effect duration="oo" amplifier="5">regeneration</effect>
     </kit>
     <kit id="1">
         <item slot="9" name="1-gate" material="flint"/>
@@ -153,113 +180,99 @@
         <item slot="27" name="19-gate" material="flint"/>
     </kit>
 </kits>
-<disabledamage> 
-    <damage>lava</damage>
-    <damage>fire</damage>
-</disabledamage>
-<spawns>
-    <default>
-        <regions yaw="-90">
-            <cylinder base="23,18,-159" radius="1" height="0"/>
-        </regions>
-    </default>
-    <spawns kit="spawn">
-        <spawn>
-            <regions>
-                <block>0.5,28,-201.5</block>
-            </regions>
-        </spawn>
-    </spawns>
-</spawns>
+<projectiles>
+    <projectile id="egg" name="Egg Launcher" projectile="Egg" velocity="4" damage="1" throwable="false" cooldown="1s" potion="slowness:30:2:false;blindness:30:2:false"/>
+</projectiles>
 <regions>
-    <cuboid id="Pipe-1" min="-5.0,22.0,-182.0" max="6.0,29.0,-170.0"/>
-    <cuboid id="Pipe-2" min="-5.0,16.0,-158.0" max="6.0,23.0,-146.0"/>
-    <cuboid id="Pipe-3" min="-5.0,22.0,-134.0" max="6.0,29.0,-122.0"/>
-    <cuboid id="Pipe-4" min="-5.0,27.0,-110.0" max="6.0,34.0,-98.0"/>
-    <cuboid id="Pipe-5" min="-5.0,30.0,-86.0" max="6.0,37.0,-74.0"/>
-    <cuboid id="Pipe-6" min="-5.0,33.0,-62.0" max="6.0,39.0,-50.0"/>
-    <cuboid id="Pipe-7" min="-5.0,22.0,-38.0" max="6.0,29.0,-26.0"/>
-    <cuboid id="Pipe-8" min="-5.0,27.0,-14.0" max="6.0,34.0,-2.0"/>
-    <cuboid id="Pipe-9" min="-5.0,22.0,10.0" max="6.0,29.0,22.0"/>
-    <cuboid id="Pipe-10" min="-5.0,27.0,34.0" max="6.0,34.0,46.0"/>
-    <cuboid id="Pipe-11" min="-5.0,22.0,58.0" max="6.0,29.0,70.0"/>
-    <cuboid id="Pipe-12" min="-5.0,16.0,82.0" max="6.0,25.0,94.0"/>
-    <cuboid id="Pipe-13" min="-5.0,33.0,109.0" max="6.0,40.0,121.0"/>
-    <cuboid id="Pipe-14" min="-5.0,27.0,133.0" max="6.0,36.0,145.0"/>
-    <cuboid id="Pipe-15" min="-5.0,22.0,157.0" max="6.0,31.0,169.0"/>
-    <cuboid id="Pipe-16" min="-5.0,22.0,181.0" max="6.0,31.0,193.0"/>
-    <cuboid id="Pipe-17" min="-5.0,22.0,205.0" max="6.0,31.0,217.0"/>
-    <cuboid id="Pipe-18" min="-5.0,16.0,229.0" max="6.0,23.0,241.0"/>
-    <cuboid id="Pipe-19" min="-5.0,33.0,255.0" max="6.0,39.0,267.0"/>
-    <cuboid id="Pipe-20" min="-5.0,16.0,281.0" max="6.0,23.0,293.0"/>
-    <apply block="block"/>
+    <cuboid id="pipe-1" min="-5.0,22.0,-182.0" max="6.0,29.0,-170.0"/>
+    <cuboid id="pipe-2" min="-5.0,16.0,-158.0" max="6.0,23.0,-146.0"/>
+    <cuboid id="pipe-3" min="-5.0,22.0,-134.0" max="6.0,29.0,-122.0"/>
+    <cuboid id="pipe-4" min="-5.0,27.0,-110.0" max="6.0,34.0,-98.0"/>
+    <cuboid id="pipe-5" min="-5.0,30.0,-86.0" max="6.0,37.0,-74.0"/>
+    <cuboid id="pipe-6" min="-5.0,33.0,-62.0" max="6.0,39.0,-50.0"/>
+    <cuboid id="pipe-7" min="-5.0,22.0,-38.0" max="6.0,29.0,-26.0"/>
+    <cuboid id="pipe-8" min="-5.0,27.0,-14.0" max="6.0,34.0,-2.0"/>
+    <cuboid id="pipe-9" min="-5.0,22.0,10.0" max="6.0,29.0,22.0"/>
+    <cuboid id="pipe-10" min="-5.0,27.0,34.0" max="6.0,34.0,46.0"/>
+    <cuboid id="pipe-11" min="-5.0,22.0,58.0" max="6.0,29.0,70.0"/>
+    <cuboid id="pipe-12" min="-5.0,16.0,82.0" max="6.0,25.0,94.0"/>
+    <cuboid id="pipe-13" min="-5.0,33.0,109.0" max="6.0,40.0,121.0"/>
+    <cuboid id="pipe-14" min="-5.0,27.0,133.0" max="6.0,36.0,145.0"/>
+    <cuboid id="pipe-15" min="-5.0,22.0,157.0" max="6.0,31.0,169.0"/>
+    <cuboid id="pipe-16" min="-5.0,22.0,181.0" max="6.0,31.0,193.0"/>
+    <cuboid id="pipe-17" min="-5.0,22.0,205.0" max="6.0,31.0,217.0"/>
+    <cuboid id="pipe-18" min="-5.0,16.0,229.0" max="6.0,23.0,241.0"/>
+    <cuboid id="pipe-19" min="-5.0,33.0,255.0" max="6.0,39.0,267.0"/>
+    <cuboid id="pipe-20" min="-5.0,16.0,281.0" max="6.0,23.0,293.0"/>
+    <apply block="deny(participating)"/>
     <!-- Pipe Barrier -->
-    <apply region="Pipe-1" enter="gate-1" message="You may not go back into the pipe"/>
-    <apply region="Pipe-2" enter="gate-2" message="You may not go back into the pipe"/>
-    <apply region="Pipe-3" enter="gate-3" message="You may not go back into the pipe"/>
-    <apply region="Pipe-4" enter="gate-4" message="You may not go back into the pipe"/>
-    <apply region="Pipe-5" enter="gate-5" message="You may not go back into the pipe"/>
-    <apply region="Pipe-6" enter="gate-6" message="You may not go back into the pipe"/>
-    <apply region="Pipe-7" enter="gate-7" message="You may not go back into the pipe"/>
-    <apply region="Pipe-8" enter="gate-8" message="You may not go back into the pipe"/>
-    <apply region="Pipe-9" enter="gate-9" message="You may not go back into the pipe"/>
-    <apply region="Pipe-10" enter="gate-10" message="You may not go back into the pipe"/>
-    <apply region="Pipe-11" enter="gate-11" message="You may not go back into the pipe"/>
-    <apply region="Pipe-12" enter="gate-12" message="You may not go back into the pipe"/>
-    <apply region="Pipe-13" enter="gate-13" message="You may not go back into the pipe"/>
-    <apply region="Pipe-14" enter="gate-14" message="You may not go back into the pipe"/>
-    <apply region="Pipe-15" enter="gate-15" message="You may not go back into the pipe"/>
-    <apply region="Pipe-16" enter="gate-16" message="You may not go back into the pipe"/>
-    <apply region="Pipe-17" enter="gate-17" message="You may not go back into the pipe"/>
-    <apply region="Pipe-18" enter="gate-18" message="You may not go back into the pipe"/>
-    <apply region="Pipe-19" enter="gate-19" message="You may not go back into the pipe"/>
+    <apply region="pipe-1" enter="gate-1" message="You may not go back into the pipe"/>
+    <apply region="pipe-2" enter="gate-2" message="You may not go back into the pipe"/>
+    <apply region="pipe-3" enter="gate-3" message="You may not go back into the pipe"/>
+    <apply region="pipe-4" enter="gate-4" message="You may not go back into the pipe"/>
+    <apply region="pipe-5" enter="gate-5" message="You may not go back into the pipe"/>
+    <apply region="pipe-6" enter="gate-6" message="You may not go back into the pipe"/>
+    <apply region="pipe-7" enter="gate-7" message="You may not go back into the pipe"/>
+    <apply region="pipe-8" enter="gate-8" message="You may not go back into the pipe"/>
+    <apply region="pipe-9" enter="gate-9" message="You may not go back into the pipe"/>
+    <apply region="pipe-10" enter="gate-10" message="You may not go back into the pipe"/>
+    <apply region="pipe-11" enter="gate-11" message="You may not go back into the pipe"/>
+    <apply region="pipe-12" enter="gate-12" message="You may not go back into the pipe"/>
+    <apply region="pipe-13" enter="gate-13" message="You may not go back into the pipe"/>
+    <apply region="pipe-14" enter="gate-14" message="You may not go back into the pipe"/>
+    <apply region="pipe-15" enter="gate-15" message="You may not go back into the pipe"/>
+    <apply region="pipe-16" enter="gate-16" message="You may not go back into the pipe"/>
+    <apply region="pipe-17" enter="gate-17" message="You may not go back into the pipe"/>
+    <apply region="pipe-18" enter="gate-18" message="You may not go back into the pipe"/>
+    <apply region="pipe-19" enter="gate-19" message="You may not go back into the pipe"/>
+    <apply leave="never">
+        <region>
+            <cuboid min="6,10,-203" max="-5,45,298"/>
+        </region>
+    </apply>
     <!-- Kit Application -->
-    <apply region="Pipe-1" kit="1"/>
-    <apply region="Pipe-2" kit="2"/>
-    <apply region="Pipe-3" kit="3"/>
-    <apply region="Pipe-4" kit="4"/>
-    <apply region="Pipe-5" kit="5"/>
-    <apply region="Pipe-6" kit="6"/>
-    <apply region="Pipe-7" kit="7"/>
-    <apply region="Pipe-8" kit="8"/>
-    <apply region="Pipe-9" kit="9"/>
-    <apply region="Pipe-10" kit="10"/>
-    <apply region="Pipe-11" kit="11"/>
-    <apply region="Pipe-12" kit="12"/>
-    <apply region="Pipe-13" kit="13"/>
-    <apply region="Pipe-14" kit="14"/>
-    <apply region="Pipe-15" kit="15"/>
-    <apply region="Pipe-16" kit="16"/>
-    <apply region="Pipe-17" kit="17"/>
-    <apply region="Pipe-18" kit="18"/>
-    <apply region="Pipe-19" kit="19"/>
+    <apply region="pipe-1" kit="1"/>
+    <apply region="pipe-2" kit="2"/>
+    <apply region="pipe-3" kit="3"/>
+    <apply region="pipe-4" kit="4"/>
+    <apply region="pipe-5" kit="5"/>
+    <apply region="pipe-6" kit="6"/>
+    <apply region="pipe-7" kit="7"/>
+    <apply region="pipe-8" kit="8"/>
+    <apply region="pipe-9" kit="9"/>
+    <apply region="pipe-10" kit="10"/>
+    <apply region="pipe-11" kit="11"/>
+    <apply region="pipe-12" kit="12"/>
+    <apply region="pipe-13" kit="13"/>
+    <apply region="pipe-14" kit="14"/>
+    <apply region="pipe-15" kit="15"/>
+    <apply region="pipe-16" kit="16"/>
+    <apply region="pipe-17" kit="17"/>
+    <apply region="pipe-18" kit="18"/>
+    <apply region="pipe-19" kit="19"/>
 </regions>
 <score>
     <limit>20</limit>
-    <box points="1" silent="true">
-        <region>
-            <region id="Pipe-1"/>
-            <region id="Pipe-2"/>
-            <region id="Pipe-3"/>
-            <region id="Pipe-4"/>
-            <region id="Pipe-5"/>
-            <region id="Pipe-6"/>
-            <region id="Pipe-7"/>
-            <region id="Pipe-8"/>
-            <region id="Pipe-9"/>
-            <region id="Pipe-10"/>
-            <region id="Pipe-11"/>
-            <region id="Pipe-12"/>
-            <region id="Pipe-13"/>
-            <region id="Pipe-14"/>
-            <region id="Pipe-15"/>
-            <region id="Pipe-16"/>
-            <region id="Pipe-17"/>
-            <region id="Pipe-18"/>
-            <region id="Pipe-19"/>
-            <region id="Pipe-20"/>
-        </region>
-    </box>
+    <box points="1" silent="true" region="pipe-1" filter="score-0"/>
+    <box points="1" silent="true" region="pipe-2" filter="score-1"/>
+    <box points="1" silent="true" region="pipe-3" filter="score-2"/>
+    <box points="1" silent="true" region="pipe-4" filter="score-3"/>
+    <box points="1" silent="true" region="pipe-5" filter="score-4"/>
+    <box points="1" silent="true" region="pipe-6" filter="score-5"/>
+    <box points="1" silent="true" region="pipe-7" filter="score-6"/>
+    <box points="1" silent="true" region="pipe-8" filter="score-7"/>
+    <box points="1" silent="true" region="pipe-9" filter="score-8"/>
+    <box points="1" silent="true" region="pipe-10" filter="score-9"/>
+    <box points="1" silent="true" region="pipe-11" filter="score-10"/>
+    <box points="1" silent="true" region="pipe-12" filter="score-11"/>
+    <box points="1" silent="true" region="pipe-13" filter="score-12"/>
+    <box points="1" silent="true" region="pipe-14" filter="score-13"/>
+    <box points="1" silent="true" region="pipe-15" filter="score-14"/>
+    <box points="1" silent="true" region="pipe-16" filter="score-15"/>
+    <box points="1" silent="true" region="pipe-17" filter="score-16"/>
+    <box points="1" silent="true" region="pipe-18" filter="score-17"/>
+    <box points="1" silent="true" region="pipe-19" filter="score-18"/>
+    <box points="1" silent="true" region="pipe-20" filter="score-19"/>
 </score>
 <itemremove>
     <item>stick</item>
@@ -267,4 +280,8 @@
     <item>wood sword</item>
     <item>flint</item>
 </itemremove>
+<disabledamage>
+    <damage>lava</damage>
+    <damage>fire</damage>
+</disabledamage>
 </map>
