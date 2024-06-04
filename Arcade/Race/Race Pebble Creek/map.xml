@@ -1,0 +1,34 @@
+<map proto="1.4.2">
+<name>Race: Pebble Creek</name>
+<version>1.1.4</version>
+<objective>Score points by completing laps around the track.</objective>
+<include id="race"/>
+<authors>
+    <author uuid="130be12a-f3b9-4b7d-ad39-7b45e84d3d0f"/> <!-- g_a_r_b_o -->
+</authors>
+<spawns>
+    <spawn yaw="90" region="spawn"/>
+    <default yaw="90" region="spawn"/>
+</spawns>
+<regions>
+    <cuboid id="spawn" min="-27,11,60" max="-29,11,46"/>
+    <apply enter="never">
+        <region>
+            <cuboid min="-oo,14,-oo" max="oo,oo,oo"/>
+        </region>
+    </apply>
+    <cuboid id="finish-line" min="1,4,46" max="9,9,62"/>
+</regions>
+<portals>
+    <portal x="-39" y="6" z="0">
+        <region>
+            <cuboid min="1,4,46" max="9,9,62"/>
+        </region>
+    </portal>
+    <portal x="@-28" y="@11.5" z="@52" yaw="@90">
+        <region>
+            <cuboid min="-oo,-5,-oo" max="oo,0,oo"/>
+        </region>
+    </portal>
+</portals>
+</map>
