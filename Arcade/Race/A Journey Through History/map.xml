@@ -1,11 +1,12 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>A Journey Through History</name>
-<version>1.0.4</version>
+<version>1.0.7</version>
 <slug>a_journey_through_history</slug>
 <objective>Runners must get from one side of the map to the other without getting killed by the Defenders.</objective>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<created>2016-06-02</created>
 <rules>
     <rule>Fall damage is disabled.</rule>
     <rule>Don't camp!</rule>
@@ -37,10 +38,13 @@
     <!--   chle_   -->
 </authors>
 <teams>
-    <team color="dark red" id="runners" max="25" max-overfill="30" plural="true">Runners</team>
-    <team color="dark_gray" id="defenders" max="4" plural="true">Defenders</team>
+    <team color="dark red" id="runners" max="40" max-overfill="50" plural="true">Runners</team>
+    <team color="dark_gray" id="defenders" max="6" plural="true">Defenders</team>
 </teams>
 <kits>
+    <kit id="obs-kit">
+        <potion duration="oo" amplifier="1">speed</potion>
+    </kit>
     <kit id="spawn" force="true">
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
@@ -82,22 +86,22 @@
 <spawns>
     <spawn team="runners" kit="runners-kit">
         <regions yaw="0">
-            <block>-15,31,-1286</block>
+            <point>-15.5,30,-1285.5</point>
         </regions>
     </spawn>
     <spawn team="defenders" kit="defenders-kit">
         <regions yaw="0">
-            <block>-14,64,-1292</block>
+            <point>-14.5,63,-1291.5</point>
         </regions>
     </spawn>
-    <default>
+    <default kit="obs-kit">
         <regions yaw="0">
-            <cylinder base="-15,31,-1286" radius="1" height="0" />
+            <cylinder base="-15.5,30,-1286.5" radius="1" height="0"/>
         </regions>
     </default>
 </spawns>
 <gamerules>
-    <naturalRegeneration>true</naturalRegeneration>
+    <naturalRegeneration>false</naturalRegeneration>
 </gamerules>
 <filters>
     <any id="monument">
