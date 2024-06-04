@@ -1,156 +1,185 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Blocks CTW</name>
-<slug>blocks_ctw</slug>
-<version>1.1.3</version>
+<version>1.1.5</version>
 <objective>Capture the enemy wools to win!</objective>
 <gamemode>ctw</gamemode>
 <authors>
     <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- PepsiDog -->
 </authors>
 <teams>
-  <team id="lime" color="green" max="32">Green</team>
-  <team id="purple" color="dark purple" max="32">Purple</team>
+    <team id="lime" color="green" max="32">Green</team>
+    <team id="purple" color="dark purple" max="32">Purple</team>
 </teams>
-<spawns>
-  <spawn team="lime" kit="green-kit">
-    <regions>
-      <point yaw="-90">46,7,10</point>
-      <point yaw="90">124,7,10</point>
-    </regions>
-  </spawn>
-  <spawn team="purple" kit="purple-kit">
-    <regions>
-      <point yaw="-90">46,7,326</point>
-      <point yaw="90">124,7,326</point>
-    </regions>
-  </spawn>
-  <default>
-    <regions yaw="-90"><point>-40,36,168</point></regions>
-  </default>
-</spawns>
 <kits>
-  <kit id="spawn-kit">
-    <item slot="0">iron sword</item>
-    <item slot="1" enchantment="arrow_infinite:1">bow</item>
-    <item slot="2" unbreakable="true">iron pickaxe</item>
-    <item slot="3" unbreakable="true">iron axe</item>
-    <item slot="4" amount="32">glass</item>
-    <item slot="8" amount="32">cooked beef</item>
-    <item slot="28">arrow</item>
-    <chestplate>chainmail chestplate</chestplate>
-    <leggings>chainmail leggings</leggings>
-  </kit>
-  <kit id="green-kit" parents="spawn-kit">
-    <helmet color="00FF00">leather helmet</helmet>
-    <item slot="4" amount="32" damage="1">wood</item>
-  </kit>
-  <kit id="purple-kit" parents="spawn-kit">
-    <helmet color="FF00FF">leather helmet</helmet>
-    <item slot="4" amount="32" damage="3">wood</item>
-  </kit>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="diamond axe"/>
+        <item slot="30" unbreakable="true" material="iron spade"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="8" material="golden apple"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+    <kit id="green-kit" parents="spawn-kit">
+        <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="31" amount="64" damage="1" material="wood"/>
+    </kit>
+    <kit id="purple-kit" parents="spawn-kit">
+        <item slot="4" amount="64" damage="3" material="wood"/>
+        <item slot="31" amount="64" damage="3" material="wood"/>
+    </kit>
 </kits>
-<regions>
-  <union id="spawns">
-    <union id="green-spawns">
-      <rectangle id="green-spawn-left" min="23,2" max="54,18"/>
-      <rectangle id="green-spawn-right" min="116,2" max="147,18"/>
-    </union>
-    <union id="purple-spawns">
-      <rectangle id="purple-spawn-right" min="23,318" max="54,334"/>
-      <rectangle id="purple-spawn-left" min="116,318" max="147,334"/>
-    </union>
-  </union>
-  <union id="monuments">
-    <rectangle id="green-monument" min="83,26" max="87,30"/>
-    <rectangle id="purple-monument" min="83,306" max="87,310"/>
-  </union>
-  <union id="wool-rooms">
-    <union id="green-wool-rooms">
-      <circle id="blue-wool" center="-33,262" radius="15"/>
-      <circle id="green-wool" center="203,262" radius="15"/>
-    </union>
-    <union id="purple-wool-rooms">
-      <circle id="orange-wool" center="203,74" radius="15"/>
-      <circle id="yellow-wool" center="-33,74" radius="15"/>    
-    </union>
-  </union>
-  <union id="build-void">
-    <rectangle id="yellow-wool-void" min="60,64" max="70,84"/>
-    <rectangle id="orange-wool-void" min="100,65" max="110,85"/>
-    <rectangle id="center-void" min="54,149" max="116,187"/>
-    <rectangle id="purple-wool-void" min="60,252" max="70,272"/>
-    <rectangle id="green-wool-void" min="100,252" max="110,272"/>
-  </union>
-  
-  <apply block="never">
-    <region>
-      <region id="wool-rooms"/>
-      <region id="spawns"/>
-      <region id="monuments"/>
-    </region>
-  </apply>
-  <apply block="void"/>
-  <apply enter="only-green">
-    <region>
-      <region id="green-wool-rooms"/>
-      <region id="green-spawns"/>
-    </region>
-  </apply>
-  <apply enter="only-purple">
-    <region>
-      <region id="purple-wool-rooms"/>
-      <region id="purple-spawns"/>    
-    </region>
-  </apply>
-</regions>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="-40,36,168" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="lime" kit="green-kit">
+        <regions>
+            <point yaw="-90">46,7,10</point>
+            <point yaw="90">124,7,10</point>
+        </regions>
+    </spawn>
+    <spawn team="purple" kit="purple-kit">
+        <regions>
+            <point yaw="-90">46,7,326</point>
+            <point yaw="90">124,7,326</point>
+        </regions>
+    </spawn>
+</spawns>
 <filters>
-  <any id="void">
-    <not><void/></not>
-    <region id="build-void"/>
-  </any>
-  <team id="only-green">lime</team>
-  <team id="only-purple">purple</team>
+    <deny id="deny-void">
+        <void/>
+    </deny>
+    <team id="only-green">lime</team>
+    <team id="only-purple">purple</team>
 </filters>
-<wools>
-  <!-- green team -->
-  <wool team="lime" color="green" location="203,26,262">
-    <monument><block>85,7,28</block></monument>
-  </wool>
-  <wool team="lime" color="blue" location="-33,26,262">
-    <monument><block>84,7,28</block></monument>
-  </wool>
-  
-  <!-- purple team -->
-  <wool team="purple" color="orange" location="203,26,74">
-    <monument><block>84,7,307</block></monument>
-  </wool>
-  <wool team="purple" color="yellow" location="-33,26,74">
-    <monument><block>85,7,307</block></monument>
-  </wool>
+<regions>
+    <union id="spawns">
+        <union id="green-spawns">
+            <rectangle id="green-spawn-left" min="23,2" max="54,18"/>
+            <rectangle id="green-spawn-right" min="116,2" max="147,18"/>
+        </union>
+        <union id="purple-spawns">
+            <rectangle id="purple-spawn-right" min="23,318" max="54,334"/>
+            <rectangle id="purple-spawn-left" min="116,318" max="147,334"/>
+        </union>
+    </union>
+    <union id="monuments">
+        <rectangle id="green-monument" min="83,26" max="87,30"/>
+        <rectangle id="purple-monument" min="83,306" max="87,310"/>
+    </union>
+    <union id="wool-rooms">
+        <union id="green-wool-rooms">
+            <circle id="blue-wool" center="-33,262" radius="15"/>
+            <circle id="green-wool" center="203,262" radius="15"/>
+        </union>
+        <union id="purple-wool-rooms">
+            <circle id="orange-wool" center="203,74" radius="15"/>
+            <circle id="yellow-wool" center="-33,74" radius="15"/>
+        </union>
+    </union>
+    <complement id="build-void">
+        <everywhere/>
+        <rectangle id="yellow-wool-void" min="60,64" max="70,84"/>
+        <rectangle id="orange-wool-void" min="100,65" max="110,85"/>
+        <rectangle id="centre-void" min="54,149" max="116,187"/>
+        <rectangle id="purple-wool-void" min="60,252" max="70,272"/>
+        <rectangle id="green-wool-void" min="100,252" max="110,272"/>
+    </complement>
+    <apply enter="only-green" region="green-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="only-purple" region="purple-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="only-green" region="green-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply block="never" region="spawns" message="You may not destroy the spawns!"/>
+    <apply block="never" region="monuments" message="You may not interfere with the wool monuments!"/>
+    <apply block="never" region="wool-rooms" message="You may not break or place blocks in the wool rooms!"/>
+    <apply block="deny-void" region="build-void" message="You may not build in the void areas!"/>
+</regions>
+<wools craftable="false">
+    <wool team="lime" color="blue" location="-33,26,262">
+        <monument>
+            <block>84,7,28</block>
+        </monument>
+    </wool>
+    <wool team="lime" color="green" location="203,26,262">
+        <monument>
+            <block>85,7,28</block>
+        </monument>
+    </wool>
+    <wool team="purple" color="orange" location="203,26,74">
+        <monument>
+            <block>84,7,307</block>
+        </monument>
+    </wool>
+    <wool team="purple" color="yellow" location="-33,26,74">
+        <monument>
+            <block>85,7,307</block>
+        </monument>
+    </wool>
 </wools>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+    <tool>iron spade</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+    <item>string</item>
+    <item>mutton</item>
+    <item>obsidian</item>
+</itemremove>
+<block-drops>
+    <rule>
+        <filter>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+            </any>
+        </filter>
+        <drops>
+            <item chance="0" material="glass"/>
+        </drops>
+    </rule>
+</block-drops>
+<itemkeep>
+    <item>golden apple</item>
+    <item>wood</item>
+    <item>glass</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+    <kill-reward filter="only-green">
+        <item amount="32" damage="1" material="wood"/>
+    </kill-reward>
+    <kill-reward filter="only-purple">
+        <item amount="32" damage="3" material="wood"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>22</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <mobs>
     <filter>
         <spawn>spawner</spawn>
     </filter>
 </mobs>
-<maxbuildheight>22</maxbuildheight>
-<itemremove>
-  <item>chainmail chestplate</item>
-  <item>chainmail leggings</item>
-  <item>leather helmet</item>
-  <item>seeds</item>
-  <item>mutton</item>
-  <item>cooked beef</item>
-  <item>iron pickaxe</item>
-  <item>iron axe</item>
-  <item>golden apple</item>
-</itemremove>
-<toolrepair>
-  <tool>iron sword</tool>
-  <tool>bow</tool>
-</toolrepair>
-<killreward>
-  <item>golden apple</item>
-</killreward>
 </map>
