@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>The Wonders of the World</name>
-<version>1.2.0</version>
+<version>1.2.4</version>
 <objective>Runners must break the monument at the end of the map without getting killed by the defenders.</objective>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
@@ -12,42 +12,31 @@
 <time result="defenders">5m</time>
 <blitz/>
 <authors>
-    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Portal XML, Petra, Map Captain."/>
-    <!-- GoldenOre -->
-    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Great Wall of China, XML."/>
-    <!-- Jexel -->
-    <author uuid="a37e4da3-1c6c-4dc9-b085-63783406a963" contribution="Stonehenge."/>
-    <!-- Cand -->
-    <author uuid="4faf501d-f965-4f07-887e-24cd66a4f7b0" contribution="Hanging Gardens."/>
-    <!-- ApplePies -->
-    <author uuid="73744a16-ca6c-4db4-a293-4c0ea8c6a6ba" contribution="Parthenon"/>
-    <!-- Olynyk -->
-    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Colosseum"/>
-    <!-- samthecat43 -->
-    <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" contribution="Chichen Itza"/>
-    <!-- Oxinous -->
-    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="Leaning Tower"/>
-    <!-- _3Each -->
-    <author uuid="625b72d4-65b7-4089-9273-060bd25ff1ab" contribution="Arc De Triomphe"/>
-    <!-- Hockey_ -->
-    <author uuid="396229db-3e91-415f-be44-8bacc9fcbc9f" contribution="Big Ben"/>
-    <!-- CIPato -->
-    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="The Tower Bridge"/>
-    <!-- _Bread__ -->
-    <author uuid="f876b863-1ccd-4ae2-acad-8a09e2209e81" contribution="Eiffel Tower"/>
-    <!-- _DISTRACTION_ -->
-    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="Golden Gate Bridge"/>
-    <!-- Ny_ -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Portal XML, Petra, Map Captain."/> <!-- GoldenOre -->
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Great Wall of China, XML."/> <!-- Jexel -->
+    <author uuid="a37e4da3-1c6c-4dc9-b085-63783406a963" contribution="Stonehenge."/> <!-- Cand -->
+    <author uuid="4faf501d-f965-4f07-887e-24cd66a4f7b0" contribution="Hanging Gardens."/> <!-- ApplePies -->
+    <author uuid="73744a16-ca6c-4db4-a293-4c0ea8c6a6ba" contribution="Parthenon"/> <!-- Olynyk -->
+    <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Colosseum"/> <!-- samthecat43 -->
+    <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" contribution="Chichen Itza"/> <!-- Oxinous -->
+    <author uuid="5198dc37-537f-4ea5-8ee8-1e0952d4a36b" contribution="Leaning Tower"/> <!-- _3Each -->
+    <author uuid="625b72d4-65b7-4089-9273-060bd25ff1ab" contribution="Arc De Triomphe"/> <!-- Hockey_ -->
+    <author uuid="396229db-3e91-415f-be44-8bacc9fcbc9f" contribution="Big Ben"/> <!-- CIPato -->
+    <author uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="The Tower Bridge"/> <!-- _Bread__ -->
+    <author uuid="f876b863-1ccd-4ae2-acad-8a09e2209e81" contribution="Eiffel Tower"/> <!-- _DISTRACTION_ -->
+    <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d" contribution="Golden Gate Bridge"/> <!-- Ny_ -->
 </authors>
 <contributors>
-    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="XML Help"/>
-    <!--    triplezko   -->
+    <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="XML Help"/> <!-- triplezko -->
 </contributors>
 <teams>
     <team color="yellow" id="runners" max="30" max-overfill="35" plural="true">Runners</team>
     <team color="white" id="defenders" max="4" max-overfill="5" plural="true">Defenders</team>
 </teams>
 <kits>
+    <kit id="obs-kit">
+        <effect>speed</effect>
+     </kit>
     <kit id="spawn" force="true">
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
@@ -59,8 +48,7 @@
         <boots color="E5E533" material="leather boots">
             <enchantment level="3">depth strider</enchantment>
         </boots>
-        <effect duration="oo">speed</effect>
-        <game-mode>adventure</game-mode>
+        <effect>speed</effect>
     </kit>
     <kit id="defenders-kit">
         <helmet color="FFFFFF" material="leather helmet"/>
@@ -75,7 +63,7 @@
         </item>
         <item slot="28" locked="true" material="arrow"/>
         <walk-speed>3.0</walk-speed>
-        <effect duration="oo">regeneration</effect>
+        <effect>regeneration</effect>
     </kit>
     <kit id="runners-kit-wall" force="true">
         <item material="arrow"/>
@@ -83,7 +71,7 @@
             <enchantment level="3">arrow knockback</enchantment>
             <enchantment level="5">damage all</enchantment>
         </item>
-        <game-mode>adventure</game-mode>
+        <game-mode>survival</game-mode>
     </kit>
     <give filter="end-bridge">
         <kit force="true">
@@ -92,12 +80,12 @@
     </give>
     <lend filter="give-wither-filter">
         <kit force="true">
-            <effect duration="oo" amplifier="3">wither</effect>
+            <effect amplifier="3">wither</effect>
         </kit>
     </lend>
     <lend filter="blindness-petra">
         <kit force="true">
-            <effect duration="oo">blindness</effect>
+            <effect>blindness</effect>
         </kit>
     </lend>
     <kit id="void-death" force="true">
@@ -111,7 +99,7 @@
 <spawns>
     <spawn team="runners" kit="runners-kit" yaw="90" region="runners-spawn"/>
     <spawn team="defenders" kit="defenders-kit" yaw="180" region="defenders-spawn"/>
-    <default yaw="90" region="runners-spawn"/>
+    <default yaw="90" kit="obs-kit" region="runners-spawn"/>
 </spawns>
 <gamerules>
     <naturalRegeneration>false</naturalRegeneration>
@@ -130,26 +118,24 @@
     <not id="deny-dispenser">
         <material>dispenser</material>
     </not>
-    <all id="runners-team">
-        <team>runners</team>
-    </all>
+    <team id="runners-team">runners</team>
     <all id="blindness-petra">
         <region id="blindness-region"/>
         <team>runners</team>
     </all>
     <not id="deny-defenders">
-        <team>defenders</team>
+        <team id="defenders-team">defenders</team>
     </not>
 </filters>
 <destroyables name="Monument" materials="bedrock" mode-changes="true">
     <destroyable owner="defenders" region="defenders-monument"/>
 </destroyables>
 <modes>
-    <mode after="12s" material="sponge" show-before="10s" name="Kicking Runners out of Their Spawn"/>
+    <mode after="12s" material="sponge" show-before="10s" name="Kicking Runners out of their spawn"/>
 </modes>
 <portals>
     <portal y="-100" sound="false" region="void-death-region"/>
-    <!-- Left Portals-->
+    <!-- Left Portals -->
     <portal x="@68.5" y="@36" z="@-173.5" yaw="@90">
         <region>
             <cuboid min="80,9,-172" max="81,6,-175"/>
@@ -180,7 +166,7 @@
             <cuboid min="-87,79,-214" max="-89,76,-215"/>
         </region>
     </portal>
-    <portal x="@-147.5" y="@80" z="@-173.5" yaw="@90">
+    <portal x="@-147.5" y="@80" z="@-173.5" yaw="@90" filter="defenders-team">
         <region>
             <cuboid min="-137,84,-211" max="-136,82,-212"/>
         </region>
@@ -225,7 +211,7 @@
             <cuboid min="-462,79,-175" max="-463,76,-172"/>
         </region>
     </portal>
-    <!-- Left Side Portals-->
+    <!-- Left Side Portals -->
     <portal y="@6" z="@-261.5" yaw="@0">
         <region>
             <cuboid min="150,6,-171" max="81,5,-172"/>
@@ -256,7 +242,7 @@
             <cuboid min="-463,76,-171" max="-700,75,-172"/>
         </region>
     </portal>
-    <!-- Right Portals-->
+    <!-- Right Portals -->
     <portal x="@68.5" y="@36" z="@-261.5" yaw="@90">
         <region>
             <cuboid min="80,9,-260" max="81,6,-263"/>
@@ -282,7 +268,7 @@
             <cuboid min="-87,79,-218" max="-89,76,-219"/>
         </region>
     </portal>
-    <portal x="@-147.5" y="@80" z="@-261.5" yaw="@90">
+    <portal x="@-147.5" y="@80" z="@-261.5" yaw="@90" filter="defenders-team">
         <region>
             <cuboid min="-137,84,-213" max="-136,82,-214"/>
         </region>
@@ -327,7 +313,7 @@
             <cuboid min="-462,79,-263" max="-463,76,-260"/>
         </region>
     </portal>
-    <!-- Right Side Portals-->
+    <!-- Right Side Portals -->
     <portal y="@6" z="@-173.5" yaw="@180">
         <region>
             <cuboid min="150,6,-263" max="81,5,-264"/>
@@ -358,7 +344,7 @@
             <cuboid min="-463,76,-263" max="-700,75,-264"/>
         </region>
     </portal>
-    <!-- Eiffel Tower Portal-->
+    <!-- Eiffel Tower Portal -->
     <portal x="@-635.5" y="@77.1" z="@-217.5" yaw="@90">
         <region>
             <cuboid min="-618,135,-216" max="-617,133,-219"/>
@@ -391,16 +377,18 @@
     <cuboid id="void-death-region" min="-49,33,-230" max="-84,35,-205"/>
     <cuboid id="blindness-region" min="-43,33,-230" max="-84,70,-205"/>
     <rectangle id="end-bridge-region" min="-694.0,-213.0" max="-714.0,-227.0"/>
-    <point id="runners-spawn">153.5,7.1,-214.5</point>
-    <point id="defenders-spawn">148.5,6.1,-173.5</point>
-    <block id="defenders-monument">-707,78,-218</block>
+    <point id="runners-spawn">153.5,7,-214.5</point>
+    <point id="defenders-spawn">148.5,6,-173.5</point>
+    <negative id="play">
+        <block id="defenders-monument">-707,78,-218</block>
+    </negative>
     <cuboid id="great-wall" min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
     <rectangle id="runners-spawn-region" min="150.0,-203.0" max="157.0,-232.0"/>
     <apply velocity="0.0,3.0,0.0" region="jump-pads-strong"/>
     <apply velocity="-0.4,1.8,0.2" region="jump-pad-weak"/>
     <apply kit="runners-kit-wall" region="great-wall" filter="runners-team"/>
     <apply kit="void-death" region="void-death-region"/>
-    <apply block="monument" use="deny-dispenser"/>
+    <apply block="never" region="play" use="deny-dispenser"/>
     <apply enter="deny-defenders" region="no-defenders" message="`7This region is disabled."/>
 </regions>
 <mobs>
