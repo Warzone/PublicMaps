@@ -1,12 +1,17 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Sakura Garden</name>
-<version>1.0.3</version>
+<variant id="halloween" world="halloween" override="true">Halloween Garden</variant>
+<version>1.1.0</version>
 <objective>Capture both wools!</objective>
 <gamemode>ctw</gamemode>
-<created>2022-02-07</created>
+<if variant="default">
+    <created>2022-02-07</created>
+</if>
+<if variant="halloween">
+    <created>2022-10-01</created>
+</if>
 <authors>
-    <author uuid="2ee523ce-6bf2-430f-aba5-2a2cd8608f64"/> <!-- Arizhem -->
+    <author uuid="38ef938a-7020-4c04-9d12-4875ed0598ca"/> <!-- Arizhem -->
     <author uuid="f6f5dce8-a158-461d-b26d-dc8acfaeedd7"/> <!-- Suavely -->
 </authors>
 <teams>
@@ -16,17 +21,17 @@
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" material="stone sword" unbreakable="true"/>
-		<item slot="1" material="bow" unbreakable="true" enchantment="arrow infinite"/>
-		<item slot="2" material="diamond pickaxe" unbreakable="true"/>
-		<item slot="3" material="iron axe" unbreakable="true"/>
-		<item slot="4" material="wood" amount="64"/>
-		<item slot="5" material="glass" amount="64"/>
-		<item slot="8" material="golden apple"/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true" enchantment="arrow infinite"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="wood" amount="64"/>
+        <item slot="5" material="glass" amount="64"/>
+        <item slot="8" material="golden apple"/>
         <item slot="28" material="arrow"/>
         <item slot="30" material="iron spade" unbreakable="true"/>
         <leggings material="chainmail leggings" unbreakable="true"/>
-        <effect duration="oo" amplifier="100">damage resistance</effect>
+        <effect>damage resistance</effect>
     </kit>
     <kit force="true" id="reset-resistance-kit">
         <effect duration="0" amplifier="0">damage resistance</effect>
@@ -44,7 +49,7 @@
 </kits>
 <spawns>
     <spawn team="blue-team" kit="blue-kit" yaw="180" region="blue-spawn-point"/>
-    <spawn team="red-team" kit="red-kit" yaw="0" region="red-spawn-point"/>
+    <spawn team="red-team" kit="red-kit" region="red-spawn-point"/>
     <default yaw="90" region="obs-spawn-point"/>
 </spawns>
 <wools craftable="false">
@@ -61,11 +66,15 @@
             <any>
                 <material>leaves</material>
                 <material>log</material>
-				<material>wool</material>
-				<material>stained glass</material>
-				<material>spruce fence</material>
-				<material>stained clay</material>
-				<material>wood step</material>
+                <material>wool</material>
+                <material>stained glass</material>
+                <material>spruce fence</material>
+                <material>stained clay</material>
+                <material>wood step</material>
+                <if variant="halloween">
+                    <material>web</material>
+                    <material>wood</material>
+                </if>
             </any>
             <void/>
         </all>
@@ -122,7 +131,7 @@
         <union id="build-area">
             <rectangle min="-50,50" max="-83,65"/>
             <rectangle min="-25,65" max="-108,102"/>
-            <rectangle min="-22,102" max="-111,171"/> <!--middle island-->
+            <rectangle min="-22,102" max="-111,171"/> <!-- middle island -->
             <rectangle min="-108,208" max="-25,170"/>
             <rectangle min="-50,208" max="-83,223"/>
         </union>
@@ -159,7 +168,7 @@
     </spawner>
 </spawners>
 <itemkeep>
-    <item>stone sword</item>
+    <item>iron sword</item>
     <item>bow</item>
     <item>diamond pickaxe</item>
     <item>iron axe</item>
@@ -175,18 +184,18 @@
     <item>chainmail leggings</item>
     <item>leather boots</item>
     <item>stone</item>
-	<item>string</item>
-	<item>red rose</item>
-	<item>long grass</item>
-	<item>sand</item>
-	<item>dark oak stairs</item>
-	<item>spruce wood stairs</item>
-	<item>quartz block</item>
-	<item>prismarine shard</item>
-	<item>wood step</item>
+    <item>string</item>
+    <item>red rose</item>
+    <item>long grass</item>
+    <item>sand</item>
+    <item>dark oak stairs</item>
+    <item>spruce wood stairs</item>
+    <item>quartz block</item>
+    <item>prismarine shard</item>
+    <item>wood step</item>
 </itemremove>
 <toolrepair>
-    <tool>stone sword</tool>
+    <tool>iron sword</tool>
     <tool>bow</tool>
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
@@ -200,7 +209,6 @@
             <material>iron chestplate</material>
             <material>iron leggings</material>
             <material>iron boots</material>
-            <material>iron sword</material>
             <material>diamond pickaxe</material>
             <material>iron axe</material>
             <material>iron spade</material>
@@ -261,9 +269,9 @@
 </hunger>
 <maxbuildheight>32</maxbuildheight>
 <kill-rewards>
-	<kill-reward>
-		<item material="golden apple" amount="1"/>
-		<item material="wood" amount="16"/>
-	</kill-reward>
+    <kill-reward>
+        <item material="golden apple" amount="1"/>
+        <item material="wood" amount="16"/>
+    </kill-reward>
 </kill-rewards>
 </map>
