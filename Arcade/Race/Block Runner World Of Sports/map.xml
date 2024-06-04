@@ -1,6 +1,9 @@
-<map proto="1.4.0" game="`eProgress">
+<map proto="1.4.2" game="`eProgress">
 <name>Block Runner: World of Sports</name>
 <version>1.0.0</version>
+<slug>block_runner_world_of_sports</slug>
+<include id="void-death"/>
+<include id="block-runner"/> <!-- Required by all Block Runner maps -->
 <authors>
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
@@ -19,43 +22,6 @@
         </regions>
     </default>
 </spawns>
-<objective>Be the first to the end!</objective>
-<gamemode>arcade</gamemode> 
-<blitz>
-    <lives>1</lives>    
-</blitz>
-<players min="2" max="8" colors="true"/>
-<broadcasts>
-    <alert after="2s">`6`lBlocks falling in 3 seconds</alert>
-    <alert after="3s">`6`lBlocks falling in 2 seconds</alert>
-    <alert after="4s">`6`lBlocks falling in 1 seconds</alert>
-    <alert after="5s">`6`lThe path is falling away! Run!</alert>
-</broadcasts>
-<time>2m</time>
-<score>
-    <limit>4</limit>
-    <kills>0</kills>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint1"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint2"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint3"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="box-win"/>
-        </region>
-    </box>
-</score>
 <regions>
     <cuboid id="spawn-location" min="-35.5,13,7" max="-35.5,13,13"/>
     <cuboid id="mon" min="-38,1,12" max="-37,0,9"/>
@@ -63,70 +29,5 @@
     <above id="checkpoint2" x="109"/>
     <above id="checkpoint3" x="148"/>
     <cuboid id="box-win" min="196,12,3" max="205,19,17"/>
-    <apply enter="never">
-        <region>
-            <negative>
-                <region id="checkpoint1"/>
-            </negative>
-        </region>
-    </apply>
-    <apply enter="never">
-        <region>
-            <negative>
-                <region id="checkpoint2"/>
-            </negative>
-        </region>
-    </apply>
-    <apply enter="never">
-        <region>
-            <negative>
-                <region id="checkpoint3"/>
-            </negative>
-        </region>
-    </apply>
 </regions>
-<kits>
-    <kit id="spawn">
-        <game-mode>adventure</game-mode>
-        <effect duration="oo">invisibility</effect>
-        <effect duration="oo">fire resistance</effect>
-        <boots>gold boots</boots>
-    </kit>
-</kits>
-<structures>
-    <structure id="mon-struct" region="mon" air="false"/>
-    <dynamic structure="mon-struct" offset="0,0,0" filter="countdown"/>
-</structures>
-<filters>
-    <not id="countdown">
-        <time>5s</time>
-    </not>
-    <not id="all-blocks">
-        <material>air</material>
-    </not>
-</filters>
-<falling-blocks delay="4">
-    <rule>
-        <filter>
-            <filter id="all-blocks"/>
-        </filter>
-        <sticky>
-            <all>
-                <filter id="all-blocks"/>
-                <material>redstone block</material>
-            </all>
-        </sticky>
-    </rule>
-</falling-blocks>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>entity attack</damage>
-</disabledamage>
-<gamerules>
-    <doTileDrops>false</doTileDrops>
-</gamerules>
 </map>
-
