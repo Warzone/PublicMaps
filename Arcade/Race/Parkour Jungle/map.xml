@@ -1,8 +1,15 @@
-<map proto="1.4.0" game="`d`lParkour!">
+<map proto="1.4.2" game="`d`lParkour!">
 <name>Parkour: Jungle</name>
-<version>1.2.1</version>
+<variant id="team" override="true">Team Parkour: Jungle</variant>
+<version>1.3.3</version>
 <objective>Reach the top first!</objective>
 <gamemode>arcade</gamemode>
+<if variant="default">
+    <created>2019-03-30</created>
+</if>
+<if variant="team">
+    <created>2020-10-18</created>
+</if>
 <authors>
     <author uuid="a9f11454-beac-4cc3-a138-1780802c8794"/> <!-- Crazy_ -->
 </authors>
@@ -10,20 +17,24 @@
     <contributor uuid="bf331953-4f92-43ee-8abc-7544b8234936" contribution="Map concept"/> <!-- ViceTechnicolour -->
     <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Additions to the end"/> <!-- Tywnis -->
 </contributors>
-<players colors="true" max="50" show-name-tags="false"/>
+<if variant="default">
+    <players colors="true" max="50" show-name-tags="false"/>
+</if>
+<if variant="team">
+    <teams>
+        <team id="red" show-name-tags="false" color="dark red" max="10">Red</team>
+        <team id="blue" show-name-tags="false" color="blue" max="10">Blue</team>
+        <team id="green" show-name-tags="false" color="green" max="10">Green</team>
+        <team id="yellow" show-name-tags="false" color="yellow" max="10">Yellow</team>
+        <team id="orange" show-name-tags="false" color="gold" max="10">Orange</team>
+        <team id="purple" show-name-tags="false" color="dark purple" max="10">Purple</team>
+    </teams>
+</if>
 <spawns>
-    <spawn yaw="90" kit="invis" filter="only-at-0">
-        <regions>
-            <point>0,1.5,0</point>
-        </regions>
-    </spawn>
-    <spawn yaw="90" kit="invis" filter="only-at-1" region="portal-check-1"/>
-    <spawn yaw="-90" kit="invis" filter="only-at-2" region="portal-check-2"/>
-    <default yaw="0">
-        <regions>
-            <point>-9,25.5,-28</point>
-        </regions>
-    </default>
+    <spawn yaw="90" kit="invis" region="spawn" filter="only-at-0"/>
+    <spawn yaw="90" kit="invis" region="portal-check-1" filter="only-at-1"/>
+    <spawn yaw="-90" kit="invis" region="portal-check-2" filter="only-at-2"/>
+    <default region="obs-spawn"/>
 </spawns>
 <kits>
     <kit id="invis">
@@ -37,39 +48,37 @@
         <item slot="6" locked="true" name="`aLocation Indicator" material="wood button"/>
         <item slot="7" locked="true" name="`aLocation Indicator" material="wood button"/>
         <item slot="8" locked="true" name="`aLocation Indicator" material="wood button"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <filters>
     <score id="only-at-0">0</score>
     <score id="only-at-1">1</score>
     <score id="only-at-2">2</score>
+    <after id="report-issues" duration="5s">
+        <all>
+            <match-running/>
+            <participating/>
+        </all>
+    </after>
 </filters>
 <regions>
-    <point id="spawn">0,1.5,0</point>
+    <cuboid id="finish-area" min="-10,32,-30" max="-8,33,-28"/>
+    <below id="below-0" y="0"/>
+    <point id="spawn">0,1,0</point>
+    <point id="obs-spawn">-9,25,-28</point>
     <apply block="never"/>
     <!-- Checkpoints to pass through -->
     <cuboid id="checkpoint-1" min="3,14,-2" max="6,16,1"/>
     <cuboid id="checkpoint-2" min="-21,17,19" max="-18,19,16"/>
     <!-- Teleport locations for checkpoints -->
-    <point id="portal-check-1">4,14.5,-1</point>
-    <point id="portal-check-2">-20,17.5,17</point>
+    <point id="portal-check-1">4.5,14,-0.5</point>
+    <point id="portal-check-2">-19.5,17,17.5</point>
 </regions>
-<portals>
-    <portal destination="spawn" yaw="@90" filter="only-at-0">
-        <region>
-            <below y="0"/>
-        </region>
-    </portal>
-    <portal destination="portal-check-1" yaw="@90" filter="only-at-1">
-        <region>
-            <below y="0"/>
-        </region>
-    </portal>
-    <portal destination="portal-check-2" yaw="@-90" filter="only-at-2">
-        <region>
-            <below y="0"/>
-        </region>
-    </portal>
+<portals sound="false">
+    <portal destination="spawn" yaw="@90" region="below-0" filter="only-at-0"/>
+    <portal destination="portal-check-1" yaw="@90" region="below-0" filter="only-at-1"/>
+    <portal destination="portal-check-2" yaw="@-90" region="below-0" filter="only-at-2"/>
 </portals>
 <hunger>
     <depletion>off</depletion>
@@ -80,19 +89,52 @@
 </disabledamage>
 <time>6m</time>
 <broadcasts>
-    <tip after="5s" every="90s">There are checkpoints scattered throughout the course!</tip>
-    <tip after="5s" every="1m">Once you've passed a checkpoint, you can fall into the void to return to it at any point!</tip>
+    <if variant="default">
+        <tip after="5s" every="1m">Pass a checkpoint to go back to it if you fall!</tip>
+    </if>
+    <if variant="team">
+        <tip after="5s" every="1m">Checkpoints are shared with all members of your team!</tip>
+    </if>
 </broadcasts>
 <score>
     <limit>3</limit>
-    <box points="1" region="checkpoint-1" silent="true" filter="only-at-0"/>
-    <box points="1" region="checkpoint-2" silent="true" filter="only-at-1"/>
-    <box points="1" filter="only-at-2">
-        <region>
-            <cuboid min="-10,32,-30" max="-8,33,-28"/>
-        </region>
-    </box>
 </score>
+<variables>
+    <score id="score"/>
+</variables>
+<actions>
+    <trigger scope="player">
+        <filter>
+            <any>
+                <all>
+                    <region id="checkpoint-1"/>
+                    <score>0</score>
+                    <filter id="report-issues"/>
+                </all>
+                <all>
+                    <region id="checkpoint-2"/>
+                    <score>1</score>
+                    <filter id="report-issues"/>
+                </all>
+                <all>
+                    <region id="finish-area"/>
+                    <score>2</score>
+                    <filter id="report-issues"/>
+                </all>
+            </any>
+        </filter>
+        <action>
+            <switch-scope inner="team">
+                <set var="score" value="score + 1"/>
+                <message text="`6Checkpoint `7{num} `6reached">
+                    <replacements>
+                        <decimal id="num" value="score"/>
+                    </replacements>
+                </message>
+            </switch-scope>
+        </action>
+    </trigger>
+</actions>
 <timelock>on</timelock>
 <itemremove>
     <item>wood button</item>
