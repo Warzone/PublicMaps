@@ -1,74 +1,73 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Sheep Scramble</name>
-<version>1.0.4</version>
-<objective>Score the most wool to win!</objective>
+<version>1.0.6</version>
 <gamemode>arcade</gamemode>
+<objective>Score the most wool to win!</objective>
 <authors>
-	<author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/>
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
-<players min="4" max="8" colors="true"/>
-<respawn delay="7s" auto="true"/>
-<spawns>
-	<spawn kit="spawn-kit">
-		<regions yaw="0">
-			<point>277,9,-101</point>
-		</regions>
-	</spawn>
-	<default>
-		<regions yaw="0">
-			<point>277,18,-101</point>
-		</regions>
-	</default>
-</spawns>
+<players min="2" max="16" colors="true"/>
 <kits>
-	<kit id="spawn-kit">
-		<item slot="0" name="`3Sheep Slayer" unbreakable="true" enchantment="damage all:3">iron sword</item>
-		<boots unbreakable="true" name="`3Boots" material="leather boots">
+    <kit id="spawn-kit">
+        <item slot="0" name="`3Sheep Slayer" unbreakable="true" enchantment="damage all:3" material="iron sword"/>
+        <boots unbreakable="true" name="`3Boots" material="leather boots">
             <attribute operation="add" amount="0.3">generic.knockbackResistance</attribute>
         </boots>
-		<potion duration="oo" amplifier="1">speed</potion>
-		<potion duration="oo" amplifier="5">resistance</potion>
-        <potion duration="oo" amplifier="1">regeneration</potion>
-	</kit>
+        <effect>speed</effect>
+        <effect amplifier="5">resistance</effect>
+        <effect>regeneration</effect>
+    </kit>
 </kits>
+<spawns>
+    <spawn kit="spawn-kit">
+        <regions>
+            <point>277,9,-101</point>
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point>277,18,-101</point>
+        </regions>
+    </default>
+</spawns>
 <filters>
-	<all id="only-tnt">
-		<material>tnt</material>
-	</all>
-	<apply block="only-tnt"/>
+    <material id="only-tnt">tnt</material>
 </filters>
+<regions>
+    <apply block="only-tnt"/>
+</regions>
 <time>150s</time>
 <score>
-	<box region="everywhere" silent="true">
-		<redeemables>
-			<item points="1">wool:0</item>
-			<item points="3">wool:5</item>
-			<item points="10">wool:6</item>
-		</redeemables>
-	</box>
+    <box region="everywhere" silent="true">
+        <redeemables>
+            <item points="1">wool:0</item>
+            <item points="3">wool:5</item>
+            <item points="10">wool:6</item>
+        </redeemables>
+    </box>
 </score>
 <disabledamage>
-	<damage>entity attack</damage>
+    <damage>entity attack</damage>
 </disabledamage>
 <itemremove>
-	<item>mutton</item>
-	<item>iron sword</item>
-	<item>wool:14</item>
-	<item>leather boots</item>
+    <item>mutton</item>
+    <item>iron sword</item>
+    <item>wool:14</item>
+    <item>leather boots</item>
 </itemremove>
 <tnt>
-	<instantignite>on</instantignite>
-	<fuse>1.5s</fuse>
+    <instantignite>on</instantignite>
+    <fuse>1.5s</fuse>
     <power>5</power>
     <licensing>false</licensing>
 </tnt>
 <mobs>
-	<filter>
-		<spawn>spawner</spawn>
-	</filter>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
 </mobs>
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<respawn delay="7s" auto="true"/>
 </map>
