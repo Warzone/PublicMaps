@@ -1,6 +1,6 @@
-<map proto="1.4.0" game="Juggernaut">
+<map proto="1.4.2" game="Juggernaut">
 <name>Juggernaut's Hamlet</name>
-<version>1.1.2</version>
+<version>1.1.4</version>
 <objective>Run from the Juggernaut!</objective>
 <gamemode>arcade</gamemode>
 <authors>
@@ -61,16 +61,17 @@
         <potion duration="oo" amplifier="1">invisibility</potion>
         <item projectile="slowball" name="`aSlowball" amount="8" slot="1">egg</item>
     </kit>
-    <kit id="juggernaut-kit">
-        <double-jump power="1.8" recharge-time="4s" />
-        <helmet material="diamond helmet" unbreakable="true" enchantment="protection environmental:4" locked="true" />
+    <kit id="juggernaut-kit" force="true">
+        <double-jump power="1.8" recharge-time="4s"/>
+        <foodlevel>6</foodlevel>
+        <helmet material="diamond helmet" unbreakable="true" enchantment="protection environmental:4" locked="true"/>
         <chestplate material="diamond chestplate" unbreakable="true" enchantment="protection environmental:4" locked="true">
-            <attribute operation="multiply" amount="-0.63">generic.movementSpeed</attribute>
+            <attribute operation="multiply" amount="-0.43">generic.movementSpeed</attribute>
         </chestplate>
         <leggings material="diamond leggings" unbreakable="true" enchantment="protection environmental:4" locked="true">
             <attribute operation="add" amount="0.3">generic.knockbackResistance</attribute>
         </leggings>
-        <boots material="diamond boots" unbreakable="true" enchantment="protection environmental:4" locked="true" />
+        <boots material="diamond boots" unbreakable="true" enchantment="protection environmental:4" locked="true"/>
         <item slot="0" material="diamond sword">
             <enchantment level="4">damage all</enchantment>
             <enchantment level="2">knockback</enchantment>
