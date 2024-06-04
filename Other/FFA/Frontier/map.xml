@@ -1,25 +1,23 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Frontier</name>
-<slug>frontier</slug>
-<version>1.3.4</version>
+<version>1.3.5</version>
 <objective>Get the most kills within 5 minutes</objective>
+<created>2016-03-27</created>
+<gamemode>ffa</gamemode>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" />
-    <!--  mitchiii_  -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
 </authors>
 <contributors>
-    <contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="Name suggestions" />
-    <!-- Poseidons -->
+    <contributor uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4" contribution="Name suggestions"/> <!-- Poseidons -->
 </contributors>
-<gamemode>ffa</gamemode>
 <time>5m</time>
 <score>
     <kills>1</kills>
 </score>
 <players max="10" max-overfill="12"/>
-<respawn auto="true" />
+<respawn auto="true"/>
 <spawns  safe="true">
-    <default kit="default-kit" region="default-spawn" yaw="19" />
+    <default kit="default-kit" region="default-spawn" yaw="19"/>
     <spawn   kit="spawn-kit"   spread="true">
         <regions>
             <point yaw="157" >65,10,28</point>
@@ -55,27 +53,27 @@
         <potion duration="oo">night vision</potion>
     </kit>
     <kit id="spawn-kit">
-        <item slot="0" unbreakable="true"               material="stone sword" />
-        <item slot="1" unbreakable="true"               material="bow" />
-        <item slot="2"                    amount="8"    material="stained glass" />
-        <item slot="3"                    amount="6"    material="torch" />
-        <item slot="8"                    amount="24"   material="arrow" />
-        <helmet        unbreakable="true" locked="true" material="leather helmet" />
-        <chestplate    unbreakable="true" locked="true" material="gold chestplate" />
-        <boots         unbreakable="true" locked="true" material="iron boots" />
+        <item slot="0" unbreakable="true"               material="stone sword"/>
+        <item slot="1" unbreakable="true"               material="bow"/>
+        <item slot="2"                    amount="8"    material="stained glass"/>
+        <item slot="3"                    amount="6"    material="torch"/>
+        <item slot="8"                    amount="24"   material="arrow"/>
+        <helmet        unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate    unbreakable="true" locked="true" material="gold chestplate"/>
+        <boots         unbreakable="true" locked="true" material="iron boots"/>
         <potion        duration="1m30s"                >absorption</potion>
         <potion        duration="3s"      amplifier="5">resistance</potion>
     </kit>
     <kit id="kill-boost">
+        <potion duration="3s" amplifier="3">regeneration</potion>
         <potion duration="4s" amplifier="2">speed</potion>
         <potion duration="3s"              >night vision</potion>
     </kit>
 </kits>
 <killreward>
-    <kit id="kill-boost" />
-    <item amount="2" material="stained glass" />
-    <item amount="4" material="arrow" />
-    <item amount="1" material="golden apple" />
+    <kit id="kill-boost"/>
+    <item amount="2" material="stained glass"/>
+    <item amount="4" material="arrow"/>
 </killreward>
 <filters>
     <all id="place-blocks">
@@ -92,18 +90,18 @@
             <material>stained glass pane</material>
         </any>
         <not>
-            <void />
+            <void/>
         </not>
     </all>
 </filters>
 <regions>
-    <cylinder id="default-spawn" base="52.5,21,8.5" radius="1" height="1" />
-    <cuboid id="portal-in" min="63,11,-23" max="59,13,-24" />
+    <cylinder id="default-spawn" base="52.5,21,8.5" radius="1" height="1"/>
+    <cuboid id="portal-in" min="63,11,-23" max="59,13,-24"/>
     <block id="portal-out">5.5,9.2,-15.5</block>
-    <apply block-place="place-blocks" block-break="break-blocks" />
+    <apply block-place="place-blocks" block-break="break-blocks"/>
 </regions>
 <portals>
-    <portal region="portal-in" destination="portal-out" protect="true" smooth="true" yaw="@90" />
+    <portal region="portal-in" destination="portal-out" protect="true" smooth="true" yaw="@90"/>
 </portals>
 <gamerules>
     <doDaylightCycle>false</doDaylightCycle>
