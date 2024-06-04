@@ -1,18 +1,17 @@
-<?xml version="1.0"?>
-<map proto="1.4.3">
+<map proto="1.4.2">
 <name>Proelium: DTM</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Destroy the other team's monuments!</objective>
 <gamemode>dtm</gamemode>
 <authors>
-    <author>sweeeper</author> <!-- Neither author or contributor has ever joined -->
+    <author uuid="4a99223d-3465-492c-879a-81e65a21089d"/> <!-- sweeeper -->
 </authors>
 <contributors>
-    <contributor>resepignev</contributor>
+    <contributor uuid="0c20aa0d-82f9-46cd-aeae-29cf1f112aa2"/> <!-- resepignev -->
 </contributors>
 <teams>
-    <team id="red" color="dark red" max="40">Red</team>
-    <team id="blue" color="blue" max="40">Blue</team>
+    <team id="red" color="dark red" max="35">Red</team>
+    <team id="blue" color="blue" max="35">Blue</team>
 </teams>
 <kits>
     <kit id="spawn">
@@ -71,8 +70,8 @@
         <cylinder id="red-spawn" base="0,63,-39" height="11" radius="10"/> <!-- red -->
     </union>
     <apply block="never" region="spawns" message="You may not modify the spawn area!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter Red team's spawn!"/>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter Blue team's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter Red's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter Blue's spawn!"/>
 </regions>
 <destroyables materials="obsidian">
     <destroyable owner="blue" name="Left Monument">
@@ -96,9 +95,6 @@
         </region>
     </destroyable>
 </destroyables>
-<kill-reward>
-    <item amount="1">golden apple</item>
-</kill-reward>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
