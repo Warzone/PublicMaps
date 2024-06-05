@@ -1,11 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Government</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Kill as many players as you can in 5 minutes</objective>
 <created>2016-03-27</created>
 <gamemode>ffa</gamemode>
-<phase>development</phase>
 <authors>
     <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
 </authors>
@@ -21,15 +19,16 @@
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="8" amount="16">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
-        <potion duration="2.5" amplifier="10">resistance</potion>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
+        <effect duration="2.5" amplifier="10">resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -59,7 +58,7 @@
     </default>
 </spawns>
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never"/>
 </regions>
 <toolrepair>
     <tool>stone sword</tool>
@@ -73,10 +72,12 @@
     <item>arrow</item>
     <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
