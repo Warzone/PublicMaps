@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Geometric</name>
+<version>1.9.3</version>
+<objective>Kill as many players as you can with your gun!</objective>
 <gamemode>ffa</gamemode>
-<version>1.9.2</version>
-<objective>Kill as many players as you can!</objective>
+<created>2016-03-02</created>
 <authors>
     <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
 </authors>
@@ -14,20 +14,21 @@
 <score>
     <kills>1</kills>
 </score>
-<time>4m</time>
-<players min="2" max="6" colors="true"/>
+<time>5m</time>
+<players min="2" max="5" colors="true"/>
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="8" amount="16">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
-        <potion duration="2.5" amplifier="10">resistance</potion>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
+        <effect duration="2.5" amplifier="10">resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -53,14 +54,14 @@
             <point yaw="-117">-62.5,16,-42.5</point>
         </regions>
     </spawn>
-    <default yaw="0">
+    <default>
         <regions>
             <cuboid min="-39,14,-74" max="-37,16,-72"/>
         </regions>
     </default>
 </spawns>
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never"/>
     <apply velocity="0.0,1.0,0.0">
         <region>
             <cuboid min="4.5,14,-0.5" max="3.5,14,0.5"/>
@@ -82,10 +83,12 @@
 <disabledamage>
     <damage>suffocation</damage>
 </disabledamage>
-<killreward>
-    <item material="golden apple" />
-    <item amount="8" material="arrow" />
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
