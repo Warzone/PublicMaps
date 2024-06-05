@@ -1,6 +1,6 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Tebulas</name>
-<version>1.1</version>
+<version>1.1.1</version>
 <objective>Be the team with the most kills after 8 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
@@ -40,10 +40,11 @@
         <item slot="0" unbreakable="true" lore="`aOne-hit kill!" material="iron sword">
             <enchantment>sharpness</enchantment>
         </item>
-        <item slot="1" unbreakable="true" lore="`aOne-shot kill!" material="bow">
+        <item slot="1" unbreakable="true" lore="`aOne-shot, one-hit kill!" material="bow">
             <enchantment>power</enchantment>
+            <enchantment>sharpness</enchantment>
         </item>
-        <item slot="2" material="arrow"/>
+        <item slot="2" amount="2" material="arrow"/>
         <helmet locked="true" unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate locked="true" unbreakable="true" team-color="true" material="leather chestplate">
             <enchantment>protection</enchantment>
@@ -51,35 +52,36 @@
         <leggings locked="true" unbreakable="true" team-color="true" material="leather leggings"/>
         <boots locked="true" unbreakable="true" team-color="true" material="leather boots"/>
         <effect>speed</effect>
-        <effect duration="3" amplifier="255">heal</effect>
-        <effect duration="3" amplifier="255">damage resistance</effect>
+        <effect duration="3s" amplifier="255">damage resistance</effect>
+        <effect duration="3s">absorption</effect>
+        <max-health>6</max-health>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<spawns angle="19,78,-59">
+<spawns angle="19,14,-59">
     <default yaw="0" kit="default-kit">
         <region>
-            <cuboid min="20,145,-58" max="18,145,-60"/>
+            <cuboid min="20,81,-58" max="18,81,-60"/>
         </region>
     </default>
     <spawn team="cyan" kit="spawn-kit">
         <region>
-            <cuboid min="17,77,-108" max="21,77,-108"/>
+            <cuboid min="17,13,-108" max="21,13,-108"/>
         </region>
     </spawn>
     <spawn team="lime" kit="spawn-kit">
         <region>
-            <cuboid min="21,77,-10" max="17,77,-10"/>
+            <cuboid min="21,13,-10" max="17,13,-10"/>
         </region>
     </spawn>
     <spawn team="orange" kit="spawn-kit">
         <region>
-            <cuboid min="-30,77,-61" max="-30,77,-57"/>
+            <cuboid min="-30,13,-61" max="-30,13,-57"/>
         </region>
     </spawn>
     <spawn team="purple" kit="spawn-kit">
         <region>
-            <cuboid min="68,77,-61" max="68,77,-57"/>
+            <cuboid min="68,13,-61" max="68,13,-57"/>
         </region>
     </spawn>
 </spawns>
@@ -91,39 +93,39 @@
 </filters>
 <regions>
     <union id="spawns">
-        <cuboid id="cyan-spawn" min="9,73,-110" max="29,256,-105"/>
-        <cuboid id="lime-spawn" min="9,73,-13" max="29,256,-8"/>
-        <cuboid id="orange-spawn" min="-32,73,-69" max="-27,256,-49"/>
-        <cuboid id="purple-spawn" min="65,73,-69" max="70,256,-49"/>
+        <cuboid id="cyan-spawn" min="9,9,-110" max="29,256,-105"/>
+        <cuboid id="lime-spawn" min="9,9,-13" max="29,256,-8"/>
+        <cuboid id="orange-spawn" min="-32,9,-69" max="-27,256,-49"/>
+        <cuboid id="purple-spawn" min="65,9,-69" max="70,256,-49"/>
     </union>
     <union id="jump-pads">
         <union id="cyan-jump-pads">
-            <cuboid id="c-right-spawn" min="1,77,-102" max="5,79,-98"/> <!-- -x -->
-            <cuboid id="c-center" min="10,77,-68" max="13,79,-65"/>
-            <cuboid id="c-left-spawn-below" min="41,67,-102" max="45,69,-98"/>
-            <cuboid id="c-infront-spawn" min="26,67,-82" max="30,69,-78"/>
-            <cuboid id="c-abnormal" min="41,67,-70" max="45,69,-66"/> <!-- +z -->
+            <cuboid id="c-right-spawn" min="1,13,-102" max="5,15,-98"/> <!-- -x -->
+            <cuboid id="c-center" min="10,13,-68" max="13,15,-65"/>
+            <cuboid id="c-left-spawn-below" min="41,3,-102" max="45,5,-98"/>
+            <cuboid id="c-infront-spawn" min="26,3,-82" max="30,5,-78"/>
+            <cuboid id="c-abnormal" min="41,3,-70" max="45,5,-66"/> <!-- +z -->
         </union>
         <union id="lime-jump-pads">
-            <cuboid id="l-right-spawn" min="33,77,-20" max="37,79,-16"/> <!-- +x -->
-            <cuboid id="l-center" min="25,77,-54" max="27,79,-50"/>
-            <cuboid id="l-left-spawn-below" min="-7,67,-20" max="-3,69,-16"/>
-            <cuboid id="l-infront-spawn" min="8,67,-40" max="12,69,-36"/>
-            <cuboid id="l-abnormal" min="-7,67,-52" max="-3,69,-48"/> <!-- -z -->
+            <cuboid id="l-right-spawn" min="33,13,-20" max="37,15,-16"/> <!-- +x -->
+            <cuboid id="l-center" min="25,13,-54" max="27,15,-50"/>
+            <cuboid id="l-left-spawn-below" min="-7,3,-20" max="-3,5,-16"/>
+            <cuboid id="l-infront-spawn" min="8,3,-40" max="12,5,-36"/>
+            <cuboid id="l-abnormal" min="-7,3,-52" max="-3,5,-48"/> <!-- -z -->
         </union>
         <union id="orange-jump-pads">
-            <cuboid id="o-right-spawn" min="-24,77,-45" max="-20,79,-41"/> <!-- +z -->
-            <cuboid id="o-center" min="10,77,-53" max="13,79,-50"/>
-            <cuboid id="o-left-spawn-below" min="-24,67,-85" max="-20,69,-81"/>
-            <cuboid id="o-infront-spawn" min="-4,67,-70" max="-0,69,-66"/>
-            <cuboid id="o-abnormal" min="8,67,-85" max="12,69,-81"/> <!-- +x -->
+            <cuboid id="o-right-spawn" min="-24,13,-45" max="-20,15,-41"/> <!-- +z -->
+            <cuboid id="o-center" min="10,13,-53" max="13,15,-50"/>
+            <cuboid id="o-left-spawn-below" min="-24,3,-85" max="-20,5,-81"/>
+            <cuboid id="o-infront-spawn" min="-4,3,-70" max="-0,5,-66"/>
+            <cuboid id="o-abnormal" min="8,3,-85" max="12,5,-81"/> <!-- +x -->
         </union>
         <union id="purple-jump-pads">
-            <cuboid id="p-right-spawn" min="58,77,-77" max="62,79,-73"/> <!-- -z -->
-            <cuboid id="p-center" min="25,77,-68" max="28,79,-65"/>
-            <cuboid id="p-left-spawn-below" min="58,67,-37" max="62,69,-33"/>
-            <cuboid id="p-infront-spawn" min="38,67,-52" max="42,69,-48"/>
-            <cuboid id="p-abnormal" min="26,67,-37" max="30,69,-33"/> <!-- -x -->
+            <cuboid id="p-right-spawn" min="58,13,-77" max="62,15,-73"/> <!-- -z -->
+            <cuboid id="p-center" min="25,13,-68" max="28,15,-65"/>
+            <cuboid id="p-left-spawn-below" min="58,3,-37" max="62,5,-33"/>
+            <cuboid id="p-infront-spawn" min="38,3,-52" max="42,5,-48"/>
+            <cuboid id="p-abnormal" min="26,3,-37" max="30,5,-33"/> <!-- -x -->
         </union>
     </union>
     <union id="plus-z">
@@ -205,7 +207,7 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<!-- <include id="tutorial"/> -->
+<!-- include src="tutorial.xml"/ -->
 <tutorial>
     <stage title="Rage TDM">
         <message>
@@ -213,7 +215,7 @@
             <line>is to have the most kills at the end of the alloted time; 6 minutes.</line>
         </message>
         <teleport>
-            <point yaw="-180" pitch="90">19,120,-59</point>
+            <point yaw="-180" pitch="90">19,56,-59</point>
         </teleport>
     </stage>
     <stage title="Jumpads">
@@ -223,7 +225,7 @@
             <line>teams color.</line>
         </message>
         <teleport>
-            <point yaw="135" pitch="40">63.5,84,-71.5</point>
+            <point yaw="135" pitch="40">63.5,20,-71.5</point>
         </teleport>
     </stage>
     <stage title="Spawn Kit and Killreward">
@@ -233,7 +235,7 @@
             <line>rewarded with a single arrow.</line>
         </message>
         <teleport>
-            <point yaw="-135" pitch="10">57.5,77,-56.5</point>
+            <point yaw="-135" pitch="10">57.5,13,-56.5</point>
         </teleport>
     </stage>
 </tutorial>
