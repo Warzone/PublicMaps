@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Destiny</name>
-<version>1.1.1</version>
-<objective>Get the most kills before time ends!</objective>
+<version>1.1.0</version>
+<objective>Kill as many players as you can in 5 minutes</objective>
 <created>2016-03-29</created>
 <gamemode>ffa</gamemode>
 <authors>
@@ -12,6 +12,9 @@
     <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Feedback"/> <!-- Tywnis -->
     <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="World File Help"/> <!-- rockymine -->
 </contributors>
+<rules>
+    <rule>Kill as many players as you can in 5 minutes!</rule>
+</rules>
 <score>
     <kills>1</kills>
 </score>
@@ -25,7 +28,6 @@
             <point yaw="180">-115,9,95</point>
             <point yaw="123">-83.5,24,115.5</point>
             <point yaw="45">-89.5,8,81.5</point>
-            <point yaw="-9">-125.5,18,88.5</point>
         </regions>
     </spawn>
     <default yaw="-48">
@@ -54,17 +56,8 @@
 </disabledamage>
 <respawn delay="1s" blackout="true"/>
 <regions>
-    <apply block="allowed-blocks" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never" region="everywhere" message="You may not edit the map!"/>
 </regions>
-<filters>
-    <all id="allowed-blocks">
-        <any>
-            <material>sugar cane block</material>
-            <material>long grass</material>
-            <material>torch</material>
-        </any>
-    </all>
-</filters>
 <killreward>
     <item amount="3" material="arrow"/>
     <item amount="1" material="golden apple"/>
@@ -77,10 +70,6 @@
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>arrow</item>
-    <item>long grass</item>
-    <item>sugar cane</item>
-    <item>seeds</item>
-    <item>torch</item>
 </itemremove>
 <timelock>on</timelock>
 </map>
