@@ -1,64 +1,78 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.4.2">
 <name>No Return</name>
+<variant id="creeper" override="true">Creeper Return</variant>
 <phase>development</phase>
-<version>2.1.4</version>
+<version>2.1.7</version>
 <objective>Eliminate the other team.</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<time>5m</time>
 <authors>
-    <author uuid="a6a99e23-34c4-4957-8974-b78b4da9ce7c"/> <!-- AntonyMo -->
+    <author uuid="a6a99e23-34c4-4957-8974-b78b4da9ce7c"/> <!-- AMo AKA AntonyMo -->
 </authors>
 <contributors>
-    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Feedback and Minor Aesthetics"/> <!-- Stealth5061 -->
+    <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Feedback and minor aesthetics"/> <!-- Stealth5061 -->
 </contributors>
 <rules>
    <rule>You may not access areas where the lava cannot flow (apart from the center).</rule>
 </rules>
-<teams>
-    <team color="dark purple" max="50">Purple</team>
-    <team color="blue" max="50">Blue</team>
-</teams>
 <blitz>
-    <time>5m</time>
     <lives>1</lives>
 </blitz>
 <timelock>on</timelock>
+<teams>
+    <team id="purple" color="dark purple" max="15">Purple</team>
+    <team id="blue" color="blue" max="15">Blue</team>
+</teams>
 <spawns>
-    <spawn team="purple" kit="purple" yaw="180">
-        <cuboid min="18,18,55" max="-17,18,53"/>
+    <spawn team="purple" kit="spawn-kit" yaw="180">
+        <region>
+            <cuboid min="18,18,55" max="-17,18,53"/>
+        </region>
     </spawn>
-    <spawn team="blue" kit="blue" yaw="0">
-        <cuboid min="18,18,-53" max="-17,18,-55"/>
+    <spawn team="blue" kit="spawn-kit" yaw="0">
+        <region>
+            <cuboid min="18,18,-53" max="-17,18,-55"/>
+        </region>
     </spawn>
     <default yaw="270">
-        <cylinder base="51,35,0" radius="2" height="0"/>
+        <region>
+            <cylinder base="51,35,0" radius="2" height="0"/>
+        </region>
     </default>
 </spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" enchantment="arrow damage:1;arrow infinite:1;damage all:3;knockback:2">bow</item>
-        <item slot="27">arrow</item>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="0066cc">leather helmet</helmet>
-        <chestplate color="0066cc">leather chestplate</chestplate>
-        <leggings color="0066cc">leather leggings</leggings>
-        <boots color="0066cc">leather boots</boots>
-    </kit>
-    <kit name="purple" parents="spawn">
-        <helmet color="cc00ff">leather helmet</helmet>
-        <chestplate color="cc00ff">leather chestplate</chestplate>
-        <leggings color="cc00ff">leather leggings</leggings>
-        <boots color="cc00ff">leather boots</boots>
+    <kit id="spawn-kit">
+        <unless variant="creeper">
+            <item slot="0" enchantment="arrow damage:1;arrow infinite:1;damage all:3;knockback:2" unbreakable="true" material="bow"/>
+        </unless>
+        <if variant="creeper">
+            <item slot="0" enchantment="arrow damage:1;arrow infinite:1;damage all:2;knockback:2" unbreakable="true" material="bow"/>
+        </if>
+        <item slot="27" material="arrow"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
+<mobs>
+    <filter>
+        <mob>creeper</mob>
+    </filter>
+</mobs>
+<modifybowprojectile>
+    <unless variant="creeper">
+        <projectile>Snowball</projectile>
+    </unless>
+    <if variant="creeper">
+        <projectile>Creeper</projectile>
+        <velocityMod>40</velocityMod>
+    </if>
+</modifybowprojectile>
 <toolrepair>
     <tool>bow</tool>
 </toolrepair>
-<modifybowprojectile>
-	<projectile>Snowball</projectile>
-</modifybowprojectile>
 <itemremove>
     <item>arrow</item>
     <item>leather helmet</item>
@@ -67,17 +81,13 @@
     <item>leather boots</item>
 </itemremove>
 <filters>
-    <filter name="allow-lava">
-        <any>
-            <block>lava</block>
-            <block>stationary lava</block>
-        </any>
-    </filter>
+    <any id="allow-lava">
+        <material>lava</material>
+        <material>stationary lava</material>
+    </any>
 </filters>
 <regions>
-<apply block="allow-lava" use="allow-lava">
-    <rectangle min="-oo,-oo" max="oo,oo"/>
-</apply>
+    <apply block="allow-lava"/>
 </regions>
 <hunger>
     <depletion>off</depletion>
