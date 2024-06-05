@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
-<map proto="1.4.0" game="Capture the Wool">
+<map proto="1.4.2">
 <name>Fairy Tales: Metamorphose</name>
-<version>1.2.1</version>
+<version>1.2.7</version>
 <objective>Capture both of the enemy's wools before the other team does!</objective>
+<include id="lava-buckets"/>
 <gamemode>ctw</gamemode>
+<created>2019-03-24</created>
 <authors>
     <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ViceTechnicolour -->
     <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f"/> <!-- D347HxD -->
@@ -12,8 +14,8 @@
     <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML"/> <!-- Crazy_ -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="dark red" max="16">Red</team>
+    <team id="blue" color="blue" max="20">Blue</team>
+    <team id="red" color="dark red" max="20">Red</team>
 </teams>
 <kits>
     <kit id="spawn">
@@ -26,7 +28,6 @@
         <item slot="3" unbreakable="true">iron axe</item>
         <item slot="4" damage="1" amount="64">wood</item>
         <item slot="5" amount="16">glass</item>
-        <item slot="8" amount="64">cooked beef</item>
         <item slot="31" unbreakable="true">iron spade</item>
         <effect duration="6" amplifier="3">damage resistance</effect>
         <effect duration="4" amplifier="1">heal</effect>
@@ -70,12 +71,6 @@
     <not id="no-void">
         <void/>
     </not>
-    <deny id="deny-lava">
-        <any>
-            <material>lava</material>
-            <material>stationary lava</material>
-        </any>
-    </deny>
     <time id="at-5m">5m</time>
 </filters>
 <regions>
@@ -85,12 +80,12 @@
     </union>
     <union id="wool-rooms">
         <union id="blue-wools"> <!-- Wools on red side -->
-            <rectangle id="cyan-wool" min="31,-78" max="49,-63"/>
-            <rectangle id="orange-wool" min="49,25" max="31,40"/>
+            <rectangle id="cyan-wool" min="31,-78" max="50,-62"/>
+            <rectangle id="orange-wool" min="50,25" max="31,41"/>
         </union>
         <union id="red-wools"> <!-- Wools on blue side -->
-            <rectangle id="lime-wool" min="-72,-63" max="-54,-78"/>
-            <rectangle id="silver-wool" min="-54,25" max="-72,40"/>
+            <rectangle id="lime-wool" min="-72,-62" max="-53,-78"/>
+            <rectangle id="silver-wool" min="-53,25" max="-72,41"/>
         </union>
     </union>
     <union id="portal-regions">
@@ -137,7 +132,6 @@
     <apply enter="at-5m" region="portals" message="You may only use these portals after 5 minutes have passed!"/>
     <apply block="never" region="destinations-building" message="You may not build/break blocks here!"/>
     <apply block="never" region="anti-underbridge-lanes" message="You may not underbridge here!"/>
-    <apply block-place="deny-lava" region="everywhere" message="You may not place down lava!"/>
     <apply block-break="always" block-place="no-void" region="everywhere" message="You may not place blocks in the void!"/>
 </regions>
 <wools team="blue" craftable="false">
@@ -203,4 +197,7 @@
     <item>lava bucket</item>
     <item>seeds</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
