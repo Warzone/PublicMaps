@@ -1,0 +1,72 @@
+<map proto="1.4.2">
+<name>Crossroads</name>
+<version>1.0.0</version>
+<objective>Get the most kills within 10 minutes!</objective>
+<gamemode>ffa</gamemode>
+<created>2024-06-03</created>
+<authors>
+    <author uuid="c5525b6d-6919-4a25-85b1-5ebebd3d8ece"/> <!-- GameDevRG -->
+</authors>
+<contributors>
+    <contributor uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="XML"/> <!-- Fishywishi -->
+</contributors>
+<players min="2" max="10" max-overfill="12" colors="true"/>
+<kits>
+    <kit id="default">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="diamond axe"/>
+        <item slot="2" unbreakable="true" material="bow"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="8" amount="25" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" locked="true" material="leather helmet">
+            <enchantment level="2">protection</enchantment>
+        </helmet>
+        <chestplate unbreakable="true" locked="true" material="iron chestplate"/>
+        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
+        <boots unbreakable="true" locked="true" material="iron boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <regions yaw="-90">
+            <cuboid min="-61,69,1" max="-58,69,4"/>
+        </regions>
+    </default>
+    <spawn spread="true" safe="true" kit="default">
+        <regions angle="0,13,0">
+            <point>-30,20,-6</point>
+            <point>-20,19,-27</point>
+            <point>5,19,-29</point>
+            <point>30,19,-27</point>
+            <point>32,20,9</point>
+            <point>23,22,33</point>
+            <point>-6,22,34</point>
+            <point>-28,22,24</point>
+            <point>10,18,-10</point>
+            <point>-10,17,10</point>
+            <point>-4,12,-4</point>
+            <point>4,12,4</point>
+        </regions>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="never"/>
+</regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
+<kill-rewards>
+    <kill-reward>
+        <item amount="5" material="arrow"/>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
