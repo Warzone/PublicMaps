@@ -1,87 +1,90 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.4.2">
 <name>Lights Out</name>
-<version>1.1.4</version>
-<objective>Be the team with the most points after 12 minutes.</objective>
+<version>1.1.6</version>
+<objective>Be the team with the most points after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
 <authors>
-    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall Map Design and XML Code"/> <!-- Mikeg542 -->
+    <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall map design and XML"/> <!-- Mikeg542 -->
 </authors>
 <contributors>
-    <contributor uuid="10946c56-7961-42c1-a1d3-102c9f937cf8" contribution="build slave"/> <!-- Stephen012 -->
-    <contributor uuid="8e0b87e1-2369-4c3e-9819-c9e93cd4f8eb" contribution="build slave"/> <!-- TheDrewGuy -->
+    <contributor uuid="10946c56-7961-42c1-a1d3-102c9f937cf8" contribution="Build slave"/> <!-- Stephen012 -->
+    <contributor uuid="8e0b87e1-2369-4c3e-9819-c9e93cd4f8eb" contribution="Build slave"/> <!-- TheDrewGuy -->
 </contributors>
 <teams>
-    <team color="dark purple" max="40">Purple</team>
-    <team color="gold" max="40">Orange</team>
+    <team id="purple" color="dark purple" max="35">Purple</team>
+    <team id="orange" color="gold" max="35">Orange</team>
 </teams>
 <kits>
-    <kit name="spawn">
-		<clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="28">arrow</item>
-        <item slot="17" damage="4" amount="64">ink sack</item>
-		<leggings unbreakable="true" enchantment="protection projectile:3">chainmail leggings</leggings>
-		<boots enchantment="protection fall:2" unbreakable="true">iron boots</boots>
-		<potion duration="6" amplifier="5">heal</potion>
-		<potion duration="6" amplifier="5">damage resistance</potion>
-    </kit>
-    <kit name="orange" parents="spawn">
-        <helmet color="D87F33" unbreakable="true">leather helmet</helmet>
-        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
-    </kit>
-    <kit name="purple" parents="spawn">
-        <helmet color="7F3FB2" unbreakable="true">leather helmet</helmet>
-        <chestplate color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <item slot="17" damage="4" amount="64" material="ink sack"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:2" material="iron boots"/>
+        <effect duration="6" amplifier="5">heal</effect>
+        <effect duration="6" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="orange" kit="orange" yaw="180">
-        <cylinder base="39,16,174" radius="1" height="1"/>
+    <spawn team="orange" kit="spawn-kit" yaw="180">
+        <regions>
+            <cylinder base="39,16,174" radius="1" height="1"/>
+        </regions>
     </spawn>
-    <spawn team="purple" kit="purple" yaw="0">
-        <cylinder base="39,16,-12" radius="1" height="1"/>
+    <spawn team="purple" kit="spawn-kit">
+        <regions>
+            <cylinder base="39,16,-12" radius="1" height="1"/>
+        </regions>
     </spawn>
     <default yaw="-90">
-        <cylinder base="-11,71,82" radius="2" height="1"/>
+        <regions>
+            <cylinder base="-11,71,82" radius="2" height="1"/>
+        </regions>
     </default>
 </spawns>
 <regions>
-    <apply block="deny-all" message="You may not modify blocks!">
-        <rectangle min="84,-20" max="-6,184"/>
+    <apply block="never" message="You may not modify blocks!">
+        <region>
+            <rectangle min="84,-20" max="-6,184"/>
+        </region>
     </apply>
 </regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
 <toolrepair>
-	<tool>bow</tool>
-	<tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone sword</tool>
 </toolrepair>
 <itemremove>
-	<item>leather helmet</item>
-	<item>leather chestplate</item>
-	<item>chainmail leggings</item>
-	<item>iron boots</item>
-	<item>374</item>
-	<item>ink sack</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>glass bottle</item>
+    <item>ink sack</item>
 </itemremove>
 <itemkeep>
-	<item>arrow</item>
-	<item>golden apple</item>
-</itemkeep>
-<hunger>
-	<depletion>off</depletion>
-</hunger>
-<score>
-	<time>600</time>
-</score>
-<timelock>on</timelock>
-<killreward>
+    <item>arrow</item>
     <item>golden apple</item>
-    <item>exp bottle</item>
-</killreward>
-<tutorial>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="exp bottle"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<timelock>on</timelock>
+<!-- <tutorial>
     <stage title="Team Death Match">
         <message>
             <line>This map is a `a`lTeam Death Match `r(TDM) map</line>
@@ -108,5 +111,5 @@
             <point yaw="0" pitch="0">40,20,64</point>
         </teleport>
     </stage>
-</tutorial>
+</tutorial> -->
 </map>
