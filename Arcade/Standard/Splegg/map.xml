@@ -3,13 +3,28 @@
 <version>1.0.1</version>
 <objective>Use your Egg Shooter to break blocks under your enemies!</objective>
 <gamemode>arcade</gamemode>
+<created>2024-03-23</created>
 <authors>
-    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f"/>
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f"/> <!-- Fishywishi -->
 </authors>
 <blitz>
     <lives>1</lives>
 </blitz>
 <players max="20" colors="true"/>
+<kits>
+    <kit id="default" force="true">
+        <game-mode>adventure</game-mode>
+        <max-health>1</max-health>
+        <double-jump power="3" recharge-time="10s" recharge-before-landing="true"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet" locked="true"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate" locked="true"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings" locked="true"/>
+        <boots team-color="true" unbreakable="true" material="leather boots" locked="true"/>
+    </kit>
+    <kit id="Egg-Shooter" parents="default">
+        <item projectile="eggs" name="`aEgg Shooter" material="diamond hoe"/>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="default">
         <regions>
@@ -28,20 +43,6 @@
         <participating/>
     </all>
 </filters>
-<kits>
-    <kit id="default" force="true">
-        <game-mode>adventure</game-mode>
-        <max-health>1</max-health>
-        <double-jump power="3" recharge-time="10s" recharge-before-landing="true"/>
-        <helmet team-color="true" unbreakable="true" material="leather helmet" locked="true"/>
-        <chestplate team-color="true" unbreakable="true" material="leather chestplate" locked="true"/>
-        <leggings team-color="true" unbreakable="true" material="leather leggings" locked="true"/>
-        <boots team-color="true" unbreakable="true" material="leather boots" locked="true"/>
-    </kit>
-    <kit id="Egg-Shooter" parents="default">
-        <item projectile="eggs" name="`aEgg Shooter" material="diamond hoe"/>
-    </kit>
-</kits>
 <world>
     <timeset>6000</timeset>
 </world>
@@ -64,17 +65,13 @@
     </trigger>
 </actions>
 <projectiles>
-    <projectile id="eggs"
-    name="eggs"
-    projectile="Egg"
-    throwable="false"
-    velocity="2.0">
-    <destroy-filter>
-        <not>
-            <material>barrier</material>
-        </not>
-    </destroy-filter>
-</projectile>
+    <projectile id="eggs" name="eggs" projectile="Egg" throwable="false" velocity="2.0">
+        <destroy-filter>
+            <not>
+                <material>barrier</material>
+            </not>
+        </destroy-filter>
+    </projectile>
 </projectiles>
 <hunger>
     <depletion>off</depletion>
