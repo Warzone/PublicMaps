@@ -1,0 +1,37 @@
+<map proto="1.4.2">
+<!-- Lava bucket emptying include file - lava-buckets.xml -->
+<!-- Created by zzuf -->
+<!-- Version 2023.09.22-1 -->
+<filters>
+    <deny id="include-deny-lava">
+        <all>
+            <any>
+                <material>lava</material>
+                <material>stationary lava</material>
+            </any>
+            <cause>player</cause>
+        </all>
+    </deny>
+</filters>
+<regions>
+    <apply block-place="include-deny-lava" message="You may not place lava!"/>
+</regions>
+<actions>
+    <trigger scope="player">
+        <filter>
+            <pulse period="0.1" duration="0.05">
+                <carrying id="carrying-lava" ignore-metadata="true">
+                    <item material="lava bucket"/>
+                </carrying>
+            </pulse>
+        </filter>
+        <action scope="player">
+            <replace-item ignore-metadata="true">
+                <find material="lava bucket"/>
+                <replace material="bucket"/>
+            </replace-item>
+            <sound key="random.fizz"/>
+        </action>
+    </trigger>
+</actions>
+</map>
