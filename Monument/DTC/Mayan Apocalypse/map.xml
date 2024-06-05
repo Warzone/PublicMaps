@@ -1,8 +1,9 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Mayan Apocalypse</name>
-<version>1.1.6</version>
+<version>1.1.7</version>
 <objective>Destroy the enemy's core!</objective>
 <gamemode>dtc</gamemode>
+<created>2012-12-13</created>
 <authors>
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall Map Design"/> <!-- Mikeg542 -->
 </authors>
@@ -17,31 +18,31 @@
 <kits>
     <kit id="spawn">
         <clear/>
-        <item slot="0">iron sword</item>
-        <item slot="1">bow</item>
-        <item slot="28" amount="64">arrow</item>
-        <item slot="2">diamond pickaxe</item>
-        <item slot="3">iron axe</item>
-        <item amount="64" damage="2" slot="4">log</item>
-        <item slot="7">golden apple</item>
-        <item amount="64" slot="8">golden carrot</item>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="iron axe"/>
+        <item amount="64" damage="2" slot="4" material="log"/>
+        <item slot="7" material="golden apple"/>
+        <item amount="64" slot="8" material="golden carrot"/>
     </kit>
     <kit id="purple-kit" parents="spawn">
-        <chestplate color="7F3FB2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="7F3FB2" unbreakable="true" enchantment="protection fall:1">leather helmet</helmet>
+        <chestplate color="7F3FB2" unbreakable="true" material="leather chestplate"/>
+        <helmet color="7F3FB2" unbreakable="true" enchantment="protection fall" material="leather helmet"/>
     </kit>
     <kit id="orange-kit" parents="spawn">
-        <chestplate color="D87F33" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="D87F33" unbreakable="true" enchantment="protection fall:1">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true" material="leather chestplate"/>
+        <helmet color="D87F33" unbreakable="true" enchantment="protection fall" material="leather helmet"/>
     </kit>
 </kits>
 <spawns>
-    <default yaw="0">
+    <default>
         <region>
             <cylinder base="-17.0,67.0,116" height="0" radius="2"/>
         </region>
     </default>
-    <spawn kit="orange-kit" team="orange" yaw="0">
+    <spawn kit="orange-kit" team="orange">
         <region>
             <cylinder base="-134.0,31.0,4.5" height="0" radius="2"/>
         </region>
@@ -82,9 +83,9 @@
     </union>
     <rectangle id="playable-area" max="126,81" min="-152,0"/>
     <!-- Beacon protection -->
-    <apply block="never" use="deny-beacon" message="You may not interact with the core beacon!" region="beacons"/>
+    <apply region="beacons" block="never" use="deny-beacon" message="You may not interact with the core beacon!"/>
     <!-- Spawn protection -->
-    <apply block-break="spawn-permit" block-place="deny-players" message="You may not break any blocks other than iron!" region="spawns"/>
+    <apply region="spawns" block-break="spawn-permit" block-place="deny-players" message="You may not break any blocks other than iron!"/>
     <!-- Playable region -->
     <apply block="deny-void" message="You may not build outside the map!">
         <region>
@@ -132,10 +133,12 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item>golden apple</item>
-    <item amount="16">arrow</item>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <world>
     <timelock>on</timelock>
     <timeset>18000</timeset>
