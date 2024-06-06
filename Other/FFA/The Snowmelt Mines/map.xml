@@ -1,6 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>The Snowmelt Mines</name>
-<version>1.0.2</version>
+<created>2016-06-18</created>
+<version>1.0.3</version>
 <objective>Get the most kills in 5 minutes!</objective>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -40,13 +41,13 @@
 <kits>
     <kit id="spawn-kit">
         <double-jump power="2" recharge-time="10s" recharge-before-landing="true" />
-        <item slot="0" name="Ice Pick" enchantment="damage all:10" unbreakable="true">iron pickaxe</item>
-        <item slot="1" name="Bow" enchantment="arrow damage:10" unbreakable="true">bow</item>
-        <item slot="2" amount="1">arrow</item>
-        <helmet color="E5E533" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate color="E5E533" unbreakable="true" locked="true">leather chestplate</chestplate>
-        <leggings color="E5E533" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="E5E533" unbreakable="true" locked="true">leather boots</boots>
+        <item slot="0" name="Ice Pick" enchantment="damage all:10" unbreakable="true" material="iron pickaxe"/>
+        <item slot="1" enchantment="arrow damage:10" unbreakable="true" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate color="E5E533" unbreakable="true" locked="true" material="leather chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
         <potion duration="oo" amplifier="1">speed</potion>
         <potion duration="2.5s" amplifier="25">damage resistance</potion>
     </kit>
@@ -60,11 +61,13 @@
 </disabledamage>
 <respawn delay="2.0s" blackout="true" />
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!" />
+    <apply block="never" message="You may not edit the map!" />
 </regions>
-<killreward>
-    <item amount="1" material="arrow" />
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow" />
+    </kill-reward>
+</kill-rewards>
 <itemremove>
     <item>bow</item>
     <item>arrow</item>
