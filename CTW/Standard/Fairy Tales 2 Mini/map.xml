@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Fairy Tales 2: Mini</name>
-<version>2.1.4</version>
+<version>2.1.6</version>
 <objective>Capture both wools!</objective>
 <gamemode>ctw</gamemode>
+<include id="lava-buckets"/>
 <authors>
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- Kroest -->
     <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f" contribution="Creator of 'Fairy Tales 2: A Tale or Two' "/> <!-- D347HxD -->
@@ -23,6 +23,7 @@
         <item slot="2" material="iron pickaxe" unbreakable="true"/>
         <item slot="3" material="iron axe" unbreakable="true"/>
         <item slot="4" material="wood" amount="64"/>
+        <item slot="5" material="stained clay" team-color="true" amount="48"/>
         <item slot="6" material="vine" amount="24"/>
         <item slot="8" material="golden apple"/>
         <item slot="28" material="arrow"/>
@@ -37,16 +38,10 @@
     <kit force="true" id="reset-resitance-kit">
         <effect duration="0" amplifier="0">damage resistance</effect>
     </kit>
-    <kit id="green-kit" parent="spawn-kit">
-        <item slot="5" material="stained clay" damage="5" amount="48"/>
-    </kit>
-    <kit id="red-kit" parent="spawn-kit">
-        <item slot="5" material="stained clay" damage="14" amount="48"/>
-    </kit>
 </kits>
 <spawns>
-    <spawn team="green-team" kit="green-kit" yaw="180" region="green-spawn-point"/>
-    <spawn team="red-team" kit="red-kit" yaw="0" region="red-spawn-point"/>
+    <spawn team="green-team" kit="spawn-kit" yaw="180" region="green-spawn-point"/>
+    <spawn team="red-team" kit="spawn-kit" yaw="0" region="red-spawn-point"/>
     <default yaw="90" region="obs-spawn-point"/>
 </spawns>
 <wools craftable="false">
@@ -70,12 +65,6 @@
         <material id="only-iron">iron block</material>
         <cause>world</cause>
     </all>
-    <deny id="deny-lava">
-        <any>
-            <material>lava</material>
-            <material>stationary lava</material>
-        </any>
-    </deny>
     <material id="only-air">air</material>
 </filters>
 <regions>
@@ -142,11 +131,12 @@
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-red" region="greens-woolrooms" message="You may not enter your own wool room!"/>
     <apply enter="only-green" region="reds-woolrooms" message="You may not enter your own wool room!"/>
+    <apply use="only-red" region="greens-woolrooms"/>
+    <apply use="only-green" region="reds-woolrooms"/>
     <apply block-place="only-iron-cause-world" block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
     <apply block="greens-woolrooms-filter" region="greens-woolrooms" message="You may not edit the wool room!"/>
     <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not edit the wool room!"/>
     <apply block="never" region="not-build-area" message="You may not edit the void!"/>
-    <apply block-place="deny-lava" message="You may not place down lava!"/>
     <apply kit="reset-resitance-kit" region="not-spawns"/>
 </regions>
 <spawners>
