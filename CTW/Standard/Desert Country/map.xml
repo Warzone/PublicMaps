@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Desert Country</name>
-<version>1.1.2</version>
+<version>1.1.3</version>
 <variant id="christmas" world="christmas" override="true">Christmas Country</variant>
 <variant id="halloween" world="halloween" override="true">Spooky Country</variant>
 <include id="gapple-kill-reward"/>
@@ -83,12 +83,12 @@
     </default>
     <spawn team="green-team" kit="spawn-kit">
         <region yaw="180">
-            <cuboid min="532,11.5,-129" max="536,12,-127"/>
+            <cuboid min="532,11,-129" max="536,11,-127"/>
         </region>
     </spawn>
     <spawn team="blue-team" kit="spawn-kit">
         <region>
-            <cuboid min="532,11.5,-324" max="536,12,-322"/>
+            <cuboid min="532,11,-324" max="536,11,-322"/>
         </region>
     </spawn>
 </spawns>
@@ -98,10 +98,13 @@
     <not id="deny-void">
         <void/>
     </not>
-    <any id="iron-diamond-allow">
-        <material>iron block</material>
-        <material>diamond block</material>
-    </any>
+    <all id="block-place-spawns">
+        <any id="iron-diamond-allow">
+            <material>iron block</material>
+            <material>diamond block</material>
+        </any>
+        <cause>world</cause>
+    </all>
     <not id="blacklisted-blocks">
         <any>
             <material>emerald block</material>
@@ -186,7 +189,7 @@
     <apply enter="only-green" region="green-spawn" message="You may not enter the enemy spawn"/>
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn"/>
     <!-- Modify -->
-    <apply block="iron-diamond-allow">
+    <apply block-break="iron-diamond-allow" block-place="block-place-spawns">
         <region>
             <region id="green-spawn"/>
             <region id="blue-spawn"/>
