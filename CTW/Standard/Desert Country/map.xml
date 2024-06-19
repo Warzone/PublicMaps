@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Desert Country</name>
-<version>1.1.3</version>
+<version>1.1.7</version>
 <variant id="christmas" world="christmas" override="true">Christmas Country</variant>
 <variant id="halloween" world="halloween" override="true">Spooky Country</variant>
 <include id="gapple-kill-reward"/>
@@ -144,7 +144,11 @@
             <filter id="yellow-wool-room"/>
         </all>
     </player>
+    <participating id="participating"/>
 </filters>
+<variables>
+    <variable id="entered_wool_room" scope="player" default="0"/>
+</variables>
 <regions>
     <union id="rooms">
         <!-- Blue Wool Rooms (Wools blue need to get) -->
@@ -199,6 +203,53 @@
     <apply block-break="blacklisted-blocks" message="You are not allowed to break this block!"/>
     <apply kit="wool-gear" region="rooms"/>
 </regions>
+<actions>
+    <!-- Set variables for each wool room so if a player glitches into the one over they can be voided -->
+    <action id="entered-purple" scope="player">
+        <set var="entered_wool_room" value="1"/>
+    </action>
+    <action id="entered-red" scope="player">
+        <set var="entered_wool_room" value="2"/>
+    </action>
+    <action id="entered-orange" scope="player">
+        <set var="entered_wool_room" value="3"/>
+    </action>
+    <action id="entered-yellow" scope="player">
+        <set var="entered_wool_room" value="4"/>
+    </action>
+    <action id="exited-wool-room" scope="player">
+        <set var="entered_wool_room" value="0"/>
+    </action>
+    <trigger filter="all(purple-wool-room, participating)" action="entered-purple" scope="player"/>
+    <trigger filter="all(red-wool-room, participating)" action="entered-red" scope="player"/>
+    <trigger filter="all(orange-wool-room, participating)" action="entered-orange" scope="player"/>
+    <trigger filter="all(yellow-wool-room, participating)" action="entered-yellow" scope="player"/>
+    <!-- Set the variable to 0 if a player is not in a wool room -->
+    <trigger filter="not(any(purple-wool-room, red-wool-room, orange-wool-room, yellow-wool-room))" action="exited-wool-room" scope="player"/>
+</actions>
+<portals observers="never">
+    <!-- Void players who cross the wool room barriers -->
+    <portal y="@-12" region="purple-wool-room">
+        <filter>
+            <variable var="entered_wool_room">2</variable>
+        </filter>
+    </portal>
+    <portal y="@-12" region="red-wool-room">
+        <filter>
+            <variable var="entered_wool_room">1</variable>
+        </filter>
+    </portal>
+    <portal y="@-12" region="orange-wool-room">
+        <filter>
+            <variable var="entered_wool_room">4</variable>
+        </filter>
+    </portal>
+    <portal y="@-12" region="yellow-wool-room">
+        <filter>
+            <variable var="entered_wool_room">3</variable>
+        </filter>
+    </portal>
+</portals>
 <wools>
     <wool team="blue-team" color="purple" location="533,7,-104">
         <monument>
