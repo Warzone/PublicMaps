@@ -2,7 +2,7 @@
 <!-- Infection gamemode include file -->
 <!-- Created by Cazadorian -->
 <!-- Modified by zzuf -->
-<!-- Version 2024-03-02-1 -->
+<!-- Version 2024-06-23-1 -->
 <constants>
     <constant id="time-limit">8</constant> <!-- Time limit in minutes -->
     <constant id="zombie-team-name">Zombies</constant>
@@ -14,8 +14,8 @@
 <objective>${human-team-name} must survive against the ${zombie-team-name} for ${time-limit} minutes!</objective>
 <gamemode>infection</gamemode>
 <broadcasts>
-    <tip after="4s" filter="only-humans">You are a Human, you must survive for as long as possible against the waves of Zombies. If you die, you become a Zombie!</tip>
-    <tip after="4s" filter="only-zombies">You are a Zombie, you must kill all of the Humans to win!</tip>
+    <tip after="4s" filter="only-humans">You are a ${human-team-name}, you must survive for as long as possible against the waves of ${zombie-team-name}. If you die, you join the ${zombie-team-name}!</tip>
+    <tip after="4s" filter="only-zombies">You are a ${zombie-team-name}, you must kill all of the ${human-team-name} to win!</tip>
 </broadcasts>
 <teams>
     <team id="zombie-team" color="${zombie-team-color}" plural="true" min="1" max="4">${zombie-team-name}</team>
@@ -44,7 +44,7 @@
         <leggings locked="true" unbreakable="true" team-color="true" material="leather leggings"/>
         <boots locked="true" unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="5s">increase damage</effect>
-        <effect amplifier="1">speed</effect>
+        <effect>speed</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="zombie-switch-kit" force="true">
