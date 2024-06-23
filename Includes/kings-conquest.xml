@@ -1,11 +1,19 @@
 <map proto="1.4.2">
-<!-- Created by mitchiii, based on the King's Conquest maps created by Chicky -->
-<!-- Include version number : v2.3.0 -->
+<!--
+ ____  __.__                       _________                                              __
+|    |/ _|__| ____    ____  ______ \_   ___ \  ____   ____   ________ __   ____   _______/  |_
+|      < |  |/    \  / ___\/  ___/ /    \  \/ /  _ \ /    \ / ____/  |  \_/ __ \ /  ___/\   __\
+|    |  \|  |   |  \/ /_/  >___ \  \     \___(  <_> )   |  < <_|  |  |  /\  ___/ \___ \  |  |
+|____|__ \__|___|  /\___  /____  >  \______  /\____/|___|  /\__   |____/  \___  >____  > |__|
+       \/       \//_____/     \/          \/            \/    |__|           \/     \/
+-->
+<!-- Created by mitchiii, based on the King's Conquest maps by Chicky -->
+<!-- Version 2024-06-22 -->
 <objective>Kill the enemy team's King to win!</objective>
 <gamemode>arcade</gamemode>
 <game>Kill the King</game>
 <respawn auto="true" delay="5s"/>
-<time>15m</time>
+<time result="score">15m</time>
 <constants>
     <constant id="team-size">16</constant>
     <constant id="team-one-name">Blue</constant>
@@ -25,8 +33,8 @@
     <constant id="sudden-death-hp">5</constant>
 </constants>
 <teams>
-    <team id="team-one" color="${team-one-color}" max="${team-size}" min="1">${team-one-name}</team>
-    <team id="team-two" color="${team-two-color}" max="${team-size}" min="1">${team-two-name}</team>
+    <team id="team-one" color="${team-one-color}" max="${team-size}" min="1">${team-one-name} King</team>
+    <team id="team-two" color="${team-two-color}" max="${team-size}" min="1">${team-two-name} King</team>
 </teams>
 <spawns>
     <spawn team="team-one" yaw="${team-one-yaw}" pitch="${team-one-pitch}" region="team-one-spawn-point"/>
@@ -41,6 +49,7 @@
         <clear/>
         <effect duration="3" amplifier="5">strength</effect>
         <effect duration="3" amplifier="5">resistance</effect>
+        <item slot="7" material="compass"/>
         <action filter="switch-to-team-one">
             <set var="switch_to_team" value="0"/>
             <kit>
@@ -248,11 +257,39 @@
             </kit>
         </action>
     </kit>
+    <kit id="obs-kit">
+        <book show-other="false">
+            <title>`e`lHow to Play</title>
+            <author>mitchiii</author>
+            <pages>
+                <page>
+                    `5» `lKING'S CONQUEST`0
+
+                    Kill the enemy kingdom's
+                    `6King `0to win the match.
+                    The `6King `0is located by
+                    the flag beam and your
+                    compass.
+
+                    Each `6King `0has a
+                    maximum of `c100 HP
+                    `0which is shown on the
+                    scoreboard. Damaging
+                    the `6King `0reduces
+                    their `cHP `0by `c1`0.
+                </page>
+            </pages>
+        </book>
+    </kit>
 </kits>
 <consumables>
     <consumable id="king-berserking-consumable" action="king-berserking-kit" on="eat"/>
     <consumable id="king-gapple-consumable" action="king-gapple-kit" on="eat"/>
 </consumables>
+<compass show-distance="true">
+    <player filter="team-one-king" holder-filter="only-team-two" show-player="true"/>
+    <player filter="team-two-king" holder-filter="only-team-one" show-player="true"/>
+</compass>
 <classes family="king" sticky="false">
     <class name="Knight" icon="iron sword" default="true" description="Attack from both close and afar">
         <kit parents="main-kit">
@@ -320,7 +357,7 @@
             <item slot="2" material="stone axe" unbreakable="true" prevent-sharing="true"/>
             <item slot="3" material="wood" amount="16"/>
             <item slot="4" material="ladder" amount="16"/>
-            <item slot="7" material="arrow" amount="16"/>
+            <item slot="6" material="arrow" amount="16"/>
             <item slot="8" material="golden apple" amount="2"/>
             <helmet material="iron helmet" unbreakable="true" locked="true"/>
             <chestplate material="leather chestplate" unbreakable="true" team-color="true" locked="true"/>
@@ -415,6 +452,7 @@
            <time>9m30s</time>
         </after>
     </not>
+    <observing id="observing"/>
     <time id="initial-action-delay">3s</time>
     <match-started id="match-started"/>
     <after id="delayed-alive" duration="0.01s">
@@ -422,8 +460,8 @@
     </after>
     <not id="not-king">
         <any id="only-king">
-            <carrying-flag>team-one-king-banner</carrying-flag>
-            <carrying-flag>team-two-king-banner</carrying-flag>
+            <carrying-flag id="team-one-king">team-one-king-banner</carrying-flag>
+            <carrying-flag id="team-two-king">team-two-king-banner</carrying-flag>
         </any>
     </not>
     <all id="only-knight">
@@ -735,6 +773,7 @@
     <item>diamond chestplate</item>
     <item>diamond leggings</item>
     <item>diamond boots</item>
+    <item>compass</item>
     <item>shears</item>
     <item>bow</item>
     <item>arrow</item>
