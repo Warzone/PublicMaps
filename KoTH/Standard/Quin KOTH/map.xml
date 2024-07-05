@@ -1,7 +1,7 @@
 <map proto="1.4.2">
 <name>Quin KOTH</name>
 <created>2021-12-25</created>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Capture as many hills as possible with your team to reach 2000 points before the opposing teams!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>koth</gamemode>
@@ -38,7 +38,8 @@
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <potion duration="oo">night vision</potion>
+        <effect>night vision</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -151,15 +152,15 @@
     <point id="pink-spawn">-45.5,20,38.5</point>
     <point id="purple-spawn">-36.5,20,62.5</point>
     <!-- Applications -->
-    <apply block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
-    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
-    <apply region="lime-spawn-protection" enter="lime-only" message="You may not enter the enemy spawn."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy spawn."/>
-    <apply region="pink-spawn-protection" enter="pink-only" message="You may not enter the enemy spawn."/>
-    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
+    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy's spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy's spawn."/>
+    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy's spawn."/>
+    <apply region="lime-spawn-protection" enter="lime-only" message="You may not enter the enemy's spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy's spawn."/>
+    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy's spawn."/>
+    <apply region="pink-spawn-protection" enter="pink-only" message="You may not enter the enemy's spawn."/>
+    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy's spawn."/>
+    <apply block="never"/>
 </regions>
 <!-- Item Remove -->
 <itemremove>
@@ -179,7 +180,7 @@
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="5"/>
+            <kill-streak count="2"/>
         </filter>
         <item material="arrow"/>
     </kill-reward>
