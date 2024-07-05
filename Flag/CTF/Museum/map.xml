@@ -2,6 +2,7 @@
 <name>Museum</name>
 <version>1.2.2</version>
 <objective>First team to capture the enemy flag 3 times wins!</objective>
+<created>2021-05-25</created>
 <gamemode>ctf</gamemode>
 <authors>
     <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
@@ -25,29 +26,23 @@
 <respawn delay="3.5s"/>
 <!-- Kits -->
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="7" amount="1" material="golden apple"/>
+        <item slot="7" material="golden apple"/>
         <item slot="8" amount="64" material="golden carrot"/>
         <item slot="17" amount="32" material="arrow"/>
         <helmet unbreakable="true" material="chainmail helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="orange-kit" parents="spawn">
-        <chestplate unbreakable="true" color="FFA500" material="leather chestplate"/>
-        <boots unbreakable="true" color="FFA500" material="leather boots"/>
-    </kit>
-    <kit id="cyan-kit" parents="spawn">
-        <chestplate unbreakable="true" color="4C7F99" material="leather chestplate"/>
-        <boots unbreakable="true" color="4C7F99" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="orange" kit="orange-kit" region="orange-spawn"/>
-    <spawn team="cyan" kit="cyan-kit" yaw="180" region="cyan-spawn"/>
+    <spawn team="orange" kit="spawn-kit" region="orange-spawn"/>
+    <spawn team="cyan" kit="spawn-kit" yaw="180" region="cyan-spawn"/>
     <default yaw="180" region="obs-spawn"/>
 </spawns>
 <!-- Filters -->
@@ -71,9 +66,9 @@
     <point id="cyan-spawn">0.5,59,104</point>
     <point id="obs-spawn">0.5,53.5,0.5</point>
     <!-- Applications -->
-    <apply region="spawn-protections"       block="never"       message="You are not allowed to modify terrain here."/>
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
-    <apply region="cyan-spawn-protection"   enter="cyan-only"   message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy's spawn."/>
+    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
 </regions>
 <!-- Portals -->
 <portals protect="true" sound="false" pitch="@0">
@@ -140,8 +135,8 @@
 </itemremove>
 <!-- Kill Rewards -->
 <kill-rewards>
-    <killreward>
+    <kill-reward>
         <item material="golden apple"/>
-    </killreward>
+    </kill-reward>
 </kill-rewards>
 </map>
