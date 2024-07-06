@@ -8,26 +8,26 @@
 > **Example:** This is a map with several mushroom biome islands. It can support two teams, each with three players (3v3).
 
 ### Screenshots
-> Screenshot the map from multiple views. You may use image hosting services, such as Imgur.
+> Screenshot the map from multiple views. You may use image hosting services, such as [Imgur](https://imgur.com/).
 
 ### XML
-> Link your map's XML file by uploading it to [GitHub Gist](https://gist.github.com/). If you have trouble using this service, you may use alternatives such as Pastebin. Please do not provide a link to a `map.xml` file located at another GitHub repository, fork, branch, issue, pull request, etc.
+> Link your map's XML file by uploading it to [GitHub Gist](https://gist.github.com/). If you have trouble using this service, you may use alternatives such as [Pastebin](https://pastebin.com/). Please do not provide a link to a `map.xml` file located at another GitHub repository, fork, branch, issue, pull request, etc.
 
 ### Map Download
-> Provide a direct download link to your map's [properly packaged files](https://pgm.dev/docs/guides/packaging/compiling-and-releasing) (`region/*`, `level.dat`, `map.png`, `map.xml`). Please use a file hosting service such as Google Drive, Dropbox, Mega, Mediafire, etc. Do not provide link(s) to map files which are located at another GitHub repository, fork, branch, issue, pull request, etc.
+> Provide a direct download link to your map's [properly packaged files](https://pgm.dev/docs/guides/preparing/packaging-and-releasing/) (`region/*`, `level.dat`, `map.png`, `map.xml`). Please use a file hosting service such as Google Drive, Dropbox, Mega, Mediafire, etc. Do not provide link(s) to map files which are located at another GitHub repository, fork, branch, issue, pull request, etc.
 ---
 
 ### Map Checklist
 >To mark as completed, replace the space between the [ ] with an `X` or click on the checkbox after submitting this pull request.
 - [ ] Contains a `map.xml` file with valid syntax and formatting.
-- [ ] The `map.xml` uses proto `1.4.0` or above (older or legacy maps are exempt, so long as the XML works).
+- [ ] The `map.xml` uses proto `1.4.2` or above (older or legacy maps are exempt, so long as the XML works).
 - [ ] The `map.xml` explicitly [sets the gamemode](https://pgm.dev/docs/modules/general/main#map-gamemode) (for stat-tracking).
 - [ ] The `map.xml` has correctly credited the map authors and contributors.
 - [ ] Contains `map.png` file (`290x246`).
 - [ ] The map was built for (or has been converted to) Minecraft 1.8.
-- [ ] Chunks have been pruned.
+- [ ] The map has been [pruned](https://pgm.dev/docs/guides/preparing/pruning-chunks/).
 - [ ] The map has been tested on a server running PGM.
-- [ ] I agree to submit this map under a commercial, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
+- [ ] I agree to submit this map under CC BY-SA 4.0 license, as mentioned in the [README](https://github.com/Warzone/PublicMaps/blob/main/README.md#license).
 
 ---
 
