@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Splegg</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Use your Egg Shooter to break blocks under your enemies!</objective>
 <gamemode>arcade</gamemode>
 <created>2024-03-23</created>
@@ -10,12 +10,18 @@
 <blitz>
     <lives>1</lives>
 </blitz>
+<time>4m</time>
+<broadcasts>
+    <alert after="1s">`cYou will recieve your egg shooter in 5 seconds!</alert>
+    <alert after="10s">`cWorld border closes in 2 minutes!</alert>
+    <tip after="1m" every="1m">`cTry double jumping to save yourself from the void!</tip>
+</broadcasts>
 <players max="20" colors="true"/>
 <kits>
     <kit id="default" force="true">
         <game-mode>adventure</game-mode>
         <max-health>1</max-health>
-        <double-jump power="3" recharge-time="10s" recharge-before-landing="true"/>
+        <double-jump power="3" recharge-time="3s" recharge-before-landing="true"/>
         <helmet team-color="true" unbreakable="true" material="leather helmet" locked="true"/>
         <chestplate team-color="true" unbreakable="true" material="leather chestplate" locked="true"/>
         <leggings team-color="true" unbreakable="true" material="leather leggings" locked="true"/>
@@ -52,17 +58,6 @@
             <kit id="Egg-Shooter"/>
         </action>
     </trigger>
-    <trigger scope="player">
-        <filter>
-            <all>
-                <match-started/>
-                <participating/>
-            </all>
-        </filter>
-        <action>
-            <message text="`6You will recieve your Egg Shooter in 5 seconds!"/>
-        </action>
-    </trigger>
 </actions>
 <projectiles>
     <projectile id="eggs" name="eggs" projectile="Egg" throwable="false" velocity="2.0">
@@ -81,4 +76,8 @@
     <damage>entity attack</damage>
     <damage>projectile</damage>
 </disabledamage>
+<world-borders center="0,0">
+    <world-border size="90"/>
+    <world-border size="1" after="2m" duration="110s" damage="100" buffer="0"/>
+</world-borders>
 </map>
