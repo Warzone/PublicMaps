@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Shrine</name>
-<version>1.1.2</version>
+<version>1.1.3</version>
 <objective>Capture the enemy flag and control the center flag to reach the score limit first.</objective>
 <gamemode>ctf</gamemode>
 <phase>development</phase>
@@ -100,12 +100,12 @@
         <cuboid id="cyan-wool-room" min="198,11,114" max="219,16,113"/>
     </union>
     <union id="orange-nets">
-        <cuboid min="250,11,127" max="254,14,123"/>
-        <cuboid min="162,11,127" max="166,14,123"/>
-    </union>
-    <union id="cyan-nets">
         <cuboid min="166,11,315" max="162,14,319"/>
         <cuboid min="254,11,315" max="250,14,319"/>
+    </union>
+    <union id="cyan-nets">
+        <cuboid min="250,11,127" max="254,14,123"/>
+        <cuboid min="162,11,127" max="166,14,123"/>
     </union>
     <cuboid id="orange-shrine-net" min="207,9,175" max="209,12,173"/>
     <cuboid id="cyan-shrine-net" min="209,9,267" max="207,12,269"/>
@@ -116,8 +116,8 @@
 </regions>
 <flags>
     <post id="center-post" recover-time="0s" respawn-time="8s">208.5,9,221.5</post>
-    <post id="orange-post" recover-time="3s" respawn-time="0s" owner="orange" yaw="0" points-rate="1" pickup-filter="only-cyan">208.5,10,268.5</post>
-    <post id="cyan-post" recover-time="3s" respawn-time="0s" owner="cyan" yaw="180" points-rate="1" pickup-filter="only-orange">208.5,10,174.5</post>
+    <post id="orange-post" recover-time="3s" respawn-time="1s" owner="orange" yaw="180" points-rate="1" pickup-filter="only-cyan">208.5,10,174.5</post>
+    <post id="cyan-post" recover-time="3s" respawn-time="1s" owner="cyan" yaw="0" points-rate="1" pickup-filter="only-orange">208.5,10,268.5</post>
     <flag name="Shrine Flag" color="white" shared="true" post="center-post" points-rate="0.5">
         <net owner="orange" region="orange-shrine-net" post="orange-post" capture-filter="only-orange"/>
         <net owner="cyan" region="cyan-shrine-net" post="cyan-post" capture-filter="only-cyan"/>
