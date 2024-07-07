@@ -1,0 +1,95 @@
+<map proto="1.4.2">
+<name>SunTest: Legacy</name> 
+<created>2017-08-21</created>
+<version>1.0.0</version>
+<objective>Finish the test by destroying the enemy's Sun in the sky before the opposing team!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="39a9e1b5-1e1d-40c0-8c16-69a9568efa72"/> <!-- Teejers -->
+</authors>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="1s" every="2m">Climb up and destroy the enemy team's Sun!</tip>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="50">Blue</team>
+    <team id="red-team" color="dark red" max="50">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone axe"/>
+        <item slot="3" amount="64" material="log"/>
+        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="9" amount="64" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" yaw="-90" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="90" region="red-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables name="Sun" completion="6%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable owner="blue-team" region="blue-sun"/>
+    <destroyable owner="red-team" region="red-sun"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <material id="only-glowstone">glowstone</material>
+    <material id="only-stone">stone</material>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <cuboid id="blue-sun" min="281,110,-285" max="286,99,-274"/>
+    <cuboid id="red-sun" min="280,110,-285" max="275,99,-274"/>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="259,0,-296" max="268,oo,-263"/>
+        <cuboid id="red-spawn-protection" min="302,0,-296" max="293,oo,-263"/>
+    </union>
+    <point id="blue-spawn">259.5,4,-279.5</point>
+    <point id="red-spawn">301.5,4,-279.5</point>
+    <point id="obs-spawn">280.5,10,-279.5</point>
+    <!-- Applications -->
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy's spawn."/>
+    <apply block-break="deny(only-glowstone)" message="You may not break the glowstone!"/>
+    <apply block-break="deny(only-stone)" message="You may not break the platform!"/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>cooked beef</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>gold block</item>
+    <item>golden apple</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="7" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+</map>
