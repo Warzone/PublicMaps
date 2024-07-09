@@ -1,25 +1,44 @@
-<map proto="1.4.0">
+<map proto="1.4.2">
 <name>Mega Cacti Terror</name>
-<version>1.1.1</version>
+<version>2.0.7</version>
 <objective>Be the last man standing!</objective>
-<authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/>
-</authors>
+<created>2023-03-17</created>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<authors>
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
+</authors>
 <players min="2" max="64">Players</players>
 <blitz/>
-<time>4m</time>
+<time>3m45s</time>
+<spawns>
+    <spawn kit="spawn-kit">
+        <region angle="0.5,10,0.5">
+            <cylinder base="0.5,9,0.5" radius="34" height="0"/>
+        </region>
+    </spawn>
+    <default kit="obs-kit">
+        <regions angle="0.5,18,0.5">
+            <point>0.5,29,-47.5</point>
+            <point>48.5,29.5,0.5</point>
+            <point>0.5,29,48.5</point>
+            <point>-47.5,29,0.5</point>
+        </regions>
+    </default>
+</spawns>
 <kits>
     <kit id="spawn-kit" force="true">
         <health>1</health>
+        <max-health>1</max-health>
         <item slot="0" amount="16" material="cactus"/>
         <item slot="1" unbreakable="true" material="fishing rod"/>
-        <effect duration="oo" amplifier="-4">health boost</effect>
         <effect duration="oo" amplifier="1">slow digging</effect>
         <effect duration="oo" amplifier="20">weakness</effect>
         <effect duration="3" amplifier="20">damage resistance</effect>
-    </kit> 
+    </kit>
+    <kit id="obs-kit" force="true">
+        <fly flying="true"/>
+    </kit>
 </kits>
 <gamerules>
     <naturalRegeneration>false</naturalRegeneration>
@@ -27,171 +46,447 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<spawns>
-    <spawn kit="spawn-kit">
-        <region angle="-497.5,14,325.5">
-            <cuboid min="-534,13,289" size="73,0,73"/>
-        </region>
-    </spawn>
-    <default>
-        <region angle="-497.5,14,325.5">
-            <cuboid min="-534,13,289" size="73,0,73"/>
-        </region>
-    </default>
-</spawns>
 <filters>
     <any id="allowed-interactions">
         <all>
-            <not>
-                <any>
-                    <cause>player</cause>
-                    <cause>explosion</cause>
-                </any>
-            </not>
             <any>
-                <material>gravel</material>
+                <cause>explosion</cause>
+                <cause>player</cause>
             </any>
-        </all>
-        <all>
-            <cause>explosion</cause>
-            <material>cactus</material>
-        </all>
-        <all>
-            <cause>player</cause>
             <any>
                 <material>cactus</material>
                 <material>tnt</material>
             </any>
         </all>
+        <all>
+            <cause>world</cause>
+            <not>
+                <cause>explosion</cause>
+            </not>
+        </all>
     </any>
-    <not id="no-cactus">
-        <material>cactus</material>
-    </not>
-    <not id="trigger-arena">
-        <time>3s</time>
-    </not>
+    <material id="arena-materials-sand">sand:0</material>
+    <all id="arena-materials-dark-sticky">
+        <region id="sandstone-layer"/>
+        <any>
+            <material id="arena-materials-dark-anchor">sand:1</material>
+            <material id="arena-materials-dark">stained clay:1</material>
+        </any>
+    </all>
+    <all id="arena-materials-light-sticky">
+        <region id="sandstone-layer"/>
+        <any>
+            <material id="arena-materials-light-anchor">gravel</material>
+            <material id="arena-materials-light">red sandstone</material>
+        </any>
+    </all>
+    <material id="arena-material-lava-stilt">hard clay</material>
+    <time id="t-33">3s</time>
+    <time id="t-32">8s</time>
+    <time id="t-31">13s</time>
+    <time id="t-30">18s</time>
+    <time id="t-29">23s</time>
+    <time id="t-28">28s</time>
+    <time id="t-27">33s</time>
+    <time id="t-26">38s</time>
+    <time id="t-25">43s</time>
+    <time id="t-24">48s</time>
+    <time id="t-23">53s</time>
+    <time id="t-22">58s</time>
+    <time id="t-21">63s</time>
+    <time id="t-20">68s</time>
+    <time id="t-19">73s</time>
+    <time id="t-18">78s</time>
+    <time id="t-17">83s</time>
+    <time id="t-16">88s</time>
+    <time id="t-15">93s</time>
+    <time id="t-14">98s</time>
+    <time id="t-13">101s</time>
+    <time id="t-12">104s</time>
+    <time id="t-11">107s</time>
+    <time id="t-10">110s</time>
+    <time id="t-9">113s</time>
+    <time id="t-8">116s</time>
+    <time id="t-7">119s</time>
+    <time id="t-6">122s</time>
+    <time id="t-5">125s</time>
+    <time id="t-4">127s</time>
+    <time id="t-3">131s</time>
+    <time id="t-2">133s</time>
+    <time id="t-1">135s</time>
+    <time id="t-0">137s</time>
+    <all id="bad-cacti">
+        <region id="out-of-bounds"/>
+        <participating/>
+    </all>
 </filters>
 <regions>
-    <cuboid id="r-1" min="-500,11,323" size="4,2,4"/>
-    <complement id="r-2"><cuboid id="s-2" min="-501,11,322" size="6,2,6"/><region id="r-1"/></complement>
-    <complement id="r-3"><cuboid id="s-3" min="-502,11,321" size="8,2,8"/><region id="s-2"/></complement>
-    <complement id="r-4"><cuboid id="s-4" min="-503,11,320" size="10,2,10"/><region id="s-3"/></complement>
-    <complement id="r-5"><cuboid id="s-5" min="-504,11,319" size="12,2,12"/><region id="s-4"/></complement>
-    <complement id="r-6"><cuboid id="s-6" min="-505,11,318" size="14,2,14"/><region id="s-5"/></complement>
-    <complement id="r-7"><cuboid id="s-7" min="-506,11,317" size="16,2,16"/><region id="s-6"/></complement>
-    <complement id="r-8"><cuboid id="s-8" min="-507,11,316" size="18,2,18"/><region id="s-7"/></complement>
-    <complement id="r-9"><cuboid id="s-9" min="-508,11,315" size="20,2,20"/><region id="s-8"/></complement>
-    <complement id="r-10"><cuboid id="s-10" min="-509,11,314" size="22,2,22"/><region id="s-9"/></complement>
-    <complement id="r-11"><cuboid id="s-11" min="-510,11,313" size="24,2,24"/><region id="s-10"/></complement>
-    <complement id="r-12"><cuboid id="s-12" min="-511,11,312" size="26,2,26"/><region id="s-11"/></complement>
-    <complement id="r-13"><cuboid id="s-13" min="-512,11,311" size="28,2,28"/><region id="s-12"/></complement>
-    <complement id="r-14"><cuboid id="s-14" min="-513,11,310" size="30,2,30"/><region id="s-13"/></complement>
-    <complement id="r-15"><cuboid id="s-15" min="-514,11,309" size="32,2,32"/><region id="s-14"/></complement>
-    <complement id="r-16"><cuboid id="s-16" min="-515,11,308" size="34,2,34"/><region id="s-15"/></complement>
-    <complement id="r-17"><cuboid id="s-17" min="-516,11,307" size="36,2,36"/><region id="s-16"/></complement>
-    <complement id="r-18"><cuboid id="s-18" min="-517,11,306" size="38,2,38"/><region id="s-17"/></complement>
-    <complement id="r-19"><cuboid id="s-19" min="-518,11,305" size="40,2,40"/><region id="s-18"/></complement>
-    <complement id="r-20"><cuboid id="s-20" min="-519,11,304" size="42,2,42"/><region id="s-19"/></complement>
-    <complement id="r-21"><cuboid id="s-21" min="-520,11,303" size="44,2,44"/><region id="s-20"/></complement>
-    <complement id="r-22"><cuboid id="s-22" min="-521,11,302" size="46,2,46"/><region id="s-21"/></complement>
-    <complement id="r-23"><cuboid id="s-23" min="-522,11,301" size="48,2,48"/><region id="s-22"/></complement>
-    <complement id="r-24"><cuboid id="s-24" min="-523,11,300" size="50,2,50"/><region id="s-23"/></complement>
-    <complement id="r-25"><cuboid id="s-25" min="-524,11,299" size="52,2,52"/><region id="s-24"/></complement>
-    <complement id="r-26"><cuboid id="s-26" min="-525,11,298" size="54,2,54"/><region id="s-25"/></complement>
-    <complement id="r-27"><cuboid id="s-27" min="-526,11,297" size="56,2,56"/><region id="s-26"/></complement>
-    <complement id="r-28"><cuboid id="s-28" min="-527,11,296" size="58,2,58"/><region id="s-27"/></complement>
-    <complement id="r-29"><cuboid id="s-29" min="-528,11,295" size="60,2,60"/><region id="s-28"/></complement>
-    <complement id="r-30"><cuboid id="s-30" min="-529,11,294" size="62,2,62"/><region id="s-29"/></complement>
-    <complement id="r-31"><cuboid id="s-31" min="-530,11,293" size="64,2,64"/><region id="s-30"/></complement>
-    <complement id="r-32"><cuboid id="s-32" min="-531,11,292" size="66,2,66"/><region id="s-31"/></complement>
-    <complement id="r-33"><cuboid id="s-33" min="-532,11,291" size="68,2,68"/><region id="s-32"/></complement>
-    <complement id="r-34"><cuboid id="s-34" min="-533,11,290" size="70,2,70"/><region id="s-33"/></complement>
-    <complement id="r-35"><cuboid id="s-35" min="-534,11,289" size="72,2,72"/><region id="s-34"/></complement>
-    <point id="trigger-n">-497.5,12,287.5</point>
-    <point id="trigger-s">-497.5,12,363.5</point>
-    <point id="trigger-e">-459.5,12,325.5</point>
-    <point id="trigger-w">-535.5,12,325.5</point>
-    <point id="center">-497.5,13,325.5</point>
-    <above id="playable-region" y="10"/>
-    <below id="lava-region" y="10"/>
-    <apply region="playable-region" block="allowed-interactions"/>
+    <point id="center">0.5,8,0.5</point>
+    <cuboid id="playable-zone" min="-41,7,42" max="41,18,-41"/>
+    <negative id="out-of-bounds">
+        <rectangle min="-41,42" max="41,-41"/>
+    </negative>
+    <below id="lava-region" y="7"/>
+    <below id="sandstone-layer" y="8"/>
+    <cuboid id="segment-0" min="-3,6,-3" size="7,3,7"/>
+    <complement id="segment-1">
+        <cuboid id="cuboid-1" min="-4,6,-4" size="9,3,9"/>
+        <region id="segment-0"/>
+    </complement>
+    <complement id="segment-2">
+        <cuboid id="cuboid-2" min="-5,6,-5" size="11,3,11"/>
+        <region id="cuboid-1"/>
+    </complement>
+    <complement id="segment-3">
+        <cuboid id="cuboid-3" min="-6,6,-6" size="13,3,13"/>
+        <region id="cuboid-2"/>
+    </complement>
+    <complement id="segment-4">
+        <cuboid id="cuboid-4" min="-7,6,-7" size="15,3,15"/>
+        <region id="cuboid-3"/>
+    </complement>
+    <complement id="segment-5">
+        <cuboid id="cuboid-5" min="-8,6,-8" size="17,3,17"/>
+        <region id="cuboid-4"/>
+    </complement>
+    <complement id="segment-6">
+        <cuboid id="cuboid-6" min="-9,6,-9" size="19,3,19"/>
+        <region id="cuboid-5"/>
+    </complement>
+    <complement id="segment-7">
+        <cuboid id="cuboid-7" min="-10,6,-10" size="21,3,21"/>
+        <region id="cuboid-6"/>
+    </complement>
+    <complement id="segment-8">
+        <cuboid id="cuboid-8" min="-11,6,-11" size="23,3,23"/>
+        <region id="cuboid-7"/>
+    </complement>
+    <complement id="segment-9">
+        <cuboid id="cuboid-9" min="-12,6,-12" size="25,3,25"/>
+        <region id="cuboid-8"/>
+    </complement>
+    <complement id="segment-10">
+        <cuboid id="cuboid-10" min="-13,6,-13" size="27,3,27"/>
+        <region id="cuboid-9"/>
+    </complement>
+    <complement id="segment-11">
+        <cuboid id="cuboid-11" min="-14,6,-14" size="29,3,29"/>
+        <region id="cuboid-10"/>
+    </complement>
+    <complement id="segment-12">
+        <cuboid id="cuboid-12" min="-15,6,-15" size="31,3,31"/>
+        <region id="cuboid-11"/>
+    </complement>
+    <complement id="segment-13">
+        <cuboid id="cuboid-13" min="-16,6,-16" size="33,3,33"/>
+        <region id="cuboid-12"/>
+    </complement>
+    <complement id="segment-14">
+        <cuboid id="cuboid-14" min="-17,6,-17" size="35,3,35"/>
+        <region id="cuboid-13"/>
+    </complement>
+    <complement id="segment-15">
+        <cuboid id="cuboid-15" min="-18,6,-18" size="37,3,37"/>
+        <region id="cuboid-14"/>
+    </complement>
+    <complement id="segment-16">
+        <cuboid id="cuboid-16" min="-19,6,-19" size="39,3,39"/>
+        <region id="cuboid-15"/>
+    </complement>
+    <complement id="segment-17">
+        <cuboid id="cuboid-17" min="-20,6,-20" size="41,3,41"/>
+        <region id="cuboid-16"/>
+    </complement>
+    <complement id="segment-18">
+        <cuboid id="cuboid-18" min="-21,6,-21" size="43,3,43"/>
+        <region id="cuboid-17"/>
+    </complement>
+    <complement id="segment-19">
+        <cuboid id="cuboid-19" min="-22,6,-22" size="45,3,45"/>
+        <region id="cuboid-18"/>
+    </complement>
+    <complement id="segment-20">
+        <cuboid id="cuboid-20" min="-23,6,-23" size="47,3,47"/>
+        <region id="cuboid-19"/>
+    </complement>
+    <complement id="segment-21">
+        <cuboid id="cuboid-21" min="-24,6,-24" size="49,3,49"/>
+        <region id="cuboid-20"/>
+    </complement>
+    <complement id="segment-22">
+        <cuboid id="cuboid-22" min="-25,6,-25" size="51,3,51"/>
+        <region id="cuboid-21"/>
+    </complement>
+    <complement id="segment-23">
+        <cuboid id="cuboid-23" min="-26,6,-26" size="53,3,53"/>
+        <region id="cuboid-22"/>
+    </complement>
+    <complement id="segment-24">
+        <cuboid id="cuboid-24" min="-27,6,-27" size="55,3,55"/>
+        <region id="cuboid-23"/>
+    </complement>
+    <complement id="segment-25">
+        <cuboid id="cuboid-25" min="-28,6,-28" size="57,3,57"/>
+        <region id="cuboid-24"/>
+    </complement>
+    <complement id="segment-26">
+        <cuboid id="cuboid-26" min="-29,6,-29" size="59,3,59"/>
+        <region id="cuboid-25"/>
+    </complement>
+    <complement id="segment-27">
+        <cuboid id="cuboid-27" min="-30,6,-30" size="61,3,61"/>
+        <region id="cuboid-26"/>
+    </complement>
+    <complement id="segment-28">
+        <cuboid id="cuboid-28" min="-31,6,-31" size="63,3,63"/>
+        <region id="cuboid-27"/>
+    </complement>
+    <complement id="segment-29">
+        <cuboid id="cuboid-29" min="-32,6,-32" size="65,3,65"/>
+        <region id="cuboid-28"/>
+    </complement>
+    <complement id="segment-30">
+        <cuboid id="cuboid-30" min="-33,6,-33" size="67,3,67"/>
+        <region id="cuboid-29"/>
+    </complement>
+    <complement id="segment-31">
+        <cuboid id="cuboid-31" min="-34,6,-34" size="69,3,69"/>
+        <region id="cuboid-30"/>
+    </complement>
+    <complement id="segment-32">
+        <cuboid id="cuboid-32" min="-35,6,-35" size="71,3,71"/>
+        <region id="cuboid-31"/>
+    </complement>
+    <complement id="segment-33">
+        <cuboid id="cuboid-33" min="-36,6,-36" size="73,3,73"/>
+        <region id="cuboid-32"/>
+    </complement>
+    <apply region="out-of-bounds" block="never"/>
+    <apply region="playable-zone" block="allowed-interactions"/>
     <apply region="lava-region" block="never"/>
 </regions>
+<actions>
+    <trigger filter="t-33" scope="match">
+        <action>
+            <fill region="segment-33" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-33" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-32" scope="match">
+        <action>
+            <fill region="segment-32" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-32" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-31" scope="match">
+        <action>
+            <fill region="segment-31" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-31" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-30" scope="match">
+        <action>
+            <fill region="segment-30" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-30" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-29" scope="match">
+        <action>
+            <fill region="segment-29" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-29" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-28" scope="match">
+        <action>
+            <fill region="segment-28" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-28" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-27" scope="match">
+        <action>
+            <fill region="segment-27" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-27" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-26" scope="match">
+        <action>
+            <fill region="segment-26" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-26" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-25" scope="match">
+        <action>
+            <fill region="segment-25" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-25" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-24" scope="match">
+        <action>
+            <fill region="segment-24" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-24" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-23" scope="match">
+        <action>
+            <fill region="segment-23" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-23" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-22" scope="match">
+        <action>
+            <fill region="segment-22" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-22" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-21" scope="match">
+        <action>
+            <fill region="segment-21" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-21" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-20" scope="match">
+        <action>
+            <fill region="segment-20" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-20" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-19" scope="match">
+        <action>
+            <fill region="segment-19" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-19" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-18" scope="match">
+        <action>
+            <fill region="segment-18" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-18" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-17" scope="match">
+        <action>
+            <fill region="segment-17" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-17" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-16" scope="match">
+        <action>
+            <fill region="segment-16" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-16" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-15" scope="match">
+        <action>
+            <fill region="segment-15" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-15" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-14" scope="match">
+        <action>
+            <fill region="segment-14" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-14" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-13" scope="match">
+        <action>
+            <fill region="segment-13" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-13" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-12" scope="match">
+        <action>
+            <fill region="segment-12" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-12" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-11" scope="match">
+        <action>
+            <fill region="segment-11" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-11" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-10" scope="match">
+        <action>
+            <fill region="segment-10" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-10" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-9" scope="match">
+        <action>
+            <fill region="segment-9" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-9" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-8" scope="match">
+        <action>
+            <fill region="segment-8" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-8" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-7" scope="match">
+        <action>
+            <fill region="segment-7" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-7" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-6" scope="match">
+        <action>
+            <fill region="segment-6" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-6" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-5" scope="match">
+        <action>
+            <fill region="segment-5" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-5" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-4" scope="match">
+        <action>
+            <fill region="segment-4" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-4" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-3" scope="match">
+        <action>
+            <fill region="segment-3" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-3" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-2" scope="match">
+        <action>
+            <fill region="segment-2" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-2" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-1" scope="match">
+        <action>
+            <fill region="segment-1" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-1" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="t-0" scope="match">
+        <action>
+            <fill region="segment-0" material="lava" filter="arena-material-lava-stilt"/>
+            <fill region="segment-0" material="sand:1" filter="arena-materials-sand"/>
+        </action>
+    </trigger>
+    <trigger filter="bad-cacti" scope="player">
+        <action>
+            <message subtitle="`cThere is no escape"/>
+        </action>
+    </trigger>
+</actions>
+<portals>
+    <portal region="out-of-bounds" filter="bad-cacti" x="@0.5" y="@64" z="@0.5" pitch="90" observers="never"/>
+</portals>
 <falling-blocks>
-    <rule delay="1">
-        <filter>
-            <any>
-                <material>stone:6</material>
-                <material>cactus</material>
-            </any>
-        </filter>
-    </rule>
-    <rule delay="80">
-        <filter>
-            <all>
-                <any>
-                    <material>bedrock</material>
-                    <material>sand</material>
-                </any>
-                <any>
-                    <all><region id="r-35"/></all>
-                    <all><region id="r-34"/><time>4s</time></all>
-                    <all><region id="r-33"/><time>8s</time></all>
-                    <all><region id="r-32"/><time>12s</time></all>
-                    <all><region id="r-31"/><time>16s</time></all>
-                    <all><region id="r-30"/><time>20s</time></all>
-                    <all><region id="r-29"/><time>24s</time></all>
-                    <all><region id="r-28"/><time>28s</time></all>
-                    <all><region id="r-27"/><time>32s</time></all>
-                    <all><region id="r-26"/><time>36s</time></all>
-                    <all><region id="r-25"/><time>40s</time></all>
-                    <all><region id="r-24"/><time>44s</time></all>
-                    <all><region id="r-23"/><time>48s</time></all>
-                    <all><region id="r-22"/><time>52s</time></all>
-                    <all><region id="r-21"/><time>56s</time></all>
-                    <all><region id="r-20"/><time>60s</time></all>
-                    <all><region id="r-19"/><time>64s</time></all>
-                    <all><region id="r-18"/><time>68s</time></all>
-                    <all><region id="r-17"/><time>72s</time></all>
-                    <all><region id="r-16"/><time>76s</time></all>
-                    <all><region id="r-15"/><time>80s</time></all>
-                    <all><region id="r-14"/><time>84s</time></all>
-                </any>
-            </all>
-        </filter>
-    </rule>
-    <rule delay="40">
-        <filter>
-            <all>
-                <any>
-                    <material>bedrock</material>
-                    <material>sand</material>
-                </any>
-                <any>
-                    <all><region id="r-13"/><time>86s</time></all>
-                    <all><region id="r-12"/><time>88s</time></all>
-                    <all><region id="r-11"/><time>90s</time></all>
-                    <all><region id="r-10"/><time>92s</time></all>
-                    <all><region id="r-9"/><time>94s</time></all>
-                    <all><region id="r-8"/><time>96s</time></all>
-                    <all><region id="r-7"/><time>98s</time></all>
-                    <all><region id="r-6"/><time>100s</time></all>
-                    <all><region id="r-5"/><time>102s</time></all>
-                    <all><region id="r-4"/><time>104s</time></all>
-                    <all><region id="r-3"/><time>106s</time></all>
-                    <all><region id="r-2"/><time>108s</time></all>
-                    <all><region id="r-1"/><time>110s</time></all>
-                </any>
-            </all>
-        </filter>
-    </rule>
+    <rule filter="arena-materials-dark" sticky="arena-materials-dark-sticky" delay="2"/>
+    <rule filter="arena-materials-light" sticky="arena-materials-light-sticky" delay="2"/>
 </falling-blocks>
 <spawners>
-    <spawner spawn-region="trigger-n" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
-    <spawner spawn-region="trigger-s" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
-    <spawner spawn-region="trigger-e" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
-    <spawner spawn-region="trigger-w" player-region="playable-region" delay="1s" filter="trigger-arena"><item material="egg"/></spawner>
-    <spawner spawn-region="center"    player-region="playable-region" delay="15s"><item material="snow ball"/></spawner>
+    <spawner spawn-region="center" player-region="playable-zone" delay="3s">
+        <item material="snow ball"/>
+    </spawner>
 </spawners>
 <kill-rewards>
     <kill-reward>
@@ -205,6 +500,9 @@
     <blockdamage>true</blockdamage>
     <instantignite>true</instantignite>
 </tnt>
+<disabledamage>
+    <damage ally="true" self="true" enemy="true" other="true">block explosion</damage>
+</disabledamage>
 <itemkeep>
     <item>cactus</item>
     <item>fishing rod</item>
