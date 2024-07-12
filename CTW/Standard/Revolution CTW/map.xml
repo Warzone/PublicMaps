@@ -1,6 +1,6 @@
 <map proto="1.4.2">
 <name>Revolution CTW</name>
-<version>1.0.6</version>
+<version>1.1.0</version>
 <objective>Capture all 3 wools and bring them back to your base!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -122,31 +122,6 @@
 </filters>
 <!-- Regions -->
 <regions>
-    <union id="map">
-        <cylinder base="-1352,0,-253" height="23" radius="31"/>
-        <cuboid max="-1321,23,-249" min="-1315,0,-257"/>
-        <cuboid max="-1356,23,-222" min="-1348,0,-216"/>
-        <cuboid max="-1382,23,-255" min="-1389,0,-249"/>
-        <cuboid max="-1348,23,-283" min="-1356,0,-290"/>
-        <block>-1441,11,-252</block>
-        <block>-1441,11,-254</block>
-        <block>-1441,11,-253</block>
-        <block>-1263,11,-252</block>
-        <block>-1263,11,-254</block>
-        <block>-1263,11,-253</block>
-        <block>-1352,11,-342</block>
-        <block>-1353,11,-342</block>
-        <block>-1351,11,-342</block>
-        <block>-1351,11,-164</block>
-        <block>-1352,11,-164</block>
-        <block>-1353,11,-164</block>
-    </union>
-    <union id="spawn-islands">
-        <cuboid max="-1315, 0, -231" min="-1240, 23,-275"/>
-        <cuboid max="-1330, 0, -290" min="-1374, 23, -365"/>
-        <cuboid max="-1389, 0, -275" min="-1464, 23,-231"/>
-        <cuboid max="-1374, 0, -216" min="-1330, 23,-142"/>
-    </union>
     <!-- Definitions -->
     <!-- Spawn protection regions -->
     <union id="spawn-protections">
@@ -169,17 +144,11 @@
     </union>
     <!-- Wool room regions -->
     <union id="wool-rooms">
-        <cylinder id="blue-wool-room" base="-1352,0,-148" height="23" radius="7"/>
-        <cylinder id="green-wool-room" base="-1352,0,-358" height="23" radius="7"/>
-        <cylinder id="red-wool-room" base="-1457,0,-253" height="23" radius="7"/>
-        <cylinder id="yellow-wool-room" base="-1247,0,-253" height="23" radius="7"/>
+        <cylinder id="blue-wool-room" base="-1352,0,-148" height="24" radius="5.5"/>
+        <cylinder id="green-wool-room" base="-1352,0,-358" height="24" radius="5.5"/>
+        <cylinder id="red-wool-room" base="-1457,0,-253" height="24" radius="5.5"/>
+        <cylinder id="yellow-wool-room" base="-1247,0,-253" height="24" radius="5.5"/>
     </union>
-    <!-- Spawn points 
-    <point id="blue-spawn">-1170.5,71,431.5</point>
-    <point id="green-spawn">-1170.5,71,273.5</point>
-    <point id="red-spawn">-1091.5,71,352.5</point>
-    <point id="yellow-spawn">-1249.5,71,352.5</point>
-    <point id="obs-spawn">-1229.5,96,293.5</point>-->
     <!-- Wool Monuments -->
     <!-- Green Team -->
     <block id="green-team-blue-wool">-1352,11,-342</block>
@@ -205,7 +174,9 @@
         <cuboid id="blue-wool-monuments" max="-1350,15,-342" min="-1354,9,-336"/>
     </union>
     <!-- Applications -->
-    <!-- Spawn protections // You stopped here. There is a lot more you need to decipher. -->
+    <!-- Disable safeties -->
+    <apply block-place="deny-wools" region="everywhere" message="You may not place or destroy safety wools!"/>
+        <!-- Spawn protections // You stopped here. There is a lot more you need to decipher. -->.
     <apply enter="only-blue" region="blue-spawn-protections" message="You may not enter the enemy spawn."/>
     <apply enter="only-green" region="green-spawn-protections" message="You may not enter the enemy spawn."/>
     <apply enter="only-red" region="red-spawn-protections" message="You may not enter the enemy spawn."/>
@@ -214,23 +185,12 @@
     <!-- Wool room protections -->
     <apply block="never" region="wool-rooms" message="You are not allowed to modify terrain here."/>
     <apply block="never" region="wool-monuments" message="You are not allowed to modify terrain here."/>
-    <apply block="not-void" message="You are not allowed to modify terrain here.">
-        <region>
-            <union>
-                <cuboid max="-1315,0,-231" min="-1240,23,-275"/>
-                <cuboid max="-1330,0,-290" min="-1374,23,-365"/>
-                <cuboid max="-1389,0,-275" min="-1464,23,-231"/>
-                <cuboid max="-1374,0,-216" min="-1330,23,-142"/>
-            </union>
-        </region>
-    </apply>
+    <apply block-place="not-void" message="You may not edit the void area!" region="everywhere"/> <!-- uses block 36 -->
     <apply enter="not-blue" region="blue-wool-room" message="You may not enter your own wool room!"/>
     <apply enter="not-green" region="green-wool-room" message="You may not enter your own wool room!"/>
     <apply enter="not-red" region="red-wool-room" message="You may not enter your own wool room!"/>
     <apply enter="not-yellow" region="yellow-wool-room" message="You may not enter your own wool room!"/>
     <!-- Monument protections -->
-    <!-- Disable safeties -->
-    <apply block-place="deny-wools" message="You may not place or destroy safety wools!"/>
 </regions>
 <itemremove>
     <item>wood</item>
