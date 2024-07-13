@@ -1,0 +1,61 @@
+<map proto="1.4.2">
+<name>Warzone Limbo</name>
+<created>2021-10-22</created>
+<version>1.0.0</version>
+<objective>Be the first player to reach the end!</objective>
+<gamemode>arcade</gamemode>
+<time>10m</time>
+<authors>
+    <author uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb"/> <!-- TheBestGamer -->
+    <author uuid="4019ebc4-e6d7-44e1-ad5a-66dfd5f1c613"/> <!-- JorgeberrexMC -->
+</authors>
+<contributors>
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="XML"/> <!-- Wesdial -->
+</contributors> 
+<!-- Spawn Definitions -->
+<spawns>
+    <spawn yaw="-0" kit="spawn-kit" filter="score-0"  region="spawn"/>
+    <default yaw="180" kit="obs-kit" region="obs-spawn"/>
+</spawns>
+<players colors="true" min="1" max="50" show-name-tags="false"/>
+<kits>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parent="obs-kit">
+        <effect>invisibility</effect>
+        <boots unbreakable="true" locked="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Scoring -->
+<filters>
+    <score id="score-0">0</score>
+</filters>
+<!-- Regions -->
+<regions>
+    <point id="obs-spawn">0.5,98.5,10.5</point>
+    <point id="spawn">-18.5,94,4.5</point>
+    <below id="return-area" y="85"/>
+    <cuboid id="stage-1" min="23,105,-16" max="25,107,-14"/>
+    <apply block="never"/>
+</regions>
+<portals yaw="@-0">
+    <portal destination="spawn" filter="score-0" region="return-area"/>
+</portals>
+<!-- Score points -->
+<score>
+    <limit>1</limit>
+    <box points="1" region="stage-1" silent="false" filter="score-0"/>
+</score>
+<itemremove>
+    <item>leather boots</item>
+</itemremove>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>entity attack</damage>
+</disabledamage>
+</map>
