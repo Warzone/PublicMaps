@@ -50,7 +50,13 @@
     <kit id="zombie-switch-kit" force="true">
         <team-switch team="zombie-team"/>
     </kit>
+    <kit id="zombie-compass-kit">
+        <item prevent-sharing="true" material="compass"/>
+    </kit>
 </kits>
+<compass show-distance="true">
+    <player filter="only-humans" name="Closest ${human-team-name}"/>
+</compass>
 <filters>
     <team id="only-humans">human-team</team>
     <team id="only-zombies">zombie-team</team>
@@ -81,6 +87,7 @@
     <item>armor stand</item>
     <item>bow</item>
     <item>iron boots</item>
+    <item>compass</item>
 </itemremove>
 <hunger>
     <depletion>off</depletion>
