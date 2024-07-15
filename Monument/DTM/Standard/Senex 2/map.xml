@@ -1,7 +1,7 @@
 <map proto="1.4.2">
 <name>Senex 2</name>
 <variant id="christmas" world="christmas" override="true">Snowex 2</variant>
-<version>2.3.2</version>
+<version>3.0.0</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -14,13 +14,14 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
-         <item slot="0" material="stone sword"/>
-         <item slot="1" enchantment="arrow infinite" material="bow"/>
-         <item slot="2" material="diamond pickaxe"/>
-         <item slot="3" amount="3" material="golden apple"/>
-         <item slot="4" amount="32" material="log"/>
-         <item slot="5" amount="64" material="glass"/>
-         <item slot="6" amount="16" material="cooked beef"/>
+         <item slot="0" unbreakable="true" material="stone sword"/>
+         <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+         <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+         <item slot="3" unbreakable="true" material="stone axe"/>
+         <item slot="4" amount="3" material="golden apple"/>
+         <item slot="5" amount="32" material="log"/>
+         <item slot="6" amount="64" material="glass"/>
+         <item slot="7" amount="16" material="cooked beef"/>
          <item slot="28" material="arrow"/>
          <helmet unbreakable="true" team-color="true" material="leather helmet"/>
          <effect duration="3" amplifier="5">damage resistance</effect>
@@ -30,89 +31,46 @@
 <spawns>
     <spawn team="gray-team" kit="spawn-kit">
         <regions>
-            <if variant="christmas">
-                <cylinder yaw="-90" base="35.5,25,-788.5" height="0" radius="1"/>
-            </if>
-            <if variant="default">
-                <cylinder yaw="90" base="118.5,25,-788.5" height="0" radius="1"/>
-            </if>
+            <point yaw="-90">35.5,25,-788.5</point>
         </regions>
     </spawn>
     <spawn team="orange-team" kit="spawn-kit">
         <regions>
-            <if variant="christmas">
-                <cylinder yaw="90" base="125.5,25,-788.5" height="0" radius="1"/>
-            </if>
-            <if variant="default">
-                <cylinder yaw="-90" base="35.5,25,-788.5" height="0" radius="1"/>
-            </if>
+            <point yaw="90">125.5,25,-788.5</point>
         </regions>
     </spawn>
     <default>
         <regions>
-            <if variant="christmas">
-                <cylinder yaw="-180" base="80.5,51,-732.5" height="0" radius="1"/>
-            </if>
-            <if variant="default">
-                <cylinder base="76.5,58,-788.5" height="0" radius="1"/>
-            </if>
+            <point yaw="180">80.5,50,-733.5</point>
         </regions>
     </default>
 </spawns>
 <regions>
-    <if variant="christmas">
-        <union id="spawn-protections">
-            <cylinder id="gray-spawn" base="118,24,-788" height="8" radius="8"/>
-            <cylinder id="orange-spawn" base="125,24,-788" height="8" radius="8"/>
-        </union>
-    </if>
-    <if variant="default">
-        <union id="spawn-protections">
-            <cylinder id="gray-spawn" base="118,24,-788" height="8" radius="8"/>
-            <cylinder id="orange-spawn" base="35,24,-788" height="8" radius="8"/>
-        </union>
-    </if>
+    <union id="spawn-protections">
+        <cylinder id="gray-spawn" base="35.5,24,-788.5" height="8" radius="7"/>
+        <cylinder id="orange-spawn" base="125.5,24,-788.5" height="8" radius="7"/>
+    </union>
     <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
 </regions>
 <destroyables materials="obsidian">
     <destroyable name="Left" owner="orange-team">
         <region>
-            <if variant="christmas">
-                <block>178,28,-808</block>
-            </if>
-            <unless variant="christmas">
-                <block>-26,27,-770</block>
-            </unless>
+            <block>178,28,-808</block>
         </region>
     </destroyable>
     <destroyable name="Right" owner="orange-team">
         <region>
-            <if variant="christmas">
-                <block>178,28,-770</block>
-            </if>
-            <if variant="default">
-                <block>-26,27,-808</block>
-            </if>
+            <block>178,28,-770</block>
         </region>
     </destroyable>
     <destroyable name="Left" owner="gray-team">
         <region>
-            <if variant="christmas">
-                <block>-18,28,-770</block>
-            </if>
-            <if variant="default">
-                <block>179,27,-808</block>
-            </if>
+            <block>-18,28,-770</block>
         </region>
     </destroyable>
     <destroyable name="Right" owner="gray-team">
         <region>
-             <if variant="christmas">
-                <block>-18,28,-808</block>
-             </if>
-            <if variant="default">
-                <block>179,27,-770</block>
-            </if>
+            <block>-18,28,-808</block>
         </region>
     </destroyable>
 </destroyables>
@@ -126,7 +84,6 @@
    <item>sandstone</item>
    <item>leather helmet</item>
    <item>cooked beef</item>
-   <item>golden apple</item>
 </itemremove>
 <itemkeep>
     <item>arrow</item>
