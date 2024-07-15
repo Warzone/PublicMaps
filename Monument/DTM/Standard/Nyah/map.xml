@@ -1,42 +1,35 @@
 <map proto="1.4.2">
 <name>Nyah</name>
-<version>1.2.1</version>
+<version>1.2.2</version>
 <objective>Destroy the other team's Gold monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
 </authors>
 <teams>
-    <team id="blue-team" color="blue"     max="5">Blue</team>
-    <team id="red-team"  color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="red-team" color="dark red" max="5">Red</team>
 </teams>
 <time>20m</time>
 <kits>
     <kit id="main-kit">
-        <clear />
-        <item slot="0" unbreakable="true" material="stone sword" />
-        <item slot="1" unbreakable="true" material="bow" />
-        <item slot="2" unbreakable="true" material="stone pickaxe" />
-        <item slot="3" unbreakable="true" material="stone axe" />
-        <item slot="4" amount="36"        material="wood" damage="2" />
-        <item slot="8" amount="64"        material="golden carrot" />
-        <chestplate    unbreakable="true" material="chainmail chestplate" />
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="36" material="wood" damage="2"/>
+        <item slot="5" amount="28" team-color="true" material="stained clay"/>
+        <item slot="8" amount="64" material="golden carrot"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <effect duration="oo" amplifier="5">resistance</effect>
         <effect duration="oo" amplifier="5">strength</effect>
     </kit>
-    <kit id="blue-kit" parents="main-kit">
-        <item     slot="5" amount="28" damage="11"  material="stained clay" />
-        <helmet   unbreakable="true" color="0066cc" material="leather helmet" />
-        <leggings unbreakable="true" color="0066cc" material="leather leggings" />
-    </kit>
-    <kit id="red-kit" parents="main-kit">
-        <item     slot="5" amount="28" damage="14"  material="stained clay" />
-        <helmet   unbreakable="true" color="cd0000" material="leather helmet" />
-        <leggings unbreakable="true" color="cd0000" material="leather leggings" />
-    </kit>
     <kit id="playing-kit" force="true">
-        <item slot="28" amount="24" material="arrow" />
-        <boots unbreakable="true" material="iron boots" />
+        <item slot="28" amount="24" material="arrow"/>
+        <boots unbreakable="true" material="iron boots"/>
         <effect duration="3" amplifier="10">resistance</effect>
         <effect duration="0" amplifier="10">strength</effect>
     </kit>
@@ -47,23 +40,23 @@
             <point yaw="180">76.5,33.5,424.5</point>
         </regions>
     </default>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="main-kit">
         <regions>
             <point yaw="90">121,10.5,454</point>
         </regions>
     </spawn>
-    <spawn team="red-team" kit="red-kit">
+    <spawn team="red-team" kit="main-kit">
         <regions>
             <point yaw="-90">32,10.5,395</point>
         </regions>
     </spawn>
 </spawns>
-<respawn delay="3.5s" />
+<respawn delay="3.5s"/>
 <filters>
     <team id="only-blue">blue-team</team>
     <team id="only-red">red-team</team>
     <not id="deny-void">
-        <void />
+        <void/>
     </not>
     <not id="deny-player-cause">
         <cause>player</cause>
@@ -75,85 +68,85 @@
         </any>
     </not>
     <all id="apply-blue-play-kit">
-        <filter id="only-blue" />
+        <filter id="only-blue"/>
         <not>
             <wearing>
-                <item unbreakable="true" material="iron boots" />
+                <item unbreakable="true" material="iron boots"/>
             </wearing>
         </not>
     </all>
     <all id="apply-red-play-kit">
-        <filter id="only-red" />
+        <filter id="only-red"/>
         <not>
             <wearing>
-                <item unbreakable="true" material="iron boots" />
+                <item unbreakable="true" material="iron boots"/>
             </wearing>
         </not>
     </all>
 </filters>
 <regions>
     <union id="team-spawns">
-        <rectangle id="blue-spawns" min="108,460" max="124,448" />
-        <rectangle id="red-spawns" min="45,401" max="30,389" />
+        <rectangle id="blue-spawns" min="108,460" max="124,448"/>
+        <rectangle id="red-spawns" min="45,401" max="30,389"/>
     </union>
     <intersect id="blue-spawn-pools">
-        <region id="blue-spawns" />
-        <below y="10" />
+        <region id="blue-spawns"/>
+        <below y="10"/>
     </intersect>
     <intersect id="red-spawn-pools">
-        <region id="red-spawns" />
-        <below y="10" />
+        <region id="red-spawns"/>
+        <below y="10"/>
     </intersect>
-    <cuboid id="buildable" min="54,0,452" max="99,17,397" />
+    <cuboid id="buildable" min="54,0,452" max="99,17,397"/>
     <above id="world-limit" y="17" />
-    <apply region="team-spawns"  block="never"                   message="You may not modify the spawn area" />
-    <apply region="world-limit"  block-place="deny-player-cause" message="You may not place blocks that high" />
-    <apply region="buildable"    block="always" />
-    <apply                       block-place="deny-void"         message="You may not interact with that material here" />
-    <apply                       block="deny-beacons" use="deny-beacons" />
-    <apply region="blue-spawn-pools" kit="playing-kit" filter="apply-blue-play-kit" />
-    <apply region="red-spawn-pools"  kit="playing-kit" filter="apply-red-play-kit" />
+    <apply region="team-spawns" block="never" message="You may not modify the spawn area"/>
+    <apply region="world-limit" block-place="deny-player-cause" message="You may not place blocks that high"/>
+    <apply region="buildable" block="always"/>
+    <apply block-place="deny-void" message="You may not interact with that material here"/>
+    <apply block="deny-beacons" use="deny-beacons"/>
+    <apply region="blue-spawn-pools" kit="playing-kit" filter="apply-blue-play-kit"/>
+    <apply region="red-spawn-pools" kit="playing-kit" filter="apply-red-play-kit"/>
 </regions>
 <destroyables materials="gold block" mode-changes="true">
     <destroyable id="blue-monument" name="Monument" owner="blue-team">
         <region>
-            <cuboid min="78,8,456" max="75,13,459" />
+            <cuboid min="78,8,456" max="75,13,459"/>
         </region>
     </destroyable>
     <destroyable id="red-monument" name="Monument" owner="red-team">
         <region>
-            <cuboid min="78,8,390" max="75,13,393" />
+            <cuboid min="78,8,390" max="75,13,393"/>
         </region>
     </destroyable>
 </destroyables>
 <modes>
-    <mode after="10m" material="coal block" />
-    <mode after="15m" material="packed ice" />
+    <mode after="10m" material="coal block"/>
+    <mode after="15m" material="packed ice"/>
 </modes>
 <kill-rewards>
     <kill-reward>
-        <item amount="8" material="arrow" />
-        <item            material="golden apple" />
-        <item amount="2" material="gold ingot" />
+        <item amount="8" material="arrow"/>
+        <item material="golden apple"/>
+        <item amount="2" material="gold ingot"/>
     </kill-reward>
     <kill-reward filter="only-blue">
-        <item amount="16" damage="11" material="stained clay" />
+        <item amount="16" damage="11" material="stained clay"/>
     </kill-reward>
     <kill-reward filter="only-red">
-        <item amount="16" damage="14" material="stained clay" />
+        <item amount="16" damage="14" material="stained clay"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="6" repeat="false" />
+            <kill-streak count="6" repeat="false"/>
         </filter>
-        <item damage="61" material="flint and steel" />
-        <item amount="3"  material="golden apple" />
+        <item damage="61" material="flint and steel"/>
+        <item amount="3" material="golden apple"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="8" repeat="true" />
+            <kill-streak count="8" repeat="true"/>
         </filter>
-        <item amount="1" material="tnt" />
+        <item amount="1" material="tnt"/>
     </kill-reward>
 </kill-rewards>
 <item-mods>
@@ -177,16 +170,16 @@
             <material>iron leggings</material>
             <material>iron boots</material>
         </match>
-        <modify unbreakable="true" />
+        <modify unbreakable="true"/>
     </rule>
 </item-mods>
 <toolrepair>
     <tool>bow</tool>
+    <tool>stone sword</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
 </toolrepair>
 <itemremove>
-    <item>stone sword</item>
-    <item>stone pickaxe</item>
-    <item>stone axe</item>
     <item>golden carrot</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
@@ -198,7 +191,10 @@
     <item>gold block</item>
     <item>coal block</item>
     <item>packed ice</item>
-    <item>stained clay</item>
-    <item>arrow</item>
 </itemremove>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>stained clay</item>
+    <item>wood</item>
 </map>
