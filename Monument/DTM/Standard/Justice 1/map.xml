@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <map proto="1.4.2">
 	<name>Justice 1</name>
-	<version>1.0.2</version>
+	<version>1.1.0</version>
     <gamemode>dtm</gamemode>
 	<objective>Destroy the enemy's monument(s) to win!</objective>
 	<authors>
-		<author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/>
-		<!-- Evocal -->
+		<author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Evocal -->
 	</authors>
 	<teams>
 		<team id="red" color="dark red" max="20">Red</team>
 		<team id="yellow" color="yellow" max="20">Yellow</team>
 	</teams>
 	<spawns>
-		<spawn team="yellow" kit="ykit">
+		<spawn team="yellow" kit="default">
 			<regions yaw="0">
 				<cylinder base="-2, 84, -107" height="1" radius="1"/>
 			</regions>
 		</spawn>
-		<spawn team="red" kit="rkit">
+		<spawn team="red" kit="default">
 			<regions yaw="180">
 				<cylinder base="-2, 84, 11" height="1" radius="1"/>
 			</regions>
@@ -30,29 +28,21 @@
 		</default>
 	</spawns>
 	<kits>
-		<kit id="parent">
-			<item slot="0">iron sword</item>
-			<item slot="1">bow</item>
-			<item slot="27" amount="64">arrow</item>
-			<item slot="2">diamond pickaxe</item>
-			<item slot="3" amount="3">golden apple</item>
-			<item slot="4" amount="32">log</item>
-			<item slot="7" amount="64">glass</item>
-			<item slot="8" amount="32">cooked fish</item>
-			<potion duration="4" amplifier="25">heal</potion>
-			<potion duration="4" amplifier="25">damage resistance</potion>
-		</kit>
-		<kit id="ykit" parents="parent">
-			<helmet color="E5E533">leather helmet</helmet>
-			<chestplate color="E5E533">leather chestplate</chestplate>
-			<leggings color="E5E533">leather leggings</leggings>
-			<boots color="E5E533">leather boots</boots>
-		</kit>
-		<kit id="rkit" parents="parent">
-			<helmet color="AA0000">leather helmet</helmet>
-			<chestplate color="AA0000">leather chestplate</chestplate>
-			<leggings color="AA0000">leather leggings</leggings>
-			<boots color="AA0000">leather boots</boots>
+		<kit id="default">
+			<item slot="0" unbreakable="true" material="iron sword"/>
+			<item slot="1" unbreakable="true" material="bow"/>
+			<item slot="2" unbreakable="true" material="diamond pickaxe"/>
+			<item slot="3"  amount="3" material="golden apple"/>
+			<item slot="4"  amount="64" material="log"/>
+			<item slot="7"  amount="64" material="glass"/>
+			<item slot="8"  amount="32" material="cooked fish"/>
+			<item slot="27" amount="64" material="arrow"/>
+			<effect duration="4" amplifier="25">heal</effect>
+			<effect duration="4" amplifier="25">damage resistance</effect>
+			<helmet unbreakable="true" team-color="true" material="leather helmet"/>
+			<chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+			<leggings unbreakable="true" team-color="true" material="leather leggings"/>
+			<boots unbreakable="true" team-color="true" material="leather boots"/>
 		</kit>
 	</kits>
 	<kill-rewards>
@@ -93,9 +83,9 @@
             <cylinder id="yellow-spawn-protection" base="-2,82,-107" radius="10" height="oo"/>
             <cylinder id="red-spawn-protection" base="-2,82,11" radius="10" height="oo"/>
         </union>
-        <apply region="spawn-protections"       block="never"     message="You are not allowed to modify terrain here."/>
+        <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
         <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy spawn."/>
-        <apply region="red-spawn-protection"    enter="red-only" message="You may not enter the enemy spawn."/>
+        <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
     </regions>
 	<itemremove>
 		<item>leather helmet</item>
@@ -103,11 +93,14 @@
 		<item>leather leggings</item>
 		<item>leather boots</item>
 		<item>cooked fish</item>
+	</itemremove>
+	<itemkeep>
 		<item>arrow</item>
 		<item>log</item>
 		<item>wood</item>
 		<item>glass</item>
-	</itemremove>
+		<item>golden apple</item>
+	</itemkeep>
 	<toolrepair>
 		<tool>bow</tool>
 		<tool>iron sword</tool>
