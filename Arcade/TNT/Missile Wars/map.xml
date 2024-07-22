@@ -1,0 +1,474 @@
+<map proto="1.4.2" game="Missile Wars">
+<name>Missile Wars</name>
+<version>1.0.2</version>
+<objective>Destroy your enemies portal!</objective>
+<authors>
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Author"/>
+</authors>
+<world>
+    <timeset>10000</timeset>
+</world>
+<contributors>
+    <contributor uuid="55a2e72e-0161-4c85-b191-a0b227ff758a" contribution="Original Map Concept"/>
+</contributors>
+<gamemode>dtm</gamemode>
+<gamemode>arcade</gamemode>
+<time>8m</time>
+<broadcasts>
+    <alert after="1s">You will recieve a random rocket every 10 seconds!</alert>
+    <alert after="3s">Protect your portal at all costs while destroying the enemy team's portal!</alert>
+    <tip after="5s" every="1m">Try riding the missiles by jumping continuously while on them!</tip>
+    <tip after="30s" every="1m">Use your Missile Shooter or Fireball to destroy enemy missiles!</tip>
+</broadcasts>
+<teams>
+    <team id="red-team" color="dark red" max="12" max-overfill="20">Red</team>
+    <team id="blue-team" color="blue" max="12" max-overfill="20">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="red" yaw="180">
+        <region>
+            <cuboid min="27,78,64" max="-26,78,65"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="blue">
+        <region>
+            <cuboid min="-26,78,-19" max="27,78,-19"/>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <point>50,97,23</point>
+        </region>
+    </default>
+</spawns>
+<kits>
+    <kit id="spawn" force="true">
+        <item name="`cMisslie Shooter" material="bow" slot="0">
+            <enchantment level="1">arrow fire</enchantment>
+        </item>
+        <item material="arrow" amount="1" slot="8"/>
+        <helmet material="leather helmet" locked="true" team-color="true"/>
+        <chestplate material="leather chestplate" locked="true" team-color="true"/>
+        <leggings material="leather leggings" locked="true" team-color="true"/>
+        <boots material="leather boots" locked="true" team-color="true"/>
+        <item material="stained glass" team-color="true" amount="32"/>
+    </kit>
+    <kit id="arrow-kit">
+        <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true"/>
+        <action>
+            <message actionbar="`a`lARROW READY!"/>
+        </action>
+    </kit>
+    <kit id="Red_Tomahawk_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Red_Tomahawk" material="firework" name="`cTomahawk Missile"/>
+    </kit>
+    <kit id="Red_Juggernaut_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Red_Juggernaut" material="clay brick" name="`cJuggernaut Missile"/>
+    </kit>
+    <kit id="Red_Guardian_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Red_Guardian" material="iron ingot" name="`cGuardian Missile"/>
+    </kit>
+    <kit id="Red_Lightning_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Red_Lightning" material="redstone torch on" name="`cLightning Missile"/>
+    </kit>
+    <kit id="Red_Shieldbuster_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Red_Shieldbuster" material="clay ball" name="`cShieldbuster Missile"/>
+    </kit>
+    <!-- Blue Kits -->
+    <kit id="Blue_Tomahawk_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Blue_Tomahawk" material="firework" name="`9Tomahawk Missile"/>
+    </kit>
+    <kit id="Blue_Juggernaut_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Blue_Juggernaut" material="clay brick" name="`9Juggernaut Missile"/>
+    </kit>
+    <kit id="Blue_Guardian_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Blue_Guardian" material="iron ingot" name="`9Guardian Missile"/>
+    </kit>
+    <kit id="Blue_Lightning_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Blue_Lightning" material="redstone torch on" name="`9Lightning Missile"/>
+    </kit>
+    <kit id="Blue_Shieldbuster_Kit" deduct-items="false">
+        <item consumable="Missile_Summoner_Blue_Shieldbuster" material="clay ball" name="`9Shieldbuster Missile"/>
+    </kit>
+    <!-- Base kits -->
+     <kit id="Fireball_Kit" deduct-items="false">
+        <item projectile="Fireball" name="`4`lFireball" material="fireball"/>
+     </kit>
+    <kit id="red" parents="spawn">
+    </kit>
+    <kit id="blue" parents="spawn">
+    </kit>
+</kits>
+<projectiles>
+    <projectile
+        id="Fireball"
+        name="Fireball"
+        projectile="LargeFireball"
+        velocity="2"
+        damage="8"
+        precise="true"
+    > 
+    <destroy-filter>
+        <not>
+            <material>barrier</material>
+        </not>
+    </destroy-filter>
+    </projectile>
+</projectiles>
+<destroyables name="Portal" materials="stained_glass_pane" completion="50%" show-progress="true">
+    <destroyable owner="blue-team">
+        <region>
+            <cuboid min="-23,53,-26" max="24,75,-23"/>
+        </region>
+    </destroyable>
+    <destroyable owner="red-team">
+        <region>
+            <cuboid min="-22,53,70" max="22,74,72"/>
+        </region>
+    </destroyable>
+</destroyables>
+<structures>
+    <!-- Red Missiles -->
+    <structure id="Red_Tomahawk" air="false">
+        <region>
+            <cuboid min="63,95,1" max="61,98,-12"/>
+        </region>
+    </structure>
+    <structure id="Red_Juggernaut" air="false">
+        <region>
+            <cuboid min="68,94,1" max="64,98,-10"/>
+        </region>
+    </structure>
+    <structure id="Red_Guardian" air="false">
+        <region>
+            <cuboid min="73,94,1" max="70,98,-7"/>
+        </region>
+    </structure>
+    <structure id="Red_Lightning" air="false">
+        <region>
+            <cuboid min="78,95,1" max="75,98,-8"/>
+        </region>
+    </structure>
+    <structure id="Red_Shieldbuster" air="false">
+        <region>
+            <cuboid min="98,95,1" max="80,98,-14"/>
+        </region>
+    </structure>
+    <!-- Blue Missiles -->
+    <structure id="Blue_Tomahawk" air="false">
+        <region>
+            <cuboid min="61,95,4" max="63,98,17"/>
+        </region>
+    </structure>
+    <structure id="Blue_Juggernaut" air="false">
+        <region>
+            <cuboid min="65,94,4" max="68,98,15"/>
+        </region>
+    </structure>
+    <structure id="Blue_Guardian" air="false">
+        <region>
+            <cuboid min="70,94,4" max="73,98,12"/>
+        </region>
+    </structure>
+    <structure id="Blue_Lightning" air="false">
+        <region>
+            <cuboid min="75,95,4" max="78,98,13"/>
+        </region>
+    </structure>
+    <structure id="Blue_Shieldbuster" air="false">
+        <region>
+            <cuboid min="79,95,4" max="83,98,19"/>
+        </region>
+    </structure>
+</structures>
+<consumables>
+    <!-- Red Missiles -->
+    <consumable id="Missile_Summoner_Red_Tomahawk" action="Spawn_Red_Tomahawk" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Red_Juggernaut" action="Spawn_Red_Juggernaut" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Red_Guardian" action="Spawn_Red_Guardian" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Red_Lightning" action="Spawn_Red_Lightning" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Red_Shieldbuster" action="Spawn_Red_Shieldbuster" on="click" override="true" consume="true"/>
+    <!-- Blue Missiles -->
+    <consumable id="Missile_Summoner_Blue_Tomahawk" action="Spawn_Blue_Tomahawk" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Blue_Juggernaut" action="Spawn_Blue_Juggernaut" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Blue_Guardian" action="Spawn_Blue_Guardian" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Blue_Lightning" action="Spawn_Blue_Lightning" on="click" override="true" consume="true"/>
+    <consumable id="Missile_Summoner_Blue_Shieldbuster" action="Spawn_Blue_Shieldbuster" on="click" override="true" consume="true"/>
+</consumables>
+<filters>
+    <all id="no-arrows">
+        <not>
+            <carrying ignore-metadata="true"><item material="arrow"/></carrying>
+        </not>
+        <participating/>
+        <alive/>
+    </all>
+    <all id="1-arrow">
+        <carrying ignore-metadata="true"><item material="arrow"/></carrying>
+        <participating/>
+    </all>
+    <all id="more-than-1-arrow">
+        <carrying ignore-metadata="true" amount="(1,oo)"><item material="arrow"/></carrying>
+        <participating/>
+    </all>
+    <after id="arrow-regen" duration="3.0s" filter="no-arrows"/>
+    <pulse id="Distribute-Items" period="10s" duration="5s">
+        <match-running/>
+    </pulse>
+</filters>
+<actions>
+    <!-- Red Missiles -->
+    <action id="Spawn_Red_Tomahawk" scope="player">
+        <paste-structure x="x" y="y-8" z="z-15" structure="Red_Tomahawk"/>
+    </action>
+    <action id="Spawn_Red_Juggernaut" scope="player">
+        <paste-structure x="x" y="y-8" z="z-13" structure="Red_Juggernaut"/>
+    </action>
+    <action id="Spawn_Red_Guardian" scope="player">
+        <paste-structure x="x" y="y-8" z="z-12" structure="Red_Guardian"/>
+    </action>
+    <action id="Spawn_Red_Lightning" scope="player">
+        <paste-structure x="x" y="y-8" z="z-11" structure="Red_Lightning"/>
+    </action>
+    <action id="Spawn_Red_Shieldbuster" scope="player">
+        <paste-structure x="x" y="y-8" z="z-16" structure="Red_Shieldbuster"/>
+    </action>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Red_Tomahawk_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <participating/>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">1</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Red_Juggernaut_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">2</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Red_Guardian_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">3</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Red_Lightning_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">4</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Red_Shieldbuster_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">5</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Red_Missile_Manager" value="0"/>
+            <kit id="Fireball_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>red-team</team>
+                <variable var="Red_Missile_Manager">6</variable>
+            </all>
+        </filter>
+    </trigger>
+    <!-- Blue Missiles -->
+    <action id="Spawn_Blue_Tomahawk" scope="player">
+        <paste-structure x="x" y="y-8" z="z+4" structure="Blue_Tomahawk"/>
+    </action>
+    <action id="Spawn_Blue_Juggernaut" scope="player">
+        <paste-structure x="x" y="y-8" z="z+2" structure="Blue_Juggernaut"/>
+    </action>
+    <action id="Spawn_Blue_Guardian" scope="player">
+        <paste-structure x="x" y="y-8" z="z+3" structure="Blue_Guardian"/>
+    </action>
+    <action id="Spawn_Blue_Lightning" scope="player">
+        <paste-structure x="x" y="y-8" z="z+3" structure="Blue_Lightning"/>
+    </action>
+    <action id="Spawn_Blue_Shieldbuster" scope="player">
+        <paste-structure x="x" y="y-8" z="z+5" structure="Blue_Shieldbuster"/>
+    </action>
+
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Blue_Tomahawk_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <participating/>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">1</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Blue_Juggernaut_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">2</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Blue_Guardian_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">3</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Blue_Lightning_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">4</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Blue_Shieldbuster_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">5</variable>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action>
+            <set var="Blue_Missile_Manager" value="0"/>
+            <kit id="Fireball_Kit"/>
+        </action>
+        <filter>
+            <all>
+                <alive/>
+                <team>blue-team</team>
+                <variable var="Blue_Missile_Manager">6</variable>
+            </all>
+        </filter>
+    </trigger>
+    <action id="remove-arrow" scope="player">
+        <replace-item>
+            <find material="arrow"/>
+            <replace material="air"/>
+        </replace-item>
+    </action>
+    <action id="no-arrows-message" scope="player">
+        <message text=" `e⚠ `cYou will receive an arrow in `e3.0`c seconds!" actionbar="`c`lNO ARROWS!"/>
+    </action>
+    <action id="1-arrow-message" scope="player">
+        <message actionbar="`a`lARROW READY!"/>
+    </action>
+    <action id="give-arrow" scope="player">
+        <kit id="arrow-kit"/>
+        <message text=" `e⚠ `aYou got an arrow!"/>
+        <sound key="random.pop" pitch="0.8"/>
+    </action>
+    <action id="Random_Number_Action" scope="player">
+        <set var="Red_Missile_Manager" value="floor(random() * 6) + 1"/>
+        <set var="Blue_Missile_Manager" value="floor(random() * 6) + 1"/>
+    </action>
+    <trigger filter="Distribute-Items" action="Random_Number_Action" scope="player"/>
+    <trigger filter="arrow-regen" action="give-arrow" scope="player"/>
+    <trigger filter="no-arrows" action="no-arrows-message" scope="player"/>
+    <trigger filter="1-arrow" action="1-arrow-message" scope="player"/>
+</actions>
+<variables>
+    <player-location id="x" component="x"/>
+    <player-location id="y" component="y"/>
+    <player-location id="z" component="z"/>
+    <variable id="Blue_Missile_Manager" scope="player" default="0" exclusive="7"/>
+    <variable id="Red_Missile_Manager" scope="player" default="0" exclusive="7"/>
+</variables>
+<kill-rewards>
+    <kill-reward>
+        <item amount="1" material="golden apple"/>
+        <item material="stained glass" team-color="true" amount="8"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<damage>
+    <deny>
+        <cause>fall</cause>
+    </deny>
+</damage>
+<itemremove>
+    <item>Leather helmet</item>
+    <item>Leather chestplate</item>
+    <item>Leather leggings</item>
+    <item>Leather boots</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>bow</item>
+    <item>stained glass</item>
+    <item>firework</item>
+    <item>iron ingot</item>
+    <item>clay brick</item>
+    <item>clay ball</item>
+    <item>redstone torch on</item>
+    <item>Iron block</item>
+</itemremove>
+</map>
