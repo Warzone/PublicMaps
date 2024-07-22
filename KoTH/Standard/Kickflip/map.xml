@@ -1,0 +1,119 @@
+<map proto="1.4.2">
+<name>Kickflip</name>
+<version>1.0.7</version>
+<include id="conquest"/>
+<constant id="damage-resistance">2s</constant>
+<constant id="respawn-timer">2s</constant>
+<objective>Be the first team to reach 750 points!</objective>
+<created>2023-01-14</created>
+<gamemode>koth</gamemode>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+</authors>
+<contributors>
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="XML"/> <!-- zzuf -->
+</contributors>
+<teams>
+    <team id="red-team" color="dark red" dye-color="red" max="16">Red</team>
+    <team id="blue-team" color="blue" dye-color="blue" max="16">Blue</team>
+</teams>
+<spawns>
+    <spawn team="red-team" kit="base-kit">
+        <region yaw="45">
+            <point>28.5,5,-45.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="base-kit">
+        <region yaw="-135">
+            <point>-27.5,5,44.5</point>
+        </region>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="0">0.5,40,-0.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <deny id="deny-red">
+        <team id="only-red">red-team</team>
+    </deny>
+    <deny id="deny-blue">
+        <team id="only-blue">blue-team</team>
+    </deny>
+</filters>
+<regions>
+    <apply block="never" use="never"/>
+    <union id="hill-regions">
+        <cuboid id="capture-a" min="17,6,28" size="7,5,7"/>
+        <cuboid id="signal-a" min="19,29,30" size="3,3,3"/>
+        <cuboid id="capture-b" min="-3,6,-4" size="7,5,7"/>
+        <cuboid id="signal-b" min="-1,29,-2" size="3,3,3"/>
+        <cuboid id="capture-c" min="-23,6,-36" size="7,5,7"/>
+        <cuboid id="signal-c" min="-21,29,-34" size="3,3,3"/>
+    </union>
+    <point id="gapple-point">0.5,2.2,-0.5</point>
+    <circle id="blue-spawn-area" center="-27.5,44.5" radius="6.5"/>
+    <circle id="red-spawn-area" center="28.5,-45.5" radius="6.5"/>
+    <apply enter="only-blue" region="blue-spawn-area" message="You may not enter your opponent's spawn!"/>
+    <apply enter="only-red" region="red-spawn-area" message="You may not enter your opponent's spawn!"/>
+    <union id="jump-pads">
+        <cuboid id="jump-pad-1" min="-14,11,-23" size="2,1,2"/>
+        <cuboid id="jump-pad-2" min="13,11,20" size="2,1,2"/>
+    </union>
+    <apply velocity="7,2.5,2" kit="yeeted" region="jump-pad-1"/>
+    <apply velocity="-7,2.5,-2" kit="yeeted" region="jump-pad-2"/>
+</regions>
+<spawners>
+    <spawner spawn-region="gapple-point" player-region="everywhere" max-entities="1" delay="8s">
+        <item amount="1" material="golden apple"/>
+    </spawner>
+</spawners>
+<control-points required="false" capture-rule="lead" capture-time="5s" points="1" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
+    <control-point name="Hill A" capture="capture-a" progress="capture-a" captured="signal-a"/>
+    <control-point name="Hill B" capture="capture-b" progress="capture-b" captured="signal-b"/>
+    <control-point name="Hill C" capture="capture-c" progress="capture-c" captured="signal-c"/>
+</control-points>
+<score>
+    <limit>750</limit>
+</score>
+<!-- Disables fall damage when using jump pads, reenables it after landing -->
+<kits>
+    <kit id="yeeted">
+        <action scope="player">
+            <set var="fall_variable" value="1"/>
+        </action>
+    </kit>
+    <give>
+        <!-- Reset the variable to 0 only after a player is definitely not on the jump pad, and is more certainly grounded. If we do not time this, the variable can reset before the player has velocity applied in the jump pad region. -->
+        <filter>
+            <all>
+                <after duration="1s">
+                    <not>
+                        <region id="jump-pads"/>
+                    </not>
+                </after>
+                <after duration="0.2s">
+                    <grounded/>
+                </after>
+            </all>
+        </filter>
+        <kit>
+            <action scope="player">
+                <set var="fall_variable" value="0"/>
+            </action>
+        </kit>
+    </give>
+</kits>
+<variables>
+    <variable id="fall_variable" scope="player" default="0"/>
+</variables>
+<damage>
+    <deny>
+        <all>
+            <cause>fall</cause>
+            <variable var="fall_variable">1</variable>
+        </all>
+    </deny>
+</damage>
+</map>
