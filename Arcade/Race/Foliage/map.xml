@@ -1,7 +1,7 @@
 <map proto="1.4.2">
 <name>Foliage</name>
 <created>2023-01-29</created>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Reach the end first!</objective>
 <gamemode>arcade</gamemode>
 <time>5m</time>
@@ -10,27 +10,28 @@
 </authors>
 <players colors="true" min="1" max="50" show-name-tags="false"/>
 <spawns>
-    <spawn yaw="0" kit="spawn-kit" filter="score-0" region="spawn"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-1" region="spawn-1"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-2" region="spawn-2"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-3" region="spawn-3"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-4" region="spawn-4"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-5" region="spawn-5"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-6" region="spawn-6"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-7" region="spawn-7"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-8" region="spawn-8"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-9" region="spawn-9"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-10" region="spawn-10"/>
-    <spawn yaw="0" kit="spawn-kit" filter="score-11" region="spawn-11"/>
-    <default yaw="0" kit="obs-kit" region="obs-spawn"/>
+    <spawn kit="spawn-kit" filter="score-0" region="spawn"/>
+    <spawn kit="spawn-kit" filter="score-1" region="spawn-1"/>
+    <spawn kit="spawn-kit" filter="score-2" region="spawn-2"/>
+    <spawn kit="spawn-kit" filter="score-3" region="spawn-3"/>
+    <spawn kit="spawn-kit" filter="score-4" region="spawn-4"/>
+    <spawn kit="spawn-kit" filter="score-5" region="spawn-5"/>
+    <spawn kit="spawn-kit" filter="score-6" region="spawn-6"/>
+    <spawn kit="spawn-kit" filter="score-7" region="spawn-7"/>
+    <spawn kit="spawn-kit" filter="score-8" region="spawn-8"/>
+    <spawn kit="spawn-kit" filter="score-9" region="spawn-9"/>
+    <spawn kit="spawn-kit" filter="score-10" region="spawn-10"/>
+    <spawn kit="spawn-kit" filter="score-11" region="spawn-11"/>
+    <default kit="obs-kit" region="obs-spawn"/>
 </spawns>
 <kits>
     <kit id="obs-kit">
         <effect>night vision</effect>
     </kit>
     <kit id="spawn-kit" parent="obs-kit">
-        <effect>invisibility</effect>
         <boots unbreakable="true" locked="true" material="leather boots"/>
+        <effect>invisibility</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <filters>
