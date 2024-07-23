@@ -1,22 +1,20 @@
 <map proto="1.4.2" game="Missile Wars">
 <name>Missile Wars</name>
 <version>1.0.2</version>
-<objective>Destroy your enemies portal!</objective>
-<authors>
-    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Author"/>
-</authors>
-<world>
-    <timeset>10000</timeset>
-</world>
-<contributors>
-    <contributor uuid="55a2e72e-0161-4c85-b191-a0b227ff758a" contribution="Original Map Concept"/>
-</contributors>
+<objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
 <gamemode>arcade</gamemode>
+<authors>
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Author"/> <!-- Fishywishi -->
+</authors>
+<contributors>
+    <contributor uuid="55a2e72e-0161-4c85-b191-a0b227ff758a" contribution="Original map concept"/> <!-- Sethbling -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Testing"/> <!-- _Pear -->
+</contributors>
 <time>8m</time>
 <broadcasts>
     <alert after="1s">You will recieve a random rocket every 10 seconds!</alert>
-    <alert after="3s">Protect your portal at all costs while destroying the enemy team's portal!</alert>
+    <alert after="3s">Protect your portal at all costs while destroying the enemy's portal!</alert>
     <tip after="5s" every="1m">Try riding the missiles by jumping continuously while on them!</tip>
     <tip after="30s" every="1m">Use your Missile Shooter or Fireball to destroy enemy missiles!</tip>
 </broadcasts>
@@ -46,7 +44,7 @@
         <item name="`cMisslie Shooter" material="bow" slot="0">
             <enchantment level="1">arrow fire</enchantment>
         </item>
-        <item material="arrow" amount="1" slot="8"/>
+        <item material="arrow" slot="8"/>
         <helmet material="leather helmet" locked="true" team-color="true"/>
         <chestplate material="leather chestplate" locked="true" team-color="true"/>
         <leggings material="leather leggings" locked="true" team-color="true"/>
@@ -441,15 +439,6 @@
     <variable id="Blue_Missile_Manager" scope="player" default="0" exclusive="7"/>
     <variable id="Red_Missile_Manager" scope="player" default="0" exclusive="7"/>
 </variables>
-<kill-rewards>
-    <kill-reward>
-        <item amount="1" material="golden apple"/>
-        <item material="stained glass" team-color="true" amount="8"/>
-    </kill-reward>
-</kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <damage>
     <deny>
         <cause>fall</cause>
@@ -471,4 +460,16 @@
     <item>redstone torch on</item>
     <item>Iron block</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item material="stained glass" team-color="true" amount="8"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<world>
+    <timeset>10000</timeset>
+</world>
 </map>
