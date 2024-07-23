@@ -1,6 +1,6 @@
 <map proto="1.4.2" game="Missile Wars">
 <name>Missile Wars</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
 <gamemode>arcade</gamemode>
@@ -14,9 +14,9 @@
 <time>8m</time>
 <broadcasts>
     <alert after="1s" every="2m30s">You will receive a random item of varying strength every 10 seconds. Right click the items to spawn a rocket!</alert>
-    <alert after="3s">Protect your portal behind the shield at all costs while destroying the enemy's portal!</alert>
-    <tip after="5s" every="1m30s">Try riding the missiles by jumping continuously while on them!</tip>
-    <tip after="30s" every="1m30s">Use your Missile Shooter or Fireball to destroy enemy missiles!</tip>
+    <alert after="3s">Protect your `dportal`r behind the `fshield`r at all costs while destroying the enemy's portal!</alert>
+    <tip after="6s" every="1m30s">Try riding the missiles by jumping continuously on top of them!</tip>
+    <tip after="30s" every="1m30s">Use your `eMissile Shooter`r or `eAnti-ballistic Missile`r to destroy enemy missiles!</tip>
 </broadcasts>
 <teams>
     <team id="red-team" color="dark red" max="12" max-overfill="20">Red</team>
@@ -41,7 +41,7 @@
 </spawns>
 <kits>
     <kit id="spawn" force="true">
-        <item name="`cMisslie Shooter" material="bow" slot="0">
+        <item name="`Missile Shooter" material="bow" slot="0">
             <enchantment level="1">arrow fire</enchantment>
         </item>
         <item material="arrow" slot="8"/>
@@ -90,7 +90,7 @@
     </kit>
     <!-- Base kits -->
     <kit id="Fireball_Kit" deduct-items="false">
-        <item projectile="Fireball" name="`4`lFireball" material="fireball" lore="`7Right-click to shoot!"/>
+        <item projectile="fireball-missile" name="`4`lAnti-ballistic Missile" material="fireball" lore="`7Right-click to shoot!"/>
     </kit>
     <kit id="red" parents="spawn">
     </kit>
@@ -99,8 +99,8 @@
 </kits>
 <projectiles>
     <projectile
-        id="Fireball"
-        name="Fireball"
+        id="fireball-missile"
+        name="Anti-ballistic Missile"
         projectile="LargeFireball"
         velocity="2"
         damage="8"
@@ -113,17 +113,9 @@
     </destroy-filter>
     </projectile>
 </projectiles>
-<destroyables name="Portal" materials="stained_glass_pane" completion="50%" show-progress="true">
-    <destroyable owner="blue-team">
-        <region>
-            <cuboid min="-23,53,-26" max="24,75,-23"/>
-        </region>
-    </destroyable>
-    <destroyable owner="red-team">
-        <region>
-            <cuboid min="-22,53,70" max="22,74,72"/>
-        </region>
-    </destroyable>
+<destroyables name="Portal" materials="stained glass pane:10" completion="50%" show-progress="true">
+    <destroyable owner="blue-team" region="blue-portal"/>
+    <destroyable owner="red-team" region="red-portal"/>
 </destroyables>
 <structures>
     <!-- Red Missiles -->
@@ -194,6 +186,13 @@
     <consumable id="Missile_Summoner_Blue_Shieldbuster" action="Spawn_Blue_Shieldbuster" on="click" override="true" consume="true"/>
 </consumables>
 <filters>
+    <all id="only-explosion">
+        <material>stained glass pane:10</material>
+        <cause>explosion</cause>
+        <deny>
+            <cause>player</cause>
+        </deny>
+    </all>
     <all id="no-arrows">
         <not>
             <carrying ignore-metadata="true"><item material="arrow"/></carrying>
@@ -214,6 +213,13 @@
         <match-running/>
     </pulse>
 </filters>
+<regions>
+    <union id="portals">
+        <cuboid id="blue-portal" min="-23,52,-26" max="23,74,-24"/>
+        <cuboid id="red-portal" min="-22,52,71" max="22,74,69"/>
+    </union>
+    <apply region="portals" block="only-explosion" message="You can only destroy the portal with explosions!"/>
+</regions>
 <actions>
     <!-- Red Missiles -->
     <action id="Spawn_Red_Tomahawk" scope="player">
@@ -238,7 +244,6 @@
         </action>
         <filter>
             <all>
-                <participating/>
                 <alive/>
                 <team>red-team</team>
                 <variable var="Missile_Manager">1</variable>
@@ -333,7 +338,6 @@
         </action>
         <filter>
             <all>
-                <participating/>
                 <alive/>
                 <team>blue-team</team>
                 <variable var="Missile_Manager">1</variable>
@@ -442,31 +446,37 @@
     </deny>
 </damage>
 <itemremove>
-    <item>Leather helmet</item>
-    <item>Leather chestplate</item>
-    <item>Leather leggings</item>
-    <item>Leather boots</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
     <item>golden apple</item>
     <item>arrow</item>
     <item>bow</item>
     <item>stained glass</item>
+    <item>stained clay</item>
     <item>firework</item>
     <item>iron ingot</item>
     <item>clay brick</item>
     <item>clay ball</item>
     <item>redstone torch on</item>
-    <item>Iron block</item>
+    <item>iron block</item>
+    <item>slime block</item>
+    <item>piston base</item>
+    <item>piston sticky base</item>
+    <item>redstone wire</item>
+    <item>redstone block</item>
 </itemremove>
 <kill-rewards>
     <kill-reward>
         <item material="golden apple"/>
-        <item material="stained glass" team-color="true" amount="8"/>
+        <item amount="8" team-color="true" material="stained glass"/>
     </kill-reward>
 </kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
 <world>
-    <timeset>10000</timeset>
+    <timeset>12000</timeset>
 </world>
 </map>
