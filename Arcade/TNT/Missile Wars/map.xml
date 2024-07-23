@@ -1,6 +1,6 @@
 <map proto="1.4.2" game="Missile Wars">
 <name>Missile Wars</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
 <gamemode>arcade</gamemode>
@@ -13,10 +13,10 @@
 </contributors>
 <time>8m</time>
 <broadcasts>
-    <alert after="1s">You will recieve a random rocket every 10 seconds!</alert>
-    <alert after="3s">Protect your portal at all costs while destroying the enemy's portal!</alert>
-    <tip after="5s" every="1m">Try riding the missiles by jumping continuously while on them!</tip>
-    <tip after="30s" every="1m">Use your Missile Shooter or Fireball to destroy enemy missiles!</tip>
+    <alert after="1s" every="2m30s">You will receive a random item of varying strength every 10 seconds. Right click the items to spawn a rocket!</alert>
+    <alert after="3s">Protect your portal behind the shield at all costs while destroying the enemy's portal!</alert>
+    <tip after="5s" every="1m30s">Try riding the missiles by jumping continuously while on them!</tip>
+    <tip after="30s" every="1m30s">Use your Missile Shooter or Fireball to destroy enemy missiles!</tip>
 </broadcasts>
 <teams>
     <team id="red-team" color="dark red" max="12" max-overfill="20">Red</team>
@@ -49,7 +49,7 @@
         <chestplate material="leather chestplate" locked="true" team-color="true"/>
         <leggings material="leather leggings" locked="true" team-color="true"/>
         <boots material="leather boots" locked="true" team-color="true"/>
-        <item material="stained glass" team-color="true" amount="32"/>
+        <item material="stained glass" team-color="true" amount="16"/>
     </kit>
     <kit id="arrow-kit">
         <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true"/>
@@ -58,39 +58,39 @@
         </action>
     </kit>
     <kit id="Red_Tomahawk_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Tomahawk" material="firework" name="`cTomahawk Missile"/>
+        <item consumable="Missile_Summoner_Red_Tomahawk" material="firework" name="`cTomahawk Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Red_Juggernaut_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Juggernaut" material="clay brick" name="`cJuggernaut Missile"/>
+        <item consumable="Missile_Summoner_Red_Juggernaut" material="clay brick" name="`cJuggernaut Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Red_Guardian_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Guardian" material="iron ingot" name="`cGuardian Missile"/>
+        <item consumable="Missile_Summoner_Red_Guardian" material="iron ingot" name="`cGuardian Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Red_Lightning_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Lightning" material="redstone torch on" name="`cLightning Missile"/>
+        <item consumable="Missile_Summoner_Red_Lightning" material="redstone torch on" name="`cLightning Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Red_Shieldbuster_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Shieldbuster" material="clay ball" name="`cShieldbuster Missile"/>
+        <item consumable="Missile_Summoner_Red_Shieldbuster" material="clay ball" name="`cShieldbuster Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <!-- Blue Kits -->
     <kit id="Blue_Tomahawk_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Tomahawk" material="firework" name="`9Tomahawk Missile"/>
+        <item consumable="Missile_Summoner_Blue_Tomahawk" material="firework" name="`9Tomahawk Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Blue_Juggernaut_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Juggernaut" material="clay brick" name="`9Juggernaut Missile"/>
+        <item consumable="Missile_Summoner_Blue_Juggernaut" material="clay brick" name="`9Juggernaut Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Blue_Guardian_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Guardian" material="iron ingot" name="`9Guardian Missile"/>
+        <item consumable="Missile_Summoner_Blue_Guardian" material="iron ingot" name="`9Guardian Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Blue_Lightning_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Lightning" material="redstone torch on" name="`9Lightning Missile"/>
+        <item consumable="Missile_Summoner_Blue_Lightning" material="redstone torch on" name="`9Lightning Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <kit id="Blue_Shieldbuster_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Shieldbuster" material="clay ball" name="`9Shieldbuster Missile"/>
+        <item consumable="Missile_Summoner_Blue_Shieldbuster" material="clay ball" name="`9Shieldbuster Missile" lore="`7Right-click to deploy!"/>
     </kit>
     <!-- Base kits -->
      <kit id="Fireball_Kit" deduct-items="false">
-        <item projectile="Fireball" name="`4`lFireball" material="fireball"/>
+        <item projectile="Fireball" name="`4`lFireball" material="fireball" lore="`7Right-click to shoot!"/>
      </kit>
     <kit id="red" parents="spawn">
     </kit>
@@ -326,7 +326,6 @@
     <action id="Spawn_Blue_Shieldbuster" scope="player">
         <paste-structure x="x" y="y-8" z="z+5" structure="Blue_Shieldbuster"/>
     </action>
-
     <trigger scope="player">
         <action>
             <set var="Blue_Missile_Manager" value="0"/>
