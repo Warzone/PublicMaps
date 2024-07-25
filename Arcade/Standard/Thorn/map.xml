@@ -1,0 +1,110 @@
+<map proto="1.4.2" game="Spleef">
+<name>Thorn</name>
+<created>2024-07-23</created>
+<version>1.0.0</version>
+<objective>Use your bow to spleef the enemy team!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<authors>
+    <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516"/> <!-- Preinstalled -->
+</authors>
+<contributors>
+    <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="XML"/> <!-- Wesdial -->
+</contributors>
+<teams>
+    <team id="blue" color="blue" max="5">Blue</team>
+    <team id="red" color="dark red" max="5">Red</team>
+</teams>
+<time>3m</time>
+<broadcasts>
+    <alert after="1s">You will recieve your bow in 5 seconds.</alert>
+    <alert after="3s">Don't spleef your teammates.</alert>
+    <alert after="5s">You have recieved your bow!</alert>
+    <alert after="6s">World Border closes in 2 minutes. Good luck!</alert>
+</broadcasts>
+<kits>
+    <kit id="main-kit" force="true">
+        <item slot="9" locked="true" material="arrow"/>
+        <helmet unbreakable="true" locked="true" team-color="true" material="stained glass"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+        <effect>night_vision</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="blue-kit" parents="main-kit">
+        <item slot="1" unbreakable="true" damage="4" material="ink sack"/> <!-- (team-color="true") doesn't work for "ink sack" for some reason -->
+        <item slot="2" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="3" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="4" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="5" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="6" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="7" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="8" unbreakable="true" damage="4" material="ink sack"/>
+    </kit>
+    <kit id="red-kit" parents="main-kit">
+        <item slot="1" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="2" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="3" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="4" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="5" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="6" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="7" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="8" unbreakable="true" damage="1" material="ink sack"/>
+    </kit>
+    <kit id="Flame Bow" parents="main-kit">
+        <item name="`aFlame Bow" locked="true" unbreakable="true" material="bow">
+            <enchantment level="1">flame</enchantment>
+            <enchantment level="1">infinity</enchantment>
+        </item>
+    </kit>
+</kits>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<filters>
+    <all id="await-5s">
+        <time>5s</time>
+        <participating/>
+    </all>
+</filters>
+<actions>
+    <trigger scope="player" filter="await-5s">
+        <action>
+            <kit id="Flame Bow"/>
+        </action>
+    </trigger>
+</actions>
+<spawns>
+    <spawn team="blue" kit="blue-kit" yaw="180">
+        <region>
+            <point>10.5,30,88.5</point>
+        </region>
+    </spawn>
+    <spawn team="red" kit="red-kit">
+        <region>
+            <point>10.5,30,58.5</point>
+        </region>
+    </spawn>
+    <default>
+        <regions yaw="-180">
+            <point>10.5,47,73.5</point>
+        </regions>
+    </default>
+</spawns>
+<world-borders center="10.5,73.5">
+    <world-border size="128"/>
+    <world-border size="5" after="0s" duration="120s" damage="100" buffer="0"/>
+</world-borders>
+<itemremove>
+    <item>ink sack</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>entity attack</damage>
+    <damage>fall</damage>
+    <damage>projectile</damage>
+</disabledamage>
+</map>
