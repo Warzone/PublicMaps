@@ -1,0 +1,104 @@
+<map proto="1.4.2" game="Blitz: Sumo">
+<name>Sumo Duels</name>
+<created>2024-07-25</created>
+<version>1.0.0</version>
+<objective>Be the last team standing by throwing everyone off the platform!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>blitz</gamemode>
+<!-- Authors & Contributors -->
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="d3309d83-b135-4198-aa01-7b75f2cda8b4" contribution="Trees"/> <!-- MrWizz -->
+</contributors>
+<broadcasts>
+    <alert after="3s">You will be released in `c5 seconds`7!</alert>
+    <alert after="4s">You will be released in `c4 seconds`7!</alert>
+    <alert after="5s">You will be released in `c3 seconds`7!</alert>
+    <alert after="6s">You will be released in `c2 seconds`7!</alert>
+    <alert after="7s">You will be released in `c1 second`7!</alert>
+    <alert after="8s">---- `a`lGO! `r-----</alert>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="red" color="dark red" min="1" max="2">Red</team>
+    <team id="blue" color="blue" min="1" max="2">Blue</team>
+</teams>
+<!-- Time Limit & Lives -->
+<time>5m</time>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<!-- Kits -->
+<kits>
+    <!-- Red Kit -->
+    <kit id="red-kit">
+        <game-mode>adventure</game-mode>
+        <item slot="0" name="`cSUMO WEAPON" damage="1" material="ink sack"/>
+        <helmet unbreakable="true" locked="true" color="B02E26" material="leather helmet"/>
+        <effect duration="oo" amplifier="2">instant_health</effect>
+    </kit>
+    <!-- Blue Kit -->
+    <kit id="blue-kit">
+        <game-mode>adventure</game-mode>
+        <item slot="0" name="`9SUMO WEAPON" damage="4" material="ink sack"/>
+        <helmet unbreakable="true" locked="true" color="3C44AA" material="leather helmet"/>
+        <effect duration="oo" amplifier="2">instant_health</effect>
+    </kit>
+    <!-- Void Kit -->
+    <kit id="void-death" force="true">
+        <clear items="false" armor="false" effects="true"/>
+        <health>1</health>
+        <effect duration="1" amplifier="10">instant_damage</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <!-- Red Team -->
+    <spawn team="red" kit="red-kit">
+        <regions>
+            <point>6.5,23,-4.5</point>
+        </regions>
+    </spawn>
+    <!-- Blue Team -->
+    <spawn team="blue" kit="blue-kit">
+        <regions yaw="-180">
+            <point>6.5,23,7.5</point>
+        </regions>
+    </spawn>
+    <!-- Obs (Spectators) Team -->
+    <default>
+        <regions yaw="-90">
+            <point>6.5,23,1.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <below id="void" y="0"/>
+    <union id="cages">
+        <cuboid id="blue-cage" min="4,22,8" max="8,26,5"/>
+        <cuboid id="red-cage" min="8,22,-6" max="5,26,-3"/>
+    </union>
+    <apply region="void" kit="void-death"/>
+</regions>
+<destroyables show="false" required="false">
+    <!-- Gates will eventually be phased out in favour of structures -->
+    <destroyable region="cages" id="warmup-cages" name="warmupcages" owner="blue" materials="barrier" modes="warmup-cages-mode"/>
+</destroyables>
+<modes>
+    <mode after="8s" show-before="8s" id="warmup-cages-mode" name="Players will be released" material="air"/>
+</modes>
+<!-- Itemremove -->
+<itemremove>
+    <item>ink sack</item>
+    <item>leather helmet</item>
+</itemremove>
+<!-- Miscellaneous -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>
