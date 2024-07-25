@@ -2,20 +2,23 @@
 <!-- Infection gamemode include file -->
 <!-- Created by Cazadorian -->
 <!-- Modified by zzuf -->
-<!-- Version 2024-06-23-1 -->
+<!-- Version 2024-07-21-1 -->
 <constants>
     <constant id="time-limit">8</constant> <!-- Time limit in minutes -->
+    <constant id="compass-distribution-time">7</constant> <!-- The time limit in minutes minus 1 -->
     <constant id="zombie-team-name">Zombies</constant>
     <constant id="human-team-name">Humans</constant>
     <constant id="zombie-team-color">dark green</constant>
     <constant id="human-team-color">gold</constant>
     <constant id="disabled-damage">fall</constant>
+    <constant id="enable-player-tracker">always</constant> <!-- Maps can opt out by using 'never' or customize by setting their own filter ID -->
 </constants>
 <objective>${human-team-name} must survive against the ${zombie-team-name} for ${time-limit} minutes!</objective>
 <gamemode>infection</gamemode>
 <broadcasts>
     <tip after="4s" filter="only-humans">You are a ${human-team-name}, you must survive for as long as possible against the waves of ${zombie-team-name}. If you die, you join the ${zombie-team-name}!</tip>
     <tip after="4s" filter="only-zombies">You are a ${zombie-team-name}, you must kill all of the ${human-team-name} to win!</tip>
+    <alert after="${compass-distribution-time}m" filter="${enable-player-tracker}">${zombie-team-name} can now `etrack`r the nearest ${human-team-name} with a compass!</alert>
 </broadcasts>
 <teams>
     <team id="zombie-team" color="${zombie-team-color}" plural="true" min="1" max="4">${zombie-team-name}</team>
@@ -50,12 +53,9 @@
     <kit id="zombie-switch-kit" force="true">
         <team-switch team="zombie-team"/>
     </kit>
-    <kit id="zombie-compass-kit">
-        <item prevent-sharing="true" material="compass"/>
-    </kit>
 </kits>
 <compass show-distance="true">
-    <player filter="only-humans" name="Closest ${human-team-name}"/>
+    <player filter="only-humans" name="`eClosest ${human-team-name}"/>
 </compass>
 <filters>
     <team id="only-humans">human-team</team>
@@ -67,6 +67,28 @@
 <regions>
     <apply block="deny-participating"/>
 </regions>
+<actions>
+    <trigger scope="player">
+        <action>
+            <kit>
+                <item prevent-sharing="true" material="compass"/>
+            </kit>
+        </action>
+        <filter>
+            <all>
+                <filter id="${enable-player-tracker}"/>
+                <filter id="only-zombies"/>
+                <time>${compass-distribution-time}m</time>
+                <alive/>
+                <not>
+                    <carrying>
+                        <item prevent-sharing="true" material="compass"/> <!-- Return compass after death or dropping -->
+                    </carrying>
+                </not>
+            </all>
+        </filter>
+   </trigger>
+</actions>
 <itemremove>
     <item>arrow</item>
     <item>leather helmet</item>
