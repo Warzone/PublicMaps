@@ -1,7 +1,7 @@
 <map proto="1.4.2" game="Missile Wars">
 <name>Missile Wars</name>
 <created>2024-07-22</created>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
 <gamemode>arcade</gamemode>
@@ -34,82 +34,88 @@
             <cuboid min="-26,78,-19" max="27,78,-19"/>
         </region>
     </spawn>
-    <default yaw="90">
+    <default yaw="90" kit="obs-kit">
         <region>
-            <point>50,97,23</point>
+            <point>50.5,96,24.5</point>
         </region>
     </default>
 </spawns>
 <kits>
-    <kit id="spawn" force="true">
-        <item name="`cMissile Shooter" material="bow" slot="0">
+    <kit id="spawn-kit" force="true" parents="obs-kit">
+        <item name="`cMissile Shooter" material="bow" slot="0" lore="`eTake down the missiles!" show-enchantments="false" unbreakable="true">
             <enchantment level="1">arrow fire</enchantment>
         </item>
         <item material="arrow" slot="8"/>
-        <helmet material="leather helmet" locked="true" team-color="true"/>
-        <chestplate material="leather chestplate" locked="true" team-color="true"/>
-        <leggings material="leather leggings" locked="true" team-color="true"/>
-        <boots material="leather boots" locked="true" team-color="true"/>
+        <helmet material="leather helmet" locked="true" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" locked="true" team-color="true" unbreakable="true"/>
+        <leggings material="leather leggings" locked="true" team-color="true" unbreakable="true"/>
+        <boots material="leather boots" locked="true" team-color="true" unbreakable="true"/>
         <item material="stained glass" team-color="true" amount="16"/>
     </kit>
     <kit id="arrow-kit">
-        <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true"/>
+        <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3 seconds `7after shooting!" prevent-sharing="true"/>
         <action>
             <message actionbar="`a`lARROW READY!"/>
         </action>
     </kit>
     <kit id="Red_Tomahawk_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Tomahawk" material="firework" name="`cTomahawk Missile"/>
+        <item consumable="Missile_Summoner_Red_Tomahawk" material="firework" name="`cTomahawk Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Red_Juggernaut_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Juggernaut" material="clay brick" name="`cJuggernaut Missile"/>
+        <item consumable="Missile_Summoner_Red_Juggernaut" material="clay brick" name="`cJuggernaut Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Red_Guardian_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Guardian" material="iron ingot" name="`cGuardian Missile"/>
+        <item consumable="Missile_Summoner_Red_Guardian" material="iron ingot" name="`cGuardian Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Red_Lightning_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Lightning" material="redstone torch on" name="`cLightning Missile"/>
+        <item consumable="Missile_Summoner_Red_Lightning" material="redstone torch on" name="`cLightning Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Red_Shieldbuster_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Red_Shieldbuster" material="clay ball" name="`cShieldbuster Missile"/>
+        <item consumable="Missile_Summoner_Red_Shieldbuster" material="clay ball" name="`cShieldbuster Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <!-- Blue Kits -->
     <kit id="Blue_Tomahawk_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Tomahawk" material="firework" name="`9Tomahawk Missile"/>
+        <item consumable="Missile_Summoner_Blue_Tomahawk" material="firework" name="`9Tomahawk Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Blue_Juggernaut_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Juggernaut" material="clay brick" name="`9Juggernaut Missile"/>
+        <item consumable="Missile_Summoner_Blue_Juggernaut" material="clay brick" name="`9Juggernaut Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Blue_Guardian_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Guardian" material="iron ingot" name="`9Guardian Missile"/>
+        <item consumable="Missile_Summoner_Blue_Guardian" material="iron ingot" name="`9Guardian Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Blue_Lightning_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Lightning" material="redstone torch on" name="`9Lightning Missile"/>
+        <item consumable="Missile_Summoner_Blue_Lightning" material="redstone torch on" name="`9Lightning Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Blue_Shieldbuster_Kit" deduct-items="false">
-        <item consumable="Missile_Summoner_Blue_Shieldbuster" material="clay ball" name="`9Shieldbuster Missile"/>
+        <item consumable="Missile_Summoner_Blue_Shieldbuster" material="clay ball" name="`9Shieldbuster Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <!-- Base kits -->
     <kit id="Fireball_Kit" deduct-items="false">
-        <item projectile="fireball-missile" name="`4`lAnti-ballistic Missile" material="fireball"/>
+        <item projectile="fireball-missile" name="`4`lAnti-ballistic Missile" material="fireball" lore="`eRight click to shoot!"/>
     </kit>
-    <kit id="red" parents="spawn">
+    <kit id="red" parents="spawn-kit">
     </kit>
-    <kit id="blue" parents="spawn">
+    <kit id="blue" parents="spawn-kit">
+    </kit>
+    <kit id="obs-kit">
+        <potion>night vision</potion>
     </kit>
 </kits>
 <projectiles>
     <projectile
         id="fireball-missile"
         name="Anti-ballistic Missile"
-        projectile="LargeFireball"
+        projectile="Fireball"
         velocity="2"
         damage="8"
         precise="true"
-    > 
+    >
     <destroy-filter>
         <not>
-            <material>barrier</material>
+            <any>
+                <material>obsidian</material>
+                <material>tnt</material>
+            </any>
         </not>
     </destroy-filter>
     </projectile>
@@ -211,14 +217,27 @@
     </all>
     <after id="arrow-regen" duration="3.0s" filter="no-arrows"/>
     <pulse id="Distribute-Items" period="10s" duration="5s">
-        <match-running/>
+        <all>
+            <match-running/>
+            <participating/>
+        </all>
     </pulse>
+    <all id="blue-alive">
+        <alive/>
+        <team>blue-team</team>
+    </all>
+    <all id="red-alive">
+        <alive/>
+        <team>red-team</team>
+    </all>
 </filters>
 <regions>
+    <cuboid id="obs-spawn-region" min="42,92,31" max="58,102,16"/>
     <union id="portals">
         <cuboid id="blue-portal" min="-23,52,-26" max="23,74,-24"/>
         <cuboid id="red-portal" min="-22,52,71" max="22,74,69"/>
     </union>
+    <apply region="obs-spawn-region" block="never"/>
     <apply region="portals" block="only-explosion" message="You can only destroy the portal with explosions!"/>
 </regions>
 <actions>
@@ -245,8 +264,8 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">1</variable>
             </all>
         </filter>
@@ -258,8 +277,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">2</variable>
             </all>
         </filter>
@@ -271,8 +289,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">3</variable>
             </all>
         </filter>
@@ -284,8 +301,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">4</variable>
             </all>
         </filter>
@@ -297,8 +313,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">5</variable>
             </all>
         </filter>
@@ -310,8 +325,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>red-team</team>
+                <filter id="red-alive"/>
                 <variable var="Missile_Manager">6</variable>
             </all>
         </filter>
@@ -339,8 +353,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">1</variable>
             </all>
         </filter>
@@ -352,8 +365,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">2</variable>
             </all>
         </filter>
@@ -365,8 +377,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">3</variable>
             </all>
         </filter>
@@ -378,8 +389,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">4</variable>
             </all>
         </filter>
@@ -391,8 +401,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">5</variable>
             </all>
         </filter>
@@ -404,8 +413,7 @@
         </action>
         <filter>
             <all>
-                <alive/>
-                <team>blue-team</team>
+                <filter id="blue-alive"/>
                 <variable var="Missile_Manager">6</variable>
             </all>
         </filter>
@@ -439,7 +447,7 @@
     <player-location id="x" component="x"/>
     <player-location id="y" component="y"/>
     <player-location id="z" component="z"/>
-    <variable id="Missile_Manager" scope="player" default="0" exclusive="7"/>
+    <variable id="Missile_Manager" scope="player" default="0"/>
 </variables>
 <damage>
     <deny>
@@ -478,6 +486,6 @@
     <depletion>off</depletion>
 </hunger>
 <world>
-    <timeset>12000</timeset>
+    <timeset>18000</timeset>
 </world>
 </map>
