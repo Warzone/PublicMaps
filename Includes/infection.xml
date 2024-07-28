@@ -2,7 +2,7 @@
 <!-- Infection gamemode include file -->
 <!-- Created by Cazadorian -->
 <!-- Modified by zzuf -->
-<!-- Version 2024-07-21-1 -->
+<!-- Version 2024-07-27-1 -->
 <constants>
     <constant id="time-limit">8</constant> <!-- Time limit in minutes -->
     <constant id="compass-distribution-time">7</constant> <!-- The time limit in minutes minus 1 -->
@@ -65,6 +65,7 @@
     <deny id="deny-participating">
         <participating/>
     </deny>
+    <alive id="alive"/>
 </filters>
 <regions>
     <apply block="deny-participating"/>
@@ -81,7 +82,7 @@
                 <filter id="${enable-player-tracker}"/>
                 <filter id="only-zombies"/>
                 <time>${compass-distribution-time}m</time>
-                <alive/>
+                <filter id="alive"/>
                 <not>
                     <carrying>
                         <item prevent-sharing="true" material="compass"/> <!-- Return compass after death or dropping -->
