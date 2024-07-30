@@ -1,7 +1,7 @@
 <map proto="1.4.2" game="Blitz: Sumo">
 <name>Sumo Duels</name>
 <created>2024-07-25</created>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Be the last team standing by throwing everyone off the platform!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -22,8 +22,8 @@
 </broadcasts>
 <!-- Teams -->
 <teams>
-    <team id="red" color="dark red" min="1" max="2">Red</team>
-    <team id="blue" color="blue" min="1" max="2">Blue</team>
+    <team id="red" color="dark red" min="1" max="1" max-overfill="1">Red</team>
+    <team id="blue" color="blue" min="1" max="1" max-overfill="1">Blue</team>
 </teams>
 <!-- Time Limit & Lives -->
 <time>5m</time>
@@ -32,19 +32,19 @@
 </blitz>
 <!-- Kits -->
 <kits>
-    <!-- Red Kit -->
-    <kit id="red-kit">
+    <kit id="base-kit">
         <game-mode>adventure</game-mode>
+        <effect amplifier="2">instant_health</effect>
+    </kit>
+    <!-- Red Kit -->
+    <kit id="red-kit" parents="base-kit">
         <item slot="0" name="`cSUMO WEAPON" damage="1" material="ink sack"/>
         <helmet unbreakable="true" locked="true" color="B02E26" material="leather helmet"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <!-- Blue Kit -->
-    <kit id="blue-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="blue-kit" parents="base-kit">
         <item slot="0" name="`9SUMO WEAPON" damage="4" material="ink sack"/>
         <helmet unbreakable="true" locked="true" color="3C44AA" material="leather helmet"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <!-- Void Kit -->
     <kit id="void-death" force="true">
