@@ -1,150 +1,63 @@
-<map proto="1.4.0" game="Infection">
+<map proto="1.4.2">
+<include id="infection"/>
 <name>Pier 2</name>
-<version>2.0.1</version>
-<objective>Try not to get killed by the infected. Humans win by default after the timer ends.</objective>
-<gamemode>arcade</gamemode>
+<version>2.1.0</version>
+<created>2018-12-25</created>
+<constants>
+    <constant id="time-limit">7</constant>
+    <constant id="compass-distribution-time">6</constant>
+    <constant id="zombie-team-color">green</constant>
+    <constant id="human-team-color">blue</constant>
+</constants>
 <authors>
     <author uuid="fa28ac5f-6a4c-414f-8bcd-b5f2a93470a5"/> <!-- JackJack33 -->
     <author uuid="42195cb9-b21b-42f5-b938-5ef46f303fcd"/> <!-- _Bill -->
     <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
 </authors>
-<teams>
-    <team id="human-team"    color="blue"  show-name-tags="allies" plural="true" min="3" max="50" max-overfill="50">Humans</team>
-    <team id="infected-team" color="green" show-name-tags="allies" plural="true" min="1" max="5" max-overfill="5">Infected</team>
-</teams>
-<time result="human-team">7m</time>
-<respawn auto="true"/>
+<broadcasts>
+    <alert after="2s">The ${zombie-team-name} will be released in `c8 seconds`r!</alert>
+    <tip after="20s" every="2m">${zombie-team-name} are able to `edouble-jump`r every 5 seconds.</tip>
+    <alert after="10s">The ${zombie-team-name} has been `creleased`r!</alert>
+</broadcasts>
 <kits>
-    <kit id="infected-switch-kit" force="true">
-        <team-switch team="infected-team"/>
+    <kit id="zombie-spawn-kit" parent="default-zombie-kit" force="true">
+        <double-jump recharge-time="5s" power="2" recharge-before-landing="true"/>
     </kit>
-    <kit id="infected-kit">
-        <helmet locked="true" unbreakable="true" color="00FF00" material="leather helmet"/>
-        <chestplate locked="true" unbreakable="true" color="00FF00" material="leather chestplate"/>
-        <leggings locked="true" unbreakable="true" color="00FF00" material="leather leggings"/>
-        <boots locked="true" unbreakable="true" color="00FF00" material="leather boots"/>
-        <item slot="0" unbreakable="true" material="iron sword" name="`2`lInfection Sword"/>
-        <item slot="1" unbreakable="true" material="bow" name="`2`lInfection Bow"/>
-        <item slot="28" material="arrow" amount="64"/>
-        <effect duration="oo" amplifier="2">jump</effect>
-        <effect duration="5" amplifier="1">increase damage</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="infected-kit-start">
-        <helmet locked="true" unbreakable="true" color="00FF00" material="leather helmet"/>
-        <chestplate locked="true" unbreakable="true" color="00FF00" material="leather chestplate"/>
-        <leggings locked="true" unbreakable="true" color="00FF00" material="leather leggings"/>
-        <boots locked="true" unbreakable="true" color="00FF00" material="leather boots"/>
-        <item slot="0" unbreakable="true" material="iron sword" name="`2`lInfection Sword"/>
-        <item slot="1" unbreakable="true" material="bow" name="`2`lInfection Bow"/>
-        <item slot="28" material="arrow" amount="64"/>
-        <effect duration="10" amplifier="1000">weakness</effect>
-        <effect duration="10" amplifier="1000">slow</effect>
-        <effect duration="10" amplifier="129">jump</effect>
-        <effect duration="10" amplifier="1">blindness</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="human-kit">
-        <helmet locked="true" unbreakable="true" color="0000FF" material="leather helmet"/>
-        <chestplate locked="true" unbreakable="true" color="0000FF" material="leather chestplate"/>
-        <leggings locked="true" unbreakable="true" color="0000FF" material="leather leggings"/>
-        <boots locked="true" unbreakable="true" color="0000FF" material="leather boots"/>
-        <item slot="0" unbreakable="true" material="iron sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="28" material="arrow" amount="64"/>
-        <game-mode>adventure</game-mode>
-    </kit>
+    <lend filter="all(alive,not(after-release),only-zombies)">
+        <kit>
+            <effect amplifier="255">weakness</effect>
+            <effect amplifier="255">slow</effect>
+            <effect>blindness</effect>
+        </kit>
+    </lend>
 </kits>
 <spawns>
-    <spawn filter="before-10s" team="infected-team" kit="infected-kit-start">
-        <regions yaw="-90">
-            <point>69.5,16,398.5</point>
-        </regions>
-    </spawn>
-    <spawn filter="before-10s" team="human-team" kit="human-kit">
-        <regions yaw="90">
-            <point>199.5,7,420.5</point>
-        </regions>
-    </spawn>
-    <spawn filter="after-10s" team="infected-team" kit="infected-kit">
-        <regions yaw="-90">
-            <point>69.5,16,398.5</point>
-        </regions>
-    </spawn>
-    <spawn filter="after-10s" team="human-team" kit="infected-switch-kit">
-        <region yaw="90">
-            <point>199.5,7,420.5</point>
-        </region>
-    </spawn>
-    <default>
-        <regions yaw="90">
-            <point>222.5,31,398.5</point>
-        </regions>
-    </default>
+    <default region="obs-spawn" yaw="90"/>
+    <!-- Human Spawns -->
+    <spawn filter="before-release" team="human-team" kit="default-human-kit" region="human-spawn" yaw="90"/>
+    <spawn filter="after-release" team="human-team" kit="zombie-switch-kit" region="human-spawn" yaw="90"/>
+    <!-- Zombie Spawns -->
+    <spawn team="zombie-team" kit="zombie-spawn-kit" region="zombie-spawn" yaw="-90"/>
 </spawns>
-<broadcasts>
-    <alert after="1s">The infected will be released after 10 seconds!</alert>
-    <alert after="10s">The infected have been released!</alert>
-    <tip after="3s" filter="only-humans">You are a Human, You must survive for as long as possible against the infected. If you die, you will become part of the Infected!</tip>
-    <tip after="3s" filter="only-infected">You are Infected, You must kill all of the Humans to win!</tip>
-</broadcasts>
-<damage>
-    <deny>
-        <attacker>
-            <filter id="before-10s"/>
-        </attacker>
-    </deny>
-    <deny>
-        <all>
-            <cause>fall</cause>
-            <team>infected-team</team>
-        </all>
-    </deny>
-</damage>
 <filters>
-    <team id="only-humans">human-team</team>
-    <team id="only-infected">infected-team</team>
-    <not id="before-10s">
-        <time id="after-10s">11s</time>
-    </not>
-    <not id="deny-void">
-        <void/>
-    </not>
-    <not id="deny-ender-chest">
-        <material>ender chest</material>
+    <not id="after-release">
+        <countdown id="before-release" duration="10" message="${zombie-team-name} will be released in {0}">
+            <match-running/>
+        </countdown>
     </not>
 </filters>
-<control-points>
-    <control-point id="win-point" name="Infected Win!" required="true" capture-time="10s" show-progress="true">
-        <capture>
-            <everywhere/>
-        </capture>
-    </control-point>
-</control-points>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>arrow</item>
-</itemremove>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<regions>
+    <point id="obs-spawn">222.5,31,398.5</point>
+    <point id="human-spawn">199.5,7,420.5</point>
+    <point id="zombie-spawn">69.5,16,398.5</point>
+    <cuboid id="zombie-cage" min="71,16,397" size="-3,3,3"/>
+    <apply region="zombie-cage" leave="all(only-zombies,after-release)"/>
+</regions>
 <kill-rewards>
-    <kill-reward>
-        <kit>
+    <kill-reward filter="only-humans">
+        <kit id="human-kill-reward">
             <effect duration="5" amplifier="2">regeneration</effect>
         </kit>
-        <filter>
-            <all>
-                <team>human-team</team>
-                <kill-streak count="1" repeat="true"/>
-            </all>
-        </filter>
     </kill-reward>
 </kill-rewards>
-<timelock>on</timelock>
 </map>
