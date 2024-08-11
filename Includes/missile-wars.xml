@@ -1,4 +1,5 @@
 <!-- Created by Fishywishi -->
+<!-- Version 1.0.0 -->
 <map proto="1.4.2" game="Missile Wars">
 <objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
@@ -25,6 +26,19 @@
     <team id="team_two" color="${team_two-color}" max="${max-player-limit}">${team_two-name}</team>
 </teams>
 <kits>
+    <kit id="default-kit">
+        <item name="`cMissile Shooter" material="bow" slot="0" lore="`eTake down the missiles!" show-enchantments="true" unbreakable="true">
+            <enchantment level="1">arrow fire</enchantment>
+            <enchantment level="2">damage all</enchantment>
+        </item>
+        <item material="arrow" slot="8"/>
+        <helmet material="stained glass" locked="true" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" locked="true" team-color="true" unbreakable="true"/>
+        <leggings material="leather leggings" locked="true" team-color="true" unbreakable="true"/>
+        <boots material="leather boots" locked="true" team-color="true" unbreakable="true"/>
+        <item material="stained glass" team-color="true" amount="16"/>
+        <potion>night vision</potion>
+    </kit>
     <kit id="arrow-kit">
         <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f${arrow-regen} seconds `7after shooting!" prevent-sharing="true"/>
         <action>
