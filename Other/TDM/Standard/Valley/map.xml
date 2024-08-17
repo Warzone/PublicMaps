@@ -1,0 +1,92 @@
+<map proto="1.4.2">
+<name>Valley</name>
+<version>1.0.0</version>
+<objective>Get the most points by killing and scoring!</objective>
+<gamemode>tdm</gamemode>
+<gamemode>scorebox</gamemode>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+    <author uuid="ba234137-6078-452c-8d84-e046e0bb9334"/> <!-- Jxcob -->
+</authors>
+<teams>
+    <team id="red-team" color="dark red" max="4">Red</team>
+    <team id="yellow-team" color="yellow" max="4">Yellow</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="8" material="cooked fish"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="8" amount="8" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="255">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
+<spawns>
+    <spawns kit="spawn-kit">
+        <spawn team="red-team" region="red-spawn" yaw="90"/>
+        <spawn team="yellow-team" region="yellow-spawn" yaw="-90"/>
+    </spawns>
+    <default>
+        <regions>
+            <point>0.5,6,0.5</point>
+        </regions>
+    </default>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-yellow">yellow-team</team>
+</filters>
+<regions>
+    <union id="spawns">
+        <point id="red-spawn">56.5,11,0.5</point>
+        <point id="yellow-spawn">-55.5,11,0.5</point>
+        <cuboid id="red-spawn-protection" min="46,11,-2" max="47,17,2"/>
+        <cuboid id="yellow-spawn-protection" min="-45,11,2" max="-47,17,-2"/>
+    </union>
+    <union id="scoreboxes">
+        <cuboid id="red-scorebox" min="43,6,-2" max="40,9,2"/> <!-- red side -->
+        <cuboid id="yellow-scorebox" min="-43,6,2" max="-40,9,-2"/> <!-- yellow side -->
+    </union>
+    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy's spawn!"/>
+    <apply region="yellow-spawn-protection" enter="only-yellow" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-scorebox" enter="only-yellow" message="You may not enter your own scorebox!"/>
+    <apply region="yellow-scorebox" enter="only-red" message="You may not enter your own scorebox!"/>
+    <apply block="never" use="never"/>
+</regions>
+<score>
+    <limit>150</limit>
+    <kills>1</kills>
+    <box points="5" filter="only-yellow" region="red-scorebox"/>
+    <box points="5" filter="only-red" region="yellow-scorebox"/>
+</score>
+<portals pitch="@0">
+    <portal region="red-scorebox" destination="yellow-spawn" filter="only-yellow" yaw="@-90"/>
+    <portal region="yellow-scorebox" destination="red-spawn" filter="only-red" yaw="@90"/>
+</portals>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>arrow</item>
+    <item>cooked fish</item>
+    <item>golden apple</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<respawn delay="3s"/>
+</map>
