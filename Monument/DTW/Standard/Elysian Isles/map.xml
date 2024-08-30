@@ -1,7 +1,7 @@
 <map proto="1.4.2" game="Destroy the Wool">
 <name>Elysian Isles</name>
 <created>2024-08-06</created>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -12,6 +12,10 @@
     <team id="blue-team" color="blue" max="5">Blue</team>
     <team id="orange-team" color="gold" max="5">Orange</team>
 </teams>
+<!-- broadcast -->
+<broadcasts>
+    <tip after="5s" every="30s">Use the portals loacted at the corners of the bottom layer to go back up!</tip>
+</broadcasts>
 <!-- Kits -->
 <kits>
     <kit id="default">
@@ -61,7 +65,7 @@
       <region>
           <cuboid min="196,63,12" max="198,66,14"/>
       </region>
-      <destination> 
+      <destination>
           <point>207.5,72,9.5</point>
       </destination>
     </portal>
@@ -78,12 +82,14 @@
         <cuboid id="right-orange-monument" min="204,81,36" max="208,75,32"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="blue-spawn-protection" min="177,0,-33" max="185,oo,-43"/>
-        <cuboid id="orange-spawn-protection" min="184,0,34" max="176,oo,43"/>
+        <cuboid id="blue-spawn-protection" min="177,0,-33" max="184,oo,-43"/>
+        <cuboid id="orange-spawn-protection" min="184,0,34" max="177,oo,43"/>
     </union>
     <union id="portal-protections">
-        <cuboid id="blue-portal-protection" min="168,60,-7" max="162,67,-14"/>
-        <cuboid id="orange-portal-protection" min="193,60,9" max="198,67,14"/>
+        <cuboid id="blue-portal-protection" min="168,60,-8" max="161,68,-15"/>
+        <cuboid id="blue-up-portal-protection" min="152,71,-8" max="147,76,-4"/>
+        <cuboid id="orange-portal-protection" min="193,60,9" max="200,68,16"/>
+        <cuboid id="orange-up-portal-protection" min="209,71,9" max="214,76,5"/>
     </union>
     <point id="blue-spawn">180.5,74,-37.5</point>
     <point id="orange-spawn">180.5,74,37.5</point>
