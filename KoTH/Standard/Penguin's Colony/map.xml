@@ -1,9 +1,15 @@
 <map proto="1.4.2">
 <name>Penguin's Colony</name>
-<created>2021-11-28</created>
-<version>1.0.5</version>
+<variant id="halloween" world="halloween" override="true">Pumpkin's Colony</variant>
+<version>1.1.0</version>
 <objective>Reach 750 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
+<if variant="default">
+    <created>2021-11-28</created>
+</if>
+<if variant="halloween">
+    <created>2022-08-11</created>
+</if>
 <authors>
     <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
@@ -28,19 +34,11 @@
         <item slot="3" amount="24" damage="1" material="leaves"/>
         <item slot="7" amount="24" material="arrow"/>
         <item slot="8" amount="16" material="golden carrot"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <potion duration="oo" amplifier="1">night vision</potion>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="3C44AA" material="leather helmet"/>
-        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
-        <leggings unbreakable="true" color="3C44AA" material="leather leggings"/>
-        <boots unbreakable="true" color="3C44AA" material="leather boots"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
-        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
-        <leggings unbreakable="true" color="B02E26" material="leather leggings"/>
-        <boots unbreakable="true" color="B02E26" material="leather boots"/>
     </kit>
     <kit id="obs">
         <potion duration="oo" amplifier="1">night vision</potion>
@@ -52,12 +50,12 @@
             <point>-78.5,80,-275.5</point>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit" yaw="40" pitch="-10">
+    <spawn team="blue" kit="spawn-kit" yaw="40" pitch="-10">
         <region>
             <point>-26.5, 37, -250.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit" yaw="-140" pitch="-10">
+    <spawn team="red" kit="spawn-kit" yaw="-140" pitch="-10">
         <region>
             <point>-130.5,37,-232.5</point>
         </region>
