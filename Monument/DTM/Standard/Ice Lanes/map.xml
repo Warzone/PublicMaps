@@ -1,0 +1,122 @@
+<map proto="1.4.2">
+<name>Ice Lanes</name>
+<version>1.0.0</version>
+<objective>Destroy both of the enemy's monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+</authors>
+<contributors>
+    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="XML"/> <!-- Ruediger_LP -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="32" team-color="true" material="stained glass"/>
+        <item slot="5" amount="16" material="wood"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked fish"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="1" amplifier="100">resistance</effect>
+        <effect duration="1" amplifier="100">strength</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit">
+        <regions yaw="180">
+            <cylinder base="-24.6,20,46.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit">
+        <regions yaw="180">
+            <cylinder base="25.6,20,46.5" radius="1" height="0"/>
+        </regions>
+    </spawn>
+    <default>
+        <regions yaw="180">
+            <point>0.5,75,0.5</point>
+        </regions>
+    </default>
+</spawns>
+<destroyables material="ender stone">
+    <destroyable owner="blue-team" name="Front Monument">
+        <region>
+            <block>-25,12,0</block>
+        </region>
+    </destroyable>
+    <destroyable owner="blue-team" name="Rear Monument">
+        <region>
+            <block>-25,19,-37</block>
+            <block>-25,18,-37</block>
+        </region>
+    </destroyable>
+    <destroyable owner="red-team" name="Front Monument">
+        <region>
+            <block>25,12,0</block>
+        </region>
+    </destroyable>
+    <destroyable owner="red-team" name="Rear Monument">
+        <region>
+            <block>25,19,-37</block>
+            <block>25,18,-37</block>
+        </region>
+    </destroyable>
+</destroyables>
+<regions>
+    <union id="not-playingfield">
+        <negative>
+            <rectangle min="36,50" max="-35,-38" id="playingfield"/>
+        </negative>
+        <rectangle min="-14,-38" max="15,-18"/> <!-- rear gap -->
+        <rectangle min="-14,0" max="15,50"/> <!-- front gap -->
+    </union>
+    <union id="spawns">
+        <rectangle id="blue-spawn" min="-28,50" max="-21,43"/>
+        <rectangle id="red-spawn" min="22,43" max="29,50"/>
+    </union>
+    <apply region="spawns" block="never" message="You may not edit the spawn!"/>
+    <apply region="not-playingfield" block="never" message="You may not build outside the playing field!"/>
+</regions>
+<itemkeep>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>cooked fish</item>
+    <item>stained glass</item>
+    <item>wood</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>ender stone</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>32</maxbuildheight>
+</map>
