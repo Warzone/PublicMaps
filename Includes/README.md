@@ -4,7 +4,7 @@ This folder contains a collection of reusable XML files adopted for use across W
 
 ## Usage
 
-Please see the [Include Statements](https://pgm.dev/docs/modules/general/main/#include-statements) section covered in PGM Documentation.
+Please see the [Includes section](https://pgm.dev/docs/modules/general/preprocessing#includes) covered in PGM Documentation.
 
 To use an include for a map, an include statement must be added to its XML:
 
