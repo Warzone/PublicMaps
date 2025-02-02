@@ -1,0 +1,111 @@
+<map proto="1.4.2">
+<name>Bretzel</name>
+<version>1.0.0</version>
+<objective>First team to capture the enemy flag 3 times wins!</objective>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+</authors>
+<teams>
+    <team id="green-team" color="dark green" max="8">Green</team>
+    <team id="red-team" color="red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" damage="5" material="wood"/>
+        <item slot="5" amount="64" team-color="true" material="stained glass"/>
+        <item slot="7" amount="16" material="cooked fish"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="green-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>-16.5,6,-37.5</point>
+        </region>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit" yaw="180">
+        <region>
+            <point>38.5,6,17.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <point>1.0,6,0.0</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <!-- TODO: simplify this in future proto 1.5 update -->
+    <team id="only-green">green-team</team>
+    <team id="only-red">red-team</team>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cuboid id="green-spawn" min="-21,5,-34" max="-12,13,-42"/>
+        <cuboid id="red-spawn" min="42,5,21" max="34,13,13"/>
+    </union>
+    <union id="flag-nets">
+        <cylinder id="green-net" base="-16.5,16,-37.5" radius="2" height="3"/>
+        <cylinder id="red-net" base="38.5,16,17.5" radius="2" height="3"/>
+    </union>
+    <apply region="green-spawn" enter="only-green" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn."/>
+    <apply region="flag-nets" block="never" message="You may not build here!"/>
+    <apply region="spawn-protections" block="never" message="You may not build here!"/>
+    <apply use="deny-beacon"/>
+</regions>
+<flags>
+    <!-- Green's Flag -->
+    <flag id="green-flag" owner="green-team" name="Green Flag" color="green" carry-message="You are carrying the `2flag`r! Return it to your `cflag post`r!">
+        <post id="green-flag-post" pickup-filter="only-red" recover-time="0" respawn-time="20s">-16.5,16,-37.5</post>
+        <net post="green-flag-post" points="1" region="red-net"/>
+    </flag>
+    <!-- Red's Flag -->
+    <flag id="red-flag" owner="red-team" name="Red Flag" color="red" carry-message="You are carrying the `cflag`r! Return it to your `2flag post`r!">
+        <post id="red-flag-post" pickup-filter="only-green" recover-time="0" respawn-time="20s">38.5,16,17.5</post>
+        <net post="red-flag-post" points="1" region="green-net"/>
+    </flag>
+</flags>
+<score>
+    <limit>3</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>stained glass</item>
+    <item>cooked fish</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>banner</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>25</maxbuildheight>
+<respawn delay="1"/>
+</map>
