@@ -1,0 +1,126 @@
+<map proto="1.4.2">
+<name>Second Chance</name>
+<version>1.0.0</version>
+<objective>Destroy both of the enemy's monuments!</objective>
+<gamemode>dtm</gamemode>
+<authors>
+    <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+</authors>
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" amount="64" team-color="true" material="stained glass"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="7" amount="16" material="cooked fish"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="2" amplifier="100">resistance</effect>
+        <effect duration="2" amplifier="100">strength</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit" yaw="90">
+        <region>
+            <point>60.5,11,0.5</point>
+        </region>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>-59.5,11,0.5</point>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <point>60.5,23.5,0.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <!-- TODO: simplify this in future proto 1.5 update -->
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
+</filters>
+<regions>
+    <union id="spawns">
+        <cylinder id="blue-spawn" base="60.5,0,0.5" radius="6.5" height="22"/>
+        <cylinder id="red-spawn" base="-59.5,0,0.5" radius="6.5" height="22"/>
+    </union>
+    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn."/>
+    <apply region="spawns" block="never" message="You may not edit the spawn!"/>
+    <apply use="deny-beacon"/>
+</regions>
+<destroyables>
+    <destroyable name="Rear Monument" owner="blue-team" material="obsidian" mode-changes="true">
+        <region>
+            <cuboid min="94,11,-1" max="96,14,1"/>
+        </region>
+    </destroyable>
+        <destroyable name="Front Monument" owner="blue-team" material="emerald block">
+        <region>
+            <cuboid min="33,9,2" max="29,13,-2"/>
+        </region>
+    </destroyable>
+    <destroyable name="Rear Monument" owner="red-team" material="obsidian" mode-changes="true">
+        <region>
+            <cuboid min="-94,11,1" max="-96,14,-1"/>
+        </region>
+    </destroyable>
+    <destroyable name="Front Monument" owner="red-team" material="emerald block">
+        <region>
+            <cuboid min="-33,9,-2" max="-29,13,2"/>
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode id="stage1" name="`bBeacon Mode" material="beacon" after="4m"/>
+    <mode id="stage2" name="`aEmerald Mode" material="emerald block" after="8m"/>
+    <mode id="stage3" name="`6Gold Mode" material="gold block" after="12m"/>
+    <mode id="stage4" name="`3Packed Ice Mode" material="packed ice" after="16m"/>
+</modes>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wood</item>
+    <item>stained glass</item>
+    <item>cooked fish</item>
+    <item>obsidian</item>
+    <item>beacon</item>
+    <item>emerald block</item>
+    <item>gold block</item>
+    <item>packed ice</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>23</maxbuildheight>
+</map>
