@@ -1,14 +1,16 @@
 <map proto="1.4.2">
-<name>Second Chance</name>
+<name>Sloped</name>
 <version>1.0.0</version>
-<objective>Destroy both of the enemy's monuments!</objective>
+<objective>Destroy all of the enemy's monuments!</objective>
 <gamemode>dtm</gamemode>
 <authors>
+    <author uuid="450c2d83-1757-4021-9789-5e57b3d4cc58"/> <!-- BD33 -->
     <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
+    <author uuid="62d9830a-0b77-4e21-9d4f-de4b60c68fb5"/> <!-- shaarpie -->
 </authors>
 <teams>
-    <team id="blue-team" color="blue" max="8">Blue</team>
-    <team id="red-team" color="red" max="8">Red</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="red" max="16">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -17,33 +19,33 @@
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="diamond pickaxe"/>
         <item slot="3" amount="64" team-color="true" material="stained glass"/>
-        <item slot="4" amount="64" material="wood"/>
-        <item slot="5" amount="64" material="wood"/>
+        <item slot="4" amount="64" damage="1" material="wood"/>
+        <item slot="5" amount="64" damage="1" material="wood"/>
         <item slot="7" amount="16" material="cooked fish"/>
         <item slot="8" material="golden apple"/>
-        <item slot="9" amount="16" material="arrow"/>
+        <item slot="9" amount="32" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="2" amplifier="100">resistance</effect>
-        <effect duration="2" amplifier="100">strength</effect>
+        <effect duration="8" amplifier="100">resistance</effect>
+        <effect duration="8" amplifier="100">strength</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue-team" kit="spawn-kit" yaw="90">
+    <spawn team="blue-team" kit="spawn-kit" yaw="180">
         <region>
-            <point>60.5,11,0.5</point>
+            <point>0.5,10,96.5</point>
         </region>
     </spawn>
-    <spawn team="red-team" kit="spawn-kit" yaw="-90">
+    <spawn team="red-team" kit="spawn-kit">
         <region>
-            <point>-59.5,11,0.5</point>
+            <point>0.5,10,-95.5</point>
         </region>
     </spawn>
     <default yaw="90">
         <region>
-            <point>60.5,23.5,0.5</point>
+            <point>17.5,39,0.5</point>
         </region>
     </default>
 </spawns>
@@ -57,8 +59,8 @@
 </filters>
 <regions>
     <union id="spawns">
-        <cylinder id="blue-spawn" base="60.5,0,0.5" radius="6.5" height="22"/>
-        <cylinder id="red-spawn" base="-59.5,0,0.5" radius="6.5" height="22"/>
+        <cylinder id="blue-spawn" base="0.5,0,96.5" radius="9" height="15"/>
+        <cylinder id="red-spawn" base="0.5,0,-95.5" radius="9" height="15"/>
     </union>
     <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn."/>
     <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn."/>
@@ -66,24 +68,34 @@
     <apply use="deny-beacon"/>
 </regions>
 <destroyables>
-    <destroyable name="Rear Monument" owner="blue-team" material="obsidian" mode-changes="true">
+    <destroyable name="West Monument" owner="blue-team" material="emerald block">
         <region>
-            <cuboid min="94,11,-1" max="96,14,1"/>
+            <cuboid min="-45,24,66" max="-49,30,62"/>
         </region>
     </destroyable>
-    <destroyable name="Front Monument" owner="blue-team" material="emerald block">
+    <destroyable name="South Monument" owner="blue-team" material="obsidian" mode-changes="true">
         <region>
-            <cuboid min="33,9,2" max="29,13,-2"/>
+            <cuboid min="1,23,91" max="-1,27,93"/>
         </region>
     </destroyable>
-    <destroyable name="Rear Monument" owner="red-team" material="obsidian" mode-changes="true">
+    <destroyable name="East Monument" owner="blue-team" material="emerald block">
         <region>
-            <cuboid min="-94,11,1" max="-96,14,-1"/>
+            <cuboid min="45,24,62" max="49,30,66"/>
         </region>
     </destroyable>
-    <destroyable name="Front Monument" owner="red-team" material="emerald block">
+    <destroyable name="East Monument" owner="red-team" material="emerald block">
         <region>
-            <cuboid min="-33,9,-2" max="-29,13,2"/>
+            <cuboid min="45,24,-66" max="49,30,-62"/>
+        </region>
+    </destroyable>
+    <destroyable name="North Monument" owner="red-team" material="obsidian" mode-changes="true">
+        <region>
+            <cuboid min="-1,23,-91" max="1,27,-93"/>
+        </region>
+    </destroyable>
+    <destroyable name="West Monument" owner="red-team" material="emerald block">
+        <region>
+            <cuboid min="-45,24,-62" max="-49,30,-66"/>
         </region>
     </destroyable>
 </destroyables>
@@ -122,5 +134,5 @@
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<maxbuildheight>23</maxbuildheight>
+<maxbuildheight>50</maxbuildheight>
 </map>
