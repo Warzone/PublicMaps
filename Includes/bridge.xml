@@ -1,13 +1,14 @@
-<map proto="1.4.2">
+<map>
 <!-- [#####|#####] -->
 <!-- Bridge gamemode include file -->
 <!-- Created by zzuf -->
-<!-- Version 2024.05.16-1 -->
-<gamemode>bridge</gamemode>
 <gamemode>arcade</gamemode>
+<!-- Version 2025.02.03-2 -->
 <respawn auto="true" delay="0s"/>
 <modifybowprojectile pickup-filter="never"/>
-<constants> <!-- Default values - Can be overriden by an individual map's code -->
+<constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
+    <!-- Gamemode -->
+    <constant id="gamemode">bridge</constant>
     <!-- Map -->
     <constant id="map-origin">0.5,0,0.5</constant>
     <constant id="void-plane">-5</constant>
@@ -18,10 +19,13 @@
     <constant id="pre-round-time">5s</constant>
     <constant id="arrow-check-enabled">1</constant>
     <constant id="overtime-default">0</constant>
+    <constant id="goal-scorer">1</constant>
     <!-- Misc. -->
     <constant id="main-kit">spawn-kit</constant> <!-- If using a custom name, requires a clear-[your kit name] action - can throw an error, but the map will still load -->
+    <constant id="armor-kit">default-armor-kit</constant>
     <constant id="max-health">20</constant>
     <constant id="show-tutorial">1</constant>
+    <constant id="natural-regeneration">false</constant>
     <!-- Teams (placeholders) -->
     <constant id="team-one-spawn">0.5,0,0.5</constant>
     <constant id="team-one-yaw">-90</constant>
@@ -66,10 +70,10 @@
         <max-health>${max-health}</max-health>
         <health>${max-health}</health>
     </kit>
-    <kit id="armor-kit">
-        <chestplate material="leather chestplate" team-color="true" unbreakable="true" prevent-sharing="true"/>
-        <leggings material="leather leggings" team-color="true" unbreakable="true" prevent-sharing="true"/>
-        <boots material="leather boots" team-color="true" unbreakable="true" prevent-sharing="true"/>
+    <kit id="default-armor-kit">
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true" locked="true"/>
+        <leggings material="leather leggings" team-color="true" unbreakable="true" locked="true"/>
+        <boots material="leather boots" team-color="true" unbreakable="true" locked="true"/>
     </kit>
     <kit id="remove-effects-kit" force="true">
         <effect duration="0">invisibility</effect>
@@ -129,11 +133,11 @@
             </pages>
         </book>
     </kit>
-    <give kit="obs-kit" filter="all(is-observer,show_tutorial=1)"/>
+    <give kit="obs-kit" filter="all(observing,show_tutorial=1)"/>
     <give kit="map-kit" filter="during-buytime"/>
     <give kit="absorption-reset-kit" filter="on-buytime"/>
     <lend kit="pre-round-kit" filter="on-buytime"/>
-    <give kit="armor-kit" filter="not-on-buytime-after"/>
+    <give kit="${armor-kit}" filter="not-on-buytime-after"/>
     <give kit="remove-effects-kit" filter="not-on-buytime"/>
 </kits>
 <filters>
@@ -187,7 +191,7 @@
     <all id="during-buytime">
         <after duration="0.05" filter="on-buytime"/>
         <not>
-            <region id="void"/>
+            <region id="void-level"/>
         </not>
     </all>
     <variable id="round-2" var="round_status">2</variable>
@@ -252,7 +256,6 @@
         <message>`4» `fThe match will `cend`f in {0} `4«</message>
         <!-- <message>{"translate":"misc.timeRemaining"}</message> -->
     </after>
-    <observing id="is-observer"/>
     <all id="team-one-own-goal">
         <team>team-one</team>
         <variable var="scoring_team">1</variable>
@@ -279,8 +282,8 @@
     </all>
     <all id="cant-score-obs">
         <filter id="cant-score"/>
-        <filter id="is-observer"/>
         <filter id="after-round-1"/>
+        <observing/>
         <match-running/>
     </all>
     <match-finished id="ended"/>
@@ -303,12 +306,13 @@
     <variable id="pre_round" scope="match" default="${pre-round-enabled}"/>
     <variable id="arrow_check" scope="match" default="${arrow-check-enabled}"/>
     <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
+    <variable id="goal_scorer" scope="player" exclusive="1"/>
+    <variable id="goal_scorer_enabled" scope="match" default="${goal-scorer}"/>
 </variables>
 <actions>
     <action id="increment-round" scope="player">
         <set var="team_score" value="team_score+1"/>
         <set var="player_score" value="player_score+1"/>
-        <message text=" `e⚠ `aYou have scored a goal!"/>
         <message text=" `2You have scored `e{amount} `2goal(s) in this match.">
             <replacements>
                 <decimal id="amount" value="player_score"/>
@@ -321,6 +325,7 @@
             <kill-entities filter="remove-entities"/>
         </switch-scope>
         <action id="tiebreaker-win"/>
+        <action id="message-score-display-player"/>
     </action>
     <action id="set-buytime" scope="match" filter="pre_round=1">
         <set var="buytime" value="1"/>
@@ -352,7 +357,7 @@
     <action id="give-arrow" scope="player">
         <kit id="arrow-kit"/>
         <message text=" `e⚠ `aYou got an arrow!"/>
-        <sound key="random.pop" pitch="0.8"/>
+        <sound key="${entity.item.pickup}" pitch="0.8"/>
     </action>
     <action id="arrow-action" scope="player" filter="arrow_check=1">
         <kit id="arrow-kit"/>
@@ -394,7 +399,7 @@
             <set var="current_team" value="2"/>
         </action>
     </trigger>
-    <trigger filter="is-observer" scope="player">
+    <trigger filter="observing" scope="player" observers="true">
         <action scope="player">
             <set var="current_team" value="0"/>
         </action>
@@ -407,7 +412,10 @@
         <action id="message-score-display-team-two"/>
         <message text="`5# # # # # # # # # # # # # # # #"/>
         <action id="goal-title"/>
-        <sound key="portal.travel" volume="0.2" pitch="2"/> <!-- OBJECTIVE_GOOD with lower volume -->
+        <switch-scope outer="player" inner="match">
+            <action id="goal-title-scorer"/>
+        </switch-scope>
+        <sound key="${block.portal.travel}" volume="0.2" pitch="2"/> <!-- OBJECTIVE_GOOD with lower volume -->
     </action>
     <action id="message-enemy-scored" scope="player">
         <message text="`5# # # # # # # # # # # # # # # #"/>
@@ -417,7 +425,17 @@
         <action id="message-score-display-team-two"/>
         <message text="`5# # # # # # # # # # # # # # # #"/>
         <action id="goal-title"/>
-        <sound key="mob.blaze.death" volume="0.4" pitch="0.8"/> <!-- OBJECTIVE_BAD with lower volume -->
+        <sound key="${entity.blaze.death}" volume="0.4" pitch="0.8"/> <!-- OBJECTIVE_BAD with lower volume -->
+    </action>
+    <action filter="goal_scorer_enabled=1" id="message-score-display-player" scope="player">
+        <set var="goal_scorer" value="1"/>
+        <switch-scope outer="player" inner="match">
+            <message text=" `l» `r{player} `7scored a goal!">
+                <replacements>
+                    <player id="player" var="goal_scorer"/>
+                </replacements>
+            </message>
+        </switch-scope>
     </action>
     <action filter="only-team-one" id="message-score-display-team-one" scope="player">
         <message text="`5# #            `f{one-score}`6 `l－`r `f{two-score}`5            # #">
@@ -435,12 +453,19 @@
             </replacements>
         </message>
     </action>
-    <action id="goal-title" scope="player" filter="pre_round=1">
+    <action id="goal-title" scope="player" filter="all(pre_round=1,goal_scorer_enabled=0)">
         <message title="`f`lGOAL!" subtitle="`7The next round will begin shortly." fade-in="0.5" stay="2" fade-out="0.5"/>
+    </action>
+    <action id="goal-title-scorer" scope="match" filter="all(pre_round=1,goal_scorer_enabled=1)">
+        <message title="`f`lGOAL!" subtitle="`7by {player}" fade-in="0.5" stay="2" fade-out="0.5">
+            <replacements>
+                <player id="player" var="goal_scorer"/>
+            </replacements>
+        </message>
     </action>
     <action id="go-message" scope="match" filter="pre_round=1">
         <message title="`aGo!" fade-in="0.1" stay="0.5" fade-out="0.1"/>
-        <sound key="note.pling" volume="1" pitch="1.59"/> <!-- Used as SOUND_MATCH_START in PGM -->
+        <sound key="${block.note_block.pling}" volume="1" pitch="1.59"/> <!-- Used as SOUND_MATCH_START in PGM -->
     </action>
     <action id="message-reset-scoring-team" scope="match">
         <set var="scoring_team" value="0"/>
@@ -456,13 +481,13 @@
             </replacements>
         </message>
         <message text="`5# # # # # # # # # # # #"/>
-        <sound key="fireworks.twinkle"/>
+        <sound key="${entity.firework_rocket.twinkle}"/>
     </action>
     <trigger filter="team-one-own-goal" action="message-own-scored" scope="player"/>
     <trigger filter="team-two-own-goal" action="message-own-scored" scope="player"/>
     <trigger filter="team-one-enemy-goal" action="message-enemy-scored" scope="player"/>
     <trigger filter="team-two-enemy-goal" action="message-enemy-scored" scope="player"/>
-    <trigger filter="cant-score-obs" action="message-obs-scored" scope="player"/>
+    <trigger filter="cant-score-obs" action="message-obs-scored" scope="player" observers="true"/>
     <action id="set-team-one" scope="player">
         <switch-scope outer="player" inner="match">
             <set var="scoring_team" value="1"/>
@@ -557,8 +582,8 @@
     <negative id="not-cages">
         <region id="cages"/>
     </negative>
-    <below id="void" y="${void-plane}"/>
-    <apply kit="void-death" region="void"/>
+    <below id="void-level" y="${void-plane}"/>
+    <apply kit="void-death" region="void-level"/>
     <!-- Spawn points -->
     <point id="team-one-spawn-point">${team-one-spawn}</point>
     <point id="team-two-spawn-point">${team-two-spawn}</point>
@@ -574,14 +599,14 @@
     <portal destination="team-one-spawn-point" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}" sound="false"/>
     <portal destination="team-two-spawn-point" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}" sound="false"/>
     <!-- Void -->
-    <portal y="@-110" sound="false" region="void" observers="always"/>
+    <portal y="@-110" sound="false" region="void-level" observers="always"/>
 </portals>
 <score>
     <limit>${score-limit}</limit>
     <mercy>${mercy-limit}</mercy>
 </score>
 <gamerules>
-    <naturalRegeneration>false</naturalRegeneration>
+    <naturalRegeneration>${natural-regeneration}</naturalRegeneration>
 </gamerules>
 <itemkeep>
     <item>iron sword</item>
@@ -608,6 +633,7 @@
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
+<gamemode>${gamemode}</gamemode>
 <!-- can't use consumable nor prevent-sharing on item-mods at the moment -->
 <!-- <item-mods>
     <rule>
