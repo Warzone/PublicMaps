@@ -1,46 +1,41 @@
-<map>
+<map> <!-- minimum proto 1.4.0 -->
 <!-- Golden apple kill reward include file -->
 <!-- Author: Pablete1234 -->
-<!-- Version 2023.09.11-1 -->
+<!-- Version 2024.12.12-1 -->
 <!--
     This include file prevents golden apple consumption from being interrupted
     after killing another play and receiving a golden apple as a kill reward.
 -->
+<constants fallback="true">
+    <constant id="gapple-name" delete="true"/>
+    <constant id="gapple-lore" delete="true"/>
+</constants>
 <variables>
     <variable id="missing_gaps" scope="player"/>
 </variables>
 <filters>
-    <pulse id="can-give-gap" duration="0.05s" period="0.1s">
-        <all>
-            <not id="not-holding-gap">
-                <holding id="holding-gap">
-                    <item>golden apple</item>
-                </holding>
-            </not>
-            <variable var="missing_gaps">1..</variable>
-        </all>
-    </pulse>
+    <holding id="holding-gap" ignore-metadata="true">
+        <item>golden apple</item>
+    </holding>
+    <pulse id="pulse-give-gap" duration="0.05s" period="0.1s" filter="all(not(holding-gap),missing_gaps=1..)"/>
 </filters>
 <actions>
-    <trigger scope="player" filter="can-give-gap">
-        <action>
-            <kit deduct-items="false">
-                <item material="golden apple"/>
-            </kit>
-            <set var="missing_gaps" value="missing_gaps-1"/>
-        </action>
-    </trigger>
+    <action id="give-gap" scope="player">
+        <kit deduct-items="false">
+            <item material="golden apple" name="${gapple-name}" lore="${gapple-lore}"/>
+        </kit>
+        <set var="missing_gaps" value="missing_gaps-1"/>
+    </action>
+    <trigger scope="player" filter="pulse-give-gap" action="give-gap"/>
 </actions>
 <kill-rewards>
-    <kill-reward filter="not-holding-gap">
-        <item material="golden apple"/>
-    </kill-reward>
-    <kill-reward filter="holding-gap">
-        <kit>
-            <action>
-                <set var="missing_gaps" value="missing_gaps+1"/>
+    <kill-reward>
+        <action>
+            <set var="missing_gaps" value="missing_gaps+1"/>
+            <action filter="not(holding-gap)">
+                <action id="give-gap"/>
             </action>
-        </kit>
+        </action>
     </kill-reward>
 </kill-rewards>
 </map>
