@@ -72,7 +72,7 @@
     </any>
 </filters>
 <regions>
-    <negative id="void">
+    <negative id="void-area">
         <rectangle id="playable" min="-10,-32" max="10,41"/>
     </negative>
     <union id="team-spawns">
@@ -81,7 +81,7 @@
     </union>
     <below id="void-plane" y="-20"/>
     <apply region="team-spawns" block="never" message="You may not modify the spawn area"/>
-    <apply region="void" block-place="never" message="You may not build here"/>
+    <apply region="void-area" block-place="never" message="You may not build here"/>
     <apply block="some-blocks" message="You can only modify blocks placed by players!"/>
     <apply kit="void-death" region="void-plane"/>
 </regions>
