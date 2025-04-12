@@ -1,4 +1,4 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <!-- ======================================================================= -->
 <!-- |  12v12v12v12 Bed Wars For Alpha - Thunderbird                         -->
 <!-- ======================================================================= -->
@@ -38,7 +38,7 @@
 <!-- ======================================================================= -->
 <!-- |  Customize for your map: version, name, author, teams, regions, etc.  -->
 <!-- ======================================================================= -->
-<version>1.4.0</version>
+<version>1.4.3</version>
 <phase>staging</phase>
 <name>Bed Wars: Thunderbird</name>
 <created>2023-08-10</created>
@@ -64,14 +64,14 @@
     <spawn team="team-one" kit="default" region="team-one-spawn" yaw="90"/>
     <spawn team="team-two" kit="default" region="team-two-spawn" yaw="270"/>
     <spawn team="team-three" kit="default" region="team-three-spawn" yaw="180"/>
-    <spawn team="team-four" kit="default" region="team-four-spawn" yaw="0"/>
+    <spawn team="team-four" kit="default" region="team-four-spawn"/>
     <default>
         <regions>
             <!-- Spawn regions can be removed as needed -->
             <cuboid yaw="90" id="obs-spawn" min="-3,99,-3" max="-3,99,3"/>
             <cuboid yaw="-90" id="obs-spawn-2" min="3,99,-3" max="3,99,3"/>
             <cuboid yaw="180" id="obs-spawn-3" min="3,99,-3" max="3,99,-3"/>
-            <cuboid yaw="0" id="obs-spawn-4" min="-3,99,3" max="3,99,3"/>
+            <cuboid id="obs-spawn-4" min="-3,99,3" max="3,99,3"/>
         </regions>
     </default>
 </spawns>
@@ -207,7 +207,6 @@
 <!-- |                                                                       -->
 <!-- -====================================================================== -->
 <gamemode>bedwars</gamemode>
-<gamemode>arcade</gamemode>
 <objective>Destroy enemy beds &amp; eliminate them.</objective>
 <respawn auto="true" delay="5s"/>
 <time>17m</time> <!-- Pacing: End -->
@@ -504,8 +503,8 @@
     <!-- Thunder -->
     <action id="thunder-action" scope="match">
         <!-- fatten up sound to be better heard -->
-        <sound key="ambient.weather.thunder" volume="1" pitch=".8"/>
-        <sound key="ambient.weather.thunder" volume="1" pitch="1"/>
+        <sound key="${entity.lightning_bolt.thunder}" volume="1" pitch=".8"/>
+        <sound key="${entity.lightning_bolt.thunder}" volume="1" pitch="1"/>
     </action>
     <trigger filter="team-eliminated-one" action="thunder-action" scope="match"/>
     <trigger filter="team-eliminated-two" action="thunder-action" scope="match"/>
@@ -526,10 +525,10 @@
                 <sound preset="objective_bad"/>
                 <!-- above provides legato fill, below provides staccato impact -->
                 <!-- chord is minor and discordant, signifying danger -->
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -557,10 +556,10 @@
                 <set var="alarm_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lAlarm Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -588,10 +587,10 @@
                 <set var="alarm_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lAlarm Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -619,10 +618,10 @@
                 <set var="alarm_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lAlarm Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -651,10 +650,10 @@
                 <set var="fatigue_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lMiner Fatigue Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -682,10 +681,10 @@
                 <set var="fatigue_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lMiner Fatigue Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -713,10 +712,10 @@
                 <set var="fatigue_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lMiner Fatigue Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -744,10 +743,10 @@
                 <set var="fatigue_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lMiner Fatigue Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -776,10 +775,10 @@
                 <set var="freeze_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lFreeze Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -807,10 +806,10 @@
                 <set var="freeze_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lFreeze Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -838,10 +837,10 @@
                 <set var="freeze_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lFreeze Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -869,10 +868,10 @@
                 <set var="freeze_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lFreeze Trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- AmM7 -->
-                <sound key="note.harp" volume="1" pitch="1.414"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.244"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- AmM7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.414"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.244"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -902,10 +901,10 @@
                 <message text="`e`l>>> `c`lCounter-Offensive trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
                 <!-- chord is major, since this trap provides team boost -->
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- Amaj7 -->
-                <sound key="note.harp" volume="1" pitch="1.498"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.12"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- Amaj7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.498"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.12"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -933,10 +932,10 @@
                 <set var="counteroffensive_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lCounter-Offensive trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- Amaj7 -->
-                <sound key="note.harp" volume="1" pitch="1.498"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.12"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- Amaj7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.498"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.12"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -964,10 +963,10 @@
                 <set var="counteroffensive_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lCounter-Offensive trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- Amaj7 -->
-                <sound key="note.harp" volume="1" pitch="1.498"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.12"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- Amaj7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.498"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.12"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -995,10 +994,10 @@
                 <set var="counteroffensive_trap_active" value="1" scope="team"/>
                 <message text="`e`l>>> `c`lCounter-Offensive trap set off by an enemy team!"/>
                 <sound preset="objective_bad"/>
-                <sound key="note.harp" volume="1" pitch="1.189"/> <!-- Amaj7 -->
-                <sound key="note.harp" volume="1" pitch="1.498"/>
-                <sound key="note.harp" volume="1" pitch="1.782"/>
-                <sound key="note.harp" volume="1" pitch="2.12"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.189"/> <!-- Amaj7 -->
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.498"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="1.782"/>
+                <sound key="${block.note_block.harp}" volume="1" pitch="2.12"/>
             </switch-scope>
         </switch-scope>
     </action>
@@ -1046,7 +1045,7 @@
                 <title>`cSUDDEN DEATH!</title>
                 <subtitle>`fWorld border is approaching!</subtitle>
             </message>
-            <sound key="mob.enderdragon.growl" volume="1" pitch="1"/>
+            <sound key="${entity.ender_dragon.growl}" volume="1" pitch="1"/>
             <set var="sudden_death_variable" value="2"/>
         </action>
     </trigger>
@@ -1349,7 +1348,7 @@
             <effect amplifier="3" duration="16s">speed</effect>
             <effect amplifier="4" duration="16s">jump_boost</effect>
         </kit>
-        <sound key="random.burp" volume="1" pitch=".9"/>
+        <sound key="${entity.player.burp}" volume="1" pitch=".9"/>
     </action>
     <!-- Magic Milk actions -->
     <!-- Important to not turn off Magic Milk immunity early, if they drank a second before end of first -->
@@ -1358,7 +1357,7 @@
         <set var="milk_variable" value="1"/>
         <set var="milk_seconds_variable" value="30"/> <!-- Regardless of previous value, it's 30 now -->
         <message text="`e`l>>> `bYou are immune to traps for `c30 seconds`b!`r"/>
-        <sound key="random.burp" volume="1" pitch=".9"/>
+        <sound key="${entity.player.burp}" volume="1" pitch=".9"/>
     </action>
     <!-- Step 2, 3, 4 - Decrement Milk which keeps cycle going via a filter -->
     <action id="milk-10-seconds-older" scope="player">
@@ -1383,7 +1382,7 @@
         <set var="invis_seconds_variable" value="30"/> <!-- Regardless of previous value, it's 30 now -->
         <message text="`e`l>>> `bInvisibility/Absorption given, armor returns in `c30 seconds`r"/>
         <message text="`e`l>>> `bunless exposed by Alert trap.`r"/>
-        <sound key="random.fizz" volume="1" pitch="1"/>
+        <sound key="${entity.generic.extinguish_fire}" volume="1" pitch="1"/>
         <!-- remove any possible armor -->
         <replace-item ignore-metadata="true">
             <find material="leather helmet"/>
@@ -1573,7 +1572,7 @@
         <set var="invis_variable" value="0"/>
         <message text="`e`l>>> `cYou were revealed, you are now visible!"/>
         <sound preset="objective_mode"/>
-        <sound key="note.harp" volume="1" pitch="3"/>
+        <sound key="${block.note_block.harp}" volume="1" pitch="3"/>
     </action>
     <trigger filter="apply-alarm-filter-is-invisible" action="invis-check-revealed-action" scope="player"/>
     <trigger filter="apply-alarm-filter-is-invisible" action="invis-check-empty-action-armor" scope="player"/>
