@@ -20,7 +20,7 @@
 ### Map Checklist
 >To mark as completed, replace the space between the [ ] with an `X` or click on the checkbox after submitting this pull request.
 - [ ] Contains a `map.xml` file with valid syntax and formatting.
-- [ ] The `map.xml` uses proto `1.4.2` or above (older or legacy maps are exempt, so long as the XML works).
+- [ ] The `map.xml` uses proto `1.5.0` (older or legacy maps are exempt, so long as the XML works).
 - [ ] The `map.xml` explicitly [sets the gamemode](https://pgm.dev/docs/modules/general/main#map-gamemode) (for stat-tracking).
 - [ ] The `map.xml` has correctly credited the map authors and contributors.
 - [ ] Contains `map.png` file (`290x246`).
