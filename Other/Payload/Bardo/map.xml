@@ -1,32 +1,33 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Bardo</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Attackers must escort the payload to a designated delivery point while the Defenders try to stop them.</objective>
 <created>2024-04-13</created>
 <!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
 <gamemode>arcade</gamemode>
 <gamemode>payload</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Layout, XML, Design"/> <!-- Wesdial -->
 </authors>
 <contributors>
     <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Minor Detailing"/> <!-- _Pear -->
 </contributors>
-<time result="blue">10m25s</time>
+<time result="blue-team">10m25s</time>
 <broadcasts>
-    <alert after="2s" filter="only-red">Your spawn gates will open up after 25 seconds have passed, push the payload to the end of the map to win!</alert>
-    <alert after="2s" filter="only-blue">Locate the payload by following the red light in the sky, and try to stop the Attackers from getting the Paylaoad to the end of the map!</alert>
-    <alert after="21s" filter="only-red">Your spawn gates will open up in `c5 seconds`7!</alert>
-    <alert after="22s" filter="only-red">Your spawn gates will open up in `c4 seconds`7!</alert>
-    <alert after="23s" filter="only-red">Your spawn gates will open up in `c3 seconds`7!</alert>
-    <alert after="24s" filter="only-red">Your spawn gates will open up in `c2 seconds`7!</alert>
-    <alert after="25s" filter="only-red">Your spawn gates will open up in `c1 seconds`7!</alert>
-    <alert after="26s" filter="only-red">`lYour spawn gates have opened up. Push the cart to the end to win!</alert>
+    <alert after="2s" filter="red-team">Your spawn gates will open up after 25 seconds have passed, push the payload to the end of the map to win!</alert>
+    <alert after="2s" filter="blue-team">Locate the payload by following the red light in the sky, and try to stop the Attackers from getting the Paylaoad to the end of the map!</alert>
+    <alert after="21s" filter="red-team">Your spawn gates will open up in `c5 seconds`7!</alert>
+    <alert after="22s" filter="red-team">Your spawn gates will open up in `c4 seconds`7!</alert>
+    <alert after="23s" filter="red-team">Your spawn gates will open up in `c3 seconds`7!</alert>
+    <alert after="24s" filter="red-team">Your spawn gates will open up in `c2 seconds`7!</alert>
+    <alert after="25s" filter="red-team">Your spawn gates will open up in `c1 seconds`7!</alert>
+    <alert after="26s" filter="red-team">`lYour spawn gates have opened up. Push the cart to the end to win!</alert>
     <tip after="40s" every="2m">Golden apple &amp; arrow spawners are located under both bridges surrounded by `6Gold Blocks!</tip>
 </broadcasts>
 <teams>
-    <team id="red" color="dark red" max="10">Attackers</team>
-    <team id="blue" color="blue" max="10">Defenders</team>
+    <team id="red-team" color="dark red" max="10">Attackers</team>
+    <team id="blue-team" color="blue" max="10">Defenders</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -56,7 +57,7 @@
             <point>-0.5,50,-1.5</point>
         </region>
     </default>
-    <spawns team="red" kit="red-kit">
+    <spawns team="red-team" kit="red-kit">
         <spawn id="red-first" filter="first-spawn">
             <region yaw="45">
                 <point>39.5,5,-38.5</point>
@@ -73,7 +74,7 @@
             </region>
         </spawn>
     </spawns>
-    <spawns team="blue" kit="blue-kit">
+    <spawns team="blue-team" kit="blue-kit">
         <spawn id="blue-first" filter="first-spawn">
             <region yaw="-45">
                 <point>-45.5,4,-43.5</point>
@@ -138,8 +139,8 @@
     <apply block="never" use="never"/>
     <apply enter="first-blue-spawn-entry" region="blue-first-spawn-protection" message="You may not enter the enemy's spawn!"/>
     <apply enter="second-blue-spawn-entry" region="blue-second-spawn-protection" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-blue" region="blue-third-spawn-protection" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-red" region="red-spawn-protection" message="You may not enter the enemy's spawn!"/>
+    <apply enter="blue-team" region="blue-third-spawn-protection" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-spawn-protection" message="You may not enter the enemy's spawn!"/>
 </regions>
 <filters>
     <not id="first-spawn">
@@ -157,14 +158,12 @@
     </all>
     <any id="first-blue-spawn-entry">
         <completed>first-checkpoint</completed>
-        <team>blue</team>
+        <team>blue-team</team>
     </any>
     <any id="second-blue-spawn-entry">
         <completed>second-checkpoint</completed>
-        <team>blue</team>
+        <team>blue-team</team>
     </any>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
 </filters>
 <actions>
     <message id="spawns-forward-1" text="`b`lCheckpoint `cA `b`lhas been captured. Spawns have been moved to accommodate, new spawn gates have opened!"/>
@@ -172,16 +171,16 @@
     <trigger filter="first-checkpoint-completed" trigger="spawns-forward-1" scope="player"/>
     <trigger filter="second-checkpoint-completed" trigger="spawns-forward-2" scope="player"/>
 </actions>
-<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="50s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
+<payloads permanent="true" radius="3.5" capture-filter="red-team" capture-time="50s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
   <payload id="first-checkpoint" name="Checkpoint A" location="23,4,-23" captured="first-captured-region" display-filter="first-spawn"/>
   <payload id="second-checkpoint" name="Checkpoint B" location="-3,2,-24" captured="second-captured-region" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
   <payload id="third-checkpoint" name="Checkpoint C" location="20,2,10" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
 </payloads>
 <destroyables show="false" required="false">
     <!-- Gates, will eventually be phased out in favour of structures -->
-    <destroyable region="1st-red-gates" id="warmup-gates-monument" name="warmupgates" owner="blue" materials="iron fence" modes="warmup-gates-mode"/>
-    <destroyable region="2nd-red-gate"  id="second-gates-monument" name="secondgates" owner="blue" materials="iron fence" modes="first-checkpoint-gates"/>
-    <destroyable region="3rd-red-gate"  id="third-gates-monuments" name="thirdgates"  owner="blue" materials="iron fence" modes="second-checkpoint-gates"/>
+    <destroyable region="1st-red-gates" id="warmup-gates-monument" name="warmupgates" owner="blue-team" materials="iron fence" modes="warmup-gates-mode"/>
+    <destroyable region="2nd-red-gate" id="second-gates-monument" name="secondgates" owner="blue-team" materials="iron fence" modes="first-checkpoint-gates"/>
+    <destroyable region="3rd-red-gate" id="third-gates-monuments" name="thirdgates" owner="blue-team" materials="iron fence" modes="second-checkpoint-gates"/>
 </destroyables>
 <modes>
     <mode after="25s" show-before="25s" id="warmup-gates-mode" name="Attackers will be released" material="air"/>
@@ -214,13 +213,14 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="6" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawns>
-    <respawn delay="5s" filter="only-red"/>
-    <respawn delay="7s" filter="only-blue"/>
+    <respawn delay="5s" filter="red-team"/>
+    <respawn delay="7s" filter="blue-team"/>
 </respawns>
 <hunger>
     <depletion>off</depletion>
