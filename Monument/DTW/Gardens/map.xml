@@ -1,0 +1,98 @@
+<map proto="1.5.0">
+<name>Gardens</name>
+<created>2018-02-04</created>
+<version>1.0.1</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+    <author uuid="663ec1c0-a87d-49cf-9079-8e0d5b98a74a"/> <!-- Lizxx -->
+	<author uuid="c78d4660-635a-417c-ad28-b432b6804f6b"/> <!-- Pndq -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="9" amount="24" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" yaw="180" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" region="red-spawn"/>
+    <default yaw="90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="16%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="left-blue-wool" min="117,81,198" max="120,88,201"/>
+        <cuboid id="right-blue-wool" min="19,81,198" max="22,88,201"/>
+        <cuboid id="left-red-wool" min="17,81,44" max="20,88,47"/>
+        <cuboid id="right-red-wool" min="115,81,44" max="118,88,47"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="59,0,209" max="79,oo,197"/>
+        <cuboid id="red-spawn-protection" min="57,0,47" max="77,oo,35"/>
+    </union>
+    <point id="blue-spawn">69.5,83,207.5</point>
+    <point id="red-spawn">67.5,83,37.5</point>
+    <point id="obs-spawn">125.5,119,122.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="5,32" max="132,213"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+	<kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item amount="5" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>108</maxbuildheight>
+</map>

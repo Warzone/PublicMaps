@@ -1,0 +1,95 @@
+<map proto="1.5.0">
+<name>Thrive</name>
+<created>2015-11-06</created>
+<version>1.0.1</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="2d915995-45ba-49e7-af98-bfc34a0aa35c"/> <!-- JamesPond -->
+    <author uuid="72b488cc-5b6b-4328-8c75-9e6f1350d276"/> <!-- cooli -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="20">Blue</team>
+    <team id="red-team" color="dark red" max="20">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="180" region="red-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="17%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="left-blue-wool" min="-54,65,-21" max="-61,75,-28"/>
+        <cuboid id="right-blue-wool" min="7,65,-21" max="14,75,-28"/>
+        <cuboid id="left-red-wool" min="7,65,36" max="14,75,43"/>
+        <cuboid id="right-red-wool" min="-54,65,36" max="-61,75,43"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-19,65,-32" max="-28,72,-40"/>
+        <cuboid id="red-spawn-protection" min="-19,65,47" max="-27,72,54"/>
+    </union>
+    <point id="blue-spawn">-23.5,66,-35.5</point>
+    <point id="red-spawn">-23.5,66,50.5</point>
+    <point id="obs-spawn">-23.5,60,7.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-67,-55" max="19,69"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>iron helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>77</maxbuildheight>
+</map>

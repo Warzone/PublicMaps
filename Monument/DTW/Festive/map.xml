@@ -1,0 +1,96 @@
+<map proto="1.5.0">
+<name>Festive</name>
+<created>2017-12-18</created>
+<version>1.0.3</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+</authors>
+<contributors>
+    <contributor uuid="01cebb01-e055-4cdb-abfa-b7803cc1ac26" contribution="Moral support"/> <!-- gianneeeh -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red-team" color="dark red" max="10">Red</team>
+    <team id="green-team" color="green" max="10">Green</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" unbreakable="true" material="iron spade"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="32" team-color="true" material="stained glass"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red-team" kit="default-kit" yaw="180" region="red-spawn"/>
+    <spawn team="green-team" kit="default-kit" region="green-spawn"/>
+    <default region="obs-spawn" yaw="90"/>
+</spawns>
+<!-- Monuments -->
+<destroyables name="Wool" completion="17%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable owner="red-team" region="red-wool"/>
+    <destroyable owner="green-team" region="green-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="red-wool" min="-137,69,208" max="-143,75,202"/>
+        <cuboid id="green-wool" min="-39,69,38" max="-33,75,44"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="red-spawn-protection" min="-81,68,232" max="-92,oo,215"/>
+        <cuboid id="green-spawn-protection" min="-84,68,32" max="-95,oo,14"/>
+    </union>
+    <point id="red-spawn">-86.5,73,219.5</point>
+    <point id="green-spawn">-88.5,73,27.5</point>
+    <point id="obs-spawn">-22.5,110,123.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-160,5" max="-15,240"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <item amount="15" material="wood"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>101</maxbuildheight>
+</map>

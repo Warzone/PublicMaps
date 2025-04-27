@@ -1,0 +1,75 @@
+<map proto="1.5.0">
+<name>Bridges</name>
+<created>2017-10-14</created>
+<version>1.1.2</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="0fee9b73-72ce-4793-926f-c2c45340f480"/> <!-- Nightsent -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"/> <!-- _Pear -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="9" amount="64" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="blue-team" yaw="90" region="blue-spawn" kit="default-kit"/>
+    <spawn team="red-team" yaw="-90" region="red-spawn" kit="default-kit"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<destroyables name="Wool" completion="63%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable owner="blue-team" region="blue-wool"/>
+    <destroyable owner="red-team" region="red-wool"/>
+</destroyables>
+<regions>
+    <union id="monuments">
+        <cuboid id="blue-wool" min="45,24,47" max="41,29,51"/>
+        <cuboid id="red-wool" min="-45,24,-47" max="-41,29,-51"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="47,-oo,4" max="39,oo,-4"/>
+        <cuboid id="red-spawn-protection" min="-47,-oo,-4" max="-39,oo,4"/>
+    </union>
+    <point id="blue-spawn">43.5,25,0.5</point>
+    <point id="red-spawn">-42.5,25,0.5</point>
+    <point id="obs-spawn">0.5,65,67.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-55,55" max="55,-54"/>
+    </negative>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>stone axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<maxbuildheight>52</maxbuildheight>
+</map>

@@ -1,0 +1,88 @@
+<map proto="1.5.0">
+<name>Tetris</name>
+<created>2017-09-16</created>
+<version>1.0.1</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="9f48f032-bb96-453b-9eee-201a8d030b61"/> <!-- Jamie47 -->
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="9" amount="64" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="180" region="red-spawn"/>
+    <default yaw="90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables name="Wool" completion="23%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable owner="blue-team" region="blue-wool"/>
+    <destroyable owner="red-team" region="red-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="17,14,-39" max="25,19,-47"/>
+        <cuboid id="red-wool" min="-24,14,44" max="-32,19,52"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-5,0,-45" max="-17,oo,-45"/>
+        <cuboid id="red-spawn-protection" min="-2,0,50" max="10,oo,60"/>
+    </union>
+    <point id="blue-spawn">-13.5,10,-51.5</point>
+    <point id="red-spawn">6.5,10,56.5</point>
+    <point id="obs-spawn">-0.5,63,-0.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-37,-55" max="30,60"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>30</maxbuildheight>
+</map>

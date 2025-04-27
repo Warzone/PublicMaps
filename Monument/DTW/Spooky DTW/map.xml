@@ -1,0 +1,94 @@
+<map proto="1.5.0">
+<name>Spooky DTW</name>
+<created>2017-10-22</created>
+<version>1.0.1</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="e19c0b9f-d47c-4a4e-b323-fdba2939a19c"/> <!-- Scoolins -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and world conversion"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="16">Ghouls</team>
+    <team id="red-team" color="dark red" max="16">Ghasts</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" unbreakable="true" material="stone pickaxe"/>
+        <item slot="4" amount="64" damage="1" material="stained glass"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <chestplate unbreakable="true" material="diamond chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+    <kit id="blue-kit" parents="default-kit">
+        <helmet locked="true" damage="0" material="skull item"/>
+    </kit>
+    <kit id="red-kit" parents="default-kit">
+        <helmet locked="true" damage="1" material="skull item"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="blue-kit" yaw="45" region="blue-spawn"/>
+    <spawn team="red-team" kit="red-kit" yaw="-135" region="red-spawn"/>
+    <default region="obs-spawn" yaw="90"/>
+</spawns>
+<!-- Monuments -->
+<destroyables name="Wool" completion="25%" repairable="false" materials="wool" show-progress="true" sparks="true"> 
+    <destroyable owner="blue-team" region="blue-wool"/>
+    <destroyable owner="red-team" region="red-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-wool" min="-28,49,-57"  max="-24,56,-61"/>
+        <cuboid id="red-wool" min="38,49,61" max="34,56,65"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="25,41,-65" max="34,oo,-74"/>
+        <cuboid id="red-spawn-protection" min="-15,42,69" max="-24,oo,78"/>
+    </union>
+    <point id="blue-spawn">30.5,43,-69.5</point>
+    <point id="red-spawn">-19.5,43,74.5</point>
+    <point id="obs-spawn">52.5,130,1.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-50,-100" max="64,95"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>stone pickaxe</item>
+    <item>stained glass</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>skull item</item>
+    <item>diamond chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>80</maxbuildheight>
+</map>

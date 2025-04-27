@@ -1,0 +1,102 @@
+<map proto="1.5.0">
+<name>Dark Harvest</name>
+<created>2022-06-13</created>
+<version>1.0.2</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f"/> <!-- Virus53 -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="purple-team" color="dark purple" max="8">Purple</team>
+    <team id="green-team" color="green" max="8">Green</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" enchantments="DIG_SPEED:2" material="stone axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" amount="1" material="golden apple"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="4s" amplifier="10">damage_resistance</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="purple-team" kit="default-kit" yaw="180" region="purple-spawn"/>
+    <spawn team="green-team" kit="default-kit" region="green-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<respawn delay="10s"/>
+<!-- Monuments -->
+<destroyables repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="purple-team" region="left-purple-wool"/>
+    <destroyable name="Right Wool" owner="purple-team" region="right-purple-wool"/>
+    <destroyable name="Left Wool" owner="green-team" region="left-green-wool"/>
+    <destroyable name="Right Wool" owner="green-team" region="right-green-wool"/>
+</destroyables>
+<!-- Filters -->
+<filters>
+    <any id="breakables">
+        <material>wood:0</material>
+        <material>wool:2</material>
+        <material>wool:5</material>
+    </any>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="left-purple-wool" min="22,15,-4" max="18,19,0"/>
+        <cuboid id="right-purple-wool" min="-18,15,-4" max="-22,19,0"/>
+        <cuboid id="left-green-wool" min="-22,15,-134" max="-18,19,-138"/>
+        <cuboid id="right-green-wool" min="18,15,-134" max="22,19,-138"/>
+    </union>
+    <union id="spawn-protections">
+        <cylinder id="purple-spawn-protection" base="0.5,12,37.5" radius="6" height="oo"/>
+        <cylinder id="green-spawn-protection" base="0.5,12,-174.5" radius="6" height="oo"/>
+    </union>
+    <point id="purple-spawn">0.5,16,37.5</point>
+    <point id="green-spawn">0.5,16,-174.5</point>
+    <point id="obs-spawn">0.5,16,-68.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-30,-190" max="31,53"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="everywhere" block="breakables" message="You can only modify blocks placed by a player!"/>
+    <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove/Repair -->
+<itemremove>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>35</maxbuildheight>
+</map>

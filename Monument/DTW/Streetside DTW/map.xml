@@ -1,0 +1,180 @@
+<map proto="1.5.0">
+<name>Streetside DTW</name>
+<variant id="halloween" world="halloween" override="true">Purgatory Street DTW</variant>
+<variant id="christmas" world="christmas" override="true">Frosty Street DTW</variant>
+<version>1.3.1</version>
+<include id="destroy-the-wool"/>
+<if variant="default">
+    <created>2024-07-26</created>
+</if>
+<if variant="halloween">
+    <created>2024-10-06</created>
+</if>
+<if variant="christmas">
+    <created>2024-10-06</created>
+</if>
+<!-- Map Authors & Contributors -->
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML advisory"/> <!-- _Pear -->
+</contributors>
+<!-- Broadcasts -->
+<broadcasts>
+    <tip after="1s" every="4m">Gold blocks regenerate on this map!</tip>
+</broadcasts>
+<!-- Teams -->
+<teams>
+    <team id="green-team" color="dark green" max="10">Green</team>
+    <team id="blue-team" color="blue" max="10">Blue</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"> 
+            <enchantment level="3">dig speed</enchantment>
+        </item>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <if variant="christmas">
+            <item slot="5" unbreakable="true" material="stone spade"/> <!-- to be able to break snow blocks easier in the Christmas variant -->
+        </if>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <default>
+        <region>
+            <point>35.5,61.5,-1.5</point>
+        </region>
+    </default>
+    <spawn team="blue-team" kit="default-kit" yaw="180">
+        <region>
+            <point>82.5,27,89.5</point>
+        </region>
+    </spawn>
+    <spawn team="green-team" kit="default-kit" yaw="-180">
+        <region>
+            <point>-5.5,27,89.5</point>
+        </region>
+    </spawn>
+</spawns>
+<!-- Filters -->
+<filters>
+    <material id="only-gold">gold block</material>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <negative id="not-map">
+        <rectangle id="map" min="-26,12" max="103,96"/>
+    </negative>
+    <union id="spawn-protections">
+        <rectangle id="blue-spawn-protection" min="78,75" max="87,96"/>
+        <rectangle id="green-spawn-protection" min="-2,99" max="-16,74"/>
+    </union>
+    <union id="gold-spawners">
+        <cuboid id="blue-gold-spawn" min="83.5,25,69.5" max="90.5,30,74.5"/>
+        <cuboid id="green-gold-spawn" min="-7,25,74" max="-14,30,68"/>
+    </union>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="gold-spawners" block-break="only-gold" block-place="deny(participating)" message="You may only break iron blocks!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="spawn-protections" use="never"/> <!-- Split from first spawn-protections to avoid duplicate messages -->
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Monuments -->
+<destroyables name="Wool" completion="25%" materials="wool" repairable="false" show-progress="true" sparks="true">
+    <destroyable id="blue-monument" owner="blue-team">
+        <region>
+            <cuboid min="85,25,50" max="81,31,46"/>
+        </region>
+    </destroyable>
+    <destroyable id="green-monument" owner="green-team">
+        <region>
+            <cuboid min="-9,25,46" max="-5,31,50"/>
+        </region>
+    </destroyable>
+</destroyables>
+<!-- Renewables -->
+<renewables>
+    <renewable interval="10s" grow="true" sound="false" region="gold-spawners" renew-filter="only-gold"/>
+</renewables>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="5" material="arrow"/>
+        <item amount="10" material="wood"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Block Drops -->
+<block-drops>
+    <rule wrong-tool="true">
+        <filter>
+            <material>gold block</material>
+        </filter>
+        <drops>
+            <item amount="9" material="gold ingot"/>
+        </drops>
+    </rule>
+</block-drops>
+<!-- Item Rules -->
+<item-mods>
+    <rule>
+        <match>
+            <material>gold sword</material>
+            <material>gold axe</material>
+            <material>gold pickaxe</material>
+            <material>gold spade</material>
+            <material>gold helmet</material>
+            <material>gold chestplate</material>
+            <material>gold leggings</material>
+            <material>gold boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<!-- Item Remove -->
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>sapling</item>
+    <item>wool:11</item>
+    <item>wool:13</item>
+    <item>iron block</item>
+    <item>iron ingot</item>
+     <if variant="christmas">
+        <item>snowball</item> <!-- Prevent players from getting snow balls in the Christmas variant -->
+    </if>
+</itemremove>
+<!-- Item keep -->
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>wood</item>
+</itemkeep>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<!-- Misc -->
+<maxbuildheight>41</maxbuildheight>
+</map>

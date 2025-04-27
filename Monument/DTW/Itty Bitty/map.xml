@@ -1,0 +1,341 @@
+<map proto="1.5.0">
+<name>Itty Bitty</name>
+<variant id="ctw" world="ctw">CTW</variant>
+<variant id="koth" world="koth">KOTH</variant>
+<variant id="payload" world="payload">Payload</variant>
+<version>1.1.1</version>
+<if variant="default">
+    <include id="destroy-the-wool"/>
+    <created>2018-02-21</created>
+    <constant id="build-height">9</constant>
+    <constant id="give-gapple-killreward">0</constant>
+</if>
+<if variant="ctw">
+    <gamemode>ctw</gamemode>
+    <created>2018-02-21</created>
+    <constant id="game-objective">Capture the wools and bring them back to your base!</constant>
+    <constant id="build-height">10</constant>
+</if>
+<if variant="koth">
+    <gamemode>arcade</gamemode>
+    <gamemode>koth</gamemode>
+    <created>2018-12-16</created>
+    <constant id="game-objective">Reach 600 points before the opposing team!</constant>
+    <constant id="build-height">8</constant>
+</if>
+<if variant="payload">
+    <!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
+    <gamemode>arcade</gamemode>
+    <gamemode>payload</gamemode>
+    <created>2022-09-24</created>
+    <constant id="game-objective">Attackers must push the payload to the end of the map, defenders must stop them from doing so!</constant>
+</if>
+<unless variant="default">
+    <!-- DTW include already handles this, so we'll go with this XML jank for now -->
+    <objective>${game-objective}</objective>
+</unless>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391" contribution="Original map design"/> <!-- _Rascal -->
+    <if variant="koth,payload">
+        <author uuid="8e96ab64-74fa-46ab-b436-d35187e118af" contribution="Original map design"/> <!-- Mega_Rascal -->
+    </if>
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+    <if variant="koth">
+        <contributor uuid="811968c3-0a9f-4cb5-80af-19ce37141341"/> <!-- BennyDoesStuff -->
+    </if>
+    <if variant="payload">
+        <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map conversion and XML"/> <!-- _Pear -->
+        <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Mutual XML assistance"/> <!-- Cazadorian -->
+    </if>
+</contributors>
+<!-- Teams -->
+<unless variant="payload">
+    <constant id="blue-team-name">Blue</constant>
+    <constant id="red-team-name">Red</constant>
+</unless>
+<if variant="payload">
+    <constant id="blue-team-name">Defenders</constant>
+    <constant id="red-team-name">Attackers</constant>
+</if>
+<teams>
+    <team id="blue-team" color="blue" max="10">${blue-team-name}</team>
+    <team id="red-team" color="dark red" max="10">${red-team-name}</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <if variant="ctw">
+            <item slot="1" unbreakable="true" material="stone axe"/>
+        </if>
+        <if variant="koth,payload">
+            <item slot="1" unbreakable="true" material="bow"/>
+            <item slot="8" material="golden apple"/>
+            <item slot="9" material="arrow"/>
+        </if>
+        <if variant="default,ctw">
+            <item slot="2" amount="8" material="wood"/>
+        </if>
+        <if variant="koth">
+            <item slot="2" team-color="true" amount="8" material="stained glass"/>
+        </if>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="3" amplifier="255">resistance</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" yaw="90" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="-90" region="red-spawn"/>
+    <default yaw="14.5" region="obs-spawn"/>
+</spawns>
+<!-- Filters -->
+<filters>
+    <all id="only-wood-or-wool-in-map">
+        <any>
+            <material id="only-wood-in-map">wood</material>
+            <material>wool</material>
+        </any>
+    </all>
+    <if variant="koth">
+        <any id="interactable">
+            <material>stained glass</material>
+            <all>
+                <material>gravel</material>
+                <cause>world</cause>
+            </all>
+        </any>
+    </if>
+    <if variant="payload">
+        <not id="first-spawn">
+            <completed>first-checkpoint</completed>
+        </not>
+        <all id="second-spawn">
+            <completed>first-checkpoint</completed>
+            <not>
+                <completed>second-checkpoint</completed>
+            </not>
+        </all>
+        <all id="third-spawn">
+            <completed>first-checkpoint</completed>
+            <completed>second-checkpoint</completed>
+            <not>
+                <completed>third-checkpoint</completed>
+            </not>
+        </all>
+        <all id="fourth-spawn">
+            <completed id="first-checkpoint-completed">first-checkpoint</completed>
+            <completed id="second-checkpoint-completed">second-checkpoint</completed>
+            <completed id="third-checkpoint-completed">third-checkpoint</completed>
+        </all>
+    </if>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <if variant="default">
+        <!-- Wool monuments -->
+        <union id="blue-wool">
+            <!-- Lower Front -->
+            <block>25,2,25</block>
+            <block>25,2,39</block>
+            <block>25,3,25</block>
+            <block>25,3,39</block>
+            <!-- Upper Rear -->
+            <block>26,5,32</block>
+            <block>29,5,28</block>
+            <block>30,5,36</block>
+            <block>26,6,32</block>
+            <block>29,6,28</block>
+            <block>30,6,36</block>
+        </union>
+        <union id="red-wool">
+            <!-- Lower Rear -->
+            <block>-1,2,25</block>
+            <block>-1,2,39</block>
+            <block>-1,3,25</block>
+            <block>-1,3,39</block>
+            <!-- Upper Rear -->
+            <block>-2,5,32</block>
+            <block>-5,5,28</block>
+            <block>-6,5,36</block>
+            <block>-2,6,32</block>
+            <block>-5,6,28</block>
+            <block>-6,6,36</block>
+        </union>
+    </if>
+    <!-- Spawn protection -->
+    <union id="spawn-protections">
+        <if variant="default">
+            <cuboid id="blue-spawn-protection" min="24,0,31" max="28,4,34"/>
+            <cuboid id="red-spawn-protection" min="-3,0,31" max="1,4,34"/>
+        </if>
+        <if variant="ctw">
+            <cuboid id="blue-spawn-protection" min="23,0,29" max="29,oo,36"/>
+            <cuboid id="red-spawn-protection" min="-4,0,28" max="2,oo,36"/>
+        </if>
+        <if variant="koth,payload">
+            <cuboid id="blue-spawn-protection" min="69,0,-10" max="80,oo,10"/>
+            <cuboid id="red-spawn-protection" min="-68,0,-10" max="-80,oo,10"/>
+        </if>
+    </union>
+    <if variant="ctw">
+        <!-- Wool Rooms -->
+        <cuboid id="blue-wool-rooms" min="31,0,22" max="39,oo,43"/>
+        <cuboid id="red-wool-rooms" min="-6,0,43" max="-14,oo,22"/>
+        <!-- Wool Monuments -->
+        <!-- Blue Team -->
+        <block id="blue-team-pink-wool">27,3,31</block>
+        <block id="blue-team-purple-wool">27,3,33</block>
+        <!-- Red Team -->
+        <block id="red-team-cyan-wool">-3,3,31</block>
+        <block id="red-team-blue-wool">-3,3,33</block>
+    </if>
+    <if variant="koth">
+        <cuboid id="hill-protection" min="-4,0,6" max="5,oo,-5"/>
+    </if>
+    <if variant="payload">
+        <union id="captured-display-regions">
+            <cuboid id="first-captured-region" min="-32,1,2" max="-36,3,-2"/>
+            <cuboid id="second-captured-region" min="2,2,2" max="-2,4,-2"/>
+            <cuboid id="third-captured-region" min="36,1,2" max="32,3,-2"/>
+        </union>
+    </if>
+    <!-- Spawns -->
+    <if variant="default,ctw">
+        <point id="blue-spawn">26.5,2,32.5</point>
+        <point id="red-spawn">-1.5,2,32.5</point>
+        <point id="obs-spawn">12.5,14,14.5</point>
+    </if>
+    <if variant="koth">
+        <point id="blue-spawn">75.5,2,0.5</point>
+        <point id="red-spawn">-74.5,2,0.5</point>
+        <point id="obs-spawn">0.5,14,-17.5</point>
+    </if>
+    <if variant="payload">
+        <point id="blue-spawn">75.5,3,0.5</point>
+        <point id="red-spawn">-74.5,3,0.5</point>
+        <point id="obs-spawn">0.5,15,-17.5</point>
+    </if>
+    <negative id="not-map">
+        <if variant="default">
+            <rectangle id="map" min="-8,23" max="33,42"/>
+        </if>
+        <if variant="ctw">
+            <rectangle id="map" min="-14,22" max="39,43"/>
+        </if>
+        <if variant="koth">
+            <rectangle id="map" min="-80,-14" max="80,14"/>
+        </if>
+    </negative>
+    <!-- Applications -->
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+    <unless variant="payload">
+        <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+        <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    </unless>
+    <if variant="default">
+        <apply region="map" block="only-wood-or-wool-in-map" message="You may only place or break wood!"/>
+    </if>
+    <if variant="ctw">
+        <apply region="blue-wool-rooms" enter="red-team" message="You may not enter your own wool room!"/>
+        <apply region="blue-wool-rooms" block="never" use="red-team" message="You are not allowed to modify terrain here."/>
+        <apply region="red-wool-rooms" enter="blue-team" message="You may not enter your own wool room!"/>
+        <apply region="red-wool-rooms" block="never" use="blue-team" message="You are not allowed to modify terrain here."/>
+        <apply block="only-wood-in-map" message="You may only place or break wood!"/>
+    </if>
+    <if variant="koth">
+        <apply region="hill-protection" block="never" message="You are not allowed to modify terrain here."/>
+        <apply block="interactable" message="You may only place or break glass!"/>
+    </if>
+    <if variant="payload">
+        <apply block="never" use="never"/>
+    </if>
+</regions>
+<!-- Objectives -->
+<if variant="default">
+    <!-- Monuments -->
+    <destroyables name="Wool" repairable="false" materials="wool" show-progress="true" sparks="true">
+        <destroyable owner="blue-team" region="blue-wool"/>
+        <destroyable owner="red-team" region="red-wool"/>
+    </destroyables>
+</if>
+<if variant="ctw">
+    <!-- Wools -->
+    <wools craftable="false">
+        <!-- Blue Team -->
+        <wool team="blue-team" monument="blue-team-pink-wool" color="pink" location="-12,2,39"/>
+        <wool team="blue-team" monument="blue-team-purple-wool" color="purple" location="-12,2,25"/>
+        <!-- Red Team -->
+        <wool team="red-team" monument="red-team-cyan-wool" color="cyan" location="36,2,25"/>
+        <wool team="red-team" monument="red-team-blue-wool" color="blue" location="36,2,39"/>
+    </wools>
+</if>
+<if variant="koth">
+    <control-points capture-time="7s" incremental="true" neutral-state="true" show-progress="true" required="false">
+        <control-point name="Center" points="2" progress="center" captured="center">
+            <capture>
+                <cuboid id="center" min="-2,0,3" max="3,6,-2"/>
+            </capture>
+        </control-point>
+    </control-points>
+    <score>
+        <limit>600</limit>
+    </score>
+</if>
+<if variant="payload">
+    <payloads permanent="true" radius="3.5" capture-filter="red-team" capture-time="30s" decay-rate="0.25" recovery-rate="0.25" contested-rate="0">
+        <payload id="first-checkpoint" name="Checkpoint A" location="-62.5,3,0.5" captured="first-captured-region" display-filter="first-spawn"/>
+        <payload id="second-checkpoint" name="Checkpoint B" location="-33.5,1,0.5" captured="second-captured-region" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
+        <payload id="third-checkpoint" name="Checkpoint C" location="0.5,2,0.5" captured="third-captured-region" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
+        <payload id="fourth-checkpoint" name="Checkpoint D" location="34.5,1,0.5" player-filter="third-checkpoint-completed" display-filter="fourth-spawn"/>
+    </payloads>
+    <time result="blue-team">8m</time>
+</if>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone axe</item>
+    <item>wood</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+    <item>stone plate</item>
+</itemremove>
+<unless variant="default">
+    <!-- Kill Rewards -->
+    <kill-rewards>
+        <kill-reward>
+            <item material="golden apple"/>
+            <if variant="koth,payload">
+                <item material="arrow"/>
+            </if>
+        </kill-reward>
+    </kill-rewards>
+</unless>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<if variant="payload">
+    <respawns>
+        <respawn delay="2s" filter="blue-team"/>
+        <respawn delay="3s" filter="red-team"/>
+    </respawns>
+</if>
+<unless variant="payload">
+    <maxbuildheight>${build-height}</maxbuildheight>
+</unless>
+</map>

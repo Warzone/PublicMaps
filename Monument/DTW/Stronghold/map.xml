@@ -1,0 +1,98 @@
+<map proto="1.5.0">
+<name>Stronghold</name>
+<created>2017-09-30</created>
+<version>1.0.1</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
+    <author uuid="c78d4660-635a-417c-ad28-b432b6804f6b"/> <!-- Pndq -->
+    <author uuid="9f48f032-bb96-453b-9eee-201a8d030b61"/> <!-- Jamie47 -->
+    <author uuid="8e96ab64-74fa-46ab-b436-d35187e118af"/> <!-- Mega_Rascal -->
+</authors>
+<contributors>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="10">Blue</team>
+    <team id="red-team" color="dark red" max="10">Red</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron axe"/>
+        <item slot="3" amount="64" material="wood"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" material="iron helmet"/>
+        <chestplate unbreakable="true" material="iron chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="180" region="red-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="31%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-wool"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-wool"/>
+    <destroyable name="Left Wool" owner="red-team" region="left-red-wool"/>
+    <destroyable name="Right Wool" owner="red-team" region="right-red-wool"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="left-blue-wool" min="454,18,444" max="457,22,447"/>
+        <cuboid id="right-blue-wool" min="544,18,444" max="547,22,447"/>
+        <cuboid id="left-red-wool" min="544,18,554" max="547,22,557"/>
+        <cuboid id="right-red-wool" min="454,18,554" max="457,22,557"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="515,8,425" max="486,oo,409"/>
+        <cuboid id="red-spawn-protection" min="486,8,575" max="515,oo,591"/>
+    </union>
+    <point id="blue-spawn">500.5,18,414.5</point>
+    <point id="red-spawn">500.5,18,586.5</point>
+    <point id="obs-spawn">460.5,53,500.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="444,591" max="556,409"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>iron helmet</item>
+    <item>iron chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2"/>
+        </filter>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>40</maxbuildheight>
+</map>

@@ -1,0 +1,126 @@
+<map proto="1.5.0">
+<name>Elysian Isles</name>
+<created>2024-08-06</created>
+<version>1.0.3</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
+</authors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="orange-team" color="gold" max="5">Orange</team>
+</teams>
+<!-- broadcast -->
+<broadcasts>
+    <tip after="5s" every="30s">Use the portals loacted at the corners of the bottom layer to go back up!</tip>
+</broadcasts>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="16" team-color="true" material="stained glass"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="8" amount="12" material="arrow"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" region="blue-spawn"/>
+    <spawn team="orange-team" kit="default-kit" yaw="-180" region="orange-spawn"/>
+    <default yaw="-90" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables completion="40%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable name="Left Wool" owner="blue-team" region="left-blue-monument"/>
+    <destroyable name="Right Wool" owner="blue-team" region="right-blue-monument"/>
+    <destroyable name="Left Wool" owner="orange-team" region="left-orange-monument"/>
+    <destroyable name="Right Wool" owner="orange-team" region="right-orange-monument"/>
+</destroyables>
+<!-- Portals -->
+<portals>
+    <!-- Blue Portal -->
+    <portal yaw="@-145">
+        <region>
+            <cuboid min="164,63,-12" max="162,66,-13"/>
+        </region>
+        <destination>
+            <point>153.5,72,-8.5</point>
+      </destination>
+    </portal>
+    <!-- Orange Portal -->
+    <portal yaw="@45">
+        <region>
+            <cuboid min="196,63,12" max="198,66,14"/>
+        </region>
+        <destination>
+            <point>207.5,72,9.5</point>
+        </destination>
+    </portal>
+</portals>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <!-- Blue -->
+        <cuboid id="left-blue-monument" min="203,64,-33" max="207,70,-29"/>
+        <cuboid id="right-blue-monument" min="156,75,-35" max="152,81,-31"/>
+        <!-- Orange -->
+        <cuboid id="left-orange-monument" min="157,64,34" max="153,70,30"/>
+        <cuboid id="right-orange-monument" min="204,81,36" max="208,75,32"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="177,0,-33" max="184,oo,-43"/>
+        <cuboid id="orange-spawn-protection" min="184,0,34" max="177,oo,43"/>
+    </union>
+    <union id="portal-protections">
+        <cuboid id="blue-portal-protection" min="168,60,-8" max="161,68,-15"/>
+        <cuboid id="blue-up-portal-protection" min="152,71,-8" max="147,76,-4"/>
+        <cuboid id="orange-portal-protection" min="193,60,9" max="200,68,16"/>
+        <cuboid id="orange-up-portal-protection" min="209,71,9" max="214,76,5"/>
+    </union>
+    <point id="blue-spawn">180.5,74,-37.5</point>
+    <point id="orange-spawn">180.5,74,37.5</point>
+    <point id="obs-spawn">180.5,73,0.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="215,-43" max="146,44"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="portal-protections" block="never" message="You are not allowed to modify the portal area."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<!-- Item Remove -->
+<itemremove>
+    <item>chainmail leggings</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Item Keep -->
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>stained glass</item>
+</itemkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item amount="2" team-color="true" material="stained glass"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>82</maxbuildheight>
+</map>

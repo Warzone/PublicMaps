@@ -1,0 +1,24 @@
+<map>
+<!-- Base "Destroy the Wool" include file -->
+<!-- Version 2025.04.21-1 -->
+<game>Destroy the Wool</game>
+<objective>Destroy the other team's monument, made of colored wool.</objective>
+<gamemode>dtm</gamemode>
+<!-- Constants -->
+<constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
+    <constant id="game-objective">Destroy the other team's monument, made of colored wool.</constant>
+    <constant id="give-gapple-killreward">1</constant>
+</constants>
+<!-- Crafting -->
+<crafting>
+    <disable>shears</disable>
+</crafting>
+<!-- Kill rewards -->
+<if constant="give-gapple-killreward" constant-value="1">
+    <include id="gapple-kill-reward"/>
+</if>
+<!-- Disable hunger -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

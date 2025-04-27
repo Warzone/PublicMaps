@@ -1,0 +1,92 @@
+<map proto="1.5.0">
+<name>Sandstone 2</name>
+<created>2017-10-06</created>
+<version>1.1.2</version>
+<include id="destroy-the-wool"/>
+<authors>
+    <author uuid="e19c0b9f-d47c-4a4e-b323-fdba2939a19c"/> <!-- Scoolins -->
+    <author uuid="2d915995-45ba-49e7-af98-bfc34a0aa35c"/> <!-- JamesPond -->
+    <author uuid="a864ce8a-ed92-4492-9ac7-f2f17e907966"/> <!-- Clothier -->
+</authors>
+<contributors>
+    <contributor uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Converted the map's JSON to XML"/> <!-- Flashee -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="dark aqua" max="5">Blue</team>
+    <team id="yellow-team" color="yellow" max="5">Yellow</team>
+</teams>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="blue-team" kit="default-kit" yaw="-90" region="blue-spawn"/>
+    <spawn team="yellow-team" kit="default-kit" yaw="90" region="yellow-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
+</spawns>
+<!-- Monuments -->
+<destroyables name="Wool" completion="25%" repairable="false" materials="wool" show-progress="true" sparks="true">
+    <destroyable owner="blue-team" region="blue-monument"/>
+    <destroyable owner="yellow-team" region="yellow-monument"/>
+</destroyables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="monuments">
+        <cuboid id="blue-monument" min="-94,34,-24" max="-91,39,-21"/>
+        <cuboid id="yellow-monument" min="20,34,-24" max="23,39,-21"/>
+    </union>
+    <union id="spawn-protections">
+        <cuboid id="blue-spawn-protection" min="-101,40,-12" max="-112,oo,-33"/>
+        <cuboid id="blue-floor-protection" min="-86,33,-29" max="-100,34,-16"/>
+        <cuboid id="yellow-spawn-protection" min="30,40,-33" max="41,oo,-12"/>
+        <cuboid id="yellow-floor-protection" min="14,33,-15" max="28,34,-31"/>
+    </union>
+    <point id="blue-spawn">-107.5,41,-22.5</point>
+    <point id="yellow-spawn">36.5,41,-22.5</point>
+    <point id="obs-spawn">-35.5,52,51.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="-112,-47" max="41,2"/>
+    </negative>
+    <!-- Applications -->
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="yellow-spawn-protection" enter="yellow-team" message="You may not enter the enemy's spawn."/>
+</regions>
+<!-- Item Remove -->
+<itemremove>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>wood</item>
+    <item>arrow</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>iron leggings</item>
+    <item>iron boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>71</maxbuildheight>
+</map>
