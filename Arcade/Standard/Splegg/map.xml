@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Splegg</name>
-<version>1.0.2</version>
+<version>1.1.0</version>
 <objective>Use your Egg Shooter to break blocks under your enemies!</objective>
 <gamemode>arcade</gamemode>
 <created>2024-03-23</created>
@@ -10,16 +10,17 @@
 <blitz>
     <lives>1</lives>
 </blitz>
-<time>4m</time>
+<time>3m</time>
 <broadcasts>
     <alert after="1s">`cYou will recieve your egg shooter in 5 seconds!</alert>
     <alert after="10s">`cWorld border closes in 2 minutes!</alert>
+    <alert after="2m">`cWorld border is closing!</alert>
+    <tip after="20s" every="1m">`cFind Power Ups across the map!</tip>
     <tip after="1m" every="1m">`cTry double jumping to save yourself from the void!</tip>
 </broadcasts>
 <players max="20" colors="true"/>
 <kits>
     <kit id="default" force="true">
-        <game-mode>adventure</game-mode>
         <max-health>1</max-health>
         <double-jump power="3" recharge-time="3s" recharge-before-landing="true"/>
         <helmet team-color="true" unbreakable="true" material="leather helmet" locked="true"/>
@@ -28,9 +29,50 @@
         <boots team-color="true" unbreakable="true" material="leather boots" locked="true"/>
     </kit>
     <kit id="Egg-Shooter" parents="default">
-        <item projectile="eggs" name="`aEgg Shooter" material="diamond hoe"/>
+        <item projectile="eggs" name="`a`lEgg Shooter" material="diamond hoe" prevent-sharing="true"/>
     </kit>
 </kits>
+<spawners>
+    <spawner spawn-region="powerup-spawner-region-a" player-region="everywhere" max-entities="5" min-delay="5s" max-delay="10s" filter="await-5s">
+        <item amount="1" name="`c`lPortable Platform" consumable="platform-spawner" material="clay brick"/>
+        <item amount="1" name="`b`lSpeed Power" consumable="speed-powerup" material="ghast tear"/>
+        <item amount="1" name="`4`lExplosive Egg" grenade="true" grenade-power="4" grenade-fire="true" material="egg"/>
+        <item amount="1" name="`a`lJump Boost Power" consumable="jump-boost-powerup" material="rabbit"/>
+        <item amount="1" name="`8`lBlindness Potion" material="potion" damage="16390">
+            <effect duration="10s" amplifier="1">blindness</effect>
+        </item>
+    </spawner>
+    <spawner spawn-region="powerup-spawner-region-b" player-region="everywhere" max-entities="5" min-delay="5s" max-delay="10s" filter="await-5s">
+        <item amount="1" name="`c`lPortable Platform" consumable="platform-spawner" material="clay brick"/>
+        <item amount="1" name="`b`lSpeed Power" consumable="speed-powerup" material="ghast tear"/>
+        <item amount="1" name="`4`lExplosive Egg" grenade="true" grenade-power="4" grenade-fire="true" material="egg"/>
+        <item amount="1" name="`a`lJump Boost Power" consumable="jump-boost-powerup" material="rabbit"/>
+        <item amount="1" name="`8`lBlindness Potion" material="potion" damage="16390">
+            <effect duration="10s" amplifier="1">blindness</effect>
+        </item>
+    </spawner>
+</spawners>
+<consumables>
+    <consumable id="platform-spawner" action="spawn-platform" on="click"/>
+    <consumable id="speed-powerup" action="give-speed" on="click"/>
+    <consumable id="jump-boost-powerup" action="give-jump" on="click"/>
+</consumables>
+<regions>
+    <cuboid id="powerup-spawner-region-a" min="-30, 73, -30" max="31, 76, 31"/>
+    <cuboid id="powerup-spawner-region-b" min="-24, 62, -25" max="26, 65, 26"/>
+</regions>
+<actions>
+    <action id="spawn-platform" scope="player">
+        <paste-structure structure="powerup-platform" x="x-1.25" y="y" z="z-1.25"/>
+        <teleport x="x" y="y + 0.5" z="z"/>
+    </action>
+    <kit id="give-speed" force="true">
+        <effect duration="10" amplifier="2">speed</effect>
+    </kit>
+    <kit id="give-jump" force="true">
+        <effect duration="10" amplifier="4">jump boost</effect>
+    </kit>
+</actions>
 <spawns>
     <spawn kit="default">
         <regions>
@@ -68,6 +110,13 @@
         </destroy-filter>
     </projectile>
 </projectiles>
+<structures>
+	<structure id="powerup-platform">
+		<region>
+			<cuboid min="-1, 69, 30" max="3, 72, 34"/>
+		</region>
+	</structure>
+</structures>
 <hunger>
     <depletion>off</depletion>
 </hunger>
@@ -75,9 +124,30 @@
     <damage>fall</damage>
     <damage>entity attack</damage>
     <damage>projectile</damage>
+    <damage>fire</damage>
+    <damage>block explosion</damage>
 </disabledamage>
+<variables>
+    <player-location id="x" component="x"/>
+    <player-location id="y" component="y"/>
+    <player-location id="z" component="z"/>
+</variables>
 <world-borders center="0,0">
     <world-border size="90"/>
-    <world-border size="1" after="2m" duration="110s" damage="100" buffer="0"/>
+    <world-border size="1" after="2m" duration="60s" damage="100" buffer="0"/>
 </world-borders>
+<toolrepair>
+    <tool>diamond hoe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stained clay</item>
+    <item>sea lantern</item>
+    <item>step</item>
+    <item>quartz block</item>
+    <item>brick</item>
+</itemremove>
 </map>
