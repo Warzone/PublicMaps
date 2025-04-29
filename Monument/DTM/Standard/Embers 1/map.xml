@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Embers 1</name>
-<version>1.2</version>
+<version>1.2.1</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- timaeusTestified -->
 </authors>
@@ -12,19 +13,19 @@
 </teams>
 <spawns>
     <spawn team="blue-team" kit="spawn-kit" yaw="90">
-        <regions>
+        <region>
             <cylinder base="119.5,88,17.5" height="0" radius="2"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="red-team" kit="spawn-kit" yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-76.5,88,17.5" height="0" radius="2"/>
-        </regions>
+        </region>
     </spawn>
-    <default>
-        <regions yaw="180">
+    <default yaw="180">
+        <region>
             <cylinder base="22.5,132,118.5" height="0" radius="3"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <kits>
@@ -45,18 +46,14 @@
         <effect duration="5" amplifier="255">heal</effect>
     </kit>
 </kits>
-<filters>
-    <team id="only-blue">blue-team</team>
-    <team id="only-red">red-team</team>
-</filters>
 <regions>
     <union id="spawns">
         <circle center="22.5,118.5" radius="10.5"/>
         <circle id="red-spawn" center="-76.5,17.5" radius="8.5"/>
         <circle id="blue-spawn" center="119.5,17.5" radius="8.5"/>
     </union>
-    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn!"/>
-    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn!"/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn" enter="red-team" message="You may not enter the enemy's spawn!"/>
     <apply region="spawns" block="never" message="You may not modify spawn areas!"/>
 </regions>
 <destroyables materials="obsidian">
@@ -101,11 +98,6 @@
         </region>
     </destroyable>
 </destroyables>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
