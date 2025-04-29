@@ -1,9 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Snowy Wars</name>
+<version>1.6.6</version>
+<include id="gapple-kill-reward"/>
 <variant id="christmas" world="christmas">Christmas</variant>
 <variant id="halloween" world="halloween">Halloween</variant>
-<version>1.6.4</version>
 <objective>Break the enemy's monument!</objective>
+<gamemode>dtm</gamemode>
 <authors>
     <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- Ro_G -->
     <if variant="halloween">
@@ -100,7 +102,7 @@
             <cylinder base="-571.5,10,259.5" height="6" radius="7"/> <!-- East -->
         </union>
     </negative>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-631,236" max="-560,373"/>
     </complement>
@@ -118,11 +120,9 @@
     <apply enter="never"  region="obs-spawn" message="You may not enter the observers spawn area!"/>
     <apply block="no-melting"/>
     <apply block="never" region="spawns" message="You may not break or place blocks in the spawn regions!"/>
-    <apply block="never" region="void" message="You may not build outside of the playing field!"/>
+    <apply block="never" region="void-area" message="You may not build outside of the playing field!"/>
     <apply block-place="never" region="height-limit">
-        <message>
-            {"translate":"match.maxBuildHeight"}
-        </message>
+        <message>{"translate":"match.maxBuildHeight"}</message>
     </apply>
 </regions>
 <destroyables name="Monument" material="obsidian" mode-changes="true">
@@ -159,18 +159,13 @@
 <block-drops>
     <rule>
         <filter>
-            <material>wood</material>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
         </drops>
     </rule>
 </block-drops>
@@ -178,7 +173,6 @@
     <kill-reward>
         <item amount="16" damage="2" material="wood"/>
         <item amount="8" material="glass"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <item-mods>
