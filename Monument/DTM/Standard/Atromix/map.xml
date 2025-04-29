@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Atromix</name>
-<version>1.6.9</version>
+<version>1.6.10</version>
 <objective>Destroy the enemy team's front and back monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="9909505b-1f0f-4af1-ae21-afbee92427ce"/> <!-- Winarve -->
     <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b"/> <!-- ItsMiiOlly -->
@@ -56,25 +57,9 @@
     <spawn team="red-team" kit="spawn-kit" region="red-spawn-point-2" yaw="135"/>
     <spawn team="orange-team" kit="spawn-kit" region="orange-spawn-point-1" yaw="-45"/>
     <spawn team="orange-team" kit="spawn-kit" region="orange-spawn-point-2" yaw="-135"/>
-    <default region="obs-spawn-point" yaw="0"/>
+    <default region="obs-spawn-point"/>
 </spawns>
-<destroyables completion="100%">
-    <destroyable owner="red-team" region="red-back-monument" name="Back Monument" materials="obsidian" show-progress="false" mode-changes="true"/>
-    <destroyable owner="red-team" region="red-front-monument" name="Front Monument" materials="beacon;emerald block" show-progress="true" mode-changes="false"/>
-    <destroyable owner="orange-team" region="orange-back-monument" name="Back Monument" materials="obsidian" show-progress="false" mode-changes="true"/>
-    <destroyable owner="orange-team" region="orange-front-monument" name="Front Monument" materials="beacon;emerald block" show-progress="true" mode-changes="false"/>
-</destroyables>
-<modes>
-    <mode after="30m" material="beacon" name="`bBEACON MONUMENT MODE"/>
-    <mode after="1h" material="gold block" name="`6GOLDEN MONUMENT MODE"/>
-    <mode after="90m" material="glass" name="`fGLASS MONUMENT MODE"/>
-</modes>
 <filters>
-    <team id="only-red">red-team</team>
-    <team id="only-orange">orange-team</team>
-    <not id="not-void">
-        <void/>
-    </not>
     <deny id="deny-beacon">
         <material>beacon</material>
     </deny>
@@ -107,12 +92,23 @@
         </union>
     </negative>
     <!-- applicators -->
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-orange" region="orange-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="orange-team" region="orange-spawn" message="You may not enter the enemy's spawn!"/>
     <apply block="never" region="spawns" message="You may not edit spawn"/>
-    <apply block-place="not-void" region="not-build-region" message="You may not build in the void!"/>
+    <apply block-place="deny(void)" region="not-build-region" message="You may not build in the void!"/>
     <apply use="deny-beacon"/>
 </regions>
+<destroyables>
+    <destroyable owner="red-team" region="red-back-monument" name="Back Monument" materials="obsidian" show-progress="false" mode-changes="true"/>
+    <destroyable owner="red-team" region="red-front-monument" name="Front Monument" materials="beacon;emerald block" show-progress="true" mode-changes="false"/>
+    <destroyable owner="orange-team" region="orange-back-monument" name="Back Monument" materials="obsidian" show-progress="false" mode-changes="true"/>
+    <destroyable owner="orange-team" region="orange-front-monument" name="Front Monument" materials="beacon;emerald block" show-progress="true" mode-changes="false"/>
+</destroyables>
+<modes>
+    <mode after="30m" material="beacon" name="`bBEACON MONUMENT MODE"/>
+    <mode after="1h" material="gold block" name="`6GOLDEN MONUMENT MODE"/>
+    <mode after="90m" material="glass" name="`fGLASS MONUMENT MODE"/>
+</modes>
 <itemkeep>
     <item>stone sword</item>
     <item>bow</item>
@@ -172,15 +168,14 @@
         <modify unbreakable="true"/>
     </rule>
 </item-mods>
-<timelock>on</timelock>
-<maxbuildheight>29</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
 </hunger>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="iron ingot" amount="2"/>
     </kill-reward>
 </kill-rewards>
+<timelock>on</timelock>
+<maxbuildheight>29</maxbuildheight>
 </map>
