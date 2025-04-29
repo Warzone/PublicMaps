@@ -1,14 +1,15 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Hyral Skylands</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Break the obsidian from both of the enemy team's monuments.</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- Stealth5061 -->
 </authors>
 <teams>
-    <team id="red" color="dark red" max="24">Red</team>
-    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
+    <team id="blue-team" color="blue" max="24">Blue</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -30,26 +31,22 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <cylinder base="0.5,32,-87.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="180">
-        <regions>
+    <spawn team="blue-team" kit="spawn-kit" yaw="180">
+        <region>
             <cylinder base="0.5,32,88.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <cylinder base="0.5,81,0.5" radius="2" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
-</filters>
 <regions>
     <union id="spawn-islands">
         <circle id="blue-spawn" center="0,88" radius="6"/>
@@ -58,28 +55,28 @@
     <negative id="playable-inverse">
         <circle id="playable" center="0.5,0.5" radius="100"/>
     </negative>
-    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn!"/>
-    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's spawn!"/>
     <apply region="spawn-islands" block="never" message="You may not modify the spawn island!"/>
     <apply region="playable-inverse" block="never" message="You may not build outside the map!"/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable name="Monument A" owner="blue">
+    <destroyable name="Monument A" owner="blue-team">
         <region>
             <block>37,31,43</block>
         </region>
     </destroyable>
-    <destroyable name="Monument B" owner="blue">
+    <destroyable name="Monument B" owner="blue-team">
         <region>
             <block>-37,31,43</block>
         </region>
     </destroyable>
-    <destroyable name="Monument A" owner="red">
+    <destroyable name="Monument A" owner="red-team">
         <region>
             <block>-37,31,-43</block>
         </region>
     </destroyable>
-    <destroyable name="Monument B" owner="red">
+    <destroyable name="Monument B" owner="red-team">
         <region>
             <block>37,31,-43</block>
         </region>
@@ -103,10 +100,5 @@
     <item>obsidian</item>
     <item>seeds</item>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <maxbuildheight>70</maxbuildheight>
 </map>
