@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Boom</name>
-<version>1.0.7</version>
 <gamemode>dtm</gamemode>
+<version>1.0.8</version>
 <objective>Destroy both enemy gold orbs with TNT</objective>
 <authors>
     <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb"/> <!-- Anxuiz -->
@@ -43,17 +43,14 @@
         </regions>
     </spawn>
     <default>
-        <regions>
+        <region>
             <cylinder base="0.5,27,-84.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
-    <deny id="no-void">
-        <void/>
-    </deny>
     <deny id="no-beacons-anvils">
         <any>
             <material>anvil</material>
@@ -109,7 +106,7 @@
     <apply region="monuments" block-break="only-tnt-damage" message="Orbs may only be damaged with TNT"/>
     <apply region="bases" block="never" message="You may not modify the base"/>
     <apply use="no-beacons-anvils"/>
-    <apply block="no-void" message="You may not build in the void"/>
+    <apply block="deny(void)" message="You may not build in the void"/>
 </regions>
 <destroyables completion="90%" repairable="false">
     <destroyables materials="gold block;wool:11;beacon" owner="blue">
@@ -167,54 +164,4 @@
 </hunger>
 <friendlyfirerefund>on</friendlyfirerefund>
 <maxbuildheight>22</maxbuildheight>
-<!-- <tutorial>
-    <stage title="Overview">
-        <message>
-            <line>There are two golden orbs on each side marked by beacons.</line>
-            <line>Destroy both orbs on the enemy's side with TNT to win!</line>
-        </message>
-        <teleport yaw="0" pitch="15">0,24,-52</teleport>
-    </stage>
-    <stage title="Blue Orb">
-        <message>
-            <line>This is Orb A on the Blue Team's side.</line>
-            <line>Red Team must destroy at least 90% of the orb for it to count.</line>
-            <line>The orb can only be damaged by TNT explosions.</line>
-        </message>
-        <teleport yaw="270" pitch="25">-20,23,-33.5</teleport>
-    </stage>
-    <stage title="TNT Spawners">
-        <message>
-            <line>Under each of the weighted pressure plates is a TNT and redstone torch spawner.</line>
-            <line>There are two obsidian platforms for TNT spawning, one on each side.</line>
-            <line>These are the only sources of TNT on the map, so it is important to control these sides.</line>
-            <line>You may not place or break blocks on the obsidian platform.</line>
-        </message>
-        <teleport yaw="0" pitch="90">0.5,13.5,-52.5</teleport>
-    </stage>
-    <stage title="Obsidian Parkour">
-        <message>
-            <line>The obsidian parkour jump is the only other way to get to the other team's side besides the often-besieged obsidian platform below.</line>
-            <line>The raised platforms to the left and right provide important tactical positions for attacking the cores.</line>
-            <line>Blocks may not be placed or broken between the two sides.</line>
-        </message>
-        <teleport yaw="0" pitch="15">0.5,19,-69</teleport>
-    </stage>
-    <stage title="Kill Reward">
-        <message>
-            <line>Each player starts with basic supplies including a bow and 64 arrows.</line>
-            <line>Killing other players is the only way to gain more arrows.</line>
-            <line>One kill will reward you 20 arrows and a health 2 potion.</line>
-        </message>
-        <teleport yaw="90" pitch="0">30.5,11,0.5</teleport>
-    </stage>
-    <stage title="Play Style">
-        <message>
-            <line>Matches on this map are quick with fast-paced action.</line>
-            <line>Always be on the lookout for attackers armed with TNT destined for your orbs.</line>
-            <line>Don't get flustered when you lose an orb. Remember, the other team must destroy both to win.</line>
-        </message>
-        <teleport pitch="15">0.5,23,-78</teleport>
-    </stage>
-</tutorial> -->
 </map>
