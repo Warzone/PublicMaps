@@ -1,6 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Monument Valley</name>
-<version>1.1</version>
+<version>1.1.4</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the enemy team's monument.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -13,8 +14,8 @@
     <rule>Players have resistance and reduced knockback in spawn!</rule>
 </rules>
 <teams>
-    <team id="blue" color="blue" max="32">Blue</team>
-    <team id="red" color="dark red" max="32">Red</team>
+    <team id="blue-team" color="blue" max="32">Blue</team>
+    <team id="red-team" color="dark red" max="32">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -32,26 +33,16 @@
         <item slot="5" amount="64" material="wood"/>
         <item slot="32" amount="64" material="wood"/>
         <item slot="6" amount="64" material="glass"/>
-        <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="8" material="golden apple"/>
         <item slot="35" material="boat"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
-        <effect duration="10" amplifier="25">heal</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <chestplate unbreakable="true" color="334CB2" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
-        <boots unbreakable="true" color="334CB2" material="leather boots"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <chestplate unbreakable="true" color="993333" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
-        <boots unbreakable="true" color="993333" material="leather boots"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="10s" amplifier="255">heal</effect>
     </kit>
     <kit id="spawn-protection" force="true">
-        <effect amplifier="10">damage resistance</effect>
+        <effect amplifier="255">damage resistance</effect>
         <knockback-reduction>1</knockback-reduction>
     </kit>
 </kits>
@@ -61,20 +52,21 @@
             <cuboid min="115,84,22" max="118,84,25"/>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="180">
             <cuboid min="3,46,-45" max="6,46,-42"/>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
-        <region yaw="0">
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <cuboid min="3,46,89" max="6,46,92"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
 </filters>
 <regions>
     <union id="spawn-entry">
@@ -84,6 +76,7 @@
     <union id="spawn-build">
         <cuboid id="blue-spawn" min="0,42,-54" max="12,55,-35"/>
         <cuboid id="red-spawn" min="0,42,82" max="12,55,101"/>
+        <cuboid id="obs-spawn" min="110,80,30" max="123,87,17"/>
     </union>
     <negative id="void-area">
         <complement>
@@ -91,20 +84,21 @@
             <cuboid min="0,50,11" max="101,oo,36"/>
         </complement>
     </negative>
-    <apply enter="only-blue" region="blue-entry" message="You may not enter the enemy spawn!"/>
-    <apply enter="only-red" region="red-entry" message="You may not enter the enemy spawn!"/>
-    <apply lend-kit="spawn-protection" filter="only-blue" region="blue-entry"/>
-    <apply lend-kit="spawn-protection" filter="only-red" region="red-entry"/>
+    <apply use="deny-beacon"/>
+    <apply enter="blue-team" region="blue-entry" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-entry" message="You may not enter the enemy's spawn!"/>
+    <apply lend-kit="spawn-protection" filter="blue-team" region="blue-entry"/>
+    <apply lend-kit="spawn-protection" filter="red-team" region="red-entry"/>
     <apply block="never" region="spawn-build" message="You may not modify the spawn areas!"/>
-    <apply block="never" region="void-area" message="You may not build outside of the map"/>
+    <apply block-place="never" region="void-area" message="You may not build outside of the map"/>
 </regions>
 <destroyables name="Monument" materials="obsidian" mode-changes="true">
-    <destroyable owner="blue">
+    <destroyable owner="blue-team">
         <region>
             <cuboid min="61,41,-26" max="62,44,-25"/>
         </region>
     </destroyable>
-    <destroyable owner="red">
+    <destroyable owner="red-team">
         <region>
             <cuboid min="61,41,72" max="62,44,73"/>
         </region>
@@ -121,13 +115,12 @@
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
     <tool>iron spade</tool>
-    <tool>boat</tool>
 </toolrepair>
 <itemremove>
+    <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
-    <item>cooked beef</item>
     <item>obsidian</item>
     <item>beacon</item>
     <item>coal block</item>
@@ -136,31 +129,36 @@
 <block-drops>
     <rule>
         <filter>
-            <material>wood</material>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="wood"/>
         </drops>
     </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
 </block-drops>
 <itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>boat</item>
     <item>wood</item>
     <item>glass</item>
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item amount="32" material="wood"/>
-    <item amount="16" material="glass"/>
-	<item material="golden apple"/>
-    <item amount="16" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" material="wood"/>
+        <item amount="16" material="glass"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
