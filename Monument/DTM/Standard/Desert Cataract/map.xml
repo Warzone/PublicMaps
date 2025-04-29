@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Desert Cataract</name>
-<version>1.1.14</version>
+<version>1.1.18</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy enemy team's obsidian monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -43,21 +43,21 @@
 <spawns>
     <default yaw="180">
         <region>
-            <cylinder base="0.5,39,1.5" radius="2" height="0"/>
+            <cylinder base="0.5,37,0.5" radius="2" height="0"/>
         </region>
     </default>
     <spawn team="blue-team" kit="spawn-kit">
         <region yaw="-90">
-            <cylinder base="-102.5,9,0.5" radius="1" height="0"/>
+            <cylinder base="-102.5,8,-0.5" radius="1" height="0"/>
         </region>
     </spawn>
     <spawn team="red-team" kit="spawn-kit">
         <region yaw="90">
-            <cylinder base="103.5,9,0.5" radius="1" height="0"/>
+            <cylinder base="103.5,8,-0.5" radius="1" height="0"/>
         </region>
     </spawn>
 </spawns>
-<destroyables name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+<destroyables name="Monument" materials="obsidian" mode-changes="true">
     <destroyable owner="blue-team" region="blue-monument"/>
     <destroyable owner="red-team" region="red-monument"/>
 </destroyables>
@@ -66,8 +66,9 @@
     <mode after="30m" material="coal block" name="`8COAL MONUMENT MODE"/>
 </modes>
 <filters>
-    <team id="only-blue">blue-team</team>
-    <team id="only-red">red-team</team>
+    <deny id="deny-beacon">
+        <material>beacon</material>
+    </deny>
 </filters>
 <regions>
     <cuboid id="blue-spawn" min="-94,7,-4" max="-98,100,3"/>
@@ -78,8 +79,9 @@
         <rectangle min="88,51" max="-87,-52"/>
     </negative>
     <!-- applicators -->
-    <apply enter="only-blue" message="You may not enter the enemy team's spawn!" region="blue-spawn"/>
-    <apply enter="only-red" message="You may not enter the enemy team's spawn!"  region="red-spawn"/>
+    <apply use="deny-beacon"/>
+    <apply enter="blue-team" message="You may not enter the enemy's spawn!" region="blue-spawn"/>
+    <apply enter="red-team" message="You may not enter the enemy's spawn!" region="red-spawn"/>
     <apply block="never" message="You may not edit this part of the map!" region="not-build-area"/>
 </regions>
 <itemkeep>
@@ -102,7 +104,6 @@
     <tool>arrow</tool>
 </toolrepair>
 <itemremove>
-    <item>golden carrot</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
@@ -129,13 +130,14 @@
         </drops>
     </rule>
 </block-drops>
+<kill-rewards>
+    <kill-reward>
+        <item material="wood" damage="2" amount="32"/>
+        <item material="sandstone" amount="16"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>28</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<maxbuildheight>28</maxbuildheight>
-<kill-reward>
-    <item material="golden apple"/>
-    <item material="wood" damage="2" amount="32"/>
-    <item material="sandstone" amount="16"/>
-</kill-reward>
 </map>
