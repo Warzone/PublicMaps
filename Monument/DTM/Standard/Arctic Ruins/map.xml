@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Arctic Ruins</name>
-<version>1.1.5</version>
+<version>1.1.8</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the opposing team's monument!</objective>
 <gamemode>dtm</gamemode>
 <time result="objectives">20m</time>
@@ -12,8 +13,8 @@
     <contributor uuid="3a64dcf4-5d71-4664-80bf-4e5c54e41b86"/> <!-- Zaquez -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="5">Blue</team>
-    <team id="red" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="red-team" color="dark red" max="8">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -40,24 +41,17 @@
             <cuboid min="205.5,38,138.5" max="201.5,38,134.5"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="-135">
             <cuboid min="200.5,10,206.5" max="202.5,10,204.5"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="-45">
             <cuboid min="200.5,10,66.5" max="202.5,10,68.5"/>
         </region>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-    <not id="no-void">
-        <void/>
-    </not>
-</filters>
 <regions>
     <union id="spawns">
         <union id="blue-spawn">
@@ -72,26 +66,26 @@
     <union id="spawner">
         <cuboid min="251,20,136" max="250,19,137"/>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <cuboid min="258,40,173" max="259,13,100"/>
         <cuboid min="259,40,129" max="260,13,144"/>
         <cuboid min="261,40,144" max="258,13,150"/>
         <cuboid min="261,40,129" max="258,13,123"/>
     </complement>
-    <apply enter="only-blue" use="only-blue" region="blue-spawn" message="You may not enter the opponent's spawn!"/>
-    <apply enter="only-red" use="only-red" region="red-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply enter="blue-team" use="blue-team" region="blue-spawn" message="You may not enter the opponent's spawn!"/>
+    <apply enter="red-team" use="red-team" region="red-spawn" message="You may not enter the opponent's spawn!"/>
     <apply block="never" region="spawns" message="You may not edit spawn!"/>
-    <apply block="never" region="spawner" message="Yoy may not destroy the spawner!"/>
-    <apply block-place="no-void" region="void" message="You may not edit the void!"/>
+    <apply block="never" region="spawner" message="You may not destroy the spawner!"/>
+    <apply block-place="deny(void)" region="void-area" message="You may not edit the void!"/>
 </regions>
-<destroyables name="Monument" materials="gold block" mode-changes="true" completion="100%" show-progress="true">
-    <destroyable owner="blue">
+<destroyables name="Monument" materials="gold block" mode-changes="true" show-progress="true">
+    <destroyable owner="blue-team">
         <region>
             <cuboid min="211,18,179" max="214,13,176"/>
         </region>
     </destroyable>
-    <destroyable owner="red">
+    <destroyable owner="red-team">
         <region>
             <cuboid min="211,18,97" max="214,13,94"/>
         </region>
@@ -143,12 +137,13 @@
     <item>wood</item>
     <item>glass</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="12" damage="1" material="wood"/>
-    <item amount="6" material="glass"/>
-    <item amount="8" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" damage="1" material="wood"/>
+        <item amount="6" material="glass"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>24</maxbuildheight>
 <respawn delay="4s" auto="true"/>
 <hunger>
