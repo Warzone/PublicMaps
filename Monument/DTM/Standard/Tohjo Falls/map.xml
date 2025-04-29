@@ -1,9 +1,20 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Tohjo Falls</name>
-<created>2023-01-06</created>
-<version>1.0.3</version>
+<variant id="halloween" world="halloween" override="true">Styx Falls</variant>
+<version>1.1.2</version>
 <objective>Destroy the enemy team's monument!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
+<if variant="default">
+    <created>2023-01-06</created>
+    <constant id="blue-team-name">Blue</constant>
+    <constant id="red-team-name">Red</constant>
+</if>
+<if variant="halloween">
+    <created>2023-09-13</created>
+    <constant id="blue-team-name">Purple</constant>
+    <constant id="red-team-name">Orange</constant>
+</if>
 <authors>
     <author uuid="6863869b-4b8c-4445-b778-a8e016775ae4"/> <!-- Cazadorian -->
 </authors>
@@ -11,8 +22,14 @@
     <contributor uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9" contribution="Front gate"/> <!-- Obelistics -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="8">Blue</team>
-    <team id="red" color="dark red" max="8">Red</team>
+    <unless variant="halloween">
+        <team id="blue" color="blue" max="8">${blue-team-name}</team>
+        <team id="red" color="dark red" max="8">${red-team-name}</team>
+    </unless>
+    <if variant="halloween">
+        <team id="blue" color="dark purple" max="8">${blue-team-name}</team>
+        <team id="red" color="gold" max="8">${red-team-name}</team>
+    </if>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -26,7 +43,9 @@
         <item slot="4" amount="32" material="wood" damage="2"/>
         <item slot="5" material="stained glass" team-color="true" amount="16"/>
         <item slot="7" material="golden apple"/>
-        <item slot="8" material="bucket"/>
+        <unless variant="halloween">
+            <item slot="8" material="bucket"/>
+        </unless>
         <item slot="28" amount="32" material="arrow"/>
         <item slot="29" unbreakable="true" material="shears"/>
         <item slot="30" unbreakable="true" material="iron spade"/>
@@ -38,7 +57,7 @@
     </kit>
 </kits>
 <spawns>
-    <default yaw="0">
+    <default>
         <regions>
             <point>0.5,30,-32.5</point>
         </regions>
@@ -55,9 +74,6 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-void">
-        <void/>
-    </not>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
 </filters>
@@ -78,16 +94,16 @@
     </complement>
     <apply enter="only-blue" region="blue-protection" message="You may not enter the opponent's spawn!"/>
     <apply enter="only-red" region="red-protection" message="You may not enter the opponent's spawn!"/>
-    <apply block-place="deny-void" region="void-area" message="You may not build in the void area!"/>
+    <apply block-place="deny(void)" region="void-area" message="You may not build in the void area!"/>
     <apply block="never" region="spawn-protection" message="You may not modify the spawns!"/>
 </regions>
-<destroyables show-progress="true" materials="emerald block" completion="100%">
-    <destroyable name="Red Monument" id="red-monument" required="true" owner="red" modes="gold-mode clay-mode">
+<destroyables show-progress="true" materials="emerald block" required="true" modes="gold-mode clay-mode">
+    <destroyable name="${red-team-name} Monument" id="red-monument" owner="red">
         <region>
            <cuboid min="-43,22,2" max="-46,25,-1"/>
         </region>
     </destroyable>
-    <destroyable name="Blue Monument" id="blue-monument" required="true" owner="blue" modes="gold-mode clay-mode">
+    <destroyable name="${blue-team-name} Monument" id="blue-monument" owner="blue">
         <region>
            <cuboid min="44,22,2" max="47,25,-1"/>
         </region>
@@ -129,6 +145,11 @@
     <item>wool</item>
     <item>gravel</item>
     <item>flint</item>
+    <if variant="halloween">
+        <item>nether stalk</item>
+        <item>brown mushroom</item>
+        <item>red mushroom</item>
+    </if>
 </itemremove>
 <block-drops>
     <rule>
@@ -153,7 +174,6 @@
         <item amount="12" material="wood" damage="2"/>
         <item amount="8" material="stained glass" team-color="true"/>
         <item amount="12" material="arrow"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <hunger>
