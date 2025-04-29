@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Acear II</name>
-<version>2.3.3</version>
+<version>2.3.5</version>
 <objective>Break the enemy team's monument.</objective>
 <created>2016-04-15</created>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="022321a8-578b-4438-b035-8a3ca735639f"/> <!-- nintendoboy11 -->
     <author uuid="cbd5c47c-1137-4f02-93dd-626a46bdd779"/> <!-- Kaskito -->
@@ -37,17 +38,17 @@
 <spawns>
     <default>
         <region yaw="90">
-            <point>43,59,0</point>
+            <cylinder base="43.5,59,0.5" height="0" radius="1"/>
         </region>
     </default>
     <spawn kit="spawn-kit" team="blue">
         <region yaw="90">
-            <cuboid min="156,50,-1" max="152,52,2"/>
+            <cuboid min="156,50,-1" max="153,50,2"/>
         </region>
     </spawn>
     <spawn kit="spawn-kit" team="red">
         <region yaw="-90">
-            <cuboid min="-69,50,-1" max="-65,52,2"/>
+            <cuboid min="-69,50,-1" max="-66,50,2"/>
         </region>
     </spawn>
 </spawns>
@@ -66,7 +67,7 @@
     <apply block="always" region="always-buildable"/>
     <apply block="never" region="outside-map" message="You may not build outside of the map area!"/>
 </regions>
-<destroyables name="Monument" materials="obsidian" completion="100%" mode-changes="true">
+<destroyables name="Monument" materials="obsidian" mode-changes="true">
     <destroyable owner="blue">
         <region>
             <cuboid min="88,5,-0" max="90,12,1"/>
@@ -100,7 +101,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="arrow"/>
         <item amount="4" material="water lily"/>
     </kill-reward>
