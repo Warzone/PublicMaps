@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Antiquis</name>
-<version>1.2.8</version>
+<version>1.2.11</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the enemy's obsidian monument!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -17,7 +18,19 @@
     <kit id="pickaxe" filter="upgraded-pickaxe">
         <item slot="2" material="wood pickaxe" unbreakable="true"/>
     </kit>
-    <kit id="spawn-kit" parent="pickaxe">
+    <kit id="remove-itemkeep">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="wood"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="golden apple"/>
+                <replace material="air"/>
+            </replace-item>
+        </action>
+    </kit>
+    <kit id="spawn-kit" parents="pickaxe,remove-itemkeep">
         <item slot="0" material="stone sword" unbreakable="true"/>
         <item slot="1" material="bow" unbreakable="true">
             <enchantment>arrow infinite</enchantment>
@@ -69,8 +82,6 @@
     <mode after="45m" material="coal block" name="`8COAL MONUMENT MODE"/>
 </modes>
 <filters>
-    <team id="only-red">red-team</team>
-    <team id="only-blue">blue-team</team>
     <not id="not-plate">
         <material>iron plate</material>
     </not>
@@ -97,10 +108,10 @@
     <rectangle id="blue-spawn" min="-31,-84" max="32,-52"/>
     <rectangle id="red-spawn" min="-31,52" max="32,84"/>
     <!-- applicators -->
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's base!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's base!"/>
+    <apply enter="blue-team" region="blue-spawn" message="You may not enter the enemy's base!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter the enemy's base!"/>
     <apply block="never" region="void-region"/>
-    <apply block="not-plate" region="everywhere"/>
+    <apply block="not-plate"/>
 </regions>
 <renewables>
     <renewable sound="false" rate="0.4"> <!-- sound is important to find hiding players -->
@@ -139,7 +150,7 @@
     </shapeless>
     <!-- Allow of 2X2 crafting as well -->
     <!-- Infused Plate -->
-    <shaped> <!-- this previously had override-all=true, but didn't work -->
+    <shaped>
         <result name="`4Infused Plate" show-enchantments="false" material="iron plate">
             <enchantment>unbreaking</enchantment>
         </result>
@@ -166,6 +177,32 @@
         <ingredient>iron pickaxe</ingredient>
     </shapeless>
 </crafting>
+<item-mods> <!-- lessen confusion -->
+    <rule>
+        <match>
+            <material>wood pickaxe</material>
+        </match>
+        <modify lore="`rCombine with 2 `4Infused Shards `rto upgrade!"/>
+    </rule>
+    <rule>
+        <match>
+            <material>stone pickaxe</material>
+        </match>
+        <modify lore="`rCombine with 4 `4Infused Shards|`ror 1 `4Infused Plate `rto upgrade!"/>
+    </rule>
+    <rule>
+        <match>
+            <material>iron pickaxe</material>
+        </match>
+        <modify lore="`rCombine with 8 `4Infused Shards|`ror 2 `4Infused Plates `rto upgrade!"/>
+    </rule>
+    <rule>
+        <match>
+            <material>iron plate</material>
+        </match>
+        <modify lore="`rCan be crafted back|`rinto 4 `4Infused Shards`r!"/>
+    </rule>
+</item-mods>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -193,9 +230,6 @@
     <item>coal block</item>
     <item>packed ice</item>
     <item>emerald block</item>
-    <!-- item keep for traded items necessitates itemremove for golden apple and kit blocks -->
-    <item>wood</item>
-    <item>golden apple</item>
 </itemremove>
 <itemkeep>
     <item>nether star</item>
@@ -209,16 +243,27 @@
     <item>gold chestplate</item>
     <item>gold leggings</item>
     <item>gold boots</item>
+    <item>wood</item>
+    <item>golden apple</item>
 </itemkeep>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<maxbuildheight>35</maxbuildheight>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="wood" amount="16"/>
         <item material="nether star" name="`4Infused Shard"/>
     </kill-reward>
 </kill-rewards>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+</block-drops>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>35</maxbuildheight>
 </map>
