@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Proelium: DTM</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Destroy the other team's monuments!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -10,11 +10,11 @@
     <contributor uuid="0c20aa0d-82f9-46cd-aeae-29cf1f112aa2"/> <!-- resepignev -->
 </contributors>
 <teams>
-    <team id="red" color="dark red" max="35">Red</team>
-    <team id="blue" color="blue" max="35">Blue</team>
+    <team id="red-team" color="dark red" max="35">Red</team>
+    <team id="blue-team" color="blue" max="35">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow">
             <enchantment>arrow infinite</enchantment>
@@ -29,67 +29,55 @@
         <item slot="7" amount="2" material="golden apple"/>
         <item slot="8" amount="16" material="cooked beef"/>
         <item slot="28" material="arrow"/>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet unbreakable="true" color="993333" material="leather helmet"/>
-        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
-        <leggings unbreakable="true" color="993333" material="leather leggings"/>
-        <boots unbreakable="true" color="993333" material="leather boots"/>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <helmet unbreakable="true" color="334CB2" material="leather helmet"/>
-        <chestplate unbreakable="true" color="334CB2" material="leather chestplate"/>
-        <leggings unbreakable="true" color="334CB2" material="leather leggings"/>
-        <boots unbreakable="true" color="334CB2" material="leather boots"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red-kit" yaw="180">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit" yaw="180">
+        <region>
             <point>0.5,64,-38.5</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit" yaw="0">
-        <regions>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region>
             <point>0.5,64,-244</point>
-        </regions>
+        </region>
     </spawn>
     <default yaw="90">
-        <regions>
+        <region>
             <point>72.5,129,-140.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
-</filters>
 <regions>
     <union id="spawns">
         <cylinder id="blue-spawn" base="0,63,-245" height="11" radius="10"/> <!-- blue -->
         <cylinder id="red-spawn" base="0,63,-39" height="11" radius="10"/> <!-- red -->
     </union>
     <apply block="never" region="spawns" message="You may not modify the spawn area!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter Red's spawn!"/>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter Blue's spawn!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter Red's spawn!"/>
+    <apply enter="blue-team" region="blue-spawn" message="You may not enter Blue's spawn!"/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable owner="blue" name="Left Monument">
+    <destroyable owner="blue-team" name="Left Monument">
         <region>
             <block>-39,65,-245</block>
         </region>
     </destroyable>
-    <destroyable owner="blue" name="Right Monument">
+    <destroyable owner="blue-team" name="Right Monument">
         <region>
             <block>39,65,-245</block>
         </region>
     </destroyable>
-    <destroyable owner="red" name="Left Monument">
+    <destroyable owner="red-team" name="Left Monument">
         <region>
             <block>39,65,-39</block>
         </region>
     </destroyable>
-    <destroyable owner="red" name="Right Monument">
+    <destroyable owner="red-team" name="Right Monument">
         <region>
             <block>-39,65,-39</block>
         </region>
