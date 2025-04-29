@@ -1,0 +1,192 @@
+<map>
+<!-- Efficiency variables include file -->
+<!-- Created by Pablete1234 -->
+<!-- Version 2024.11.04-1 -->
+<constants fallback="true">
+    <constant id="eff.efficiency-filter">eff.default-efficiency-filter</constant>
+    <constant id="eff.efficiency-tool">diamond_pickaxe</constant>
+
+    <constant id="eff.team-1" delete="true"/>
+    <constant id="eff.team-2" delete="true"/>
+    <constant id="eff.t1-m1-region" delete="true"/>
+    <constant id="eff.t1-m2-region" delete="true"/>
+    <constant id="eff.t1-m3-region" delete="true"/>
+    <constant id="eff.t2-m1-region" delete="true"/>
+    <constant id="eff.t2-m2-region" delete="true"/>
+    <constant id="eff.t2-m3-region" delete="true"/>
+
+    <constant id="eff.resize-min">5,6,5</constant>
+    <constant id="eff.resize-max">5,4,5</constant>
+</constants>
+
+<filters>
+    <carrying id="eff_carrying-lvl-0" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-1" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:1"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-2" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:2"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-3" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:3"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-4" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:4"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-5" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:5"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-6" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:6"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-7" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:7"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-8" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:8"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-9" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:9"/>
+    </carrying>
+    <carrying id="eff_carrying-lvl-X" ignore-metadata="true" ignore-enchantments="false">
+        <item material="${eff.efficiency-tool}" enchantment="efficiency:10"/>
+    </carrying>
+
+    <any id="eff.default-efficiency-filter">
+        <if constant="eff.team-1">
+            <all>
+                <team>${eff.team-1}</team>
+                <any>
+                    <if constant="eff.t1-m1-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m1-region}"/>
+                    </if>
+                    <if constant="eff.t1-m2-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m2-region}"/>
+                    </if>
+                    <if constant="eff.t1-m3-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m3-region}"/>
+                    </if>
+                </any>
+            </all>
+        </if>
+        <if constant="eff.team-2">
+            <all>
+                <team>${eff.team-2}</team>
+                <any>
+                    <if constant="eff.t2-m1-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m1-region}"/>
+                    </if>
+                    <if constant="eff.t2-m2-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m2-region}"/>
+                    </if>
+                    <if constant="eff.t2-m3-region">
+                        <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m3-region}"/>
+                    </if>
+                </any>
+            </all>
+        </if>
+        <never/>
+    </any>
+</filters>
+<variables>
+    <variable id="eff_level" scope="match"/>
+</variables>
+<actions>
+    <action id="eff.fill-regions-debug" expose="true" scope="match">
+        <fill material="glass">
+            <if constant="eff.t1-m1-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m1-region}"/>
+            </if>
+            <if constant="eff.t1-m2-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m2-region}"/>
+            </if>
+            <if constant="eff.t1-m3-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t1-m3-region}"/>
+            </if>
+            <if constant="eff.t2-m1-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m1-region}"/>
+            </if>
+            <if constant="eff.t2-m2-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m2-region}"/>
+            </if>
+            <if constant="eff.t2-m3-region">
+                <resize min="${eff.resize-min}" max="${eff.resize-max}" region="${eff.t2-m3-region}"/>
+            </if>
+        </fill>
+        <fill material="obsidian">
+            <if constant="eff.t1-m1-region">
+                <region id="${eff.t1-m1-region}"/>
+            </if>
+            <if constant="eff.t1-m2-region">
+                <region id="${eff.t1-m2-region}"/>
+            </if>
+            <if constant="eff.t1-m3-region">
+                <region id="${eff.t1-m3-region}"/>
+            </if>
+            <if constant="eff.t2-m1-region">
+                <region id="${eff.t2-m1-region}"/>
+            </if>
+            <if constant="eff.t2-m2-region">
+                <region id="${eff.t2-m2-region}"/>
+            </if>
+            <if constant="eff.t2-m3-region">
+                <region id="${eff.t2-m3-region}"/>
+            </if>
+        </fill>
+    </action>
+
+    <!-- You should have efficiency but don't have the correct level-->
+    <trigger scope="player" filter="all(${eff.efficiency-filter},any(
+              all(not(eff_level=0),eff_carrying-lvl-0),
+              all(not(eff_level=1),eff_carrying-lvl-1),
+              all(not(eff_level=2),eff_carrying-lvl-2),
+              all(not(eff_level=3),eff_carrying-lvl-3),
+              all(not(eff_level=4),eff_carrying-lvl-4),
+              all(not(eff_level=5),eff_carrying-lvl-5),
+              all(not(eff_level=6),eff_carrying-lvl-6),
+              all(not(eff_level=7),eff_carrying-lvl-7),
+              all(not(eff_level=8),eff_carrying-lvl-8),
+              all(not(eff_level=9),eff_carrying-lvl-9),
+              all(not(eff_level=10..),eff_carrying-lvl-X)))">
+        <action>
+            <enchant-item enchantment="efficiency" level="eff_level" ignore-metadata="true">
+                <find material="${eff.efficiency-tool}"/>
+            </enchant-item>
+        </action>
+    </trigger>
+    <!-- You shouldn't have efficiency but do -->
+    <trigger scope="player" filter="all(not(${eff.efficiency-filter}), any(
+              eff_carrying-lvl-1,eff_carrying-lvl-2,eff_carrying-lvl-3,eff_carrying-lvl-4,eff_carrying-lvl-5,
+              eff_carrying-lvl-6,eff_carrying-lvl-7,eff_carrying-lvl-8,eff_carrying-lvl-9,eff_carrying-lvl-X))">
+        <action>
+            <enchant-item enchantment="efficiency" level="0" ignore-metadata="true">
+                <find material="${eff.efficiency-tool}"/>
+            </enchant-item>
+        </action>
+    </trigger>
+
+    <set id="eff.increase_level" var="eff_level" value="eff_level+1" scope="match"/>
+</actions>
+<modes show-before="30s">
+    <if constant="eff.modes-preset" constant-value="every-5m">
+        <mode after="10m" action="eff.increase_level" name="Efficiency I"/>
+        <mode after="15m" action="eff.increase_level" name="Efficiency II"/>
+        <mode after="20m" action="eff.increase_level" name="Efficiency III"/>
+        <mode after="25m" action="eff.increase_level" name="Efficiency IV"/>
+        <mode after="30m" action="eff.increase_level" name="Efficiency V"/>
+        <mode after="35m" action="eff.increase_level" name="Efficiency VI"/>
+        <mode after="40m" action="eff.increase_level" name="Efficiency VII"/>
+        <mode after="45m" action="eff.increase_level" name="Efficiency VIII"/>
+    </if>
+    <if constant="eff.modes-preset" constant-value="every-10m">
+        <mode after="10m" action="eff.increase_level" name="Efficiency I"/>
+        <mode after="20m" action="eff.increase_level" name="Efficiency II"/>
+        <mode after="30m" action="eff.increase_level" name="Efficiency III"/>
+        <mode after="40m" action="eff.increase_level" name="Efficiency IV"/>
+        <mode after="50m" action="eff.increase_level" name="Efficiency V"/>
+        <mode after="60m" action="eff.increase_level" name="Efficiency VI"/>
+    </if>
+</modes>
+</map>
