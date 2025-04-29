@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Riverbank</name> 
-<version>1.0.3</version> 
+<version>1.0.4</version> 
 <objective>To win destroy both of the enemy team's monuments.</objective>
 <created>2014-10-19</created>
 <gamemode>dtm</gamemode>
@@ -9,8 +9,8 @@
     <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- yoyo_power -->
 </authors>
 <teams>
-    <team id="red" color="red" max="25" max-overfill="27">Red</team>
-    <team id="blue" color="blue" max="25" max-overfill="27">Blue</team>
+    <team id="red-team" color="red" max="25" max-overfill="27">Red</team>
+    <team id="blue-team" color="blue" max="25" max-overfill="27">Blue</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -31,13 +31,13 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions>
             <point yaw="-135">-70.5,20,-5.5</point>
             <point yaw="45">-62.5,20,-13.5</point>
         </regions>
     </spawn>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions>
             <point yaw="-135">29.5,20,14.5</point>
             <point yaw="45">37.5,20,6.5</point>
@@ -50,8 +50,6 @@
     </default>
 </spawns>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
     <material id="only-obsidian">obsidian</material>
 </filters>
 <regions>
@@ -59,31 +57,31 @@
         <rectangle id="red-spawn" min="-60,-16" max="-62,-11"/>
         <rectangle id="blue-spawn" min="27,17" max="29,12"/>
     </union>
-    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's base!"/>
-    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's base!"/>
+    <apply region="red-spawn" enter="red-team" message="You may not enter the enemy's base!"/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's base!"/>
     <apply region="spawns" block="never" message="You may not edit the team spawns!"/>
     <apply block="only-obsidian"/>
 </regions>
 <destroyables materials="obsidian">
     <destroyables name="Front Monument">
-        <destroyable owner="blue">
+        <destroyable owner="blue-team">
             <region>
                 <block>-4,9,30</block>
             </region>
         </destroyable>
-        <destroyable owner="red">
+        <destroyable owner="red-team">
             <region>
                 <block>-30,9,-30</block>
             </region>
         </destroyable>
     </destroyables>
     <destroyables name="Back Monument">
-        <destroyable owner="blue">
+        <destroyable owner="blue-team">
             <region>
                 <block>42,13,-25</block>
             </region>
         </destroyable>
-        <destroyable owner="red">
+        <destroyable owner="red-team">
             <region>
                 <block>-76,13,25</block>
             </region>
@@ -119,7 +117,7 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item name="Fine Gold" lore="Use this as currency." material="gold ingot"/>
+        <item name="Fine Gold" lore="`rUse this as currency." material="gold ingot"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
