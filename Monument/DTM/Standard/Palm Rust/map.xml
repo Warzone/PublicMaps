@@ -1,16 +1,17 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Palm Rust</name>
-<version>2.2.2</version>
+<version>2.2.3</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Vice -->
     <author uuid="93db9798-b995-4bda-b70a-23f5d33124a0"/> <!-- steven5703 -->
     <author uuid="c7e1e823-83c3-4070-898b-1dd5f5cd458e"/> <!-- stu133 -->
 </authors>
 <teams>
-    <team id="lime" color="green" max="16">Lime</team>
-    <team id="orange" color="gold" max="16">Orange</team>
+    <team id="lime-team" color="green" max="16">Lime</team>
+    <team id="orange-team" color="gold" max="16">Orange</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -32,28 +33,26 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="lime" kit="spawn-kit" yaw="-45">
-        <regions>
+    <spawn team="lime-team" kit="spawn-kit" yaw="-45">
+        <region>
             <cylinder base="-56.5,36,33.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="orange" kit="spawn-kit" yaw="135">
-        <regions>
+    <spawn team="orange-team" kit="spawn-kit" yaw="135">
+        <region>
             <cylinder base="47.5,36,137.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cylinder base="18.5,43,58.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
     <deny id="deny-fire-spread">
-       <material>fire</material>
+        <material>fire</material>
     </deny>
-    <team id="only-orange">orange</team>
-    <team id="only-lime">lime</team>
 </filters>
 <regions>
     <rectangle id="playable" min="52,-892" max="-24,-742"/>
@@ -61,26 +60,26 @@
     <sphere id="lime-spawn" origin="-56,36,33" radius="8"/> 
     <apply region="orange-spawn" block="never" message="You may not modify the spawn area."/>
     <apply region="lime-spawn" block="never" message="You may not modify the spawn area."/>
-    <apply region="lime-spawn" enter="only-lime" message="You may not enter `6Orange`c's spawn area!"/>
-    <apply region="orange-spawn" enter="only-orange" message="You may not enter `aLime`c's spawn area!"/>
+    <apply region="lime-spawn" enter="lime-team" message="You may not enter `6Orange`r's spawn area!"/>
+    <apply region="orange-spawn" enter="orange-team" message="You may not enter `aLime`r's spawn area!"/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable name="Left" owner="lime">
+    <destroyable name="Left" owner="lime-team">
         <region>
             <block>-47,24,83</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="lime">
+    <destroyable name="Right" owner="lime-team">
         <region>
             <block>-7,24,43</block>
         </region>
     </destroyable>
-    <destroyable name="Left" owner="orange">
+    <destroyable name="Left" owner="orange-team">
         <region>
             <block>37,24,87</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="orange">
+    <destroyable name="Right" owner="orange-team">
         <region>
             <block>-3,24,127</block>
         </region>
@@ -104,11 +103,6 @@
     <item>cooked beef</item>
     <item>golden apple</item>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <timelock>on</timelock>
 <maxbuildheight>40</maxbuildheight>
 </map>
