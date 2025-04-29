@@ -1,6 +1,6 @@
 <!-- Created by Fishywishi -->
-<!-- Version 1.0.0 -->
-<map proto="1.4.2">
+ <!-- Version 1.1.0 -->
+<map proto="1.5.0">
 <objective>Destroy your enemy's portal with rockets!</objective>
 <gamemode>dtm</gamemode>
 <gamemode>arcade</gamemode>
@@ -9,6 +9,7 @@
     <constant id="max-player-limit">12</constant>
     <constant id="arrow-regen">3</constant> <!-- Arrow refresh rate in Seconds-->
     <constant id="missile-distribution-timer">10</constant> <!-- Rate of Missile distribution in Seconds -->
+    <constant id="amount-of-missile-types">6</constant> <!-- increase constant to add new missiles into the item pool -->
     <constant id="team_one-name">Red</constant>
     <constant id="team_one-color">dark red</constant> 
     <constant id="team_two-name">Blue</constant>
@@ -29,7 +30,7 @@
     <kit id="default-kit">
         <item name="`cMissile Shooter" material="bow" slot="0" lore="`eTake down the missiles!" show-enchantments="true" unbreakable="true">
             <enchantment level="1">arrow fire</enchantment>
-            <enchantment level="2">damage all</enchantment>
+            <enchantment level="3">damage all</enchantment>
         </item>
         <item material="arrow" slot="8"/>
         <helmet material="stained glass" locked="true" team-color="true" unbreakable="true"/>
@@ -76,7 +77,7 @@
         <item consumable="Missile_Summoner_team_two_Shieldbuster" material="clay ball" name="`lShieldbuster Missile" lore="`eRight click to deploy a missile!"/>
     </kit>
     <kit id="Fireball_Kit" deduct-items="false">
-        <item projectile="fireball-missile" name="`4`lAnti-ballistic Missile" material="fireball" lore="`eRight click to shoot!"/>
+        <item projectile="fireball-missile" grenade="true" grenade-power="3" name="`4`lAnti-ballistic Missile" material="fireball" lore="`eRight click to shoot!"/>
     </kit>
 </kits>
 <projectiles>
@@ -84,19 +85,9 @@
         id="fireball-missile"
         name="Anti-ballistic Missile"
         projectile="Fireball"
+        damage="4"
         velocity="2"
-        damage="8"
-        precise="true"
-    > 
-    <destroy-filter>
-        <not>
-            <any>
-                <material>obsidian</material>
-                <material>tnt</material>
-            </any>
-        </not>
-    </destroy-filter>
-    </projectile>
+    />
 </projectiles>
 <consumables>
     <consumable id="Missile_Summoner_team_one_Tomahawk" action="Spawn_team_one_Tomahawk" on="click" override="true" consume="true"/>
@@ -354,7 +345,7 @@
         <sound key="random.pop" pitch="0.8"/>
     </action>
     <action id="Random_Number_Action" scope="player">
-        <set var="Missile_Manager" value="floor(random() * 6) + 1"/>
+        <set var="Missile_Manager" value="floor(random() * ${amount-of-missile-types}) + 1"/>
     </action>
     <trigger filter="Distribute-Items" action="Random_Number_Action" scope="player"/>
     <trigger filter="arrow-regen" action="give-arrow" scope="player"/>
@@ -373,15 +364,11 @@
     </deny>
 </damage>
 <itemremove>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
     <item>golden apple</item>
     <item>arrow</item>
     <item>bow</item>
     <item>stained glass</item>
     <item>stained clay</item>
-    <item>fireball</item>
     <item>firework</item>
     <item>iron ingot</item>
     <item>clay brick</item>
@@ -393,7 +380,13 @@
     <item>piston sticky base</item>
     <item>redstone wire</item>
     <item>redstone block</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
 </itemremove>
+<toolrepair>
+    <tool>arrow</tool>
+</toolrepair>
 <hunger>
     <depletion>off</depletion>
 </hunger>
