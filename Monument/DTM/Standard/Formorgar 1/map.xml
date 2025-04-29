@@ -1,98 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Formorgar 1</name>
-<version>1.1.4</version>
+<version>1.1.5</version>
 <objective>Destroy the enemy's monument(s) to win!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/>
-    <!-- Almyran -->
+    <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Almyran -->
 </authors>
 <teams>
-    <team id="purple" color="dark purple" max="14">Purple</team>
-    <team id="yellow" color="yellow" max="14">Yellow</team>
+    <team id="purple-team" color="dark purple" max="14">Purple</team>
+    <team id="yellow-team" color="yellow" max="14">Yellow</team>
 </teams>
-<spawns>
-    <spawn team="purple" kit="pkit">
-        <regions yaw="180">
-            <point>-0.5, 66, 5.5</point>
-        </regions>
-    </spawn>
-    <spawn team="yellow" kit="ykit">
-        <regions yaw="0">
-            <point>-0.5, 66, -130.5</point>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="-90">
-            <point>-39.5, 86, -62.5</point>
-        </regions>
-    </default>
-</spawns>
 <kits>
-    <kit id="both">
+    <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="29" amount="64">wood</item>
-        <item slot="5" amount="32">glass</item>
-        <item slot="6" amount="3">golden apple</item>
-        <item slot="7" amount="32">cooked beef</item>
-        <item slot="8" amount="4">exp bottle</item>
-        <item slot="10" amount="1">lapis block</item>
-        <item slot="28">arrow</item>
-        <leggings unbreakable="true">iron leggings</leggings>
-    </kit>
-    <kit id="pkit" parents="both">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
-        <boots unbreakable="true" color="3C44AA">leather boots</boots>
-    </kit>
-    <kit id="ykit" parents="both">
-        <helmet unbreakable="true" color="E5E533">leather helmet</helmet>
-        <chestplate unbreakable="true" color="E5E533">leather chestplate</chestplate>
-        <boots unbreakable="true" color="E5E533">leather boots</boots>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="29" amount="64" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" amount="3" material="golden apple"/>
+        <item slot="7" amount="32" material="cooked beef"/>
+        <item slot="8" amount="4" material="exp bottle"/>
+        <item slot="10" material="lapis block"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
-<kill-rewards>
-    <kill-reward>
-        <item amount="1" material="golden apple"/>
-        <item amount="4" material="exp bottle"/>
-    </kill-reward>
-</kill-rewards>
-<destroyables owner="yellow" completion="100%" sparks="true">
-    <destroyable name="Left Monument" region="yellow-left" materials="obsidian"/>
-    <destroyable name="Right Monument" region="yellow-right" materials="obsidian"/>
-</destroyables>
-    <destroyables owner="purple" completion="100%" sparks="true">
-    <destroyable name="Left Monument" region="purple-left" materials="obsidian"/>
-    <destroyable name="Right Monument" region="purple-right" materials="obsidian"/>
-</destroyables>
-<filters>
-    <team id="only-yellow">yellow</team>
-    <team id="only-purple">purple</team>
-</filters>
+<spawns>
+    <spawn team="purple-team" kit="spawn-kit" yaw="180">
+        <region>
+            <point>-0.5,66,5.5</point>
+        </region>
+    </spawn>
+    <spawn team="yellow-team" kit="spawn-kit">
+        <region>
+            <point>-0.5,66,-130.5</point>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <point>-39.5,86,-62.5</point>
+        </region>
+    </default>
+</spawns>
 <regions>
-    <cuboid id="yellow-spawn" min="9, 0, -137" max="-11, oo, -116"/>
-    <cuboid id="purple-spawn" min="9, 0, -10" max="-11, oo, 11"/>
-    <cuboid id="nobuild-one" max="-1, 69, -97" min="-1, 68, -97"/>
-    <cuboid id="nobuild-two" max="-1, 69, -29" min="-1, 68, -29"/>
+    <cuboid id="yellow-spawn" min="9,0,-137" max="-11,oo,-116"/>
+    <cuboid id="purple-spawn" min="9,0,-10" max="-11,oo,11"/>
+    <cuboid id="nobuild-one" max="-1,69,-97" min="-1,68,-97"/>
+    <cuboid id="nobuild-two" max="-1,69,-29" min="-1,68,-29"/>
     <union id="monuments">
-        <block id="yellow-left">-20, 67, -131</block>
-        <block id="yellow-right">18, 67, -131</block>
-        <block id="purple-left">18, 67, 5</block>
-        <block id="purple-right">-20, 67, 5</block>
+        <block id="yellow-left">-20,67,-131</block>
+        <block id="yellow-right">18,67,-131</block>
+        <block id="purple-left">18,67,5</block>
+        <block id="purple-right">-20,67,5</block>
     </union>
-    <apply block="never" enter="only-yellow" region="yellow-spawn" message="You can not modify blocks or enter here!"/>
-    <apply block="never" enter="only-purple" region="purple-spawn" message="You can not modify blocks or enter here!"/>
+    <apply enter="yellow-team" region="yellow-spawn"/>
+    <apply enter="purple-team" region="purple-spawn"/>
+    <apply block="never" enter="yellow-team" region="yellow-spawn" message="You can not modify blocks or enter here!"/>
+    <apply block="never" enter="purple-team" region="purple-spawn" message="You can not modify blocks or enter here!"/>
     <apply block="never" region="nobuild-one" message="You can not modify blocks or enter here!"/>
     <apply block="never" region="nobuild-two" message="You can not modify blocks or enter here!"/>
-    <apply enter="only-yellow" region="yellow-spawn"/>
-    <apply enter="only-purple" region="purple-spawn"/>
 </regions>
+<destroyables materials="obsidian" sparks="true">
+    <destroyables owner="yellow-team">
+        <destroyable name="Left Monument" region="yellow-left"/>
+        <destroyable name="Right Monument" region="yellow-right"/>
+    </destroyables>
+    <destroyables owner="purple-team">
+        <destroyable name="Left Monument" region="purple-left"/>
+        <destroyable name="Right Monument" region="purple-right"/>
+    </destroyables>
+</destroyables>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
@@ -118,4 +102,9 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="4" material="exp bottle"/>
+    </kill-reward>
+</kill-rewards>
 </map>
