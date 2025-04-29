@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Strongbow</name>
-<version>0.6.6</version>
+<version>0.6.7</version>
 <objective>Break the obsidian from the enemy team's monument.</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="bada87c3-3383-42cb-973d-99032a0724b9"/> <!-- Holdfast33 -->
 </authors>
@@ -37,24 +38,22 @@
     </kit>
 </kits>
 <spawns>
-    <spawns safe="true" team="red" kit="spawn-kit">
-        <spawn yaw="180">
-            <regions>
+    <spawns safe="true" kit="spawn-kit">
+        <spawn team="red" yaw="180">
+            <region>
                 <cylinder base="-251.5,16,932.5" radius="0" height="0"/>
-            </regions>
+            </region>
         </spawn>
-    </spawns>
-    <spawns safe="true" team="blue" kit="spawn-kit">
-        <spawn yaw="-180">
-            <regions>
+        <spawn team="blue" yaw="-180">
+            <region>
                 <cylinder base="-321.5,16,932.5" radius="0" height="0"/>
-            </regions>
+            </region>
         </spawn>
     </spawns>
     <default yaw="-180">
-        <regions>
+        <region>
             <cuboid min="-283,31,882" max="-289.5,31,886.5"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
@@ -137,7 +136,6 @@
 <kill-rewards>
     <kill-reward>
         <item material="exp bottle"/>
-        <item material="golden apple"/>
     </kill-reward>
     <kill-reward>
         <filter>
