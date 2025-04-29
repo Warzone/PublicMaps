@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Midnight Train</name>
 <variant id="halloween" world="halloween" override="true">Halloween Train</variant>
-<version>1.3.0</version>
+<version>1.3.1</version>
 <objective>Break both of the enemy team's obsidian monuments.</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
     <author uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2"/> <!-- dinner1111 -->
@@ -14,8 +15,8 @@
     <contributor uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Fixed up the XML"/> <!-- IM_A_H0B0 -->
 </contributors>
 <teams>
-    <team id="green" color="green" max="40">Green</team>
-    <team id="purple" color="dark purple" max="40">Purple</team>
+    <team id="green-team" color="green" max="40">Green</team>
+    <team id="purple-team" color="dark purple" max="40">Purple</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -43,12 +44,12 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="green" kit="spawn-kit">
+    <spawn team="green-team" kit="spawn-kit">
         <region>
             <cuboid min="58,29,-60" max="54,29,-56"/>
         </region>
     </spawn>
-    <spawn team="purple" kit="spawn-kit" yaw="180">
+    <spawn team="purple-team" kit="spawn-kit" yaw="180">
         <region>
             <cuboid min="54,29,130" max="58,29,126"/>
         </region>
@@ -59,31 +60,7 @@
         </region>
     </default>
 </spawns>
-<destroyables materials="obsidian">
-    <destroyable name="Monument A" owner="purple">
-        <region>
-            <cuboid min="105,30,107" max="104,27,106"/>
-        </region>
-    </destroyable>
-    <destroyable name="Monument B" owner="purple">
-        <region>
-            <cuboid min="8,30,109" max="7,27,108"/>
-        </region>
-    </destroyable>
-    <destroyable name="Monument A" owner="green">
-        <region>
-            <cuboid min="8,30,-36" max="7,27,-37"/>
-        </region>
-    </destroyable>
-    <destroyable name="Monument B" owner="green">
-        <region>
-            <cuboid min="105,30,-38" max="104,27,-39"/>
-        </region>
-    </destroyable>
-</destroyables>
 <filters>
-    <team id="only-green">green</team>
-    <team id="only-purple">purple</team>
     <deny id="deny-chest">
         <material>chest</material>
     </deny>
@@ -102,12 +79,12 @@
     <if variant="halloween">
         <apply region="playable" block-place="deny-lava" use="deny-lava"/>
     </if>
-    <apply enter="only-green" message="You may not enter Green's spawn!">
+    <apply enter="green-team" message="You may not enter Green's spawn!">
         <region>
             <rectangle min="48,-48" max="64,-68"/>
         </region>
     </apply>
-    <apply enter="only-purple" message="You may not enter Purple's spawn!">
+    <apply enter="purple-team" message="You may not enter Purple's spawn!">
         <region>
             <rectangle min="64,118" max="48,138"/>
         </region>
@@ -162,6 +139,28 @@
         </region>
     </apply>
 </regions>
+<destroyables materials="obsidian">
+    <destroyable name="Monument A" owner="purple-team">
+        <region>
+            <cuboid min="105,30,107" max="104,27,106"/>
+        </region>
+    </destroyable>
+    <destroyable name="Monument B" owner="purple-team">
+        <region>
+            <cuboid min="8,30,109" max="7,27,108"/>
+        </region>
+    </destroyable>
+    <destroyable name="Monument A" owner="green-team">
+        <region>
+            <cuboid min="8,30,-36" max="7,27,-37"/>
+        </region>
+    </destroyable>
+    <destroyable name="Monument B" owner="green-team">
+        <region>
+            <cuboid min="105,30,-38" max="104,27,-39"/>
+        </region>
+    </destroyable>
+</destroyables>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>iron pickaxe</tool>
@@ -192,58 +191,5 @@
         <item>flint</item>
     </if>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <timelock>on</timelock>
-<!-- include src="tutorial.xml"/ -->
-<!-- <tutorial>
-    <stage title="Destroy the Monument">
-        <message>
-            <line>`rThis map is a `a`lDestroy the Monument `r(DTM) map.</line>
-            <line>The objective is to destroy the other team's `5obsidian `bmonuments `ron their side.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="30">-32,108,36.5</point>
-        </teleport>
-    </stage>
-    <stage title="The Monument">
-        <message>
-            <line>`rThis is a `bmonument`r. There is one on either team's side.</line>
-            <line>`rYou must destroy the `5obsidian blocks `rin both enemy's monuments to win.</line>
-        </message>
-        <teleport>
-            <point yaw="-45" pitch="0">100,27,102</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>`rTeams spawn inside a base that looks like a minecart. You spawn with gear ready for battle!</line>
-            <line>`rNote that the enemy team cannot enter your team spawn.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="0">56,29,112</point>
-        </teleport>
-    </stage>
-    <stage title="Iron">
-        <message>
-            <line>`rThere are `biron blocks `rin the piston building. You can use iron blocks to craft `aarmor`r.</line>
-            <line>`rThere are also underground mines that contain `biron blocks`r.</line>
-        </message>
-        <teleport>
-            <point yaw="45" pitch="50">95,25,70</point>
-        </teleport>
-    </stage>
-    <stage title="Extra Supplies">
-        <message>
-            <line>`rExtra supplies can be found in a building that looks like a dispenser.</line>
-            <line>`rUseful items can also be found the piston buildings.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="20">-5,25,108</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>
