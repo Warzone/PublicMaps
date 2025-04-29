@@ -1,27 +1,24 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Sunrise Over Paradise</name>
-<variant id="halloween" world="halloween" override="true">Halloween Over Paradise</variant>
-<variant id="christmas" world="christmas" override="true">Christmas Over Paradise</variant>
-<variant id="classic" world="classic">Classic</variant>
+<include id="gapple-kill-reward"/>
+<variant id="halloween" world="halloween" override="true" slug="halloween_over_paradise_redux">Halloween Over Paradise</variant>
+<variant id="christmas" world="christmas" override="true" slug="christmas_over_paradise_redux">Christmas Over Paradise</variant>
+<variant id="classic" world="classic" slug="sunrise_over_paradise">Classic</variant>
 <if variant="default">
     <slug>sunrise_over_paradise_redux</slug>
 </if>
 <if variant="halloween">
     <constant id="season">Halloween</constant>
-    <slug>halloween_over_paradise_redux</slug>
 </if>
 <if variant="christmas">
     <constant id="season">Christmas</constant>
-    <slug>christmas_over_paradise_redux</slug>
 </if>
 <if variant="classic">
-    <slug>sunrise_over_paradise</slug>
-    <phase>development</phase>
+    <phase>staging</phase>
 </if>
-<version>1.4</version>
+<version>1.4.2</version>
 <objective>Destroy both of the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
-
 <authors>
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design"/> <!-- Plastix -->
 </authors>
@@ -37,10 +34,10 @@
 </contributors>
 <constants>
     <unless variant="classic">
-         <constant id="max-players">24</constant>
+        <constant id="max-players">24</constant>
     </unless>
     <if variant="classic">
-         <constant id="max-players">14</constant>
+        <constant id="max-players">14</constant>
     </if>
 </constants>
 <teams>
@@ -65,7 +62,7 @@
         </region>
     </default>
     <spawn team="blue" kit="spawn-kit">
-        <region yaw="0">
+        <region>
             <unless variant="classic">
                 <cylinder base="0.5,4,-79.5" radius="1" height="0"/>
             </unless>
@@ -91,7 +88,7 @@
             <effect duration="10s" amplifier="255">damage resistance</effect>
         </unless>
         <if variant="classic">
-            <effect duration="5" amplifier="1">heal</effect>
+            <effect duration="5">heal</effect>
             <effect duration="10" amplifier="2">damage resistance</effect>
         </if>
     </kit>
@@ -142,8 +139,6 @@
     </take>
 </kits>
 <filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
     <deny id="no-beacon">
         <material>beacon</material>
     </deny>
@@ -180,9 +175,6 @@
         </all>
     </deny>
     <material id="only-tnt">tnt</material>
-    <deny id="deny-void">
-        <void/>
-    </deny>
 </filters>
 <regions>
     <unless variant="classic">
@@ -199,7 +191,7 @@
         <apply block="only-tnt" region="above-21" message="You may only place TNT at this height!"/>
         <apply block="never" region="no-spawn-island" message="You may not modify the spawn island!"/>
         <apply block="tnt-immune"/>
-        <apply block="deny-void" message="You may not build in the void!"/> <!-- uses block 36 -->
+        <apply block="deny(void)" message="You may not build in the void!"/> <!-- uses block 36 -->
     </unless>
     <if variant="classic">
         <cuboid id="blue-mon-a" min="-46,8,-52" max="-43,4,-49"/>
@@ -219,7 +211,7 @@
         <apply block="always" region="playable"/>
     </if>
 </regions>
-<destroyables completion="100%" materials="obsidian" mode-changes="true" repairable="false">
+<destroyables materials="obsidian" mode-changes="true" repairable="false">
     <destroyable name="Monument A" owner="blue" region="blue-mon-a"/>
     <destroyable name="Monument B" owner="blue" region="blue-mon-b"/>
     <destroyable name="Monument A" owner="red" region="red-mon-a"/>
@@ -289,7 +281,6 @@
 <kill-rewards>
     <unless variant="classic">
         <kill-reward>
-            <item material="golden apple"/>
             <item amount="8" material="ladder"/>
             <item amount="16" team-color="true" material="stained clay"/>
             <item amount="4" team-color="true" lore="Immune to TNT" material="stained glass"/>
@@ -305,7 +296,6 @@
     </unless>
     <if variant="classic">
         <kill-reward>
-            <item material="golden apple"/>
             <item material="wood" amount="12"/>
         </kill-reward>
     </if>
