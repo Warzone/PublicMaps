@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>State of Decay</name>
-<version>1.0.5</version>
 <gamemode>dtm</gamemode>
+<version>1.0.6</version>
 <objective>Destroy the enemy team's obsidian monument to win!</objective>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
 </authors>
@@ -10,8 +11,8 @@
     <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- Dinner1111 -->
 </contributors>
 <teams>
-    <team id="orange" color="gold" max="24">Orange</team>
-    <team id="red" color="dark red" max="24">Red</team>
+    <team id="orange-team" color="gold" max="24">Orange</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -32,26 +33,22 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit" yaw="-45">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit" yaw="-45">
+        <region>
             <point>-31,19,-101</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="orange" kit="spawn-kit" yaw="135">
-        <regions>
+    <spawn team="orange-team" kit="spawn-kit" yaw="135">
+        <region>
             <point>32,19,54</point>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cuboid min="-0,44,-24" max="2,44,-21"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-orange">orange</team>
-</filters>
 <regions>
     <union id="bases">
         <circle id="red-base" center="-30,-100" radius="8"/>
@@ -60,8 +57,8 @@
     <negative id="playable-inverse">
         <rectangle min="-50,-123" max="50,75"/>
     </negative>
-    <apply region="red-base" enter="only-red" message="You may not enter the enemy's base!"/>
-    <apply region="orange-base" enter="only-orange" message="You may not enter the enemy's base!"/>
+    <apply region="red-base" enter="red-team" message="You may not enter the enemy's base!"/>
+    <apply region="orange-base" enter="orange-team" message="You may not enter the enemy's base!"/>
     <apply block="never">
         <region>
             <cuboid min="15.5,14,-30.5" max="20.5,21,-26.5"/>
@@ -72,12 +69,12 @@
     <apply region="playable-inverse" block="never"/>
 </regions>
 <destroyables name="Monument" materials="obsidian">
-    <destroyable owner="red">
+    <destroyable owner="red-team">
         <region>
             <cuboid min="-1,19,-77" max="0,22,-76"/>
         </region>
     </destroyable>
-    <destroyable owner="orange">
+    <destroyable owner="orange-team">
         <region>
             <cuboid min="1,19,29" max="2,22,30"/>
         </region>
@@ -104,7 +101,6 @@
 <kill-rewards>
     <kill-reward>
         <item amount="3" material="tnt"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <tnt>
@@ -115,25 +111,4 @@
 </tnt>
 <timelock>on</timelock>
 <maxbuildheight>30</maxbuildheight>
-<!-- <tutorial>
-    <stage title="Destroy the Monument">
-        <message>
-            <line>§rThis map is a §a§lDestroy the Monument §r(DTM) map.</line>
-            <line>§rThe objective is to destroy the other team's §a§lobsidian monument§r.</line>
-        </message>
-        <teleport>
-            <point yaw="-33" pitch="25">-34,58,-71</point>
-        </teleport>
-    </stage>
-    <stage title="Monuments">
-        <message>
-            <line>§rThis is the §cMonument§r.</line>
-            <line>§rIt consists of §a3§r obsidian blocks.</line>
-            <line>§rBreak it all to win.</line>
-        </message>
-        <teleport>
-            <point yaw="-41" pitch="15">-8,25,18</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>
