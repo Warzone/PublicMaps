@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Kuusepuu</name>
-<version>1.0.2</version>
+<version>1.0.5</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the monument!</objective>
 <gamemode>dtm</gamemode>
 <created>2021-12-17</created>
@@ -51,10 +52,6 @@
     <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn-point"/>
     <default yaw="180" region="obs-spawn-point"/>
 </spawns>
-<destroyables name="Monument" materials="emerald block" show-progress="true">
-    <destroyable owner="blue-team" region="blue-monument"/>
-    <destroyable owner="red-team" region="red-monument"/>
-</destroyables>
 <filters>
     <team id="only-blue">blue-team</team>
     <team id="only-red">red-team</team>
@@ -86,6 +83,10 @@
 	<apply block-place="never" block-break="block-break-void-filter" region="not-build-area" message="You may not edit the void!"/>
     <apply kit="reset-resistance-kit" region="not-spawns"/>
 </regions>
+<destroyables name="Monument" materials="emerald block" show-progress="true">
+    <destroyable owner="blue-team" region="blue-monument"/>
+    <destroyable owner="red-team" region="red-monument"/>
+</destroyables>
 <itemkeep>
     <item>iron sword</item>
     <item>bow</item>
@@ -176,7 +177,6 @@
 <maxbuildheight>30</maxbuildheight>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple" amount="1"/>
         <item material="wood" amount="16"/>
         <item material="stained clay" team-color="true" amount="48"/>
     </kill-reward>
