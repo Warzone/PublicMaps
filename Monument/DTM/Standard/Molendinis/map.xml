@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Molendinis</name>
-<version>1.2.5</version>
+<version>1.2.7</version>
 <objective>Destroy the enemy's monument while protecting your own</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
     <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTerwiesch -->
@@ -15,10 +16,8 @@
     <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow">
-            <enchantment>infinity</enchantment>
-        </item>
-        <item slot="28" material="arrow"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="28" amount="64" material="arrow"/>
         <item slot="2" unbreakable="true" material="diamond pickaxe"/>
         <item slot="3" unbreakable="true" material="iron axe">
             <enchantment>efficiency</enchantment>
@@ -27,21 +26,19 @@
         <item slot="5" amount="64" damage="2" material="wood"/>
         <item slot="32" amount="32" damage="2" material="wood"/>
         <item slot="6" amount="32" material="glass"/>
-        <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="cooked beef"/>
+        <item slot="8" material="golden apple"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="iron leggings">
             <enchantment>projectile_protection</enchantment>
         </leggings>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect amplifier="4" duration="10">damage resistance</effect>
-        <effect duration="10">heal</effect>
+        <effect duration="10s" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
+        <region>
             <cylinder base="-121.5,55,41.5" radius="1.5" height="0"/>
         </region>
     </default>
@@ -62,9 +59,6 @@
     <deny id="deny-beacon">
         <material>beacon</material>
     </deny>
-    <not id="deny-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="spawns">
@@ -90,13 +84,12 @@
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-yellow" region="yellow-spawn" message="You may not enter the enemy's spawn!"/>
     <apply block="never" region="spawns" message="You may not destroy the spawns!"/>
-    <apply block="deny-void" region="void-area" message="You may not build outside the playable region!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build outside the playable region!"/>
 </regions>
 <modes>
     <mode id="beacon-mode" after="25m" material="beacon" name="`bBEACON MONUMENT MODE"/>
-    <mode id="coal-mode" after="40m" material="coal block" name="`8COAL MONUMENT MODE"/>
 </modes>
-<destroyables name="Monument" repairable="false" completion="100%" materials="obsidian" modes="beacon-mode coal-mode">
+<destroyables name="Monument" repairable="false" materials="obsidian" modes="beacon-mode">
     <destroyable owner="red" region="red-monument"/>
     <destroyable owner="yellow" region="yellow-monument"/>
 </destroyables>
@@ -106,17 +99,14 @@
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
     <tool>iron spade</tool>
-    <tool>arrow</tool>
 </toolrepair>
 <itemremove>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>iron leggings</item>
     <item>leather boots</item>
     <item>obsidian</item>
     <item>beacon</item>
-    <item>coal block</item>
     <item>gravel</item>
     <item>flint</item>
     <item>seeds</item>
@@ -124,82 +114,22 @@
     <item>yellow flower</item>
     <item>red rose</item>
 </itemremove>
-<block-drops>
-    <rule>
-        <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-</block-drops>
 <itemkeep>
     <item>golden apple</item>
     <item>wood</item>
     <item>glass</item>
+    <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="24" damage="2" material="wood"/>
-    <item amount="16" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="24" damage="2" material="wood"/>
+        <item amount="16" material="glass"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>43</maxbuildheight>
 <respawn delay="3.5s"/>
-<!-- <include id="tutorial"/> -->
-<tutorial>
-    <stage title="Destroy the Monument">
-        <message>
-            <line>`rThis map is a `a`lDestroy the Monument (DTM) `rmap.</line>
-            <line>The objective is to destroy the other team's monument on their side.</line>
-        </message>
-        <teleport>
-            <point yaw="25" pitch="45">-78,49,-15</point>
-        </teleport>
-    </stage>
-    <stage title="Yellow Base">
-        <message>
-            <line>`rThis is the `eYellow Base`r.</line>
-            <line>`rThis is where the `eYellow Team `rspawns. You spawn with gear ready to go into battle!</line>
-        </message>
-        <teleport>
-            <point yaw="135" pitch="35">-21.5,17,87.5</point>
-        </teleport>
-    </stage>
-    <stage title="Red Base">
-        <message>
-            <line>`rThis is the `cRed Base`r.</line>
-            <line>`rThis is where the `cRed Team `rspawns. You spawn with gear ready to go into battle!</line>
-        </message>
-        <teleport>
-            <point yaw="-45" pitch="35">-187.5,17,-5.5</point>
-        </teleport>
-    </stage>
-    <stage title="Red Monument">
-        <message>
-            <line>`rThis is the `cRed Monument`r.</line>
-            <line>`rThe two `5obsidian blocks `rare what the `eYellow Team `rneeds to destroy to win.</line>
-        </message>
-        <teleport>
-            <point yaw="40" pitch="65">-154.5,28,52</point>
-        </teleport>
-    </stage>
-    <stage title="Yellow Monument">
-        <message>
-            <line>`rThis is the `eYellow Monument`r.</line>
-            <line>`rThe two `5obsidian blocks `rare what the `cRed Team `rneeds to destroy to win.</line>
-        </message>
-        <teleport>
-            <point yaw="-135" pitch="65">-56,28,30.8</point>
-        </teleport>
-    </stage>
-</tutorial>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
