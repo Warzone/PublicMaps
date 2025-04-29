@@ -1,0 +1,63 @@
+<map> <!-- minimum proto 1.4.0 -->
+<!-- Iron bulkcrafting include file -->
+<!-- Authored by Ruediger_LP, include-ified by mameBT -->
+<!-- Version 2024.09.09-1 -->
+<constant id="unbreakable-armor" fallback="true">false</constant>
+<crafting>
+    <shaped override="false">
+        <result material="iron helmet" amount="9"/>
+        <shape>
+            <row>III</row>
+            <row>I.I</row>
+        </shape>
+        <ingredient symbol="I">iron block</ingredient>
+    </shaped>
+    <shaped override="false">
+        <result material="iron chestplate" amount="9"/>
+        <shape>
+            <row>I.I</row>
+            <row>III</row>
+            <row>III</row>
+        </shape>
+        <ingredient symbol="I">iron block</ingredient>
+    </shaped>
+    <shaped override="false">
+        <result material="iron leggings" amount="9"/>
+        <shape>
+            <row>III</row>
+            <row>I.I</row>
+            <row>I.I</row>
+        </shape>
+        <ingredient symbol="I">iron block</ingredient>
+    </shaped>
+    <shaped override="false">
+        <result material="iron boots" amount="9"/>
+        <shape>
+            <row>I.I</row>
+            <row>I.I</row>
+        </shape>
+        <ingredient symbol="I">iron block</ingredient>
+    </shaped>
+    <shaped override="false">
+        <result material="bucket" amount="9"/>
+        <shape>
+            <row>I.I</row>
+            <row>.I.</row>
+        </shape>
+        <ingredient symbol="I">iron block</ingredient>
+    </shaped>
+</crafting>
+<if constant="unbreakable-armor" constant-value="true">
+    <item-mods>
+        <rule>
+            <match>
+                <material>iron helmet</material>
+                <material>iron chestplate</material>
+                <material>iron leggings</material>
+                <material>iron boots</material>
+            </match>
+            <modify unbreakable="true"/>
+        </rule>
+    </item-mods>
+</if>
+</map>
