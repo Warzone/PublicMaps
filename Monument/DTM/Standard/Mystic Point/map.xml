@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Mystic Point</name>
-<version>1.1.6</version>
+<version>1.1.7</version>
 <objective>Destroy the enemy team's left and right monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="00c06fa6-1c53-4634-931a-929efd8a52df" contribution="Map Design"/> <!-- Nadastorm -->
     <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Tunnel Asthetics"/> <!-- Stealth5061 -->
@@ -90,7 +91,7 @@
         <cylinder base="-25,69,-81.5" height="oo" radius="9"/>
         <cylinder base="-25,69,-193.5" height="oo" radius="9"/>
     </union>
-    <complement id="void">
+    <complement id="void-region">
         <everywhere/>
         <rectangle min="-155,-175" max="100,-100"/>
     </complement>
@@ -100,7 +101,7 @@
     <apply enter="only-green" region="green-spawn" message="You may not enter the enemy team's spawn!"/>
     <apply block="never" region="spawn-buildings" message="You may not modify the spawn buildings!"/>
     <apply block="deny-spawner" region="spawners" message="Do not break the spawners!"/>
-    <apply block="never" region="void" message="You cannot build outside of the map!"/>
+    <apply block="never" region="void-region" message="You cannot build outside of the map!"/>
 </regions>
 <destroyables materials="obsidian" modes="beacon-mode coal-mode" repairable="false">
     <destroyable owner="blue" name="Left Monument">
@@ -167,7 +168,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" material="wood"/>
         <item amount="16" material="glass"/>
     </kill-reward>
