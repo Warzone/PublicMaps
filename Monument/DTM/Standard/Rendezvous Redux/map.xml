@@ -1,15 +1,16 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Rendezvous Redux</name>
-<version>2.3.0</version>
+<version>2.3.1</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="f391227e-626f-4076-a389-95e2b922d167"/> <!-- Haribo98 (ParaPenguin) -->
     <author uuid="378952b5-808f-4a33-911e-39c7ba153b38"/> <!-- Pavlo -->
 </authors>
 <teams>
-   <team id="red" color="dark red" max="32">Red</team>
-   <team id="blue" color="blue" max="32">Blue</team>
+   <team id="red-team" color="dark red" max="32">Red</team>
+   <team id="blue-team" color="blue" max="32">Blue</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -31,26 +32,22 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit" yaw="90">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit" yaw="90">
+        <region>
             <cylinder base="67.5,27,-798.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="-90">
-        <regions>
+    <spawn team="blue-team" kit="spawn-kit" yaw="-90">
+        <region>
             <cylinder base="-42.5,27,-798.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <cylinder base="12.5,54,-898.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
-</filters>
 <regions>
     <union id="spawn-entrances">
         <cuboid id="red-spawn-enter" min="56,33,-802" max="61,37,-794"/>
@@ -60,28 +57,28 @@
         <cuboid id="red-spawn-tunnel" min="57,25,-802" max="73,33,-794"/>
         <cuboid id="blue-spawn-tunnel" min="-49,33,-802" max="-33,25,-794"/>
     </union>
-    <apply region="red-spawn-tunnel" enter="only-red" message="You may not enter `4Red`c's spawn area!"/>
-    <apply region="blue-spawn-tunnel" enter="only-blue" message="You may not enter `9Blue`c's spawn area!"/>
+    <apply region="red-spawn-tunnel" enter="red-team" message="You may not enter `4Red`r's spawn area!"/>
+    <apply region="blue-spawn-tunnel" enter="blue-team" message="You may not enter `9Blue`r's spawn area!"/>
     <apply region="spawn-entrances" block="never" message="You may not modify the spawn area."/>
     <apply region="spawn-tunnels" block="never" message="You may not modify the spawn tunnel."/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable name="Left" owner="red">
+    <destroyable name="Left" owner="red-team">
         <region>
             <block>108,37,-832</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="red">
+    <destroyable name="Right" owner="red-team">
         <region>
             <block>108,37,-764</block>
         </region>
     </destroyable>
-    <destroyable name="Left" owner="blue">
+    <destroyable name="Left" owner="blue-team">
         <region>
             <block>-84,37,-764</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="blue">
+    <destroyable name="Right" owner="blue-team">
         <region>
             <block>-84,37,-832</block>
         </region>
@@ -110,7 +107,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="arrow"/>
     </kill-reward>
 </kill-rewards>
