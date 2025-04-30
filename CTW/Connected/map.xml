@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Connected</name>
-<version>1.2.0</version>
+<version>1.2.4</version>
 <variant id="christmas" world="christmas">Christmas</variant>
 <objective>Capture the wool and return it to your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- Kroest -->
 </authors>
@@ -11,8 +12,8 @@
     <contributor uuid="10c1b730-49b9-4f75-9212-91facc371477" contribution="XML assistance"/> <!-- Qixit -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="24">Blue</team>
-    <team id="red" color="dark red" max="24">Red</team>
+    <team id="blue-team" color="blue" max="24">Blue</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -28,23 +29,22 @@
         <item slot="3" unbreakable="true" material="iron axe">
             <enchantment>efficiency</enchantment>
         </item>
-        <item slot="4" unbreakable="true" material="iron spade">
+        <item slot="30" unbreakable="true" material="iron spade">
             <enchantment>efficiency</enchantment>
         </item>
-        <item slot="5" amount="64" damage="2" material="wood"/>
-        <item slot="32" amount="64" damage="2" material="wood"/>
-        <item slot="6" amount="64" material="glass"/>
-        <item slot="7" amount="64" material="ladder"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="31" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" amount="64" material="ladder"/>
+        <item slot="33" material="bucket"/>
         <item slot="8" material="golden apple"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings">
             <enchantment>projectile_protection</enchantment>
         </leggings>
-        <boots unbreakable="true" material="iron boots">
-            <enchantment>feather_falling</enchantment>
-        </boots>
-        <effect duration="5" amplifier="3">heal</effect>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5s" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
@@ -53,36 +53,22 @@
             <cylinder base="0.5,73,0.5" radius="0.25" height="0"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region>
             <cylinder base="11.5,7,-114.5" radius="1" height="0"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="180">
             <cylinder base="-8.5,7,115.5" radius="1" height="0"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <not id="blue-in-wr">
-        <any>
-            <team id="only-red">red</team>
-            <material>chest</material>
-        </any>
-    </not>
-    <not id="red-in-wr">
-        <any>
-            <team id="only-blue">blue</team>
-            <material>chest</material>
-        </any>
-    </not>
-    <not id="deny-void">
-        <void/>
-    </not>
+    <material id="chest">chest</material>
 </filters>
 <regions>
-    <complement id="void">
+    <complement id="void-region">
         <everywhere/>
         <rectangle min="-17,19" max="20,-18"/>
     </complement>
@@ -99,43 +85,45 @@
         <circle center="0,-115" radius="1"/>
     </union>
     <union id="wool-rooms">
-        <union id="blue-wools"> <!-- Blue must get from red -->
-            <rectangle id="magenta-wool" min="30,0.5" max="50,12"/>
-            <rectangle id="pink-wool" min="-47,0.5" max="-27,12"/>
-        </union>
-        <union id="red-wools"> <!-- Red must get from blue -->
+        <union id="blue-wools"> <!-- Red must get from blue -->
             <rectangle id="green-wool" min="-47,0.5" max="-27,-11"/>
             <rectangle id="lime-wool" min="30,0.5" max="50,-11"/>
         </union>
+        <union id="red-wools"> <!-- Blue must get from red -->
+            <rectangle id="magenta-wool" min="30,0.5" max="50,12"/>
+            <rectangle id="pink-wool" min="-47,0.5" max="-27,12"/>
+        </union>
     </union>
-    <apply enter="only-blue" region="blue-base" message="You may not enter the enemy team's base!"/>
-    <apply enter="only-red" region="red-base" message="You may not enter the enemy team's base!"/>
-    <apply enter="only-blue" region="blue-wools" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="red-wools" message="You may not enter your team's own wool rooms!"/>
+    <apply use="deny(void)" region="void-region"/>
+    <apply enter="deny(blue-team)" region="red-base" message="You may not enter the enemy team's base!"/>
+    <apply enter="deny(red-team)" region="blue-base" message="You may not enter the enemy team's base!"/>
+    <apply enter="deny(blue-team)" region="blue-wools" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="deny(red-team)" region="red-wools" message="You may not enter your team's own wool rooms!"/>
     <apply enter="never" region="wool-entry" message="You may not block the wool monuments!"/>
     <apply block="never" region="bases" message="You may not destroy the bases!"/>
     <apply block="never" region="wool-monuments" message="Only wool blocks may be placed at the monuments!"/>
-    <apply block="blue-in-wr" use="only-blue" region="blue-wools"/>
-    <apply block="red-in-wr" use="only-red" region="red-wools"/>
-    <apply block="deny-void" region="void" message="You may not build in the void area!"/>
+    <apply block="deny(chest)" region="wool-rooms" message="You may not break or place this block in the wool rooms!"/>
+    <apply block="deny(blue-team)" region="blue-wools" message="You may not break or place blocks in your team's own wool room!"/>
+    <apply block="deny(red-team)" region="red-wools" message="You may not break or place blocks in your team's own wool room!"/>
+    <apply block="deny(void)" region="void-region" message="You may not build in the void area!"/>
 </regions>
 <wools craftable="false">
-    <wool team="blue" color="pink" location="-36.5,11,3.5">
+    <wool team="blue-team" color="pink" location="-36.5,11,3.5">
         <monument>
             <block>0,7,-116</block>
         </monument>
     </wool>
-    <wool team="blue" color="magenta" location="39.5,11,3.5">
+    <wool team="blue-team" color="magenta" location="39.5,11,3.5">
         <monument>
             <block>0,7,-115</block>
         </monument>
     </wool>
-    <wool team="red" color="green" location="-36.5,11,-2.5">
+    <wool team="red-team" color="green" location="-36.5,11,-2.5">
         <monument>
             <block>2,7,115</block>
         </monument>
     </wool>
-    <wool team="red" color="lime" location="39.5,11,-2.5">
+    <wool team="red-team" color="lime" location="39.5,11,-2.5">
         <monument>
             <block>2,7,116</block>
         </monument>
@@ -162,33 +150,18 @@
     <item>redstone</item>
     <item>redstone torch on</item>
     <item>glowstone dust</item>
+    <item>boat</item>
 </itemremove>
-<block-drops>
-    <rule>
-        <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-</block-drops>
 <itemkeep>
     <item>golden apple</item>
     <item>wood</item>
     <item>glass</item>
+    <item>ladder</item>
+    <item>bucket</item>
+    <item>water bucket</item>
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" damage="2" material="wood"/>
         <item amount="16" material="glass"/>
     </kill-reward>
