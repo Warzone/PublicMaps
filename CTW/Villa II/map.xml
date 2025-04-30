@@ -1,31 +1,58 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Villa II</name>
-<version>1.1.1</version>
+<version>1.2.5</version>
+<variant id="halloween" world="halloween" override="true" slug="villa_ii_boo">Villa BOO</variant>
+<variant id="christmas" world="christmas" override="true">Chilla II</variant>
 <objective>Capture the enemy team's wool!</objective>
-<created>2022-08-07</created>
 <gamemode>ctw</gamemode>
+<if variant="default">
+    <created>2022-08-07</created>
+    <constant id="wood-damage">2</constant>
+</if>
+<if variant="halloween">
+    <created>2022-09-14</created>
+    <constant id="wood-damage">1</constant>
+</if>
+<if variant="christmas">
+    <created>2024-12-03</created>
+    <constant id="wood-damage">1</constant>
+</if>
+<include id="gapple-kill-reward"/>
+<include id="iron-bulkcrafting"/>
 <authors>
     <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
     <author uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b"/> <!-- Tundren -->
 </authors>
 <contributors>
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="XML"/> <!-- Cazadorian -->
+    <if variant="halloween">
+        <contributor uuid="74271a2f-47c0-4bd7-9a9f-4dc7eaedabe0" contribution="Motivation"/> <!-- envyother -->
+    </if>
 </contributors>
+<constants>
+    <constant id="observers-kit" delete="true"/>
+</constants>
+<if variant="halloween">
+    <constant id="observers-kit">default-kit</constant>
+</if>
 <teams>
     <team id="blue" color="blue" max="24">Blue</team>
     <team id="red" color="dark red" max="24">Red</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
+    <kit id="default-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parents="${observers-kit}">
         <clear/>
         <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow" enchantment="infinity"/>
         <item slot="2" unbreakable="true" material="iron pickaxe" enchantment="dig speed"/>
-        <item slot="3" material="iron axe" unbreakable="true">
+        <item slot="3" unbreakable="true" material="iron axe">
             <enchantment level="2">dig_speed</enchantment>
         </item>
         <item slot="4" unbreakable="true" material="iron spade" enchantment="dig speed"/>
-        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" damage="${wood-damage}" material="wood"/>
         <item slot="6" amount="32" material="glass"/>
         <item slot="7" material="golden apple"/>
         <item slot="8" material="bucket"/>
@@ -33,40 +60,69 @@
         <effect duration="4" amplifier="255">damage resistance</effect>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate" enchantment="protection projectile:2"/>
-        <leggings material="chainmail leggings" unbreakable="true"/>
-        <boots material="leather boots" team-color="true" unbreakable="true"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <default yaw="-90">
+    <default kit="${observers-kit}" yaw="-90">
         <regions>
-            <point>-80.5,22,41.5</point>
+            <cylinder base="-80,22,42" radius="1" height="0"/>
         </regions>
     </default>
     <spawn team="red" kit="spawn-kit" yaw="135">
         <regions>
-            <point>61.5,13,146.5</point>
+            <unless variant="christmas">
+                <point>61.5,13,146.5</point>
+            </unless>
+            <if variant="christmas">
+                <point>58,13,144</point>
+            </if>
         </regions>
     </spawn>
     <spawn team="blue" kit="spawn-kit" yaw="-45">
         <regions>
-            <point>-47.5,13,-62.5</point>
+            <unless variant="christmas">
+                <point>-47.5,13,-62.5</point>
+            </unless>
+            <if variant="christmas">
+                <point>-44,13,-60</point>
+            </if>
         </regions>
     </spawn>
 </spawns>
 <wools craftable="false">
     <wool team="blue" color="purple" location="-12.5,13,198.5">
         <monument>
-            <block>-43,14,-52</block>
+            <unless variant="halloween">
+                <block>-43,14,-52</block>
+            </unless>
+            <if variant="halloween">
+                <block>-43,13,-52</block>
+            </if>
+            <if variant="christmas">
+                <block>-48,14,-64</block>
+            </if>
         </monument>
     </wool>
     <wool team="red" color="orange" location="26.5,13,-114.5">
         <monument>
-            <block>56,14,135</block>
+            <unless variant="halloween">
+                <block>56,14,135</block>
+            </unless>
+            <if variant="halloween">
+                <block>56,13,135</block>
+            </if>
+            <if variant="christmas">
+                <block>61,14,147</block>
+            </if>
         </monument>
-   </wool>
+    </wool>
 </wools>
 <filters>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
     <all id="blue-in-wr">
         <team id="only-blue">blue</team>
         <filter id="wr-filter"/>
@@ -78,18 +134,27 @@
     <any id="wr-filter">
         <material>web</material>
     </any>
-    <not id="deny-void">
-       <void/>
-    </not>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
     <material id="only-iron">iron block</material>
+    <deny id="deny-void-break">
+        <all>
+            <any>
+                <material>stone button</material>
+                <material>web</material>
+            </any>
+            <void/>
+        </all>
+    </deny>
 </filters>
 <regions>
     <union id="spawn-protection">
-        <rectangle id="blue-prot" min="-27,-41" max="-59,-74"/>
-        <rectangle id="red-prot" min="41,125" max="73,158"/>
+        <unless variant="christmas">
+            <rectangle id="blue-prot" min="-27,-41" max="-59,-74"/>
+            <rectangle id="red-prot" min="41,125" max="73,158"/>
+        </unless>
+        <if variant="christmas">
+            <rectangle id="blue-prot" min="-23,-76" max="-60,-39"/>
+            <rectangle id="red-prot" min="37,161" max="74,123"/>
+        </if>
     </union>
     <union id="wool-rooms">
         <rectangle id="orange-wool-room" min="12,-88" max="41,-123"/> <!-- blue defends -->
@@ -125,7 +190,7 @@
     <apply block="blue-in-wr" region="purple-wool-room" message="You may not break the wool rooms!"/>
     <apply block="red-in-wr" region="orange-wool-room" message="You may not break the wool rooms!"/>
     <apply block="never" region="gap-spawner-prot" message="You may not break the spawner!"/>
-    <apply block-place="deny-void" region="void-area" message="You may not build in the void area!"/>
+    <apply block-place="deny(void)" block-break="deny-void-break" region="void-area" message="You may not build in the void area!"/>
     <apply block-break="only-iron" block-place="deny-players" region="spawn-protection" message="You may not modify the spawns!"/>
 </regions>
 <spawners>
@@ -157,6 +222,13 @@
     <item>string</item>
     <item>redstone</item>
     <item>redstone torch off</item>
+    <item>boat</item>
+    <if variant="halloween">
+        <item>nether stalk</item>
+    </if>
+    <if variant="christmas">
+        <item>snowball</item>
+    </if>
 </itemremove>
 <itemkeep>
     <item>arrow</item>
@@ -185,8 +257,7 @@
 <maxbuildheight>33</maxbuildheight>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
-        <item material="wood" damage="2" amount="16"/>
+        <item material="wood" damage="${wood-damage}" amount="16"/>
         <item material="glass" amount="8"/>
     </kill-reward>
 </kill-rewards>
