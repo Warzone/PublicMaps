@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ender Hill</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Craft and capture all three wools before the enemy team!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="42b10520-7c51-4252-92d9-8b65df108b12" contribution="Concept and design"/> <!-- PieZ -->
     <author uuid="3cce0080-9faa-48f9-82cf-64410305822a" contribution="Design"/> <!-- ProfessorUtonium -->
@@ -12,61 +13,33 @@
     <contributor uuid="a9f11454-beac-4cc3-a138-1780802c8794" contribution="XML for PGM"/> <!-- Crazy_ -->
 </contributors>
 <broadcasts>
-    <alert after="1s" every="60s">Collect string to craft wools at the black island at the top middle</alert>
-    <alert after="2s" every="60s">You can find dye at the coloured islands across the map</alert>
+    <alert after="1s" every="1m">Collect string to craft wools at the black island at the top middle</alert>
+    <alert after="2s" every="1m">You can find dye at the coloured islands across the map</alert>
     <tip after="30s" every="2m">Some of the islands give special potion effects, like regeneration or speed</tip>
 </broadcasts>
 <teams>
     <team id="red-team" color="dark red" min="1" max="20">Red</team>
     <team id="blue-team" color="blue" min="1" max="20">Blue</team>
 </teams>
-<spawns>
-    <spawn team="red-team" kit="red-kit">
-        <regions>
-            <point yaw="-90">-42.5,92,-3.5</point>
-        </regions>
-    </spawn>
-    <spawn team="blue-team" kit="blue-kit">
-        <regions>
-            <point yaw="90">106.5,92,-3.5</point>
-        </regions>
-    </spawn>
-    <default kit="obs">
-        <regions>
-            <point>32.5,166,-3</point>
-        </regions>
-    </default>
-</spawns>
 <kits>
     <kit id="obs">
-        <effect duration="oo" amplifier="1">night vision</effect>
+        <effect>night vision</effect>
     </kit>
-    <kit id="default">
+    <kit id="default-kit" parents="obs">
         <clear/>
         <item slot="0" material="iron sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" name="`5Ender Bow" material="bow"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" name="`5Ender Bow" material="bow"/>
         <item slot="2" amount="16" material="snow ball"/>
         <item slot="3" amount="16" material="snow ball"/>
         <item slot="8" amount="64" material="golden carrot"/>
         <item slot="28" material="arrow"/>
-        <effect duration="oo" amplifier="1">night vision</effect>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots">
+        <enchantment level="5">protection fall</enchantment>
+        </boots>
         <effect duration="5" amplifier="15">damage resistance</effect>
-    </kit>
-    <kit id="red-kit" parent="default">
-        <helmet color="993333" unbreakable="true" material="leather helmet"/>
-        <chestplate color="993333" unbreakable="true" material="leather chestplate"/>
-        <leggings color="993333" unbreakable="true" material="leather leggings"/>
-        <boots color="993333" unbreakable="true" material="leather boots">
-            <enchantment level="5">protection fall</enchantment>
-        </boots>
-    </kit>
-    <kit id="blue-kit" parent="default">
-        <helmet color="334CB2" unbreakable="true" material="leather helmet"/>
-        <chestplate color="334CB2" unbreakable="true" material="leather chestplate"/>
-        <leggings color="334CB2" unbreakable="true" material="leather leggings"/>
-        <boots color="334CB2" unbreakable="true" material="leather boots">
-            <enchantment level="5">protection fall</enchantment>
-        </boots>
     </kit>
     <!-- Potion effects for regions -->
     <kit id="absorption" force="true">
@@ -85,6 +58,23 @@
         <effect duration="10s" amplifier="2">poison</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="red-team" kit="default-kit" yaw="-90">
+        <region>
+            <point>-42.5,92,-3.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="default-kit" yaw="90">
+        <region>
+            <point>106.5,92,-3.5</point>
+        </region>
+    </spawn>
+    <default kit="obs">
+        <region>
+            <point>32.5,166,-3</point>
+        </region>
+    </default>
+</spawns>
 <modifybowprojectile>
     <projectile>EnderPearl</projectile>
 </modifybowprojectile>
@@ -163,46 +153,43 @@
         </region>
     </apply>
 </regions>
-<!-- Proximity doesn't really work with this map  -->
-<wools team="red-team"> 
-    <wool color="blue" craftable="true" location="0,0,0">
-        <monument>
-            <block>28,171,1</block>
-        </monument>
-    </wool>
-    <wool color="yellow" craftable="true" location="0,0,0">
-        <monument>
-            <block>26,171,-4</block>
-        </monument>
-    </wool>
-    <wool color="red" craftable="true" location="0,0,0">
-        <monument>
-            <block>28,171,-9</block>
-        </monument>
-    </wool>
+<!-- Proximity doesn't really work with this map -->
+<wools craftable="true">
+    <wools team="red-team"> 
+        <wool color="blue" location="0,0,0">
+            <monument>
+                <block>28,171,1</block>
+            </monument>
+        </wool>
+        <wool color="yellow" location="0,0,0">
+            <monument>
+                <block>26,171,-4</block>
+            </monument>
+        </wool>
+        <wool color="red" location="0,0,0">
+            <monument>
+                <block>28,171,-9</block>
+            </monument>
+        </wool>
+    </wools>
+    <wools team="blue-team">
+        <wool color="blue" location="0,0,0">
+            <monument>
+                <block>36,171,1</block>
+            </monument>
+        </wool>
+        <wool color="yellow" location="0,0,0">
+            <monument>
+                <block>38,171,-4</block>
+            </monument>
+        </wool>
+        <wool color="red" location="0,0,0">
+            <monument>
+                <block>36,171,-9</block>
+            </monument>
+        </wool>
+    </wools>
 </wools>
-<wools team="blue-team">
-    <wool color="blue" craftable="true" location="0,0,0">
-        <monument>
-            <block>36,171,1</block>
-        </monument>
-    </wool>
-    <wool color="yellow" craftable="true" location="0,0,0">
-        <monument>
-            <block>38,171,-4</block>
-        </monument>
-    </wool>
-    <wool color="red" craftable="true" location="0,0,0">
-        <monument>
-            <block>36,171,-9</block>
-        </monument>
-    </wool>
-</wools>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
