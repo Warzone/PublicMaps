@@ -1,24 +1,32 @@
-<?xml version="1.0"?> <!-- created july 2021 as a summer school project -->
-<map proto="1.4.0">
+<map proto="1.5.0"> <!-- created july 2021 as a summer school project -->
 <name>Corrupted Paradise CTW</name>
-<version>1.0.8</version>
+<version>1.0.13</version>
 <objective>Capture all 6 wools!</objective>
 <gamemode>ctw</gamemode>
 <created>2021-07-27</created>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="executive producer"/> <!-- rockymine -->
-    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="executive producer"/> <!-- Ruediger_LP -->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Executive producer"/> <!-- rockymine -->
+    <author uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="Executive producer"/> <!-- Ruediger_LP -->
     <author uuid="2af553e3-4e3e-4f0f-a35e-bb3ad2c4cf36"/> <!-- Bizazir -->
     <author uuid="64f71111-a0bf-4903-834a-39e68ad6462b"/> <!-- alphaschrank -->
     <author uuid="45679737-302c-4e12-88fc-71c68f26acf5"/> <!-- MrFrendly -->
     <author uuid="6e87bec7-2cfe-418a-8783-c5027a03dd68"/> <!-- DetrexYT69 -->
 </authors>
 <contributors>
-    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="feedback"/> <!-- Strangey -->
+    <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Feedback"/> <!-- Strangey -->
 </contributors>
+<rules>
+    <rule>Teaming is allowed.</rule>
+</rules>
+<broadcasts>
+    <tip after="10s" every="6m">`lIron can be found left of spawn`r inside the cave!</tip>
+    <tip after="20s" every="6m">`lWools cannot be placed`r on the playing field of this map!</tip>
+    <tip after="30s" every="6m">Combat is disabled in the woolrooms!</tip>
+</broadcasts>
 <teams>
-    <team id="blue-team" color="blue" max="20">Blue</team>
-    <team id="red-team" color="red" max="20">Red</team>
+    <team id="blue-team" color="blue" dye-color="light blue" max="20">Blue</team>
+    <team id="red-team" color="red" dye-color="pink" max="20">Red</team>
     <team id="yellow-team" color="yellow" max="20">Yellow</team>
     <team id="green-team" color="green" max="20">Green</team>
 </teams>
@@ -30,6 +38,7 @@
         <item slot="2" material="iron pickaxe" unbreakable="true"/>
         <item slot="3" material="iron axe" unbreakable="true"/>
         <item slot="4" material="wood" amount="64"/>
+        <item slot="5" material="stained clay" team-color="true" amount="32"/>
         <item slot="6" material="vine" amount="24"/>
         <item slot="8" material="golden apple"/>
         <item slot="28" material="arrow"/>
@@ -39,26 +48,23 @@
         <chestplate material="chainmail chestplate" unbreakable="true"/>
         <effect duration="oo" amplifier="100">damage resistance</effect>
     </kit>
-    <kit force="true" id="reset-resitance-kit">
+    <kit force="true" id="reset-resistance-kit">
         <effect duration="0" amplifier="0">damage resistance</effect>
     </kit>
+    <!-- Separate kits for armor colors are intentional -->
     <kit id="blue-kit" parents="spawn-kit">
-        <item slot="4" material="stained clay" damage="3" amount="32"/>
         <leggings material="leather leggings" color="3498DB" unbreakable="true"/>
         <boots material="leather boots" color="3498DB" unbreakable="true"/>
     </kit>
     <kit id="red-kit" parents="spawn-kit">
-        <item slot="4" material="stained clay" damage="6" amount="32"/>
         <leggings material="leather leggings" color="E74C3C" unbreakable="true"/>
         <boots material="leather boots" color="E74C3C" unbreakable="true"/>
     </kit>
     <kit id="yellow-kit" parents="spawn-kit">
-        <item slot="4" material="stained clay" damage="4" amount="32"/>
         <leggings material="leather leggings" color="F1C40F" unbreakable="true"/>
         <boots material="leather boots" color="F1C40F" unbreakable="true"/>
     </kit>
     <kit id="green-kit" parents="spawn-kit">
-        <item slot="4" material="stained clay" damage="5" amount="32"/>
         <leggings material="leather leggings" color="28B463" unbreakable="true"/>
         <boots material="leather boots" color="28B463" unbreakable="true"/>
     </kit>
@@ -101,21 +107,6 @@
     <wool team="green-team" monument="green-team-orange-wool" color="orange" location="-67,10.2,-105"/>
 </wools>
 <filters>
-    <not id="not-blue">
-        <team id="only-blue">blue-team</team>
-    </not>
-    <not id="not-red">
-        <team id="only-red">red-team</team>
-    </not>
-    <not id="not-yellow">
-        <team id="only-yellow">yellow-team</team>
-    </not>
-    <not id="not-green">
-        <team id="only-green">green-team</team>
-    </not>
-    <not id="not-void">
-        <void/>
-    </not>
     <not id="not-void-and-web">
         <all>
             <material>web</material>
@@ -124,25 +115,25 @@
     </not>
     <all id="blues-woolrooms-filter">
         <not>
-            <team>blue-team</team>
+            <team id="only-blue">blue-team</team>
         </not>
         <filter id="woolrooms-filter"/>
     </all>
     <all id="reds-woolrooms-filter">
         <not>
-            <team>red-team</team>
+            <team id="only-red">red-team</team>
         </not>
         <filter id="woolrooms-filter"/>
     </all>
     <all id="yellows-woolrooms-filter">
         <not>
-            <team>yellow-team</team>
+            <team id="only-yellow">yellow-team</team>
         </not>
         <filter id="woolrooms-filter"/>
     </all>
     <all id="greens-woolrooms-filter">
         <not>
-            <team>green-team</team>
+            <team id="only-green">green-team</team>
         </not>
         <filter id="woolrooms-filter"/>
     </all>
@@ -216,7 +207,7 @@
     <cylinder id="red-spawn" base="-75,45,117" radius="0.5" height="0"/>
     <cylinder id="yellow-spawn" base="-117,45,-75" radius="0.5" height="0"/>
     <cylinder id="green-spawn" base="75,45,-117" radius="0.5" height="0"/>
-    <cylinder id="obs-spawn" base="-75.5,47.2,0.5" radius="2" height="0"/>
+    <cylinder id="obs-spawn" base="-75.5,47,0.5" radius="2" height="0"/>
     <!-- victory monuments -->
     <!-- blue -->
     <block id="blue-team-red-wool">112,20,77</block>
@@ -303,21 +294,21 @@
     <apply enter="only-red" region="red-base" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-yellow" region="yellow-base" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-green" region="green-base" message="You may not enter the enemy's spawn!"/>
-    <apply enter="not-blue" region="blues-woolrooms" message="You may not enter your own wool room!"/>
-    <apply enter="not-red" region="reds-woolrooms" message="You may not enter your own wool room!"/>
-    <apply enter="not-yellow" region="yellows-woolrooms" message="You may not enter your own wool room!"/>
-    <apply enter="not-green" region="greens-woolrooms" message="You may not enter your own wool room!"/>
-    <apply block-place="deny-wools" region="everywhere" message="You may not place safety wools!"/>
-    <apply block-physics="deny-lava" region="everywhere"/>
+    <apply enter="not(only-blue)" region="blues-woolrooms" message="You may not enter your own wool room!"/>
+    <apply enter="not(only-red)" region="reds-woolrooms" message="You may not enter your own wool room!"/>
+    <apply enter="not(only-yellow)" region="yellows-woolrooms" message="You may not enter your own wool room!"/>
+    <apply enter="not(only-green)" region="greens-woolrooms" message="You may not enter your own wool room!"/>
+    <apply block-place="deny-wools" message="You may not place safety wools!"/>
+    <apply block-physics="deny-lava"/>
     <apply block-place="never" block-break="only-iron-or-diamond-ore" region="bases" message="You may not edit spawn!"/>
     <apply block-place="never" region="beacons" message="You may not edit the wool room!"/>
     <apply block="blues-woolrooms-filter" region="blues-woolrooms" message="You may not edit the wool room!"/>
     <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not edit the wool room!"/>
     <apply block="yellows-woolrooms-filter" region="yellows-woolrooms" message="You may not edit the wool room!"/>
     <apply block="greens-woolrooms-filter" region="greens-woolrooms" message="You may not edit the wool room!"/>
-    <apply block-place="not-void" block-break="not-void-and-web" region="not-build-area" message="You may not edit the void"/>
     <apply use="deny-woolroom-use" region="woolrooms"/>
-    <apply kit="reset-resitance-kit" region="not-bases"/>
+    <apply kit="reset-resistance-kit" region="not-bases"/>
+    <apply block-place="deny(void)" block-break="not-void-and-web" region="not-build-area" message="You may not edit the void"/>
 </regions>
 <block-drops>
     <rule wrongtool="false" region="woolrooms" filter="only-iron">
@@ -567,37 +558,17 @@
         </all>
     </deny>
 </damage>
+<kill-rewards>
+    <kill-reward>
+        <item material="wood" damage="0" amount="16"/>
+        <item material="stained clay" team-color="true" amount="24"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
 <gamerules>
     <randomTickSpeed>3</randomTickSpeed>
 </gamerules>
-<rules>
-    <rule>Teaming is allowed.</rule>
-</rules>
-<broadcasts>
-    <tip after="10s" every="6m">`lIron can be found left of spawn`r inside the cave!</tip>
-    <tip after="20s" every="6m">`lWools cannot be placed`r on the playing field of this map!</tip>
-    <tip after="30s" every="6m">Combat is disabled in the woolrooms!</tip>
-</broadcasts>
 <maxbuildheight>28</maxbuildheight>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item material="wood" damage="0" amount="16"/>
-    </kill-reward>
-    <kill-reward filter="only-blue">
-        <item material="stained clay" damage="3" amount="24"/>
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item material="stained clay" damage="6" amount="24"/>
-    </kill-reward>
-    <kill-reward filter="only-yellow">
-        <item material="stained clay" damage="4" amount="24"/>
-    </kill-reward>
-    <kill-reward filter="only-green">
-        <item material="stained clay" damage="5" amount="24"/>
-    </kill-reward>
-</kill-rewards>
 </map>
