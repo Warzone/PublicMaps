@@ -1,179 +1,148 @@
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Ethereal</name>
-<version>1.3.1</version>
+<version>1.3.2</version>
 <objective>Capture the wool and return it to your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880" />
-    <!--  KroestV2  -->
-    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" />
-    <!--  GoldenOre  -->
+    <author uuid="65722be1-29fd-4e7d-a47d-94ed616ed880"/> <!-- KroestV2 -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
 <teams>
-    <team color="light purple" max="32" max-overfill="36">Pink</team>
-    <team color="yellow" max="32" max-overfill="36">Yellow</team>
+    <team id="pink" color="light purple" max="32" max-overfill="36">Pink</team>
+    <team id="yellow" color="yellow" max="32" max-overfill="36">Yellow</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite">bow</item>
-        <item slot="2" enchantment="durability:4;dig speed:1">iron pickaxe</item>
-        <item slot="3" enchantment="durability:4;dig speed:1">iron axe</item>
-        <item slot="4" amount="12">ladder</item>
-        <item slot="5" amount="48" damage="2">wood</item>
-        <item slot="6" amount="1">boat</item>
-        <item slot="8" amount="32">golden carrot</item>
-        <item slot="28" amount="1">arrow</item>
-        <potion duration="5" amplifier="3">heal</potion>
-        <chestplate enchantment="protection projectile:2" damage="-3000">chainmail chestplate</chestplate>
-    </kit>
-    <kit name="yellow" parents="spawn">
-        <leggings color="E5E533" unbreakable="true">leather leggings</leggings>
-        <boots enchantment="protection environmental:1;protection fall:3" color="E5E533" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="pink" parents="spawn">
-        <leggings color="f27fa5" unbreakable="true">leather leggings</leggings>
-        <boots enchantment="protection environmental:1;protection fall:3" color="f27fa5" unbreakable="true">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" enchantment="durability:4;dig speed" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:4;dig speed" material="iron axe"/>
+        <item slot="4" amount="12" material="ladder"/>
+        <item slot="5" amount="48" damage="2" material="wood"/>
+        <item slot="6" material="boat"/>
+        <item slot="8" amount="32" material="golden carrot"/>
+        <item slot="28" material="arrow"/>
+        <chestplate enchantment="protection projectile:2" unbreakable="true" material="chainmail chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <effect duration="5" amplifier="3">heal</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="pink" kit="pink" yaw="90">
-        <point>158.5,30,-26.5</point>
-        <point>158.5,30,27.5</point>
+    <spawn team="pink" kit="spawn-kit" yaw="90">
+        <regions>
+            <point>158.5,30,-26.5</point>
+            <point>158.5,30,27.5</point>
+        </regions>
     </spawn>
-    <spawn team="yellow" kit="yellow" yaw="-90">
-        <point>-157.5,30,27.5</point>
-        <point>-157.5,30,-26.5</point>
+    <spawn team="yellow" kit="spawn-kit" yaw="-90">
+        <regions>
+            <point>-157.5,30,27.5</point>
+            <point>-157.5,30,-26.5</point>
+        </regions>
     </spawn>
-    <default yaw="0">
-        <point>0.5,105.5,0.5</point>
+    <default>
+        <region>
+            <point>0.5,105.5,0.5</point>
+        </region>
     </default>
 </spawns>
 <filters>
-    <filter name="yellow">
-        <team>yellow</team>
-    </filter>
-    <filter name="pink">
-        <team>pink</team>
-    </filter>
-    <filter name="anti-grief-yellow" parents="yellow">
-        <deny>
-            <block>chest</block>
-            <block>beacon</block>
-            <block>iron block</block>
-            <block>redstone wire</block>
-            <block>redstone torch on</block>
-        </deny>
-    </filter>
-    <filter name="anti-grief-pink" parents="pink">
-        <deny>
-            <block>chest</block>
-            <block>beacon</block>
-            <block>iron block</block>
-            <block>redstone wire</block>
-            <block>redstone torch on</block>
-        </deny>
-    </filter>
-    <filter name="deny-void">
-        <deny>
-            <void />
-        </deny>
-    </filter>
-    <filter name="only-pink-usage">
-        <not>
-            <all>
-                <any>
-                    <block>chest</block>
-                    <block>workbench</block>
-                </any>
-                <team>yellow</team>
-            </all>
-        </not>
-    </filter>
-    <filter name="only-yellow-usage">
-        <not>
-            <all>
-                <any>
-                    <block>chest</block>
-                    <block>workbench</block>
-                </any>
-                <team>pink</team>
-            </all>
-        </not>
-    </filter>
-    <filter name="deny-webs">
-        <deny>
-            <block>web</block>
-        </deny>
-    </filter>
+    <material id="webs">web</material>
+    <any id="anti-grief">
+        <material>chest</material>
+        <material>beacon</material>
+        <material>iron block</material>
+        <material>redstone wire</material>
+        <material>redstone torch on</material>
+    </any>
+    <deny id="anti-grief-yellow">
+        <all>
+            <filter id="anti-grief"/>
+            <team id="only-yellow">yellow</team>
+        </all>
+    </deny>
+    <deny id="anti-grief-pink">
+        <all>
+            <filter id="anti-grief"/>
+            <team id="only-pink">pink</team>
+        </all>
+    </deny>
+    <not id="only-pink-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+            </any>
+            <filter id="only-yellow"/>
+        </all>
+    </not>
+    <not id="only-yellow-usage">
+        <all>
+            <any>
+                <material>chest</material>
+                <material>workbench</material>
+            </any>
+            <filter id="only-pink"/>
+        </all>
+    </not>
 </filters>
 <regions>
-    <rectangle name="all" min="-oo,-oo" max="oo,oo" />
-    <union name="bridgezones">
-        <rectangle min="128,16" max="94,-15" />
-        <rectangle min="-127,16" max="-93,-15" />
-        <!--  mid zones  -->
-        <rectangle min="-12,-38" max="13,-15" />
-        <rectangle min="-12,39" max="13,16" />
+    <negative id="void-area">
+        <union id="bridgezones">
+            <rectangle min="128,16" max="94,-15"/>
+            <rectangle min="-127,16" max="-93,-15"/>
+            <!-- mid zones -->
+            <rectangle min="-12,-38" max="13,-15"/>
+            <rectangle min="-12,39" max="13,16"/>
+        </union>
+    </negative>
+    <union id="team-bases">
+        <union id="yellow-base">
+            <rectangle min="-161,16" max="-149,39"/>
+            <rectangle min="-161,-38" max="-149,-15"/>
+        </union>
+        <union id="pink-base">
+            <rectangle min="150,-38" max="162,-15"/>
+            <rectangle min="162,16" max="150,39"/>
+        </union>
     </union>
-    <union name="yellow-base">
-        <rectangle min="-161,16" max="-149,39" />
-        <rectangle min="-161,-38" max="-149,-15" />
-    </union>
-    <union name="pink-base">
-        <rectangle min="150,-38" max="162,-15" />
-        <rectangle min="162,16" max="150,39" />
-    </union>
-    <rectangle name="pink-wool" min="153,-5" max="172,6" />
-    <rectangle name="yellow-wool" min="-152,6" max="-171,-5" />
-    <!--  Applied  -->
-    <apply enter="pink" message="You cannot enter the enemy spawn area!">
-        <region name="pink-base" />
+    <rectangle id="pink-wool" min="153,-5" max="172,6"/>
+    <rectangle id="yellow-wool" min="-152,6" max="-171,-5"/>
+    <!-- Applied -->
+    <apply region="pink-base" enter="pink" message="You may not enter the enemy's spawn area!"/>
+    <apply region="yellow-base" enter="yellow" message="You may not enter the enemy's spawn area!"/>
+    <apply block="never">
+        <region>
+            <region id="team-bases"/>
+            <cuboid min="99,25,-3" max="94,20,4"/>
+            <cuboid min="-98,25,4" max="-93,20,-3"/>
+        </region>
     </apply>
-    <apply enter="yellow" message="You cannot enter the enemy spawn area!">
-        <region name="yellow-base" />
+    <apply region="pink-wool" enter="yellow" message="You may not enter your own wool room!"/>
+    <apply region="yellow-wool" enter="pink" message="You may not enter your own wool room!"/>
+    <apply region="pink-wool" block="anti-grief-yellow" use="yellow"/>
+    <apply region="yellow-wool" block="anti-grief-pink" use="pink"/>
+    <apply block="never" message="You may not modify the spawn!">
+        <region>
+            <above y="90"/>
+        </region>
     </apply>
-    <apply block="deny-all">
-        <region name="yellow-base" />
-        <region name="pink-base" />
-        <cuboid min="99,25,-3" max="94,20,4" />
-        <cuboid min="-98,25,4" max="-93,20,-3" />
-    </apply>
-    <apply enter="yellow" message="You cannot enter your own wool room!">
-        <region name="pink-wool" />
-    </apply>
-    <apply enter="pink" message="You cannot enter your own wool room!">
-        <region name="yellow-wool" />
-    </apply>
-    <apply block="anti-grief-yellow" use="yellow">
-        <region name="pink-wool" />
-    </apply>
-    <apply block="anti-grief-pink" use="pink">
-        <region name="yellow-wool" />
-    </apply>
-    <apply block="deny-void" message="You cannot build outside the map area!">
-        <negative>
-            <region name="bridgezones" />
-        </negative>
-    </apply>
-    <apply block="deny-all" message="You may not modify the spawn!">
-        <above y="90" />
-    </apply>
-    <apply block="deny-webs">
-        <region name="bridgezones" />
-    </apply>
+    <apply region="bridgezones" block="deny(webs)"/>
+    <apply region="void-area" block="deny(void)" message="You may not build outside the map area!"/>
 </regions>
-<wools team="pink">
-    <wool color="yellow">
-        <block>96,22,0</block>
+<wools>
+    <wool team="pink" color="yellow" location="-163.5,31,0.5">
+        <monument>
+            <block>96,22,0</block>
+        </monument>
+    </wool>
+    <wool team="yellow" color="pink" location="164.5,31,0.5">
+        <monument>
+            <block>-96,22,0</block>
+        </monument>
     </wool>
 </wools>
-<wools team="yellow">
-    <wool color="pink">
-        <block>-96,22,0</block>
-    </wool>
-</wools>
-<maxbuildheight>45</maxbuildheight>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -195,7 +164,5 @@
     <item>golden carrot</item>
     <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item>golden apple</item>
-</killreward>
+<maxbuildheight>45</maxbuildheight>
 </map>
