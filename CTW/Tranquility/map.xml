@@ -1,8 +1,9 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Tranquility</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Capture the enemy's two wools!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
 </authors>
@@ -108,9 +109,6 @@
             <material>chest</material>
         </any>
     </not>
-    <not id="no-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="spawns">
@@ -128,15 +126,15 @@
         </union>
     </union>
     <cuboid id="tnt-spawner" min="-370,6,24" max="-369,7,25"/>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-blue" region="red-wool-rooms" message="You may not enter your own wool room!"/>
     <apply enter="only-red" region="blue-wool-rooms" message="You may not enter your own wool room!"/>
     <apply block="never" region="spawns" message="You may not edit the spawn!"/>
     <apply block="deny-blue-wool-room" region="blue-wool-rooms"/>
     <apply block="deny-red-wool-room" region="red-wool-rooms"/>
     <apply block-break="never" region="tnt-spawner" message="You may not destroy the TNT spawner!"/>
-    <apply block-place="no-void" message="You may not edit the void!"/>
+    <apply block-place="deny(void)" message="You may not edit the void!"/>
 </regions>
 <toolrepair>
     <tool>stone sword</tool>
@@ -164,9 +162,6 @@
     <item>golden apple</item>
 </itemkeep>
 <kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
     <kill-reward filter="only-blue">
         <item amount="16" material="wood"/>
     </kill-reward>
