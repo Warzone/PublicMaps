@@ -1,7 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Wit's End</name>
 <variant id="christmas" world="christmas">Christmas</variant>
-<version>1.3.0</version>
+<version>1.3.2</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture the enemy team's wools and return them to your victory monument.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -54,9 +55,6 @@
             <material>chest</material>
         </any>
     </not>
-    <not id="no-void">
-        <void/>
-    </not>
     <deny id="deny-beacon">
         <material>beacon</material>
     </deny>
@@ -94,15 +92,15 @@
         <rectangle min="-78,-30" max="78,30"/>
     </complement>
     <apply use="deny-beacon"/>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy spawn!"/>
-    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block-break="only-gold" block-place="only-gold-regen" region="bases" message="You may only break gold blocks in the bases!"/>
     <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
     <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
     <apply block="deny-spawner" message="You may not break this block!"/>
-    <apply block-place="no-void" region="void-region" message="You may not build in the void!"/>
+    <apply block-place="deny(void)" region="void-region" message="You may not build in the void!"/>
 </regions>
 <spawns>
     <default kit="default-kit" region="spawn-obs"/>
@@ -153,26 +151,14 @@
 <block-drops>
     <rule>
         <filter>
-            <material>quartz block</material>
+            <any>
+                <material>quartz block</material>
+                <material>wood</material>
+                <material>ladder</material>
+            </any>
         </filter>
         <drops>
-            <item chance="0" material="quartz block"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>ladder</material>
-        </filter>
-        <drops>
-            <item chance="0" material="ladder"/>
+            <item chance="0" material="glass"/>
         </drops>
     </rule>
 </block-drops>
@@ -184,7 +170,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" material="quartz block"/>
         <item amount="16" damage="2" material="wood"/>
     </kill-reward>
