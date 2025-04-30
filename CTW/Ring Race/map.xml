@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ring Race</name>
 <variant id="halloween" world="halloween" override="true">Haunted Rings</variant>
 <!-- <variant id="tournament" world="tournament">TE</variant> -->
-<version>1.8.2</version>
-<phase>development</phase>
+<version>1.8.3</version>
+<include id="gapple-kill-reward"/>
+<phase>staging</phase>
 <objective>Capture both wools from the enemy's wool rooms and return them to your victory monument</objective>
 <gamemode>ctw</gamemode>
 <if variant="halloween">
@@ -69,9 +70,6 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-void">
-        <void/>
-    </not>
     <not id="orange-wr">
         <any>
             <team id="only-purple">purple</team>
@@ -131,7 +129,7 @@
     <apply block="orange-wr" use="only-orange" region="purple-wrs"/>
     <apply block="purple-wr" use="only-purple" region="orange-wrs"/>
     <!-- void filter -->
-    <apply block="deny-void" message="You may not modify the void area!" region="void-area"/>
+    <apply block="deny(void)" message="You may not modify the void area!" region="void-area"/>
 </regions>
 <wools craftable="false">
     <wool team="orange" color="blue" location="-57.5,8,48.5">
@@ -223,7 +221,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" damage="2" material="wood"/>
         <item amount="16" material="glass"/>
     </kill-reward>
