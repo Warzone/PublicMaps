@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Arabia</name>
-<version>1.3.1</version>
+<version>1.3.2</version>
 <variant id="halloween" world="halloween" override="true">AraBOOia</variant>
 <variant id="christmas" world="christmas" override="true">AraBlizzardia</variant>
 <include id="gapple-kill-reward"/>
@@ -68,18 +68,18 @@
     </kit>
 </kits>
 <spawns>
-    <default>
-        <region yaw="-90">
+    <default yaw="-90">
+        <region>
             <cylinder base="210,30,-8" radius="1" height="0"/>
         </region>
     </default>
     <spawn team="team-1" kit="spawn-kit">
-        <region yaw="0">
+        <region>
             <cylinder base="163,11,-100" radius="0.5" height="0"/>
         </region>
     </spawn>
-    <spawn team="team-2" kit="spawn-kit">
-        <region yaw="180">
+    <spawn team="team-2" kit="spawn-kit" yaw="180">
+        <region>
             <cylinder base="167,11,85" radius="0.5" height="0"/>
         </region>
     </spawn>
@@ -101,9 +101,6 @@
         <material id="only-gold">gold block</material>
         <cause>world</cause>
     </all>
-    <not id="deny-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="gold">
@@ -124,20 +121,20 @@
             <rectangle id="pink-wr" min="183,88" max="195,102"/>
         </union>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="135,-70" max="195,54"/>
         <region id="gold"/>
         <region id="wool-rooms"/>
     </complement>
-    <apply enter="only-team-1" region="team-1-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-team-2" region="team-2-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-team-1" region="team-2-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-team-2" region="team-1-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-team-1" region="team-1-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-team-2" region="team-2-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-team-1" region="team-2-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-team-2" region="team-1-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block="team-1-in-wr" use="only-team-1" region="team-2-wool-rooms"/>
     <apply block="team-2-in-wr" use="only-team-2" region="team-1-wool-rooms"/>
     <apply block-break="only-gold" block-place="only-gold-regen" region="gold" message="You may only break gold blocks here!"/>
-    <apply block="deny-void" region="void" message="You may not edit the void area!"/>
+    <apply block="deny(void)" region="void-area" message="You may not edit the void area!"/>
 </regions>
 <wools>
     <wool team="team-1" color="magenta" location="138,7,91">
