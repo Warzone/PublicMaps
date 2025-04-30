@@ -1,43 +1,212 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Golden Drought II</name>
-<version>1.3.8</version>
+<version>1.3.9</version>
 <objective>Capture the wool and return it to your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
 </authors>
 <contributors>
-    <contributor uuid="e1e9e6af-f826-44ce-b1e2-5efb4e5c5d9e" contribution="Chief Build Slave"/> <!-- zemphon -->
-    <contributor uuid="8955e177-fe4f-420f-a7bf-f8098b3f1e9c" contribution="Build Slave"/> <!-- Haxasaurous -->
-    <contributor uuid="dbe909c6-2b15-4528-b12a-c77ed4031496" contribution="Build Slave"/> <!-- teheggy -->
-    <contributor uuid="f64546c7-917b-4caf-a0c9-caa120156a84" contribution="Feedback"/> <!-- BrunoTheMiner -->
+    <contributor uuid="e1e9e6af-f826-44ce-b1e2-5efb4e5c5d9e" contribution="Chief Build Slave"/> <!-- zemphon -->
+    <contributor uuid="8955e177-fe4f-420f-a7bf-f8098b3f1e9c" contribution="Build Slave"/> <!-- Haxasaurous -->
+    <contributor uuid="c33a03bf-0f73-46e2-a93e-ddb7d25232d1" contribution="Build Slave"/> <!-- teheggy -->
+    <contributor uuid="f64546c7-917b-4caf-a0c9-caa120156a84" contribution="Feedback"/> <!-- BrunoTheMiner -->
 </contributors>
-<maxbuildheight>44</maxbuildheight>
 <teams>
-    <team color="dark red" max="50">Red</team>
-    <team color="blue" max="50">Blue</team>
+    <team id="red" color="dark red" max="40">Red</team>
+    <team id="blue" color="blue" max="40">Blue</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite">bow</item>
-        <item slot="2" enchantment="durability:1;dig speed:1">iron pickaxe</item>
-        <item slot="3" enchantment="durability:3">gold axe</item>
-        <item slot="4" amount="64">sandstone</item>
-        <item slot="5" amount="64" damage="2">wood</item>
-        <item slot="6" amount="64">ladder</item>
-        <item slot="7" amount="2">golden apple</item>
-        <item slot="8" amount="32">cooked chicken</item>
-        <item slot="28">arrow</item>
-        <item slot="31" amount="64">sandstone</item>
-        <item slot="32" amount="4">web</item>
-        <item slot="33">bucket</item>
-        <item slot="22" amount="64">sandstone</item>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <potion duration="5" amplifier="1">heal</potion>
+    <kit id="spawn">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" enchantment="durability;dig speed" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:3" material="gold axe"/>
+        <item slot="4" amount="64" material="sandstone"/>
+        <item slot="5" amount="64" damage="2" material="wood"/>
+        <item slot="6" amount="64" material="ladder"/>
+        <item slot="7" amount="2" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked chicken"/>
+        <item slot="28" material="arrow"/>
+        <item slot="31" amount="64" material="sandstone"/>
+        <item slot="32" amount="4" material="web"/>
+        <item slot="33" material="bucket"/>
+        <item slot="22" amount="64" material="sandstone"/>
+        <effect duration="5">heal</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="blue" kit="spawn" yaw="135">
+        <region>
+            <cylinder base="76.5,25,76.5" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn" yaw="-45">
+        <region>
+            <cylinder base="-75.5,25,-75.5" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="45">
+        <region>
+            <cylinder base="0.5,52,0.5" radius="3" height="0"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <all id="only-blue-only-gold">
+        <team id="only-blue">blue</team>
+        <material id="only-gold">gold block</material>
+    </all>
+    <all id="only-red-only-gold">
+        <team id="only-red">red</team>
+        <filter id="only-gold"/>
+    </all>
+</filters>
+<regions>
+    <!-- Center area -->
+    <complement id="battlefield">
+        <rectangle min="-55,-55" max="56,56"/>
+        <union> <!-- Remove the very corners -->
+            <rectangle min="-55,-55" max="-54,-54"/>
+            <rectangle min="55,55" max="56,56"/>
+        </union>
+    </complement>
+    <!-- Blue Side -->
+    <union id="red-wool-rooms">
+        <rectangle id="lime-room" min="166,88" max="181,103"/>
+        <rectangle id="green-room" min="88,166" max="103,181"/>
+    </union>
+    <apply region="red-wool-rooms" enter="only-red" block="only-red" message="You may not enter or modify your own wool room!"/>
+    <union id="red-wool-paths">
+        <rectangle id="lime-path" min="154,88" max="166,103"/>
+        <rectangle id="green-path" min="88,154" max="103,166"/>
+    </union>
+    <complement id="blue-base">
+        <union id="blue-base-main">
+            <circle center="84.5,84.5" radius="24"/>
+            <rectangle min="55,55" max="79,79"/>
+        </union>
+        <union> <!-- The holes -->
+            <rectangle min="69,55" max="74,61"/> <!-- Right side -->
+            <rectangle min="55,69" max="61,74"/> <!-- Left side -->
+            <rectangle min="55,55" max="61,64"/> <!-- Center side left-->
+            <rectangle min="61,55" max="64,61"/> <!-- Center side right sliver -->
+        </union>
+    </complement>
+    <apply region="blue-base" block-break="only-blue-only-gold" block-place="never" message="You can only break gold blocks in your own base"/>
+    <apply region="blue-base" enter="only-blue" message="You may not enter the enemy's base!"/>
+    <complement id="blue-base-voidmatcher">
+        <rectangle id="blue-base-wrapper" min="36,36" max="154,154"/>
+        <union>
+            <region id="blue-base"/>
+            <region id="battlefield"/>
+        </union>
+    </complement>
+    <!-- Red Side -->
+    <union id="blue-wool-rooms">
+        <rectangle id="purple-room" min="-180,-102" max="-165,-87"/>
+        <rectangle id="pink-room" min="-102,-180" max="-87,-165"/>
+    </union>
+    <apply region="blue-wool-rooms" enter="only-blue" block="only-blue" message="You may not enter or modify your own wool room!"/>
+    <union id="blue-wool-paths">
+        <rectangle id="purple-path" min="-165,-102" max="-153,-87"/>
+        <rectangle id="pink-path" min="-102,-165" max="-87,-153"/>
+    </union>
+    <complement id="red-base">
+        <union id="red-base-main">
+            <circle center="-83.5,-83.5" radius="24"/>
+            <rectangle min="-78,-78" max="-54,-54"/>
+        </union>
+        <union> <!-- The holes -->
+            <rectangle min="-73,-60" max="-68,-54"/> <!-- Right side -->
+            <rectangle min="-60,-73" max="-54,-68"/> <!-- Left side -->
+            <rectangle min="-60,-63" max="-54,-54"/> <!-- Center side left-->
+            <rectangle min="-63,-60" max="-60,-54"/> <!-- Center side right sliver -->
+        </union>
+    </complement>
+    <apply region="red-base" block-break="only-red-only-gold" block-place="never" message="You can only break gold blocks in your own base"/>
+    <apply region="red-base" enter="only-red" message="You may not enter the enemy's base!"/>
+    <complement id="red-base-voidmatcher">
+        <rectangle id="red-base-wrapper" min="-153,-153" max="-35,-35"/>
+        <union>
+            <region id="red-base"/>
+            <region id="battlefield"/>
+        </union>
+    </complement>
+    <!-- Both sides -->
+    <apply block-place="never" message="You may not place blocks in the bases!">
+        <region>
+            <region id="blue-base"/>
+            <region id="red-base"/>
+        </region>
+    </apply>
+    <!-- Void protection -->
+    <apply block="never" message="You may not build outside of the playing field!">
+        <region>
+            <negative>
+                <union>
+                    <region id="battlefield"/>
+                    <region id="blue-base-wrapper"/>
+                    <region id="red-wool-rooms"/>
+                    <region id="red-wool-paths"/>
+                    <region id="red-base-wrapper"/>
+                    <region id="blue-wool-rooms"/>
+                    <region id="blue-wool-paths"/>
+                </union>
+            </negative>
+        </region>
+    </apply>
+    <apply block="deny(void)" message="You may not build outside of the playing field!">
+        <region>
+            <union>
+                <region id="blue-base-voidmatcher"/>
+                <region id="red-base-voidmatcher"/>
+            </union>
+        </region>
+    </apply>
+</regions>
+<renewables rate="3" sound="false">
+    <renewable renew-filter="only-gold">
+        <region>
+            <union>
+                <cylinder base="-83.5,17,-83.5" radius="24" height="4"/>
+                <cuboid min="-78,12,-78" max="-54,21,-54"/>
+            </union>
+        </region>
+    </renewable>
+    <renewable renew-filter="only-gold">
+        <region>
+            <union>
+                <cylinder base="84.5,17,84.5" radius="24" height="4"/>
+                <cuboid min="55,12,55" max="79,21,79"/>
+            </union>
+        </region>
+    </renewable>
+</renewables>
+<!-- In order so left to attackers matches left on scoreboard -->
+<wools>
+    <wool team="red" color="lime" location="178.5,25,95.5">
+        <monument>
+            <block>-62,23,-63</block>
+        </monument>
+    </wool>
+    <wool team="red" color="green" location="95.5,25,178.5">
+        <monument>
+            <block>-63,23,-62</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="purple" location="-177.5,25,-94.5">
+        <monument>
+            <block>62,23,63</block>
+        </monument>
+    </wool>
+    <wool team="blue" color="pink" location="-94.5,25,-177.5">
+        <monument>
+            <block>63,23,62</block>
+        </monument>
+    </wool>
+</wools>
 <itemremove>
     <item>sandstone</item>
     <item>ladder</item>
@@ -48,7 +217,6 @@
     <item>bucket</item>
     <item>glass bottle</item>
     <item>string</item>
-    <item>leather chestplate</item>
 </itemremove>
 <toolrepair>
     <tool>stone sword</tool>
@@ -57,191 +225,6 @@
     <tool>gold axe</tool>
     <tool>arrow</tool>
 </toolrepair>
-<spawns>
-    <spawn team="blue" kit="spawn" yaw="135">
-        <cylinder base="76.5,25,76.5" radius="0" height="0"/>
-    </spawn>
-    <spawn team="red" kit="spawn" yaw="-45">
-        <cylinder base="-75.5,25,-75.5" radius="0" height="0"/>
-    </spawn>
-    <default yaw="45">
-        <cylinder base="0.5,52,0.5" radius="3" height="0"/>
-    </default>
-</spawns>
-<filters>
-    <!-- Base filters -->
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-gold">
-        <block>gold block</block>
-    </filter>
-    <filter name="deny-void">
-        <deny>
-            <void/>
-        </deny>
-    </filter>
-    <!-- Complex filters -->
-    <filter name="only-blue-only-gold">
-        <all>
-            <team>blue</team>
-            <filter name="only-gold"/>
-        </all>
-    </filter>
-    <filter name="only-red-only-gold">
-        <all>
-            <team>red</team>
-            <filter name="only-gold"/>
-        </all>
-    </filter>
-</filters>
-<regions>
-    <!-- Center area -->
-    <complement name="battlefield">
-        <rectangle min="-55,-55" max="56,56"/>
-        <union> <!-- Remove the very corners -->
-            <rectangle min="-55,-55" max="-54,-54"/>
-            <rectangle min="55,55" max="56,56"/>
-        </union>
-    </complement>
-    <!-- Blue Side -->
-    <union name="red-wool-rooms">
-        <rectangle name="lime-room" min="166,88" max="181,103"/>
-        <rectangle name="green-room" min="88,166" max="103,181"/>
-    </union>
-    <apply enter="only-red" block="only-red" message="You may not enter or modify your own wool room!">
-        <region name="red-wool-rooms"/>
-    </apply>
-    <union name="red-wool-paths">
-        <rectangle name="lime-path" min="154,88" max="166,103"/>
-        <rectangle name="green-path" min="88,154" max="103,166"/>
-    </union>
-    <complement name="blue-base">
-        <union name="blue-base-main">
-            <circle center="84.5,84.5" radius="24"/>
-            <rectangle min="55,55" max="79,79"/>
-        </union>
-        <union> <!-- The holes -->
-            <rectangle min="69,55" max="74,61"/> <!-- Right side -->
-            <rectangle min="55,69" max="61,74"/> <!-- Left side -->
-            <rectangle min="55,55" max="61,64"/> <!-- Center side left-->
-            <rectangle min="61,55" max="64,61"/> <!-- Center side right sliver -->
-        </union>
-    </complement>
-    <apply block-break="only-blue-only-gold" block-place="deny-all" message="You can only break gold blocks in your own base">
-        <region name="blue-base"/>
-    </apply>
-    <apply enter="only-blue" message="You may not enter the enemy base!">
-        <region name="blue-base"/>
-    </apply>
-    <complement name="blue-base-voidmatcher">
-        <rectangle name="blue-base-wrapper" min="36,36" max="154,154"/>
-        <union>
-            <region name="blue-base"/>
-            <region name="battlefield"/>
-        </union>
-    </complement>
-    <!-- Red Side -->
-    <union name="blue-wool-rooms">
-        <rectangle name="purple-room" min="-180,-102" max="-165,-87"/>
-        <rectangle name="pink-room" min="-102,-180" max="-87,-165"/>
-    </union>
-    <apply enter="only-blue" block="only-blue" message="You may not enter or modify your own wool room!">
-        <region name="blue-wool-rooms"/>
-    </apply>
-    <union name="blue-wool-paths">
-        <rectangle name="purple-path" min="-165,-102" max="-153,-87"/>
-        <rectangle name="pink-path" min="-102,-165" max="-87,-153"/>
-    </union>
-    <complement name="red-base">
-        <union name="red-base-main">
-            <circle center="-83.5,-83.5" radius="24"/>
-            <rectangle min="-78,-78" max="-54,-54"/>
-        </union>
-        <union> <!-- The holes -->
-            <rectangle min="-73,-60" max="-68,-54"/> <!-- Right side -->
-            <rectangle min="-60,-73" max="-54,-68"/> <!-- Left side -->
-            <rectangle min="-60,-63" max="-54,-54"/> <!-- Center side left-->
-            <rectangle min="-63,-60" max="-60,-54"/> <!-- Center side right sliver -->
-        </union>
-    </complement>
-    <apply block-break="only-red-only-gold" block-place="deny-all" message="You can only break gold blocks in your own base">
-        <region name="red-base"/>
-    </apply>
-    <apply enter="only-red" message="You may not enter the enemy base!">
-        <region name="red-base"/>
-    </apply>
-    <complement name="red-base-voidmatcher">
-        <rectangle name="red-base-wrapper" min="-153,-153" max="-35,-35"/>
-        <union>
-            <region name="red-base"/>
-            <region name="battlefield"/>
-        </union>
-    </complement>
-    <!-- Both sides -->
-    <apply block-place="deny-all" message="You may not place blocks in the bases!">
-        <region name="blue-base"/>
-        <region name="red-base"/>
-    </apply>
-    <!-- Void protection -->
-    <apply block="deny-all" message="You may not build outside of the playing field!">
-        <negative>
-            <union>
-                <region name="battlefield"/>
-                <region name="blue-base-wrapper"/>
-                <region name="red-wool-rooms"/>
-                <region name="red-wool-paths"/>
-                <region name="red-base-wrapper"/>
-                <region name="blue-wool-rooms"/>
-                <region name="blue-wool-paths"/>
-            </union>
-        </negative>
-    </apply>
-    <apply block="deny-void" message="You may not build outside of the playing field!">
-        <union>
-            <region name="blue-base-voidmatcher"/>
-            <region name="red-base-voidmatcher"/>
-        </union>
-    </apply>
-</regions>
-<renewables rate="3" grow="true" avoid-entities="true" sound="false">
-    <renewable>
-        <region>
-            <union>
-                <cylinder base="-83.5,17,-83.5" radius="24" height="4"/>
-                <cuboid min="-78,12,-78" max="-54,21,-54"/>
-            </union>
-        </region>
-        <renew>gold block</renew>
-    </renewable>
-    <renewable>
-        <region>
-            <union>
-                <cylinder base="84.5,17,84.5" radius="24" height="4"/>
-                <cuboid min="55,12,55" max="79,21,79"/>
-            </union>
-        </region>
-        <renew>gold block</renew>
-    </renewable>
-</renewables>
-<!-- In order so left to attackers matches left on scoreboard -->
-<wools>
-    <wool team="red" color="lime">
-        <block location="-62,23,-63"/>
-    </wool>
-    <wool team="red" color="green">
-        <block location="-63,23,-62"/>
-    </wool>
-    <wool team="blue" color="purple">
-        <block location="62,23,63"/>
-    </wool>
-    <wool team="blue" color="pink">
-        <block location="63,23,62"/>
-    </wool>
-</wools>
 <item-mods>
     <rule>
         <match>
@@ -252,7 +235,5 @@
         </modify>
     </rule>
 </item-mods>
-<killreward>
-    <item>golden apple</item>
-</killreward>
+<maxbuildheight>44</maxbuildheight>
 </map>
