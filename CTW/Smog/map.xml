@@ -1,9 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Smog</name>
 <variant id="halloween" world="halloween" override="true">Spooky Smog</variant>
 <include id="gapple-kill-reward"/>
 <include id="lava-buckets"/>
-<version>1.3</version>
+<version>1.3.1</version>
 <objective>Retrieve the enemy's two wools and place them on your victory monument</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -51,14 +51,13 @@
             <cylinder base="-22.5,23,22.5" radius="2" height="0"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit" yaw="0">
+    <spawn team="red" kit="spawn-kit">
         <region>
             <cylinder base="-22.5,23,-81.5" radius="2" height="0"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <void id="void"/>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
     <blocks id="wool-room-blocks" region="wool-rooms">
@@ -116,8 +115,8 @@
     <apply use="only-red" region="red-wool-rooms"/>
     <apply enter="only-blue" region="blue-storage" message="You may not enter the other team's spawn!"/>
     <apply enter="only-red" region="red-storage" message="You may not enter the other team's spawn!"/>
-    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your own team's wool rooms!"/>
-    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block-break="only-iron" block-place="only-iron-renew" region="spawns" message="You may only break iron blocks in the spawn areas!"/>
     <apply block="all(only-blue, wool-room-blocks)" region="blue-wool-rooms" message="You may not modify the wool rooms!"/>
     <apply block="all(only-red, wool-room-blocks)" region="red-wool-rooms" message="You may not modify the wool rooms!"/>
@@ -208,31 +207,4 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<!-- include src="tutorial.xml"/>
-<tutorial>
-    <stage title="CTW">
-        <message>
-            <line>This is a `aCapture the Wool`r `c(CTW)`r map.</line>
-            <line>Capture both wools from the enemy side and bring them back.</line>
-        </message>
-    </stage>
-    <stage title="Wool Rooms">
-        <message>
-            <line>This is a wool room.</line>
-            <line>You must come here in order to retrieve the wool.</line>
-            <line>Wool rooms also contain some nice loot!</line>
-        </message>
-        <teleport>
-            <point yaw="-45">-4,129,31</point>
-        </teleport>
-    </stage>
-    <stage title="Victory Monument">
-        <message>
-            <line>Place the wools you retrieved from the wool room here.</line>
-        </message>
-        <teleport>
-            <point yaw="-45">14,133,49</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>
