@@ -1,38 +1,32 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Desolate Gully CTW</name>
 <version>1.0.2</version>
 <objective>Retrieve the wool and place it on your victory monument!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="5" max-overfill="6">Blue</team>
-    <team id="red" color="dark red" max="5" max-overfill="6">Red</team>
+    <team id="blue" color="blue" max="6">Blue</team>
+    <team id="red" color="dark red" max="6">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="28" amount="36" material="arrow"/>
         <item slot="2" unbreakable="true" material="stone pickaxe"/>
         <item slot="3" unbreakable="true" material="stone axe"/>
-        <item slot="4" amount="48" material="wood" damage="4"/>
-        <item slot="8" amount="64" material="golden carrot"/>
-        <item slot="28" amount="36" material="arrow"/>
-        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <item slot="4" amount="48" damage="4" material="wood"/>
+        <item slot="5" amount="36" team-color="true" material="stained clay"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
         <boots unbreakable="true" material="iron boots"/>
-        <effect duration="3" amplifier="10">damage resistance</effect>
-    </kit>
-    <kit id="red-kit" parent="spawn-kit">
-        <item slot="5" amount="36" damage="14" material="stained clay"/>
-        <helmet material="leather helmet" color="993333" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="993333" unbreakable="true"/>
-    </kit>
-    <kit id="blue-kit" parent="spawn-kit">
-        <item slot="5" amount="36" damage="11" material="stained clay"/>
-        <helmet material="leather helmet" color="334cb2" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="334cb2" unbreakable="true"/>
+        <effect duration="3s" amplifier="255">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
@@ -41,18 +35,17 @@
             <block>-107.5,14,-61.5</block>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit">
-        <region yaw="0">
+    <spawn team="blue" kit="spawn-kit">
+        <region>
             <point>-111,6.5,-59.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
-        <region yaw="0">
+    <spawn team="red" kit="spawn-kit">
+        <region>
             <point>-63,6.5,-59.5</point>
         </region>
     </spawn>
 </spawns>
-<time>20m</time>
 <wools>
     <wool team="blue" color="red" location="-134.5,10,-35">
         <monument>
@@ -68,32 +61,29 @@
 <filters>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
-    <not id="deny-void">
-        <void/>
-    </not>
-    <not id="deny-web">
+    <deny id="deny-void-web">
         <all>
             <void/>
             <material>web</material>
         </all>
-    </not>
+    </deny>
     <any id="wool-room-blacklist">
         <material>chest</material>
         <material>redstone wire</material>
         <material>redstone torch on</material>
     </any>
-    <not id="deny-blue-wool-room">
+    <deny id="deny-blue-wool-room">
         <any>
             <filter id="only-blue"/>
             <filter id="wool-room-blacklist"/>
         </any>
-    </not>
-    <not id="deny-red-wool-room">
+    </deny>
+    <deny id="deny-red-wool-room">
         <any>
             <filter id="only-red"/>
             <filter id="wool-room-blacklist"/>
         </any>
-    </not>
+    </deny>
 </filters>
 <regions>
     <block id="red-wool-monument">-115,7,-60</block>
@@ -110,19 +100,17 @@
     <apply region="blue-wool" block="deny-blue-wool-room" message="You cannot modify that here!"/>
     <apply region="red-wool" enter="only-blue" message="You cannot enter your own wool room!"/>
     <apply region="red-wool" block="deny-red-wool-room" message="You cannot modify that here!"/>
-    <apply block-place="deny-void" block-break="deny-web" message="You cannot modify the void area!"/>
+    <apply block-place="deny(void)" block-break="deny-void-web" message="You cannot modify the void area!"/>
 </regions>
 <maxbuildheight>16</maxbuildheight>
 <kill-rewards>
     <kill-reward>
         <item amount="12" material="wood" damage="4"/>
         <item amount="12" material="arrow"/>
-        <item material="golden apple"/>
         <item amount="12" damage="4" material="wood"/>
     </kill-reward>
     <kill-reward>
         <item damage="61" material="flint and steel"/>
-        <item amount="2" material="golden apple"/>
         <filter>
             <kill-streak count="6"/>
         </filter>
@@ -135,27 +123,28 @@
     </kill-reward>
 </kill-rewards>
 <itemremove>
-    <item>stone sword</item>
-    <item>stone pickaxe</item>
-    <item>stone axe</item>
     <item>leather helmet</item>
-    <item>chainmail chestplate</item>
     <item>leather chestplate</item>
-    <item>leather leggings</item>
+    <item>chainmail leggings</item>
     <item>iron boots</item>
-    <item>golden carrot</item>
     <item>seeds</item>
     <item>sapling</item>
     <item>apple</item>
-    <item>arrow</item>
     <item>string</item>
 </itemremove>
 <itemkeep>
+    <item>arrow</item>
     <item>wood</item>
     <item>stained clay</item>
     <item>golden apple</item>
 </itemkeep>
 <toolrepair>
+    <tool>stone sword</tool>
     <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
 </toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
