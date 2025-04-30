@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Infernal Shadow</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <objective>Capture the wool at the enemy side and bring it back to your monument!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
     <author uuid="ecbc58c1-ae7f-45c4-945c-cb3ab3e104cc"/> <!-- Sbongkh -->
@@ -37,19 +38,19 @@
 </kits>
 <spawns>
     <spawn team="green" kit="spawn-kit" yaw="-90">
-        <regions>
+        <region>
             <cuboid min="45,3,-1" max="48,3,2"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="red" kit="spawn-kit" yaw="90">
-        <regions>
+        <region>
             <cuboid min="-59,3,-1" max="-56,3,2"/>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-5.5,38,0.5" radius="1.5" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
@@ -61,9 +62,6 @@
         <material>web</material>
         <team id="only-red">red</team>
     </any>
-    <deny id="deny-void">
-        <void/>
-    </deny>
 </filters>
 <regions>
     <rectangle id="green-wool-room" min="-87,-6" max="-103,7"/>
@@ -94,7 +92,7 @@
     <apply region="red-wool-room" block="anti-grief-r"/>
     <apply region="green-spawn" block="never" use="only-green" message="You may not modify blocks near the spawn!"/>
     <apply region="red-spawn" block="never" use="only-red" message="You may not modify blocks near the spawn!"/>
-    <apply region="void-area" block="deny-void" message="You may not edit the void area!"/>
+    <apply region="void-area" block="deny(void)" message="You may not edit the void area!"/>
     <apply block="never">
         <region>
             <above y="25"/>
@@ -102,20 +100,16 @@
     </apply>
 </regions>
 <wools>
-    <wools team="red">
-        <wool color="red" location="85,13,0">
-            <monument>
-                <block>-43.5,8,0.5</block>
-            </monument>
-        </wool>
-    </wools>
-    <wools team="green">
-        <wool color="green" location="-97,13,0">
-            <monument>
-                <block>32.5,8,0.5</block>
-            </monument>
-        </wool>
-    </wools>
+    <wool team="red" color="red" location="85,13,0">
+        <monument>
+            <block>-43.5,8,0.5</block>
+        </monument>
+    </wool>
+    <wool team="green" color="green" location="-97,13,0">
+        <monument>
+            <block>32.5,8,0.5</block>
+        </monument>
+    </wool>
 </wools>
 <spawners>
     <spawner spawn-region="green-team-wool" player-region="green-wool-room" delay="3s">
@@ -152,7 +146,6 @@
 <kill-rewards>
     <kill-reward>
         <item material="gold ingot"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <timelock>on</timelock>
