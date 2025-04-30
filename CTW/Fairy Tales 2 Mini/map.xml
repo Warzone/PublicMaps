@@ -1,15 +1,16 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Fairy Tales 2: Mini</name>
-<version>2.1.6</version>
+<version>2.1.7</version>
 <objective>Capture both wools!</objective>
 <gamemode>ctw</gamemode>
 <include id="lava-buckets"/>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- Kroest -->
-    <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f" contribution="Creator of 'Fairy Tales 2: A Tale or Two' "/> <!-- D347HxD -->
+    <author uuid="2e28d256-4656-4f37-bcdc-5fab21b0f70f" contribution="Creator of 'Fairy Tales 2: A Tale or Two'"/> <!-- D347HxD -->
 </authors>
 <contributors>
-    <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="build/xml fixing"/> <!-- DoomyBoy -->
+    <contributor uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="Build/XML fixing"/> <!-- DoomyBoy -->
 </contributors>
 <teams>
     <team id="green-team" color="green" max="10">Green</team>
@@ -33,15 +34,15 @@
         <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
         <leggings material="chainmail leggings" unbreakable="true"/>
         <boots material="leather boots" team-color="true" unbreakable="true"/>
-        <effect duration="oo" amplifier="100">damage resistance</effect>
+        <effect amplifier="100">damage resistance</effect>
     </kit>
-    <kit force="true" id="reset-resitance-kit">
+    <kit force="true" id="reset-resistance-kit">
         <effect duration="0" amplifier="0">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
     <spawn team="green-team" kit="spawn-kit" yaw="180" region="green-spawn-point"/>
-    <spawn team="red-team" kit="spawn-kit" yaw="0" region="red-spawn-point"/>
+    <spawn team="red-team" kit="spawn-kit" region="red-spawn-point"/>
     <default yaw="90" region="obs-spawn-point"/>
 </spawns>
 <wools craftable="false">
@@ -51,14 +52,12 @@
     <wool team="red-team" color="yellow" monument="red-team-yellow-wool" location="-36.5,13.2,67.5"/>
 </wools>
 <filters>
-    <team id="only-green">green-team</team>
-    <team id="only-red">red-team</team>
     <all id="reds-woolrooms-filter">
-        <team>green-team</team>
+        <team id="only-green">green-team</team>
         <material>web</material>
     </all>
     <all id="greens-woolrooms-filter">
-        <team>red-team</team>
+        <team id="only-red">red-team</team>
         <material>web</material>
     </all>
     <all id="only-iron-cause-world">
@@ -137,7 +136,7 @@
     <apply block="greens-woolrooms-filter" region="greens-woolrooms" message="You may not edit the wool room!"/>
     <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not edit the wool room!"/>
     <apply block="never" region="not-build-area" message="You may not edit the void!"/>
-    <apply kit="reset-resitance-kit" region="not-spawns"/>
+    <apply kit="reset-resistance-kit" region="not-spawns"/>
 </regions>
 <spawners>
     <spawner spawn-region="lime-wool-spawn" player-region="lime-woolroom" delay="3s">
@@ -249,20 +248,14 @@
 <renewables>
     <renewable rate="2" sound="false" region="spawns" renew-filter="only-iron" replace-filter="only-air" avoid-players="3"/>
 </renewables>
+<kill-rewards>
+    <kill-reward>
+        <item material="wood" amount="20"/>
+        <item material="stained clay" team-color="true" amount="10"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
 <maxbuildheight>25</maxbuildheight>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item material="wood" amount="20"/>
-    </kill-reward>
-    <kill-reward filter="only-green">
-        <item material="stained clay" damage="5" amount="10"/>
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item material="stained clay" damage="14" amount="10"/>
-    </kill-reward>
-</kill-rewards>
 </map>
