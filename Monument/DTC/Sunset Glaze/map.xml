@@ -1,14 +1,15 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Sunset Glaze</name>
-<version>1.0.2</version>
+<version>1.0.4</version>
 <objective>Leak the enemy's gold core!</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="5">Blue</team>
-    <team id="red" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="red-team" color="dark red" max="5">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -28,8 +29,7 @@
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" color="4C4C4C" material="leather leggings"/>
         <boots unbreakable="true" material="iron boots"/>
-        <effect duration="3" amplifier="255">regeneration</effect>
-        <effect duration="4" amplifier="255">damage resistance</effect>
+        <effect duration="4s" amplifier="255">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
@@ -38,41 +38,34 @@
             <cuboid min="-69.5,28,14.5" max="-68.5,28,18.5"/>
         </regions>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions yaw="-135">
             <cuboid min="-55.5,11,60.5" max="-54.5,11,59.5"/>
         </regions>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions yaw="45">
             <cuboid min="-28.5,11,-27.5" max="-29.5,11,-26.5"/>
         </regions>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-    <not id="no-void">
-        <void/>
-    </not>
-</filters>
 <regions>
     <union id="spawns">
         <rectangle id="blue-spawn" min="-39,53" max="-57,64"/>
         <rectangle id="red-spawn" min="-45,-20" max="-27,-31"/>
     </union>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="blue-team" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter the enemy's spawn!"/>
     <apply block="never" region="spawns" message="You may not edit the spawns!"/>
-    <apply block-place="no-void" message="You may not build in the void!"/>
+    <apply block-place="deny(void)" message="You may not build in the void!"/>
 </regions>
 <cores material="gold block" leak="2" mode-changes="true">
-    <core team="red">
+    <core team="red-team">
         <region>
             <cuboid min="-55,12,-8" max="-58,9,-11"/>
         </region>
     </core>
-    <core team="blue">
+    <core team="blue-team">
         <region>
             <cuboid min="-26,12,41" max="-29,9,44"/>
         </region>
@@ -118,11 +111,12 @@
     <item>wood</item>
     <item>glass</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" damage="1" material="wood"/>
-    <item amount="4" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" damage="1" material="wood"/>
+        <item amount="4" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>18</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
