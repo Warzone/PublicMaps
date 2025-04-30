@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Race for Victory 2</name>
-<version>1.3.4</version>
-<objective>Take the enemy's wools located to either side of the enemy's base and place them in your victory monuments.</objective>
 <gamemode>ctw</gamemode>
+<version>1.3.6</version>
 <include id="lava-buckets"/>
+<include id="gapple-kill-reward"/>
+<objective>Take the enemy's wools located to either side of the enemy's base and place them in your victory monuments.</objective>
 <authors>
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design"/> <!-- Plastix -->
     <author uuid="82c796a5-c033-43be-af30-fa06496995f9" contribution="Map design"/> <!-- IM_A_H0B0 -->
@@ -62,12 +63,6 @@
     </spawn>
 </spawns>
 <filters>
-    <deny id="deny-blue">
-        <team id="only-blue">blue-team</team>
-    </deny>
-    <deny id="deny-red">
-        <team id="only-red">red-team</team>
-    </deny>
     <deny id="deny-chest">
         <material>chest</material>
     </deny>
@@ -94,7 +89,7 @@
         <cuboid id="blue-spawn" min="-14,0,-65" max="15,7,-41"/>
         <cuboid id="red-spawn" min="-14,0,56" max="15,7,80"/>
     </union>
-    <negative id="void">
+    <negative id="void-area">
         <complement id="map">
             <union>
                 <rectangle min="-16,-119" max="17,134"/>
@@ -112,17 +107,17 @@
     </negative>
     <apply kit="adventure" region="blockglitch-zone"/>
     <apply kit="survival" region="non-blockglitch-zone"/>
-    <apply use="only-blue" region="red-wool-rooms"/>
-    <apply use="only-red" region="blue-wool-rooms"/>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-blue" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply use="blue-team" region="red-wool-rooms"/>
+    <apply use="red-team" region="blue-wool-rooms"/>
+    <apply enter="blue-team" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="blue-team" region="red-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="red-team" region="blue-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block="never" region="storage-rooms" message="You may not break or place blocks in the storage rooms!"/>
     <apply block="deny-chest" region="wool-rooms" message="You may not break or place chests in the wool rooms!"/>
-    <apply block="deny-blue" region="blue-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
-    <apply block="deny-red" region="red-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
-    <apply block-place="never" block-break="deny-obs-spawn" region="void" message="You may not edit the void!"/>
+    <apply block="deny(blue-team)" region="blue-wool-rooms" message="You may not interfere with your team's wool rooms!"/>
+    <apply block="deny(red-team)" region="red-wool-rooms" message="You may not interfere with your team's wool rooms!"/>
+    <apply block-place="never" block-break="deny-obs-spawn" region="void-area" message="You may not edit the void!"/>
 </regions>
 <wools wool-proximity-metric="none" monument-proximity-metric="closest block">
     <wool team="blue-team" color="purple" location="11,12,128.5">
@@ -191,7 +186,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" damage="2" material="wood"/>
         <item amount="16" material="glass"/>
     </kill-reward>
@@ -208,55 +202,3 @@
     <depletion>off</depletion>
 </hunger>
 </map>
-<!-- include src="tutorial.xml"/>
-<tutorial>
-    <stage title="Capture the Wool">
-        <message>
-            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
-            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
-        </message>
-        <teleport>
-            <point yaw="90">27,11,7</point>
-        </teleport>
-    </stage>
-    <stage title="Blue Wool Rooms">
-        <message>
-            <line>These are `9Blue Team`r's wool rooms housing `alime `rand `6orange`r.</line>
-            <line>`cRed Team `rhas `5purple `rand `eyellow`r wools.</line>
-            <line>Blue Team should defend these rooms against Red Team invaders who are trying to steal the wool and make it back alive.</line>
-            <line>There are special goodies inside that will help you fight your way out.</line>
-        </message>
-        <teleport>
-            <point yaw="180" pitch="30">0,22,-93</point>
-        </teleport>
-    </stage>
-    <stage title="Red Team Base">
-        <message>
-            <line>Here is the `cRed Team `rvictory monument and spawn where the captured wool must be placed.</line>
-            <line>Both wool must be placed to win.</line>
-            <line>You can get geared up with supplies from the chests.</line>
-        </message>
-        <teleport>
-            <point yaw="0">0.5,4,73.5</point>
-        </teleport>
-    </stage>
-    <stage title="Iron Supplies">
-        <message>
-            <line>Here is the iron supply for `cRed Team`r. Note that `9Blue Team `rhas the same thing on their side.</line>
-            <line>You can craft iron armor to prepare yourself for battle.</line>
-            <line>There are additional resources in the chests that will help you bridge the void.</line>
-        </message>
-        <teleport>
-            <point yaw="180">0.5,22,94</point>
-        </teleport>
-    </stage>
-    <stage title="Underground Lava">
-        <message>
-            <line>Lava, potions and more iron can be found here.</line>
-            <line>There is another lava pool on the other side of the lane as well.</line>
-        </message>
-        <teleport>
-            <point yaw="-73" pitch="10">-27.5,4,40</point>
-        </teleport>
-    </stage>
-</tutorial> -->
