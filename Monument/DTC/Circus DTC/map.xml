@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Circus DTC</name>
 <variant id="halloween" world="halloween">Halloween</variant>
-<version>1.4.1</version>
+<version>1.4.2</version>
 <objective>Leak the opposing circus's cannonball (core) mid-flight while defending your own!</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
     <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- xCLAFx -->
@@ -15,8 +16,8 @@
     <contributor uuid="2fb11a11-1a1d-4b31-a7ba-2707a9ca9906" contribution="Build more"/> <!-- elego123 -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="dark red" max="16">Red</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -50,7 +51,7 @@
             <cylinder base="-825.5,69,78.5" height="0" radius="4"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="135">
             <point>-741.5,18,110.5</point>
         </region>
@@ -58,7 +59,7 @@
             <point>-741.5,18,46.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="-135">
             <point>-910.5,18,110.5</point>
         </region>
@@ -68,17 +69,12 @@
     </spawn>
 </spawns>
 <filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-    <not id="deny-void">
-        <void/>
-    </not>
     <deny id="no-chest">
         <material>chest</material>
     </deny>
 </filters>
 <regions>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-801,49" max="-852,107"/>
     </complement>
@@ -112,24 +108,24 @@
         <block>-801,3,59</block>
         <block>-801,3,97</block>
     </union>
-    <apply enter="only-blue" region="blue-spawn-entry" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn-entry" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="blue-team" region="blue-spawn-entry" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" region="red-spawn-entry" message="You may not enter the enemy's spawn!"/>
     <apply block="never" region="spawns" message="You may not modify the spawns!"/>
     <apply block="never" region="spawners" message="You may not destroy the spawners!"/>
     <apply block="no-chest" region="tents" message="You may not destroy chests here!"/>
-    <apply block="deny-void" region="void" message="You may not build in the void!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build in the void!"/>
 </regions>
 <modes>
     <mode id="gold-core" after="15m" material="gold block" name="`6GOLD CORE MODE"/>
     <mode id="ice-core" after="25m" material="packed ice" name="`3PACKED ICE CORE MODE"/>
 </modes>
 <cores material="obsidian" leak="3" modes="gold-core ice-core">
-    <core team="blue">
+    <core team="blue-team">
         <region>
             <cuboid min="-775,12,76" max="-780,17,81"/>
         </region>
     </core>
-    <core team="red">
+    <core team="red-team">
         <region>
             <cuboid min="-872,12,76" max="-877,17,81"/>
         </region>
@@ -151,18 +147,18 @@
     <item>gold block</item>
     <item>packed ice</item>
     <item>string</item>
-    <item>red_rose</item>
-    <item>yellow_flower</item>
-    <item>flower_pot_item</item>
-    <item>iron_plate</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>flower pot item</item>
+    <item>iron plate</item>
     <item>seeds</item>
     <item>sapling</item>
     <item>apple</item>
-    <item>double_plant</item>
-    <item>item_frame</item>
-    <item>sugar_cane</item>
-    <item>water_lily</item>
-    <item>ink_sack</item>
+    <item>double plant</item>
+    <item>item frame</item>
+    <item>sugar cane</item>
+    <item>water lily</item>
+    <item>ink sack</item>
     <if variant="halloween">
         <item>soul sand</item>
         <item>nether stalk</item>
@@ -211,7 +207,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" damage="1" material="wood"/>
         <item amount="12" team-color="true" material="stained clay"/>
         <item amount="16" material="arrow"/>
