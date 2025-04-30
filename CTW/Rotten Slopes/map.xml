@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Rotten Slopes</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Bring the other team's wool back to spawn.</objective>
 <gamemode>ctw</gamemode>
+<created>2014-07-29</created> <!-- estimated date based on Imgur link in the XML -->
 <authors>
     <author uuid="33b99f02-2a1a-42db-9505-6161a3b2cb7e"/> <!-- halfmaster1 -->
     <author uuid="73268281-3d86-47b0-b3f1-c4e5806c9919"/> <!-- Extreeme -->
@@ -17,54 +17,40 @@
     <contributor contribution="Fixing" uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomRobotBoy -->
 </contributors>
 <teams>
-    <team id="green" color="dark green" max="12">Green</team>
-    <team id="purple" color="dark purple" max="12">Purple</team>
+    <team id="green" color="dark green" max="12" max-overfill="20">Green</team>
+    <team id="purple" color="dark purple" max="12" max-overfill="20">Purple</team>
 </teams>
 <kits>
     <kit id="spawn" force="true">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="28" amount="32">arrow</item>
-        <item slot="2" enchantment="durability:2;dig speed:1">iron pickaxe</item>
-        <item slot="3" amount="16">glass</item>
-        <item slot="4" amount="32">log 2</item>
-        <item slot="5" amount="42">bread</item>
-        <item slot="6">golden apple</item>
-        <item slot="7" amount="8">ladder</item>
-        <item slot="8" amount="16">torch</item>
-        <leggings enchantment="protection projectile:1">iron leggings</leggings>
-        <potion duration="2" amplifier="10" ambient="true">damage resistance</potion>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="28" amount="32" material="arrow"/>
+        <item slot="2" enchantment="durability:2;dig speed" material="iron pickaxe"/>
+        <item slot="3" amount="16" material="glass"/>
+        <item slot="4" amount="32" material="log 2"/>
+        <item slot="5" amount="42" material="bread"/>
+        <item slot="6" material="golden apple"/>
+        <item slot="7" amount="8" material="ladder"/>
+        <item slot="8" amount="16" material="torch"/>
+        <leggings enchantment="protection projectile" material="iron leggings"/>
+        <effect duration="2" amplifier="10" ambient="true">damage resistance</effect>
     </kit>
     <kit id="purple-kit" parents="spawn">
-        <helmet color="9548A8">leather helmet</helmet>
-        <chestplate color="9548A8">leather chestplate</chestplate>
-        <boots color="9548A8">leather boots</boots>
+        <helmet color="9548A8" material="leather helmet"/>
+        <chestplate color="9548A8" material="leather chestplate"/>
+        <boots color="9548A8" material="leather boots"/>
     </kit>
     <kit id="green-kit" parents="spawn">
-        <helmet color="5BA848">leather helmet</helmet>
-        <chestplate color="5BA848">leather chestplate</chestplate>
-        <boots color="5BA848">leather boots</boots>
+        <helmet color="5BA848" material="leather helmet"/>
+        <chestplate color="5BA848" material="leather chestplate"/>
+        <boots color="5BA848" material="leather boots"/>
     </kit>
 </kits>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-    <tool>iron pickaxe</tool>
-</toolrepair>
-<itemremove>
-    <item>bread</item>
-    <item>wood</item><!--only planks not logs-->
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>iron leggings</item>
-    <item>leather boots</item>
-    <item>torch</item>
-</itemremove>
-<gamerules>
-    <doFireTick>false</doFireTick>
-</gamerules>
-<timelock>on</timelock>
-<maxbuildheight>46</maxbuildheight>
+<spawns>
+    <spawn team="green" kit="green-kit" region="green-spawn" yaw="90"/>
+    <spawn team="purple" kit="purple-kit" region="purple-spawn" yaw="-90"/>
+    <default region="observer-spawn" yaw="180"/>
+</spawns>
 <filters>
     <not id="deny-lava">
         <any>
@@ -74,18 +60,12 @@
     </not>
     <all id="only-web-green">
         <material>web</material>
-        <team>green</team>
+        <team id="only-green">green</team>
     </all>
     <all id="only-web-purple">
         <material>web</material>
-        <team>purple</team>
+        <team id="only-purple">purple</team>
     </all>
-    <not id="deny-green">
-        <team>green</team>
-    </not>
-    <not id="deny-purple">
-        <team>purple</team>
-    </not>
     <not id="deny-spawner">
         <material>mob spawner</material>
     </not>
@@ -108,7 +88,9 @@
             <region name="woolroom-template"/>
         </mirror>
     </translate> -->
-    <rectangle id="map" min="-90,-93" max="7,-62"/>
+    <negative id="not-map">
+        <rectangle id="map" min="-90,-93" max="7,-62"/>
+    </negative>
     <union id="magenta-woolroom">
         <cuboid min="3,37,-86" max="7,55,-69"/>
         <cuboid min="1,37,-85" max="3,55,-70"/>
@@ -125,27 +107,13 @@
     <cylinder base="-74.5,16.5,-87.5" radius="1" height="0" id="purple-spawn"/>
     <cylinder base="-71,16,-89.5" radius="7" height="10" id="purple-spawn-house"/>
     <cylinder base="-42,17,-45" radius="2" height="0" id="observer-spawn"/>
-<!-- Applied -->
-    <apply block="never" message="You cannot build outside the map.">
-        <region>
-            <negative>
-                <region id="map"/>
-            </negative>
-        </region>
-    </apply>
-    <apply enter="deny-purple" message="You cannot enter the enemy's woolroom!">
-        <region><region id="lime-woolroom"/></region>
-    </apply>
-    <apply block="only-web-green" message="Only green may destroy cobwebs here.">
-        <region><region id="lime-woolroom"/></region>
-    </apply>
-    <apply enter="deny-green" message="You cannot enter the enemy's woolroom!">
-        <region><region id="magenta-woolroom"/></region>
-    </apply>
-    <apply block="only-web-purple" message="Only purple may destroy cobwebs here.">
-        <region><region id="magenta-woolroom"/></region>
-    </apply>
-    <apply block="never" message="You cannot modify the spawn.">
+    <!-- Applied -->
+    <apply region="not-map" block="never" message="You may not build outside the map."/>
+    <apply region="lime-woolroom" enter="only-green" message="You may not enter the enemy's woolroom!"/>
+    <apply region="lime-woolroom" block="only-web-green" message="Only Green may destroy cobwebs here."/>
+    <apply region="magenta-woolroom" enter="only-purple" message="You may not enter the enemy's woolroom!"/>
+    <apply region="magenta-woolroom" block="only-web-purple" message="Only Purple may destroy cobwebs here."/>
+    <apply block="never" message="You may not modify the spawn.">
         <region>
             <union>
                 <region id="green-spawn-house"/>
@@ -153,34 +121,9 @@
             </union>
         </region>
     </apply>
-    <apply block="deny-lava" message="You cannot use the lava.">
-        <region>
-            <region id="map"/>
-        </region>
-    </apply>
-    <apply block="deny-spawner" message="You cannot break the wool spawner.">
-        <region>
-            <region id="map"/>
-        </region>
-    </apply>
+    <apply region="map" block="deny-lava" message="You cannot use the lava."/>
+    <apply region="map" block="deny-spawner" message="You cannot break the wool spawner."/>
 </regions>
-<spawns>
-    <spawn team="green" kit="green-kit">
-        <regions yaw="90">
-            <region id="green-spawn"/>
-        </regions>
-    </spawn>
-    <spawn team="purple" kit="purple-kit">
-        <regions yaw="-90">
-            <region id="purple-spawn"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="180">
-            <region id="observer-spawn"/>
-        </regions>
-    </default>
-</spawns>
 <wools>
     <wool team="green" color="lime" location="-86.5,47,-77.5">
         <monument><block>-7,22,-67</block></monument>
@@ -189,4 +132,23 @@
         <monument><block>-77,22,-89</block></monument>
     </wool>
 </wools>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>bread</item>
+    <item>wood</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>iron leggings</item>
+    <item>leather boots</item>
+    <item>torch</item>
+</itemremove>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
+<timelock>on</timelock>
+<maxbuildheight>46</maxbuildheight>
 </map>
