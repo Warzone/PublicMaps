@@ -1,14 +1,15 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Blocks CTW</name>
-<version>1.1.5</version>
+<version>1.1.6</version>
 <objective>Capture the enemy wools to win!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- PepsiDog -->
 </authors>
 <teams>
-    <team id="lime" color="green" max="32">Green</team>
-    <team id="purple" color="dark purple" max="32">Purple</team>
+    <team id="green-team" color="green" max="32">Green</team>
+    <team id="purple-team" color="dark purple" max="32">Purple</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -22,7 +23,9 @@
         <item slot="3" unbreakable="true" material="diamond axe"/>
         <item slot="30" unbreakable="true" material="iron spade"/>
         <item slot="5" amount="64" material="glass"/>
+        <item slot="7" material="bucket"/>
         <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
@@ -42,26 +45,19 @@
             <cylinder base="-40,36,168" radius="1" height="0"/>
         </region>
     </default>
-    <spawn team="lime" kit="green-kit">
+    <spawn team="green-team" kit="green-kit">
         <regions>
             <point yaw="-90">46,7,10</point>
             <point yaw="90">124,7,10</point>
         </regions>
     </spawn>
-    <spawn team="purple" kit="purple-kit">
+    <spawn team="purple-team" kit="purple-kit">
         <regions>
             <point yaw="-90">46,7,326</point>
             <point yaw="90">124,7,326</point>
         </regions>
     </spawn>
 </spawns>
-<filters>
-    <deny id="deny-void">
-        <void/>
-    </deny>
-    <team id="only-green">lime</team>
-    <team id="only-purple">purple</team>
-</filters>
 <regions>
     <union id="spawns">
         <union id="green-spawns">
@@ -95,32 +91,32 @@
         <rectangle id="purple-wool-void" min="60,252" max="70,272"/>
         <rectangle id="green-wool-void" min="100,252" max="110,272"/>
     </complement>
-    <apply enter="only-green" region="green-spawns" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-purple" region="purple-spawns" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-green" region="green-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="deny(green-team)" region="purple-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="deny(purple-team)" region="green-spawns" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="deny(green-team)" region="purple-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="deny(purple-team)" region="green-wool-rooms" message="You may not enter your team's own wool rooms!"/>
     <apply block="never" region="spawns" message="You may not destroy the spawns!"/>
     <apply block="never" region="monuments" message="You may not interfere with the wool monuments!"/>
     <apply block="never" region="wool-rooms" message="You may not break or place blocks in the wool rooms!"/>
-    <apply block="deny-void" region="build-void" message="You may not build in the void areas!"/>
+    <apply block="deny(void)" region="build-void" message="You may not build in the void areas!"/>
 </regions>
 <wools craftable="false">
-    <wool team="lime" color="blue" location="-33,26,262">
+    <wool team="green-team" color="blue" location="-33,26,262">
         <monument>
             <block>84,7,28</block>
         </monument>
     </wool>
-    <wool team="lime" color="green" location="203,26,262">
+    <wool team="green-team" color="green" location="203,26,262">
         <monument>
             <block>85,7,28</block>
         </monument>
     </wool>
-    <wool team="purple" color="orange" location="203,26,74">
+    <wool team="purple-team" color="orange" location="203,26,74">
         <monument>
             <block>84,7,307</block>
         </monument>
     </wool>
-    <wool team="purple" color="yellow" location="-33,26,74">
+    <wool team="purple-team" color="yellow" location="-33,26,74">
         <monument>
             <block>85,7,307</block>
         </monument>
@@ -135,6 +131,7 @@
     <tool>arrow</tool>
 </toolrepair>
 <itemremove>
+    <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
@@ -143,37 +140,25 @@
     <item>mutton</item>
     <item>obsidian</item>
 </itemremove>
-<block-drops>
-    <rule>
-        <filter>
-            <any>
-                <material>wood</material>
-                <material>glass</material>
-            </any>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-</block-drops>
 <itemkeep>
-    <item>golden apple</item>
     <item>wood</item>
     <item>glass</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>golden apple</item>
 </itemkeep>
 <kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item amount="16" material="glass"/>
-    </kill-reward>
-    <kill-reward filter="only-green">
+    <kill-reward filter="green-team">
         <item amount="32" damage="1" material="wood"/>
     </kill-reward>
-    <kill-reward filter="only-purple">
+    <kill-reward filter="purple-team">
         <item amount="32" damage="3" material="wood"/>
     </kill-reward>
+    <kill-reward>
+        <item amount="16" material="glass"/>
+    </kill-reward>
 </kill-rewards>
-<maxbuildheight>22</maxbuildheight>
+<maxbuildheight>28</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
 </hunger>
