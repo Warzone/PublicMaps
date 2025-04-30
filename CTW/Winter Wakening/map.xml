@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Winter Wakening</name>
-<version>2.0.3</version>
+<version>2.0.4</version>
+<include id="gapple-kill-reward"/>
 <objective>The team who first captures the other team's wools, located in the opposite wool rooms, wins!</objective>
 <created>2014-11-23</created>
 <gamemode>ctw</gamemode>
@@ -34,21 +35,12 @@
         <item slot="31" amount="64" damage="5" material="wood"/>
         <item slot="5" amount="64" material="glass"/>
         <item slot="6" amount="16" material="snow ball"/>
-        <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="cooked beef"/>
-        <effect duration="4" amplifier="5">damage resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="334CB2" material="leather helmet"/>
-        <chestplate unbreakable="true" color="334CB2" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="993333" material="leather helmet"/>
-        <chestplate unbreakable="true" color="993333" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="4s" amplifier="255">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
@@ -57,13 +49,13 @@
             <point>-532.5,51,-149.5</point>
         </region>
     </default>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions yaw="-90">
             <point>-703.5,17,-151.5</point>
             <point>-703.5,17,-147.5</point>
         </regions>
     </spawn>
-    <spawn team="red-team" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions yaw="90">
             <point>-361.5,17,-147.5</point>
             <point>-361.5,17,-151.5</point>
@@ -71,16 +63,24 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="not-void">
-        <void/>
-    </not>
+    <blocks id="woolroom-blocks" region="woolrooms">
+        <all>
+            <any>
+                <material>air</material>
+                <material>web</material>
+            </any>
+            <not id="not-void">
+                <void/>
+            </not>
+        </all>
+    </blocks>
     <all id="blues-woolrooms-filter">
         <team id="only-red">red-team</team>
-        <material>web</material>
+        <filter id="woolroom-blocks"/>
     </all>
     <all id="reds-woolrooms-filter">
         <team id="only-blue">blue-team</team>
-        <material>web</material>
+        <filter id="woolroom-blocks"/>
     </all>
     <any id="only-air">
         <material>air</material>
@@ -95,36 +95,40 @@
         <rectangle id="blue-spawn" min="-692,-120" max="-707,-179"/>
         <rectangle id="red-spawn" min="-373,-179" max="-358,-120"/>
     </union>
-    <union id="blues-woolrooms"> <!-- blue defends, red must get -->
-        <union id="magenta-wool">
-            <rectangle min="-565,-222" max="-570,-205"/>
-            <rectangle min="-563,-221" max="-572,-206"/>
-            <rectangle min="-561,-220" max="-574,-207"/>
-            <rectangle min="-560,-218" max="-575,-209"/>
-            <rectangle min="-559,-216" max="-576,-211"/>
+    <union id="woolrooms">
+        <union id="blues-woolrooms">
+            <!-- blue defends, red must get -->
+            <union id="magenta-wool">
+                <cuboid min="-565,0,-222" max="-570,255,-205"/>
+                <cuboid min="-563,0,-221" max="-572,255,-206"/>
+                <cuboid min="-561,0,-220" max="-574,255,-207"/>
+                <cuboid min="-560,0,-218" max="-575,255,-209"/>
+                <cuboid min="-559,0,-216" max="-576,255,-211"/>
+            </union>
+            <union id="pink-wool">
+                <cuboid min="-565,0,-94" max="-570,255,-77"/>
+                <cuboid min="-563,0,-93" max="-572,255,-78"/>
+                <cuboid min="-561,0,-92" max="-574,255,-79"/>
+                <cuboid min="-560,0,-90" max="-575,255,-81"/>
+                <cuboid min="-559,0,-88" max="-576,255,-83"/>
+            </union>
         </union>
-        <union id="pink-wool">
-            <rectangle min="-565,-94" max="-570,-77"/>
-            <rectangle min="-563,-93" max="-572,-78"/>
-            <rectangle min="-561,-92" max="-574,-79"/>
-            <rectangle min="-560,-90" max="-575,-81"/>
-            <rectangle min="-559,-88" max="-576,-83"/>
-        </union>
-    </union>
-    <union id="reds-woolrooms"> <!-- red defends, blue must get -->
-        <union id="green-wool">
-            <rectangle min="-495,-222" max="-500,-205"/>
-            <rectangle min="-493,-221" max="-502,-206"/>
-            <rectangle min="-491,-220" max="-504,-207"/>
-            <rectangle min="-490,-218" max="-505,-209"/>
-            <rectangle min="-489,-216" max="-506,-211"/>
-        </union>
-        <union id="lime-wool">
-            <rectangle min="-495,-94" max="-500,-77"/>
-            <rectangle min="-493,-93" max="-502,-78"/>
-            <rectangle min="-491,-92" max="-504,-79"/>
-            <rectangle min="-490,-90" max="-505,-81"/>
-            <rectangle min="-489,-88" max="-506,-83"/>
+        <union id="reds-woolrooms">
+            <!-- red defends, blue must get -->
+            <union id="green-wool">
+                <cuboid min="-495,0,-222" max="-500,255,-205"/>
+                <cuboid min="-493,0,-221" max="-502,255,-206"/>
+                <cuboid min="-491,0,-220" max="-504,255,-207"/>
+                <cuboid min="-490,0,-218" max="-505,255,-209"/>
+                <cuboid min="-489,0,-216" max="-506,255,-211"/>
+            </union>
+            <union id="lime-wool">
+                <cuboid min="-495,0,-94" max="-500,255,-77"/>
+                <cuboid min="-493,0,-93" max="-502,255,-78"/>
+                <cuboid min="-491,0,-92" max="-504,255,-79"/>
+                <cuboid min="-490,0,-90" max="-505,255,-81"/>
+                <cuboid min="-489,0,-88" max="-506,255,-83"/>
+            </union>
         </union>
     </union>
     <union id="spawners">
@@ -145,8 +149,8 @@
     <!-- applicators -->
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-blue" region="reds-woolrooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="blues-woolrooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" region="reds-woolrooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" region="blues-woolrooms" message="You may not enter your team's wool rooms!"/>
     <apply block="blues-woolrooms-filter" region="blues-woolrooms" message="You may not edit the wool rooms!"/>
     <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not edit the wool rooms!"/>
     <apply use="only-red" region="blues-woolrooms" message="You may not interact with this block!"/>
@@ -203,7 +207,6 @@
 </toolrepair>
 <itemremove>
     <item>snow ball</item>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>string</item>
@@ -211,15 +214,10 @@
 <block-drops>
     <rule>
         <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="glass"/>
@@ -231,10 +229,14 @@
     <item>glass</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="wood" amount="32"/>
-    <item material="glass" amount="16"/>
-    <item material="golden apple"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item material="wood" amount="32"/>
+        <item material="glass" amount="16"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>35</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
