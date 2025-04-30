@@ -1,0 +1,159 @@
+<map>
+<!-- Water lanes include file -->
+<!-- Created by Pablete1234, mameBT & Eliminate -->
+<!-- Version 2025.03.09-4 -->
+
+<!--
+     NOTE: Maps implementing this include require a region named `water-lanes`.
+-->
+
+<constants fallback="true">
+    <constant id="water-lane-timer">45m</constant>
+</constants>
+<filters>
+    <!-- Disgusting list of blocks which don't trigger block break events when broken by proxy -->
+    <any id="blacklisted-blocks">
+        <!-- Climbable -->
+        <material>ladder</material>
+        <material>vine</material>
+
+        <!-- Signs -->
+        <material>sign post</material>
+        <material>wall sign</material>
+
+        <!-- Doors -->
+        <!-- This is its own filter because doors are Quirky and we filter for each individual block -->
+        <any id="doors">
+            <material>wooden door</material>
+            <material>spruce door</material>
+            <material>birch door</material>
+            <material>jungle door</material>
+            <material>dark oak door</material>
+            <material>acacia door</material>
+            <material>iron door block</material>
+        </any>
+
+        <!-- Fence gates -->
+        <material>fence gate</material>
+        <material>spruce fence gate</material>
+        <material>birch fence gate</material>
+        <material>jungle fence gate</material>
+        <material>dark oak fence gate</material>
+        <material>acacia fence gate</material>
+        
+        <!-- Fences -->
+        <material>fence</material>
+        <material>spruce fence</material>
+        <material>birch fence</material>
+        <material>jungle fence</material>
+        <material>dark oak fence</material>
+        <material>acacia fence</material>
+        <material>nether fence</material>
+
+        <!-- Trapdoors -->
+        <material>trap door</material>
+        <material>iron trapdoor</material>
+
+        <!-- "Walls" -->
+        <material>iron fence</material>
+        <material>thin glass</material>
+        <material>stained glass pane</material>
+        <material>cobble wall</material>
+
+        <!-- Buttons -->
+        <material>stone button</material>
+        <material>wood button</material>
+
+        <!-- Pressure plates -->
+        <material>stone plate</material>
+        <material>wood plate</material>
+        <material>gold plate</material>
+        <material>iron plate</material>
+
+        <!-- Redstone stuff -->
+        <material>lever</material>
+        <material>redstone wire</material>
+        <material>redstone torch off</material>
+        <material>redstone torch on</material>
+        <material>redstone comparator off</material>
+        <material>redstone comparator on</material>
+        <material>tripwire</material>
+        <material>tripwire hook</material>
+
+        <!-- Banners -->
+        <material>standing banner</material>
+        <material>wall banner</material>
+
+        <!-- Rails -->
+        <material>detector rail</material>
+        <material>activator rail</material>
+        <material>powered rail</material>
+        <material>rails</material>
+
+        <!-- Plants -->
+        <material>yellow flower</material>
+        <material>red rose</material>
+        <material>long grass</material>
+        <material>water lily</material>
+        <material>sugar cane block</material>
+        <material>brown mushroom</material>
+        <material>red mushroom</material>
+
+        <!-- Misc -->
+        <material>flower pot</material>
+        <material>torch</material>
+        <material>string</material>
+        <material>skull</material>
+        <material>bed block</material>
+        <material>carpet</material>
+        <material>cake block</material>
+        <material>cocoa</material>
+    </any>
+    <!-- Generally, we only want to filter where the water lanes used to be air -->
+    <blocks id="water-lanes-air" region="water-lanes">
+        <material>air</material>
+    </blocks>
+    <!-- Players holding buckets should not be allowed to break the water -->
+    <holding id="holding-bucket">
+        <item>bucket</item>
+    </holding>
+    <!-- Denying sponges -->
+    <material id="sponge">sponge</material>
+</filters>
+<regions>
+    <!-- Deny sponge placement -->
+    <apply block-place="deny(sponge)"/>
+    <!-- Deny blacklisted blocks in parts of water lane that were previously air -->
+    <apply block-place="deny(all(blacklisted-blocks,water-lanes-air))" region="water-lanes" message="You may not place this block here!"/>
+    <!-- Special case doors region -->
+    <resize id="water-lanes-only-doors" min="0,0,0" max="0,1,0" region="water-lanes"/>
+    <apply block-place="deny(doors)" region="water-lanes-only-doors"/>
+    <!-- Avoid pistons etc. moving blocks in parts of the water lane that were previously air -->
+    <apply block="deny(all(not(participating),water-lanes-air))" region="water-lanes"/>
+    <!-- Don't let players use buckets to break water in parts of water lane that were previously air -->
+    <apply block-break="deny(all(holding-bucket,water-lanes-air))" region="water-lanes" message="You can't use buckets here!"/>
+    <!-- Avoid filtering void above water lane region if y-level 0 somehow has no water -->
+    <resize id="water-lanes-resized" min="0,0,0" max="0,255,0" region="water-lanes"/>
+    <apply block="allow(water_lanes_initiated=1)" region="water-lanes-resized"/>
+</regions>
+<variables>
+    <variable id="water_lanes_initiated" scope="match"/>
+</variables>
+<actions>
+    <set id="water-lanes-start" var="water_lanes_initiated" value="1" scope="match"/>
+    <fill id="place-water-lanes" region="water-lanes" material="water" filter="water-lanes-air" expose="true"/>
+    <trigger action="place-water-lanes" scope="match">
+        <filter>
+            <pulse period="15m" duration="0.1s" filter="water_lanes_initiated=1"/>
+        </filter>
+    </trigger>
+</actions>
+<modes>
+    <mode name="`eWater lanes added" action="water-lanes-start" after="${water-lane-timer}" show-before="5m"/>
+</modes>
+<block-drops>
+    <rule region="water-lanes" filter="water-lanes-air">
+        <replacement>stationary water</replacement>
+    </rule>
+</block-drops>
+</map>
