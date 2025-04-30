@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Oakspell</name> 
-<version>2.0.4</version> 
+<version>2.0.5</version> 
 <objective>Leak lava from the enemy's obsidian core!</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer --> 
 </authors>
@@ -13,8 +14,8 @@
     <rule>Do not intentionally avoid the objective.</rule>
 </rules>
 <teams>
-    <team id="red" color="dark red" max="10">Red</team>
-    <team id="green" color="dark green" max="10">Green</team>
+    <team id="red-team" color="dark red" max="10">Red</team>
+    <team id="green-team" color="dark green" max="10">Green</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -36,25 +37,23 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <point>129,2,-15</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="green" kit="spawn-kit" yaw="180">
-        <regions>
+    <spawn team="green-team" kit="spawn-kit" yaw="180">
+        <region>
             <point>129,2,112</point>
-        </regions>
+        </region>
     </spawn>
     <default yaw="90">
-        <regions>
+        <region>
             <cuboid min="85,23,49" max="83,23,47"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-green">green</team>
     <material id="only-gold">gold block</material>
 </filters>
 <regions>
@@ -67,18 +66,18 @@
         <rectangle id="green-spawn" min="133,108" max="125,126"/>
         <rectangle id="red-spawn" min="125,-11" max="133,-29"/>
     </union>
-    <apply region="green-spawn" enter="only-green" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn" enter="only-red" message="You may enter the enemy spawn."/>
+    <apply region="green-spawn" enter="green-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn" enter="red-team" message="You may enter the enemy's spawn."/>
     <apply region="spawns" block="only-gold" message="You may only break gold in spawns!"/>
     <apply region="main-area-inverse" block="never"/>
 </regions>
 <cores material="obsidian" leak="2">
-    <core team="red">
+    <core team="red-team">
         <region>
             <cuboid min="126,7,-1" max="132,14,-7"/>
         </region>
     </core>
-    <core team="green">
+    <core team="green-team">
         <region>
             <cuboid min="126,7,104" max="132,14,98"/>
         </region>
@@ -104,10 +103,5 @@
     <item>arrow</item>
     <item>golden apple</item>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <maxbuildheight>35</maxbuildheight>
 </map>
