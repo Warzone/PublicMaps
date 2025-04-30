@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Hot Dam Mini</name>
-<version>1.1.3</version>
-<objective>Leak lava from the enemy's obsidian core onto the dam.</objective>
 <gamemode>dtc</gamemode>
+<version>1.1.10</version>
+<objective>Leak lava from the enemy's obsidian core onto the dam!</objective>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="00c06fa6-1c53-4634-931a-929efd8a52df"/> <!-- Nadastorm -->
 </authors>
@@ -10,181 +11,114 @@
     <contributor uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Spawn"/> <!-- Plastix -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="12">Blue</team>
-    <team id="red" color="dark red" max="12">Red</team>
+    <team id="blue-team" color="blue" max="12">Blue</team>
+    <team id="red-team" color="dark red" max="12">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <clear/> <!-- See itemkeep below; permits golden apples and arrows to drop but not upon death. Clears inventory after death. -->
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="28" amount="64">arrow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-        <item slot="4" amount="48" damage="2">wood</item>
-        <item slot="5" amount="24">glass</item>
-        <item slot="6" amount="16">ladder</item>
-        <item slot="7">golden apple</item>
-        <item slot="8" amount="64">cooked beef</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true" team-color="true">leather boots</boots>
-        <effect duration="6" amplifier="1">heal</effect>
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="wood" damage="2" amount="48"/>
+        <item slot="5" material="glass" amount="24"/>
+        <item slot="6" material="ladder" amount="16"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="28" material="arrow" amount="64"/>
+        <item slot="30" material="iron spade" unbreakable="true"/>
+        <helmet material="leather helmet" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
+        <leggings material="leather leggings" team-color="true" unbreakable="true"/>
+        <boots material="leather boots" team-color="true" unbreakable="true"/>
+        <effect duration="6">heal</effect>
         <effect duration="6" amplifier="2">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
-    <default yaw="-45">
-        <region>
-            <cylinder base="-51,19,131" radius="3" height="0"/>
-        </region>
-    </default>
-    <spawn team="blue" kit="spawn-kit" yaw="90">
-        <region>
-            <cylinder base="-89,38,127" radius="1" height="0"/>
-        </region>
-    </spawn>
-    <spawn team="red" kit="spawn-kit" yaw="180">
-        <region>
-            <cylinder base="-55,38,93" radius="1" height="0"/>
-        </region>
-    </spawn>
+    <spawn team="blue-team" kit="spawn-kit" region="blue-spawn-point" yaw="90"/>
+    <spawn team="red-team" kit="spawn-kit" region="red-spawn-point" yaw="180"/>
+    <default region="obs-spawn-point" yaw="-45"/>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-    <deny id="no-void">
-        <void/>
-    </deny>
-</filters>
 <regions>
+    <cylinder id="blue-spawn-point" base="-89,38,127" radius="1" height="0"/>
+    <cylinder id="red-spawn-point" base="-55,38,93" radius="1" height="0"/>
+    <cylinder id="obs-spawn-point" base="-51,19,131" radius="3" height="0"/>
+    <cuboid id="blue-core" min="-116,39,112" max="-113,44,107"/>
+    <cuboid id="red-core" min="-70,39,69" max="-75,44,66"/>
     <union id="spawn-protection">
-        <union id="spawn-paths">
-            <cuboid id="blue-spawn-path" min="-85,37,124" max="-102,oo,134"/>
-            <cuboid id="red-spawn-path" min="-58,37,97" max="-48,oo,80"/>
-        </union>
-        <union id="spawn-circles">
-            <cylinder id="blue-circle" base="-89,37,127" radius="4" height="oo"/>
-            <cylinder id="red-circle" base="-55,37,93" radius="4" height="oo"/>
-        </union>
-        <union id="buildings-build">
-            <cuboid id="blue-building-build" min="-110,35,134" max="-123,oo,129"/>
-            <cuboid id="red-building-build" min="-53,35,72" max="-48,oo,59"/>
-        </union>
+        <cuboid id="blue-spawn-path" min="-85,37,124" max="-102,oo,134"/>
+        <cuboid id="red-spawn-path" min="-58,37,97" max="-48,oo,80"/>
+        <cylinder id="blue-circle" base="-89,37,127" radius="4" height="oo"/>
+        <cylinder id="red-circle" base="-55,37,93" radius="4" height="oo"/>
+        <cuboid id="blue-building-build" min="-110,35,134" max="-123,oo,129"/>
+        <cuboid id="red-building-build" min="-53,35,72" max="-48,oo,59"/>
     </union>
-    <union id="buildings-enter">
-        <cuboid id="blue-building-enter" min="-110,35,134" max="-123,39,129"/>
-        <cuboid id="red-building-enter" min="-53,35,72" max="-48,39,59"/>
-    </union>
-    <apply enter="only-blue" use="only-blue" region="blue-building-enter" message="You may not enter the enemy spawn!"/>
-    <apply enter="only-red" use="only-red" region="red-building-enter" message="You may not enter the enemy spawn!"/>
-    <apply block="never" region="spawn-protection" message="You may not modify the spawn area!"/>
-    <apply block-place="no-void" message="You may not build outside the map area!"/>
+    <cuboid id="blue-building-enter" min="-110,35,134" max="-123,39,129"/>
+    <cuboid id="red-building-enter" min="-53,35,72" max="-48,39,59"/>
+    <!-- applicators -->
+    <apply enter="blue-team" use="blue-team" region="blue-building-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="red-team" use="red-team" region="red-building-enter" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="spawn-protection" message="You may not edit spawn!"/>
+    <apply block-place="deny(void)" message="You may not edit the void!"/>
 </regions>
-<cores material="obsidian" leak="2">
-    <core team="blue">
-        <region>
-            <cuboid min="-116,39,112" max="-113,44,107"/>
-        </region>
-    </core>
-    <core team="red">
-        <region>
-            <cuboid min="-70,39,69" max="-75,44,66"/>
-        </region>
-    </core>
+<cores material="obsidian" leak="2" mode-changes="true">
+    <core team="blue-team" region="blue-core"/>
+    <core team="red-team" region="red-core"/>
 </cores>
+<modes>
+    <mode after="15m" material="gold block"/>
+    <mode after="20m" material="glass"/>
+</modes>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
+    <tool>iron spade</tool>
     <tool>bow</tool>
 </toolrepair>
+<itemkeep>
+    <item>iron sword</item>
+    <item>diamond pickaxe</item>
+    <item>iron axe</item>
+    <item>iron spade</item>
+    <item>bow</item>
+    <item>wood</item>
+    <item>glass</item>
+    <item>ladder</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>cooked beef</item>
     <item>obsidian</item>
 </itemremove>
 <block-drops>
     <rule>
         <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
+            <any>
+                <material>glass</material>
+                <material>wood</material>
+                <material>ladder</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="glass"/>
         </drops>
     </rule>
-    <rule>
-        <filter>
-            <material>ladder</material>
-        </filter>
-        <drops>
-            <item chance="0" material="ladder"/>
-        </drops>
-    </rule>
 </block-drops>
-<kill-reward>
-    <item>golden apple</item>
-    <item amount="8" damage="2">wood</item>
-    <item amount="4">glass</item>
-    <item amount="16">arrow</item>
-</kill-reward>
-<itemkeep>
-    <item>golden apple</item>
-    <item>wood</item>
-    <item>glass</item>
-    <item>arrow</item>
-</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="wood" damage="2" amount="8"/>
+        <item material="glass" amount="4"/>
+        <item material="arrow" amount="16"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>51</maxbuildheight>
-<!-- <include id="tutorial"/> -->
-<tutorial>
-    <stage title="Destroy the Core">
-        <message>
-            <line>`rWelcome to the mini version of the original Hot Dam.</line>
-            <line>`rThis map is a Destroy the `cCore `r(DTC)</line>
-            <line>`rThe objective is to break the other team's `aobsidian `rcore.</line>
-        </message>
-        <teleport>
-            <point yaw="135" pitch="30">-48,60,135</point>
-        </teleport>
-    </stage>
-    <stage title="The Core">
-        <message>
-            <line>`rThis is the core, you must protect yours while attacking the enemy's.</line>
-            <line>`rYou only need to break `atwo `rblocks to leak the lava.</line>
-        </message>
-        <teleport>
-            <point yaw="148" pitch="20">-67,41,75</point>
-        </teleport>
-    </stage>
-    <stage title="Iron Blocks and Spawn">
-        <message>
-            <line>`rIron blocks are sparse, however you can find it around the spawn areas.</line>
-            <line>`rYou can also find extra supplies in the spawn buildings.</line>
-        </message>
-        <teleport>
-            <point yaw="-126" pitch="15">-72,40,81</point>
-        </teleport>
-    </stage>
-    <stage title="Special Items">
-        <message>
-            <line>`rOn the center island you will find some `aspecial `ritems.</line>
-            <line>`rSome might include a `6Fire Aspect Blaze Rod `rand a `cKnockback Fishing Rod</line>
-        </message>
-        <teleport>
-            <point yaw="140" pitch="10">-60,13,124</point>
-        </teleport>
-    </stage>
-</tutorial>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
