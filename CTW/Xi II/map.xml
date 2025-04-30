@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Xi II</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <include id="gapple-kill-reward"/>
 <objective>Capture the wool located on the opposite side.</objective>
 <created>2016-05-03</created>
@@ -55,7 +55,7 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
+        <region>
             <cuboid min="3.5,42.5,57.5" max="0.5,43,57.5"/>
         </region>
     </default>
@@ -73,9 +73,6 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-void">
-        <void/>
-    </not>
     <not id="no-water">
         <any>
             <material>stationary water</material>
@@ -121,10 +118,10 @@
         <rectangle min="-31.5,-6.5" max="35.5,7.5"/>
         <rectangle min="-31.5,-42.5" max="35.5,-28.5"/>
     </complement>
-    <apply enter="only-cyan" region="cyan-spawns" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-purple" region="purple-spawns" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-cyan" message="You may not enter your team's own wool room!" region="purple-wool"/>
-    <apply enter="only-purple" message="You may not enter your team's own wool room!" region="cyan-wool"/>
+    <apply enter="only-cyan" region="cyan-spawns" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-purple" region="purple-spawns" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-cyan" message="You may not enter your team's wool room!" region="purple-wool"/>
+    <apply enter="only-purple" message="You may not enter your team's wool room!" region="cyan-wool"/>
     <apply kit="wool-room-kit" region="cyan-wr-kit" filter="only-purple"/>
     <apply kit="wool-room-kit" region="purple-wr-kit" filter="only-cyan"/>
     <apply use="no-water" region="spawns"/>
@@ -132,7 +129,7 @@
     <apply block="never" region="victory-monuments" message="You may not edit the victory monuments!"/>
     <apply block="cyan-in-wr" use="only-cyan" region="purple-wool"/>
     <apply block="purple-in-wr" use="only-purple" region="cyan-wool"/>
-    <apply block="deny-void" region="void-area" message="You may not build in the void!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build in the void!"/>
 </regions>
 <wools>
     <wool team="cyan" color="purple" location="116,10.5,-17.5">
