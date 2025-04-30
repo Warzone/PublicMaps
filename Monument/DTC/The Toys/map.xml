@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Toys DTC</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Leak the core!</objective>
 <gamemode>dtc</gamemode>
 <authors>
@@ -50,17 +50,13 @@
         </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-orange">orange-team</team>
-    <team id="only-yellow">yellow-team</team>
-</filters>
 <regions>
     <union id="spawns">
         <cuboid id="orange-spawn" min="1,10,-3" max="-6,15,4"/>
         <cuboid id="yellow-spawn" min="134,10,4" max="141,15,-3"/>
     </union>
-    <apply region="orange-spawn" enter="only-orange" message="You may not enter the enemy's spawn!"/>
-    <apply region="yellow-spawn" enter="only-yellow" message="You may not enter the enemy's spawn!"/>
+    <apply region="orange-spawn" enter="orange-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="yellow-spawn" enter="yellow-team" message="You may not enter the enemy's spawn!"/>
     <apply block="never" region="spawns" message="You may not edit the spawn!"/>
 </regions>
 <cores material="obsidian" leak="3">
