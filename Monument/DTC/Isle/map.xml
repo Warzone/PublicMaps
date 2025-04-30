@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Isle</name>
-<version>1.3.5</version>
+<version>1.3.6</version>
 <objective>Leak the enemy team's core.</objective>
 <gamemode>dtc</gamemode>
 <authors>
@@ -31,33 +31,21 @@
 </kits>
 <spawns>
     <spawn team="magenta" kit="spawn-kit" yaw="-135">
-        <regions>
+        <region>
             <point>223.0,39,785.0</point>
-        </regions>
+        </region>
     </spawn>
     <spawn team="blue" kit="spawn-kit" yaw="45">
-        <regions>
+        <region>
             <point>207.0,39,603.0</point>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cuboid min="285,87,692" max="281,87,695"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<cores material="obsidian" leak="3">
-    <core team="blue">
-        <region>
-            <cuboid min="208,49,645" max="216,57,653"/>
-        </region>
-    </core>
-    <core team="magenta">
-        <region>
-            <cuboid min="221,49,742" max="214,58,735"/>
-        </region>
-    </core>
-</cores>
 <filters>
     <not id="deny-spawner-break">
         <material>mob spawner</material>
@@ -71,6 +59,18 @@
     <apply region="spawns" block="never"/>
     <apply block="deny-spawner-break"/>
 </regions>
+<cores material="obsidian" leak="3">
+    <core team="blue">
+        <region>
+            <cuboid min="208,49,645" max="216,57,653"/>
+        </region>
+    </core>
+    <core team="magenta">
+        <region>
+            <cuboid min="221,49,742" max="214,58,735"/>
+        </region>
+    </core>
+</cores>
 <itemremove>
     <item>log</item>
     <item>wood</item>
