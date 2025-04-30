@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Race for Victory 4</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Take the enemy's wools located to either side of the enemy's base and place them in your victory monument.</objective>
 <created>2012-08-12</created>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design"/> <!-- Plastix -->
     <author uuid="25961a08-c90c-4abd-b136-dad90e89c2eb" contribution="Map design"/> <!-- Anxuiz -->
@@ -13,7 +14,7 @@
     <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Map aesthetic and code"/> <!-- zzuf -->
 </contributors>
 <rules>
-    <rule>Players may break stained glass panes in their enemies' wool rooms.</rule>
+    <rule>Players may break stained glass panes in their enemy's wool rooms.</rule>
 </rules>
 <teams>
     <team id="blue" color="blue" max="24">Blue</team>
@@ -25,7 +26,7 @@
             <cuboid id="blue-spawn" min="2,11.5,103" max="-2,11.5,108"/>
         </regions>
     </spawn>
-    <spawn team="red" kit="spawn-kit" yaw="0">
+    <spawn team="red" kit="spawn-kit">
         <regions>
             <cuboid id="red-spawn" min="-2,11.5,-92" max="2,11.5,-97"/>
         </regions>
@@ -40,9 +41,9 @@
     <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="iron sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" enchantment="durability:3;dig speed:1">iron pickaxe</item>
-        <item slot="3" enchantment="durability:3;dig speed:1">iron axe</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" enchantment="durability:3;dig speed" material="iron pickaxe"/>
+        <item slot="3" enchantment="durability:3;dig speed" material="iron axe"/>
         <item slot="4" amount="64" damage="1" material="wood"/>
         <item slot="5" amount="64" material="glass"/>
         <item slot="6" amount="32" material="ladder"/>
@@ -54,11 +55,6 @@
     </kit>
 </kits>
 <filters>
-    <not id="no-void">
-        <any>
-            <void/>
-        </any>
-    </not>
     <deny id="no-beacons">
         <material>beacon</material>
     </deny>
@@ -85,9 +81,6 @@
     <any id="only-iron">
         <material>iron block</material>
     </any>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
 </filters>
 <regions>
     <!-- void protection -->
@@ -99,7 +92,7 @@
         <region id="portal-protections"/>
         <region id="redstone-strips"/>
     </negative>
-    <apply block-place="no-void" region="void-area" message="You may not build in the void."/>
+    <apply block-place="deny(void)" region="void-area" message="You may not build in the void."/>
     <apply use="no-beacons" block="no-beacons" message="You may not use or break the beacons."/>
     <apply block="no-lava" message="You may not interact with this block here."/>
     <!-- portal protections -->
@@ -114,7 +107,7 @@
         <rectangle min="-34,92" max="34,122"/> <!-- Blue -->
         <rectangle min="34,-81" max="-34,-111"/> <!-- Red -->
     </union>
-    <apply block-place="deny-players" block-break="only-iron" region="spawn-protections" message="You may only break iron blocks in your supply room."/>
+    <apply block-place="deny(participating)" block-break="only-iron" region="spawn-protections" message="You may only break iron blocks in your supply room."/>
     <!-- redstone strip protections -->
     <union id="redstone-strips">
         <rectangle min="20,-13" max="19,24"/> <!-- East -->
@@ -189,6 +182,28 @@
     <apply block="red-in-wr" use="only-red" region="red-wool-rooms" message="You may not interact with this block here."/>
     <apply enter="only-red" region="red-wool-rooms" message="You may not enter your own wool room."/>
 </regions>
+<wools team="blue">
+    <wool color="yellow" location="-0.5,20.5,-34.5">
+        <monument><block>0,13,116</block></monument>
+    </wool>
+    <wool color="pink" location="-47.5,15.5,-67.5">
+        <monument><block>-1,12,116</block></monument>
+    </wool>
+    <wool color="lime" location="47.5,15.5,-67.5">
+        <monument><block>0,11,116</block></monument>
+    </wool>
+</wools>
+<wools team="red">
+    <wool color="cyan" location="-0.5,20.5,45.5">
+        <monument><block>-1,13,-106</block></monument>
+    </wool>
+    <wool color="purple" location="47.5,15.5,78.5">
+        <monument><block>0,12,-106</block></monument>
+    </wool>
+    <wool color="orange" location="-47.5,15.5,78.5">
+        <monument><block>-1,11,-106</block></monument>
+    </wool>
+</wools>
 <portals>
     <!-- portals in red base -->
     <portal x="1" y="-4" z="14">
@@ -287,34 +302,13 @@
     <item>glass</item>
     <item>ladder</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" damage="1" material="wood"/>
-    <item amount="16" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" damage="1" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>27</maxbuildheight>
-<wools team="blue">
-    <wool color="yellow" location="-0.5,20.5,-34.5">
-        <monument><block>0,13,116</block></monument>
-    </wool>
-    <wool color="pink" location="-47.5,15.5,-67.5">
-        <monument><block>-1,12,116</block></monument>
-    </wool>
-    <wool color="lime" location="47.5,15.5,-67.5">
-        <monument><block>0,11,116</block></monument>
-    </wool>
-</wools>
-<wools team="red">
-    <wool color="cyan" location="-0.5,20.5,45.5">
-        <monument><block>-1,13,-106</block></monument>
-    </wool>
-    <wool color="purple" location="47.5,15.5,78.5">
-        <monument><block>0,12,-106</block></monument>
-    </wool>
-    <wool color="orange" location="-47.5,15.5,78.5">
-        <monument><block>-1,11,-106</block></monument>
-    </wool>
-</wools>
 <renewables>
     <renewable region="spawn-protections" renew-filter="only-iron" interval="4" grow="false" particles="true" sound="true"/>
 </renewables>
