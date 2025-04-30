@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Hallows</name>
-<version>1.1.5</version>
+<version>1.1.6</version>
 <objective>Capture the other teams wools!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="be49b1a8-600e-4751-9725-a8aead777363"/> <!-- izjust4fun -->
     <author uuid="297428a6-b482-4558-99f5-b413067ed48d"/> <!-- CrazyClownz -->
@@ -40,7 +41,7 @@
 </kits>
 <spawns>
     <spawn team="blue-team" kit="spawn-kit" yaw="-180" region="blue-spawn-point"/>
-    <spawn team="red-team" kit="spawn-kit" yaw="0" region="red-spawn-point"/>
+    <spawn team="red-team" kit="spawn-kit" region="red-spawn-point"/>
     <default yaw="90" region="obs-spawn-point"/>
 </spawns>
 <wools craftable="false">
@@ -61,9 +62,6 @@
             <team id="only-red">red-team</team>
             <material>chest</material>
         </any>
-    </deny>
-    <deny id="deny-void">
-        <void/>
     </deny>
     <all id="only-iron-cause-world">
         <material id="only-iron">iron block</material>
@@ -102,13 +100,13 @@
     <!-- applicators -->
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-blue" use="only-blue" region="reds-woolrooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" use="only-red" region="blues-woolrooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" use="only-blue" region="reds-woolrooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" use="only-red" region="blues-woolrooms" message="You may not enter your team's wool rooms!"/>
     <apply block-place="only-iron-cause-world" block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
-    <apply block="blues-woolrooms-filter" region="blues-woolrooms" message="You may not break chests in the wool rooms, or your team's own wool rooms!"/>
-    <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not break chests in the wool rooms, or your team's own wool rooms!"/>
+    <apply block="blues-woolrooms-filter" region="blues-woolrooms" message="You may not break chests in the wool rooms, or your team's wool rooms!"/>
+    <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not break chests in the wool rooms, or your team's wool rooms!"/>
     <apply block-physics="deny-redstone" region="woolrooms"/>
-    <apply block-place="deny-void" block-break="deny-obs-spawn" message="You may not edit the void!"/> <!-- uses block 36 -->
+    <apply block-place="deny(void)" block-break="deny-obs-spawn" message="You may not edit the void!"/> <!-- uses block 36 -->
 </regions>
 <itemkeep>
     <item>iron sword</item>
@@ -218,15 +216,14 @@
 <renewables>
     <renewable rate="0.5" sound="false" region="spawns" renew-filter="only-iron" replace-filter="only-air" avoid-players="5"/>
 </renewables>
-<maxbuildheight>26</maxbuildheight>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="wood" damage="1" amount="32"/>
         <item material="glass" amount="16"/>
     </kill-reward>
 </kill-rewards>
+<maxbuildheight>26</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
