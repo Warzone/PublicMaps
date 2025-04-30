@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Teokalli</name>
-<version>1.0.3</version>
-<objective>Destroy the enemy team's core!</objective>
-<created>2021-12-29</created>
+<version>1.0.5</version>
+<objective>Leak the enemy team's core!</objective>
 <gamemode>dtc</gamemode>
+<created>2021-12-29</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="b2539be1-8f98-4375-b653-9d91cd04c30e"/> <!-- Mewzzy -->
     <author uuid="ec5ec930-5cf3-4f8a-ad9f-09056aeed71b"/> <!-- Tundren -->
@@ -11,6 +12,7 @@
 </authors>
 <contributors>
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="XML"/> <!-- Cazadorian -->
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="XML (update)"/> <!-- zzuf -->
 </contributors>
 <teams>
     <team id="blue" color="blue" max="16">Blue</team>
@@ -37,36 +39,45 @@
 </kits>
 <spawns>
     <default yaw="-90">
-        <regions>
+        <region>
             <point>-313.5,21,-9.5</point>
-        </regions>
+        </region>
     </default>
     <spawn team="red" kit="spawn-kit" yaw="180">
-        <regions>
-            <point>-233.5,22,76.5</point>
-        </regions>
+        <region>
+            <point>-233.5,22,75.5</point>
+        </region>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="0">
-        <regions>
-            <point>-233.5,22,-95.5</point>
-        </regions>
+    <spawn team="blue" kit="spawn-kit">
+        <region>
+            <point>-233.5,22,-94.5</point>
+        </region>
     </spawn>
 </spawns>
 <filters>
     <deny id="deny-players">
-          <participating/>
+        <participating/>
     </deny>
     <material id="only-iron">iron block</material>
-    <not id="deny-void">
-        <void/>
-    </not>
     <team id="only-blue">blue</team>
     <team id="only-red">red</team>
 </filters>
 <regions>
     <union id="spawn-protection">
-        <rectangle id="red-protection" min="-281,112" max="-219,49"/>
-        <rectangle id="blue-protection" min="-248,-68" max="-186,-131"/>
+        <union id="red-protection">
+            <complement>
+                <rectangle min="-281,112" max="-219,49"/>
+                <rectangle min="-248,52" max="-281,49"/>
+            </complement>
+            <rectangle min="-216,67" max="-219,76"/>
+        </union>
+        <union id="blue-protection">
+            <complement>
+                <rectangle min="-248,-68" max="-186,-131"/>
+                <rectangle min="-219,-71" max="-185,-68"/>
+            </complement>
+            <rectangle min="-251,-86" max="-248,-95"/>
+        </union>
     </union>
     <complement id="void-area">
         <everywhere/>
@@ -79,19 +90,9 @@
     </complement>
     <apply enter="only-blue" region="blue-protection" message="You may not enter the opponent's spawn!"/>
     <apply enter="only-red" region="red-protection" message="You may not enter the opponent's spawn!"/>
-    <apply block-place="deny-void" region="void-area" message="You may not build in the void area!"/>
     <apply block-break="only-iron" block-place="deny-players" region="spawn-protection" message="You may not modify the spawns!"/>
+    <apply block-place="deny(void)" region="void-area" message="You may not build in the void area!"/>
 </regions>
-<block-drops>
-    <rule>
-        <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-</block-drops>
 <cores material="obsidian" leak="4" mode-changes="true">
     <core team="blue">
         <region>
@@ -105,8 +106,26 @@
     </core>
 </cores>
 <modes>
-    <mode after="15m" material="gold block" name="GOLD CORE MODE"/>
+    <mode after="15m" material="gold block" name="`eGOLD CORE MODE"/>
 </modes>
+<block-drops>
+    <rule>
+        <filter>
+            <material>wood</material>
+        </filter>
+        <drops>
+            <item chance="0" material="wood"/>
+        </drops>
+    </rule>
+    <rule>
+        <filter>
+            <material>tnt</material>
+        </filter>
+        <drops>
+            <item chance="1" material="tnt" name="`fAuto-Igniting TNT" lore="`cDoesn't damage players!"/>
+        </drops>
+    </rule>
+</block-drops>
 <renewables>
     <renewable region="spawn-protection" renew-filter="only-iron" interval="3" grow="false" particles="true" sound="true"/>
 </renewables>
@@ -137,7 +156,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="wood"/>
         <item amount="8" material="glass"/>
     </kill-reward>
@@ -145,6 +163,12 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<tnt>
+    <instantignite>true</instantignite>
+</tnt>
+<disabledamage>
+    <damage>block explosion</damage>
+</disabledamage>
 <crafting>
     <disable>boat</disable>
 </crafting>
