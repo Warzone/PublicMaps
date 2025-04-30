@@ -1,113 +1,123 @@
-<?xml version="1.0"?>
-<map proto="1.3.2">
+<map proto="1.5.0">
 <name>Fallencrests</name>
-<version>1.2.9</version>
+<variant id="halloween" world="halloween">Halloween</variant>
+<version>1.3.2</version>
 <objective>Leak lava from each of the enemy's obsidian core 6 blocks downwards</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <rules>
-    <rule>Players have resistance and reduced knockback, haste and resistance in spawn!</rule>
+    <rule>Players have haste, resistance, and reduced knockback at their spawn!</rule>
 </rules>
 <authors>
     <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
-    <author uuid="c95e0a45-8208-430a-a1a2-1e27333445a4"/> <!-- skippy369 -->
-    <author uuid="5bcba185-92a3-4e61-854a-4485ac7d240f"/> <!-- MonstroGato -->
+    <if variant="default">
+        <author uuid="72fcc87a-2443-4b93-890d-d11dbb10f851"/> <!-- Preloom -->
+        <author uuid="c95e0a45-8208-430a-a1a2-1e27333445a4"/> <!-- skippy369 -->
+        <author uuid="5bcba185-92a3-4e61-854a-4485ac7d240f"/> <!-- MonstroGato -->
+    </if>
+    <if variant="halloween">
+        <author uuid="8e48d3e6-3abe-4e28-ab01-ac272ecea35f"/> <!-- TinyOrange -->
+    </if>
 </authors>
 <contributors>
-    <contributor uuid="51122eec-f6b4-42f6-9a4d-807aeee960a2" contribution="Misc. map help."/> <!-- ravi60 -->
-    <contributor uuid="3769b4c1-376a-488e-98db-a343fb3439bf" contribution="Misc. map help."/> <!-- Kevinthedude2000 -->
+    <contributor uuid="3769b4c1-376a-488e-98db-a343fb3439bf" contribution="Misc. map help"/> <!-- Kevinthedude2000 -->
+    <contributor uuid="51122eec-f6b4-42f6-9a4d-807aeee960a2" contribution="Misc. map help"/> <!-- ravi60 -->
+    <contributor uuid="d2fdcc0c-f85d-4a7e-8ea7-86ec6d377c24"/> <!-- IcePhoenix0525 -->
+    <contributor uuid="9ee0a4b4-7727-45d0-9aee-1a794e23b641"/> <!-- gloomp -->
 </contributors>
 <teams>
-    <team color="blue" max="32">Blue</team>
-    <team color="dark red" max="32">Red</team>
+    <team id="blue-team" color="blue" max="32">Blue</team>
+    <team id="red-team" color="dark red" max="32">Red</team>
 </teams>
-<spawns>
-    <spawn team="blue" kit="blue" yaw="90">
-        <cuboid min="639,17,429" max="641,17,431"/>
-    </spawn>
-    <spawn team="red" kit="red" yaw="270">
-        <cuboid min="569,17,301" max="571,17,305"/>
-    </spawn>
-    <default yaw="270">
-        <cuboid min="513,47,364" max="526,47,371"/>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" unbreakable="true">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">iron axe</item>
-        <item slot="4" amount="64">wood</item>
-        <item slot="31" amount="64">wood</item>
-        <item slot="22" amount="64">wood</item>
-        <item slot="5" amount="32">glass</item>
-        <item slot="6" amount="32">ladder</item>
-        <item slot="7">golden apple</item>
-        <item slot="8" amount="32">cooked beef</item>
-        <item slot="28">arrow</item>
-        <potion amplifier="10" duration="8">damage resistance</potion>
-        <potion amplifier="2" duration="5">fast digging</potion>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="31" amount="64" material="wood"/>
+        <item slot="22" amount="64" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" amount="32" material="ladder"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked beef"/>
+        <item slot="28" material="arrow"/>
+        <if variant="halloween">
+            <helmet material="jack o lantern"/>
+        </if>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <effect amplifier="10" duration="8">damage resistance</effect>
+        <effect amplifier="2" duration="5">fast digging</effect>
     </kit>
-    <kit name="red" parents="spawn">
-        <chestplate unbreakable="true" color="cd0000">leather chestplate</chestplate>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate unbreakable="true" color="0066cc">leather chestplate</chestplate>
-    </kit>
-    <kit name="spawn-protection">
-        <potion amplifier="10" duration="oo">damage resistance</potion>
-        <potion amplifier="2" duration="oo">fast digging</potion>
+    <kit id="spawn-protection">
+        <effect amplifier="10">damage resistance</effect>
+        <effect amplifier="2">fast digging</effect>
         <knockback-reduction>1</knockback-reduction>
     </kit>
 </kits>
-<filters>
-    <filter name="only-red" parents="deny-all">
-        <allow>
-            <team>red</team>
-        </allow>
-    </filter>
-    <filter name="only-blue" parents="deny-all">
-        <allow>
-            <team>blue</team>
-        </allow>
-    </filter>
-</filters>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit" yaw="90">
+        <region>
+            <cuboid min="639,17,429" max="641,17,431"/>
+        </region>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit" yaw="270">
+        <region>
+            <cuboid min="569,17,301" max="571,17,305"/>
+        </region>
+    </spawn>
+    <default yaw="270">
+        <region>
+            <cuboid min="513,47,364" max="526,47,371"/>
+        </region>
+    </default>
+</spawns>
 <regions>
-    <apply lend-kit="spawn-protection" enter="only-blue" block="deny-all" message="You may not interact with Blue Team's spawn!">
-        <rectangle min="636,426" max="642,437"/>
+    <apply lend-kit="spawn-protection" enter="blue-team" block="never" message="You may not interact with Blue's spawn!">
+        <region>
+            <rectangle min="636,426" max="642,437"/>
+        </region>
     </apply>
-    <apply lend-kit="spawn-protection" enter="only-red" block="deny-all" message="You may not interact with Red Team's spawn!">
-        <rectangle min="575,309" max="567,298"/>
+    <apply lend-kit="spawn-protection" enter="red-team" block="never" message="You may not interact with Red's spawn!">
+        <region>
+            <rectangle min="575,309" max="567,298"/>
+        </region>
     </apply>
-    <apply block="deny-all" message="You may not build outside of the map!">
-        <negative name="playable-inverse">
-            <rectangle min="567,225" max="643,509"/>
-        </negative>
+    <apply block="never" message="You may not build outside of the map!">
+        <region>
+            <negative id="playable-inverse">
+                <rectangle min="567,225" max="643,509"/>
+            </negative>
+        </region>
     </apply>
 </regions>
-<cores material="obsidian" leak="5" mode-changes="true">
-    <core name="Rear Core" team="red">
-        <cuboid min="606,38,250" max="611,43,255"/>
+<cores leak="5" mode-changes="true">
+    <core name="Rear Core" team="red-team">
+        <region>
+            <cuboid min="606,38,250" max="611,43,255"/>
+        </region>
     </core>
-    <core name="Front Core" team="red">
-        <cuboid min="612,38,310" max="617,43,315"/>
+    <core name="Front Core" team="red-team">
+        <region>
+            <cuboid min="612,38,310" max="617,43,315"/>
+        </region>
     </core>
-    <core name="Rear Core" team="blue">
-        <cuboid min="600,38,480" max="605,43,485"/>
+    <core name="Rear Core" team="blue-team">
+        <region>
+            <cuboid min="600,38,480" max="605,43,485"/>
+        </region>
     </core>
-    <core name="Front Core" team="blue">
-        <cuboid min="594,38,420" max="599,43,425"/>
+    <core name="Front Core" team="blue-team">
+        <region>
+            <cuboid min="594,38,420" max="599,43,425"/>
+        </region>
     </core>
 </cores>
 <modes>
     <mode after="15m" material="gold block" name="`6GOLD CORE MODE"/>
     <mode after="25m" material="packed ice" name="PACKED ICE CORE MODE"/>
 </modes>
-<killreward>
-    <item>golden apple</item>
-    <item amount="32">wood</item>
-    <item amount="16">glass</item>
-</killreward>
 <itemremove>
     <item>leather chestplate</item>
     <item>cooked beef</item>
@@ -117,6 +127,9 @@
     <item>ladder</item>
     <item>golden apple</item>
     <item>glass</item>
+    <if variant="halloween">
+        <item>jack o lantern</item>
+    </if>
 </itemremove>
 <toolrepair>
     <tool>iron sword</tool>
@@ -125,5 +138,11 @@
     <tool>diamond pickaxe</tool>
     <tool>arrow</tool>
 </toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>60</maxbuildheight>
 </map>
