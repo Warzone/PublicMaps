@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Canyon II</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Capture the opposing team's wools!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid= "0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
 </authors>
@@ -57,9 +58,6 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="void-filter">
-        <void/>
-    </not>
     <all id="only-iron-regen">
         <cause>world</cause>
         <material id="only-iron">iron block</material>
@@ -127,7 +125,7 @@
     <apply block-place="only-iron-regen" block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
     <apply block="blue-wools" use="only-red-usage" region="blue-wrs"/>
     <apply block="red-wools" use="only-blue-usage" region="red-wrs"/>
-    <apply block-place="void-filter" block-break="always" message="You may not edit the void!"/>
+    <apply block-place="deny(void)" block-break="always" message="You may not edit the void!"/>
 </regions>
 <wools>
     <wool team="blue-team" color="green" craftable="false" location="113,13,44">
@@ -193,11 +191,12 @@
     <item>glass</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="24" damage="1" material="wood"/>
-    <item amount="12" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="24" damage="1" material="wood"/>
+        <item amount="12" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>27</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
