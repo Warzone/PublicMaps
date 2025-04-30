@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Empire</name>
 <variant id="halloween" world="halloween" override="true">Empire in Ruins</variant>
-<version>2.3.11</version>
+<version>2.3.12</version>
 <objective>Capture both wools and return them safely to your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
 </authors>
@@ -14,9 +15,9 @@
 <kits>
     <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
         <item slot="2" unbreakable="true" material="iron pickaxe"/>
-        <item slot="3" unbreakable="true" enchantment="dig speed:1" material="iron axe"/>
+        <item slot="3" unbreakable="true" enchantment="dig speed" material="iron axe"/>
         <unless variant="halloween">
             <item slot="30" unbreakable="true" material="iron spade"/>
         </unless>
@@ -32,19 +33,23 @@
         <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
-<spawns team="blue" kit="spawn-kit">
-    <spawn yaw="0" pitch="90">
-        <region><point>-1.5,55,-60.5</point></region>
-    </spawn>
-</spawns>
-<spawns team="red" kit="spawn-kit">
-    <spawn yaw="180" pitch="90">
-        <region><point>-1.5,55,85.5</point></region>
-    </spawn>
-</spawns>
 <spawns>
+    <spawns kit="spawn-kit">
+        <spawn team="blue" pitch="90">
+            <region>
+                <point>-1.5,55,-60.5</point>
+            </region>
+        </spawn>
+        <spawn team="red" yaw="180" pitch="90">
+            <region>
+                <point>-1.5,55,85.5</point>
+            </region>
+        </spawn>
+    </spawns>
     <default yaw="-90">
-        <region><cylinder base="-70.5,11,12.5" radius="2.5" height="0"/></region>
+        <region>
+            <cylinder base="-70.5,11,12.5" radius="2.5" height="0"/>
+        </region>
     </default>
 </spawns>
 <wools>
@@ -66,8 +71,6 @@
     </wools>
 </wools>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
     <deny id="deny-spawner">
         <material>mob spawner</material>
     </deny>
@@ -78,7 +81,7 @@
                 <material>chest</material>
             </any>
         </deny>
-        <filter id="only-blue"/>
+        <team id="only-blue">blue</team>
     </all>
     <all id="anti-grief-red">
         <deny>
@@ -87,11 +90,8 @@
                 <material>chest</material>
             </any>
         </deny>
-        <filter id="only-red"/>
+        <team id="only-red">red</team>
     </all>
-    <deny id="deny-void">
-        <void/>
-    </deny>
     <not id="only-red-usage">
         <all>
             <any>
@@ -126,8 +126,8 @@
     <apply enter="only-blue" block="only-blue" use="only-blue-usage" message="You may not access/modify your own wool room!" region="blue-wool-rooms"/>
     <apply enter="only-red" block="only-red" use="only-red-usage" message="You may not access/modify your own wool room!" region="red-wool-rooms"/>
     <apply block-break="anti-grief-blue" region="blue-wool-rooms"/>
-    <apply block-break="anti-grief-red"  region="red-wool-rooms"/>
-    <apply block="deny-void" message="You may not edit in the void area!">
+    <apply block-break="anti-grief-red" region="red-wool-rooms"/>
+    <apply block="deny(void)" message="You may not edit in the void area!">
         <region>
             <negative>
                 <rectangle min="-39,63" max="36,-38"/>
@@ -180,50 +180,7 @@
 <kill-rewards>
     <kill-reward>
         <item amount="7" material="gold nugget"/>
-        <item material="golden apple"/>
         <item amount="16" material="wood"/>
     </kill-reward>
 </kill-rewards>
-<!-- include src="tutorial.xml"/ -->
-<!-- <tutorial>
-    <stage title="Capture the Wool">
-        <teleport>
-            <point yaw="-140" pitch="20">-53,30,58</point>
-        </teleport>
-        <message>
-            <line>The objective is `3Capture the Wool`r.</line>
-            <line>Your team wins when `2both wools`r are placed on the `6victory monuments`r.</line>
-            <line>This is a `8wool room`r. (There are four in this map in total)</line>
-            <line>This wool room is for the `bBlue Team`r, meaning that's where they'll need to go.</line>
-        </message>
-    </stage>
-    <stage title="Villager Trading">
-        <teleport>
-            <point yaw="-180" pitch="0">-2,6,87</point>
-        </teleport>
-        <message>
-            <line>You can use `6gold ingots`r to purchase potions from the `7villager`r at your team's spawn.</line>
-            <line>You gain `e1 `6gold ingot`r every time you kill an `4enemy`r.</line>
-            <line>Additionally, you can craft `6golden apples`r or `6golden armor`r with your `bingots`r!</line>
-        </message>
-    </stage>
-    <stage title="Wool Rooms">
-        <teleport>
-            <point yaw="-40" pitch="20">-40,18,79</point>
-        </teleport>
-        <message>
-            <line>`9Blue`r must enter, pick up a wool, and return it safely to their `8victory monument `r located at their spawn area.</line>
-            <line>`4Red Team `rshould prevent any `9Blue Team `rinvaders from entering, because there is `2 powerful gear `rinside.</line>
-        </message>
-    </stage>
-    <stage title="Victory Monument">
-        <teleport>
-            <point yaw="0" pitch="0">-2,6,87</point>
-        </teleport>
-        <message>
-            <line>Once you pick up a `bwool`r, you must `2return it safely`r to your side and</line>
-            <line>Place it on your `8victory monument`r. Once `oboth wools`r have been placed, your team will win.</line>
-        </message>
-    </stage>
-</tutorial> -->
 </map>
