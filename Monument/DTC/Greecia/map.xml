@@ -1,15 +1,15 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Greecia</name>
-<version>1.2.3</version>
-<objective>Destroy the other team's core before they destroy yours!</objective>
+<version>1.2.4</version>
 <created>2014-07-07</created>
 <gamemode>dtc</gamemode>
+<objective>Destroy the other team's core before they destroy yours!</objective>
 <authors>
     <author uuid="b8539c6d-533b-4be2-8f0d-3f70431eee87"/> <!-- CatchingMC -->
 </authors>
 <teams>
-    <team id="red" color="dark red" max="6" max-overfill="8">Red</team>
-    <team id="blue" color="blue" max="6" max-overfill="8">Blue</team>
+    <team id="red-team" color="dark red" max="6" max-overfill="8">Red</team>
+    <team id="blue-team" color="blue" max="6" max-overfill="8">Blue</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -32,25 +32,23 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit" yaw="90">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit" yaw="90">
+        <region>
             <cuboid min="401,17,-660" max="406,17,-652"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="-90">
-        <regions>
+    <spawn team="blue-team" kit="spawn-kit" yaw="-90">
+        <region>
             <cuboid min="305,17,-666" max="300,17,-674"/>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <cuboid min="352,38,-626" max="354,38,-624"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
     <deny id="deny-spawner">
         <material>mob spawner</material>
     </deny>
@@ -64,19 +62,19 @@
         <rectangle id="map" min="297,-649" max="410,-678"/>
     </negative>
     <!-- Applied -->   
-    <apply region="blue-base" enter="only-blue" message="You may not enter the enemy base!"/>
-    <apply region="red-base" enter="only-red" message="You may not enter the enemy base!"/>
+    <apply region="blue-base" enter="blue-team" message="You may not enter the enemy's base!"/>
+    <apply region="red-base" enter="red-team" message="You may not enter the enemy's base!"/>
     <apply region="bases" block="never" message="You may not edit the bases!"/>
     <apply region="not-map" block="never" message="You may not bridge outside of the map!"/>
     <apply region="map" block-break="deny-spawner" message="You may not break the spawner!"/>
 </regions>
 <cores material="obsidian" leak="2" mode-changes="true">
-    <core team="blue">
+    <core team="blue-team">
         <region>
             <sphere origin="329.5,13,-672.5" radius="3"/>
         </region>
     </core>
-    <core team="red">
+    <core team="red-team">
         <region>
             <sphere origin="377.5,13,-654.5" radius="3"/>
         </region>
