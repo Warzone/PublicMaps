@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Desert Country</name>
-<version>1.1.7</version>
+<version>1.1.8</version>
 <variant id="christmas" world="christmas" override="true">Christmas Country</variant>
 <variant id="halloween" world="halloween" override="true">Spooky Country</variant>
 <include id="gapple-kill-reward"/>
@@ -76,13 +76,13 @@
     </kit>
 </kits>
 <spawns>
-    <default>
-        <region yaw="-90">
+    <default yaw="-90">
+        <region>
             <point>478,42.5,-226</point>
         </region>
     </default>
-    <spawn team="green-team" kit="spawn-kit">
-        <region yaw="180">
+    <spawn team="green-team" kit="spawn-kit" yaw="180">
+        <region>
             <cuboid min="532,11,-129" max="536,11,-127"/>
         </region>
     </spawn>
@@ -93,11 +93,6 @@
     </spawn>
 </spawns>
 <filters>
-    <team id="only-green">green-team</team>
-    <team id="only-blue">blue-team</team>
-    <not id="deny-void">
-        <void/>
-    </not>
     <all id="block-place-spawns">
         <any id="iron-diamond-allow">
             <material>iron block</material>
@@ -114,11 +109,11 @@
     </not>
     <all id="blue-wool-rooms-blocks">
         <material>web</material>
-        <team>blue-team</team>
+        <team id="only-blue">blue-team</team>
     </all>
     <all id="green-wool-rooms-blocks">
         <material>web</material>
-        <team>green-team</team>
+        <team id="only-green">green-team</team>
     </all>
     <player id="player-in-purple">
         <all>
@@ -199,7 +194,7 @@
             <region id="blue-spawn"/>
         </region>
     </apply>
-    <apply block="deny-void" message="You may not build in the void!" region="yes-void"/>
+    <apply block="deny(void)" message="You may not build in the void!" region="yes-void"/>
     <apply block-break="blacklisted-blocks" message="You are not allowed to break this block!"/>
     <apply kit="wool-gear" region="rooms"/>
 </regions>
