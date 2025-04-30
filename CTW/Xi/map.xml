@@ -1,7 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Xi</name>
-<version>1.2.6</version>
+<version>1.2.7</version>
 <include id="gapple-kill-reward"/>
+<phase>staging</phase>
 <objective>Capture both enemy wools.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -74,9 +75,6 @@
     <deny id="deny-chest">
         <material>chest</material>
     </deny>
-    <deny id="deny-void">
-        <void/>
-    </deny>
     <all id="only-iron-regen">
         <material id="only-iron">iron block</material>
         <cause>world</cause>
@@ -109,15 +107,15 @@
     </complement>
     <apply use="only-cyan" region="cyan-wool-rooms"/>
     <apply use="only-purple" region="purple-wool-rooms"/>
-    <apply enter="only-cyan" region="cyan-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-purple" region="purple-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-cyan" region="cyan-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-cyan" region="cyan-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-purple" region="purple-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-cyan" region="cyan-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block-break="only-iron" block-place="only-iron-regen" region="spawns" message="You may only break iron blocks in the spawn areas!"/>
     <apply block="deny-chest" region="wool-rooms" message="You may not break or place chests in the wool rooms!"/>
-    <apply block="deny-cyan" region="purple-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
-    <apply block="deny-purple" region="cyan-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
-    <apply block="deny-void" region="not-yes-void" message="You may not build in the void!"/>
+    <apply block="deny-cyan" region="purple-wool-rooms" message="You may not interfere with your team's wool rooms!"/>
+    <apply block="deny-purple" region="cyan-wool-rooms" message="You may not interfere with your team's wool rooms!"/>
+    <apply block="deny(void)" region="not-yes-void" message="You may not build in the void!"/>
 </regions>
 <wools craftable="false" wool-proximity-metric="none" monument-proximity-metric="closest block">
     <wool team="cyan" color="orange" location="357,9,-774">
