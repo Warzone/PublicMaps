@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Jungle Beat</name>
 <variant id="halloween" world="halloween" override="true">Jungle Spook</variant>
-<version>1.10.0</version>
+<version>1.10.1</version>
 <objective>Capture the wool from the enemy's wool rooms and return them to your spawn!</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Map design"/> <!-- Mikeg542 -->
     <author uuid="fcbc5806-e7fd-45f1-845a-22f1df93c9bf" contribution="Wool rooms and feedback"/> <!-- Minii_ -->
@@ -74,9 +75,6 @@
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-void">
-        <void/>
-    </not>
     <not id="orange-in-wr">
         <any>
             <team id="only-purple">purple</team>
@@ -149,7 +147,7 @@
         <rectangle min="-175,28" max="-174,29"/>
         <rectangle min="-175,78" max="-174,79"/>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-63,-1" max="64,107"/>
     </complement>
@@ -163,17 +161,17 @@
         <cuboid min="119,16,50" max="123,21,56"/>
         <cuboid min="-121,16,51" max="-118,21,57"/>
     </union>
-    <apply enter="only-orange" region="orange-spawn-inner" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-purple" region="purple-spawn-inner" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-orange" region="orange-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-orange" region="orange-spawn-inner" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-purple" region="purple-spawn-inner" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-orange" region="orange-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-purple" region="purple-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block="orange-in-wr" use="only-orange" region="orange-wool-rooms"/>
     <apply block="purple-in-wr" use="only-purple" region="purple-wool-rooms"/>
     <apply block="never" use="never" region="beacons" message="You may not block the beacons!"/>
     <apply block="never" region="spawns" message="You may not break or place blocks in the storage room!"/>
     <apply block="beacon-protection"/>
     <apply block="never" region="sides" message="You may not build outside of the map!"/>
-    <apply block="deny-void" region="void" message="You may not build outside of the map!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build outside of the map!"/>
 </regions>
 <unless variant="halloween">
     <constant id="orange-wool-a">red</constant>
@@ -282,11 +280,12 @@
     <item>water bucket</item>
     <item>iron ingot</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" damage="2" material="wood"/>
-    <item amount="16" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" damage="2" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>48</maxbuildheight>
 <if variant="halloween">
     <crafting>
@@ -294,44 +293,3 @@
     </crafting>
 </if>
 </map>
-<!-- include src="tutorial.xml"/>
-<tutorial>
-    <stage title="Capture the Wool">
-        <message>
-            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
-            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="50">0,50,0</point>
-        </teleport>
-    </stage>
-    <stage title="Orange Wool Rooms">
-        <message>
-            <line>These are `6Orange Team`r's wool rooms housing `1Blue `rand `2Green`r.</line>
-            <line>`5Purple Team `rhas `aLime `rand `4Red`r wools.</line>
-            <line>Purple Team should defend these rooms against Orange Team invaders who are trying to steal the wool and make it back alive.</line>\
-            <line>There are special items inside that will help you fight your way out.</line>
-        </message>
-        <teleport>
-            <point yaw="-90">143,28,54</point>
-        </teleport>
-    </stage>
-    <stage title="Purple Team Base">
-        <message>
-            <line>Here is the `5Purple Team `rvictory monument and spawn where the captured wool must be placed.</line>
-            <line>Both wool must be placed to win.</line>
-        </message>
-        <teleport>
-            <point yaw="90">-103,9,53</point>
-        </teleport>
-    </stage>
-    <stage title="Iron Supplies">
-        <message>
-            <line>Here is the iron supply for `6Orange Team`r. Note that `5Purple Team `rhas the same thing on their side.</line>
-            <line>You can craft iron armor to prepare yourself for battle.</line>
-        </message>
-        <teleport>
-            <point yaw="-90">94,20,53</point>
-        </teleport>
-    </stage>
-</tutorial> -->
