@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Mayan Apocalypse</name>
-<version>1.1.7</version>
+<version>1.1.9</version>
 <objective>Destroy the enemy's core!</objective>
 <gamemode>dtc</gamemode>
 <created>2012-12-13</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall Map Design"/> <!-- Mikeg542 -->
 </authors>
@@ -16,7 +17,7 @@
     <team id="purple" color="dark purple" max="32">Purple</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
         <item slot="0" material="iron sword"/>
         <item slot="1" material="bow"/>
@@ -25,15 +26,8 @@
         <item slot="3" material="iron axe"/>
         <item amount="64" damage="2" slot="4" material="log"/>
         <item slot="7" material="golden apple"/>
-        <item amount="64" slot="8" material="golden carrot"/>
-    </kit>
-    <kit id="purple-kit" parents="spawn">
-        <chestplate color="7F3FB2" unbreakable="true" material="leather chestplate"/>
-        <helmet color="7F3FB2" unbreakable="true" enchantment="protection fall" material="leather helmet"/>
-    </kit>
-    <kit id="orange-kit" parents="spawn">
-        <chestplate color="D87F33" unbreakable="true" material="leather chestplate"/>
-        <helmet color="D87F33" unbreakable="true" enchantment="protection fall" material="leather helmet"/>
+        <helmet team-color="true" unbreakable="true" enchantment="protection fall" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
     </kit>
 </kits>
 <spawns>
@@ -42,12 +36,12 @@
             <cylinder base="-17.0,67.0,116" height="0" radius="2"/>
         </region>
     </default>
-    <spawn kit="orange-kit" team="orange">
+    <spawn team="orange" kit="spawn-kit">
         <region>
             <cylinder base="-134.0,31.0,4.5" height="0" radius="2"/>
         </region>
     </spawn>
-    <spawn kit="purple-kit" team="purple" yaw="180">
+    <spawn team="purple" kit="spawn-kit" yaw="180">
         <region>
             <cylinder base="107.0,31.0,75" height="0" radius="2"/>
         </region>
@@ -62,15 +56,6 @@
     <deny id="deny-beacon">
         <material>beacon</material>
     </deny>
-    <deny id="deny-players">
-        <any>
-            <team>orange</team>
-            <team>purple</team>
-        </any>
-    </deny>
-    <not id="deny-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="beacons">
@@ -83,14 +68,14 @@
     </union>
     <rectangle id="playable-area" max="126,81" min="-152,0"/>
     <!-- Beacon protection -->
-    <apply region="beacons" block="never" use="deny-beacon" message="You may not interact with the core beacon!"/>
+    <apply block="never" use="deny-beacon" message="You may not interact with the core beacon!" region="beacons"/>
     <!-- Spawn protection -->
-    <apply region="spawns" block-break="spawn-permit" block-place="deny-players" message="You may not break any blocks other than iron!"/>
+    <apply block-break="spawn-permit" block-place="deny(participating)" message="You may not break any blocks other than iron!" region="spawns"/>
     <!-- Playable region -->
-    <apply block="deny-void" message="You may not build outside the map!">
+    <apply block="deny(void)" message="You may not build outside the map!">
         <region>
             <complement>
-                <region id="everywhere"/>
+                <everywhere/>
                 <region id="playable-area"/>
             </complement>
         </region>
@@ -120,7 +105,6 @@
 <itemremove>
     <item>log</item>
     <item>wood</item>
-    <item>golden carrot</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>obsidian</item>
@@ -135,7 +119,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="arrow"/>
     </kill-reward>
 </kill-rewards>
@@ -144,4 +127,7 @@
     <timeset>18000</timeset>
 </world>
 <maxbuildheight>75</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
