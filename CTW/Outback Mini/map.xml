@@ -1,15 +1,15 @@
-<?xml version="1.0"?>
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Outback Mini</name>
-<version>1.0.0</version>
+<version>1.0.3</version>
 <objective>Capture both wools!</objective>
 <gamemode>ctw</gamemode>
 <created>2022-01-25</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
 </authors>
 <contributors>
-    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="xml"/> <!-- Ruediger_LP -->
+    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="XML"/> <!-- Ruediger_LP -->
 </contributors>
 <teams>
     <team id="magenta-team" color="light purple" max="16">Magenta</team>
@@ -28,6 +28,7 @@
         <item slot="3" material="iron axe" unbreakable="true">
             <enchantment level="2">efficiency</enchantment>
         </item>
+        <item slot="4" material="stained clay" amount="64" team-color="true"/>
         <item slot="5" material="wood" amount="32"/>
         <item slot="8" material="golden apple"/>
         <item slot="28" material="arrow"/>
@@ -36,32 +37,18 @@
         <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
         <leggings material="chainmail leggings" unbreakable="true"/>
         <boots material="leather boots" team-color="true" unbreakable="true"/>
-        <effect duration="oo" amplifier="100">damage resistance</effect>
+        <effect amplifier="100">damage resistance</effect>
     </kit>
-    <kit force="true" id="reset-resitance-kit">
+    <kit force="true" id="reset-resistance-kit">
         <effect duration="0" amplifier="0">damage resistance</effect>
-    </kit>
-    <kit id="magenta-kit" parent="spawn-kit">
-        <item slot="4" material="stained clay" amount="64" damage="2"/>
-    </kit>
-    <kit id="yellow-kit" parent="spawn-kit">
-        <item slot="4" material="stained clay" amount="64" damage="4"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="magenta-team" kit="magenta-kit" yaw="180" region="magenta-spawn-point"/>
-    <spawn team="yellow-team" kit="yellow-kit" yaw="0" region="yellow-spawn-point"/>
-    <default yaw="0" region="obs-spawn-point"/>
+    <spawn team="magenta-team" kit="spawn-kit" yaw="180" region="magenta-spawn-point"/>
+    <spawn team="yellow-team" kit="spawn-kit" region="yellow-spawn-point"/>
+    <default region="obs-spawn-point"/>
 </spawns>
-<wools craftable="false">
-    <wool team="magenta-team" color="pink" monument="magenta-team-pink-wool" location="-28,10.2,-61.5"/>
-    <wool team="magenta-team" color="purple" monument="magenta-team-purple-wool" location="28,10.2,-61.5"/>
-    <wool team="yellow-team" color="blue" monument="yellow-team-blue-wool" location="28,10.2,61.5"/>
-    <wool team="yellow-team" color="light blue" monument="yellow-team-light-blue-wool" location="-28,10.2,61.5"/>
-</wools>
 <filters>
-    <team id="only-magenta">magenta-team</team>
-    <team id="only-yellow">yellow-team</team>
     <any id="block-break-void-filter">
         <all>
             <any>
@@ -75,11 +62,11 @@
         </not>
     </any>
     <all id="yellows-woolrooms-filter">
-        <team>magenta-team</team>
+        <team id="only-magenta">magenta-team</team>
         <filter id="woolrooms-filter"/>
     </all>
     <all id="magentas-woolrooms-filter">
-        <team>yellow-team</team>
+        <team id="only-yellow">yellow-team</team>
         <filter id="woolrooms-filter"/>
     </all>
     <any id="woolrooms-filter">
@@ -95,9 +82,9 @@
     <material id="only-air">air</material>
 </filters>
 <regions>
-    <cylinder id="magenta-spawn-point" base="0,7.5,58" radius="0.5" height="0"/>
-    <cylinder id="yellow-spawn-point" base="0,7.5,-58" radius="0.5" height="0"/>
-    <cylinder id="obs-spawn-point" base="0,22.5,0" radius="0.5" height="0"/>
+    <cylinder id="magenta-spawn-point" base="0,7,58" radius="0.5" height="0"/>
+    <cylinder id="yellow-spawn-point" base="0,7,-58" radius="0.5" height="0"/>
+    <cylinder id="obs-spawn-point" base="0,22,0" radius="0.5" height="0"/>
     <block id="magenta-team-pink-wool">-2,8,51</block>
     <block id="magenta-team-purple-wool">1,8,51</block>
     <block id="yellow-team-blue-wool">1,8,-52</block>
@@ -134,9 +121,17 @@
     <apply block-place="only-iron-cause-world" block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
     <apply block="magentas-woolrooms-filter" region="magentas-woolrooms" message="You may not edit the wool room!"/>
     <apply block="yellows-woolrooms-filter" region="yellows-woolrooms" message="You may not edit the wool room!"/>
+    <apply use="only-yellow" region="magentas-woolrooms"/>
+    <apply use="only-magenta" region="yellows-woolrooms"/>
     <apply block-place="block-place-void-filter" block-break="block-break-void-filter" region="not-build-area" message="You may not edit the void!"/>
-    <apply kit="reset-resitance-kit" region="not-spawns"/>
+    <apply kit="reset-resistance-kit" region="not-spawns"/>
 </regions>
+<wools craftable="false">
+    <wool team="magenta-team" color="pink" monument="magenta-team-pink-wool" location="-28,10.2,-61.5"/>
+    <wool team="magenta-team" color="purple" monument="magenta-team-purple-wool" location="28,10.2,-61.5"/>
+    <wool team="yellow-team" color="blue" monument="yellow-team-blue-wool" location="28,10.2,61.5"/>
+    <wool team="yellow-team" color="light blue" monument="yellow-team-light-blue-wool" location="-28,10.2,61.5"/>
+</wools>
 <spawners>
     <spawner spawn-region="pink-wool-spawn" player-region="pink-woolroom" delay="3s">
         <item material="wool" amount="1" damage="6"/>
@@ -193,18 +188,14 @@
 <block-drops>
     <rule>
         <filter>
-            <material>wood</material>
+            <any>
+                <material>wood</material>
+                <material>stained clay</material>
+                <material>snow</material>
+            </any>
         </filter>
         <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>stained clay</material>
-        </filter>
-        <drops>
-            <item chance="0" material="stained clay"/>
+            <item chance="0" material="glass"/>
         </drops>
     </rule>
     <rule>
@@ -213,14 +204,6 @@
         </filter>
         <drops>
             <item material="snow block"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>snow</material>
-        </filter>
-        <drops>
-            <item chance="0" material="snow block"/>
         </drops>
     </rule>
 </block-drops>
@@ -296,17 +279,11 @@
 <world>
     <timeset>6000</timeset>
 </world>
-<maxbuildheight>18</maxbuildheight>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="wood" amount="8"/>
-    </kill-reward>
-    <kill-reward filter="only-magenta">
-        <item material="stained clay" damage="2" amount="16"/>
-    </kill-reward>
-    <kill-reward filter="only-yellow">
-        <item material="stained clay" damage="4" amount="16"/>
+        <item material="stained clay" team-color="true" amount="16"/>
     </kill-reward>
 </kill-rewards>
+<maxbuildheight>18</maxbuildheight>
 </map>
