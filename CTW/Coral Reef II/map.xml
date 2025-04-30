@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Coral Reef II</name>
-<version>1.9.1</version>
+<version>1.9.2</version>
 <objective>Capture the wools and return them to your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
@@ -44,7 +45,7 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
+        <region>
             <point>-366.5,44,111.5</point>
         </region>
     </default>
@@ -76,9 +77,6 @@
         <cause>world</cause>
         <material id="only-iron">iron block</material>
     </all>
-    <not id="deny-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="bases">
@@ -103,15 +101,15 @@
     </complement>
     <block id="spawner">-368,13,170</block>
     <!-- Applied -->
-    <apply enter="only-blue" message="You may not enter the enemy base!" region="blue-base"/>
-    <apply enter="only-red" message="You may not enter the enemy base!" region="red-base"/>
-    <apply enter="only-blue" message="You may not enter your team's own wool room!" region="blue-wools"/>
-    <apply enter="only-red" message="You may not enter your team's own wool room!" region="red-wools"/>
+    <apply enter="only-blue" message="You may not enter the enemy's base!" region="blue-base"/>
+    <apply enter="only-red" message="You may not enter the enemy's base!" region="red-base"/>
+    <apply enter="only-blue" message="You may not enter your team's wool room!" region="blue-wools"/>
+    <apply enter="only-red" message="You may not enter your team's wool room!" region="red-wools"/>
     <apply block="never" message="You may not break the spawner!" region="spawner"/>
     <apply block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in the base!" region="bases"/>
     <apply block="blue-in-wr" use="only-blue" region="blue-wools"/>
     <apply block="red-in-wr" use="only-red" region="red-wools"/>
-    <apply block="deny-void" message="You may not build in the void area!" region="void-region"/>
+    <apply block="deny(void)" message="You may not build in the void area!" region="void-region"/>
 </regions>
 <renewables>
     <renewable region="bases" renew-filter="only-iron"/>
@@ -121,29 +119,31 @@
         </renew-filter>
     </renewable>
 </renewables>
-<wools team="blue">
-    <wool color="magenta" location="-290,10,205" craftable="false">
-        <monument>
-            <block>-467,12,173</block>
-        </monument>
-    </wool>
-    <wool color="purple" location="-290,10,137" craftable="false">
-        <monument>
-            <block>-467,12,168</block>
-        </monument>
-    </wool>
-</wools>
-<wools team="red">
-    <wool color="green" location="-445,10,205" craftable="false">
-        <monument>
-            <block>-269,12,173</block>
-        </monument>
-    </wool>
-    <wool color="lime" location="-445,10,136" craftable="false">
-        <monument>
-            <block>-269,12,168</block>
-        </monument>
-    </wool>
+<wools craftable="false">
+    <wools team="blue">
+        <wool color="magenta" location="-290,10,205">
+            <monument>
+                <block>-467,12,173</block>
+            </monument>
+        </wool>
+        <wool color="purple" location="-290,10,137">
+            <monument>
+                <block>-467,12,168</block>
+            </monument>
+        </wool>
+    </wools>
+    <wools team="red">
+        <wool color="green" location="-445,10,205">
+            <monument>
+                <block>-269,12,173</block>
+            </monument>
+        </wool>
+        <wool color="lime" location="-445,10,136">
+            <monument>
+                <block>-269,12,168</block>
+            </monument>
+        </wool>
+    </wools>
 </wools>
 <toolrepair>
     <tool>iron sword</tool>
@@ -230,11 +230,12 @@
     <item>golden apple</item>
     <item>bucket</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="16" damage="2" material="wood"/>
-    <item amount="12" material="sandstone"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" damage="2" material="wood"/>
+        <item amount="12" material="sandstone"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>30</maxbuildheight>
 <respawn delay="3s" auto="true"/>
 <hunger>
