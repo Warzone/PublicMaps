@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Runes of Ruin</name>
-<version>1.2.12</version>
+<version>1.2.13</version>
 <objective>Leak lava from the enemy's obsidian core</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="00c06fa6-1c53-4634-931a-929efd8a52df"/> <!-- Nadastorm -->
 </authors>
@@ -13,8 +14,8 @@
     <contributor uuid="c46af832-71b5-4b3a-829c-837509d9f3eb" contribution="Cave design"/> <!-- Umopaplsdn -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="24">Blue</team>
-    <team id="red" color="dark red" max="24">Red</team>
+    <team id="blue-team" color="blue" max="24">Blue</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -32,22 +33,15 @@
         <item slot="6" material="water bucket"/>
         <item slot="7" material="golden apple"/>
         <item slot="8" amount="64" material="cooked beef"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate">
             <enchantment level="4">blast_protection</enchantment>
         </chestplate>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="10" amplifier="2">regeneration</effect>
         <effect duration="5" amplifier="2">heal</effect>
         <effect duration="10" amplifier="4">resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="0066cc" material="leather helmet"/>
-        <leggings unbreakable="true" color="0066cc" material="leather leggings"/>
-        <boots unbreakable="true" color="0066cc" material="leather boots"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="cd0000" material="leather helmet"/>
-        <leggings unbreakable="true" color="cd0000" material="leather leggings"/>
-        <boots unbreakable="true" color="cd0000" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
@@ -56,21 +50,17 @@
             <cylinder base="368,14,726" radius="3" height="0"/>
         </region>
     </default>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="180">
             <cylinder base="422,11,685" radius="3" height="0"/>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="180">
             <cylinder base="314,11,685" radius="3" height="0"/>
         </region>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-</filters>
 <regions>
     <union id="supply-rooms">
         <cuboid id="blue-supply-room" min="415,10,675" max="430,16,697"/>
@@ -83,8 +73,8 @@
     <negative id="void-area">
         <rectangle id="playable" min="305,701" max="432,600"/>
     </negative>
-    <apply enter="only-blue" message="You may not enter the enemy team's supply room!" region="blue-supply-room"/>
-    <apply enter="only-red" message="You may not enter the enemy team's supply room!" region="red-supply-room"/>
+    <apply enter="blue-team" message="You may not enter the enemy's supply room!" region="blue-supply-room"/>
+    <apply enter="red-team" message="You may not enter the enemy's supply room!" region="red-supply-room"/>
     <apply block="never" message="You may not place or break blocks in the supply rooms!" region="supply-protection"/>
     <apply block="never" message="You may not build outside the playable region!" region="void-area"/>
 </regions>
@@ -93,12 +83,12 @@
     <mode id="ice-core" after="35m" material="packed ice" name="`3PACKED ICE CORE MODE"/>
 </modes>
 <cores material="obsidian" leak="4" modes="gold-core ice-core">
-    <core team="blue">
+    <core team="blue-team">
         <region>
             <cuboid min="426,19,634" max="422,23,630"/>
         </region>
     </core>
-    <core team="red">
+    <core team="red-team">
         <region>
             <cuboid min="315,23,634" max="311,19,630"/>
         </region>
@@ -164,11 +154,12 @@
     <item>bucket</item>
     <item>water bucket</item>
 </itemkeep>
-<kill-reward>
-    <item amount="32" material="wood"/>
-    <item amount="16" material="glass"/>
-    <item material="golden apple"/>
-    <item amount="16" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" material="wood"/>
+        <item amount="16" material="glass"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>70</maxbuildheight>
 </map>
