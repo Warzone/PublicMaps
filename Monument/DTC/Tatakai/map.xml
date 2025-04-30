@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Tatakai</name>
 <version>1.0.4</version>
 <gamemode>dtc</gamemode>
 <objective>Leak the enemy team's core to win!</objective>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
 </authors>
@@ -10,12 +11,11 @@
     <contributor uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" contribution="XML"/> <!-- Diamyx  -->
 </contributors>
 <teams>
-    <team id="red" color="dark red" max="12" max-overfill="14">Red</team>
-    <team id="blue" color="blue" max="12" max-overfill="14">Blue</team>
+    <team id="red-team" color="dark red" max="12" max-overfill="14">Red</team>
+    <team id="blue-team" color="blue" max="12" max-overfill="14">Blue</team>
 </teams>
 <kits>
     <kit id="spawn-kit" potion-particles="true">
-        <clear/>
         <item slot="0" material="iron sword"/>
         <item slot="1" enchantment="arrow infinite" material="bow"/>
         <item slot="2" material="diamond pickaxe"/>
@@ -34,12 +34,12 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions yaw="180">
             <point>-88.5,8,-163.5</point>
         </regions>
     </spawn>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions>
             <point>-88.5,8,-288.5</point>
         </regions>
@@ -50,10 +50,6 @@
         </regions>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
-</filters>
 <regions>
     <cuboid id="red-core" min="-90,13,-182" max="-86,9,-186"/>
     <cuboid id="blue-core" min="-86,13,-269" max="-90,9,-265"/>
@@ -61,7 +57,7 @@
         <rectangle id="red-spawn-area" min="-112,-173" max="-64,-158"/>
         <rectangle id="blue-spawn-area" min="-112,-294" max="-64,-279"/>
     </union>
-    <union id="void">
+    <union id="void-area">
         <rectangle min="-79,-283" max="-97,-272"/>
         <rectangle min="-97,-168" max="-79,-179"/>
         <rectangle min="-112,-253" max="-131,-293"/>
@@ -73,17 +69,16 @@
         <rectangle id="map" min="-133,-156" max="-43,-295"/>
     </negative>
     <apply region="not-map" block-place="never" message="You may not build outside the map boundaries"/>
-    <apply region="void" block-place="never" message="You may not build in the void"/>
     <apply region="red-spawn-area" block="never" message="You may not edit spawn areas!"/>
     <apply region="blue-spawn-area" block="never" message="You may not edit spawn areas!"/>
-    <apply region="red-spawn-area" enter="only-red" message="You may not enter `4Red`r's spawn area!"/>
-    <apply region="blue-spawn-area" enter="only-blue" message="You may not enter `9Blue`r's spawn area!"/>
-    <apply region="void" block-place="never" message="You may not build in the void"/>
+    <apply region="red-spawn-area" enter="red-team" message="You may not enter `4Red`r's spawn area!"/>
+    <apply region="blue-spawn-area" enter="blue-team" message="You may not enter `9Blue`r's spawn area!"/>
+    <apply region="void-area" block-place="never" message="You may not build in the void"/>
     <apply region="not-map" block-place="never" message="You may not build outside the map boundaries"/>
 </regions>
 <cores material="obsidian" leak="1" mode-changes="true">
-    <core team="red" region="red-core"/>
-    <core team="blue" region="blue-core"/>
+    <core team="red-team" region="red-core"/>
+    <core team="blue-team" region="blue-core"/>
 </cores>
 <modes>
     <mode after="15m" material="gold block"/>
@@ -95,6 +90,9 @@
     <tool>iron axe</tool>
 </toolrepair>
 <itemremove>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>glass</item>
     <item>obsidian</item>
     <item>gold block</item>
     <item>leather helmet</item>
@@ -102,17 +100,7 @@
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>carrot item</item>
-</itemremove>
-<itemkeep>
-    <item>arrow</item>
-    <item>wood</item>
-    <item>glass</item>
     <item>golden apple</item>
-</itemkeep>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
+</itemremove>
 <maxbuildheight>21</maxbuildheight>
 </map>
