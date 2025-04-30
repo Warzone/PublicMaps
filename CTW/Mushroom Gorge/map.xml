@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Mushroom Gorge</name>
-<version>1.1</version>
+<version>1.1.2</version>
 <objective>Take the enemy's wool located in bedrock castles on the enemy's side and place it in your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <rules>
     <rule>Players recieve knockback resistance and no knockback in spawns.</rule>
 </rules>
@@ -14,8 +15,8 @@
     <contributor uuid="2553e6f2-3a2c-440b-a6a3-39e3df7fe3ff"/> <!-- khazhyk -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="40">Blue</team>
-    <team id="red" color="dark red" max="40">Red</team>
+    <team id="blue" color="blue" max="35">Blue</team>
+    <team id="red" color="dark red" max="35">Red</team>
 </teams>
 <kits>
     <kit id="default-kit">
@@ -91,9 +92,6 @@
             <void/>
         </any>
     </not>
-    <not id="no-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <!-- Team base protections -->
@@ -135,7 +133,7 @@
         <block>-64,10,43</block> <!-- Red side -->
         <block>-25,10,43</block>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-75,-27" max="-13,22"/>
         <region id="bases"/>
@@ -143,15 +141,15 @@
     <apply lend-kit="spawn-protection" filter="only-blue" region="blue-base-sides"/>
     <apply lend-kit="spawn-protection" filter="only-red" region="red-base-sides"/>
     <apply kit="spawn-regen" region="base-sides"/>
-    <apply enter="only-blue" region="blue-base" message="You may not enter the enemy team's base!"/>
-    <apply enter="only-red" region="red-base" message="You may not enter the enemy team's base!"/>
-    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" region="blue-base" message="You may not enter the enemy's base!"/>
+    <apply enter="only-red" region="red-base" message="You may not enter the enemy's base!"/>
+    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
     <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
     <apply block="never" region="bases" message="You may not modify the bases!"/>
     <apply block="never" region="tables" message="You may not break the enchanting tables!"/>
-    <apply block="no-void" region="void" message="You may not build outside of the map!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build outside of the map!"/>
 </regions>
 <wools craftable="false">
     <wools team="blue">
@@ -267,12 +265,13 @@
     <item>water bucket</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" damage="1" material="wood"/>
-    <item amount="16" material="glass"/>
-    <item damage="4" material="ink sack"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" damage="1" material="wood"/>
+        <item amount="16" material="glass"/>
+        <item damage="4" material="ink sack"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>58</maxbuildheight>
 <respawn auto="true"/>
 <hunger>
