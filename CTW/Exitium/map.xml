@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Exitium</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Capture and place the enemy's wools on your victory monument!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -52,9 +52,6 @@
     </default>
 </spawns>
 <filters>
-    <deny id="deny-void">
-        <void/>
-    </deny>
     <all id="only-red">
         <team>red</team>
         <not>
@@ -181,7 +178,7 @@
             </complement>
         </region>
     </apply>
-    <apply block="deny-void" message="You may not build outside the map!">
+    <apply block="deny(void)" message="You may not build outside the map!">
         <region>
             <negative id="void-area">
                 <region id="middle"/>
@@ -248,43 +245,4 @@
     <tool>iron axe</tool>
 </toolrepair>
 <timelock>on</timelock>
-<!-- <tutorial>
-    <stage title="Capture the Wool">
-        <message>
-            <line>`rThis map is a `aCapture the Wool `r(CTW) map.</line>
-            <line>The objective is to grab the wools on the other team's side and return it to your base.</line>
-        </message>
-        <teleport>
-            <point yaw="145" pitch="20">32.5,25,49.5</point>
-        </teleport>
-    </stage>
-    <stage title="Wool Rooms">
-        <message>
-            <line>`rHere is one of the `9Blue Team`r's wool room. They must protect it.</line>
-            <line>`rInside the wool rooms you will find chests with several supplies.</line>
-            <line>`rOne of these supplies also includes `cTNT`r.</line>
-        </message>
-        <teleport>
-            <point yaw="-45" pitch="10">22.5,15,67.5</point>
-        </teleport>
-    </stage>
-    <stage title="Bases">
-        <message>
-            <line>`rThis is the base; use it to get iron blocks, TNT, and other supplies.</line>
-            <line>`rBe wise with it, you only have a limited amount!</line>
-        </message>
-        <teleport>
-            <point yaw="-130" pitch="20">0.5,20,133.5</point>
-        </teleport>
-    </stage>
-    <stage title="TNT Spawners">
-        <message>
-            <line>`rOn each team's side there is a spawner that will spawn 8 pieces of `cTNT `revery couple of seconds.</line>
-            <line>`rBe careful, the enemy can break yours!</line>
-        </message>
-        <teleport>
-            <point yaw="-150" pitch="30">-27.5,7,42.5</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>
