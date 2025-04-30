@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Fallencrests 2</name>
-<version>1.2.8</version>
+<version>1.2.9</version>
 <objective>Leak the other team's obsidian core to win!</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="36dc036a-dfbc-4627-b66a-501223f08075"/> <!-- ieatboulders2 -->
     <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
@@ -14,8 +15,8 @@
     <contributor uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
 </contributors>
 <teams>
-    <team id="yellow" color="yellow" max="35">Yellow</team>
-    <team id="red" color="dark red" max="35">Red</team>
+    <team id="yellow-team" color="yellow" max="35">Yellow</team>
+    <team id="red-team" color="dark red" max="35">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -36,12 +37,12 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <regions>
             <cuboid min="12.5,18.5,42.5" max="10.5,18.5,43.5"/>
         </regions>
     </spawn>
-    <spawn team="yellow" kit="spawn-kit" yaw="180">
+    <spawn team="yellow-team" kit="spawn-kit" yaw="180">
         <regions>
             <cuboid min="12.5,18.5,254.5" max="14.5,18.5,253.5"/>
         </regions>
@@ -52,13 +53,6 @@
         </regions>
     </default>
 </spawns>
-<filters>
-    <not id="no-void">
-        <void/>
-    </not>
-    <team id="y-only">yellow</team>
-    <team id="r-only">red</team>
-</filters>
 <regions>
     <union id="spawns">
         <cuboid id="r-spawn" min="16,16,47" max="7,oo,39"/>
@@ -67,8 +61,8 @@
     <negative id="void-area">
         <rectangle min="50,138" max="-25,160"/>
     </negative>
-    <apply region="r-spawn" enter="r-only" message="You may not enter the enemy's spawn!"/>
-    <apply region="y-spawn" enter="y-only" message="You may not enter the enemy's spawn!"/>
+    <apply region="r-spawn" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="y-spawn" enter="yellow-team" message="You may not enter the enemy's spawn!"/>
     <apply block="never" message="You have reached the build limit over the void.">
         <region>
             <cuboid min="50,37,158" max="-25,oo,138"/>
@@ -85,15 +79,15 @@
         </region>
     </apply>
     <apply region="spawns" block="never" message="You may not modify the spawn!"/>
-    <apply region="void-area" block="no-void"/>
+    <apply region="void-area" block="deny(void)"/>
 </regions>
 <cores material="obsidian" leak="4" mode-changes="true">
-    <core team="red">
+    <core team="red-team">
         <region>
             <cuboid min="2,33,107" max="-3,38,102"/>
         </region>
     </core>
-    <core team="yellow">
+    <core team="yellow-team">
         <region>
             <cuboid min="28,33,195" max="23,38,190"/>
         </region>
@@ -125,7 +119,6 @@
 </toolrepair>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="32" material="wood"/>
     </kill-reward>
 </kill-rewards>
