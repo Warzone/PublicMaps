@@ -1,23 +1,22 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ground Zero</name>
 <created>2022-06-29</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Leak the enemy's obsidian core and defend your own.</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map creation"/> <!-- _iMan -->
     <author uuid="c7631131-30fe-4d64-adee-adaa2ac089de" contribution="Map layout"/> <!-- orangle -->
     <author uuid="3c2d8af1-d1ff-4b19-b8f6-a49712cb2601" contribution="Map terraforming"/> <!-- TurtleeMan69 -->
 </authors>
 <contributors>
-    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML"/> <!-- _Pear -->
 </contributors>
-<!-- Teams -->
 <teams>
     <team id="blue-team" color="blue" max="14">Blue</team>
     <team id="red-team" color="red" max="14">Red</team>
 </teams>
-<!-- Kits -->
 <kits>
     <kit id="default">
         <clear/>
@@ -31,7 +30,6 @@
         <item slot="4" amount="32" damage="1" material="log"/>
         <item slot="5" amount="64" material="glass"/>
         <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="cooked beef"/>
         <item slot="30" material="stone spade"/>
         <helmet unbreakable="true" material="chainmail helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate">
@@ -41,27 +39,14 @@
         <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <spawn team="blue-team" kit="default" region="blue-spawn"/>
     <spawn team="red-team" kit="default" region="red-spawn" yaw="180"/>
     <default region="obs-spawn" yaw="-90"/>
 </spawns>
-<!-- Objective -->
-<cores material="obsidian" leak="3">
-    <core team="blue-team" region="blue-core"/>
-    <core team="red-team" region="red-core"/>
-</cores>
-<!-- Filters -->
 <filters>
-    <team id="blue-only">blue-team</team>
-    <team id="red-only">red-team</team>
     <material id="only-iron">iron block</material>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
 </filters>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
     <union id="cores">
@@ -79,16 +64,18 @@
         <rectangle id="map" min="49,-305" max="-24,-15"/>
     </negative>
     <!-- Applications -->
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block-break="only-iron" block-place="deny(participating)" message="You may not modify the terrain here."/>
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
-    <apply region="spawn-protections" block-break="only-iron" block-place="deny-players" message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
 </regions>
-<!-- Renewables -->
+<cores material="obsidian" leak="3">
+    <core team="blue-team" region="blue-core"/>
+    <core team="red-team" region="red-core"/>
+</cores>
 <renewables>
     <renewable region="spawn-protections" renew-filter="only-iron" interval="5s" grow="true" sound="false"/>
 </renewables>
-<!-- Item Remove/Repair -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -99,18 +86,13 @@
 <itemremove>
     <item>log</item>
     <item>wood</item>
-    <item>cooked beef</item>
     <item>chainmail helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
     <item>obsidian</item>
 </itemremove>
-<!-- Misc -->
 <kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
     <kill-reward>
         <filter>
             <kill-streak count="2"/>
@@ -119,4 +101,7 @@
     </kill-reward>
 </kill-rewards>
 <maxbuildheight>49</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
