@@ -1,8 +1,9 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Gridlock 2</name>
-<version>1.1.1</version>
+<version>1.1.3</version>
 <objective>Take the enemy's wool located to either side of the enemy's base and place it in your victory monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="62b6d081-8df8-4c09-aa15-71141ca7df76"/> <!-- Arzanex -->
     <author uuid="04105de3-ecd4-4879-af0c-929715728070"/> <!-- MapleMint -->
@@ -12,27 +13,27 @@
     <contributor uuid="b34f6de7-8f74-4d4b-a8dc-85e20018fb68"/> <!-- Schemetrical -->
 </contributors>
 <teams>
-    <team id="cyan" color="dark aqua" max="32">Cyan</team>
-    <team id="purple" color="dark purple" max="32">Purple</team>
+    <team id="cyan" color="dark aqua" max="28">Cyan</team>
+    <team id="purple" color="dark purple" max="28">Purple</team>
 </teams>
 <kits>
     <kit id="spawn">
         <clear/>
-        <item slot="0" material="stone sword"/>
-        <item slot="1" material="bow"/>
-        <item slot="28" amount="64" material="arrow"/>
-        <item slot="2" material="iron pickaxe">
-            <enchantment level="3">durability</enchantment>
-            <enchantment level="1">dig speed</enchantment>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow">
+            <enchantment>infinity</enchantment>
         </item>
-        <item slot="3" material="iron axe">
-            <enchantment level="3">durability</enchantment>
-            <enchantment level="1">dig speed</enchantment>
-        </item>
-        <item slot="4" amount="64" damage="2" material="log"/>
-        <item slot="5" amount="64">glass</item>
-        <item slot="7">golden apple</item>
-        <item slot="8" amount="64">golden carrot</item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" material="diamond axe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="31" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" material="bucket"/>
+        <item slot="8" material="golden apple"/>
+        <chestplate team-color="true" material="leather chestplate"/>
+        <leggings material="chainmail leggings"/>
+        <boots team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
@@ -59,33 +60,24 @@
         <material>chest</material>
         <material>workbench</material>
     </any>
-    <not id="deny-void">
-        <void/>
-    </not>
-    <deny id="only-cyan">
-        <team>purple</team>
-    </deny>
-    <deny id="only-purple">
-        <team>cyan</team>
-    </deny>
     <all id="only-webs-c">
         <material>web</material>
-        <team>cyan</team>
+        <team id="only-cyan">cyan</team>
     </all>
     <all id="only-webs-p">
         <material>web</material>
-        <team>purple</team>
+        <team id="only-purple">purple</team>
     </all>
     <not id="only-cyan-usage">
         <all>
             <filter id="materials"/>
-            <team>purple</team>
+            <filter id="only-purple"/>
         </all>
     </not>
     <not id="only-purple-usage">
         <all>
             <filter id="materials"/>
-            <team>cyan</team>
+            <filter id="only-cyan"/>
         </all>
     </not>
     <material id="allow-iron">iron block</material>
@@ -101,16 +93,16 @@
     </union>
     <union id="portal-areas">
         <union id="cyan-portals">
-            <rectangle id="portal-left-c" max="-88,3" min="-83,6"/>
-            <rectangle id="portal-right-c" max="-83,78" min="-88,75"/>
-            <rectangle id="portal-up-left-c" max="-116,6" min="-121,3"/>
-            <rectangle id="portal-up-right-c" max="-121,75" min="-116,78"/>
+            <rectangle id="portal-left-c" max="-91,2" min="-80,11"/>
+            <rectangle id="portal-right-c" max="-80,79" min="-91,70"/>
+            <rectangle id="portal-up-left-c" max="-113,11" min="-124,2"/>
+            <rectangle id="portal-up-right-c" max="-124,70" min="-113,79"/>
         </union>
         <union id="purple-portals">
-            <rectangle id="portal-left-p" max="19,75" min="24,78"/>
-            <rectangle id="portal-right-p" max="19,6" min="24,3"/>
-            <rectangle id="portal-up-left-p" max="52,75" min="57,78"/>
-            <rectangle id="portal-up-right-p" max="52,3" min="57,6"/>
+            <rectangle id="portal-left-p" max="16,70" min="27,79"/>
+            <rectangle id="portal-right-p" max="16,11" min="27,2"/>
+            <rectangle id="portal-up-left-p" max="49,70" min="60,79"/>
+            <rectangle id="portal-up-right-p" max="49,2" min="60,11"/>
         </union>
         <union id="portal-rooms">
             <cuboid id="cyan-portal-room" min="-103,64,47" max="-117,77,33"/>
@@ -121,7 +113,7 @@
         <rectangle id="spawn-cyan" max="-190,23" min="-165,58"/>
         <rectangle id="spawn-purple" max="100,22" min="127,58"/>
     </union>
-    <negative id="void">
+    <negative id="void-area">
         <union>
             <rectangle min="0,11" max="-64,70"/>
             <region id="cyan-portals"/>
@@ -140,7 +132,7 @@
     <apply block="only-webs-p" use="only-purple-usage" region="cyan-woolrooms"/>
     <apply enter="only-purple" message="You may not enter your own wool room!." region="cyan-woolrooms"/>
     <!--  void protection  -->
-    <apply block-place="deny-void" block-break="always" message="You may not edit the void area!" region="void"/>
+    <apply block-place="deny(void)" block-break="always" message="You may not edit the void area!" region="void-area"/>
 </regions>
 <portals>
     <!--  portals in cyan base  -->
@@ -216,30 +208,6 @@
         </region>
     </portal>
 </portals>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>iron pickaxe</tool>
-    <tool>iron axe</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>log</item>
-    <item>wood</item>
-    <item>golden carrot</item>
-    <item>seeds</item>
-    <item>sugar cane</item>
-    <item>string</item>
-    <item>apple</item>
-    <item>sapling</item>
-</itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<killreward>
-    <item>golden apple</item>
-    <item amount="16">arrow</item>
-</killreward>
 <wools>
     <wool team="cyan" color="lime" location="75,15,51">
         <monument>
@@ -262,5 +230,63 @@
         </monument>
     </wool>
 </wools>
-<maxbuildheight>35</maxbuildheight>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>redstone</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>golden carrot</item>
+    <item>seeds</item>
+    <item>sugar cane</item>
+    <item>string</item>
+    <item>apple</item>
+    <item>sapling</item>
+    <item>bucket</item>
+    <item>glass</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" damage="2" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
+<item-mods>
+    <rule>
+        <match>
+            <material>iron sword</material>
+            <material>bow</material>
+            <material>diamond pickaxe</material>
+            <material>diamond axe</material>
+            <material>leather chestplate</material>
+            <material>chainmail leggings</material>
+            <material>leather boots</material>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+            <material>iron pickaxe</material>
+            <material>iron axe</material>
+            <material>iron spade</material>
+            <material>shears</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>30</maxbuildheight>
 </map>
