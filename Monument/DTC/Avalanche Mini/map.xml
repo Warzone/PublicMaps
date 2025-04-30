@@ -1,10 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Avalanche Mini</name>
 <version>1.0.3</version>
 <objective>Leak lava from the enemy's obsidian core on the mountain!</objective>
 <gamemode>dtc</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
-     <author uuid="904bf23f-67c5-484a-ae60-61f4ec150b48" contribution="Map design"/> <!-- oib5 -->
+    <author uuid="904bf23f-67c5-484a-ae60-61f4ec150b48" contribution="Map design"/> <!-- oib5 -->
 </authors>
 <contributors>
     <contributor uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317" contribution="Feedback"/> <!-- Stealth5061 -->
@@ -12,8 +13,8 @@
     <contributor uuid="22ba442b-cf26-4d09-b290-8d4e50a551b2" contribution="XML"/> <!-- dinner1111 -->
 </contributors>
 <teams>
-    <team id="orange" color="gold" max="16">Orange</team>
-    <team id="purple" color="dark purple" max="16">Purple</team>
+    <team id="orange-team" color="gold" max="16">Orange</team>
+    <team id="purple-team" color="dark purple" max="16">Purple</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -33,56 +34,37 @@
         <item slot="6" material="snow ball"/>
         <item slot="7" material="golden apple"/>
         <item slot="8" amount="64" material="golden carrot"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate">
+            <enchantment>projectile_protection</enchantment>
+        </chestplate>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" color="151515" material="leather boots"/> <!-- intentional color -->
         <effect duration="4">damage resistance</effect>
         <effect duration="4">heal</effect>
     </kit>
-    <kit id="orange-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="FFAA00" material="leather helmet"/>
-        <chestplate unbreakable="true" color="FFAA00" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
-        <leggings unbreakable="true" color="FFAA00" material="leather leggings"/>
-        <boots unbreakable="true" color="151515" material="leather boots"/>
-    </kit>
-    <kit id="purple-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="AA00AA" material="leather helmet"/>
-        <chestplate unbreakable="true" color="AA00AA" material="leather chestplate">
-            <enchantment>projectile_protection</enchantment>
-        </chestplate>
-        <leggings unbreakable="true" color="AA00AA" material="leather leggings"/>
-        <boots unbreakable="true" color="151515" material="leather boots"/>
-    </kit>
 </kits>
 <spawns>
-    <default yaw="0">
+    <default>
         <region>
             <cylinder base="-18.5,31,-60.5" radius="2" height="1"/>
         </region>
     </default>
-    <spawn team="orange" kit="orange-kit" yaw="270">
+    <spawn team="orange-team" kit="spawn-kit" yaw="90">
         <region>
             <cuboid min="-98.5,14,-0.5" max="-96.5,14,1.5"/>
         </region>
     </spawn>
-    <spawn team="purple" kit="purple-kit" yaw="90">
+    <spawn team="purple-team" kit="spawn-kit" yaw="90">
         <region>
             <cuboid min="61.5,14,1.5" max="59.5,14,-0.5"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <not id="deny-void">
-        <void/>
-    </not>
     <deny id="deny-spawner">
         <material>mob spawner</material>
     </deny>
-    <not id="only-orange">
-        <team>purple</team>
-    </not>
-    <not id="only-purple">
-        <team>orange</team>
-    </not>
 </filters>
 <regions>
     <cylinder id="middle-island" base="-18.5,0,0.5" radius="4" height="14"/>
@@ -112,20 +94,20 @@
     </union>
     <!-- Applied -->
     <apply block="never" message="You may not modify the bases!" region="bases"/>
-    <apply enter="only-orange" message="You may not enter the enemy spawn area!" region="orange-spawn"/>
-    <apply enter="only-purple" message="You may not enter the enemy spawn area!" region="purple-spawn"/>
+    <apply enter="orange-team" message="You may not enter the enemy's spawn area!" region="orange-spawn"/>
+    <apply enter="purple-team" message="You may not enter the enemy's spawn area!" region="purple-spawn"/>
     <apply block="never" message="You may not modify the middle island!" region="middle-island"/>
     <apply block="never" message="You may not modify the elixir areas!" region="elixir-areas"/>
-    <apply block="deny-void" message="You may not edit the void area!" region="no-build"/>
+    <apply block="deny(void)" message="You may not edit the void area!" region="no-build"/>
     <apply block-break="deny-spawner" message="You may not break the spawners!"/>
 </regions>
 <cores material="obsidian" leak="2" mode-changes="true">
-    <core team="orange">
+    <core team="orange-team">
         <region>
             <cuboid min="-89,31,2" max="-86,36,-1"/>
         </region>
     </core>
-    <core team="purple">
+    <core team="purple-team">
         <region>
             <cuboid min="49,31,-1" max="52,36,2"/>
         </region>
@@ -155,11 +137,5 @@
 <itemkeep>
     <item>golden apple</item>
 </itemkeep>
-<tnt>
-    <instantignite>on</instantignite>
-</tnt>
-<kill-reward>
-    <item>golden apple</item>
-</kill-reward>
 <maxbuildheight>44</maxbuildheight>
 </map>
