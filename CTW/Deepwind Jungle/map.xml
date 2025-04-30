@@ -1,10 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Deepwind Jungle</name>
 <variant id="halloween" world="halloween" override="true">Deepwind Horror</variant>
 <!-- <variant id="ranked" world="ranked">TE</variant> -->
-<version>1.4.1</version>
+<version>1.4.2</version>
 <objective>Retrieve the wool from the enemy's side and place it on your team's monument.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <if variant="default">
     <created>2013-08-27</created>
 </if>
@@ -81,9 +82,6 @@
         <team id="only-red">red</team>
         <filter id="materials"/>
     </all>
-    <not id="deny-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <union id="spawns">
@@ -100,20 +98,20 @@
             <cuboid id="yellow-room" min="17,0,-65" max="37,256,-78"/>
         </union>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle id="main" min="-31,-48" max="31,49"/>
         <rectangle id="red-gap" min="4,56" max="-4,49"/>
         <mirror id="blue-gap" region="red-gap" origin="0,0,0.5" normal="0,0,-1"/>
     </complement>
-    <apply enter="only-blue" use="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" use="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="only-blue" use="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" use="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's wool rooms!"/>
     <apply block="never" region="spawns" message="You may not modify the spawns!"/>
     <apply block-break="blue-in-wr" block-place="never" use="only-blue" region="blue-wool-rooms"/>
     <apply block-break="red-in-wr" block-place="never" use="only-red" region="red-wool-rooms"/>
-    <apply block="deny-void" region="void" message="You may not build in the void!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build in the void!"/>
 </regions>
 <wools craftable="false">
     <wool team="blue" color="cyan" location="-27,7.5,74.5">
@@ -152,7 +150,7 @@
     <item>leather boots</item>
     <item>string</item>
     <item>cocoa</item>
-    <item>5:3</item>
+    <item>wood:3</item>
 </itemremove>
 <block-drops>
     <rule>
@@ -177,11 +175,12 @@
     <item>glass</item>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="16" damage="3" material="wood"/>
-    <item amount="12" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" damage="3" material="wood"/>
+        <item amount="12" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>32</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
