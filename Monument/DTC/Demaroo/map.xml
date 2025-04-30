@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Demaroo</name>
-<version>1.1.7</version>
 <gamemode>dtc</gamemode>
+<version>1.1.8</version>
 <objective>Leak lava from the enemy's obsidian core!</objective>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
 </authors>
@@ -10,8 +11,8 @@
     <contributor uuid="8fda3d23-991f-457c-b679-45ed4b0a576d" contribution="XML"/> <!-- feidi_22 -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="18" max-overfill="20">Blue</team>
-    <team id="orange" color="gold" max="18" max-overfill="20">Orange</team>
+    <team id="blue-team" color="blue" max="18" max-overfill="20">Blue</team>
+    <team id="orange-team" color="gold" max="18" max-overfill="20">Orange</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -33,28 +34,24 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="orange" kit="spawn-kit">
+    <spawn team="orange-team" kit="spawn-kit">
         <regions>
             <point yaw="-90">-19.5,21,166.5</point>
             <point yaw="90">-19.5,21,166.5</point>
         </regions>
     </spawn>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions>
             <point yaw="-90">-19.5,21,54.5</point>
             <point yaw="90">-19.5,21,54.5</point>
         </regions>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cuboid min="26,27,110" max="25,27,109"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-orange">orange</team>
-    <team id="only-blue">blue</team>
-</filters>
 <regions>
     <!-- Main Area -->
     <rectangle id="main-area" min="-46,44" max="7,177" />
@@ -69,8 +66,8 @@
             <cuboid min="-23,17,53" max="-16,oo,58"/>
         </union>
     </union>
-    <apply region="blue-spawn" enter="only-blue" message="You may not enter the enemy's spawn."/>
-    <apply region="orange-spawn" enter="only-orange" message="You may not enter the enemy's spawn."/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="orange-spawn" enter="orange-team" message="You may not enter the enemy's spawn."/>
     <apply block="never">
         <region>
             <region id="spawns"/>
@@ -81,12 +78,12 @@
     </apply>
 </regions>
 <cores material="obsidian" leak="4" mode-changes="true">
-    <core team="orange">
+    <core team="orange-team">
         <region>
             <cuboid min="-22,7,132" max="-17,15,137"/>
         </region>
     </core>
-    <core team="blue">
+    <core team="blue-team">
         <region>
             <cuboid min="-22,7,89" max="-17,15,84"/>
         </region>
@@ -121,7 +118,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
