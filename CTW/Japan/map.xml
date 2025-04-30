@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Japan</name>
-<version>1.1.1</version>
+<version>1.1.3</version>
+<include id="gapple-kill-reward"/>
 <objective>Bring the enemy's wool back to your own side.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -34,63 +35,47 @@
 </kits>
 <spawns>
     <default>
-        <regions>
-            <point>18.5,22.02,-49.5</point>
-        </regions>
+        <region>
+            <point>18.5,22.5,-49.5</point>
+        </region>
     </default>
     <spawn team="green" kit="spawn-kit">
-        <regions>
-            <point yaw="-90">62.5,11,21.5</point>
-        </regions>
+        <region yaw="-90">
+            <point>62.5,11,21.5</point>
+        </region>
     </spawn>
     <spawn team="orange" kit="spawn-kit">
-        <regions>
-            <point yaw="90">-25.5,11,-46.5</point>
-        </regions>
+        <region yaw="90">
+            <point>-25.5,11,-46.5</point>
+        </region>
     </spawn>
 </spawns>
 <filters>
-    <deny id="green-in-wr">
-        <any>
-            <team id="only-orange">orange</team>
-            <material>chest</material>
-        </any>
-    </deny>
-    <deny id="orange-in-wr">
-        <any>
-            <team id="only-green">green</team>
-            <material>chest</material>
-        </any>
-    </deny>
-    <deny id="deny-void">
-        <void/>
-    </deny>
-    <deny id="deny-beacon">
-        <material>beacon</material>
-    </deny>
+    <material id="only-chest">chest</material>
+    <material id="only-beacon">beacon</material>
 </filters>
 <regions>
     <union id="spawns">
         <rectangle id="green-spawn" min="54,9" max="75,29"/>
-        <rectangle id="orange-spawn" min="-17,-34" max="-38,-54"/>
+        <rectangle id="orange-spawn" min="-38,-54" max="-17,-34"/>
     </union>
     <union id="wool-rooms">
         <cuboid id="cyan-for-orange" min="105,0,-65" max="123,64,-49"/>
-        <cuboid id="red-for-green" min="-68,0,40" max="-86,64,24"/>
+        <cuboid id="red-for-green" min="-86,0,24" max="-68,64,40"/>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
-        <rectangle id="mid" min="31,-21" max="6,-4"/>
+        <rectangle min="-6,-21" max="31,-4"/> <!-- Mid Region -->
     </complement>
-    <apply use="deny-beacon"/>
-    <apply enter="only-orange" region="orange-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-green" region="green-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-green" use="only-green" region="red-for-green" message="You may not enter your team's own wool room!"/>
-    <apply enter="only-orange" use="only-orange" region="cyan-for-orange" message="You may not enter your team's own wool room!"/>
-    <apply block="green-in-wr" region="red-for-green" message="You may not modify chests in the wool room, or modify your team's own wool room."/>
-    <apply block="orange-in-wr" region="cyan-for-orange" message="You may not modify chests in the wool room, or modify your team's own wool room."/>
+    <apply use="deny(only-beacon)"/>
+    <apply enter="orange" region="orange-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="green" region="green-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="green" use="green" region="red-for-green" message="You may not enter your team's own wool room!"/>
+    <apply enter="orange" use="orange" region="cyan-for-orange" message="You may not enter your team's own wool room!"/>
+    <apply block="deny(any(orange,only-chest))" region="red-for-green" message="You may not modify chests in the wool room, or modify your team's own wool room."/>
+    <apply block="deny(any(green,only-chest))" region="cyan-for-orange" message="You may not modify chests in the wool room, or modify your team's own wool room."/>
     <apply block="never" region="spawns" message="You may not modify the spawns!"/>
-    <apply block="deny-void" region="void" message="You may not place or break blocks here!"/>
+    <apply block-place="deny(void)" region="void-area" message="You may not place or break blocks here!"/>
 </regions>
 <wools>
     <wool team="green" color="red" location="-81,12,31">
@@ -142,7 +127,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" damage="5" material="wood"/>
         <item amount="12" material="glass"/>
     </kill-reward>
