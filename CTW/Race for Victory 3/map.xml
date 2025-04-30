@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Race for Victory 3</name>
-<version>1.2.19</version>
+<version>1.2.20</version>
 <objective>Capture all 3 enemy wools.</objective>
 <gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="Map design and master gardener"/> <!-- MonsieurApple -->
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Map design and code memorization"/> <!-- Plastix -->
@@ -54,7 +55,7 @@
         </region>
     </spawn>
     <spawn team="red" kit="spawn-kit">
-        <region yaw="0">
+        <region>
             <cylinder base="0.5,2,-90.5" radius="5" height="0"/>
         </region>
     </spawn>
@@ -71,9 +72,6 @@
             <material>chest</material>
             <team id="only-blue">blue</team>
         </any>
-    </not>
-    <not id="no-void">
-        <void/>
     </not>
     <all id="only-iron-regen">
         <cause>world</cause>
@@ -138,8 +136,8 @@
             <region id="pink-island"/>
         </complement>
     </union>
-    <apply enter="only-blue" message="You may not enter the enemy base!" region="blue-base"/>
-    <apply enter="only-red" message="You may not enter the enemy base!" region="red-base"/>
+    <apply enter="only-blue" message="You may not enter the enemy's base!" region="blue-base"/>
+    <apply enter="only-red" message="You may not enter the enemy's base!" region="red-base"/>
     <apply enter="only-blue" message="You may not enter your own wool rooms!" region="blue-wool-rooms"/>
     <apply enter="only-red" message="You may not enter your own wool rooms!" region="red-wool-rooms"/>
     <apply block-break="only-iron" block-place="only-iron-regen" message="You may only break iron blocks in the base!" region="bases"/>
@@ -147,7 +145,7 @@
     <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
     <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
     <apply block="never" message="You may not place blocks outside the wool rooms!" region="outside-wr"/>
-    <apply block="no-void" message="You may not edit the void area!" region="void-filter"/>
+    <apply block="deny(void)" message="You may not edit the void area!" region="void-filter"/>
 </regions>
 <portals>
     <!-- portals in blue base -->
@@ -272,62 +270,11 @@
     <item>glass</item>
     <item>ladder</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="32" damage="1" material="wood"/>
-    <item amount="16" material="glass"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="32" damage="1" material="wood"/>
+        <item amount="16" material="glass"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>30</maxbuildheight>
 </map>
-<!-- include src="tutorial.xml"/>
-<tutorial>
-    <stage title="Capture the Wool">
-        <message>
-            <line>`rThis map is a `a`lCapture the Wool `r(CTW) map</line>
-            <line>The objective is to grab the wool on the other team's side and return it to your base.</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="50">44,60,0</point>
-        </teleport>
-    </stage>
-    <stage title="Blue Team Base">
-        <message>
-            <line>`rThis is the `9Blue Team `rbase. You spawn with gear ready to go into battle!</line>
-            <line>You can use the water portals on either side to quickly exit the base.</line>
-            <line>The chests contain extra supplies to help you build defenses or bridge to the enemy side.</line>
-        </message>
-        <teleport>
-            <point yaw="180">0.5,2,102</point>
-        </teleport>
-    </stage>
-    <stage title="Iron Supplies">
-        <message>
-            <line>Here is the iron supply for `9Blue Team`r. Note that `cRed Team `rhas the same thing on their side.</line>
-            <line>You can craft iron armor to prepare yourself for battle.</line>
-        </message>
-        <teleport>
-            <point yaw="35" pitch="30">14,25,63</point>
-        </teleport>
-    </stage>
-    <stage title="Red Wool Rooms">
-        <message>
-            <line>These are `cRed Team`r's wool rooms housing `alime`r, `dpink`r, and `6orange`r.</line>
-            <line>`9Blue Team `rhas `5purple`r, `eyellow`r, and `3cyan `rwools.</line>
-            <line>`cRed Team`r should defend these rooms against `9Blue Team`r invaders who are trying to steal the wool and make it back alive.</line>
-            <line>There are special goodies inside that will help you fight your way out.</line>
-        </message>
-        <teleport>
-            <point yaw="-107" pitch="10">-115,22,-95</point>
-        </teleport>
-    </stage>
-    <stage title="Victory Monument">
-        <message>
-            <line>This is one of three of `9Blue Team`r's victory monuments.</line>
-            <line>The three colored wools from the `cRed Team`r's wool rooms must be placed in the victory monuments for the match to end.</line>
-            <line>Note that `cRed Team`r has three identical victory monuments for their respective wools.</line>
-        </message>
-        <teleport>
-            <point yaw="0">0.5,15,137</point>
-        </teleport>
-    </stage>
-</tutorial> -->
