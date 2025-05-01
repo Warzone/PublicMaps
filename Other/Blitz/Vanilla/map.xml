@@ -1,64 +1,47 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Vanilla</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Eliminate the opposing team.</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
 <authors>
-    <author uuid="2dc9b2a1-6063-499b-9685-aa97b978707a"/> <!-- Luuke --> 
+    <author uuid="2dc9b2a1-6063-499b-9685-aa97b978707a"/> <!-- Luuke -->
 </authors>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>true</broadcastLives>
-</blitz>
-<respawn auto="true"/>
 <teams>
    <team id="red-team" color="dark red" max="4" max-overfill="6">Red</team>
    <team id="blue-team" color="blue" max="4" max-overfill="6">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn" force="true">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" amount="12">wood</item>
-        <item slot="7" amount="1">golden apple</item>
-        <item slot="8" amount="8">cooked beef</item>
-        <item slot="9" amount="8">arrow</item>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-    </kit>
-    <kit id="red-kit" parent="spawn">
-        <helmet unbreakable="true" color="B02E26">leather helmet</helmet>
-        <chestplate unbreakable="true" color="B02E26">leather chestplate</chestplate>
-        <boots unbreakable="true" color="B02E26">leather boots</boots>
-    </kit>
-    <kit id="blue-kit" parent="spawn">
-        <helmet unbreakable="true" color="3C44AA">leather helmet</helmet>
-        <chestplate unbreakable="true" color="3C44AA">leather chestplate</chestplate>
-        <boots unbreakable="true" color="3C44AA">leather boots</boots>
+    <kit id="spawn-kit" force="true">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" amount="12" material="wood"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="8" material="cooked beef"/>
+        <item slot="9" amount="8" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red-team" kit="red-kit">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <point>-1.5,7,-12</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue-team" kit="blue-kit">
-        <regions yaw="180">
+    <spawn team="blue-team" kit="spawn-kit" yaw="180">
+        <region>
             <point>-1.5,7,36</point>
-        </regions>
+        </region>
     </spawn>
-    <default>
-        <regions yaw="90">
+    <default yaw="90">
+        <region>
             <point>9.5,12,25.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="red-only">red-team</team>
-    <team id="blue-only">blue-team</team>
-</filters>
 <regions>
     <union id="spawn-protections">
         <cuboid id="red-spawn-protection" min="-5,0,-13" max="1,9,-9"/>
@@ -67,11 +50,15 @@
     <negative id="not-map">
         <rectangle id="map" min="-14,-13" max="11,38"/>
     </negative>
-    <apply region="spawn-protections"     block="never"     message="You are not allowed to modify terrain here."/>
-    <apply region="red-spawn-protection"  enter="red-only"  message="You may not enter the enemy spawn."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="not-map"               block="never"     message="You may not edit outside the map!"/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
 </regions>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -85,4 +72,5 @@
     <item>leather boots</item>
 </itemremove>
 <maxbuildheight>14</maxbuildheight>
+<respawn auto="true"/>
 </map>

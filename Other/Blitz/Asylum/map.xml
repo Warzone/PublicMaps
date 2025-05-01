@@ -1,17 +1,14 @@
-<map proto="1.4.2" game="Frenzy">
+<map proto="1.5.0" game="Frenzy">
 <name>Asylum</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Eliminate the opposing team.</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="68cfe240-d81c-46ae-8a93-9e3eb5d71e3e"/> <!-- Myv -->
     <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
 </authors>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>true</broadcastLives>
-</blitz>
 <teams>
    <team id="red" color="red" max="10">Red</team>
    <team id="blue" color="blue" max="10">Blue</team>
@@ -20,37 +17,40 @@
     <kit id="default" force="true">
         <item slot="0" unbreakable="true" material="wood sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="8" amount="12" material="bread"/>
         <item slot="28" amount="16" material="arrow"/>
         <helmet team-color="true" unbreakable="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings team-color="true" unbreakable="true" material="leather leggings"/>
         <boots team-color="true" unbreakable="true" material="leather boots"/>
         <effect duration="3" amplifier="50">damage_resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="default">
-        <regions yaw="-45">
+    <spawn team="red" kit="default" yaw="-45">
+        <region>
             <point>-35.5,70,-20.5</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="default">
-        <regions yaw="135">
+    <spawn team="blue" kit="default" yaw="135">
+        <region>
             <point>1.5,70,25.5</point>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <point>-17,113,-33</point>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
     <apply block="never"/>
 </regions>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
 <itemremove>
-    <item>bread</item>
     <item>arrow</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
@@ -64,8 +64,10 @@
 </toolrepair>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

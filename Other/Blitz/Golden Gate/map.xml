@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Golden Gate</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Eliminate the enemy team before time runs out!</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomRobotBoy -->
 </authors>
@@ -15,11 +16,10 @@
     <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" amount="32" material="bread"/>
-        <item slot="3" material="golden apple"/>
-        <item slot="4" name="`4`rBrick" projectile="brick" material="clay brick"/>
-        <item slot="5" amount="6" damage="2" material="leaves"/>
-        <item slot="6" amount="3" material="ladder"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" name="`4`rBrick" projectile="brick" material="clay brick"/>
+        <item slot="4" amount="6" damage="2" material="leaves"/>
+        <item slot="5" amount="3" material="ladder"/>
         <item slot="8" amount="24" material="arrow"/>
         <helmet locked="true" unbreakable="true" material="iron helmet"/>
         <chestplate locked="true" unbreakable="true" team-color="true" material="leather chestplate"/>
@@ -29,19 +29,19 @@
 </kits>
 <spawns>
     <spawn team="red" kit="spawn-kit" yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-46.5,26,40.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="blue" kit="spawn-kit" yaw="90">
-        <regions>
+        <region>
             <cylinder base="147.5,26,40.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-46.5,26,40.5" radius="1" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
@@ -53,13 +53,10 @@
         <material>red rose</material>
         <material>double plant</material>
     </any>
-    <not id="no-void">
-        <void/>
-    </not>
 </filters>
 <regions>
     <apply block="only-some"/>
-    <apply block="no-void"/>
+    <apply block="deny(void)"/>
 </regions>
 <blitz>
     <lives>1</lives>
@@ -75,7 +72,6 @@
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
-    <item>bread</item>
     <item>golden apple</item>
     <item>leaves</item>
     <item>apple</item>
@@ -86,7 +82,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item damage="2" amount="3" material="leaves"/>
     </kill-reward>
 </kill-rewards>
