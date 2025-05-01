@@ -1,0 +1,387 @@
+<map proto="1.5.0" game="Destroy the Wool">
+<name>Monumentum</name>
+<version>1.0.0</version>
+<gamemode>dtm</gamemode>
+<created>2025-04-30</created>
+<objective>Be the last team standing by destroying the enemy teams's wools.</objective>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map, Layout, &amp; XML"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map Advisory &amp; Tester"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="green-team" color="dark green" max="5">Green</team>
+    <team id="yellow-team" color="yellow" max="5">Yellow</team>
+</teams>
+<!-- Blitz and Sudden Death -->
+<blitz filter="blitz-conditions" join-filter="joining-filter" scoreboard-filter="blitz-conditions">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<!-- Respawn Time -->
+<respawn auto="true" delay="2.5s"/>
+<!-- Time Limit -->
+<time>30m</time>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="4" amount="64" team-color="true" material="stained clay"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="4s" amplifier="10">damage_resistance</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red-team" kit="default-kit" region="red-spawn"/>
+    <spawn team="blue-team" kit="default-kit" yaw="-180" region="blue-spawn"/>
+    <spawn team="green-team" kit="default-kit" yaw="90" region="green-spawn"/>
+    <spawn team="yellow-team" kit="default-kit" yaw="-90"  region="yellow-spawn"/>
+    <default region="obs-spawn"/>
+</spawns>
+<broadcasts>
+    <!-- Sudden Death notification -->
+    <alert after="15m">The world border will appear in `c10 minutes`r.</alert>
+    <alert after="25m">The world border has appeared and is approaching!</alert>
+    <tip after="10s" every="4m">You can get `6Coins `r(`6Gold Nuggets`r) by killing players!</tip>
+</broadcasts>
+<!-- Monuments -->
+<destroyables completion="26%" repairable="false" required="false" show-progress="true" sparks="true" materials="wool">
+    <destroyable name="Red Wool" owner="red-team" region="red-team-wool" id="red-team-wool-broken" scoreboard-filter="red-team-scoreboard-filter"/>
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-team-wool" id="blue-team-wool-broken" scoreboard-filter="blue-team-scoreboard-filter"/>
+    <destroyable name="Green Wool" owner="green-team" region="green-team-wool" id="green-team-wool-broken" scoreboard-filter="green-team-scoreboard-filter"/>
+    <destroyable name="Yellow Wool" owner="yellow-team" region="yellow-team-wool" id="yellow-team-wool-broken" scoreboard-filter="yellow-team-scoreboard-filter"/>
+</destroyables>
+<shops>
+    <shop id="item-shop" name="Shop">
+        <!-- Item Category -->
+        <category id="quickbuy" name="`aItems" material="nether star">
+            <item material="stained clay" team-color="true" amount="16" price="8" currency="iron ingot" color="white"/>
+            <item material="golden apple" amount="1" price="2" currency="gold nugget"/>
+            <item material="potion" name="`rSpeed II (0:45)" damage="2" amount="1" price="10" currency="emerald" color="dark green">
+                <effect duration="45s" amplifier="2">speed</effect>
+            </item>
+            <item material="ender pearl" lore="`7The quickest way to invade enemy bases." amount="1" price="45" currency="emerald" color="dark green"/>
+            <item material="tnt" lore="`7Great for instantly destroying wools." amount="1" price="64" currency="emerald"/>
+        </category>
+        <!-- Tools Category -->
+        <category id="tools" name="`aTools" material="gold pickaxe">
+            <item material="iron sword" unbreakable="true" amount="1" price="10" currency="gold nugget" filter="not-iron-sword"/>
+            <item material="diamond sword" unbreakable="true" amount="1" price="20" currency="gold nugget" filter="not-diamond-sword"/>
+            <item material="bow" unbreakable="true" enchantment="power:1" name="`rPower Bow" amount="1" price="15" currency="gold nugget"/>
+            <item material="diamond axe" amount="1" price="4" currency="gold nugget"/>
+            <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3" amount="1" filter="not-diamond-pickaxe">
+                <payment price="6" currency="gold nugget"/>
+                <payment price="1" currency="iron pickaxe"/>
+            </item>
+            <item material="shears" name="`rShears" lore="`7Great for getting rid of wool quicker." price="30" currency="emerald" color="white"/>
+            <item material="arrow" amount="8" price="2" currency="gold nugget"/>
+            <item material="arrow" amount="16" price="64" currency="iron ingot"/>
+        </category>
+        <category id="defense" name="`aDefense Supplies" material="fence">
+            <item material="ladder" amount="8" price="32" currency="iron ingot"/>
+            <item material="fence" amount="6" price="32" currency="iron ingot"/>
+            <item material="wood plate" amount="4" price="48" currency="iron ingot"/>
+            <item material="water bucket" amount="1" price="5" currency="emerald"/>
+            <item material="obsidian" amount="4" price="32" currency="emerald"/>
+        </category>
+    </shop>
+</shops>
+<shopkeepers>
+    <shopkeepers name="`b`lItem Shop" shop="item-shop">
+        <shopkeeper yaw="90">8.5,33,-90.5</shopkeeper> <!-- Team Red Left -->
+        <shopkeeper yaw="-90">-7.5,33,-90.5</shopkeeper> <!-- Team Red Right -->
+        <shopkeeper yaw="-90">-7.5,33,91.5</shopkeeper> <!-- Team Blue Left -->
+        <shopkeeper yaw="90">8.5,33,91.5</shopkeeper> <!-- Team Blue Right -->
+        <shopkeeper yaw="-180">91.5,33,8.5</shopkeeper> <!-- Team Green Left -->
+        <shopkeeper yaw="0">91.5,33,-7.5</shopkeeper> <!-- Team Green Right -->
+        <shopkeeper yaw="0">-90.5,33,-7.5</shopkeeper> <!-- Team Yellow Left -->
+        <shopkeeper yaw="-180">-90.5,33,8.5</shopkeeper> <!-- Team Green Right -->
+    </shopkeepers>
+</shopkeepers>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>false</licensing>
+    <friendly-defuse>false</friendly-defuse>
+    <fuse>3s</fuse>
+    <yield>1</yield>
+    <power>3.0</power>
+</tnt>
+<actions>
+    <!-- Sudden death variable handling -->
+    <action id="sudden-death" expose="true" filter="sudden-death-unstarted" scope="match">
+        <set var="sudden_death_variable" value="1"/>
+    </action>
+    <trigger action="sudden-death" scope="match">
+        <filter>
+            <time>24m</time>
+        </filter>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after message="`cSudden Death `rWill Begin In {0}" duration="60s" filter="sudden-death-counting"/>
+        </filter>
+        <action>
+            <message id="sudden-death-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+                <title>`cSUDDEN `cDEATH!</title>
+                <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+            </message>
+            <set var="sudden_death_variable" value="2"/>
+            <fill region="team-wools" material="air" events="true"/>
+        </action>
+    </trigger>
+    <!-- Destruction alert -->
+    <message id="destroy-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+        <title>`cWOOL `cDESTROYED!</title>
+        <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+    </message>
+    <trigger filter="wool-destroy-message" trigger="destroy-title" scope="player"/>
+</actions>
+<variables>
+    <variable id="sudden_death_variable" scope="match"/>
+</variables>
+<!-- Filters -->
+<filters>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
+    <alive id="respawned"/>
+    <any id="blitz-conditions">
+        <!-- Triggers blitz for a team if their wool is destroyed in under 30 minutes -->
+        <filter id="wool-destruction"/>
+        <!-- Failsafe to guarantee blitz after 25m sudden death happens -->
+        <time>25m</time>
+    </any>
+    <not id="not-diamond-pickaxe">
+        <any>
+            <carrying>
+                <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2"/>
+            </carrying>
+            <carrying>
+               <item material="diamond pickaxe" unbreakable="true" enchantment="efficiency:3"/>
+            </carrying>
+        </any>
+    </not>
+        <not id="not-iron-sword">
+        <any>
+            <carrying>
+                <item material="iron sword" unbreakable="true"/>
+            </carrying>
+            <carrying>
+               <item material="diamond sword" unbreakable="true"/>
+            </carrying>
+        </any>
+    </not>
+        <not id="not-diamond-sword">
+        <any>
+            <carrying>
+                <item material="iron sword" unbreakable="true"/>
+            </carrying>
+            <carrying>
+               <item material="diamond sword" unbreakable="true"/>
+            </carrying>
+        </any>
+    </not>
+    <any id="wool-destruction">
+        <all>
+            <team>red-team</team>
+            <objective any="true">red-team-wool-broken</objective>
+        </all>
+        <all>
+            <team>blue-team</team>
+            <objective any="true">blue-team-wool-broken</objective>
+        </all>
+        <all>
+            <team>green-team</team>
+            <objective any="true">green-team-wool-broken</objective>
+        </all>
+        <all>
+            <team>yellow-team</team>
+            <objective any="true">yellow-team-wool-broken</objective>
+        </all>
+        </any>
+    <not id="joining-filter">
+        <any>
+            <completed>red-team-wool-broken</completed>
+            <completed>blue-team-wool-broken</completed>
+            <completed>green-team-wool-broken</completed>
+            <completed>yellow-team-wool-broken</completed>
+        </any>
+    </not>
+    <not id="red-team-scoreboard-filter">
+        <completed>red-team-wool-broken</completed>
+    </not>
+    <not id="blue-team-scoreboard-filter">
+        <completed>blue-team-wool-broken</completed>
+    </not>
+    <not id="green-team-scoreboard-filter">
+        <completed>green-team-wool-broken</completed>
+    </not>
+    <not id="yellow-team-scoreboard-filter">
+        <completed>yellow-team-wool-broken</completed>
+    </not>
+    <all id="wool-destroy-message">
+        <filter id="wool-destruction"/>
+    <not>
+        <filter id="sudden-death-enabled"/>
+    </not>
+    </all>
+    <variable id="sudden-death-unstarted" var="sudden_death_variable">0</variable>
+    <variable id="sudden-death-counting" var="sudden_death_variable">1</variable>
+    <variable id="sudden-death-enabled" var="sudden_death_variable">2</variable>
+    <any id="red-team-status">
+        <team>red-team</team>
+        <objective any="true">red-team-wool-broken</objective>
+    </any>
+    <any id="blue-team-status">
+        <team>blue-team</team>
+        <objective any="true">blue-team-wool-broken</objective>
+    </any>
+    <any id="green-team-status">
+        <team>green-team</team>
+        <objective any="true">green-team-wool-broken</objective>
+    </any>
+    <any id="yellow-team-status">
+        <team>yellow-team</team>
+        <objective any="true">yellow-team-wool-broken</objective>
+    </any>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="team-wools">
+        <cuboid id="red-team-wool" min="2,32,-60" max="-2,38,-65"/>
+        <cuboid id="blue-team-wool" min="-2,32,61" max="2,38,65"/>
+        <cuboid id="green-team-wool" min="61,32,2" max="65,38,-2"/>
+        <cuboid id="yellow-team-wool" min="-61,32,-2" max="-65,38,2"/>
+    </union>
+    <union id="spawn-protections">
+        <cylinder id="red-spawn-protection" base="0.5,0,-89.5" radius="12" height="oo"/>
+        <cylinder id="blue-spawn-protection" base="0.5,0,90.5" radius="12" height="oo"/>
+        <cylinder id="green-spawn-protection" base="90.5,0,0.5" radius="12" height="oo"/>
+        <cylinder id="yellow-spawn-protection" base="-89.5,0,0.5" radius="12" height="oo"/>
+    </union>
+    <union id="gen-protections">
+        <cuboid id="iron-gens-protection-red" min="10.5,48,-13.5" max="-9.5,60,-11.5"/>
+        <cuboid id="iron-gens-protection-blue" min="-9.5,48,14.5" max="10.5,60,12.5"/>
+        <cuboid id="iron-gens-protection-green" min="14.5,48,10.5" max="12.5,50,-9.5"/>
+        <cuboid id="iron-gens-protection-yellow" min="-13.5,48,-9.5" max="-11.5,60,10.5"/>
+        <cylinder id="emerald-gen-protection" base="0.5,0,0.5" radius="8" height="42"/>
+    </union>
+    <point id="red-spawn">0.5,33,-97.5</point>
+    <point id="blue-spawn">0.5,33,98.5</point>
+    <point id="green-spawn">98.5,33,0.5</point>
+    <point id="yellow-spawn">-97.5,33,0.5</point>
+    <point id="obs-spawn">0.5,70,0.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="105,105" max="-104,-104"/>
+    </negative>
+    <union id="generators">
+        <point id="iron-gen-1">-12.5,50,0.5</point>
+        <point id="iron-gen-2">0.5,50,-12.5</point>
+        <point id="iron-gen-3">13.5,50,0.5</point>
+        <point id="iron-gen-4">0.5,50,13.5</point>
+        <point id="emerald-gen">0.5,32,0.5</point>
+    </union>
+    <!-- Applications -->
+    <below id="below-map" y="20"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="gen-protections" block="never" message="You may not modify the generator area!"/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="below-map" block="never" message="You may not build below the map!"/>
+</regions>
+<spawners player-region="everywhere">
+    <!-- Generators -->
+    <spawner spawn-region="iron-gen-1" max-entities="64" delay="1s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+  	<spawner spawn-region="iron-gen-2" max-entities="64" delay="1s">
+        <item amount="2" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="iron-gen-3" max-entities="64" delay="1s">
+        <item amount="3" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="iron-gen-4" max-entities="64" delay="1s">
+        <item amount="4" material="iron ingot"/>
+    </spawner>
+    <spawner spawn-region="emerald-gen" max-entities="24" delay="10s">
+        <item amount="1" material="emerald"/>
+    </spawner>
+</spawners>
+<world-borders center="0.5,0.5">
+    <world-border size="400"/>
+    <world-border size="12" after="30m" duration="4m" damage="5" buffer="0"/>
+</world-borders>
+<!-- Disable Crafting -->
+<crafting>
+    <disable>wool</disable>
+    <disable>workbench</disable>
+    <disable>shears</disable>
+    <disable>stick</disable>
+    <disable>wood button</disable>
+    <disable>stone button</disable>
+    <disable>wood plate</disable>
+    <disable>stone plate</disable>
+    <disable>gold plate</disable>
+    <disable>iron plate</disable>
+    <disable>iron trapdoor</disable>
+    <disable>gold nugget</disable>
+    <disable>gold ingot</disable>
+    <disable>flint and steel</disable>
+    <disable>clay</disable>
+    <disable>beacon</disable>
+    <disable>snow block</disable>
+    <disable>wool</disable>
+</crafting>
+<!-- Item Remove -->
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+    <item>beacon</item>
+    <item>yellow flower</item>
+    <item>seeds</item>
+    <item>ender pearl</item>
+    <item>potion</item>
+    <item>ladder</item>
+    <item>tnt</item>
+</itemremove>
+<!-- Itemkeep -->
+<itemkeep>
+    <item>stone sword</item>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>shears</item>
+    <item>iron pickaxe</item>
+    <item>diamond pickaxe</item>
+    <item>diamond axe</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>stained clay</item>
+</itemkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item name="`6Coins" amount="2" material="gold nugget"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>65</maxbuildheight>
+</map>
