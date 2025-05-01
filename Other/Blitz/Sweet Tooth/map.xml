@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Sweet Tooth</name>
 <variant id="halloween" world="halloween" override="true">Sore Teeth</variant>
-<version>1.0.9</version>
+<version>1.0.10</version>
 <objective>Elimate the enemy team before time runs out!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>br</gamemode>
@@ -22,42 +22,6 @@
         <team id="blue" color="dark purple" max="20" max-overfill="25">Purple</team>
     </if>
 </teams>
-<spawns>
-    <unless variant="halloween">
-        <spawn team="blue" kit="regular-kit">
-            <regions yaw="90">
-                <point>72.5,52,3.5</point>
-            </regions>
-        </spawn>
-        <spawn team="lime" kit="regular-kit">
-            <regions yaw="-90">
-                <point>-69.5,52,-4.5</point>
-            </regions>
-        </spawn>
-        <default>
-            <regions yaw="-90">
-                <point>1.5,68,0</point>
-            </regions>
-        </default>
-    </unless>
-    <if variant="halloween">
-        <spawn team="blue" kit="halloween-kit">
-            <regions yaw="90">
-                <point>72.5,50,5</point>
-            </regions>
-        </spawn>
-        <spawn team="lime" kit="halloween-kit">
-            <regions yaw="-90">
-                <point>-71.5,50,-6</point>
-            </regions>
-        </spawn>
-        <default>
-            <regions yaw="180">
-                <point>0,104,-2.5</point>
-            </regions>
-        </default>
-    </if>
-</spawns>
 <kits>
     <kit id="spawn-kit">
         <item slot="1" enchantment="arrow damage:10" material="bow" unbreakable="true"/>
@@ -81,6 +45,42 @@
         <boots material="iron boots" unbreakable="true"/>
     </kit>
 </kits>
+<spawns>
+    <unless variant="halloween">
+        <spawn team="blue" kit="regular-kit">
+            <region yaw="90">
+                <point>72.5,52,3.5</point>
+            </region>
+        </spawn>
+        <spawn team="lime" kit="regular-kit">
+            <region yaw="-90">
+                <point>-69.5,52,-4.5</point>
+            </region>
+        </spawn>
+        <default>
+            <region yaw="-90">
+                <point>1.5,68,0</point>
+            </region>
+        </default>
+    </unless>
+    <if variant="halloween">
+        <spawn team="blue" kit="halloween-kit">
+            <region yaw="90">
+                <point>72.5,50,5</point>
+            </region>
+        </spawn>
+        <spawn team="lime" kit="halloween-kit">
+            <region yaw="-90">
+                <point>-71.5,50,-6</point>
+            </region>
+        </spawn>
+        <default>
+            <region yaw="180">
+                <point>0,104,-2.5</point>
+            </region>
+        </default>
+    </if>
+</spawns>
 <regions>
     <apply block="never"/>
 </regions>

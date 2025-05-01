@@ -1,12 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>No Return</name>
 <variant id="creeper" override="true">Creeper Return</variant>
-<phase>development</phase>
-<version>2.1.7</version>
+<phase>staging</phase>
+<version>2.1.8</version>
 <objective>Eliminate the other team.</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
-<time>5m</time>
 <authors>
     <author uuid="a6a99e23-34c4-4957-8974-b78b4da9ce7c"/> <!-- AMo AKA AntonyMo -->
 </authors>
@@ -16,38 +15,17 @@
 <rules>
    <rule>You may not access areas where the lava cannot flow (apart from the center).</rule>
 </rules>
-<blitz>
-    <lives>1</lives>
-</blitz>
-<timelock>on</timelock>
 <teams>
     <team id="purple" color="dark purple" max="15">Purple</team>
     <team id="blue" color="blue" max="15">Blue</team>
 </teams>
-<spawns>
-    <spawn team="purple" kit="spawn-kit" yaw="180">
-        <region>
-            <cuboid min="18,18,55" max="-17,18,53"/>
-        </region>
-    </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="0">
-        <region>
-            <cuboid min="18,18,-53" max="-17,18,-55"/>
-        </region>
-    </spawn>
-    <default yaw="270">
-        <region>
-            <cylinder base="51,35,0" radius="2" height="0"/>
-        </region>
-    </default>
-</spawns>
 <kits>
     <kit id="spawn-kit">
         <unless variant="creeper">
-            <item slot="0" enchantment="arrow damage:1;arrow infinite:1;damage all:3;knockback:2" unbreakable="true" material="bow"/>
+            <item slot="0" enchantment="arrow damage;arrow infinite;damage all:3;knockback:2" unbreakable="true" material="bow"/>
         </unless>
         <if variant="creeper">
-            <item slot="0" enchantment="arrow damage:1;arrow infinite:1;damage all:2;knockback:2" unbreakable="true" material="bow"/>
+            <item slot="0" enchantment="arrow damage;arrow infinite;damage all:2;knockback:2" unbreakable="true" material="bow"/>
         </if>
         <item slot="27" material="arrow"/>
         <helmet team-color="true" unbreakable="true" material="leather helmet"/>
@@ -56,6 +34,36 @@
         <boots team-color="true" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
+<spawns>
+    <spawn team="purple" kit="spawn-kit" yaw="180">
+        <region>
+            <cuboid min="18,18,55" max="-17,18,53"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit">
+        <region>
+            <cuboid min="18,18,-53" max="-17,18,-55"/>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <cylinder base="51,35,0" radius="2" height="0"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <any id="allow-lava">
+        <material>lava</material>
+        <material>stationary lava</material>
+    </any>
+</filters>
+<regions>
+    <apply block="allow-lava"/>
+</regions>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time>5m</time>
 <mobs>
     <filter>
         <mob>creeper</mob>
@@ -80,16 +88,8 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<filters>
-    <any id="allow-lava">
-        <material>lava</material>
-        <material>stationary lava</material>
-    </any>
-</filters>
-<regions>
-    <apply block="allow-lava"/>
-</regions>
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<timelock>on</timelock>
 </map>

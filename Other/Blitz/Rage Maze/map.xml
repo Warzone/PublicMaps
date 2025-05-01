@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Rage Maze</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Eliminate all of the enemy teams before 5 minutes!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>br</gamemode>
@@ -16,42 +16,49 @@
     <team id="green" color="green" max="20">Green</team>
     <team id="yellow" color="yellow" max="20">Yellow</team>
 </teams>
-<rage/>
-<blitz/>
-<time>5m</time>
-<spawns>
-    <spawn team="red" kit="spawn-kit" yaw="45">
-        <region><cuboid max="42,6,-42" min="40,6,-40"/></region>
-    </spawn>
-    <spawn team="blue" kit="spawn-kit" yaw="-45">
-        <region><cuboid max="-43,6,-42" min="-41,6,-40"/></region>
-    </spawn>
-    <spawn team="green" kit="spawn-kit" yaw="135">
-        <region><cuboid max="42,6,43" min="40,6,41"/></region>
-    </spawn>
-    <spawn team="yellow" kit="spawn-kit" yaw="-135">
-        <region><cuboid max="-43,6,43" min="-41,6,41"/></region>
-    </spawn>
-    <default yaw="90">
-        <region><cylinder base="0.5,6,0.5" radius="2" height="0"/></region>
-    </default>
-</spawns>
 <kits>
     <kit id="spawn-kit">
         <item slot="0" enchantment="damage all:10" material="iron sword" unbreakable="true"/>
         <item slot="1" enchantment="arrow damage:10" material="bow" unbreakable="true"/>
-        <item slot="7" amount="1" name="`eMaze Cookie" material="cookie"/>
+        <item slot="7" name="`eMaze Cookie" material="cookie"/>
         <item slot="8" amount="8" material="bread"/>
-        <item slot="28" amount="1" material="arrow"/>
-        <effect duration="5" amplifier="10">heal</effect>
-        <effect duration="5" amplifier="10">damage resistance</effect>
-        <game-mode>adventure</game-mode>
+        <item slot="28" material="arrow"/>
         <helmet team-color="true" locked="true" material="leather helmet" unbreakable="true"/>
         <chestplate team-color="true" locked="true" material="leather chestplate" unbreakable="true"/>
         <leggings team-color="true" locked="true" material="leather leggings" unbreakable="true"/>
         <boots team-color="true" locked="true" material="leather boots" unbreakable="true"/>
+        <effect duration="5" amplifier="10">heal</effect>
+        <effect duration="5" amplifier="10">damage resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <spawn team="red" kit="spawn-kit" yaw="45">
+        <region>
+            <cuboid max="42,6,-42" min="40,6,-40"/>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="-45">
+        <region>
+            <cuboid max="-43,6,-42" min="-41,6,-40"/>
+        </region>
+    </spawn>
+    <spawn team="green" kit="spawn-kit" yaw="135">
+        <region>
+            <cuboid max="42,6,43" min="40,6,41"/>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="spawn-kit" yaw="-135">
+        <region>
+            <cuboid max="-43,6,43" min="-41,6,41"/>
+        </region>
+    </spawn>
+    <default yaw="90">
+        <region>
+            <cylinder base="0.5,6,0.5" radius="2" height="0"/>
+        </region>
+    </default>
+</spawns>
 <regions>
     <apply block="never"/>
     <apply velocity="@0,6,0">
@@ -60,18 +67,9 @@
         </region>
     </apply>
 </regions>
-<toolrepair>
-    <tool>iron sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>bread</item>
-    <item>cookie</item>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-</itemremove>
+<rage/>
+<blitz/>
+<time>5m</time>
 <actions>
     <trigger scope="player"> <!-- item-mods wouldn't work unless dropped -->
         <filter>
@@ -93,15 +91,26 @@
         </action>
     </trigger>
 </actions>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>bread</item>
+    <item>cookie</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
 <kill-rewards>
     <kill-reward>
         <item material="arrow"/>
         <item name="`eMaze Cookie" material="cookie"/>
     </kill-reward>
 </kill-rewards>
-<!-- include src="blitz-global.xml"/ -->
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 <respawn auto="true"/>
 </map>

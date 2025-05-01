@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Bill's Town Blitz</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Eliminate the opposing team.</objective>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- Yoyo_ -->
     <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/> <!-- Diamyx -->
@@ -33,10 +34,6 @@
     <spawn team="purple" kit="spawn" region="purple-spawn"/>
     <default kit="vision" region="default-spawn" yaw="180"/>
 </spawns>
-<filters>
-    <team id="orange-only">orange</team>
-    <team id="purple-only">purple</team>
-</filters>
 <regions>
     <union id="spawns">
         <cuboid id="purple-spawn" min="970,6,-1197" max="968,6,-1197"/>
@@ -52,7 +49,6 @@
 </blitz>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
@@ -71,5 +67,5 @@
     <item>leather boots</item>
     <item>arrow</item>
 </itemremove>
-<respawn auto="true"/>
+<respawn delay="4.5s" auto="false"/>
 </map>

@@ -1,11 +1,11 @@
-<map proto="1.4.2" internal="true">
+<map proto="1.5.0" internal="true">
 <name>Netherrage</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Be the last team standing!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>br</gamemode>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Infection idea + XML Help" /> <!-- AtlasGames -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" contribution="Infection idea + XML Help"/> <!-- AtlasGames -->
 </authors>
 <teams>
     <team id="ghast-team" color="white" max="12" max-overfill="16">Ghast</team>
@@ -13,64 +13,54 @@
     <team id="skele-team" color="gray" max="12" max-overfill="16">Nether Skeleton</team>
     <team id="magma-team" color="dark red" max="12" max-overfill="16">Magma Cube</team>
 </teams>
-<spawns>
-    <spawn team="ghast-team" kit="ghast-kit" yaw="135">
-        <regions>
-            <point>37.5,10,80.5</point>
-        </regions>
-    </spawn>
-    <spawn team="blaze-team" kit="blaze-kit" yaw="-135">
-        <regions>
-            <point>-117.5,10,29.5</point>
-        </regions>
-    </spawn>
-    <spawn team="skele-team" kit="skele-kit" yaw="-45">
-        <regions>
-            <point>-66.5,10,-125.5</point>
-        </regions>
-    </spawn>
-    <spawn team="magma-team" kit="magma-kit" yaw="45">
-        <regions>
-            <point>88.5,10,-74.5</point>
-        </regions>
-    </spawn>
-    <default yaw="90">
-        <regions>
-            <point>-12.5,31,-22.5</point>
-        </regions>
-    </default>
-</spawns>
 <kits>
-    <kit id="spawn">
-        <effect>speed</effect>
+    <kit id="spawn-kit">
         <item slot="0" enchantment="damage all:10" unbreakable="true" material="iron sword"/>
         <item slot="1" enchantment="arrow damage:10" unbreakable="true" material="bow"/>
         <item slot="2" amount="2" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings color="191919" unbreakable="true" material="leather leggings"/>
         <boots color="191919" unbreakable="true" material="leather boots"/>
-    </kit>
-    <kit id="ghast-kit" parent="spawn">
-        <helmet color="FFFFFF" unbreakable="true" material="leather helmet"/>
-    </kit>
-    <kit id="blaze-kit" parent="spawn">
-        <helmet color="E5E533" unbreakable="true" material="leather helmet"/>
-    </kit>
-    <kit id="skele-kit" parent="spawn">
-        <helmet color="4C4C4C" unbreakable="true" material="leather helmet"/>
-    </kit>
-    <kit id="magma-kit" parent="spawn">
-        <helmet color="B24CD8" unbreakable="true" material="leather helmet"/>
+        <effect>speed</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <spawn team="ghast-team" kit="spawn-kit">
+        <region yaw="135">
+            <point>37.5,10,80.5</point>
+        </region>
+    </spawn>
+    <spawn team="blaze-team" kit="spawn-kit">
+        <region yaw="-135">
+            <point>-117.5,10,29.5</point>
+        </region>
+    </spawn>
+    <spawn team="skele-team" kit="spawn-kit">
+        <region yaw="-45">
+            <point>-66.5,10,-125.5</point>
+        </region>
+    </spawn>
+    <spawn team="magma-team" kit="spawn-kit">
+        <region yaw="45">
+            <point>88.5,10,-74.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="90">
+            <point>-12.5,31,-22.5</point>
+        </region>
+    </default>
+</spawns>
 <regions>
     <apply block="never"/>
 </regions>
+<rage/>
 <time>4m</time>
 <blitz>
     <lives>2</lives>
 </blitz>
-<rage/>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>

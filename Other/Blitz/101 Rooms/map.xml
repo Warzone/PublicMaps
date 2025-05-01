@@ -1,10 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>101 Rooms</name>
 <variant id="tdm">TDM</variant> <!-- original map was called 101 Rooms TDM without colon -->
 <variant id="halloween" world="halloween" override="true">101 Pumpkins</variant>
 <variant id="lifesteal">Lifesteal</variant>
-<version>1.3.7</version>
 <gamemode>arcade</gamemode>
+<version>1.3.8</version>
 <unless variant="lifesteal,tdm">
     <objective>Kill all your opponents! Each person has 2 lives</objective>
     <gamemode>br</gamemode>
@@ -15,6 +15,7 @@
 </if>
 <if variant="tdm">
     <objective>Get the most kills after 5 minutes!</objective>
+    <gamemode>tdm</gamemode>
     <score>
         <kills>1</kills>
     </score>
@@ -35,7 +36,7 @@
     <contributor uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="Found the ender pearl glitch"/> <!-- TheZaner - appears twice in halloween variant -->
     <contributor uuid="10c7915f-26b2-4cd6-9d42-7675a9259374" contribution="Help with spawner"/> <!-- RabidRabbit30 -->
     <if variant="lifesteal">
-        <contributor uuid="0b009ce8-969a-4f61-a894-e757a7164ba0" contribution="Lifesteal for 101 Rooms idea"/> <!-- FlyDwen -->
+        <contributor uuid="49b0ccbd-dfa6-4be0-a5e6-45eab829556f" contribution="Lifesteal for 101 Rooms idea"/> <!-- feldwyn -->
         <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Lifesteal XML"/> <!-- zzuf -->
     </if>
 </contributors>
@@ -98,7 +99,7 @@
         </unless>
         <if variant="halloween">
             <helmet team-color="true" locked="true" material="wool"/>
-            <effect>wither</effect>
+            <effect duration="oo" amplifier="1">wither</effect>
         </if>
         <chestplate team-color="true" name="Kevlar" locked="true" material="leather chestplate"/>
         <potion duration="4" amplifier="1">heal</potion>
