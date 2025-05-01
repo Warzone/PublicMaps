@@ -1,6 +1,7 @@
-<map proto="1.4.2" game="Spleef">
+<map proto="1.5.0" game="Spleef">
 <name>Not So Spleef</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
+<created>2021-10-23</created>
 <objective>Spleef everyone on the enemy team!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -53,19 +54,19 @@
 </kits>
 <spawns>
     <spawn team="red" kit="red-kit" yaw="180">
-        <regions>
+        <region>
             <cuboid min="2,39,10" max="11,41,12"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="blue" kit="blue-kit">
-        <regions>
+        <region>
             <cuboid min="2,39,2" max="11,41,4"/>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <point>6.5,47,7</point>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
@@ -79,6 +80,7 @@
 <blitz>
     <lives>1</lives>
 </blitz>
+<!-- TODO: replace fake destroyables with fill actions -->
 <destroyables required="false" show="false" materials="air">
     <destroyable name="First lava layer" owner="red" modes="first-layer-to-lava" region="first-layer"/>
     <destroyable name="Second lava layer" owner="blue" modes="second-layer-to-lava" region="second-layer"/>

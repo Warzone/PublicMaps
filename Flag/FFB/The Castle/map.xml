@@ -1,8 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Castle</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
+<created>2024-07-10</created>
 <objective>Score the flag in the enemy's portal as many times as possible!</objective>
 <gamemode>ffb</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
 </authors>
@@ -63,14 +65,12 @@
 </score>
 <time result="score" overtime="45s" max-overtime="3m15s">8m</time>
 <filters>
-    <team id="only-red">red-team</team>
-    <team id="only-blue">blue-team</team>
     <all id="red-team-carrying-flag">
-        <team>red-team</team>
+        <team id="only-red">red-team</team>
         <carrying-flag>flag</carrying-flag>
     </all>
     <all id="blue-team-carrying-flag">
-        <team>blue-team</team>
+        <team id="only-blue">blue-team</team>
         <carrying-flag>flag</carrying-flag>
     </all>
 </filters>
@@ -90,7 +90,7 @@
         <cuboid id="red-net-exclusion" min="-37.5,9,2.5" max="-41.5,13,-1.5"/>
     </union>
     <apply enter="only-blue" region="red-net-exclusion" message="You may not enter your own portal"/>
-    <apply enter="only-red" region="blue-net-exclusion" message="You may not enter your own portal"/> 
+    <apply enter="only-red" region="blue-net-exclusion" message="You may not enter your own portal"/>
     <apply block="never"/>
 </regions>
 <proximity-alarms>
@@ -113,7 +113,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="arrow" amount="3"/>
     </kill-reward>
 </kill-rewards>

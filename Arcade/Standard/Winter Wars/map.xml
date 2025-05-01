@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Blitz: Micro Battles">
+<map proto="1.5.0" game="Blitz: Micro Battles">
 <name>Winter Wars</name>
-<version>1.0.2</version>
-<objective>Four teams are divided onto the map and only one will remain. Gather blocks to help you build up a tower or barricade yourself. Be careful for the world border!</objective>
+<version>1.0.3</version>
+<created>2022-06-01</created>
+<objective>Four teams are divided onto the map and only one will remain. Gather blocks to help you build up a tower or barricade yourself. Watch out for the world border!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <!-- Authors & Contributors -->
@@ -15,10 +15,10 @@
 </contributors>
 <!-- Teams -->
 <teams>
-    <team id="blue"   color="dark aqua" max="8">Blue</team>
-    <team id="green"  color="green"     max="8">Green</team>
-    <team id="red"    color="red"       max="8">Red</team>
-    <team id="yellow" color="yellow"    max="8">Yellow</team>
+    <team id="blue" color="dark aqua" max="8">Blue</team>
+    <team id="green" color="green" max="8">Green</team>
+    <team id="red" color="red" max="8">Red</team>
+    <team id="yellow" color="yellow" max="8">Yellow</team>
 </teams>
 <!-- Time Limit & Broadcasts -->
 <time>170s</time>
@@ -35,33 +35,20 @@
 </blitz>
 <!-- Kits -->
 <kits>
-    <kit id="default">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2" unbreakable="true">stone pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" unbreakable="true">stone spade</item>
-        <item slot="8" amount="8">apple</item>
-        <item slot="28" amount="8">arrow</item>
-        <leggings unbreakable="true" locked="true">chainmail leggings</leggings>
-    </kit>
-    <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="334CB2">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="334CB2">leather boots</boots>
-    </kit>
-    <kit id="green-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="667F33">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="667F33">leather boots</boots>
-    </kit>
-    <kit id="red-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="993333">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="993333">leather boots</boots>
-    </kit>
-    <kit id="yellow-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="E5E533">leather chestplate</chestplate>
-        <boots      unbreakable="true" locked="true" color="E5E533">leather boots</boots>
+    <kit id="default-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" unbreakable="true" material="stone spade"/>
+        <item slot="8" amount="8" material="apple"/>
+        <item slot="28" amount="8" material="arrow"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
+<!-- TODO: replace fake destroyables with fill actions -->
 <!-- Walls & Floor -->
 <destroyables required="false" show="false">
     <destroyable name="Walls" owner="blue"  materials="glass" modes="walls-to-air" region="walls"/>
@@ -84,30 +71,28 @@
 </blockdrops>
 <!-- Filters -->
 <filters>
-    <all id="not-glass">
-        <not>
-            <material>glass</material>
-        </not>
-    </all>
+    <not id="not-glass">
+        <material>glass</material>
+    </not>
 </filters>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
     <cuboid id="floor" min="2,0,-2" max="-2,40,-2"/>
     <union id="walls">
-        <cuboid id="first-wall"  min="1,22,21" max="-1,37,-21"/>
+        <cuboid id="first-wall" min="1,22,21" max="-1,37,-21"/>
         <cuboid id="second-wall" min="21,22,-1" max="-21,37,1"/>
     </union>
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="20" height="40"/>
     </negative>
     <!-- Applications -->
-    <apply region="map"     block="not-glass" message="You cannot break the walls."/>
-    <apply region="not-map" block="never"     message="You cannot build outside of the map."/>
+    <apply region="map" block="not-glass" message="You cannot break the walls."/>
+    <apply region="not-map" block="never" message="You cannot build outside of the map."/>
 </regions>
 <!-- Spawns -->
 <spawns>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue" kit="default-kit">
         <regions>
             <point yaw="-90">-5.5,22,10.5</point>
             <point yaw="180">-8.5,22,14.5</point>
@@ -115,7 +100,7 @@
             <point yaw="-180">-16.5,22,4.5</point>
         </regions>
     </spawn>
-    <spawn team="green" kit="green-kit">
+    <spawn team="green" kit="default-kit">
         <regions>
             <point yaw="90">6.5,22,-9.5</point>
             <point>9.5,22,-13.5</point>
@@ -123,7 +108,7 @@
             <point>17.5,22,-3.5</point>
         </regions>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red" kit="default-kit">
         <regions>
             <point>-9.5,22,-5.5</point>
             <point yaw="-90">-13.5,22,-8.5</point>
@@ -131,7 +116,7 @@
             <point yaw="-90">-3.5,22,-16.5</point>
         </regions>
     </spawn>
-    <spawn team="yellow" kit="yellow-kit">
+    <spawn team="yellow" kit="default-kit">
         <regions>
             <point yaw="180">10.5,22,6.5</point>
             <point yaw="90">14.5,22,9.5</point>
@@ -145,7 +130,7 @@
         </regions>
     </default>
 </spawns>
-<!-- Itemeremove -->
+<!-- Itemremove -->
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
