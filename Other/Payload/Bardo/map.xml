@@ -3,6 +3,7 @@
 <version>2.0.0</version>
 <objective>Attackers must escort the payload to a designated delivery point while the Defenders try to stop them.</objective>
 <created>2024-04-13</created>
+<include id="gapple-kill-reward"/>
 <!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
 <gamemode>arcade</gamemode>
 <gamemode>payload</gamemode>
@@ -132,8 +133,8 @@
 </filters>
 <!-- Actions for Gates & Checkpoints -->
 <actions>
-    <message id="spawns-forward-1" text="`b`lCheckpoint `cA `b`lhas been captured. Spawns have been moved to accommodate, new spawn gates have opened!"/>
-    <message id="spawns-forward-2" text="`b`lCheckpoint `cB `b`lhas been captured. Spawns have been moved to accommodate, new spawn gates have opened!"/>
+    <message id="spawns-forward-1" text="`b`lCheckpoint `cA `b`lhas been captured. Spawns have been moved to accommodate. New spawn gates have opened!"/>
+    <message id="spawns-forward-2" text="`b`lCheckpoint `cB `b`lhas been captured. Spawns have been moved to accommodate. New spawn gates have opened!"/>
     <trigger filter="first-checkpoint-completed" trigger="spawns-forward-1" scope="match"/>
     <trigger filter="second-checkpoint-completed" trigger="spawns-forward-2" scope="match"/>
     <trigger scope="match" filter="attackers-warmup">
@@ -248,10 +249,11 @@
     <item>arrow</item>
 </itemkeep>
 <!-- Kill Rewards -->
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="4" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="4" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawns>
     <respawn delay="5s" filter="red-team"/>
     <respawn delay="7s" filter="blue-team"/>
