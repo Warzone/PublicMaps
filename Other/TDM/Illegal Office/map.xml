@@ -1,33 +1,71 @@
-<?xml version="1.0"?>
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Illegal Office</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Be the team with the most points after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="da98a2f1-673c-4cec-b547-e0a342abfde4"/> <!-- Evocal -->
 </authors>
 <teams>
-    <team id="red" color="dark red" max="25">Red</team>
-    <team id="blue" color="blue" max="25">Blue</team>
+    <team id="red-team" color="dark red" max="25">Red</team>
+    <team id="blue-team" color="blue" max="25">Blue</team>
 </teams>
 <kits>
     <kit id="spawn">
-        <item material="iron sword" slot="0"/>
-        <item material="bow" slot="1"/>
-        <item material="diamond pickaxe" slot="2"/>
-        <item amount="2" material="golden apple" slot="3"/>
-        <item amount="64" team-color="true" material="wool" slot="4"/>
-        <item amount="64" team-color="true" material="wool" slot="5"/>
-        <item amount="16" material="pumpkin pie" slot="6"/>
-        <item material="stick" slot="27"/>
-        <item amount="64" material="arrow" slot="28"/>
-        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
-        <chestplate team-color="true" unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots team-color="true" enchantment="protection fall:2" unbreakable="true">leather boots</boots>
+        <item slot="0" material="iron sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" amount="2" material="golden apple"/>
+        <item slot="4" amount="64" team-color="true" material="wool"/>
+        <item slot="5" amount="64" team-color="true" material="wool"/>
+        <item slot="6" amount="16" material="pumpkin pie"/>
+        <item slot="27" material="stick"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots team-color="true" enchantment="protection fall:2" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
+<spawns>
+    <spawn team="red-team" kit="spawn" yaw="45">
+        <region>
+            <cylinder base="22.5, 51, -75.5" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn" yaw="-135">
+        <region>
+            <cylinder base="-42.5, 51, 47.5" radius="0" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cylinder base="-56, 85, -14" radius="0" height="0"/>
+        </region>
+    </default>
+</spawns>
+<regions>
+    <union id="spawns">
+        <union id="blue-spawn">
+            <cuboid max="-46,56,51" min="-27,50,36"/>
+        </union>
+        <union id="red-spawn">
+            <cuboid max="26,56,-79" min="7,50,-64"/>
+        </union>
+    </union>
+    <negative id="non-playable">
+        <cuboid max="-48,50,53" min="28,86,-81"/>
+    </negative>
+    <apply enter="blue-team" message="You may not enter the enemy's spawn!" region="blue-spawn"/>
+    <apply enter="red-team" message="You may not enter the enemy's spawn!" region="red-spawn"/>
+    <apply block="never" message="You may not modify the spawns!" region="spawns"/>
+    <apply block="never" message="You may not build outside the map!" region="non-playable"/>
+</regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
@@ -43,50 +81,4 @@
     <tool>bow</tool>
     <tool>diamond pickaxe</tool>
 </toolrepair>
-<spawns>
-    <spawn team="red" kit="spawn" yaw="45">
-        <region>
-            <cylinder base="22.5, 51, -75.5" radius="0" height="0"/>
-        </region>
-    </spawn>
-    <spawn team="blue" kit="spawn" yaw="-135">
-        <region>
-            <cylinder base="-42.5, 51, 47.5" radius="0" height="0"/>
-        </region>
-    </spawn>
-    <default yaw="-90">
-        <region>
-            <cylinder base="-56, 85, -14" radius="0" height="0"/>
-        </region>
-    </default>
-</spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-</filters>
-<time>10m</time>
-<score>
-    <kills>1</kills>
-</score>
-<regions>
-    <union id="spawns">
-        <union id="blue-spawn">
-            <cuboid max="-46,56,51" min="-27,50,36"/>
-        </union>
-        <union id="red-spawn">
-            <cuboid max="26,56,-79" min="7,50,-64"/>
-        </union>
-    </union>
-    <negative id="non-playable">
-        <cuboid max="-48,50,53" min="28,86,-81"/>
-    </negative>
-
-    <apply block="never" message="You may not modify the spawns!" region="spawns"/>
-    <apply block="never" message="You may not build outside the map!" region="non-playable"/>
-    <apply enter="only-blue" message="You may not enter the enemy team's spawn!" region="blue-spawn"/>
-    <apply enter="only-red" message="You may not enter the enemy team's spawn!" region="red-spawn"/>
-</regions>
-<killreward>
-    <item>golden apple</item>
-</killreward>
 </map>

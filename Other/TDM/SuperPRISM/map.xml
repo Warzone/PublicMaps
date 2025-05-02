@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>SuperPRISM</name>
 <variant id="halloween" world="halloween" override="true">SuperHALLOW</variant>
-<version>1.4.0</version>
+<version>1.4.1</version>
 <objective>Be the team with the most points after 7 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
@@ -28,12 +28,12 @@
 </rules>
 <teams>
     <unless variant="halloween">
-        <team id="cyan" color="dark aqua" max="18">Cyan</team>
-        <team id="yellow" color="yellow" max="18">Yellow</team>
+        <team id="cyan-team" color="dark aqua" max="18">Cyan</team>
+        <team id="yellow-team" color="yellow" max="18">Yellow</team>
     </unless>
     <if variant="halloween">
-        <team id="cyan" color="gold" max="18">Trick</team>
-        <team id="yellow" color="dark purple" max="18">Treat</team>
+        <team id="cyan-team" color="gold" max="18">Trick</team>
+        <team id="yellow-team" color="dark purple" max="18">Treat</team>
     </if>
 </teams>
 <kits>
@@ -80,20 +80,18 @@
             <point>-1062.5,14,-2103.5</point>
         </region>
     </default>
-    <spawn team="cyan" kit="cyan-kit">
+    <spawn team="cyan-team" kit="cyan-kit">
         <region>
             <cuboid min="-1106,1,-2224" max="-1096,1,-2228"/>
         </region>
     </spawn>
-    <spawn team="yellow" kit="yellow-kit" yaw="180">
+    <spawn team="yellow-team" kit="yellow-kit" yaw="180">
         <region>
             <cuboid min="-1058,1,-2108" max="-1068,1,-2104"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <team id="only-yellow">yellow</team>
-    <team id="only-cyan">cyan</team>
     <material id="only-tnt">tnt</material>
 </filters>
 <regions>
@@ -105,8 +103,8 @@
         <cuboid min="-1057,0,-2125" max="-1049,6,-2118"/>
         <cuboid min="-1076,0,-2112" max="-1069,7,-2106"/>
     </union>
-    <apply region="cyan-spawn" enter="only-cyan" message="You may not enter the enemy team's spawn!"/>
-    <apply region="yellow-spawn" enter="only-yellow" message="You may not enter the enemy team's spawn!"/>
+    <apply region="cyan-spawn" enter="cyan-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="yellow-spawn" enter="yellow-team" message="You may not enter the enemy's spawn!"/>
     <apply block="only-tnt"/>
     <!-- Yellow Pads -->
     <apply velocity="@-0.4,1.1,0.0">

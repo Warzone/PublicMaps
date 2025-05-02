@@ -1,8 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<!-- <include id="tutorial"/> -->
+<map proto="1.5.0">
 <name>Shock Wave</name>
-<version>1.0.2</version>
+<version>1.0.4</version>
 <objective>Kill the enemy to gain points for your team. The team with the most points wins!</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -13,66 +11,52 @@
     <contributor uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Support"/> <!-- ItsmiiOlly -->
 </contributors>
 <teams>
-    <team color="blue" max="25" max-overfill="30">Blue</team>
-    <team color="green" max="25" max-overfill="30">Green</team>
+    <team id="blue-team" color="blue" max="25" max-overfill="30">Blue</team>
+    <team id="green-team" color="green" max="25" max-overfill="30">Green</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="2" amount="64">baked potato</item>
-        <item slot="3" damage="16373">potion</item> <!-- Instant Health II -->
-        <item slot="8">gold ingot</item>
-        <item slot="7" amount="24">arrow</item>
-        <potion duration="3" amplifier="4">damage resistance</potion>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="334CB2" enchantment="protection projectile:3">leather chestplate</chestplate>
-        <leggings color="334CB2">leather leggings</leggings>
-        <boots color="334CB2">leather boots</boots>
-    </kit>
-    <kit name="green" parents="spawn">
-        <chestplate color="7FCC19" enchantment="protection projectile:3">leather chestplate</chestplate>
-        <leggings color="7FCC19">leather leggings</leggings>
-        <boots color="7FCC19">leather boots</boots>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" amount="64" material="baked potato"/>
+        <item slot="3" damage="16373" material="potion"/> <!-- Instant Health II -->
+        <item slot="8" material="gold ingot"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <chestplate team-color="true" enchantment="protection projectile:3" material="leather chestplate"/>
+        <leggings team-color="true" material="leather leggings"/>
+        <boots team-color="true" material="leather boots"/>
+        <effect duration="3" amplifier="4">damage resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue" kit="blue" yaw="135">
-        <cylinder base="39,1,39" radius="3" height="0"/>
+    <spawn team="blue-team" kit="spawn-kit" yaw="135">
+        <region>
+            <cylinder base="39.5,1,39.5" radius="3" height="0"/>
+        </region>
     </spawn>
-    <spawn team="green" kit="green" yaw="-45">
-        <cylinder base="-39,1,-39" radius="3" height="0"/>
+    <spawn team="green-team" kit="spawn-kit" yaw="-45">
+        <region>
+            <cylinder base="-38.5,1,-38.5" radius="3" height="0"/>
+        </region>
     </spawn>
     <default yaw="180">
-        <cuboid min="1,9,-60" max="-1,9,-60"/>
+        <region>
+            <cuboid min="1,9,-60" max="0,9,-59"/>
+        </region>
     </default>
 </spawns>
 <regions>
-    <apply block="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply enter="only-green" message="Don't enter the enemy base!">
-        <cuboid name="green-spawn" min="-30,0,-30" max="-46,oo,-46"/>
-    </apply>
-    <apply enter="only-blue" message="Don't enter the enemy base!">
-        <cuboid name="blue-spawn" min="31,0,31" max="47,oo,47"/>
-    </apply>
+    <cuboid id="green-spawn" min="-30,0,-30" max="-45,oo,-45"/>
+    <cuboid id="blue-spawn" min="31,0,31" max="48,oo,48"/>
+    <apply region="green-spawn" enter="green-team" message="You may not enter the enemy's base!"/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's base!"/>
+    <apply block="never"/>
 </regions>
-<filters>
-    <filter name="only-green">
-        <team>green</team>
-    </filter>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-</filters>
-<killreward>
-    <item amount="1">gold ingot</item>
-    <item amount="4">arrow</item>
-    <item damage="16373">potion</item>
-</killreward>
-<timelock>on</timelock>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
 <itemremove>
     <item>baked potato</item>
     <item>gold sword</item>
@@ -91,37 +75,12 @@
     <tool>stone sword</tool>
     <tool>bow</tool>
 </toolrepair>
-<score>
-    <time>10m</time>
-</score>
-<tutorial>
-    <stage title="Team Death Match (TDM)">
-        <message>
-            <line>`rThis map is a `4Team Death Match`r `l(TDM)`r map.</line>
-            <line>`rThe objective is to get as many `bpoints for your team`r by `4killing foes`r.</line>
-        </message>
-        <teleport>
-            <point yaw="45" pitch="15">17,15,-16</point>
-        </teleport>
-    </stage>
-    <stage title="Gold Ingot Spawners">
-        <message>
-            <line>This is the one and only `agold ingot spawner`r.</line>
-            <line>Use the `6gold`r for armour.</line>
-            <line>Collect gold from killing enemies.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="50">0,19,-4</point>
-        </teleport>
-    </stage>
-    <stage title="Arrow spawners">
-        <message>
-            <line>There are `b4 arrow spawners`r in the map.</line>
-            <line>These spawn `a4 arrows`r every 8 seconds.</line>
-        </message>
-        <teleport>
-            <point yaw="45" pitch="25">25,8,-25</point>
-        </teleport>
-    </stage>
-</tutorial>
+<kill-rewards>
+    <kill-reward>
+        <item material="gold ingot"/>
+        <item amount="4" material="arrow"/>
+        <item damage="16373" material="potion"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
 </map>

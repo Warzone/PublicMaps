@@ -1,14 +1,14 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Pharaoh's Catacombs</name>
-<version>1.4.8</version>
 <gamemode>tdm</gamemode>
+<version>1.4.9</version>
 <objective>Get the most amount of kills for your team while buying new gear!</objective>
 <authors>
     <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="14">Blue</team>
-    <team id="red" color="dark red" max="14">Red</team>
+    <team id="blue-team" color="blue" max="14">Blue</team>
+    <team id="red-team" color="dark red" max="14">Red</team>
 </teams>
 <kits>
     <kit id="obs">
@@ -30,25 +30,23 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue" kit="spawn-kit" yaw="180">
-        <regions>
+    <spawn team="blue-team" kit="spawn-kit" yaw="180">
+        <region>
             <cylinder base="0,85,6" radius="2" height="0"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
-        <regions>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <cylinder base="0,85,-6" radius="2" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <default kit="obs">
-        <regions>
+        <region>
             <cylinder base="1,60,1" radius="2" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
-    <team id="blue-only">blue</team>
-    <team id="red-only">red</team>
     <material id="only-tnt">tnt</material>
 </filters>
 <regions>
@@ -58,22 +56,22 @@
             <cuboid min="-1,86,11" max="3,90,13"/>
         </region>
     </apply>
-    <apply kit="regen" enter="red-only">
+    <apply kit="regen" enter="red-team">
         <region>
             <cuboid min="10,64,-21" max="13,68,-17"/>
         </region>
     </apply>
-    <apply kit="regen" enter="blue-only">
+    <apply kit="regen" enter="blue-team">
         <region>
             <cuboid min="8,64,24" max="12,68,27"/>
         </region>
     </apply>
-    <apply enter="blue-only" message="You may not enter Blue's spawn!">
+    <apply enter="blue-team" message="You may not enter Blue's spawn!">
         <region>
             <cuboid min="-13,63,23" max="20,69,33"/>
         </region>
     </apply>
-    <apply enter="red-only" message="You may not enter Red's spawn!">
+    <apply enter="red-team" message="You may not enter Red's spawn!">
         <region>
             <union>
                 <cuboid min="8,63,-27" max="20,69,-9"/>

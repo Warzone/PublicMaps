@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Babylon</name>
-<version>1.2.6</version>
+<version>1.2.7</version>
 <objective>Get the most kills in 10 minutes!</objective>
 <gamemode>tdm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="75d87bcf-3921-4871-9330-e83736580a95"/> <!-- Rixiot -->
     <author uuid="5cbdeae7-824e-494e-8667-91165718c30b"/> <!-- xSugoix -->
@@ -13,10 +14,10 @@
     <author uuid="6261860b-b738-426d-9425-975bd3045383"/> <!-- Aaron215 -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="green" color="green" max="16">Green</team>
-    <team id="red" color="dark red" max="16">Red</team>
-    <team id="yellow" color="yellow" max="16">Yellow</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="green-team" color="green" max="16">Green</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
+    <team id="yellow-team" color="yellow" max="16">Yellow</team>
 </teams>
 <kits>
     <!-- This kit is given on spawn, and if someone somehow flys/enderpearls back to spawn -->
@@ -47,12 +48,26 @@
         <effect duration="6">damage resistance</effect>
     </kit>
 </kits>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-green">green</team>
-    <team id="only-red">red</team>
-    <team id="only-yellow">yellow</team>
-</filters>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <region id="blue-spawn"/>
+        </region>
+        <region yaw="180">
+            <region id="green-spawn"/>
+        </region>
+        <region yaw="90">
+            <region id="red-spawn"/>
+        </region>
+        <region>
+            <region id="yellow-spawn"/>
+        </region>
+    </default>
+    <spawn team="blue-team" kit="spawn-kit" yaw="-90" region="blue-spawn"/>
+    <spawn team="green-team" kit="spawn-kit" yaw="180" region="green-spawn"/>
+    <spawn team="red-team" kit="spawn-kit" yaw="90" region="red-spawn"/>
+    <spawn team="yellow-team" kit="spawn-kit" region="yellow-spawn"/>
+</spawns>
 <regions>
     <!-- Team spawns -->
     <union id="spawns">
@@ -78,10 +93,10 @@
         <cuboid min="-2,30,-96" max="3,34,-95"/> <!-- Yellow -->
     </union>
     <!-- Team spawn protections -->
-    <apply enter="only-blue" region="blue-spawn-prot"/>
-    <apply enter="only-green" region="green-spawn-prot"/>
-    <apply enter="only-red" region="red-spawn-prot"/>
-    <apply enter="only-yellow" region="yellow-spawn-prot"/>
+    <apply enter="blue-team" region="blue-spawn-prot"/>
+    <apply enter="green-team" region="green-spawn-prot"/>
+    <apply enter="red-team" region="red-spawn-prot"/>
+    <apply enter="yellow-team" region="yellow-spawn-prot"/>
     <!-- playing field, apply the playing kit -->
     <apply kit="playing-kit" region="playing"/>
     <!-- outside of playing field, apply the spawn kit -->
@@ -89,26 +104,6 @@
     <apply kit="ender-kit" region="refill-pearl"/>
     <apply block="never"/>
 </regions>
-<spawns>
-    <default>
-        <region yaw="-90">
-            <region id="blue-spawn"/>
-        </region>
-        <region yaw="180">
-            <region id="green-spawn"/>
-        </region>
-        <region yaw="90">
-            <region id="red-spawn"/>
-        </region>
-        <region>
-            <region id="yellow-spawn"/>
-        </region>
-    </default>
-    <spawn team="blue" kit="spawn-kit" yaw="-90" region="blue-spawn"/>
-    <spawn team="green" kit="spawn-kit" yaw="180" region="green-spawn"/>
-    <spawn team="red" kit="spawn-kit" yaw="90" region="red-spawn"/>
-    <spawn team="yellow" kit="spawn-kit" region="yellow-spawn"/>
-</spawns>
 <toolrepair>
     <tool>iron axe</tool>
     <tool>bow</tool>
@@ -127,7 +122,6 @@
 <kill-rewards>
     <kill-reward>
         <item amount="16" material="arrow"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <score>

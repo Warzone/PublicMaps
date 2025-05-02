@@ -1,77 +1,69 @@
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Cavum</name>
-<version>1.1.0</version>
+<version>1.1.2</version>
 <objective>Get the most kills in 10 minutes!</objective>
 <gamemode>tdm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
     <author uuid="15dc7f7a-40cd-4389-ad45-f8a33a09a394"/> <!-- moo88888888 -->
 </authors>
 <teams>
-    <team color="blue" max="14">Blue</team>
-    <team color="dark red" max="14">Red</team>
-    <team color="dark purple" max="14">Purple</team>
-    <team color="yellow" max="14">Yellow</team>
+    <team id="blue" color="blue" max="14">Blue</team>
+    <team id="red" color="dark red" max="14">Red</team>
+    <team id="purple" color="dark purple" max="14">Purple</team>
+    <team id="yellow" color="yellow" max="14">Yellow</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="8" amount="16">arrow</item>
-        <item slot="2" amount="32">golden carrot</item>
-        <item slot="3" amount="1">golden apple</item>
-        <potion duration="3" amplifier="1">heal</potion>
-        <potion duration="3" amplifier="5">damage resistance</potion>
-        <boots unbreakable="true" enchantment="protection fall:2">iron boots</boots>
-        <leggings unbreakable="true">gold leggings</leggings>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="334cb2" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="334cb2" unbreakable="true">leather helmet</helmet>
-    </kit>
-    <kit name="red" parents="spawn">
-        <chestplate color="b2324b" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="b2324b" unbreakable="true">leather helmet</helmet>
-    </kit>
-    <kit name="yellow" parents="spawn">
-        <chestplate color="E5E533" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="E5E533" unbreakable="true">leather helmet</helmet>
-    </kit>
-    <kit name="purple" parents="spawn">
-        <chestplate color="7729AB" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <helmet color="7729AB" unbreakable="true">leather helmet</helmet>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <item slot="2" amount="32" material="golden carrot"/>
+        <item slot="3" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" enchantment="protection projectile:2" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="gold leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:2" material="iron boots"/>
+        <effect duration="3">heal</effect>
+        <effect duration="3" amplifier="5">damage resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<timelock>on</timelock>
-<score>
-    <time>10m</time>
-</score>
-<regions>
-    <apply block="deny-all">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-</regions>
 <spawns>
-    <spawn team="red" kit="red" yaw="45">
-        <block>52,42,-45</block>
+    <spawn team="red" kit="spawn-kit" yaw="45">
+        <region>
+            <point>52.5,42,-45.5</point>
+        </region>
     </spawn>
-    <spawn team="blue" kit="blue" yaw="-135">
-        <block>-52,42,45</block>
+    <spawn team="blue" kit="spawn-kit" yaw="-135">
+        <region>
+            <point>-52.5,42,45.5</point>
+        </region>
     </spawn>
-    <spawn team="yellow" kit="yellow" yaw="-45">
-        <block>-45,42,-52</block>
+    <spawn team="yellow" kit="spawn-kit" yaw="-45">
+        <region>
+            <point>-45.5,42,-52.5</point>
+        </region>
     </spawn>
-    <spawn team="purple" kit="purple" yaw="135">
-        <block>45,42,52</block>
+    <spawn team="purple" kit="spawn-kit" yaw="135">
+        <region>
+            <point>45.5,42,52.5</point>
+        </region>
     </spawn>
-    <default yaw="0">
-        <block>0,86,0</block>
+    <default>
+        <region>
+            <point>0,85,0</point>
+        </region>
     </default>
 </spawns>
-<killreward>
-    <item amount="1">golden apple</item>
-    <item amount="1">iron ingot</item>
-</killreward>
+<regions>
+    <apply block="never"/>
+</regions>
+<time>10m</time>
+<score>
+    <kills>1</kills>
+</score>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
@@ -86,5 +78,13 @@
     <item>iron helmet</item>
     <item>gold leggings</item>
     <item>iron leggings</item>
+    <item>watch</item>
+    <item>item frame</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="iron ingot"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
 </map>

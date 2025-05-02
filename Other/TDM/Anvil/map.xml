@@ -1,10 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Anvil</name>
-<version>1.2.1</version>
+<version>1.2.3</version>
 <created>2020-08-09</created>
 <objective>Welcome to Anvil Facilities! Your goal is to be the team with the most points after 10 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>scorebox</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="1aad55f7-2dea-4f22-85ca-ad9de3a78609" contribution="Map author and creator"/> <!-- Technodono -->
 </authors>
@@ -16,8 +17,8 @@
     <rule>Fall damage is disabled!</rule>
 </rules>
 <broadcasts>
-    <tip after="30s" every="4m">`e⚠  `7Anvil Facillites contains an armour and golden apple spawner in the middle of the map. Use this to your advantage!</tip>
-    <tip after="2m" every="2m">`e⚠  `7Anvil Facillites provides its workers with only the best transportation technology... Use the `nJump Pads`r `7to reach higher floors!</tip>
+    <tip after="30s" every="4m">`e⚠  `7Anvil Facilities contains an armour and golden apple spawner in the middle of the map. Use this to your advantage!</tip>
+    <tip after="2m" every="2m">`e⚠  `7Anvil Facilities provides its workers with only the best transportation technology... Use the `nJump Pads`r `7to reach higher floors!</tip>
     <tip after="1m" every="2m">`e⚠  `7There are two `nscoreboxes`r `7next to each teams spawn... Make sure you defend them from incoming players!</tip>
     <tip after="0s" every="4m">`e⚠  `7Need a nice vantage point? There are `nLaunch Pads`r `7above each teams spawn... Use them to get onto the iron bucket!</tip>
 </broadcasts>
@@ -43,7 +44,7 @@
     </kit>
     <kit id="force-kill" force="true">
         <health>1</health>
-        <effect duration="oo" amplifier="1">wither</effect>
+        <effect>wither</effect>
     </kit>
 </kits>
 <spawns>
@@ -123,29 +124,29 @@
         <cylinder id="spawner-activate" base="50.5,16,0.5" radius="3" height="6"/>
     </union>
     <!-- Lab Area -->
-    <apply velocity=" 0.0,1.0,-0.4">
+    <apply velocity="0.0,1.0,-0.4">
         <region>
             <cuboid min="-4,16,24" max="-1,18,27"/>
         </region>
     </apply>
-    <apply velocity=" 0.0,1.0,-0.4">
+    <apply velocity="0.0,1.0,-0.4">
         <region>
             <cuboid min="46,16,24" max="49,18,27"/>
         </region>
     </apply>
-    <apply velocity=" 0.0,1.0,-0.4">
+    <apply velocity="0.0,1.0,-0.4">
         <region>
             <cuboid min="96,16,24" max="99,18,27"/>
         </region>
     </apply>
     <!-- Red Bounce -->
-    <apply velocity=" -1.4,0.4,0.0">
+    <apply velocity="-1.4,0.4,0.0">
         <region>
             <cuboid min="113,26,2" max="112,28,-2"/>
         </region>
     </apply>
     <!-- Blue Bounce -->
-    <apply velocity="@ 1.4,0.4,0.0">
+    <apply velocity="@1.4,0.4,0.0">
         <region>
             <cuboid min="-13,26,-2" max="-12,28,2"/>
         </region>
@@ -153,7 +154,7 @@
     <!-- Insta-Kill Kit -->
     <apply kit="force-kill">
         <region>
-            <cuboid min="-oo,-oo,-oo" max="oo,13,oo"/>
+            <below y="13"/>
         </region>
     </apply>
     <!-- Rules Applied -->
@@ -161,7 +162,7 @@
     <apply enter="only-blue" region="blue-spawn-entry" message="You may not enter the opposing team's spawn!"/>
     <apply enter="only-red" region="red-spawn-entry" message="You may not enter the opposing team's spawn!"/>
     <apply enter="only-blue" region="blue-scoreboxes" message="You may not score on your own team's score box!"/>
-    <apply enter="only-red" region="red-scoreboxes" message="You may not score on your own team's score box!"></apply>
+    <apply enter="only-red" region="red-scoreboxes" message="You may not score on your own team's score box!"/>
     <apply block="never" message="You may not edit the map!"/>
     <apply block-physics="never" use="deny-use"/>
 </regions>
@@ -175,7 +176,7 @@
     <portal region="blue-goals" destination="blue-spawn" filter="only-blue"/>
     <portal region="red-goals" destination="red-spawn" filter="only-red"/>
 </portals>
-<!-- Spawners -->
+<!--  Spawners  -->
 <spawners>
     <spawner id="centre-gapple" spawn-region="spawner-drop" player-region="spawner-activate" max-entities="2" min-delay="10s" max-delay="15s">
         <item material="golden apple"/>
@@ -206,7 +207,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
         <item amount="3" projectile="arrow" name="`rCrossbow" lore="`r`7Right-click to fire!" material="firework charge"/>
     </kill-reward>

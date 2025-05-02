@@ -1,16 +1,17 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Arabian Nightmare</name>
 <version>2.1.1</version>
 <objective>Be the team with the most kills after 8 minutes.</objective>
 <gamemode>tdm</gamemode>
+<include id="gapple-kill-reward"/>
 <time result="score">8m</time>
 <authors>
     <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/> <!-- Obelistics -->
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- kroest -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="red" max="16">Red</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="red" max="16">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -36,33 +37,29 @@
             <point>0.5,31,0.5</point>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="180">
             <point>0.5,5,48.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
-        <region yaw="0">
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
             <point>0.5,5,-48.5</point>
         </region>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-</filters>
 <regions>
-    <apply block="never" use="never"/>
-    <apply enter="only-blue" message="You may not enter the enemy spawn!">
+    <apply enter="blue-team" message="You may not enter the enemy's spawn!">
         <region>
             <cylinder base="-784.5,27,-833.5" radius="3" height="5"/>
         </region>
     </apply>
-    <apply enter="only-red" message="You may not enter the enemy spawn!">
+    <apply enter="red-team" message="You may not enter the enemy's spawn!">
         <region>
             <cylinder base="-784.5,27,-957.5" radius="3" height="5"/>
         </region>
     </apply>
+    <apply block="never" use="never"/>
 </regions>
 <score>
     <kills>1</kills>
@@ -82,10 +79,11 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item amount="6" material="arrow"/>
-    <item name="Fresh 'n Healthy Fruit" material="golden apple"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawn auto="true"/>
 <timelock>off</timelock>
 <hunger>

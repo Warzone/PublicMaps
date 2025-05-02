@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Catacomb</name>
-<version>1.1.1</version>
 <gamemode>tdm</gamemode>
+<version>1.1.2</version>
 <objective>Be the team with the most points after 8 minutes!</objective>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall map design and XML"/> <!--  Mikeg542  -->
 </authors>
@@ -19,31 +20,17 @@
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" material="golden apple"/>
         <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings">
             <enchantment level="3">projectile_protection</enchantment>
         </leggings>
         <boots unbreakable="true" material="iron boots">
             <enchantment level="2">feather_falling</enchantment>
         </boots>
-        <game-mode>adventure</game-mode>
         <effect duration="4" amplifier="3">heal</effect>
         <effect duration="4" amplifier="3">damage resistance</effect>
-    </kit>
-    <kit id="green-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="00cd00" material="leather helmet"/>
-        <chestplate unbreakable="true" color="00cd00" material="leather chestplate"/>
-    </kit>
-    <kit id="orange-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="d87f33" material="leather helmet"/>
-        <chestplate unbreakable="true" color="d87f33" material="leather chestplate"/>
-    </kit>
-    <kit id="purple-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="7f3fb2" material="leather helmet"/>
-        <chestplate unbreakable="true" color="7f3fb2" material="leather chestplate"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <helmet unbreakable="true" color="cd0000" material="leather helmet"/>
-        <chestplate unbreakable="true" color="cd0000" material="leather chestplate"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -52,15 +39,15 @@
             <cylinder base="0,16,0" radius="1" height="1"/>
         </region>
     </default>
-    <spawn team="green" kit="green-kit">
+    <spawn team="green" kit="spawn-kit">
         <region yaw="90">
             <point>-11,11,19</point>
         </region>
-        <region yaw="0">
+        <region>
             <point>-19,11,11</point>
         </region>
     </spawn>
-    <spawn team="orange" kit="orange-kit">
+    <spawn team="orange" kit="spawn-kit">
         <region yaw="180">
             <point>19,11,-11</point>
         </region>
@@ -68,7 +55,7 @@
             <point>11,11,-19</point>
         </region>
     </spawn>
-    <spawn team="purple" kit="purple-kit">
+    <spawn team="purple" kit="spawn-kit">
         <region yaw="90">
             <point>-11,11,-19</point>
         </region>
@@ -76,11 +63,11 @@
             <point>-19,11,-11</point>
         </region>
     </spawn>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red" kit="spawn-kit">
         <region yaw="-90">
             <point>11,11,19</point>
         </region>
-        <region yaw="0">
+        <region>
             <point>19,11,11</point>
         </region>
     </spawn>
@@ -107,41 +94,13 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<killreward>
-    <item material="golden apple"/>
-    <item amount="12" material="arrow"/>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="12" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawn auto="true"/>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<!-- include src="tutorial.xml"/ -->
-<tutorial>
-    <stage title="Team Death Match">
-        <message>
-            <line>This map is a `a`lTeam Death Match `r(TDM) map</line>
-            <line>The objective is to get the most points within 8 minutes.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="0">-14,7,0</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>`rThis is where you spawn when the match starts or you die.</line>
-        </message>
-        <teleport>
-            <point yaw="45" pitch="0">-20,11,20</point>
-        </teleport>
-    </stage>
-    <stage title="Spawners">
-        <message>
-            <line>The spawner in the centre of the map gives `bGolden Apples `r.</line>
-            <line>There are also  arrow spawners in the four rooms on the sides in case you run out.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="0">-14,7,0</point>
-        </teleport>
-    </stage>
-</tutorial>
 </map>

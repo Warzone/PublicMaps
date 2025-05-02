@@ -1,15 +1,16 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Cursed Library</name>
 <version>1.1.2</version>
-<objective>Get the most points in 4 minutes!</objective>
 <gamemode>tdm</gamemode>
-<time result="score">4m</time>
+<objective>Get the most points in 5 minutes!</objective>
+<include id="gapple-kill-reward"/>
+<time result="score">5m</time>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--  mitchiii  -->
 </authors>
 <teams>
-    <team id="blue" color="blue" max="5">Blue</team>
-    <team id="red" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="6">Blue</team>
+    <team id="red-team" color="dark red" max="6">Red</team>
 </teams>
 <kits>
     <kit id="default-kit">
@@ -38,26 +39,22 @@
             <cuboid min="-55,31,-128" max="-50,31.1,-130"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="90">
             <cylinder base="-23,25.5,-115.5" radius="1" height="1"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="-90">
             <cylinder base="-82,25.5,-115.5" radius="1" height="1"/>
         </region>
     </spawn>
 </spawns>
-<filters>
-    <team id="only-blue">blue</team>
-    <team id="only-red">red</team>
-</filters>
 <regions>
     <above id="blue-spawn" x="-33"/>
     <below id="red-spawn" x="-71"/>
-    <apply region="blue-spawn" enter="only-blue" message="You cannot enter the enemy team's spawn!"/>
-    <apply region="red-spawn" enter="only-red" message="You cannot enter the enemy team's spawn!"/>
+    <apply region="blue-spawn" enter="blue-team" message="You cannot enter the enemy's spawn!"/>
+    <apply region="red-spawn" enter="red-team" message="You cannot enter the enemy's spawn!"/>
     <apply block="never"/>
 </regions>
 <score>
@@ -79,12 +76,13 @@
     <item>ink sack</item>
     <item>exp bottle</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-    <item material="ink sack" damage="4"/>
-    <item amount="3" material="exp bottle"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+        <item material="ink sack" damage="4"/>
+        <item amount="3" material="exp bottle"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>

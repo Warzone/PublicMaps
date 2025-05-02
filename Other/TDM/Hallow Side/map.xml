@@ -1,111 +1,103 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
-<name>Hallow Side TDM</name>
-<version>1.0.2</version>
+<map proto="1.5.0">
+<name>Hallow Side</name>
+<version>1.0.4</version>
+<phase>staging</phase>
 <objective>Defeat all of the opposing teams within 8 minutes!</objective>
-<gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
-<gamemode>arcade</gamemode>
+<gamemode>br</gamemode>
 <authors>
     <author uuid="8053ed38-89d9-4096-b265-a0fcce3a1c33" contribution="Main Design, Building"/> <!-- JETUB1 -->
     <author uuid="1e3b1b79-307a-4093-aaeb-21b2fd419336" contribution="XML Writing, Suggestions"/> <!-- BlockDrop74 -->
 </authors>
 <contributors>
-    <contributor contribution="Feedback">Everyone Who Gave Feedback!</contributor>
+    <contributor contribution="Feedback">Everyone who gave feedback!</contributor>
 </contributors>
 <rules>
     <rule>Don't camp in your teams spawn</rule>
     <rule>Fall damage is disabled</rule>
 </rules>
 <teams>
-    <team max="10" color="dark green">Green</team>
-    <team max="10" color="gray">Silver</team>
-    <team max="10" color="dark gray">Gray</team>
-    <team max="10" color="dark red">Red</team>
+    <team id="green" max="10" color="dark green">Green</team>
+    <team id="silver" max="10" color="gray">Silver</team>
+    <team id="gray" max="10" color="dark gray">Gray</team>
+    <team id="red" max="10" color="dark red">Red</team>
 </teams>
-<rage/>
-<blitz>
-    <time>8m</time>
-    <lives>2</lives>
-</blitz>
-<spawns safe="false">
-    <spawn yaw="90" kit="green" team="green">
-        <cylinder base="766, 51, 513" radius="3" height="0"/>
-    </spawn>
-    <spawn yaw="0" kit="gray" team="silver">
-        <cylinder base="688, 51, 435" radius="3" height="0"/>
-    </spawn>
-    <spawn yaw="180" kit="dark gray" team="gray">
-        <cylinder base="688, 51, 591" radius="3" height="0"/>
-    </spawn>
-    <spawn yaw="-90" kit="red" team="red">
-        <cylinder base="610, 51, 513" radius="3" height="0"/>
-    </spawn>
-    <default yaw="135" kit="default">
-        <cylinder base="742, 61, 567" radius="3" height="0"/>
-    </default>
-</spawns>
 <kits>
-    <kit name="default">
-        <potion duration="oo" amplifier="2">speed</potion>
-        <potion duration="oo" amplifier="2">jump</potion>
+    <kit id="default">
+        <effect amplifier="2">speed</effect>
+        <effect amplifier="2">jump</effect>
     </kit>
-    <kit name="spawn">
-        <item name="`7Quartz `rSword" slot="0" enchantment="damage all:10">iron sword</item>
-        <item name="`cFire-String `rBow" slot="1" enchantment="arrow damage:10;arrow fire:10">bow</item>
-        <item slot="2" amount="1">393</item>
-        <item slot="28">arrow</item>
-        <potion duration="oo" amplifier="2">speed</potion>
-        <potion duration="oo" amplifier="2">jump</potion>
-    </kit>
-    <kit name="green" parents="spawn">
-        <helmet color="667F33" locked="true">leather helmet</helmet>
-        <leggings color="667F33" locked="true">leather leggings</leggings>
-        <boots color="667F33" locked="true">leather boots</boots>
-    </kit>
-    <kit name="gray" parents="spawn">
-        <helmet color="4C4C4C" locked="true">leather helmet</helmet>
-        <leggings color="4C4C4C" locked="true">leather leggings</leggings>
-        <boots color="4C4C4C" locked="true">leather boots</boots>
-    </kit>
-    <kit name="dark gray" parents="spawn">
-        <helmet color="191919" locked="true">leather helmet</helmet>
-        <leggings color="191919" locked="true">leather leggings</leggings>
-        <boots color="191919" locked="true">leather boots</boots>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="993333" locked="true">leather helmet</helmet>
-        <leggings color="993333" locked="true">leather leggings</leggings>
-        <boots color="993333" locked="true">leather boots</boots>
+    <kit id="spawn-kit" parents="default">
+        <item slot="0" name="`7Quartz `rSword" enchantment="damage all:10" material="iron sword"/>
+        <item slot="1" name="`cFire-String `rBow" enchantment="arrow damage:10;arrow fire:10" material="bow"/>
+        <item slot="2" material="baked potato"/>
+        <item slot="28" material="arrow"/>
+        <helmet locked="true" team-color="true" material="leather helmet"/>
+        <leggings locked="true" team-color="true" material="leather leggings"/>
+        <boots locked="true" team-color="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <spawn yaw="90" kit="spawn-kit" team="green">
+        <region>
+            <cylinder base="766, 51, 513" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <spawn kit="spawn-kit" team="silver">
+        <region>
+            <cylinder base="688, 51, 435" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <spawn yaw="180" kit="spawn-kit" team="gray">
+        <region>
+            <cylinder base="688, 51, 591" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <spawn yaw="-90" kit="spawn-kit" team="red">
+        <region>
+            <cylinder base="610, 51, 513" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="135" kit="default">
+        <region>
+            <cylinder base="742, 61, 567" radius="3" height="0"/>
+        </region>
+    </default>
+</spawns>
 <regions>
-    <rectangle name="playable" max="oo,oo" min="-oo,-oo"/>
-    <apply block-break="deny-all">
-        <rectangle max="oo,oo" min="-oo,-oo"/>
+    <apply velocity="@0,1.8,0">
+        <region>
+            <cylinder base="688.5,36,513.5" radius="1.5" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0,1.8,0">
-        <cylinder base="688.5,36,513.5" radius="1.5" height="1"/>
+        <region>
+            <cylinder base="705.5,34,530.5" radius="1.5" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0,1.8,0">
-        <cylinder base="705.5,34,530.5" radius="1.5" height="1"/>
+        <region>
+            <cylinder base="705.5,34,496.5" radius="1.5" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0,1.8,0">
-        <cylinder base="705.5,34,496.5" radius="1.5" height="1"/>
+        <region>
+            <cylinder base="671.5,34,496.5" radius="1.5" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0,1.8,0">
-        <cylinder base="671.5,34,496.5" radius="1.5" height="1"/>
+        <region>
+            <cylinder base="671.5,34,530.5" radius="1.5" height="1"/>
+        </region>
     </apply>
-    <apply velocity="@0,1.8,0">
-        <cylinder base="671.5,34,530.5" radius="1.5" height="1"/>
-    </apply>
+    <apply block="never"/>
 </regions>
-<killreward>
-    <item>arrow</item>
-</killreward>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
+<time>8m</time>
+<blitz>
+    <lives>2</lives>
+</blitz>
+<rage/>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
@@ -119,50 +111,20 @@
     <item>bow</item>
     <item>baked potato</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>on</depletion>
 </hunger>
-<!-- <tutorial>
-    <stage title="One in a Chamber">
-        <message>
-            <line>This is a "`6One in a Chamber" `ror "`6Rage" `rmap.</line>
-            <line>Players only have `4ONE `rlife in this map</line>
-        </message>
-        <teleport>
-            <point yaw="135" pitch="90">742, 70, 567</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn Kit">
-        <message>
-            <line>Players spawn with a `2Sharpness `r10 Sword, a `5Power `r10 Bow, as well as</line>
-            <line>1 arrow, and baked potato.</line>
-            <line>You also spawn with your teams corresponding armor</line>
-        </message>
-        <teleport>
-            <point yaw="-45" pitch="45">745, 61, 570</point>
-        </teleport>
-    </stage>
-    <stage title="Team Spawnpoints">
-        <message>
-            <line>This is an example of where your team will spawn.</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="90">766, 51, 513</point>
-        </teleport>
-    </stage>
-    <stage title="Jumpad">
-        <message>
-            <line>This is a `1jumpad. `rIt can be used to get back to</line>
-            <line>the top layer of this map.</line>
-        </message>
-        <teleport>
-            <point yaw="90" pitch="50">692, 36, 513</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 <mobs>
     <filter>
         <spawn>spawner</spawn>
     </filter>
 </mobs>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 </map>

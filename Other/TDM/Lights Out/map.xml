@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Lights Out</name>
-<version>1.1.6</version>
+<version>1.1.7</version>
 <objective>Be the team with the most points after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e8d1ad63-bd9e-4d0e-9a6c-27f2b047d924" contribution="Overall map design and XML"/> <!-- Mikeg542 -->
 </authors>
@@ -32,19 +33,19 @@
 </kits>
 <spawns>
     <spawn team="orange" kit="spawn-kit" yaw="180">
-        <regions>
+        <region>
             <cylinder base="39,16,174" radius="1" height="1"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="purple" kit="spawn-kit">
-        <regions>
+        <region>
             <cylinder base="39,16,-12" radius="1" height="1"/>
-        </regions>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-11,71,82" radius="2" height="1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
@@ -76,7 +77,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="exp bottle"/>
     </kill-reward>
 </kill-rewards>
@@ -84,32 +84,4 @@
     <depletion>off</depletion>
 </hunger>
 <timelock>on</timelock>
-<!-- <tutorial>
-    <stage title="Team Death Match">
-        <message>
-            <line>This map is a `a`lTeam Death Match `r(TDM) map</line>
-            <line>The objective is to get the most points within 12 minutes.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="45">1,76,83</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>This is where you spawn when the match starts or you die. Go through the holes to get to the fight.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="0">40,16,-13</point>
-        </teleport>
-    </stage>
-    <stage title="Spawners">
-        <message>
-            <line>There is a spawner in the center of the map and down in the sewers. Use them to get the edge in a fight.</line>
-            <line>There are also enchanting tables in the two towers on either side.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="0">40,20,64</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>

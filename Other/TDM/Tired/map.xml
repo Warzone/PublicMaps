@@ -1,10 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Tired</name>
-<version>1.2.2</version>
+<version>1.2.3</version>
+<objective>Be the team with the most kills after about 6 minutes.</objective>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
 <gamemode>arcade</gamemode>
-<objective>Be the team with the most kills after about 6 minutes.</objective>
 <authors>
     <author uuid="03236737-c1f8-429c-83df-24b537365f5a" contribution="Block Design/Layout/Map Design"/> <!-- Guicotsch -->
     <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2" contribution="XML/Map Design"/> <!-- DoomRobotBoy -->
@@ -12,39 +12,20 @@
 <contributors>
     <contributor uuid="c2848337-b526-4db0-9130-fabd0a5c7cfb" contribution="MapDev Server Host"/> <!-- jollee999 -->
 </contributors>
-<rules> 
-    <rule>Fall and suffocation damage are disabled</rule> 
+<rules>
+    <rule>Fall and suffocation damage are disabled</rule>
 </rules>
 <teams>
-    <team id="red" color="red" max="16" max-overfill="18">Red</team> 
-    <team id="blue" color="blue" max="16" max-overfill="18">Blue</team> 
+    <team id="red" color="red" max="16" max-overfill="18">Red</team>
+    <team id="blue" color="blue" max="16" max-overfill="18">Blue</team>
 </teams>
-<spawns>
-    <default kit="all" yaw="90">
-        <regions>
-            <cylinder base="9.5,20,-55.5" radius="1" height="0"/>
-        </regions>
-    </default>
-    <spawn team="red" kit="spawn-kit">
-        <regions>
-            <cuboid min="-11,35,-123" max="-12,35,-125"/>
-            <cuboid min="24,35,-125" max="25,35,-123"/>
-        </regions>
-    </spawn> 
-    <spawn team="blue" kit="spawn-kit" yaw="-180">
-        <regions>
-            <cuboid min="-7,35,13" max="-8,35,11"/>
-            <cuboid min="29,35,13" max="28,35,11"/>
-        </regions>
-    </spawn>
-</spawns>
 <kits>
-    <kit id="all"> 
+    <kit id="all">
         <effect>night vision</effect>
         <effect>speed</effect>
         <effect amplifier="3">jump</effect>
-    </kit> 
-    <kit id="spawn-kit" parents="all"> 
+    </kit>
+    <kit id="spawn-kit" parents="all">
         <item slot="0" unbreakable="true" enchantment="damage all:10" material="iron sword"/>
         <item slot="1" unbreakable="true" enchantment="arrow damage:10" material="bow"/>
         <item slot="2" amount="2" material="arrow"/>
@@ -55,13 +36,32 @@
         <effect duration="3" amplifier="100">heal</effect>
     </kit>
 </kits>
+<spawns>
+    <default kit="all" yaw="90">
+        <region>
+            <cylinder base="9.5,20,-55.5" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="red" kit="spawn-kit">
+        <regions>
+            <cuboid min="-11,35,-123" max="-12,35,-125"/>
+            <cuboid min="24,35,-125" max="25,35,-123"/>
+        </regions>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="-180">
+        <regions>
+            <cuboid min="-7,35,13" max="-8,35,11"/>
+            <cuboid min="29,35,13" max="28,35,11"/>
+        </regions>
+    </spawn>
+</spawns>
 <filters>
     <material id="only-vine">vine</material>
 </filters>
 <regions>
     <apply block="only-vine" message="You can only interact with vines!"/>
 </regions>
-<time>6m40s</time> 
+<time>6m40s</time>
 <score>
     <kills>1</kills>
 </score>

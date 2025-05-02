@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Quatuor</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Be the team with the most kills by in 5 minutes!</objective>
 <gamemode>tdm</gamemode>
 <gamemode>rage</gamemode>
@@ -15,10 +15,10 @@
     <rule>Fall damage is disabled!</rule>
 </rules>
 <teams>
-    <team id="orange" color="gold" max="8" max-overfill="10">Orange</team>
-    <team id="yellow" color="yellow" max="8" max-overfill="10">Yellow</team>
-    <team id="cyan" color="dark aqua" max="8" max-overfill="10">Cyan</team>
-    <team id="purple" color="dark purple" max="8" max-overfill="10">Purple</team>
+    <team id="orange-team" color="gold" max="8" max-overfill="10">Orange</team>
+    <team id="yellow-team" color="yellow" max="8" max-overfill="10">Yellow</team>
+    <team id="cyan-team" color="dark aqua" max="8" max-overfill="10">Cyan</team>
+    <team id="purple-team" color="dark purple" max="8" max-overfill="10">Purple</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -39,55 +39,49 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="orange" kit="spawn-kit" yaw="90">
-        <regions>
+    <spawn team="orange-team" kit="spawn-kit" yaw="90">
+        <region>
             <cuboid min="56,83,-73" max="52,83,-77"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="yellow" kit="spawn-kit">
-        <regions>
+    <spawn team="yellow-team" kit="spawn-kit">
+        <region>
             <cuboid min="11,83,-122" max="7,83,-118"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="cyan" kit="spawn-kit" yaw="-90">
-        <regions>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="-90">
+        <region>
             <cuboid min="-38,83,-77" max="-34,83,-73"/>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="purple" kit="spawn-kit" yaw="180">
-        <regions>
+    <spawn team="purple-team" kit="spawn-kit" yaw="180">
+        <region>
             <cuboid min="7,83,-28" max="11,83,-32"/>
-        </regions>
+        </region>
     </spawn>
     <default kit="observers">
-        <regions>
+        <region>
             <cuboid min="11,148,-77" max="7,148,-73"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-orange">orange</team>
-    <team id="only-yellow">yellow</team>
-    <team id="only-cyan">cyan</team>
-    <team id="only-purple">purple</team>
-</filters>
 <regions>
-    <apply enter="only-orange">
+    <apply enter="orange-team">
         <region>
             <cuboid min="45,0,-80" max="59,256,-70"/>
         </region>
     </apply>
-    <apply enter="only-yellow">
+    <apply enter="yellow-team">
         <region>
             <cuboid min="4,0,-111" max="14,256,-125"/>
         </region>
     </apply>
-    <apply enter="only-cyan">
+    <apply enter="cyan-team">
         <region>
             <cuboid min="-27,0,-70" max="-41,256,-80"/>
         </region>
     </apply>
-    <apply enter="only-purple">
+    <apply enter="purple-team">
         <region>
             <cuboid min="14,0,-39" max="4,256,-25"/>
         </region>

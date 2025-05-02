@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Dwyer Hill</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Get the most kills after 5 minutes!</objective>
 <gamemode>rage</gamemode>
 <gamemode>tdm</gamemode>
@@ -8,13 +8,16 @@
 <authors>
     <author uuid="bada87c3-3383-42cb-973d-99032a0724b9"/> <!-- Holdfast33 -->
 </authors>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
 <teams>
     <team id="green-team" color="green" max="10" max-overfill="12">Green</team>
     <team id="yellow-team" color="yellow" max="10" max-overfill="12">Yellow</team>
 </teams>
 <kits>
     <kit id="nv-kit">
-        <effect duration="oo" amplifier="1">night vision</effect>
+        <effect>night vision</effect>
     </kit>
     <kit id="spawn-kit" parent="nv-kit">
         <clear/>
@@ -30,9 +33,9 @@
         <chestplate material="iron chestplate" locked="true" unbreakable="true"/>
         <leggings material="leather leggings" team-color="true" locked="true" unbreakable="true"/>
         <boots material="leather boots" team-color="true" locked="true" unbreakable="true"/>
-        <effect duration="oo" amplifier="2">speed</effect>
-        <effect duration="oo" amplifier="-4">health boost</effect>
-        <effect duration="oo" amplifier="100">damage resistance</effect>
+        <effect amplifier="2">speed</effect>
+        <effect amplifier="-4">health boost</effect>
+        <effect amplifier="100">damage resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
     <kit force="true" id="reset-resistance-kit">
@@ -43,9 +46,8 @@
 <spawns>
     <spawn team="green-team" kit="spawn-kit" region="green-spawn-point" yaw="90"/>
     <spawn team="yellow-team" kit="spawn-kit" region="yellow-spawn-point" yaw="-90"/>
-    <default kit="nv-kit" region="obs-spawn-point" yaw="0"/>
+    <default kit="nv-kit" region="obs-spawn-point"/>
 </spawns>
-<autorespawn/>
 <score>
     <kills>1</kills>
     <deaths>0</deaths>
@@ -97,16 +99,14 @@
     <power>2</power>
     <blockdamage>false</blockdamage>
 </tnt>
-<rules>
-    <rule>Fall damage is disabled!</rule>
-</rules>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <kill-rewards>
     <kill-reward>
         <item material="arrow"/>
         <item material="tnt" name="`4Landmine `6| `bFuse: 1s `6| `bPower: 2" lore="`9Use this strategically! It could be helpful..."/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn auto="true"/>
 </map>

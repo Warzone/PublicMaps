@@ -1,8 +1,14 @@
-<map proto="1.4.2">
+<map> <!-- minimum proto 1.4.0 -->
 <!-- Base conquest kit include file -->
 <!-- Created by mameBT -->
-<!-- Version 2023.09.11-2 -->
+<!-- Version 2024.12.09-2 -->
 <include id="gapple-kill-reward"/>
+<constants fallback="true">
+    <constant id="override-itemkeep">false</constant>
+    <constant id="projectile-protection-level">3</constant>
+    <constant id="feather-falling-level">1</constant>
+    <constant id="enable-feather-falling">false</constant>
+</constants>
 <kits>
     <kit id="base-kit">
         <clear/>
@@ -13,10 +19,14 @@
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="3">projectile_protection</enchantment>
+            <enchantment level="${projectile-protection-level}">projectile_protection</enchantment>
         </leggings>
-        <boots unbreakable="true" material="iron boots"/>
-        <effect duration="${damage-resistance}" amplifier="255">resistance</effect>
+        <boots unbreakable="true" material="iron boots">
+            <if constant="enable-feather-falling" constant-value="true">
+                <enchantment level="${feather-falling-level}">feather_falling</enchantment>
+            </if>
+        </boots>
+        <effect duration="${damage-resistance}" amplifier="5">resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
@@ -31,12 +41,14 @@
     <item>iron boots</item>
     <item>banner</item>
 </itemremove>
-<itemkeep>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
+<unless constant="override-itemkeep" constant-value="true">
+    <itemkeep>
+        <item>stone sword</item>
+        <item>bow</item>
+        <item>golden apple</item>
+        <item>arrow</item>
+    </itemkeep>
+</unless>
 <kill-rewards>
     <kill-reward>
         <item amount="6" material="arrow"/>

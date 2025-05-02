@@ -1,10 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Hanger</name>
-<version>1.0.6</version>
+<version>1.0.7</version>
 <objective>Be the first team to reach 100 points!</objective>
 <gamemode>tdm</gamemode>
 <authors>
-    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Main design, building and XML"/> <!-- ItsMiiOlly -->
+    <author uuid="ba4a93aa-4935-4a71-bab2-a58f9a124e7b" contribution="Main design, building, and XML"/> <!-- ItsMiiOlly -->
     <author uuid="06078e7e-6a7b-4d31-8f74-853072b182bb" contribution="Aesthetics and WorldEdit magic"/> <!-- xXFracXx AKA Frac -->
     <author uuid="9bfbc560-244a-4e28-ab70-185f39740ec1" contribution="Aesthetics and Design"/> <!-- TheZaner -->
 </authors>
@@ -26,14 +26,14 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" name="`c`lKnife" damage="-3000" enchantment="damage all" material="iron sword"/>
-        <item slot="1" name="`c`lGun" damage="-3000" enchantment="arrow infinite" material="bow"/>
+        <item slot="0" name="`c`lKnife" unbreakable="true" enchantment="damage all" material="iron sword"/>
+        <item slot="1" name="`c`lGun" unbreakable="true" enchantment="arrow infinite" material="bow"/>
         <item slot="28" material="arrow"/>
         <item slot="2" name="`c`lHealth Kit" damage="8229" material="potion"/>
-        <helmet team-color="true" damage="-3000" material="leather helmet"/>
-        <chestplate damage="-3000" material="iron chestplate"/>
-        <leggings team-color="true" damage="-3000" material="leather leggings"/>
-        <boots team-color="true" damage="-3000" material="leather boots"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="iron chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
         <effect duration="7" amplifier="25">heal</effect>
         <effect duration="7" amplifier="25">damage resistance</effect>
         <effect>speed</effect>
@@ -43,19 +43,19 @@
 </kits>
 <spawns>
     <spawn team="blue" kit="spawn-kit" yaw="90">
-        <regions>
+        <region>
             <cylinder base="-10,1,733" radius="3" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="yellow" kit="spawn-kit" yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-101,1,733" radius="3" height="0"/>
-        </regions>
+        </region>
     </spawn>
     <default yaw="180">
-        <regions>
+        <region>
             <cylinder base="-55,18,733" radius="1" height="0"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
@@ -93,39 +93,4 @@
     <velocityMod>2.0</velocityMod>
 </modifybowprojectile>
 <timelock>on</timelock>
-<!-- <tutorial>
-    <stage title="Team Death Match">
-        <message>
-            <line>`rThis map is a `a`lTeam Death Match `r(TDM) map</line>
-            <line>First team to a total of `4`l100 Kills`r wins.</line>
-        </message>
-        <teleport>
-            <point angle="-59,5,735">-88,19,748</point>
-        </teleport>
-    </stage>
-    <stage title="Team Spawns">
-        <message>
-            <line>`rExits are on both `asides`r and the stairs will lead you to the Sniping Area.</line>
-        </message>
-        <teleport>
-            <point angle="-14,1,737">-6,2,728</point>
-        </teleport>
-    </stage>
-    <stage title="Sniping Area">
-        <message>
-            <line>`rSniping area is used to snipe players on the other side, you can also find your own sniping spots.</line>
-        </message>
-        <teleport>
-            <point angle="-19,8,730">-8,11,737</point>
-        </teleport>
-    </stage>
-    <stage title="The Center">
-        <message>
-        <line>`rThe Center is the main combat area. Tunnels and holes lead to it too.</line>
-        </message>
-        <teleport>
-            <point angle="-53,5,736">-47,15,746</point>
-        </teleport>
-    </stage>
-</tutorial> -->
 </map>

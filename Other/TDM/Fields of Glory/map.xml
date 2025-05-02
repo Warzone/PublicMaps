@@ -1,26 +1,69 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Fields of Glory</name>
 <version>1.0.6</version>
 <gamemode>tdm</gamemode>
 <gamemode>scorebox</gamemode>
-<phase>development</phase>
+<phase>staging</phase>
 <objective>Be the team with the most kills in 10 minutes!</objective>
 <authors>
     <author uuid="5ca79703-1be6-4dca-9073-59d024eb8bb0"/> <!-- koipen -->
 </authors>
-<time result="score">10m</time>
+<broadcasts>
+    <tip after="1s" every="3m">`bChange your class to `a`lHeavy`r`b, `a`lArcher`r `bor `a`lScout`r `bwith `6`l'/class'!</tip>
+</broadcasts>
 <teams>
     <team id="blue" color="blue" max="24">Blue</team>
     <team id="red" color="dark red" max="24">Red</team>
 </teams>
-<score>
-    <kills>1</kills>
-    <box value="3" filter="only-blue" region="blue-scorebox"/>
-    <box value="3" filter="only-red" region="red-scorebox"/>
-</score>
-<broadcasts>
-    <tip after="1s" every="3m">`bChange your class to `a`lHeavy`r`b, `a`lArcher`r `bor `a`lScout`r `bwith `6`l'/class'!</tip>
-</broadcasts>
+<kits>
+    <kit id="spawn-protection">
+        <effect duration="5" amplifier="4">damage resistance</effect>
+    </kit>
+</kits>
+<classes family="bastion_hill" sticky="false">
+    <class name="Heavy" description="Heavily armored but slow class with a good sword!" icon="iron sword">
+        <kit force="true" parents="spawn-protection">
+            <item slot="0" unbreakable="true" material="iron sword"/>
+            <item slot="1" unbreakable="true" material="bow"/>
+            <item slot="2" amount="32" material="cooked beef"/>
+            <item slot="3" name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false" material="potion"/>
+            <item slot="4" name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false" material="potion"/>
+            <item slot="28" amount="32" material="arrow"/>
+            <helmet locked="true" unbreakable="true" material="iron helmet"/>
+            <chestplate locked="true" unbreakable="true" material="iron chestplate"/>
+            <leggings unbreakable="true" material="iron leggings"/>
+            <boots unbreakable="true" material="iron boots"/>
+        </kit>
+    </class>
+    <class name="Archer" default="true" description="An average class with a powerful bow" icon="bow">
+        <kit force="true" parents="spawn-protection">
+            <item slot="0" unbreakable="true" material="stone sword"/>
+            <item slot="1" unbreakable="true" enchantment="arrow damage;arrow infinite" material="bow"/>
+            <item slot="2" amount="32" material="cooked beef"/>
+            <item slot="3" name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false" material="potion"/>
+            <item slot="4" name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false" material="potion"/>
+            <item slot="28" material="arrow"/>
+            <helmet locked="true" material="chainmail helmet"/>
+            <chestplate locked="true" enchantment="protection projectile:4" material="chainmail chestplate"/>
+            <leggings material="chainmail leggings"/>
+            <boots material="chainmail boots"/>
+        </kit>
+    </class>
+    <class name="Scout" description="A fast but frail class with a knockback sword" icon="feather">
+        <kit force="true" parents="spawn-protection">
+            <item slot="0" unbreakable="true" enchantment="knockback" material="wood sword"/>
+            <item slot="1" unbreakable="true" material="bow"/>
+            <item slot="2" amount="32" material="cooked beef"/>
+            <item slot="3" name="`b`lLiquidifed SuperDash mk. 2" damage="16385" potions="invisibility:200:0:false;saturation:2400:0:false;regeneration:600:0:false" material="potion"/>
+            <item slot="28" amount="32" material="arrow"/>
+            <helmet material="leather helmet"/>
+            <chestplate unbreakable="true" attributes="generic.movementSpeed:base:.2" material="leather chestplate"/>
+            <leggings material="leather leggings"/>
+            <boots unbreakable="true" enchantment="protection fall:2" material="leather boots"/>
+            <effect amplifier="2">jump</effect>
+        </kit>
+    </class>
+</classes>
 <spawns>
     <default>
         <region yaw="90">
@@ -28,7 +71,7 @@
         </region>
     </default>
     <spawn team="blue">
-        <region yaw="0" >
+        <region>
             <cylinder id="blue-spawn" base="3.5,24,-76.5" radius="1" height="1"/>
         </region>
     </spawn>
@@ -38,58 +81,42 @@
         </region>
     </spawn>
 </spawns>
-<kits>
-    <kit id="spawn-protection">
-        <effect duration="5" amplifier="4">damage resistance</effect>
-    </kit>
-</kits>
-<classes family="bastion_hill" sticky="false">
-    <class name="Heavy" description="Heavily armored but slow class with a good sword!" icon="iron sword">
-        <kit force="true" parents="spawn-protection">
-            <item slot="0" unbreakable="true">iron sword</item>
-            <item slot="1" unbreakable="true">bow</item>
-            <item slot="2" amount="32">cooked beef</item>
-            <item slot="3" name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false">potion</item>
-            <item slot="4" name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false">potion</item>
-            <item slot="28" amount="32">arrow</item>
-            <helmet locked="true" unbreakable="true">iron helmet</helmet>
-            <chestplate locked="true" unbreakable="true">iron chestplate</chestplate>
-            <leggings unbreakable="true">iron leggings</leggings>
-            <boots damage="-300">iron boots</boots>
-        </kit>
-    </class>
-    <class name="Archer" default="true" description="An average class with a powerful bow" icon="bow">
-        <kit force="true" parents="spawn-protection">
-            <item slot="0" unbreakable="true">stone sword</item>
-            <item slot="1" unbreakable="true" enchantment="arrow damage:1;arrow infinite:1">bow</item>
-            <item slot="2" amount="32">cooked beef</item>
-            <item slot="3" name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false">potion</item>
-            <item slot="4" name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false">potion</item>
-            <item slot="28">arrow</item>
-            <helmet locked="true">chainmail helmet</helmet>
-            <chestplate locked="true" enchantment="protection projectile:4">chainmail chestplate</chestplate>
-            <leggings>chainmail leggings</leggings>
-            <boots>chainmail boots</boots>
-        </kit>
-    </class>
-    <class name="Scout" description="A fast but frail class with a knockback sword" icon="feather">
-        <kit force="true" parents="spawn-protection">
-            <item slot="0" unbreakable="true" enchantment="knockback:1">wood sword</item>
-            <item slot="1" unbreakable="true">bow</item>
-            <item slot="2" amount="32">cooked beef</item>
-            <item slot="3" name="`b`lLiquidifed SuperDash mk. 2" damage="16385" potions="invisibility:200:0:false;saturation:2400:0:false;regeneration:600:0:false">potion</item>
-            <item slot="28" amount="32">arrow</item>
-            <helmet>leather helmet</helmet>
-            <chestplate unbreakable="true">leather chestplate</chestplate>
-            <leggings>leather leggings</leggings>
-            <boots unbreakable="true" enchantment="protection fall:2">leather boots</boots>
-            <potion duration="oo" amplifier="2">jump</potion>
-            <walk-speed>1.2</walk-speed>
-        </kit>
-    </class>
-</classes>
+<filters>
+    <any id="whitelisted-blocks">
+        <material>red rose</material> <!-- All flowers -->
+        <material>thin glass</material> <!-- Glass panes -->
+        <material>long grass</material> <!-- Tall grass -->
+        <material>crops</material> <!-- Wheat block -->
+    </any>
+    <deny id="deny-panes">
+        <material>thin glass</material>
+    </deny>
+    <team id="only-red">red</team>
+    <team id="only-blue">blue</team>
+</filters>
+<portals>
+    <portal region="blue-scorebox" filter="only-blue" destination="blue-spawn"/>
+    <portal region="red-scorebox" filter="only-red" destination="red-spawn"/>
+</portals>
+<regions>
+    <cuboid id="blue-scorebox" min="24,26,40" max="21,28,39.5"/>
+    <cuboid id="red-scorebox" min="21,26,-80" max="24,28,-79.5"/>
+    <negative id="deny-blocks">
+        <rectangle id="map-area" min="50,-56" max="-43,16"/>
+    </negative>
+    <apply enter="only-blue" message="You may not enter the `9Blue`r's scorebox." region="blue-scorebox"/>
+    <apply enter="only-red" message="You may not enter the `4Red`r's scorebox." region="red-scorebox"/>
+    <apply block="never" region="deny-blocks"/>
+    <!-- <apply block="whitelisted-blocks"/> -->
+</regions>
+<score>
+    <kills>1</kills>
+    <box value="3" filter="only-blue" region="blue-scorebox"/>
+    <box value="3" filter="only-red" region="red-scorebox"/>
+</score>
+<time result="score">10m</time>
 <itemremove>
-    <item>38</item> <!-- Remove all flowers -->
+    <item>red rose</item> <!-- Remove all flowers -->
     <item>seeds</item>
     <item>wheat</item>
     <item>leather helmet</item>
@@ -133,7 +160,7 @@
                 </not>
             </all>
         </filter>
-        <item name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false">potion</item>
+        <item name="`6`lStun Grenade" damage="16396" potions="slow:600:1:false;blindness:21:0:false" material="potion"/>
     </kill-reward>
     <kill-reward>
         <filter>
@@ -147,7 +174,7 @@
                 </not>
             </all>
         </filter>
-        <item name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false">potion</item>
+        <item name="`d`lElixir of Life" damage="8192" potions="regeneration:160:1:false" material="potion"/>
     </kill-reward>
     <kill-reward>
         <filter>
@@ -161,50 +188,8 @@
                 </not>
             </all>
         </filter>
-        <item name="`b`lLiquidifed SuperDash mk. 2" damage="16385" potions="invisibility:200:0:false;saturation:2400:0:false;regeneration:600:0:false">potion</item>
+        <item name="`b`lLiquidifed SuperDash mk. 2" damage="16385" potions="invisibility:200:0:false;saturation:2400:0:false;regeneration:600:0:false" material="potion"/>
     </kill-reward>
 </kill-rewards>
-<filters>
-    <any id="whitelisted-blocks">
-        <material>38</material> <!-- All flowers -->
-        <material>thin glass</material> <!-- Glass panes -->
-        <material>long grass</material> <!-- Tall grass -->
-        <material>59</material> <!-- Wheat block -->
-    </any>
-    <deny id="deny-panes">
-        <material>thin glass</material>
-    </deny>
-    <deny id="only-blue">
-        <team>red</team>
-    </deny>
-    <deny id="only-red">
-        <team>blue</team>
-    </deny>
-</filters>
-<portals>
-    <portal region="blue-scorebox" filter="only-blue">
-        <destination>
-            <region id="blue-spawn"/>
-        </destination>
-    </portal>
-    <portal region="red-scorebox" filter="only-red">
-        <destination>
-            <region id="red-spawn"/>
-        </destination>
-    </portal>
-</portals>
-<regions>
-    <cuboid id="blue-scorebox" min="24,26,40" max="21,28,39.5"/>
-    <cuboid id="red-scorebox" min="21,26,-80" max="24,28,-79.5"/>
-    <negative id="deny-blocks">
-        <rectangle id="map-area" min="50,-56" max="-43,16"/>
-    </negative>
-    <apply enter="only-blue" message="You may not enter the `9Blue `cteam's scorebox." region="blue-scorebox"/>
-    <apply enter="only-red" message="You may not enter the `4Red `cteam's scorebox." region="red-scorebox"/>
-    <apply block="never" region="deny-blocks"/>
-    <!--
-    <apply block="whitelisted-blocks"/>
-    -->
-</regions>
 <maxbuildheight>38</maxbuildheight>
 </map>
