@@ -1,19 +1,31 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Pompeii</name>
-<version>1.1.5</version>
-<authors>
-    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23" />
-    <!--  KRo_oOH  -->
-    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" />
-    <!--  GoldenOre  -->
-</authors>
-<objective>Be the player with the most kills after 10 minutes!</objective>
+<variant id="rage">RAGE</variant>
+<version>1.3.1</version>
 <gamemode>ffa</gamemode>
-<score>
-    <kills>1</kills>
-</score>
-<time>10m</time>
-<players min="2" max="64" colors="true" />
+<authors>
+    <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- KRo_oOH -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
+</authors>
+<unless variant="rage">
+    <objective>Be the player with the most kills after 10 minutes!</objective>
+    <time>10m</time>
+    <players min="2" max="64" colors="true"/>
+    <include id="gapple-kill-reward"/>
+</unless>
+<if variant="rage">
+    <objective>Be the player with the most kills after 7 minutes. There are no teams, so watch your back!</objective>
+    <gamemode>rage</gamemode>
+    <time>7m</time>
+    <rage/>
+    <respawn spectate="true"/>
+    <players min="2" max="64"/>
+    <kill-rewards>
+        <kill-reward>
+            <item material="arrow"/>
+        </kill-reward>
+    </kill-rewards>
+</if>
 <rules>
     <rule>Fall damage is disabled!</rule>
 </rules>
@@ -21,41 +33,60 @@
     <alert after="2s">Fall damage is disabled on this map! You can also double jump!</alert>
 </broadcasts>
 <kits>
-    <kit id="players" force="true">
+    <kit id="players">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="28">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2;depth_strider:2">leather boots</boots>
-        <potion duration="2.5" amplifier="10">resistance</potion>
-        <effect>speed</effect>
-        <double-jump power="3" recharge-before-landing="true" recharge-time="6s"/>
+        <unless variant="rage">
+            <item slot="0" unbreakable="true" material="stone sword"/>
+            <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+            <item slot="2" material="golden apple"/>
+            <item slot="28" material="arrow"/>
+            <effect>speed</effect>
+            <double-jump power="3" recharge-before-landing="true" recharge-time="6s"/>
+            <boots unbreakable="true" team-color="true" enchantment="protection fall:2;depth_strider:2" material="leather boots"/>
+        </unless>
+        <if variant="rage">
+            <item slot="0" enchantment="damage all:10" material="iron sword"/>
+            <item slot="1" enchantment="arrow damage:10" material="bow"/>
+            <item slot="2" amount="2" material="arrow"/>
+            <boots unbreakable="true" team-color="true" enchantment="protection fall:2;protection environmental" material="leather boots"/>
+            <double-jump power="3" recharge-before-landing="true"/>
+        </if>
+        <effect duration="2.5" amplifier="10">resistance</effect>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
     </kit>
 </kits>
 <spawns>
-    <spawn kit="players" spread="true" safe="true">
-        <regions angle="231,70,-2070">
-            <cuboid min="398,63.5,-1958" max="115,100,-2230"/>
-        </regions>
-    </spawn>
+    <unless variant="rage">
+        <spawn kit="players" spread="true" safe="true">
+            <region angle="231,70,-2070">
+                <cuboid min="398,63.5,-1958" max="115,100,-2230"/>
+            </region>
+        </spawn>
+    </unless>
+    <if variant="rage">
+        <spawn kit="players" spread="true" safe="true">
+            <region>
+                <cylinder base="249.5,68,-2113.5" radius="150" height="5"/>
+            </region>
+        </spawn>
+    </if>
     <default>
-        <regions>
-            <cylinder base="128.5,70,-2010.5" radius="3" height="0" />
-        </regions>
+        <region>
+            <cylinder base="128.5,70,-2010.5" radius="3" height="0"/>
+        </region>
     </default>
 </spawns>
 <filters>
-    <any id="lily">
-        <material>water lily</material>
-    </any>
+    <material id="lily">water lily</material>
 </filters>
 <regions>
-    <apply block="lily" />
+    <apply block="lily"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -75,13 +106,11 @@
     <item>leaves</item>
     <item>golden apple</item>
 </itemremove>
-<kill-reward>
-    <item material="golden apple"/>
-</kill-reward>
 <hunger>
     <depletion>off</depletion>
 </hunger>
 <disabledamage>
     <damage>fall</damage>
+    <damage>suffocation</damage>
 </disabledamage>
 </map>

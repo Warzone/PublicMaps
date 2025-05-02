@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>L'Automne</name>
 <version>1.1.4</version>
 <objective>Have the most kills after 10 minutes!</objective>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="5906313b-dd1b-4847-8164-7f9800fcb782"/>
     <author uuid="ff692817-83e7-4afe-b5ae-c5f62aa642b3"/>
@@ -14,23 +15,20 @@
     <alert after="2s">Fall damage is disabled on this map!</alert>
 </broadcasts>
 <players min="2" max="48" colors="true"/>
-<score>
-    <kills>1</kills>
-</score>
-<time>10m</time>
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true">gold sword</item>
-        <item slot="1" unbreakable="true" enchantment="infinity:1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="28">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true">leather boots</boots>
-        <potion duration="2.5" amplifier="10">resistance</potion>
+        <item slot="0" unbreakable="true" material="gold sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="depth_strider:2" material="leather boots"/>
+        <effect duration="2.5" amplifier="10">resistance</effect>
         <double-jump recharge-before-landing="true" power="3.5" recharge-time="5s"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -46,12 +44,10 @@
             <cuboid min="-9,35,25" max="35,50,59"/>
             <cuboid min="71,43,19" max="35,50,59"/>
             <cuboid min="71,43,19" max="58,48,-35"/>
-
             <cuboid min="91,18,-72" max="58,48,-35"/>
             <cuboid min="91,30,-72" max="105,44,-108"/>
             <cuboid min="83,13,-111" max="54,22,-91"/>
             <cuboid min="29,18,-110" max="54,26,-91"/>
-
             <cuboid min="-50,19,-51" max="-83,39,-12"/>
             <cuboid min="-15,34,-47" max="-59,37,0"/>
             <cuboid min="14,15,-6" max="-37,39,41"/>
@@ -61,14 +57,18 @@
         </regions>
     </spawn>
     <default>
-        <regions yaw="0">
+        <region>
             <point>22.5,18,-23.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
     <apply block="never"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>10m</time>
 <toolrepair>
     <tool>gold sword</tool>
     <tool>bow</tool>
@@ -81,9 +81,6 @@
     <item>leather boots</item>
     <item>golden apple</item>
 </itemremove>
-<kill-reward>
-    <item>golden apple</item>
-</kill-reward>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>

@@ -1,21 +1,28 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Festive FFA</name>
-<gamemode>ffa</gamemode>
 <version>1.0.2</version>
-<objective>Get the most kills before time ends!</objective>
+<objective>Kill as many players as you can in 5 minutes!</objective>
+<created>2016-03-03</created>
+<gamemode>ffa</gamemode>
 <authors>
-    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/>
-    <!--  Timotheeee  -->
+    <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9"/> <!-- Timotheeee -->
 </authors>
-<score>
-    <kills>1</kills>
-</score>
 <rules>
     <rule>Fall damage is disabled.</rule>
 </rules>
-<time>4m</time>
-<players min="2" max="6" show-name-tags="false"/>
+<players max="5" max-overfill="5" show-name-tags="false" />
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" name="Sword" material="stone sword"/>
+        <item slot="1" name="Bow" enchantment="arrow damage" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" color="E5E533" locked="true" material="leather chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true">
         <regions>
@@ -34,36 +41,18 @@
         </regions>
     </spawn>
     <default yaw="-90">
-        <regions>
-            <cuboid min="136,27.5,40" max="137,27.5,38"/>
-        </regions>
+        <region>
+            <cuboid min="136,27.5,40" max="137,27.5,38" />
+        </region>
     </default>
 </spawns>
-<kits>
-    <kit id="spawn-kit">
-        <item slot="0" name="Sword">stone sword</item>
-        <item slot="1" name="Bow" enchantment="arrow damage:1">bow</item>
-        <item slot="2" amount="8">arrow</item>
-        <helmet color="E5E533" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate unbreakable="true" color="E5E533" locked="true">leather chestplate</chestplate>
-        <leggings color="E5E533" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="E5E533" unbreakable="true" locked="true">leather boots</boots>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-</disabledamage>
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never"/>
 </regions>
-<killreward>
-    <item amount="4" material="arrow"/>
-    <item material="golden apple"/>
-</killreward>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
@@ -74,5 +63,17 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
 <timelock>on</timelock>
 </map>

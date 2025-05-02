@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>5man</name>
-<version>1.0.4</version>
+<version>1.0.5</version>
 <objective>Get the most kills within 5 minutes!</objective>
 <created>2016-02-28</created>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- Jtr -->
 </authors>
@@ -17,7 +18,7 @@
 <players min="2" max="5" colors="true"/>
 <kits>
     <kit id="default-kit">
-        <effect>night vision</effect>
+        <effect duration="oo">night vision</effect>
     </kit>
     <kit id="spawn-kit">
         <clear/>
@@ -69,13 +70,13 @@
             <material>stained glass pane</material>
         </any>
         <not>
-            <void />
+            <void/>
         </not>
     </all>
 </filters>
 <regions>
-    <cylinder id="default-spawn" base="18.5,13,7.5" radius="1" height="1"/>
-    <apply block="allowed-blocks"/>
+    <cylinder id="default-spawn" base="18.5,13,7.5" radius="1" height="1" />
+    <apply block="allowed-blocks" />
 </regions>
 <toolrepair>
     <tool>bow</tool>
@@ -99,7 +100,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>

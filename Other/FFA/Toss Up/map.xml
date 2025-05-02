@@ -1,8 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Toss Up</name>
-<version>1.4.1</version>
-<objective>Get the most kills before time ends!</objective>
+<version>1.4.4</version>
+<objective>Kill as many players as you can before 5 minutes are up!</objective>
+<created>2016-03-27</created>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
     <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTr -->
@@ -13,11 +15,7 @@
 <broadcasts>
     <alert after="2s">Fall damage is disabled on this map!</alert>
 </broadcasts>
-<score>
-    <kills>1</kills>
-</score>
-<time result="score">4m</time>
-<players min="2" max="6" colors="true"/>
+<players min="2" max="5" colors="true"/>
 <kits>
     <kit id="default-kit">
         <effect>night vision</effect>
@@ -81,6 +79,10 @@
     </apply>
     <apply block-place="never" block-break="allowed-blocks"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time result="score">5m</time>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -99,10 +101,11 @@
     <item>sapling</item>
     <item>torch</item>
 </itemremove>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>

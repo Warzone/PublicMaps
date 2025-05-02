@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Geometric</name>
-<version>1.9.3</version>
+<version>1.9.4</version>
 <objective>Kill as many players as you can with your gun!</objective>
 <gamemode>ffa</gamemode>
 <created>2016-03-02</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
 </authors>
@@ -11,10 +12,6 @@
     <contributor uuid="105f6a09-f533-412b-93cb-501601763c11" contribution="Feedback and Scaling"/> <!-- JTr -->
     <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Scaling"/> <!-- Strangey -->
 </contributors>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
 <players min="2" max="5" colors="true"/>
 <kits>
     <kit id="spawn-kit">
@@ -55,19 +52,23 @@
         </regions>
     </spawn>
     <default>
-        <regions>
+        <region>
             <cuboid min="-39,14,-74" max="-37,16,-72"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
-    <apply block="never"/>
     <apply velocity="0.0,1.0,0.0">
         <region>
             <cuboid min="4.5,14,-0.5" max="3.5,14,0.5"/>
         </region>
     </apply>
+    <apply block="never" message="You may not edit the map!"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <toolrepair>
     <tool>bow</tool>
     <tool>stone sword</tool>
@@ -85,7 +86,6 @@
 </disabledamage>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>

@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Raid FFA</name>
 <variant id="guns">Guns</variant>
-<version>1.0.6</version>
+<version>1.0.8</version>
 <objective>Be the player with the most kills in 6 minutes!</objective>
 <created>2023-05-12</created>
 <authors>
@@ -11,10 +11,15 @@
     <author uuid="42195cb9-b21b-42f5-b938-5ef46f303fcd"/> <!-- _Bill -->
     <author uuid="b13b0b00-a8f9-422b-8963-b3d18bf80aa6"/> <!-- Bearinx -->
     <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa" contribution="Re-remaster"/> <!-- Eliminate -->
+    <if variant="guns">
+        <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Re-remaster XML and Guns variant"/> <!-- zzuf -->
+    </if>
 </authors>
-<contributors>
-    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Re-remaster XML and Guns variant"/> <!-- zzuf -->
-</contributors>
+<unless variant="guns">
+    <contributors>
+            <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Re-remaster XML and Guns variant"/> <!-- zzuf -->
+    </contributors>
+</unless>
 <players max="48" colors="true"/>
 <time result="score">6m</time>
 <unless variant="guns">
@@ -25,6 +30,7 @@
 <if variant="guns">
     <gamemode>ffa</gamemode>
     <gamemode>arcade</gamemode>
+    <include id="gapple-kill-reward"/>
     <broadcasts>
         <tip after="1s" every="2m">Hover your cursor over each weapon to learn about its stats!</tip>
         <tip after="2s" every="2m">Get `f2 grenades`r per `c2 kills`r!</tip>
@@ -182,14 +188,11 @@
     <item>leather helmet</item>
 </itemremove>
 <kill-rewards>
-    <kill-reward>
-        <unless variant="guns">
+    <unless variant="guns">
+        <kill-reward>
             <item material="arrow"/>
-        </unless>
-        <if variant="guns">
-            <item material="golden apple"/>
-        </if>
-    </kill-reward>
+        </kill-reward>
+    </unless>
     <if variant="guns">
         <kill-reward>
             <filter>

@@ -1,4 +1,4 @@
-<map proto="1.4.2">
+<map>
 <!--
       \
       |\
@@ -8,18 +8,17 @@
 -->
 <!-- One in the Quiver gamemode include file -->
 <!-- Created by zzuf -->
-<!-- Version 2023.12.10-2 -->
 <gamemode>rage</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>arcade</gamemode>
-<constants>
+<!-- Version 2025.02.03-1 -->
+<constants fallback="true">
     <constant id="time-limit">3</constant> <!-- Time limit in minutes -->
     <constant id="base-kit">default-players-kit</constant> <!-- The base kit that all classes will have -->
     <constant id="extra-kit">default-extra-kit</constant> <!-- For small additions to the base kit, useful if you just want to add stuff to the default one -->
-    <constant id="game-title">One in the Quiver</constant> <!-- Gamemode title - Modify if your map combines other gamemodes with OITQ -->
-    <constant id="classes-amount">3</constant> <!-- Amount of classes the map has -->
+    <constant id="classes-amount">5</constant> <!-- Amount of classes the map has -->
 </constants>
-<game>${game-title}</game>
+<game>One in the Quiver</game>
 <modifybowprojectile pickup-filter="never"/>
 <rage/>
 <time result="score">${time-limit}m</time>
@@ -51,15 +50,15 @@
                 <page>
                     `2» `lONE IN THE
                     `2`lQUIVER`0
-                    
+
                     Swords `cdon't`0 kill in one
                     hit, but bow shots `2do`0!
-                    
+
                     Time your `7double
                     `7jumps`0 carefully to
                     `ochain`0 them and fly
                     around!
-                    
+
                     Play using one of `6${classes-amount}`0
                     available classes!
                 </page>
@@ -87,6 +86,20 @@
             <effect duration="oo" ambient="true">speed</effect>
         </kit>
     </class>
+    <class name="Fisker" description="Wooden sword! Fishing rod! No bow!" longdescription="Wooden sword! Fishing rod! No bow!" icon="fishing rod">
+        <kit parents="${base-kit}">
+            <item slot="0" unbreakable="true" name="`c`lSharpened `rStick" lore="`8Multiple Hit Kill" material="wood sword"/>
+            <item slot="1" name="`a`lKool Stik Global Elite" material="fishing rod" damage="24">
+                <attribute operation="add" amount="-2">generic.attackDamage</attribute>
+            </item>
+        </kit>
+    </class>
+    <class name="Phoenix" description="Blaze rod! Strength! No bow!" longdescription="Blaze rod! Strength! No bow!" icon="blaze rod">
+        <kit parents="${base-kit}">
+            <item slot="0" name="`6`lFire `rStick" lore="`8Multiple Hit Kill" material="blaze rod" enchantment="fire aspect:1"/>
+            <effect duration="oo" ambient="true">strength</effect>
+        </kit>
+    </class>
 </classes>
 <filters>
     <deny id="deny-players">
@@ -99,9 +112,12 @@
 </regions>
 <actions>
     <action id="killstreak-sound" scope="player">
-        <sound key="mob.enderdragon.growl" volume="1" pitch="0.8"/>
+        <sound key="${entity.ender_dragon.growl}" volume="1" pitch="0.8"/>
     </action>
 </actions>
+<variables>
+    <variable id="killstreaker" scope="player" exclusive="1"/>
+</variables>
 <kill-rewards>
     <kill-reward>
         <filter>
@@ -115,7 +131,14 @@
         </filter>
         <kit>
             <action>
-                <message text=" `b`lTriple kill! `f(3 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `b`l» » `r{player} `7got a `b`lTRIPLE KILL`7! `f(3 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
@@ -126,18 +149,50 @@
         </filter>
         <kit>
             <action>
-                <message text=" `a`lKilling Spree! `f(5 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `a`l» » `r{player} `7is on a `a`lKILLING SPREE`7! `f(5 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="10" repeat="false"/>
+            <kill-streak count="8" repeat="false"/>
         </filter>
         <kit>
             <action>
-                <message text=" `e`lRampage! `f(10 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `e`l» » `r{player} `7is on a `e`lRAMPAGE`7! `f(8 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
+                <action id="killstreak-sound"/>
+            </action>
+        </kit>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="12" repeat="false"/>
+        </filter>
+        <kit>
+            <action>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `6`l» » `r{player} `7is `6`lDOMINATING`7! `f(12 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
@@ -148,18 +203,32 @@
         </filter>
         <kit>
             <action>
-                <message text=" `6`lDominating! `f(15 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `c`l» » `r{player} `7is `c`lUNSTOPPABLE`7! `f(15 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="20" repeat="false"/>
+            <kill-streak count="22" repeat="false"/>
         </filter>
         <kit>
             <action>
-                <message text=" `c`lUnstoppable! `f(20 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `4`l» » `r{player} `7is `4`lGODLIKE`7! `f(22 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
@@ -170,18 +239,14 @@
         </filter>
         <kit>
             <action>
-                <message text=" `4`lGODLIKE! `f(30 kills)"/>
-                <action id="killstreak-sound"/>
-            </action>
-        </kit>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <kill-streak count="50" repeat="false"/>
-        </filter>
-        <kit>
-            <action>
-                <message text=" `0`l`kzzuf`r `f(50 kills)"/>
+                <set var="killstreaker" value="1"/>
+                <switch-scope outer="player" inner="match">
+                    <message text=" `0`l» » `r{player} `7is `0`l`kzzuf`7! `f(30 kills)">
+                        <replacements>
+                            <player id="player" var="killstreaker"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
                 <action id="killstreak-sound"/>
             </action>
         </kit>
@@ -195,6 +260,8 @@
     <item>arrow</item>
     <item>bone</item>
     <item>rotten flesh</item>
+    <item>fishing rod</item>
+    <item>blaze rod</item>
 </itemremove>
 <disabledamage>
     <damage>fall</damage>

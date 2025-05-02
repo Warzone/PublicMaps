@@ -1,33 +1,30 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Aztec</name>
 <gamemode>ffa</gamemode>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Kill as many players as possible in 8 minutes</objective>
 <created>2015-12-28</created>
-<phase>development</phase>
+<phase>staging</phase>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/>
-    <!--yoyo_-->
+    <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!--yoyo_-->
 </authors>
-<time>5m</time>
 <players min="2" max="10" max-overfill="10" colors="true"/>
 <kits>
     <kit id="players-kit">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="8" amount="16">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
-        <potion duration="2.5" amplifier="10">resistance</potion>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
+        <effect duration="2.5" amplifier="10">resistance</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<regions>
-    <apply block="never" region="everywhere"/>
-</regions>
 <spawns>
     <spawn kit="players-kit" spread="true" safe="true">
         <regions angle="-18.5,40,-3.5">
@@ -53,19 +50,19 @@
             <point>-21.5,45,-38.5</point>
         </regions>
     </spawn>
-    <default>
-        <regions yaw="90">
+    <default yaw="90">
+        <region>
             <point>-18.5,40,-3.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<regions>
+    <apply block="never"/>
+</regions>
+<time>5m</time>
 <score>
     <kills>1</kills>
 </score>
-<timelock>on</timelock>
 <itemremove>
     <item>arrow</item>
     <item>apple</item>
@@ -81,8 +78,13 @@
     <tool>bow</tool>
     <tool>stone sword</tool>
 </toolrepair>
-<killreward>
-    <item>golden apple</item>
-    <item amount="8">arrow</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

@@ -1,19 +1,28 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Castellum</name>
 <version>1.0.1</version>
 <gamemode>ffa</gamemode>
-<objective>Get the most kills before time ends!</objective>
+<objective>Get the most kills within 5 minutes</objective>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="a53ab2da-36ed-4886-ac2a-49696de4622f"/> <!--   SailorMojo   -->
+    <author uuid="a53ab2da-36ed-4886-ac2a-49696de4622f"/> <!-- SailorMojo -->
 </authors>
-<time>4m</time>
-<score>
-    <kills>1</kills>
-</score>
-<players min="2" max="6" show-name-tags="false"/>
-<respawn auto="true"/>
+<players min="2" max="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit" potion-particles="true">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <helmet unbreakable="true" locked="true" color="6699D8" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" color="6699D8" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
+        <boots unbreakable="true" locked="true" color="6699D8" material="leather boots"/>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns safe="true">
-    <default region="default-spawn" yaw="180"/>
+    <default region="default-spawn" yaw="90"/>
     <spawn kit="spawn-kit" spread="true">
         <regions>
             <point yaw="-90">-26.5,15,-56.5</point>
@@ -29,34 +38,14 @@
         </regions>
     </spawn>
 </spawns>
-<kits>
-    <kit id="spawn-kit" potion-particles="true">
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="8" amount="32" material="arrow"/>
-        <helmet unbreakable="true" locked="true" color="6699D8" material="leather helmet"/>
-        <chestplate unbreakable="true" locked="true" color="6699D8" material="leather chestplate"/>
-        <leggings unbreakable="true" locked="true" material="chainmail leggings"/>
-        <boots unbreakable="true" locked="true" color="6699D8" material="leather boots"/>
-        <potion duration="3s" amplifier="5">resistance</potion>
-    </kit>
-</kits>
-<killreward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</killreward>
-<filters>
-    <apply block="never"/>
-</filters>
 <regions>
-    <cylinder id="default-spawn" base="-40,23,-38" radius="1" height="1"/>
+    <cylinder id="default-spawn" base="-40,23,-39" radius="1" height="1"/>
+    <apply block="never"/>
 </regions>
-<gamerules>
-    <doDaylightCycle>false</doDaylightCycle>
-</gamerules>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -67,4 +56,16 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<gamerules>
+    <doDaylightCycle>false</doDaylightCycle>
+</gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn auto="true"/>
 </map>

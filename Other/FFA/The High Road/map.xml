@@ -1,16 +1,17 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The High Road</name>
 <variant id="cummins" world="cummins" override="true">Cummins Turbo Diesel</variant>
-<version>1.0.8</version>
+<version>1.0.10</version>
 <objective>Get the most kills in 8 minutes!</objective>
-<time result="score">8m</time>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
+<gamemode>arcade</gamemode>
 <unless variant="cummins">
     <authors>
         <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
     </authors>
 </unless>
 <if variant="cummins">
-    <phase>development</phase>
     <authors>
         <author uuid="57c4813e-ecc2-4aee-9479-8d58991d1a0c"/> <!-- CincoDeMayo -->
         <author uuid="556fd070-7c92-4742-a061-c352b30728f8"/> <!-- PhantomOrion -->
@@ -23,10 +24,6 @@
         <contributor uuid="3947c68f-9050-4676-ad25-62eb2b4d79ba"/> <!-- Rosstheboss1211 -->
     </contributors>
 </if>
-<gamemode>ffa</gamemode>
-<gamemode>rage</gamemode>
-<gamemode>arcade</gamemode>
-<rage/>
 <players min="2" max="24"/>
 <kits>
     <kit id="spawn-kit">
@@ -126,6 +123,8 @@
     <apply velocity="-0.4,2,0" region="j-3"/>
     <apply block="never" use="deny-access"/>
 </regions>
+<rage/>
+<time result="score">8m</time>
 <score>
     <kills>1</kills>
 </score>
@@ -162,7 +161,9 @@
         </filter>
     </kill-reward>
 </kill-rewards>
-<timelock>off</timelock>
+<if variant="default">
+    <timelock>off</timelock>
+</if>
 <hunger>
     <depletion>off</depletion>
 </hunger>

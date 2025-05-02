@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Geiran</name>
 <version>1.0.4</version>
 <objective>Be the one with the most kills after 5 minutes!</objective>
 <gamemode>ffa</gamemode>
 <created>2016-04-28</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade"/> <!-- chle_ -->
     <author uuid="dd495aa8-26a3-4b77-b3fa-e96e2e5a0d47"/> <!-- McFanta_ -->
@@ -15,10 +16,6 @@
     <contributor uuid="6d24722c-dba4-4224-9d14-b3d08a8d9620"/> <!-- MrPetrus -->
 </contributors>
 <players min="2" max="5" colors="true"/>
-<time>5m</time>
-<score>
-    <kills>1</kills>
-</score>
 <kits>
     <kit id="spawn-kit">
         <clear/>
@@ -69,20 +66,18 @@
             <material>long grass</material>
         </any>
         <not>
-            <void />
+            <void/>
         </not>
     </all>
 </filters>
 <regions>
-    <apply block="allowed-blocks" />
     <block id="default-spawn">-27,28.1,60</block>
+    <apply block="allowed-blocks"/>
 </regions>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item amount="8" material="arrow"/>
-    </kill-reward>
-</kill-rewards>
+<time>5m</time>
+<score>
+    <kills>1</kills>
+</score>
 <toolrepair>
     <tool>bow</tool>
     <tool>stone sword</tool>
@@ -96,6 +91,11 @@
     <item>golden apple</item>
     <item>seeds</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>

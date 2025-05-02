@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Snowmelt Mines</name>
 <created>2016-06-18</created>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Get the most kills in 5 minutes!</objective>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -14,12 +14,22 @@
     <contributor uuid="205d1aad-c619-499b-9885-b91c372b1c13" /> <!-- Equus -->
     <contributor uuid="65722be1-29fd-4e7d-a47d-94ed616ed880" /> <!-- KroestV2 -->
 </contributors>
-<score>
-    <kills>1</kills>
-</score>
-<rage />
-<time>5m</time>
-<players max="5" max-overfill="5" show-name-tags="false" />
+<players max="5" max-overfill="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit">
+        <double-jump power="2" recharge-time="10s" recharge-before-landing="true"/>
+        <item slot="0" name="Ice Pick" enchantment="damage all:10" unbreakable="true" material="iron pickaxe"/>
+        <item slot="1" enchantment="arrow damage:10" unbreakable="true" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate color="E5E533" unbreakable="true" locked="true" material="leather chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
+        <effect>speed</effect>
+        <effect duration="2.5s" amplifier="25">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true">
         <regions>
@@ -33,41 +43,19 @@
         </regions>
     </spawn>
     <default>
-        <regions>
-            <point yaw="-50">9641.5,154,-88.5</point>
-        </regions>
+        <region yaw="-50">
+            <point>9641.5,154,-88.5</point>
+        </region>
     </default>
 </spawns>
-<kits>
-    <kit id="spawn-kit">
-        <double-jump power="2" recharge-time="10s" recharge-before-landing="true" />
-        <item slot="0" name="Ice Pick" enchantment="damage all:10" unbreakable="true" material="iron pickaxe"/>
-        <item slot="1" enchantment="arrow damage:10" unbreakable="true" material="bow"/>
-        <item slot="2" material="arrow"/>
-        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
-        <chestplate color="E5E533" unbreakable="true" locked="true" material="leather chestplate"/>
-        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
-        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
-        <potion duration="oo" amplifier="1">speed</potion>
-        <potion duration="2.5s" amplifier="25">damage resistance</potion>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-</disabledamage>
-<respawn delay="2.0s" blackout="true" />
 <regions>
-    <apply block="never" message="You may not edit the map!" />
+    <apply block="never"/>
 </regions>
-<kill-rewards>
-    <kill-reward>
-        <item material="arrow" />
-    </kill-reward>
-</kill-rewards>
+<score>
+    <kills>1</kills>
+</score>
+<rage />
+<time>5m</time>
 <itemremove>
     <item>bow</item>
     <item>arrow</item>
@@ -77,5 +65,18 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow" />
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<respawn delay="2.0s" blackout="true" />
 <timelock>on</timelock>
 </map>

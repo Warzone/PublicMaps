@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Immitis FFA</name>
-<version>1.0.7</version>
-<objective>Kill everyone, and try not to die. Swords and arrows kill instantly!</objective>
+<version>0.3.1</version>
+<objective>Kill everyone, and try not to die. Arrows kill instantly!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -11,15 +11,51 @@
 <contributors>
     <contributor uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112" contribution="XML"/> <!-- last_username -->
 </contributors>
-<rage/>
-<score>
-    <kills>1</kills>
-</score>
-<time>8m</time>
-<players min="2" max="30" max-overfill="32" show-name-tags="false"/>
 <rules>
-    <rule>Block glitching is ILLEGAL and will be punished for!</rule>
+    <rule>Block glitching is ILLEGAL and will be punished!</rule>
 </rules>
+<players min="2" max="30" max-overfill="32" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit">
+        <effect duration="1" amplifier="10">damage resistance</effect>
+        <double-jump recharge-before-landing="true" power="3" recharge-time="8s"/>
+        <helmet material="leather helmet"/>
+        <chestplate material="leather chestplate"/>
+        <leggings material="leather leggings"/>
+        <boots material="leather boots"/>
+        <item slot="0" unbreakable="true" material="diamond sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow damage:100" lore="`aOne-shot kill!" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <item slot="3" amount="32" material="bread"/>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="-135">
+        <region>
+            <cylinder base="-41.5,27,21.5" radius="4" height="0"/>
+        </region>
+    </default>
+    <spawn kit="spawn-kit" spread="true">
+        <regions>
+            <point yaw="-45">-43.5,22,-10.5</point>
+            <point yaw="-160">-17.5,24,15.5</point>
+            <point yaw="140">2.5,24,11.5</point>
+            <point yaw="135">30.5,5,14.5</point>
+            <point yaw="-90">9.5,10,-1.5</point>
+            <point yaw="135">-6.5,24,-22.5</point>
+            <point yaw="-45">-26.5,16,-47.5</point>
+            <point yaw="-90">-33.5,6,-19.5</point>
+            <point>8.5,16,-72.5</point>
+            <point yaw="-180">8.5,10,-32.5</point>
+            <point>44.5,16.1,-26.5</point>
+            <point yaw="90">64.5,22,-74.5</point>
+            <point yaw="-45">21.5,7,-94.5</point>
+            <point yaw="90">38.5,26,-26.5</point>
+            <point yaw="-135">-1.5,8,8.5</point>
+            <point yaw="-90">20.5,21,-55.5</point>
+        </regions>
+    </spawn>
+</spawns>
 <filters>
     <deny id="deny-unbreakable-blocks">
         <not>
@@ -41,70 +77,32 @@
 <regions>
     <apply block="deny-unbreakable-blocks"/>
 </regions>
-<keep-potion-bottles/>
-<kits>
-    <kit id="spawn-kit">
-        <effect duration="1" amplifier="10">damage resistance</effect>
-        <double-jump recharge-before-landing="true" power="3" recharge-time="8s"/>
-        <item slot="0" unbreakable="true" enchantments="damage_all:10" material="diamond sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow damage:100" lore="`aOne-shot kill!" material="bow"/>
-        <item slot="2" material="arrow"/>
-        <helmet show-unbreakable="false" unbreakable="true" color="D87F33" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" color="D87F33" material="leather chestplate"/>
-        <leggings show-unbreakable="false" unbreakable="true" color="D87F33" material="leather leggings"/>
-        <boots show-unbreakable="false" unbreakable="true" color="D87F33" material="leather boots"/>
-    </kit>
-</kits>
+<score>
+    <kills>1</kills>
+</score>
+<time>8m</time>
 <kill-rewards>
     <kill-reward>
         <kit>
-            <item slot="2" material="arrow"/>
-            <effect duration="6" amplifier="1">speed</effect>
+            <item material="arrow"/>
+            <effect duration="6">speed</effect>
         </kit>
     </kill-reward>
 </kill-rewards>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
-<spawns>
-    <default yaw="-135">
-        <regions>
-            <cylinder base="-41.5,27,21.5" radius="4" height="0"/>
-        </regions>
-    </default>
-    <spawn kit="spawn-kit" spread="true">
-        <regions>
-            <point yaw="-45">-43.5, 22, -10.5</point>
-            <point yaw="-160">-17.5, 24, 15.5</point>
-            <point yaw="140">2.5, 24, 11.5</point>
-            <point yaw="135">30.5, 5, 14.5</point>
-            <point yaw="-90">9.5, 10, -1.5</point>
-            <point yaw="135">-6.5, 24, -22.5</point>
-            <point yaw="-45">-26.5, 16, -47.5</point>
-            <point yaw="-90">-33.5, 6, -19.5</point>
-            <point yaw="0">8.5, 16, -72.5</point>
-            <point yaw="-180">8.5, 10, -32.5</point>
-            <point yaw="0">44.5, 16.1, -26.5</point>
-            <point yaw="90">64.5, 22, -74.5</point>
-            <point yaw="-45">21.5, 7, -94.5</point>
-            <point yaw="90">38.5, 26, -26.5</point>
-            <point yaw="-135">-1.5, 8, 8.5</point>
-            <point yaw="-90">20.5, 21, -55.5</point>
-        </regions>
-    </spawn>
-</spawns>
+
 <itemremove>
     <item>arrow</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
+    <item>bread</item>
 </itemremove>
 <toolrepair>
     <tool>diamond sword</tool>
     <tool>bow</tool>
 </toolrepair>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 </map>

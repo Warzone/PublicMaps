@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Jurassic Attack RAGE</name>
-<version>1.4.8</version>
+<version>1.4.11</version>
 <objective>Kill the most people!</objective>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -10,7 +10,7 @@
     <author uuid="b2539be1-8f98-4375-b653-9d91cd04c30e"/> <!-- Mewzzy -->
 </authors>
 <contributors>
-    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="xml"/> <!-- Ruediger_LP -->
+    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="XML"/> <!-- Ruediger_LP -->
     <contributor uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Feedback"/> <!-- Strangey -->
 </contributors>
 <players min="2" max="64" colors="true"/>
@@ -33,6 +33,7 @@
         </item>
         <item slot="1" material="bow" unbreakable="true">
             <enchantment>power</enchantment>
+            <enchantment>sharpness</enchantment>
         </item>
         <item slot="2" material="arrow" amount="2"/>
         <helmet material="leather helmet" team-color="true" unbreakable="true" locked="true"/>
@@ -41,6 +42,7 @@
         <boots material="leather boots" team-color="true" unbreakable="true" locked="true"/>
         <game-mode>adventure</game-mode>
         <effect>speed</effect>
+        <effect duration="2s" amplifier="255">resistance</effect>
         <double-jump power="3.5" recharge-before-landing="true"/>
     </kit>
 </kits>
@@ -102,7 +104,7 @@
     <apply velocity="2,2,-4" region="jump-pad-north"/>
     <apply velocity="0,10,0" region="jump-pad-volcano"/>
     <apply velocity="0,1,-10" region="jump-pad-volcanosecond"/>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never" message="You may not edit the map!"/>
 </regions>
 <itemremove>
     <item>leather helmet</item>

@@ -1,28 +1,39 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Stagnant Waters</name>
 <slug>stagnant_waters_5x5</slug>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Get the most amount of kills in 5 minutes!</objective>
 <created>2016-03-13</created>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
 <gamemode>arcade</gamemode>
 <authors>
-    <author uuid="cbd5c47c-1137-4f02-93dd-626a46bdd779"/> <!--  Kaskito  -->
+    <author uuid="cbd5c47c-1137-4f02-93dd-626a46bdd779"/> <!-- Kaskito -->
 </authors>
 <contributors>
-    <contributor uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!--  JTr  -->
-    <contributor uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="XML Help"/> <!--  chle_  -->
+    <contributor uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- JTr -->
+    <contributor uuid="a23a1d91-7e97-40b4-8f5e-1ab82d8f5ade" contribution="XML Help"/> <!-- chle_ -->
 </contributors>
 <rules>
     <rule>Try your best!</rule>
 </rules>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
+<broadcasts>
+    <tip after="1s">Bows and swords are one hit kills</tip>
+</broadcasts>
 <players max="5" max-overfill="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" name="Sword" lore="One Hit Kill" enchantment="damage all:10" material="iron sword"/>
+        <item slot="1" name="Bow" lore="One Hit Kill" enchantment="arrow damage:10" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" color="E5E533" locked="true" material="leather chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
+        <effect>night vision</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true" safe="false">
         <regions>
@@ -48,47 +59,25 @@
             <point yaw="59">18.5,47,-27.5</point>
         </regions>
     </spawn>
-    <default yaw="0">
-        <regions>
+    <default>
+        <region>
             <cuboid min="1,51,1" max="-1,53,-1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<rage/>
-<kits>
-    <kit id="spawn-kit">
-        <item slot="0" name="Sword" lore="One Hit Kill" enchantment="damage all:10">iron sword</item>
-        <item slot="1" name="Bow" lore="One Hit Kill" enchantment="arrow damage:10">bow</item>
-        <item slot="2" amount="1">arrow</item>
-        <potion duration="oo" amplifier="1">night vision</potion>
-        <helmet color="E5E533" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate unbreakable="true" color="E5E533" locked="true">leather chestplate</chestplate>
-        <leggings color="E5E533" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="E5E533" unbreakable="true" locked="true">leather boots</boots>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-</disabledamage>
-<respawn delay="0.1s" blackout="true"/>
 <regions>
-    <apply block="never" region="everywhere"/>
+    <apply block="never"/>
     <apply velocity="0.0,1.0,0.0">
         <region>
             <cuboid min="4.5,14,-0.5" max="3.5,14,0.5"/>
         </region>
     </apply>
 </regions>
-<broadcasts>
-    <tip after="1s">Bows and swords are one hit kills</tip>
-</broadcasts>
-<killreward>
-    <item amount="1" material="arrow"/>
-</killreward>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<rage/>
 <itemremove>
     <item>iron sword</item>
     <item>bow</item>
@@ -97,5 +86,18 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
+<respawn delay="0.1s" blackout="true"/>
 </map>

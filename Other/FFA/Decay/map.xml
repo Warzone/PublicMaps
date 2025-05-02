@@ -1,40 +1,14 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Decay</name>
 <version>1.5.5</version>
 <objective>Kill as many people before the time is up!</objective>
 <gamemode>ffa</gamemode>
 <created>2016-02-26</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="105f6a09-f533-412b-93cb-501601763c11"/> <!-- Jtr -->
 </authors>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
 <players min="2" max="5" colors="true"/>
-<spawns>
-    <spawn kit="spawn-kit" spread="true" safe="true">
-        <regions>
-            <!--Yaw indicates were the player will face when they spawn. I recommend spawning them in corners angleded so they see everything, to prevent spawnkill.-->
-            <point yaw="135">20.5,6,19.5</point>
-            <!--Add .5 on the end of X and Z so the player spawns in middle of the block-->
-            <point yaw="180">14.5,6,22.5</point>
-            <point yaw="-180">-19.5,6,5.5</point>
-            <point yaw="-45">-20.5,11,-17.5</point>
-            <point yaw="75">22.5,7,-20.5</point>
-            <point yaw="180">10.5,12,-3.5</point>
-            <point>10.5,12,-10.5</point>
-            <point yaw="-106">-21.5,6,16.5</point>
-            <point yaw="-90">-15.5,6,5.5</point>
-            <point yaw="45">24.5,6,-7.5</point>
-        </regions>
-    </spawn>
-    <default yaw="180">
-        <regions>
-            <cuboid min="3,18,3" max="1,20,1"/>
-        </regions>
-    </default>
-</spawns>
 <kits>
     <kit id="spawn-kit">
         <clear/>
@@ -49,6 +23,29 @@
         <effect duration="2.5" amplifier="10">resistance</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn kit="spawn-kit" spread="true" safe="true">
+        <regions>
+            <!-- Yaw indicates were the player will face when they spawn. I recommend spawning them in corners angleded so they see everything, to prevent spawnkill. -->
+            <point yaw="135">20.5,6,19.5</point>
+            <!-- Add .5 on the end of X and Z so the player spawns in middle of the block -->
+            <point yaw="180">14.5,6,22.5</point>
+            <point yaw="-180">-19.5,6,5.5</point>
+            <point yaw="-45">-20.5,11,-17.5</point>
+            <point yaw="75">22.5,7,-20.5</point>
+            <point yaw="180">10.5,12,-3.5</point>
+            <point yaw="0">10.5,12,-10.5</point>
+            <point yaw="-106">-21.5,6,16.5</point>
+            <point yaw="-90">-15.5,6,5.5</point>
+            <point yaw="45">24.5,6,-7.5</point>
+        </regions>
+    </spawn>
+    <default yaw="180">
+        <region>
+            <cuboid min="3,18,3" max="1,20,1"/>
+        </region>
+    </default>
+</spawns>
 <filters>
     <all id="allowed-blocks">
         <any>
@@ -57,18 +54,22 @@
             <material>double plant</material>
         </any>
         <not>
-            <void />
+            <void/>
         </not>
     </all>
 </filters>
 <regions>
-    <apply block="allowed-blocks"/>
     <apply velocity="0.0,1.0,0.0">
         <region>
             <cuboid min="4.5,14,-0.5" max="3.5,14,0.5"/>
         </region>
     </apply>
+    <apply block="allowed-blocks"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <toolrepair>
     <tool>bow</tool>
     <tool>stone sword</tool>
@@ -84,7 +85,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
@@ -95,5 +95,5 @@
     <damage>suffocation</damage>
 </disabledamage>
 <timelock>on</timelock>
-<!--This XML has been roughly based of Chle_ and McFanta_'s xml. It works well as a template for 5x5 maps.-->
+<!-- This XML has been roughly based of Chle_ and McFanta_'s XML. It works well as a template for 5x5 maps. -->
 </map>

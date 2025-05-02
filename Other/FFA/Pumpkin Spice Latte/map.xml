@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Pumpkin Spice Latte: Venti</name>
-<version>1.2.9</version>
+<version>1.2.10</version>
 <objective>Be the player with the most kills after 5 minutes!</objective>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -9,17 +9,12 @@
     <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
 </authors>
 <contributors>
-    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="moral support"/> <!-- Timotheeee -->
+    <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Moral support"/> <!-- Timotheeee -->
 </contributors>
 <rules>
     <rule>Fall damage is disabled!</rule>
 </rules>
-<score>
-    <kills>1</kills>
-</score>
-<time>6m</time>
 <players min="2" max="16" max-overfill="18" show-name-tags="true"/>
-<rage/>
 <kits>
     <kit id="spawn">
         <item slot="0" unbreakable="true" enchantment="damage all:10" lore="Instant Kill" material="iron sword"/>
@@ -29,27 +24,21 @@
         <boots color="667F33" unbreakable="true" locked="true" material="leather boots"/>
         <effect duration="2" amplifier="20">damage resistance</effect>
         <effect amplifier="20">night vision</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<kill-rewards>
-    <kill-reward>
-        <item material="arrow"/>
-    </kill-reward>
-</kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<itemremove>
-    <item>arrow</item>
-    <item>leather chestplate</item>
-    <item>leather boots</item>
-    <item>iron sword</item>
-    <item>bow</item>
-</itemremove>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-</disabledamage>
+<spawns>
+    <spawn kit="spawn" safe="true" spread="true">
+        <region>
+            <cylinder base="0,3,0" radius="20" height="63"/>
+        </region>
+    </spawn>
+    <default>
+        <region angle="0,81,0">
+            <cylinder base="0,79,0" radius="20" height="0"/>
+        </region>
+    </default>
+</spawns>
 <regions>
     <apply block="never"/>
     <apply velocity="-2,1.8,0">
@@ -113,18 +102,11 @@
         </region>
     </apply>
 </regions>
-<spawns>
-    <spawn kit="spawn" safe="true" spread="true">
-        <regions>
-            <cylinder base="0,3,0" radius="20" height="63"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions angle="0,81,0">
-            <cylinder base="0,79,0" radius="20" height="0"/>
-        </regions>
-    </default>
-</spawns>
+<score>
+    <kills>1</kills>
+</score>
+<time>6m</time>
+<rage/>
 <portals>
     <portal y="-70">
         <region>
@@ -132,4 +114,23 @@
         </region>
     </portal>
 </portals>
+<itemremove>
+    <item>arrow</item>
+    <item>leather chestplate</item>
+    <item>leather boots</item>
+    <item>iron sword</item>
+    <item>bow</item>
+</itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+</disabledamage>
 </map>

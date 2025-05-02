@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Crossroads</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Get the most kills within 10 minutes!</objective>
 <gamemode>ffa</gamemode>
 <created>2024-06-03</created>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c5525b6d-6919-4a25-85b1-5ebebd3d8ece"/> <!-- GameDevRG -->
 </authors>
@@ -28,10 +29,10 @@
     </kit>
 </kits>
 <spawns>
-    <default>
-        <regions yaw="-90">
+    <default yaw="-90">
+        <region>
             <cuboid min="-61,69,1" max="-58,69,4"/>
-        </regions>
+        </region>
     </default>
     <spawn spread="true" safe="true" kit="default">
         <regions angle="0,13,0">
@@ -57,18 +58,6 @@
 <score>
     <kills>1</kills>
 </score>
-<kill-rewards>
-    <kill-reward>
-        <item amount="3" material="arrow"/>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <item-remove>
     <item>iron sword</item>
     <item>diamond axe</item>
@@ -80,4 +69,15 @@
     <item>chainmail leggings</item>
     <item>iron boots</item>
 </item-remove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="3" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Rage Quit FFA</name>
-<version>1.2.14</version>
+<version>1.2.12</version>
 <objective>Kill the most people in 5 minutes</objective>
 <gamemode>ffa</gamemode>
 <gamemode>rage</gamemode>
@@ -15,7 +15,20 @@
 <broadcasts>
     <tip after="1s">Bows and swords are one hit kills</tip>
 </broadcasts>
-<players max="25" show-name-tags="false"/>
+<players max="5" max-overfill="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" name="Sword" lore="One Hit Kill" enchantment="damage all:10" material="iron sword"/>
+        <item slot="1" name="Bow" lore="One Hit Kill" enchantment="arrow damage:10" material="bow"/>
+        <item slot="2" material="arrow"/>
+        <effect>night vision</effect>
+        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" color="E5E533" locked="true" material="leather chestplate"/>
+        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true" safe="false">
         <regions>
@@ -44,19 +57,6 @@
         </regions>
     </default>
 </spawns>
-<kits>
-    <kit id="spawn-kit">
-        <item slot="0" name="Sword" lore="One Hit Kill" enchantment="damage all:10" material="iron sword"/>
-        <item slot="1" name="Bow" lore="One Hit Kill" enchantment="arrow damage:10" material="bow"/>
-        <item slot="2" material="arrow"/>
-        <helmet color="E5E533" unbreakable="true" locked="true" material="leather helmet"/>
-        <chestplate unbreakable="true" color="E5E533" locked="true" material="leather chestplate"/>
-        <leggings color="E5E533" unbreakable="true" locked="true" material="leather leggings"/>
-        <boots color="E5E533" unbreakable="true" locked="true" material="leather boots"/>
-        <effect>night vision</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-</kits>
 <regions>
     <apply block="never"/>
 </regions>
@@ -81,8 +81,8 @@
         <item material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<timelock>on</timelock>
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<timelock>on</timelock>
 </map>

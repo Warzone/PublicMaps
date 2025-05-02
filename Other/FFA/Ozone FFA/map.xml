@@ -1,9 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ozone FFA</name>
-<version>1.0.2</version>
-<gamemode>ffa</gamemode>
+<version>1.0.3</version>
 <objective>Kill the most players in 10 minutes!</objective>
-<time>10m</time>
+<gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="ef4ea031-998f-4ec9-b7b6-1bdd428bcef8" contribution="Overall map design and XML"/> <!-- Plastix -->
     <author uuid="3c7db14d-ac4b-4e35-b2c6-3b2237f382be" contribution="Map design"/> <!-- MonsieurApple -->
@@ -14,17 +14,13 @@
     <contributor uuid="2553e6f2-3a2c-440b-a6a3-39e3df7fe3ff" contribution="Feedback and aesthetics"/> <!-- Khazhyk -->
     <contributor uuid="3ce426cd-2ded-4f83-a9bb-46a57d68d9a5" contribution="Various aesthethics"/> <!-- McYukon -->
 </contributors>
-<gamemode>ffa</gamemode>
-<players min="2" max="80" colors="true"/>
-<score>
-    <kills>1</kills>
-</score>
 <rules>
     <rule>Fall damage is disabled</rule>
 </rules>
 <broadcasts>
     <alert after="2s">Fall damage is disabled on this map! Bows shoot ender pearls!</alert>
 </broadcasts>
+<players min="2" max="80" colors="true"/>
 <kits>
     <kit id="spawn-kit">
         <clear/>
@@ -42,6 +38,7 @@
         <boots unbreakable="true" material="iron boots"/>
         <effect duration="5" amplifier="10">damage resistance</effect>
         <effect>speed</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -72,6 +69,15 @@
 <regions>
     <apply block="never"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>10m</time>
+<!-- Do the magic! *wizz* -->
+<modifybowprojectile>
+    <projectile>EnderPearl</projectile>
+    <velocityMod>2.5</velocityMod>
+</modifybowprojectile>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -86,17 +92,9 @@
 <itemkeep>
     <item>golden apple</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-</kill-reward>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<!-- Do the magic! *wizz* -->
-<modifybowprojectile>
-    <projectile>EnderPearl</projectile>
-    <velocityMod>2.5</velocityMod>
-</modifybowprojectile>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>

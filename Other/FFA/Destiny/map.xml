@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Destiny</name>
-<version>1.1.0</version>
-<objective>Kill as many players as you can in 4 minutes</objective>
+<version>1.0.1</version>
+<objective>Kill as many players as you can in 5 minutes</objective>
 <created>2016-03-29</created>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="e3fdaea1-8a19-4378-8ad7-41cf63f5d141"/> <!-- Avaleer -->
 </authors>
@@ -13,13 +13,22 @@
     <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="World File Help"/> <!-- rockymine -->
 </contributors>
 <rules>
-    <rule>Kill as many players as you can in 4 minutes!</rule>
+    <rule>Kill as many players as you can in 5 minutes!</rule>
 </rules>
-<score>
-    <kills>1</kills>
-</score>
-<time>4m</time>
-<players min="2" max="6" show-name-tags="false"/>
+<players max="5" max-overfill="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" name="Sword" material="stone sword"/>
+        <item slot="1" name="Bow" material="bow"/>
+        <item slot="2" amount="10" material="arrow"/>
+        <item slot="8" material="golden apple"/>
+        <helmet color="167785" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" material="iron chestplate"/>
+        <leggings color="167785" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="167785" unbreakable="true" locked="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true">
         <regions>
@@ -31,37 +40,18 @@
         </regions>
     </spawn>
     <default yaw="-48">
-        <regions>
+        <region>
             <cuboid min="-95,34,92" max="-94,34,91"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<kits>
-    <kit id="spawn-kit">
-        <item slot="0" name="Sword">stone sword</item>
-        <item slot="1" name="Bow">bow</item>
-        <item slot="2" amount="1">golden apple</item>
-        <item slot="8" amount="10">arrow</item>
-        <helmet color="167785" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate unbreakable="true" locked="true">iron chestplate</chestplate>
-        <leggings color="167785" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="167785" unbreakable="true" locked="true">leather boots</boots>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>suffocation</damage>
-</disabledamage>
-<respawn delay="1s" blackout="true"/>
 <regions>
-    <apply block="never" region="everywhere" message="You may not edit the map!"/>
+    <apply block="never"/>
 </regions>
-<killreward>
-    <item amount="3" material="arrow"/>
-    <item amount="1" material="golden apple"/>
-</killreward>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -71,5 +61,17 @@
     <item>leather boots</item>
     <item>arrow</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <item amount="3" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>suffocation</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <timelock>on</timelock>
+<respawn delay="1s" blackout="true"/>
 </map>

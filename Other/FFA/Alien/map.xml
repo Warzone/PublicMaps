@@ -1,19 +1,38 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Alien</name>
-<slug>alien</slug>
-<version>1.0.7</version>
+<version>1.0.8</version>
 <objective>Get the most kills within 5 minutes!</objective>
 <created>2016-03-05</created>
+<gamemode>ffa</gamemode>
 <authors>
     <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" /> <!-- AtlasGames -->
 </authors>
-<gamemode>ffa</gamemode>
 <score>
     <kills>1</kills>
 </score>
 <time>5m</time>
-<players max="5" max-overfill="5" show-name-tags="false" />
-<respawn auto="true" />
+<players max="5" max-overfill="5" show-name-tags="false"/>
+<kits>
+    <kit id="spawn-kit" parents="obs-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="8" amount="24" material="arrow"/>
+        <helmet unbreakable="true" locked="true" color="7F3FB2" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" locked="true" color="7F3FB2" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection fall:4"/>
+        <effect duration="1m30s">absorption</effect>
+        <effect duration="3s" amplifier="5">resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="kill-boost" force="true">
+        <effect duration="3s" amplifier="3">regeneration</effect>
+        <effect duration="4s" amplifier="2">speed</effect>
+    </kit>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+</kits>
 <spawns safe="true" spread="true">
     <spawn kit="spawn-kit">
         <regions angle="0,10,0">
@@ -31,43 +50,16 @@
             <point>-19,2,-21</point>
         </regions>
     </spawn>
-    <default kit="obs-kit">
-        <regions>
-            <point yaw="135" pitch="18">-11.5,21,-4.5</point>
-        </regions>
+    <default kit="obs-kit" yaw="135" pitch="18">
+        <region>
+            <point>-11.5,21,-4.5</point>
+        </region>
     </default>
 </spawns>
-<kits>
-    <kit id="spawn-kit" parents="obs-kit">
-        <item slot="0" unbreakable="true" material="stone sword" />
-        <item slot="1" unbreakable="true" material="bow" />
-        <item slot="8" amount="24" material="arrow" />
-        <helmet unbreakable="true" locked="true" color="7F3FB2" material="leather helmet" />
-        <chestplate unbreakable="true" locked="true" material="chainmail chestplate" />
-        <leggings unbreakable="true" locked="true" color="7F3FB2" material="leather leggings" />
-        <boots unbreakable="true" locked="true" material="iron boots" enchantment="protection fall:4" />
-        <effect duration="1m30s">absorption</effect>
-        <effect duration="3s" amplifier="5">resistance</effect>
-    </kit>
-    <kit id="kill-boost" force="true">
-        <effect duration="3s" amplifier="3">regeneration</effect>
-        <effect duration="4s" amplifier="2">speed</effect>
-    </kit>
-    <kit id="obs-kit">
-        <effect>night vision</effect>
-    </kit>
-</kits>
-<kill-rewards>
-    <kill-reward>
-        <item material="ender pearl" />
-        <item amount="8" material="arrow" />
-        <kit id="kill-boost"/>
-    </kill-reward>
-</kill-rewards>
 <regions>
     <cuboid id="roof" min="-25,17,-25" max="25,30,25" />
     <apply enter="never" region="roof" message="You cannot leave the playing field!" />
-    <apply block="never" />
+    <apply block="never"/>
 </regions>
 <gamerules>
     <doDaylightCycle>false</doDaylightCycle>
@@ -90,4 +82,12 @@
     <damage>fall</damage>
     <damage>suffocation</damage>
 </disabledamage>
+<kill-rewards>
+    <kill-reward>
+        <item material="ender pearl"/>
+        <item amount="8" material="arrow"/>
+        <kit id="kill-boost"/>
+    </kill-reward>
+</kill-rewards>
+<respawn auto="true"/>
 </map>

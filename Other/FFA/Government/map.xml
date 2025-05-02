@@ -1,20 +1,17 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Government</name>
 <version>1.0.6</version>
 <objective>Kill as many players as you can in 5 minutes</objective>
 <created>2016-03-27</created>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="755acf7d-c9b4-4f1d-b7ac-db4dfdfa2b26"/> <!-- Strmr -->
 </authors>
 <contributors>
     <contributor uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Obstacle course"/> <!-- Timotheeee -->
-    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Trees and garden"/> <!--Rockymine -->
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6" contribution="Trees and garden"/> <!-- rockymine -->
 </contributors>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
 <players min="2" max="5" colors="true"/>
 <kits>
     <kit id="spawn-kit">
@@ -52,14 +49,18 @@
         </regions>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cuboid min="70,13,136" max="68,11,132"/>
-        </regions>
+        </region>
     </default>
 </spawns>
 <regions>
     <apply block="never"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -74,7 +75,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>

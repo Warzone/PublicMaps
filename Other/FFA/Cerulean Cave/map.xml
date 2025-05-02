@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Cerulean Cave</name>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <created>2016-02-24</created>
 <gamemode>ffa</gamemode>
 <objective>Kill as many players as you can with your gun!</objective>
@@ -11,11 +11,28 @@
 <rules>
     <rule>You are not allowed to hide!</rule>
 </rules>
-<score>
-    <kills>1</kills>
-</score>
-<time>5m</time>
+<broadcasts>
+    <tip after="3s" every="140s">`7You get 1 `clandmine`7 every 4 kills!</tip>
+    <tip after="5s" every="140s">`7You get 2 `bMLG grenades`7 every 6 kills!</tip>
+</broadcasts>
 <players max="5" max-overfill="5"/>
+<kits>
+    <kit id="spawn-kit" parents="obs-kit">
+        <item slot="0" unbreakable="true" enchantment="damage all:10;knockback" projectile="blast" name="`6`lFlame `4`lThrower" material="blaze rod"/>
+        <helmet color="ffffff" unbreakable="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" color="ffffff" locked="true" material="leather chestplate"/>
+        <leggings color="ffffff" unbreakable="true" locked="true" material="leather leggings"/>
+        <boots color="ffffff" unbreakable="true" locked="true" material="leather boots"/>
+        <effect>speed</effect>
+        <effect amplifier="100" duration="2">heal</effect>
+        <effect amplifier="100" duration="2">damage resistance</effect>
+        <effect amplifier="100" duration="2">regeneration</effect>
+        <double-jump power="4.0" recharge-time="3.5s" recharge-before-landing="false"/>
+    </kit>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" spread="true">
         <regions>
@@ -32,81 +49,29 @@
         </regions>
     </spawn>
     <default yaw="135" kit="obs-kit">
-        <regions>
+        <region>
             <cuboid min="2,58,-1" max="2,58,-1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<projectiles>
-    <projectile id="blast" name="`6`lFlame `4Thrower" projectile="SmallFireball" velocity="7" damage="50" throwable="false" click="right" destroy-filter="never" cooldown="0.75s"/>
-</projectiles>
-<kits>
-    <kit id="spawn-kit" parents="obs-kit">
-        <item slot="0" unbreakable="true" enchantment="damage all:10;knockback" projectile="blast" name="`6`lFlame `4`lThrower" material="blaze rod"/>
-        <potion duration="oo" amplifier="1">speed</potion>
-        <potion amplifier="100" duration="2">heal</potion>
-        <potion amplifier="100" duration="2">damage resistance</potion>
-        <potion amplifier="100" duration="2">regeneration</potion>
-        <helmet color="ffffff" unbreakable="true" locked="true">leather helmet</helmet>
-        <chestplate unbreakable="true" color="ffffff" locked="true">leather chestplate</chestplate>
-        <leggings color="ffffff" unbreakable="true" locked="true">leather leggings</leggings>
-        <boots color="ffffff" unbreakable="true" locked="true">leather boots</boots>
-        <double-jump power="4.0" recharge-time="3.5s" recharge-before-landing="false"/>
-    </kit>
-    <kit id="obs-kit">
-        <potion duration="oo">night vision</potion>
-    </kit>
-</kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-    <damage>suffocation</damage>
-    <damage self="true" enemy="false" other="false">block explosion</damage>
-</disabledamage>
-<kill-rewards>
-    <kill-reward>
-        <filter>
-            <all>
-                <kill-streak count="4" repeat="true"/>
-            </all>
-        </filter>
-        <item amount="1" name="`4`lMEGABOMB `6| `bFuse: 1s `6| `bPower: 3" lore="`e`lBOOM!" material="tnt"/>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <all>
-                <kill-streak count="6" repeat="true"/>
-            </all>
-        </filter>
-        <item amount="2" name="`f`lMLG SNOWBALL-GRENADE `6| `bPower: 4" lore="`e`lBOOM++!" grenade-destroy="false" grenade-fire="false" enchantment="arrow damage" grenade-power="4" grenade="true" material="snow ball"/>
-    </kill-reward>
-</kill-rewards>
-<autorespawn/>
-<tnt>
-    <instantignite>on</instantignite>
-    <licensing>off</licensing>
-    <friendly-defuse>off</friendly-defuse>
-    <blockdamage>off</blockdamage>
-    <fuse>1s</fuse>
-    <power>3</power>
-</tnt>
 <filters>
     <material id="only-tnt">tnt</material>
 </filters>
 <regions>
-    <apply block-place="only-tnt" block-break="never" region="everywhere" message="You may not edit the map!"/>
     <apply velocity="-0.8,1.5,0.0">
         <region>
             <cuboid min="4.5,14,-0.5" max="3.5,15,0.5"/>
         </region>
     </apply>
+    <apply block-place="only-tnt" block-break="never" message="You may not edit the map!"/>
 </regions>
-<broadcasts>
-    <tip after="3s" every="140s">`7You get 1 `clandmine`7 every 4 kills!</tip>
-    <tip after="5s" every="140s">`7You get 2 `bMLG grenades`7 every 6 kills!</tip>
-</broadcasts>
+<score>
+    <kills>1</kills>
+</score>
+<time>5m</time>
+<projectiles>
+    <projectile id="blast" name="`6`lFlame `4Thrower" projectile="SmallFireball" velocity="7" damage="50" throwable="false" click="right" destroy-filter="never" cooldown="0.75s"/>
+</projectiles>
 <itemremove>
     <item>blaze rod</item>
     <item>tnt</item>
@@ -115,5 +80,36 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="4" repeat="true"/>
+        </filter>
+        <item name="`4`lMEGABOMB `6| `bFuse: 1s `6| `bPower: 3" lore="`e`lBOOM!" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="6" repeat="true"/>
+        </filter>
+        <item amount="2" name="`f`lMLG SNOWBALL-GRENADE `6| `bPower: 4" lore="`e`lBOOM++!" grenade-destroy="false" grenade-fire="false" enchantment="arrow damage" grenade-power="4" grenade="true" material="snow ball"/>
+    </kill-reward>
+</kill-rewards>
+<disabledamage>
+    <damage>fall</damage>
+    <damage>suffocation</damage>
+    <damage self="true" enemy="false" other="false">block explosion</damage>
+</disabledamage>
+<tnt>
+    <instantignite>on</instantignite>
+    <licensing>off</licensing>
+    <friendly-defuse>off</friendly-defuse>
+    <blockdamage>off</blockdamage>
+    <fuse>1s</fuse>
+    <power>3</power>
+</tnt>
+<respawn auto="true"/>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <timelock>on</timelock>
 </map>
