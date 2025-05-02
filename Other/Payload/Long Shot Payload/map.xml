@@ -1,0 +1,207 @@
+<map proto="1.5.0">
+<name>Long Shot: Payload</name>
+<version>1.1.5</version>
+<objective>Push your team's cart back to your base before the enemy!</objective>
+<include id="gapple-kill-reward"/>
+<!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
+<gamemode>arcade</gamemode>
+<gamemode>payload</gamemode>
+<phase>staging</phase>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+    <author uuid="4a0780d3-d9c4-41c4-a816-e077a36f27c9"/> <!-- KasiCrafter -->
+</authors>
+<contributors>
+    <contributor uuid="bb628049-e368-4b1c-b8aa-d4557ae9416b" contribution="WorldEdit substitute"/> <!-- Anthonny -->
+    <contributor uuid="b1521072-6993-4fe4-ae60-dbeeb7dc0cfa" contribution="Payload edit"/> <!-- Antnecb -->
+</contributors>
+<broadcasts>
+    <tip after="1s" every="2m">`bAfter `32 kills `byou will receive `35 firecharges`b.</tip>
+    <tip after="3s" every="3m">`bAfter `35 kills `byou will receive `35 auto-igniting TNT`b.</tip>
+    <tip after="5s" every="2m">`bEntering the enemy lane temporarily lowers your maximum health!</tip>
+</broadcasts>
+<teams>
+    <team id="blue" color="blue" max="24">Blue</team>
+    <team id="red" color="dark red" max="24">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow">
+            <enchantment>infinity</enchantment>
+        </item>
+        <item slot="28" material="arrow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="12" team-color="true" material="stained clay"/>
+        <item slot="6" material="water bucket"/>
+        <item slot="8" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment>projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots">
+            <enchantment>feather_falling</enchantment>
+        </boots>
+    </kit>
+    <kit id="health-debuff">
+        <max-health>14</max-health>
+    </kit>
+    <lend kit="health-debuff">
+        <filter>
+            <all>
+                <filter id="only-red"/>
+                <filter id="blue-lane"/>
+            </all>
+        </filter>
+    </lend>
+    <lend kit="health-debuff">
+        <filter>
+            <all>
+                <filter id="only-blue"/>
+                <filter id="red-lane"/>
+            </all>
+        </filter>
+    </lend>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="174,61,0" radius="4" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue" kit="spawn-kit">
+        <region yaw="90">
+            <cylinder base="148.5,60,-21.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red" kit="spawn-kit">
+        <region yaw="90">
+            <cylinder base="148.5,60,22.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-blue">blue</team>
+    <team id="only-red">red</team>
+    <deny id="deny-tracks">
+        <material>rails</material>
+    </deny>
+</filters>
+<regions>
+    <union id="bases">
+        <rectangle id="blue-base" min="110,-32" max="158,-11"/>
+        <rectangle id="red-base" min="110,12" max="158,33"/>
+    </union>
+    <union id="above-bases">
+        <cuboid id="blue-above" min="123,66,-32" max="158,oo,-11"/>
+        <cuboid id="red-above" min="123,66,12" max="158,oo,33"/>
+    </union>
+    <complement id="deny-lane">
+        <rectangle id="mid-lane" min="-152,-11" max="158,12"/>
+        <rectangle id="front-wood-platform" min="27,-11" max="50,12"/>
+        <rectangle id="middle-wood-platform" min="-53,-11" max="-30,12"/>
+    </complement>
+    <negative id="outside-map">
+        <cuboid id="playable" min="-152,0,-32" max="158,78,33"/>
+    </negative>
+    <union id="lanes">
+        <rectangle id="blue-lane" min="-152,-32" max="110,-11"/>
+        <mirror id="red-lane" region="blue-lane" origin="38.5,0,0.5" normal="0,0,1"/>
+    </union>
+    <apply enter="only-blue" region="blue-above"/>
+    <apply enter="only-red" region="red-above"/>
+    <apply block="never" region="outside-map" message="You may not build outside of the map's boundaries!"/>
+    <apply block="never" region="bases" message="You may not modify the bases!"/>
+    <apply block="never" region="deny-lane" message="You may only cross the void on the wooden platforms!"/>
+    <apply block="deny-tracks" block-physics="deny-tracks"/>
+    <!-- union id="rail-radii">
+        <union id="blue-radii">
+            Payload island
+            <cuboid min="-145,0,-25" max="-138,78,-18"/>
+            <cuboid min="-138,28,-23" max="-131,32,-20"/>
+            Last island from the back
+            <cuboid min="-52,38,-23" max="-46,42,-20"/>
+            <cuboid min="-49,38,-20" max="-46,42,-15"/>
+            <cuboid min="-46,38,-18" max="-34,42,-15"/>
+            <cuboid min="-37,38,-23" max="-34,42,-18"/>
+            <cuboid min="-34,38,-23" max="-31,42,-20"/>
+            Middle island
+            <cuboid min="28,48,-23" max="34,52,-20"/>
+            <cuboid min="31,48,-20" max="34,52,-15"/>
+            <cuboid min="34,48,-18" max="46,52,-15"/>
+            <cuboid min="43,48,-23" max="46,52,-18"/>
+            <cuboid min="46,48,-23" max="49,52,-20"/>
+            Spawn island
+            <cuboid min="89,58,-23" max="96,62,-20"/>
+            <cuboid min="96,0,-25" max="103,78,-18"/>
+            Void
+            <cuboid min="48,48,-23" max="90,62,-20"/>
+            <cuboid min="-32,38,-23" max="29,52,-20"/>
+            <cuboid min="-132,28,-23" max="-51,42,-20"/>
+        </union>
+        <mirror id="red-radii" region="blue-radii" origin="38.5,39,0.5" normal="0,0,1"/>
+    </union -->
+    <!-- apply block="never" region="rail-radii" message="You may not interfere with the areas around the payload tracks!"/ -->
+</regions>
+<payloads radius="6" capture-time="5m" decay-rate="0.25" contested-rate="0.75" capture-rule="exclusive" points="1">
+    <payload location="99.5,60,-21.5" name="Blue Payload" capture-filter="only-blue"/>
+    <payload location="99.5,60,22.5" name="Red Payload" capture-filter="only-red"/>
+</payloads>
+<score>
+    <limit>1</limit>
+</score>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>arrow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+</itemremove>
+<itemkeep>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>iron axe</item>
+    <item>arrow</item>
+    <item>wood</item>
+    <item>stained clay</item>
+    <item>water bucket</item>
+    <item>bucket</item>
+    <item>golden apple</item>
+    <item>fireball</item>
+    <item>tnt</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="4" team-color="true" material="stained clay"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item amount="5" material="fireball"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5" repeat="true"/>
+        </filter>
+        <item amount="5" material="tnt"/>
+    </kill-reward>
+</kill-rewards>
+<tnt>
+    <instantignite>on</instantignite>
+</tnt>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
