@@ -1,6 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Xiexieni</name>
-<version>0.1.5</version>
+<version>0.1.8</version>
+<include id="gapple-kill-reward"/>
 <objective>Attackers must push the payload to the end of the map, defenders must stop them from doing so!</objective>
 <created>2023-02-10</created>
 <!-- Payload is an experimental / alpha phase gamemode! Stats must not be tracked until further updates -->
@@ -15,7 +16,6 @@
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Assets"/> <!-- Cazadorian -->
     <contributor uuid="430ec559-364a-4363-ac7a-2529050440ac" contribution="XML"/> <!-- MameBT -->
 </contributors>
-<time result="blue">10m25s</time>
 <broadcasts>
     <alert after="2s" filter="only-red">Your spawn will open up after 25 seconds have passed, push the payload to the end of the map to win!</alert>
     <alert after="2s" filter="only-blue">Follow the rails to the right out of your spawn to the payload you must defend, stop the Attackers getting it to the end of the map!</alert>
@@ -42,62 +42,58 @@
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="red-kit" parent="spawn-kit">
-        <item slot="8" amount="8" material="arrow"/>
+        <item slot="8" amount="12" material="arrow"/>
     </kit>
     <kit id="blue-kit" parent="spawn-kit">
-        <item slot="8" amount="12" material="arrow"/>
+        <item slot="8" amount="8" material="arrow"/>
     </kit>
 </kits>
 <spawns>
-    <default>
-        <region yaw="90">
+    <default yaw="90">
+        <region>
             <cylinder base="83,25,26.5" height="0" radius="0.5"/>
         </region>
     </default>
     <spawns team="red" kit="red-kit">
-        <spawn id="red-first" filter="first-spawn">
-            <region yaw="-90">
+        <spawn id="red-first" filter="first-spawn" yaw="-90">
+            <region>
                 <point>-4.5,57,-38.5</point>
             </region>
         </spawn>
-        <spawn id="red-second" filter="second-spawn">
-            <region yaw="-90">
+        <spawn id="red-second" filter="second-spawn" yaw="-90">
+            <region>
                 <point>15.5,44,4.5</point>
             </region>
         </spawn>
-        <spawn id="red-third" filter="third-spawn">
-            <region yaw="90">
+        <spawn id="red-third" filter="third-spawn" yaw="90">
+            <region>
                 <point>77.5,47,9.5</point>
             </region>
         </spawn>
-        <spawn id="red-fourth" filter="third-checkpoint-completed">
-            <region yaw="90">
+        <spawn id="red-fourth" filter="third-checkpoint-completed" yaw="90">
+            <region>
                 <point>99,27,63.5</point>
             </region>
         </spawn>
     </spawns>
     <spawns team="blue" kit="blue-kit">
-        <spawn id="blue-first" filter="first-spawn">
-            <region yaw="90">
+        <spawn id="blue-first" filter="first-spawn" yaw="90">
+            <region>
                 <point>91.5,46,26.5</point>
             </region>
         </spawn>
-        <spawn  id="blue-second" filter="second-spawn">
-            <region yaw="-90">
+        <spawn  id="blue-second" filter="second-spawn" yaw="-90">
+            <region>
                 <point>-0.5,51,62.5</point>
             </region>
         </spawn>
-        <spawn id="blue-third" filter="third-spawn">
-            <region yaw="180">
+        <spawn id="blue-third" filter="third-spawn" yaw="180">
+            <region>
                 <point>49.5,43,127.5</point>
             </region>
         </spawn>
     </spawns>
 </spawns>
-<regions>
-    <cuboid id="attackers-gate" min="-1,17,-45" size="1,1,13"/>
-    <apply block="never" use="never"/>
-</regions>
 <filters>
     <not id="first-spawn">
         <completed>first-checkpoint</completed>
@@ -119,6 +115,11 @@
         <match-started/>
     </after>
 </filters>
+<regions>
+    <cuboid id="attackers-gate" min="-1,17,-45" size="1,1,13"/>
+    <apply block="never" use="never"/>
+</regions>
+<time result="blue">10m25s</time>
 <actions>
     <fill id="open-attackers-gate" region="attackers-gate" material="air"/>
     <message id="spawns-forward-1" text="`b`lSpawns have been moved forward!"/>
@@ -129,7 +130,7 @@
     <trigger filter="second-checkpoint-completed" trigger="spawns-forward-2" scope="player"/>
     <trigger filter="third-checkpoint-completed" trigger="spawns-forward-3" scope="player"/>
 </actions>
-<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="65s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
+<payloads permanent="true" radius="3.5" capture-filter="only-red" capture-time="60s" decay-rate="0.15" recovery-rate="0.15" contested-rate="0" time-multiplier="0.05" capture-rule="majority">
     <payload id="first-checkpoint" name="Checkpoint A" location="18,11,-38" display-filter="first-spawn"/>
     <payload id="second-checkpoint" name="Checkpoint B" location="39,9,8" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
     <payload id="third-checkpoint" name="Checkpoint C" location="62,9,54" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
@@ -281,7 +282,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="3" material="arrow"/>
     </kill-reward>
 </kill-rewards>
