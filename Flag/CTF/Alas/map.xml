@@ -1,155 +1,148 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Alas</name>
 <version>1.1.1</version>
-<objective>Reach 150 points by capturing enemy flags and killing opponents!</objective>
+<objective>Get the most points by capturing enemy flags and killing opponents!</objective>
 <gamemode>ctf</gamemode>
-<time>20m</time>
-<score>
-	<limit>150</limit>
-    <kills>1</kills>
-</score>
+<include id="gapple-kill-reward"/>
 <authors>
-	<author uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4"/> <!-- Pos -->
+    <author uuid="04415962-13e2-4010-b5f1-6d5ed7e537d4"/> <!-- Pos -->
 </authors>
 <contributors>
-	<contributor uuid="7475c44e-3066-468f-a4c6-488fe9612097"/> <!-- Jc i made the whole map -->
+    <contributor uuid="7475c44e-3066-468f-a4c6-488fe9612097"/> <!-- Jc i made the whole map -->
 </contributors>
 <broadcasts>
     <alert after="2s" every="1m">`6Kills`r = `l1 point`r, `6Flag captures`r = `l10 points</alert>
     <alert after="5s" every="1m">`rFirst team to `c`l150 points`r wins the game!</alert>
-	<alert after="20s" every="1m">`rYou will receive a golden apple and 8 arrows every two kills!</alert>
+    <alert after="20s" every="1m">`rYou will receive a golden apple and 8 arrows every two kills!</alert>
 </broadcasts>
-<kill-rewards>
-	<kill-reward>
-		<item amount="8">wood</item>
-		<item amount="1">gold ingot</item>
-		<item amount="1">golden apple</item>
-	</kill-reward>
-	<kill-reward>
-		<filter>
-			<kill-streak count="2" repeat="true"/>
-		</filter>
-		<item amount="8">arrow</item>
-	</kill-reward>
-</kill-rewards>
-<itemremove>
-	<item>leather helmet</item>
-	<item>leather chestplate</item>
-	<item>leather leggings</item>
-	<item>chainmail boots</item>
-	<item>golden carrot</item>
-	<item>seeds</item>
-	<item>yellow flower</item>
-	<item>red rose</item>
-	<item>red rose:1</item>
-</itemremove>
-<toolrepair>
-	<tool>stone sword</tool>
-	<tool>bow</tool>
-	<tool>stone pickaxe</tool>
-	<tool>stone spade</tool>
-	<tool>stone axe</tool>
-</toolrepair>
-<maxbuildheight>38</maxbuildheight>
 <teams>
-	<team id="red-team" color="dark red" max="16">Red</team>
-	<team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
 </teams>
 <kits>
-	<kit id="spawn" force="true">
-		<item slot="0">stone sword</item>
-		<item slot="1">bow</item>
-		<item slot="2">stone pickaxe</item>
-		<item slot="3" material="stone axe">
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="stone pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe">
             <enchantment level="2">efficiency</enchantment>
         </item>
-		<item slot="4" amount="32">wood</item>
-		<item slot="7" amount="24">arrow</item>
-		<item slot="8" amount="64">golden carrot</item>
-		<leggings color="191919" unbreakable="true">leather leggings</leggings>
-		<boots material="chainmail boots" unbreakable="true">
+        <item slot="4" amount="48" material="wood"/>
+        <item slot="7" amount="24" material="arrow"/>
+        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
+        <chestplate team-color="true" unbreakable="true">leather chestplate</chestplate>
+        <leggings color="191919" unbreakable="true" material="leather leggings"/>
+        <boots material="chainmail boots" unbreakable="true">
             <enchantment level="2">projectile_protection</enchantment>
         </boots>
-		<potion duration="3" amplifier="25">regeneration</potion>
+        <effect duration="3" amplifier="25">regeneration</effect>
         <item slot="29">stone spade</item>
-	</kit>
-	<kit id="red-kit" parents="spawn">
-		<helmet color="993333" unbreakable="true">leather helmet</helmet>
-		<chestplate color="993333" unbreakable="true">leather chestplate</chestplate>
-	</kit>
-		<kit id="blue-kit" parents="spawn">
-		<helmet color="334CB2" unbreakable="true">leather helmet</helmet>
-		<chestplate color="334CB2" unbreakable="true">leather chestplate</chestplate>
-	</kit>
+    </kit>
 </kits>
 <spawns>
-	<spawn team="red-team" kit="red-kit">
-		<regions yaw="90">
-			<cuboid min="80,28,3" max="76,28,-2"/>
-		</regions>
-	</spawn>
-	<spawn team="blue-team" kit="blue-kit">
-		<regions yaw="-90">
-			<cuboid min="-79,28,-2" max="-76,28,3"/>
-		</regions>
-	</spawn>
-	<default>
-		<regions yaw="0">
-			<cuboid min="-1,54,-1" max="1,54,1"/>
-		</regions>
-	</default>
+    <spawn team="red-team" kit="spawn-kit" yaw="90">
+        <region>
+            <cuboid min="80,28,3" max="76,28,-2"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <cuboid min="-79,28,-2" max="-76,28,3"/>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <cuboid min="-1,54,-1" max="1,54,1"/>
+        </region>
+    </default>
 </spawns>
 <filters>
-	<team id="only-blue">blue-team</team>
-	<team id="only-red">red-team</team>
-	<not id="no-void">
-		<void/>
-	</not>
+    <team id="only-blue">blue-team</team>
+    <team id="only-red">red-team</team>
 </filters>
 <regions>
-	<apply block="never" message="You may not edit the spawner area"><!--Spawners -->
+    <apply block="never" message="You may not edit the spawner area"> <!--Spawners -->
         <region>
             <cuboid min="-1,28,-1" max="2,30,2"/>
-			<sphere id="arrow-north" origin="0.5,30,-34.5" radius="1.5"/>
-			<sphere id="arrow-south" origin="0.5,30,35.5" radius="1.5"/>
+            <sphere id="arrow-north" origin="0.5,30,-34.5" radius="1.5"/>
+            <sphere id="arrow-south" origin="0.5,30,35.5" radius="1.5"/>
         </region>
-	</apply>
-	<apply block="never" message="You may not edit the flag post"><!-- Flag Spawners (ALL DIRECTIONS ARE FROM THE OBSERVERS SPAWN) -->
+    </apply>
+    <apply block="never" message="You may not edit the flag post"> <!-- Flag Spawners (ALL DIRECTIONS ARE FROM THE OBSERVERS SPAWN) -->
         <region>
-	    	<cuboid min="-67,27,-50" max="-64,31,-47"/>    <!-- Blue flag right-->
-	    	<cuboid min="-67,27,48" max="-64,31,51"/>   <!-- Blue flag left -->
-	    	<cuboid min="65,27,51" max="68,31,48"/><!-- Red flag right -->
-	    	<cuboid min="68,27,-47" max="65,31,-50"/>  <!-- Red flag left -->
+            <cuboid min="-67,27,-50" max="-64,31,-47"/> <!-- Blue flag right-->
+            <cuboid min="-67,27,48" max="-64,31,51"/> <!-- Blue flag left -->
+            <cuboid min="65,27,51" max="68,31,48"/> <!-- Red flag right -->
+            <cuboid min="68,27,-47" max="65,31,-50"/> <!-- Red flag left -->
         </region>
-	</apply>
-	<apply block="never" message="You may not edit the flag net"><!-- Flag Nets -->
+    </apply>
+    <apply block="never" message="You may not edit the flag net"> <!-- Flag Nets -->
         <region>
             <cuboid id="reds-net-region" min="64,27,-1" max="67,31,2"/> <!-- Red's net -->
             <cuboid id="blues-net-region" min="-63,27,2" max="-66,31,-1"/> <!-- Blue's net -->
         </region>
     </apply>
-    <apply block="never" message="You may not edit the spawn buildings"><!-- Spawn Protection -->
+    <apply block="never" message="You may not edit the spawn buildings"> <!-- Spawn Protection -->
         <region>
-            <cuboid min="-69,27,5" max="-82,33,-4"/><!-- Blue Spawn -->
-            <cuboid min="83,27,5" max="70,33,-4"/><!-- Red Spawn -->
+            <cuboid min="-69,27,5" max="-82,33,-4"/> <!-- Blue Spawn -->
+            <cuboid min="83,27,5" max="70,33,-4"/> <!-- Red Spawn -->
         </region>
     </apply>
-    <apply block="no-void" message="You many not interact with blocks outside the map"><!-- Outside of map -->
+    <apply block="deny(void)" message="You many not interact with blocks outside the map"> <!-- Outside of map -->
         <region>
-			<rectangle id="main-area" min="85,65" max="-86,-64"/>
+            <rectangle id="main-area" min="85,65" max="-86,-64"/>
         </region>
     </apply>
 </regions>
+<time>20m</time>
+<score>
+    <limit>150</limit>
+    <kills>1</kills>
+</score>
 <flags>
-	<post id="red-left-post" pickup-filter="only-blue">66,28,-49</post>
-	<post id="red-right-post" pickup-filter="only-blue">66,28,49</post>
-	<post id="blue-left-post" pickup-filter="only-red">-66,28,49</post>
-	<post id="blue-right-post" pickup-filter="only-red">-66,28,-49</post>
+    <post id="red-left-post" pickup-filter="only-blue">66,28,-49</post>
+    <post id="red-right-post" pickup-filter="only-blue">66,28,49</post>
+    <post id="blue-left-post" pickup-filter="only-red">-66,28,49</post>
+    <post id="blue-right-post" pickup-filter="only-red">-66,28,-49</post>
     <flag id="red-left-flag" name="North Red Flag" color="red" post="red-left-post"/>
     <flag id="red-right-flag" name="South Red Flag" color="red" post="red-right-post"/>
     <flag id="blue-left-flag" name="South Blue Flag" color="blue" post="blue-left-post"/>
     <flag id="blue-right-flag" name="North Blue Flag" color="blue" post="blue-right-post"/>
-    <net  flags="red-right-flag red-left-flag" points="10" region="blues-net-region"/>
-    <net  flags="blue-right-flag blue-left-flag" points="10" region="reds-net-region"/>
+    <net flags="red-right-flag red-left-flag" points="10" region="blues-net-region"/>
+    <net flags="blue-right-flag blue-left-flag" points="10" region="reds-net-region"/>
 </flags>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>chainmail boots</item>
+    <item>seeds</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>red rose:1</item>
+</itemremove>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone spade</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="wood"/>
+        <item material="gold ingot"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item material="golden apple"/>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>38</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

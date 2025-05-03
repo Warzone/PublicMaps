@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>We Sell Mushrooms CTF</name>
 <version>1.1.2</version>
 <objective>Capture both enemy flags two times!</objective>
 <gamemode>ctf</gamemode>
 <edition>standard</edition>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="6bec5c3a-4934-4b19-9aa8-c7c569820f7d"/> <!-- Claf -->
     <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06" contribution="Original author, CTF edits"/> <!-- Strangey -->
@@ -79,9 +80,6 @@
         <cause>world</cause>
         <material id="only-iron">iron block</material>
     </all>
-    <deny id="deny-void">
-        <void/>
-    </deny>
 </filters>
 <regions>
     <union id="spawns">
@@ -102,58 +100,38 @@
         <cylinder id="blue-net" base="-343,2,110" radius="7" height="5"/>
         <cylinder id="red-net" base="-154,2,-79" radius="7" height="5"/>
     </union>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle id="mid" min="-289,-25" max="-208,56"/>
         <rectangle id="blue-side" min="-315,9" max="-242,82"/>
         <rectangle id="red-side" min="-255,-51" max="-182,22"/>
     </complement>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy spawn!"/>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
     <apply lend-kit="entry-lend" region="red-defence" filter="only-blue"/>
     <apply lend-kit="entry-lend" region="blue-defence" filter="only-red"/>
     <apply block-break="only-iron" block-place="only-iron-regen" region="spawns" message="You may only destroy iron blocks in spawn!"/>
     <apply block="never" region="flag-posts" message="You may not build directly around the flags!"/>
-    <apply block="deny-void" region="void" message="You may not build outside of the map!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build outside of the map!"/>
 </regions>
 <renewables>
     <renewable renew-filter="only-iron" region="spawns"/>
 </renewables>
 <flags>
-    <flag id="cyan-flag"
-          name="Cyan Flag"
-          owner="blue"
-          color="cyan"
-          pickup-kit="flag-pickup"
-          drop-kit="flag-drop">
+    <flag id="cyan-flag" name="Cyan Flag" owner="blue" color="cyan" pickup-kit="flag-pickup" drop-kit="flag-drop">
         <carry-message>You have the flag! Return it to your spawn!</carry-message>
         <post owner="blue" pickup-filter="only-red" recover-time="15s">-319.5,19,38.5</post>
     </flag>
-    <flag id="lime-flag"
-          name="Lime Flag"
-          owner="blue"
-          color="lime"
-          pickup-kit="flag-pickup"
-          drop-kit="flag-drop">
+    <flag id="lime-flag" name="Lime Flag" owner="blue" color="lime" pickup-kit="flag-pickup" drop-kit="flag-drop">
         <carry-message>You have the flag! Return it to your spawn!</carry-message>
         <post owner="blue" pickup-filter="only-red" recover-time="15s">-271.5,19,86.5</post>
     </flag>
     <net points="1" region="red-net" flags="cyan-flag lime-flag" respawn-together="true"/>
-    <flag id="orange-flag"
-          name="Orange Flag"
-          owner="red"
-          color="orange"
-          pickup-kit="flag-pickup"
-          drop-kit="flag-drop">
+    <flag id="orange-flag" name="Orange Flag" owner="red" color="orange" pickup-kit="flag-pickup" drop-kit="flag-drop">
         <carry-message>You have the flag! Return it to your spawn!</carry-message>
         <post owner="red" pickup-filter="only-blue" recover-time="15s">-177.5,19,-7.5</post>
     </flag>
-    <flag id="yellow-flag"
-          name="Yellow Flag"
-          owner="red"
-          color="yellow"
-          pickup-kit="flag-pickup"
-          drop-kit="flag-drop">
+    <flag id="yellow-flag" name="Yellow Flag" owner="red" color="yellow" pickup-kit="flag-pickup" drop-kit="flag-drop">
         <carry-message>You have the flag! Return it to your spawn!</carry-message>
         <post owner="red" pickup-filter="only-blue" recover-time="15s">-225.5,19,-55.5</post>
     </flag>
@@ -205,7 +183,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="wood"/>
         <item amount="8" material="glass"/>
     </kill-reward>

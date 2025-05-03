@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>TF2: Badlands CTF</name>
-<version>2.0.4</version>
+<version>2.0.5</version>
 <objective>Capture the flag from the enemy base 5 times!</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -10,19 +10,6 @@
     <team id="red" color="dark red" max="10" max-overfill="12" show-name-tags="false">Red</team>
     <team id="blu" color="blue" max="10" max-overfill="12" show-name-tags="false">Blu</team>
 </teams>
-<score>
-    <limit>5</limit>
-</score>
-<flags pickup-kit="flag-pickup">
-    <flag id="blu-flag" name="Blu Flag" owner="blu" color="blue" pickup-filter="only-red">
-        <post yaw="0">15.5,7,-74.5</post>
-        <net points="1" region="red-return"/>
-    </flag>
-    <flag id="red-flag" name="Red Flag" owner="red" color="red" pickup-filter="only-blu">
-        <post yaw="-180">-25.5,7,76.5</post>
-        <net points="1" region="blu-return"/>
-    </flag>
-</flags>
 <spawns>
     <spawn team="blu" kit="all">
         <regions>
@@ -44,15 +31,15 @@
 </spawns>
 <kits>
     <kit id="all">
-        <potion duration="oo">night vision</potion>
-        <potion duration="2.5s" amplifier="5">heal</potion>
+        <effect>night vision</effect>
+        <effect duration="2.5s" amplifier="5">heal</effect>
     </kit>
     <kit id="ammo-kit-pre">
         <item slot="0" amount="16" material="arrow"/>
     </kit>
     <kit id="ammo-kit-post" parents="ammo-kit-pre"/>
     <kit id="health-kit">
-        <potion duration="2" amplifier="4">regeneration</potion>
+        <effect duration="2" amplifier="4">regeneration</effect>
     </kit>
     <!-- Inversed armor is intentional -->
     <!-- <kit id="spy-red" parents="spy-kit" filter="only-red">
@@ -69,7 +56,7 @@
     </kit> -->
     <kit id="flag-pickup" force="true">
         <double-jump enabled="false"/>
-        <potion duration="0">speed</potion>
+        <effect duration="0">speed</effect>
     </kit>
 </kits>
 <classes family="tf2">
@@ -77,9 +64,9 @@
         <kit id="scout-kit" parents="all">
             <item slot="0" name="`lBaseball Bat" unbreakable="true" material="stone sword"/>
             <item slot="1" name="`lScattergun Shots" amount="6" damage="16460" material="potion"/>
-            <potion duration="oo" amplifier="-1">health boost</potion>
-            <potion duration="oo" amplifier="2">speed</potion>
-            <potion duration="oo" amplifier="2">jump</potion>
+            <effect amplifier="-1">health boost</effect>
+            <effect amplifier="2">speed</effect>
+            <effect amplifier="2">jump</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -93,8 +80,8 @@
             <item slot="2" name="`lKukri" enchantment="knockback:1" attributes="generic.attackDamage:add:2" material="stick"/>
             <item slot="3" amount="32" material="arrow"/>
             <chestplate unbreakable="true" material="chainmail chestplate"/>
-            <potion duration="oo" amplifier="-1">health boost</potion>
-            <potion duration="oo">speed</potion>
+            <effect amplifier="-1">health boost</effect>
+            <effect>speed</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
             <boots team-color="true" enchantment="protection fall:3;protection projectile:2" unbreakable="true" material="leather boots"/>
@@ -104,8 +91,8 @@
         <kit id="heavy-kit" parents="all">
             <item slot="0" name="`lBoxing Gloves" unbreakable="true" attributes="generic.attackDamage:add:5.5" material="stone sword"/>
             <item slot="1" name="`lMinigun" amount="48" grenade="true" material="snow ball"/>
-            <potion duration="oo" amplifier="3">health boost</potion>
-            <potion duration="oo" amplifier="3">slow</potion>
+            <effect amplifier="3">health boost</effect>
+            <effect amplifier="3">slow</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate unbreakable="true" material="diamond chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -117,7 +104,7 @@
             <item slot="0" name="`lEyelander" unbreakable="true" material="stone sword"/>
             <item slot="1" name="`lGrenades" amount="32" grenade="true" grenade-power="0.75" material="snow ball"/>
             <item slot="2" name="`lStickybomb" amount="12" material="tnt"/>
-            <potion duration="oo" amplifier="-1">health boost</potion>
+            <effect amplifier="-1">health boost</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate unbreakable="true" enchantment="protection explosions:10" material="chainmail chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -129,8 +116,8 @@
             <item slot="0" name="`lKnife" unbreakable="true" material="iron sword"/>
             <item slot="1" name="`lRevolver" unbreakable="true" material="bow"/>
             <item slot="2" amount="16" material="arrow"/>
-            <potion duration="oo" amplifier="-3">health boost</potion>
-            <potion duration="oo" amplifier="1">speed</potion>
+            <effect amplifier="-3">health boost</effect>
+            <effect>speed</effect>
             <double-jump/>
         </kit>
     </class> -->
@@ -138,8 +125,8 @@
         <kit id="pyro-kit" parents="all">
             <item slot="0" name="`lFlamethrower" enchantment="fire aspect:1" attributes="generic.attackDamage:add:2" unbreakable="true" material="flint and steel"/>
             <item slot="1" name="`lFire Axe" unbreakable="true" material="stone axe"/>
-            <potion duration="oo" amplifier="1">health boost</potion>
-            <potion duration="oo">fire resistance</potion>
+            <effect>health boost</effect>
+            <effect>fire resistance</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate unbreakable="true" material="chainmail chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -150,7 +137,7 @@
         <kit id="medic-kit" parents="all">
             <item slot="0" name="`lBonesaw" unbreakable="true" material="gold axe"/>
             <item slot="1" name="`lMedigun `7(Infinite)" potions="regeneration:160:2:true" damage="16385" amount="10000" material="potion"/>
-            <potion duration="oo" amplifier="-2">health boost</potion>
+            <effect amplifier="-2">health boost</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate unbreakable="true" material="gold chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -161,7 +148,7 @@
         <kit id="soldier-kit" parents="all">
             <item slot="0" name="`lBlade" unbreakable="true" material="iron sword"/>
             <item slot="1" name="`lRocket Booster `7(Right Click on Ground)" amount="5" grenade="true" grenade-power="2" material="snow ball"/>
-            <potion duration="oo" amplifier="-1">health boost</potion>
+            <effect amplifier="-1">health boost</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate unbreakable="true" enchantment="protection explosions:10" material="chainmail chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -173,8 +160,8 @@
             <item slot="0" name="`lWrench" unbreakable="true" material="stone sword"/>
             <item slot="1" name="`lArcher Sentry" amount="2" damage="51" material="monster egg"/>
             <item slot="2" name="`lGround Sentry" amount="2" damage="54" material="monster egg"/>
-            <potion duration="oo" amplifier="-1">health boost</potion>
-            <potion duration="oo" amplifier="1">slow</potion>
+            <effect amplifier="-1">health boost</effect>
+            <effect amplifier="1">slow</effect>
             <helmet team-color="true" unbreakable="true" material="leather helmet"/>
             <chestplate team-color="true" unbreakable="true" material="chainmail chestplate"/>
             <leggings team-color="true" unbreakable="true" material="leather leggings"/>
@@ -183,8 +170,6 @@
     </class>
 </classes>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blu">blu</team>
     <deny id="no-beacon">
         <material>beacon</material>
     </deny>
@@ -196,10 +181,10 @@
         <all>
             <material>fire</material>
             <not>
-                <team>red</team>
+                <team id="only-red">red</team>
             </not>
             <not>
-                <team>blu</team>
+                <team id="only-blu">blu</team>
             </not>
         </all>
     </any>
@@ -247,15 +232,25 @@
         </region>
     </apply>
     <apply use="no-beacon"/>
-    <apply region="blu-spawn" enter="only-blu" message="You may not enter the enemy spawn area!"/>
-    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy spawn area!"/>
+    <apply region="blu-spawn" enter="only-blu" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn" enter="only-red" message="You may not enter the enemy's spawn!"/>
     <!-- Applied Kits -->
     <apply region="ammo-stations" kit="ammo-kit-post"/>
     <apply region="health-stations" kit="health-kit"/>
 </regions>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<flags pickup-kit="flag-pickup">
+    <flag id="blu-flag" name="Blu Flag" owner="blu" color="blue" pickup-filter="only-red">
+        <post yaw="0">15.5,7,-74.5</post>
+        <net points="1" region="red-return"/>
+    </flag>
+    <flag id="red-flag" name="Red Flag" owner="red" color="red" pickup-filter="only-blu">
+        <post yaw="-180">-25.5,7,76.5</post>
+        <net points="1" region="blu-return"/>
+    </flag>
+</flags>
+<score>
+    <limit>5</limit>
+</score>
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
@@ -310,4 +305,7 @@
     <doMobLoot>false</doMobLoot>
     <doFireTick>false</doFireTick>
 </gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

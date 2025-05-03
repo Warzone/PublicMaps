@@ -1,25 +1,33 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Last Sunset II</name>
-<version>1.1.4</version>
+<variant id="halloween" world="halloween" override="true" slug="a_spooky_sunset">A SpOOky Sunset II</variant> <!-- slug for original name -->
+<version>1.1.7</version>
 <objective>Capture each enemy flag two times!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomRobotBoy -->
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Building"/> <!-- GoldenOre -->
 </authors>
-<broadcasts>
-    <tip after="4s">`3`oYou have to capture the `6flags`3`o in `6spawn`3.</tip>
-    <tip after="6s">`3`oTo make the `6flags`3`o respawn you have to capture both enemy flags first.</tip>
-    <tip after="7s">`6The gold ores`3`o in the `6mines under spawn`3`o drop gold blocks instead of gold ore.</tip>
-    <tip after="10s">`3`oYou can't place water in a 5-block radius around the flag(s).</tip>
-    <tip after="12s">`3`oEvery 4th kill you will get one instant-igniting piece of tnt.</tip>
-</broadcasts>
 <rules>
     <rule>Gold ore drops 1 gold block when mined.</rule>
 </rules>
+<broadcasts>
+    <tip after="4s">`3`oYou have to capture the `6flags`3`o in `6spawn`3.</tip>
+    <tip after="6s">`3`oTo make the `6flags`3`o respawn you have to capture both enemy flags first.</tip>
+    <tip after="8s">`6The gold ores`3`o in the `6mines under spawn`3`o drop gold blocks instead of gold ore.</tip>
+    <tip after="10s">`3`oYou can't place water in a 5-block radius around the flag(s).</tip>
+    <tip after="12s">`3`oEvery 4th kill you will get one instant-igniting piece of tnt.</tip>
+</broadcasts>
 <teams>
-    <team id="blue" color="blue" max="24">Blue</team>
-    <team id="red" color="dark red" max="24">Red</team>
+    <unless variant="halloween">
+        <team id="blue" color="blue" max="24">Blue</team>
+        <team id="red" color="dark red" max="24">Red</team>
+    </unless>
+    <if variant="halloween">
+        <team id="blue" color="gold" max="24">Trick</team>
+        <team id="red" color="dark purple" max="24">Treat</team>
+    </if>
 </teams>
 <kits>
     <kit id="default-kit">
@@ -38,33 +46,48 @@
         <item slot="3" unbreakable="true" material="iron axe">
             <enchantment>efficiency</enchantment>
         </item>
-        <item slot="4" unbreakable="true" material="iron spade"/>
-        <item slot="5" amount="64" material="wood"/>
-        <item slot="6" amount="32" material="glass"/>
-        <item slot="7" amount="32" material="vine"/>
+        <item slot="30" unbreakable="true" material="iron spade"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="32" material="glass"/>
+        <item slot="6" amount="32" material="vine"/>
+        <item slot="7" material="water bucket"/>
         <item slot="8" material="golden apple"/>
-        <item slot="35" material="water bucket"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="iron leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="6" amplifier="255">damage resistance</effect>
+        <effect duration="6s" amplifier="255">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
     <default kit="default-kit">
         <region yaw="-90">
-            <cylinder base="-870.5,62,-393.5" radius="1" height="0"/>
+            <unless variant="halloween">
+                <cylinder base="-870.5,62,-393.5" radius="1" height="0"/>
+            </unless>
+            <if variant="halloween">
+                <cylinder base="-745.5,4,-393.5" radius="1" height="0"/>
+            </if>
         </region>
     </default>
     <spawn team="blue" kit="spawn-kit">
         <region yaw="-90">
-            <cylinder base="-991.5,20,-393.5" radius="1" height="0"/>
+            <unless variant="halloween">
+                <cylinder base="-991.5,20,-393.5" radius="1" height="0"/>
+            </unless>
+            <if variant="halloween">
+                <cylinder base="-989.5,18,-394.5" radius="1" height="0"/>
+            </if>
         </region>
     </spawn>
     <spawn team="red" kit="spawn-kit">
         <region yaw="90">
-            <cylinder base="-749.5,20,-393.5" radius="1" height="0"/>
+            <unless variant="halloween">
+                <cylinder base="-749.5,20,-393.5" radius="1" height="0"/>
+            </unless>
+            <if variant="halloween">
+                <cylinder base="-752.5,18,-393.5" radius="1" height="0"/>
+            </if>
         </region>
     </spawn>
 </spawns>
@@ -97,40 +120,60 @@
     <union id="all-flag-posts-y">
         <circle center="-802.5,-341.5" radius="1.5"/>
         <circle center="-802.5,-445.5" radius="1.5"/>
-        <circle center="-938.5,-445.6" radius="1.5"/>
+        <circle center="-938.5,-445.5" radius="1.5"/>
         <circle center="-938.5,-341.5" radius="1.5"/>
     </union>
     <union id="all-flag-posts-no-water">
         <circle center="-802.5,-341.5" radius="3.5"/>
         <circle center="-802.5,-445.5" radius="3.5"/>
-        <circle center="-938.5,-445.6" radius="3.5"/>
+        <circle center="-938.5,-445.5" radius="3.5"/>
         <circle center="-938.5,-341.5" radius="3.5"/>
     </union>
     <negative id="void-area">
         <cylinder base="-870.5,0,-393.5" radius="140" height="30"/>
     </negative>
-    <cylinder id="blue-net" base="-991.5,20,-393.5" radius="3" height="2"/>
-    <cylinder id="red-net" base="-749.5,20,-393.5" radius="3" height="2"/>
+    <unless variant="halloween">
+        <cylinder id="blue-net" base="-991.5,20,-393.5" radius="3" height="2"/>
+        <cylinder id="red-net" base="-749.5,20,-393.5" radius="3" height="2"/>
+    </unless>
+    <if variant="halloween">
+        <cylinder id="blue-net" base="-989.5,18,-394.5" radius="3" height="2"/>
+        <cylinder id="red-net" base="-752.5,18,-393.5" radius="3" height="2"/>
+    </if>
     <apply block-break="only-gold" block-place="only-gold-regen" message="You may not modify the spawn island!" region="spawn-areas"/>
     <apply block="never" message="You may not break or place blocks where the flag will respawn!" region="all-flag-posts-y"/>
     <apply block="deny-water" message="You may not place water around the flag post!" region="all-flag-posts-no-water"/>
     <apply block="deny-spawners" message="You may not break the spawners!"/>
     <apply block="never" message="You may not modify the void area!" region="void-area"/>
 </regions>
+<constants>
+    <unless variant="halloween">
+        <constant id="team-1-name">Blue</constant>
+        <constant id="team-2-name">Red</constant>
+        <constant id="team-1-color">blue</constant>
+        <constant id="team-2-color">red</constant>
+    </unless>
+    <if variant="halloween">
+        <constant id="team-1-name">Orange</constant>
+        <constant id="team-2-name">Purple</constant>
+        <constant id="team-1-color">orange</constant>
+        <constant id="team-2-color">purple</constant>
+    </if>
+</constants>
 <flags flag-proximity-metric="closest player" net-proximity-metric="closest player" drop-on-water="false">
-    <flag id="north-blue-flag" name="North Blue Flag" owner="blue" color="blue">
+    <flag id="north-blue-flag" name="North ${team-1-name} Flag" owner="blue" color="${team-1-color}">
         <carry-message>You have the flag! Return it to your `6`lspawn!</carry-message>
         <post pickup-filter="only-red" recover-time="30s" respawn-speed="6">-938.5,4,-445.6</post>
     </flag>
-    <flag id="south-blue-flag" name="South Blue Flag" owner="blue" color="blue">
+    <flag id="south-blue-flag" name="South ${team-1-name} Flag" owner="blue" color="${team-1-color}">
         <carry-message>You have the flag! Return it to your `6`lspawn!</carry-message>
         <post pickup-filter="only-red" recover-time="30s" respawn-speed="6">-938.5,4,-341.5</post>
     </flag>
-    <flag id="north-red-flag" name="North Red Flag" owner="red" color="red">
+    <flag id="north-red-flag" name="North ${team-2-name} Flag" owner="red" color="${team-2-color}">
         <carry-message>You have the flag! Return it to your `6`lspawn!</carry-message>
         <post pickup-filter="only-blue" recover-time="30s" respawn-speed="6">-802.5,4,-445.5</post>
     </flag>
-    <flag id="south-red-flag" name="South Red Flag" owner="red" color="red">
+    <flag id="south-red-flag" name="South ${team-2-name} Flag" owner="red" color="${team-2-color}">
         <carry-message>You have the flag! Return it to your `6`lspawn!</carry-message>
         <post pickup-filter="only-blue" recover-time="30s" respawn-speed="6">-802.5,4,-341.5</post>
     </flag>
@@ -181,26 +224,14 @@
     </rule>
     <rule>
         <filter>
-            <material>wood</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>glass</material>
+            <any>
+                <material>wood</material>
+                <material>glass</material>
+                <material>vine</material>
+            </any>
         </filter>
         <drops>
             <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-    <rule>
-        <filter>
-            <material>vine</material>
-        </filter>
-        <drops>
-            <item chance="0" material="vine"/>
         </drops>
     </rule>
 </blockdrops>
@@ -215,7 +246,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="wood"/>
         <item amount="8" material="glass"/>
     </kill-reward>
@@ -231,9 +261,11 @@
 <tnt>
     <instantignite>on</instantignite>
 </tnt>
-<world>
-    <timelock>off</timelock>
-</world>
+<if variant="default">
+    <world>
+        <timelock>off</timelock>
+    </world>
+</if>
 <hunger>
     <depletion>off</depletion>
 </hunger>

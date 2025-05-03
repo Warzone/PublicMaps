@@ -1,102 +1,108 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Aleppo</name>
-<version>1.1.1</version>
-<objective>Capture the Enemy team's flag 4 times to win!</objective>
+<variant id="halloween" world="halloween" override="true">AlepBOO!</variant>
+<version>1.2.1</version>
+<objective>Capture the enemy team's flag 4 times to win!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samtheman43 -->
 </authors>
 <contributors>
-    <contributor contribution="Feedback" uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- PepsiDog -->
-    <contributor contribution="Feedback" uuid="68c0280d-17d6-4c6b-b453-d1b8eb6a866d"/> <!-- ID12 -->
-    <contributor contribution="Feedback" uuid="7dcb1605-a641-4f6f-99ef-ea04278b6f7c"/> <!-- lgmatias -->
+    <contributor uuid="060baa18-2852-40d8-afcb-e61607c04be3" contribution="Feedback"/> <!-- PepsiDog -->
+    <contributor uuid="68c0280d-17d6-4c6b-b453-d1b8eb6a866d" contribution="Feedback"/> <!-- ID12 -->
+    <contributor uuid="7dcb1605-a641-4f6f-99ef-ea04278b6f7c" contribution="Feedback"/> <!-- lgmatias -->
 </contributors>
 <rules>
-    <rule>Do not block glitch to somehow get outside of the map</rule>
-    <rule>Do not hide in trees</rule>
-    <rule>Do not hide in houses while holding the flag</rule>
+    <rule>Do not block glitch to somehow get outside of the map.</rule>
+    <rule>Do not hide in trees.</rule>
+    <rule>Do not hide in houses while holding the flag.</rule>
 </rules>
 <broadcasts>
     <tip after="30s">`bCapture the Enemy's `aflag`r`b and bring it back to the hill with the beacon!</tip>
-    <tip after="120s" count="oo">`bUse your `aaxe`r`b to break the fence gates at the enemy's flag point!</tip>
-    <tip after="120s" count="oo">`bAfter you have captured the flag you can `anot`b re-enter the flag room!</tip>
+    <tip after="2m" count="oo">`bUse your `aaxe`r`b to break the fence gates at the enemy's flag point!</tip>
+    <tip after="2m" count="oo">`bAfter you have captured the flag you can `anot`b re-enter the flag room!</tip>
     <tip after="3m" every="2m">`aArrow Spawners`r`b can be found on each side of the map, use them wisely!</tip>
 </broadcasts>
 <score>
     <limit>4</limit>
 </score>
 <teams>
-    <!--show-name-tags="allies"-->
-    <team id="cyan-team" color="dark aqua" max="16">Cyan</team>
-    <team id="yellow-team" color="yellow" max="16">Yellow</team>
+    <unless variant="halloween">
+        <team show-name-tags="allies" id="cyan-team" color="dark aqua" max="12" max-overfill="14">Cyan</team>
+        <team show-name-tags="allies" id="yellow-team" color="yellow" max="12" max-overfill="14">Yellow</team>
+    </unless>
+    <if variant="halloween">
+        <team show-name-tags="allies" id="cyan-team" color="gray" max="12" max-overfill="14" plural="true">Spooks</team>
+        <team show-name-tags="allies" id="yellow-team" color="gold" max="12" max-overfill="14" plural="true">Pumpkins</team>
+    </if>
 </teams>
 <spawns>
-    <spawn team="cyan-team" kit="cyan">
-        <regions yaw="90">
-            <region id="cyanSpawn"/>
-        </regions>
-    </spawn>
-    <spawn team="yellow-team" kit="yellow">
-        <regions yaw="-90">
-            <region id="yellowSpawn"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="90">
-            <region id="observerSpawn"/>
-        </regions>
-    </default>
+    <spawn team="cyan-team" kit="cyan" region="cyanSpawn" yaw="90"/>
+    <spawn team="yellow-team" kit="yellow" region="yellowSpawn" yaw="-90"/>
+    <default region="observerSpawn" yaw="90"/>
 </spawns>
 <kits>
     <kit id="spawn" force="true">
+        <clear/>
         <game-mode>adventure</game-mode>
-        <item slot="1">bow</item>
-        <item slot="3" amount="16">424</item>
-        <item slot="8" amount="8">arrow</item>
-        <potion duration="5" amplifier="5">heal</potion>
+        <item slot="1" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="12" material="arrow"/>
+        <leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="5">heal</effect>
     </kit>
     <kit id="yellow" parents="spawn">
-        <chestplate locked="true" color="E5E533" unbreakable="true">leather chestplate</chestplate>
-        <leggings locked="true" color="E5E533" unbreakable="true">leather leggings</leggings>
-        <boots locked="true" unbreakable="true">iron boots</boots>
-        <item slot="0" material="iron axe" enchantment="dig speed:1;sharpness:1">
+        <unless variant="halloween">
+            <helmet locked="true" color="E5E533" unbreakable="true" material="leather helmet"/>
+            <chestplate locked="true" color="E5E533" unbreakable="true" material="leather chestplate"/>
+        </unless>
+        <if variant="halloween">
+            <helmet material="jack o lantern"/>
+            <chestplate locked="true" color="D87F33" unbreakable="true" material="leather chestplate"/>
+        </if>
+        <item slot="0" material="iron axe" enchantment="dig speed">
             <can-destroy>
-                <material>DARK_OAK_FENCE</material>
+                <material>dark oak fence</material>
             </can-destroy>
         </item>
     </kit>
     <kit id="cyan" parents="spawn">
-        <chestplate locked="true" color="4C7F99" unbreakable="true">leather chestplate</chestplate>
-        <leggings locked="true" color="4C7F99" unbreakable="true">leather leggings</leggings>
-        <boots locked="true" unbreakable="true">iron boots</boots>
-        <item slot="0" material="iron axe" enchantment="dig speed:1;sharpness:1">
+        <unless variant="halloween">
+            <helmet locked="true" color="4C7F99" unbreakable="true" material="leather helmet"/>
+            <chestplate locked="true" color="4C7F99" unbreakable="true" material="leather chestplate"/>
+        </unless>
+        <if variant="halloween">
+            <helmet material="skull item"/>
+            <chestplate locked="true" color="999999" unbreakable="true" material="leather chestplate"/>
+        </if>
+        <item slot="0" material="iron axe" enchantment="dig speed">
             <can-destroy>
-                <material>SPRUCE_FENCE</material>
+                <material>spruce fence</material>
             </can-destroy>
         </item>
     </kit>
     <kit id="pickup" force="true">
-        <chestplate enchantment="protection environmental:1" locked="true" unbreakable="true">iron chestplate</chestplate>
-        <potion duration="oo" amplifier="2">slow</potion>
+        <chestplate enchantment="protection environmental" locked="true" unbreakable="true" material="iron chestplate"/>
+        <effect amplifier="2">slow</effect>
     </kit>
     <kit id="remove-slow" force="true">
-        <potion duration="0" amplifier="3">slow</potion>
+        <effect duration="0" amplifier="3">slow</effect>
     </kit>
 </kits>
 <regions>
-    <cuboid id="yellow-lower-flagRoom" min="-56.0,0,-77.0" max="-45.0,25,-71.0"/>
-    <cuboid id="cyan-lower-flagRoom" min="-101.0,0,70.0" max="-90.0,25,76.0"/>
+    <union id="flagRooms">
+        <cuboid id="yellow-lower-flagRoom" min="-56.0,0,-77.0" max="-45.0,25,-71.0"/>
+        <cuboid id="cyan-lower-flagRoom" min="-101.0,0,70.0" max="-90.0,25,76.0"/>
+    </union>
     <cuboid id="cyan-net" min="-113.0,20,51.0" max="-110.0,25,54.0"/>
     <cuboid id="yellow-net" min="-36.0,20,-55.0" max="-33.0,25,-52.0"/>
     <cuboid id="cyan-portal" min="-96,22,69" max="-95,24,70"/>
     <cuboid id="yellow-portal" min="-51,22,-71" max="-50,24,-70"/>
-    <block id="cyanSpawn">-77.5,23,93.5</block>
-    <block id="yellowSpawn">-68.5,23,-94.5</block>
-    <block id="observerSpawn">-72.5,80,-0.5</block>
-    <union id="flagRooms">
-        <region id="yellow-lower-flagRoom"/>
-        <region id="cyan-lower-flagRoom"/>
-    </union>
+    <point id="cyanSpawn">-77.5,23,93.5</point>
+    <point id="yellowSpawn">-68.5,23,-94.5</point>
+    <point id="observerSpawn">-72.5,80,-0.5</point>
     <complement id="above28">
         <above y="27"/>
         <circle center="-95.5,72.5" radius="12"/>
@@ -104,34 +110,14 @@
         <circle center="-50.5,-73.5" radius="12"/>
         <!-- Yellow flag room -->
     </complement>
-    <apply enter="cyan-flag-carrier" block="cyanFlag" message="You may not enter here!">
-        <region>
-            <region id="yellow-lower-flagRoom"/>
-        </region>
-    </apply>
-    <apply enter="yellow-flag-carrier" block="yellowFlag" message="You may not enter here!">
-        <region>
-            <region id="cyan-lower-flagRoom"/>
-        </region>
-    </apply>
+    <apply region="yellow-lower-flagRoom" enter="cyan-flag-carrier" block="cyanFlag" message="You may not enter here!"/>
+    <apply region="cyan-lower-flagRoom" enter="yellow-flag-carrier" block="yellowFlag" message="You may not enter here!"/>
     <apply block="only-some" message="You may not modify the terrain"/>
-    <apply enter="never">
-        <region>
-            <region id="above28"/>
-        </region>
-    </apply>
+    <apply region="above28" enter="never"/>
 </regions>
 <portals>
-    <portal x="@-50.5" y="@31" z="@-73.5">
-        <region>
-            <region id="yellow-portal"/>
-        </region>
-    </portal>
-    <portal x="@-95.5" y="@31" z="@72.5">
-        <region>
-            <region id="cyan-portal"/>
-        </region>
-    </portal>
+    <portal region="yellow-portal" x="@-50.5" y="@31" z="@-73.5"/>
+    <portal region="cyan-portal" x="@-95.5" y="@31" z="@72.5"/>
 </portals>
 <filters>
     <any id="only-some">
@@ -139,8 +125,8 @@
         <filter id="only-fence"/>
     </any>
     <any id="only-fence">
-        <material>SPRUCE_FENCE</material>
-        <material>DARK_OAK_FENCE</material>
+        <material>spruce fence</material>
+        <material>dark oak fence</material>
     </any>
     <all id="cyan-flag-carrier">
         <team id="cyan-only">cyan-team</team>
@@ -170,12 +156,22 @@
     </all>
 </filters>
 <flags>
-    <flag id="cyan-flag" name="Cyan Flag" owner="cyan-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring `aflag `bto `3cyan beacon">
-        <post pickup-filter="yellow-only">-95.5,31,72.5</post>
-    </flag>
-    <flag id="yellow-flag" name="Yellow Flag" owner="yellow-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring `aflag `bto `eyellow beacon">
-        <post pickup-filter="cyan-only">-50.5,31,-73.5</post>
-    </flag>
+    <unless variant="halloween">
+        <flag id="cyan-flag" name="Cyan Flag" owner="cyan-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring `aflag `bto the `3cyan beacon`r!">
+            <post pickup-filter="yellow-only">-95.5,31,72.5</post>
+        </flag>
+        <flag id="yellow-flag" name="Yellow Flag" owner="yellow-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring `aflag `bto the `eyellow beacon`r!">
+            <post pickup-filter="cyan-only">-50.5,31,-73.5</post>
+        </flag>
+    </unless>
+    <if variant="halloween">
+        <flag id="cyan-flag" name="Spooks Flag" owner="cyan-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring the `aflag `bto the `8gray beacon`r!">
+            <post pickup-filter="yellow-only">-95.5,31,72.5</post>
+        </flag>
+        <flag id="yellow-flag" name="Pumpkins Flag" owner="yellow-team" pickup-kit="pickup" drop-kit="remove-slow" carry-message="`bBring the `aflag `bto the `6orange beacon`r!">
+            <post pickup-filter="cyan-only">-50.5,31,-73.5</post>
+        </flag>
+    </if>
     <flags points="1">
         <net region="yellow-net" flag="cyan-flag"/>
         <net region="cyan-net" flag="yellow-flag"/>
@@ -185,23 +181,29 @@
     <tool>iron axe</tool>
     <tool>bow</tool>
 </toolrepair>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <itemremove>
     <item>iron chestplate</item>
-    <item>424</item>
     <item>spruce fence</item>
-    <item>gold chestplate</item>
     <item>item frame</item>
     <item>barrier</item>
+    <item>leather helmet</item>
     <item>leather chestplate</item>
-    <item>leather leggings</item>
+    <item>chainmail leggings</item>
     <item>iron boots</item>
-    <item>DARK_OAK_FENCE</item>
+    <item>dark oak fence</item>
+    <if variant="halloween">
+        <item>jack o lantern</item>
+        <item>skull item</item>
+        <item>stone plate</item>
+    </if>
 </itemremove>
-<armorkeep>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>iron boots</item>
-</armorkeep>
 <disabledamage>
     <damage>fall</damage>
     <damage ally="true" self="true" enemy="false" other="true">block explosion</damage>
@@ -213,29 +215,25 @@
     <licensing>true</licensing>
     <friendly-defuse>false</friendly-defuse>
 </tnt>
-<killreward>
-    <kit>
-        <item amount="1" slot="2">golden apple</item>
-        <potion amplifier="2" duration="5">speed</potion>
-        <potion amplifier="1" duration="2">night vision</potion>
-    </kit>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <kit>
+            <effect amplifier="2" duration="5">speed</effect>
+            <effect duration="2">night vision</effect>
+        </kit>
+    </kill-reward>
+</kill-rewards>
 <timelock>true</timelock>
 <renewables>
-    <renewable interval="5s" particles="true" sound="true" avoid-entities="false">
-        <region>
-            <region id="flagRooms"/>
-        </region>
+    <renewable region="flagRooms" interval="5s" particles="true" sound="true" avoid-entities="false">
         <renew-filter>
             <any>
                 <material>spruce fence</material>
-                <material>DARK_OAK_FENCE</material>
+                <material>dark oak fence</material>
             </any>
         </renew-filter>
         <replace-filter>
-            <any>
-                <material>air</material>
-            </any>
+            <material>air</material>
         </replace-filter>
     </renewable>
 </renewables>
@@ -248,16 +246,6 @@
             <can-place-on>
                 <all-blocks/>
             </can-place-on>
-        </modify>
-    </rule>
-    <rule>
-        <match>
-            <material>iron axe</material>
-        </match>
-        <modify>
-            <can-destroy>
-                <material>spruce fence</material>
-            </can-destroy>
         </modify>
     </rule>
 </item-mods>

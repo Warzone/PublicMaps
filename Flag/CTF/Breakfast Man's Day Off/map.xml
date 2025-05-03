@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Breakfast Man's Day Off</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Retrieve both enemy flags two times each and carry them to your spawn.</objective>
 <gamemode>ctf</gamemode>
 <authors>
@@ -36,28 +36,21 @@
 </kits>
 <spawns>
     <spawn team="red-team" kit="spawnKit" yaw="90">
-        <regions>
+        <region>
             <point>287,50,24</point>
-        </regions>
+        </region>
     </spawn>
     <spawn team="blue-team" kit="spawnKit" yaw="-90">
-        <regions>
+        <region>
             <point>69,50,24</point>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions>
+        <region>
             <point>178,76,-81</point>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-red">red-team</team>
-    <team id="only-blue">blue-team</team>
-    <not id="deny-void">
-        <void/>
-    </not>
-</filters>
 <regions>
     <apply block="never" message="You may not modify the spawn!">
         <region>
@@ -70,7 +63,7 @@
             <block id="spawner">178.5,8,24.5</block>
         </region>
     </apply>
-    <apply block="deny-void" message="You may not build in the void!"/>
+    <apply block="deny(void)" message="You may not build in the void!"/>
 </regions>
 <score>
     <limit>4</limit>
@@ -78,10 +71,10 @@
 <flags>
     <!-- Flags blue needs to cap -->
     <flag id="purple-flag" name="Purple Flag" owner="red-team" color="purple">
-        <post pickup-filter="only-blue" recover-time="1m" respawn-time="5s" yaw="0">254,41,-17</post>
+        <post pickup-filter="blue-team" recover-time="1m" respawn-time="5s" yaw="0">254,41,-17</post>
     </flag>
     <flag id="orange-flag" name="Orange Flag" owner="red-team" color="orange">
-        <post pickup-filter="only-blue" recover-time="1m" respawn-time="5s" yaw="0">254,41,65</post>
+        <post pickup-filter="blue-team" recover-time="1m" respawn-time="5s" yaw="0">254,41,65</post>
     </flag>
     <net points="1" flags="purple-flag orange-flag" respawn-together="true">
         <region>
@@ -90,10 +83,10 @@
     </net>
     <!-- Flags Red needs to cap -->
     <flag id="cyan-flag" name="Cyan Flag" owner="blue-team" color="cyan">
-        <post pickup-filter="only-red" recover-time="1m" respawn-time="5s" yaw="-90">102,41,65</post>
+        <post pickup-filter="red-team" recover-time="1m" respawn-time="5s" yaw="-90">102,41,65</post>
     </flag>
     <flag id="pink-flag" name="Pink Flag" owner="blue-team" color="pink">
-        <post pickup-filter="only-red" recover-time="1m" respawn-time="5s" yaw="-90">102,41,-17</post>
+        <post pickup-filter="red-team" recover-time="1m" respawn-time="5s" yaw="-90">102,41,-17</post>
     </flag>
     <net points="1" flags="cyan-flag pink-flag" respawn-together="true">
         <region>

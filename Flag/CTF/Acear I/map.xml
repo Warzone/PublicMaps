@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Acear I</name>
 <version>1.2.3</version>
 <objective>First team to capture the enemy flag 3 times wins!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="022321a8-578b-4438-b035-8a3ca735639f"/> <!-- nintendoboy11 -->
     <author uuid="cbd5c47c-1137-4f02-93dd-626a46bdd779"/> <!-- Kaskito -->
@@ -16,39 +17,41 @@
     <tip after="5s">Go to your left or right to craft iron armor!</tip>
 </broadcasts>
 <teams>
-    <team id="red" color="dark red" max="8">Red</team>
-    <team id="blue" color="blue" max="8">Blue</team>
+    <team id="red" color="dark red" max="8" max-overfill="12">Red</team>
+    <team id="blue" color="blue" max="8" max-overfill="12">Blue</team>
 </teams>
-<score>
-    <limit>3</limit>
-    <kills>0</kills>
-    <deaths>0</deaths>
-</score>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="iron sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="28" amount="24" material="arrow"/>
         <item slot="2" unbreakable="true" material="iron pickaxe"/>
         <item slot="3" unbreakable="true" material="iron axe"/>
-        <item slot="4" amount="64" damage="1" material="wood"/>
-        <item slot="5" amount="48" material="leaves"/>
+        <item slot="5" amount="16" damage="1" material="log"/>
+        <item slot="6" amount="48" material="leaves"/>
         <item slot="7" amount="32" material="cooked beef"/>
         <item slot="8" material="golden apple"/>
-    </kit>
-    <kit id="red-kit" parents="spawn">
-        <chestplate unbreakable="true" color="993333" material="leather chestplate"/>
-        <boots unbreakable="true" material="iron boots"/>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <chestplate unbreakable="true" color="334CB2" material="leather chestplate"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <boots unbreakable="true" material="iron boots"/>
     </kit>
 </kits>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="10" material="arrow"/>
-</kill-reward>
+<spawns>
+    <spawn team="red" kit="spawn-kit" yaw="90">
+        <region>
+            <point>83.5,6,0.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>-82.5,6,0.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <point>0.5,23,0.5</point>
+        </region>
+    </default>
+</spawns>
 <filters>
     <team id="red-only">red</team>
     <team id="blue-only">blue</team>
@@ -59,103 +62,67 @@
     <rectangle id="blue-flag-protection" min="-34,-2" max="-39,3"/>
     <cuboid id="red-net" min="35,0,3" max="40,3,-2"/>
     <cuboid id="blue-net" min="-34,0,-2" max="-39,3,3"/>
-    <rectangle id="red-spawn-protection" min="86,-2" max="56,3"/>
-    <rectangle id="blue-spawn-protection" min="-85,3" max="-55,-2"/>
     <rectangle id="red-spawn" min="87,-3" max="61,4"/>
     <rectangle id="blue-spawn" min="-86,4" max="-60,-3"/>
-    <union id="map">
-        <rectangle min="58,-21" max="-57,22"/>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="58,-16" max="60,17"/>
-        </intersect>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="60,-15" max="61,16"/>
-        </intersect>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="61,-13" max="62,14"/>
-        </intersect>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="-57,17" max="-59,-16"/>
-        </intersect>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="-59,16" max="-60,-15"/>
-        </intersect>
-        <intersect>
-            <region id="above-5"/>
-            <rectangle min="-60,14" max="-61,-13"/>
-        </intersect>
-    </union>
-    <complement id="build-region">
-        <region id="map"/>
-        <region id="red-spawn-protection"/>
-        <region id="blue-spawn-protection"/>
-    </complement>
+    <negative id="outside-playingfield">
+        <complement id="build-region">
+            <union id="map">
+                <rectangle min="58,-21" max="-57,22"/>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="58,-16" max="60,17"/>
+                </intersect>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="60,-15" max="61,16"/>
+                </intersect>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="61,-13" max="62,14"/>
+                </intersect>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="-57,17" max="-59,-16"/>
+                </intersect>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="-59,16" max="-60,-15"/>
+                </intersect>
+                <intersect>
+                    <region id="above-5"/>
+                    <rectangle min="-60,14" max="-61,-13"/>
+                </intersect>
+            </union>
+            <union id="spawn-protection-area">
+                <rectangle id="red-spawn-protection" min="86,-2" max="56,3"/>
+                <rectangle id="blue-spawn-protection" min="-85,3" max="-55,-2"/>
+            </union>
+        </complement>
+    </negative>
     <cuboid id="spawn-protection-1" min="6,20,7" max="-6,27,-7"/>
-    <cuboid id="water" min="-57,0,-21" max="58,1,22"/>
     <!-- Applied -->
-    <apply enter="red-only" region="red-spawn" message="Only Red Team may enter this spawn!"/>
-    <apply enter="blue-only" region="blue-spawn" message="Only Blue Team may enter this spawn!"/>
+    <apply enter="red-only" region="red-spawn" message="Only Red may enter this spawn!"/>
+    <apply enter="blue-only" region="blue-spawn" message="Only Blue may enter this spawn!"/>
     <apply block="never" message="You may not edit the spawn area" region="spawn-protection-1"/>
-    <apply block="never" message="You may not edit blocks above the flag platform.">
-        <region>
-            <region id="red-flag-protection"/>
-            <region id="blue-flag-protection"/>
-        </region>
-    </apply>
-    <apply block="never" message="You may not modify blocks outside the playing field!">
-        <region>
-            <negative>
-                <region id="build-region"/>
-            </negative>
-        </region>
-    </apply>
+    <apply region="spawn-protection-area" block="never" message="You may not edit blocks above the flag platform."/>
+    <apply region="outside-playingfield" block="never" message="You may not modify blocks outside the playing field!"/>
 </regions>
-<spawns>
-    <spawn team="red" kit="red-kit">
-        <regions>
-            <point yaw="90">83.5,6,0.5</point>
-        </regions>
-    </spawn>
-    <spawn team="blue" kit="blue-kit">
-        <regions>
-            <point yaw="-90">-82.5,6,0.5</point>
-        </regions>
-    </spawn>
-    <default>
-        <regions>
-            <point>0.5,25,0.5</point>
-        </regions>
-    </default>
-</spawns>
+<score>
+    <limit>3</limit>
+    <kills>0</kills>
+    <deaths>0</deaths>
+</score>
+<time>15m</time>
 <flags>
     <!-- Red's Flag -->
-    <post id="red-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="blue-only">37.5,1,0.5</post>
+    <post id="red-flag-post" pickup-filter="blue-only">37.5,1,0.5</post>
     <flag id="red-flag" name="Red Flag" color="red" post="red-flag-post"/>
     <net post="red-flag-post" points="1" region="blue-net" capture-filter="blue-only"/>
     <!-- Blue's Flag -->
-    <post id="blue-flag-post" recover-time="15s" respawn-time="10s" pickup-filter="red-only">-36.5,1,0.5</post>
+    <post id="blue-flag-post" pickup-filter="red-only">-36.5,1,0.5</post>
     <flag id="blue-flag" name="Blue Flag" color="blue" post="blue-flag-post"/>
     <net post="blue-flag-post" points="1" region="red-net" capture-filter="red-only"/>
 </flags>
-<renewables>
-    <renewable region="water" grow="true" particles="false" sound="false">
-        <renew-filter>
-            <any>
-                <material>stationary water</material>
-            </any>
-        </renew-filter>
-        <replace-filter>
-            <any>
-                <material>air</material>
-            </any>
-        </replace-filter>
-    </renewable>
-</renewables>
 <itemremove>
     <item>leather chestplate</item>
     <item>iron boots</item>
@@ -172,6 +139,10 @@
     <item>iron chestplate</item>
     <item>iron leggings</item>
 </itemremove>
-<time>12m</time>
+<kill-rewards>
+    <kill-reward>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <maxbuildheight>19</maxbuildheight>
 </map>

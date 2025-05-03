@@ -1,12 +1,12 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Grassy Mound CTF</name>
-<version>1.0.2</version>
+<version>1.0.4</version>
 <objective>Capture the other team's flag 3 times to win!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
 </authors>
-<time result="score" overtime="1m" max-overtime="2m">15m</time>
 <teams>
     <team id="blue-team" color="blue" max="12">Blue</team>
     <team id="red-team" color="dark red" max="12">Red</team>
@@ -23,18 +23,13 @@
         <item slot="3" unbreakable="true" material="iron axe"/>
         <item slot="30" unbreakable="true" material="iron spade"/>
         <item slot="4" amount="48" material="wood"/>
+        <item slot="5" amount="36" team-color="true" material="stained clay"/>
         <item slot="8" material="golden apple"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="iron boots"/>
         <effect duration="4s" amplifier="255">resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn-kit">
-        <item slot="5" amount="36" damage="11" material="stained clay"/>
-    </kit>
-    <kit id="red-kit" parents="spawn-kit">
-        <item slot="5" amount="36" damage="14" material="stained clay"/>
     </kit>
     <kit id="flag-pickup" force="true">
         <effect>slowness</effect>
@@ -52,12 +47,12 @@
             <cylinder base="30.5,13,227.5" radius="1.5" height="0.2"/>
         </region>
     </default>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="-90">
             <point>36.5,8.5,280.5</point>
         </region>
     </spawn>
-    <spawn team="red-team" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="90">
             <point>106.5,8.5,174.5</point>
         </region>
@@ -99,6 +94,7 @@
     <apply block-place="deny-void" block-break="void-break-ban" message="You may not interact with that material here"/>
     <apply block="deny-enchant-break" message="You may not break the enchantment table"/>
 </regions>
+<time result="score" overtime="1m" max-overtime="2m">15m</time>
 <flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
     <flag id="blue-flag" name="Blue Flag" owner="blue-team" color="blue" pickup-kit="flag-pickup" drop-kit="flag-dropped">
         <post yaw="180" pickup-filter="only-red" recover-time="20s" respawn-time="8s">75.5,15,290.5</post>
@@ -163,15 +159,9 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="12" material="wood"/>
         <item amount="2" material="exp bottle"/>
-    </kill-reward>
-    <kill-reward filter="only-blue">
-        <item amount="8" damage="11" material="stained clay"/>
-    </kill-reward>
-    <kill-reward filter="only-red">
-        <item amount="8" damage="14" material="stained clay"/>
+        <item amount="8" team-color="true" material="stained clay"/>
     </kill-reward>
     <kill-reward>
         <filter>
@@ -215,4 +205,5 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<maxbuildheight>20</maxbuildheight>
 </map>

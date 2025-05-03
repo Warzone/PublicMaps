@@ -1,10 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Odin</name>
 <variant id="halloween" world="halloween" override="true">BOOdin</variant>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Capture the enemy flag 5 times!</objective>
 <gamemode>ctf</gamemode>
-<time result="score" overtime="30s" max-overtime="1m30s">10m</time>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="bbfac3db-dd46-4996-b936-0e2432f33285"/> <!-- Valky -->
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
@@ -54,13 +54,13 @@
             <cylinder base="-260.5,12,299.5" radius="1" height="0"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
-        <region yaw="-90">
+    <spawn team="blue" kit="spawn-kit" yaw="-90">
+        <region>
             <point>-280.5,5,313.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
-        <region yaw="90">
+    <spawn team="red" kit="spawn-kit" yaw="90">
+        <region>
             <point>-240.5,5,285.5</point>
         </region>
     </spawn>
@@ -74,47 +74,24 @@
     <cuboid id="red-net" min="-243,0,289" max="-238,22,282"/>
     <apply block="never" use="never"/>
 </regions>
+<time result="score" overtime="30s" max-overtime="1m30s">10m</time>
 <flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
     <unless variant="halloween">
-        <flag color="blue"
-              id="blue-flag"
-              name="Blue Flag"
-              owner="blue"
-              pickup-kit="flag-pickup"
-              drop-kit="flag-drop"
-              carry-message="You are carrying the flag! Return it to your spawn!">
+        <flag color="blue" id="blue-flag" name="Blue Flag" owner="blue" pickup-kit="flag-pickup" drop-kit="flag-drop" carry-message="You are carrying the flag! Return it to your spawn!">
             <post pickup-filter="only-red" recover-time="7s" respawn-time="3s" yaw="135">-256.5,8,323.5</post>
             <net region="red-net" points="1"/>
         </flag>
-        <flag color="red"
-              id="red-flag"
-              name="Red Flag"
-              owner="red"
-              pickup-kit="flag-pickup"
-              drop-kit="flag-drop"
-              carry-message="You are carrying the flag! Return it to your spawn!">
+        <flag color="red" id="red-flag" name="Red Flag" owner="red" pickup-kit="flag-pickup" drop-kit="flag-drop" carry-message="You are carrying the flag! Return it to your spawn!">
             <post pickup-filter="only-blue" recover-time="7s" respawn-time="3s" yaw="-45">-264.5,8,275.5</post>
             <net region="blue-net" points="1"/>
         </flag>
     </unless>
     <if variant="halloween">
-        <flag color="lime"
-              id="blue-flag"
-              name="Green Flag"
-              owner="blue"
-              pickup-kit="flag-pickup"
-              drop-kit="flag-drop"
-              carry-message="You are carrying the flag! Return it to your spawn!">
+        <flag color="lime" id="blue-flag" name="Green Flag" owner="blue" pickup-kit="flag-pickup" drop-kit="flag-drop" carry-message="You are carrying the flag! Return it to your spawn!">
             <post pickup-filter="only-red" recover-time="7s" respawn-time="3s" yaw="135">-256.5,8,323.5</post>
             <net region="red-net" points="1"/>
         </flag>
-        <flag color="purple"
-              id="red-flag"
-              name="Purple Flag"
-              owner="red"
-              pickup-kit="flag-pickup"
-              drop-kit="flag-drop"
-              carry-message="You are carrying the flag! Return it to your spawn!">
+        <flag color="purple" id="red-flag" name="Purple Flag" owner="red" pickup-kit="flag-pickup" drop-kit="flag-drop" carry-message="You are carrying the flag! Return it to your spawn!">
             <post pickup-filter="only-blue" recover-time="7s" respawn-time="3s" yaw="-45">-264.5,8,275.5</post>
             <net region="blue-net" points="1"/>
         </flag>
@@ -142,12 +119,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <unless variant="halloween">
-            <item name="Holy Fruit" material="golden apple"/>
-        </unless>
-        <if variant="halloween">
-            <item name="Candy Corn" material="golden apple"/>
-        </if>
         <item amount="6" material="arrow"/>
     </kill-reward>
 </kill-rewards>

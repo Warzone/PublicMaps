@@ -1,10 +1,11 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Chocolate Diamonds</name>
 <variant id="christmas" world="christmas" override="true">Snowy Diamonds</variant>
 <variant id="halloween" world="halloween" override="true">SpOOky Diamonds</variant>
-<version>2.2.0</version>
+<version>2.2.4</version>
 <objective>Capture the enemy's flag 3 times!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- kroest -->
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Map and XML changes"/> <!-- ogel / GoldenOre -->
@@ -61,7 +62,7 @@
             <enchantment level="2">efficiency</enchantment>
         </item>
         <item slot="4" amount="48" damage="${kit-wood-dmg-value}" material="wood"/>
-        <item slot="5" amount="24" team-color="true" material="stained clay"/> 
+        <item slot="5" amount="24" team-color="true" material="stained clay"/>
         <item slot="7" amount="16" material="arrow"/>
         <item slot="8" material="golden apple"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
@@ -112,9 +113,6 @@
 <filters>
     <team id="only-green">green</team>
     <team id="only-red">red</team>
-    <deny id="deny-void">
-        <void/>
-    </deny>
     <deny id="deny-beacon">
         <any>
             <material>beacon</material>
@@ -142,25 +140,31 @@
         <cuboid id="green-net" min="-2,29,-57" max="2,33,-60"/>
         <cuboid id="red-net" min="2,29,60" max="-2,33,63"/>
     </union>
-    <union id="flag-platforms">
-        <rectangle id="green-platform" min="-2,-57" max="2,-60"/>
-        <rectangle id="red-platform" min="2,60" max="-2,63"/>
-    </union>
+    <intersect id="flag-platforms">
+        <below y="30"/>
+        <union>
+            <rectangle id="green-platform" min="-2,-57" max="2,-60"/>
+            <rectangle id="red-platform" min="2,60" max="-2,63"/>
+        </union>
+    </intersect>
     <cuboid id="spawner" min="-1,25,-1" max="1,29,2"/>
-    <complement id="void">
+    <sphere id="spawner-detect" origin="-0,26,0.5" radius="5"/>
+    <point id="spawner-location">-0,26.5,0.5</point>
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-52,89" max="52,-89"/>
     </complement>
     <apply block-break="deny-beacon" use="deny-beacon"/>
-    <apply enter="only-green" region="green-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply block="only-red" region="green-platform" message="You may not modify your flag platform!"/>
-    <apply block="only-green" region="red-platform" message="You may not modify your flag platform!"/>
+    <apply enter="only-green" region="green-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="flag-platforms" message="You may not modify the flag platform!"/>
+    <apply block-place="only-red" region="green-platform" message="You may not modify the flag platform!"/>
+    <apply block-place="only-green" region="red-platform" message="You may not modify the flag platform!"/>
     <apply block="never" region="spawns" message="You may not modify the spawn areas!"/>
     <unless variant="christmas">
         <apply block="never" region="spawner" message="You may not interfere with the arrow spawner!"/>
     </unless>
-    <apply block="deny-void" region="void" message="You may not build in the void!"/>
+    <apply block="deny(void)" region="void-area" message="You may not build in the void!"/>
 </regions>
 <flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
     <flag id="green-flag" name="${team-green-name} Flag" owner="green" color="${team-green-flag-color}" carry-message="`eCapture the flag at the ${team-red-name} Beacon!">
@@ -213,12 +217,18 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" damage="${kit-wood-dmg-value}" material="wood"/>
         <item amount="8" team-color="true" material="stained clay"/>
         <item amount="4" material="arrow"/>
     </kill-reward>
 </kill-rewards>
+<unless variant="christmas">
+    <spawners>
+        <spawner spawn-region="spawner-location" player-region="spawner-detect" max-entities="12" delay="1s">
+            <item material="arrow"/>
+        </spawner>
+    </spawners>
+</unless>
 <maxbuildheight>36</maxbuildheight>
 <hunger>
     <depletion>off</depletion>

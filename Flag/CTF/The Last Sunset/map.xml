@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Last Sunset</name>
-<version>1.4.3</version>
+<version>1.4.4</version>
 <objective>Capture both enemy flags two times!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="dff980ed-9f69-491e-b79c-30c21350baf2"/> <!-- DoomyBoy -->
 </authors>
@@ -104,7 +105,7 @@
 <regions>
     <negative id="void-regions">
         <!-- union of regions to replace the void filter, which consistently broke -->
-        <union id="void">
+        <union id="void-area">
             <rectangle min="-771,-310" max="-1004,-477"/>
             <rectangle min="-770,-311" max="-1005,-476"/>
             <rectangle min="-769,-313" max="-1006,-474"/>
@@ -174,28 +175,20 @@
 </regions>
 <flags drop-on-water="false">
     <flag id="north-blue-flag" name="North Blue Flag" owner="blue" color="blue">
-        <carry-message>
-            You have the flag! Return it to the island `6`lbehind spawn
-        </carry-message>
+        <carry-message>You have the flag! Return it to the island `6`lbehind spawn</carry-message>
         <post owner="blue" pickup-filter="only-red" recover-time="20s">-810.5,5,-447.5</post>
     </flag>
     <flag id="south-blue-flag" name="South Blue Flag" owner="blue" color="blue">
-        <carry-message>
-            You have the flag! Return it to the island `6`lbehind spawn
-        </carry-message>
+        <carry-message>You have the flag! Return it to the island `6`lbehind spawn</carry-message>
         <post owner="blue" pickup-filter="only-red" recover-time="20s">-810.5,5,-339.5</post>
     </flag>
     <net points="1" region="red-net" flags="south-blue-flag north-blue-flag" respawn-together="true"/>
     <flag id="north-red-flag" name="North Red Flag" owner="red" color="red">
-        <carry-message>
-            You have the flag! Return it to the island `6`lbehind spawn
-        </carry-message>
+        <carry-message>You have the flag! Return it to the island `6`lbehind spawn</carry-message>
         <post owner="red" pickup-filter="only-blue" recover-time="20s">-964.5,5,-447.5</post>
     </flag>
     <flag id="south-red-flag" name="South Red Flag" owner="red" color="red">
-        <carry-message>
-            You have the flag! Return it to the island `6`lbehind spawn
-        </carry-message>
+        <carry-message>You have the flag! Return it to the island `6`lbehind spawn</carry-message>
         <post owner="red" pickup-filter="only-blue" recover-time="20s">-964.5,5,-339.5</post>
     </flag>
     <net points="1" region="blue-net" flags="south-red-flag north-red-flag" respawn-together="true"/>
@@ -240,7 +233,6 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="16" material="wood"/>
         <item amount="8" material="glass"/>
     </kill-reward>

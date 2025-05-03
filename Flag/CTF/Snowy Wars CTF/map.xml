@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Snowy Wars CTF</name>
 <version>2.1.2</version>
 <objective>Capture the flag from the enemy to win!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="c14862ba-058a-44a2-a1c3-bfb0b462e198"/> <!-- Ro_G -->
 </authors>
@@ -13,10 +14,10 @@
 <kits>
     <kit id="spawn-kit">
         <item slot="0" material="stone sword"/>
-        <item slot="1" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="1" enchantment="arrow infinite" material="bow"/>
         <item slot="28" material="arrow"/>
         <item slot="2" enchantment="dig speed:3" material="iron axe"/>
-        <item slot="3" enchantment="dig speed:1" material="diamond pickaxe"/>
+        <item slot="3" enchantment="dig speed" material="diamond pickaxe"/>
         <item slot="4" amount="16" damage="2" material="wood"/>
         <item slot="5" amount="64" material="cooked beef"/>
         <item slot="6" amount="7" material="gold nugget"/>
@@ -83,7 +84,7 @@
             </union>
         </union>
     </negative>
-    <complement id="void">
+    <complement id="void-area">
         <everywhere/>
         <rectangle min="-631,236" max="-560,373"/>
     </complement>
@@ -99,11 +100,11 @@
     <!-- Applications -->
     <apply region="flag-platforms" block="never" message="You may not edit the flag platform"/>
     <apply region="obs-spawn" enter="never" message="You may not enter the observers spawn area!"/>
-    <apply region="blue-spawns" enter="not-red" message="You may not enter the enemy's spawn areas!"/>
-    <apply region="red-spawns" enter="not-blue" message="You may not enter the enemy's spawn areas!"/>
+    <apply region="blue-spawns" enter="not-red" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawns" enter="not-blue" message="You may not enter the enemy's spawn!"/>
     <apply block="no-melting"/>
     <apply region="spawns" block="never" message="You may not break or place blocks in the spawn regions!"/>
-    <apply region="void" block="never" message="You may not build outside of the playing field!"/>
+    <apply region="void-area" block="never" message="You may not build outside of the playing field!"/>
     <apply region="height-limit" block-place="never">
         <message>{"translate":"match.maxBuildHeight"}</message>
     </apply>
@@ -146,9 +147,4 @@
     <friendly-defuse>off</friendly-defuse>
     <blockdamage>off</blockdamage>
 </tnt>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 </map>

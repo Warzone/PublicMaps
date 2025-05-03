@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Museum</name>
-<version>1.2.2</version>
-<objective>First team to capture the enemy flag 3 times wins!</objective>
+<version>1.2.3</version>
+<objective>First team to capture the enemy's flag 3 times wins!</objective>
 <created>2021-05-25</created>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
     <author uuid="1fc24e45-8ce8-4749-922f-fc9e8c59cf74"/> <!-- betche -->
@@ -15,8 +16,8 @@
 </contributors>
 <!-- Teams -->
 <teams>
-    <team id="orange" color="gold" max="18">Orange</team>
-    <team id="cyan" color="dark aqua" max="18">Cyan</team>
+    <team id="orange-team" color="gold" max="18">Orange</team>
+    <team id="cyan-team" color="dark aqua" max="18">Cyan</team>
 </teams>
 <!-- Match information -->
 <time>20m</time>
@@ -29,9 +30,8 @@
     <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="golden carrot"/>
-        <item slot="17" amount="32" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="32" material="arrow"/>
         <helmet unbreakable="true" material="chainmail helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="iron leggings"/>
@@ -41,15 +41,10 @@
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="orange" kit="spawn-kit" region="orange-spawn"/>
-    <spawn team="cyan" kit="spawn-kit" yaw="180" region="cyan-spawn"/>
+    <spawn team="orange-team" kit="spawn-kit" region="orange-spawn"/>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="180" region="cyan-spawn"/>
     <default yaw="180" region="obs-spawn"/>
 </spawns>
-<!-- Filters -->
-<filters>
-    <team id="orange-only">orange</team>
-    <team id="cyan-only">cyan</team>
-</filters>
 <!-- Regions -->
 <regions>
     <union id="spawn-protections">
@@ -66,9 +61,9 @@
     <point id="cyan-spawn">0.5,59,104</point>
     <point id="obs-spawn">0.5,53.5,0.5</point>
     <!-- Applications -->
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy's spawn."/>
-    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy's spawn."/>
-    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy's spawn."/>
+    <apply region="cyan-spawn-protection" enter="cyan-team" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block="never" message="You may not build here."/>
 </regions>
 <!-- Portals -->
 <portals protect="true" sound="false" pitch="@0">
@@ -112,20 +107,19 @@
 <!-- Flags -->
 <flags>
     <!-- Orange's Flag -->
-    <post id="orange-flag-post" pickup-filter="cyan-only" recover-time="0" respawn-time="20s">0.5,60,-81.5</post>
+    <post id="orange-flag-post" pickup-filter="cyan-team" recover-time="0" respawn-time="20s">0.5,60,-81.5</post>
     <flag id="orange-flag" owner="orange" name="Orange Flag" color="orange" post="orange-flag-post" beam="true"/>
-    <net post="orange-flag-post" points="1" region="cyan-net" capture-filter="cyan-only"/>
+    <net post="orange-flag-post" points="1" region="cyan-net" capture-filter="cyan-team"/>
     <!-- Cyan's Flag -->
-    <post id="cyan-flag-post" pickup-filter="orange-only" recover-time="0" respawn-time="20s">0.5,60,82.5</post>
+    <post id="cyan-flag-post" pickup-filter="orange-team" recover-time="0" respawn-time="20s">0.5,60,82.5</post>
     <flag id="cyan-flag" owner="cyan" name="Cyan Flag" color="cyan" post="cyan-flag-post" beam="true"/>
-    <net post="cyan-flag-post" points="1" region="orange-net" capture-filter="orange-only"/>
+    <net post="cyan-flag-post" points="1" region="orange-net" capture-filter="orange-team"/>
 </flags>
 <!-- Item Remove -->
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
     <item>golden apple</item>
-    <item>golden carrot</item>
     <item>arrow</item>
     <item>chainmail helmet</item>
     <item>leather chestplate</item>
@@ -133,10 +127,8 @@
     <item>leather boots</item>
     <item>painting</item>
 </itemremove>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

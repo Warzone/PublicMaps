@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Royal</name>
-<version>1.1.0</version>
-<objective>Hold the flag for 200 seconds to win!</objective>
+<version>1.1.1</version>
+<include id="kotf"/>
+<constant id="damage-resistance">0s</constant>
+<objective>Hold the flag for ${score} seconds to win!</objective>
 <created>2019-02-10</created>
-<gamemode>kotf</gamemode>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9"/> <!-- Xerocoles -->
 </authors>
@@ -20,31 +21,13 @@
     <rule>Aiding member of other teams is not allowed.</rule>
 </rules>
 <kits>
-    <kit id="spawn-kit">
-        <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
-        <item slot="8" amount="16" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">projectile_protection</enchantment>
-        </leggings>
-        <boots unbreakable="true" material="iron boots">
-            <enchantment level="2">feather_falling</enchantment>
-        </boots>
-        <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="flag-kit" force="true">
-        <effect>slowness</effect>
-        <effect amplifier="-3">health boost</effect>
-        <effect duration="3s" amplifier="2">absorption</effect>
-    </kit>
-    <kit id="reset-health" force="true">
-        <effect duration="0s">slowness</effect>
-        <effect duration="0s">health boost</effect>
-        <effect duration="1s" amplifier="10">regeneration</effect>
+    <kit id="spawn-kit" parents="base-kit">
+        <action>
+            <replace-item>
+                <find unbreakable="true" material="iron boots"/>
+                <replace unbreakable="true" enchantment="feather_falling:2" material="iron boots"/>
+            </replace-item>
+        </action>
     </kit>
 </kits>
 <spawns>
@@ -53,36 +36,36 @@
             <cylinder base="-24.5,45,129.5" radius="1" height="0"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit" filter="has-flag">
+    <spawn team="blue" kit="spawn-kit" filter="has-either-flag">
         <region yaw="90">
             <point>57.5,13.1,129.5</point>
         </region>
     </spawn>
-    <spawn team="green" kit="spawn-kit" filter="has-flag">
+    <spawn team="green" kit="spawn-kit" filter="has-either-flag">
         <region yaw="-90">
             <point>-56.4,13.1,129.5</point>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit" filter="has-flag">
+    <spawn team="red" kit="spawn-kit" filter="has-either-flag">
         <region yaw="0">
             <point>0.5,13.1,72.5</point>
         </region>
     </spawn>
-    <spawn team="yellow" kit="spawn-kit" filter="has-flag">
+    <spawn team="yellow" kit="spawn-kit" filter="has-either-flag">
         <region yaw="180">
             <point>0.5,13.1,185.5</point>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <any id="has-flag">
-        <carrying-flag>flag1</carrying-flag>
-        <carrying-flag>flag2</carrying-flag>
+    <any id="has-either-flag">
+        <carrying-flag>flag</carrying-flag>
+        <carrying-flag>other-flag</carrying-flag>
         <not>
             <same-team>
                 <any>
-                    <carrying-flag>flag1</carrying-flag>
-                    <carrying-flag>flag2</carrying-flag>
+                    <carrying-flag>flag</carrying-flag>
+                    <carrying-flag>other-flag</carrying-flag>
                 </any>
             </same-team>
         </not>
@@ -128,43 +111,23 @@
     <apply block="never" use="never"/>
 </regions>
 <flags>
-    <flag id="flag1" name="Top Flag" shared="true" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health">
+    <flag id="flag"
+          name="Top Flag"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
         <post return-time="0s" respawn-time="10s">0.5,32,129.5</post>
     </flag>
-    <flag id="flag2" name="Bottom Flag" shared="true" points-rate="1" pickup-kit="flag-kit" drop-kit="reset-health">
+    <flag id="other-flag"
+          name="Bottom Flag"
+          shared="true"
+          points-rate="1"
+          pickup-kit="flag-kit"
+          drop-kit="reset-health">
         <post return-time="0s" respawn-time="10s">0.5,17,129.5</post>
     </flag>
 </flags>
-<score>
-    <limit>200</limit>
-</score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
-    <item>banner</item>
-</itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</kill-reward>
-<respawn spectate="true" auto="true">
-    <message>
-        {"translate":"death.respawn.confirmed.waiting.flagDropped"}
-    </message>
-</respawn>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <!-- Disables fall damage when using jump pads, reenables it after landing -->
 <actions>
     <set id="fall-var-0" var="fall_variable" value="0" scope="player"/>

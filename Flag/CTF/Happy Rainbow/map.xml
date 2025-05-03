@@ -1,16 +1,33 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Happy Rainbow</name>
-<version>2.0</version>
-<objective>Capture the most flags in 8m or gain a 3 point lead to win!</objective>
-<time result="score" overtime="1m" max-overtime="2m">8m</time>
+<variant id="rage">Snowball RAGE</variant>
+<version>2.0.5</version>
 <created>2022-08-15</created>
 <gamemode>ctf</gamemode>
+<include id="void-death"/>
+<include id="gapple-kill-reward"/>
+<constants>
+    <constant id="void-plane">-60</constant>
+</constants>
+<unless variant="rage">
+    <objective>Capture the most flags in 8m or gain a 3 point lead to win!</objective>
+    <time result="score" overtime="1m" max-overtime="2m">8m</time>
+</unless>
+<if variant="rage">
+    <objective>Capture the most flags in 5m or gain a 3 point lead to win!</objective>
+    <time result="score">5m</time>
+    <respawn delay="5s"/>
+</if>
 <authors>
     <author uuid="5876ff18-006d-4a1d-83d8-53abd8002578" contribution="Map Building and XML"/> <!-- LKFJimmy -->
 </authors>
 <contributors>
     <contributor uuid="f2efb814-9e02-4d17-bdf5-8ed449f9df77" contribution="Testing"/> <!-- Alexander_ -->
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="Feedback"/> <!-- Cazadorian -->
+    <if variant="rage">
+        <contributor uuid="cc2292de-fcb3-412d-9319-f3177f73b605" contribution="Snowball RAGE variant"/> <!-- cs_ -->
+        <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Snowball RAGE variant"/> <!-- zzuf -->
+    </if>
 </contributors>
 <broadcasts>
     <tip after="1s" every="1m">The floor is falling! Gotta keep running!</tip>
@@ -23,52 +40,59 @@
     <team id="green" color="green" max="3">Green</team>
     <team id="blue" color="blue" max="3">Blue</team>
 </teams>
-<spawns>
-    <default kit="default" yaw="-180">
-        <region yaw="-180">
-            <cylinder base="0.5,22,45.5" radius="3" height="0"/>
-        </region>
-    </default>
-    <spawn team="red" kit="spawn-kit">
-        <region yaw="-135">
-            <point>-31,3,32</point>
-        </region>
-    </spawn>
-    <spawn team="yellow" kit="spawn-kit">
-        <region yaw="-45">
-            <point>-31,3,-31</point>
-        </region>
-    </spawn>
-    <spawn team="green" kit="spawn-kit">
-        <region yaw="45">
-            <point>32,3,-31</point>
-        </region>
-    </spawn>
-    <spawn team="blue" kit="spawn-kit">
-        <region yaw="135">
-            <point>32,3,32</point>
-        </region>
-    </spawn>
-</spawns>
 <kits>
     <kit id="default">
         <effect amplifier="1">night vision</effect>
     </kit>
     <kit id="spawn-kit" parent="default">
         <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" amount="8" material="snowball"/>
-        <item slot="2" material="golden apple"/>
+        <unless variant="rage">
+            <item slot="0" unbreakable="true" material="stone sword"/>
+            <item slot="1" amount="8" material="snowball"/>
+            <item slot="2" material="golden apple"/>
+        </unless>
+        <if variant="rage">
+            <item slot="0" unbreakable="true" material="diamond sword" enchantments="sharpness:10"/>
+            <item slot="1" amount="4" material="snowball" name="`fHeavy Snowball" projectile="heavySnowball" enchantments="sharpness:10"/>
+        </if>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="3" amplifier="255">damage resistance</effect>
-    </kit>
-    <kit id="death-kit" force="true">
-        <health>1</health>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
+<spawns>
+    <default kit="default" yaw="-180">
+        <region>
+            <cylinder base="0.5,22,45.5" radius="3" height="0"/>
+        </region>
+    </default>
+    <spawn team="red" kit="spawn-kit" yaw="-135">
+        <region>
+            <point>-31,3,32</point>
+        </region>
+    </spawn>
+    <spawn team="yellow" kit="spawn-kit" yaw="-45">
+        <region>
+            <point>-31,3,-31</point>
+        </region>
+    </spawn>
+    <spawn team="green" kit="spawn-kit" yaw="45">
+        <region>
+            <point>32,3,-31</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="spawn-kit" yaw="135">
+        <region>
+            <point>32,3,32</point>
+        </region>
+    </spawn>
+</spawns>
+<projectiles>
+    <projectile id="heavySnowball" name="Heavy Snowball" projectile="Snowball" damage="9999" throwable="true" click="right"/>
+</projectiles>
 <filters>
     <not id="not-red">
         <team id="only-red">red</team>
@@ -84,42 +108,9 @@
     </not>
     <any id="interactable">
         <material>wool</material>
-        <material>95:0</material>
+        <material>stained glass:0</material>
     </any>
 </filters>
-<score>
-    <mercy>3</mercy>
-</score>
-<flags>
-    <flag id="red-flag" name="Red Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-red" post="red-post" shared="true"/>
-    <flag id="yellow-flag" name="Yellow Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-yellow" post="yellow-post" shared="true"/>
-    <flag id="green-flag" name="Green Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-green" post="green-post" shared="true"/>
-    <flag id="blue-flag" name="Blue Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-blue" post="blue-post" shared="true"/>
-    <post id="red-post" owner="red" recover-time="10" respawn-time="10" pickup-filter="not-red" yaw="-135">-24.5,3,25.5</post>
-    <post id="yellow-post" owner="yellow" recover-time="10" respawn-time="10" pickup-filter="not-yellow" yaw="-45">-24.5,3,-24.5</post>
-    <post id="green-post" owner="green" recover-time="10" respawn-time="10" pickup-filter="not-green" yaw="45">25.5,3,-24.5</post>
-    <post id="blue-post" owner="blue" recover-time="10" respawn-time="10" pickup-filter="not-blue" yaw="135">25.5,3,25.5</post>
-    <net region="red-net" flags="yellow-flag green-flag blue-flag" points="1">
-        <capture-filter>
-            <filter id="only-red"/>
-        </capture-filter>
-    </net>
-    <net region="yellow-net" flags="red-flag green-flag blue-flag" points="1">
-        <capture-filter>
-            <filter id="only-yellow"/>
-        </capture-filter>
-    </net>
-    <net region="green-net" flags="red-flag yellow-flag blue-flag" points="1">
-        <capture-filter>
-            <filter id="only-green"/>
-        </capture-filter>
-    </net>
-    <net region="blue-net" flags="red-flag yellow-flag green-flag" points="1">
-        <capture-filter>
-            <filter id="only-blue"/>
-        </capture-filter>
-    </net>
-</flags>
 <regions>
     <cuboid id="parkour" min="-33,0,-33" max="34,3,34" />
     <cuboid id="gapple-point" min="0.5,3,0.5" max="0.5,3,0.5"/>
@@ -199,26 +190,42 @@
         <cuboid min="-2,3,-1" max="3,4,2"/>
         <cuboid min="-1,3,-2" max="2,4,3"/>
     </union>
-    <apply block="interactable"/>
-    <apply block="never" region="everywhere"/>
     <apply enter="only-red" region="red-protection" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-yellow" region="yellow-protection" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-green" region="green-protection" message="You may not enter the enemy's spawn!"/>
     <apply enter="only-blue" region="blue-protection" message="You may not enter the enemy's spawn!"/>
-    <cuboid id="death" min="-oo,-oo,-oo" max="oo,-60,oo"/>
-    <apply kit="death-kit" region="death"/>
+    <apply block="interactable"/>
+    <apply block="never"/>
 </regions>
+<score>
+    <mercy>3</mercy>
+</score>
+<flags>
+    <flag id="red-flag" name="Red Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-red" post="red-post" shared="true"/>
+    <flag id="yellow-flag" name="Yellow Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-yellow" post="yellow-post" shared="true"/>
+    <flag id="green-flag" name="Green Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-green" post="green-post" shared="true"/>
+    <flag id="blue-flag" name="Blue Flag" carry-message="Capture the enemy flag at your spawn!" pickup-filter="not-blue" post="blue-post" shared="true"/>
+    <post id="red-post" owner="red" recover-time="10" respawn-time="10" pickup-filter="not-red" yaw="-135">-24.5,3,25.5</post>
+    <post id="yellow-post" owner="yellow" recover-time="10" respawn-time="10" pickup-filter="not-yellow" yaw="-45">-24.5,3,-24.5</post>
+    <post id="green-post" owner="green" recover-time="10" respawn-time="10" pickup-filter="not-green" yaw="45">25.5,3,-24.5</post>
+    <post id="blue-post" owner="blue" recover-time="10" respawn-time="10" pickup-filter="not-blue" yaw="135">25.5,3,25.5</post>
+    <net region="red-net" flags="yellow-flag green-flag blue-flag" points="1" capture-filter="only-red"/>
+    <net region="yellow-net" flags="red-flag green-flag blue-flag" points="1" capture-filter="only-yellow"/>
+    <net region="green-net" flags="red-flag yellow-flag blue-flag" points="1" capture-filter="only-green"/>
+    <net region="blue-net" flags="red-flag yellow-flag green-flag" points="1" capture-filter="only-blue"/>
+</flags>
 <kill-rewards>
     <kill-reward>
         <item amount="4">snowball</item>
-        <item>golden apple</item>
     </kill-reward>
 </kill-rewards>
-<spawners>
-    <spawner spawn-region="gapple-point" player-region="gapple" delay="3s">
-        <item amount="1" material="golden apple"/>
-    </spawner>
-</spawners>
+<unless variant="rage">
+    <spawners>
+        <spawner spawn-region="gapple-point" player-region="gapple" delay="3s">
+            <item amount="1" material="golden apple"/>
+        </spawner>
+    </spawners>
+</unless>
 <renewables>
     <renewable interval="7s" grow="true" particles="true" sound="false" region="everywhere">
         <renew-filter>
@@ -257,4 +264,7 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 </map>

@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Stonehaven</name>
 <version>1.0.1</version>
 <objective>Grab the enemy flag and bring it back to your flag stand!</objective>
 <gamemode>ctf</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
     <author uuid="c7afcff7-72ea-4029-9048-d03aae9fcfdb"/> <!-- Zelocksurian -->
@@ -15,19 +16,16 @@
     <team id="red" color="dark red" max="10" max-overfill="12">Red</team>
     <team id="dark aqua" color="dark aqua" max="10" max-overfill="12">Cyan</team>
 </teams>
-<score>
-    <limit>3</limit>
-</score>
 <classes family="Classes" sticky="false">
-    <class name="Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
+    <class name="§4Offense" default="true" description="Go for the enemy flag!" icon="iron sword">
         <kit>
             <item slot="0" name="`4Sword" material="stone sword"/>
             <chestplate locked="true" enchantments="protection_projectile:2" material="chainmail chestplate"/>
             <helmet locked="true" material="chainmail helmet"/>
-            <potion duration="oo" amplifier="1">fire resistance</potion>
+            <effect>fire resistance</effect>
         </kit>
     </class>
-    <class name="Defense" default="false" description="Defend your flag!" icon="iron chestplate">
+    <class name="§2Defense" default="false" description="Defend your flag!" icon="iron chestplate">
         <kit>
             <item slot="0" name="`2Sword" material="stone sword"/>
             <item slot="1" name="`2Weakening Poison" damage="16424" potions="weakness:30:1:true" material="potion"/>
@@ -35,11 +33,11 @@
             <chestplate locked="true" material="chainmail chestplate"/>
             <leggings locked="true" material="leather leggings"/>
             <boots locked="true" material="iron boots"/>
-            <potion duration="oo" amplifier="1">fire resistance</potion>
-            <potion duration="oo" amplifier="1">slow</potion>
+            <effect>fire resistance</effect>
+            <effect>slow</effect>
         </kit>
     </class>
-    <class name="Support" default="false" description="Support your teammates!" icon="potion">
+    <class name="§5Support" default="false" description="Support Your Teammates!" icon="potion">
         <kit>
             <item slot="0" name="`5Bow" enchantment="damage_all:1;arrow_infinite:2" material="bow"/>
             <item slot="27" name="`5Arrow" material="arrow"/>
@@ -48,31 +46,10 @@
             <item slot="3" name="`5Regenerative Serum" damage="16385" potions="regeneration:60:1:true" material="potion"/>
             <helmet locked="true" material="gold helmet"/>
             <boots locked="true" enchantment="protection_fall:3" material="gold boots"/>
-            <potion duration="oo" amplifier="1">fire resistance</potion>          
+            <effect>fire resistance</effect>          
         </kit>
     </class>
 </classes>
-<filters>
-    <material id="only-chests">chest</material>
-    <all id="red-pickup">
-        <filter id="only-offense"/>
-        <team>red</team>
-    </all>
-    <all id="blue-pickup">
-        <filter id="only-offense"/>
-        <team>dark aqua</team>
-    </all>
-    
-    <not id="not-red">
-        <flag-carried>red-flag</flag-carried>
-    </not>
-    <not id="not-blue">
-        <flag-carried>blue-flag</flag-carried>
-    </not>
-    <class id="only-offense">Offense</class>
-    <class id="only-defense">Defense</class>
-    <class id="only-support">Support</class>
-</filters>
 <spawns>
     <spawn team="red" filter="only-offense">
         <regions yaw="180">
@@ -110,7 +87,26 @@
         </regions>
     </default>
 </spawns>
-<respawn delay="5s"/>
+<filters>
+    <material id="only-chests">chest</material>
+    <all id="red-pickup">
+        <filter id="only-offense"/>
+        <team>red</team>
+    </all>
+    <all id="blue-pickup">
+        <filter id="only-offense"/>
+        <team>dark aqua</team>
+    </all>
+    <not id="not-red">
+        <flag-carried>red-flag</flag-carried>
+    </not>
+    <not id="not-blue">
+        <flag-carried>blue-flag</flag-carried>
+    </not>
+    <class id="only-offense">§4Offense</class>
+    <class id="only-defense">§2Defense</class>
+    <class id="only-support">§5Support</class>
+</filters>
 <regions>
     <cuboid id="red-net" min="22,28,45" max="25,35,48"/>
     <cuboid id="blue-net" min="25,28,-46" max="28,35,-43"/>
@@ -126,6 +122,9 @@
         </region>
     </apply>
 </regions>
+<score>
+    <limit>3</limit>
+</score>
 <flags>
     <!-- Blue's Flag -->
     <flag id="blue-flag" name="Cyan Flag" color="cyan">
@@ -155,9 +154,5 @@
     <item>arrow</item>
     <item>golden apple</item>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
+<respawn delay="5s"/>
 </map>
