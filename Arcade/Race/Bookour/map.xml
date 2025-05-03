@@ -4,12 +4,21 @@
 <version>1.0.2</version>
 <objective>Reach the end first!</objective>
 <gamemode>arcade</gamemode>
-<time>8m</time>
 <authors>
     <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Map Author"/> <!-- Preinstalled -->
     <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="XML"/> <!-- Fishywishi -->
 </authors>
 <players colors="true" min="1" max="50" show-name-tags="false"/>
+<kits>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parent="obs-kit">
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+        <effect>invisibility</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <default kit="obs-kit" region="obs-spawn"/>
     <spawn kit="spawn-kit" filter="score-0" region="spawn"/>
@@ -29,16 +38,6 @@
     <spawn kit="spawn-kit" filter="score-14" region="spawn-14"/>
     <spawn kit="spawn-kit" filter="score-15" region="spawn-15"/>
 </spawns>
-<kits>
-    <kit id="obs-kit">
-        <effect>night vision</effect>
-    </kit>
-    <kit id="spawn-kit" parent="obs-kit">
-        <boots unbreakable="true" locked="true" material="leather boots" team-color="true"/>
-        <effect>invisibility</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-</kits>
 <filters>
     <score id="score-0">0</score>
     <score id="score-1">1</score>
@@ -113,6 +112,7 @@
     <portal destination="spawn-14" filter="score-14" region="return-area"/>
     <portal destination="spawn-15" filter="score-15" region="return-area"/>
 </portals>
+<time>8m</time>
 <score>
     <limit>16</limit>
     <box points="1" region="area-1" silent="true" filter="score-0"/>
@@ -138,11 +138,11 @@
 <world>
     <timeset>18000</timeset>
 </world>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <disabledamage>
     <damage>fall</damage>
     <damage>entity attack</damage>
 </disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

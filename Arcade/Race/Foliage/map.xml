@@ -1,14 +1,23 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Foliage</name>
 <created>2023-01-29</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Reach the end first!</objective>
 <gamemode>arcade</gamemode>
-<time>5m</time>
 <authors>
     <author uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516"/> <!-- Preinstalled -->
 </authors>
 <players colors="true" min="1" max="50" show-name-tags="false"/>
+<kits>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+    <kit id="spawn-kit" parent="obs-kit">
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+        <effect>invisibility</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="spawn-kit" filter="score-0" region="spawn"/>
     <spawn kit="spawn-kit" filter="score-1" region="spawn-1"/>
@@ -24,16 +33,6 @@
     <spawn kit="spawn-kit" filter="score-11" region="spawn-11"/>
     <default kit="obs-kit" region="obs-spawn"/>
 </spawns>
-<kits>
-    <kit id="obs-kit">
-        <effect>night vision</effect>
-    </kit>
-    <kit id="spawn-kit" parent="obs-kit">
-        <boots unbreakable="true" locked="true" material="leather boots"/>
-        <effect>invisibility</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-</kits>
 <filters>
     <score id="score-0">0</score>
     <score id="score-1">1</score>
@@ -91,6 +90,7 @@
     <portal destination="spawn-10" filter="score-10" region="return-area"/>
     <portal destination="spawn-11" filter="score-11" region="return-area"/>
 </portals>
+<time>5m</time>
 <score>
     <limit>12</limit>
     <box points="1" region="area-1" silent="true" filter="score-0"/>
@@ -110,11 +110,11 @@
     <item>leather boots</item>
 </itemremove>
 <timelock>on</timelock>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <disabledamage>
     <damage>fall</damage>
     <damage>entity attack</damage>
 </disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
