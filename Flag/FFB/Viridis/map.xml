@@ -1,14 +1,14 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Viridis</name>
-<version>1.0.1</version>
+<variant id="mini" world="mini">Mini</variant>
+<version>1.0.2</version>
 <gamemode>ffb</gamemode>
 <created>2024-07-04</created>
 <objective>Jump with the flag in the enemey's portal as many times as possible in ten minutes!</objective>
-<time result="score" overtime="45s" max-overtime="3m15s">10m</time>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
 </authors>
-<variant id="mini" world="mini">Mini</variant>
 <teams>
     <team id="red-team" color="dark red" max="8">Red</team>
     <team id="blue-team" color="blue" max="8">Blue</team>
@@ -41,7 +41,7 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="0">
+        <region>
             <cylinder base="0.5,35.5,-44.5" radius="1.5" height="0"/>
         </region>
     </default>
@@ -57,28 +57,26 @@
     </spawn>
 </spawns>
 <filters>
-   <team id="only-red">red-team</team>
-    <team id="only-blue">blue-team</team>
     <all id="red-team-carrying-flag">
-        <team>red-team</team>
+        <team id="only-red">red-team</team>
         <carrying-flag>flag</carrying-flag>
     </all>
     <all id="blue-team-carrying-flag">
-        <team>blue-team</team>
+        <team id="only-blue">blue-team</team>
         <carrying-flag>flag</carrying-flag>
     </all>
 </filters>
 <regions>
     <union id="sides">
         <unless variant="mini">
-        <rectangle id="red-ne-side" min="15,-19" max="48,-39"/>
-        <rectangle id="red-se-side" min="15,20" max="48,40"/>
-        <rectangle id="blue-sw-side" min="-14,20" max="-47,40"/>
-        <rectangle id="blue-nw-side" min="-14,-19" max="-47,-39"/>
+            <rectangle id="red-ne-side" min="15,-19" max="48,-39"/>
+            <rectangle id="red-se-side" min="15,20" max="48,40"/>
+            <rectangle id="blue-sw-side" min="-14,20" max="-47,40"/>
+            <rectangle id="blue-nw-side" min="-14,-19" max="-47,-39"/>
         </unless>
         <if variant="mini">
-        <rectangle id="blue-side" min="-17.5,31.5" max="-55.5,-29.5"/>
-        <rectangle id="red-side" min="18.5,-30.5" max="56.5,31.5"/>
+            <rectangle id="blue-side" min="-17.5,31.5" max="-55.5,-29.5"/>
+            <rectangle id="red-side" min="18.5,-30.5" max="56.5,31.5"/>
         </if>
     </union>
     <negative id="protection-area">
@@ -87,20 +85,21 @@
     </negative>
     <union id="nets">
         <unless variant="mini">
-        <!-- Red -->
-        <cylinder id="red-ne-net" base="46.5,12,-24" radius="5" height="1"/>
-        <cylinder id="red-se-net" base="46.5,12,24" radius="5" height="1"/>
-        <!-- Blue -->
-        <cylinder id="blue-sw-net" base="-46.5,12,24" radius="5" height="1"/>
-        <cylinder id="blue-nw-net" base="-46.5,12,-24" radius="5" height="1"/>
+            <!-- Red -->
+            <cylinder id="red-ne-net" base="46.5,12,-24" radius="5" height="1"/>
+            <cylinder id="red-se-net" base="46.5,12,24" radius="5" height="1"/>
+            <!-- Blue -->
+            <cylinder id="blue-sw-net" base="-46.5,12,24" radius="5" height="1"/>
+            <cylinder id="blue-nw-net" base="-46.5,12,-24" radius="5" height="1"/>
         </unless>
         <if variant="mini">
-        <cylinder id="red-net" base="46.5,12,0.5" radius="5" height="1"/>
-        <cylinder id="blue-net" base="-45.5,12,0.5" radius="5" height="1"/>
+            <cylinder id="red-net" base="46.5,12,0.5" radius="5" height="1"/>
+            <cylinder id="blue-net" base="-45.5,12,0.5" radius="5" height="1"/>
         </if>
     </union>
     <apply block="never" use="never"/>
 </regions>
+<time result="score" overtime="45s" max-overtime="3m15s">10m</time>
 <flags flag-proximity-metric="none" net-proximity-metric="none" required="false" carry-message="Carry the flag to the portal behind the enemy's spawn!">
     <flag id="flag" name="Flag" color="green" shared="true">
         <post id="center-post" recover-time="8s" respawn-time="4">
@@ -115,14 +114,14 @@
             <potion duration="0">speed</potion>
         </drop-kit>
         <unless variant="mini">
-        <net points="1" region="blue-sw-net" capture-filter="only-red"/>
-        <net points="1" region="blue-nw-net" capture-filter="only-red"/>
-        <net points="1" region="red-ne-net" capture-filter="only-blue"/>
-        <net points="1" region="red-se-net" capture-filter="only-blue"/>
+            <net points="1" region="blue-sw-net" capture-filter="only-red"/>
+            <net points="1" region="blue-nw-net" capture-filter="only-red"/>
+            <net points="1" region="red-ne-net" capture-filter="only-blue"/>
+            <net points="1" region="red-se-net" capture-filter="only-blue"/>
         </unless>
         <if variant="mini">
-        <net points="1" region="blue-net" capture-filter="only-red"/>
-        <net points="1" region="red-net" capture-filter="only-blue"/>
+            <net points="1" region="blue-net" capture-filter="only-red"/>
+            <net points="1" region="red-net" capture-filter="only-blue"/>
         </if>
     </flag>
 </flags>
@@ -131,26 +130,26 @@
 </score>
 <portals>
     <unless variant="mini">
-    <portal observers="never" filter="only-red" region="blue-sw-net" destination="red-spawn-point" yaw="@90"/>
-    <portal observers="never" filter="only-red" region="blue-nw-net" destination="red-spawn-point" yaw="@90"/>
-    <portal observers="never" filter="only-blue" region="red-ne-net" destination="blue-spawn-point" yaw="@-90"/>
-    <portal observers="never" filter="only-blue" region="red-se-net" destination="blue-spawn-point" yaw="@-90"/>
+        <portal observers="never" filter="only-red" region="blue-sw-net" destination="red-spawn-point" yaw="@90"/>
+        <portal observers="never" filter="only-red" region="blue-nw-net" destination="red-spawn-point" yaw="@90"/>
+        <portal observers="never" filter="only-blue" region="red-ne-net" destination="blue-spawn-point" yaw="@-90"/>
+        <portal observers="never" filter="only-blue" region="red-se-net" destination="blue-spawn-point" yaw="@-90"/>
     </unless>
     <if variant="mini">
-    <portal observers="never" filter="only-red" region="blue-net" destination="red-spawn-point" yaw="@90"/>
-    <portal observers="never" filter="only-blue" region="red-net" destination="blue-spawn-point" yaw="@-90"/>
+        <portal observers="never" filter="only-red" region="blue-net" destination="red-spawn-point" yaw="@90"/>
+        <portal observers="never" filter="only-blue" region="red-net" destination="blue-spawn-point" yaw="@-90"/>
     </if>
 </portals>
 <proximity-alarms>
     <unless variant="mini">
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-sw-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-nw-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-ne-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-se-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-sw-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-nw-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-ne-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-se-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
     </unless>
     <if variant="mini">
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
-    <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="blue-side" detect="blue-team-carrying-flag" notify="blue-team-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="red-side" detect="red-team-carrying-flag" notify="red-team-carrying-flag"/>
     </if>
 </proximity-alarms>
 <toolrepair>
@@ -169,10 +168,11 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="3" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="3" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <respawn delay="3s" auto="true"/>
 <disabledamage>
     <damage>fall</damage>

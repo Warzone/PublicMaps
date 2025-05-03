@@ -1,0 +1,145 @@
+<map proto="1.5.0">
+<!-- Flag Football include file -->
+<!-- Created by mameBT -->
+<!-- Version 2024.12.11-1 -->
+<!--
+    XML notes: team 1 defends their own net,
+    scoring on team 2's net and vice-versa
+-->
+<include id="gapple-kill-reward"/>
+<constants fallback="true">
+    <constant id="night-vision">false</constant>
+    <constant id="sword-name" delete="true"/>
+    <constant id="bow-name" delete="true"/>
+    <constant id="team-1-spawn-pitch" delete="true"/>
+    <constant id="team-2-spawn-pitch" delete="true"/>
+    <constant id="flag-color" delete="true"/>
+    <constant id="pickup-filter">not-above-nor-below</constant>
+    <constant id="team-1-net-region">team-1-spawn</constant>
+    <constant id="team-2-net-region">team-2-spawn</constant>
+    <constant id="team-1-net-portal-filter">team-1-carrying-flag</constant>
+    <constant id="team-2-net-portal-filter">team-2-carrying-flag</constant>
+    <constant id="enable-proximity-alarms">true</constant>
+</constants>
+<gamemode>ffb</gamemode>
+<if has-variant="comp">
+    <unless variant="comp">
+        <time result="score" overtime="45s" max-overtime="3m15s">8m</time>
+    </unless>
+    <if variant="comp">
+        <time result="score" overtime="1m" max-overtime="5m">8m</time>
+    </if>
+</if>
+<unless has-variant="comp">
+    <time result="score" overtime="45s" max-overtime="3m15s">8m</time>
+</unless>
+<kits>
+    <kit id="default-kit">
+        <clear items="false" armor="false" effects="true"/> <!-- kits can't be empty, so this is here as a close-to-no-op -->
+        <if constant="night-vision" constant-value="true">
+            <effect>night vision</effect>
+        </if>
+    </kit>
+    <kit id="spawn-kit" parent="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" name="${sword-name}" material="stone sword"/>
+        <item slot="1" unbreakable="true" name="${bow-name}" material="bow"/>
+        <item slot="8" amount="12" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings">
+            <enchantment level="2">projectile_protection</enchantment>
+        </leggings>
+        <boots unbreakable="true" material="iron boots"/>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="flag-kit">
+        <effect>speed</effect>
+    </kit>
+    <kit id="drop-kit" force="true">
+        <effect duration="0s">speed</effect>
+    </kit>
+</kits>
+<filters>
+    <all id="team-1-carrying-flag">
+        <team id="only-team-1">team-1</team>
+        <carrying-flag>flag</carrying-flag>
+    </all>
+    <all id="team-2-carrying-flag">
+        <team id="only-team-2">team-2</team>
+        <carrying-flag>flag</carrying-flag>
+    </all>
+</filters>
+<regions>
+    <apply block="never" use="never"/>
+</regions>
+<flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
+    <flag id="flag"
+          name="Flag"
+          color="${flag-color}"
+          shared="true"
+          pickup-kit="flag-kit"
+          drop-kit="drop-kit"
+          pickup-filter="${pickup-filter}">
+        <post recover-time="8s" respawn-time="4s">${flag-post}</post>
+        <net points="1" region="${team-1-net-region}" capture-filter="only-team-1"/>
+        <net points="1" region="${team-2-net-region}" capture-filter="only-team-2"/>
+    </flag>
+</flags>
+<score>
+    <if has-variant="comp">
+        <unless variant="comp">
+            <mercy>5</mercy>
+        </unless>
+    </if>
+    <unless has-variant="comp">
+        <mercy>5</mercy>
+    </unless>
+</score>
+<portals>
+    <!--
+    Team spawn points must be defined separately with a ~0.25 higher y-level
+    than regions in spawn module to allow for instant flag capture on teleportation,
+    unless you capture the flag at the net rather than at spawn. If doing so, you may
+    need to change the portal filter constant so the portal still works for the player
+    who has already capture the flag by the time they would be teleported.
+    -->
+    <portal observers="never" filter="${team-1-net-portal-filter}" region="team-1-net" destination="team-1-spawn-point" yaw="@${team-1-spawn-yaw}" pitch="@${team-1-spawn-pitch}"/>
+    <portal observers="never" filter="${team-2-net-portal-filter}" region="team-2-net" destination="team-2-spawn-point" yaw="@${team-2-spawn-yaw}" pitch="@${team-2-spawn-pitch}"/>
+</portals>
+<unless constant="enable-proximity-alarms" constant-value="false">
+    <proximity-alarms>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="team-2-side" detect="team-1-carrying-flag" notify="team-1-carrying-flag"/>
+        <proximity-alarm message="You are running to the wrong goal!" flare-radius="0" region="team-1-side" detect="team-2-carrying-flag" notify="team-2-carrying-flag"/>
+    </proximity-alarms>
+</unless>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>banner</item>
+</itemremove>
+<itemkeep>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="3" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<respawn delay="${respawn-timer}" auto="true"/>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
