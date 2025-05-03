@@ -1,0 +1,219 @@
+<map proto="1.5.0">
+<name>FourTest</name>
+<version>1.0.0</version>
+<include id="destroy-the-wool"/>
+<gamemode>dtm</gamemode>
+<created>2025-04-27</created>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Tester"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="green-team" color="dark green" max="5">Green</team>
+    <team id="yellow-team" color="yellow" max="5">Yellow</team>
+</teams>
+<!-- Blitz and Sudden Death -->
+<blitz filter="blitz-conditions" join-filter="joining-filter" scoreboard-filter="blitz-conditions">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<!-- Respawn Time -->
+<respawn auto="true" delay="2.5s"/>
+<!-- Time Limit -->
+<time>8m</time>
+<!-- Kits -->
+<kits>
+    <kit id="default">
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" amount="32" team-color="true" material="stained clay"/>
+        <item slot="4" material="golden apple"/>
+        <item slot="9" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red-team" kit="default" yaw="180" region="red-spawn"/>
+    <spawn team="blue-team" kit="default" yaw="90" region="blue-spawn"/>
+    <spawn team="green-team" kit="default" region="green-spawn"/>
+    <spawn team="yellow-team" kit="default" yaw="-90" region="yellow-spawn"/>
+    <default yaw="-180" region="obs-spawn"/>
+</spawns>
+<broadcasts>
+    <!-- Sudden Death notification -->
+    <alert after="1m">The world border will appear in `c1 minute`r.</alert>
+    <alert after="2m">The world border has appeared and is approaching!</alert>
+</broadcasts>
+<!-- Monuments -->
+<destroyables completion="23%" repairable="false" required="false" show-progress="true" sparks="true" materials="wool">
+    <destroyable name="Red Wool" owner="red-team" region="red-team-wool" id="red-team-wool-broken" scoreboard-filter="red-team-scoreboard-filter"/>
+    <destroyable name="Blue Wool" owner="blue-team" region="blue-team-wool" id="blue-team-wool-broken" scoreboard-filter="blue-team-scoreboard-filter"/>
+    <destroyable name="Green Wool" owner="green-team" region="green-team-wool" id="green-team-wool-broken" scoreboard-filter="green-team-scoreboard-filter"/>
+    <destroyable name="Yellow Wool" owner="yellow-team" region="yellow-team-wool" id="yellow-team-wool-broken" scoreboard-filter="yellow-team-scoreboard-filter"/>
+</destroyables>
+<actions>
+    <!-- Sudden death variable handling -->
+    <action id="sudden-death" expose="true" filter="sudden-death-unstarted" scope="match">
+        <set var="sudden_death_variable" value="1"/>
+    </action>
+    <trigger action="sudden-death" scope="match">
+        <filter>
+            <time>2m</time>
+        </filter>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after message="`cSudden Death `rWill Begin In {0}" duration="60s" filter="sudden-death-counting"/>
+        </filter>
+        <action>
+            <message id="sudden-death-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+                <title>`cSUDDEN `cDEATH!</title>
+                <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+            </message>
+            <set var="sudden_death_variable" value="2"/>
+            <fill region="team-wools" material="air" events="true"/>
+        </action>
+    </trigger>
+    <!-- Destruction alert -->
+    <message id="destroy-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+        <title>`cWOOL `cDESTROYED!</title>
+        <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+    </message>
+    <trigger filter="wool-destroy-message" trigger="destroy-title" scope="player"/>
+</actions>
+<variables>
+    <variable id="sudden_death_variable" scope="match"/>
+</variables>
+<!-- Filters -->
+<filters>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
+    <alive id="respawned"/>
+    <any id="blitz-conditions">
+        <!-- Triggers blitz for a team if their monument is destroyed in under 8 minutes -->
+        <filter id="wool-destruction"/>
+        <!-- Failsafe to guarantee blitz after 3m sudden death happens -->
+        <time>3m</time>
+    </any>
+    <any id="wool-destruction">
+        <all>
+            <team>red-team</team>
+            <objective any="true">red-team-wool-broken</objective>
+        </all>
+        <all>
+            <team>blue-team</team>
+            <objective any="true">blue-team-wool-broken</objective>
+        </all>
+        <all>  
+            <team>green-team</team>
+            <objective any="true">green-team-wool-broken</objective>
+        </all>
+        <all>
+            <team>yellow-team</team>
+            <objective any="true">yellow-team-wool-broken</objective>
+        </all>
+        </any>
+    <not id="joining-filter">
+        <any>
+            <completed>red-team-wool-broken</completed>
+            <completed>blue-team-wool-broken</completed>
+            <completed>green-team-wool-broken</completed>
+            <completed>yellow-team-wool-broken</completed>
+        </any>
+    </not>
+    <not id="red-team-scoreboard-filter">
+        <completed>red-team-wool-broken</completed>
+    </not>
+    <not id="blue-team-scoreboard-filter">
+        <completed>blue-team-wool-broken</completed>
+    </not>
+    <not id="green-team-scoreboard-filter">
+        <completed>green-team-wool-broken</completed>
+    </not>
+    <not id="yellow-team-scoreboard-filter">
+        <completed>yellow-team-wool-broken</completed>
+    </not>
+    <all id="wool-destroy-message">
+        <filter id="wool-destruction"/>
+    <not>
+        <filter id="sudden-death-enabled"/>
+    </not>
+    </all>
+    <variable id="sudden-death-unstarted" var="sudden_death_variable">0</variable>
+    <variable id="sudden-death-counting" var="sudden_death_variable">1</variable>
+    <variable id="sudden-death-enabled" var="sudden_death_variable">2</variable>
+    <any id="red-team-status">
+        <team>red-team</team>
+        <objective any="true">red-team-wool-broken</objective>
+    </any>
+    <any id="blue-team-status">
+        <team>blue-team</team>
+        <objective any="true">blue-team-wool-broken</objective>
+    </any>
+    <any id="green-team-status">
+        <team>green-team</team>
+        <objective any="true">green-team-wool-broken</objective>
+    </any>
+    <any id="yellow-team-status">
+        <team>yellow-team</team>
+        <objective any="true">yellow-team-wool-broken</objective>
+    </any>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="team-wools">
+        <cuboid id="red-team-wool" min="-2,2,12" max="2,7,16"/>
+        <cuboid id="blue-team-wool" min="12,2,2" max="16,7,-2"/>
+        <cuboid id="green-team-wool" min="2,2,-12" max="-2,7,-16"/>
+        <cuboid id="yellow-team-wool" min="-12,2,-2" max="-16,7,2"/>
+    </union>
+    <point id="red-spawn">0.5,2,10.5</point>
+    <point id="blue-spawn">10.5,2,0.5</point>
+    <point id="green-spawn">0.5,2,-9.5</point>
+    <point id="yellow-spawn">-9.5,2,0.5</point>
+    <point id="obs-spawn">0.5,1,0.5</point>
+</regions>
+<world-borders center="0.5,0.5">
+    <world-border size="400"/> 
+    <world-border size="12" after="2m" duration="3m" damage="5" buffer="0"/>
+</world-borders>
+<!-- Item Remove -->
+<itemremove>
+    <item>stone sword</item>
+    <item>bow</item>
+    <item>iron pickaxe</item>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>wool</item>
+</itemremove>
+<!-- Itemkeep -->
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>stained clay</item>
+</itemkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+        <item amount="8" material="stained clay" team-color="true"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<maxbuildheight>23</maxbuildheight>
+</map>
