@@ -1,5 +1,5 @@
 <map proto="1.5.0">
-<version>1.0.0</version>
+<version>1.1.0</version>
 <name>Itty Bitty: Bed Wars</name>
 <objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
 <gamemode>bedwars</gamemode>
@@ -187,7 +187,7 @@
 <!-- Respawn Time -->
 <respawn auto="true" delay="3.5s"/>
 <!-- Time Limit -->
-<time>20m</time>
+<time>30m</time>
 <spawns>
     <spawn team="red-team" kit="default-kit" yaw="-90" region="red-spawn"/>
     <spawn team="blue-team" kit="default-kit" yaw="90" region="blue-spawn"/>
@@ -197,9 +197,15 @@
     <!-- Emerald Generators notification -->
     <alert after="5m">`2Emerald Generators`r have been upgraded to Tier `cII`r.</alert>
     <alert after="10m">`2Emerald Generators`r have been upgraded to Tier `cIII`r.</alert>
-    <!-- Sudden Death notification -->
-    <alert after="5m">The world border will appear in `c10 minutes`r.</alert>
-    <alert after="15m">The world border has appeared and is approaching!</alert>
+    <!-- Sudden Death & World Border Notifications -->
+    <alert after="16m">The world border will appear in `c10 minutes`r.</alert>
+    <alert after="26m">The world border has appeared and is approaching!</alert>
+    <alert after="24m50s">Sudden Death will begin in `c10 seconds`r.</alert>
+    <alert after="24m55s">Sudden Death will begin in `c5 seconds`r.</alert>
+    <alert after="24m56s">Sudden Death will begin in `c4 seconds`r.</alert>
+    <alert after="24m57s">Sudden Death will begin in `c3 seconds`r.</alert>
+    <alert after="24m58s">Sudden Death will begin in `c2 seconds`r.</alert>
+    <alert after="24m59s">Sudden Death will begin in `c1 second`r.</alert>
 </broadcasts>
 <!-- Monuments -->
 <destroyables completion="25%" repairable="false" required="false" sparks="true" materials="bed block">
@@ -388,20 +394,20 @@
     <friendly-defuse>false</friendly-defuse>
     <fuse>3s</fuse>
     <yield>1</yield>
-    <power>3.0</power>
+    <power>4.0</power>
 </tnt>
 <proximity-alarms>
     <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="red-team-base-region" detect="apply-alarm" notify="only-red-team"/>
     <proximity-alarm message="An enemy has been detected in your base!" flare-radius="3" region="blue-team-base-region" detect="apply-alarm" notify="only-blue-team"/>
 </proximity-alarms>
 <spawners player-region="everywhere">
-    <spawner spawn-region="emerald-gen" max-entities="32" delay="10s" filter="emerald-1">
+    <spawner spawn-region="emerald-gen" max-entities="15" delay="15s" filter="emerald-1">
         <item amount="1" material="emerald"/>
     </spawner>
-  	<spawner spawn-region="emerald-gen" max-entities="32" delay="7s" filter="emerald-2"> <!-- Tier 2 -->
+  	<spawner spawn-region="emerald-gen" max-entities="20" delay="10s" filter="emerald-2"> <!-- Tier 2 -->
         <item amount="1" material="emerald"/>
     </spawner>
-    <spawner spawn-region="emerald-gen" max-entities="32" delay="5s" filter="emerald-3"> <!-- Tier 3 -->
+    <spawner spawn-region="emerald-gen" max-entities="25" delay="5s" filter="emerald-3"> <!-- Tier 3 -->
         <item amount="1" material="emerald"/>
     </spawner>
     <spawner spawn-region="blue-team-generator" max-entities="128" delay="2s">
@@ -961,10 +967,10 @@
     <team id="only-red-team">red-team</team>
     <team id="only-blue-team">blue-team</team>
     <any id="blitz-conditions">
-        <!-- Triggers blitz for a team if their monument is destroyed in under 20 minutes -->
+        <!-- Triggers blitz for a team if their monument is destroyed in under 30 minutes -->
         <filter id="bed-destruction"/>
-        <!-- Failsafe to guarantee blitz after 14m sudden death happens -->
-        <time>14m</time>
+        <!-- Failsafe to guarantee blitz after 25m sudden death happens -->
+        <time>25m</time>
     </any>
     <any id="bed-destruction">
         <all>
@@ -1351,12 +1357,12 @@
 <regions>
     <!-- Definitions -->
     <union id="team-beds">
-        <cuboid id="red-team-bed" min="-41,1,-0.5" max="-44,3,1"/>
-        <cuboid id="blue-team-bed" min="42,1,1" max="45,3,-0"/>
+        <cuboid id="red-team-bed" min="-39.5,1,-0.5" max="-42.5,3,1.5"/>
+        <cuboid id="blue-team-bed" min="40.5,1,1.5" max="43.5,3,-0.5"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="red-spawn-protection" min="-45.5,0,9.5" max="-59.5,oo,-8.5"/>
-        <cuboid id="blue-spawn-protection" min="46.5,0,-8.5" max="59.5,oo,9.5"/>
+        <cuboid id="red-spawn-protection" min="-45.5,2,9.5" max="-59.5,oo,-8.5"/>
+        <cuboid id="blue-spawn-protection" min="46.5,2,-8.5" max="59.5,oo,9.5"/>
     </union>
     <point id="red-spawn">-47.5,2,0.5</point>
     <point id="blue-spawn">48.5,2,0.5</point>
@@ -1391,7 +1397,7 @@
 </regions>
 <world-borders center="0.5,0.5">
     <world-border size="400"/> 
-    <world-border size="12" after="16m" duration="3m" damage="5" buffer="0"/>
+    <world-border size="12" after="26m" duration="3m" damage="5" buffer="0"/>
 </world-borders>
 <enderchest>
     <dropoff region="red-team-generator" filter="only-red-team"/>
@@ -1488,7 +1494,7 @@
         <filter>
             <kill-streak count="2" repeat="true"/>
         </filter>
-        <item material="diamond"/>
+        <item material="emerald"/>
     </kill-reward>
 </kill-rewards>
 <!-- Consumables -->
@@ -1526,5 +1532,5 @@
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<maxbuildheight>16</maxbuildheight>
+<maxbuildheight>18</maxbuildheight>
 </map>
