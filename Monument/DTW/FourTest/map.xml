@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>FourTest</name>
-<version>1.0.0</version>
+<version>1.0.2</version>
 <include id="destroy-the-wool"/>
 <gamemode>dtm</gamemode>
 <created>2025-04-27</created>
@@ -54,6 +54,12 @@
     <!-- Sudden Death notification -->
     <alert after="1m">The world border will appear in `c1 minute`r.</alert>
     <alert after="2m">The world border has appeared and is approaching!</alert>
+    <alert after="130s">Sudden Death will begin in `c50 seconds`r, be careful, you will no longer respawn!</alert>
+    <alert after="175">Sudden Death will begin in `c5 seconds`r.</alert>
+    <alert after="176">Sudden Death will begin in `c4 seconds`r.</alert>
+    <alert after="177">Sudden Death will begin in `c3 seconds`r.</alert>
+    <alert after="178">Sudden Death will begin in `c2 seconds`r.</alert>
+    <alert after="179">Sudden Death will begin in `c1 second`r.</alert>
 </broadcasts>
 <!-- Monuments -->
 <destroyables completion="23%" repairable="false" required="false" show-progress="true" sparks="true" materials="wool">
@@ -174,27 +180,45 @@
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
+    <union id="spawn-protections">
+        <cylinder id="red-team-spawn-prot" base="0.5,1,14.5" radius="7" height="1"/>
+        <cylinder id="blue-team-spawn-prot" base="14.5,1,0.5" radius="7" height="1"/>
+        <cylinder id="green-team-spawn-prot" base="0.5,1,-13.5" radius="7" height="1"/>
+        <cylinder id="yellow-team-spawn-prot" base="-13.5,1,0.5" radius="7" height="1"/>
+    </union>
+    <union id="spawn-point-protections">
+        <cylinder id="red-team-spawn" base="0.5,1,10.5" radius="2" height="4"/>
+        <cylinder id="blue-team-spawn" base="10.5,1,0.5" radius="2" height="4"/>
+        <cylinder id="green-team-spawn" base="0.5,1,-9.5" radius="2" height="4"/>
+        <cylinder id="yellow-team-spawn" base="-9.5,1,0.5" radius="2" height="4"/>
+    </union>
     <union id="team-wools">
-        <cuboid id="red-team-wool" min="-2,2,12" max="2,7,16"/>
-        <cuboid id="blue-team-wool" min="12,2,2" max="16,7,-2"/>
-        <cuboid id="green-team-wool" min="2,2,-12" max="-2,7,-16"/>
-        <cuboid id="yellow-team-wool" min="-12,2,-2" max="-16,7,2"/>
+        <cuboid id="red-team-wool" min="-2,2,12" max="2,8,16"/>
+        <cuboid id="blue-team-wool" min="12,2,2" max="16,8,-2"/>
+        <cuboid id="green-team-wool" min="2,2,-12" max="-2,8,-16"/>
+        <cuboid id="yellow-team-wool" min="-12,2,-2" max="-16,8,2"/>
     </union>
     <point id="red-spawn">0.5,2,10.5</point>
     <point id="blue-spawn">10.5,2,0.5</point>
     <point id="green-spawn">0.5,2,-9.5</point>
     <point id="yellow-spawn">-9.5,2,0.5</point>
-    <point id="obs-spawn">0.5,1,0.5</point>
+    <point id="obs-spawn">0.5,2,0.5</point>
+    <!-- Applications -->
+    <apply block-break="never" region="spawn-protections" message="You may not modify the spawn!"/>
+    <apply block-place="never" region="spawn-point-protections" message="You may not modify the spawn point area!"/>
 </regions>
 <world-borders center="0.5,0.5">
     <world-border size="400"/> 
     <world-border size="12" after="2m" duration="3m" damage="5" buffer="0"/>
 </world-borders>
+<!-- Toolrepair - Tools already have an unbreakable tag, but this is just in case a player loses a tool by accident -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
 <!-- Item Remove -->
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>iron pickaxe</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
@@ -211,7 +235,7 @@
 <kill-rewards>
     <kill-reward>
         <item amount="2" material="arrow"/>
-        <item amount="8" material="stained clay" team-color="true"/>
+        <item amount="6" material="stained clay" team-color="true"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
