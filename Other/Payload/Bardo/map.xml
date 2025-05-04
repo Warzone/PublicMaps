@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Bardo</name>
-<version>2.0.0</version>
+<version>2.0.1</version>
 <objective>Attackers must escort the payload to a designated delivery point while the Defenders try to stop them.</objective>
 <created>2024-04-13</created>
 <include id="gapple-kill-reward"/>
@@ -154,7 +154,7 @@
     </trigger>
 </actions>
 <!-- Payload -->
-<payloads permanent="true" radius="3.5" capture-filter="red-team" capture-time="10s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
+<payloads permanent="true" radius="3.5" capture-filter="red-team" capture-time="50s" decay-rate="0.1" recovery-rate="0.5" contested-rate="0" time-multiplier="0.1">
     <payload id="first-checkpoint" name="Checkpoint A" location="23,4,-23" captured="first-captured-region" display-filter="first-spawn"/>
     <payload id="second-checkpoint" name="Checkpoint B" location="-3,2,-24" captured="second-captured-region" player-filter="first-checkpoint-completed" display-filter="second-spawn"/>
     <payload id="third-checkpoint" name="Checkpoint C" location="20,2,10" player-filter="second-checkpoint-completed" display-filter="third-spawn"/>
