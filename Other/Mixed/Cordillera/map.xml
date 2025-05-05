@@ -1,0 +1,411 @@
+<map proto="1.5.0">
+<name>Cordillera</name>
+<version>1.1.3</version>
+<objective>Jump into the enemy team's portal, located below their spawn point!</objective>
+<created>2023-09-02</created>
+<include id="bridge"/>
+<gamemode>dtm</gamemode>
+<constants>
+    <constant id="score-limit">7</constant>
+    <constant id="mercy-limit">5</constant>
+    <constant id="pre-round-time">7</constant>
+    <constant id="void-plane">51</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">-103.5,86,0.5</constant>
+    <constant id="team-one-yaw">-90</constant>
+    <constant id="team-two-spawn">104.5,86,0.5</constant>
+    <constant id="team-two-yaw">90</constant>
+    <!-- Cordillera -->
+    <constant id="green-north">-77.5,75,-33.5</constant>
+    <constant id="green-south">-77.5,75,34.5</constant>
+    <constant id="yellow-north">78.5,75,-33.5</constant>
+    <constant id="yellow-south">78.5,75,34.5</constant>
+</constants>
+<authors>
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128"/> <!-- zzuf -->
+</authors>
+<broadcasts>
+    <alert after="1s" every="5m" filter="broadcast-filter">`3If an enemy's `fmonument`3 is broken, an `nextra lane`3 that goes directly to their portal will appear!</alert>
+    <tip after="2s" every="5m">`3Get `a1 emerald`3 every `c2 kills`3 to buy items at spawn, like `bgrenades`3 and `bpotions`3!</tip>
+    <tip after="10s" every="5m">`3Find the `6Sumo Arena`3 and compete against other players for `aemeralds`3!</tip>
+</broadcasts>
+<teams>
+    <team id="team-one" color="dark green" max="32">Green</team>
+    <team id="team-two" color="yellow" max="32">Yellow</team>
+</teams>
+<spawns>
+    <default yaw="0">
+        <region>
+            <cylinder base="0.5,93,-77.5" radius="4" height="0"/>
+        </region>
+    </default>
+</spawns>
+<kits>
+    <kit id="adventure-kit">
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="survival-kit">
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="gold-kit">
+        <head name="zzuf" uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" slot="7" consumable="golden-head" prevent-sharing="true">
+            <skin>e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2U5OGI5YmYxMjk3MmUzMzkxODcwZmE2MTcyMjUzZTE4ZjdjMzhmOGYzMmE1MWQzMDczODYwYjcwMDdjMjEifX19</skin>
+        </head>
+    </kit>
+</kits>
+<filters>
+    <any id="block-list">
+        <material id="green-clay">stained clay:13</material>
+        <material id="yellow-clay">stained clay:4</material>
+        <material>stained clay:0</material>
+        <all>
+            <any>
+                <material>snow</material>
+                <material>long grass</material>
+                <material>double plant:3</material>
+                <material>double plant:2</material>
+                <material>gold block</material>
+            </any>
+            <not>
+                <cause>explosion</cause>
+            </not>
+        </all>
+    </any>
+    <deny id="deny-physics">
+        <any>
+            <material>long grass</material>
+            <material>double plant</material>
+            <material>wall sign</material>
+            <material>redstone wire</material>
+            <material>snow</material>
+        </any>
+    </deny>
+    <any id="broadcast-filter">
+        <all>
+            <not>
+                <completed id="yellow-monument-broken">yellow-monument</completed>
+            </not>
+            <filter id="only-team-one"/>
+        </all>
+        <all>
+            <not>
+                <completed id="green-monument-broken">green-monument</completed>
+            </not>
+            <filter id="only-team-two"/>
+        </all>
+        <observing/>
+    </any>
+    <deny id="deny-use">
+        <any>
+            <material>chest</material>
+            <material>dispenser</material>
+            <material>ender chest</material>
+        </any>
+    </deny>
+    <after duration="0.05" id="is-alive">
+        <all>
+            <participating/>
+            <match-running/>
+            <alive/>
+        </all>
+    </after>
+    <all id="outside-portal-participating">
+        <region id="outside-portal"/>
+        <participating/>
+        <match-running/>
+    </all>
+</filters>
+<regions>
+    <negative id="not-buildable">
+        <union>
+            <cuboid min="69,56,-30" max="-68,75,31"/>
+            <cuboid id="green-mon-area" min="-36,75,6" max="-47,80,-5"/>
+            <mirror region="green-mon-area" origin="${map-origin}" normal="1,0,0"/>
+        </union>
+    </negative>
+    <apply block-physics="deny-physics"/>
+    <!-- Portals -->
+    <cylinder id="team-one-portal" base="-98.5,61,0.5" height="1" radius="3.5"/>
+    <mirror id="team-two-portal" region="team-one-portal" origin="${map-origin}" normal="1,0,0"/>
+    <union id="outside-portal">
+        <block id="team-one-outside-portal">-62,55,0</block>
+        <mirror region="team-one-outside-portal" origin="${map-origin}" normal="1,0,0"/>
+    </union>
+    <!-- Round cages -->
+    <complement id="cages">
+        <union>
+            <cylinder id="green-north-o" base="${green-north}" height="4" radius="3"/>
+            <cylinder id="green-south-o" base="${green-south}" height="4" radius="3"/>
+            <mirror region="green-north-o" origin="${map-origin}" normal="1,0,0"/>
+            <mirror region="green-south-o" origin="${map-origin}" normal="1,0,0"/>
+        </union>
+        <union>
+            <cylinder id="green-north-i" base="${green-north}" height="3" radius="2"/>
+            <cylinder id="green-south-i" base="${green-south}" height="3" radius="2"/>
+            <mirror region="green-north-i" origin="${map-origin}" normal="1,0,0"/>
+            <mirror region="green-south-i" origin="${map-origin}" normal="1,0,0"/>
+        </union>
+    </complement>
+    <!-- Cordillera  -->
+    <apply use="deny-use" message="You may not interact with this block!"/>
+    <negative id="adventure-area">
+        <cuboid id="survival-area" min="73,56,-32" max="-72,84,33"/>
+    </negative>
+    <apply kit="survival-kit" region="survival-area"/>
+    <apply kit="adventure-kit" region="adventure-area"/>
+    <point id="green-sumo">-24.5,93,64.5</point>
+    <point id="yellow-sumo">23.5,93,64.5</point>
+    <cuboid id="green-spawn-north-portal" min="-99.5,86,-3.5" size="2,4,2"/>
+    <mirror id="green-spawn-south-portal" region="green-spawn-north-portal" origin="${map-origin}" normal="0,0,1"/>
+    <mirror id="yellow-spawn-north-portal" region="green-spawn-north-portal" origin="${map-origin}" normal="1,0,0"/>
+    <mirror id="yellow-spawn-south-portal" region="green-spawn-south-portal" origin="${map-origin}" normal="1,0,0"/>
+    <point id="green-north">${green-north}</point>
+    <point id="green-south">${green-south}</point>
+    <point id="yellow-north">${yellow-north}</point>
+    <point id="yellow-south">${yellow-south}</point>
+    <union id="sumo-spawn-areas">
+        <cylinder id="green-sumo-area" base="-24.5,93,64.5" height="oo" radius="8"/>
+        <cylinder id="yellow-sumo-area" base="23.5,93,64.5" height="oo" radius="8"/>
+    </union>
+    <apply enter="only-team-one" region="green-sumo-area" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-team-two" region="yellow-sumo-area" message="You may not enter the enemy's spawn!"/>
+</regions>
+<destroyables materials="gold block" completion="100%" required="false" show-progress="true">
+    <destroyable id="green-monument" owner="team-one" name="Green Monument">
+        <region><cuboid min="-43,77,-1" size="3,3,3"/></region>
+    </destroyable>
+    <destroyable id="yellow-monument" owner="team-two" name="Yellow Monument">
+        <region><cuboid min="41,77,-1" size="3,3,3"/></region>
+    </destroyable>
+</destroyables>
+<projectiles>
+    <projectile
+        id="vitGrenade"
+        name="Vitamin Industries Grenade"
+        projectile="LargeFireball"
+        velocity="1.5"
+        click="right"
+        power="4"
+        damage="8"
+        throwable="true"
+        cooldown="4s"/>
+</projectiles>
+<shops>
+    <shop id="zzuf-shop" name="`f`lCdlla. Incognita Gift Shop">
+        <category id="bridge" name="`eBridging Supplies" material="159">
+            <item name="`9Mont Blanc `fSnowball" material="snow ball" lore="`8Collected from the Mont Blanc Grand Prix race track." amount="6" price="1" currency="emerald" prevent-sharing="true"/>
+            <item filter="only-team-one" name="`2Sharpshooter" material="monster egg" damage="51" lore="`9ⓘ `7Spawns a `fSkeleton`7!" amount="2" price="4" currency="emerald" prevent-sharing="true" show-can-place-on="false">
+                <can-place-on>
+                    <all-blocks/>
+                </can-place-on>
+            </item>
+            <item filter="only-team-two" name="`eSharpshooter" material="monster egg" damage="51" lore="`9ⓘ `7Spawns a `fSkeleton`7!" amount="2" price="4" currency="emerald" prevent-sharing="true" show-can-place-on="false">
+                <can-place-on>
+                    <all-blocks/>
+                </can-place-on>
+            </item>
+            <item name="`aVitamin Industries Grenade" material="fireball" lore="`9ⓘ `7Destroys `fStained Clay`7/`fTerracotta`7 and damages players." amount="1" price="3" currency="emerald" prevent-sharing="true" projectile="vitGrenade"/>
+            <item name="`fiCarus Blade" damage="55" material="wood sword" lore="`9ⓘ `7Enchanted with Knockback II. `f5`7 uses!" amount="1" price="2" currency="emerald" prevent-sharing="true">
+                <enchantment level="2">knockback</enchantment>
+            </item>
+            <item name="`bThe Motörhead `f(Speed II)" damage="2" material="potion" lore="`9ⓘ `7Speed II for `f20`7 seconds.||`8Parallelogram." amount="1" price="3" currency="emerald" prevent-sharing="true">
+                <effect duration="20s" amplifier="2">speed</effect>
+            </item>
+            <item name="`aChartreuse `f(Jump Boost II)" damage="11" material="potion" lore="`9ⓘ `7Jump Boost II for `f15`7 seconds." amount="1" price="3" currency="emerald" prevent-sharing="true">
+                <effect duration="15s" amplifier="2">jump_boost</effect>
+            </item>
+            <item name="`4Cognac `f(Strength I)" damage="9" material="potion" lore="`9ⓘ `7Strength I for `f15`7 seconds." amount="1" price="3" currency="emerald" prevent-sharing="true">
+                <effect duration="15s">strength</effect>
+            </item>
+            <item name="`6Sagojn `fBow" damage="375" material="bow" lore="`9ⓘ `7Enchanted with Punch II. `f10`7 uses!" amount="1" price="5" currency="emerald" prevent-sharing="true">
+                <enchantment level="2">punch</enchantment>
+            </item>
+            <item name="`eBroken Crown" damage="77" material="gold helmet" lore="`9ⓘ `7Use this to show off your wealth!||`8Very damaged!" amount="1" price="10" currency="emerald" prevent-sharing="true">
+                <enchantment level="4">protection environmental</enchantment>
+            </item>
+        </category>
+    </shop>
+</shops>
+<shopkeepers>
+    <!-- Green -->
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="180" pitch="0">-74.5,75,40.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="180" pitch="0">-72.5,75,40.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="0" pitch="0">-74.5,75,-39.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="0" pitch="0">-72.5,75,-39.5</point>
+    </shopkeeper>
+    <!-- Yellow -->
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="180" pitch="0">75.5,75,40.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="180" pitch="0">73.5,75,40.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="0" pitch="0">73.5,75,-39.5</point>
+    </shopkeeper>
+    <shopkeeper name="`6Gift Shop Clerk" shop="zzuf-shop" mob="Blaze">
+        <point yaw="0" pitch="0">75.5,75,-39.5</point>
+    </shopkeeper>
+</shopkeepers>
+<consumables>
+    <consumable id="golden-head" action="golden-action" on="click" consume="true"/>
+</consumables>
+<actions>
+    <action id="golden-action" scope="player">
+        <sound key="${entity.generic.eat}" pitch="0.8"/>
+        <kit>
+            <health>${max-health}</health>
+            <effect amplifier="2" duration="20s">absorption</effect>
+        </kit>
+    </action>
+    <trigger filter="yellow-monument-broken" scope="match">
+        <action scope="match">
+            <message text=" `e⚠ `fAn extra bridge to `eYellow`f's portal has appeared!"/>
+            <sound preset="alert"/>
+            <fill material="air">
+                <union><block>71,67,0</block><block>86,67,0</block></union>
+            </fill>
+            <fill material="obsidian">
+                <block>42,95,0</block>
+            </fill>
+        </action>
+    </trigger>
+    <trigger filter="green-monument-broken" scope="match">
+        <action scope="match">
+            <message text=" `e⚠ `fAn extra bridge to `2Green`f's portal has appeared!"/>
+            <sound preset="alert"/>
+            <fill material="air">
+                <union><block>-71,67,0</block><block>-86,67,0</block></union>
+            </fill>
+            <fill material="obsidian">
+                <block>-42,95,0</block>
+            </fill>
+        </action>
+    </trigger>
+    <trigger filter="outside-portal-participating" scope="player">
+        <action scope="player">
+            <replace-item ignore-metadata="true">
+                <find material="iron sword"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="bow"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="diamond pickaxe"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="stained clay"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="wood sword"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="potion"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="snow ball"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="gold helmet"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="monster egg"/>
+                <replace material="air"/>
+            </replace-item>
+            <replace-item ignore-metadata="true">
+                <find material="fireball"/>
+                <replace material="air"/>
+            </replace-item>
+            <kit id="adventure-kit"/>
+            <message text=" `e⚠ `cYour weapons have been removed!"/>
+            <sound preset="death_other"/>
+        </action>
+    </trigger>
+    <trigger filter="is-alive" scope="player">
+        <action scope="player">
+            <kit id="adventure-kit"/>
+        </action>
+    </trigger>
+</actions>
+<item-mods>
+    <rule>
+        <match>
+            <material>skull item</material>
+        </match>
+        <modify name="`6Golden `6Head"/>
+        <!-- <modify name="`6Golden `6Head" lore="`9ⓘ `7Instantly restores to `c${max-health} HP`7!|`9ⓘ `7Grants `eAbsorption II`7 for `f20 seconds`7!"/> -->
+        <!-- modifying the lore would break the consumable, though if that ever changes this version would be nicer -->
+    </rule>
+</item-mods>
+<structures>
+    <structure id="bonus-bridge" air="false">
+        <region>
+            <cuboid min="9,79,-301" max="-9,72,-290"/>
+        </region>
+    </structure>
+    <dynamic structure="bonus-bridge" location="70,61,-5" trigger="yellow-monument-broken"/>
+    <dynamic structure="bonus-bridge" location="-87,61,-5" trigger="green-monument-broken"/>
+</structures>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item material="emerald" name="`fCordillera Emerald" lore="`9ⓘ `7Use this at spawn shops to buy interesting items!||`8ZZUF●D●G●REX●ET●IMP|`8Issued SEPTEMBER 2023"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <all>
+                <kill-streak count="1" repeat="false"/>
+                <cuboid min="-27,93,57" max="26,110,77"/>
+            </all>
+        </filter>
+        <kit id="gold-kit"/>
+    </kill-reward>
+</kill-rewards>
+<portals>
+    <!-- Spawns -->
+    <portal destination="green-north" region="green-spawn-north-portal" yaw="@-90" pitch="@0"/>
+    <portal destination="green-south" region="green-spawn-south-portal" yaw="@-90" pitch="@0"/>
+    <portal destination="yellow-north" region="yellow-spawn-north-portal" yaw="@90" pitch="@0"/>
+    <portal destination="yellow-south" region="yellow-spawn-south-portal" yaw="@90" pitch="@0"/>
+    <!-- Sumo -->
+    <portal destination="green-sumo" yaw="@-90" pitch="@0" region="outside-portal" filter="only-team-one" sound="true"/>
+    <portal destination="yellow-sumo" yaw="@90" pitch="@0" region="outside-portal" filter="only-team-two" sound="true"/>
+</portals>
+<itemkeep>
+    <item>emerald</item>
+    <item>gold helmet</item>
+    <item>wood sword</item>
+    <item>potion</item>
+    <item>snow ball</item>
+    <item>bow</item>
+    <item>monster egg</item>
+    <item>fireball</item>
+    <item>skull item</item>
+</itemkeep>
+<itemremove>
+    <item>seeds</item>
+    <item>double plant</item>
+    <item>147</item>
+    <item>gold block</item>
+    <item>bone</item>
+    <item>coal</item>
+    <item>skull item</item>
+</itemremove>
+</map>
