@@ -1,0 +1,341 @@
+<map proto="1.5.0">
+<name>Avant Garde</name>
+<version>1.2.2</version>
+<objective>Break the enemy's monument, then jump into the enemy team's portal located below their spawn point!</objective>
+<created>2023-06-04</created>
+<include id="bridge"/>
+<gamemode>dtm</gamemode>
+<constants>
+    <constant id="map-origin">0.5,0,0.5</constant>
+    <constant id="void-plane">51</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">51.5,70,-27.5</constant>
+    <constant id="team-one-yaw">45</constant>
+    <constant id="team-two-spawn">-50.5,70,28.5</constant>
+    <constant id="team-two-yaw">-135</constant>
+</constants>
+<broadcasts>
+    <tip after="2s" every="5m">`7Monuments are either made out of `fIron Blocks`7 or `bPacked Ice`7, and regenerate each round!</tip>
+    <tip after="3s" every="5m">`7Beacons above the `cenemy`7 side let you know where you need to go!</tip>
+</broadcasts>
+<authors>
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128"/> <!-- zzuf -->
+</authors>
+<teams>
+    <team id="team-one" color="light purple" dye-color="magenta" max="12">Magenta</team>
+    <team id="team-two" color="blue" max="12">Blue</team>
+</teams>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="0">0.5,81,-58.5</point>
+            <point yaw="180">0.5,81,59.5</point>
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="adventure-kit">
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="survival-kit">
+        <game-mode>survival</game-mode>
+    </kit>
+</kits>
+<filters>
+    <any id="only-mon-materials">
+        <material id="only-iron">iron block</material>
+        <material id="only-packed-ice">packed ice</material>
+    </any>
+    <material id="only-bedrock">bedrock</material>
+    <any id="block-list">
+        <material>stained clay:2</material>
+        <material>stained clay:11</material>
+        <material>stained clay:0</material>
+        <any>
+            <all>
+                <filter id="only-mon-materials"/>
+                <region id="magenta-monument"/>
+                <filter id="only-team-two"/>
+            </all>
+            <all>
+                <filter id="only-mon-materials"/>
+                <region id="blue-monument"/>
+                <filter id="only-team-one"/>
+            </all>
+        </any>
+        <material>long grass</material>
+        <material>dead bush</material>
+        <material>double plant</material>
+        <material>red rose</material>
+        <material>yellow flower</material>
+        <material>stationary water</material>
+        <material>water</material>
+        <material>water lily</material>
+        <material>sugar cane block</material>
+    </any>
+    <any id="1-broken-mon">
+        <filter id="magenta-zzuf-monument"/>
+        <filter id="blue-zzuf-monument"/>
+    </any>
+    <any id="only-stained-glass-and-obby">
+        <material>stained glass:0</material>
+        <material>obsidian</material>
+    </any>
+    <deny id="deny-physics">
+        <any>
+            <material>redstone wire</material>
+            <material>double plant</material>
+            <material>dead bush</material>
+        </any>
+    </deny>
+    <all id="magenta-zzuf-monument">
+        <!-- top -->
+        <offset vector="38,69,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,69,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,69,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,69,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,69,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,69,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,69,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,69,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,69,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <!-- middle -->
+        <offset vector="38,68,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,68,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,68,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,68,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,68,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,68,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,68,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,68,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <!-- bottom -->
+        <offset vector="38,67,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,67,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="38,67,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,67,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,67,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="39,67,15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,67,13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,67,14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="40,67,15" filter="not(any(only-iron,only-packed-ice))"/>
+    </all>
+    <all id="blue-zzuf-monument">
+        <!-- top -->
+        <offset vector="-38,69,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,69,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,69,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,69,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,69,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,69,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,69,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,69,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,69,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <!-- middle -->
+        <offset vector="-38,68,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,68,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,68,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,68,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,68,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,68,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,68,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,68,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <!-- bottom -->
+        <offset vector="-38,67,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,67,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-38,67,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,67,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,67,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-39,67,-15" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,67,-13" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,67,-14" filter="not(any(only-iron,only-packed-ice))"/>
+        <offset vector="-40,67,-15" filter="not(any(only-iron,only-packed-ice))"/>
+    </all>
+</filters>
+<regions>
+    <negative id="not-buildable">
+        <complement>
+            <union>
+                <cuboid min="-51,56,-21" max="52,70,22"/>
+                <cuboid min="-46,56,-28" max="47,70,29"/>
+                <cuboid min="-34,56,-30" max="35,70,31"/>
+                <cuboid min="35,56,-28" max="41,70,-30"/> <!-- Magenta small -->
+                <cuboid min="-34,56,29" max="-40,70,31"/> <!-- Blue small -->
+            </union>
+            <region id="bases"/>
+        </complement>
+    </negative>
+    <cuboid id="team-one-portal" min="54,58,-25" size="3,1,3"/>
+    <cuboid id="team-two-portal" min="-56,58,23" size="3,1,3"/>
+    <!-- Round cages -->
+    <union id="cages">
+        <cylinder id="team-one-spawn-cage" base="${team-one-spawn}" height="3" radius="2"/>
+        <cylinder id="team-two-spawn-cage" base="${team-two-spawn}" height="3" radius="2"/>
+    </union>
+    <!-- Avant Garde -->
+    <rectangle id="base-complement" min="-44,22" max="45,-21"/>
+    <union id="bases">
+        <union id="magenta-base">
+            <complement>
+                <cuboid min="41,56,-11" max="63,70,-30"/>
+                <region id="base-complement"/>
+            </complement>
+            <block>55,94,-24</block>
+        </union>
+        <union id="blue-base">
+            <complement>
+                <cuboid min="-40,56,12" max="-62,70,31"/>
+                <region id="base-complement"/>
+            </complement>
+            <block>-55,94,24</block>
+        </union>
+    </union>
+    <union id="base-doors">
+        <union id="magenta-base-doors">
+            <cuboid min="41,64,-27" max="42,67,-24"/>
+            <cuboid min="45,64,-17" max="46,67,-14"/>
+            <cuboid min="48,64,-12" max="51,67,-11"/>
+            <cuboid min="59,64,-25" max="60,68,-22"/>
+            <!-- ceiling -->
+            <cuboid min="48,69,-17" max="51,70,-14"/>
+            <cuboid min="60,69,-25" max="63,70,-22"/>
+            <!-- portal -->
+            <cuboid min="54,63,-25" max="57,64,-22"/>
+        </union>
+        <mirror id="blue-base-doors" region="magenta-base-doors-mirror" origin="${map-origin}" normal="0,0,1"/>
+    </union>
+    <mirror id="magenta-base-doors-mirror" region="magenta-base-doors" origin="${map-origin}" normal="1,0,0"/>
+    <union id="monuments">
+        <cuboid id="magenta-monument" min="38,67,13" size="3,3,3"/>
+        <cuboid id="blue-monument" min="-40,67,-15" size="3,3,3"/>
+    </union>
+    <!-- 
+    <apply block="only-team-one" region="blue-monument">
+        <message>{"translate":"objective.damageOwn"}</message>
+    </apply>
+    <apply block="only-team-two" region="magenta-monument">
+        <message>{"translate":"objective.damageOwn"}</message>
+    </apply>
+    -->
+    <block id="magenta-m-marker">39,95,14</block>
+    <block id="magenta-p-marker">55,94,-24</block>
+    <block id="blue-m-marker">-39,95,-14</block>
+    <block id="blue-p-marker">-55,94,24</block>
+    <apply use="never" block-physics="deny-physics"/>
+    <union id="obs-monuments">
+        <cuboid min="-7,84,54" size="3,3,3"/> <!-- South -->
+        <cuboid min="5,84,-56" size="3,3,3"/> <!-- North -->
+    </union>
+    <apply leave="never" message="You may not leave the playable area!">
+        <region>
+            <rectangle min="73,-38" max="-72,39"/>
+        </region>
+    </apply>
+    <apply kit="adventure-kit">
+        <region>
+            <union id="adventure-area">
+                <below x="-52"/>
+                <above x="53"/>
+            </union>
+        </region>
+    </apply>
+    <apply kit="survival-kit">
+        <region>
+            <negative>
+                <region id="adventure-area"/>
+            </negative>
+        </region>
+    </apply>
+</regions>
+<variables>
+    <variable id="monument_blocks" scope="player" default="0"/>
+</variables>
+<actions>
+    <action id="magenta-doors" scope="match">
+        <fill region="magenta-base-doors" material="air"/>
+        <fill material="obsidian">
+            <region id="magenta-m-marker"/>
+        </fill>
+        <fill material="air">
+            <region id="magenta-p-marker"/>
+        </fill>
+        <message text=" `e⚠ `dMagenta`f's portal is now `aopen`f!"/>
+        <sound preset="ALERT"/>
+    </action>
+    <action id="blue-doors" scope="match">
+        <fill region="blue-base-doors" material="air"/>
+        <fill material="obsidian">
+            <region id="blue-m-marker"/>
+        </fill>
+        <fill material="air">
+            <region id="blue-p-marker"/>
+        </fill>
+        <message text=" `e⚠ `9Blue`f's portal is now `aopen`f!"/>
+        <sound preset="ALERT"/>
+    </action>
+    <action id="obs-mon-ice-mode" scope="match">
+        <fill region="monuments" material="packed ice" filter="only-iron"/>
+        <fill region="obs-monuments" material="packed ice" filter="only-iron"/>
+    </action>
+    <action id="obs-mon-iron-mode" scope="match">
+        <fill region="obs-monuments" material="iron block" filter="only-packed-ice"/>
+    </action>
+    <action id="restore-monuments" scope="match">
+        <fill region="monuments" material="iron block" filter="not(only-bedrock)"/>
+        <message text=" `e⚠ `bAll monuments have been repaired."/>
+    </action>
+    <trigger action="magenta-doors" filter="magenta-zzuf-monument" scope="match"/>
+    <trigger action="blue-doors" filter="blue-zzuf-monument" scope="match"/>
+    <trigger action="obs-mon-ice-mode" filter="1-broken-mon" scope="match"/>
+    <trigger action="obs-mon-iron-mode" filter="cant-score" scope="match"/>
+    <trigger action="restore-monuments" filter="cant-score" scope="match"/>
+    <action id="magenta-doors-close" scope="match">
+        <fill region="magenta-base-doors" material="95"/>
+        <fill material="air">
+            <region id="magenta-m-marker"/>
+        </fill>
+        <fill material="obsidian">
+            <region id="magenta-p-marker"/>
+        </fill>
+    </action>
+    <action id="blue-doors-close" scope="match">
+        <fill region="blue-base-doors" material="95"/>
+        <fill material="air">
+            <region id="blue-m-marker"/>
+        </fill>
+        <fill material="obsidian">
+            <region id="blue-p-marker"/>
+        </fill>
+    </action>
+    <trigger action="magenta-doors-close" filter="all(cant-score,magenta-zzuf-monument)" scope="match"/>
+    <trigger action="blue-doors-close" filter="all(cant-score,blue-zzuf-monument)" scope="match"/>
+</actions>
+<block-drops>
+    <rule>
+        <filter>
+            <any>
+                <material>packed ice</material>
+                <material>iron block</material>
+            </any>
+        </filter>
+        <kit>
+            <action>
+                <set var="monument_blocks" value="monument_blocks+1"/>
+            </action>
+        </kit>
+    </rule>
+</block-drops>
+<stats>
+    <stat value="monument_blocks" name="Monument blocks broken"/>
+</stats>
+<itemremove>
+    <item>iron block</item>
+    <item>seeds</item>
+    <item>double plant</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>water lily</item>
+    <item>sugar cane</item>
+    <item>stick</item>
+    <item>sign</item>
+</itemremove>
+</map>

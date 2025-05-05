@@ -1,5 +1,5 @@
 <map proto="1.5.0">
-<version>1.1.0</version>
+<version>1.1.1</version>
 <name>Itty Bitty: Bed Wars</name>
 <objective>Destroy the enemy teams' bed and eliminate them before they get to yours.</objective>
 <gamemode>bedwars</gamemode>
@@ -194,9 +194,9 @@
     <default region="obs-spawn"/>
 </spawns>
 <broadcasts>
-    <!-- Emerald Generators notification -->
-    <alert after="5m">`2Emerald Generators`r have been upgraded to Tier `cII`r.</alert>
-    <alert after="10m">`2Emerald Generators`r have been upgraded to Tier `cIII`r.</alert>
+    <!-- Emerald Generator notification -->
+    <alert after="5m">`2Emerald Generator`r have been upgraded to Tier `cII`r.</alert>
+    <alert after="10m">`2Emerald Generator`r have been upgraded to Tier `cIII`r.</alert>
     <!-- Sudden Death & World Border Notifications -->
     <alert after="16m">The world border will appear in `c10 minutes`r.</alert>
     <alert after="26m">The world border has appeared and is approaching!</alert>
@@ -233,7 +233,7 @@
             <item material="iron boots" enchantment="protection:4" name="`rPermanent Iron Armor" price="12" currency="gold ingot" kit="iron-prot4-kit" filter="iron-set-4"/>
             <item material="golden apple" amount="1" price="3" currency="gold ingot"/>
             <item material="shears" name="`rPermanent Shears" lore="`7Great for getting rid of wool." unbreakable="true" price="20" currency="iron ingot" filter="not-shears" color="white"/>
-            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/> 
+            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/>
             <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-pickaxe">
                 <payment price="10" currency="iron ingot" color="white"/>
                 <payment price="1" currency="wood pickaxe"/>
@@ -262,14 +262,13 @@
             <item material="fireball" name="`rFireball" lore="`7Right-click to launch! Great for|`7knocking off enemies walking on|`7thin bridges." price="40" currency="iron ingot" kit="fireball" color="white"/>
             <item material="tnt" lore="`7Instantly ignites once placed." amount="1" price="8" currency="gold ingot"/>
         </category>
-        <category id="blocks" name="`aBlocks" material="hard clay"> 
+        <category id="blocks" name="`aBlocks" material="hard clay">
             <item material="wool" team-color="true" amount="16" price="4" currency="iron ingot" color="white"/>
             <item material="stained clay" team-color="true" amount="16" price="12" currency="iron ingot" color="white"/>
             <item material="stained glass" team-color="true" name="`rBlastproof Glass" amount="4" price="12" currency="iron ingot" color="white"/>
             <item material="ender stone" amount="12" price="24" currency="iron ingot" color="white"/>
             <item material="ladder" amount="8" price="4" currency="iron ingot" color="white"/>
             <item material="wood" amount="16" price="4" currency="gold ingot"/>
-            <item material="obsidian" amount="4" price="4" currency="emerald" color="dark green"/>
         </category>
         <category id="melee" name="`aMelee" material="gold sword">
             <item material="stone sword" unbreakable="true" amount="1" price="10" currency="iron ingot" kit="stone-sword-sharp0" filter="sharpness-0" color="white"/>
@@ -299,7 +298,7 @@
         </category>
         <category id="tools" name="`aTools" material="stone pickaxe">
             <item material="shears" name="`rPermanent Shears" lore="`7Great for getting rid of wool." unbreakable="true" price="20" currency="iron ingot" filter="not-shears" color="white"/>
-            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/> 
+            <item material="wood pickaxe" unbreakable="true" enchantment="efficiency:1" amount="1" price="10" currency="iron ingot" filter="not-wood-pickaxe" color="white"/>
             <item material="iron pickaxe" unbreakable="true" enchantment="efficiency:2" amount="1" filter="not-iron-pickaxe">
                 <payment price="10" currency="iron ingot" color="white"/>
                 <payment price="1" currency="wood pickaxe"/>
@@ -329,8 +328,6 @@
         <category id="ranged" name="`aRanged" material="bow">
             <item material="arrow" amount="4" price="2" currency="gold ingot"/>
             <item material="bow" unbreakable="true" amount="1" price="12" currency="gold ingot"/>
-            <item material="bow" unbreakable="true" enchantment="power:1" name="`rPower Bow" amount="1" price="20" currency="gold ingot"/>
-            <item material="bow" unbreakable="true" enchantment="power:1;punch:1" name="`rPower &amp; Punch Bow" amount="1" price="6" currency="emerald" color="dark green"/>
             <item material="fishing rod" unbreakable="true" amount="1" price="6" currency="gold ingot"/>
         </category>
         <category id="potions" name="`aPotions" material="brewing stand item">
@@ -340,9 +337,9 @@
             <item material="potion" name="`rJump Boost V (0:45)" damage="11" amount="1" price="1" currency="emerald" color="dark green">
                 <effect duration="45s" amplifier="5">jump_boost</effect>
             </item>
-            <item material="potion" name="`rInvisibility (0:30)" damage="14" amount="1" price="2" currency="emerald" color="dark green">
+            <!-- <item material="potion" name="`rInvisibility (0:30)" damage="14" amount="1" price="2" currency="emerald" color="dark green">
                 <effect duration="30s">invisibility</effect>
-            </item>
+            </item> -->
         </category>
         <category id="utilities" name="`aUtilities" material="tnt">
             <item material="golden apple" amount="1" price="3" currency="gold ingot"/>
@@ -365,9 +362,9 @@
         <item material="diamond chestplate" name="`e`lReinforced Armor IV" lore="`7Your team permanently gains|`7Protection IV on all armor pieces." price="30" currency="emerald" action="protection-dummy-4" filter="protection-3" color="dark green"/>
         <item material="gold pickaxe" name="`6`lHaste I" lore="`7All players on your team|`7permanently gain Haste I." price="4" currency="emerald" action="haste-dummy-1" filter="haste-0" color="dark green"/>
         <item material="diamond pickaxe" name="`6`lHaste II" lore="`7All players on your team|`7permanently gain Haste II." price="6" currency="emerald" action="haste-dummy-2" filter="haste-1" color="dark green"/>
-        <item material="iron ingot" name="`b`lResource Generator Upgrade I" lore="`7This upgrade increases your resource|`7generator's speed to 150%." price="4" currency="emerald" action="generator-dummy-1" filter="generator-0" color="dark green"/> 
+        <item material="iron ingot" name="`b`lResource Generator Upgrade I" lore="`7This upgrade increases your resource|`7generator's speed to 150%." price="4" currency="emerald" action="generator-dummy-1" filter="generator-0" color="dark green"/>
         <item material="gold ingot" name="`b`lResource Generator Upgrade II" lore="`7This upgrade increases your resource|`7generator's speed to 200%." price="8" currency="emerald" action="generator-dummy-2" filter="generator-1" color="dark green"/>
-        <item material="emerald" name="`b`lResource Generator Upgrade III" lore="`7This upgrade will spawn emeralds in your|`7resource generator." price="12" currency="emerald" action="generator-dummy-3" filter="generator-2" color="dark green"/> 
+        <item material="emerald" name="`b`lResource Generator Upgrade III" lore="`7This upgrade will spawn emeralds in your|`7resource generator." price="12" currency="emerald" action="generator-dummy-3" filter="generator-2" color="dark green"/>
         <item material="gold block" name="`b`lResource Generator Upgrade IV" lore="`7This upgrade increases your resource|`7generator's speed to 300%." price="16" currency="emerald" action="generator-dummy-4" filter="generator-3" color="dark green"/>
         <item material="beacon" name="`c`lRegenerative Pool" lore="`7Creates a Regeneration field|`7around your base." price="3" currency="emerald" action="regen-dummy" filter="regen-0" color="dark green"/>
     </category>
@@ -379,13 +376,13 @@
 </shop>
 </shops>
 <shopkeepers>
-    <shopkeepers name="`b`lItem Shop" shop="item-shop"> 
-        <shopkeeper yaw="0">-50.5,2,-3.5</shopkeeper> <!-- Team Red -->
+    <shopkeepers name="`b`lItem Shop" shop="item-shop">
+        <shopkeeper>-50.5,2,-3.5</shopkeeper> <!-- Team Red -->
         <shopkeeper yaw="180">51.5,2,4.5</shopkeeper> <!-- Team Blue -->
     </shopkeepers>
     <shopkeepers name="`b`lUpgrade Shop" shop="upgrade-shop">
         <shopkeeper yaw="-180">-50.5,2,4.5</shopkeeper> <!-- Team Red -->
-        <shopkeeper yaw="-0">51.5,2,-3.5</shopkeeper> <!-- Team Blue -->
+        <shopkeeper>51.5,2,-3.5</shopkeeper> <!-- Team Blue -->
     </shopkeepers>
 </shopkeepers>
 <tnt>
@@ -754,12 +751,12 @@
     <variable id="freeze_variable" scope="team"/>
     <variable id="fatigue_variable" scope="team"/>
     <variable id="alarm_variable" scope="team"/>
-    <variable id="sudden_death_variable" scope="match"/> 
+    <variable id="sudden_death_variable" scope="match"/>
 </variables>
 <!-- Filters -->
 <filters>
     <!-- Time Filters -->
-    <not id="emerald-1">                                                               
+    <not id="emerald-1">
         <time>5m</time>
     </not>
     <not id="emerald-2">
@@ -1396,7 +1393,7 @@
     <apply block="original-block-protection-filter" message="You can only modify blocks placed by a player!"/>
 </regions>
 <world-borders center="0.5,0.5">
-    <world-border size="400"/> 
+    <world-border size="400"/>
     <world-border size="12" after="26m" duration="3m" damage="5" buffer="0"/>
 </world-borders>
 <enderchest>
