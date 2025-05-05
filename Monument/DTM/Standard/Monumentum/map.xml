@@ -1,0 +1,283 @@
+<map proto="1.5.0">
+<name>Monumentum</name>
+<version>2.0.0</version>
+<gamemode>dtm</gamemode>
+<created>2025-04-30</created>
+<objective>Be the last team standing by destroying the enemy teams's monuments.</objective>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Map, Layout, &amp; XML"/> <!-- Wesdial -->
+</authors>
+<contributors>
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Map Advisory &amp; Tester"/> <!-- _Pear -->
+</contributors>
+<!-- Teams -->
+<teams>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="green-team" color="dark green" max="5">Green</team>
+    <team id="yellow-team" color="yellow" max="5">Yellow</team>
+</teams>
+<!-- Blitz and Sudden Death -->
+<blitz filter="blitz-conditions" join-filter="joining-filter" scoreboard-filter="blitz-conditions">
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<!-- Time Limit -->
+<time>60m</time>
+<!-- Kits -->
+<kits>
+    <kit id="default-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="4" unbreakable="true" material="iron axe"/>
+        <item slot="3" unbreakable="true" material="iron spade"/>
+        <item slot="5" material="golden apple"/>
+        <item slot="6" amount="64" team-color="true" material="stained clay"/>
+        <item slot="7" amount="64" team-color="true" material="stained clay"/>
+        <item slot="33" amount="64" team-color="true" material="stained clay"/>
+        <item slot="34" amount="64" team-color="true" material="stained clay"/>
+        <item slot="9" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" material="chainmail boots"/>
+        <effect duration="2s" amplifier="10">damage_resistance</effect>
+    </kit>
+</kits>
+<!-- Spawns -->
+<spawns>
+    <spawn team="red-team" kit="default-kit" yaw="90" region="red-spawn"/>
+    <spawn team="blue-team" kit="default-kit" yaw="-90" region="blue-spawn"/>
+    <spawn team="green-team" kit="default-kit" yaw="180" region="green-spawn"/>
+    <spawn team="yellow-team" kit="default-kit" yaw="180" region="yellow-spawn"/>
+    <default region="obs-spawn"/>
+</spawns>
+<broadcasts>
+    <!-- Sudden Death notification -->
+    <alert after="40m">Sudden Death will begin in `c5 minutes`r, beware!</alert>
+    <alert after="44m50s">Sudden Death will begin in `c10 seconds`r.</alert>
+    <alert after="44m55s">Sudden Death will begin in `c5 seconds`r.</alert>
+    <alert after="44m56s">Sudden Death will begin in `c4 seconds`r.</alert>
+    <alert after="44m57s">Sudden Death will begin in `c3 seconds`r.</alert>
+    <alert after="44m58s">Sudden Death will begin in `c2 seconds`r.</alert>
+    <alert after="44m59s">Sudden Death will begin in `c1 second`r.</alert>
+    <alert after="50m">The world border will appear in `c5 minutes`r.</alert>
+    <alert after="55m">The world border has appeared and is approaching!</alert>
+    <alert after="57m">The world border is getting super close to you. Better run now!</alert>
+</broadcasts>
+<!-- Monuments -->
+<destroyables completion="100%" repairable="false" required="false" show-progress="true" sparks="true" materials="obsidian" mode-changes="true">
+    <destroyable name="Red Monument" owner="red-team" region="red-team-monument" id="red-team-monument-broken" scoreboard-filter="red-team-scoreboard-filter"/>
+    <destroyable name="Blue Monument" owner="blue-team" region="blue-team-monument" id="blue-team-monument-broken" scoreboard-filter="blue-team-scoreboard-filter"/>
+    <destroyable name="Green Monument" owner="green-team" region="green-team-monument" id="green-team-monument-broken" scoreboard-filter="green-team-scoreboard-filter"/>
+    <destroyable name="Yellow Monument" owner="yellow-team" region="yellow-team-monument" id="yellow-team-monument-broken" scoreboard-filter="yellow-team-scoreboard-filter"/>
+</destroyables>
+<!-- Monument Modes -->
+<modes>
+    <mode after="30m" material="emerald block"/>
+</modes>
+<actions>
+    <!-- Sudden death variable handling -->
+    <action id="sudden-death" expose="true" filter="sudden-death-unstarted" scope="match">
+        <set var="sudden_death_variable" value="1"/>
+    </action>
+    <trigger action="sudden-death" scope="match">
+        <filter>
+            <time>44m</time>
+        </filter>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after message="`cSudden Death `rWill Begin In {0}" duration="60s" filter="sudden-death-counting"/>
+        </filter>
+        <action>
+            <message id="sudden-death-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+                <title>`cSUDDEN `cDEATH!</title>
+                <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+            </message>
+            <set var="sudden_death_variable" value="2"/>
+            <fill region="team-monuments" material="air" events="true"/>
+        </action>
+    </trigger>
+    <!-- Destruction alert -->
+    <message id="destroy-title" fade-in="0.5s" stay="2s" fade-out="0.5s">
+        <title>`cMONUMENT `cDESTROYED!</title>
+        <subtitle>`fYou `fcan `fno `flonger `frespawn.</subtitle>
+    </message>
+    <trigger filter="monument-destroy-message" trigger="destroy-title" scope="player"/>
+</actions>
+<variables>
+    <variable id="sudden_death_variable" scope="match"/>
+</variables>
+<!-- Filters -->
+<filters>
+    <deny id="deny-players">
+        <participating/>
+    </deny>
+    <all id="only-iron-regen">
+        <cause>world</cause>
+    </all>
+    <material id="only-iron">iron block</material>
+    <alive id="respawned"/>
+    <any id="blitz-conditions">
+        <!-- Triggers blitz for a team if their monument is destroyed in under 60 minutes -->
+        <filter id="monument-destruction"/>
+        <!-- Failsafe to guarantee blitz after 45m, sudden death happens -->
+        <time>45m</time>
+    </any>
+    <any id="monument-destruction">
+        <all>
+            <team>red-team</team>
+            <objective any="true">red-team-monument-broken</objective>
+        </all>
+        <all>
+            <team>blue-team</team>
+            <objective any="true">blue-team-monument-broken</objective>
+        </all>
+        <all>
+            <team>green-team</team>
+            <objective any="true">green-team-monument-broken</objective>
+        </all>
+        <all>
+            <team>yellow-team</team>
+            <objective any="true">yellow-team-monument-broken</objective>
+        </all>
+        </any>
+    <not id="joining-filter">
+        <any>
+            <completed>red-team-monument-broken</completed>
+            <completed>blue-team-monument-broken</completed>
+            <completed>green-team-monument-broken</completed>
+            <completed>yellow-team-monument-broken</completed>
+        </any>
+    </not>
+    <not id="red-team-scoreboard-filter">
+        <completed>red-team-monument-broken</completed>
+    </not>
+    <not id="blue-team-scoreboard-filter">
+        <completed>blue-team-monument-broken</completed>
+    </not>
+    <not id="green-team-scoreboard-filter">
+        <completed>green-team-monument-broken</completed>
+    </not>
+    <not id="yellow-team-scoreboard-filter">
+        <completed>yellow-team-monument-broken</completed>
+    </not>
+    <all id="monument-destroy-message">
+        <filter id="monument-destruction"/>
+    <not>
+        <filter id="sudden-death-enabled"/>
+    </not>
+    </all>
+    <variable id="sudden-death-unstarted" var="sudden_death_variable">0</variable>
+    <variable id="sudden-death-counting" var="sudden_death_variable">1</variable>
+    <variable id="sudden-death-enabled" var="sudden_death_variable">2</variable>
+    <any id="red-team-status">
+        <team>red-team</team>
+        <objective any="true">red-team-monument-broken</objective>
+    </any>
+    <any id="blue-team-status">
+        <team>blue-team</team>
+        <objective any="true">blue-team-monument-broken</objective>
+    </any>
+    <any id="green-team-status">
+        <team>green-team</team>
+        <objective any="true">green-team-monument-broken</objective>
+    </any>
+    <any id="yellow-team-status">
+        <team>yellow-team</team>
+        <objective any="true">yellow-team-monument-broken</objective>
+    </any>
+</filters>
+<!-- Iron Block Rewnewables -->
+<renewables>
+    <renewable interval="5s" grow="true" sound="false" region="spawn-protections" renew-filter="only-iron"/>
+</renewables>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="team-monuments">
+        <cuboid id="red-team-monument" min="62,36,-1" max="64,39,1"/>
+        <cuboid id="blue-team-monument" min="-62,36,1" max="-64,39,-1"/>
+        <cuboid id="green-team-monument" min="1,36,62" max="-1,39,64"/>
+        <cuboid id="yellow-team-monument" min="-1,36,-62" max="1,39,-64"/>
+    </union>
+    <union id="spawn-protections">
+        <cylinder id="red-spawn-protection" base="93.5,0,0.5" radius="11" height="oo"/>
+        <cylinder id="blue-spawn-protection" base="-92.5,0,0.5" radius="11" height="oo"/>
+        <cylinder id="green-spawn-protection" base="0.5,0,93.5" radius="11" height="oo"/>
+        <cylinder id="yellow-spawn-protection" base="0.5,0,-92.5" radius="11" height="oo"/>
+    </union>
+    <point id="red-spawn">99.5,33,0.5</point>
+    <point id="blue-spawn">-98.5,33,0.5</point>
+    <point id="green-spawn">0.5,33,99.5</point>
+    <point id="yellow-spawn">0.5,33,98.5</point>
+    <point id="obs-spawn">0.5,70,0.5</point>
+    <negative id="not-map">
+        <rectangle id="map" min="105,105" max="-104,-104"/>
+    </negative>
+    <!-- Applications -->
+    <below id="below-map" y="20"/>
+    <apply region="spawn-protections" block-break="only-iron" block-place="only-iron-regen" message="You may only modify iron blocks in spawn!"/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
+    <apply region="not-map" block="never" message="You may not edit outside the map!"/>
+    <apply region="below-map" block="never" message="You may not build below the map!"/>
+</regions>
+<world-borders center="0.5,0.5">
+    <world-border size="400"/>
+    <world-border size="12" after="55m" duration="4m" damage="5" buffer="0"/>
+</world-borders>
+<!-- Item Mods -->
+<item-mods>
+    <rule>
+        <match>
+            <material>iron helmet</material>
+            <material>iron chestplate</material>
+            <material>iron leggings</material>
+            <material>iron boots</material>
+        </match>
+        <modify unbreakable="true"/>
+    </rule>
+</item-mods>
+<!-- Toolrepair - Tools already have an unbreakable tag, this is only here to ensure players don't lose a tool by accident. -->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>iron axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<!-- Item Remove -->
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>beacon</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>seeds</item>
+    <item>potion</item>
+    <item>obsidian</item>
+</itemremove>
+<!-- Item Keep -->
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>stained clay</item>
+</itemkeep>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item material="golden apple"/>
+        <item amount="6" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>65</maxbuildheight>
+</map>
