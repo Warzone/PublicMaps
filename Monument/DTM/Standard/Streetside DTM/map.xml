@@ -1,8 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Streetside DTM</name>
 <variant id="halloween" world="halloween" override="true">Purgatory Street DTM</variant>
 <variant id="christmas" world="christmas" override="true">Frosty Street DTM</variant>
-<version>1.4.3</version>
+<version>1.4.4</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
 <if variant="default">
@@ -74,8 +74,6 @@
 </spawns>
 <!-- Filters -->
 <filters>
-    <team id="only-green">green-team</team>
-    <team id="only-blue">blue-team</team>
     <deny id="deny-players">
         <participating/>
     </deny>
@@ -100,8 +98,8 @@
     <apply region="gold-spawners" block-break="only-gold" block-place="deny-players" message="You may only break iron blocks!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="spawn-protections" use="never"/> <!-- Split from first spawn-protections to avoid duplicate messages -->
-    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy spawn."/>
-    <apply region="green-spawn-protection" enter="only-green" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy spawn."/>
 </regions>
 <!-- Monuments -->
 <destroyables materials="emerald block" repairable="false" name="Monument" mode-changes="true">
@@ -127,8 +125,8 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="5" material="arrow"/>
-        <item amount="10" material="wood"/>
+        <item amount="8" material="arrow"/>
+        <item amount="16" material="wood"/>
         <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
@@ -190,5 +188,8 @@
     <tool>stone axe</tool>
 </toolrepair>
 <!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>41</maxbuildheight>
 </map>
