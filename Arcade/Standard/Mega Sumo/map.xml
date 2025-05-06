@@ -1,7 +1,7 @@
-<map proto="1.4.2" game="Blitz: Sumo">
+<map proto="1.5.0" game="Blitz: Sumo">
 <name>Mega Sumo</name>
 <created>2021-11-23</created>
-<version>2.0.2</version>
+<version>2.0.3</version>
 <objective>Be the last team standing by throwing everyone off the platform!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -33,120 +33,65 @@
 </blitz>
 <!-- Broadcasts -->
 <broadcasts>
-    <alert after="20">`cWatch out! The first platform will break in 10 seconds!</alert>
-    <alert after="25">`cThe first platform will break in 5 seconds!</alert>
-    <alert after="26">`cThe first platform will break in 4 seconds!</alert>
-    <alert after="27">`cThe first platform will break in 3 seconds!</alert>
-    <alert after="28">`cThe first platform will break in 2 seconds!</alert>
-    <alert after="29">`cThe first platform will break in 1 seconds!</alert>
-    <alert after="30">`eThe first platform has crumbled!</alert>
-
-    <alert after="40">`cThe second layer of platforms will break in 10 seconds!</alert>
-    <alert after="45">`cThe second layer of platforms will break in 5 seconds!</alert>
-    <alert after="46">`cThe second layer of platforms will break in 4 seconds!</alert>
-    <alert after="47">`cThe second layer of platforms will break in 3 seconds!</alert>
-    <alert after="48">`cThe second layer of platforms will break in 2 seconds!</alert>
-    <alert after="49">`cThe second layer of platforms will break in 1 seconds!</alert>
-    <alert after="50">`eThe second layer of platforms has crumbled!</alert>
-
-    <alert after="60">`cThe third layer of platforms will break in 10 seconds!</alert>
-    <alert after="65">`cThe third layer of platforms will break in 5 seconds!</alert>
-    <alert after="66">`cThe third layer of platforms will break in 4 seconds!</alert>
-    <alert after="67">`cThe third layer of platforms will break in 3 seconds!</alert>
-    <alert after="68">`cThe third layer of platforms will break in 2 seconds!</alert>
-    <alert after="69">`cThe third layer of platforms will break in 1 seconds!</alert>
-    <alert after="70">`eThe third layer of platforms has crumbled!</alert>
-
-    <alert after="80">`cThe fourth layer of platforms will break in 10 seconds!</alert>
-    <alert after="85">`cThe fourth layer of platforms will break in 5 seconds!</alert>
-    <alert after="86">`cThe fourth layer of platforms will break in 4 seconds!</alert>
-    <alert after="87">`cThe fourth layer of platforms will break in 3 seconds!</alert>
-    <alert after="88">`cThe fourth layer of platforms will break in 2 seconds!</alert>
-    <alert after="89">`cThe fourth layer of platforms will break in 1 seconds!</alert>
-    <alert after="90">`eThe fourth layer of platforms has crumbled!</alert>
-
-    <alert after="100">`cWatch out! The world border is getting close!</alert>
+    <!-- First Layer -->
+    <alert after="20">Watch out! The first platform will break in `c10 seconds`r!</alert>
+    <alert after="27">The first platform will break in `c3 seconds`r!</alert>
+    <alert after="28">The first platform will break in `c2 seconds`r!</alert>
+    <alert after="29">The first platform will break in `c1 second`r!</alert>
+    <!-- Second Layer -->
+    <alert after="40">The second layer of platforms will break in `c10 seconds`r!</alert>
+    <alert after="47">The second layer of platforms will break in `c3 seconds`r!</alert>
+    <alert after="48">The second layer of platforms will break in `c2 seconds`r!</alert>
+    <alert after="49">The second layer of platforms will break in `c1 second`r!</alert>
+    <!-- Third Layer -->
+    <alert after="60">The third layer of platforms will break in `c10 seconds`r!</alert>
+    <alert after="67">The third layer of platforms will break in `c3 seconds`r!</alert>
+    <alert after="68">The third layer of platforms will break in `c2 seconds`r!</alert>
+    <alert after="69">The third layer of platforms will break in `c1 second`r!</alert>
+    <!-- Fourth Layer -->
+    <alert after="80">The fourth layer of platforms will break in `c10 seconds`r!</alert>
+    <alert after="87">The fourth layer of platforms will break in `c3 seconds`r!</alert>
+    <alert after="88">The fourth layer of platforms will break in `c2 seconds`r!</alert>
+    <alert after="89">The fourth layer of platforms will break in `c1 second`r!</alert>
+    <!-- World Border Notification -->
+    <alert after="100">`cWatch out! The `cworld border `ris getting close!</alert>
 </broadcasts>
 <!-- Kits -->
 <kits>
-    <kit id="cyan-kit">
+    <kit id="main-kit">
         <game-mode>adventure</game-mode>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <effect duration="oo" amplifier="2">instant_health</effect>
+    </kit>
+    <kit id="cyan-kit" parents="main-kit">
         <item slot="0" name="`3`lSUMO WEAPON" damage="6" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="4C7F99" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="green-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="green-kit" parents="main-kit">
         <item slot="0" name="`2`lSUMO WEAPON" damage="2" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="667F33" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="light-blue-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="light-blue-kit" parents="main-kit">
         <item slot="0" name="`b`lSUMO WEAPON" damage="12" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="6699D8" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="lime-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="lime-kit" parents="main-kit">
         <item slot="0" name="`a`lSUMO WEAPON" damage="10" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="7FCC19" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="orange-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="orange-kit" parents="main-kit">
         <item slot="0" name="`6`lSUMO WEAPON" damage="14" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="D87F33" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="purple-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="purple-kit" parents="main-kit">
         <item slot="0" name="`5`lSUMO WEAPON" damage="5" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="7F3FB2" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="red-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="red-kit" parents="main-kit">
         <item slot="0" name="`c`lSUMO WEAPON" damage="1" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="993333" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
-    <kit id="yellow-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="yellow-kit" parents="main-kit">
         <item slot="0" name="`e`lSUMO WEAPON" damage="11" material="ink sack"/>
-        <chestplate unbreakable="true" locked="true" color="E5E533" material="leather chestplate"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <kit id="void-kit" force="true">
-        <clear items="false" armor="false" effects="true"/>
+        <clear effects="true" items="false" armor="false"/>
+        <health>1</health>
     </kit>
 </kits>
-<!-- Platforms -->
-<destroyables required="false" show="false">
-    <destroyable name="First platform" owner="cyan" materials="stained clay;sea lantern" modes="first-to-air" region="first-platform"/>
-    <destroyable name="Second platform" owner="green" materials="stained clay;sea lantern;chest" modes="second-to-air" region="second-platform"/>
-    <destroyable name="Third platform" owner="lime" materials="stained clay;sea lantern" modes="third-to-air" region="third-platform"/>
-    <destroyable name="Fourth platform" owner="orange" materials="stained clay;sea lantern" modes="fourth-to-air" region="fourth-platform"/>
-</destroyables>
-<!-- Modes -->
-<modes>
-    <mode id="first-to-air" after="30s" show-before="0" material="air"/>
-    <mode id="second-to-air" after="50s" show-before="0" material="air"/>
-    <mode id="third-to-air" after="70s" show-before="0" material="air"/>
-    <mode id="fourth-to-air" after="90s" show-before="0" material="air"/>
-</modes>
-<!-- Regions -->
-<regions>
-    <!-- Definitions -->
-    <cylinder id="first-platform" base="0.5,38,0.5" radius="25" height="5"/>
-    <cylinder id="second-platform" base="0.5,27,0.5" radius="16" height="5"/>
-    <cylinder id="third-platform" base="0.5,16,0.5" radius="20" height="8"/>
-    <cylinder id="fourth-platform" base="0.5,8,0.5" radius="25" height="6"/>
-    <below id="void" y="0"/>
-    <!-- Applications -->
-    <apply block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="void" kit="void-kit"/>
-</regions>
 <!-- Spawns -->
 <spawns>
     <spawn team="cyan" kit="cyan-kit">
@@ -195,6 +140,78 @@
         </regions>
     </default>
 </spawns>
+<!-- Filters -->
+<filters>
+<!-- Block filters -->
+    <material id="stained-clay">stained clay</material>
+    <material id="sea-lantern">sea lantern</material>
+    <material id="chest">chest</material>
+    <!-- First Platform -->
+    <after id="first-to-air" duration="30s">
+        <match-started/>
+    </after>
+    <!-- Second Platform -->
+    <after id="second-to-air" duration="50s">
+        <match-started/>
+    </after>
+    <!-- Third Platform -->
+    <after id="third-to-air" duration="70s">
+        <match-started/>
+    </after>
+    <!-- Fourth Platform -->
+    <after id="fourth-to-air" duration="90s">
+        <match-started/>
+    </after>
+</filters>
+<!-- Actions -->
+<actions>
+    <!-- First Platform -->
+    <trigger scope="match" filter="first-to-air">
+        <action>
+            <fill region="first-platform" filter="stained-clay" material="air"/>
+            <fill region="first-platform" filter="sea-lantern" material="air"/>
+            <message text="`4The first layer of platforms has crumbled!"/>
+            <sound preset="tip"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="second-to-air">
+        <action>
+            <fill region="second-platform" filter="stained-clay" material="air"/>
+            <fill region="second-platform" filter="sea-lantern" material="air"/>
+            <fill region="second-platform" filter="chest" material="air"/>
+            <message text="`4The second layer of platforms has crumbled!"/>
+            <sound preset="tip"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="third-to-air">
+        <action>
+            <fill region="third-platform" filter="stained-clay" material="air"/>
+            <fill region="third-platform" filter="sea-lantern" material="air"/>
+            <message text="`4The third layer of platforms has crumbled!"/>
+            <sound preset="tip"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="fourth-to-air">
+        <action>
+            <fill region="fourth-platform" filter="stained-clay" material="air"/>
+            <fill region="fourth-platform" filter="sea-lantern" material="air"/>
+            <message text="`4The fourth layer of platforms has crumbled!"/>
+            <sound preset="tip"/>
+        </action>
+    </trigger>
+</actions>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <cylinder id="first-platform" base="0.5,38,0.5" radius="25" height="5"/>
+    <cylinder id="second-platform" base="0.5,27,0.5" radius="16" height="5"/>
+    <cylinder id="third-platform" base="0.5,16,0.5" radius="20" height="8"/>
+    <cylinder id="fourth-platform" base="0.5,8,0.5" radius="25" height="6"/>
+    <below id="void-area" y="0"/>
+    <!-- Applications -->
+    <apply block="never"/>
+    <apply region="void-area" kit="void-kit"/>
+</regions>
 <!-- ItemRemove -->
 <itemremove>
     <item>ink sack</item>
