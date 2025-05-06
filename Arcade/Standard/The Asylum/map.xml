@@ -1,8 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Asylum</name>
 <created>2022-02-16</created>
-<version>1.0.1</version>
-<objective>In an abandoned asylum, 5 beasts are being hunted by a group of trained hunters. But the beasts will not go down without a fight, Are you the hunter or the beast?</objective>
+<version>1.0.2</version>
+<objective>An abandoned asylum hides five deadly beasts, but hunters are closing in. Will you be the hunter or the hunted?</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <authors>
@@ -13,31 +13,23 @@
     <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="Decorations"/> <!-- _NotMaria -->
     <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Room Creations"/> <!-- _Pear -->
 </contributors>
-<broadcasts>
-    <tip after="1m" count="oo" filter="only-beasts">Double tap the spacebar button to double jump as a beast!</tip>
-</broadcasts>
 <blitz>
     <lives>2</lives>
 </blitz>
-<time>10m</time>
 <respawn auto="true"/>
-<filters>
-    <team id="only-hunters">hunters</team>
-    <team id="only-beasts">beasts</team>
-    <not id="before-1s">
-        <time id="after-1s">1s</time>
-    </not>
-</filters>
+<time>10m</time>
+<!-- Teams -->
 <teams>
-    <team id="hunters" min="5" max="24" color="blue" show-name-tags="true">Hunters</team>
+    <team id="hunters" min="4" max="24" color="blue" show-name-tags="true">Hunters</team>
     <team id="beasts" min="1" max="5" color="green" show-name-tags="true">Beasts</team>
 </teams>
+<!-- Kits -->
 <kits>
     <kit id="hunters-kit">
-        <boots unbreakable="true" material="leather boots" enchantment="protection environmental:2" locked="true" color="334CB2"/>
-        <leggings unbreakable="true" material="leather leggings" enchantment="protection environmental:2" locked="true" color="334CB2"/>
-        <chestplate unbreakable="true" material="iron chestplate" enchantment="protection environmental:1" locked="true"/>
-        <helmet unbreakable="true" material="leather helmet" enchantment="protection environmental:2" locked="true" color="334CB2"/>
+        <helmet unbreakable="true" material="leather helmet" team-color="true" enchantment="protection environmental:2" locked="true"/>
+        <chestplate unbreakable="true" material="iron chestplate" team-color="true" enchantment="protection environmental:1" locked="true"/>
+        <leggings unbreakable="true" material="leather leggings" team-color="true" enchantment="protection environmental:2" locked="true"/>
+        <boots unbreakable="true" material="leather boots" team-color="true" enchantment="protection environmental:2" locked="true"/>
         <item slot="0" material="iron sword" enchantment="sharpness:1" name="Excalibur"/>
         <item slot="1" material="bow" enchantment="power:1" unbreakable="true"/>
         <item slot="2" material="golden apple" amount="2"/>
@@ -61,6 +53,19 @@
         <effect amplifier="100" duration="oo">instant_damage</effect>
     </kit>	
 </kits>
+<!-- Tips -->
+<broadcasts>
+   <tip after="45s" count="oo" filter="beasts">Double tap the spacebar button to double jump as a beast!</tip>
+   <tip after="3s" filter="beasts">Try to survive for 10 minutes or eliminate all the hunters. But be careful, you only have 2 lives!</tip>
+   <tip after="3s" filter="hunters">Try to find the beasts and eliminate them. But be careful, you only have 2 lives!</tip>
+</broadcasts>
+<!-- Filters -->
+<filters>
+    <not id="before-1s">
+        <time id="after-1s">1s</time>
+    </not>
+</filters>
+<!-- Spanws -->
 <spawns>
     <spawn team="beasts" filter="after-1s" kit="death">
         <regions yaw="23.6">
@@ -83,22 +88,30 @@
         </regions>
     </default>
 </spawns>
+<!-- Tool repiar -->
+<toolrepair>
+   <tool>iron sword</tool>
+   <tool>diamond sword</tool>
+   <tool>bow</tool>
+</toolrepair>
+<!-- Item Keep -->
+<itemkeep>
+   <item>arrow</item>
+   <item>golden apple</item>
+</itemkeep>
+<!-- Item Remove -->
 <itemremove>
-    <item>iron sword</item>
-    <item>leather boots</item>
-    <item>leather leggings</item>
-    <item>iron chestplate</item>
-    <item>leather helmet</item>
-    <item>bow</item>
-    <item>diamond helmet</item>
-    <item>diamond chestplate</item>
-    <item>diamond leggings</item>
-    <item>diamond boots</item>
-    <item>diamond sword</item>
-    <item>arrow</item>
-    <item>golden apple</item>
+   <item>leather boots</item>
+   <item>leather leggings</item>
+   <item>iron chestplate</item>
+   <item>leather helmet</item>
+   <item>diamond helmet</item>
+   <item>diamond chestplate</item>
+   <item>diamond leggings</item>
+   <item>diamond boots</item>
 </itemremove>
+<!-- Misc -->
 <hunger>
-    <depletion>off</depletion>
+   <depletion>off</depletion>
 </hunger>
 </map>
