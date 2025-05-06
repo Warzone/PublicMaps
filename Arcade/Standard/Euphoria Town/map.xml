@@ -1,8 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Euphoria Town</name>
 <variant id="christmas" world="christmas">Christmas</variant>
-<version>1.2.0</version>
-<objective>After terrorizing a town for years, a group of trained hunters had decided to hunt down the beasts and eliminate them once and for all. The beasts are not going down without a fight, are you the hunter or the beast?</objective>
+<version>1.2.1</version>
+<objective>A town long haunted by vicious beasts has called upon skilled hunters to wipe them out. But the beasts won`t surrender easily. Will you be the hunter, or the hunted?</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <if variant="default">
@@ -20,50 +20,16 @@
    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="House Designs" /> <!-- _Pear -->
    <contributor uuid="3fa22f5e-098d-49f7-b9ad-92566f045cbc" contribution="Mansion and Houses" /> <!-- BigTonyMC -->
 </contributors>
+<time>10m</time>
+<respawn auto="true"/>
 <blitz>
    <lives>2</lives>
 </blitz>
-<time>10m</time>
-<respawn auto="true" />
 <!-- Teams -->
 <teams>
-   <team id="hunters" min="5" max="24" color="blue" plural="true" show-name-tags="true">Hunters</team>
+   <team id="hunters" min="4" max="24" color="blue" plural="true" show-name-tags="true">Hunters</team>
    <team id="beasts" min="1" max="5" color="green" plural="true" show-name-tags="true">Beasts</team>
 </teams>
-<!-- Spawns -->
-<spawns>
-   <spawn team="beasts" filter="after-1s" kit="death">
-      <regions yaw="55.5">
-         <point>60.5,39,-39.5</point>
-      </regions>
-   </spawn>
-   <spawn team="beasts" filter="before-1s" kit="beasts-kit">
-      <regions yaw="55.5">
-         <point>60.5,39,-39.5</point>
-      </regions>
-   </spawn>
-   <spawn team="hunters" kit="hunters-kit">
-      <regions yaw="180">
-         <cuboid min="-3.5,30,58.5" max="-0.5,30,56.5"/>
-      </regions>
-   </spawn>
-   <default kit="default-kit">
-      <regions>
-         <point>-58.5,67,1.5</point>
-      </regions>
-   </default>
-</spawns>
-<!-- Filters & Regions -->
-<filters>
-   <team id="only-hunters">hunters</team>
-   <team id="only-beasts">beasts</team>
-   <not id="before-1s">
-      <time id="after-1s">1s</time>
-   </not>
-</filters>
-<regions>
-   <apply block="never" />
-</regions>
 <!-- Kits -->
 <kits>
    <kit id="default-kit">
@@ -95,27 +61,65 @@
       <item slot="2" material="golden apple" amount="8" />
    </kit>
 </kits>
+<!-- Spawns -->
+<spawns>
+   <spawn team="beasts" filter="after-1s" kit="death">
+      <regions yaw="55.5">
+         <point>60.5,39,-39.5</point>
+      </regions>
+   </spawn>
+   <spawn team="beasts" filter="before-1s" kit="beasts-kit">
+      <regions yaw="55.5">
+         <point>60.5,39,-39.5</point>
+      </regions>
+   </spawn>
+   <spawn team="hunters" kit="hunters-kit">
+      <regions yaw="180">
+         <cuboid min="-3.5,30,58.5" max="-0.5,30,56.5"/>
+      </regions>
+   </spawn>
+   <default kit="default-kit">
+      <regions>
+         <point>-58.5,67,1.5</point>
+      </regions>
+   </default>
+</spawns>
+<!-- Filters & Regions -->
+<filters>
+   <not id="before-1s">
+      <time id="after-1s">1s</time>
+   </not>
+</filters>
+<regions>
+   <apply block="never"/>
+</regions>
 <!-- Tips -->
 <broadcasts>
-   <tip after="45s" count="oo" filter="only-beasts">Double tap the spacebar button to double jump as a beast!</tip>
-   <tip after="3s" filter="only-beasts">Try to survive for 10 minutes or eliminate all the hunters. But be careful, you only have 2 lives!</tip>
-   <tip after="3s" filter="only-hunters">Try to find the beasts and eliminate them. But be careful, you only have 2 lives!</tip>
+   <tip after="45s" count="oo" filter="beasts">Double tap the spacebar button to double jump as a beast!</tip>
+   <tip after="3s" filter="beasts">Try to survive for 10 minutes or eliminate all the hunters. But be careful, you only have 2 lives!</tip>
+   <tip after="3s" filter="hunters">Try to find the beasts and eliminate them. But be careful, you only have 2 lives!</tip>
 </broadcasts>
-<!-- Itemremove -->
+<!-- Tool repiar -->
+<toolrepair>
+   <tool>iron sword</tool>
+   <tool>diamond sword</tool>
+   <tool>bow</tool>
+</toolrepair>
+<!-- Item Keep -->
+<itemkeep>
+   <item>arrow</item>
+   <item>golden apple</item>
+</itemkeep>
+<!-- Item Remove -->
 <itemremove>
-   <item>iron sword"</item>
    <item>leather boots</item>
    <item>leather leggings</item>
    <item>iron chestplate</item>
    <item>leather helmet</item>
-   <item>bow</item>
    <item>diamond helmet</item>
    <item>diamond chestplate</item>
    <item>diamond leggings</item>
    <item>diamond boots</item>
-   <item>diamond sword</item>
-   <item>arrow</item>
-   <item>golden apple</item>
 </itemremove>
 <!-- Misc -->
 <hunger>
