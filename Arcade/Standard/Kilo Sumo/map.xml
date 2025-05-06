@@ -29,23 +29,24 @@
 </broadcasts>
 <!-- Kits -->
 <kits>
-    <!-- Red Kit -->
-    <kit id="red-kit">
+    <!-- Main Kit -->
+    <kit id="main-kit">
         <game-mode>adventure</game-mode>
-        <item slot="0" name="`cSUMO WEAPON" damage="1" material="ink sack"/>
         <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
+        <effect amplifier="2">instant_health</effect>
+    </kit>
+    <!-- Red Kit -->
+    <kit id="red-kit" parents="main-kit">
+        <item slot="0" name="`cSUMO WEAPON" damage="1" material="ink sack"/>
     </kit>
     <!-- Blue Kit -->
-    <kit id="blue-kit">
-        <game-mode>adventure</game-mode>
+    <kit id="blue-kit" parents="main-kit">
         <item slot="0" name="`9SUMO WEAPON" damage="4" material="ink sack"/>
-        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
-        <effect duration="oo" amplifier="2">instant_health</effect>
     </kit>
     <!-- Void Kit -->
     <kit id="void-kit" force="true">
-        <clear items="false" armor="false" effects="true"/>
+        <clear effects="true" items="false" armor="false"/>
+        <health>1</health>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -62,7 +63,6 @@
             <cuboid min="6,84,-6" max="8,86,5"/>
         </regions>
     </spawn>
-    <!-- Obs (Spectators) Team -->
     <default>
         <regions>
             <point>-0.5,139,-0.5</point>
@@ -72,207 +72,93 @@
 <!-- Filters -->
 <filters>
     <!-- Block filters -->
-    <any id="white-clay">
-        <material>stained clay:0</material>
-    </any>
-    <any id="black-clay">
-        <material>stained clay:15</material>
-    </any>
-    <any id="blue-clay">
-        <material>stained clay:11</material>
-    </any>
-    <any id="red-clay">
-        <material>stained clay:14</material>
-    </any>
-    <any id="white-glass">
-        <material>stained glass:0</material>
-    </any>
-    <any id="black-glass">
-        <material>stained glass:15</material>
-    </any>
-    <any id="blue-glass">
-        <material>stained glass:11</material>
-    </any>
-    <any id="red-glass">
-        <material>stained glass:14</material>
-    </any>
+    <material id="black-clay">stained clay:15</material>
+    <material id="blue-clay">stained clay:11</material>
+    <material id="red-clay">stained clay:14</material>
+    <material id="white-clay">stained clay:0</material>
+    <material id="black-glass">stained glass:15</material>
+    <material id="blue-glass">stained glass:11</material>
+    <material id="red-glass">stained glass:14</material>
+    <material id="white-glass">stained glass:0</material>
     <!-- First Platform -->
-    <after id="first-white-clay-to-white-glass" duration="20s">
+    <after id="first-clay-to-glass" duration="20s">
         <match-started/>
     </after>
-    <after id="first-blue-clay-to-blue-glass" duration="20s">
-        <match-started/>
-    </after>
-    <after id="first-red-clay-to-red-glass" duration="20s">
-        <match-started/>
-    </after>
-    <after id="first-black-clay-to-black-glass" duration="20s">
-        <match-started/>
-    </after>
-    <after id="first-white-glass-to-air" duration="30s">
-        <match-started/>
-    </after>
-    <after id="first-blue-glass-to-air" duration="30s">
-        <match-started/>
-    </after>
-    <after id="first-red-glass-to-air" duration="30s">
-        <match-started/>
-    </after>
-    <after id="first-black-glass-to-air" duration="30s">
+    <after id="first-glass-to-air" duration="30s">
         <match-started/>
     </after>
     <!-- Second Platform -->
-    <after id="second-white-clay-to-white-glass" duration="50s">
+    <after id="second-clay-to-glass" duration="50s">
         <match-started/>
     </after>
-    <after id="second-black-clay-to-black-glass" duration="50s">
-        <match-started/>
-    </after>
-    <after id="second-white-glass-to-air" duration="60s">
-        <match-started/>
-    </after>
-    <after id="second-black-glass-to-air" duration="60s">
+    <after id="second-glass-to-air" duration="60s">
         <match-started/>
     </after>
     <!-- Third Platform -->
-    <after id="third-white-clay-to-white-glass" duration="80s">
+    <after id="third-clay-to-glass" duration="80s">
         <match-started/>
     </after>
-    <after id="third-blue-clay-to-blue-glass" duration="80s">
-        <match-started/>
-    </after>
-    <after id="third-red-clay-to-red-glass" duration="80s">
-        <match-started/>
-    </after>
-    <after id="third-black-clay-to-black-glass" duration="80s">
-        <match-started/>
-    </after>
-    <after id="third-white-glass-to-air" duration="90s">
-        <match-started/>
-    </after>
-    <after id="third-blue-glass-to-air" duration="90s">
-        <match-started/>
-    </after>
-    <after id="third-red-glass-to-air" duration="90s">
-        <match-started/>
-    </after>
-    <after id="third-black-glass-to-air" duration="90s">
+    <after id="third-glass-to-air" duration="90s">
         <match-started/>
     </after>
 </filters>
 <!-- Actions -->
 <actions>
     <!-- First Platform -->
-    <trigger scope="match" filter="first-white-clay-to-white-glass">
+    <trigger scope="match" filter="first-clay-to-glass">
         <action>
             <fill region="first-platform" filter="white-clay" material="stained glass:0"/>
+            <fill region="first-platform" filter="blue-clay" material="stained glass:11"/>
+            <fill region="first-platform" filter="red-clay" material="stained glass:14"/>
+            <fill region="first-platform" filter="black-clay" material="stained glass:15"/>
             <message text="`cWatch out! The top platform is breaking!"/>
             <sound preset="tip"/>
         </action>
     </trigger>
-    <trigger scope="match" filter="first-blue-clay-to-blue-glass">
-        <action>
-            <fill region="first-platform" filter="blue-clay" material="stained glass:11"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-red-clay-to-red-glass">
-        <action>
-            <fill region="first-platform" filter="red-clay" material="stained glass:14"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-black-clay-to-black-glass">
-        <action>
-            <fill region="first-platform" filter="black-clay" material="stained glass:15"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-white-glass-to-air">
+    <trigger scope="match" filter="first-glass-to-air">
         <action>
             <fill region="first-platform" filter="white-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-blue-glass-to-air">
-        <action>
             <fill region="first-platform" filter="blue-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-red-glass-to-air">
-        <action>
             <fill region="first-platform" filter="red-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="first-black-glass-to-air">
-        <action>
             <fill region="first-platform" filter="black-glass" material="air"/>
             <message text="`cThe top platform has crumbled!"/>
             <sound preset="alert"/>
         </action>
     </trigger>
     <!-- Second Platform -->
-    <trigger scope="match" filter="second-white-clay-to-white-glass">
+    <trigger scope="match" filter="second-clay-to-glass">
         <action>
             <fill region="second-platform" filter="white-clay" material="stained glass:0"/>
+            <fill region="second-platform" filter="black-clay" material="stained glass:15"/>
             <message text="`cWatch out! The second platform is breaking!"/>
             <sound preset="tip"/>
         </action>
     </trigger>
-    <trigger scope="match" filter="second-black-clay-to-black-glass">
-        <action>
-            <fill region="second-platform" filter="black-clay" material="stained glass:15"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="second-white-glass-to-air">
-        <action>
-            <fill region="second-platform" filter="white-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="second-black-glass-to-air">
+    <trigger scope="match" filter="second-glass-to-air">
         <action>
             <fill region="second-platform" filter="black-glass" material="air"/>
+            <fill region="second-platform" filter="white-glass" material="air"/>
             <message text="`cThe second platform has crumbled!"/>
             <sound preset="alert"/>
         </action>
     </trigger>
     <!-- Third Platform -->
-    <trigger scope="match" filter="third-white-clay-to-white-glass">
+    <trigger scope="match" filter="third-clay-to-glass">
         <action>
             <fill region="third-platform" filter="white-clay" material="stained glass:0"/>
+            <fill region="third-platform" filter="blue-clay" material="stained glass:11"/>
+            <fill region="third-platform" filter="red-clay" material="stained glass:14"/>
+            <fill region="third-platform" filter="black-clay" material="stained glass:15"/>
             <message text="`cWatch out! The third platform is breaking!"/>
             <sound preset="tip"/>
         </action>
     </trigger>
-    <trigger scope="match" filter="third-blue-clay-to-blue-glass">
-        <action>
-            <fill region="third-platform" filter="blue-clay" material="stained glass:11"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-red-clay-to-red-glass">
-        <action>
-            <fill region="third-platform" filter="red-clay" material="stained glass:14"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-black-clay-to-black-glass">
-        <action>
-            <fill region="third-platform" filter="black-clay" material="stained glass:15"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-white-glass-to-air">
+    <trigger scope="match" filter="third-glass-to-air">
         <action>
             <fill region="third-platform" filter="white-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-blue-glass-to-air">
-        <action>
-            <fill region="third-platform" filter="blue-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-red-glass-to-air">
-        <action>
-            <fill region="third-platform" filter="red-glass" material="air"/>
-        </action>
-    </trigger>
-    <trigger scope="match" filter="third-black-glass-to-air">
-        <action>
             <fill region="third-platform" filter="black-glass" material="air"/>
+            <fill region="third-platform" filter="blue-glass" material="air"/>
+            <fill region="third-platform" filter="red-glass" material="air"/>
             <message text="`cThe third platform has crumbled!"/>
             <sound preset="alert"/>
         </action>
