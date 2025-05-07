@@ -1,8 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Volitare Terras</name>
 <variant id="christmas" world="christmas" override="true">Christmas Terras</variant>
 <variant id="halloween" world="halloween" override="true">Halloween Terras</variant>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Reach 900 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
 <if variant="default">
@@ -23,6 +23,7 @@
     <constant id="orange-team-name">Mol</constant>
     <constant id="orange-team-color">gold</constant>
 </if>
+<!-- Authors & Contributors -->
 <authors>
     <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
@@ -34,10 +35,12 @@
 <broadcasts>
     <tip after="1s">Fall damage is disabled on this map!</tip>
 </broadcasts>
+<!-- Teams -->
 <teams>
-    <team id="green" color="green" max="20">${green-team-name}</team>
-    <team id="orange" color="${orange-team-color}" max="20">${orange-team-name}</team>
+    <team id="green-team" color="green" max="20">${green-team-name}</team>
+    <team id="orange-team" color="${orange-team-color}" max="20">${orange-team-name}</team>
 </teams>
+<!-- Kits -->
 <kits>
     <kit id="spawn-kit">
         <clear/>
@@ -46,7 +49,6 @@
         <item slot="2" unbreakable="true" material="shears"/>
         <item slot="3" amount="24" material="leaves"/>
         <item slot="4" material="golden apple"/>
-        <item slot="8" amount="32" material="cooked beef"/>
         <item slot="9" amount="24" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
@@ -55,28 +57,29 @@
         <effect duration="4" amplifier="255">resistance</effect>
     </kit>
 </kits>
+<!-- Spawns -->
 <spawns>
     <default yaw="180">
         <region>
             <point>0.5,146,74.5</point>
         </region>
     </default>
-    <spawn team="green" kit="spawn-kit" yaw="-135">
+    <spawn team="green-team" kit="spawn-kit" yaw="-135">
         <region>
             <point>-53.5,94,54.5</point>
         </region>
     </spawn>
-    <spawn team="orange" kit="spawn-kit" yaw="45">
+    <spawn team="orange-team" kit="spawn-kit" yaw="45">
         <region>
             <point>54.5,94,-53.5</point>
         </region>
     </spawn>
 </spawns>
+<!-- Filter -->
 <filters>
-    <team id="green-only">green</team>
-    <team id="orange-only">orange</team>
     <material id="only-leaves-in-map">leaves</material>
 </filters>
+<!-- Regions -->
 <regions>
     <union id="spawn-protections">
         <cuboid id="green-spawn-protection" min="-47,91,48" max="-61,oo,61"/>
@@ -93,10 +96,11 @@
         <cylinder id="mid-hill" base="0.5,81,0.5" radius="6.5" height="5"/>
         <cylinder id="a-hill" base="-37.5,74,-37.5" radius="6" height="4"/>
     </union>
+    <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="portal-protections" block="never" message="You may not obstruct the portal platforms!"/>
-    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy spawn."/>
     <apply block="only-leaves-in-map" message="You may only place or break leaves!"/>
 </regions>
 <control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false">
@@ -104,6 +108,7 @@
     <control-point name="Mid Point" points="1.5" capture="mid-hill" progress="mid-hill" captured="mid-hill"/>
     <control-point name="A Point" points="1" capture="a-hill" progress="a-hill" captured="a-hill"/>
 </control-points>
+<!-- Portals -->
 <portals protect="true" sound="false" pitch="@0">
     <!-- Green Portal -->
     <portal yaw="@-135">
@@ -124,21 +129,28 @@
       </destination>
     </portal>
 </portals>
+<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure that players don't lose a tool by accident. -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>shears</tool>
+</toolrepair>
+<!-- Item Remove -->
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>shears</item>
-    <item>leaves</item>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>iron boots</item>
+    <item>stick</item>
+    <item>sapling</item>
 </itemremove>
+<!-- Item Keep -->
 <itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
+    <item>leaves</item>
 </itemkeep>
+<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item material="golden apple"/>
@@ -147,12 +159,17 @@
         <filter>
             <kill-streak count="5"/>
         </filter>
-        <item amount="5" material="arrow"/>
+        <item amount="12" material="arrow"/>
+        <item amount="12" material="leaves"/>
     </kill-reward>
 </kill-rewards>
 <score>
     <limit>900</limit>
 </score>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
