@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Quin KOTH</name>
 <created>2021-12-25</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Capture as many hills as possible with your team to reach 2000 points before the opposing teams!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>koth</gamemode>
@@ -15,21 +15,23 @@
 <broadcasts>
     <tip after="1s">The higher you go, the more points you can get!</tip>
     <tip after="2s">Fall damage is disabled on this map!</tip>
+    <tip after="3s">You won't take knockback after you respawn!</tip>
 </broadcasts>
 <!-- Teams -->
 <teams>
-    <team id="red" color="red" max="8">Red</team>
-    <team id="orange" color="gold" max="8">Orange</team>
-    <team id="yellow" color="yellow" max="8">Yellow</team>
-    <team id="lime" color="green" max="8">Lime</team>
-    <team id="blue" color="blue" max="8">Blue</team>
-    <team id="cyan" color="dark aqua" max="8">Cyan</team>
-    <team id="pink" color="light purple" max="8">Pink</team>
-    <team id="purple" color="dark purple" max="8">Purple</team>
+    <team id="red-team" color="red" max="8">Red</team>
+    <team id="orange-team" color="gold" max="8">Orange</team>
+    <team id="yellow-team" color="yellow" max="8">Yellow</team>
+    <team id="lime-team" color="green" max="8">Lime</team>
+    <team id="blue-team" color="blue" max="8">Blue</team>
+    <team id="cyan-team" color="dark aqua" max="8">Cyan</team>
+    <team id="pink-team" color="light purple" max="8">Pink</team>
+    <team id="purple-team" color="dark purple" max="8">Purple</team>
 </teams>
 <!-- Kits -->
 <kits>
     <kit id="spawn-kit" force="true">
+        <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" material="golden apple"/>
@@ -40,19 +42,30 @@
         <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect>night vision</effect>
         <game-mode>adventure</game-mode>
+        <effect amplifier="255">damage resistance</effect>
+        <knockback-reduction>1</knockback-reduction>
     </kit>
+    <take>
+        <kit>
+            <knockback-reduction>0</knockback-reduction>
+            <effect amplifier="255">resistance</effect>
+        </kit>
+        <filter>
+            <region id="spawn-protections"/>
+        </filter>
+    </take>
 </kits>
 <!-- Spawns -->
 <spawns>
     <default yaw="90" region="obs-spawn"/>
-    <spawn team="red" kit="spawn-kit" yaw="-180" region="red-spawn"/>
-    <spawn team="orange" kit="spawn-kit" yaw="135" region="orange-spawn"/>
-    <spawn team="yellow" kit="spawn-kit" yaw="90" region="yellow-spawn"/>
-    <spawn team="lime" kit="spawn-kit" yaw="45" region="lime-spawn"/>
-    <spawn team="blue" kit="spawn-kit" region="blue-spawn"/>
-    <spawn team="cyan" kit="spawn-kit" yaw="-45" region="cyan-spawn"/>
-    <spawn team="pink" kit="spawn-kit" yaw="-90" region="pink-spawn"/>
-    <spawn team="purple" kit="spawn-kit" yaw="-135" region="purple-spawn"/>
+    <spawn team="red-team" kit="spawn-kit" yaw="-180" region="red-spawn"/>
+    <spawn team="orange-team" kit="spawn-kit" yaw="135" region="orange-spawn"/>
+    <spawn team="yellow-team" kit="spawn-kit" yaw="90" region="yellow-spawn"/>
+    <spawn team="lime-team" kit="spawn-kit" yaw="45" region="lime-spawn"/>
+    <spawn team="blue-team" kit="spawn-kit" region="blue-spawn"/>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="-45" region="cyan-spawn"/>
+    <spawn team="pink-team" kit="spawn-kit" yaw="-90" region="pink-spawn"/>
+    <spawn team="purple-team" kit="spawn-kit" yaw="-135" region="purple-spawn"/>
 </spawns>
 <!-- Capture Points -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false">
@@ -117,17 +130,6 @@
         </captured>
     </control-point>
 </control-points>
-<!-- Filters -->
-<filters>
-    <team id="red-only">red</team>
-    <team id="orange-only">orange</team>
-    <team id="yellow-only">yellow</team>
-    <team id="lime-only">lime</team>
-    <team id="blue-only">blue</team>
-    <team id="cyan-only">cyan</team>
-    <team id="pink-only">pink</team>
-    <team id="purple-only">purple</team>
-</filters>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -152,27 +154,33 @@
     <point id="pink-spawn">-45.5,20,38.5</point>
     <point id="purple-spawn">-36.5,20,62.5</point>
     <!-- Applications -->
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy's spawn."/>
-    <apply region="orange-spawn-protection" enter="orange-only" message="You may not enter the enemy's spawn."/>
-    <apply region="yellow-spawn-protection" enter="yellow-only" message="You may not enter the enemy's spawn."/>
-    <apply region="lime-spawn-protection" enter="lime-only" message="You may not enter the enemy's spawn."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy's spawn."/>
-    <apply region="cyan-spawn-protection" enter="cyan-only" message="You may not enter the enemy's spawn."/>
-    <apply region="pink-spawn-protection" enter="pink-only" message="You may not enter the enemy's spawn."/>
-    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy's spawn."/>
+    <apply region="yellow-spawn-protection" enter="yellow-team" message="You may not enter the enemy's spawn."/>
+    <apply region="lime-spawn-protection" enter="lime-team" message="You may not enter the enemy's spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="cyan-spawn-protection" enter="cyan-team" message="You may not enter the enemy's spawn."/>
+    <apply region="pink-spawn-protection" enter="pink-team" message="You may not enter the enemy's spawn."/>
+    <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn."/>
     <apply block="never"/>
 </regions>
+<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure players don't drop a tool by accident. -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
 <!-- Item Remove -->
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>golden apple</item>
-    <item>arrow</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
+<!-- Item Keep -->
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+</itemkeep>
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
