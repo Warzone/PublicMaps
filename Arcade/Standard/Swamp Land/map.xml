@@ -1,7 +1,7 @@
-<map proto="1.4.2" game="Walls">
+<map proto="1.5.0" game="Walls">
 <name>Swamp Land</name>
 <created>2022-07-02</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Prepare for battle by gathering resources and armor. Watch out for the walls to drop!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -13,13 +13,6 @@
 <contributors>
     <contributor uuid="c48598a7-c085-4e0f-b242-48c7fc452089" contribution="Helped with terrain, and walls"/> <!-- FlammingFreak296 -->
 </contributors>
-<!-- Teams -->
-<teams>
-    <team color="blue" id="blue" min="1" max="8">Blue</team>
-    <team color="green" id="green" min="1" max="8">Green</team>
-    <team color="yellow" id="yellow" min="1" max="8">Yellow</team>
-    <team color="red" id="red" min="1" max="8">Red</team>
-</teams>
 <!-- Time & Blitz -->
 <time>16m</time>
 <respawn delay="3s" auto="true" spectate="true"/>
@@ -30,39 +23,42 @@
         <time>7m</time>
     </filter>
 </blitz>
+<!-- Teams -->
+<teams>
+    <team id="blue-team" color="blue" min="1" max="8">Blue</team>
+    <team id="green-team" color="green" min="1" max="8">Green</team>
+    <team id="yellow-team" color="yellow" min="1" max="8">Yellow</team>
+    <team id="red-team" color="red" min="1" max="8">Red</team>
+</teams>
 <!-- Alerts -->
 <broadcasts>
     <alert after="1s">Prepare for battle by gathering tools, weapons, resources, and armor!</alert>
-    <alert after="2s">The walls will drop in `c7 minutes`r!</alert>
-    <alert after="5m">The walls will drop in `c2 minutes`r!</alert>
-    <alert after="6m">The walls will drop in `c1 minute`r!</alert>
-    <alert after="410s">The walls will drop in `c10 seconds`r!</alert>
-    <alert after="415s">The walls will drop in `c5 seconds`r!</alert>
-    <alert after="416s">The walls will drop in `c4 seconds`r!</alert>
-    <alert after="417s">The walls will drop in `c3 seconds`r!</alert>
-    <alert after="418s">The walls will drop in `c2 seconds`r!</alert>
-    <alert after="419s">The walls will drop in `c1 second`r!</alert>
-    <alert after="7m">The walls have dropped! You have `c1 life`r left. The last team standing wins!</alert>
-    <alert after="7m">The world border is now shrinking, `cget to safety`r!</alert>
+    <alert after="2s">The walls will fall in `c7 minutes`r!</alert>
+    <alert after="6m">The walls will fall in `c1 minute`r!</alert>
+    <alert after="410s">The walls will fall in `c10 seconds`r!</alert>
+    <alert after="417s">The walls will fall in `c3 seconds`r!</alert>
+    <alert after="418s">The walls will fall in `c2 seconds`r!</alert>
+    <alert after="419s">The walls will fall in `c1 second`r!</alert>
+    <alert after="7m5s">The world border is now shrinking, `cget to safety`r!</alert>
 </broadcasts>
 <!-- Spawns -->
 <spawns>
-    <spawn team="blue">
+    <spawn team="blue-team">
         <region yaw="45">
             <point>65.5,74,-55.5</point>
         </region>
     </spawn>
-    <spawn team="green">
+    <spawn team="green-team">
         <region yaw="-45">
             <point>-48.5,74,-55.5 </point>
         </region>
     </spawn>
-    <spawn team="yellow">
+    <spawn team="yellow-team">
         <region yaw="-135">
             <point>-48.5,74,62.5</point>
         </region>
     </spawn>
-    <spawn team="red">
+    <spawn team="red-team">
         <region yaw="135">
             <point>65.5,74,62.5</point>
         </region>
@@ -164,24 +160,44 @@
         </kit>
     </class>
 </classes>
-<!-- Walls -->
-<destroyables required="false" show="false">
-    <destroyable name="Walls" owner="blue" materials="clay" modes="walls-to-air" region="walls"/>
-</destroyables>
-<!-- Walls will turn to air 10 minutes into the match -->
-<modes>
-    <mode id="walls-to-air" after="7m" show-before="1m" name="Walls dropping" material="air"/>
-</modes>
 <filters>
+<!-- Block filters -->
+    <material id="clay-block">clay</material>
+    <!-- Wall To Air -->
+    <after id="walls-to-air" duration="7m">
+        <match-started/>
+    </after>
     <!-- Walls Filter -->
     <deny id="no-clay">
         <material>clay</material>
     </deny>
 </filters>
+<!-- Actions -->
+<actions>
+    <!-- Walls To Air -->
+    <trigger scope="match" filter="walls-to-air">
+        <action>
+            <fill region="walls" filter="clay-block" material="air"/>
+            <sound preset="OBJECTIVE BAD"/>
+        </action>
+    </trigger>
+    <!-- Walls Drop Notification -->
+    <trigger scope="match">
+        <filter>
+            <after message="`cWalls Will Drop In {0}" duration="0.5s" filter="walls-to-air"/>
+        </filter>
+        <action>
+            <message id="walls-drop-title" fade-in="0.5s" stay="2.5s" fade-out="0.5s">
+                <title>`cWALLS HAVE `cFALLEN!</title>
+                <subtitle>`fYou `fhave `fone `flife `fremaining.</subtitle>
+            </message>
+        </action>
+    </trigger>
+</actions>
 <!-- World Border -->
 <world-borders center="8.5, 3.5">
     <world-border size="150"/>
-    <world-border size="7" after="7m" duration="7m" damage="3" buffer="0"/>
+    <world-border size="7" after="7m" duration="7m" damage="5" buffer="0"/>
 </world-borders>
 <!-- Regions -->
 <regions>
