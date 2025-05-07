@@ -1,8 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Sandy Paradise</name>
 <variant id="christmas" world="christmas" override="true">Snowy Paradise</variant>
 <variant id="halloween" world="halloween" override="true">Spooky Paradise</variant>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Capture the wools and bring them back to your base!</objective>
 <gamemode>ctw</gamemode>
 <if variant="default">
@@ -72,14 +72,6 @@
     <wool team="green-team" monument="green-team-pink-wool" color="pink" location="-158,8,-2"/>
     <wool team="green-team" monument="green-team-purple-wool" color="purple" location="-158,8,2"/>
 </wools>
-<!-- Filters -->
-<filters>
-    <team id="only-cyan">cyan-team</team>
-    <team id="only-green">green-team</team>
-    <not id="not-void">
-        <void/>
-    </not>
-</filters>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -113,26 +105,29 @@
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="cyan-spawn-protection" enter="only-cyan" message="You may not enter the enemy's spawn."/>
-    <apply region="green-spawn-protection" enter="only-green" message="You may not enter the enemy's spawn."/>
-    <apply region="cyan-team-wool-rooms" enter="only-green" message="You may not enter your own wool room!"/>
-    <apply region="cyan-team-wool-rooms" block="only-green" message="You are not allowed to modify terrain here."/>
-    <apply region="green-team-wool-rooms" enter="only-cyan" message="You may not enter your own wool room!"/>
-    <apply region="green-team-wool-rooms" block="only-cyan" message="You are not allowed to modify terrain here."/>
-    <apply block-place="not-void" region="wool-lanes" message="You may not build over the void!"/>
+    <apply region="cyan-spawn-protection" enter="cyan-team" message="You may not enter the enemy's spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn."/>
+    <apply region="cyan-team-wool-rooms" enter="green-team" message="You may not enter your own wool room!"/>
+    <apply region="cyan-team-wool-rooms" block="green-team" message="You are not allowed to modify terrain here."/>
+    <apply region="green-team-wool-rooms" enter="cyan-team" message="You may not enter your own wool room!"/>
+    <apply region="green-team-wool-rooms" block="cyan-team" message="You are not allowed to modify terrain here."/>
+    <apply block-place="deny(void)" region="wool-lanes" message="You may not build over the void!"/> <!-- Will use block 36 eventually -->
 </regions>
+<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure that players don't drop a tool by accident. -->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>iron axe</tool>
+</toolrepair>
 <!-- Item Remove -->
 <itemremove>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>iron pickaxe</item>
-    <item>iron axe</item>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
     <item>iron boots</item>
 </itemremove>
+<!-- Item Keep -->
 <itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
@@ -149,8 +144,8 @@
             <kill-streak count="5"/>
         </filter>
         <item amount="2" material="golden apple"/>
-        <item amount="10" material="arrow"/>
-        <item amount="15" damage="2" material="wood"/>
+        <item amount="12" material="arrow"/>
+        <item amount="16" damage="2" material="wood"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
