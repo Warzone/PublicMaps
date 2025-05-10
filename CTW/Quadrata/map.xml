@@ -40,12 +40,12 @@
 <spawns>
     <spawn team="red-team" kit="main-kit" yaw="-180">
         <region>
-            <point>0.5,7,62.5</point>
+            <point>0.5,7,67.5</point>
         </region>
     </spawn>
     <spawn team="blue-team" kit="main-kit">
         <region>
-            <point>0.5,7,-61.5</point>
+            <point>0.5,7,-66.5</point>
         </region>
     </spawn>
     <default>
@@ -60,27 +60,28 @@
         <cause>world</cause>
     </all>
     <material id="only-iron">iron block</material>
+    <material id="chest">chest</material>
 </filters>
 <!-- Wools -->
 <wools>
     <wool team="blue-team" color="lime" location="45.5,10.5,63.5">
         <monument>
-            <block>2,8,-63</block>
+            <block>2,8,-68</block>
         </monument>
     </wool>
     <wool team="blue-team" color="yellow" location="-44.5,10.5,63.5">
         <monument>
-            <block>-2,8,-63</block>
+            <block>-2,8,-68</block>
         </monument>
     </wool>
     <wool team="red-team" color="orange" location="-44.5,10.5,-62.5">
         <monument>
-            <block>-2,8,63</block>
+            <block>-2,8,68</block>
         </monument>
     </wool>
     <wool team="red-team" color="pink" location="45.5,10.5,-62.5">
         <monument>
-            <block>2,8,63</block>
+            <block>2,8,68</block>
         </monument>
     </wool>
 </wools>
@@ -88,34 +89,40 @@
 <regions>
     <!-- Definitions -->
     <union id="spawn-protections">
-        <rectangle id="red-spawn" min="-10,43" max="10,65"/>
-        <rectangle id="blue-spawn" min="10,-43" max="-10,-65"/>
+        <rectangle id="red-spawn" min="-12,49" max="11,70"/>
+        <rectangle id="blue-spawn" min="12,-49" max="-11,-70"/>
     </union>
-    <rectangle id="pink-woolroom" min="39,-57" max="47,-69"/>
-    <rectangle id="orange-woolroom" min="-39,-67" max="-47,-59"/>
-    <rectangle id="yellow-woolroom" min="-39,57" max="-47,69"/>
-    <rectangle id="lime-woolroom" min="39,67" max="47,59"/>
+    <union id="wool-rooms">
+        <union id="blue-wool-rooms">
+            <cuboid id="pink-woolroom" min="39.5,0,-57.5" max="47.5,oo,-68.5"/>
+            <cuboid id="orange-woolroom" min="-38.5,0,-67.5" max="-46.5,oo,-57.5"/>
+        </union>
+        <union id="red-wool-rooms">
+            <cuboid id="yellow-woolroom" min="-38.5,0,58.5" max="-46.5,oo,69.5"/>
+            <cuboid id="lime-woolroom" min="39.5,0,68.5" max="47.5,oo,58.5"/>
+        </union>
+    </union>
     <!-- Applications -->
     <apply block-break="only-iron" block-place="only-iron-regen" message="You may only modify iron blocks in spawn!" region="spawn-protections"/>
     <!-- Red Team -->
-    <apply block="red-team" message="You may not edit your own wool room!" region="pink-woolroom"/>
-    <apply block="red-team" message="You may not edit your own wool room!" region="orange-woolroom"/>
-    <apply enter="red-team" message="You may not enter your own wool room!" region="pink-woolroom"/>
-    <apply enter="red-team" message="You may not enter your own wool room!" region="orange-woolroom"/>
-    <apply enter="red-team" message="You may not enter the enemy's spawn!" region="red-spawn"/>
+    <apply use="deny(red-team)" region="red-wool-rooms"/>
+    <apply enter="deny(red-team)" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(red-team)" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply block="deny(red-team)" region="red-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
     <!-- Blue Team -->
-    <apply block="blue-team" message="You may not edit your own wool room!" region="yellow-woolroom"/>
-    <apply block="blue-team" message="You may not edit your own wool room!" region="lime-woolroom"/>
-    <apply enter="blue-team" message="You may not enter your own wool room!" region="yellow-woolroom"/>
-    <apply enter="blue-team" message="You may not enter your own wool room!" region="lime-woolroom"/>
-    <apply enter="blue-team" message="You may not enter the enemy's spawn!" region="blue-spawn"/>
-    <apply block="never" message="You may not edit spawn!" region="spawn-protections"/>
+    <apply use="deny(blue-team)" region="blue-wool-rooms"/>
+    <apply enter="deny(blue-team)" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(blue-team)" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply block="deny(blue-team)" region="blue-wool-rooms" message="You may not interfere with your team's own wool rooms!"/>
+    <apply block="deny(chest)" region="wool-rooms" message="You may not break the wool room chests!"/>
     <apply block="deny(void)" message="You may not edit the void!"/> <!-- uses block 36 -->
+    <apply block="never" region="spawn-protections" message="You may not edit spawn!"/>
 </regions>
 <!-- Renewables -->
 <renewables>
     <renewable interval="5" particles="false" sound="false" region="spawn-protections" renew-filter="only-iron"/>
 </renewables>
+<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure that players don't drop and lose a tool by accident. -->
 <toolrepair>
     <tool>iron sword</tool>
     <tool>bow</tool>
@@ -123,6 +130,7 @@
     <tool>iron axe</tool>
     <tool>iron spade</tool>
 </toolrepair>
+<!-- Item Remove -->
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
@@ -132,18 +140,21 @@
     <item>emerald block</item>
     <item>beacon</item>
 </itemremove>
+<!-- Item Keep -->
 <itemkeep>
     <item>arrow</item>
     <item>wood</item>
     <item>glass</item>
     <item>golden apple</item>
 </itemkeep>
+<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item material="wood" amount="16"/>
         <item material="stained glass" amount="16" team-color="true"/>
     </kill-reward>
 </kill-rewards>
+<!-- Misc -->
 <maxbuildheight>30</maxbuildheight>
 <hunger>
     <depletion>off</depletion>
