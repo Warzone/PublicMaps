@@ -1,10 +1,11 @@
 <map proto="1.5.0" game="Spleef">
 <name>Not So Spleef</name>
-<version>1.0.4</version>
+<version>1.1.0</version>
 <created>2021-10-23</created>
 <objective>Spleef everyone on the enemy team!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
+<!-- Authors & Contributors -->
 <authors>
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
     <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b"/> <!-- _iMan -->
@@ -12,15 +13,18 @@
 <contributors>
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="TGM to PGM conversion"/> <!-- TheBestGamer -->
 </contributors>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<!-- Teams -->
 <teams>
     <team id="red" color="dark red" max="20">Red</team>
     <team id="blue" color="blue" max="20">Blue</team>
 </teams>
 <broadcasts>
-    <alert after="1s">`cTeamspleefing will result in a punishment!</alert>
+    <alert after="1s">Teamspleefing will result in a `cpunishment`r!</alert>
     <alert after="5s">`eGood luck!</alert>
     <alert after="15s">`cThe `6lava `chas been dispensed! Watch your head!</alert>
-    <alert after="20s">`cNobody is safe from the `6lava`c.</alert>
 </broadcasts>
 <kits>
     <kit id="teams-kit">
@@ -32,7 +36,6 @@
         <effect duration="5" amplifier="255">slow digging</effect>
     </kit>
     <kit id="red-kit" parents="teams-kit">
-        <item slot="1" unbreakable="true" damage="1" material="ink sack"/>
         <item slot="2" unbreakable="true" damage="1" material="ink sack"/>
         <item slot="3" unbreakable="true" damage="1" material="ink sack"/>
         <item slot="4" unbreakable="true" damage="1" material="ink sack"/>
@@ -55,12 +58,12 @@
 <spawns>
     <spawn team="red" kit="red-kit" yaw="180">
         <region>
-            <cuboid min="2,39,10" max="11,41,12"/>
+            <cuboid min="2,39,10" max="11,40,12"/>
         </region>
     </spawn>
     <spawn team="blue" kit="blue-kit">
         <region>
-            <cuboid min="2,39,2" max="11,41,4"/>
+            <cuboid min="2,39,2" max="11,40,4"/>
         </region>
     </spawn>
     <default>
@@ -71,27 +74,108 @@
 </spawns>
 <filters>
     <material id="only-snow-in-map">snow block</material>
+    <material id="air">air</material>
+    <!-- First Layer -->
+    <after id="first-to-lava" duration="15s">
+        <match-started/>
+    </after>
+    <after id="first-to-lava-1" duration="20s">
+        <match-started/>
+    </after>
+    <after id="first-to-air" duration="20s">
+        <match-started/>
+    </after>
+    <after id="second-to-air" duration="25s">
+        <match-started/>
+    </after>
+    <after id="third-to-air" duration="30s">
+        <match-started/>
+    </after>
+    <after id="fourth-to-air" duration="35s">
+        <match-started/>
+    </after>
+    <after id="fifth-to-air" duration="41s">
+        <match-started/>
+    </after>
+    <after id="sixth-to-air" duration="47s">
+        <match-started/>
+    </after>
+    <after id="seventh-to-air" duration="52s">
+        <match-started/>
+    </after>
 </filters>
+<!-- Actions -->
+<actions>
+    <!-- First Layer -->
+    <trigger scope="match" filter="first-to-lava">
+        <action>
+            <fill region="first-layer" filter="air" material="lava"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="first-to-lava-1">
+        <action>
+            <fill region="first-layer-2" filter="air" material="lava"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="first-to-air">
+        <action>
+            <fill region="first-layer-1" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Second Layer -->
+    <trigger scope="match" filter="second-to-air">
+        <action>
+            <fill region="second-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Third Layer -->
+    <trigger scope="match" filter="third-to-air">
+        <action>
+            <fill region="third-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Fourth Layer -->
+    <trigger scope="match" filter="fourth-to-air">
+        <action>
+            <fill region="fourth-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Fifth Layer -->
+    <trigger scope="match" filter="fifth-to-air">
+        <action>
+            <fill region="fifth-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Sixth Layer -->
+    <trigger scope="match" filter="sixth-to-air">
+        <action>
+            <fill region="sixth-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+    <!-- Seventh Layer -->
+    <trigger scope="match" filter="seventh-to-air">
+        <action>
+            <fill region="seventh-layer" filter="only-snow-in-map" material="air"/>
+        </action>
+    </trigger>
+</actions>
+<!-- Regions -->
 <regions>
-    <cuboid id="first-layer" min="1,44,1" max="12,46,13"/>
-    <cuboid id="second-layer" min="1,41,1" max="12,42,13"/>
+    <cuboid id="first-layer" min="12,44,13" max="1,46,1"/>
+    <cuboid id="first-layer-1" min="11.5,38,12" max="1.5,39,1.5"/>
+    <cuboid id="first-layer-2" min="10.5,42,11.5" max="2.5,41,2.5"/>
+    <cuboid id="second-layer" min="11.5,34,12.5" max="1.5,35,1.5"/>
+    <cuboid id="third-layer" min="11.5,30,12.5" max="1.5,31,1.5"/>
+    <cuboid id="fourth-layer" min="11.5,26,12.5" max="1.5,27,1.5"/>
+    <cuboid id="fifth-layer" min="11.5,22,12.5" max="1.5,23,1.5"/>
+    <cuboid id="sixth-layer" min="11.5,18,12.5" max="1.5,19,1.5"/>
+    <cuboid id="seventh-layer" min="11.5,14,12.5" max="1.5,15,1.5"/>
     <apply block-break="only-snow-in-map" message="You may only break snow blocks."/>
 </regions>
-<blitz>
-    <lives>1</lives>
-</blitz>
-<!-- TODO: replace fake destroyables with fill actions -->
-<destroyables required="false" show="false" materials="air">
-    <destroyable name="First lava layer" owner="red" modes="first-layer-to-lava" region="first-layer"/>
-    <destroyable name="Second lava layer" owner="blue" modes="second-layer-to-lava" region="second-layer"/>
-</destroyables>
-<modes>
-    <mode id="first-layer-to-lava" after="15s" show-before="0" material="lava"/>
-    <mode id="second-layer-to-lava" after="20s" show-before="0" material="lava"/>
-</modes>
 <toolrepair>
     <tool>diamond spade</tool>
 </toolrepair>
+<!-- Item Remove -->
 <itemremove>
     <item>ink sack</item>
     <item>leather helmet</item>
@@ -100,6 +184,7 @@
     <item>leather boots</item>
     <item>snow ball</item>
 </itemremove>
+<!-- Misc -->
 <disabledamage>
     <damage>fall</damage>
     <damage>entity attack</damage>
