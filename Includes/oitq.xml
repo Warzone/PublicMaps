@@ -11,7 +11,7 @@
 <gamemode>rage</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>arcade</gamemode>
-<!-- Version 2025.02.03-1 -->
+<!-- Version 2025.05.10-1 -->
 <constants fallback="true">
     <constant id="time-limit">3</constant> <!-- Time limit in minutes -->
     <constant id="base-kit">default-players-kit</constant> <!-- The base kit that all classes will have -->
@@ -50,15 +50,15 @@
                 <page>
                     `2» `lONE IN THE
                     `2`lQUIVER`0
-
+                    
                     Swords `cdon't`0 kill in one
                     hit, but bow shots `2do`0!
-
+                    
                     Time your `7double
                     `7jumps`0 carefully to
                     `ochain`0 them and fly
                     around!
-
+                    
                     Play using one of `6${classes-amount}`0
                     available classes!
                 </page>
@@ -68,38 +68,47 @@
     <give kit="obs-kit" filter="is-observer"/>
 </kits>
 <classes family="oitq">
-    <class name="Archer" description="Stone sword! Quick double jumps!" longdescription="Stone sword, insta-kill bow and double jumps!" icon="bow" default="true">
+    <class name="Archer" description="Stone sword! Bow and arrow!" longdescription="Stone sword, insta-kill bow and double jumps!" icon="bow" default="true">
         <kit parents="${base-kit}">
-            <item slot="0" unbreakable="true" name="`7`lRegular `rBowie Knife" lore="`8Multiple Hit Kill" material="stone sword"/>
-            <item slot="1" unbreakable="true" name="`c`lMo`6`ldd`e`led `rRepeater" lore="`8One Hit Kill" enchantment="power:10" show-enchantments="false" material="bow"/>
+            <item slot="0" unbreakable="true" name="`7`lRegular `fBowie Knife`r" lore="`8Multiple Hit Kill" material="stone sword"/>
+            <item slot="1" unbreakable="true" name="`c`lMo`6`ldd`e`led `fRepeater`r" lore="`8One Hit Kill" enchantment="power:10" show-enchantments="false" material="bow"/>
             <item slot="2" material="arrow"/>
         </kit>
     </class>
-    <class name="Brawler" description="Iron sword! No bow!" longdescription="Iron sword! No bow!" icon="potion:9">
+    <class name="Brawler" description="Iron sword! No bow!" longdescription="Iron sword! No bow! Double jumps!" icon="potion:9">
         <kit parents="${base-kit}">
-            <item slot="0" unbreakable="true" name="`c`lSharpened `rBowie Knife" lore="`8Multiple Hit Kill" material="iron sword"/>
+            <item slot="0" unbreakable="true" name="`c`lSharpened `fBowie Knife`r" lore="`8Multiple Hit Kill" material="iron sword"/>
         </kit>
     </class>
-    <class name="Speedster" description="Wooden sword! Speed! No bow!" longdescription="Wooden sword! Speed! No bow!" icon="potion:2">
+    <class name="Speedster" description="Wooden sword! Speed! No bow!" longdescription="Wooden sword! Speed! No bow! Double jumps!" icon="potion:2">
         <kit parents="${base-kit}">
-            <item slot="0" unbreakable="true" name="`c`lSharpened `rStick" lore="`8Multiple Hit Kill" material="wood sword"/>
+            <item slot="0" unbreakable="true" name="`c`lSharpened `fStick`r" lore="`8Multiple Hit Kill" material="wood sword"/>
             <effect duration="oo" ambient="true">speed</effect>
         </kit>
     </class>
-    <class name="Fisker" description="Wooden sword! Fishing rod! No bow!" longdescription="Wooden sword! Fishing rod! No bow!" icon="fishing rod">
+    <class name="Fisker" description="Wooden sword! Fishing rod! No bow!" longdescription="Wooden sword! Fishing rod! No bow! Double jumps!" icon="fishing rod">
         <kit parents="${base-kit}">
-            <item slot="0" unbreakable="true" name="`c`lSharpened `rStick" lore="`8Multiple Hit Kill" material="wood sword"/>
-            <item slot="1" name="`a`lKool Stik Global Elite" material="fishing rod" damage="24">
+            <item slot="0" unbreakable="true" name="`c`lSharpened `fStick`r" lore="`8Multiple Hit Kill" material="wood sword"/>
+            <item slot="1" name="`a`lKool Stik Global Elite`r" material="fishing rod" damage="24">
                 <attribute operation="add" amount="-2">generic.attackDamage</attribute>
             </item>
         </kit>
     </class>
-    <class name="Phoenix" description="Blaze rod! Strength! No bow!" longdescription="Blaze rod! Strength! No bow!" icon="blaze rod">
+    <class name="Phoenix" description="Blaze rod! Strength! No bow!" longdescription="Blaze rod! Strength! No bow! Double jumps!" icon="blaze rod">
         <kit parents="${base-kit}">
-            <item slot="0" name="`6`lFire `rStick" lore="`8Multiple Hit Kill" material="blaze rod" enchantment="fire aspect:1"/>
+            <item slot="0" name="`6`lFire `fStick`r" lore="`8Multiple Hit Kill" material="blaze rod" enchantment="fire aspect:1"/>
             <effect duration="oo" ambient="true">strength</effect>
         </kit>
     </class>
+    <if min-server-version="1.14">
+        <class name="Golden Claw" description="Wooden sword! Quick double jumps!" longdescription="Stone sword, insta-kill crossbow and double jumps!" icon="crossbow">
+            <kit parents="${base-kit}">
+                <item slot="0" unbreakable="true" name="`c`lSharpened `fStick`r" lore="`8Multiple Hit Kill" material="wood sword"/>
+                <item slot="1" unbreakable="true" name="`e`lHand-crafted `fCrossbow`r" lore="`8One Hit Kill" enchantment="power:10;quick charge:1;vanishing curse" show-enchantments="false" material="crossbow"/>
+                <item slot="2" material="arrow"/>
+            </kit>
+        </class>
+    </if>
 </classes>
 <filters>
     <deny id="deny-players">
@@ -262,6 +271,9 @@
     <item>rotten flesh</item>
     <item>fishing rod</item>
     <item>blaze rod</item>
+    <if min-server-version="1.14">
+        <item>crossbow</item>
+    </if>
 </itemremove>
 <disabledamage>
     <damage>fall</damage>
