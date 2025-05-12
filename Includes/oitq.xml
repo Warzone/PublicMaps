@@ -11,12 +11,11 @@
 <gamemode>rage</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>arcade</gamemode>
-<!-- Version 2025.05.10-1 -->
+<!-- Version 2025.05.11-2 -->
 <constants fallback="true">
     <constant id="time-limit">3</constant> <!-- Time limit in minutes -->
     <constant id="base-kit">default-players-kit</constant> <!-- The base kit that all classes will have -->
     <constant id="extra-kit">default-extra-kit</constant> <!-- For small additions to the base kit, useful if you just want to add stuff to the default one -->
-    <constant id="classes-amount">5</constant> <!-- Amount of classes the map has -->
 </constants>
 <game>One in the Quiver</game>
 <modifybowprojectile pickup-filter="never"/>
@@ -50,17 +49,16 @@
                 <page>
                     `2» `lONE IN THE
                     `2`lQUIVER`0
-                    
+
                     Swords `cdon't`0 kill in one
                     hit, but bow shots `2do`0!
-                    
+
                     Time your `7double
                     `7jumps`0 carefully to
-                    `ochain`0 them and fly
-                    around!
-                    
-                    Play using one of `6${classes-amount}`0
-                    available classes!
+                    `ochain`0 them!
+
+                    Play using one of
+                    many available classes!
                 </page>
             </pages>
         </book>
@@ -94,14 +92,14 @@
             </item>
         </kit>
     </class>
-    <class name="Phoenix" description="Blaze rod! Strength! No bow!" longdescription="Blaze rod! Strength! No bow! Double jumps!" icon="blaze rod">
+    <class name="Phoenix" description="Blaze rod! Strength! No bow!" longdescription="Fire stick! Strength! No bow! Double jumps!" icon="blaze rod">
         <kit parents="${base-kit}">
             <item slot="0" name="`6`lFire `fStick`r" lore="`8Multiple Hit Kill" material="blaze rod" enchantment="fire aspect:1"/>
             <effect duration="oo" ambient="true">strength</effect>
         </kit>
     </class>
     <if min-server-version="1.14">
-        <class name="Golden Claw" description="Wooden sword! Quick double jumps!" longdescription="Stone sword, insta-kill crossbow and double jumps!" icon="crossbow">
+        <class name="Golden Claw" description="Wooden sword! Crossbow!" longdescription="Wooden sword, insta-kill crossbow and double jumps!" icon="crossbow">
             <kit parents="${base-kit}">
                 <item slot="0" unbreakable="true" name="`c`lSharpened `fStick`r" lore="`8Multiple Hit Kill" material="wood sword"/>
                 <item slot="1" unbreakable="true" name="`e`lHand-crafted `fCrossbow`r" lore="`8One Hit Kill" enchantment="power:10;quick charge:1;vanishing curse" show-enchantments="false" material="crossbow"/>
@@ -109,7 +107,21 @@
             </kit>
         </class>
     </if>
+    <if min-server-version="1.21">
+        <class name="Wind-and-fire Wheels" description="Wind charges! No Bow!" longdescription="Wind-and-fire wheels and double jumps!" icon="wind charge">
+            <kit parents="${base-kit}">
+                <item slot="0" name="`c`lFire `fWheel`r" lore="`8Multiple Hit Kill" material="blaze powder"/>
+                <item slot="1" name="`9`lWind `fWheel`r" lore="`8One Hit Kill" enchantment="vanishing curse" show-enchantments="false" material="wind charge" projectile="wind-wheel"/>
+                <effect duration="oo" ambient="true">strength</effect>
+            </kit>
+        </class>
+    </if>
 </classes>
+<if min-server-version="1.21">
+    <projectiles>
+        <projectile id="wind-wheel" name="Wind Wheel" projectile="WindCharge" click="right" damage="255" throwable="true" cooldown="5s" velocity="12"/>
+    </projectiles>
+</if>
 <filters>
     <deny id="deny-players">
         <participating/>
@@ -130,10 +142,24 @@
 <kill-rewards>
     <kill-reward>
         <filter>
-            <class>Archer</class>
+            <any>
+                <class>Archer</class>
+                <if min-server-version="1.14">
+                    <class>Golden Claw</class>
+                </if>
+            </any>
         </filter>
         <item amount="1" material="arrow"/>
     </kill-reward>
+    <if min-server-version="1.21">
+        <kill-reward>
+            <filter>
+                <class>Wind-and-fire Wheels</class>
+            </filter>
+            <item name="`9`lWind `fWheel`r" lore="`8One Hit Kill" enchantment="vanishing curse" show-enchantments="false" material="wind charge" projectile="wind-wheel"/>
+        </kill-reward>
+    </if>
+    <!-- Kill streaks -->
     <kill-reward>
         <filter>
             <kill-streak count="3" repeat="false"/>
@@ -273,6 +299,10 @@
     <item>blaze rod</item>
     <if min-server-version="1.14">
         <item>crossbow</item>
+    </if>
+    <if min-server-version="1.21">
+        <item>blaze powder</item>
+        <item>wind charge</item>
     </if>
 </itemremove>
 <disabledamage>
