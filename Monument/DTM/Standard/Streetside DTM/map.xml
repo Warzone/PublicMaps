@@ -2,9 +2,11 @@
 <name>Streetside DTM</name>
 <variant id="halloween" world="halloween" override="true">Purgatory Street DTM</variant>
 <variant id="christmas" world="christmas" override="true">Frosty Street DTM</variant>
-<version>1.4.4</version>
+<variant id="enhanced" world="enhanced">Enhanced</variant>
+<version>1.5.0</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <if variant="default">
     <created>2022-02-25</created>
 </if>
@@ -13,6 +15,9 @@
 </if>
 <if variant="christmas">
     <created>2024-03-31</created>
+</if>
+<if variant="enhanced">
+    <created>2025-05-13</created>
 </if>
 <!-- Map Authors & Contributors -->
 <authors>
@@ -25,6 +30,7 @@
 <!-- Broadcasts -->
 <broadcasts>
     <tip after="1s" every="4m">Gold blocks regenerate on this map!</tip>
+    <tip after="2s" every="4m1s">Chainmail Leggings are stronger than Golden Leggings!</tip>
 </broadcasts>
 <!-- Teams -->
 <teams>
@@ -38,16 +44,15 @@
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="stone pickaxe"> 
-            <enchantment level="3">dig speed</enchantment>
+            <enchantment level="2">dig speed</enchantment>
         </item>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="64" material="wood"/>
-        <if variant="christmas">
-            <item slot="5" unbreakable="true" material="stone spade"/> <!-- to be able to break snow blocks easier in the Christmas variant -->
+        <if variant="christmas,enhanced">
+            <item slot="5" unbreakable="true" material="stone spade"/> <!-- To be able to break snow blocks and concrete powder easier in the Christmas and Enhanced variants -->
         </if>
         <item slot="6" material="golden apple"/>
-        <item slot="7" amount="24" material="arrow"/>
-        <item slot="8" amount="64" material="golden carrot"/>
+        <item slot="8" amount="24" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
@@ -57,14 +62,19 @@
 <!-- Spawns -->
 <spawns>
     <default>
-        <regions>
+        <region>
             <point>35.5,61.5,-1.5</point>
-        </regions>
+        </region>
     </default>
     <spawn team="blue-team" kit="main-kit">
-        <regions>
-            <point>76.5,27,4.5</point>
-        </regions>
+        <region>
+            <unless variant="enhanced">
+                <point>76.5,27,4.5</point>
+            </unless>
+            <if variant="enhanced">
+                <point>76.5,27,3.5</point>
+            </if>
+        </region>
     </spawn>
     <spawn team="green-team" kit="main-kit">
         <regions>
@@ -79,6 +89,23 @@
     </deny>
     <material id="only-gold">gold block</material>
 </filters>
+<!-- Monuments -->
+<destroyables materials="emerald block" repairable="false" name="Monument" mode-changes="true">
+    <destroyable id="blue-monument" owner="blue-team">
+        <region>
+            <cuboid min="77,26,72" max="73,32,68"/>
+        </region>
+    </destroyable>
+    <destroyable id="green-monument" owner="green-team">
+        <region>
+            <cuboid min="-7,26,21" max="-3,32,25"/>
+        </region>
+    </destroyable>
+</destroyables>
+<!-- Monument Modes -->
+<modes>
+    <mode after="12m" material="coal block"/>
+</modes>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
@@ -101,23 +128,6 @@
     <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy spawn."/>
     <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy spawn."/>
 </regions>
-<!-- Monuments -->
-<destroyables materials="emerald block" repairable="false" name="Monument" mode-changes="true">
-    <destroyable id="blue-monument" owner="blue-team">
-        <region>
-            <cuboid min="77,26,72" max="73,32,68"/>
-        </region>
-    </destroyable>
-    <destroyable id="green-monument" owner="green-team">
-        <region>
-            <cuboid min="-7,26,21" max="-3,32,25"/>
-        </region>
-    </destroyable>
-</destroyables>
-<!-- Monument Modes -->
-<modes>
-    <mode after="12m" material="coal block"/>
-</modes>
 <!-- Renewables -->
 <renewables>
     <renewable interval="10s" grow="true" sound="false" region="gold-spawners" renew-filter="only-gold"/>
@@ -127,7 +137,6 @@
     <kill-reward>
         <item amount="8" material="arrow"/>
         <item amount="16" material="wood"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
 <!-- Block Drops -->
@@ -162,7 +171,6 @@
 </item-mods>
 <!-- Item Remove -->
 <itemremove>
-    <item>golden carrot</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
@@ -170,6 +178,8 @@
     <item>sapling</item>
     <item>emerald block</item>
     <item>coal block</item>
+    <item>rail</item>
+    <item>iron door</item>
     <if variant="christmas">
         <item>snowball</item> <!-- Prevent players from getting snow balls in the Christmas variant -->
     </if>
