@@ -1,0 +1,70 @@
+<map proto="1.5.0">
+<name>Winter Wars</name>
+<version>1.1.0</version>
+<created>2022-06-01</created>
+<include id="micro-battles"/>
+<constant id="game-objective">Four teams are divided onto the map and only one will remain. Gather blocks to help you build up a tower or barricade yourself. Watch out for the world border!</constant>
+<constant id="max-height-value">18</constant>
+<authors>
+    <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
+    <author uuid="1455875f-7c59-4194-a03b-e41e3c84d0c1"/> <!-- abduh -->
+</authors>
+<contributors>
+    <contributor uuid="edbd4cdb-63a5-4cec-944c-2b6bda56f51f" contribution="Map inspiration (Cozy Cove)"/> <!-- Owehttamy -->
+</contributors>
+<spawns>
+    <spawns kit="spawn-kit">
+        <spawn team="blue-team">
+            <regions>
+                <point yaw="-90">-5.5,6,10.5</point>
+                <point yaw="180">-8.5,6,14.5</point>
+                <point yaw="-180">-8.5,6,5.5</point>
+                <point yaw="-180">-16.5,6,4.5</point>
+            </regions>
+        </spawn>
+        <spawn team="green-team">
+            <regions>
+                <point yaw="90">6.5,6,-9.5</point>
+                <point>9.5,6,-13.5</point>
+                <point>9.5,6,-4.5</point>
+                <point>17.5,6,-3.5</point>
+            </regions>
+        </spawn>
+        <spawn team="red-team">
+            <regions>
+                <point>-9.5,6,-5.5</point>
+                <point yaw="-90">-13.5,6,-8.5</point>
+                <point yaw="-90">-4.5,6,-8.5</point>
+                <point yaw="-90">-3.5,6,-16.5</point>
+            </regions>
+        </spawn>
+        <spawn team="yellow-team">
+            <regions>
+                <point yaw="180">10.5,6,6.5</point>
+                <point yaw="90">14.5,6,9.5</point>
+                <point yaw="90">5.5,6,9.5</point>
+                <point yaw="90">4.5,6,17.5</point>
+            </regions>
+        </spawn>
+    </spawns>
+    <default>
+        <regions>
+            <point yaw="90">0.5,40,0.5</point>
+        </regions>
+    </default>
+</spawns>
+<!-- Map-specific features -->
+<itemremove>
+    <item>packed ice</item>
+</itemremove>
+<blockdrops>
+    <rule>
+        <filter>
+            <material>packed ice</material>
+        </filter>
+        <drops>
+            <item material="packed ice"/>
+        </drops>
+    </rule>
+</blockdrops>
+</map>
