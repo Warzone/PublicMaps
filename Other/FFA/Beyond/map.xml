@@ -1,11 +1,11 @@
 <map proto="1.5" min-server-version="1.21">
 <name>Beyond</name>
-<version>1.0.1</version>
+<version>1.0.5</version>
 <include id="oitq"/>
 <include id="void-death"/>
 <constants>
     <constant id="extra-kit">beyonder-kit</constant>
-    <constant id="void-plane">-30</constant>
+    <constant id="void-plane">8</constant>
 </constants>
 <objective>Be the player with the highest amount of kills after ${time-limit} minutes!</objective>
 <authors>
@@ -14,6 +14,9 @@
 <created>2025-05-11</created>
 <players max="10" colors="true"/>
 <terrain environment="the end"/>
+<broadcasts>
+    <tip after="5s" every="1m">`7Use `5End Gateways`7 to `dteleport`7 around!`r</tip>
+</broadcasts>
 <spawns>
     <spawn spread="true">
         <regions>
@@ -52,11 +55,12 @@
 </kits>
 <itemremove>
     <item>ender pearl</item>
+    <item>potion</item>
 </itemremove>
 <kill-rewards>
     <kill-reward>
         <item material="ender pearl" amount="2"/>
-        <item material="potion" name="Potion of Slow Falling"> <!-- name="{translate:'item.minecraft.potion.effect.slow_falling'} -->
+        <item material="potion" name="`fPotion of Slow Falling"> <!-- name="{translate:'item.minecraft.potion.effect.slow_falling'} -->
             <effect duration="10s" amplifier="2">slow falling</effect>
         </item>
     </kill-reward>
