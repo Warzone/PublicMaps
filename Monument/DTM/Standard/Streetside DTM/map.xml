@@ -3,6 +3,7 @@
 <variant id="halloween" world="halloween" override="true">Purgatory Street DTM</variant>
 <variant id="christmas" world="christmas" override="true">Frosty Street DTM</variant>
 <variant id="enhanced" world="enhanced">Enhanced</variant>
+<variant id="halloween-enhanced" world="ehalloween" override="true">Purgatory Street DTM Enhanced</variant>
 <version>1.5.0</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
@@ -18,6 +19,10 @@
 </if>
 <if variant="enhanced">
     <created>2025-05-13</created>
+</if>
+<if variant="halloween-enhanced">
+    <created>2025-05-15</created>
+    <terrain environment="nether"/>
 </if>
 <!-- Map Authors & Contributors -->
 <authors>
@@ -48,8 +53,8 @@
         </item>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="64" material="wood"/>
-        <if variant="christmas,enhanced">
-            <item slot="5" unbreakable="true" material="stone spade"/> <!-- To be able to break snow blocks and concrete powder easier in the Christmas and Enhanced variants -->
+        <if variant="christmas,enhanced,halloween-enhanced">
+            <item slot="5" unbreakable="true" material="stone spade"/> <!-- To be able to break snow blocks and concrete powder easier in certain variants -->
         </if>
         <item slot="6" material="golden apple"/>
         <item slot="8" amount="24" material="arrow"/>
