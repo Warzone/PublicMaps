@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Desert Sanctuary</name>
-<version>1.6.5</version>
+<version>1.6.6</version>
 <variant id="5v5" world="5v5">5v5</variant>
 <variant id="7v7" world="7v7">7v7</variant>
 <variant id="halloween" world="halloween" override="true">Deserted Sanctuary</variant>
@@ -62,7 +62,13 @@
             <effect>night vision</effect>
         </if>
     </kit>
-    <kit id="spawn-kit" parents="default-kit,base-kit-compass">
+    <kit id="spawn-kit" parent="default-kit">
+        <unless min-server-version="1.9">
+            <kit id="base-kit-compass"/>
+        </unless>
+        <if min-server-version="1.9">
+            <kit id="base-kit"/>
+        </if>
         <unless variant="5v5">
             <action>
                 <replace-item ignore-metadata="true">
