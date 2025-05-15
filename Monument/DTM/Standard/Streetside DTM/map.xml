@@ -2,9 +2,9 @@
 <name>Streetside DTM</name>
 <variant id="halloween" world="halloween" override="true">Purgatory Street DTM</variant>
 <variant id="christmas" world="christmas" override="true">Frosty Street DTM</variant>
-<variant id="enhanced" world="enhanced">Enhanced</variant>
-<variant id="halloween-enhanced" world="ehalloween" override="true">Purgatory Street DTM Enhanced</variant>
-<version>1.5.0</version>
+<variant id="enhanced" world="enhanced" min-server-version="1.21">Enhanced</variant>
+<variant id="halloween-enhanced" world="ehalloween" override="true" min-server-version="1.21">Purgatory Street DTM Enhanced</variant>
+<version>1.5.1</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
 <include id="gapple-kill-reward"/>
@@ -48,7 +48,7 @@
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" unbreakable="true" material="stone pickaxe"> 
+        <item slot="2" unbreakable="true" material="stone pickaxe">
             <enchantment level="2">dig speed</enchantment>
         </item>
         <item slot="3" unbreakable="true" material="stone axe"/>
@@ -89,9 +89,6 @@
 </spawns>
 <!-- Filters -->
 <filters>
-    <deny id="deny-players">
-        <participating/>
-    </deny>
     <material id="only-gold">gold block</material>
 </filters>
 <!-- Monuments -->
@@ -127,7 +124,7 @@
     </union>
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
-    <apply region="gold-spawners" block-break="only-gold" block-place="deny-players" message="You may only break iron blocks!"/>
+    <apply region="gold-spawners" block-break="only-gold" block-place="deny(participating)" message="You may only break iron blocks!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="spawn-protections" use="never"/> <!-- Split from first spawn-protections to avoid duplicate messages -->
     <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy spawn."/>
@@ -156,9 +153,9 @@
     </rule>
 </block-drops>
 <!-- Crafting -->
-<crafting> 
-    <disable>gold pickaxe</disable>    
-</crafting> 
+<crafting>
+    <disable>gold pickaxe</disable>
+</crafting>
 <!-- Item Rules -->
 <item-mods>
     <rule>
