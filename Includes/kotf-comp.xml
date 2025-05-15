@@ -1,7 +1,7 @@
-<map> <!-- minimum proto 1.4.0 -->
+<map>
 <!-- Base competitive KotF kit include file -->
 <!-- Created by mameBT -->
-<!-- Version 2024.12.07-1 -->
+<!-- Version 2025.05.13-1 -->
 <include id="conquest-comp"/>
 <constants fallback="true">
     <constant id="respawn-timer">2s</constant>
@@ -16,10 +16,16 @@
     </kit>
     <kit id="flag-kit" force="true">
         <max-health>8</max-health>
+        <if min-server-version="1.9">
+            <effect>glowing</effect>
+        </if>
         <effect duration="3s" amplifier="2">absorption</effect>
     </kit>
     <kit id="reset-health" force="true">
         <max-health>20</max-health>
+        <if min-server-version="1.9">
+            <effect duration="0s" amplifier="0">glowing</effect>
+        </if>
     </kit>
 </kits>
 <filters>
