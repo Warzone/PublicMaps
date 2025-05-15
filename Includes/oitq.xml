@@ -11,14 +11,18 @@
 <gamemode>rage</gamemode>
 <gamemode>ffa</gamemode>
 <gamemode>arcade</gamemode>
-<!-- Version 2025.05.11-2 -->
+<!-- Version 2025.05.13-1 -->
 <constants fallback="true">
     <constant id="time-limit">3</constant> <!-- Time limit in minutes -->
     <constant id="base-kit">default-players-kit</constant> <!-- The base kit that all classes will have -->
     <constant id="extra-kit">default-extra-kit</constant> <!-- For small additions to the base kit, useful if you just want to add stuff to the default one -->
 </constants>
 <game>One in the Quiver</game>
-<modifybowprojectile pickup-filter="never"/>
+<modifybowprojectile pickup-filter="never">
+    <if min-server-version="1.9">
+        <potion>glowing</potion>
+    </if>
+</modifybowprojectile>
 <rage/>
 <time result="score">${time-limit}m</time>
 <respawn auto="true"/>
@@ -110,9 +114,9 @@
     <if min-server-version="1.21">
         <class name="Wind-and-fire Wheels" description="Wind charges! No Bow!" longdescription="Wind-and-fire wheels and double jumps!" icon="wind charge">
             <kit parents="${base-kit}">
-                <item slot="0" name="`c`lFire `fWheel`r" lore="`8Multiple Hit Kill" material="blaze powder"/>
-                <item slot="1" name="`9`lWind `fWheel`r" lore="`8One Hit Kill" enchantment="vanishing curse" show-enchantments="false" material="wind charge" projectile="wind-wheel"/>
-                <effect duration="oo" ambient="true">strength</effect>
+                <item slot="slot.weapon.offhand" name="`c`lFire `fWheel`r" lore="`8Multiple Hit Kill" enchantment="vanishing curse" show-enchantments="false" material="blaze powder"/>
+                <item slot="0" name="`9`lWind `fWheel`r" lore="`8One Hit Kill" enchantment="vanishing curse" show-enchantments="false" material="wind charge" projectile="wind-wheel"/>
+                <effect duration="oo" amplifier="2" ambient="true">strength</effect>
             </kit>
         </class>
     </if>
