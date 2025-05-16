@@ -5,7 +5,7 @@
 <variant id="enhanced" world="enhanced" min-server-version="1.21">Enhanced</variant>
 <variant id="halloween-enhanced" world="ehalloween" override="true" min-server-version="1.21">Purgatory Street DTM Enhanced</variant>
 <variant id="christmas-enhanced" world="echristmas" override="true" min-server-version="1.21">Frosty Street DTM Enhanced</variant>
-<version>1.5.2</version>
+<version>1.5.3</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
 <include id="gapple-kill-reward"/>
@@ -40,6 +40,9 @@
 <broadcasts>
     <tip after="1s" every="4m">Gold blocks regenerate on this map!</tip>
     <tip after="2s" every="4m1s">Chainmail Leggings are stronger than Golden Leggings!</tip>
+    <if variant="halloween-enhanced">
+        <tip after="3s">`cFor an added immersive twist! enable `6particles `cin your minecraft settings to get the full halloween experience!</tip>
+    </if>
 </broadcasts>
 <!-- Teams -->
 <teams>
@@ -77,12 +80,7 @@
     </default>
     <spawn team="blue-team" kit="main-kit">
         <region>
-            <unless variant="enhanced">
-                <point>76.5,27,4.5</point>
-            </unless>
-            <if variant="enhanced">
-                <point>76.5,27,3.5</point>
-            </if>
+            <point>76.5,27,4.5</point>
         </region>
     </spawn>
     <spawn team="green-team" kit="main-kit">
