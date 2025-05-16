@@ -4,7 +4,8 @@
 <variant id="christmas" world="christmas" override="true">Frosty Street DTM</variant>
 <variant id="enhanced" world="enhanced" min-server-version="1.21">Enhanced</variant>
 <variant id="halloween-enhanced" world="ehalloween" override="true" min-server-version="1.21">Purgatory Street DTM Enhanced</variant>
-<version>1.5.1</version>
+<variant id="christmas-enhanced" world="echristmas" override="true" min-server-version="1.21">Frosty Street DTM Enhanced</variant>
+<version>1.5.2</version>
 <objective>Destroy the enemy's Emerald monument!</objective>
 <gamemode>dtm</gamemode>
 <include id="gapple-kill-reward"/>
@@ -23,6 +24,9 @@
 <if variant="halloween-enhanced">
     <created>2025-05-15</created>
     <terrain environment="nether"/>
+</if>
+<if variant="christmas-enhanced">
+    <created>2025-05-16</created>
 </if>
 <!-- Map Authors & Contributors -->
 <authors>
@@ -53,7 +57,7 @@
         </item>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="64" material="wood"/>
-        <if variant="christmas,enhanced,halloween-enhanced">
+        <if variant="christmas,enhanced,halloween-enhanced,christmas-enhanced">
             <item slot="5" unbreakable="true" material="stone spade"/> <!-- To be able to break snow blocks and concrete powder easier in certain variants -->
         </if>
         <item slot="6" material="golden apple"/>
@@ -124,7 +128,7 @@
     </union>
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
-    <apply region="gold-spawners" block-break="only-gold" block-place="deny(participating)" message="You may only break iron blocks!"/>
+    <apply region="gold-spawners" block-break="only-gold" block-place="deny(participating)" message="You may only break gold blocks here!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
     <apply region="spawn-protections" use="never"/> <!-- Split from first spawn-protections to avoid duplicate messages -->
     <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy spawn."/>
@@ -182,8 +186,8 @@
     <item>coal block</item>
     <item>rails</item>
     <item>iron door</item>
-    <if variant="christmas">
-        <item>snowball</item> <!-- Prevent players from getting snow balls in the Christmas variant -->
+    <if variant="christmas,christmas-enhanced">
+        <item>snowball</item> <!-- Prevent players from getting snow balls in the christmas variants -->
     </if>
 </itemremove>
 <!-- Item keep -->
