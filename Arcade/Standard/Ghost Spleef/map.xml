@@ -1,40 +1,18 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ghost Spleef</name>
-<version>1.2</version>
+<version>1.2.1</version>
+<objective>Be the last player standing!</objective>
+<gamemode>arcade</gamemode>
 <authors>
     <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
-<objective>Be the last player standing!</objective>
-<gamemode>arcade</gamemode>
 <broadcasts>
-    <alert after="10s" filter="only-ghost" every="30s">You can fly as a ghost!</alert>
+    <alert after="10s" filter="ghost-team" every="30s">You can fly as a ghost!</alert>
 </broadcasts>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>true</broadcastLives>
-</blitz>
-<time result="survivor-team">2m</time>
 <teams>
-    <team id="ghost-team" show-name-tags="allies"  color="gray" min="1" max="4" max-overfill="5">Ghost</team>
-    <team id="survivor-team" show-name-tags="allies"  color="gold" min="3" max="50" plural="true">Survivors</team>
+    <team id="ghost-team" show-name-tags="allies" color="gray" min="1" max="4" max-overfill="5">Ghost</team>
+    <team id="survivor-team" show-name-tags="allies" color="gold" min="3" max="50" plural="true">Survivors</team>
 </teams>
-<spawns>
-    <spawn team="survivor-team" kit="survivor-kit" spread="true" angle="-164.5,40,113.5">
-        <regions>
-            <cylinder base="-164.5,26,113.5" radius="25" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="ghost-team" kit="ghost-kit">
-        <regions>
-            <point>-164.5,40,113.5</point>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="0">
-            <cylinder base="-164.5,45,113.5" radius="1.5" height="0"/>
-        </regions>
-    </default>
-</spawns>
 <kits>
     <kit id="survivor-kit">
         <double-jump power="2"/>
@@ -42,8 +20,8 @@
         <chestplate locked="true" material="chainmail chestplate"/>
         <leggings locked="true" material="leather leggings"/>
         <boots locked="true" material="iron boots"/>
-        <item amount="64" slot="1" material="snow ball"/>
-        <item amount="64" slot="2" material="snow ball"/>
+        <item slot="1" amount="64" material="snow ball"/>
+        <item slot="2" amount="64" material="snow ball"/>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="ghost-kit" potion-particles="false" force="true">
@@ -57,11 +35,52 @@
         <item slot="1" material="air"/>
         <item slot="2" material="air"/>
         <foodlevel>6</foodlevel>
-        <effect amplifier="1" duration="oo">invisibility</effect>
-        <effect amplifier="10" duration="oo">damage resistance</effect>
-        <effect amplifier="1" duration="oo">fire resistance</effect>
+        <effect>invisibility</effect>
+        <effect amplifier="10">damage resistance</effect>
+        <effect>fire resistance</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="survivor-team" kit="survivor-kit" spread="true" angle="-164.5,40,113.5">
+        <region>
+            <cylinder base="-164.5,26,113.5" radius="25" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="ghost-team" kit="ghost-kit">
+        <region>
+            <point>-164.5,40,113.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <cylinder base="-164.5,45,113.5" radius="1.5" height="0"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <all id="snow-break">
+        <team>ghost-team</team>
+        <material>snow block</material>
+    </all>
+</filters>
+<regions>
+    <apply block-break="snow-break"/>
+    <below y="26" id="no-ghosts"/>
+    <apply enter="survivor-team" region="no-ghosts" message="You may not fly this low!"/>
+    <above y="31" id="no-survivors"/>
+    <apply enter="ghost-team" region="no-survivors" message="You may not climb higher!"/>
+</regions>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<time result="survivor-team">2m</time>
+<disabledamage>
+    <damage>entity attack</damage>
+</disabledamage>
+<crafting>
+    <disable>snow block</disable>
+</crafting>
 <itemremove>
     <item>snow block</item>
     <item>snow ball</item>
@@ -70,27 +89,6 @@
     <item>iron boots</item>
     <item>iron spade</item>
 </itemremove>
-<regions>
-    <apply block-break="snow-break"/>
-    <below y="26" id="no-ghosts"/>
-    <apply enter="only-survivor" region="no-ghosts" message="You may not fly this low!"/>
-    <above y="31" id="no-survivors"/>
-    <apply enter="only-ghost" region="no-survivors" message="You may not climb higher!"/>
-</regions>
-<filters>
-    <team id="only-ghost">ghost-team</team>
-    <team id="only-survivor">survivor-team</team>
-    <all id="snow-break">
-        <filter id="only-ghost"/>
-        <material>snow block</material>
-    </all>
-</filters>
-<disabledamage>
-    <damage>entity attack</damage>
-</disabledamage>
-<crafting>
-    <disable>snow block</disable>
-</crafting>
 <hunger>
     <depletion>off</depletion>
 </hunger>
