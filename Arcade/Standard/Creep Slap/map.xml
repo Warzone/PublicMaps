@@ -1,45 +1,32 @@
-<map proto="1.4.2" game="Creep Slap!">
+<map proto="1.5.0" game="Creep Slap!">
 <name>Creep Slap</name>
+<version>1.1.2</version>
 <objective>Ignite and throw the Creepers! Least deaths win!</objective>
-<version>1.1.1</version>
-<gamemode>arcade</gamemode>
 <created>2016-05-03</created>
+<gamemode>arcade</gamemode>
+<phase>staging</phase>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
-    <!-- AtlasGames !-->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
 <teams>
     <team color="blue" id="blue" max="30">Blue</team>
     <team color="red" id="red" max="30">Red</team>
 </teams>
-<score>
-    <kills>1</kills>
-</score>
-<time>2m</time>
 <kits>
-    <kit id="spawn-kit">
-        <effect amplifier="1" duration="oo">night vision</effect>
-        <effect amplifier="2" duration="oo">resistance</effect>
-        <item slot="0" enchantments="knockback:5" name="`a`lCreeper Slapper" unbreakable="true">flint and steel</item>
-        <item slot="1" amount="16" damage="50">383</item>
-        <item slot="2" amount="16" damage="50">383</item>
+    <kit id="spawn-kit" parents="obs-kit">
+        <item slot="0" unbreakable="true" enchantments="knockback:5" name="`a`lCreeper Slapper" material="flint and steel"/>
+        <item slot="1" amount="16" damage="50" material="monster egg"/>
+        <item slot="2" amount="16" damage="50" material="monster egg"/>
+        <effect amplifier="2">resistance</effect>
         <walk-speed>2</walk-speed>
     </kit>
     <kit id="obs-kit">
-        <effect amplifier="1" duration="oo">night vision</effect>
+        <effect>night vision</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn kit="spawn-kit" team="blue">
-        <regions yaw="-90">
-            <region id="blue-spawn" />
-        </regions>
-    </spawn>
-    <spawn kit="spawn-kit" team="red">
-        <regions yaw="90">
-            <region id="red-spawn" />
-        </regions>
-    </spawn>
+    <spawn kit="spawn-kit" team="blue" yaw="-90" region="blue-spawn"/>
+    <spawn kit="spawn-kit" team="red" yaw="90" region="red-spawn"/>
     <default kit="obs-kit">
         <regions yaw="180">
             <point>0.5,1,15.5</point>
@@ -47,16 +34,19 @@
     </default>
 </spawns>
 <regions>
-    <cuboid id="blue-spawn" min="-9,1,-10" max="-8,2,11" />
-    <cuboid id="red-spawn" min="9,1,-10" max="10,2,11" />
-    <cuboid id="creeper-area" min="-6,1,-11" max="7,2,12" />
-
-    <apply block="never" region="everywhere" />
+    <cuboid id="blue-spawn" min="-9,1,-10" max="-8,2,11"/>
+    <cuboid id="red-spawn" min="9,1,-10" max="10,2,11"/>
+    <cuboid id="creeper-area" min="-6,1,-11" max="7,2,12"/>
+    <apply block="never"/>
 </regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>2m</time>
 <mobs>
     <filter>
         <all>
-            <region id="creeper-area" />
+            <region id="creeper-area"/>
             <mob>creeper</mob>
             <spawn>spawner egg</spawn>
         </all>
@@ -64,12 +54,14 @@
 </mobs>
 <itemremove>
     <item>flint and steel</item>
-    <item>383</item>
+    <item>monster egg</item>
     <item>sulphur</item>
 </itemremove>
-<kill-reward>
-    <item amount="4" damage="50">383</item>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="4" damage="50" material="monster egg"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>
