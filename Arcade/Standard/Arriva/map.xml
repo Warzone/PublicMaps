@@ -1,15 +1,18 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Arriva</name>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Escape the Minotaur!</objective>
 <gamemode>arcade</gamemode>
 <authors>
     <author uuid="06e0e173-4a93-4654-9769-fa7c216e353f"/> <!-- Howsie -->
     <author uuid="81401938-25d1-437e-bb70-d2828a7a6aac"/> <!-- Shirokamii -->
 </authors>
+<broadcasts>
+    <tip filter="players-team" every="1m" after="1s">Get to the center of the maze to win!</tip>
+</broadcasts>
 <teams>
-    <team id="minotaur" color="red" max="2" max-overfill="2">Minotaur</team>
-    <team id="players" color="dark aqua" max="50">Players</team>
+    <team id="minotaur-team" color="red" max="2" max-overfill="2">Minotaur</team>
+    <team id="players-team" color="dark aqua" max="50">Players</team>
 </teams>
 <kits>
     <kit id="min-kit">
@@ -23,43 +26,38 @@
     </kit>
     <kit id="players-kit">
         <helmet team-color="true" material="leather helmet" unbreakable="true"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
-    <spawn team="minotaur" kit="min-kit" yaw="90">
-        <regions>
+    <spawn team="minotaur-team" kit="min-kit" yaw="90">
+        <region>
             <point>-6,103,-797</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="players" kit="players-kit" yaw="135">
-        <regions>
+    <spawn team="players-team" kit="players-kit" yaw="135">
+        <region>
             <point>42,103,-779</point>
-        </regions>
+        </region>
     </spawn>
     <default yaw="180">
-        <regions>
+        <region>
             <point>17,103,-815</point>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <team id="only-players">players</team>
-</filters>
 <regions>
     <cuboid id="endgoal" min="20,102,-819" max="14,105,-813"/>
-    <apply enter="only-players" use="only-players" region="endgoal" message="You may not enter this area!"/>
+    <apply enter="players-team" use="players-team" region="endgoal" message="You may not enter this area!"/>
     <apply block="never"/>
 </regions>
 <score>
     <limit>1</limit>
-    <box region="endgoal" filter="only-players" points="1"/>
+    <box region="endgoal" filter="players-team" points="1"/>
 </score>
 <time>8m</time>
 <blitz/>
 <hunger>
     <depletion>off</depletion>
 </hunger>
-<broadcasts>
-    <tip filter="only-players" every="1m" after="1s">Get to the center of the maze to win!</tip>
-</broadcasts>
 </map>
