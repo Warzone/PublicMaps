@@ -1,59 +1,44 @@
-<map proto="1.4.2" game="Firesand Survival">
+<map proto="1.5.0" game="Firesand Survival">
 <name>Firesand Survival</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Survive until the end!</objective>
 <gamemode>arcade</gamemode>
 <authors>
-    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7" />
-    <!-- AtlasGames -->
+    <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<blitz>
-    <lives>1</lives>
-</blitz>
-<time>240s</time>
 <players min="4" max="50"/>
-<spawns>
-    <spawn kit="spawn-kit" angle="0,2,0" spread="true">
-        <regions>
-            <cuboid min="-10,4,-10" max="11,5,11" />
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="-45">
-            <point>0.5,28,0.5</point>
-        </regions>
-    </default>
-</spawns>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" unbreakable="true">fishing rod</item>
-        <chestplate>chainmail chestplate</chestplate>
-        <boots>leather boots</boots>
-        <item projectile="frozenegg" name="`aFrozen Egg" amount="16" slot="1">egg</item>
+        <item slot="0" unbreakable="true" material="fishing rod"/>
+        <item slot="1" projectile="frozenegg" name="`aFrozen Egg" amount="16" material="egg"/>
+        <chestplate material="chainmail chestplate"/>
+        <boots material="leather boots"/>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<projectiles>
-    <projectile id="frozenegg" name="`aFrozen Egg" projectile="Egg" velocity="1" damage="0" throwable="true" click="right">
-        <potion duration="3" amplifier="10">blindness</potion>
-        <potion duration="3" amplifier="5">slow</potion>
-    </projectile>
-</projectiles>
+<spawns>
+    <spawn kit="spawn-kit" angle="0,2,0" spread="true">
+        <region>
+            <cuboid min="-10,4,-10" max="11,5,11" />
+        </region>
+    </spawn>
+    <default>
+        <region yaw="-45">
+            <point>0.5,28,0.5</point>
+        </region>
+    </default>
+</spawns>
 <filters>
     <time id="countdown">1s</time>
     <time id="countdown2">5s</time>
     <time id="t-filter">0s</time>
     <all id="leaves-decay">
         <any>
-            <material>18</material>
+            <material>leaves</material>
             <material>sand</material>
         </any>
         <time>1s</time>
     </all>
-    <material id="only-log">log</material>
     <all id="only-some-break">
         <not>
             <cause>player</cause>
@@ -64,7 +49,7 @@
                 <material>fire</material>
             </all>
             <material>sand</material>
-            <material>log</material>
+            <material id="only-log">log</material>
         </any>
     </all>
     <all id="only-some-place">
@@ -78,16 +63,29 @@
     </all>
 </filters>
 <regions>
-    <cuboid id="play-zone" min="-10,0,-10" max="11,256,11" />
-    <cuboid id="fire" min="13,3,13" max="14,4,14" />
-    <cuboid id="netherrack" min="13,2,13" max="14,3,14" />
-    <cuboid id="top-wood" min="-10,14,-10" max="11,18,11" />
-    <cuboid id="bottom-wood" min="-10,2,-10" max="11,6,11" />
-    <apply block="leaves-decay" region="everywhere" />
-    <apply block-break="only-some-break" block-place="only-some-place" />
+    <cuboid id="play-zone" min="-10,0,-10" max="11,256,11"/>
+    <cuboid id="fire" min="13,3,13" max="14,4,14"/>
+    <cuboid id="netherrack" min="13,2,13" max="14,3,14"/>
+    <cuboid id="top-wood" min="-10,14,-10" max="11,18,11"/>
+    <cuboid id="bottom-wood" min="-10,2,-10" max="11,6,11"/>
+    <apply block="leaves-decay"/>
+    <apply block-break="only-some-break" block-place="only-some-place"/>
 </regions>
+<blitz>
+    <lives>1</lives>
+</blitz>
+<time>4m</time>
+<projectiles>
+    <projectile id="frozenegg" name="`aFrozen Egg" projectile="Egg" velocity="1" damage="0" throwable="true" click="right">
+        <potion duration="3" amplifier="10">blindness</potion>
+        <potion duration="3" amplifier="5">slow</potion>
+    </projectile>
+</projectiles>
 <itemremove>
     <item>sapling</item>
     <item>apple</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
