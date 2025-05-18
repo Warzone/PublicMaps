@@ -1,8 +1,9 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Cacti Mayhem Overdrive</name>
-<version>1.2.12</version>
-<gamemode>arcade</gamemode>
+<version>1.2.13</version>
 <objective>Be the last man standing!</objective>
+<gamemode>arcade</gamemode>
+<phase>staging</phase>
 <authors>
     <author uuid="f1352a57-4fe3-4f0c-b867-56b771fc1a0f" contribution="Game Design, XML"/> <!-- teagod -->
     <author uuid="74948888-fdb8-4446-9340-f7688c2435cc" contribution="Arena Build"/> <!-- Zero_Frosty -->
@@ -34,8 +35,8 @@
         <max-health>1</max-health>
         <item slot="0" amount="16" material="cactus"/>
         <item slot="1" unbreakable="true" material="fishing rod"/>
-        <effect duration="oo" amplifier="1">slow digging</effect>
-        <effect duration="oo" amplifier="20">weakness</effect>
+        <effect>slow digging</effect>
+        <effect amplifier="20">weakness</effect>
         <effect duration="3" amplifier="20">damage resistance</effect>
     </kit>
     <kit id="obs-kit" force="true">
@@ -429,7 +430,7 @@
     </action>
     <action id="remove-doublejump" scope="player">
           <set var="doublejump_state" value="0"/>
-          <sound key="random.fizz"/>
+          <sound key="${entity.generic.extinguish_fire}"/>
     </action>
     <trigger filter="timer-passed" scope="player" action="remove-doublejump"/>
         <!-- Knockback Reduction Logic -->
@@ -438,7 +439,7 @@
     </action>
     <action id="remove-kbreduction" scope="player">
           <set var="kbreduction_state" value="0"/>
-          <sound key="random.fizz"/>
+          <sound key="${entity.generic.extinguish_fire}"/>
     </action>
     <trigger filter="timer-passed2" scope="player" action="remove-kbreduction"/>
         <!-- Map Shrinking Logic -->
