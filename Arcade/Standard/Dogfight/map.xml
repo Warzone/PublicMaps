@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Dogfight</name>
 <created>2021-04-15</created>
-<version>1.3.1</version>
+<version>1.3.2</version>
 <objective>Blow up the enemy aircraft before they blow up yours!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -12,43 +12,34 @@
     <contributor uuid="f5d5c301-9ad3-4cb4-9cfd-a6b78e67734a" contribution="Inspiration and idea (Ping Bomb I/II)"/> <!-- Flashee -->
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="XML and world conversion"/> <!-- TheBestGamer -->
 </contributors>
-<blitz>
-    <lives>1</lives>
-</blitz>
 <teams>
-    <team id="red" color="dark red" max="10" max-overfill="10">Robins</team>
-    <team id="blue" color="blue" max="10" max-overfill="10">Blue Jays</team>
+    <team id="red-team" color="dark red" max="10" max-overfill="10">Robins</team>
+    <team id="blue-team" color="blue" max="10" max-overfill="10">Blue Jays</team>
 </teams>
 <kits>
-    <kit id="red-kit">
-        <item slot="0" amount="8" damage="14" material="stained glass"/>
-        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
-    </kit>
-    <kit id="blue-kit">
-        <item slot="0" amount="8" damage="11" material="stained glass"/>
-        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
+    <kit id="spawn-kit">
+        <item slot="0" amount="8" team-color="true" material="stained glass"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red-kit">
-        <regions yaw="90">
+    <spawn team="red-team" kit="spawn-kit">
+        <region yaw="90">
             <point>56.5,27.5,0.5</point>
-        </regions>
+        </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit">
-        <regions yaw="-90">
+    <spawn team="blue-team" kit="spawn-kit">
+        <region yaw="-90">
             <point>-57.5,27.5,0.5</point>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions yaw="180">
+        <region yaw="180">
             <point>-0.5,36,22.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
 <filters>
-    <team id="only-red">red</team>
-    <team id="only-blue">blue</team>
     <material id="only-glass-in-map">stained glass</material>
 </filters>
 <regions>
@@ -58,21 +49,24 @@
     <point id="blue-glass-right-spawner">-48.5,20.5,15.5</point>
     <apply block="only-glass-in-map" message="You may only place or break glass!"/>
 </regions>
+<blitz>
+    <lives>1</lives>
+</blitz>
 <spawners player-region="everywhere">
-    <spawner spawn-region="red-glass-left-spawner" max-entities="1" delay="1s" filter="only-red">
+    <spawner spawn-region="red-glass-left-spawner" max-entities="1" delay="1s" filter="red-team">
         <item amount="1" damage="14" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="red-glass-right-spawner" max-entities="1" delay="1s" filter="only-red">
+    <spawner spawn-region="red-glass-right-spawner" max-entities="1" delay="1s" filter="red-team">
         <item amount="1" damage="14" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="blue-glass-left-spawner" max-entities="1" delay="1s" filter="only-blue">
+    <spawner spawn-region="blue-glass-left-spawner" max-entities="1" delay="1s" filter="blue-team">
         <item amount="1" damage="11" material="stained glass"/>
     </spawner>
-    <spawner spawn-region="blue-glass-right-spawner" max-entities="1" delay="1s" filter="only-blue">
+    <spawner spawn-region="blue-glass-right-spawner" max-entities="1" delay="1s" filter="blue-team">
         <item amount="1" damage="11" material="stained glass"/>
     </spawner>
 </spawners>
-<world-borders center="0.5, 0.5">
+<world-borders center="0.5,0.5">
     <world-border size="160"/>
     <world-border size="3" after="5s" duration="200s"/>
 </world-borders>
