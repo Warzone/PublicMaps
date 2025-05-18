@@ -1,15 +1,16 @@
-<map proto="1.4.2" game="Spleef">
+<map proto="1.5.0" game="Spleef">
 <name>Polar Spleef</name>
-<created>2022-05-28</created>
-<version>1.0.2</version>
+<version>1.0.1</version>
+<phase>staging</phase>
 <objective>Spleef others and survive as the last man standing!</objective>
 <gamemode>arcade</gamemode>
+<created>2022-05-28</created>
 <authors>
     <author uuid="4ed45d5d-bdc3-4f1a-9201-014e06019618"/> <!-- Trionaf -->
     <author uuid="924c4e61-57b6-4931-afdb-6525b2ed34c0"/> <!-- OAF6 -->
 </authors>
 <contributors>
-    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="xml"/> <!-- Ruediger_LP -->
+    <contributor uuid="e2d2c2c6-cea9-4510-9ab2-a091b5605b30" contribution="XML"/> <!-- Ruediger_LP -->
 </contributors>
 <players colors="true" max="40"/>
 <kits>
@@ -24,7 +25,8 @@
         <game-mode>adventure</game-mode>
     </kit>
     <give filter="not-carrying-spade" kit="spawn-kit"/>
-    <kit id="snowball-kit" force="true">
+    <kit id="snowball-kit">
+        <item material="diamond"/>
         <item material="snow ball" projectile="snowball-projectile"/>
     </kit>
 </kits>
@@ -45,7 +47,7 @@
             <point>-18,16,4</point>
         </regions>
     </spawn>
-    <default yaw="0" region="obs-spawn-point"/>
+    <default yaw="180" region="obs-spawn-point"/>
 </spawns>
 <blitz/>
 <filters>
@@ -68,7 +70,7 @@
     <projectile id="snowball-projectile" projectile="Snowball" damage="0" throwable="true" cooldown="0s" destroy-filter="only-snow"/>
 </projectiles>
 <block-drops>
-    <rule wrongtool="false" filter="only-snow" kit="snowball-kit"/>
+    <rule wrongtool="false" punch="true" filter="only-snow" kit="snowball-kit"/>
 </block-drops>
 <damage>
     <one>
