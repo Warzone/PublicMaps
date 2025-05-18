@@ -1,12 +1,12 @@
-<?xml version="1.0"?>
-<map proto="1.4.2" game="King of the Ladder">
+<map proto="1.5.0">
 <name>Ladderp II</name>
-<version>1.0.3</version>
+<version>1.1.1</version>
 <objective>Control le ladder to win.</objective>
 <gamemode>arcade</gamemode>
 <gamemode>koth</gamemode>
+<phase>staging</phase>
 <authors>
-    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!--Reshif -->
+    <author uuid="459fd919-0d58-401a-9601-6cab1eb721ab"/> <!-- Reshif -->
     <author uuid="177803b2-797c-4089-aae1-5702ca259e2c"/> <!-- Onsole -->
     <author uuid="069a79f4-44e9-4726-a5be-fca90e38aaf5"/> <!-- Notch -->
     <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
@@ -29,6 +29,60 @@
     <team id="fier-team" color="gold" max="69">tem fier</team>
     <team id="purlp-team" color="dark purple" max="69">tem purlp</team>
 </teams>
+<kits>
+    <kit id="spawn">
+        <effect duration="4" amplifier="100">heal</effect>
+        <effect duration="4" amplifier="100">damage resistance</effect>
+        <effect amplifier="-2">health boost</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="dolan-team" kit="spawn">
+        <region yaw="-90">
+            <cylinder base="-24.5,3,-7.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="grifindoor-team" kit="spawn">
+        <region yaw="90">
+            <cylinder base="25.5,3,8.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="creper-team" kit="spawn">
+        <region>
+            <cylinder base="8.5,3,-24.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="doge-team" kit="spawn">
+        <region yaw="180">
+            <cylinder base="-7.5,3,25.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="offline-team" kit="spawn">
+        <region yaw="90">
+            <cylinder base="25.5,3,-7.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="swehg-team" kit="spawn">
+        <region yaw="-90">
+            <cylinder base="-24.5,3,8.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="fier-team" kit="spawn">
+        <region>
+            <cylinder base="-7.5,3,-24.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="purlp-team" kit="spawn">
+        <region yaw="180">
+            <cylinder base="8.5,3,25.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="90">
+            <cylinder base=".5,73.5,.5" radius=".3" height="0"/>
+        </region>
+    </default>
+</spawns>
 <filters>
     <any id="play">
         <material>glass</material>
@@ -38,64 +92,9 @@
 <regions>
     <apply block="play"/>
 </regions>
-<kits>
-    <kit id="spawn">
-        <effect duration="4" amplifier="100">heal</effect>
-        <effect duration="4" amplifier="100">damage resistance</effect>
-        <effect duration="oo" amplifier="-2">health boost</effect>
-    </kit>
-</kits>
-<spawns>
-    <spawn team="dolan-team" kit="spawn">
-        <regions yaw="-90">
-            <cylinder base="-24.5,3,-7.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="grifindoor-team" kit="spawn">
-        <regions yaw="90">
-            <cylinder base="25.5,3,8.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="creper-team" kit="spawn">
-        <regions yaw="0">
-            <cylinder base="8.5,3,-24.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="doge-team" kit="spawn">
-        <regions yaw="180">
-            <cylinder base="-7.5,3,25.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="offline-team" kit="spawn">
-        <regions yaw="90">
-            <cylinder base="25.5,3,-7.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="swehg-team" kit="spawn">
-        <regions yaw="-90">
-            <cylinder base="-24.5,3,8.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="fier-team" kit="spawn">
-        <regions yaw="0">
-            <cylinder base="-7.5,3,-24.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <spawn team="purlp-team" kit="spawn">
-        <regions yaw="180">
-            <cylinder base="8.5,3,25.5" radius="1" height="0"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="90">
-            <cylinder base=".5,73.5,.5" radius=".3" height="0"/>
-        </regions>
-    </default>
-</spawns>
-<timelock>on</timelock>
 <king>
     <hills>
-        <hill name="Ladder" required="false" neutral-state="false"  capture-time="1s" points="1">
+        <hill name="Ladder" required="false" neutral-state="false" capture-time="1s" points="1">
             <capture>
                 <cuboid min="-1,68,-1" max="2,72,2"/>
             </capture>
@@ -107,6 +106,7 @@
 </king>
 <score>
     <limit>269</limit>
+    <kills>1</kills>
 </score>
 <mobs filter="always"/>
 <tnt>
@@ -118,4 +118,5 @@
     <item>iron boots</item>
     <item>shears</item>
 </itemremove>
+<timelock>on</timelock>
 </map>
