@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.0.0">
+<map proto="1.5.0">
 <name>Mystic Gully</name>
-<version>1.0.1</version>
+<version>1.1.0</version>
 <objective>Break the obsidian from the enemy team's monument.</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -14,94 +13,105 @@
     <contributor uuid="d556bcdf-57ad-4220-92f6-150a9b12380b" contribution="Grass Master"/> <!-- three_two -->
 </contributors>
 <teams>
-    <team color="dark purple" max="15">Purple</team>
-    <team color="gold" max="15">Orange</team>
+    <team id="purple-team" color="dark purple" max="15">Purple</team>
+    <team id="orange-team" color="gold" max="15">Orange</team>
 </teams>
-<maxbuildheight>34</maxbuildheight>
+<!-- Kits --> 
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true">iron sword</item>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite">bow</item>
+        <item slot="2" unbreakable="true">diamond pickaxe</item>
+        <item slot="3" unbreakable="true">stone spade</item>
+        <item slot="4" unbreakable="true">stone axe</item>
+        <item slot="5" unbreakable="true" amount="32">log</item>
+        <item slot="28">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true">iron chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" team-color="true">leather boots</boots>
+    </kit>
+</kits>
 <spawns>
     <spawns>
-        <spawn team="orange" kit="orange" yaw="0">
-            <cuboid min="-23.5,10,91.5" max="-20.5,10,94.5"/>
+        <spawn team="orange-team" kit="spawn-kit" yaw="0">
+            <region>
+                <cuboid min="-23.5,10,91.5" max="-20.5,10,94.5"/>
+            </region>
         </spawn>
-        <spawn team="purple" kit="purple" yaw="180">
-            <cuboid min="26.5,10,186.5" max="23.3,10,189.5"/>
+        <spawn team="purple-team" kit="spawn-kit" yaw="180">
+            <region>
+                <cuboid min="26.5,10,186.5" max="23.3,10,189.5"/>
+            </region>
         </spawn>
     </spawns>
     <default yaw="180">
-        <cuboid min="0,76,61" max="3,76,64"/>
+        <region>
+            <cuboid min="0,76,61" max="3,76,64"/>
+        </region>
     </default>
 </spawns>
-<filters>
-    <filter name="deny-cobblestone-and-glowstone">
-        <all>
-            <not>
-                <block>cobblestone</block>
-                <block>glowstone</block>
-            </not>
-        </all>
-    </filter>
-    <filter name="deny-void">
-        <deny>
-            <void/>
-        </deny>
-    </filter>
-</filters>
-<regions>
-    <apply block="deny-void" message="You may not over the void!">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply block="deny-cobblestone-and-glowstone" message="You can't break the cobblestone near the monument!">
-        <cuboid min="-57,17,134" max="-41,29,154"/>
-        <cuboid min="44,17,127" max="60,29,147"/>
-    </apply>
-    <apply block="deny-all" message="You can't modify the spawns yo">
-        <cylinder base="-22,9,93" radius="5" height="5"/>
-        <cylinder base="25,9,188" radius="5" height="5"/>
-    </apply>
-</regions>
+<!-- Monuments -->
 <destroyables materials="obsidian">
-    <destroyable name="Monument A" owner="purple">
-        <cuboid min="52,20,134" max="53,21,135"/>
+    <destroyable name="Monument A" owner="purple-team">
+        <region>
+            <cuboid min="52,20,134" max="53,21,135"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument B" owner="purple">
-        <cuboid min="52,21,138" max="53,22,139"/>
+    <destroyable name="Monument B" owner="purple-team">
+        <region>
+            <cuboid min="52,21,138" max="53,22,139"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument C" owner="purple">
-        <cuboid min="49,22,136" max="50,23,137"/>
+    <destroyable name="Monument C" owner="purple-team">
+        <region>
+            <cuboid min="49,22,136" max="50,23,137"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument A" owner="orange">
-        <cuboid min="-50,20,146" max="-49,21,147"/>
+    <destroyable name="Monument A" owner="orange-team">
+        <region>
+            <cuboid min="-50,20,146" max="-49,21,147"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument B" owner="orange">
-        <cuboid min="-50,21,142" max="-49,22,143"/>
+    <destroyable name="Monument B" owner="orange-team">
+        <region>
+            <cuboid min="-50,21,142" max="-49,22,143"/>
+        </region>
     </destroyable>
-    <destroyable name="Monument C" owner="orange">
-        <cuboid min="-47,22,144" max="-46,23,145"/>
+    <destroyable name="Monument C" owner="orange-team">
+        <region>
+            <cuboid min="-47,22,144" max="-46,23,145"/>
+        </region>
     </destroyable>
 </destroyables>
-<kits>
-    <kit name="spawn">
-        <item slot="0">iron sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2">diamond pickaxe</item>
-        <item slot="3" enchantment="durability:1">stone spade</item>
-        <item slot="4" enchantment="durability:10">stone axe</item>
-        <item slot="5" amount="32">391</item>
-        <item slot="6" amount="32" damage="1">log</item>
-        <chestplate>iron chestplate</chestplate>
-    </kit>
-    <kit name="orange" parents="spawn">
-        <helmet color="D87F33">leather helmet</helmet>
-        <leggings color="D87F33">leather leggings</leggings>
-        <boots color="D87F33">leather boots</boots>
-    </kit>
-    <kit name="purple" parents="spawn">
-        <helmet color="905AC5">leather helmet</helmet>
-        <leggings color="905AC5">leather leggings</leggings>
-        <boots color="905AC5">leather boots</boots>
-    </kit>
-</kits>
+<!-- Filters -->
+<filters>
+    <deny id="deny-cobblestone-and-glowstone">
+        <all>
+            <material>cobblestone</material>
+            <material>glowstone</material>
+        </all>
+    </deny>
+    <deny id="deny-void">
+        <void/>
+    </deny>
+</filters>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <cylinder base="-22,9,93" radius="5" height="5"/>
+        <cylinder base="25,9,188" radius="5" height="5"/>
+    </union>
+    <union id="cb-gs-monument">
+        <cuboid min="-57,17,134" max="-41,29,154"/>
+        <cuboid min="44,17,127" max="60,29,147"/>
+    </union>
+    <!-- Applications -->
+    <apply block="never" region="spawn-protections" message="You can't modify the spawns yo!"/>
+    <apply block="deny-cobblestone-and-glowstone" region="cb-gs-monument" message="You can't break the cobblestone near the monument!"/>
+    <apply block="deny-void" region="everywhere" message="You may not over the void!"/>
+</regions>
 <toolrepair>
     <tool>iron sword</tool>
     <tool>diamond pickaxe</tool>
@@ -109,19 +119,26 @@
     <tool>stone axe</tool>
     <tool>bow</tool>
 </toolrepair>
-<itemremove>
+<itemkeep>
     <item>arrow</item>
+    <item>golden apple</item>
+    <item>glass</item>
+</itemkeep>
+<itemremove>
     <item>iron chestplate</item>
     <item>leather boots</item>
     <item>leather leggings</item>
     <item>leather helmet</item>
-    <item>glass</item>
     <item>obsidian</item>
-    <item>391</item>
 </itemremove>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <tnt>
     <instantignite>on</instantignite>
     <licensing>off</licensing>
     <friendly-defuse>off</friendly-defuse>
 </tnt>
+<maxbuildheight>34</maxbuildheight>
 </map>
