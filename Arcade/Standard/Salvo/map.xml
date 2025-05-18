@@ -1,4 +1,4 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Salvo</name>
 <version>1.2.2</version>
 <objective>Destroy the other team's two clay monuments to win!</objective>
@@ -11,8 +11,8 @@
     <tip after="3s">You can build with the blocks that drop!</tip>
 </broadcasts>
 <teams>
-   <team id="pink" color="light purple" max="50">Pink</team>
-   <team id="yellow" color="yellow" max="50">Yellow</team>
+   <team id="pink" color="light purple" max="12">Pink</team>
+   <team id="yellow" color="yellow" max="12">Yellow</team>
 </teams>
 <kits>
     <kit id="kit">
@@ -27,14 +27,7 @@
     <projectile>TNTPrimed</projectile>
 </modifybowprojectile>
 <!--<projectiles>
-    <projectile
-        id="tnt"
-        name="tnt"
-        projectile="TNTPrimed"
-        velocity="2.5"
-        damage="7"
-        throwable="false"
-        cooldown="1s"/>
+    <projectile id="tnt" name="tnt" projectile="TNTPrimed" velocity="2.5" damage="7" throwable="false" cooldown="1s"/>
 </projectiles>-->
 <spawns>
     <spawn team="pink" kit="kit" yaw="180">
@@ -59,21 +52,20 @@
     <cuboid id="pink-right" min="-8,13,46" max="-12,18,42"/>
     <cuboid id="yellow-right" min="14,13,-6" max="18,18,-10"/>
 </regions>
-<destroyables name="Left Monument" materials="stained clay" completion="100%">
-    <destroyable owner="pink" region="pink-left"/>
-    <destroyable owner="yellow" region="yellow-left"/>
-</destroyables>
-<destroyables name="Right Monument" materials="stained clay" completion="100%">
-    <destroyable owner="pink" region="pink-right"/>
-    <destroyable owner="yellow" region="yellow-right"/>
+<destroyables materials="stained clay">
+    <destroyables name="Left Monument">
+        <destroyable owner="pink" region="pink-left"/>
+        <destroyable owner="yellow" region="yellow-left"/>
+    </destroyables>
+    <destroyables name="Right Monument">
+        <destroyable owner="pink" region="pink-right"/>
+        <destroyable owner="yellow" region="yellow-right"/>
+    </destroyables>
 </destroyables>
 <time>2m30s</time>
 <disabledamage>
     <damage ally="true" enemy="false" self="false" other="false">block explosion</damage>
 </disabledamage>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <itemremove>
     <item>golden apple</item>
     <item>arrow</item>
@@ -81,4 +73,7 @@
 <toolrepair>
     <tool>bow</tool>
 </toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
