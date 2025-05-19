@@ -1,15 +1,39 @@
-<?xml version="1.0"?>
-<map proto="1.4.2" game="Water Drop">
+<map proto="1.5.0" game="Water Drop">
 <name>Water Drop: Limbo II</name>
-<version>1.4.1</version>
+<version>1.4.3</version>
 <objective>Get the most points in 3 minutes!</objective>
 <created>2019-04-01</created>
 <gamemode>arcade</gamemode>
+<include id="void-death"/>
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150" contribution="Original map theme"/>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" contribution="Water Drop adaptation"/> <!-- mitchiii_ -->
 </authors>
 <players min="1" max="60" colors="true"/>
+<kits>
+    <kit id="obs">
+        <effect amplifier="2">speed</effect>
+    </kit>
+    <kit id="players">
+        <clear/>
+        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5" material="leather boots"/>
+        <effect duration="2s" amplifier="5">resistance</effect>
+        <effect amplifier="-2">health boost</effect>
+        <game-mode>survival</game-mode>
+    </kit>
+    <kit id="removal" force="true">
+        <clear/>
+        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5" material="leather boots"/>
+        <effect amplifier="2">weakness</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+</kits>
 <spawns>
     <spawn kit="players" yaw="90" region="spawn">
         <regions>
@@ -19,36 +43,6 @@
     </spawn>
     <default kit="obs" yaw="90" region="spawn"/>
 </spawns>
-<kits>
-    <kit id="obs">
-        <potion duration="oo" amplifier="2">speed</potion>
-    </kit>
-    <kit id="players">
-        <clear/>
-        <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
-        <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
-        <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
-        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
-        <effect duration="2s" amplifier="5">resistance</effect>
-        <effect duration="oo" amplifier="-2">health boost</effect>
-        <game-mode>survival</game-mode>
-    </kit>
-    <kit id="removal" force="true">
-        <clear/>
-        <item slot="0" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
-        <item slot="1" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
-        <item slot="2" locked="true" name="`c`lNo Water-Drop Area!" material="barrier"/>
-        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
-        <potion duration="oo" amplifier="2">weakness</potion>
-        <game-mode>adventure</game-mode>
-    </kit>
-    <kit id="force-kill">
-        <potion duration="1" amplifier="100">harm</potion>
-    </kit>
-    <kit id="void-death" force="true">
-        <health>1</health>
-    </kit>
-</kits>
 <filters>
     <all id="water">
         <any>
@@ -76,6 +70,7 @@
 </filters>
 <regions>
     <block id="spawn">106.5,250,-60.5</block>
+    <cuboid id="spawn-prot" min="97,246,-72" max="109,253,-50"/>
     <cuboid id="point-a-region" min="39,223,-39" size="5,5,5"/>
     <cuboid id="point-b-region" min="39,223,-87" size="5,5,5"/>
     <cuboid id="point-c-region" min="47,220,-63" size="5,5,5"/>
@@ -113,34 +108,10 @@
     <apply region="bottom-jumps" velocity="-0.1,1.7,0" block="never"/>
     <apply region="end-jump" velocity="-10,10,0"/>
     <apply region="end-to-start-jump" velocity="-3,5,0"/>
+    <apply region="spawn-prot" block-place="never"/>
     <apply block-place="water" block-break="water" block-physics="never"/>
-    <apply kit="void-death">
-        <region><below y="0"/></region>
-    </apply>
 </regions>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<itemremove>
-    <item>bucket</item>
-    <item>water bucket</item>
-    <item>leather boots</item>
-    <item>barrier</item>
-</itemremove>
-<damage>
-    <deny>
-        <region id="jumps"/>
-    </deny>
-</damage>
-<portals sound="false">
-    <portal region="end-net" destination="end-to-start-point"/>
-    <portal y="-64">
-        <region><below y="-5"/></region>
-    </portal>
-</portals>
-<score><!--
-    <box points="25" region="portal"/>-->
-</score>
+<score/>
 <control-points required="false" points="5" neutral-state="false" capture-time="0.1s" capture-rule="lead" show="false">
     <control-point id="point-a" name="Point A" capture="point-a-region" captured="point-a-region" player-filter="holding-a"/>
     <control-point id="point-b" name="Point B" capture="point-b-region" captured="point-b-region" player-filter="holding-b"/>
@@ -158,4 +129,27 @@
     <control-point id="point-n" name="Point N" capture="point-n-region" captured="point-n-region" player-filter="holding-n"/>
 </control-points>
 <time>3m</time>
+<damage>
+    <deny>
+        <any>
+            <region id="spawn-prot"/>
+            <region id="jumps"/>
+        </any>
+    </deny>
+</damage>
+<portals sound="false">
+    <portal region="end-net" destination="end-to-start-point"/>
+    <portal y="-64">
+        <region><below y="-5"/></region>
+    </portal>
+</portals>
+<itemremove>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>leather boots</item>
+    <item>barrier</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
