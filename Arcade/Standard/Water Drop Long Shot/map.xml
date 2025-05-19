@@ -1,6 +1,6 @@
-<map proto="1.4.2" game="Water Drop">
+<map proto="1.5.0" game="Water Drop">
 <name>Water Drop: Long Shot</name>
-<version>1.5.2</version>
+<version>1.5.5</version>
 <objective>Grab the flag and return it to your spawn!</objective>
 <created>2019-04-01</created>
 <gamemode>arcade</gamemode>
@@ -15,11 +15,6 @@
     <team id="blue-team" color="blue" max="30">Blue</team>
     <team id="red-team" color="dark red" max="30">Red</team>
 </teams>
-<spawns>
-    <spawn team="blue-team" kit="players" yaw="90" region="blue-spawn"/>
-    <spawn team="red-team" kit="players" yaw="90" region="red-spawn"/>
-    <default yaw="90" region="obs-spawn"/>
-</spawns>
 <kits>
     <kit id="players">
         <clear/>
@@ -31,31 +26,23 @@
         <item slot="2" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
         <item slot="3" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
         <item slot="4" material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
-        <item slot="8" material="arrow" amount="16"/>
+        <item slot="8" material="arrow" amount="6"/>
         <chestplate material="leather chestplate" locked="true" unbreakable="true" team-color="true">
             <enchantment>protection projectile</enchantment>
         </chestplate>
         <boots material="leather boots" locked="true" unbreakable="true" team-color="true"/>
     </kit>
 </kits>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<kill-reward>
-    <item material="arrow" amount="8"/>
-    <item material="wood" damage="1" amount="8"/>
-    <kit>
-        <action>
-            <replace-item ignore-metadata="true">
-                <find material="bucket"/>
-                <replace material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
-            </replace-item>
-        </action>
-    </kit>
-</kill-reward>
+<spawns>
+    <spawn team="blue-team" kit="players" yaw="90" region="blue-spawn"/>
+    <spawn team="red-team" kit="players" yaw="90" region="red-spawn"/>
+    <default yaw="90" region="obs-spawn"/>
+</spawns>
 <filters>
     <match-started id="match-started"/>
+    <match-running id="match-running"/>
     <participating id="participating"/>
+    <grounded id="grounded"/>
     <any id="placeable">
         <all>
             <any>
@@ -67,13 +54,16 @@
             </not>
         </all>
         <all>
-            <material>wood:2</material>
+            <material>wood</material>
             <not>
                 <void/>
             </not>
         </all>
         <material id="only-fire">fire</material>
     </any>
+    <offset id="air-underneath" vector="~0,~-0.5,~0">
+        <material>air</material>
+    </offset>
 </filters>
 <regions>
     <union id="spawns">
@@ -117,12 +107,14 @@
 <score>
     <limit>1</limit>
 </score>
+<time>7m</time>
 <variables>
     <variable id="can_jump" default="0" scope="player"/>
 </variables>
 <actions>
-    <trigger scope="player" filter="all(return-checkpoint, participating)">
+    <trigger scope="player" filter="all(can_jump=0, match-running, return-checkpoint, participating)">
         <action>
+            <sound preset="SCORE"/>
             <set var="can_jump" value="1"/>
             <kit force="true">
                 <chestplate material="gold chestplate" locked="true" unbreakable="true">
@@ -136,16 +128,11 @@
     </trigger>
     <trigger scope="player">
         <filter>
-            <pulse period="0.1s" duration="0.05s">
-                <all>
-                    <variable var="can_jump">1</variable>
-                    <grounded/>
-                </all>
-            </pulse>
+            <pulse period="0.1s" duration="0.05s" filter="all(can_jump=1, match-running)"/>
         </filter>
-        <action>
+        <action filter="all(grounded, not(air-underneath))">
             <kit>
-                <effect amplifier="16" duration="1s">jump</effect>
+                <effect amplifier="16" duration="2s">jump</effect>
             </kit>
         </action>
     </trigger>
@@ -175,4 +162,19 @@
     <item>leather chestplate</item>
     <item>leather boots</item>
 </itemremove>
+<kill-reward>
+    <item material="arrow" amount="2"/>
+    <item material="wood" damage="2" amount="8"/>
+    <kit>
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="bucket"/>
+                <replace material="water bucket" name="`a`lWater-Drop Area!" prevent-sharing="true"/>
+            </replace-item>
+        </action>
+    </kit>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
