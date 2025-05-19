@@ -1,9 +1,10 @@
-<map proto="1.4.2" game="Water Drop">
+<map proto="1.5.0" game="Water Drop">
 <name>Water Drop: Ender Blast</name>
-<version>2.1.1</version>
+<version>2.1.3</version>
 <objective>Get to the bottom 2 times!</objective>
 <created>2019-04-01</created>
 <gamemode>arcade</gamemode>
+<include id="void-death"/>
 <authors>
     <author uuid="ca2306d1-1198-4d46-8c44-a82f5b3c8a4e" contribution="Original map theme"/> <!-- BeanButt -->
     <author uuid="36e46b32-80ef-4fa5-b1e2-6c777736d888" contribution="Original map theme"/> <!-- Elijah -->
@@ -23,7 +24,7 @@
         <item slot="0" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
         <item slot="1" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
         <item slot="2" locked="true" name="`a`lWater-Drop Area!" material="water bucket"/>
-        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <boots color="7fcc19" locked="true" unbreakable="true" enchantment="protection environmental:5" material="leather boots"/>
         <effect amplifier="-2">health boost</effect>
         <effect>night vision</effect>
         <effect duration="0" amplifier="101">damage resistance</effect>
@@ -34,12 +35,9 @@
         <item slot="0" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
         <item slot="1" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
         <item slot="2" locked="true" name="`c`lRocket-Jumper" material="tnt" amount="64"/>
-        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5">leather boots</boots>
+        <boots color="993333" locked="true" unbreakable="true" enchantment="protection environmental:5" material="leather boots"/>
         <effect amplifier="100">damage resistance</effect>
         <game-mode>survival</game-mode>
-    </kit>
-    <kit id="force-kill">
-        <effect duration="1" amplifier="100">harm</effect>
     </kit>
 </kits>
 <filters>
@@ -82,6 +80,7 @@
 <regions>
     <cylinder id="spawn" base="88.5,251.5,3.5" radius="2" height="0"/>
     <cylinder id="end" base="410.5,73,3.5" radius="3" height="3"/>
+    <cuboid id="spawn-prot" min="104,247,21" max="82,259,-13"/>
     <negative id="outside">
         <complement id="tnt-cube">
             <cuboid id="tnt-cube-main" min="224,161,10" max="237,175,-3"/>
@@ -112,9 +111,9 @@
         <cuboid id="top" min="146,191,-10" max="189,197,17"/>
         <cuboid id="bottom" min="246,126,-5" max="239,132,12"/>
     </union>
-    <apply region="everywhere" use="no-dispenser"/>
+    <apply region="spawn-prot" block-place="never"/>
     <apply region="tnt-allowed" block-place="only-tnt"/>
-    <apply region="everywhere" block-place="allowed-place" block-break="allowed-break" block-physics="allowed-physics"/>
+    <apply block-place="allowed-place" block-break="allowed-break" block-physics="allowed-physics" use="no-dispenser"/>
     <!-- velocity -->
     <apply region="velocity" velocity="10,15,0"/>
     <!-- kits -->
@@ -133,15 +132,15 @@
     <instantignite>on</instantignite>
     <fuse>0.5s</fuse>
 </tnt>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <damage>
     <deny>
-        <all>
-            <region id="tnt-cube-enter"/>
-            <cause>explosion</cause>
-        </all>
+        <any>
+            <region id="spawn-prot"/>
+            <all>
+                <region id="tnt-cube-enter"/>
+                <cause>explosion</cause>
+            </all>
+        </any>
     </deny>
 </damage>
 <itemremove>
@@ -150,4 +149,7 @@
     <item>leather boots</item>
     <item>barrier</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
