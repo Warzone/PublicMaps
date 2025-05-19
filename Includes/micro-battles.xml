@@ -1,7 +1,7 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.05.14-1 -->
+<!-- Version 2025.05.16-1 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="game-objective">Eliminate the other teams before the time runs out! Watch out for the shrinking world border!</constant>
@@ -45,26 +45,24 @@
     </kit>
 </kits>
 <filters>
-    <not id="not-glass">
-        <material>glass</material>
-    </not>
+    <material id="only-glass">glass</material>
 </filters>
 <regions>
     <cuboid id="floor" min="-39,0,-39" max="40,25,40"/>
     <union id="walls">
-        <cuboid id="first-wall" min="1,6,-29" max="-1,14,29"/>
-        <cuboid id="second-wall" min="-29,6,-1" max="29,14,1"/>
+        <cuboid id="first-wall" min="1,0,-29" max="-1,14,29"/>
+        <cuboid id="second-wall" min="-29,0,-1" max="29,14,1"/>
     </union>
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="27.5" height="25"/>
     </negative>
-    <apply region="map" block="not-glass" message="You may not break the walls."/>
+    <apply region="map" block="not(only-glass)" message="You may not break the walls."/>
     <apply region="not-map" block="never" message="You may not build outside of the map."/>
 </regions>
 <actions>
     <!-- Wall controls -->
     <action id="walls-falling" scope="match">
-        <fill id="walls-air" region="walls" material="air"/>
+        <fill id="walls-air" region="walls" material="air" filter="only-glass"/>
     </action>
     <trigger action="walls-falling" scope="match">
         <filter>
@@ -91,8 +89,6 @@
     <item>stone pickaxe</item>
     <item>stone axe</item>
     <item>stone spade</item>
-    <item>apple</item>
-    <item>arrow</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
     <item>leather boots</item>
@@ -114,7 +110,7 @@
 </kill-rewards>
 <world-borders center="0.5,0.5">
     <world-border size="80"/>
-    <world-border size="0" after="0s" duration="160s" damage="5" buffer="0"/>
+    <world-border size="3" after="0s" duration="160s" damage="5" buffer="0"/>
 </world-borders>
 <maxbuildheight>${max-height-value}</maxbuildheight>
 </map>
