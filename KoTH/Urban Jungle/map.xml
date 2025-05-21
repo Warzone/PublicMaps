@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.2">
+<map proto="1.5.0">
 <name>Urban Jungle</name>
-<version>0.1.3</version>
+<version>1.1.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Control the center until you have 500 points to win!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -11,120 +11,90 @@
     <rule>Players have resistance and reduced knockback in spawn!</rule>
 </rules>
 <teams>
-    <team color="dark red" max="24">Red</team>
-    <team color="blue" max="24">Blue</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
+    <team id ="blue-team" color="blue" max="24">Blue</team>
 </teams>
+<!-- Kits -->
 <kits>
-    <kit name="spawn-protection">
-        <potion amplifier="10" duration="oo">damage resistance</potion>
-        <knockback-reduction>1</knockback-reduction>
-    </kit>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="2">stone pickaxe</item>
-        <item slot="8" amount="64">arrow</item>
-        <item slot="3" amount="64">glass</item>
-        <item slot="4" amount="32">cooked beef</item>
-        <item slot="5" amount="1" damage="8194">potion</item>
+    <kit id="spawn-kit" force="true">
+        <clear/>
+        <item unbreakable="true" slot="0">stone sword</item>
+        <item unbreakable="true" slot="1">bow</item>
+        <item unbreakable="true" slot="2">stone pickaxe</item>
+        <item unbreakable="true" slot="8" amount="64">arrow</item>
+        <item unbreakable="true" slot="3" amount="64" team-color="true">stained glass</item>
+        <item unbreakable="true" slot="4" amount="32">cooked beef</item>
+        <item unbreakable="true" slot="5" amount="1" damage="8194">potion</item>
         <helmet unbreakable="true">gold helmet</helmet>
-        <chestplate unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">leather leggings</leggings>
-        <boots unbreakable="true">leather boots</boots>
-        <potion duration="5" amplifier="4">heal</potion>
-    </kit>
-</kits>
-<filters>
-    <filter name="only-red">
-        <deny>
-            <team>blue</team>
-        </deny>
-    </filter>
-    <filter name="only-blue">
-        <deny>
-            <team>red</team>
-        </deny>
-    </filter>
-</filters>
-<regions>
-    <rectangle name="playable" min="-61,-61" max="62,62"/>
-    <cuboid name="red-spawn" min="-47,58.1,-17" max="-43,58.1,-13"/>
-    <cuboid name="blue-spawn" min="44,58.1,14" max="48,58.1,18"/>
-    <cylinder name="hill" base="0.5,71,0.5" radius="5.5" height="5"/>
-    <cuboid name="hill-progess" min="-5,71,-5" max="6,72,6"/>
-    <apply block="deny-all">
-        <region name="hill"/>
-    </apply>
-    <apply block="deny-all" message="`cYou may not leave the playing field.">
-        <negative>
-            <region name="playable"/>
-        </negative>
-    </apply>
-    <apply block="deny-all" message="`cYou may not modify the spawns.">
-        <rectangle name="red-spawn-protection" min="-38,-8" max="-52,-22"/>
-        <rectangle name="blue-spawn-protection" min="39,23" max="53,9"/>
-    </apply>
-    <apply enter="only-red">
-        <region name="red-spawn-protection"/>
-    </apply>
-    <apply enter="only-blue">
-        <region name="blue-spawn-protection"/>
-    </apply>
-    <apply lend-kit="spawn-protection" filter="only-blue">
-       <cuboid min="39,55,23" max="53,58,9"/>
-    </apply>
-    <apply lend-kit="spawn-protection" filter="only-red">
-        <cuboid min="-38,55,-8" max="-52,58,-22"/>
-    </apply>
-</regions>
-<maxbuildheight>120</maxbuildheight>
-<itemremove>
-    <item>gold helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-    <item>glass</item>
-    <item>cooked beef</item>
-    <item>potion</item>
-    <item>arrow</item>
-    <item>374</item>
-    <item>golden apple</item>
-</itemremove>
-<killreward>
-    <item>golden apple</item>
-    <item amount="16">arrow</item>
-</killreward>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-    <tool>stone pickaxe</tool>
-</toolrepair>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" team-color="true">leather boots</boots>
+        <effect duration="3" amplifier="255">damage resistance</effect>
+<!-- Spawns -->
 <spawns>
-    <spawns yaw="-90">
-        <spawn team="red" kit="spawn">
-            <region name="red-spawn"/>
-        </spawn>
-    </spawns>
-    <spawns yaw="90">
-        <spawn team="blue" kit="spawn">
-            <region name="blue-spawn"/>
-        </spawn>
-    </spawns>
-    <default yaw="180">
-        <cuboid min="-8,70,99" max="8,70,112"/>
-    </default>
+    <spawn team="red-team" kit="spawn-kit" yaw="-90" region="red-spawn"/>
+    <spawn team="blue-team" kit="spawn-kit" yaw="90" region="blue-spawn"/>
+    <default yaw="180" region="obs-spawn"/>
 </spawns>
+<!-- Capture Points -->
 <control-points required="false" capture-time="10s" neutral-state="true" show-progress="true" incremental="true">
     <control-point name="Hill">
         <capture>
-            <region name="hill"/>
+            <region id="hill"/>
         </capture>
         <progress>
-            <region name="hill-progess"/>
+            <region id="hill-progess"/>
         </progress>
     </control-point>
 </control-points>
 <score>
     <limit>500</limit>
 </score>
+<!-- Regions -->
+<regions>
+    <!-- Definitions -->
+    <union id="spawn-protections">
+        <rectangle id="red-spawn-protection" min="-38,-8" max="-52,-22"/>
+        <rectangle id="blue-spawn-protection" min="39,23" max="53,9"/>
+    </union>
+    <cuboid id="red-spawn" min="-47,58,-17" max="-43,58,-13"/>
+    <cuboid id="blue-spawn" min="44,58,14" max="48,58,18"/>
+    <cuboid id="obs-spawn" min="-8,70,99" max="8,70,112"/>
+    <cylinder id="hill" base="0.5,71,0.5" radius="5.5" height="5"/>
+    <cuboid id="hill-progess" min="-5,71,-5" max="6,72,6"/>
+    <rectangle id="playable" min="-61,-61" max="62,62"/>
+    <!-- Applications -->
+    <apply region="hill" block="never"/>
+    <apply region="spawn-protections" block="never" message="You may not modify the spawns."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy team's spawn"/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy team's spawn"/>
+</regions>
+<!-- Tool Repair -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+</toolrepair>
+<!-- Item Keep -->
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+    <item>glass</item>
+</itemkeep>
+<!-- Item Remove -->
+<itemremove>
+    <item>gold helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>potion</item>
+    <item>374</item>
+</itemremove>
+<killreward>
+    <item amount="16">arrow</item>
+</killreward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>120</maxbuildheight>
 </map>
