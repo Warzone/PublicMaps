@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Sky Traffic 2</name>
-<version>1.4.0</version>
+<version>1.4.1</version>
 <objective>Leak lava from the enemy's obsidian core in their yellow submarine.</objective>
 <gamemode>dtc</gamemode>
 <include id="gapple-kill-reward"/>
@@ -51,7 +51,7 @@
         </region>
     </default>
 </spawns>
-<cores material="obsidian" leak="3">
+<cores material="obsidian" leak="3" mode-changes="true">
     <core team="red-team">
         <region>
             <cuboid min="549,133,114" max="556,139,119"/>
@@ -63,11 +63,12 @@
         </region>
     </core>
 </cores>
+<modes>
+    <mode after="15m" material="gold block"/>
+    <mode after="20m" material="glass"/>
+</modes>
 <filters>
     <deny id="anti-chest-grief">
-        <material>chest</material>
-    </deny>
-    <deny id="anti-tnt-grief">
         <material>chest</material>
     </deny>
 </filters>
@@ -79,11 +80,10 @@
     </union>
     <cuboid id="blue-spawn-ship" min="301,114,62" max="360,128,79"/>
     <cuboid id="red-spawn-ship" min="593,114,79" max="535,128,62"/>
-    <rectangle id="map" min="298,19" max="597,143"/>
     <complement id="void-area">
         <everywhere/>
         <!-- Middle-->
-        <region id="map"/>
+        <rectangle id="map" min="298,19" max="597,143"/>
         <region id="spawn-tunnels"/>
     </complement>
     <cuboid id="red-spawn-protect" min="593,123,73" max="606,127,67"/>
