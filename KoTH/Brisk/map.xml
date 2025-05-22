@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.5">
+<map proto="1.5.0">
 <name>Brisk</name>
-<version>1.2.6</version>
+<version>1.3.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Get the most points by holding the hill!</objective>
 <created>2014-07-04</created>
 <gamemode>koth</gamemode>
@@ -15,160 +15,151 @@
     <rule>Fall damage is disabled!</rule>
 </rules>
 <teams>
-    <team color="dark red" max="10" max-overfill="15">Red</team>
-    <team color="blue" max="10" max-overfill="15">Blue</team>
+    <team id="red-team" color="dark red" max="10" max-overfill="15">Red</team>
+    <team id="blue-team" color="blue" max="10" max-overfill="15">Blue</team>
 </teams>
+<!-- Kits -->
 <kits>
-    <kit name="all">
-        <potion duration="oo">night vision</potion>
-    </kit>
-    <kit name="teams" parents="all">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
+    <kit id="spawn-kit" force="true">
+        <clear/>
+        <item unbreakable="true" slot="0">stone sword</item>
+        <item unbreakable="true" slot="1">bow</item>
         <item slot="2" amount="6" damage="1">leaves</item>
+        <item slot="3">golden apple</item>
         <item slot="8" amount="32">arrow</item>
-        <item slot="6">golden apple</item>
-        <item slot="7" amount="64">golden carrot</item>
+        <helmet unbreakable="true" team-color="true" locked="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true" locked="true">leather chestplate</chestplate>
         <leggings unbreakable="true" locked="true">iron leggings</leggings>
-        <potion duration="3" amplifier="3">heal</potion>
-        <potion duration="5" amplifier="3">damage resistance</potion>
-    </kit>
-    <kit name="red" parents="teams">
-        <helmet color="ff0000" locked="true">leather helmet</helmet>
-        <chestplate color="ff0000" locked="true">leather chestplate</chestplate>
-        <boots color="ff0000" locked="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="teams">
-        <helmet color="0000ff" locked="true">leather helmet</helmet>
-        <chestplate color="0000ff" locked="true">leather chestplate</chestplate>
-        <boots color="0000ff" locked="true">leather boots</boots>
+        <boots unbreakable="true" team-color="true" locked="true">leather boots</boots>
+        <effect duration="3" amplifier="3">heal</effect>
+        <effect duration="5" amplifier="3">damage resistance</effect>
     </kit>
 </kits>
+<!-- Spawns -->
 <spawns>
-    <spawn team="red" kit="red" yaw="-90">
-        <point yaw="-180">-42.5,33,0.5</point>
-        <point yaw="0">-42.5,33,0.5</point>
+    <spawn team="red-team" kit="spawn-kit" yaw="-90">
+        <regions>
+            <point yaw="-180">-42.5,33,0.5</point>
+            <point yaw="0">-42.5,33,0.5</point>
+        </regions>
     </spawn>
-    <spawn team="blue" kit="blue" yaw="90">
-        <point yaw="-180">43.5,33,0.5</point>
-        <point yaw="0">43.5,33,0.5</point>
+    <spawn team="blue-team" kit="spawn-kit" yaw="90">
+        <regions>
+            <point yaw="-180">43.5,33,0.5</point>
+            <point yaw="0">43.5,33,0.5</point>
+        </regions>
     </spawn>
-    <default yaw="90" kit="all">
-        <cylinder base="38.5,21,0.5" radius="3" height="0" />
+    <default yaw="90">
+        <region>
+            <cylinder base="38.5,21,0.5" radius="3" height="0"/>
+        </region>
     </default>
 </spawns>
+<!-- Control Points -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <!-- Hill -->
+    <control-point name="Hill" capture-time="10s" points="1">
+        <capture>
+            <cylinder base="0.5,20,0.5" radius="5.7" height="5" />
+        </capture>
+        <progress>
+            <cylinder base="0.5,14,0.5" radius="7" height="6" />
+        </progress>
+        <captured>
+            <cuboid min="0,0,0" max="0,0,0" />
+        </captured>
+    </control-point>
+</control-points>
+<!-- Score Limit -->
+<score>
+    <limit>500</limit>
+</score>
+<!-- Filters -->
 <filters>
-    <filter name="only-leaves">
-        <block>leaves</block>
-    </filter>
-    <filter name="deny-void">
-        <deny>
-            <void />
-        </deny>
-    </filter>
+    <material id="only-leaves">leaves</material>
 </filters>
+<!-- Regions -->
 <regions>
-    <apply block="deny-void" message="You may not edit the void area">
-        <negative>
-            <rectangle min="-oo,-oo" max="oo,oo" />
-        </negative>
-    </apply>
-    <apply block="only-leaves" message="You may only interact with leaves">
-        <rectangle min="-oo,-oo" max="oo,oo" />
-    </apply>
+    <apply region="everywhere" block="only-leaves" message="You may only interact with leaves"/>
     <!--  left and right  -->
     <apply velocity="@0.0,2.1,0.5">
-        <cylinder base="0.5,8,-36.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="0.5,8,-36.5" radius="1.2" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0.5,2,0.5">
-        <cylinder base="-18.5,6,-18.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="-18.5,6,-18.5" radius="1.2" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0.5,2,-0.5">
-        <cylinder base="-18.5,6,19.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="-18.5,6,19.5" radius="1.2" height="1"/>
+        </region>
     </apply>
     <apply velocity="@0,2.1,-0.5">
-        <cylinder base="0.5,8,37.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="0.5,8,37.5" radius="1.2" height="1"/>
+        </region>
     </apply>
     <apply velocity="@-0.5,2,-0.5">
-        <cylinder base="19.5,6,19.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="19.5,6,19.5" radius="1.2" height="1"/>
+        </region>
     </apply>
     <apply velocity="@-0.5,2,0.5">
-        <cylinder base="19.5,6,-18.5" radius="1.2" height="1" />
+        <region>
+            <cylinder base="19.5,6,-18.5" radius="1.2" height="1"/>
+        </region>
     </apply>
 </regions>
-<renewables>
-    <renewable rate="3" grow="false" particles="true" sound="true" avoid-entities="false">
-        <region>
-            <complement>
-                <cylinder base="0.5,0,0.5" radius="75" height="40" />
-                <cylinder base="0.5,14,0.5" radius="7" height="6" />
-            </complement>
-        </region>
-    </renewable>
-</renewables>
+<!-- Falling Blocks -->
 <falling-blocks>
     <rule>
         <filter>
-            <any>
-                <block>leaves:1</block>
-            </any>
+            <material>leaves</material>
         </filter>
         <sticky>
             <any>
-                <block>stained clay:9</block>
-                <block>quartz block</block>
-                <block>double step:8</block>
+                <material>stained clay:9</material>
+                <material>quartz block</material>
+                <material>double step:8</material>
             </any>
         </sticky>
     </rule>
 </falling-blocks>
-<king>
-    <hills>
-        <hill name="Hill" capture-time="10s" points="1" capture-rule="lead">
-            <capture>
-                <cylinder base="0.5,20,0.5" radius="5.7" height="5" />
-            </capture>
-            <progress>
-                <cylinder base="0.5,14,0.5" radius="7" height="6" />
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0" />
-            </captured>
-        </hill>
-    </hills>
-</king>
-<score>
-    <limit>500</limit>
-    <king />
-</score>
 <itemremove>
     <item>leather chestplate</item>
     <item>leather helmet</item>
     <item>iron leggings</item>
     <item>leather boots</item>
-    <item>arrow</item>
-    <item>golden carrot</item>
-    <item>golden apple</item>
     <item>apple</item>
     <item>sapling</item>
-    <item>leaves</item>
     <item>ladder</item>
 </itemremove>
 <toolrepair>
     <tool>bow</tool>
     <tool>stone sword</tool>
 </toolrepair>
-<killreward>
-    <item amount="6">arrow</item>
+<itemkeep>
+    <item>arrow</item>
     <item>golden apple</item>
-</killreward>
-<killreward>
-    <filter>
-        <kill-streak count="3"/>
-    </filter>
-    <item amount="3">leaves</item>
-</killreward>
+    <item>leaves</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="6">arrow</item>
+        <item>golden apple</item>
+        <filter>
+            <kill-streak count="3"/>
+        </filter>
+        <item amount="3">leaves</item>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
