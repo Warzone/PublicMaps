@@ -1,0 +1,395 @@
+<!-- Base "Survival Games" include -->
+<!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
+<!-- Include version 1.1.1 -->
+<map>
+<gamemode>sg</gamemode>
+<objective>Be the last player standing.</objective>
+<constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
+    <constant id="timelimit">10</constant> <!-- Time limit in minutes -->
+    <constant id="player-count">24</constant> <!-- How many players this map is suited for based on podium counts. Common values: "8", "12", "24", "32", "48" -->
+    <constant id="world-border-on">always</constant> <!-- Controls world border message. Can be set to "never" to turn off -->
+    <constant id="world-border-time">4</constant>
+</constants>
+<time>${timelimit}m</time>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<players min="8" max="${player-count}" max-overfill="${player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
+<broadcasts>
+    <alert after="5m" every="5m">All chests have been refilled!</alert>
+    <alert after="${world-border-time}m" filter="${world-border-on}">The world border has begun to shrink!</alert>
+</broadcasts>
+<filters>
+    <not id="starting-countdown">
+        <countdown duration="5s" message="Match will start in {0}">
+            <all>
+                <match-running/>
+            </all>
+        </countdown>
+    </not>
+    <countdown id="grace-period" duration="30s" message="Grace period will end in {0}">
+        <all>
+            <match-running/>
+            <time>5s</time>
+        </all>
+    </countdown>
+    <countdown duration="30s" message="Chests will refill in {0}">
+        <all>
+            <time>4m30s</time>
+            <match-running/>
+        </all>
+    </countdown>
+    <countdown duration="30s" message="Chests will refill in {0}">
+        <all>
+            <time>9m30s</time>
+            <match-running/>
+        </all>
+    </countdown>
+    <any id="chest-refill">
+        <all>
+            <time>5m</time>
+            <not>
+                <time>5m1s</time>
+            </not>
+        </all>
+        <all>
+            <time>10m</time>
+            <not>
+                <time>10m1s</time>
+            </not>
+        </all>
+    </any>
+    <any id="allow-break">
+        <material>leaves</material>
+        <material>vine</material>
+        <material>yellow flower</material>
+        <material>red rose</material>
+        <material>red mushroom</material>
+        <material>brown mushroom</material>
+        <material>double plant</material>
+        <material>long grass</material>
+        <material>dead bush</material>
+    </any>
+    <all id="only-tier-1-chests">
+        <any>
+            <material>chest</material>
+            <material>trapped chest</material>
+        </any>
+        <negative>
+            <region id="tier-2-chests"/>
+        </negative>
+    </all>
+    <material id="chests">chest</material>
+    <all id="only-tier-2-chests">
+        <any>
+            <material>chest</material>
+            <material>trapped chest</material>
+        </any>
+        <region id="tier-2-chests"/>
+    </all>
+</filters>
+<actions>
+    <trigger scope="player">
+        <filter>
+            <all>
+                <time>1s</time>
+                <participating/>
+            </all>
+        </filter>
+        <action>
+            <message title="`cReady"/>
+        </action>
+    </trigger>
+<trigger scope="player">
+    <filter>
+        <all>
+            <time>3s</time>
+            <participating/>
+        </all>
+    </filter>
+    <action>
+        <message title="`eSet"/>
+    </action>
+</trigger>
+<trigger scope="player">
+    <filter>
+        <all>
+            <time>5s</time>
+            <participating/>
+        </all>
+    </filter>
+    <action>
+        <message title="`aGo!"/>
+    </action>
+</trigger>
+</actions>
+<regions>
+    <apply block="allow-break"/>
+    <apply block-place="always"/>
+</regions>
+<lootables>
+    <loot id="tier-1-chests-loottable">
+        <any count="2..5" unique="true">
+            <!-- Weapons -->
+            <option weight="20">
+                <item material="stone sword" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="stone axe" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="wood sword" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="bow" unbreakable="true"/>
+            </option>
+            <option weight="10">
+                <item material="fishing rod" unbreakable="true"/>
+            </option>
+            <!-- Food -->
+            <option weight="15">
+                <item material="pork"/>
+            </option>
+            <option weight="15">
+                <item material="raw beef"/>
+            </option>
+            <option weight="15">
+                <item material="apple"/>
+            </option>
+            <option weight="10">
+                <item material="cookie"/>
+            </option>
+            <option weight="10">
+                <item material="pumpkin pie"/>
+            </option>
+            <option weight="15">
+                <item material="raw fish"/>
+            </option>
+            <option weight="8">
+                <item material="bread"/>
+            </option>
+            <option weight="15">
+                <item material="carrot item"/>
+            </option>
+            <option weight="15">
+                <item material="potato item"/>
+            </option>
+            <option weight="8">
+                <item material="cooked beef"/>
+            </option>
+            <option weight="8">
+                <item material="grilled pork"/>
+            </option>
+            <option weight="8">
+                <item material="cooked fish"/>
+            </option>
+            <option weight="8">
+                <item material="baked potato"/>
+            </option>
+            <option weight="5">
+                <item material="golden apple"/>
+            </option>
+            <!-- Armor -->
+            <option weight="25">
+                <item material="leather helmet"/>
+            </option>
+            <option weight="20">
+                <item material="leather chestplate"/>
+            </option>
+            <option weight="20">
+                <item material="leather leggings"/>
+            </option>
+            <option weight="25">
+                <item material="leather boots"/>
+            </option>
+            <option weight="15">
+                <item material="gold helmet"/>
+            </option>
+            <option weight="10">
+                <item material="gold chestplate"/>
+            </option>
+            <option weight="10">
+                <item material="gold leggings"/>
+            </option>
+            <option weight="15">
+                <item material="gold boots"/>
+            </option>
+            <option weight="5">
+                <item material="iron helmet"/>
+            </option>
+            <option weight="5">
+                <item material="iron boots"/>
+            </option>
+            <!-- Items -->
+            <option weight="10">
+                <item material="stick"/>
+            </option>
+            <option weight="8">
+                <item material="iron ingot"/>
+            </option>
+            <option weight="8">
+                <item material="gold ingot"/>
+            </option>
+            <option weight="8">
+                <item material="feather"/>
+            </option>
+            <option weight="10">
+                <item material="flint"/>
+            </option>
+            <option weight="5">
+                <item material="diamond"/>
+            </option>
+            <any>
+                <option weight="12">
+                    <item material="arrow" amount="2"/>
+                </option>
+                <option weight="8">
+                    <item material="arrow" amount="5"/>
+                </option>
+            </any>
+        </any>
+    </loot>
+    <loot id="tier-2-chests-loottable">
+        <any count="3..6" unique="true">
+            <!-- Weapons -->
+            <option weight="20">
+                <item material="stone sword" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="stone axe" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="wood sword" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="iron sword" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="bow" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="fishing rod" unbreakable="true"/>
+            </option>
+            <!-- Food -->
+            <option weight="10">
+                <item material="pork"/>
+            </option>
+            <option weight="10">
+                <item material="raw beef"/>
+            </option>
+            <option weight="5">
+                <item material="pumpkin pie"/>
+            </option>
+            <option weight="8">
+                <item material="raw fish"/>
+            </option>
+            <option weight="10">
+                <item material="carrot item"/>
+            </option>
+            <option weight="15">
+                <item material="cooked beef"/>
+            </option>
+            <option weight="15">
+                <item material="baked potato"/>
+            </option>
+            <option weight="15">
+                <item material="grilled pork"/>
+            </option>
+            <option weight="15">
+                <item material="bread"/>
+            </option>
+            <option weight="8">
+                <item material="golden apple"/>
+            </option>
+            <!-- Armor -->
+            <option weight="20">
+                <item material="leather helmet"/>
+            </option>
+            <option weight="15">
+                <item material="leather chestplate"/>
+            </option>
+            <option weight="15">
+                <item material="leather leggings"/>
+            </option>
+            <option weight="20">
+                <item material="leather boots"/>
+            </option>
+            <option weight="15">
+                <item material="gold helmet"/>
+            </option>
+            <option weight="15">
+                <item material="gold chestplate"/>
+            </option>
+            <option weight="15">
+                <item material="gold leggings"/>
+            </option>
+            <option weight="18">
+                <item material="gold boots"/>
+            </option>
+            <option weight="10">
+                <item material="iron helmet"/>
+            </option>
+            <option weight="10">
+                <item material="iron chestplate"/>
+            </option>
+            <option weight="10">
+                <item material="iron leggings"/>
+            </option>
+            <option weight="15">
+                <item material="iron boots"/>
+            </option>
+            <!-- Items -->
+            <option weight="10">
+                <item material="stick"/>
+            </option>
+            <option weight="12">
+                <item material="iron ingot"/>
+            </option>
+            <option weight="12">
+                <item material="gold ingot"/>
+            </option>
+            <option weight="6">
+                <item material="feather"/>
+            </option>
+            <option weight="10">
+                <item material="flint"/>
+            </option>
+            <option weight="8">
+                <item material="diamond"/>
+            </option>
+            <any>
+                <option weight="8">
+                    <item material="arrow" amount="2"/>
+                </option>
+                <option weight="15">
+                    <item material="arrow" amount="5"/>
+                </option>
+            </any>
+        </any>
+    </loot>
+    <fill loot="tier-2-chests-loottable" filter="only-tier-2-chests" refill-trigger="chest-refill" refill-clear="false"/>
+    <fill loot="tier-1-chests-loottable" filter="only-tier-1-chests" refill-trigger="chest-refill" refill-clear="false"/>
+</lootables>
+<damage>
+    <deny>
+        <all>
+            <filter id="grace-period"/>
+            <cause>melee</cause>
+        </all>
+    </deny>
+</damage>
+<timelock>on</timelock>
+<keep-potion-bottles/>
+<itemremove>
+    <item>sapling</item>
+    <item>seeds</item>
+    <item>red rose</item>
+    <item>yellow flower</item>
+    <item>double plant</item>
+    <item>red mushroom</item>
+    <item>brown mushroom</item>
+    <item>long grass</item>
+    <item>dead bush</item>
+</itemremove>
+</map>
