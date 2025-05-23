@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.2">
+<map proto="1.5.0">
 <name>Graveyard</name>
-<version>1.1</version>
+<version>1.2.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Take control of all three hills!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -9,108 +9,114 @@
     <author uuid="ff4918fc-977d-4209-b3be-05ccc4f83d23" contribution="Building, XML"/> <!-- luigishadow2 -->
 </authors>
 <teams>
-    <team color="dark red" max="24">Red</team>
-    <team color="blue" max="24">Blue</team>
+    <team id="red-team" color="dark red" max="24">Red</team>
+    <team id="blue-team" color="blue" max="24">Blue</team>
 </teams>
+<!-- Kits -->
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
+    <kit id="spawn-kit">
+        <item unbreakable="true" slot="0">stone sword</item>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite:1">bow</item>
+        <item slot="2">golden apple</item>
         <item slot="28" amount="1">arrow</item>
-        <item slot="2" amount="64">cooked beef</item>
-        <item slot="3">golden apple</item>
-        <boots enchantment="protection fall:2">iron boots</boots>
-    </kit>
-    <kit name="red" parents="spawn">
-        <helmet color="cd0000">leather helmet</helmet>
-        <chestplate>chainmail chestplate</chestplate>
-        <leggings color="cd0000">leather leggings</leggings>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <helmet color="0066cc">leather helmet</helmet>
-        <chestplate>chainmail chestplate</chestplate>
-        <leggings color="0066cc">leather leggings</leggings>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
+        <boots unbreakable="true" enchantment="protection fall:2">iron boots</boots>
     </kit>
 </kits>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit" yaw="135">
+        <region>
+            <cylinder base="-1,86.5,163" radius="2" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit" yaw="-45">
+        <region>
+            <cylinder base="-68,86.5,0" radius="2" height="0"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cuboid min="17,86,79" max="13,86,84"/>
+        </region>
+    </default>
+</spawns>
+<!-- Filters -->
 <filters>
-    <filter name="deny-beacons" parents="allow-all">
-        <deny>
-            <block>beacon</block>
-        </deny>
-    </filter>
+    <deny id="deny-beacons">
+        <material>beacon</material>
+    </deny>
 </filters>
+<!-- Regions -->
 <regions>
-    <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    <apply block="deny-all" use="deny-beacons">
-        <region name="playable"/>
-    </apply>
+    <apply region="everywhere" block="never" use="deny-beacons" message="You are not allowed to modify this map!"/>
 </regions>
+<!-- Tool Reapir -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
 </toolrepair>
+<!-- Item Keep -->
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<!-- Item Remove -->
 <itemremove>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
     <item>iron boots</item>
-    <item>arrow</item>
-    <item>cooked beef</item>
-    <item>golden apple</item>
 </itemremove>
-<spawns>
-    <spawn team="red" kit="red" yaw="135">
-        <cylinder base="-1,86.5,163" radius="2" height="0"/>
-    </spawn>
-    <spawn team="blue" kit="blue" yaw="-45">
-        <cylinder base="-68,86.5,0" radius="2" height="0"/>
-    </spawn>
-    <default yaw="-90">
-        <cuboid min="17,86,79" max="13,86,84"/>
-    </default>
-</spawns>
-<score>
-    <limit>750</limit>
-    <king/>
-</score>
 <killreward>
     <item>golden apple</item>
 </killreward>
-<king>
-    <hills>
-        <hill name="Middle" capture-time="15s" points="1">
-            <capture>
-                <cuboid min="-39,80,86" max="-31,76,78"/>
-            </capture>
-            <progress>
-                <cuboid min="-39,80,86" max="-31,76,78"/>
-            </progress>
-            <captured>
-                <cuboid min="-34,85,80" max="-37,87,83"/>
-            </captured>
-        </hill>
-        <hill name="North Point" capture-time="10s" points="1">
-            <capture>
-                <cuboid min="-17,82,54" max="-8,86,45"/>
-            </capture>
-            <progress>
-                <cuboid min="-17,82,54" max="-8,86,45"/>
-            </progress>
-            <captured>
-                <block>-13,90,49</block>
-            </captured>
-        </hill>
-        <hill name="South Point" capture-time="10s" points="1">
-            <capture>
-                <cuboid min="-53,81,110" max="-62,86,119"/>
-            </capture>
-            <progress>
-                <cuboid min="-53,81,110" max="-62,86,119"/>
-            </progress>
-            <captured>
-                <block>-58,90,114</block>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<!-- Control Points -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <!-- Middle Hill -->
+    <control-point name="Middle" capture-time="15s" points="1">
+        <capture>
+            <cuboid min="-39,80,86" max="-31,76,78"/>
+        </capture>
+        <progress>
+            <cuboid min="-39,80,86" max="-31,76,78"/>
+        </progress>
+        <captured>
+            <cuboid min="-34,85,80" max="-37,87,83"/>
+        </captured>
+    </control-point>
+    <!-- North Hill -->
+    <control-point name="North Point" capture-time="10s" points="1">
+        <capture>
+            <cuboid min="-17,82,54" max="-8,86,45"/>
+        </capture>
+        <progress>
+            <cuboid min="-17,82,54" max="-8,86,45"/>
+        </progress>
+        <captured>
+            <point>-13,90,49</point>
+        </captured>
+    </control-point>
+    <!-- South Hill -->
+    <control-point name="South" capture-time="10s" points="1">
+        <capture>
+            <cuboid min="-53,81,110" max="-62,86,119"/>
+        </capture>
+        <progress>
+            <cuboid min="-53,81,110" max="-62,86,119"/>
+        </progress>
+        <captured>
+            <point>-58,90,114</point>
+        </captured>
+    </control-point>
+</control-points>
+<!-- Score Limit -->
+<score>
+    <limit>750</limit>
+</score>
+<!-- Misc -->
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
