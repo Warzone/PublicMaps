@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Brisk</name>
-<version>1.3.0</version>
+<version>1.3.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Get the most points by holding the hill!</objective>
 <created>2014-07-04</created>
@@ -22,31 +22,31 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item unbreakable="true" slot="0">stone sword</item>
-        <item unbreakable="true" slot="1">bow</item>
-        <item slot="2" amount="6" damage="1">leaves</item>
-        <item slot="3">golden apple</item>
-        <item slot="8" amount="32">arrow</item>
-        <helmet unbreakable="true" team-color="true" locked="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true" locked="true">leather chestplate</chestplate>
-        <leggings unbreakable="true" locked="true">iron leggings</leggings>
-        <boots unbreakable="true" team-color="true" locked="true">leather boots</boots>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" material="bow"/>
+        <item slot="2" amount="6" damage="1" material="leaves"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" locked="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" locked="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" material="iron leggings"/>
+        <boots unbreakable="true" team-color="true" locked="true" material="leather boots"/>
         <effect duration="3" amplifier="3">heal</effect>
         <effect duration="5" amplifier="3">damage resistance</effect>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="red-team" kit="spawn-kit" yaw="-90">
+    <spawn team="red-team" kit="spawn-kit">
         <regions>
             <point yaw="-180">-42.5,33,0.5</point>
-            <point yaw="0">-42.5,33,0.5</point>
+            <point>-42.5,33,0.5</point>
         </regions>
     </spawn>
-    <spawn team="blue-team" kit="spawn-kit" yaw="90">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions>
             <point yaw="-180">43.5,33,0.5</point>
-            <point yaw="0">43.5,33,0.5</point>
+            <point>43.5,33,0.5</point>
         </regions>
     </spawn>
     <default yaw="90">
@@ -55,32 +55,13 @@
         </region>
     </default>
 </spawns>
-<!-- Control Points -->
-<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
-    <!-- Hill -->
-    <control-point name="Hill" capture-time="10s" points="1">
-        <capture>
-            <cylinder base="0.5,20,0.5" radius="5.7" height="5" />
-        </capture>
-        <progress>
-            <cylinder base="0.5,14,0.5" radius="7" height="6" />
-        </progress>
-        <captured>
-            <cuboid min="0,0,0" max="0,0,0" />
-        </captured>
-    </control-point>
-</control-points>
-<!-- Score Limit -->
-<score>
-    <limit>500</limit>
-</score>
 <!-- Filters -->
 <filters>
     <material id="only-leaves">leaves</material>
 </filters>
 <!-- Regions -->
 <regions>
-    <apply region="everywhere" block="only-leaves" message="You may only interact with leaves"/>
+    <apply block="only-leaves" message="You may only interact with leaves"/>
     <!--  left and right  -->
     <apply velocity="@0.0,2.1,0.5">
         <region>
@@ -113,6 +94,22 @@
         </region>
     </apply>
 </regions>
+<!-- Control Points -->
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <!-- Hill -->
+    <control-point name="Hill" capture-time="10s" points="1">
+        <capture>
+            <cylinder base="0.5,20,0.5" radius="5.7" height="5"/>
+        </capture>
+        <progress>
+            <cylinder base="0.5,14,0.5" radius="7" height="6"/>
+        </progress>
+    </control-point>
+</control-points>
+<!-- Score Limit -->
+<score>
+    <limit>500</limit>
+</score>
 <!-- Falling Blocks -->
 <falling-blocks>
     <rule>
@@ -148,12 +145,13 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item amount="6">arrow</item>
-        <item>golden apple</item>
+        <item amount="6" material="arrow"/>
+    </kill-reward>
+    <kill-reward>
         <filter>
             <kill-streak count="3"/>
         </filter>
-        <item amount="3">leaves</item>
+        <item amount="3" material="leaves"/>
     </kill-reward>
 </kill-rewards>
 <disabledamage>

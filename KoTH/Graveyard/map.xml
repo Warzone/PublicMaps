@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Graveyard</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Take control of all three hills!</objective>
 <gamemode>koth</gamemode>
@@ -15,14 +15,16 @@
 <!-- Kits -->
 <kits>
     <kit id="spawn-kit">
-        <item unbreakable="true" slot="0">stone sword</item>
-        <item unbreakable="true" slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="28" amount="1">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true" enchantment="protection fall:2">iron boots</boots>
+        <clear/>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:2" material="iron boots"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <spawns>
@@ -50,28 +52,8 @@
 </filters>
 <!-- Regions -->
 <regions>
-    <apply region="everywhere" block="never" use="deny-beacons" message="You are not allowed to modify this map!"/>
+    <apply block="never" use="deny-beacons"/>
 </regions>
-<!-- Tool Reapir -->
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<!-- Item Keep -->
-<itemkeep>
-    <item>arrow</item>
-    <item>golden apple</item>
-</itemkeep>
-<!-- Item Remove -->
-<itemremove>
-    <item>leather helmet</item>
-    <item>chainmail chestplate</item>
-    <item>leather leggings</item>
-    <item>iron boots</item>
-</itemremove>
-<killreward>
-    <item>golden apple</item>
-</killreward>
 <!-- Control Points -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false">
     <!-- Middle Hill -->
@@ -115,6 +97,23 @@
 <score>
     <limit>750</limit>
 </score>
+<!-- Tool Reapir -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<!-- Item Keep -->
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<!-- Item Remove -->
+<itemremove>
+    <item>leather helmet</item>
+    <item>chainmail chestplate</item>
+    <item>leather leggings</item>
+    <item>iron boots</item>
+</itemremove>
 <!-- Misc -->
 <hunger>
     <depletion>off</depletion>

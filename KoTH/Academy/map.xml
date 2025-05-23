@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Academy</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Capture the bridge to accumulate points!</objective>
 <gamemode>koth</gamemode>
@@ -19,15 +19,16 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item unbreakable="true" slot="0">stone sword</item>
-        <item unbreakable="true" slot="1">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="3" amount="7">gold nugget</item>
-        <item slot="8" amount="16">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true" enchantment="protection projectile:1">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true">leather boots</boots>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" amount="7" material="gold nugget"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" enchantment="protection projectile" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -79,16 +80,10 @@
     <cylinder id="red-spawn-protection" base="59,0,-151" height="oo" radius="10"/>
     <cylinder id="blue-spawn-protection" base="23,0,-235" height="oo" radius="10"/>
     <!-- Applications -->
-    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy team's spawn!"/> 
-    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy team's spawn!"/>
-    <apply region="everywhere" block="never"/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply block="never"/>
 </regions>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item amount="8">arrow</item>
-    </kill-reward>
-</kill-rewards>
 <!-- Tool Repair -->
 <toolrepair>
     <tool>stone sword</tool>
@@ -107,6 +102,12 @@
     <item>chainmail leggings</item>
     <item>leather boots</item>
 </itemremove>
+<!-- Kill Rewards -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <!-- Misc -->
 <hunger>
     <depletion>off</depletion>

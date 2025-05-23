@@ -1,9 +1,8 @@
 <map proto="1.5.0">
 <name>Atom</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Be the team with the most kills after 7 minutes!</objective>
-<time result="score">7m</time>
 <gamemode>tdm</gamemode>
 <authors>
     <author uuid="e5eea785-51c1-40fe-a2d0-f83d4c035cd9"/> <!-- pikpikmerchant -->
@@ -19,22 +18,22 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item unbreakable="true" slot="0">stone sword</item>
-        <item unbreakable="true" slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28" amount="1">arrow</item>
-        <item slot="2" amount="2">TNT</item>
-        <item slot="3">golden apple</item>
-        <item slot="4" name="TNT Defuser" lore="`7Right click to defuse TNT">shears</item>
-        <helmet team-color="true" unbreakable="true">leather helmet</helmet>
-        <chestplate enchantment="protection explosions:3" unbreakable="true">leather chestplate</chestplate>
-        <leggings team-color="true" unbreakable="true">leather leggings</leggings>
-        <boots team-color="true" unbreakable="true" enchantment="protection fall:2">leather boots</boots>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="2" amount="2" material="tnt"/>
+        <item slot="3" material="golden apple"/>
+        <item slot="4" name="TNT Defuser" lore="`7Right click to defuse TNT" material="shears"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate enchantment="protection explosions:3" unbreakable="true" material="leather chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" enchantment="protection fall:2" material="leather boots"/>
         <effect duration="4" amplifier="5">damage resistance</effect>
         <effect duration="4" amplifier="5">heal</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="green-team" kit="spawn-kit" yaw="0">
+    <spawn team="green-team" kit="spawn-kit">
         <region>
             <cylinder base="7.5,7,-57.5" radius="1" height="0"/>
         </region>
@@ -69,6 +68,7 @@
         </region>
     </apply>
 </regions>
+<time result="score">7m</time>
 <!-- Tool Repair -->
 <toolrepair>
     <tool>stone sword</tool>

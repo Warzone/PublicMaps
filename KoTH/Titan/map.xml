@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Titan</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Control all 5 hills!</objective>
 <gamemode>koth</gamemode>
@@ -24,14 +24,14 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item unbreakable="true" slot="0">iron sword</item>
-        <item unbreakable="true" slot="1" enchantment="arrow infinite:1;arrow damage:2">bow</item>
-        <item slot="28" amount="1">arrow</item>
-        <item slot="2">golden apple</item>
-        <helmet enchantment="protection projectile:1" unbreakable="true">iron helmet</helmet>
-        <chestplate enchantment="protection projectile:1" unbreakable="true">iron chestplate</chestplate>
-        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true">iron boots</boots>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite;arrow damage:2" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <item slot="2" material="golden apple"/>
+        <helmet enchantment="protection projectile" unbreakable="true" material="iron helmet"/>
+        <chestplate enchantment="protection projectile" unbreakable="true" material="iron chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" material="iron boots"/>
         <effect duration="5">heal</effect>
         <effect duration="10">damage resistance</effect>
     </kit>
@@ -57,66 +57,11 @@
 </portals>
 <!-- Control Points -->
 <control-points capture-time="8s" neutral-state="true" show-progress="true" incremental="true">
-    <!-- Quarry -->
-    <control-point name="Quarry">
-        <capture>
-            <region id="quarry"/>
-        </capture>
-        <progress>
-            <region id="quarry"/>
-        </progress>
-        <captured>
-            <region id="quarry-captured"/>
-        </captured>
-    </control-point>
-    <!-- Radio Station -->
-    <control-point name="Radio Station">
-        <capture>
-            <region id="radio-station"/>
-        </capture>
-        <progress>
-            <region id="radio-progress"/>
-        </progress>
-        <captured>
-            <region id="radio-captured"/>
-        </captured>
-    </control-point>
-    <!-- Missile Silo -->
-    <control-point name="Missile Silo">
-        <capture>
-            <region id="missile-silo"/>
-        </capture>
-        <progress>
-            <region id="missile-progress"/>
-        </progress>
-        <captured>
-            <region id="missile-captured"/>
-        </captured>
-    </control-point>
-    <!-- Ruins -->
-    <control-point name="Ruins">
-        <capture>
-            <region id="ruins"/>
-        </capture>
-        <progress>
-            <region id="ruins-progress"/>
-        </progress>
-        <captured>
-            <region id="ruins-captured"/>
-        </captured>
-    </control-point>
-    <!-- Crateyard -->
-    <control-point name="Crateyard">
-        <capture>
-            <region id="crateyard"/>
-        </capture>
-        <progress>
-            <region id="crateyard-progress"/>
-        </progress>
-        <captured>
-            <region id="crateyard-captured"/>
-        </captured>
-    </control-point>
+    <control-point name="Quarry" capture="quarry" progress="quarry" captured="quarry-captured"/>
+    <control-point name="Radio Station" capture="radio-station" progress="radio-progress" captured="radio-captured"/>
+    <control-point name="Missile Silo" capture="missile-silo" progress="missile-progress" captured="missile-captured"/>
+    <control-point name="Ruins" capture="ruins" progress="ruins-progress" captured="ruins-captured"/>
+    <control-point name="Crateyard" capture="crateyard" progress="crateyard-progress" captured="crateyard-captured"/>
 </control-points>
 <!-- Score Limit -->
 <score>
@@ -124,18 +69,15 @@
 </score>
 <!-- Filters -->
 <filters>
-    <all id="allow-some">
-        <any>
-            <material>tnt</material>
-            <material>web</material>
-        </any>
-    </all>
+    <any id="allow-some">
+        <material>tnt</material>
+        <material>web</material>
+    </any>
 </filters>
 <regions>
     <!-- Definitions -->
     <cuboid id="red-spawn-protection" min="-2,7,-114" max="3,10,-113"/>
     <cuboid id="blue-spawn-protection" min="-2,8,112" max="5,12,113"/>
-    <rectangle id="playable" min="-oo,-oo" max="oo,oo"/>
     <cylinder id="red-spawn" base="0.5,64,-112" radius="3" height="0"/>
     <cylinder id="blue-spawn" base="1.5,64,108.5" radius="3" height="0"/>
     <cylinder id="obs-spawn" base="0.5,60,0.5" radius="3" height="0"/>
@@ -160,9 +102,9 @@
     <cuboid id="crateyard-progress" min="93,6,4" max="107,10,17"/>
     <cuboid id="crateyard-captured" min="93,6,4" max="107,20,17"/>
     <!-- Applications -->
-    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter Blue's spawn!"/>
-    <apply region="red-spawn-protection" enter="red-team" message="You may not enter Red's spawn!"/>
-    <apply region="playable" block="allow-some"/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply block="allow-some"/>
 </regions>
 <!-- Tool Repair -->
 <toolrepair>
@@ -195,7 +137,7 @@
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item amount="4">gold ingot</item>
+        <item amount="4" material="gold ingot"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->

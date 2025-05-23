@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Quintus</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
@@ -15,24 +15,24 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="2" unbreakable="true" enchantment="dig speed:1">diamond pickaxe</item>
-        <item slot="3" unbreakable="true">stone axe</item>
-        <item slot="4" amount="2">golden apple</item>
-        <item slot="5" amount="64">glass</item>
-        <item slot="6" amount="32">log</item>
-        <item slot="28" amount="1">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true" team-color="true">leather leggings</leggings>
-        <boots unbreakable="true" team-color="true">leather boots</boots>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="2" material="golden apple"/>
+        <item slot="5" amount="64" material="glass"/>
+        <item slot="6" amount="32" material="log"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="5" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="cyan-team" kit="spawn-kit" yaw="0">
+    <spawn team="cyan-team" kit="spawn-kit">
         <region>
             <cylinder base="40.5,34,-902.5" height="0" radius="1"/>
         </region>
@@ -76,20 +76,22 @@
 </regions>
 <!-- Monuments -->
 <!-- Purple Team -->
-<destroyables owner="purple-team" repairable="false">
-     <destroyable name="Front Left" region="purple-front-left" materials="obsidian"/>
-     <destroyable name="Front Right" region="purple-front-right" materials="obsidian"/>
-     <destroyable name="Back Left" region="purple-back-left" materials="obsidian"/>
-     <destroyable name="Back Right" region="purple-back-right" materials="obsidian"/>
-     <destroyable name="Back Middle" region="purple-back-middle" materials="obsidian"/>
-</destroyables>
-<!-- Cyan Team -->
-<destroyables owner="cyan-team" repairable="false">
-     <destroyable name="Front Left" region="cyan-front-left" materials="obsidian"/>
-     <destroyable name="Front Right" region="cyan-front-right" materials="obsidian"/>
-     <destroyable name="Back Left" region="cyan-back-left" materials="obsidian"/>
-     <destroyable name="Back Right" region="cyan-back-right" materials="obsidian"/>
-     <destroyable name="Back Middle" region="cyan-back-middle" materials="obsidian"/>
+<destroyables materials="obsidian" repairable="false">
+    <destroyables owner="purple-team">
+        <destroyable name="Front Left" region="purple-front-left"/>
+        <destroyable name="Front Right" region="purple-front-right"/>
+        <destroyable name="Back Left" region="purple-back-left"/>
+        <destroyable name="Back Right" region="purple-back-right"/>
+        <destroyable name="Back Middle" region="purple-back-middle"/>
+    </destroyables>
+    <!-- Cyan Team -->
+    <destroyables owner="cyan-team">
+        <destroyable name="Front Left" region="cyan-front-left"/>
+        <destroyable name="Front Right" region="cyan-front-right"/>
+        <destroyable name="Back Left" region="cyan-back-left"/>
+        <destroyable name="Back Right" region="cyan-back-right"/>
+        <destroyable name="Back Middle" region="cyan-back-middle"/>
+    </destroyables>
 </destroyables>
 <!-- Tool Repair -->
 <toolrepair>

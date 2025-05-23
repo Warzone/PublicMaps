@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>The Old Texas</name>
-<version>1.3.0</version>
+<version>1.3.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Capture the hills to score points!</objective>
 <gamemode>koth</gamemode>
@@ -16,16 +16,18 @@
 <!-- Kits -->
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="3" amount="1">iron ingot</item>
-        <item slot="8" amount="10">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true" team-color="true" enchantment="protection fall:2">leather boots</boots>
-        <effect duration="5" amplifier="1">heal</effect>
+        <clear/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" material="iron ingot"/>
+        <item slot="8" amount="10" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
+        <effect duration="5">heal</effect>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -35,7 +37,7 @@
             <cuboid min="-64,4,193" max="-69,4,188"/>
         </region>
     </spawn>
-    <spawn team="blue-team" yaw="0" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region>
             <cuboid min="-68,4,19" max="-63,4,24"/>
         </region>
@@ -48,7 +50,7 @@
 </spawns>
 <!-- Regions -->
 <regions>
-    <apply region="everywhere" block="never" message="You are not allowed to modify the map!"/>
+    <apply block="never"/>
 </regions>
 <!-- Control Points -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false">
@@ -60,9 +62,6 @@
         <progress>
             <cylinder base="-67.5,4,106.5" radius="4" height="5"/>
         </progress>
-        <captured>
-            <cuboid min="0,0,0" max="0,0,0"/>
-        </captured>
     </control-point>
     <!-- North Hill -->
     <control-point name="North" capture-time="10s" points="1">
@@ -72,9 +71,6 @@
         <progress>
             <cylinder base="-95.5,14,67.5" radius="4" height="5"/>
         </progress>
-        <captured>
-            <cuboid min="0,0,0" max="0,0,0"/>
-        </captured>
     </control-point>
     <!-- South Hill -->
     <control-point name="South" capture-time="10s" points="1">
@@ -84,21 +80,12 @@
         <progress>
             <cylinder base="-35.5,14,145.5" radius="4" height="5"/>
         </progress>
-        <captured>
-            <cuboid min="0,0,0" max="0,0,0"/>
-        </captured>
     </control-point>
 </control-points>
 <!-- Score Limit -->
 <score>
     <limit>500</limit>
 </score>
-<timelock>on</timelock>
-<kill-rewards>
-    <kill-reward>
-        <item>iron ingot</item>
-    </kill-reward>
-</kill-rewards>
 <!-- Tool Repair -->
 <toolrepair>
     <tool>stone sword</tool>
@@ -126,6 +113,12 @@
     <item>iron boots</item>
 </itemremove>
 <!-- Misc -->
+<kill-rewards>
+    <kill-reward>
+        <item material="iron ingot"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
 <hunger>
     <depletion>off</depletion>
 </hunger>

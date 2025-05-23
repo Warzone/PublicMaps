@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Sunburn</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Control the Central Hill to win!</objective>
 <gamemode>koth</gamemode>
@@ -16,14 +16,15 @@
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="8" amount="32">arrow</item>
-        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
-        <chestplate unbreakable="true">gold chestplate</chestplate>
-        <leggings unbreakable="true">gold leggings</leggings>
-        <boots unbreakable="true" team-color="true">leather boots</boots>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="gold chestplate"/>
+        <leggings unbreakable="true" material="gold leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <game-mode>adventure</game-mode>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -50,9 +51,9 @@
     <rectangle id="green-spawn-protection" min="280,335" max="295,322"/>
     <rectangle id="blue-spawn-protection" min="207,322" max="192,335"/>
     <!-- Applications -->
-    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy team's spawn!"/>
-    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy team's spawn!"/>
-    <apply region="everywhere" block="never" message="You may not modify the map!"/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply block="never"/>
 </regions>
 <!-- Control Points -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false">
@@ -73,12 +74,6 @@
 <score>
     <limit>400</limit>
 </score>
-<timelock>on</timelock>
-<kill-rewards>
-    <kill-reward>
-        <item amount="8">arrow</item>
-    </kill-reward>
-</kill-rewards>
 <!-- Tool Repair -->
 <toolrepair>
     <tool>stone sword</tool>
@@ -97,6 +92,12 @@
     <item>leather boots</item>
 </itemremove>
 <!-- Misc -->
+<kill-rewards>
+    <kill-reward>
+        <item amount="8" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
 <hunger>
     <depletion>off</depletion>
 </hunger>
