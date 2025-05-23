@@ -1,65 +1,36 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.1.1 -->
+<!-- Include version 1.2.1 -->
 <map>
 <gamemode>sg</gamemode>
 <objective>Be the last player standing.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
-    <constant id="timelimit">10</constant> <!-- Time limit in minutes -->
+    <constant id="timelimit">10m</constant>
     <constant id="player-count">24</constant> <!-- How many players this map is suited for based on podium counts. Common values: "8", "12", "24", "32", "48" -->
     <constant id="world-border-on">always</constant> <!-- Controls world border message. Can be set to "never" to turn off -->
     <constant id="world-border-time">4</constant>
+    <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
+    <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
+    <constant id="match-delay">10s</constant>
 </constants>
-<time>${timelimit}m</time>
+<time>${timelimit}</time>
 <blitz>
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
 <players min="8" max="${player-count}" max-overfill="${player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
 <broadcasts>
-    <alert after="5m" every="5m">All chests have been refilled!</alert>
     <alert after="${world-border-time}m" filter="${world-border-on}">The world border has begun to shrink!</alert>
 </broadcasts>
 <filters>
-    <not id="starting-countdown">
-        <countdown duration="5s" message="Match will start in {0}">
-            <all>
-                <match-running/>
-            </all>
-        </countdown>
-    </not>
-    <countdown id="grace-period" duration="30s" message="Grace period will end in {0}">
-        <all>
-            <match-running/>
-            <time>5s</time>
-        </all>
-    </countdown>
-    <countdown duration="30s" message="Chests will refill in {0}">
-        <all>
-            <time>4m30s</time>
-            <match-running/>
-        </all>
-    </countdown>
-    <countdown duration="30s" message="Chests will refill in {0}">
-        <all>
-            <time>9m30s</time>
-            <match-running/>
-        </all>
-    </countdown>
-    <any id="chest-refill">
-        <all>
-            <time>5m</time>
-            <not>
-                <time>5m1s</time>
-            </not>
-        </all>
-        <all>
-            <time>10m</time>
-            <not>
-                <time>10m1s</time>
-            </not>
-        </all>
-    </any>
+    <all id="starting-countdown">
+        <not>
+            <countdown duration="${match-delay}" message="`3`lMatch will start in {0}" filter="match-running"/>
+        </not>
+        <match-running/>
+    </all>
+    <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
+    <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
     <any id="allow-break">
         <material>leaves</material>
         <material>vine</material>
@@ -71,62 +42,55 @@
         <material>long grass</material>
         <material>dead bush</material>
     </any>
+    <any id="chests">
+        <material>chest</material>
+        <material>trapped chest</material>
+    </any>
     <all id="only-tier-1-chests">
-        <any>
-            <material>chest</material>
-            <material>trapped chest</material>
-        </any>
+        <filter id="chests"/>
         <negative>
             <region id="tier-2-chests"/>
         </negative>
     </all>
-    <material id="chests">chest</material>
     <all id="only-tier-2-chests">
-        <any>
-            <material>chest</material>
-            <material>trapped chest</material>
-        </any>
+        <filter id="chests"/>
         <region id="tier-2-chests"/>
     </all>
 </filters>
 <actions>
-    <trigger scope="player">
-        <filter>
-            <all>
-                <time>1s</time>
-                <participating/>
-            </all>
-        </filter>
-        <action>
-            <message title="`cReady"/>
+    <trigger filter="starting-countdown" scope="player">
+        <action scope="player">
+            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3The games have started!"/>
         </action>
     </trigger>
-<trigger scope="player">
-    <filter>
-        <all>
-            <time>3s</time>
-            <participating/>
-        </all>
-    </filter>
-    <action>
-        <message title="`eSet"/>
-    </action>
-</trigger>
-<trigger scope="player">
-    <filter>
-        <all>
-            <time>5s</time>
-            <participating/>
-        </all>
-    </filter>
-    <action>
-        <message title="`aGo!"/>
-    </action>
-</trigger>
+    <trigger scope="player">
+        <action scope="player">
+            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3Grace Period is now over!"/>
+        </action>
+        <filter>
+            <all>
+                <not>
+                    <filter id="grace-period-countdown"/>
+                </not>
+                <filter id="starting-countdown"/>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action scope="player">
+            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3Chests have been refilled!"/>
+        </action>
+        <filter>
+            <all>
+                <filter id="chest-refill"/>
+                <time>${chest-refill-timer}</time>
+            </all>
+        </filter>
+    </trigger>
 </actions>
 <regions>
-    <apply block="allow-break"/>
-    <apply block-place="always"/>
+    <!-- <apply leave="starting-countdown" region="spawn-cages"/> -->
+    <apply block="allow-break" block-place="always"/>
 </regions>
 <lootables>
     <loot id="tier-1-chests-loottable">
@@ -374,13 +338,16 @@
 <damage>
     <deny>
         <all>
-            <filter id="grace-period"/>
+            <any>
+                <filter id="grace-period-countdown"/>
+                <not>
+                    <filter id="starting-countdown"/>
+                </not>
+            </any>
             <cause>melee</cause>
         </all>
     </deny>
 </damage>
-<timelock>on</timelock>
-<keep-potion-bottles/>
 <itemremove>
     <item>sapling</item>
     <item>seeds</item>
@@ -392,4 +359,11 @@
     <item>long grass</item>
     <item>dead bush</item>
 </itemremove>
+<keep-potion-bottles/>
+<mobs>
+    <filter>
+        <spawn>spawner</spawn>
+    </filter>
+</mobs>
+<timelock>on</timelock>
 </map>
