@@ -1,34 +1,28 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Ricco</name>
 <variant id="christmas" world="christmas">Christmas</variant>
 <variant id="halloween" world="halloween">Halloween</variant>
 <variant id="rage">Rage</variant>
 <variant id="rage_christmas" world="christmas">Rage Christmas</variant>
 <variant id="rage_halloween" world="halloween">Rage Halloween</variant>
-<version>2.2.2</version>
+<version>2.2.3</version>
 <objective>Be the first team to reach 1200 points by capturing the hills!</objective>
 <gamemode>koth</gamemode>
-<if variant="rage,rage_christmas">
+<if variant="rage,rage_christmas,rage_halloween">
     <gamemode>rage</gamemode>
     <gamemode>arcade</gamemode>
 </if>
 <if variant="default">
     <created>2019-09-02</created>
 </if>
-<if variant="christmas">
+<if variant="christmas,rage_christmas">
     <created>2021-11-02</created>
 </if>
-<if variant="halloween">
+<if variant="halloween,rage_halloween">
     <created>2024-03-31</created>
 </if>
 <if variant="rage">
     <created>2022-06-11</created>
-</if>
-<if variant="rage_christmas">
-    <created>2022-12-21</created>
-</if>
-<if variant="rage_halloween">
-    <created>2024-03-31</created>
 </if>
 <!-- Finer map controls -->
 <if variant="default,rage">
@@ -42,6 +36,7 @@
     <constant id="bow-enchantment" delete="true"/>
     <constant id="arrow-amount">24</constant>
     <constant id="hill-capture-time">5s</constant>
+    <include id="gapple-kill-reward"/>
 </if>
 <if variant="rage,rage_christmas,rage_halloween"> <!-- Targets Rage variants -->
     <constant id="sword-enchantment">damage_all:10</constant>
@@ -52,18 +47,18 @@
 <!-- Authors and Contributors -->
 <authors>
     <author uuid="db3e4ab9-7c34-4342-8aca-63db60ec8d1b"/> <!-- Henrs -->
-    <if variant="rage,rage_christmas">
+    <if variant="rage,rage_christmas,rage_halloween">
         <author uuid="53af1e46-7424-485b-97de-7bf8d854a2aa" contribution="Rage version"/> <!-- __BT -->
     </if>
 </authors>
 <contributors>
-    <if variant="rage,rage_christmas">
+    <if variant="rage,rage_christmas,rage_halloween">
         <contributor uuid="5fa68d7e-a2e8-4ff4-8bb6-c4d6d53cdfdf" contribution="Inspiration"/> <!-- Prolav -->
         <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Inspiration"/> <!-- Preinstalled -->
     </if>
-    <if variant="christmas,rage_christmas,halloween,rage_halloween">
+    <unless variant="default,rage">
         <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas / Halloween edit"/> <!-- Wesdial -->
-    </if>
+    </unless>
 </contributors>
 <!-- Teams -->
 <teams>
@@ -86,7 +81,7 @@
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="5" amplifier="255">damage resistance</effect>
+        <effect duration="5" amplifier="10">damage resistance</effect>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -124,9 +119,9 @@
     </union>
     <above id="playable" y="1"/>
     <below id="non-playable" y="1"/>
-    <apply region="spawns" block="never" message="`eYou may not build in `cSpawn`e!"/>
-    <apply region="non-playable" block="never" message="`eYou may not modify the `9water `eor `7the void`e!"/>
-    <apply region="playable" block="only-leaves-in-map" message="`eYou may only break and place `2Oak Leaves `ewithin the map!"/>
+    <apply region="spawns" block="never" message="You may not build in spawn!"/>
+    <apply region="non-playable" block="never" message="You may not modify the `9water `cor `7the void`c!"/>
+    <apply region="playable" block="only-leaves-in-map" message="You may only break and place `2Oak Leaves `cwithin the map!"/>
 </regions>
 <!-- Control Points -->
 <control-points required="false" incremental="true" capture-time="${hill-capture-time}">
@@ -156,7 +151,7 @@
     </control-point>
 </control-points>
 <!-- Map Control -->
-<if variant="rage,rage_christmas">
+<if variant="rage,rage_christmas,rage_halloween">
     <rage/>
     <hunger>
         <depletion>off</depletion>
@@ -167,7 +162,7 @@
 </if>
 <score>
     <limit>1200</limit>
-    <if variant="rage,rage_christmas">
+    <if variant="rage,rage_christmas,rage_halloween">
         <kills>1</kills>
     </if>
 </score>
@@ -191,7 +186,6 @@
 <kill-rewards>
     <kill-reward>
         <if variant="default,christmas,halloween">
-            <item material="golden apple"/>
             <item amount="8" material="arrow"/>
         </if>
         <if variant="rage,rage_christmas,rage_halloween">

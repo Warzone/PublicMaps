@@ -1,12 +1,13 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Taiga Ways</name>
 <created>2022-08-01</created>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <objective>Be the first team to reach 1000 points!</objective>
 <gamemode>koth</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="bb53a84a-89c6-493f-ad94-824bc4cba39a" contribution="Building"/> <!-- _Void_xx -->
-    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Building"/> <!-- Fishywishi --> 
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Building"/> <!-- Fishywishi -->
 </authors>
 <contributors>
     <contributor uuid="6863869b-4b8c-4445-b778-a8e016775ae4" contribution="XML"/> <!-- Cazadorian -->
@@ -22,7 +23,7 @@
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" material="golden apple"/>
         <item slot="8" amount="4" material="arrow"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate" enchantment="protection:1"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate" enchantment="protection"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
         <boots unbreakable="true" material="chainmail boots" enchantment="feather_falling:4"/>
         <effect duration="2s" amplifier="255">resistance</effect>
@@ -55,36 +56,36 @@
 </regions>
 <control-points required="false" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
     <control-point name="Top" capture-time="6s" points="1.5">
-        <capture-region>
+        <capture>
             <cylinder base="0.5,25,0.5" radius="4" height="3"/>
-        </capture-region>
-        <progress-display-region>
+        </capture>
+        <progress>
             <cylinder base="0.5,24,0.5" radius="4" height="1"/>
-        </progress-display-region>
+        </progress>
     </control-point>
     <control-point name="Bottom" capture-time="6s" points="1.5">
-        <capture-region>
+        <capture>
             <cylinder base="0.5,3,0.5" radius="5" height="3"/>
-        </capture-region>
-        <progress-display-region>
+        </capture>
+        <progress>
             <cylinder base="0.5,2,0.5" radius="5" height="1"/>
-        </progress-display-region>
+        </progress>
     </control-point>
     <control-point name="North" capture-time="3s" points="1">
-        <capture-region>
+        <capture>
             <cylinder base="0.5,16,-31.5" radius="4" height="3"/>
-        </capture-region>
-        <progress-display-region>
+        </capture>
+        <progress>
             <cylinder base="0.5,15,-31.5" radius="4" height="1"/>
-        </progress-display-region>
+        </progress>
     </control-point>
     <control-point name="South" capture-time="3s" points="1">
-        <capture-region>
+        <capture>
             <cylinder base="0.5,16,32.5" radius="4" height="3"/>
-        </capture-region>
-        <progress-display-region>
+        </capture>
+        <progress>
             <cylinder base="0.5,15,32.5" radius="4" height="1"/>
-        </progress-display-region>
+        </progress>
     </control-point>
 </control-points>
 <score>
@@ -106,10 +107,11 @@
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="4" material="arrow"/>
-</kill-reward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="4" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
 <hunger>
     <depletion>off</depletion>
 </hunger>

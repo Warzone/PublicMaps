@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Clockwork</name>
 <created>2022-02-19</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <objective>Be the first team to reach 750 points from capturing the hills!</objective>
 <gamemode>koth</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" /> <!-- Virus53 -->
 </authors>
@@ -21,7 +22,7 @@
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings team-color="true" unbreakable="true" material="leather leggings"/>
         <boots team-color="true" unbreakable="true" material="leather boots"/>
-        <potion duration="5s" amplifier="10">damage resistance</potion>
+        <effect duration="5" amplifier="10">damage resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
@@ -43,7 +44,7 @@
     </default>
 </spawns>
 <regions>
-    <apply block="never" message="You may not modify the map!"/>
+    <apply block="never"/>
 </regions>
 <control-points required="false">
     <control-point name="North East Point" capture-time="5s">
@@ -88,7 +89,6 @@
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="4" material="arrow"/>
     </kill-reward>
 </kill-rewards>

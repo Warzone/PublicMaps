@@ -1,26 +1,23 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Target</name>
 <created>2022-03-23</created>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Reach 800 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
-<!-- Authors and Contributors -->
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="14091c10-0c80-4700-bdc9-91de0518c79a" contribution="Map creation"/> <!-- n6cr -->
 </authors>
 <contributors>
     <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
 </contributors>
-<!-- Teams -->
 <teams>
-    <team id="green" color="green" max="3">Green</team>
-    <team id="purple" color="dark purple" max="3">Purple</team>
+    <team id="green-team" color="green" max="3">Green</team>
+    <team id="purple-team" color="dark purple" max="3">Purple</team>
 </teams>
-<!-- Broadcasts -->
 <broadcasts>
     <tip after="1s">Fall damage is disabled on this map!</tip>
 </broadcasts>
-<!-- Kits -->
 <kits>
     <kit id="spawn-kit">
         <item slot="0" unbreakable="true" material="stone sword"/>
@@ -29,7 +26,9 @@
         <item slot="8" amount="64" material="cooked beef"/>
         <helmet unbreakable="true" material="iron helmet"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
+        <effect duration="3" amplifier="10">damage resistance</effect>
     </kit>
+    <!-- Separate kits for armor colors are intentional -->
     <kit id="green-kit" parents="spawn-kit">
         <chestplate unbreakable="true" color="80C71F" material="leather chestplate"/>
         <boots unbreakable="true" color="80C71F" material="leather boots"/>
@@ -39,19 +38,18 @@
         <boots unbreakable="true" color="8932B8" material="leather boots"/>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default yaw="90">
         <region>
             <point>281.5,26,240.5</point>
         </region>
     </default>
-    <spawn team="green" kit="green-kit" yaw="-135">
+    <spawn team="green-team" kit="green-kit" yaw="-135">
         <region>
             <point>244.5,8,262.5</point>
         </region>
     </spawn>
-    <spawn team="purple" kit="purple-kit" yaw="45">
+    <spawn team="purple-team" kit="purple-kit" yaw="45">
         <region>
             <point>268.5,8,218.5</point>
         </region>
@@ -59,14 +57,11 @@
 </spawns>
 <!-- Hills -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false" visual-materials="tangible">
-    <control-point name="Green Hill" initial-owner="green" points="1" capture-time="3s" capture="green-hill-floor" progress="green-hill-floor" captured="green-hill-display"/>
+    <control-point name="Green Hill" initial-owner="green-team" points="1" capture-time="3s" capture="green-hill-floor" progress="green-hill-floor" captured="green-hill-display"/>
     <control-point name="Central Hill" points="1.5" capture-time="5s" capture="central-hill" progress="central-hill"/>
-    <control-point name="Purple Hill" initial-owner="purple" points="1" capture-time="3s" capture="purple-hill-floor" progress="purple-hill-floor" captured="purple-hill-display"/>
+    <control-point name="Purple Hill" initial-owner="purple-team" points="1" capture-time="3s" capture="purple-hill-floor" progress="purple-hill-floor" captured="purple-hill-display"/>
 </control-points>
-<!-- Filters -->
 <filters>
-    <team id="green-only">green</team>
-    <team id="purple-only">purple</team>
     <any id="tangible"> <!-- List of blocks to detect and change in a hill -->
         <material>wool:0</material>
         <material>wool:5</material>
@@ -79,7 +74,6 @@
         <material>stained glass:10</material>
     </any>
 </filters>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
     <union id="green-hill">
@@ -92,15 +86,14 @@
         <cuboid id="purple-hill-display" min="243,22,202" max="269,48,200"/>
     </union>
     <union id="spawn-protections">
-        <cuboid id="green-spawn-protection" min="-7,0,17" max="-15,oo,25"/>
-        <cuboid id="purple-spawn-protection" min="7,0,-17" max="15,oo,-25"/>
+        <cuboid id="green-spawn-protection" min="242,0,258" max="249,18,265"/>
+        <cuboid id="purple-spawn-protection" min="271,0,223" max="264,18,216"/>
     </union>
     <!-- Applications -->
-    <apply region="green-spawn-protection" enter="green-only" message="You may not enter the enemy spawn."/>
-    <apply region="purple-spawn-protection" enter="purple-only" message="You may not enter the enemy spawn."/>
+    <apply region="green-spawn-protection" enter="green-team" message="You may not enter the enemy's spawn."/>
+    <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn."/>
     <apply block="never" message="You are not allowed to modify terrain here."/>
 </regions>
-<!-- ItemRemove -->
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -112,14 +105,11 @@
     <item>chainmail leggings</item>
     <item>leather boots</item>
 </itemremove>
-<!-- Kill Reward-->
 <kill-rewards>
     <kill-reward>
         <item material="arrow"/>
-        <item material="golden apple"/>
     </kill-reward>
 </kill-rewards>
-<!-- Misc -->
 <score>
     <limit>800</limit>
 </score>
