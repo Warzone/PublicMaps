@@ -1,7 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Harvest</name>
+<version>1.2.3</version>
+<constant id="damage-resistance">3s</constant>
+<constant id="respawn-timer">2s</constant>
+<include id="conquest"/>
 <variant id="halloween" world="halloween" override="true">Harvested</variant>
-<version>1.2.1</version>
 <objective>Be the first team to reach 500 points!</objective>
 <gamemode>koth</gamemode>
 <if variant="default">
@@ -32,22 +35,14 @@
     <team id="yellow" color="yellow" max="12">Yellow</team>
 </teams>
 <kits>
-    <kit id="spawn-kit">
-        <clear/>
-        <item slot="0" show-unbreakable="false" unbreakable="true" material="stone sword"/>
-        <item slot="1" show-unbreakable="false" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
+    <kit id="spawn-kit" parent="base-kit">
         <item slot="7" material="emerald"/>
-        <item slot="8" amount="16" material="arrow"/>
-        <helmet show-unbreakable="false" unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate show-unbreakable="false" unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings show-unbreakable="false" unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">projectile_protection</enchantment>
-        </leggings>
-        <boots show-unbreakable="false" unbreakable="true" material="iron boots">
-            <enchantment>feather_falling</enchantment>
-        </boots>
-        <game-mode>adventure</game-mode>
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="iron boots"/>
+                <replace unbreakable="true" enchantment="feather_falling" material="iron boots"/>
+            </replace-item>
+        </action>
     </kit>
 </kits>
 <spawns>
@@ -56,22 +51,22 @@
             <point>206.5,6,-32.5</point>
         </region>
     </default>
-    <spawn safe="true" kit="spawn-kit" team="blue">
+    <spawn kit="spawn-kit" team="blue">
         <region yaw="90">
             <point>303.5,20,-32.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="spawn-kit" team="orange">
+    <spawn kit="spawn-kit" team="orange">
         <region yaw="180">
             <point>206.5,20,64.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="spawn-kit" team="pink">
+    <spawn kit="spawn-kit" team="pink">
         <region>
             <point>206.5,20,-129.5</point>
         </region>
     </spawn>
-    <spawn safe="true" kit="spawn-kit" team="yellow">
+    <spawn kit="spawn-kit" team="yellow">
         <region yaw="-90">
             <point>109.5,20,-32.5</point>
         </region>
@@ -256,19 +251,7 @@
 <score>
     <limit>500</limit>
 </score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
-</itemremove>
 <itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
     <item>iron sword</item>
     <item>chainmail helmet</item>
     <item>chainmail chestplate</item>
@@ -280,13 +263,8 @@
 </itemkeep>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="emerald"/>
-        <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <timelock>off</timelock>
 </map>
