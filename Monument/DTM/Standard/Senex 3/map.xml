@@ -1,64 +1,54 @@
-<?xml version="1.0"?>
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Senex 3</name>
-<version>2.2.3</version>
+<version>2.2.4</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
-<!-- Author -->
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
     <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- ViceWatercolour -->
 </authors>
-<!-- Teams -->
 <teams>
     <team id="orange-team" color="gold" max="20">Orange</team>
     <team id="purple-team" color="dark purple" max="20">Purple</team>
 </teams>
-<!-- Kits -->
 <kits>
-    <kit id="spawn">
-         <item slot="0" unbreakable="true">stone sword</item>
-         <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-         <item slot="2" unbreakable="true">diamond pickaxe</item>
-         <item slot="3" unbreakable="true">stone axe</item>
-         <item slot="4" amount="64">wood</item>
-         <item slot="5" amount="64">wood</item>
-         <item slot="6" amount="64">wood</item>
-         <item slot="7">golden apple</item>
-         <item slot="8" amount="32">cooked beef</item>
-         <item slot="28" amount="1">arrow</item>
-         <effect duration="5" amplifier="5">damage resistance</effect>
-         <effect duration="5" amplifier="5">heal</effect>
-         <chestplate unbreakable="true">chainmail chestplate</chestplate>
-         <boots unbreakable="true">iron boots</boots>
-    </kit>
-    <kit id="purple-kit" parents="spawn">
-        <helmet unbreakable="true" color="7F3FB2" material="leather helmet"/>
-        <leggings unbreakable="true" color="7F3FB2" material="leather leggings"/>
-    </kit>
-    <kit id="orange-kit" parents="spawn">
-        <helmet unbreakable="true" color="D87F33" material="leather helmet"/>
-        <leggings unbreakable="true" color="D87F33" material="leather leggings"/>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="3" unbreakable="true" material="stone axe"/>
+        <item slot="4" amount="64" material="wood"/>
+        <item slot="5" amount="64" material="wood"/>
+        <item slot="6" amount="64" material="wood"/>
+        <item slot="7" material="golden apple"/>
+        <item slot="8" amount="32" material="cooked beef"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+        <effect duration="5" amplifier="5">heal</effect>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default yaw="180">
-        <region><point>82.5,37,-809.5</point></region>
+        <region>
+            <point>82.5,37,-809.5</point>
+        </region>
     </default>
-    <spawn team="orange-team" kit="orange-kit" yaw="90">
-        <region><point>36.5,18,-878.5</point></region>
+    <spawn team="orange-team" kit="spawn-kit" yaw="90">
+        <region>
+            <point>36.5,18,-878.5</point>
+        </region>
     </spawn>
-    <spawn team="purple-team" kit="purple-kit" yaw="-90">
-       <region><point>128.5, 18, -878.5</point></region>
+    <spawn team="purple-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <point>128.5, 18, -878.5</point>
+        </region>
     </spawn>
 </spawns>
-<!-- Filters -->
-<filters>
-   <team id="only-purple">purple-team</team>
-   <team id="only-orange">orange-team</team>
-</filters>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
      <negative id="playable">
@@ -68,43 +58,42 @@
         <cylinder id="purple-spawn" base="128.5,13,-879.5" height="255" radius="9"/>
         <cylinder id="orange-spawn" base="36.5,13,-879.5" height="255" radius="9"/>
         <cuboid id="purple-spawn-bridge-protection" min="136,8,-872" max="150,oo,-886"/>
-        <cuboid id="orange-spawn-bridge-protection" min="14,8,-872" max="28,oo,-886"/> 
+        <cuboid id="orange-spawn-bridge-protection" min="14,8,-872" max="28,oo,-886"/>
     </union>
     <!-- Applications -->
     <apply region="playable" block="never" message="You may not build outside of the playing field!"/>
     <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
-    <apply region="orange-spawn" enter="only-orange" message="You may not enter the enemy spawn."/>
-    <apply region="purple-spawn" enter="only-purple" message="You may not enter the enemy spawn."/>
+    <apply region="orange-spawn" enter="orange-team" message="You may not enter the enemy's spawn."/>
+    <apply region="purple-spawn" enter="purple-team" message="You may not enter the enemy's spawn."/>
 </regions>
-<!-- Monuments -->
 <destroyables materials="obsidian" sparks="true">
     <destroyable id="left-orange" name="Left Monument" owner="orange-team">
-             <region><block>36,13,-839</block></region>
+        <region>
+            <block>36,13,-839</block>
+        </region>
     </destroyable>
     <destroyable id="right-orange" name="Right Monument" owner="orange-team">
-             <region><block>36,13,-919</block></region>
+        <region>
+            <block>36,13,-919</block>
+        </region>
     </destroyable>
     <destroyable id="left-purple" name="Left Monument" owner="purple-team">
-             <region><block>128,13,-919</block></region>
+        <region>
+            <block>128,13,-919</block>
+        </region>
     </destroyable>
     <destroyable id="right-purple" name="Right Monument" owner="purple-team">
-             <region><block>128,13,-839</block></region>
+        <region>
+            <block>128,13,-839</block>
+        </region>
     </destroyable>
 </destroyables>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item amount="1" material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<!-- Tool Repair -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
     <tool>diamond pickaxe</tool>
     <tool>stone axe</tool>
 </toolrepair>
-<!-- Item Remove -->
 <itemremove>
    <item>obsidian</item>
    <item>cooked beef</item>
@@ -118,7 +107,6 @@
    <item>arrow</item>
    <item>golden apple</item>
 </itemkeep>
-<!-- Misc -->
 <timelock>on</timelock>
 <maxbuildheight>33</maxbuildheight>
 </map>

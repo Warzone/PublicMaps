@@ -1,25 +1,23 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Senex 1</name>
 <variant id="christmas" world="christmas" override="true">Snowex 1</variant>
-<version>2.2.8</version>
+<version>2.2.9</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
-<!-- Author -->
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
 </authors>
-<!-- Teams -->
 <teams>
     <team id="lime-team" color="green" max="12">Lime</team>
     <team id="cyan-team" color="dark aqua" max="12">Cyan</team>
 </teams>
-<!-- Kits -->
 <kits>
     <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" unbreakable="true" material="diamond pickaxe"/>   
+        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="32" material="glass"/>
         <item slot="5" amount="64" material="sandstone"/>
@@ -27,33 +25,31 @@
         <item slot="7" material="golden apple"/>
         <item slot="8" amount="32" material="cooked beef"/>
         <item slot="28" material="arrow"/>
-        <effect duration="5" amplifier="5">damage resistance</effect>
-        <effect duration="5" amplifier="5">heal</effect>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+        <effect duration="5" amplifier="5">heal</effect>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default>
-        <regions>
-            <cylinder base="82.5,37,-811.5" height="0" radius="1" />
-        </regions>
+        <region>
+            <cylinder base="82.5,37,-811.5" height="0" radius="1"/>
+        </region>
     </default>
-    <spawn team="cyan-team" kit="spawn-kit">
-        <regions>
-            <cylinder yaw="90" base="129.5,20,-744.5" height="0" radius="1" />
-        </regions>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="90">
+        <region>
+            <cylinder base="129.5,20,-744.5" height="0" radius="1"/>
+        </region>
     </spawn>
-    <spawn team="lime-team" kit="spawn-kit">
-        <regions>
-            <cylinder yaw="-90" base="35.5,20,-744.5" height="0" radius="1" />
-        </regions>
+    <spawn team="lime-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <cylinder base="35.5,20,-744.5" height="0" radius="1"/>
+        </region>
     </spawn>
 </spawns>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
     <negative id="playable">
@@ -67,28 +63,28 @@
     <apply region="playable" block="never" message="You may not edit outside the map."/>
     <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
 </regions>
-<!-- Monuments -->
 <destroyables materials="obsidian">
     <destroyable id="left-lime" name="Left" owner="lime-team">
-            <region><block>-12,23,-733</block></region>
+        <region>
+            <block>-12,23,-733</block>
+        </region>
     </destroyable>
     <destroyable id="right-lime" name="Right" owner="lime-team">
-            <region><block>-12,23,-755</block></region>
+        <region>
+            <block>-12,23,-755</block>
+        </region>
     </destroyable>
     <destroyable id="left-cyan" name="Left" owner="cyan-team">
-            <region><block>176,23,-755</block></region>
+        <region>
+            <block>176,23,-755</block>
+        </region>
     </destroyable>
     <destroyable id="right-cyan" name="Right" owner="cyan-team">
-            <region><block>176,23,-733</block></region>
+        <region>
+            <block>176,23,-733</block>
+        </region>
     </destroyable>
 </destroyables>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<!-- Item Remove -->
 <itemremove>
     <item>obsidian</item>
     <item>sandstone</item>
@@ -98,14 +94,12 @@
     <item>leather boots</item>
     <item>cooked beef</item>
 </itemremove>
-<!-- Tool Repair -->
 <toolrepair>
     <tool>diamond pickaxe</tool>
     <tool>bow</tool>
     <tool>stone sword</tool>
     <tool>stone axe</tool>
 </toolrepair>
-<!-- Item Keep --> 
 <itemkeep>
     <item>arrow</item>
     <item>glass</item>
@@ -113,7 +107,6 @@
     <item>wood</item>
     <item>golden apple</item>
 </itemkeep>
-<!-- Misc -->
 <timelock>on</timelock>
 <maxbuildheight>38</maxbuildheight>
 </map>
