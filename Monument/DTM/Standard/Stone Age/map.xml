@@ -1,9 +1,10 @@
-<map proto="1.4.2" game="Destroy the Beacon">
+<map proto="1.5.0" game="Destroy the Beacon">
 <name>Stone Age</name>
 <created>2018-04-08</created>
-<version>1.2.2</version>
+<version>1.2.3</version>
 <objective>Destroy the other team's beacon! Your beacon is at the top of the mountain, protect it!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="dfacf568-6110-4362-809c-6c59c1eb6391"/> <!-- _Rascal -->
     <author uuid="39a9e1b5-1e1d-40c0-8c16-69a9568efa72"/> <!-- Teejers -->
@@ -11,40 +12,25 @@
 <contributors>
     <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="JSON to XML conversion"/> <!-- TheBestGamer -->
 </contributors>
-<!-- Teams -->
 <teams>
     <team id="blue-team" color="blue" max="50">Blue</team>
     <team id="red-team" color="dark red" max="50">Red</team>
 </teams>
-<!-- Kits -->
 <kits>
-    <kit id="default">
+    <kit id="default-kit">
         <item slot="0" unbreakable="true" material="stone axe"/>
-    </kit>
-    <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="3C44AA" material="leather chestplate"/>
-    </kit>
-    <kit id="red-kit" parents="default">
-        <chestplate unbreakable="true" locked="true" color="B02E26" material="leather chestplate"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
-    <spawn team="blue-team" kit="blue-kit" yaw="135" region="blue-spawn"/>
-    <spawn team="red-team" kit="red-kit" yaw="-45" region="red-spawn"/>
+    <spawn team="blue-team" kit="default-kit" yaw="135" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" yaw="-45" region="red-spawn"/>
     <default yaw="-135" region="obs-spawn"/>
 </spawns>
-<!-- Monuments -->
-<destroyables repairable="false" materials="beacon" sparks="true">
-    <destroyable name="Beacon" owner="blue-team" region="blue-beacon"/>
-    <destroyable name="Beacon" owner="red-team" region="red-beacon"/>
+<destroyables name="Beacon" repairable="false" materials="beacon" sparks="true">
+    <destroyable owner="blue-team" region="blue-beacon"/>
+    <destroyable owner="red-team" region="red-beacon"/>
 </destroyables>
-<!-- Filters -->
-<filters>
-    <team id="blue-only">blue-team</team>
-    <team id="red-only">red-team</team>
-</filters>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
     <union id="monuments">
@@ -60,16 +46,9 @@
     <point id="obs-spawn">-108.5,95,-43.5</point>
     <!-- Applications -->
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
 </regions>
-<!-- Kill Rewards -->
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<!-- Item Remove -->
 <itemremove>
     <item>stone axe</item>
     <item>leather chestplate</item>
@@ -77,7 +56,6 @@
     <item>golden apple</item>
     <item>snow ball</item>
 </itemremove>
-<!-- Misc -->
 <hunger>
     <depletion>off</depletion>
 </hunger>
