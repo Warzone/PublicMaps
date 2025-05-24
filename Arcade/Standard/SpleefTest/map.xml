@@ -1,7 +1,7 @@
-<map proto="1.4.2" game="Spleef">
+<map proto="1.5.0" game="Spleef">
 <name>SpleefTest</name>
 <created>2021-04-07</created>
-<version>1.0.1</version>
+<version>1.0.2</version>
 <objective>Spleef everyone on the enemy team!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -19,37 +19,37 @@
     <alert after="5s">`eGood luck!</alert>
 </broadcasts>
 <kits>
-    <kit id="red-kit">
+    <kit id="base-kit">
         <item slot="0" unbreakable="true" enchantment="efficiency:5" material="diamond spade"/>
-        <item slot="1" unbreakable="true" damage="1">ink sack</item>
-        <item slot="2" unbreakable="true" damage="1">ink sack</item>
-        <item slot="3" unbreakable="true" damage="1">ink sack</item>
-        <item slot="4" unbreakable="true" damage="1">ink sack</item>
-        <item slot="5" unbreakable="true" damage="1">ink sack</item>
-        <item slot="6" unbreakable="true" damage="1">ink sack</item>
-        <item slot="7" unbreakable="true" damage="1">ink sack</item>
-        <item slot="8" unbreakable="true" damage="1">ink sack</item>
-        <helmet unbreakable="true" locked="true" color="B02E26">leather helmet</helmet>
-        <chestplate unbreakable="true" locked="true" color="B02E26">leather chestplate</chestplate>
-        <leggings unbreakable="true" locked="true" color="B02E26">leather leggings</leggings>
-        <boots unbreakable="true" locked="true" color="B02E26">leather boots</boots>
         <effect duration="5" amplifier="255">slow digging</effect>
     </kit>
-    <kit id="blue-kit">
-        <item slot="0" unbreakable="true" enchantment="efficiency:5">diamond spade</item>
-        <item slot="1" unbreakable="true" damage="4">ink sack</item>
-        <item slot="2" unbreakable="true" damage="4">ink sack</item>
-        <item slot="3" unbreakable="true" damage="4">ink sack</item>
-        <item slot="4" unbreakable="true" damage="4">ink sack</item>
-        <item slot="5" unbreakable="true" damage="4">ink sack</item>
-        <item slot="6" unbreakable="true" damage="4">ink sack</item>
-        <item slot="7" unbreakable="true" damage="4">ink sack</item>
-        <item slot="8" unbreakable="true" damage="4">ink sack</item>
-        <helmet unbreakable="true" locked="true" color="3C44AA">leather helmet</helmet>
-        <chestplate unbreakable="true" locked="true" color="3C44AA">leather chestplate</chestplate>
-        <leggings unbreakable="true" locked="true" color="3C44AA">leather leggings</leggings>
-        <boots unbreakable="true" locked="true" color="3C44AA">leather boots</boots>
-        <effect duration="5" amplifier="255">slow digging</effect>
+    <kit id="red-kit" parents="base-kit">
+        <item slot="1" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="2" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="3" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="4" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="5" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="6" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="7" unbreakable="true" damage="1" material="ink sack"/>
+        <item slot="8" unbreakable="true" damage="1" material="ink sack"/>
+        <helmet unbreakable="true" locked="true" color="B02E26" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" color="B02E26" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" color="B02E26" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" color="B02E26" material="leather boots"/>
+    </kit>
+    <kit id="blue-kit" parents="base-kit">
+        <item slot="1" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="2" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="3" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="4" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="5" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="6" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="7" unbreakable="true" damage="4" material="ink sack"/>
+        <item slot="8" unbreakable="true" damage="4" material="ink sack"/>
+        <helmet unbreakable="true" locked="true" color="3C44AA" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" color="3C44AA" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" color="3C44AA" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" color="3C44AA" material="leather boots"/>
     </kit>
 </kits>
 <blitz>
@@ -63,19 +63,19 @@
 </regions>
 <spawns>
     <spawn team="red" kit="red-kit">
-        <regions>
+        <region>
             <cuboid min="254,50,222" max="311,52,223"/>
-        </regions>
+        </region>
     </spawn>
     <spawn team="blue" kit="blue-kit">
-        <regions yaw="180">
+        <region yaw="180">
             <cuboid min="254,50,278" max="311,52,279"/>
-        </regions>
+        </region>
     </spawn>
     <default>
-        <regions yaw="-90">
+        <region yaw="-90">
             <point>282.5,60,250.5</point>
-        </regions>
+        </region>
     </default>
 </spawns>
 <itemremove>
@@ -87,7 +87,7 @@
     <item>leather boots</item>
     <item>snow ball</item>
 </itemremove>
-<world-borders center="282.5, 250.5">
+<world-borders center="282.5,250.5">
     <world-border size="64"/>
     <world-border size="2" after="0s" duration="60s" damage="200" buffer="0"/>
 </world-borders>
