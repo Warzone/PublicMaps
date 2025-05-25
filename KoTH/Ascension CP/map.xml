@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Ascension CP</name>
-<version>1.1.3</version>
+<version>1.2.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture the center point in order to win!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -20,96 +20,80 @@
     <contributor uuid="968a1d95-089a-47b7-8840-57eeedde6ea6" contribution="This scrub helped too."/> <!-- DoctorTardi -->
 </contributors>
 <teams>
-    <team color="dark red" max="20" max-overfill="26">Red</team>
-    <team color="blue" max="20" max-overfill="26">Blue</team>
+    <team id="red-team" color="dark red" max="20" max-overfill="26">Red</team>
+    <team id="blue-team" color="blue" max="20" max-overfill="26">Blue</team>
 </teams>
-<spawns>
-    <spawn team="red" kit="spawn" yaw="0">
-        <cylinder base="61,17,-93" radius="5" height="0"/>
-    </spawn>
-    <spawn team="blue" kit="spawn" yaw="180">
-        <cylinder base="61,17,31" radius="5" height="0"/>
-    </spawn>
-    <default yaw="-90" kit="obs">
-        <cylinder base="-2,50,-31" radius="4" height="0"/>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0">stone sword</item>
-        <item slot="1">bow</item>
-        <item slot="8" amount="16">arrow</item>
-        <item slot="5">golden apple</item>
-        <item slot="6" amount="32">cooked beef</item>
-        <item slot="7">gold ingot</item>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
-        <potion amplifier="10" duration="7">heal</potion>
-        <potion amplifier="25" duration="7">damage resistance</potion>
-        <potion amplifier="1" duration="oo">night vision</potion>
+    <kit id="spawn-kit">
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="3" material="gold ingot"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+        <effect amplifier="10" duration="7">heal</effect>
+        <effect amplifier="25" duration="7">damage resistance</effect>
+        <effect>night vision</effect>
     </kit>
-    <kit name="obs">
-        <potion amplifier="1" duration="oo">night vision</potion>
-    </kit>
-    <kit name="red" parents="spawn">
-        <leggings color="ff0000" unbreakable="true">leather leggings</leggings>
-        <boots color="ff0000" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <leggings color="0400ff" unbreakable="true">leather leggings</leggings>
-        <boots color="0400ff" unbreakable="true">leather boots</boots>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
     </kit>
 </kits>
-<king>
-    <hills>
-        <hill name="Hill" capture-time="10s" points="1">
-            <capture>
-                <cylinder base="61,12,-31" radius="7" height="5"/>
-            </capture>
-            <progress>
-                <cuboid min="67,12,-25" max="55,12,-37"/>
-            </progress>
-            <!-- Hack -->
-            <captured>
-                <cuboid min="60,19,-30" max="62,23,-32"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<spawns>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
+            <cylinder base="61,17,-93" radius="5" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region yaw="180">
+            <cylinder base="61,17,31" radius="5" height="0"/>
+        </region>
+    </spawn>
+    <default kit="obs-kit">
+        <region yaw="-90">
+            <cylinder base="-2,50,-31" radius="4" height="0"/>
+        </region>
+    </default>
+</spawns>
+<control-points capture-time="10s" points="1" incremental="true" progress="hill" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Hill">
+        <capture>
+            <cylinder id="hill" base="61.5,12,-31.5" radius="7" height="5"/>
+        </capture>
+        <!-- Hack -->
+        <captured>
+            <cuboid min="60.5,19,-30.5" max="62.5,23,-32.5"/>
+        </captured>
+    </control-point>
+</control-points>
 <score>
     <limit>500</limit>
-    <king/>
 </score>
 <filters>
-    <filter name="no-beacon">
-        <deny>
-            <block>beacon</block>
-        </deny>
-    </filter>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
+    <deny id="no-beacon">
+        <material>beacon</material>
+    </deny>
 </filters>
 <regions>
+    <!-- Jump Pads -->
     <apply velocity="@0,2,0">
-        <block>87,8,-7</block>
-        <block>35,8,-7</block>
-        <block>35,8,-55</block>
-        <block>87,8,-55</block>
-        <block>92,8,-31</block>
-        <block>30,8,-31</block>
+        <region>
+            <cuboid min="86.5,8,-7.5" max="88.5,9,-5.5"/>
+            <cuboid min="91.5,8,-29.5" max="93.5,9,-31.5"/>
+            <cuboid min="86.5,8,-53.5" max="88.5,9,-55.5"/>
+            <cuboid min="36.5,8,-53.5" max="34.5,9,-55.5"/>
+            <cuboid min="31.5,8,-31.5" max="29.5,9,-29.5"/>
+            <cuboid min="36.5,8,-7.5" max="34.5,9,-5.5"/>
+        </region>
     </apply>
-    <apply block="deny-all" use="no-beacon">
-        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply enter="only-red" message="`7Don't enter the `cRED TEAM `7spawn area!">
-        <circle center="61,-93" radius="10"/>
-    </apply>
-    <apply enter="only-blue" message="`7Don't enter the `9BLUE TEAM `7spawn area!">
-        <circle center="61,31" radius="10"/>
-    </apply>
+    <circle id="red-spawn-prot" center="61,-93" radius="10"/>
+    <circle id="blue-spawn-prot" center="61,31" radius="10"/>
+    <apply enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" use="no-beacon"/>
 </regions>
 <disabledamage>
     <damage>fall</damage>
@@ -118,56 +102,22 @@
     <tool>bow</tool>
     <tool>stone sword</tool>
 </toolrepair>
-<itemremove>
-    <item>cooked beef</item>
+<itemkeep>
     <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<killreward>
-    <item amount="1">golden apple</item>
-    <item amount="2">gold nugget</item>
-    <item amount="16">arrow</item>
-</killreward>
-<!-- <include id="tutorial"/> -->
-<tutorial>
-    <stage title="King of the Hill">
-        <message>
-            <line>This is a `920v20 King of the Hill (KOTH)`r game.</line>
-            <line>In order to `awin`r, your team must capture the 'Hill' in the center.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="50">18,29,-30</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>This is where you will spawn when the game starts.</line>
-            <line>Jump off spawn to enter the arena.</line>
-        </message>
-        <teleport>
-            <point yaw="-133" pitch="15">52,22,-69</point>
-        </teleport>
-    </stage>
-    <stage title="The Hill">
-        <message>
-            <line>This is what your team has to `c`lcapture`r in order to `awin`r.</line>
-            <line>`6Keep an eye on the scoreboard on the right`r to see how much of it has been captured.</line>
-        </message>
-        <teleport>
-            <point yaw="52" pitch="5">74,18,-38</point>
-        </teleport>
-    </stage>
-    <stage title="Gold and Gold Spawners">
-        <message>
-            <line>During the game, you can/will earn `egold`r.</line>
-            <line>The `egold`r can be used to make armor such as Leggings and Boots.</line>
-            <line>Use the crafting benches to craft `eingots`r or armor.</line>
-        </message>
-        <teleport>
-            <point yaw="-43" pitch="50">97,23,-35</point>
-        </teleport>
-    </stage>
-</tutorial>
+<kill-rewards>
+    <kill-reward>
+        <item amount="2">gold nugget</item>
+        <item amount="16">arrow</item>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
