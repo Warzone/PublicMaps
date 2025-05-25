@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Cat's Cradle</name>
-<version>1.0.6</version>
+<version>1.1.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture and hold the hills!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -12,256 +12,157 @@
     <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Aesthetic help"/> <!-- Tywnis -->
 </contributors>
 <teams>
-    <team color="dark red" max="32">Red</team>
-    <team color="blue" max="32">Blue</team>
+    <team id="red-team" color="dark red" max="32">Red</team>
+    <team id="blue-team" color="blue" max="32">Blue</team>
 </teams>
-<!-- <tutorial>
-    <stage title="King of the Hill">
-        <message>
-            <line>This is a `a`lKing of the Hill `rmap.</line>
-            <line>The objective is to gain control of both hills simultaneously.</line>
-        </message>
-        <teleport>
-            <point pitch="90" yaw="90">.5,90,.5</point>
-        </teleport>
-    </stage>
-    <stage title="Hills">
-        <message>
-            <line>This is the `eSouth Hill`r. You must gain control of both this and the `eNorth Hill `rto win!</line>
-            <line>You may gain control of the hill by standing on it for 40 seconds.</line>
-        </message>
-        <teleport>
-            <point angle="-6,19,-38">-19.5,31.75,-42.5</point>
-        </teleport>
-    </stage>
-    <stage title="TNT Spawner">
-        <message>
-            <line>In the center of the map, there is a `4TNT `rspawner that will spawn a single piece of `4TNT `revery `e60 seconds`r.</line>
-            <line>`4TNT `rcan be used to quickly clear enemies from a hill.</line>
-        </message>
-        <teleport>
-            <point angle="0,23.5,0">-2.5,25.75,-5.75</point>
-        </teleport>
-    </stage>
-    <stage title="Class Selection">
-        <message>
-            <line>This is `9Blue team`r's class selection room; `4Red Team `rhas one, as well.</line>
-            <line>There are four classes to choose from:</line>
-            <line>`r- `bScout`r: Speed past enemies and be the first to the hill</line>
-            <line>`r- `aArcher`r: Take out enemies from afar with a powerful bow</line>
-            <line>`r- `cSoldier`r: Slowly tank through enemies with strong gear</line>
-            <line>`r- `6Engineer`r: Place glass and cobwebs to help build defenses</line>
-        </message>
-        <teleport>
-            <point angle="-8,34,-77">-17.5,33.25,-66</point>
-        </teleport>
-    </stage>
-</tutorial> -->
-<kits>
-    <kit name="spawn">
-        <potion duration="oo" amplifier="1">night vision</potion>
-    </kit>
-    <kit name="scout" parents="spawn">
-        <item slot="0" unbreakable="true" enchantment="knockback:1" name="`bBat">stone sword</item>
-		<item slot="1" enchantment="knockback:2" name="`bHome Run">gold sword</item>
-        <item slot="2" amount="32" name="`3Baseball">snow ball</item>
-        <item slot="3">golden apple</item>
-        <item slot="4" damage="16396">potion</item>
-        <chestplate enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots enchantment="protection fall:3" unbreakable="true">leather boots</boots>
-        <potion duration="oo" amplifier="2">jump</potion>
-        <potion duration="oo" amplifier="2">speed</potion>
-        <potion duration="10" amplifier="1">heal</potion>
-    </kit>
-    <kit name="archer" parents="spawn">
-        <item slot="0" unbreakable="true" name="`bDagger">wood sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow damage:3;arrow infinite:1" name="`3Longbow">bow</item>
-        <item slot="28" amount="1">arrow</item>
-        <item slot="2" damage="8261">potion</item>
-        <item slot="29" damage="8261">potion</item> <!--  instant health 1  -->
-        <item slot="3" damage="16388">potion</item> <!--  poison 1  -->
-        <item slot="4" damage="8226">potion</item> <!--  speed 2  -->
-        <helmet unbreakable="true">chainmail helmet</helmet>
-        <chestplate enchantment="protection projectile:3" unbreakable="true">chainmail chestplate</chestplate>
-        <leggings unbreakable="true">leather leggings</leggings>
-        <boots unbreakable="true">chainmail boots</boots>
-        <potion duration="10" amplifier="1">heal</potion>
-    </kit>
-    <kit name="soldier" parents="spawn">
-        <item slot="0" unbreakable="true" name="`bBroadsword">iron sword</item>
-        <item slot="1" unbreakable="true" name="`3Reserve Bow">bow</item>
-        <item slot="8" amount="8">arrow</item>
-        <item slot="2" unbreakable="true" enchantment="knockback:1" name="`bEnraged Axe">gold axe</item>
-		<item slot="3" damage="8225">potion</item> <!--  regeneration 2  -->
-        <item slot="4" damage="16424">potion</item> <!--  weakness 1  -->
-        <helmet unbreakable="true">diamond helmet</helmet>
-        <chestplate enchantment="protection explosions:3;protection projectile:1">iron chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots enchantment="protection fall:1">iron boots</boots>
-        <potion duration="oo" amplifier="1">slow</potion>
-        <potion duration="10" amplifier="1">heal</potion>
-    </kit>
-    <kit name="engineer" parents="spawn">
-        <item slot="0" unbreakable="true" name="`bShortsword">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow damage:1" name="`3Shortbow">bow</item>
-        <item slot="8" amount="40">arrow</item>
-        <item slot="2">golden apple</item>
-        <item slot="3" amount="64">glass</item>
-        <item slot="4" amount="7" damage="4">web</item>
-        <helmet>gold helmet</helmet>
-        <chestplate enchantment="protection explosions:3">iron chestplate</chestplate>
-        <leggings unbreakable="true">chainmail leggings</leggings>
-        <boots unbreakable="true">leather boots</boots>
-        <potion duration="oo" amplifier="3">fast digging</potion>
-        <potion duration="10" amplifier="1">heal</potion>
-    </kit>
-</kits>
+<classes family="classes">
+    <class name="Scout" description="Swift flanker with speed and evasion!" longdescription="Specializes in rapid movement and hit-and-run tactics. Excels at capturing objectives and disrupting enemy lines with superior mobility." icon="feather" default="true">
+        <kit force="true">
+            <clear/>
+            <item slot="0" unbreakable="true" name="`bDagger" material="wood sword"/>
+            <item slot="1" unbreakable="true" enchantment="arrow damage:3;arrow infinite" name="`3Longbow" material="bow"/>
+            <item slot="2" damage="8261" material="potion"/> 
+            <item slot="3" damage="16388" material="potion"/> 
+            <item slot="4" damage="8226" material="potion"/>
+            <item slot="28" material="arrow"/>
+            <item slot="29" damage="8261" material="potion"/>
+            <helmet unbreakable="true" material="chainmail helmet"/>
+            <chestplate unbreakable="true" enchantment="protection projectile:3" material="chainmail chestplate"/>
+            <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+            <boots unbreakable="true" material="chainmail boots"/>
+            <effect duration="10">heal</effect>
+        </kit>
+    </class>
+    <class name="Archer" description="Precision ranged specialist!" longdescription="Masters of long-range combat with enhanced bows. Provides covering fire and picks off enemies from a distance with deadly accuracy." icon="arrow">
+        <kit force="true">
+            <clear/>
+            <item slot="0" unbreakable="true" name="`aRanger's Blade" material="stone sword"/>
+            <item slot="1" unbreakable="true" enchantment="arrow damage:5;arrow knockback:1;arrow infinite" name="`eElven Longbow" material="bow"/>
+            <item slot="2" damage="16453" material="potion"/>
+            <item slot="3" damage="8227" material="potion"/>
+            <item slot="8" amount="64" material="arrow"/>
+            <item slot="28" amount="32" material="spectral_arrow"/>
+            <helmet unbreakable="true" enchantment="protection projectile:2" material="leather helmet"/>
+            <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+            <leggings unbreakable="true" material="chainmail leggings"/>
+            <boots unbreakable="true" enchantment="protection fall:2" material="leather boots"/>
+            <effect>speed</effect>
+        </kit>
+    </class>
+    <class name="Soldier" description="Heavy combat specialist with strong melee weapons!" longdescription="Equipped with powerful melee weapons and protective armor for frontline combat." icon="diamond sword">
+        <kit force="true">
+            <clear/>
+            <item slot="0" unbreakable="true" name="`bBroadsword" material="iron sword"/>
+            <item slot="1" unbreakable="true" name="`3Reserve Bow" material="bow"/>
+            <item slot="2" unbreakable="true" enchantment="knockback" name="`bEnraged Axe" material="gold axe"/>
+            <item slot="3" damage="8225" material="potion"/>
+            <item slot="4" damage="16424" material="potion"/>
+            <item slot="8" amount="8" material="arrow"/>
+            <helmet unbreakable="true" material="diamond helmet"/>
+            <chestplate unbreakable="true" enchantment="protection explosions:3;protection projectile:1" material="iron chestplate"/>
+            <leggings unbreakable="true" material="chainmail leggings"/>
+            <boots unbreakable="true" enchantment="protection fall" material="iron boots"/>
+            <effect>slow</effect>
+            <effect duration="10">heal</effect>
+        </kit>
+    </class>
+    <class name="Engineer" description="Support class with building and utility items!" longdescription="Specializes in construction and area control with traps and defensive tools." icon="golden apple">
+        <kit force="true">
+            <clear/>
+            <item slot="0" unbreakable="true" name="`bShortsword" material="stone sword"/>
+            <item slot="1" unbreakable="true" enchantment="arrow damage" name="`3Shortbow" material="bow"/>
+            <item slot="2" material="golden apple"/>
+            <item slot="3" amount="64" material="glass"/>
+            <item slot="4" amount="7" damage="4" material="web"/>
+            <item slot="8" amount="40" material="arrow"/>
+            <helmet material="gold helmet"/>
+            <chestplate unbreakable="true" enchantment="protection explosions:3" material="iron chestplate"/>
+            <leggings unbreakable="true" material="chainmail leggings"/>
+            <boots unbreakable="true" material="leather boots"/>
+            <effect amplifier="3">fast digging</effect>
+            <effect duration="10">heal</effect>
+        </kit>
+    </class>
+</classes>
 <spawns>
-    <spawns kit="spawn" team="red">
-        <spawn yaw="0">
-            <cylinder base="8,32,69" radius="2" height="0"/>
-        </spawn>
-    </spawns>
-    <spawns kit="spawn" team="blue">
-        <spawn yaw="180">
-            <cylinder base="-8,32,-69" radius="2" height="0"/>
-        </spawn>
-    </spawns>
-    <default kit="spawn" yaw="90">
-        <cylinder base="0,40,0" radius="2" height="0"/>
+    <spawn team="red-team">
+        <region yaw="-90">
+            <cylinder base="22.5,22,-27.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="blue-team">
+        <region yaw="90">
+            <cylinder base="-22.5,22,27.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="90">
+            <cylinder base="0,40,0" radius="2" height="0"/>
+        </region>
     </default>
 </spawns>
-<filters>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-glass" parents="deny-all">
-        <allow>
-            <block>glass</block>
-            <block>tnt</block>
-            <block>web</block>
-        </allow>
-    </filter>
-</filters>
-<regions>
-    <union name="blue-spawn">
-        <cuboid min="-34,21,32" max="-29,31,-2"/>
-        <cuboid min="-29,21,17" max="-12,31,43"/>
-    </union>
-    <union name="red-spawn">
-        <cuboid min="29,21,-33" max="33,31,1"/>
-        <cuboid min="12,21,-43" max="29,31,-17"/>
-    </union>
-    <!--  blue classes  -->
-    <cuboid name="b-scout" min="-19,32,-81" max="-15,36,-77"/>
-    <cuboid name="b-archer" min="-13,32,-81" max="-9,36,-77"/>
-    <cuboid name="b-soldier" min="-7,32,-81" max="-3,36,-77"/>
-    <cuboid name="b-engineer" min="-1,32,-81" max="3,36,-77"/>
-    <!--  red classes  -->
-    <cuboid name="r-scout" min="15,32,77" max="19,36,81"/>
-    <cuboid name="r-archer" min="9,32,77" max="13,36,81"/>
-    <cuboid name="r-soldier" min="3,32,77" max="7,36,81"/>
-    <cuboid name="r-engineer" min="-3,32,77" max="1,36,81"/>
-    <apply block="deny-all">
-        <cuboid name="top" min="-oo,37,-oo" max="oo,127,oo"/>
-    </apply>
-    <apply block="only-glass">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply enter="only-blue" message="You may not enter §9Blue Team§c's spawn!">
-        <region name="blue-spawn"/>
-    </apply>
-    <apply enter="only-red" message="You may not enter §4Red Team§c's spawn!">
-        <region name="red-spawn"/>
-    </apply>
-    <apply block="deny-all" message="You may not modify the spawn areas!">
-        <region name="blue-spawn"/>
-        <region name="red-spawn"/>
-    </apply>
-	<apply block="deny-all" message="You may not build inside of the pits!">
-		<cuboid name="south" min="14,19,34" max="2,21,46"/>
-		<cuboid name="north" min="-14,19,-34" max="-2,21,-46"/>
-	</apply>
-    <apply kit="scout">
-        <region name="r-scout"/>
-        <region name="b-scout"/>
-    </apply>
-    <apply kit="archer">
-        <region name="r-archer"/>
-        <region name="b-archer"/>
-    </apply>
-    <apply kit="soldier">
-        <region name="r-soldier"/>
-        <region name="b-soldier"/>
-    </apply>
-    <apply kit="engineer">
-        <region name="r-engineer"/>
-        <region name="b-engineer"/>
-    </apply>
-</regions>
-<portals>
-    <!--  red portals  -->
-    <portal x="@22.5" y="@22" z="@-27.5" yaw="-90">
-        <region name="r-scout"/>
-    </portal>
-    <portal x="@22.5" y="@22" z="@-27.5" yaw="-90">
-        <region name="r-archer"/>
-    </portal>
-    <portal x="@22.5" y="@22" z="@-27.5" yaw="-90">
-        <region name="r-soldier"/>
-    </portal>
-    <portal x="@22.5" y="@22" z="@-27.5" yaw="-90">
-        <region name="r-engineer"/>
-    </portal>
-    <!--  blue portals  -->
-    <portal x="@-22.5" y="-10" z="@29" yaw="-90">
-        <region name="b-scout"/>
-    </portal>
-    <portal x="@-22.5" y="-10" z="@28" yaw="-90">
-        <region name="b-archer"/>
-    </portal>
-    <portal x="@-22.5" y="-10" z="@27" yaw="-90">
-        <region name="b-soldier"/>
-    </portal>
-    <portal x="@-22.5" y="-10" z="@26" yaw="-90">
-        <region name="b-engineer"/>
-    </portal>
-</portals>
-<king>
-    <hills capture-time="5s" points="1.5">
-        <hill name="North Hill">
-            <capture>
-                <cuboid min="-15,18,-47" max="-3,21,-35"/>
-            </capture>
-            <progress>
-                <cuboid min="-15,18,-47" max="-3,19,-35"/>
-            </progress>
-            <captured>
-                <cuboid min="-15,18,-47" max="-3,29,-35"/>
-            </captured>
-        </hill>
-        <hill name="South Hill">
-            <capture>
-                <cuboid min="2,18,34" max="14,21,46"/>
-            </capture>
-            <progress>
-                <cuboid min="2,18,34" max="14,19,46"/>
-            </progress>
-            <captured>
-                <cuboid min="2,18,34" max="14,29,46"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<control-points capture-time="5s" points="1.5" incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="North Hill">
+        <capture>
+            <cuboid min="-15,18,-47" max="-3,21,-35"/>
+        </capture>
+        <progress>
+            <cuboid min="-15,18,-47" max="-3,19,-35"/>
+        </progress>
+        <captured>
+            <cuboid min="-15,18,-47" max="-3,29,-35"/>
+        </captured>
+    </control-point>
+    <control-point name="South Hill">
+        <capture>
+            <cuboid min="2,18,34" max="14,21,46"/>
+        </capture>
+        <progress>
+            <cuboid min="2,18,34" max="14,19,46"/>
+        </progress>
+        <captured>
+            <cuboid min="2,18,34" max="14,29,46"/>
+        </captured>
+    </control-point>
+</control-points>
 <score>
     <limit>750</limit>
-    <king/>
 </score>
-<maxbuildheight>37</maxbuildheight>
+<filters>
+    <any id="only-glass">
+        <material>glass</material>
+        <material>tnt</material>
+        <material>web</material>
+    </any>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <union id="blue-spawn">
+            <cuboid min="-34,21,32" max="-29,31,-2"/>
+            <cuboid min="-29,21,17" max="-12,31,43"/>
+        </union>
+        <union id="red-spawn">
+            <cuboid min="29,21,-33" max="33,31,1"/>
+            <cuboid min="12,21,-43" max="29,31,-17"/>
+        </union>
+    </union>
+    <union id="pits">
+        <cuboid id="south" min="14,19,34" max="2,21,46"/>
+        <cuboid id="north" min="-14,19,-34" max="-2,21,-46"/>
+    </union>
+    <cuboid id="top" min="-oo,37,-oo" max="oo,127,oo"/>
+    <!-- Applications -->
+    <apply block="only-glass"/>
+    <apply region="top" block="never"/>
+    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="spawn-protections" block="never" message="You may not modify the spawn areas!"/>
+    <apply region="pits" block="never" message="You may not build inside of the pits!"/>
+</regions>
+<itemkeep>
+    <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
 <itemremove>
     <item>leather chestplate</item>
     <item>leather leggings</item>
@@ -274,7 +175,6 @@
     <item>chainmail boots</item>
     <item>diamond helmet</item>
     <item>gold helmet</item>
-    <item>arrow</item>
     <item>wood sword</item>
     <item>stone sword</item>
     <item>iron sword</item>
@@ -283,7 +183,6 @@
     <item>gold sword</item>
     <item>gold axe</item>
     <item>potion</item>
-    <item>golden apple</item>
     <item>glass bottle</item>
     <item>raw fish</item>
     <item>cookie</item>
@@ -292,11 +191,7 @@
     <item>glass</item>
     <item>web</item>
     <item>string</item>
-    <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item>golden apple</item>
-</killreward>
 <tnt>
     <instantignite>on</instantignite>
     <licensing>off</licensing>
@@ -304,6 +199,7 @@
     <blockdamage>off</blockdamage>
 </tnt>
 <hunger>
-	<depletion>off</depletion>
+    <depletion>off</depletion>
 </hunger>
+<maxbuildheight>37</maxbuildheight>
 </map>
