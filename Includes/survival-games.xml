@@ -5,10 +5,10 @@
 <gamemode>sg</gamemode>
 <objective>Be the last player standing.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
-    <constant id="timelimit">10m</constant>
+    <constant id="timelimit">13m</constant> <!-- Match ending time -->
+    <constant id="deathmatch-teleport">1m</constant> <!-- How long until players are teleported to the deathmatch-->
+    <constant id="deathmatch-start">1m10s</constant> <!-- How long until the deathmatch starts (after teleporting) -->
     <constant id="player-count">24</constant> <!-- How many players this map is suited for based on podium counts. Common values: "8", "12", "24", "32", "48" -->
-    <constant id="world-border-on">always</constant> <!-- Controls world border message. Can be set to "never" to turn off -->
-    <constant id="world-border-time">4</constant>
     <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
     <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
     <constant id="match-delay">10s</constant>
@@ -19,17 +19,17 @@
     <broadcastLives>false</broadcastLives>
 </blitz>
 <players min="8" max="${player-count}" max-overfill="${player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
-<broadcasts>
-    <alert after="${world-border-time}m" filter="${world-border-on}">The world border has begun to shrink!</alert>
-</broadcasts>
 <filters>
     <all id="starting-countdown">
         <not>
-            <countdown duration="${match-delay}" message="`3`lMatch will start in {0}" filter="match-running"/>
+            <countdown duration="${match-delay}" message="`c{0} until the games begin!" filter="match-running"/>
         </not>
         <match-running/>
     </all>
+    <time id="deathmatch-teleport-time">${deathmatch-teleport}</time>
+    <time id="deathmatch-start-time">${deathmatch-start}</time>
     <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
+    <countdown id="deathmatch-countdown" duration="10s" message="`c{0} until deathmatch!" filter="deathmatch-teleport-time"/>
     <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
     <any id="allow-break">
         <material>leaves</material>
@@ -57,15 +57,26 @@
         <region id="tier-2-chests"/>
     </all>
 </filters>
+<variables scope="player">
+    <variable id="tribute"/>
+</variables>
+<variables scope="match">
+    <variable id="tmp"/>
+    <array id="tp_points_x" size="${player-count}" />
+    <array id="tp_points_y" size="${player-count}" />
+    <array id="tp_points_z" size="${player-count}" />
+</variables>
 <actions>
     <trigger filter="starting-countdown" scope="player">
         <action scope="player">
-            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3The games have started!"/>
+            <sound key="ambient.weather.thunder" volume="0.2"/>
+            <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
+            <message text="`8`l[`6`lSG`8`l] `3And may the odds be ever in your favor."/>
         </action>
     </trigger>
     <trigger scope="player">
         <action scope="player">
-            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3Grace Period is now over!"/>
+            <message text="`8`l[`6`lSG`8`l] `3Grace period is now over!"/>
         </action>
         <filter>
             <all>
@@ -78,7 +89,7 @@
     </trigger>
     <trigger scope="player">
         <action scope="player">
-            <message text="`7`l[`6`lSurvival `e`lGames`7`l] `3Chests have been refilled!"/>
+            <message text="`8`l[`6`lSG`8`l] `3Chests have been refilled!"/>
         </action>
         <filter>
             <all>
@@ -86,6 +97,42 @@
                 <time>${chest-refill-timer}</time>
             </all>
         </filter>
+    </trigger>
+    <!--
+    <trigger filter="dead" scope="player">
+        <action scope="player">
+            <switch-scope outer="player" inner="match">
+                <sound key="ambient.weather.thunder" volume="0.2"/>
+                <message text="`8`l[`6`lSG`8`l] `aOnly `8[`6${}`8] `atributes remain!" />
+                <message text="`8`l[`6`lSG`8`l] `6A cannon can be heard in the distance." />
+            </switch-scope>
+        </action>
+    </trigger>
+    -->
+    <trigger filter="match-finished" scope="match">
+        <action scope="match">
+            <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
+        </action>
+    </trigger>
+    <trigger filter="deathmatch-start-time" scope="match">
+        <action scope="match">
+            <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
+        </action>
+    </trigger>
+    <trigger filter="deathmatch-teleport-time" scope="match">
+        <action>
+            <switch-scope inner="player">
+                <teleport x="tp_points_x[tribute] + 0.5" y="tp_points_y[tribute]" z="tp_points_z[tribute] + 0.5"/>
+            </switch-scope>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="match-started">
+        <action>
+            <switch-scope inner="player">
+                <set var="tribute" value="tmp" />
+                <set var="tmp" value="tmp + 1" />
+            </switch-scope>
+        </action>
     </trigger>
 </actions>
 <regions>
@@ -225,9 +272,6 @@
             </option>
             <option weight="15">
                 <item material="wood sword" unbreakable="true"/>
-            </option>
-            <option weight="15">
-                <item material="iron sword" unbreakable="true"/>
             </option>
             <option weight="15">
                 <item material="bow" unbreakable="true"/>
