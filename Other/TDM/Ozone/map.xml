@@ -1,7 +1,8 @@
-<?xml version="1.0"?>
-<map proto="1.0.0">
+<map proto="1.5.0">
 <name>Ozone</name>
-<version>1.0.7</version>
+<version>1.1.0</version>
+<include id="gapple-kill-reward"/>
+<time result="score">10m</time>
 <objective>Be the team with the least amount of deaths after 10 minutes.</objective>
 <gamemode>tdm</gamemode>
 <authors>
@@ -17,66 +18,57 @@
 <rules>
     <rule>Fall damage is disabled</rule>
 </rules>
+<broadcasts>
+    <tip after="1s" every="3m">Aim and shoot with your bow to teleport!</tip>
+</broadcasts>
 <teams>
-    <!-- Hipster Team Colors -->
-    <team color="dark aqua" max="40">Cyan</team>
-    <team color="dark purple" max="40">Purple</team>
+    <team id="cyan-team" color="dark aqua" max="40">Cyan</team>
+    <team id="purple-team" color="dark purple" max="40">Purple</team>
 </teams>
 <kits>
-    <kit name="spawn">
+    <kit id="spawn-kit" force="true">
 		<clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2">golden apple</item>
-		<leggings unbreakable="true" enchantment="protection projectile:3">chainmail leggings</leggings>
-		<boots unbreakable="true">iron boots</boots>
-        <potion duration="5" amplifier="10">damage resistance</potion>
-        <potion duration="oo" amplifier="1">jump</potion>
-        <potion duration="oo" amplifier="2">speed</potion>
-    </kit>
-	<kit name="purple" parents="spawn">
-		<helmet unbreakable="true" color="800080">leather helmet</helmet>
-		<chestplate unbreakable="true" color="800080">leather chestplate</chestplate>
-	</kit>
-	<kit name="cyan" parents="spawn">
-		<helmet color="3089A8" unbreakable="true">leather helmet</helmet>
-		<chestplate color="3089A8" unbreakable="true">leather chestplate</chestplate>
-	</kit>
-    <kit name="observers">
-        <potion duration="oo" amplifier="1">jump</potion>
-        <potion duration="oo" amplifier="2">speed</potion>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+		<chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+		<leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+		<boots unbreakable="true" material="iron boots"/>
+        <effect duration="5" amplifier="10">damage resistance</effect>
+        <effect amplifier="2">speed</effect>
+        <effect>jump</effect>
     </kit>
 </kits>
 <spawns>
-    <spawns kit="purple" team="purple">
-        <spawn yaw="225">
+    <spawn team="purple-team" kit="spawn-kit">
+        <region yaw="225">
             <cylinder base="-102.5,69,103.5" radius="4" height="0"/>
-        </spawn>
-        <spawn yaw="45">
+        </region>
+        <region yaw="45">
             <cylinder base="103.5,69,-102.5" radius="4" height="0"/>
-        </spawn>
-    </spawns>
-    <spawns kit="cyan" team="cyan">
-        <spawn yaw="135">
+        </region>
+    </spawn>
+    <spawn team="cyan-team" kit="spawn-kit">
+        <region yaw="135">
             <cylinder base="103.5,69,103.5" radius="4" height="0"/>
-        </spawn>
-        <spawn yaw="315">
+        </region>
+        <region yaw="315">
             <cylinder base="-102.5,69,-102.5" radius="4" height="0"/>
-        </spawn>
-    </spawns>
-    <default yaw="90" kit="observers">
-        <cylinder base="0,30,0" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="90">
+            <cylinder base="0,30,0" radius="3" height="0"/>
+        </region>
     </default>
 </spawns>
 <regions>
-	<apply block="deny-all">
-		<circle name="main-area" center="0.5,0.5" radius="175.5"/>
-	</apply>
+    <circle id="main-area" center="0.5,0.5" radius="175.5"/>
+	<apply block="never"/>
+    <apply region="main-area" leave="never" message="You may not leave the playing field!"/>
 </regions>
-<playable>
-	<region name="main-area"/>
-</playable>
 <!-- Do the magic! *wizz* -->
 <modifybowprojectile>
 	<projectile>EnderPearl</projectile>
@@ -85,30 +77,21 @@
 <disabledamage>
 	<damage>fall</damage>
 </disabledamage>
-<score>
-    <time>10m</time>
-</score>
-<killreward>
-	<item>golden apple</item>
-</killreward>
 <toolrepair>
 	<tool>bow</tool>
 	<tool>stone sword</tool>
 </toolrepair>
+<itemkeep>
+	<item>golden apple</item>
+	<item>arrow</item>
+</itemkeep>
 <itemremove>
 	<item>leather helmet</item>
 	<item>leather chestplate</item>
 	<item>chainmail leggings</item>
 	<item>iron boots</item>
 </itemremove>
-<itemkeep>
-	<item>golden apple</item>
-	<item>arrow</item>
-</itemkeep>
 <hunger>
 	<depletion>off</depletion>
 </hunger>
-<gamerules>
-    <doMobSpawning>false</doMobSpawning>
-</gamerules>
 </map>
