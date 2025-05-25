@@ -1,185 +1,144 @@
-<?xml version="1.0"?>
-<map proto="1.3.3">
+<map proto="1.5.0">
 <name>Cannon Duel</name>
-<version>0.5.1</version>
+<version>1.1.0</version>
 <objective>Kill them before they kill you</objective>
 <gamemode>arcade</gamemode>
 <authors>
     <author uuid="3fbec7dd-0a5f-40bf-9d11-885a54507112"/> <!-- last_username -->
     <author uuid="dad8b95c-cf6a-44df-982e-8c8dd70201e0"/> <!-- ElectroidFilms -->
 </authors>
-
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<broadcasts>
+    <alert after="5s">You will be dropped into the map in `c25 seconds. `rGet ready!</alert>
+    <alert after="25s">You will be dropped into the map in `c5 seconds`r!</alert>
+    <alert after="27s">You will be dropped into the map in `c3 seconds`r!</alert>
+    <alert after="28s">You will be dropped into the map in `c2 seconds`r!</alert>
+    <alert after="29s">You will be dropped into the map in `c1 second`r!</alert>
+    <alert after="31s">Build a `ccannon `rand try to eliminate the other player!</alert>
+</broadcasts>
 <teams>
     <team id="red-player" color="dark red" max="1" max-overfill="1">Red Player</team>
     <team id="blue-player" color="blue" max="1" max-overfill="1">Blue Player</team>
 </teams>
-
 <kits>
-    <!-- kit given to everyone, including observers -->
-    <kit name="all">
-        <potion duration="oo">night vision</potion>
-        <potion duration="oo">saturation</potion>
+    <kit id="spawn-kit">
+        <item slot="9" amount="64" material="tnt"/>
+        <item slot="18" amount="64" material="tnt"/>
+        <item slot="27" amount="64" material="tnt"/>
+        <item slot="0" unbreakable="true" material="diamond pickaxe"/>
+        <item slot="10" amount="64" material="tnt"/>
+        <item slot="19" amount="64" material="tnt"/>
+        <item slot="28" amount="64" material="tnt"/>
+        <item slot="1" amount="16" material="dispenser"/>
+        <item slot="11" amount="64" material="tnt"/>
+        <item slot="20" amount="64" material="tnt"/>
+        <item slot="29" amount="64" material="tnt"/>
+        <item slot="2" amount="64" material="step"/>
+        <item slot="13" amount="16" material="trap door"/>
+        <item slot="22" amount="16" material="ladder"/>
+        <item slot="31" material="workbench"/>
+        <item slot="4" amount="64" material="nether fence"/>
+        <item slot="14" amount="16" material="piston base"/>
+        <item slot="23" amount="16" material="lever"/>
+        <item slot="32" amount="16" material="stone plate"/>
+        <item slot="5" amount="16" material="stone button"/>
+        <item slot="15" material="water bucket"/>
+        <item slot="24" material="water bucket"/>
+        <item slot="33" material="water bucket"/>
+        <item slot="6" material="water bucket"/>
+        <item slot="16" amount="16" material="diode"/>
+        <item slot="25" amount="16" material="redstone torch on"/>
+        <item slot="34" amount="16" material="redstone block"/>
+        <item slot="7" amount="64" material="redstone"/>
+        <item slot="17" amount="64" material="tnt"/>
+        <item slot="26" amount="64" material="tnt"/>
+        <item slot="35" amount="64" material="tnt"/>
+        <item slot="8" amount="64" material="tnt"/>
+        <item slot="12" team-color="true" amount="64" material="stained glass"/>
+        <item slot="21" team-color="true" amount="64" material="stained clay"/>
+        <item slot="30" team-color="true" amount="64" material="stained clay"/>
+        <item slot="3" team-color="true" amount="64" material="stained clay"/>
+        <helmet locked="true" team-color="true" enchantment="water worker:3" unbreakable="true" material="leather helmet"/>
+        <chestplate locked="true" team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings locked="true" team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots locked="true" team-color="true" damage="-3000" material="leather boots"/>
+        <effect duration="35" amplifier="5">damage resistance</effect>
+        <effect duration="35" amplifier="5">heal</effect>
+        <effect>night vision</effect>
     </kit>
-
-    <!-- kit given to both teams -->
-    <kit name="team" parents="all">
-        <item slot="9" amount="64">tnt</item>
-        <item slot="18" amount="64">tnt</item>
-        <item slot="27" amount="64">tnt</item>
-        <item slot="0">diamond pickaxe</item>
-        
-        <item slot="10" amount="64">tnt</item>
-        <item slot="19" amount="64">tnt</item>
-        <item slot="28" amount="64">tnt</item>
-        <item slot="1" amount="16">dispenser</item>
-        
-        <item slot="11" amount="64">tnt</item>
-        <item slot="20" amount="64">tnt</item>
-        <item slot="29" amount="64">tnt</item>
-        <item slot="2" amount="64">step</item>
-        
-        <!-- slot="12" -->
-        <!-- slot="21" -->
-        <!-- slot="30" -->
-        <!-- slot="3" -->
-
-        <item slot="13" amount="16">trap door</item>
-        <item slot="22" amount="16">ladder</item>
-        <item slot="31">workbench</item>
-        <item slot="4" amount="64">nether fence</item>
-        
-        <item slot="14" amount="16">piston base</item>
-        <item slot="23" amount="16">lever</item>
-        <item slot="32" amount="16">stone plate</item>
-        <item slot="5" amount="16">stone button</item>
-        
-        <item slot="15">water bucket</item>
-        <item slot="24">water bucket</item>
-        <item slot="33">water bucket</item>
-        <item slot="6">water bucket</item>
-        
-        <item slot="16" amount="16">diode</item>
-        <item slot="25" amount="16">redstone torch on</item>
-        <item slot="34" amount="16">redstone block</item>
-        <item slot="7" amount="64">redstone</item>
-
-        <item slot="17" amount="64">tnt</item>
-        <item slot="26" amount="64">tnt</item>
-        <item slot="35" amount="64">tnt</item>
-        <item slot="8" amount="64">tnt</item>
-
-        <!-- Resistance to make it into the spawn drop -->
-
-        <potion duration="35" amplifier="5">damage resistance</potion>
-        <potion duration="35" amplifier="5">heal</potion>
-
-    </kit>
-
-    <kit name="red-gear" parents="team">
-        <item slot="12" damage="14" amount="64">stained glass</item>
-        <item slot="21" damage="14" amount="64">stained clay</item>
-        <item slot="30" damage="14" amount="64">stained clay</item>
-        <item slot="3" damage="14" amount="64">stained clay</item>
-        
-        <helmet locked="true" color="dd5566" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
-        <chestplate locked="true" color="dd5566" unbreakable="true">leather chestplate</chestplate>
-        <leggings locked="true" color="dd5566" unbreakable="true">leather leggings</leggings>
-        <boots locked="true" color="dd5566" damage="-3000">leather boots</boots>
-    </kit>
-
-    <kit name="blue-gear" parents="team">
-        <item slot="12" damage="11" amount="64">stained glass</item>
-        <item slot="21" damage="11" amount="64">stained clay</item>
-        <item slot="30" damage="11" amount="64">stained clay</item>
-        <item slot="3" damage="11" amount="64">stained clay</item>
-        
-        <helmet locked="true" color="5e55dd" enchantment="water worker:3" unbreakable="true">leather helmet</helmet>
-        <chestplate locked="true" color="5e55dd" unbreakable="true">leather chestplate</chestplate>
-        <leggings locked="true" color="5e55dd" unbreakable="true">leather leggings</leggings>
-        <boots locked="true" color="5e55dd" damage="-3000">leather boots</boots>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
     </kit>
 </kits>
-
-<filters>
-    <filter name="red-only">
-        <team>red-player</team>
-    </filter>
-
-    <filter name="blue-only">
-        <team>blue-player</team>
-    </filter>
-</filters>
-
-<regions>
-
-    <!--                    -->
-    <!-- Region Definitions -->
-    <!--                    -->
-
-    <!-- area where players drop to get dropped into the box -->
-    <union name="drops">
-        <cuboid name="red-drop" min="35,51,9" max="28,55,16"/>
-        <cuboid name="blue-drop" min="28,51,59" max="35,55,66"/>
-    </union>
-
-    <!-- the entire inside of the box -->
-    <cuboid name="box" min="26,0,7" max="37,51,68"/>
-
-    <!-- neutral center region -->
-    <cuboid name="center" min="26,0,31" max="37,51,44"/>
-
-    <cuboid name="red-zone" min="27,16,8" max="36,35,17"/>
-    <cuboid name="blue-zone" min="27,16,58" max="36,35,67"/>
-
-    <!--             -->
-    <!-- Block Rules -->
-    <!--             -->
-
-    <apply block="deny-all" message="You may not place or break blocks outside the build zone">
-        <negative>
-            <union>
-                <region name="red-zone"/>
-                <region name="blue-zone"/>
-            </union>
-        </negative>
-    </apply>
-</regions>
-
 <spawns pitch="0">
-    <default yaw="90" kit="all">
-        <cylinder base="31.5,58,37.5" radius="4" height="0"/>
+    <default kit="obs-kit">
+        <region yaw="90">
+            <cylinder base="31.5,58,37.5" radius="4" height="0"/>
+        </region>
     </default>
-    <spawn team="red-player" yaw="0" kit="red-gear">
-        <point>31.5,52,12.5</point>
+    <spawn team="red-player" kit="spawn-kit">
+        <region>
+            <point>31.5,52,12.5</point>
+        </region>
     </spawn>
-    <spawn team="blue-player" yaw="180" kit="blue-gear">
-        <point>31.5,52,62.5</point>
+    <spawn team="blue-player" kit="spawn-kit">
+        <region yaw="180">
+            <point>31.5,52,62.5</point>
+        </region>
     </spawn>
 </spawns>
-
-<!-- Destroyables are impossible to break as they are in a deny-all region -->
-
-<destroyables name="drop" materials="stained glass:7" completion="0%" show="false" mode-changes="true">
-    <destroyable id="red-drop" owner="red player">
-        <region name="red-drop"/>
-    </destroyable>
-    <destroyable id="blue-drop" owner="blue player">
-        <region name="blue-drop"/>
-    </destroyable>
-    <destroyable id="bridge" owner="red player">
-        <cuboid min="31,25,17" max="32,46,58"/>
-    </destroyable>
-</destroyables>
-
-<broadcasts>
-    <alert after="1s">`aYou have 30 seconds to sort your inventory</alert>
-</broadcasts>
-
-<modes>
-    <mode after="30s" material="air" show-before="30s" name="`3Dropping you into the map"/>
-    <mode after="2m30s" material="stained glass:7" show-before="30s" name="`3Connecting the platforms"/>
-</modes>
-
-<blitz/>
-
+<filters>
+<!-- Block filters -->
+    <material id="stained-block">stained glass:7</material>
+    <!-- Floor To Air -->
+    <after id="floor-to-air" duration="30s">
+        <match-started/>
+    </after>
+    <!-- Floor Filter -->
+    <deny id="no-stainedglass">
+        <material>stained glass:7</material>
+    </deny>
+</filters>
+<regions>
+    <union id="floor-drops">
+        <cuboid id="red-drop" min="35,51,9" max="28,55,16"/>
+        <cuboid id="blue-drop" min="28,51,59" max="35,55,66"/>
+        <cuboid id="bridge" min="31,25,17" max="32,46,58"/>
+    </union>
+    <union id="zones">
+        <negative>
+            <cuboid id="red-zone" min="27,16,8" max="36,35,17"/>
+            <cuboid id="blue-zone" min="27,16,58" max="36,35,67"/>
+        </negative>
+    </union>
+    <!-- the entire inside of the box -->
+    <cuboid id="box" min="26,0,7" max="37,51,68"/>
+    <!-- neutral center region -->
+    <cuboid id="center" min="26,0,31" max="37,51,44"/>
+    <apply region="zones" block="never" message="You may not place or break blocks outside the build zone"/>
+</regions>
+<actions>
+    <!-- Floor To Air -->
+    <trigger scope="match" filter="floor-to-air">
+        <action>
+            <fill region="floor-drops" filter="stained-block" material="air"/>
+            <sound preset="ALERT"/>
+        </action>
+    </trigger>
+    <!-- Floor Drop Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="floor-to-air"/>
+        </filter>
+        <action>
+            <message id="floor-drop-title" fade-in="0.5s" stay="2.5s" fade-out="0.5s">
+                <title>`aGO!</title>
+                <subtitle>`fYou `fhave `fone `flife `fremaining.</subtitle>
+            </message>
+        </action>
+    </trigger>
+</actions>
 </map>
