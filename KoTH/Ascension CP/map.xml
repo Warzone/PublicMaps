@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Ascension CP</name>
-<version>1.2.0</version>
+<version>1.2.1</version>
 <include id="gapple-kill-reward"/>
 <objective>Capture the center point in order to win!</objective>
 <gamemode>koth</gamemode>
@@ -73,9 +73,7 @@
     <limit>500</limit>
 </score>
 <filters>
-    <deny id="no-beacon">
-        <material>beacon</material>
-    </deny>
+    <material id="no-beacon">beacon</material>
 </filters>
 <regions>
     <!-- Jump Pads -->
@@ -93,7 +91,7 @@
     <circle id="blue-spawn-prot" center="61,31" radius="10"/>
     <apply enter="red-team" message="You may not enter the enemy's spawn!"/>
     <apply enter="blue-team" message="You may not enter the enemy's spawn!"/>
-    <apply block="never" use="no-beacon"/>
+    <apply block="never" use="deny(no-beacon)"/>
 </regions>
 <disabledamage>
     <damage>fall</damage>

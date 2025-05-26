@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Warp Pocket</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Capture and hold both of the hills to be the first team to reach 750 points!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -120,13 +120,13 @@
             <material>stained glass:1</material>
             <material>stained glass:15</material>
             <material>chest</material>
-            <material id="only-beacon">beacon</material>
             <material>gold block</material>
             <material>emerald block</material>
             <material>carpet</material>
             <material>web</material>
         </any>
     </deny>
+    <material id="no-beacon">beacon</material>
 </filters>
 <!-- Regions -->
 <regions>
@@ -165,7 +165,7 @@
     <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy's spawn!"/>
     <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn!"/>
     <apply region="map-protections" block="never" message="You are not allowed to modify blocks here!"/>
-    <apply block-break="no-break" use="deny(only-beacon)" message="You are not allowed to modify this block!"/>
+    <apply block-break="no-break" use="deny(no-beacon)" message="You are not allowed to modify this block!"/>
 </regions>
 <!-- Tool Repair -->
 <toolrepair>

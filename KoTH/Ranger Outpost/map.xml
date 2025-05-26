@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Ranger Outpost</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <objective>Be the first team to reach 750 points!</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -79,16 +79,14 @@
     <limit>750</limit>
 </score>
 <filters>
-    <deny id="deny-beacons">
-        <material>beacon</material>
-    </deny>
+    <material id="no-beacon">beacon</material>
 </filters>
 <regions>
     <cylinder id="cyan-base" base="-42,12,-39" radius="7" height="20"/>
     <cylinder id="green-base" base="42,12,39" radius="7" height="20"/>
     <apply region="cyan-base" enter="cyan-team" message="You may not enter the enemy's spawn!"/>
     <apply region="green-base" enter="green-team" message="You may not enter the enemy's spawn!"/>
-    <apply block="never" use="deny-beacons"/>
+    <apply block="never" use="deny(no-beacon)"/>
 </regions>
 <toolrepair>
     <tool>iron sword</tool>
