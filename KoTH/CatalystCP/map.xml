@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>CatalystCP</name>
-<version>1.0.5</version>
+<version>1.1.0</version>
+<inlcude id="gapple-kill-reward"/>
 <objective>Be the first team with 1000 points to win!</objective>
 <gamemode>koth</gamemode>
 <gamemode>cp</gamemode>
@@ -22,143 +22,130 @@
     <contributor uuid="939a9a1c-f735-467a-bfd7-ae77cafd6693" contribution="Aesthetics"/> <!-- PlasmaCross -->
 </contributors>
 <teams>
-    <team color="green" max="18" max-overfill="24">Green</team>
-    <team color="blue" max="18" max-overfill="24">Blue</team>
+    <team id="green-team" color="green" max="18" max-overfill="24">Green</team>
+    <team id="blue-team" color="blue" max="18" max-overfill="24">Blue</team>
 </teams>
-<spawns>
-    <spawn team="blue" kit="blue" yaw="180">
-        <cuboid min="18,2,776" max="22,3,772"/>
-    </spawn>
-    <spawn team="green" kit="green" yaw="0">
-        <cuboid min="94,2,732" max="98,3,728"/>
-    </spawn>
-    <default kit="observers" yaw="-90">
-        <cylinder base="106,18,740" radius="1" height="2"/>
-    </default>
-</spawns>
 <kits>
-    <kit name="spawn">
-        <item slot="0" name="`e`lSplatbat" unbreakable="true" attributes="generic.attackDamage:add:5">gold sword</item>
-        <item slot="1" name="`c`lSniper Rifle" unbreakable="true">bow</item>
-        <item slot="2" amount="32">arrow</item>
-        <item slot="8">golden apple</item>
-        <potion duration="oo" amplifier="1">speed</potion>
-        <potion duration="oo" amplifier="1">night vision</potion>
-        <potion duration="5" amplifier="15">heal</potion>
-        <potion duration="5" amplifier="15">damage resistance</potion>
-    </kit>
-    <kit name="blue" parents="spawn">
-        <chestplate color="6699D8" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="6699D8" unbreakable="true">leather leggings</leggings>
-        <boots color="6699D8" unbreakable="true">leather boots</boots>
-        <helmet>glass</helmet>
-    </kit>
-    <kit name="green" parents="spawn">
-        <chestplate color="667F33" enchantment="protection projectile:2" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="667F33" unbreakable="true">leather leggings</leggings>
-        <boots color="667F33" unbreakable="true">leather boots</boots>
-        <helmet>glass</helmet>
-    </kit>
-    <kit name="observers">
-        <potion duration="oo" amplifier="1">speed</potion>
-        <potion duration="oo" amplifier="1">night vision</potion>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" name="`e`lSplatbat" attributes="generic.attackDamage:add:5" material="gold sword"/>
+        <item slot="1" unbreakable="true" name="`c`lSniper Rifle" material="bow"/>
+        <item slot="2" amount="32" material="arrow"/>
+        <item slot="8" material="golden apple"/>
+        <helmet material="glass" locked="true"/>
+        <chestplate unbreakable="true" team-color="true" locked="true" enchantment="protection projectile:2" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" locked="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" locked="true" material="leather boots"/>
+        <effect>speed</effect>
+        <effect>night vision</effect>
+        <effect duration="5" amplifier="15">heal</effect>
+        <effect duration="5" amplifier="15">damage resistance</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="blue-team" kit="spawn-kit" yaw="180">
+        <region>
+            <cuboid min="18,2,776" max="22,3,772"/>
+        </region>
+    </spawn>
+    <spawn team="green-team" kit="spawn-kit" yaw="0">
+        <region>
+            <cuboid min="94,2,732" max="98,3,728"/>
+        </region>
+    </spawn>
+    <default yaw="-90">
+        <region>
+            <cylinder base="106,18,740" radius="1" height="2"/>
+        </region>
+    </default>
+</spawns>
 <filters>
-    <filter name="only-tnt">
-        <block>tnt</block>
-    </filter>
-    <filter name="deny-some">
-        <deny>
-            <block>beacon</block>
-        </deny>
-    </filter>
+    <material id="only-tnt">tnt</material>
+    <material id="only-beacon">beacon</material>
 </filters>
 <regions>
-    <apply block-place="only-tnt" block-break="deny-all" use="deny-some">
-        <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    </apply>
+    <apply block-place="only-tnt" block-break="never" use="deny(only-beacon)"/>
     <!-- Jumpad (Small) -->
-    <apply velocity="@0,1,0">
-        <block name="green-1">106,3,758</block>
-        <block name="green-2">90,8,767</block>
-        <block name="green-3">90,8,726</block>
-        <block name="blue-1">10,3,746</block>
-        <block name="blue-2">26,8,737</block>
-        <block name="blue-3">26,8,778</block>
+    <apply velocity="@0,1.25,0">
+        <region>
+            <!-- Green Pads -->
+            <cuboid min="105.5,3,759.5" max="107.5,4,757.5"/>
+            <cuboid min="89.5,8,766.5" max="91.5,9,768.5"/>
+            <cuboid min="89.5,8,725.5" max="91.5,9,727.5"/>
+            <!-- Blue Pads -->
+            <cuboid min="9.5,3,745.5" max="11.5,4,747.5"/>
+            <cuboid min="25.5,8,736.5" max="27.5,9,738.5"/>
+            <cuboid min="25.5,8,777.5" max="27.5,9,779.5"/>
+        </region>
     </apply>
     <!-- Jumpad (Big) -->
-    <apply velocity="@0,1.25,-0.50">
-        <block name="green-a">40,3,739</block>
-        <block name="center-b">58,3,739</block>
+    <apply velocity="@0,1.5,-0.50">
+        <region>
+            <!-- Blue Center Pads -->
+            <cuboid min="39.5,3,738.5" max="41.5,4,740.5"/>
+            <cuboid min="57.5,3,739.5" max="59.5,4,740.5"/>
+        </region>
     </apply>
     <!-- Jumpad (Big) -->
-    <apply velocity="@0,1.25,0.50">
-        <block name="blue-a">76,3,765</block>
-        <block name="center-a">58,3,765</block>
+    <apply velocity="@0,1.5,0.50">
+        <region>
+            <!-- Green Center Pads -->
+            <cuboid min="77.5,3,766.5" max="75.5,4,764.5"/>
+            <cuboid min="59.5,3,765.5" max="57.5,4,764.5"/>
+        </region>
     </apply>
 </regions>
-<king>
-    <hills>
-        <hill name="Point Alpha" capture-time="5s" points="1" show-progress="true">
-            <capture>
-                <cylinder base="76,11,775" radius="4" height="4"/>
-            </capture>
-            <progress>
-                <cuboid min="71,10,780" max="81,11,770"/>
-            </progress>
-            <captured>
-                <cuboid min="71,15,780" max="81,13,770"/>
-            </captured>
-        </hill>
-    </hills>
-    <hills>
-        <hill name="Center" capture-time="10s" points="1" show-progress="true">
-            <capture>
-                <cylinder base="58,2,752" radius="7" height="4"/>
-            </capture>
-            <progress>
-                <cuboid min="50,1,760" max="66,2,743"/>
-            </progress>
-            <captured>
-                <cuboid min="51,4,759" max="65,6,745"/>
-            </captured>
-        </hill>
-    </hills>
-    <hills>
-        <hill name="Point Beta" capture-time="5s" points="1" show-progress="true">
-            <capture>
-                <cylinder base="40,11,729" radius="4" height="4"/>
-            </capture>
-            <progress>
-                <cuboid min="35,10,734" max="45,11,724"/>
-            </progress>
-            <captured>
-                <cuboid min="35,13,734" max="45,15,724"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Point Alpha" capture-time="5s" points="1">
+        <capture>
+            <cylinder base="76,11,775" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <cuboid min="82.5,10,781.5" max="70.5,17,769.5"/>
+        </progress>
+    </control-point>
+    <control-point name="Center" capture-time="10s" points="1">
+        <capture>
+            <cylinder base="58.5,2,752.5" radius="7.5" height="4"/>
+        </capture>
+        <progress>
+            <cuboid min="49.5,1,742.5" max="67.5,8,762.5"/>
+        </progress>
+        <captured>
+            <cuboid min="51,4,759" max="65,6,745"/>
+        </captured>
+    </control-point>
+    <control-point name="Point Beta" capture-time="5s" points="1">
+        <capture>
+            <cylinder base="40,11,729" radius="4" height="4"/>
+        </capture>
+        <progress>
+            <cuboid min="34.5,10,723.5" max="46.5,17,735.5"/>
+        </progress>
+    </control-point>
+</control-points>
 <score>
     <limit>1000</limit>
-    <king/>
 </score>
 <toolrepair>
     <tool>gold sword</tool>
     <tool>bow</tool>
 </toolrepair>
-<itemremove>
+<itemkeep>
     <item>arrow</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
     <item>glass</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>golden apple</item>
 </itemremove>
-<killreward>
-    <item amount="8">arrow</item>
-    <item>golden apple</item>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
 <disabledamage>
     <damage>fall</damage>
 </disabledamage>
@@ -166,5 +153,5 @@
     <depletion>off</depletion>
 </hunger>
 <timelock>on</timelock>
-<autorespawn/>
+<respawn auto="true"/>
 </map>
