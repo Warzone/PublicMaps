@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
-<map proto="1.4.3">
+<map proto="1.5.0">
 <name>Cake CTW</name>
-<version>1.0.0</version>
+<version>1.0.1</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture both wools!</objective>
 <gamemode>ctw</gamemode>
-<maxbuildheight>31</maxbuildheight>
 <authors>
     <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
     <author uuid="50a34639-abb3-4cf1-b182-204756c49f49"/> <!-- Sam -->
@@ -18,41 +17,31 @@
     <team id="yellow-team" color="yellow" max="28">Yellow</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
-        <item slot="0" material="iron sword" unbreakable="true"/>
-        <item slot="1" material="bow" unbreakable="true"/>
-        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
-        <item slot="3" material="iron axe" unbreakable="true"/>
-        <item slot="5" material="sandstone" amount="32"/>
-        <item slot="6" material="log" amount="16"/>
-        <item slot="7" material="golden apple" amount="3"/>
-        <item slot="8" material="cooked fish" amount="32"/>
-        <item slot="9" material="arrow" amount="32"/>
-        <effect duration="5" amplifier="100">resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="spawn">
-        <item slot="4" material="stained glass" damage="3" amount="64"/>
-        <helmet color="2471A3" unbreakable="true">leather helmet</helmet>
-        <chestplate color="2471A3" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="2471A3" unbreakable="true">leather leggings</leggings>
-        <boots color="2471A3" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit id="yellow-kit" parents="spawn">
-        <item slot="4" material="stained glass" damage="4" amount="64"/>
-        <helmet color="F1C40F" unbreakable="true">leather helmet</helmet>
-        <chestplate color="F1C40F" unbreakable="true">leather chestplate</chestplate>
-        <leggings color="F1C40F" unbreakable="true">leather leggings</leggings>
-        <boots color="F1C40F" unbreakable="true">leather boots</boots>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" material="bow"/>
+        <item unbreakable="true" slot="2" material="diamond pickaxe"/>
+        <item unbreakable="true" slot="3" material="iron axe"/>
+        <item slot="5" amount="32" material="sandstone"/>
+        <item slot="6" amount="16" material="log"/>
+        <item slot="7" amount="3" material="golden apple"/>
+        <item slot="8" material="arrow"/>
+        <effect duration="5" amplifier="10">resistance</effect>
+        <item slot="4" amount="64" team-color="true" material="stained glass"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue-team" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <regions yaw="0">
             <cylinder base="0.5,46.5,-150.5" radius="1" height="0"/>
         </regions>
     </spawn>
-    <spawn team="yellow-team" kit="yellow-kit">
+    <spawn team="yellow-team" kit="spawn-kit">
         <regions yaw="-180">
              <cylinder base="0.5,46.5,151.5" radius="1" height="0"/>
         </regions>
@@ -78,9 +67,6 @@
     </wool>
 </wools>
 <filters>
-    <not id="deny-void"><void/></not>
-    <team id="only-blue">blue-team</team>
-    <team id="only-yellow">yellow-team</team>
     <not id="blue-spawn-with-wools-filter">
         <any>
             <all>
@@ -129,7 +115,7 @@
     <rectangle min="14,-118" max="-13,-158" id="blue-spawn-with-wools"/>
     <rectangle min="-13,119" max="14,159" id="yellow-spawn-with-wools"/>
     <cuboid min="3,10,-130" max="-2,13,-131" id="blue-spawn-enter"/>
-    <cuboid min="-2,10,132" max="3,13,133" id="yellow-spaw-enter"/>
+    <cuboid min="-2,10,132" max="3,13,133" id="yellow-spawn-enter"/>
     <union id="blue-wool-rooms">
         <cuboid min="11,14,-142" max="9,24,-154" id="blue-wool"/>
         <cuboid min="-10,14,-142" max="-8,24,-154" id="light-blue-wool"/>
@@ -138,23 +124,18 @@
         <cuboid min="-10,14,143" max="-8,24,155" id="yellow-wool"/>
         <cuboid min="11,14,143" max="9,24,155" id="orange-wool"/>
     </union>
-    <apply enter="only-blue" region="blue-spawn-enter" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-yellow" region="yellow-spaw-enter" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-blue" region="yellow-wool-rooms" message="You may not enter this wool room!"/>
-    <apply enter="only-yellow" region="blue-wool-rooms" message="You may not enter this wool room!"/>
+    <apply enter="deny(yellow-team)" region="blue-spawn-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(blue-team)" region="yellow-spawn-enter" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(yellow-team)" region="yellow-wool-rooms" message="You may not enter this wool room!"/>
+    <apply enter="deny(blue-team)" region="blue-wool-rooms" message="You may not enter this wool room!"/>
     <apply block-break="blue-spawn-with-wools-filter" region="blue-spawn-with-wools" message="You may not edit the wool room!"/>
     <apply block-break="yellow-spawn-with-wools-filter" region="yellow-spawn-with-wools" message="You may not edit the wool room!"/>
     <apply block="always" region="part-infront-of-wools"/>
     <apply block="always" region="void-lanes"/>
-    <apply block-place="deny-void" region="everywhere" message="You may not edit the void!"/>
+    <apply block-place="deny(void)" message="You may not edit the void!"/>
 </regions>
 <itemkeep>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>diamond pickaxe</item>
-    <item>iron axe</item>
     <item>golden apple</item>
-    <item>cooked fish</item>
     <item>log</item>
     <item>wood</item>
     <item>stained glass</item>
@@ -175,8 +156,11 @@
 </toolrepair>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="arrow" amount="16"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>31</maxbuildheight>
 </map>
