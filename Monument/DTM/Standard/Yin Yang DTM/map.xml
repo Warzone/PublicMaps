@@ -1,10 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Yin Yang DTM</name>
 <created>2016-02-23</created>
-<version>1.0.0</version>
+<version>1.0.1</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy both monuments!</objective>
 <gamemode>dtm</gamemode>
-<maxbuildheight>150</maxbuildheight>
 <authors>
     <author uuid="ae5c1e91-745b-4a6f-a337-11484ede6957"/> <!-- Clijmart -->
 </authors>
@@ -17,40 +17,31 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
+        <clear/>
         <item slot="0" material="iron sword" unbreakable="true"/>
         <item slot="1" material="bow" unbreakable="true"/>
         <item slot="2" material="diamond pickaxe" unbreakable="true"/>
         <item slot="3" material="iron axe" unbreakable="true"/>
+        <item slot="4" material="stained glass" team-color="true" amount="64"/>
         <item slot="5" material="log" amount="32"/>
         <item slot="6" material="exp bottle" amount="4"/>
         <item slot="7" material="golden apple" amount="2"/>
-        <item slot="8" material="cooked fish" amount="32"/>
-        <item slot="9" material="arrow" amount="32"/>
-        <item slot="10" material="lapis block"/>
+        <item slot="8" material="arrow" amount="32"/>
+        <item slot="9" material="lapis block"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
         <effect duration="3" amplifier="100">resistance</effect>
-    </kit>
-    <kit id="black-kit" parents="spawn-kit">
-        <item slot="4" material="stained glass" damage="15" amount="64"/>
-        <helmet color="000000" unbreakable="true" material="leather helmet"/>
-        <chestplate color="000000" unbreakable="true" material="leather chestplate"/>
-        <leggings color="000000" unbreakable="true" material="leather leggings"/>
-        <boots color="000000" unbreakable="true" material="leather boots"/>
-    </kit>
-    <kit id="white-kit" parents="spawn-kit">
-        <item slot="4" material="stained glass" damage="0" amount="64"/>
-        <helmet color="ffffff" unbreakable="true" material="leather helmet"/>
-        <chestplate color="ffffff" unbreakable="true" material="leather chestplate"/>
-        <leggings color="ffffff" unbreakable="true" material="leather leggings"/>
-        <boots color="ffffff" unbreakable="true" material="leather boots"/>
     </kit>
 </kits>
 <spawns>
-    <spawn team="black-team" kit="black-kit">
+    <spawn team="black-team" kit="spawn-kit">
         <regions yaw="0">
             <cylinder base="0.5,107.5,-113.5" radius="2" height="0"/>
         </regions>
     </spawn>
-    <spawn team="white-team" kit="white-kit">
+    <spawn team="white-team" kit="spawn-kit">
         <regions yaw="180">
              <cylinder base="0.5,107.5,114.5" radius="2" height="0"/>
         </regions>
@@ -84,9 +75,7 @@
     </destroyable>
 </destroyables>
 <filters>
-     <not id="deny-enchanter">
-        <material>enchantment table</material>
-    </not>
+    <material id="only-enchanter">enchantment table</material>
 </filters>
 <regions>
     <negative id="not-playingfield">
@@ -96,15 +85,14 @@
         <cylinder base="0.5,100,-113.5" radius="10" height="17" id="black-spawn"/>
         <cylinder base="0.5,100,114.5" radius="10" height="17" id="white-spawn"/>
     </union>
-
     <apply block="never" region="spawns" message="You may not edit spawn!"/>
-    <apply block="deny-enchanter" region="everywhere" message="You may not move the enchantment table!"/>
-    <apply block="never" region="not-playingfield" message="You may not build outside the playingfield!"/>
+    <apply block="deny(only-enchanter)" message="You may not move the enchantment table!"/>
+    <apply block="never" region="not-playingfield" message="You may not build outside the playing field!"/>
 </regions>
 <itemkeep> <!-- no tool remove cus of enchants -->
     <item>sandstone</item>
     <item>wood</item>
-    <item>cooked fish</item>
+    <item>golden apple</item>
     <item>log</item>
     <item>stained glass</item>
 </itemkeep>
@@ -123,10 +111,13 @@
 </toolrepair>
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item material="exp bottle" amount="4"/>
         <item material="lapis block"/>
         <item amount="2" material="arrow"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>150</maxbuildheight>
 </map>
