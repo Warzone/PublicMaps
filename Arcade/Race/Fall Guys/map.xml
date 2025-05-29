@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <game>Progress</game>
 <name>Fall Guys</name>
-<version>1.0.7</version>
+<version>1.0.8</version>
 <created>2022-08-08</created>
 <objective>Be the first to finish the parkour!</objective>
 <gamemode>arcade</gamemode>
@@ -109,13 +109,59 @@
     <score id="score-2">2</score>
     <score id="score-3">3</score>
     <score id="score-4">4</score>
+    <after id="after-7s" duration="7s">
+        <match-started/>
+    </after>
+    <after id="after-8s" duration="8.5s">
+        <match-started/>
+    </after>
     <after id="after-10s" message="Spawn cage will open in {0}" duration="10s">
         <match-started/>
     </after>
 </filters>
 <actions>
-    <fill id="open-spawn-cage" region="spawn-cage-exit" material="air" filter="only-stained-glass"/>
-    <trigger filter="after-10s" action="open-spawn-cage" scope="match"/>
+    <!-- Ready Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-7s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="ready-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`4Ready</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Set Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-8s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="set-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`cSet</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Glass To Air -->
+    <trigger scope="match" filter="after-10s">
+        <action>
+            <fill id="open-spawn-cage" region="spawn-cage-exit" filter="only-stained-glass" material="air"/>
+            <sound preset="ALERT"/>
+        </action>
+    </trigger>
+    <!-- Game Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-10s"/>
+        </filter>
+        <action>
+            <message id="game-start-title" fade-in="0.1s" stay="1.5s" fade-out="1.5s">
+                <title>`aGO!</title>
+            </message>
+        </action>
+    </trigger>
 </actions>
 <score>
     <limit>5</limit>
