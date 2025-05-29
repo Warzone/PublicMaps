@@ -1,10 +1,9 @@
-<map proto="1.4.2" game="Destroy the Wool">
+<map proto="1.5.0">
+<include id="destroy-the-wool"/>
 <name>Not So Itty Bitty</name>
 <variant id="rage">Rage</variant>
-<version>1.1.0</version>
-<objective>Destroy the other team's monument, made of colored wool.</objective>
 <gamemode>arcade</gamemode>
-<gamemode>dtm</gamemode>
+<version>1.1.1</version>
 <if variant="default">
     <created>2018-03-05</created>
     <constant id="wood-amount">64</constant>
@@ -33,6 +32,7 @@
 <!-- Kits -->
 <kits>
     <kit id="default-kit">
+        <clear/>
         <if variant="default">
             <item slot="0" unbreakable="true" material="iron sword"/>
             <item slot="1" unbreakable="true" material="stone axe"/>
@@ -42,11 +42,10 @@
             <item slot="0" unbreakable="true" enchantment="sharpness:10" material="iron sword"/>
             <item slot="1" unbreakable="true" enchantment="power:10" material="bow"/>
             <item slot="2" unbreakable="true" material="stone axe"/>
-            <item slot="7" material="arrow"/>
+            <item slot="8" material="arrow"/>
         </if>
         <item slot="3" amount="${wood-amount}" material="wood"/>
         <item slot="4" amount="${wood-amount}" material="wood"/>
-        <item slot="8" amount="64" material="cooked beef"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
@@ -66,14 +65,8 @@
     <destroyable name="Blue Wool" owner="blue-team" region="blue-wool"/>
     <destroyable name="Red Wool" owner="red-team" region="red-wool"/>
 </destroyables>
-<!-- Filters -->
-<filters>
-    <team id="only-blue">blue-team</team>
-    <team id="only-red">red-team</team>
-</filters>
 <!-- Regions -->
 <regions>
-    <!-- Definitions -->
     <!-- Wool monuments -->
     <union id="blue-wool">
         <block>342,27,-231</block>
@@ -89,7 +82,7 @@
         <block>-154,79,-198</block>
         <block>-75,27,-230</block>
     </union>
-    <!-- Spawn protection -->
+    <!-- Spawn Protections -->
     <union id="spawn-protections">
         <cuboid id="blue-spawn-protection" min="334,27,-143" max="365,54,-128"/>
         <cuboid id="red-spawn-protection" min="-67,27,-127" max="-98,54,-142"/>
@@ -99,17 +92,20 @@
     <point id="red-spawn">-90.5,27,-133.5</point>
     <point id="obs-spawn">133.5,74,-11.5</point>
     <!-- Applications -->
-    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="only-blue" message="You may not enter the enemy's spawn."/>
-    <apply region="red-spawn-protection" enter="only-red" message="You may not enter the enemy's spawn."/>
+    <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here!"/>
+    <apply region="blue-spawn-protection" enter="deny(red-team)" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn-protection" enter="deny(blue-team)" message="You may not enter the enemy's spawn!"/>
 </regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>stone axe</tool>
+    <tool>bow</tool>
+</toolrepair>
+<itemkeep>
+    <item>wood</item>
+</itemkeep>
 <!-- Item Remove -->
 <itemremove>
-    <item>iron sword</item>
-    <item>stone axe</item>
-    <item>wood</item>
-    <item>golden apple</item>
-    <item>cooked beef</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
