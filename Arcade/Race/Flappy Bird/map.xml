@@ -1,6 +1,6 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Flappy Bird</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Jump and do not hit the pipes!</objective>
 <gamemode>arcade</gamemode>
 <game>Flappy Bird</game>
@@ -14,10 +14,6 @@
     <tip after="1s">Double tapping will make you jump</tip>
     <tip after="2s">The jump will follow your head movement, just look wherever you want to go</tip>
     <tip after="3s">Don't ever stop jumping!</tip>
-    <alert after="4s">3..</alert>
-    <alert after="5s">2..</alert>
-    <alert after="6s">1..</alert>
-    <alert after="6.5s">GO!</alert>
 </broadcasts>
 <spawns>
     <default>
@@ -112,15 +108,61 @@
     <score id="score-17">17</score>
     <score id="score-18">18</score>
     <score id="score-19">19</score>
+    <after id="after-4s" duration="4s">
+        <match-started/>
+    </after>
+    <after id="after-5s" duration="5s">
+        <match-started/>
+    </after>
+    <after id="after-6s" message="Game will start in {0}" duration="6s">
+        <match-started/>
+    </after>
 </filters>
+<actions>
+    <!-- Ready Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-4s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="ready-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`4Ready</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Set Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-5s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="set-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`cSet</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Game Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-6s"/>
+        </filter>
+        <action>
+            <message id="game-start-title" fade-in="0.1s" stay="1.5s" fade-out="1.5s">
+                <title>`aGO!</title>
+            </message>
+        </action>
+    </trigger>
+</actions>
 <kits>
     <kit id="spawn">
         <item slot="0" projectile="egg" name="`aStun Gun" material="diamond barding"/>
         <double-jump recharge-before-landing="true" recharge-time="0s" power="3"/>
         <effect duration="1s" amplifier="50">slowness</effect>
-        <effect duration="oo" amplifier="2">speed</effect>
         <effect duration="10s" amplifier="50">damage resistance</effect>
-        <effect duration="oo" amplifier="5">regeneration</effect>
+        <effect amplifier="2">speed</effect>
+        <effect amplifier="5">regeneration</effect>
     </kit>
     <kit id="1">
         <item slot="9" name="1-gate" material="flint"/>
