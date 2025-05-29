@@ -1,6 +1,6 @@
-<map proto="1.4.2" game="Rush">
+<map proto="1.5.0" game="Rush">
 <name>Crossfire</name>
-<version>1.5.11</version>
+<version>1.5.2</version>
 <slug>crossfire</slug>
 <objective>Runners must get to the other side of the map without getting killed by the Defenders.</objective>
 <gamemode>arcade</gamemode>
@@ -21,7 +21,7 @@
     <rule>Do not hide in the houses!</rule>
 </rules>
 <destroyables>
-    <destroyable owner="defenders" name="Monument" region="monument" materials="sponge" required="true"/>
+    <destroyable owner="defenders-team" name="Monument" region="monument" materials="sponge" required="true"/>
 </destroyables>
 <blitz>
     <lives>1</lives>
@@ -29,120 +29,111 @@
 </blitz>
 <respawn auto="true"/>
 <teams>
-    <team id="runners" color="light purple" max="25" max-overfill="30" plural="true">Runners</team>
-    <team id="defenders" color="dark blue" max="4" plural="true">Defenders</team>
+    <team id="runners-team" color="light purple" max="25" max-overfill="30" plural="true">Runners</team>
+    <team id="defenders-team" color="dark blue" max="4" plural="true">Defenders</team>
 </teams>
 <kits>
-    <kit id="hunger">
+    <kit id="hunger-kit">
+        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
     </kit>
-    <kit id="magenta" parents="hunger">
-        <helmet color="EBD2F5" material="leather helmet"/>
-        <chestplate color="EBD2F5" material="leather chestplate"/>
-        <leggings color="EBD2F5" material="leather leggings"/>
-        <boots color="FFFFFF" material="leather boots"/>
-        <item slot="0" damage="61" material="wood sword"/>
+    <kit id="runners-kit" parents="hunger-kit">
+        <item slot="0" material="wood sword"/>
         <item slot="1" material="boat"/>
     </kit>
-    <kit id="dark-blue" parents="hunger">
-        <helmet color="293878" material="leather helmet"/>
-        <chestplate color="293878" material="leather chestplate"/>
-        <leggings color="293878" material="leather leggings"/>
-        <boots color="191919" material="leather boots"/>
-        <potion duration="600" amplifier="2">speed</potion>
-        <item slot="1" unbreakable="true" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:3;ARROW_INFINITE:1" material="bow"/>
-        <item slot="28" amount="1">arrow</item>
+    <kit id="defenders-kit" parents="hunger-kit">
+        <item unbreakable="true" slot="0" enchantment="ARROW_KNOCKBACK;ARROW_DAMAGE:3;ARROW_INFINITE" material="bow"/>
+        <item slot="27" material="arrow"/>
+        <effect amplifier="2">speed</effect>
         <walk-speed>1.5</walk-speed>
     </kit>
-    <kit id="heal">
-        <potion duration="3" amplifier="4">heal</potion>
+    <kit id="heal-kit">
+        <effect duration="3" amplifier="4">heal</effect>
     </kit>
 </kits>
+<spawns>
+    <spawn team="runners-team" kit="runners-kit" region="runner-spawn"/>
+    <spawn team="defenders-team" kit="defenders-kit" region="defender-spawn"/>
+    <default region="observer-spawn"/>
+</spawns>
+<filters>
+    <any id="monument-cobwebs">
+        <material>web</material>
+        <material>sponge</material>
+    </any>
+</filters>
+<regions>
+    <block id="monument">756.5,45,1085.5</block>
+    <cuboid id="spawnhouse" min="743,45,431" max="770,52,445"/>
+    <cuboid id="town" min="744,36,500" max="769,45,552"/>
+    <cuboid id="mainland" min="743,0,431" max="770,256,1087"/>
+    <cuboid id="runner-spawn" min="748,47.5,437" max="765,47.5,442"/>
+    <cuboid id="defender-spawn" min="756,87,405" max="757,87,406"/>
+    <cuboid id="observer-spawn" min="756,95,375" max="757,95,376"/>
+    <rectangle id="heal-1" min="742,761" max="770,762"/>
+    <!-- Portal Regions -->
+    <union id="spawn-a">
+        <cuboid min="761,86,405" max="762,87,409"/>
+        <cuboid min="759,86,408" max="762,87,409"/>
+    </union>
+    <union id="spawn-b">
+        <cuboid min="751,86,405" max="752,87,409"/>
+        <cuboid min="751,86,408" max="754,87,409"/>
+    </union>
+    <block id="start-a">787.5,48,441.5</block>
+    <!-- yaw:-45 -->
+    <block id="start-b">725.5,48,441.5</block>
+    <!-- yaw:45 -->
+    <cuboid id="portal-a" min="792,47,468" max="793,48,1032"/>
+    <cuboid id="portal-b" min="720,47,468" max="721,48,1032"/>
+    <apply block="monument-cobwebs" message="You may only break cobwebs!"/>
+    <apply region="heal-1" kit="heal-kit"/>
+    <apply region="spawnhouse" enter="never" message="You may not re-enter your spawn"/>
+</regions>
+<portals>
+    <portal yaw="@-45" region="spawn-a" destination="start-a"/>
+    <portal yaw="@45" region="spawn-b" destination="start-b"/>
+    <portal x="-69" y="@49" z="10" region="portal-a"/>
+    <portal x="69" y="@49" z="10" region="portal-b"/>
+</portals>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <all>
+                <team>defenders-team</team>
+                <kill-streak count="3"/>
+            </all>
+        </filter>
+        <kit force="true">
+            <item slot="1" enchantment="ARROW_KNOCKBACK;ARROW_DAMAGE:5;ARROW_INFINITE" name="`AUpgraded Bow" material="bow"/>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<timelock>on</timelock>
+<time result="defenders-team">6m</time>
+<toolrepair>
+    <tool>wood sword</tool>
+    <tool>bow</tool>
+</toolrepair>
 <itemremove>
     <item>string</item>
     <item>sponge</item>
     <item>arrow</item>
     <item>stick</item>
-    <item>wood</item>
 </itemremove>
-<toolrepair>
-    <tool>wood sword</tool>
-</toolrepair>
-<kill-rewards>
-    <kill-reward>
-        <filter>
-            <all>
-                <team>defenders</team>
-                <kill-streak count="3"/>
-            </all>
-        </filter>
-        <kit force="true">
-            <item slot="1" enchantment="ARROW_KNOCKBACK:1;ARROW_DAMAGE:5;ARROW_INFINITE:1" name="`AUpgraded Bow" material="bow"/>
-        </kit>
-    </kill-reward>
-</kill-rewards>
-<timelock>on</timelock>
-<filters>
-    <!-- parents="deny-all" -->
-    <any id="monument-cobwebs">
-        <material>web</material>
-        <material>sponge</material>
-    </any>
-    <!-- parents="deny-players" -->
-    <team id="defenders-only">defenders</team>
-</filters>
-<regions>
-    <block id="monument">756.5,45,1085.5</block>
-    <cuboid id="spawnHouse" min="743,45,431" max="770,52,445"/>
-    <cuboid id="town" min="744,36,500" max="769,45,552"/>
-    <cuboid id="Mainland" min="743,0,431" max="770,256,1087"/>
-    <cuboid id="Runner-Spawn" min="748,47.5,437" max="765,47.5,442"/>
-    <cuboid id="Defender-Spawn" min="756,87,405" max="757,87,406"/>
-    <cuboid id="Observer-Spawn" min="756,95,375" max="757,95,376"/>
-    <rectangle id="heal-1" min="742,761" max="770,762"/>
-    <!-- Portal Regions -->
-    <union id="Spawn-A">
-        <cuboid min="761,86,405" max="762,87,409"/>
-        <cuboid min="759,86,408" max="762,87,409"/>
-    </union>
-    <union id="Spawn-B">
-        <cuboid min="751,86,405" max="752,87,409"/>
-        <cuboid min="751,86,408" max="754,87,409"/>
-    </union>
-    <block id="Start-A">787.5,48,441.5</block>
-    <!-- yaw:-45 -->
-    <block id="Start-B">725.5,48,441.5</block>
-    <!-- yaw:45 -->
-    <cuboid id="Portal-A" min="792,47,468" max="793,48,1032"/>
-    <cuboid id="Portal-B" min="720,47,468" max="721,48,1032"/>
-    <apply block="monument-cobwebs" message="You may only break cobwebs!"/>
-    <apply region="heal-1" kit="heal"/>
-    <apply region="spawnHouse" enter="never" message="You may not re-enter your spawn"/>
-</regions>
-<spawns>
-    <spawn team="runners" kit="magenta">
-        <regions yaw="0">
-            <region id="Runner-Spawn"/>
-        </regions>
-    </spawn>
-    <spawn team="defenders" kit="dark-blue">
-        <regions yaw="0">
-            <region id="Defender-Spawn"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions yaw="0">
-            <region id="Observer-Spawn"/>
-        </regions>
-    </default>
-</spawns>
-<portals>
-    <portal yaw="@-45" region="Spawn-A" destination="Start-A"/>
-    <portal yaw="@45" region="Spawn-B" destination="Start-B"/>
-    <portal x="-69" y="@49" z="10" region="Portal-A"/>
-    <portal x="69" y="@49" z="10" region="Portal-B"/>
-</portals>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
 <!-- <renewables>
     <renewable rate="2.5" particles="true" sound="true" avoid-entities="true">
         <region>
@@ -169,14 +160,4 @@
         </replace-filter>
     </renewable>
 </renewables> -->
-<time result="defenders">6m</time>
-<gamerules>
-    <naturalRegeneration>false</naturalRegeneration>
-</gamerules>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
 </map>
