@@ -3,7 +3,7 @@
 <!-- Bridge gamemode include file -->
 <!-- Created by zzuf -->
 <gamemode>arcade</gamemode>
-<!-- Version 2025.04.19-1 -->
+<!-- Version 2025.05.29-1 -->
 <respawn auto="true" delay="0s"/>
 <modifybowprojectile pickup-filter="never"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
@@ -20,10 +20,12 @@
     <constant id="arrow-check-enabled">1</constant>
     <constant id="overtime-default">0</constant>
     <constant id="goal-scorer">1</constant>
+    <constant id="goal-type-message">1</constant>
     <!-- <constant id="defense-kills">1</constant> -->
     <!-- Misc. -->
     <constant id="main-kit">spawn-kit</constant> <!-- If using a custom kit, requires a clear-[your kit name] action -->
     <constant id="armor-kit">default-armor-kit</constant>
+    <constant id="spawn-filter" delete="true"/>
     <constant id="max-health">20</constant>
     <constant id="show-tutorial">1</constant>
     <constant id="natural-regeneration">false</constant>
@@ -43,8 +45,8 @@
     <alert after="14m50s" filter="overtime-disabled">`7If neither team has won by then, the match will end in `4`l10 seconds`7!</alert>
 </broadcasts>
 <spawns>
-    <spawn team="team-one" kit="map-kit" yaw="${team-one-yaw}" pitch="${team-one-pitch}" region="team-one-spawn-point"/>
-    <spawn team="team-two" kit="map-kit" yaw="${team-two-yaw}" pitch="${team-two-pitch}" region="team-two-spawn-point"/>
+    <spawn team="team-one" filter="${spawn-filter}" kit="map-kit" yaw="${team-one-yaw}" pitch="${team-one-pitch}" region="team-one-spawn-point"/>
+    <spawn team="team-two" filter="${spawn-filter}" kit="map-kit" yaw="${team-two-yaw}" pitch="${team-two-pitch}" region="team-two-spawn-point"/>
 </spawns>
 <kits>
     <kit id="spawn-kit">
@@ -308,16 +310,19 @@
     <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
     <variable id="goal_scorer" scope="player" exclusive="1"/>
     <variable id="goal_scorer_enabled" scope="match" default="${goal-scorer}"/>
+    <variable id="goal_type_message" scope="match" default="${goal-type-message}"/>
 </variables>
 <actions>
     <action id="increment-round" scope="player">
         <set var="team_score" value="team_score+1"/>
         <set var="player_score" value="player_score+1"/>
-        <message text=" `2You have scored `e{amount} `2goal(s) in this match.">
-            <replacements>
-                <decimal id="amount" value="player_score"/>
-            </replacements>
-        </message>
+        <action filter="goal_scorer_enabled=1">
+            <message text=" `2You have scored `e{amount} `2goal(s) in this match.">
+                <replacements>
+                    <decimal id="amount" value="player_score"/>
+                </replacements>
+            </message>
+        </action>
         <switch-scope outer="player" inner="match">
             <set var="can_score" value="0"/>
             <set var="round_status" value="1"/>
@@ -406,7 +411,9 @@
     </trigger>
     <action id="message-own-scored" scope="player">
         <message text="`5# # # # # # # # # # # # # # # #"/>
-        <message text="`5# #         `6» `6`lGOAL! `6«`5         # #"/>
+        <action filter="goal_type_message=1">
+            <message text="`5# #         `6» `6`lGOAL! `6«`5         # #"/>
+        </action>
         <message text="`5# #    `aYour team scored!`5    # #"/>
         <action id="message-score-display-team-one"/>
         <action id="message-score-display-team-two"/>
@@ -419,7 +426,9 @@
     </action>
     <action id="message-enemy-scored" scope="player">
         <message text="`5# # # # # # # # # # # # # # # #"/>
-        <message text="`5# #         `6» `6`lGOAL! `6«`5         # #"/>
+        <action filter="goal_type_message=1">
+            <message text="`5# #         `6» `6`lGOAL! `6«`5         # #"/>
+        </action>
         <message text="`5# #    `cThe enemy scored`5    # #"/>
         <action id="message-score-display-team-one"/>
         <action id="message-score-display-team-two"/>
@@ -473,7 +482,9 @@
     <trigger filter="after-round-0" action="message-reset-scoring-team" scope="match"/>
     <action id="message-obs-scored" scope="player">
         <message text="`5# # # # # # # # # # # #"/>
-        <message text="`5# #    `6» `6`lGOAL! `6«`5    # #"/>
+        <action filter="goal_type_message=1">
+            <message text="`5# #    `6» `6`lGOAL! `6«`5    # #"/>
+        </action>
         <message text="`5# #       `f{one-score}`6 `l－`r `f{two-score}`5       # #">
             <replacements>
                 <decimal id="one-score" value="team_one_score"/>
