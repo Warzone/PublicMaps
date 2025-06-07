@@ -1,18 +1,20 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.2.1 -->
+<!-- Include version 1.3.0 -->
 <map>
 <gamemode>sg</gamemode>
 <objective>Be the last player standing.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="timelimit">13m</constant> <!-- Match ending time -->
-    <constant id="deathmatch-teleport">1m</constant> <!-- How long until players are teleported to the deathmatch-->
-    <constant id="deathmatch-start">1m10s</constant> <!-- How long until the deathmatch starts (after teleporting) -->
+    <constant id="deathmatch-pre-teleport">10m45s</constant> <!-- How long until players are warned for teleport to deathmatch -->
+    <constant id="deathmatch-teleport">11m</constant> <!-- How long until players are teleported to the deathmatch -->
+    <constant id="deathmatch-start">11m15s</constant> <!-- How long until the deathmatch starts (after teleporting) -->
     <constant id="player-count">24</constant> <!-- How many players this map is suited for based on podium counts. Common values: "8", "12", "24", "32", "48" -->
     <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
     <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
     <constant id="match-delay">10s</constant>
 </constants>
+<include id="sound-keys"/>
 <time>${timelimit}</time>
 <blitz>
     <lives>1</lives>
@@ -26,10 +28,12 @@
         </not>
         <match-running/>
     </all>
+    <time id="deathmatch-pre-teleport-time">${deathmatch-pre-teleport}</time>
     <time id="deathmatch-teleport-time">${deathmatch-teleport}</time>
     <time id="deathmatch-start-time">${deathmatch-start}</time>
     <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
-    <countdown id="deathmatch-countdown" duration="10s" message="`c{0} until deathmatch!" filter="deathmatch-teleport-time"/>
+    <countdown id="deathmatch-teleport-countdown" duration="15s" message="`cYou will be teleported to the deathmatch in {0}" filter="deathmatch-pre-teleport-time"/>
+    <countdown id="deathmatch-countdown" duration="15s" message="`c{0} until deathmatch!" filter="deathmatch-teleport-time"/>
     <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
     <any id="allow-break">
         <material>leaves</material>
@@ -76,6 +80,7 @@
     </trigger>
     <trigger scope="player">
         <action scope="player">
+            <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
             <message text="`8`l[`6`lSG`8`l] `3Grace period is now over!"/>
         </action>
         <filter>
@@ -98,7 +103,30 @@
             </all>
         </filter>
     </trigger>
-    <!--
+    <trigger scope="player">
+        <action scope="player">
+            <message text="`8`l[`6`lSG`8`l] `c10 minutes until deathmatch!"/>
+        </action>
+        <filter>
+            <time>1m</time>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action scope="player">
+            <message text="`8`l[`6`lSG`8`l] `c5 minutes until deathmatch!"/>
+        </action>
+        <filter>
+            <time>6m</time>
+        </filter>
+    </trigger>
+    <trigger scope="player">
+        <action scope="player">
+            <message text="`8`l[`6`lSG`8`l] `c15 seconds until deathmatch!"/>
+        </action>
+        <filter>
+            <time>10m45s</time>
+        </filter>
+    </trigger>
     <trigger filter="dead" scope="player">
         <action scope="player">
             <switch-scope outer="player" inner="match">
@@ -108,7 +136,6 @@
             </switch-scope>
         </action>
     </trigger>
-    -->
     <trigger filter="match-finished" scope="match">
         <action scope="match">
             <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
@@ -116,13 +143,14 @@
     </trigger>
     <trigger filter="deathmatch-start-time" scope="match">
         <action scope="match">
+            <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
             <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
         </action>
     </trigger>
     <trigger filter="deathmatch-teleport-time" scope="match">
         <action>
             <switch-scope inner="player">
-                <teleport x="tp_points_x[tribute] + 0.5" y="tp_points_y[tribute]" z="tp_points_z[tribute] + 0.5"/>
+                <teleport x="tp_points_x[tribute]" y="tp_points_y[tribute]" z="tp_points_z[tribute]"/>
             </switch-scope>
         </action>
     </trigger>
