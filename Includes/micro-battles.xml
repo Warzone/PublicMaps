@@ -1,12 +1,16 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.05.16-1 -->
+<!-- Version 2025.06.07-1 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="game-objective">Eliminate the other teams before the time runs out! Watch out for the shrinking world border!</constant>
     <constant id="resistance-time">0</constant>
     <constant id="max-height-value">25</constant>
+    <constant id="world-border-start-size">80</constant>
+    <constant id="world-border-end-size">3</constant>
+    <constant id="map-radius">27.5</constant>
+    <constant id="walls-region">walls</constant>
 </constants>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
@@ -54,7 +58,7 @@
         <cuboid id="second-wall" min="-29,0,-1" max="29,14,1"/>
     </union>
     <negative id="not-map">
-        <cylinder id="map" base="0.5,0,0.5" radius="27.5" height="25"/>
+        <cylinder id="map" base="0.5,0,0.5" radius="${map-radius}" height="${max-height-value}"/>
     </negative>
     <apply region="map" block="not(only-glass)" message="You may not break the walls."/>
     <apply region="not-map" block="never" message="You may not build outside of the map."/>
@@ -62,12 +66,12 @@
 <actions>
     <!-- Wall controls -->
     <action id="walls-falling" scope="match">
-        <fill id="walls-air" region="walls" material="air" filter="only-glass"/>
+        <fill id="walls-air" region="${walls-region}" material="air" filter="only-glass"/>
     </action>
     <trigger action="walls-falling" scope="match">
         <filter>
             <after id="walls-to-air" duration="10s" message="Walls will fall in {0}">
-                <match-started/>
+                <match-running/>
             </after>
         </filter>
     </trigger>
@@ -109,8 +113,8 @@
     </kill-reward>
 </kill-rewards>
 <world-borders center="0.5,0.5">
-    <world-border size="80"/>
-    <world-border size="3" after="0s" duration="160s" damage="5" buffer="0"/>
+    <world-border size="${world-border-start-size}"/>
+    <world-border size="${world-border-end-size}" after="0s" duration="160s" damage="5" buffer="0"/>
 </world-borders>
 <maxbuildheight>${max-height-value}</maxbuildheight>
 </map>
