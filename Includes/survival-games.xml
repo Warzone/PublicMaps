@@ -102,6 +102,7 @@
     <variable id="tribute"/>
 </variables>
 <variables scope="match">
+    <variable id="cages" default="1"/>
     <variable id="remaining"/>
     <variable id="tmp"/>
     <array id="tp_points_x" size="${player-count}" />
@@ -121,8 +122,9 @@
         </action>
     </trigger>
     <!-- Announces the start of the games after the starting countdown ends -->
-    <trigger filter="starting-countdown" scope="player">
+    <trigger scope="player" filter="starting-countdown">
         <action scope="player">
+            <set var="cages" value="0"/>
             <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
             <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
             <message text="`8`l[`6`lSG`8`l] `3And may the odds be ever in your favor."/>
@@ -181,22 +183,24 @@
         </filter>
     </trigger>
     <!-- Teleports players to spawn points for deathmatch -->
-    <trigger filter="deathmatch-teleport-time" scope="match">
+    <trigger scope="match" filter="deathmatch-teleport-time">
         <action>
+            <set var="cages" value="1"/>
             <switch-scope inner="player">
                 <teleport x="tp_points_x[tribute]" y="tp_points_y[tribute]" z="tp_points_z[tribute]"/>
             </switch-scope>
         </action>
     </trigger>
     <!-- Announces the start of the deathmatch -->  
-    <trigger filter="deathmatch-start-time" scope="match">
+    <trigger scope="match" filter="deathmatch-start-time">
         <action scope="match">
+            <set var="cages" value="0"/>
             <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
             <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
         </action>
     </trigger>
     <!-- Announces the end of the games -->
-    <trigger filter="match-finished" scope="match">
+    <trigger scope="match" filter="match-finished">
         <action scope="match">
             <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
         </action>
@@ -214,10 +218,9 @@
             <message text="`8`l[`6`lSG`8`l] `6A cannon can be heard in the distance." />
         </switch-scope>
     </action>
-    <trigger filter="all(not(participating), not(match-finished), match-started)" action="player-killed" scope="player" observers="true"/>
+    <trigger scope="player" filter="all(not(participating), not(match-finished), match-started)" action="player-killed" observers="true"/>
 </actions>
 <regions>
-    <!-- <apply leave="starting-countdown" region="spawn-cages"/> -->
     <apply block="allow-break" block-place="always"/>
 </regions>
 <lootables>
