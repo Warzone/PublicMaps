@@ -1,20 +1,19 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Bulwark</name>
-<version>1.0.6</version>
+<version>1.0.7</version>
+<include id="gapple-kill-reward"/>
 <objective>Be the first to capture 3 flags!</objective>
 <gamemode>ctf</gamemode>
 <authors>
     <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!--  mitchiii_  -->
 </authors>
 <teams>
-    <team id="red" color="dark red" max="5">Red</team>
-    <team id="blue" color="blue" max="5">Blue</team>
+    <team id="red-team" color="dark red" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
 </teams>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <kits>
     <kit id="spawn-kit">
+        <clear/>
         <item slot="0" material="stone sword" unbreakable="true"/>
         <item slot="1" material="bow" unbreakable="true"/>
         <item slot="2" material="stone pickaxe" unbreakable="true"/>
@@ -24,27 +23,20 @@
         <item slot="7" material="arrow" amount="64"/>
 		<item slot="8" material="golden apple" amount="1"/>
         <item slot="29" material="stone spade" unbreakable="true"/>
+        <helmet material="leather helmet" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
         <leggings material="chainmail leggings" unbreakable="true"/>
-        <effect duration="4s" amplifier="100">damage resistance</effect>
-    </kit>
-    <kit id="red-kit" parent="spawn-kit">
-        <helmet material="leather helmet" color="993333" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="993333" unbreakable="true"/>
-        <boots material="leather boots" color="993333" unbreakable="true"/>
-    </kit>
-    <kit id="blue-kit" parent="spawn-kit">
-        <helmet material="leather helmet" color="334cb2" unbreakable="true"/>
-        <chestplate material="leather chestplate" color="334cb2" unbreakable="true"/>
-        <boots material="leather boots" color="334cb2" unbreakable="true"/>
+        <boots material="leather boots" team-color="true" unbreakable="true"/>
+        <effect duration="4s" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="red" kit="red-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region yaw="-180">
             <cylinder base="-99.5,6.5,-142" radius="1" height="1"/>
         </region>
     </spawn>
-    <spawn team="blue" kit="blue-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="0">
             <cylinder base="-116.5,6.5,-238" radius="1" height="1"/>
         </region>
@@ -56,11 +48,11 @@
     </default>
 </spawns>
 <flags>
-    <flag id="red-flag" name="Red Flag" owner="red">
-        <post pickup-filter="only-blue">-116,7,-151</post>
+    <flag id="red-flag" name="Red Flag" owner="red-team">
+        <post pickup-filter="blue-team">-116,7,-151</post>
     </flag>
-    <flag id="blue-flag" name="Blue Flag" owner="blue">
-        <post pickup-filter="only-red">-101,7,-231</post>
+    <flag id="blue-flag" name="Blue Flag" owner="blue-team">
+        <post pickup-filter="red-team">-101,7,-231</post>
     </flag>
     <flags points="1">
         <net region="red-podium" flag="blue-flag" rescue="red-flag"/>
@@ -71,13 +63,6 @@
 <score>
     <limit>3</limit>
 </score>
-<filters>
-	<team id="only-red">red</team>
-	<team id="only-blue">blue</team>
-    <not id="not-void">
-        <void/>
-    </not>
-</filters>
 <regions>
     <union id="team-spawns">
         <cuboid id="red-spawn" min="-103,5,-154" max="-96,11,-139"/>
@@ -85,20 +70,26 @@
     </union>
     <cuboid id="red-podium" min="-114,0,-154" max="-117,9,-149"/>
     <cuboid id="blue-podium" min="-102,0,-227" max="-99,9,-232"/>
-    <apply region="red-spawn" enter="only-red" message="You cannot enter the enemy team's spawn!"/>
-    <apply region="blue-spawn" enter="only-blue" message="You cannot enter the enemy team's spawn!"/>
+    <apply region="red-spawn" enter="deny(blue-team)" message="You cannot enter the enemy team's spawn!"/>
+    <apply region="blue-spawn" enter="deny(red-team)" message="You cannot enter the enemy team's spawn!"/>
     <apply region="team-spawns" block="never" message="You cannot modify the spawn area!"/>
     <apply region="red-podium" block="never" message="You cannot modify the flag podium!"/>
     <apply region="blue-podium" block="never" message="You cannot modify the flag podium!"/>
-    <apply block-place="not-void" message="You cannot modify the void area!"/>
+    <apply block-place="deny(void)" message="You cannot modify the void area!"/>
 </regions>
-<maxbuildheight>24</maxbuildheight>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>wood<<item>
+    <item>glass</item>
+</itemkeep>
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>stone pickaxe</item>
-    <item>stone axe</item>
-    <item>stone spade</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
@@ -106,8 +97,12 @@
     <item>arrow</item>
 </itemremove>
 <kill-reward>
-    <item material="arrow" amount="12"/>
-    <item material="golden apple"/>
-    <item material="wood" amount="16"/>
-</kill-reward>	
+    <item material="arrow" amount="8"/>
+    <item material="wood" amount="8"/>
+    <item material="glass" amount="8"/>
+</kill-reward>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>24</maxbuildheight>
 </map>
