@@ -1,6 +1,6 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.3.1 -->
+<!-- Include version 1.3.2 -->
 <!--
     To adequately use this include and properly set up your map, some requirements must be met:
 
@@ -65,7 +65,7 @@
     <time id="deathmatch-teleport-time">${deathmatch-teleport}</time>
     <time id="deathmatch-start-time">${deathmatch-start}</time>
     <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
-    <countdown id="deathmatch-teleport-countdown" duration="15s" message="`cYou will be teleported to the deathmatch in {0}" filter="deathmatch-pre-teleport-time"/>
+    <countdown id="deathmatch-teleport-countdown" duration="15s" message="`cYou will be teleported for deathmatch in {0}" filter="deathmatch-pre-teleport-time"/>
     <countdown id="deathmatch-countdown" duration="15s" message="`c{0} until deathmatch!" filter="deathmatch-teleport-time"/>
     <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
     <any id="allow-break">
@@ -94,16 +94,14 @@
         <region id="tier-2-chests"/>
     </all>
 </filters>
-<variables scope="player">
-    <variable id="tribute"/>
-</variables>
-<variables scope="match">
-    <variable id="cages" default="1"/>
-    <variable id="remaining"/>
-    <variable id="tmp"/>
-    <array id="tp_points_x" size="${player-count}" />
-    <array id="tp_points_y" size="${player-count}" />
-    <array id="tp_points_z" size="${player-count}" />
+<variables>
+    <variable id="tribute" scope="player"/>
+    <variable id="cages" default="1" scope="match"/>
+    <variable id="remaining" scope="match"/>
+    <variable id="tmp" scope="match"/>
+    <array id="tp_points_x" size="${player-count}" scope="match"/>
+    <array id="tp_points_y" size="${player-count}" scope="match"/>
+    <array id="tp_points_z" size="${player-count}" scope="match"/>
 </variables>
 <actions>
     <!-- Keeps track of alive players and sets up TP coordinates for deathmatch -->
@@ -123,7 +121,7 @@
             <set var="cages" value="0"/>
             <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
             <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
-            <message text="`8`l[`6`lSG`8`l] `3And may the odds be ever in your favor."/>
+            <message text="`8`l[`6`lSG`8`l] `3May the odds be ever in your favor."/>
         </action>
     </trigger>
     <!-- Announces the end of the grace period -->
@@ -175,7 +173,7 @@
             <message text="`8`l[`6`lSG`8`l] `c15 seconds until deathmatch!"/>
         </action>
         <filter>
-            <time>10m45s</time>
+            <time>${deathmatch-pre-teleport}</time>
         </filter>
     </trigger>
     <!-- Teleports players to spawn points for deathmatch -->
@@ -214,7 +212,7 @@
             <message text="`8`l[`6`lSG`8`l] `6A cannon can be heard in the distance." />
         </switch-scope>
     </action>
-    <trigger scope="player" filter="all(not(participating), not(match-finished), match-started)" action="player-killed" observers="true"/>
+    <trigger scope="player" filter="all(not(participating), not(match-finished), match-started)" action="player-killed" observers="false"/>
 </actions>
 <regions>
     <apply block="allow-break" block-place="always"/>
@@ -464,11 +462,15 @@
         <all>
             <any>
                 <filter id="grace-period-countdown"/>
+                <filter id="deathmatch-countdown"/>
                 <not>
                     <filter id="starting-countdown"/>
                 </not>
             </any>
-            <cause>melee</cause>
+            <any>
+                <cause>melee</cause>
+                <cause>projectile</cause>
+            </any>
         </all>
     </deny>
 </damage>
