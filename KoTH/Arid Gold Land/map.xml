@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.3.5">
+<map proto="1.5.0">
 <name>Arid Gold Land</name>
-<version>0.2.5</version>
+<version>1.1.0</version>
 <objective>Control the center hills and capture points</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -10,239 +9,225 @@
     <author uuid="08724344-a5af-4283-99fa-5a7bfb39b137" contribution="Map Building"/> <!-- OllieGamerZ -->
 </authors>
 <teams>
-    <team color="blue" max="32" max-overfill="38">Blue</team>
-    <team color="red" max="32" max-overfill="38">Red</team>
+    <team id="blue-team" color="blue" max="32" max-overfill="38">Blue</team>
+    <team id="red-team" color="red" max="32" max-overfill="38">Red</team>
 </teams>
 <broadcasts>
-    <alert after="5s">You cannot capture your own capture point, however you can stop it from being captured</alert>
+    <tip after="3s" every="2m30s">Capture the enemy's hill to unlock your portal!</tip>
+    <alert after="5s">You cannot capture your own hill, however you can stop it from being captured</alert>
 </broadcasts>
-<rules>
-    <rule>You cannot capture your own capture point, however you can stop it from being captured</rule>
-</rules>
 <kits>
-    <kit name="reset-inv" force="true">
-        <item slot="0">air</item>
-        <item slot="1">air</item>
-        <item slot="2">air</item>
-        <item slot="3">air</item>
-        <item slot="4">air</item>
-        <item slot="5">air</item>
-        <item slot="6">air</item>
-        <item slot="7">air</item>
-        <item slot="8">air</item>
-        <item slot="9">air</item>
-        <item slot="10">air</item>
-        <item slot="11">air</item>
-        <item slot="12">air</item>
-        <item slot="13">air</item>
-        <item slot="14">air</item>
-        <item slot="15">air</item>
-        <item slot="16">air</item>
-        <item slot="17">air</item>
-        <item slot="18">air</item>
-        <item slot="19">air</item>
-        <item slot="20">air</item>
-        <item slot="21">air</item>
-        <item slot="22">air</item>
-        <item slot="23">air</item>
-        <item slot="24">air</item>
-        <item slot="25">air</item>
-        <item slot="26">air</item>
-        <item slot="27">air</item>
-        <item slot="28">air</item>
-        <item slot="29">air</item>
-        <item slot="30">air</item>
-        <item slot="31">air</item>
-        <item slot="32">air</item>
-        <item slot="33">air</item>
-        <item slot="34">air</item>
-        <item slot="35">air</item>
-        <chestplate>air</chestplate>
-        <leggings>air</leggings>
-        <boots>air</boots>
+    <kit id="reset-inv" force="true">
+        <clear/>
     </kit>
-    <kit name="spawn" force="true">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="8" amount="24">arrow</item>
-        <item slot="2" amount="16">stained glass</item>
-        <item slot="3" damage="8258">potion</item> <!--8min speed-->
-        <item slot="4" amount="64">golden carrot</item>
-        <chestplate>chainmail chestplate</chestplate>
-        <boots enchantment="protection fall:4">iron boots</boots>
-        <potion duration="10" amplifier="10">damage resistance</potion>
+    <kit id="spawn-kit" force="true">
+        <clear/>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" material="bow"/>
+        <item slot="2" amount="16" team-color="true" material="stained glass"/>
+        <item slot="3" damage="8258" material="potion"/> <!-- 8 min speed-->
+        <item slot="8" amount="24" material="arrow"/>
+        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" enchantment="protection fall:4" material="iron boots"/>
+        <effect duration="10" amplifier="10">damage resistance</effect>
     </kit>
-    <kit name="red" parents="spawn">
-        <helmet locked="true" color="993333">leather helmet</helmet>
+    <kit id="5kills" parents="reset-inv">
+        <clear/>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" enchantment="knockback" material="gold axe"/>
+        <item slot="3" amount="16" team-color="true" material="stained glass"/>
+        <item slot="28" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <boots unbreakable="true" enchantment="protection fall:4" material="iron boots"/>
+        <action>
+            <message text="`b=-= `6`lYou were given a new kit for being on a 5 killstreak! `b=-="/>
+            <sound preset="score"/>
+        </action>
     </kit>
-    <kit name="blue" parents="spawn">
-        <helmet locked="true" color="334CB2">leather helmet</helmet>
+    <kit id="10kills" parents="5kills">
+        <leggings material="iron leggings"/>
+        <action>
+            <message text="`b=-= `6`lYou were given a new kit for being on a 10 killstreak! `b=-="/>
+            <sound preset="score"/>
+        </action>
     </kit>
-    <kit name="5kills" parents="reset-inv">
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" enchantments="arrow infinite:1" unbreakable="true">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2" enchantments="knockback:1">gold axe</item>
-        <item slot="3" amount="16">stained glass</item>
-        <item slot="4" amount="64">golden carrot</item>
-        <chestplate>chainmail chestplate</chestplate>
-        <boots enchantments="protection fall:4">iron boots</boots>
+    <kit id="15kills" parents="reset-inv">
+        <clear/>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" enchantment="knockback" material="gold axe"/>
+        <item slot="3" amount="16" team-color="true" material="stained glass"/>
+        <item slot="4" amount="4" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:4" material="iron boots"/>
+        <action>
+            <message text="`b=-= `6`lYou were given a new kit for being on a 15 killstreak! `b=-="/>
+            <sound preset="score"/>
+        </action>
     </kit>
-    <kit name="10kills" parents="5kills">
-        <leggings>iron leggings</leggings>
-    </kit>
-    <kit name="15kills" parents="reset-inv">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" enchantments="arrow infinite:1" unbreakable="true">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="2" enchantments="knockback:1">gold axe</item>
-        <item slot="3" amount="16">stained glass</item>
-        <item slot="4" amount="4">golden apple</item>
-        <item slot="5" amount="64">golden carrot</item>
-        <chestplate>chainmail chestplate</chestplate>
-        <leggings>iron leggings</leggings>
-        <boots enchantments="protection fall:4">iron boots</boots>
-    </kit>
-    <kit name="20kills" parents="reset-inv">
-        <item slot="0" unbreakable="true">iron sword</item>
-        <item slot="1" enchantments="arrow infinite:1" unbreakable="true">bow</item>
-        <item slot="2" damage="365" enchantments="arrow infinite:1;arrow fire:1" >bow</item>
-        <item slot="28">arrow</item>
-        <item slot="3" enchantments="knockback:1">gold axe</item>
-        <item slot="4" amount="16">stained glass</item>
-        <item slot="5" amount="8">golden apple</item>
-        <item slot="6" amount="64">golden carrot</item>
-        <chestplate>chainmail chestplate</chestplate>
-        <leggings>iron leggings</leggings>
-        <boots enchantments="protection fall:4">diamond boots</boots>
+    <kit id="20kills" parents="reset-inv">
+        <clear/>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" damage="365" enchantment="arrow infinite;arrow fire" material="bow"/>
+        <item unbreakable="true" slot="3" enchantment="knockback" material="gold axe"/>
+        <item slot="4" amount="16" team-color="true" material="stained glass"/>
+        <item slot="5" amount="8" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings unbreakable="true" material="iron leggings"/>
+        <boots unbreakable="true" enchantment="protection fall:4" material="diamond boots"/>
+        <action>
+            <message text="`b=-= `6`lYou were given a new kit for being on a 20 killstreak! `b=-="/>
+            <sound preset="score"/>
+        </action>
     </kit>
 </kits>
 <spawns safe="true">
-    <spawn team="blue" kit="blue" yaw="0">
-        <cuboid min="7,55,-115" max="4,55,-112"/>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region>
+            <cuboid min="7,55,-115" max="4,55,-112"/>
+        </region>
     </spawn>
-    <spawn team="red" kit="red" yaw="180">
-        <cuboid min="-6,55,158" max="-3,55,155"/>
+    <spawn team="red-team" kit="spawn-kit">
+        <region yaw="180">
+            <cuboid min="-6,55,158" max="-3,55,155"/>
+        </region>
     </spawn>
-    <default yaw="90">
-        <cylinder base="136,148,23" radius="2" height="0"/>                                      
+    <default>
+        <region yaw="90">
+            <cylinder base="136,148,23" radius="2" height="0"/>
+        </region>
     </default>
 </spawns>
 <filters>
-    <filter name="only-blue">
-        <team>blue</team>
-    </filter>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="blocks">
-        <block>stained glass</block>
-    </filter>
-    <filter name="blue-captured">
-        <objective>bcp</objective>
-    </filter>
-    <filter name="red-captured">
-        <objective>rcp</objective>
-    </filter>
+    <any id="stained-glass">
+        <material>stained glass:14</material>
+        <material>stained glass:11</material>
+    </any>
+    <objective id="redhill" team="red-team">bcp</objective>
+    <objective id="bluehill" team="blue-team">rcp</objective>
+    <not id="nohill">
+        <any>
+            <objective team="red-team">bcp</objective>
+            <objective team="blue-team">rcp</objective>		
+        </any>
+    </not>
+    <all id="bluehillfilter">
+        <team id="blue-team">blue-team</team>
+        <objective team="blue-team">rcp</objective>
+    </all>
+    <all id="redhillfilter">
+        <team id="red-team">red-team</team>
+        <objective team="red-team">bcp</objective>
+    </all>
 </filters>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Gold Mine" capture-time="10s" points="1" progress="gold-mine" captured="gold-mine">
+        <capture>
+            <cylinder id="gold-mine" base="7.5,10,21.5" radius="7" height="3"/>
+        </capture>
+    </control-point>
+    <control-point id="bcp" name="Red Capture Point" capture-time="5s" points="2">
+        <capture>
+            <cylinder base="63,33,-29" radius="7" height="2"/>
+        </capture>
+        <progress>
+            <cylinder base="63,32,-29" radius="7" height="2"/>
+        </progress>
+        <captured>
+            <cuboid min="10,50,145" max="11,54,149"/>
+        </captured>
+        <capture-filter>
+            <filter id="red-team"/>
+        </capture-filter>
+        </control-point>
+            <control-point id="rcp" name="Blue Capture Point" capture-time="5s" points="2">
+                <capture>
+                    <cylinder base="-63,33,72" radius="7" height="2"/>
+                </capture>
+                <progress>
+                    <cylinder base="-63,32,72" radius="7" height="2"/>
+                </progress>
+                <captured>
+                    <cuboid min="-9,50,-102" max="-10,54,-106"/>
+                </captured>
+        <capture-filter>
+            <filter id="blue-team"/>
+        </capture-filter>
+    </control-point>
+</control-points>
 <score>
-    <king/>
     <limit>750</limit>
 </score>
-<king>
-    <hills>
-        <hill name="Gold Mine" capture-time="10s" points="1">
-            <capture>
-                <cylinder base="7,11,21" radius="7" height="2"/>
-            </capture>
-            <progress>
-                <cylinder base="7,10,21" radius="7" height="2"/>
-            </progress>
-        </hill>
-        <hills capture-time="5s" points="2">
-            <hill id="bcp" name="Red Capture Point">
-                <capture><cylinder base="63,33,-29" radius="7" height="2"/></capture>
-                <progress><cylinder base="63,32,-29" radius="7" height="2"/></progress>
-                <captured><cuboid min="10,50,145" max="11,54,149"/><!--red--></captured>
-                <capture-filter><filter name="only-red"/></capture-filter>
-            </hill>
-            <hill id="rcp" name="Blue Capture Point">
-                <capture><cylinder base="-63,33,72" radius="7" height="2"/></capture>
-                <progress><cylinder base="-63,32,72" radius="7" height="2"/></progress>
-                <captured><cuboid min="-9,50,-102" max="-10,54,-106"/><!--blue--></captured>
-                <capture-filter><filter name="only-blue"/></capture-filter>
-            </hill>
-        </hills>
-    </hills>                        
-</king>
 <portals>
-    <portal x="@-76" y="@34.5" z="@95.5" yaw="@180" filter="red-captured"> <!--Blue to Red-->
-        <cuboid min="-8,50,-102" max="-9,55,-106"/>
-    </portal>
-    <portal x="@77" y="@34.5" z="@-52.5" yaw="@0" filter="blue-captured"> <!--Red to Blue-->
-        <cuboid min="9,50,145" max="10,55,149"/>
-    </portal>
+    <portal filter="bluehillfilter" yaw="@180" region="red-spawn-portal" destination="blue-to-red"/>
+    <portal filter="redhillfilter" yaw="@0" region="blue-spawn-portal" destination="red-to-blue"/>
 </portals>
 <regions>
-    <apply block="deny-all" message="You may not block spawns!">
-        <cuboid min="-3,50,-107" max="-6,54,-104"/>
-        <cuboid min="4,50,150" max="7,54,147"/>
-    </apply>
-    <rectangle name="all" min="-oo,-oo" max="oo,oo"/>
-    <!-- 
-    Sperate block filters so player only gets filter message if they try and place a block 
-    -->
-    <apply block-place="blocks" message="You may only place stained glass">
-        <region name="all"/>
-    </apply>
-    <apply block-break="blocks"> 
-        <region name="all"/>
-    </apply>
-    <apply enter="only-blue" message="You may not enter the enemy teams spawn!">
-        <rectangle min="10,-93" max="-10,-115"/>
-    </apply>
-    <apply enter="only-red" message="You may not enter the enemy teams spawn!">
-        <rectangle min="-9,136" max="11,157"/>
-    </apply>
+    <union id="spawns">
+        <cuboid id="blue-spawn-prot" min="-9.5,48,-92.5" max="10.5,60,-116.5"/>
+        <cuboid id="red-spawn-prot" min="9.5,48,136.5" max="-10.5,60,158.5"/>
+    </union>
+    <rectangle id="blue-spawn" min="10,-93" max="-10,-115"/>
+    <rectangle id="red-spawn" min="-9,136" max="11,157"/>
+    <cuboid id="blue-spawn-portal" min="9,50,145" max="10,55,149"/>
+    <cuboid id="red-spawn-portal" min="-8,50,-102" max="-9,55,-106"/>
+    <point id="blue-to-red">-76.5,34.5,95.5</point>
+    <point id="red-to-blue">77.5,34.5,-52.5</point>
+    <apply region="spawns" block="never" message="You may not modify the spawn area!"/>
+    <apply region="blue-spawn-prot" enter="deny(red-team)" message="You may not enter the enemy's spawn!"/>
+    <apply region="red-spawn-prot" enter="deny(blue-team)" message="You may not enter the enemy's spawn!"/>
+    <apply block="stained-glass" message="You may only modify colored stained glass!"/>
 </regions>
-<killreward>
-    <filter>
-        <kill-streak count="5"/>
-    </filter>
-        <kit name="5kills"/>
-</killreward>
-<killreward>
-    <filter>
+<kill-rewards>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5"/>
+        </filter>
+        <kit id="5kills"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
         <kill-streak count="10"/>
-    </filter>
-        <kit name="10kills"/>
-</killreward>
-<killreward>
-    <filter>
+        </filter>
+        <kit id="10kills"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
         <kill-streak count="15"/>
-    </filter>
-    <kit name="15kills"/>
-</killreward>
-<killreward>
-    <filter>
+        </filter>
+        <kit id="15kills"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
         <kill-streak count="20"/>
-    </filter>
-        <kit name="20kills"/>
-</killreward>
-<killreward>
+        </filter>
+        <kit id="20kills"/>
+    </kill-reward>
+</kill-rewards>
+<itemkeep>
+    <item>arrow</item>
     <item>golden apple</item>
-</killreward>
+</itemkeep>
 <itemremove>
     <item>stained glass</item>
     <item>stone sword</item>
     <item>iron sword</item>
     <item>bow</item>
-    <item>golden carrot</item>
     <item>chainmail chestplate</item>
     <item>iron boots</item>
     <item>diamond boots</item>
     <item>iron leggings</item>
     <item>leather helmet</item>
     <item>glass bottle</item>
+    <item>potion</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

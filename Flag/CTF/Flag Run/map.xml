@@ -1,123 +1,81 @@
-<map proto="1.3.6">
+<map proto="1.5.0">
 <name>Flag Run</name>
-<version>1.1.1</version>
+<version>1.2.0</version>
 <objective>Capture the enemy's flag 3 times!</objective>
 <gamemode>ctf</gamemode>
 <authors>
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- Kroest -->
 </authors>
 <teams>
-    <team color="light purple" max="32" max-overfill="36">Pink</team>
-    <team color="yellow" max="32" max-overfill="36">Yellow</team>
+    <team id="pink-team" color="light purple" max="32" max-overfill="36">Pink</team>
+    <team id="yellow-team" color="yellow" max="32" max-overfill="36">Yellow</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0" name="`lIron Lemet">iron sword</item>
-        <item slot="1" name="`lPrecise Bow" enchantment="ARROW_DAMAGE:1">bow</item>
-        <item slot="2" name="`lDefenders Axe" enchantment="durability:2;dig speed:2">iron axe</item>
-        <item slot="3" name="`lDefenders Pickaxe" enchantment="durability:2;dig speed:2">iron pickaxe</item>
-        <item slot="4" amount="8">log</item>
-        <item slot="5" amount="1">golden apple</item>
-        <item slot="28" amount="64">arrow</item>
-        <chestplate enchantment="protection projectile:2" unbreakable="true">chainmail chestplate</chestplate>
-        <potion duration="5" amplifier="3">damage resistance</potion>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" name="`lIron Lemet" material="iron sword"/>
+        <item slot="1" unbreakable="true" name="`lPrecise Bow" enchantment="arrow damage" material="bow"/>
+        <item slot="2" unbreakable="true" name="`lDefenders Axe" enchantment="durability:2;dig speed:2" material="iron axe"/>
+        <item slot="3" unbreakable="true" name="`lDefenders Pickaxe" enchantment="durability:2;dig speed:2" material="iron pickaxe"/>
+        <item slot="4" amount="8" material="log"/>
+        <item slot="5" amount="1" material="golden apple"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <chestplate unbreakable="true" enchantment="protection projectile:2" material="chainmail chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" enchantment="protection environmental;protection fall:2" team-color="true" material="leather boots"/>
+        <effect duration="5" amplifier="3">damage resistance</effect>
         <walk-speed>1.3</walk-speed>
-		<potion duration="7" amplifier="2">speed</potion>
+        <effect duration="7" amplifier="2">speed</effect>
     </kit>
-    <kit name="yellow" parents="spawn">
-        <leggings  color="E5E533" unbreakable="true">leather leggings</leggings>
-        <boots enchantment="protection environmental:1;protection fall:2" color="E5E533" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="pink" parents="spawn">
-        <leggings  color="f27fa5" unbreakable="true">leather leggings</leggings>
-        <boots enchantment="protection environmental:1;protection fall:2" color="f27fa5" unbreakable="true">leather boots</boots>
-	</kit>
 </kits>
+
 <spawns>
-    <spawns kit="pink">
-        <spawn team="pink" kit="pink">
-            <regions yaw="180">
-                <block>0.5,91,267.5</block>
-            </regions>
-        </spawn>
-    </spawns>
-    <spawns kit="yellow">
-        <spawn team="yellow" kit="yellow">
-            <regions yaw="0">
-                <block>0.5,91,-266.5</block>
-            </regions>
-        </spawn>
-    </spawns>
+    <spawn team="pink-team" kit="spawn-kit">
+        <region yaw="180">
+            <point>0.5,91,267.5</point>
+        </region>
+    </spawn>
+    <spawn team="yellow-team" kit="spawn-kit">
+        <region>
+            <point>0.5,91,-266.5</point>
+        </region>
+    </spawn>
     <default>
-        <regions yaw="0">
-            <block>0.5,112,0.5</block>
-        </regions>
+        <region>
+            <point>0.5,112,0.5</point>
+        </region>
     </default>
 </spawns>
 <filters>
-    <filter name="deny-void">
-        <deny>
-            <void/>
-        </deny>
-    </filter>
-    <filter name="not-beacon">
-        <not>
-            <block>beacon</block>
-        </not>
-    </filter>
-    <filter name="only-yellow">
-        <team>yellow</team>
-    </filter>
-    <filter name="only-pink">
-        <team>pink</team>
-    </filter>
+    <material id="only-beacon">beacon</material>
 </filters>
 <regions>
-    <union name="spawns">
-        <rectangle name="yellow-spawn" min="45,-225" max="-44,-277"/>
-        <rectangle name="pink-spawn" min="45,226" max="-44,275"/>
+    <negative id="void-area">
+        <rectangle min="-55,-324" max="55,324"/>
+    </negative>
+    <union id="spawn-areas">
+        <rectangle id="yellow-spawn" min="45,-225" max="-44,-277"/>
+        <rectangle id="pink-spawn" min="45,226" max="-44,275"/>
     </union>
-    <union name="flag-nets">
-        <cylinder name="yellow-flagnet" base="0.5,71,-193.5" radius="3" height="10"/>
-        <cylinder name="pink-flagnet" base="0.5,71,194.5" radius="3" height="10"/>
+    <union id="flag-nets">
+        <cylinder id="yellow-flagnet" base="0.5,71,-193.5" radius="3" height="10"/>
+        <cylinder id="pink-flagnet" base="0.5,71,194.5" radius="3" height="10"/>
     </union>
-    <apply block="deny-void" message="You may not build outside the map!">
-        <negative>
-            <rectangle min="-55,-324" max="55,324"/>
-        </negative>
-    </apply>
-    <apply block="deny-all" message="You may not build in the spawn!">
-        <region name="spawns"/>
-    </apply>
-    <apply block="deny-all" message="You may not build on the flag post!">
-        <region name="flag-nets"/>
-    </apply>
-    <apply enter="only-pink" message="Only pink may enter this area!">
-        <region name="pink-spawn"/>
-    </apply>
-    <apply enter="only-yellow" message="Only yellow may enter this area!">
-        <region name="yellow-spawn"/>
-    </apply>
-    <apply use="not-beacon" message="You may not interact with beacons!">
-        <rectangle min="oo,oo" max="-oo,-oo"/>
-    </apply>
+    <apply region="void-area" block="deny(void)" message="You may not build outside the map!"/>
+    <apply region="spawn-areas" block="never" message="You may not modify the spawn area!"/>
+    <apply region="flag-nets" block="never" message="You may not modify the flag post!"/>
+    <apply region="pink-spawn" enter="deny(yellow-team)" message="You may not enter the enemy's spawn!"/>
+    <apply region="yellow-spawn" enter="deny(pink-team)" message="Only yellow may enter this area!"/>
+    <apply use="deny(only-beacon)" message="You may not interact with beacons!"/>
 </regions>
 <flags>
     <flag id="yellow-flag" name="Yellow Flag" color="yellow" carry-message="Bring the flag back to your spawn!" drop-on-water="false">
-        <post return-time="35" pickup-filter="only-pink" yaw="0">0.5,74,-193.5</post>
-        <net points="1">
-            <region>
-                <region name="pink-spawn"/>
-            </region>
+        <post return-time="35" pickup-filter="pink-team" yaw="0">0.5,74,-193.5</post>
+        <net points="1" region="pink-spawn">
         </net>
     </flag>
     <flag id="pink-flag" name="Pink Flag" color="pink" carry-message="Bring the flag back to your spawn!" drop-on-water="false">
-        <post return-time="35" pickup-filter="only-yellow" yaw="180">0.5,74,194.5</post>
-        <net points="1">
-            <region>
-                <region name="yellow-spawn"/>
-            </region>
-        </net>
+        <post return-time="35" pickup-filter="yellow-team" yaw="180">0.5,74,194.5</post>
+        <net points="1" region="yellow-spawn"/>
     </flag>
 </flags>
 <score>
@@ -125,9 +83,6 @@
     <kills>0</kills>
     <deaths>0</deaths>
 </score>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <itemremove>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
@@ -141,11 +96,16 @@
     <tool>iron axe</tool>
     <tool>bow</tool>
 </toolrepair>
-<killreward>
-	<kit>
-		<potion duration="30" amplifier="1">speed</potion>
-        <item slot="28" amount="16">arrow</item>
-	</kit>
-</killreward>
+<kill-rewards>
+    <kill-reward>
+        <kit>
+		    <effect duration="30">speed</effect>
+            <item slot="28" amount="16">arrow</item>
+        </kit>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>80</maxbuildheight>
 </map>

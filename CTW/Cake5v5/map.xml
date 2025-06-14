@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.4.0" game="Capture the Wool">
+<map proto="1.5.0">
 <name>Cake5v5</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture the wools and bring them back to your base!</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -18,7 +18,8 @@
     <team id="red-team" color="dark red" max="5">Red</team>
 </teams>
 <kits>
-    <kit id="default">
+    <kit id="default-kit">
+        <clear/>
         <item slot="0" unbreakable="true">iron sword</item>
         <item slot="1" unbreakable="true">bow</item>
         <item slot="2" unbreakable="true">diamond pickaxe</item>
@@ -26,26 +27,18 @@
         <item slot="4" amount="64">glass</item>
         <item slot="5" amount="64">sandstone</item>
         <item slot="6" amount="32">log</item>
-        <item slot="7" amount="32">cooked fish</item>
-        <item slot="8" amount="3">golden apple</item>
-        <item slot="9" amount="32">arrow</item>
+        <item slot="7" amount="3">golden apple</item>
+        <item slot="8" amount="32">arrow</item>
+        <helmet unbreakable="true" team-color="true">leather helmet</helmet>
+        <chestplate unbreakable="true" team-color="true">leather chestplate</chestplate>
         <leggings unbreakable="true">iron leggings</leggings>
+        <boots unbreakable="true" team-color="true">leather boots</boots>
         <effect duration="5" amplifier="9">damage resistance</effect>
-    </kit>
-    <kit id="blue-kit" parents="default">
-        <helmet unbreakable="true" color="334CB2">leather helmet</helmet>
-        <chestplate unbreakable="true" color="334CB2">leather chestplate</chestplate>
-        <boots unbreakable="true" color="334CB2">leather boots</boots>
-    </kit>
-    <kit id="red-kit" parents="default">
-        <helmet unbreakable="true" color="993333">leather helmet</helmet>
-        <chestplate unbreakable="true" color="993333">leather chestplate</chestplate>
-        <boots unbreakable="true" color="993333">leather boots</boots>
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue-team" kit="blue-kit" yaw="180" region="blue-spawn"/>
-    <spawn team="red-team" kit="red-kit" region="red-spawn"/>
+    <spawn team="blue-team" kit="default-kit" yaw="180" region="blue-spawn"/>
+    <spawn team="red-team" kit="default-kit" region="red-spawn"/>
     <default yaw="-90" region="obs-spawn"/>
 </spawns>
 <wools craftable="false">
@@ -55,24 +48,8 @@
     <wool team="blue-team" monument="red-team-red-wool" color="red" location="2,14,-85"/>
 </wools>
 <filters>
-    <not id="not-blue">
-        <team id="only-blue">blue-team</team>
-    </not>
-    <not id="not-red">
-        <team id="only-red">red-team</team>
-    </not>
-    <not id="not-void">
-        <void/>
-    </not>
     <any id="only-web-and-water">
-        <all>
-            <team>red-team</team>
-            <material>web</material>
-        </all>
-        <all>
-            <team>blue-team</team>
-            <material>web</material>
-        </all>
+        <material>web</material>
         <material>water</material>
         <material>STATIONARY_WATER</material>
     </any>
@@ -100,116 +77,122 @@
     <block id="red-team-pink-wool">-2,12,73</block>
     <block id="red-team-red-wool">4,12,73</block>
     <apply block="only-web-and-water" region="spawn-protections" message="You can't interact with this here!"/>
-    <apply enter="only-red" region="redspawnenter" message="You cannot enter the other team's spawn!"/>
-    <apply enter="only-blue" region="bluespawnenter" message="You cannot enter the other team's spawn!"/>
-    <apply enter="only-blue" region="blue-drop"/>
-    <apply enter="only-red" region="red-drop"/>
-    <apply enter="only-red" use="only-red" region="red-needs-these" message="You cannot enter this area!"/>
-    <apply enter="only-blue" use="only-blue" region="blue-needs-these" message="You cannot enter this area!"/>
+    <apply enter="deny(blue-team)" region="redspawnenter" message="You cannot enter the other team's spawn!"/>
+    <apply enter="deny(red-team)" region="bluespawnenter" message="You cannot enter the other team's spawn!"/>
+    <apply enter="red-team" region="red-drop"/>
+    <apply enter="blue-team" region="blue-drop"/>
+    <apply enter="red-team" use="red-team" block="deny(red-team)" region="red-needs-these" message="You cannot enter this area!"/>
+    <apply enter="blue-team" use="blue-team" block="deny(blue-team)" region="blue-needs-these" message="You cannot enter this area!"/>
     <apply block="never" message="You may not edit outside the map!">
-      <region>
-        <complement>
-          <everywhere/>
-          <union>
-            <cuboid id="mid" max="37,30,51" min="-37,0,-47"/>
-            <cuboid max="29,30,53" min="19,0,52"/>
-            <cuboid max="30,30,80" min="19,0,54"/>
-            <cuboid max="30,30,82" min="18,0,81"/>
-            <cuboid max="30,30,83" min="16,0,83"/>
-            <cuboid max="30,30,85" min="11,0,84"/>
-            <cuboid max="29,30,87" min="11,0,86"/>
-            <cuboid max="28,30,89" min="11,0,88"/>
-            <cuboid max="27,30,90" min="11,0,90"/>
-            <cuboid max="26,30,91" min="11,0,91"/>
-            <cuboid max="25,30,92" min="11,0,92"/>
-            <cuboid max="24,30,93" min="11,0,93"/>
-            <cuboid max="22,30,94" min="11,0,94"/>
-            <cuboid max="20,30,95" min="11,0,95"/>
-            <cuboid max="9,30,53" min="-7,0,52"/>
-            <cuboid max="10,30,56" min="-8,0,54"/>
-            <cuboid max="11,30,69" min="-9,0,57"/>
-            <cuboid max="-18,30,53" min="-28,0,52"/>
-            <cuboid max="-17,30,80" min="-28,0,54"/>
-            <cuboid max="-16,30,82" min="-28,0,81"/>
-            <cuboid max="-14,30,83" min="-28,0,83"/>
-            <cuboid max="-9,30,85" min="-28,0,84"/>
-            <cuboid max="-9,30,87" min="-27,0,86"/>
-            <cuboid max="-9,30,89" min="-26,0,88"/>
-            <cuboid max="-9,30,90" min="-25,0,90"/>
-            <cuboid max="-9,30,91" min="-24,0,91"/>
-            <cuboid max="-9,30,92" min="-23,0,92"/>
-            <cuboid max="-9,30,93" min="-22,0,93"/>
-            <cuboid max="-9,30,94" min="-20,0,94"/>
-            <cuboid max="-9,30,95" min="-18,0,95"/>
-            <cuboid max="-19,30,-48" min="-29,0,-49"/>
-            <cuboid max="-19,30,-50" min="-30,0,-76"/>
-            <cuboid max="-18,30,-77" min="-30,0,-78"/>
-            <cuboid max="-16,30,-79" min="-30,0,-79"/>
-            <cuboid max="-11,30,-80" min="-30,0,-80"/>
-            <cuboid max="-11,30,-80" min="-30,0,-81"/>
-            <cuboid max="-11,30,-82" min="-29,0,-83"/>
-            <cuboid max="-11,30,-84" min="-28,0,-85"/>
-            <cuboid max="-11,30,-86" min="-27,0,-86"/>
-            <cuboid max="-11,30,-87" min="-26,0,-87"/>
-            <cuboid max="-11,30,-88" min="-25,0,-88"/>
-            <cuboid max="-11,30,-89" min="-24,0,-89"/>
-            <cuboid max="-11,30,-90" min="-22,0,-90"/>
-            <cuboid max="-11,30,-91" min="-20,0,-91"/>
-            <cuboid max="28,30,-48" min="18,0,-49"/>
-            <cuboid max="28,30,-50" min="17,0,-76"/>
-            <cuboid max="28,30,-77" min="16,0,-78"/>
-            <cuboid max="28,30,-79" min="14,0,-79"/>
-            <cuboid max="28,30,-80" min="9,0,-81"/>
-            <cuboid max="27,30,-82" min="9,0,-83"/>
-            <cuboid max="26,30,-84" min="9,0,-85"/>
-            <cuboid max="25,30,-86" min="9,0,-86"/>
-            <cuboid max="24,30,-87" min="9,0,-87"/>
-            <cuboid max="23,30,-88" min="9,0,-88"/>
-            <cuboid max="22,30,-89" min="9,0,-89"/>
-            <cuboid max="20,30,-90" min="9,0,-90"/>
-            <cuboid max="18,30,-91" min="9,0,-91"/>
-            <cuboid max="3,25,89" min="-1,25,87"/>
-            <cuboid max="-1,25,90" min="-3,25,88"/>
-            <cuboid max="-2,25,94" min="-4,25,90"/>
-            <cuboid max="-1,25,96" min="-3,25,94"/>
-            <cuboid max="3,25,97" min="-1,25,95"/>
-            <cuboid max="5,25,96" min="3,25,94"/>
-            <cuboid max="6,25,94" min="4,25,90"/>
-            <cuboid max="5,25,90" min="3,25,88"/>
-            <cuboid max="1,25,-83" min="-3,25,-85"/>
-            <cuboid max="3,25,-84" min="1,25,-86"/>
-            <cuboid max="4,25,-86" min="2,25,-90"/>
-            <cuboid max="3,25,-90" min="1,25,-92"/>
-            <cuboid max="1,25,-91" min="-3,25,-93"/>
-            <cuboid max="-3,25,-90" min="-5,25,-92"/>
-            <cuboid max="-4,25,-86" min="-6,25,-90"/>
-            <cuboid max="-3,25,-84" min="-5,25,-86"/>
-          </union>
-        </complement>
-      </region>
+        <region>
+            <complement>
+                <everywhere/>
+                    <union>
+                        <cuboid id="mid" max="37,30,51" min="-37,0,-47"/>
+                        <cuboid max="29,30,53" min="19,0,52"/>
+                        <cuboid max="30,30,80" min="19,0,54"/>
+                        <cuboid max="30,30,82" min="18,0,81"/>
+                        <cuboid max="30,30,83" min="16,0,83"/>
+                        <cuboid max="30,30,85" min="11,0,84"/>
+                        <cuboid max="29,30,87" min="11,0,86"/>
+                        <cuboid max="28,30,89" min="11,0,88"/>
+                        <cuboid max="27,30,90" min="11,0,90"/>
+                        <cuboid max="26,30,91" min="11,0,91"/>
+                        <cuboid max="25,30,92" min="11,0,92"/>
+                        <cuboid max="24,30,93" min="11,0,93"/>
+                        <cuboid max="22,30,94" min="11,0,94"/>
+                        <cuboid max="20,30,95" min="11,0,95"/>
+                        <cuboid max="9,30,53" min="-7,0,52"/>
+                        <cuboid max="10,30,56" min="-8,0,54"/>
+                        <cuboid max="11,30,69" min="-9,0,57"/>
+                        <cuboid max="-18,30,53" min="-28,0,52"/>
+                        <cuboid max="-17,30,80" min="-28,0,54"/>
+                        <cuboid max="-16,30,82" min="-28,0,81"/>
+                        <cuboid max="-14,30,83" min="-28,0,83"/>
+                        <cuboid max="-9,30,85" min="-28,0,84"/>
+                        <cuboid max="-9,30,87" min="-27,0,86"/>
+                        <cuboid max="-9,30,89" min="-26,0,88"/>
+                        <cuboid max="-9,30,90" min="-25,0,90"/>
+                        <cuboid max="-9,30,91" min="-24,0,91"/>
+                        <cuboid max="-9,30,92" min="-23,0,92"/>
+                        <cuboid max="-9,30,93" min="-22,0,93"/>
+                        <cuboid max="-9,30,94" min="-20,0,94"/>
+                        <cuboid max="-9,30,95" min="-18,0,95"/>
+                        <cuboid max="-19,30,-48" min="-29,0,-49"/>
+                        <cuboid max="-19,30,-50" min="-30,0,-76"/>
+                        <cuboid max="-18,30,-77" min="-30,0,-78"/>
+                        <cuboid max="-16,30,-79" min="-30,0,-79"/>
+                        <cuboid max="-11,30,-80" min="-30,0,-80"/>
+                        <cuboid max="-11,30,-80" min="-30,0,-81"/>
+                        <cuboid max="-11,30,-82" min="-29,0,-83"/>
+                        <cuboid max="-11,30,-84" min="-28,0,-85"/>
+                        <cuboid max="-11,30,-86" min="-27,0,-86"/>
+                        <cuboid max="-11,30,-87" min="-26,0,-87"/>
+                        <cuboid max="-11,30,-88" min="-25,0,-88"/>
+                        <cuboid max="-11,30,-89" min="-24,0,-89"/>
+                        <cuboid max="-11,30,-90" min="-22,0,-90"/>
+                        <cuboid max="-11,30,-91" min="-20,0,-91"/>
+                        <cuboid max="28,30,-48" min="18,0,-49"/>
+                        <cuboid max="28,30,-50" min="17,0,-76"/>
+                        <cuboid max="28,30,-77" min="16,0,-78"/>
+                        <cuboid max="28,30,-79" min="14,0,-79"/>
+                        <cuboid max="28,30,-80" min="9,0,-81"/>
+                        <cuboid max="27,30,-82" min="9,0,-83"/>
+                        <cuboid max="26,30,-84" min="9,0,-85"/>
+                        <cuboid max="25,30,-86" min="9,0,-86"/>
+                        <cuboid max="24,30,-87" min="9,0,-87"/>
+                        <cuboid max="23,30,-88" min="9,0,-88"/>
+                        <cuboid max="22,30,-89" min="9,0,-89"/>
+                        <cuboid max="20,30,-90" min="9,0,-90"/>
+                        <cuboid max="18,30,-91" min="9,0,-91"/>
+                        <cuboid max="3,25,89" min="-1,25,87"/>
+                        <cuboid max="-1,25,90" min="-3,25,88"/>
+                        <cuboid max="-2,25,94" min="-4,25,90"/>
+                        <cuboid max="-1,25,96" min="-3,25,94"/>
+                        <cuboid max="3,25,97" min="-1,25,95"/>
+                        <cuboid max="5,25,96" min="3,25,94"/>
+                        <cuboid max="6,25,94" min="4,25,90"/>
+                        <cuboid max="5,25,90" min="3,25,88"/>
+                        <cuboid max="1,25,-83" min="-3,25,-85"/>
+                        <cuboid max="3,25,-84" min="1,25,-86"/>
+                        <cuboid max="4,25,-86" min="2,25,-90"/>
+                        <cuboid max="3,25,-90" min="1,25,-92"/>
+                        <cuboid max="1,25,-91" min="-3,25,-93"/>
+                        <cuboid max="-3,25,-90" min="-5,25,-92"/>
+                        <cuboid max="-4,25,-86" min="-6,25,-90"/>
+                        <cuboid max="-3,25,-84" min="-5,25,-86"/>
+                    </union>
+            </complement>
+        </region>
     </apply>
 </regions>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>bow</tool>
+    <tool>iron axe</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>log</item>
+    <item>wood</item>
+    <item>sandstone</item>
+    <item>glass</item>
+</itemkeep>
 <itemremove>
-    <item>iron sword</item>
-    <item>diamond pickaxe</item>
-    <item>bow</item>
-    <item>iron axe</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>iron leggings</item>
     <item>leather boots</item>
-    <item>log</item>
-    <item>sandstone</item>
-    <item>glass</item>
-    <item>golden apple</item>
-    <item>cooked fish</item>
-    <item>arrow</item>
 </itemremove>
 <kill-rewards>
     <kill-reward>
-        <item amount="1">golden apple</item>
         <item amount="6">arrow</item>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>89</maxbuildheight>
 </map>

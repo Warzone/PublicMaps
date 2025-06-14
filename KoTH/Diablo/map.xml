@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>Diablo</name>
-<version>1.0.3</version>
+<version>1.1.0</version>
 <objective>Capture and hold the control points in order to win.</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -12,137 +11,80 @@
     <contributor contribution="Help and Support">The Orange Sunglasses Build Team</contributor>
 </contributors>
 <teams>
-    <team color="dark red" max="32">Red</team>
-    <team color="gold" max="32">Orange</team>
+    <team id="red-team" color="dark red" max="32">Red</team>
+    <team id="orange-team" color="gold" max="32">Orange</team>
 </teams>
 <kits>
-    <kit name="spawn">
-        <item slot="0">iron axe</item>
-        <item slot="1" enchantment="arrow infinite:1">bow</item>
-        <item slot="28">arrow</item>
-        <item slot="8" amount="32">pumpkin pie</item>
-        <item slot="7" amount="2">golden apple</item>
-        <potion duration="8">heal</potion>
-        <potion duration="oo">night vision</potion>
-        <chestplate unbreakable="true">chainmail chestplate</chestplate>
+    <kit id="spawn-kit">
+        <clear/>
+        <item unbreakable="true" slot="0" material="iron axe"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="28" material="arrow"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
+        <effect duration="8">heal</effect>
+        <effect>night vision</effect>
     </kit>
-    <kit name="red" parents="spawn">
-        <leggings color="993333" unbreakable="true">leather leggings</leggings>
-        <boots color="993333" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="orange" parents="spawn">
-        <leggings color="D87F33" unbreakable="true">leather leggings</leggings>
-        <boots color="D87F33" unbreakable="true">leather boots</boots>
-    </kit>
-    <kit name="obs">
-        <potion duration="oo" amplifier="1">night vision</potion>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
     </kit>
 </kits>
-<filters>
-    <filter name="only-red">
-        <team>red</team>
-    </filter>
-    <filter name="only-orange">
-        <team>orange</team>
-    </filter>
-</filters>
-<regions>
-    <circle name="red-spawn" center="-255,-1028" radius="8"/>
-    <circle name="orange-spawn" center="-255,-886" radius="8"/>
-    <apply block="deny-all" message="You may not modify the map!">
-        <rectangle min="-oo,-oo" max="oo,oo"/>
-    </apply>
-    <apply enter="only-red">
-        <region name="red-spawn"/>
-    </apply>
-    <apply enter="only-orange">
-        <region name="orange-spawn"/>
-    </apply>
-</regions>
-<king>
-    <hills>
-        <hill name="Point A" capture-time="10s" points="1">
-            <capture>
-                <cuboid min="-238,4,-961" max="-230,9,-953"/>
-            </capture>
-            <progress>
-                <cuboid min="-238,4,-961" max="-230,4,-953"/>
-            </progress>
-            <captured>
-                <cuboid min="-238,10,-961" max="-226,22,-953"/>
-            </captured>
-        </hill>
-        <hill name="Point B" capture-time="10s" points="1">
-            <capture>
-                <cuboid min="-280,5,-953" max="-272,9,-961"/>
-            </capture>
-            <progress>
-                <cuboid min="-280,5,-953" max="-272,5,-961"/>
-            </progress>
-            <captured>
-                <cuboid min="-283,11,-953" max="-272,24,-961"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
-<score>
-    <limit>750</limit>
-    <king/>
-</score>
 <spawns>
-    <spawn team="red" kit="red" yaw="0">
-        <cuboid min="-253,3,-1026" max="-257,3,-1030"/>
+    <spawn team="red-team" kit="spawn-kit" yaw="0">
+        <region>
+            <cuboid min="-253,3,-1026" max="-257,3,-1030"/>
+        </region>
     </spawn>
-    <spawn team="orange" kit="orange" yaw="180">
-        <cuboid min="-257,3,-888" max="-253,3,-884"/>
+    <spawn team="orange-team" kit="spawn-kit" yaw="180">
+        <region>
+            <cuboid min="-257,3,-888" max="-253,3,-884"/>
+        </region>
     </spawn>
-    <default yaw="-90" kit="obs">
-        <cuboid min="-341,41,-955" max="-345,41,-959"/>
+    <default yaw="-90" kit="obs-kit">
+        <region>
+            <cuboid min="-341,41,-955" max="-345,41,-959"/>
+        </region>
     </default>
 </spawns>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Point A" points="1" capture-time="10s" capture="a-hill-floor" progress="a-hill-progress" captured="a-hill-display"/>
+    <control-point name="Point B" points="1" capture-time="10s" capture="b-hill-floor" progress="b-hill-progress" captured="b-hill-display"/>
+</control-points>
+<score>
+    <limit>750</limit>
+</score>
+<regions>
+    <circle id="red-spawn" center="-255,-1028" radius="8"/>
+    <circle id="orange-spawn" center="-255,-886" radius="8"/>
+    <!-- Hills -->
+    <cuboid id="a-hill-floor" min="-238.5,4,-960.5" max="-229.5,9,-952.5"/>
+    <cuboid id="a-hill-progress" min="-238.5,4,-960.5" max="-229.5,5,-952.5"/>
+    <cuboid id="a-hill-display" min="-238.5,10,-960.5" max="-226,22,-952.5"/>
+    <cuboid id="b-hill-floor" min="-271.5,4,-952.5" max="-279.5,9,-960"/>
+    <cuboid id="b-hill-progress" min="-271.5,4,-952.5" max="-279.5,6,-960.5"/>
+    <cuboid id="b-hill-display" min="-271.5,10,-952.5" max="-282.5,24,-961.5"/>
+    <apply region="red-spawn" enter="red-team"/>
+    <apply region="orange-spawn" enter="orange-team"/>
+    <apply block="never"/>
+</regions>
 <toolrepair>
     <tool>iron axe</tool>
     <tool>bow</tool>
 </toolrepair>
-<itemremove>
+<itemkeep>
     <item>arrow</item>
-    <item>pumpkin pie</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
     <item>glass bottle</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<killreward>
-    <item amount="1">golden apple</item>
-</killreward>
 <timelock>on</timelock>
-<!-- <include id="tutorial"/> -->
-<tutorial>
-    <stage title="Control Points">
-        <message>
-            <line>This is a `932v32`r Control Points map. In order to `awin`r, your team must</line>
-            <line>collect 750 points by capturing and holding `cPoint A`r and `6Point B`r.</line>
-        </message>
-        <teleport>
-            <point yaw="-55" pitch="20">-306,47,-985</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>This is where your team will spawn when the game starts.</line>
-        </message>
-        <teleport>
-            <point yaw="-140" pitch="30">-261,13,-1016</point>
-        </teleport>
-    </stage>
-    <stage title="The Control Points">
-        <message>
-            <line>These are both the Control Points: `cPoint A`r and `6Point B`r</line>
-            <line>`9`lWatch the top of your screen`r to check how much of the point you captured!</line>
-        </message>
-        <teleport>
-            <point yaw="-9" pitch="10">-236,7,-967</point>
-        </teleport>
-    </stage>
-</tutorial>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

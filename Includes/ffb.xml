@@ -1,7 +1,7 @@
-<map proto="1.5.0">
+<map>
 <!-- Flag Football include file -->
 <!-- Created by mameBT -->
-<!-- Version 2024.12.11-1 -->
+<!-- Version 2025.06.04-1 -->
 <!--
     XML notes: team 1 defends their own net,
     scoring on team 2's net and vice-versa
@@ -14,6 +14,8 @@
     <constant id="team-1-spawn-pitch" delete="true"/>
     <constant id="team-2-spawn-pitch" delete="true"/>
     <constant id="flag-color" delete="true"/>
+    <constant id="pickup-kit">flag-pickup-kit</constant>
+    <constant id="drop-kit">flag-drop-kit</constant>
     <constant id="pickup-filter">not-above-nor-below</constant>
     <constant id="team-1-net-region">team-1-spawn</constant>
     <constant id="team-2-net-region">team-2-spawn</constant>
@@ -53,10 +55,10 @@
         <boots unbreakable="true" material="iron boots"/>
         <game-mode>adventure</game-mode>
     </kit>
-    <kit id="flag-kit">
+    <kit id="flag-pickup-kit">
         <effect>speed</effect>
     </kit>
-    <kit id="drop-kit" force="true">
+    <kit id="flag-drop-kit" force="true">
         <effect duration="0s">speed</effect>
     </kit>
 </kits>
@@ -78,8 +80,8 @@
           name="Flag"
           color="${flag-color}"
           shared="true"
-          pickup-kit="flag-kit"
-          drop-kit="drop-kit"
+          pickup-kit="${pickup-kit}"
+          drop-kit="${drop-kit}"
           pickup-filter="${pickup-filter}">
         <post recover-time="8s" respawn-time="4s">${flag-post}</post>
         <net points="1" region="${team-1-net-region}" capture-filter="only-team-1"/>

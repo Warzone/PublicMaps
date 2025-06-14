@@ -1,4 +1,7 @@
-<map proto="1.4.2" game="`eProgress">
+<!-- Block Runner gamemode include file -->
+<!-- Modified for modern PGM - Original block-runner.xml file from the Overcast Network -->
+<!-- Version 2025.03.14-1 -->
+<map proto="1.5.0" game="`eProgress">
 <objective>Be the first to the end!</objective>
 <gamemode>arcade</gamemode> 
 <blitz>
@@ -15,26 +18,10 @@
 <score>
     <limit>4</limit>
     <kills>0</kills>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint1"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint2"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="checkpoint3"/>
-        </region>
-    </box>
-    <box points="1" silent="true">
-        <region>
-            <region id="box-win"/>
-        </region>
-    </box>
+    <box points="1" silent="true" region="checkpoint1"/>
+    <box points="1" silent="true" region="checkpoint2"/>
+    <box points="1" silent="true" region="checkpoint3"/>
+    <box points="1" silent="true" region="box-win"/>
 </score>
 <regions>
     <apply enter="never">
@@ -62,9 +49,9 @@
 <kits>
     <kit id="spawn">
         <game-mode>adventure</game-mode>
-        <effect duration="oo">invisibility</effect>
-        <effect duration="oo">fire resistance</effect>
-        <boots>gold boots</boots>
+        <effect>invisibility</effect>
+        <effect>fire resistance</effect>
+        <boots unbreakable="true" material="gold boots"/>
     </kit>
 </kits>
 <structures>
@@ -80,10 +67,7 @@
     </not>
 </filters>
 <falling-blocks delay="4">
-    <rule>
-        <filter>
-            <filter id="all-blocks"/>
-        </filter>
+    <rule filter="all-blocks">
         <sticky>
             <all>
                 <filter id="all-blocks"/>

@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<map proto="1.3.0">
+<map proto="1.5.0">
 <name>The Hill</name>
-<version>1.1.6</version>
+<version>1.2.0</version>
+<include id="gapple-kill-reward"/>
 <objective>Capture and hold the hills</objective>
 <gamemode>koth</gamemode>
 <authors>
@@ -15,80 +15,66 @@
     <contributor uuid="a59dce2e-79e2-4229-ab83-98c885fceb23" contribution="Feedback and Planning"/> <!-- XxNarwhalexX -->
 </contributors>
 <teams>
-    <team color="gold" max="40">Orange</team>
-    <team color="dark purple" max="40">Purple</team>
+    <team id="orange-team" color="gold" max="40">Orange</team>
+    <team id="purple-team" color="dark purple" max="40">Purple</team>
 </teams>
 <kits>
-    <kit name="spawn">
+    <kit id="spawn-kit">
 		<clear/>
-        <item slot="0" unbreakable="true">stone sword</item>
-        <item slot="1" unbreakable="true">bow</item>
-        <item slot="2">golden apple</item>
-        <item slot="8" amount="16">arrow</item>
-		<leggings unbreakable="true" enchantment="protection projectile:3">chainmail leggings</leggings>
-		<boots unbreakable="true">iron boots</boots>
-        <potion duration="8" amplifier="3">heal</potion>
-    </kit>
-    <kit name="orange" parents="spawn">
-		<helmet color="FF8000" unbreakable="true">leather helmet</helmet>
-        <chestplate color="FF8000" unbreakable="true">leather chestplate</chestplate>
-    </kit>
-    <kit name="purple" parents="spawn">
-		<helmet color="800080" unbreakable="true">leather helmet</helmet>
-        <chestplate color="800080" unbreakable="true">leather chestplate</chestplate>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="16" material="arrow"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+		<leggings unbreakable="true" enchantment="protection projectile:3" material="chainmail leggings"/>
+		<boots unbreakable="true" material="iron boots"/>
+        <effect duration="8" amplifier="3">heal</effect>
     </kit>
 </kits>
 <spawns>
-	<spawn team="orange" kit="orange" yaw="0">
-		<cylinder base="1101,11,-604" radius="1" height="1"/>
+	<spawn team="orange-team" kit="spawn-kit" yaw="0">
+        <region>
+		    <cylinder base="1101,11,-604" radius="1" height="1"/>
+        </region>
 	</spawn>
-	<spawn team="purple" kit="purple" yaw="180">
-		<cylinder base="1101,11,-472" radius="1" height="1"/>
+	<spawn team="purple-team" kit="spawn-kit" yaw="180">
+        <region>
+		    <cylinder base="1101,11,-472" radius="1" height="1"/>
+        </region>
 	</spawn>
 	<default yaw="-90">
-		<cuboid min="1024,40,-538" max="1024,40,-538"/>
+        <region>
+		    <cuboid min="1024,40,-538" max="1024,40,-538"/>
+        </region>
 	</default>
 </spawns>
-<regions>
-    <rectangle name="playable" min="-oo,-oo" max="oo,oo"/>
-    <apply block="deny-all">
-        <region name="playable"/>
-    </apply>
-</regions>
-<king>
-    <hills>
-        <hill name="Hill" capture-time="15s" points="1">
-            <capture>
-                <cylinder base="1101,31,-538" radius="9" height="5"/>
-            </capture>
-            <progress>
-                <cuboid min="1093,31,-531" max="1109,31,-547"/>
-            </progress>
-            <captured>
-                <cuboid min="0,0,0" max="0,0,0"/>
-            </captured>
-        </hill>
-        <hill name="Cave" capture-time="10s" points="1">
-            <capture>
-                <cylinder base="1101,9,-538" radius="11" height="5"/>
-            </capture>
-            <progress>
-                <cuboid min="1111,9,-549" max="1091,9,-529"/>
-            </progress>
-            <captured>
-                <cuboid min="1,1,1" max="1,1,1"/>
-            </captured>
-        </hill>
-    </hills>
-</king>
+<control-points incremental="true" neutral-state="true" show-progress="true" required="false">
+    <control-point name="Hill" capture-time="15s" points="1" progress="hill" captured="hill">
+        <capture>
+            <cylinder id="hill" base="1101,31,-538" radius="9" height="5"/>
+        </capture>
+    </control-point>
+    <control-point name="Cave" capture-time="10s" points="1" progress="cave" captured="cave">
+        <capture>
+            <cylinder id="cave" base="1101,9,-538" radius="11" height="5"/>
+        </capture>
+    </control-point>
+</control-points>
 <score>
     <limit>750</limit>
-    <king/>
 </score>
+<regions>
+    <apply block="never"/>
+</regions>
 <toolrepair>
 	<tool>stone sword</tool>
 	<tool>bow</tool>
 </toolrepair>
+<itemkeep>
+	<item>arrow</item>
+	<item>golden apple</item>
+</itemkeep>
 <itemremove>
 	<item>leather helmet</item>
 	<item>leather chestplate</item>
@@ -96,55 +82,13 @@
 	<item>iron boots</item>
 	<item>glass bottle</item>
 </itemremove>
-<killreward>
-	<item>golden apple</item>
-	<item amount="8">arrow</item>
-</killreward>
-<itemkeep>
-	<item>arrow</item>
-	<item>golden apple</item>
-</itemkeep>
+<kill-rewards>
+    <kill-reward>
+	    <item amount="8">arrow</item>
+    </kill-reward>
+</kill-rewards>
 <hunger>
 	<depletion>off</depletion>
 </hunger>
 <timelock>on</timelock>
-<!-- <include id="tutorial"/> -->
-<tutorial>
-    <stage title="Control Points">
-        <message>
-            <line>This is a `930v30 Control Points`r map. To `awin`r, your team must be the first</line>
-            <line>to collect 750 points, which are earned by capturing and holding Control Points.</line>
-        </message>
-        <teleport>
-            <point yaw="-90" pitch="50">1054,47,-538</point>
-        </teleport>
-    </stage>
-    <stage title="Spawn">
-        <message>
-            <line>This is where you will spawn when the game starts.</line>
-            <line>There a `93 paths to choose from`r, all of which will lead you to the Control Points.</line>
-        </message>
-        <teleport>
-            <point yaw="0" pitch="5">1101,15,-610</point>
-        </teleport>
-    </stage>
-    <stage title="Control Point: Hill">
-        <message>
-            <line>This is the `cfirst control point`r: Hill.</line>
-            <line>This is located at the `ntop`r of the map.</line>
-        </message>
-        <teleport>
-            <point yaw="38" pitch="40">1110,38,-549</point>
-        </teleport>
-    </stage>
-    <stage title="Control Point: Cave">
-        <message>
-            <line>This is the `9second control point`r: Cave.</line>
-            <line>This is located at the `nbottom`r of the map.</line>
-        </message>
-        <teleport>
-            <point yaw="45" pitch="25">1109,13,-546</point>
-        </teleport>
-    </stage>
-</tutorial>
 </map>

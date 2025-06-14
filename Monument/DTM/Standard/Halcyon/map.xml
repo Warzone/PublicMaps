@@ -1,6 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Halcyon</name>
-<version>2.2.6</version>
+<version>2.2.7</version>
+<variant id="christmas" world="christmas" override="true">Halcyon Holiday</variant>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the other team's two monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <!-- Author -->
@@ -9,49 +11,41 @@
 </authors>
 <!-- Teams -->
 <teams>
-   <team id="red" color="dark red" max="8">Red</team>
-   <team id="purple" color="dark purple" max="8">Purple</team>
+   <team id="red-team" color="dark red" max="8">Red</team>
+   <team id="purple-team" color="dark purple" max="8">Purple</team>
 </teams>
 <!-- Broadcasts -->
 <broadcasts>
-    <tip after="5s">Iron blocks are behind spawn!</tip>
+    <tip after="5s">Iron blocks are behind your spawn!</tip>
 </broadcasts>
 <!-- Kits -->
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" unbreakable="true" enchantment="dig speed:1;durability:3" material="diamond pickaxe"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed;durability:3" material="diamond pickaxe"/>
         <item slot="3" unbreakable="true" material="stone axe"/>
         <item slot="4" amount="64" material="wood"/>
         <item slot="5" amount="64" material="glass"/>
         <item slot="7" material="golden apple"/>
-        <item slot="8" amount="64" material="golden carrot"/>
         <item slot="28" amount="16" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" enchantment="protection projectile:2" material="leather chestplate"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <leggings unbreakable="true" material="iron leggings"/>
         <effect duration="5" amplifier="5">damage resistance</effect>
         <effect duration="5" amplifier="5">heal</effect>
     </kit>
-    <kit id="red-kit" parents="spawn">
-        <helmet unbreakable="true" color="B02E26" material="leather helmet"/>
-        <chestplate unbreakable="true" color="B02E26" enchantment="protection projectile:2" material="leather chestplate"/>
-        <boots unbreakable="true" color="B02E26" material="leather boots"/>
-    </kit>
-    <kit id="purple-kit" parents="spawn">
-        <helmet unbreakable="true" color="7F3FB2" material="leather helmet"/>
-        <chestplate unbreakable="true" color="7F3FB2" enchantment="protection projectile:2" material="leather chestplate"/>
-        <boots unbreakable="true" color="7F3FB2" material="leather boots"/>
-    </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="red" kit="red-kit" yaw="-180">
+    <spawn team="red-team" kit="spawn-kit" yaw="-180">
         <region>
             <point>14.5,74,-761.5</point>
         </region>
     </spawn>
-    <spawn team="purple" kit="purple-kit">
+    <spawn team="purple-team" kit="spawn-kit">
         <region>
             <point>14.5,74,-871.5</point>
         </region>
@@ -62,12 +56,6 @@
         </region>
     </default>
 </spawns>
-<!-- Filters -->
-<filters>
-    <team id="only-red">red</team>
-    <team id="only-purple">purple</team>
-</filters>
-<!-- Regions -->
 <regions>
     <!-- Definitions -->
     <negative id="playable">
@@ -78,47 +66,46 @@
         <cylinder id="purple-spawn-protection" base="14.5,66,-871.5" height="19" radius="10" />
     </union>
     <!-- Applications -->
-    <apply enter="only-red" region="red-spawn-protection" message="You may not enter `4Red Team`c's spawn area!"/>
-    <apply enter="only-purple" region="purple-spawn-protection" message="You may not enter `5Purple Team`c's spawn area!"/>
-    <apply block="never" region="spawn-protections" message="You may not modify the spawn area."/>
-    <apply block="never" region="playable" message="You may not build outside of the playing field!"/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn!"/>
+    <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
+    <apply region="playable" block="never" message="You may not build outside of the playing field!"/>
 </regions>
 <!-- Monuments -->
 <destroyables materials="obsidian">
-    <destroyable name="Left Monument" owner="purple">
+    <destroyable name="Left Monument" owner="purple-team">
         <region>
             <block>-13,74,-861</block>
         </region>
     </destroyable>
-    <destroyable name="Right Monument" owner="purple">
+    <destroyable name="Right Monument" owner="purple-team">
         <region>
             <block>41,74,-861</block>
         </region>
     </destroyable>
-    <destroyable name="Left Monument" owner="red">
+    <destroyable name="Left Monument" owner="red-team">
         <region>
             <block>41,74,-773</block>
         </region>
     </destroyable>
-    <destroyable name="Right Monument" owner="red">
+    <destroyable name="Right Monument" owner="red-team">
         <region>
             <block>-13,74,-773</block>
         </region>
     </destroyable>
 </destroyables>
-<!-- Item-Remove -->
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>stone axe</tool>
+</toolrepair>
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>diamond pickaxe</item>
-    <item>stone axe</item>
     <item>obsidian</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>iron leggings</item>
     <item>leather boots</item>
-    <item>ladder</item>
-    <item>golden carrot</item>
 </itemremove>
 <itemkeep>
     <item>golden apple</item>
@@ -126,12 +113,14 @@
     <item>log</item>
     <item>wood</item>
     <item>glass</item>
+    <item>ladder</item>
 </itemkeep>
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
-        <item amount="4" material="arrow"/>
+        <item amount="16" material="wood"/>
+        <item amount="16" material="glass"/>
+        <item amount="8" material="arrow"/>
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
@@ -139,5 +128,8 @@
 <gamerules>
     <doFireTick>false</doFireTick>
 </gamerules>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>93</maxbuildheight>
 </map>

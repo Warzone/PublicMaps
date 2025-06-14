@@ -1,16 +1,16 @@
 <map proto="1.5.0">
 <name>Penguin's Colony</name>
 <variant id="halloween" world="halloween" override="true">Pumpkin's Colony</variant>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <objective>Reach 600 points before the opposing team!</objective>
 <gamemode>koth</gamemode>
+<include id="gapple-kill-reward"/>
 <if variant="default">
     <created>2021-11-28</created>
 </if>
 <if variant="halloween">
     <created>2022-08-11</created>
 </if>
-<!-- Authors & Contributors -->
 <authors>
     <author uuid="a22f2197-5992-4e69-a483-5e5f7a44a0ad"/> <!-- Piinoy -->
     <author uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9"/> <!-- Wesdial -->
@@ -23,12 +23,11 @@
     <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="JSON to XML and map conversion"/> <!-- _Pear -->
 </contributors>
 <teams>
-    <team id="blue-team" color="blue" min="1" max="5">Blue</team>
-    <team id="red-team" color="red" min="1" max="5">Red</team>
+    <team id="blue-team" color="blue" max="5">Blue</team>
+    <team id="red-team" color="red" max="5">Red</team>
 </teams>
-<!-- Kits -->
 <kits>
-    <kit id="spawn-kit">
+    <kit id="spawn-kit" parents="obs-kit">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
@@ -39,14 +38,12 @@
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect amplifier="1">night vision</effect>
         <effect duration="5" amplifier="10">resistance</effect>
     </kit>
     <kit id="obs-kit">
-        <effect amplifier="1">night vision</effect>
+        <effect>night vision</effect>
     </kit>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default yaw="90" kit="obs-kit">
         <region>
@@ -55,7 +52,7 @@
     </default>
     <spawn team="blue-team" kit="spawn-kit" yaw="40" pitch="-10">
         <region>
-            <point>-26.5, 37, -250.5</point>
+            <point>-26.5,37,-250.5</point>
         </region>
     </spawn>
     <spawn team="red-team" kit="spawn-kit" yaw="-140" pitch="-10">
@@ -64,40 +61,21 @@
         </region>
     </spawn>
 </spawns>
-<!-- Capture Points -->
 <control-points capture-time="5s" incremental="true" neutral-state="true" show-progress="true" required="false">
-    <control-point name="B Point" points="1">
+    <control-point name="B Point" points="1" progress="b-hill" captured="b-hill">
         <capture>
             <cylinder id="b-hill" base="-51.5,42,-256.5" radius="5" height="4"/>
         </capture>
-        <progress>
-            <region id="b-hill"/>
-        </progress>
-        <captured>
-            <region id="b-hill"/>
-        </captured>
     </control-point>
-    <control-point name="Mid Point" points="1.5">
+    <control-point name="Mid Point" points="1.5" progress="mid-hill" captured="mid-hill">
         <capture>
             <cylinder id="mid-hill" base="-78.5,43,-241.5" radius="7" height="4"/>
         </capture>
-        <progress>
-            <region id="mid-hill"/>
-        </progress>
-        <captured>
-            <region id="mid-hill"/>
-        </captured>
     </control-point>
-	 <control-point name="A Point" points="1">
+     <control-point name="A Point" points="1" progress="a-hill" captured="a-hill">
         <capture>
             <cylinder id="a-hill" base="-105.5,42,-226.5" radius="5" height="4"/>
         </capture>
-        <progress>
-            <region id="a-hill"/>
-        </progress>
-        <captured>
-            <region id="a-hill"/>
-        </captured>
     </control-point>
 </control-points>
 <filters>
@@ -109,17 +87,15 @@
         <rectangle id="red-spawn-protection" min="-136,-254" max="-111,-235"/>
     </union>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="blue-team" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="red-team" message="You may not enter the enemy's spawn."/>
     <apply block="only-leaves-in-map" message="You may only place or break leaves!"/>
 </regions>
-<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure players don't drop a tool by accident. -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
     <tool>shears</tool>
 </toolrepair>
-<!-- Item Remove -->
 <itemremove>
     <item>sapling</item>
     <item>leather helmet</item>
@@ -127,24 +103,19 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<!-- Item Keep -->
 <itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
     <item>leaves</item>
 </itemkeep>
-<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="6" material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<!-- Score Limit -->
 <score>
     <limit>600</limit>
 </score>
-<!-- Misc -->
 <timelock>on</timelock>
 <hunger>
     <depletion>off</depletion>
