@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Salvo</name>
-<version>1.2.2</version>
+<version>1.2.3</version>
 <objective>Destroy the other team's two clay monuments to win!</objective>
 <gamemode>arcade</gamemode>
 <authors>
@@ -16,11 +16,10 @@
 </teams>
 <kits>
     <kit id="kit">
-        <item slot="0" name="`4TNT Gun" material="bow"/>
+        <item unbreakable="true" slot="0" name="`4TNT Gun" material="bow" enchantment="infinity"/>
         <item slot="1" material="golden apple"/>
-        <item slot="2" amount="64" material="arrow"/>
-        <item slot="3" amount="64" material="arrow"/>
-        <item slot="4" amount="64" material="arrow"/>
+        <item slot="9" material="arrow"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
     </kit>
 </kits>
 <modifybowprojectile>
@@ -66,10 +65,10 @@
 <disabledamage>
     <damage ally="true" enemy="false" self="false" other="false">block explosion</damage>
 </disabledamage>
-<itemremove>
+<itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
-</itemremove>
+</itemkeep>
 <toolrepair>
     <tool>bow</tool>
 </toolrepair>
