@@ -1,6 +1,7 @@
-<map proto="1.4.0">
+<map proto="1.5.0">
 <name>Electri City</name>
-<version>1.0.7</version>
+<version>1.0.8</version>
+<include id="gapple-kill-reward"/>
 <objective>Retrieve the wool from the enemy's side and place it on your team's monument</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -12,43 +13,35 @@
 	<contributor uuid="0442bdf6-b2b4-481a-8e90-2e79477aef63" contribution="XML coding"/> <!-- Thrasilias -->
 </contributors>
 <teams>
-	<team id="red" color="dark red" max="12">Red</team>
-	<team id="blue" color="blue" max="12">Blue</team>
+	<team id="red-team" color="dark red" max="12">Red</team>
+	<team id="blue-team" color="blue" max="12">Blue</team>
 </teams>
 <kits>
-	<kit id="spawn">
-		<clear/>
-		<item slot="0">iron sword</item>
-		<item slot="1">bow</item>
-		<item slot="2">iron pickaxe</item>
-		<item slot="3">iron axe</item>
-		<item slot="4" amount="48">cooked beef</item>
-		<item slot="5" amount="1">golden apple</item>
-		<item slot="6" amount="64">glass</item>
-		<item slot="7" amount="32" damage="3">log</item>
-		<item slot="28" amount="32">arrow</item>
-		<potion duration="10" amplifier="3">damage resistance</potion>
-	</kit>
-	<kit id="blue-kit" parents="spawn">
-		<helmet color="3c1cd9" unbreakable="true">leather helmet</helmet>
-		<chestplate>chainmail chestplate</chestplate>
-		<leggings color="3c1cd9" unbreakable="true">leather leggings</leggings>
-		<boots color="3c1cd9" unbreakable="true">leather boots</boots>
-	</kit>
-	<kit id="red-kit" parents="spawn">
-		<helmet color="db1818" unbreakable="true">leather helmet</helmet>
-		<chestplate>chainmail chestplate</chestplate>
-		<leggings color="db1818" unbreakable="true">leather leggings</leggings>
-		<boots color="db1818" unbreakable="true">leather boots</boots>
-	</kit>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" unbreakable="true" material="iron sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" unbreakable="true" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="iron axe"/>
+        <item slot="4" material="golden apple"/>
+        <item slot="5" amount="64" damage="3" material="wood"/>
+        <item slot="6" amount="64" damage="3" material="wood"/>
+        <item slot="7" amount="64" material="glass"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="chainmail chestplate"/>
+        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
+        <effect duration="5" amplifier="5">damage resistance</effect>
+    </kit>
 </kits>
 <spawns>
-	<spawn team="red" kit="red-kit">
+	<spawn team="red" kit="spawn-kit">
 		<region yaw="90">
 			<point>55.603,7.5,-40.502</point>
 		</region>
 	</spawn>
-	<spawn team="blue" kit="blue-kit">
+	<spawn team="blue" kit="spawn-kit">
 		<region yaw="-90">
 			<point>-52.551,7.5,-40.510</point>
 		</region>
@@ -60,28 +53,8 @@
 	</default>
 </spawns>
 <filters>
-	<team id="only-blue">blue</team>
-	<team id="only-red">red</team>
-	<all id="blue-webs">
-		<team>blue</team>
-		<any>
-			<material>web</material>
-			<material>stained glass</material>
-		</any>
-	</all>
-	<all id="red-webs">
-		<team>red</team>
-		<any>
-			<material>web</material>
-			<material>stained glass</material>
-		</any>
-	</all>
-	<not id="no-void">
-		<void/>
-	</not>
-	<deny id="deny-spawner">
-        <material>mob spawner</material>
-    </deny>
+	<material id="only-chest">chest</material>
+	<material id="only-spawner">mob spawner</material>
 </filters>
 <regions>
 	<union id="spawns">
@@ -99,18 +72,19 @@
 		</union>
 	</union>
 	<apply block="never" message="You may not edit the spawn areas!" region="spawns"/>
-	<apply use="only-red" region="red-spawn"/>
-	<apply use="only-blue" region="blue-spawn"/>
-	<apply enter="only-red" message="You may not enter the enemy spawn!" region="red-spawn"/>
-	<apply enter="only-blue" message="You may not enter the enemy spawn!" region="blue-spawn"/>
-	<apply enter="only-red" message="You may not enter your own wool room!" region="blue-rooms"/>
-	<apply enter="only-blue" message="You may not enter your own wool room!" region="red-rooms"/>
-	<apply use="only-red" region="blue-rooms"/>
-	<apply use="only-blue" region="red-rooms"/>
-	<apply block="red-webs" message="You may not interact with the wool rooms!" region="blue-rooms"/>
-	<apply block="blue-webs" message="You may not interact with the wool rooms!" region="red-rooms"/>
-	<apply block="deny-spawner" message="Don't destroy the arrow spawner!" region="everywhere"/>
-	<apply block-place="no-void" message="You may not edit the void area!" region="everywhere"/> <!-- Uses Block 36 -->
+	<apply use="red-team" region="red-spawn"/>
+	<apply use="blue-team" region="blue-spawn"/>
+	<apply enter="deny(blue-team)" message="You may not enter the enemy spawn!" region="red-spawn"/>
+	<apply enter="deny(red-team)" message="You may not enter the enemy spawn!" region="blue-spawn"/>
+	<apply enter="deny(blue-team)" message="You may not enter your own wool room!" region="blue-rooms"/>
+	<apply enter="deny(red-team)" message="You may not enter your own wool room!" region="red-rooms"/>
+	<apply use="deny(blue-team)" region="blue-rooms"/>
+	<apply use="deny(red-team)" region="red-rooms"/>
+	<apply block="deny(blue-team)" message="You may not edit your own wool room!" region="blue-rooms"/>
+	<apply block="deny(red-team)" message="You may not edit your own wool room!" region="red-rooms"/>
+	<apply block="deny(only-chest)" message="You may not destroy the chests in the wool room!" region="wool-rooms"/>
+	<apply block="deny(only-spawner)" message="You may not destroy the arrow spawner!"/>
+	<apply block-place="deny(void)" message="You may not edit the void area!"/> <!-- uses block 36 -->
 </regions>
 <wools team="blue">
 	<wool color="yellow" location="-54,7,17">
@@ -135,7 +109,6 @@
 	<tool>bow</tool>
 </toolrepair>
 <itemremove>
-	<item>cooked beef</item>
 	<item>leather helmet</item>
 	<item>chainmail chestplate</item>
 	<item>leather leggings</item>
@@ -148,9 +121,13 @@
 	<item>log</item>
 	<item>wood</item>
 </itemkeep>
+<kill-rewards>
+	<kill-reward>
+		<item amount="8" material="arrow"/>
+	</kill-reward>
+</kill-rewards>
+<hunger>
+	<depletion>off</depletion>
+</hunger>
 <maxbuildheight>19</maxbuildheight>
-<killreward>
-	<item>golden apple</item>
-	<item amount="2">arrow</item>
-</killreward>
 </map>
