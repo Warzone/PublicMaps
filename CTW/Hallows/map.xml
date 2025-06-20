@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Hallows</name>
-<version>1.1.6</version>
+<version>1.1.7</version>
 <objective>Capture the other teams wools!</objective>
 <gamemode>ctw</gamemode>
 <include id="gapple-kill-reward"/>
@@ -15,24 +15,18 @@
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" material="iron sword"/>
-        <item slot="1" material="bow">
-            <enchantment>arrow infinite</enchantment>
-        </item>
-        <item slot="28" material="arrow"/>
-        <item slot="2" material="iron pickaxe">
-            <enchantment>dig speed</enchantment>
-        </item>
-        <item slot="3" material="iron axe">
-            <enchantment>dig speed</enchantment>
-        </item>
-        <item slot="29" material="shears"/>
-        <item slot="30" material="iron spade"/>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" material="bow" enchantment="arrow infinite"/>
+        <item unbreakable="true" slot="2" material="iron pickaxe" enchantment="dig speed"/>
+        <item unbreakable="true" slot="3" material="iron axe" enchantment="dig speed"/>
+        <item unbreakable="true" slot="29" material="shears"/>
+        <item unbreakable="true" slot="30" material="iron spade"/>
         <item slot="4" material="wood" damage="1" amount="64"/>
         <item slot="31" material="wood" damage="1" amount="64"/>
         <item slot="5" material="glass" amount="64"/>
         <item slot="6" material="bucket"/>
         <item slot="8" material="golden apple"/>
+        <item slot="28" material="arrow"/>
         <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
         <leggings material="chainmail leggings" unbreakable="true"/>
         <boots material="leather boots" team-color="true" unbreakable="true"/>
@@ -51,26 +45,13 @@
     <wool team="red-team" color="pink" monument="pink-wool-monument" location="-1274,12,-1130"/>
 </wools>
 <filters>
-    <deny id="blues-woolrooms-filter">
-        <any>
-            <team id="only-blue">blue-team</team>
-            <material>chest</material>
-        </any>
-    </deny>
-    <deny id="reds-woolrooms-filter">
-        <any>
-            <team id="only-red">red-team</team>
-            <material>chest</material>
-        </any>
-    </deny>
     <all id="only-iron-cause-world">
         <material id="only-iron">iron block</material>
         <cause>world</cause>
     </all>
+    <material id="chest">chest</material>
     <material id="only-air">air</material>
-    <deny id="deny-redstone">
-        <material>redstone wire</material>
-    </deny>
+    <material id="only-redstone">redstone wire</material>
     <deny id="deny-obs-spawn">
         <circle id="obs-spawn" center="-1209.5,-1002.5" radius="9"/>
     </deny>
@@ -98,24 +79,18 @@
         </union>
     </union>
     <!-- applicators -->
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
-    <apply enter="only-blue" use="only-blue" region="reds-woolrooms" message="You may not enter your team's wool rooms!"/>
-    <apply enter="only-red" use="only-red" region="blues-woolrooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="deny(red-team)" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(blue-team)" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="deny(red-team)" use="deny(red-team)" region="reds-woolrooms" message="You may not enter your team's wool rooms!"/>
+    <apply enter="deny(blue-team)" use="deny(blue-team)" region="blues-woolrooms" message="You may not enter your team's wool rooms!"/>
     <apply block-place="only-iron-cause-world" block-break="only-iron" region="spawns" message="You may not edit spawn!"/>
-    <apply block="blues-woolrooms-filter" region="blues-woolrooms" message="You may not break chests in the wool rooms, or your team's wool rooms!"/>
-    <apply block="reds-woolrooms-filter" region="reds-woolrooms" message="You may not break chests in the wool rooms, or your team's wool rooms!"/>
-    <apply block-physics="deny-redstone" region="woolrooms"/>
+    <apply block="deny(blue-team)" region="blues-woolrooms" message="You may not edit your own wool room!"/>
+    <apply block="deny(red-team)" region="reds-woolrooms" message="You may not edit your own wool room!"/>
+    <apply block="deny(chest)" region="woolrooms" message="You may not break chests in the wool room!"/>
+    <apply block-physics="deny(only-redstone)" region="woolrooms"/>
     <apply block-place="deny(void)" block-break="deny-obs-spawn" message="You may not edit the void!"/> <!-- uses block 36 -->
 </regions>
 <itemkeep>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>iron pickaxe</item>
-    <item>iron axe</item>
-    <item>iron spade</item>
-    <item>shears</item>
-    <item>arrow</item>
     <item>wood:1</item>
     <item>glass</item>
     <item>golden apple</item>
@@ -140,16 +115,6 @@
     <item>flint</item>
     <item>string</item>
 </itemremove>
-<block-drops>
-    <rule>
-        <filter>
-            <material>wood:1</material>
-        </filter>
-        <drops>
-            <item chance="0" material="wood" damage="1"/>
-        </drops>
-    </rule>
-</block-drops>
 <item-mods>
     <rule>
         <match>
