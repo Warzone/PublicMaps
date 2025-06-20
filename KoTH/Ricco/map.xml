@@ -5,7 +5,8 @@
 <variant id="rage">Rage</variant>
 <variant id="rage_christmas" world="christmas">Rage Christmas</variant>
 <variant id="rage_halloween" world="halloween">Rage Halloween</variant>
-<version>2.2.3</version>
+<version>2.2.4</version>
+<include id="gapple-kill-reward"/>
 <objective>Be the first team to reach 1200 points by capturing the hills!</objective>
 <gamemode>koth</gamemode>
 <if variant="rage,rage_christmas,rage_halloween">
@@ -34,7 +35,7 @@
 <if variant="default,christmas,halloween"> <!-- Targets non-Rage variants -->
     <constant id="sword-enchantment" delete="true"/>
     <constant id="bow-enchantment" delete="true"/>
-    <constant id="arrow-amount">24</constant>
+    <constant id="arrow-amount">16</constant>
     <constant id="hill-capture-time">5s</constant>
     <include id="gapple-kill-reward"/>
 </if>
@@ -73,15 +74,12 @@
         <item slot="1" unbreakable="true" enchantments="${bow-enchantment}" material="bow"/>
         <item slot="2" amount="16" material="leaves"/>
         <item slot="3" unbreakable="true" material="shears"/>
-        <item slot="7" amount="${arrow-amount}" material="arrow"/>
-        <unless variant="rage,rage_christmas">
-            <item slot="8" amount="64" material="golden carrot"/>
-        </unless>
+        <item slot="8" amount="${arrow-amount}" material="arrow"/>
         <helmet unbreakable="true" material="iron helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="5" amplifier="10">damage resistance</effect>
+        <effect duration="5" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <!-- Spawns -->
@@ -104,12 +102,7 @@
 </spawns>
 <!-- Filters -->
 <filters>
-    <all id="only-leaves-in-map">
-        <not>
-            <void/>
-        </not>
-        <material>leaves</material>
-    </all>
+    <material id="leaves">leaves</material>
 </filters>
 <!-- Regions -->
 <regions>
@@ -121,7 +114,7 @@
     <below id="non-playable" y="1"/>
     <apply region="spawns" block="never" message="You may not build in spawn!"/>
     <apply region="non-playable" block="never" message="You may not modify the `9water `cor `7the void`c!"/>
-    <apply region="playable" block="only-leaves-in-map" message="You may only break and place `2Oak Leaves `cwithin the map!"/>
+    <apply region="playable" block="leaves" message="You may only break and place `2Oak Leaves `cwithin the map!"/>
 </regions>
 <!-- Control Points -->
 <control-points required="false" incremental="true" capture-time="${hill-capture-time}">
@@ -153,9 +146,6 @@
 <!-- Map Control -->
 <if variant="rage,rage_christmas,rage_halloween">
     <rage/>
-    <hunger>
-        <depletion>off</depletion>
-    </hunger>
     <disabledamage>
         <damage>fall</damage>
     </disabledamage>
@@ -173,7 +163,6 @@
     <item>leaves</item>
     <item>shears</item>
     <item>arrow</item>
-    <item>golden carrot</item>
     <item>iron helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
@@ -186,7 +175,7 @@
 <kill-rewards>
     <kill-reward>
         <if variant="default,christmas,halloween">
-            <item amount="8" material="arrow"/>
+            <item amount="4" material="arrow"/>
         </if>
         <if variant="rage,rage_christmas,rage_halloween">
             <item material="arrow"/>
@@ -194,5 +183,8 @@
         <item amount="8" material="leaves"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>14</maxbuildheight>
 </map>
