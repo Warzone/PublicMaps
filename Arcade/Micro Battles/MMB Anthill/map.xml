@@ -1,0 +1,70 @@
+<map proto="1.5.0" min-server-version="1.21">
+<name>MMB: Anthill</name>
+<version>1.0.2</version>
+<created>2025-06-09</created>
+<include id="micro-battles"/>
+<game>Micro Micro Battles</game>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Map theme, XML"/> <!-- zzuf -->
+</authors>
+<spawns>
+    <player-kit>
+        <if min-server-version="1.21.5">
+            <attribute operation="add" amount="-0.5">scale</attribute>
+            <attribute operation="add" amount="-0.04">generic.movementSpeed</attribute>
+            <attribute operation="add" amount="-1">entity_interaction_range</attribute>
+            <attribute operation="add" amount="-2">block_interaction_range</attribute>
+        </if>
+        <if max-server-version="1.21.1">
+            <attribute operation="add" amount="-0.5">generic.scale</attribute>
+            <attribute operation="add" amount="-0.04">generic.movementSpeed</attribute>
+            <attribute operation="add" amount="-1">player.entity_interaction_range</attribute>
+            <attribute operation="add" amount="-2">player.block_interaction_range</attribute>
+        </if>
+    </player-kit>
+    <spawns kit="spawn-kit">
+        <spawn team="blue-team">
+            <regions>
+                <point>-13.5,3,-13.5</point> <!-- Blue team should be in NW quadrant -->
+            </regions>
+        </spawn>
+        <spawn team="green-team">
+            <regions>
+                <point yaw="90">14.5,3,-13.5</point> <!-- Green team should be in NE quadrant -->
+            </regions>
+        </spawn>
+        <spawn team="red-team"> 
+            <regions>
+                <point yaw="180">14.5,3,14.5</point> <!-- Red team should be in SE quadrant -->
+            </regions>
+        </spawn>
+        <spawn team="yellow-team">
+            <regions>
+                <point yaw="270">-13.5,3,14.5</point> <!-- Yellow team should be in SW quadrant -->
+            </regions>
+        </spawn>
+    </spawns>
+    <default kit="mmb-obs-kit">
+        <regions>
+            <point>0.5,38,0.5</point> <!-- Obs spawn, should be modified as needed -->
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="mmb-obs-kit">
+        <boots material="prismarine" show-attributes="false">
+            <if min-server-version="1.21.5">
+                <attribute operation="add" amount="-0.5">scale</attribute>
+                <attribute operation="add" amount="-0.04">generic.movementSpeed</attribute>
+                <attribute operation="add" amount="-1">entity_interaction_range</attribute>
+            </if>
+            <if max-server-version="1.21.1">
+                <attribute operation="add" amount="-0.5">generic.scale</attribute>
+                <attribute operation="add" amount="-0.04">generic.movementSpeed</attribute>
+                <attribute operation="add" amount="-1">player.entity_interaction_range</attribute>
+            </if>
+        </boots>
+    </kit>
+</kits>
+</map>
