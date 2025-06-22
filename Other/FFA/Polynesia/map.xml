@@ -1,15 +1,15 @@
 <map proto="1.5.0">
 <name>Polynesia</name>
-<version>1.0.14</version>
-<variant id="default-121" world="enhanced" min-server-version="1.21">Enhanced</variant>
+<version>1.0.16</version>
 <variant id="trident" world="trident" min-server-version="1.21">Trident RAGE</variant>
-<if variant="default">
+<unless min-server-version="1.21">
     <created>2023-11-12</created>
-</if>
-<if variant="trident,default-121">
+</unless>
+<if min-server-version="1.21">
+    <variant id="default" world="trident"/>
     <created>2025-05-08</created>
 </if>
-<if variant="default,default-121">
+<if variant="default">
     <include id="oitq"/>
     <objective>Be the player with the highest amount of kills after ${time-limit} minutes!</objective>
     <constants>
@@ -119,9 +119,10 @@
     <apply block="never" use="never"/>
     <above y="114" id="ceiling"/>
     <apply enter="never" region="ceiling"/>
+    <block id="storm-sign">37,75,42</block>
 </regions>
-<if variant="default,default-121">
-    <actions>
+<actions>
+    <if variant="default">
         <trigger scope="player" filter="just-joined">
             <action>
                 <sound preset="alert"/>
@@ -130,8 +131,20 @@
                 <message text=" `f`m`k                                                    `r"/>
             </action>
         </trigger>
-    </actions>
-</if>
+        <trigger scope="match" filter="always">
+            <action>
+                <weather state="clear"/>
+            </action>
+        </trigger>
+    </if>
+    <if min-server-version="1.21" variant="default">
+        <trigger scope="match" filter="always">
+            <action>
+                <fill material="air" region="storm-sign"/>
+            </action>
+        </trigger>
+    </if>
+</actions>
 <if variant="trident">
     <toolrepair>
         <tool>trident</tool>
