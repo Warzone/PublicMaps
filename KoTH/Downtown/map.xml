@@ -1,14 +1,21 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Downtown</name>
+<version>1.2.7</version>
 <variant id="christmas" world="christmas">Christmas Eve</variant>
-<version>1.2.5</version>
 <objective>Be the first team to 2500 points!</objective>
 <gamemode>koth</gamemode>
+<constants>
+    <constant id="damage-resistance">4s</constant>
+    <constant id="respawn-timer">2s</constant>
+    <constant id="observers-kit" delete="true"/>
+</constants>
+<include id="conquest"/>
 <if variant="default">
     <created>2019-04-17</created>
 </if>
 <if variant="christmas">
     <created>2019-11-26</created>
+    <constant id="observers-kit">default-kit</constant>
 </if>
 <authors>
     <author uuid="0c44ca5a-6a42-49b7-81f2-58dc6d2ae3e9" contribution="Main Builder"/> <!-- Xerocoles -->
@@ -19,12 +26,6 @@
     <contributor uuid="d3814d5a-3d37-42f2-9db8-916846bb70ad" contribution="Feedback"/> <!-- AlmightyBread -->
     <contributor uuid="74e59389-2b3e-490d-954a-a7af1fb1eded" contribution="Feedback"/> <!-- Dowly_ -->
 </contributors>
-<constants>
-    <constant id="observers-kit" delete="true"/>
-</constants>
-<if variant="christmas">
-    <constant id="observers-kit">default-kit</constant>
-</if>
 <broadcasts>
     <tip after="10s" every="2m">Centre Hill is worth more points than any other hill!</tip>
 </broadcasts>
@@ -36,23 +37,13 @@
     <kit id="default-kit">
         <effect>night vision</effect>
     </kit>
-    <kit id="spawn-kit" parents="${observers-kit}">
-        <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
-        <item slot="8" amount="16" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">projectile_protection</enchantment>
-        </leggings>
-        <boots unbreakable="true" material="iron boots">
-            <enchantment>feather_falling</enchantment>
-        </boots>
-        <effect duration="5" amplifier="4">heal</effect>
-        <effect duration="5" amplifier="4">damage resistance</effect>
-        <game-mode>adventure</game-mode>
+    <kit id="spawn-kit" parent="${observers-kit}">
+        <kit id="base-kit"/>
+        <action>
+            <enchant-item ignore-metadata="true" enchantment="feather_falling" level="1">
+                <find material="iron boots"/>
+            </enchant-item>
+        </action>
     </kit>
 </kits>
 <spawns>
@@ -135,30 +126,9 @@
 <score>
     <limit>2500</limit>
 </score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
 <itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
     <item>gold sword</item>
     <item>iron chestplate</item>
     <item>red rose</item>
 </itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item amount="8" material="arrow"/>
-    </kill-reward>
-</kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 </map>
