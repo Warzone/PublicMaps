@@ -1,0 +1,53 @@
+<map proto="1.5.0">
+<name>MB: Xyth</name>
+<version>1.0.1</version>
+<created>2025-06-10</created>
+<include id="micro-battles"/>
+<constants>
+    <constant id="default-walls-height">21</constant>
+</constants>
+<rules>
+    <rule>Fall damage is disabled!</rule>
+</rules>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+</authors>
+<contributors>
+    <contributor uuid="2ca8072f-74be-4798-85b8-bbce03aa91af" contribution="Original map author"/> <!-- Tywnis -->
+</contributors>
+<spawns>
+    <spawn team="blue-team" kit="xyth-kit">
+        <regions>
+            <point yaw="-45">-15.5,3,-15.5</point> <!-- Blue team should be in NW quadrant -->
+        </regions>
+    </spawn>
+    <spawn team="green-team" kit="xyth-kit">
+        <regions>
+            <point yaw="45">16.5,3,-15.5</point> <!-- Green team should be in NE quadrant -->
+        </regions>
+    </spawn>
+    <spawn team="red-team" kit="xyth-kit"> 
+        <regions>
+            <point yaw="135">16.5,3,16.5</point> <!-- Red team should be in SE quadrant -->
+        </regions>
+    </spawn>
+    <spawn team="yellow-team" kit="xyth-kit">
+        <regions>
+            <point yaw="225">-15.5,3,16.5</point> <!-- Yellow team should be in SW quadrant -->
+        </regions>
+    </spawn>
+    <default>
+        <regions>
+            <point yaw="0">0.5,38,0.5</point> <!-- Obs spawn, should be modified as needed -->
+        </regions>
+    </default>
+</spawns>
+<kits>
+    <kit id="xyth-kit" parents="spawn-kit">
+        <fly flying="true" can-fly="true" fly-speed="1"/>
+    </kit>
+</kits>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+</map>
