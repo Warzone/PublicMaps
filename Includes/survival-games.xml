@@ -17,7 +17,7 @@
 
     NOTE: Spawn points are defined at the center coordinates of a block. To teleport players correctly to
     such spawn points that have negative coordinates, you must set the variable value to the next negative
-    integer. For example, if the spawn point is at X: -1576.5, Y: -635.5, set the variable values to X: -1577, Y: -636.
+    integer. For example, if the spawn point is at X: -1576.5, Z: -635.5, set the variable values to X: -1577, Z: -636.
 
     Example:
     <actions>
@@ -47,6 +47,7 @@
     tier 1 and tier 2 loot, with tier 1 items weighted higher. Default loot is tier 1.
 
     If you wish to use mixed loot, set the constant "chest-loot" to "mixed" in your map.xml.
+    Any other type of lootable configuration can be done on a per-map basis, ignoring this include.
    -->
 <map>
 <gamemode>sg</gamemode>
@@ -562,7 +563,7 @@ The last tribute standing wins.
             <option weight="10">
                 <item material="baked potato"/>
             </option>
-            <option weight="6">
+            <option weight="10">
                 <item material="golden apple"/>
             </option>
             <!-- Armor (tier 1) -->
@@ -581,10 +582,10 @@ The last tribute standing wins.
             <option weight="18">
                 <item material="gold helmet"/>
             </option>
-            <option weight="12">
+            <option weight="15">
                 <item material="gold chestplate"/>
             </option>
-            <option weight="12">
+            <option weight="15">
                 <item material="gold leggings"/>
             </option>
             <option weight="18">
@@ -593,26 +594,26 @@ The last tribute standing wins.
             <option weight="18">
                 <item material="chainmail helmet"/>
             </option>
-            <option weight="12">
+            <option weight="15">
                 <item material="chainmail chestplate"/>
             </option>
-            <option weight="12">
+            <option weight="15">
                 <item material="chainmail leggings"/>
             </option>
             <option weight="18">
                 <item material="chainmail boots"/>
             </option>
             <!-- Armor (tier 2) -->
-            <option weight="6">
+            <option weight="12">
                 <item material="iron helmet"/>
             </option>
-            <option weight="4">
+            <option weight="8">
                 <item material="iron chestplate"/>
             </option>
-            <option weight="4">
+            <option weight="8">
                 <item material="iron leggings"/>
             </option>
-            <option weight="8">
+            <option weight="12">
                 <item material="iron boots"/>
             </option>
             <!-- Items - Tier 1 weighted higher -->
@@ -631,11 +632,11 @@ The last tribute standing wins.
             <option weight="15">
                 <item material="flint"/>
             </option>
-            <option weight="7">
+            <option weight="8">
                 <item material="diamond"/>
             </option>
             <any>
-                <option weight="14">
+                <option weight="15">
                     <item material="arrow" amount="2"/>
                 </option>
                 <option weight="10">
