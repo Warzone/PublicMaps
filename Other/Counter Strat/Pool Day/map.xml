@@ -1,0 +1,48 @@
+<map proto="1.5.0" min-server-version="1.21">
+<name>Pool Day</name>
+<version>1.0.4</version>
+<objective>Capture the pool or kill everyone!</objective>
+<created>2025-05-26</created>
+<constant id="cs-shops-enabled">false</constant>
+<constant id="cs-score-mode">0</constant>
+<constant id="site-name">Pool</constant>
+<include id="counter-strat"/>
+<game>Counter-Strat: Fight Yard</game>
+<constants>
+    <!-- Map -->
+    <constant id="map-origin">0.5,0,0.5</constant>
+    <constant id="void-plane">-69</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">-3.5,-59,-17.5</constant>
+    <constant id="team-one-yaw">0</constant>
+    <constant id="team-two-spawn">-3.5,-59,18.5</constant>
+    <constant id="team-two-yaw">180</constant>
+</constants>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+    <author uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Map packaging and XML"/> <!-- zzuf -->
+</authors>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <point>-16.5,-46,0.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <empty id="block-list"/>
+    <material id="spruce-door">spruce door</material>
+</filters>
+<regions>
+    <cuboid id="site" min="-8,-62,4" max="3,-59,-3"/>
+    <negative id="not-buildable">
+        <empty/>
+    </negative>
+    <apply use="spruce-door"/>
+    <apply velocity="0.5,0.5,0">
+        <region>
+            <cylinder base="-6.5,-58,0.5" height="0.5" radius="0.5"/>
+        </region>
+    </apply>
+</regions>
+</map>

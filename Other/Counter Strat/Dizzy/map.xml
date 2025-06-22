@@ -1,0 +1,54 @@
+<map proto="1.5" min-server-version="1.21">
+<name>Dizzy</name>
+<version>1.0.4</version>
+<created>2025-05-12</created>
+<objective>Armed only with a Scout and a knife, take advantage of cover and high mobility to take down the enemy!</objective>
+<constant id="cs-mode">point</constant>
+<constant id="site-name">Unknown</constant>
+<constant id="cs-shops-enabled">false</constant>
+<constant id="cs-shops-enabled">false</constant>
+<constant id="cs-team-one-name">Orange</constant>
+<constant id="cs-team-two-name">Blue</constant>
+<constant id="cs-score-mode">0</constant>
+<include id="counter-strat"/>
+<game>Scoutzknivez</game>
+<constants>
+    <constant id="void-plane">-56</constant>
+    <!-- Teams -->
+    <constant id="team-one-spawn">-25.5,-50,21.5</constant>
+    <constant id="team-one-yaw">-135</constant>
+    <constant id="team-two-spawn">26.5,-50,-20.5</constant>
+    <constant id="team-two-yaw">45</constant>
+</constants>
+<authors>
+    <author uuid="d5a64b26-15ea-46c4-8319-f9c83e82a1fa"/> <!-- Eliminate -->
+</authors>
+<contributors>
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="XML and Packaging"/> <!-- zzuf -->
+</contributors>
+<spawns>
+    <player-kit>
+        <attribute operation="add" amount="-0.06">generic.gravity</attribute>
+        <attribute operation="add" amount="0.1">generic.jump_strength</attribute>
+    </player-kit>
+    <default>
+        <region yaw="180">
+            <cylinder base="0.5,-16,0.5" height="0" radius="1"/>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <empty id="block-list"/>
+</filters>
+<regions>
+    <empty id="site"/>
+    <negative id="not-buildable">
+        <empty/>
+    </negative>
+    <apply use="never"/>
+</regions>
+<!-- <item slot="1" unbreakable="true" name="`fSchmidt Scout" projectile="weapon_scout" material="iron barding"/> -->
+<!-- <projectiles> -->
+    <!-- <projectile id="weapon_scout" name="Schmidt Scout" projectile="SmallFireball" click="both" damage="5" cooldown="2.5" throwable="false" velocity="40" precise="true"/> -->
+<!-- </projectiles> -->
+</map>
