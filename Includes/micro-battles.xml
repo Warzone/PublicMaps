@@ -1,9 +1,10 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.06.07-1 -->
+<!-- Version 2025.06.10-2 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
+    <constant id="use-default-teams">true</constant> <!-- Make sure this is ABOVE the include statement in your map's XML if changing to "false" -->
     <constant id="game-objective">Eliminate the other teams before the time runs out! Watch out for the shrinking world border!</constant>
     <constant id="resistance-time">0</constant>
     <constant id="max-height-value">25</constant>
@@ -11,23 +12,25 @@
     <constant id="world-border-end-size">3</constant>
     <constant id="map-radius">27.5</constant>
     <constant id="walls-region">walls</constant>
+    <constant id="walls-filter">only-glass</constant> <!-- The blocks that the walls are made out of -->
+    <constant id="default-walls-height">14</constant> <!-- Height for the default wall regions -->
 </constants>
 <gamemode>arcade</gamemode>
 <gamemode>blitz</gamemode>
 <game>Blitz: Micro Battles</game>
 <objective>${game-objective}</objective>
-<teams>
-    <team id="blue-team" color="blue" max="8">Blue</team>
-    <team id="green-team" color="green" max="8">Green</team>
-    <team id="red-team" color="red" max="8">Red</team>
-    <team id="yellow-team" color="yellow" max="8">Yellow</team>
-</teams>
+<if constant="use-default-teams" constant-value="true">
+    <teams>
+        <team id="blue-team" color="blue" max="8">Blue</team>
+        <team id="green-team" color="green" max="8">Green</team>
+        <team id="red-team" color="red" max="8">Red</team>
+        <team id="yellow-team" color="yellow" max="8">Yellow</team>
+    </teams>
+</if>
 <time>170s</time>
 <broadcasts>
     <alert after="1s">`cEliminate the other teams before the time runs out! Watch out for the shrinking world border!</alert>
     <alert after="10s">`cThe walls have fallen. Take cover or attack!</alert>
-    <alert after="145s">`c20 seconds remaining!</alert>
-    <alert after="155s">`c10 seconds remaining!</alert>
     <!-- <alert after="165s">`cThe floor crumbles.</alert> -->
 </broadcasts>
 <blitz>
@@ -54,19 +57,19 @@
 <regions>
     <cuboid id="floor" min="-39,0,-39" max="40,25,40"/>
     <union id="walls">
-        <cuboid id="first-wall" min="1,0,-29" max="-1,14,29"/>
-        <cuboid id="second-wall" min="-29,0,-1" max="29,14,1"/>
+        <cuboid id="first-wall" min="1,0,-29" max="-1,${default-walls-height},29"/>
+        <cuboid id="second-wall" min="-29,0,-1" max="29,${default-walls-height},1"/>
     </union>
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="${map-radius}" height="${max-height-value}"/>
     </negative>
-    <apply region="map" block="not(only-glass)" message="You may not break the walls."/>
+    <apply region="map" block="not(${walls-filter})" message="You may not break the walls."/>
     <apply region="not-map" block="never" message="You may not build outside of the map."/>
 </regions>
 <actions>
     <!-- Wall controls -->
     <action id="walls-falling" scope="match">
-        <fill id="walls-air" region="${walls-region}" material="air" filter="only-glass"/>
+        <fill id="walls-air" region="${walls-region}" material="air" filter="${walls-filter}"/>
     </action>
     <trigger action="walls-falling" scope="match">
         <filter>

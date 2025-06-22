@@ -1,10 +1,12 @@
-<map> <!-- minimun proto 1.4.0 -->
-<!-- version 2024.12.05-1 -->
+<map> <!-- minimum proto: 1.4.0 -->
+<!-- version 2025.06.09-1 -->
 <constants fallback="true"> <!-- Default values. Each of them be modified by authors on their maps if needed. -->
     <constant id="void-plane">-5</constant> <!-- Y level to apply include effects -->
+    <!-- Note: This default value works for pre-1.18 maps, or post-1.18 Nether/End maps. The modern overworld equivalent would be -69. This value could be changed in a dedicated general include in the future (not via global so existing maps don't get their behavior changed) -->
     <constant id="affect-obs">never</constant> <!-- Will observers also get teleported to their spawn on contact with the region? -->
     <constant id="health">1</constant> <!-- What health value should be set in the void region? -->
     <constant id="override-health">true</constant> <!-- Should health be overridden at all? -->
+    <constant id="void-upside-down">false</constant> <!-- Should the player be killed when going above or below the void plane? -->
 </constants>
 <kits>
     <kit id="void-death" force="true">
@@ -15,16 +17,26 @@
     </kit>
 </kits>
 <portals>
-    <portal y="@-110" sound="false" observers="${affect-obs}">
+    <portal y="@-150" sound="false" observers="${affect-obs}">
         <region>
-            <below y="${void-plane}"/>
+            <if constant="void-upside-down" constant-value="true">
+                <above y="${void-plane}"/>
+            </if>
+            <if constant="void-upside-down" constant-value="false">
+                <below y="${void-plane}"/>
+            </if>
         </region>
     </portal>
 </portals>
 <regions>
     <apply kit="void-death">
         <region>
-            <below y="${void-plane}"/>
+            <if constant="void-upside-down" constant-value="true">
+                <above y="${void-plane}"/>
+            </if>
+            <if constant="void-upside-down" constant-value="false">
+                <below y="${void-plane}"/>
+            </if>
         </region>
     </apply>
 </regions>
