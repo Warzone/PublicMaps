@@ -1,7 +1,7 @@
 <map proto="1.5.0">
 <name>Tom Brady</name>
 <game>Flag Football</game>
-<version>1.0.9</version>
+<version>1.0.10</version>
 <objective>Capture the flag at the end zone on the enemies' side!</objective>
 <created>2024-09-22</created>
 <gamemode>ffb</gamemode>
@@ -96,7 +96,8 @@
 <kits>
     <kit id="initialize">
         <clear/>
-        <effect duration="0.2s" amplifier="1">instant_health</effect>
+        <effect duration="5s" amplifier="1">absorption</effect>
+        <effect duration="5s" amplifier="2">regeneration</effect>
     </kit>
     <kit id="keeper-kit" parents="initialize" force="true">
         <clear/>
@@ -155,8 +156,8 @@
         <effect duration="0">slow_digging</effect>
     </kit>
     <kit id="pre-round-kit" force="true">
-        <effect duration="oo">invisibility</effect>
-        <effect duration="oo" amplifier="255">slow_digging</effect>
+        <effect>invisibility</effect>
+        <effect amplifier="255">slow_digging</effect>
     </kit>
     <kit id="absorption-kit" force="true">
         <effect duration="1m">absorption</effect>
