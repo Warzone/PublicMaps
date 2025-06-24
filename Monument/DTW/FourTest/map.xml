@@ -1,17 +1,20 @@
 <map proto="1.5.0">
 <name>FourTest</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <variant id="eight" world="eight" override="true">EightTest</variant>
 <include id="destroy-the-wool"/>
-<gamemode>dtm</gamemode>
 <if variant="default">
     <constant id="player-size">5</constant>
     <constant id="time-limit">8m</constant>
+    <constant id="block-count">32</constant>
+    <constant id="maxheight">10</constant>
     <created>2025-04-27</created>
 </if>
 <if variant="eight">
     <constant id="player-size">3</constant>
     <constant id="time-limit">10m</constant>
+    <constant id="block-count">48</constant>
+    <constant id="maxheight">14</constant>
     <created>2025-06-24</created>
 </if>
 <authors>
@@ -24,7 +27,7 @@
 <teams>
     <team id="red-team" color="dark red" max="${player-size}">Red</team>
     <team id="blue-team" color="blue" max="${player-size}">Blue</team>
-    <team id="green-team" color="dark green" max="${player-size}">Green</team>
+    <team id="green-team" color="green" max="${player-size}">Green</team>
     <team id="yellow-team" color="yellow" max="${player-size}">Yellow</team>
     <if variant="eight">
         <team id="purple-team" color="dark purple" max="${player-size}">Purple</team>
@@ -39,12 +42,7 @@
     <broadcastLives>false</broadcastLives>
 </blitz>
 <!-- Respawn Time -->
-<if variant="default">
-    <respawn auto="true" delay="2.5s"/>
-</if>
-<if variant="eight">
-    <respawn auto="true" delay="2s"/>
-</if>
+<respawn auto="true" delay="2.5s"/>
 <!-- Time Limit -->
 <time>${time-limit}</time>
 <!-- Kits -->
@@ -54,59 +52,49 @@
         <item slot="0" unbreakable="true" material="stone sword"/>
         <item slot="1" unbreakable="true" material="bow"/>
         <item slot="2" unbreakable="true" material="iron pickaxe"/>
-        <item slot="3" amount="32" team-color="true" material="stained clay"/>
+        <item slot="3" amount="${block-count}" team-color="true" material="stained clay"/>
         <item slot="4" material="golden apple"/>
-        <item slot="9" amount="16" material="arrow"/>
+        <item slot="8" amount="16" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <if variant="default">
-            <effect amplifier="5" duration="2s">damage resistance</effect>
-        </if>
     </kit>
-    <if variant="eight">
         <kit id="first-spawn-kit" filter="first-spawn" parents="default">
             <effect amplifier="5" duration="9s">damage resistance</effect>
         </kit>
-    </if>
 </kits>
 <!-- Spawns -->
 <spawns>
+    <!-- FourTest -->
     <if variant="default">
-        <spawn team="red-team" kit="default" yaw="180" region="red-spawn"/>
-        <spawn team="blue-team" kit="default" yaw="90" region="blue-spawn"/>
-        <spawn team="green-team" kit="default" region="green-spawn"/>
-        <spawn team="yellow-team" kit="default" yaw="-90" region="yellow-spawn"/>
-    </if>
-    <if variant="eight">
         <!-- Red -->
         <spawns team="red-team" kit="first-spawn-kit">
             <spawn id="red-first" filter="first-spawn">
                 <region yaw="180">
-                    <point>0.5,13,18.5</point>
+                    <point>0.5,14,12.5</point>
                 </region>
             </spawn>
         </spawns>
-            <spawns team="red-team" kit="default">
-                <spawn id="red-second" filter="second-spawn">
-                    <region yaw="180">
-                        <point>0.5,2,18.5</point>
-                    </region>
-                </spawn>
-            </spawns>
-            <!-- Blue -->
+        <spawns team="red-team" kit="default">
+            <spawn id="red-second" filter="second-spawn">
+                <region yaw="180">
+                    <point>0.5,2,12.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <!-- Blue -->
         <spawns team="blue-team" kit="first-spawn-kit">
             <spawn id="blue-first" filter="first-spawn">
                 <region yaw="90">
-                    <point>18.5,13,0.5</point>
+                    <point>12.5,14,0.5</point>
                 </region>
             </spawn>
         </spawns>
         <spawns team="blue-team" kit="default">
             <spawn id="blue-second" filter="second-spawn">
                 <region yaw="90">
-                    <point>18.5,2,0.5</point>
+                    <point>12.5,2,0.5</point>
                 </region>
             </spawn>
         </spawns>
@@ -114,14 +102,14 @@
         <spawns team="green-team" kit="first-spawn-kit">
             <spawn id="green-first" filter="first-spawn">
                 <region>
-                    <point>0.5,13,-17.5</point>
+                    <point>0.5,14,-11.5</point>
                 </region>
             </spawn>
         </spawns>
         <spawns team="green-team" kit="default">
             <spawn id="green-second" filter="second-spawn">
                 <region>
-                    <point>0.5,2,-17.5</point>
+                    <point>0.5,2,-11.5</point>
                 </region>
             </spawn>
         </spawns>
@@ -129,14 +117,77 @@
         <spawns team="yellow-team" kit="first-spawn-kit">
             <spawn id="yellow-first" filter="first-spawn">
                 <region yaw="-90">
-                    <point>-17.5,13,0.5</point>
+                    <point>-11.5,14,0.5</point>
                 </region>
             </spawn>
         </spawns>
         <spawns team="yellow-team" kit="default">
             <spawn id="yellow-second" filter="second-spawn">
                 <region yaw="-90">
-                    <point>-17.5,2,0.5</point>
+                    <point>-11.5,2,0.5</point>
+                </region>
+            </spawn>
+        </spawns>
+    </if>
+    <!-- EighTest -->
+    <if variant="eight">
+        <!-- Red -->
+        <spawns team="red-team" kit="first-spawn-kit">
+            <spawn id="red-first" filter="first-spawn">
+                <region yaw="180">
+                    <point>0.5,13,20.5</point>
+                </region>
+            </spawn>
+        </spawns>
+            <spawns team="red-team" kit="default">
+                <spawn id="red-second" filter="second-spawn">
+                    <region yaw="180">
+                        <point>0.5,2,20.5</point>
+                    </region>
+                </spawn>
+            </spawns>
+            <!-- Blue -->
+        <spawns team="blue-team" kit="first-spawn-kit">
+            <spawn id="blue-first" filter="first-spawn">
+                <region yaw="90">
+                    <point>20.5,13,0.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <spawns team="blue-team" kit="default">
+            <spawn id="blue-second" filter="second-spawn">
+                <region yaw="90">
+                    <point>20.5,2,0.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <!-- Green -->
+        <spawns team="green-team" kit="first-spawn-kit">
+            <spawn id="green-first" filter="first-spawn">
+                <region>
+                    <point>0.5,13,-19.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <spawns team="green-team" kit="default">
+            <spawn id="green-second" filter="second-spawn">
+                <region>
+                    <point>0.5,2,-19.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <!-- Yellow -->
+        <spawns team="yellow-team" kit="first-spawn-kit">
+            <spawn id="yellow-first" filter="first-spawn">
+                <region yaw="-90">
+                    <point>-19.5,13,0.5</point>
+                </region>
+            </spawn>
+        </spawns>
+        <spawns team="yellow-team" kit="default">
+            <spawn id="yellow-second" filter="second-spawn">
+                <region yaw="-90">
+                    <point>-19.5,2,0.5</point>
                 </region>
             </spawn>
         </spawns>
@@ -201,29 +252,33 @@
             </spawn>
         </spawns>
     </if>
-    <default yaw="-180" region="obs-spawn"/>
+    <default yaw="-180">
+        <region>
+            <point>0.5,2,0.5</point>
+        </region>
+    </default>
 </spawns>
 <broadcasts>
     <!-- Sudden Death notification -->
     <if variant="default">
-        <alert after="1m">The world border will appear in `c1 minute`r.</alert>
+        <alert after="1m">The world border will appear in `e1 `rminute.</alert>
         <alert after="2m">The world border has appeared and is approaching!</alert>
-        <alert after="130s">Sudden Death will begin in `c50 seconds`r, be careful, you will no longer respawn!</alert>
-        <alert after="175s">Sudden Death will begin in `c5 seconds`r.</alert>
-        <alert after="176s">Sudden Death will begin in `c4 seconds`r.</alert>
-        <alert after="177s">Sudden Death will begin in `c3 seconds`r.</alert>
-        <alert after="178s">Sudden Death will begin in `c2 seconds`r.</alert>
-        <alert after="179s">Sudden Death will begin in `c1 second`r.</alert>
+        <alert after="130s">`c⚠ SUDDEN DEATH`r will begin in `e50 `rseconds! You will no longer respawn.</alert>
+        <alert after="175s">`c⚠ SUDDEN DEATH`r will begin in `e5 `rseconds.</alert>
+        <alert after="176s">`c⚠ SUDDEN DEATH`r will begin in `e4 `rseconds.</alert>
+        <alert after="177s">`c⚠ SUDDEN DEATH`r will begin in `e3 `rseconds.</alert>
+        <alert after="178s">`c⚠ SUDDEN DEATH`r will begin in `e2 `rseconds.</alert>
+        <alert after="179s">`c⚠ SUDDEN DEATH`r will begin in `e1 `rsecond.</alert>
     </if>
     <if variant="eight">
-        <alert after="3m">The world border will appear in `c1 minute`r.</alert>
+        <alert after="3m">The world border will appear in `e1 `rminute.</alert>
         <alert after="4m">The world border has appeared and is approaching!</alert>
-        <alert after="250s">Sudden Death will begin in `c50 seconds`r, be careful, you will no longer respawn!</alert>
-        <alert after="295s">Sudden Death will begin in `c5 seconds`r.</alert>
-        <alert after="296s">Sudden Death will begin in `c4 seconds`r.</alert>
-        <alert after="297s">Sudden Death will begin in `c3 seconds`r.</alert>
-        <alert after="298s">Sudden Death will begin in `c2 seconds`r.</alert>
-        <alert after="299s">Sudden Death will begin in `c1 second`r.</alert>
+        <alert after="250s">`c⚠ SUDDEN DEATH`r will begin in `e50 `rseconds! You will no longer respawn.</alert>
+        <alert after="295s">`c⚠ SUDDEN DEATH`r will begin in `e5 `rseconds.</alert>
+        <alert after="296s">`c⚠ SUDDEN DEATH`r will begin in `e4 `rseconds.</alert>
+        <alert after="297s">`c⚠ SUDDEN DEATH`r will begin in `e3 `rseconds.</alert>
+        <alert after="298s">`c⚠ SUDDEN DEATH`r will begin in `e2 `rseconds.</alert>
+        <alert after="299s">`c⚠ SUDDEN DEATH`r will begin in `e1 `rsecond.</alert>
     </if>
 </broadcasts>
 <!-- Monuments -->
@@ -438,85 +493,83 @@
         <match-started/>
     </after>
 </filters>
-<if variant="eight">
-    <actions>
-        <!-- Ready Start Notification -->
-        <trigger scope="match">
-            <filter>
-                <after duration="0.1s" filter="after-4s"/>
-            </filter>
-            <action>
-                <sound preset="CUSTOM"/>
-                <message id="ready-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
-                    <title>`cReady</title>
-                </message>
-            </action>
-        </trigger>
-        <!-- Set Start Notification -->
-        <trigger scope="match">
-            <filter>
-                <after duration="0.1s" filter="after-5s"/>
-            </filter>
-            <action>
-                <sound preset="CUSTOM"/>
-                <message id="set-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
-                    <title>`eSet</title>
-                </message>
-            </action>
-        </trigger>
-        <!-- Glass To Air -->
-        <trigger scope="match" filter="after-7s">
-            <action>
-                <fill id="open-spawn-cage" region="spawn-cage-exsits" filter="only-stained-glass" material="air"/>
-                <sound preset="ALERT"/>
-            </action>
-        </trigger>
-        <!-- Game Start Notification -->
-        <trigger scope="match">
-            <filter>
-                <after duration="0.1s" filter="after-7s"/>
-            </filter>
-            <action>
-                <message id="game-start-title" fade-in="0.1s" stay="1.5s" fade-out="1.5s">
-                    <title>`aGO!</title>
-                </message>
-            </action>
-        </trigger>
-    </actions>
-</if>
+<actions>
+    <!-- Ready Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-4s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="ready-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`cReady</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Set Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-5s"/>
+        </filter>
+        <action>
+            <sound preset="CUSTOM"/>
+            <message id="set-start-title" fade-in="0.1s" stay="0.5s" fade-out="0.1s">
+                <title>`eSet</title>
+            </message>
+        </action>
+    </trigger>
+    <!-- Glass To Air -->
+    <trigger scope="match" filter="after-7s">
+        <action>
+            <fill id="open-spawn-cage" region="spawn-cage-exsits" filter="only-stained-glass" material="air"/>
+            <sound preset="ALERT"/>
+        </action>
+    </trigger>
+    <!-- Game Start Notification -->
+    <trigger scope="match">
+        <filter>
+            <after duration="0.1s" filter="after-7s"/>
+        </filter>
+        <action>
+            <message id="game-start-title" fade-in="0.1s" stay="1.5s" fade-out="1.5s">
+                <title>`aGO!</title>
+            </message>
+        </action>
+    </trigger>
+</actions>
 <!-- Regions -->
 <regions>
     <!-- Definitions -->
     <union id="spawn-protections">
         <if variant="default">
-            <cylinder id="red-team-spawn-prot" base="0.5,1,14.5" radius="7" height="1"/>
-            <cylinder id="blue-team-spawn-prot" base="14.5,1,0.5" radius="7" height="1"/>
-            <cylinder id="green-team-spawn-prot" base="0.5,1,-21.5" radius="7" height="1"/>
-            <cylinder id="yellow-team-spawn-prot" base="-13.5,1,0.5" radius="7" height="1"/>
+            <cylinder id="red-team-spawn-prot" base="0.5,1,16.5" radius="6.5" height="1"/>
+            <cylinder id="blue-team-spawn-prot" base="16.5,1,0.5" radius="6.5" height="1"/>
+            <cylinder id="green-team-spawn-prot" base="0.5,1,-15.5" radius="6.5" height="1"/>
+            <cylinder id="yellow-team-spawn-prot" base="-15.5,1,0.5" radius="6.5" height="1"/>
         </if>
         <if variant="eight">
-            <cylinder id="red-team-spawn-prot" base="0.5,1,22.5" radius="7" height="1"/>
-            <cylinder id="blue-team-spawn-prot" base="22.5,1,0.5" radius="7" height="1"/>
-            <cylinder id="green-team-spawn-prot" base="0.5,1,-21.5" radius="7" height="1"/>
-            <cylinder id="yellow-team-spawn-prot" base="-21.5,1,0.5" radius="7" height="1"/>
-            <cylinder id="purple-team-spawn-prot" base="20.5,1,-19.5" radius="7" height="1"/>
-            <cylinder id="cyan-team-spawn-prot" base="-19.5,1,-19.5" radius="7" height="1"/>
-            <cylinder id="orange-team-spawn-prot" base="-19.5,1,20.5" radius="7" height="1"/>
-            <cylinder id="lightblue-team-spawn-prot" base="20.5,1,20.5" radius="7" height="1"/>
+            <cylinder id="red-team-spawn-prot" base="0.5,1,24.5" radius="6.5" height="1"/>
+            <cylinder id="blue-team-spawn-prot" base="24.5,1,0.5" radius="6.5" height="1"/>
+            <cylinder id="green-team-spawn-prot" base="0.5,1,-23.5" radius="6.5" height="1"/>
+            <cylinder id="yellow-team-spawn-prot" base="-23.5,1,0.5" radius="6.5" height="1"/>
+            <cylinder id="purple-team-spawn-prot" base="20.5,1,-19.5" radius="6.5" height="1"/>
+            <cylinder id="cyan-team-spawn-prot" base="-19.5,1,-19.5" radius="6.5" height="1"/>
+            <cylinder id="orange-team-spawn-prot" base="-19.5,1,20.5" radius="6.5" height="1"/>
+            <cylinder id="lightblue-team-spawn-prot" base="20.5,1,20.5" radius="6.5" height="1"/>
         </if>
     </union>
     <union id="spawn-point-protections">
         <if variant="default">
-            <cylinder id="red-team-spawn" base="0.5,1,10.5" radius="2" height="4"/>
-            <cylinder id="blue-team-spawn" base="10.5,1,0.5" radius="2" height="4"/>
-            <cylinder id="green-team-spawn" base="0.5,1,-9.5" radius="2" height="4"/>
-            <cylinder id="yellow-team-spawn" base="-9.5,1,0.5" radius="2" height="4"/>
+            <cylinder id="red-team-spawn" base="0.5,1,12.5" radius="2" height="4"/>
+            <cylinder id="blue-team-spawn" base="12.5,1,0.5" radius="2" height="4"/>
+            <cylinder id="green-team-spawn" base="0.5,1,-11.5" radius="2" height="4"/>
+            <cylinder id="yellow-team-spawn" base="-11.5,1,0.5" radius="2" height="4"/>
         </if>
         <if variant="eight">
-            <cylinder id="red-team-spawn" base="0.5,1,18.5" radius="2" height="4"/>
-            <cylinder id="blue-team-spawn" base="18.5,1,0.5" radius="2" height="4"/>
-            <cylinder id="green-team-spawn" base="0.5,1,-17.5" radius="2" height="4"/>
-            <cylinder id="yellow-team-spawn" base="-17.5,1,0.5" radius="2" height="4"/>
+            <cylinder id="red-team-spawn" base="0.5,1,20.5" radius="2" height="4"/>
+            <cylinder id="blue-team-spawn" base="20.5,1,0.5" radius="2" height="4"/>
+            <cylinder id="green-team-spawn" base="0.5,1,-19.5" radius="2" height="4"/>
+            <cylinder id="yellow-team-spawn" base="-19.5,1,0.5" radius="2" height="4"/>
             <cylinder id="purple-team-spawn" base="17.5,1,-16.5" radius="1.5" height="4"/>
             <cylinder id="cyan-team-spawn" base="-16.5,1,-16.5" radius="1.5" height="4"/>
             <cylinder id="orange-team-spawn" base="-16.5,1,17.5" radius="1.5" height="4"/>
@@ -525,47 +578,44 @@
     </union>
     <union id="team-wools">
         <if variant="default">
-            <cuboid id="red-team-wool" min="-2,2,12" max="2,8,16"/>
-            <cuboid id="blue-team-wool" min="12,2,2" max="16,8,-2"/>
-            <cuboid id="green-team-wool" min="2,2,-12" max="-2,8,-16"/>
-            <cuboid id="yellow-team-wool" min="-12,2,-2" max="-16,8,2"/>
+            <cuboid id="red-team-wool" min="-2,2,14" max="2,8,18"/>
+            <cuboid id="blue-team-wool" min="14,2,2" max="18,8,-2"/>
+            <cuboid id="green-team-wool" min="2,2,-14" max="-2,8,-18"/>
+            <cuboid id="yellow-team-wool" min="-14,2,-2" max="-18,8,2"/>
         </if>
         <if variant="eight">
-            <cuboid id="red-team-wool" min="2,1,20" max="-2,8,24"/>
-            <cuboid id="blue-team-wool" min="20,1,-2" max="24,8,2"/>
-            <cuboid id="green-team-wool" min="-2,1,-20" max="2,8,-24"/>
-            <cuboid id="yellow-team-wool" min="20,1,2" max="-24,8,-2"/>
+            <cuboid id="red-team-wool" min="2,1,22" max="-2,8,26"/>
+            <cuboid id="blue-team-wool" min="22,1,-2" max="26,8,2"/>
+            <cuboid id="green-team-wool" min="-2,1,-22" max="2,8,-26"/>
+            <cuboid id="yellow-team-wool" min="22,1,2" max="-26,8,-2"/>
             <cuboid id="purple-team-wool" min="18,1,-22" max="22,8,-18"/>
             <cuboid id="cyan-team-wool" min="-22,1,-18" max="-18,8,-22"/>
             <cuboid id="orange-team-wool" min="-18,1,22" max="-22,8,18"/>
             <cuboid id="lightblue-team-wool" min="22,1,18" max="18,8,22"/>
         </if>
     </union>
-    <if variant="default">
-        <point id="red-spawn">0.5,2,10.5</point>
-        <point id="blue-spawn">10.5,2,0.5</point>
-        <point id="green-spawn">0.5,2,-9.5</point>
-        <point id="yellow-spawn">-9.5,2,0.5</point>
-    </if>
-    <point id="obs-spawn">0.5,2,0.5</point>
-    <if variant="eight">
-        <union id="spawn-cage-exsits">
-            <cuboid id="red-spawn-cage-exit" min="3,11,16" max="-3,17,20"/>
-            <cuboid id="blue-spawn-cage-exit" min="16,11,-3" max="20,18,3"/>
-            <cuboid id="green-spawn-cage-exit" min="-3,11,-16" max="3,17,-20"/>
-            <cuboid id="yellow-spawn-cage-exit" min="-16,11,3" max="-20,17,-3"/>
+    <union id="spawn-cage-exsits">
+        <if variant="default">
+            <cuboid id="red-spawn-cage-exit" min="-2,11,10" max="2,17,14"/>
+            <cuboid id="blue-spawn-cage-exit" min="10,11,2" max="14,17,-2"/>
+            <cuboid id="green-spawn-cage-exit" min="2,11,-10" max="-2,17,-14"/>
+            <cuboid id="yellow-spawn-cage-exit" min="-10,11,-2" max="-14,17,2"/>
+        </if>
+        <if variant="eight">
+            <cuboid id="red-spawn-cage-exit" min="3,10,18" max="-2,17,22"/>
+            <cuboid id="blue-spawn-cage-exit" min="18,10,-2" max="22,17,4"/>
+            <cuboid id="green-spawn-cage-exit" min="-2,10,-17" max="3,17,-22"/>
+            <cuboid id="yellow-spawn-cage-exit" min="-18,10,3" max="-22,17,-3"/>
             <cuboid id="purple-spawn-cage-exit" min="14,12,-19" max="19,17,-14"/>
             <cuboid id="cyan-spawn-cage-exit" min="-19,12,-14" max="-14,17,-19"/>
             <cuboid id="orange-spawn-cage-exit" min="-14,12,19" max="-19,17,14"/>
             <cuboid id="lightblue-spawn-cage-exit" min="19,12,14" max="14,17,19"/>
-        </union>
-    </if>
+        </if>
+    </union>
     <!-- Applications -->
     <apply block-break="never" region="spawn-protections" message="You may not modify the spawn!"/>
     <apply block-place="never" region="spawn-point-protections" message="You may not modify the spawn point area!"/>
-    <if variant="eight">
-        <apply block="never" region="spawn-cage-exsits"/>
-    </if>
+    <apply block="never" region="spawn-cage-exsits"/>
 </regions>
 <world-borders center="0.5,0.5">
     <world-border size="400"/>
@@ -601,5 +651,5 @@
     </kill-reward>
 </kill-rewards>
 <!-- Misc -->
-<maxbuildheight>10</maxbuildheight>
+<maxbuildheight>${maxheight}</maxbuildheight>
 </map>
