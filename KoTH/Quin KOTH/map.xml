@@ -1,7 +1,7 @@
 <map proto="1.5.0">
 <name>Quin KOTH</name>
 <created>2021-12-25</created>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <objective>Capture as many hills as possible with your team to reach 2000 points before the opposing teams!</objective>
 <gamemode>arcade</gamemode>
 <gamemode>koth</gamemode>
@@ -11,13 +11,11 @@
     <author uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Parkour creation"/> <!-- _iMan -->
     <author uuid="3d741e18-8da0-4780-a6b1-ca38e6768022" contribution="Parkour testing"/> <!-- Svnti -->
 </authors>
-<!-- Broadcasts -->
 <broadcasts>
     <tip after="1s">The higher you go, the more points you can get!</tip>
     <tip after="2s">Fall damage is disabled on this map!</tip>
     <tip after="3s">You won't take knockback after you respawn!</tip>
 </broadcasts>
-<!-- Teams -->
 <teams>
     <team id="red-team" color="red" max="8">Red</team>
     <team id="orange-team" color="gold" max="8">Orange</team>
@@ -28,7 +26,6 @@
     <team id="pink-team" color="light purple" max="8">Pink</team>
     <team id="purple-team" color="dark purple" max="8">Purple</team>
 </teams>
-<!-- Kits -->
 <kits>
     <kit id="spawn-kit" force="true">
         <clear/>
@@ -42,20 +39,13 @@
         <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect>night vision</effect>
         <game-mode>adventure</game-mode>
-        <effect amplifier="255">damage resistance</effect>
-        <knockback-reduction>1</knockback-reduction>
-    </kit>
-    <take>
-        <kit>
-            <knockback-reduction>0</knockback-reduction>
-            <effect amplifier="255">resistance</effect>
+        <kit id="spawn-prot-kit">
+            <knockback-reduction>1</knockback-reduction>
+            <effect amplifier="5">damage resistance</effect>
         </kit>
-        <filter>
-            <region id="spawn-protections"/>
-        </filter>
-    </take>
+    </kit>
+    <take kit="spawn-prot-kit" filter="not(spawn-protections)"/>
 </kits>
-<!-- Spawns -->
 <spawns>
     <default yaw="90" region="obs-spawn"/>
     <spawn team="red-team" kit="spawn-kit" yaw="-180" region="red-spawn"/>
@@ -67,7 +57,6 @@
     <spawn team="pink-team" kit="spawn-kit" yaw="-90" region="pink-spawn"/>
     <spawn team="purple-team" kit="spawn-kit" yaw="-135" region="purple-spawn"/>
 </spawns>
-<!-- Capture Points -->
 <control-points incremental="true" neutral-state="true" show-progress="true" required="false">
     <!-- 1st Point -->
     <control-point name="1st Point" points="1" capture-time="3s">
@@ -132,7 +121,6 @@
 </control-points>
 <!-- Regions -->
 <regions>
-    <!-- Definitions -->
     <union id="spawn-protections">
         <cuboid id="red-spawn-protection" min="-16,0,68" max="-10,oo,74"/>
         <cuboid id="orange-spawn-protection" min="14,0,59" max="8,oo,65"/>
@@ -164,24 +152,20 @@
     <apply region="purple-spawn-protection" enter="purple-team" message="You may not enter the enemy's spawn."/>
     <apply block="never"/>
 </regions>
-<!-- Tool Repair - Tools already have an unbreakable tag, this is only here to ensure players don't drop a tool by accident. -->
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
 </toolrepair>
-<!-- Item Remove -->
 <itemremove>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<!-- Item Keep -->
 <itemkeep>
     <item>golden apple</item>
     <item>arrow</item>
 </itemkeep>
-<!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
         <item material="golden apple"/>
@@ -193,7 +177,6 @@
         <item material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<!-- Score Objective -->
 <score>
     <limit>2000</limit>
 </score>
