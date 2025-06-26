@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>FourTest</name>
-<version>1.1.1</version>
+<version>1.1.2</version>
 <variant id="eight" world="eight" override="true">EightTest</variant>
 <include id="destroy-the-wool"/>
 <if variant="default">
@@ -59,10 +59,17 @@
         <chestplate unbreakable="true" material="chainmail chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-    </kit>
-        <kit id="first-spawn-kit" filter="first-spawn" parents="default">
-            <effect amplifier="5" duration="9s">damage resistance</effect>
+        <kit id="knockback-reduction">
+            <knockback-reduction>1</knockback-reduction>
         </kit>
+    </kit>
+    <kit id="first-spawn-kit" filter="first-spawn" parents="default">
+        <effect amplifier="5" duration="9s">damage resistance</effect>
+    </kit>
+    <kit id="second-spawn-kit" filter="second-spawn" parents="default">
+        <effect amplifier="5" duration="2s">damage resistance</effect>
+    </kit>
+    <take kit="knockback-reduction" filter="not(spawn-point-protections)"/>
 </kits>
 <!-- Spawns -->
 <spawns>
@@ -76,7 +83,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="red-team" kit="default">
+        <spawns team="red-team" kit="second-spawn-kit">
             <spawn id="red-second" filter="second-spawn">
                 <region yaw="180">
                     <point>0.5,2,12.5</point>
@@ -91,7 +98,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="blue-team" kit="default">
+        <spawns team="blue-team" kit="second-spawn-kit">
             <spawn id="blue-second" filter="second-spawn">
                 <region yaw="90">
                     <point>12.5,2,0.5</point>
@@ -106,7 +113,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="green-team" kit="default">
+        <spawns team="green-team" kit="second-spawn-kit">
             <spawn id="green-second" filter="second-spawn">
                 <region>
                     <point>0.5,2,-11.5</point>
@@ -121,7 +128,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="yellow-team" kit="default">
+        <spawns team="yellow-team" kit="second-spawn-kit">
             <spawn id="yellow-second" filter="second-spawn">
                 <region yaw="-90">
                     <point>-11.5,2,0.5</point>
@@ -139,7 +146,7 @@
                 </region>
             </spawn>
         </spawns>
-            <spawns team="red-team" kit="default">
+            <spawns team="red-team" kit="second-spawn-kit">
                 <spawn id="red-second" filter="second-spawn">
                     <region yaw="180">
                         <point>0.5,2,20.5</point>
@@ -154,7 +161,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="blue-team" kit="default">
+        <spawns team="blue-team" kit="second-spawn-kit">
             <spawn id="blue-second" filter="second-spawn">
                 <region yaw="90">
                     <point>20.5,2,0.5</point>
@@ -169,7 +176,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="green-team" kit="default">
+        <spawns team="green-team" kit="second-spawn-kit">
             <spawn id="green-second" filter="second-spawn">
                 <region>
                     <point>0.5,2,-19.5</point>
@@ -184,7 +191,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="yellow-team" kit="default">
+        <spawns team="yellow-team" kit="second-spawn-kit">
             <spawn id="yellow-second" filter="second-spawn">
                 <region yaw="-90">
                     <point>-19.5,2,0.5</point>
@@ -199,7 +206,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="purple-team" kit="default">
+        <spawns team="purple-team" kit="second-spawn-kit">
             <spawn id="purple-second" filter="second-spawn">
                 <region yaw="45">
                     <point>17.5,2,-16.5</point>
@@ -214,7 +221,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="cyan-team" kit="default">
+        <spawns team="cyan-team" kit="second-spawn-kit">
             <spawn id="cyan-second" filter="second-spawn">
                 <region yaw="-45">
                     <point>-16.5,2,-16.5</point>
@@ -229,7 +236,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="orange-team" kit="default">
+        <spawns team="orange-team" kit="second-spawn-kit">
             <spawn id="orange-second" filter="second-spawn">
                 <region yaw="-135">
                     <point>-16.5,2,17.5</point>
@@ -244,7 +251,7 @@
                 </region>
             </spawn>
         </spawns>
-        <spawns team="lightblue-team" kit="default">
+        <spawns team="lightblue-team" kit="second-spawn-kit">
             <spawn id="lightblue-second" filter="second-spawn">
                 <region yaw="135">
                     <point>17.5,2,17.5</point>
@@ -613,7 +620,7 @@
         </if>
     </union>
     <!-- Applications -->
-    <apply block-break="never" region="spawn-protections" message="You may not modify the spawn!"/>
+    <apply block-break="never" region="spawn-protections" message="You may not modify the spawn area!"/>
     <apply block-place="never" region="spawn-point-protections" message="You may not modify the spawn point area!"/>
     <apply block="never" region="spawn-cage-exsits"/>
 </regions>
