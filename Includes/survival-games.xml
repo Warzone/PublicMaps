@@ -1,6 +1,6 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.3.2 -->
+<!-- Include version 1.3.3 -->
 <!--
     To adequately use this include and properly set up your map, some requirements must be met:
 
@@ -15,13 +15,17 @@
     2. In order to teleport players to the deathmatch, actions to set teleport variables must be defined.
     Three variables with increasing indexes are defined per spawn point.
 
+    NOTE: Spawn points are defined at the center coordinates of a block. To teleport players correctly to
+    such spawn points that have negative coordinates, you must set the variable value to the next negative
+    integer. For example, if the spawn point is at X: -1576.5, Z: -635.5, set the variable values to X: -1577, Z: -636.
+
     Example:
     <actions>
         <trigger scope="match" filter="always">
             <action>
-                <set var="tp_points_x" index="0" value="-1576" />
+                <set var="tp_points_x" index="0" value="-1577" />
                 <set var="tp_points_y" index="0" value="60" />
-                <set var="tp_points_z" index="0" value="-635" />
+                <set var="tp_points_z" index="0" value="-636" />
             </action>
         </trigger>
     </actions>
@@ -34,10 +38,21 @@
         <world-border size="1050"/>
         <world-border size="56" after="${deathmatch-teleport}" duration="1s"/>
     </world-borders>
--->
+
+    4. Per standard practice, spawn or cornucopia chests must be filled with tier 2 loot. Define a region
+    enclosing these chests with an ID of "tier-2-chests". If you'd like more specific chests to be filled
+    with tier 2 loot, add them to the region as well.
+
+    The rest of chests can be filled with either tier 1 or mixed loot. Mixed loot is a combination of
+    tier 1 and tier 2 loot, with tier 1 items weighted higher. Default loot is tier 1.
+
+    If you wish to use mixed loot, set the constant "chest-loot" to "mixed" in your map.xml.
+    Any other type of lootable configuration can be done on a per-map basis, ignoring this include.
+   -->
 <map>
 <gamemode>sg</gamemode>
-<objective>Be the last player standing.</objective>
+<!-- Objective (shortened) inspired by the first Hunger Games book -->
+<objective>The rules of the Survival Games are simple. In punishment for the uprising, tributes will be imprisoned in a vast outdoor arena that could hold anything. They must fight to the death. The last tribute standing wins.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="timelimit">13m</constant> <!-- Match ending time -->
     <constant id="deathmatch-pre-teleport">10m45s</constant> <!-- How long until players are warned for teleport to deathmatch -->
@@ -47,6 +62,7 @@
     <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
     <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
     <constant id="match-delay">10s</constant> <!-- How long before players are released from their spawn cages -->
+    <constant id="chest-loot">tier-1</constant> <!-- Loot for non-spawn chests. Use 'tier-1' or 'mixed' -->
 </constants>
 <time>${timelimit}</time>
 <blitz>
@@ -83,7 +99,7 @@
         <material>chest</material>
         <material>trapped chest</material>
     </any>
-    <all id="only-tier-1-chests">
+    <all id="standard-chests">
         <filter id="chests"/>
         <negative>
             <region id="tier-2-chests"/>
@@ -181,7 +197,7 @@
         <action>
             <set var="cages" value="1"/>
             <switch-scope inner="player">
-                <teleport x="tp_points_x[tribute]" y="tp_points_y[tribute]" z="tp_points_z[tribute]"/>
+                <teleport x="tp_points_x[tribute] + 0.5" y="tp_points_y[tribute]" z="tp_points_z[tribute] + 0.5"/>
             </switch-scope>
         </action>
     </trigger>
@@ -219,16 +235,19 @@
 </regions>
 <lootables>
     <loot id="tier-1-chests-loottable">
-        <any count="2..5" unique="true">
+        <any count="3..6" unique="true">
             <!-- Weapons -->
             <option weight="20">
                 <item material="stone sword" unbreakable="true"/>
             </option>
-            <option weight="25">
+            <option weight="20">
                 <item material="stone axe" unbreakable="true"/>
             </option>
             <option weight="25">
                 <item material="wood sword" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="wood axe" unbreakable="true"/>
             </option>
             <option weight="15">
                 <item material="bow" unbreakable="true"/>
@@ -304,6 +323,18 @@
             <option weight="15">
                 <item material="gold boots"/>
             </option>
+            <option weight="15">
+                <item material="chainmail helmet"/>
+            </option>
+            <option weight="10">
+                <item material="chainmail chestplate"/>
+            </option>
+            <option weight="10">
+                <item material="chainmail leggings"/>
+            </option>
+            <option weight="15">
+                <item material="chainmail boots"/>
+            </option>
             <option weight="5">
                 <item material="iron helmet"/>
             </option>
@@ -311,22 +342,22 @@
                 <item material="iron boots"/>
             </option>
             <!-- Items -->
-            <option weight="10">
+            <option weight="15">
                 <item material="stick"/>
             </option>
-            <option weight="8">
+            <option weight="12">
                 <item material="iron ingot"/>
             </option>
-            <option weight="8">
+            <option weight="15">
                 <item material="gold ingot"/>
             </option>
-            <option weight="8">
+            <option weight="12">
                 <item material="feather"/>
             </option>
-            <option weight="10">
+            <option weight="12">
                 <item material="flint"/>
             </option>
-            <option weight="5">
+            <option weight="6">
                 <item material="diamond"/>
             </option>
             <any>
@@ -347,9 +378,6 @@
             </option>
             <option weight="25">
                 <item material="stone axe" unbreakable="true"/>
-            </option>
-            <option weight="15">
-                <item material="wood sword" unbreakable="true"/>
             </option>
             <option weight="15">
                 <item material="bow" unbreakable="true"/>
@@ -413,6 +441,18 @@
             <option weight="18">
                 <item material="gold boots"/>
             </option>
+            <option weight="15">
+                <item material="chainmail helmet"/>
+            </option>
+            <option weight="15">
+                <item material="chainmail chestplate"/>
+            </option>
+            <option weight="15">
+                <item material="chainmail leggings"/>
+            </option>
+            <option weight="18">
+                <item material="chainmail boots"/>
+            </option>
             <option weight="10">
                 <item material="iron helmet"/>
             </option>
@@ -426,19 +466,19 @@
                 <item material="iron boots"/>
             </option>
             <!-- Items -->
-            <option weight="10">
+            <option weight="15">
                 <item material="stick"/>
             </option>
-            <option weight="12">
+            <option weight="15">
                 <item material="iron ingot"/>
             </option>
             <option weight="12">
                 <item material="gold ingot"/>
             </option>
-            <option weight="6">
+            <option weight="12">
                 <item material="feather"/>
             </option>
-            <option weight="10">
+            <option weight="12">
                 <item material="flint"/>
             </option>
             <option weight="8">
@@ -454,8 +494,157 @@
             </any>
         </any>
     </loot>
+    <loot id="mixed-chests-loottable">
+        <any count="4..7" unique="true">
+            <!-- Weapons -->
+            <option weight="20">
+                <item material="stone sword" unbreakable="true"/>
+            </option>
+            <option weight="20">
+                <item material="stone axe" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="wood sword" unbreakable="true"/>
+            </option>
+            <option weight="25">
+                <item material="wood axe" unbreakable="true"/>
+            </option>
+            <option weight="15">
+                <item material="bow" unbreakable="true"/>
+            </option>
+            <option weight="10">
+                <item material="fishing rod" unbreakable="true"/>
+            </option>
+            <!-- Food (tier 1) -->
+            <option weight="20">
+                <item material="pork"/>
+            </option>
+            <option weight="20">
+                <item material="raw beef"/>
+            </option>
+            <option weight="20">
+                <item material="apple"/>
+            </option>
+            <option weight="15">
+                <item material="cookie"/>
+            </option>
+            <option weight="15">
+                <item material="pumpkin pie"/>
+            </option>
+            <option weight="20">
+                <item material="raw fish"/>
+            </option>
+            <option weight="12">
+                <item material="bread"/>
+            </option>
+            <option weight="20">
+                <item material="carrot item"/>
+            </option>
+            <option weight="20">
+                <item material="potato item"/>
+            </option>
+            <!-- Food (tier 2) -->
+            <option weight="10">
+                <item material="cooked beef"/>
+            </option>
+            <option weight="10">
+                <item material="grilled pork"/>
+            </option>
+            <option weight="10">
+                <item material="cooked fish"/>
+            </option>
+            <option weight="10">
+                <item material="baked potato"/>
+            </option>
+            <option weight="10">
+                <item material="golden apple"/>
+            </option>
+            <!-- Armor (tier 1) -->
+            <option weight="30">
+                <item material="leather helmet"/>
+            </option>
+            <option weight="25">
+                <item material="leather chestplate"/>
+            </option>
+            <option weight="25">
+                <item material="leather leggings"/>
+            </option>
+            <option weight="30">
+                <item material="leather boots"/>
+            </option>
+            <option weight="18">
+                <item material="gold helmet"/>
+            </option>
+            <option weight="15">
+                <item material="gold chestplate"/>
+            </option>
+            <option weight="15">
+                <item material="gold leggings"/>
+            </option>
+            <option weight="18">
+                <item material="gold boots"/>
+            </option>
+            <option weight="18">
+                <item material="chainmail helmet"/>
+            </option>
+            <option weight="15">
+                <item material="chainmail chestplate"/>
+            </option>
+            <option weight="15">
+                <item material="chainmail leggings"/>
+            </option>
+            <option weight="18">
+                <item material="chainmail boots"/>
+            </option>
+            <!-- Armor (tier 2) -->
+            <option weight="12">
+                <item material="iron helmet"/>
+            </option>
+            <option weight="8">
+                <item material="iron chestplate"/>
+            </option>
+            <option weight="8">
+                <item material="iron leggings"/>
+            </option>
+            <option weight="12">
+                <item material="iron boots"/>
+            </option>
+            <!-- Items - Tier 1 weighted higher -->
+            <option weight="20">
+                <item material="stick"/>
+            </option>
+            <option weight="15">
+                <item material="iron ingot"/>
+            </option>
+            <option weight="18">
+                <item material="gold ingot"/>
+            </option>
+            <option weight="15">
+                <item material="feather"/>
+            </option>
+            <option weight="15">
+                <item material="flint"/>
+            </option>
+            <option weight="8">
+                <item material="diamond"/>
+            </option>
+            <any>
+                <option weight="15">
+                    <item material="arrow" amount="2"/>
+                </option>
+                <option weight="10">
+                    <item material="arrow" amount="5"/>
+                </option>
+            </any>
+        </any>
+    </loot>
     <fill loot="tier-2-chests-loottable" filter="only-tier-2-chests" refill-trigger="chest-refill" refill-clear="false"/>
-    <fill loot="tier-1-chests-loottable" filter="only-tier-1-chests" refill-trigger="chest-refill" refill-clear="false"/>
+    <if constant="chest-loot" constant-value="tier-1" constant-compare="equals">
+        <fill loot="tier-1-chests-loottable" filter="standard-chests" refill-trigger="chest-refill" refill-clear="false"/>
+    </if>
+    <if constant="chest-loot" constant-value="mixed" constant-compare="equals">
+        <fill loot="mixed-chests-loottable" filter="standard-chests" refill-trigger="chest-refill" refill-clear="false"/>
+    </if>
 </lootables>
 <damage>
     <deny>
