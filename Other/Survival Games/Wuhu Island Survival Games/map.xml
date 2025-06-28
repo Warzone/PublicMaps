@@ -1,0 +1,210 @@
+<map proto="1.5.0">
+<include id="survival-games"/>
+<name>Wuhu Island: Survival Games</name>
+<created>2025-06-16</created>
+<version>1.0.0</version>
+<authors>
+    <author uuid="9f9d89d3-5ce6-49bd-a60d-eb958f79ed91" contribution="Original map creation"/> <!-- tizona -->
+</authors>
+<contributors>
+    <!-- <contributor contribution="Map inspiration">Nintendo Co., Ltd.</contributor> -->
+    <contributor uuid="fa28ac5f-6a4c-414f-8bcd-b5f2a93470a5" contribution="Original map JSON"/> <!-- JackJack33 -->
+    <contributor uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b" contribution="Building and XML"/> <!-- MewTwoKing -->
+    <contributor uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Building and XML"/> <!-- Fishywishi -->
+    <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Building"/> <!-- Preinstalled -->
+</contributors>
+<spawns>
+    <spawn>
+        <regions angle="-1234.5, 24, 451.5">
+            <point>-1234.5,23,468.5</point>
+            <point>-1238.5,23,468.5</point>
+            <point>-1242.5,23,466.5</point>
+            <point>-1246.5,23,463.5</point>
+            <point>-1249.5,23,459.5</point>
+            <point>-1251.5,23,455.5</point>
+            <point>-1251.5,23,451.5</point>
+            <point>-1251.5,23,447.5</point>
+            <point>-1249.5,23,443.5</point>
+            <point>-1246.5,23,439.5</point>
+            <point>-1242.5,23,436.5</point>
+            <point>-1238.5,23,434.5</point>
+            <point>-1234.5,23,434.5</point>
+            <point>-1230.5,23,434.5</point>
+            <point>-1226.5,23,436.5</point>
+            <point>-1222.5,23,439.5</point>
+            <point>-1219.5,23,443.5</point>
+            <point>-1217.5,23,447.5</point>
+            <point>-1217.5,23,451.5</point>
+            <point>-1217.5,23,455.5</point>
+            <point>-1219.5,23,459.5</point>
+            <point>-1222.5,23,463.5</point>
+            <point>-1226.5,23,466.5</point>
+            <point>-1230.5,23,468.5</point>
+        </regions>
+    </spawn>
+    <default>
+        <region>
+            <point>-1234.5, 23, 451.5</point> 
+        </region>
+    </default>
+</spawns>
+<regions>
+    <union id="spawn-cages">
+        <cylinder base="-1234.5,23,468.5" radius="1.0" height="3"/>
+        <cylinder base="-1238.5,23,468.5" radius="1.0" height="3"/>
+        <cylinder base="-1242.5,23,466.5" radius="1.0" height="3"/>
+        <cylinder base="-1246.5,23,463.5" radius="1.0" height="3"/>
+        <cylinder base="-1249.5,23,459.5" radius="1.0" height="3"/>
+        <cylinder base="-1251.5,23,455.5" radius="1.0" height="3"/>
+        <cylinder base="-1251.5,23,451.5" radius="1.0" height="3"/>
+        <cylinder base="-1251.5,23,447.5" radius="1.0" height="3"/>
+        <cylinder base="-1249.5,23,443.5" radius="1.0" height="3"/>
+        <cylinder base="-1246.5,23,439.5" radius="1.0" height="3"/>
+        <cylinder base="-1242.5,23,436.5" radius="1.0" height="3"/>
+        <cylinder base="-1238.5,23,434.5" radius="1.0" height="3"/>
+        <cylinder base="-1234.5,23,434.5" radius="1.0" height="3"/>
+        <cylinder base="-1230.5,23,434.5" radius="1.0" height="3"/>
+        <cylinder base="-1226.5,23,436.5" radius="1.0" height="3"/>
+        <cylinder base="-1222.5,23,439.5" radius="1.0" height="3"/>
+        <cylinder base="-1219.5,23,443.5" radius="1.0" height="3"/>
+        <cylinder base="-1217.5,23,447.5" radius="1.0" height="3"/>
+        <cylinder base="-1217.5,23,451.5" radius="1.0" height="3"/>
+        <cylinder base="-1217.5,23,455.5" radius="1.0" height="3"/>
+        <cylinder base="-1219.5,23,459.5" radius="1.0" height="3"/>
+        <cylinder base="-1222.5,23,463.5" radius="1.0" height="3"/>
+        <cylinder base="-1226.5,23,466.5" radius="1.0" height="3"/>
+        <cylinder base="-1230.5,23,468.5" radius="1.0" height="3"/>
+    </union>
+    <union id="tier-2-chests">
+        <cylinder id="spawn-chests" base="-1234.5, 20, 451.5" radius="8" height="7"/>
+        <cuboid min="-1321, 27, 570" max="-1320, 28, 571"/>
+        <cuboid min="-1125, 87, 364" max="-1124, 88, 365"/>
+        <cuboid min="-1182, 35, 603" max="-1181, 36, 604"/>
+        <cuboid min="-1399, 55, 504" max="-1398, 56, 505"/>
+        <cuboid min="-1147, 31, 309" max="-1146, 32, 310"/>
+        <cuboid min="-1004, 21, 541" max="-1003, 22, 542"/>
+    </union>
+    <apply leave="cages=0" region="spawn-cages"/>
+</regions>
+<actions>
+    <trigger scope="match" filter="always">
+        <action>
+            <set var="tp_points_x" index="0" value="-1234"/>
+            <set var="tp_points_y" index="0" value="23"/>
+            <set var="tp_points_z" index="0" value="468"/>
+
+            <set var="tp_points_x" index="1" value="-1238"/>
+            <set var="tp_points_y" index="1" value="23"/>
+            <set var="tp_points_z" index="1" value="468"/>
+
+            <set var="tp_points_x" index="2" value="-1242"/>
+            <set var="tp_points_y" index="2" value="23"/>
+            <set var="tp_points_z" index="2" value="466"/>
+
+            <set var="tp_points_x" index="3" value="-1246"/>
+            <set var="tp_points_y" index="3" value="23"/>
+            <set var="tp_points_z" index="3" value="463"/>
+
+            <set var="tp_points_x" index="4" value="-1249"/>
+            <set var="tp_points_y" index="4" value="23"/>
+            <set var="tp_points_z" index="4" value="459"/>
+
+            <set var="tp_points_x" index="5" value="-1251"/>
+            <set var="tp_points_y" index="5" value="23"/>
+            <set var="tp_points_z" index="5" value="455"/>
+
+            <set var="tp_points_x" index="6" value="-1251"/>
+            <set var="tp_points_y" index="6" value="23"/>
+            <set var="tp_points_z" index="6" value="451"/>
+
+            <set var="tp_points_x" index="7" value="-1251"/>
+            <set var="tp_points_y" index="7" value="23"/>
+            <set var="tp_points_z" index="7" value="447"/>
+
+            <set var="tp_points_x" index="8" value="-1249"/>
+            <set var="tp_points_y" index="8" value="23"/>
+            <set var="tp_points_z" index="8" value="443"/>
+
+            <set var="tp_points_x" index="9" value="-1246"/>
+            <set var="tp_points_y" index="9" value="23"/>
+            <set var="tp_points_z" index="9" value="439"/>
+
+            <set var="tp_points_x" index="10" value="-1242"/>
+            <set var="tp_points_y" index="10" value="23"/>
+            <set var="tp_points_z" index="10" value="436"/>
+
+            <set var="tp_points_x" index="11" value="-1238"/>
+            <set var="tp_points_y" index="11" value="23"/>
+            <set var="tp_points_z" index="11" value="434"/>
+
+            <set var="tp_points_x" index="12" value="-1234"/>
+            <set var="tp_points_y" index="12" value="23"/>
+            <set var="tp_points_z" index="12" value="434"/>
+
+            <set var="tp_points_x" index="13" value="-1230"/>
+            <set var="tp_points_y" index="13" value="23"/>
+            <set var="tp_points_z" index="13" value="434"/>
+
+            <set var="tp_points_x" index="14" value="-1226"/>
+            <set var="tp_points_y" index="14" value="23"/>
+            <set var="tp_points_z" index="14" value="436"/>
+
+            <set var="tp_points_x" index="15" value="-1222"/>
+            <set var="tp_points_y" index="15" value="23"/>
+            <set var="tp_points_z" index="15" value="439"/>
+
+            <set var="tp_points_x" index="16" value="-1219"/>
+            <set var="tp_points_y" index="16" value="23"/>
+            <set var="tp_points_z" index="16" value="443"/>
+
+            <set var="tp_points_x" index="17" value="-1217"/>
+            <set var="tp_points_y" index="17" value="23"/>
+            <set var="tp_points_z" index="17" value="447"/>
+
+            <set var="tp_points_x" index="18" value="-1217"/>
+            <set var="tp_points_y" index="18" value="23"/>
+            <set var="tp_points_z" index="18" value="451"/>
+
+            <set var="tp_points_x" index="19" value="-1217"/>
+            <set var="tp_points_y" index="19" value="23"/>
+            <set var="tp_points_z" index="19" value="455"/>
+
+            <set var="tp_points_x" index="20" value="-1219"/>
+            <set var="tp_points_y" index="20" value="23"/>
+            <set var="tp_points_z" index="20" value="459"/>
+
+            <set var="tp_points_x" index="21" value="-1222"/>
+            <set var="tp_points_y" index="21" value="23"/>
+            <set var="tp_points_z" index="21" value="463"/>
+
+            <set var="tp_points_x" index="22" value="-1226"/>
+            <set var="tp_points_y" index="22" value="23"/>
+            <set var="tp_points_z" index="22" value="466"/>
+
+            <set var="tp_points_x" index="23" value="-1230"/>
+            <set var="tp_points_y" index="23" value="23"/>
+            <set var="tp_points_z" index="23" value="468"/> 
+      </action>
+  </trigger>
+</actions>
+<portals protect="true" yaw="@90" pitch="@0">
+    <!-- Wuhu to Wedge Island -->
+    <portal>
+        <region>
+            <cuboid min="-1216,23,613" max="-1220,26,617"/>
+        </region>
+        <destination>
+            <point>-1358.5,21,901.5</point>
+        </destination>
+    </portal>
+    <!-- Wedge to Wuhu Island -->
+    <portal>
+        <region>
+            <cuboid min="-1332,23,909" max="-1328,26,913"/>
+        </region>
+        <destination>
+            <point>-1221.5,22,603.5</point>
+        </destination>
+      </portal>
+</portals>
+</map>

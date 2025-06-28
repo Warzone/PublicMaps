@@ -48,7 +48,9 @@ If you need any additional support with the mapmaking process, you may visit the
 
 ## License
 
-Maps in this repository are made available under the [**CC BY-SA 4.0** license](https://creativecommons.org/licenses/by-sa/4.0/), which allows you to share and adapt any maps of this repository, even for commercial purposes, as long you give appropriate credit and provide your modifications under the same license. By submitting a map for use at Warzone, you agree with the terms of the aforementioned license, and must distribute your map with it where applicable.
+This repository uses a mixed license model. Unless a map's folder contains a `LICENSE.txt` file specifying otherwise (usually for historical or compatibility reasons), all maps are licensed under the [**CC BY-SA 4.0** license](https://creativecommons.org/licenses/by-sa/4.0/). Therefore, maps without such a file are assumed to follow this default.
+
+Under the default license (CC BY-SA 4.0), you may share, modify, and even use maps commercially, as long as you give appropriate credit and license any modifications under the same terms. By submitting a map intended for Warzone, you agree to follow these terms where applicable.
 
 ## Acknowledgements
 
