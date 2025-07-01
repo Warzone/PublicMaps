@@ -1,7 +1,7 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.06.10-2 -->
+<!-- Version 2025.06.30-2 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="use-default-teams">true</constant> <!-- Make sure this is ABOVE the include statement in your map's XML if changing to "false" -->
@@ -33,7 +33,7 @@
     <alert after="10s">`cThe walls have fallen. Take cover or attack!</alert>
     <!-- <alert after="165s">`cThe floor crumbles.</alert> -->
 </broadcasts>
-<blitz>
+<blitz join-filter="not(walls-to-air)">
     <lives>1</lives>
 </blitz>
 <kits>
