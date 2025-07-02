@@ -1,0 +1,102 @@
+<map proto="1.5.0">
+<name>Missile Wars: Brainrot Edition</name>
+<created>2025-07-01</created>
+<version>1.0.0</version>
+<include id="missile-wars"/>
+<phase>development</phase>
+<authors>
+    <author uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f" contribution="Author"/> <!-- Fishywishi -->
+</authors>
+<contributors>
+    <contributor uuid="55a2e72e-0161-4c85-b191-a0b227ff758a" contribution="Original map concept"/> <!-- Sethbling -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="Unknowingly inspired this"/> <!-- _Pear -->
+</contributors>
+<constants>
+    <constant id="game-objective">Destroy your enemy's Maid Pear with rockets!</constant>
+    <constant id="team_one-name">Green</constant>
+    <constant id="team_one-color">green</constant>
+    <constant id="team_two-name">Blue</constant>
+    <constant id="team_two-color">blue</constant>
+    <constant id="missile-distribution-timer">15</constant>
+</constants>
+<kits>
+    <kit id="extra-glass" parents="default-kit">
+        <item material="stained glass" team-color="true" amount="16"/>
+    </kit>
+    <kit id="obs-kit">
+        <effect>night vision</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="team_one" kit="extra-glass" yaw="180">
+        <region>
+            <cuboid min="27,78,64" max="-26,78,65"/>
+        </region>
+    </spawn>
+    <spawn team="team_two" kit="extra-glass">
+        <region>
+            <cuboid min="-26,78,-19" max="27,78,-19"/>
+        </region>
+    </spawn>
+    <default yaw="90" kit="obs-kit">
+        <region>
+            <point>50.5,96,24.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <all id="only-explosion-blocks">
+        <cause>explosion</cause>
+        <deny>
+            <cause>player</cause>
+        </deny>
+    </all>
+</filters>
+<destroyables material="wool;stained_clay" completion="80%" show-progress="true">
+    <destroyable name="Pear A" owner="team_one" region="green-Pear-A"/>
+    <destroyable name="Pear B" owner="team_one" region="green-Pear-B"/>
+    <destroyable name="Pear A" owner="team_two" region="blue-Pear-A"/>
+    <destroyable name="Pear B" owner="team_two" region="blue-Pear-B"/>
+</destroyables>
+<regions>
+    <cuboid id="obs-spawn-region" min="46, 95, 21" max="54, 103, 29"/>
+    <union id="portals">
+        <cuboid id="blue-Pear-A" min="-22, 49, -33" max="-6, 81, -25"/>
+        <cuboid id="blue-Pear-B" min="7, 49, -33" max="23, 81, -25"/>
+        <cuboid id="green-Pear-A" min="-22, 49, 71" max="-6, 81, 79"/>
+        <cuboid id="green-Pear-B" min="7, 49, 71" max="23, 81, 79"/>
+    </union>
+    <apply region="obs-spawn-region" block="never"/>
+    <apply region="portals" block="only-explosion-blocks" message="You can only destroy Pear with explosions!"/>
+    <cuboid id="team_one_Tomahawk_region" min="63,95,1" max="61,98,-12"/>
+    <cuboid id="team_one_Juggernaut_region" min="68,94,1" max="64,98,-10"/>
+    <cuboid id="team_one_Guardian_region" min="73,94,1" max="70,98,-7"/>
+    <cuboid id="team_one_Lightning_region" min="78,95,1" max="75,98,-8"/>
+    <cuboid id="team_one_Shieldbuster_region" min="98,95,1" max="80,98,-14"/>
+    <cuboid id="team_two_Tomahawk_region" min="61,95,4" max="63,98,17"/>
+    <cuboid id="team_two_Juggernaut_region" min="65,94,4" max="68,98,15"/>
+    <cuboid id="team_two_Guardian_region" min="70,94,4" max="73,98,12"/>
+    <cuboid id="team_two_Lightning_region" min="75,95,4" max="78,98,13"/>
+    <cuboid id="team_two_Shieldbuster_region" min="79,95,4" max="83,98,19"/>
+</regions>
+<kill-rewards>
+    <kill-reward>
+        <item amount="16" team-color="true" material="stained glass"/>
+    </kill-reward>
+</kill-rewards>
+<world>
+    <timeset>18000</timeset>
+</world>
+<renewables grow="true" particles="true" sound="true" avoid-players="1">
+    <renewable rate="0.2">
+        <region>
+            <cuboid id="green_defense" min="-26, 45, 51" max="27, 78, 64"/>
+        </region>
+    </renewable>
+    <renewable rate="0.2">
+        <region>
+            <cuboid id="blue_defense" min="-26, 45, -18" max="27, 78, -5"/>
+        </region>
+    </renewable>
+</renewables>
+</map>
