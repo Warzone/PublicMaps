@@ -1,8 +1,8 @@
 <map proto="1.5.0">
 <include id="survival-games"/>
-<name>Wuhu Island: Survival Games</name>
+<name>Wuhu Island: SG</name>
 <created>2025-06-16</created>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <authors>
     <author uuid="9f9d89d3-5ce6-49bd-a60d-eb958f79ed91" contribution="Original map creation"/> <!-- tizona -->
 </authors>
@@ -14,37 +14,35 @@
     <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Building"/> <!-- Preinstalled -->
 </contributors>
 <spawns>
-    <spawn>
-        <regions angle="-1234.5, 24, 451.5">
-            <point>-1234.5,23,468.5</point>
-            <point>-1238.5,23,468.5</point>
-            <point>-1242.5,23,466.5</point>
-            <point>-1246.5,23,463.5</point>
-            <point>-1249.5,23,459.5</point>
-            <point>-1251.5,23,455.5</point>
-            <point>-1251.5,23,451.5</point>
-            <point>-1251.5,23,447.5</point>
-            <point>-1249.5,23,443.5</point>
-            <point>-1246.5,23,439.5</point>
-            <point>-1242.5,23,436.5</point>
-            <point>-1238.5,23,434.5</point>
-            <point>-1234.5,23,434.5</point>
-            <point>-1230.5,23,434.5</point>
-            <point>-1226.5,23,436.5</point>
-            <point>-1222.5,23,439.5</point>
-            <point>-1219.5,23,443.5</point>
-            <point>-1217.5,23,447.5</point>
-            <point>-1217.5,23,451.5</point>
-            <point>-1217.5,23,455.5</point>
-            <point>-1219.5,23,459.5</point>
-            <point>-1222.5,23,463.5</point>
-            <point>-1226.5,23,466.5</point>
-            <point>-1230.5,23,468.5</point>
-        </regions>
-    </spawn>
+    <spawns spread="true" exclusive="true" angle="-1234.5,24,451.5">
+        <spawn><region><point>-1234.5,23,468.5</point></region></spawn>
+        <spawn><region><point>-1238.5,23,468.5</point></region></spawn>
+        <spawn><region><point>-1242.5,23,466.5</point></region></spawn>
+        <spawn><region><point>-1246.5,23,463.5</point></region></spawn>
+        <spawn><region><point>-1249.5,23,459.5</point></region></spawn>
+        <spawn><region><point>-1251.5,23,455.5</point></region></spawn>
+        <spawn><region><point>-1251.5,23,451.5</point></region></spawn>
+        <spawn><region><point>-1251.5,23,447.5</point></region></spawn>
+        <spawn><region><point>-1249.5,23,443.5</point></region></spawn>
+        <spawn><region><point>-1246.5,23,439.5</point></region></spawn>
+        <spawn><region><point>-1242.5,23,436.5</point></region></spawn>
+        <spawn><region><point>-1238.5,23,434.5</point></region></spawn>
+        <spawn><region><point>-1234.5,23,434.5</point></region></spawn>
+        <spawn><region><point>-1230.5,23,434.5</point></region></spawn>
+        <spawn><region><point>-1226.5,23,436.5</point></region></spawn>
+        <spawn><region><point>-1222.5,23,439.5</point></region></spawn>
+        <spawn><region><point>-1219.5,23,443.5</point></region></spawn>
+        <spawn><region><point>-1217.5,23,447.5</point></region></spawn>
+        <spawn><region><point>-1217.5,23,451.5</point></region></spawn>
+        <spawn><region><point>-1217.5,23,455.5</point></region></spawn>
+        <spawn><region><point>-1219.5,23,459.5</point></region></spawn>
+        <spawn><region><point>-1222.5,23,463.5</point></region></spawn>
+        <spawn><region><point>-1226.5,23,466.5</point></region></spawn>
+        <spawn><region><point>-1230.5,23,468.5</point></region></spawn>
+    </spawns>
     <default>
         <region>
-            <point>-1234.5, 23, 451.5</point> 
+            <point>-1234.5,41,459.5</point>
         </region>
     </default>
 </spawns>
@@ -183,10 +181,15 @@
 
             <set var="tp_points_x" index="23" value="-1230"/>
             <set var="tp_points_y" index="23" value="23"/>
-            <set var="tp_points_z" index="23" value="468"/> 
+            <set var="tp_points_z" index="23" value="468"/>
       </action>
   </trigger>
 </actions>
+<world-borders center="-1234.5,451.5">
+    <world-border size="1100"/>
+    <world-border size="50" after="${deathmatch-teleport}" duration="1s"/>
+</world-borders>
+<!-- Map-specific portals -->
 <portals protect="true" yaw="@90" pitch="@0">
     <!-- Wuhu to Wedge Island -->
     <portal>
@@ -205,6 +208,6 @@
         <destination>
             <point>-1221.5,22,603.5</point>
         </destination>
-      </portal>
+    </portal>
 </portals>
 </map>
