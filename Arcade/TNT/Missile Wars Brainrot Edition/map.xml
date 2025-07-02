@@ -1,7 +1,7 @@
 <map proto="1.5.0">
 <name>Missile Wars: Brainrot Edition</name>
 <created>2025-07-01</created>
-<version>1.0.0</version>
+<version>1.0.1</version>
 <include id="missile-wars"/>
 <phase>development</phase>
 <authors>
@@ -17,11 +17,11 @@
     <constant id="team_one-color">green</constant>
     <constant id="team_two-name">Blue</constant>
     <constant id="team_two-color">blue</constant>
-    <constant id="missile-distribution-timer">15</constant>
+    <constant id="missile-distribution-timer">13</constant>
 </constants>
 <kits>
     <kit id="extra-glass" parents="default-kit">
-        <item material="stained glass" team-color="true" amount="16"/>
+        <item material="stained glass" team-color="true" amount="8"/>
     </kit>
     <kit id="obs-kit">
         <effect>night vision</effect>
@@ -52,19 +52,19 @@
         </deny>
     </all>
 </filters>
-<destroyables material="wool;stained_clay" completion="80%" show-progress="true">
+<destroyables material="wool;stained_clay" completion="70%" show-progress="true">
     <destroyable name="Pear A" owner="team_one" region="green-Pear-A"/>
     <destroyable name="Pear B" owner="team_one" region="green-Pear-B"/>
     <destroyable name="Pear A" owner="team_two" region="blue-Pear-A"/>
     <destroyable name="Pear B" owner="team_two" region="blue-Pear-B"/>
 </destroyables>
 <regions>
-    <cuboid id="obs-spawn-region" min="46, 95, 21" max="54, 103, 29"/>
+    <cuboid id="obs-spawn-region" min="46,95,21" max="54,103,29"/>
     <union id="portals">
-        <cuboid id="blue-Pear-A" min="-22, 49, -33" max="-6, 81, -25"/>
-        <cuboid id="blue-Pear-B" min="7, 49, -33" max="23, 81, -25"/>
-        <cuboid id="green-Pear-A" min="-22, 49, 71" max="-6, 81, 79"/>
-        <cuboid id="green-Pear-B" min="7, 49, 71" max="23, 81, 79"/>
+        <cuboid id="blue-Pear-A" min="-22,49,-33" max="-6,81,-25"/>
+        <cuboid id="blue-Pear-B" min="7,49,-33" max="23,81,-25"/>
+        <cuboid id="green-Pear-A" min="-22,49,71" max="-6,81,79"/>
+        <cuboid id="green-Pear-B" min="7,49,71" max="23,81,79"/>
     </union>
     <apply region="obs-spawn-region" block="never"/>
     <apply region="portals" block="only-explosion-blocks" message="You can only destroy Pear with explosions!"/>
@@ -81,7 +81,7 @@
 </regions>
 <kill-rewards>
     <kill-reward>
-        <item amount="16" team-color="true" material="stained glass"/>
+        <item amount="8" team-color="true" material="stained glass"/>
     </kill-reward>
 </kill-rewards>
 <world>
@@ -90,12 +90,12 @@
 <renewables grow="true" particles="true" sound="true" avoid-players="1">
     <renewable rate="0.2">
         <region>
-            <cuboid id="green_defense" min="-26, 45, 51" max="27, 78, 64"/>
+            <cuboid id="green_defense" min="-26,45,51" max="27,78,64"/>
         </region>
     </renewable>
     <renewable rate="0.2">
         <region>
-            <cuboid id="blue_defense" min="-26, 45, -18" max="27, 78, -5"/>
+            <cuboid id="blue_defense" min="-26,45,-18" max="27,78,-5"/>
         </region>
     </renewable>
 </renewables>
