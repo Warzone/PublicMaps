@@ -57,6 +57,9 @@
     <constant id="timelimit">13m</constant> <!-- Match ending time -->
     <constant id="min-player-count">8</constant> <!-- Minimum player count to start the match -->
     <constant id="max-player-count">24</constant> <!-- Maximum player count for the match -->
+    <constant id="timelock">on</constant> <!-- Whether to lock world time -->
+    <constant id="difficulty">normal</constant> <!-- Difficulty of the match (peaceful, easy, normal, hard) -->
+    <constant id="hunger-depletion">on</constant> <!-- How fast hunger depletes (0.1 = 1 hunger point every 10 minutes) -->
     <constant id="lightning-enabled">true</constant> <!-- Whether lightning strikes should occur during the match -->
     <constant id="cannon-enabled">true</constant> <!-- Whether to send a message when a player is killed -->
     <constant id="grace-period-enabled">true</constant> <!-- Whether to enable the grace period -->
@@ -73,6 +76,7 @@
     <constant id="chest-loot">tier-1</constant> <!-- Loot for non-spawn chests. Use 'tier-1' or 'mixed' -->
 </constants>
 <time>${timelimit}</time>
+<difficulty>${difficulty}</difficulty>
 <blitz lightning="${lightning-enabled}">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
@@ -262,7 +266,7 @@
 </regions>
 <lootables>
     <loot id="tier-1-chests-loottable">
-        <any count="3..6" unique="true">
+        <any count="4..7" unique="true">
             <!-- Weapons -->
             <option weight="20">
                 <item material="stone sword" unbreakable="true"/>
@@ -694,6 +698,9 @@
         </deny>
     </damage>
 </if>
+<hunger>
+    <depletion>${hunger_depletion}</depletion>
+</hunger>
 <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
     <kill-rewards>
         <kill-reward filter="not(remaining=2)" victim-action="player-killed"/>
@@ -716,5 +723,5 @@
         <spawn>spawner</spawn>
     </filter>
 </mobs>
-<timelock>on</timelock>
+<timelock>${timelock}</timelock>
 </map>
