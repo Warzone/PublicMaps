@@ -1,6 +1,6 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.3.4 -->
+<!-- Include version 1.4.0 -->
 <!--
     To adequately use this include and properly set up your map, some requirements must be met:
 
@@ -36,7 +36,7 @@
     Example:
     <world-borders center="-1577,-611">
         <world-border size="1050"/>
-        <world-border size="56" after="${deathmatch-teleport}" duration="1s"/>
+        <world-border size="56" after="${dm-teleport}" duration="1s"/>
     </world-borders>
 
     4. Per standard practice, spawn or cornucopia chests must be filled with tier 2 loot. Define a region
@@ -55,21 +55,29 @@
 <objective>The rules of the Survival Games are simple. In punishment for the uprising, tributes will be imprisoned in a vast outdoor arena that could hold anything. They must fight to the death. The last tribute standing wins.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="timelimit">13m</constant> <!-- Match ending time -->
-    <constant id="deathmatch-pre-teleport">10m45s</constant> <!-- How long until players are warned for teleport to deathmatch -->
-    <constant id="deathmatch-teleport">11m</constant> <!-- How long until players are teleported to the deathmatch -->
-    <constant id="deathmatch-start">11m15s</constant> <!-- How long until the deathmatch starts (after teleporting) -->
-    <constant id="player-count">24</constant> <!-- How many players this map is suited for based on podium counts. Common values: "8", "12", "24", "32", "48" -->
+    <constant id="min-player-count">8</constant> <!-- Minimum player count to start the match -->
+    <constant id="max-player-count">24</constant> <!-- Maximum player count for the match -->
+    <constant id="lightning-enabled">true</constant> <!-- Whether lightning strikes should occur during the match -->
+    <constant id="cannon-enabled">true</constant> <!-- Whether to send a message when a player is killed -->
+    <constant id="grace-period-enabled">true</constant> <!-- Whether to enable the grace period -->
+    <constant id="chest-refill-enabled">true</constant> <!-- Whether to enable chest refills -->
+    <constant id="dm-enabled">true</constant> <!-- At what time will the countdown to be teleported to the deathmatch be displayed? -->
+    <constant id="dm-messages-enabled">true</constant> <!-- Whether to send messages about time until deathmatch -->
+    <constant id="dm-messages-minute-counter">11</constant> <!-- Must be the same as dm-teleport -->
+    <constant id="dm-warn">10m45s</constant> <!-- At what time will the countdown to be teleported to the deathmatch be displayed? -->
+    <constant id="dm-teleport">11m</constant> <!-- At what time will players be teleported to the deathmatch? -->
+    <constant id="dm-start">11m15s</constant> <!-- At what time will the deathmatch start (after teleporting)? -->
     <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
     <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
     <constant id="match-delay">10s</constant> <!-- How long before players are released from their spawn cages -->
     <constant id="chest-loot">tier-1</constant> <!-- Loot for non-spawn chests. Use 'tier-1' or 'mixed' -->
 </constants>
 <time>${timelimit}</time>
-<blitz lightning="true">
+<blitz lightning="${lightning-enabled}">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
-<players min="8" max="${player-count}" max-overfill="${player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
+<players min="${min-player-count}" max="${max-player-count}" max-overfill="${max-player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
 <filters>
     <all id="starting-countdown">
         <not>
@@ -77,13 +85,36 @@
         </not>
         <match-running/>
     </all>
-    <time id="deathmatch-pre-teleport-time">${deathmatch-pre-teleport}</time>
-    <time id="deathmatch-teleport-time">${deathmatch-teleport}</time>
-    <time id="deathmatch-start-time">${deathmatch-start}</time>
-    <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
-    <countdown id="deathmatch-teleport-countdown" duration="15s" message="`cYou will be teleported for deathmatch in {0}" filter="deathmatch-pre-teleport-time"/>
-    <countdown id="deathmatch-countdown" duration="15s" message="`c{0} until deathmatch!" filter="deathmatch-teleport-time"/>
-    <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
+    <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
+        <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
+    </if>
+    <if constant="chest-refill-enabled" constant-value="true" constant-compare="equals">
+        <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
+        <any id="chests">
+            <material>chest</material>
+            <material>trapped chest</material>
+        </any>
+        <all id="standard-chests">
+            <filter id="chests"/>
+            <negative>
+                <region id="tier-2-chests"/>
+            </negative>
+        </all>
+        <all id="only-tier-2-chests">
+            <filter id="chests"/>
+            <region id="tier-2-chests"/>
+        </all>
+    </if>
+    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
+        <time id="dm-warn-time">${dm-warn}</time>
+        <time id="dm-teleport-time">${dm-teleport}</time>
+        <time id="dm-start-time">${dm-start}</time>
+        <countdown id="dm-teleport-countdown" duration="15s" message="`cYou will be teleported for deathmatch in {0}" filter="dm-warn-time"/>
+        <countdown id="dm-start-countdown" duration="15s" message="`c{0} until deathmatch!" filter="dm-start-time"/>
+        <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
+            <pulse id="dm-message" period="1m" duration="1s" filter="match-started"/>
+        </if>
+    </if>
     <any id="allow-break">
         <material>leaves</material>
         <material>vine</material>
@@ -95,29 +126,22 @@
         <material>long grass</material>
         <material>dead bush</material>
     </any>
-    <any id="chests">
-        <material>chest</material>
-        <material>trapped chest</material>
-    </any>
-    <all id="standard-chests">
-        <filter id="chests"/>
-        <negative>
-            <region id="tier-2-chests"/>
-        </negative>
-    </all>
-    <all id="only-tier-2-chests">
-        <filter id="chests"/>
-        <region id="tier-2-chests"/>
-    </all>
 </filters>
 <variables>
-    <variable id="tribute" scope="player"/>
     <variable id="cages" default="1" scope="match"/>
-    <variable id="remaining" scope="match"/>
-    <variable id="tmp" scope="match"/>
-    <array id="tp_points_x" size="${player-count}" scope="match"/>
-    <array id="tp_points_y" size="${player-count}" scope="match"/>
-    <array id="tp_points_z" size="${player-count}" scope="match"/>
+    <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
+        <variable id="tribute" scope="player"/>
+        <variable id="remaining" scope="match"/>
+        <variable id="tmp" scope="match"/>
+    </if>
+    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
+        <array id="tp_points_x" size="${max-player-count}" scope="match"/>
+        <array id="tp_points_y" size="${max-player-count}" scope="match"/>
+        <array id="tp_points_z" size="${max-player-count}" scope="match"/>
+        <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
+            <variable id="time_left_dm" scope="match" default="${dm-messages-minute-counter}"/>
+        </if>
+    </if>
 </variables>
 <actions>
     <!-- Keeps track of alive players and sets up TP coordinates for deathmatch -->
@@ -140,94 +164,98 @@
             <message text="`8`l[`6`lSG`8`l] `3May the odds be ever in your favor."/>
         </action>
     </trigger>
+    <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
     <!-- Announces the end of the grace period -->
-    <trigger scope="player">
-        <action scope="player">
-            <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
-            <message text="`8`l[`6`lSG`8`l] `3Grace period is now over!"/>
-        </action>
-        <filter>
-            <all>
-                <not>
-                    <filter id="grace-period-countdown"/>
-                </not>
-                <filter id="starting-countdown"/>
-            </all>
-        </filter>
-    </trigger>
-    <!-- Announces that chests have been refilled -->
-    <trigger scope="player">
-        <action scope="player">
-            <message text="`8`l[`6`lSG`8`l] `3Chests have been refilled!"/>
-        </action>
-        <filter>
-            <all>
-                <filter id="chest-refill"/>
-                <time>${chest-refill-timer}</time>
-            </all>
-        </filter>
-    </trigger>
-    <!-- Announcements for time left until deathmatch -->
-    <trigger scope="player">
-        <action scope="player">
-            <message text="`8`l[`6`lSG`8`l] `c10 minutes until deathmatch!"/>
-        </action>
-        <filter>
-            <time>1m</time>
-        </filter>
-    </trigger>
-    <trigger scope="player">
-        <action scope="player">
-            <message text="`8`l[`6`lSG`8`l] `c5 minutes until deathmatch!"/>
-        </action>
-        <filter>
-            <time>6m</time>
-        </filter>
-    </trigger>
-    <trigger scope="player">
-        <action scope="player">
-            <message text="`8`l[`6`lSG`8`l] `c15 seconds until deathmatch!"/>
-        </action>
-        <filter>
-            <time>${deathmatch-pre-teleport}</time>
-        </filter>
-    </trigger>
-    <!-- Teleports players to spawn points for deathmatch -->
-    <trigger scope="match" filter="deathmatch-teleport-time">
-        <action>
-            <set var="cages" value="1"/>
-            <switch-scope inner="player">
-                <teleport x="tp_points_x[tribute] + 0.5" y="tp_points_y[tribute]" z="tp_points_z[tribute] + 0.5"/>
-            </switch-scope>
-        </action>
-    </trigger>
-    <!-- Announces the start of the deathmatch -->
-    <trigger scope="match" filter="deathmatch-start-time">
-        <action scope="match">
-            <set var="cages" value="0"/>
-            <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
-            <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
-        </action>
-    </trigger>
+        <trigger scope="player">
+            <action scope="player">
+                <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
+                <message text="`8`l[`6`lSG`8`l] `3Grace period is now over!"/>
+            </action>
+            <filter>
+                <all>
+                    <not>
+                        <filter id="grace-period-countdown"/>
+                    </not>
+                    <filter id="starting-countdown"/>
+                </all>
+            </filter>
+        </trigger>
+    </if>
+    <if constant="chest-refill-enabled" constant-value="true" constant-compare="equals">
+        <!-- Announces that chests have been refilled -->
+        <trigger scope="match">
+            <action scope="match">
+                <message text="`8`l[`6`lSG`8`l] `3Chests have been refilled!"/>
+            </action>
+            <filter>
+                <all>
+                    <filter id="chest-refill"/>
+                    <time>${chest-refill-timer}</time>
+                </all>
+            </filter>
+        </trigger>
+    </if>
+    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
+        <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
+            <!-- Announcements for time left until deathmatch -->
+            <trigger scope="match">
+                <action scope="match">
+                    <set var="time_left_dm" value="time_left_dm - 1"/>
+                    <message text="`8`l[`6`lSG`8`l] `c{dm-message-minutes} minute(s) until deathmatch!">
+                        <replacements>
+                            <decimal id="dm-message-minutes" value="time_left_dm"/>
+                        </replacements>
+                    </message>
+                </action>
+                <filter>
+                    <any>
+                        <variable id="15_min_left" var="time_left_dm">15</variable>
+                        <variable id="10_min_left" var="time_left_dm">10</variable>
+                        <variable id="5_min_left" var="time_left_dm">5</variable>
+                        <variable id="1_min_left" var="time_left_dm">1</variable>
+                    </any>
+                </filter>
+            </trigger>
+            <!-- Announces the start of the deathmatch -->
+            <trigger scope="match" filter="dm-start-time">
+                <action scope="match">
+                    <set var="cages" value="0"/>
+                    <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
+                    <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
+                </action>
+            </trigger>
+        </if>
+        <!-- Teleports players to spawn points for deathmatch -->
+        <trigger scope="match" filter="dm-teleport-time">
+            <action>
+                <set var="cages" value="1"/>
+                <switch-scope inner="player">
+                    <teleport x="tp_points_x[tribute] + 0.5" y="tp_points_y[tribute]" z="tp_points_z[tribute] + 0.5"/>
+                </switch-scope>
+            </action>
+        </trigger>
+    </if>
     <!-- Announces the end of the games -->
     <trigger scope="match" filter="match-finished">
         <action scope="match">
             <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
         </action>
     </trigger>
+    <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
     <!-- Sends messages when a player is killed -->
-    <action id="player-killed" scope="player">
-        <set var="remaining" value="remaining - 1"/>
-        <switch-scope outer="player" inner="match">
-            <message text="`8`l[`6`lSG`8`l] `aOnly `8[`6{remaining-players}`8] `atributes remain!">
-                <replacements>
-                    <decimal id="remaining-players" value="remaining"/>
-                </replacements>
-            </message>
-            <message text="`8`l[`6`lSG`8`l] `6A cannon can be heard in the distance." />
-        </switch-scope>
-    </action>
-    <trigger scope="player" filter="all(not(participating), not(match-finished), match-started)" action="player-killed" observers="false"/>
+        <action id="player-killed" scope="player">
+            <set var="remaining" value="remaining - 1"/>
+            <switch-scope outer="player" inner="match">
+                <message text="`8`l[`6`lSG`8`l] `aOnly `8[`6{remaining-players}`8] `atributes remain!">
+                    <replacements>
+                        <decimal id="remaining-players" value="remaining"/>
+                    </replacements>
+                </message>
+                <message text="`8`l[`6`lSG`8`l] `6A cannon can be heard in the distance." />
+            </switch-scope>
+        </action>
+        <trigger scope="player" filter="all(not(participating), not(match-finished), match-started)" action="player-killed" observers="false"/>
+    </if>
 </actions>
 <regions>
     <apply block="allow-break" block-place="always"/>
@@ -645,26 +673,32 @@
         <fill loot="mixed-chests-loottable" filter="standard-chests" refill-trigger="chest-refill" refill-clear="false"/>
     </if>
 </lootables>
-<damage>
-    <deny>
-        <all>
-            <any>
-                <filter id="grace-period-countdown"/>
-                <filter id="deathmatch-countdown"/>
-                <not>
-                    <filter id="starting-countdown"/>
-                </not>
-            </any>
-            <any>
-                <cause>melee</cause>
-                <cause>projectile</cause>
-            </any>
-        </all>
-    </deny>
-</damage>
-<kill-rewards>
-    <kill-reward filter="not(remaining=2)" victim-action="player-killed"/>
-</kill-rewards>
+<if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
+    <damage>
+        <deny>
+            <all>
+                <any>
+                    <filter id="grace-period-countdown"/>
+                    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
+                        <filter id="dm-teleport-countdown"/>
+                    </if>
+                    <not>
+                        <filter id="starting-countdown"/>
+                    </not>
+                </any>
+                <any>
+                    <cause>melee</cause>
+                    <cause>projectile</cause>
+                </any>
+            </all>
+        </deny>
+    </damage>
+</if>
+<if constant="cannon-enabled" constant-value="true" constant-compare="equals">
+    <kill-rewards>
+        <kill-reward filter="not(remaining=2)" victim-action="player-killed"/>
+    </kill-rewards>
+</if>
 <itemremove>
     <item>sapling</item>
     <item>seeds</item>
