@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Cargo</name>
-<version>1.3.2</version>
+<version>1.3.3</version>
 <variant id="halloween" world="halloween" override="true">Haunted Cargo</variant>
 <objective>Capture the enemy's wools!</objective>
 <gamemode>ctw</gamemode>
@@ -33,8 +33,8 @@
     </if>
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="16">Blue</team>
-    <team id="red" color="dark red" max="16">Red</team>
+    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="red-team" color="dark red" max="16">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
@@ -65,30 +65,19 @@
             <cylinder base="76,52,93" height="0" radius="3"/>
         </region>
     </default>
-    <spawn team="blue" kit="spawn-kit">
+    <spawn team="blue-team" kit="spawn-kit">
         <region yaw="-180">
             <cylinder base="116,7.5,170" height="0" radius="1"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit">
+    <spawn team="red-team" kit="spawn-kit">
         <region>
             <cylinder base="116,7.5,16" height="0" radius="1"/>
         </region>
     </spawn>
 </spawns>
 <filters>
-    <not id="blue-in-wr">
-        <any>
-            <team id="only-red">red</team>
-            <material>chest</material>
-        </any>
-    </not>
-    <not id="red-in-wr">
-        <any>
-            <team id="only-blue">blue</team>
-            <material>chest</material>
-        </any>
-    </not>
+    <material id="chest">chest</material>
 </filters>
 <regions>
     <union id="spawn-entry">
@@ -118,14 +107,16 @@
         <mirror id="blue-underside" region="red-underside" origin="116,8,93" normal="0,0,1"/>
         <below y="1"/>
     </union>
-    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
-    <apply enter="only-blue" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
-    <apply enter="only-red" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="deny(red-team)" region="blue-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="deny(blue-team)" region="red-spawn" message="You may not enter the enemy team's spawn!"/>
+    <apply enter="deny(red-team)" region="blue-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply enter="deny(blue-team)" region="red-wool-rooms" message="You may not enter your team's own wool rooms!"/>
+    <apply block="deny(red-team)" region="blue-wool-rooms"/>
+    <apply block="deny(blue-team)" region="red-wool-rooms"/>
+    <apply block="deny(chest)" use="deny(red-team)" region="blue-wool-rooms"/>
+    <apply block="deny(chest)" use="deny(blue-team)" region="red-wool-rooms"/>
     <apply block="never" region="spawn-no-block" message="You may not break or place blocks in the spawns!"/>
     <apply block="never" region="wool-monuments" message="You may not modify the victory monuments!"/>
-    <apply block="blue-in-wr" use="only-blue" region="blue-wool-rooms"/>
-    <apply block="red-in-wr" use="only-red" region="red-wool-rooms"/>
     <apply block="never" region="underside" message="You may not under-bridge!"/>
     <apply block="deny(void)" message="You may not build in the void!"/> <!-- uses block 36 -->
 </regions>
@@ -142,22 +133,22 @@
     </renewable>
 </renewables>
 <wools craftable="false">
-    <wool team="blue" color="cyan" location="85,11,-2">
+    <wool team="blue-team" color="cyan" location="85,11,-2">
         <monument>
             <block>111,12,156</block>
         </monument>
     </wool>
-    <wool team="blue" color="purple" location="146,11,-2">
+    <wool team="blue-team" color="purple" location="146,11,-2">
         <monument>
             <block>120,12,156</block>
         </monument>
     </wool>
-    <wool team="red" color="orange" location="85,11,187">
+    <wool team="red-team" color="orange" location="85,11,187">
         <monument>
             <block>111,12,29</block>
         </monument>
     </wool>
-    <wool team="red" color="yellow" location="146,11,187">
+    <wool team="red-team" color="yellow" location="146,11,187">
         <monument>
             <block>120,12,29</block>
         </monument>
@@ -178,21 +169,6 @@
     <item>redstone</item>
     <item>string</item>
 </itemremove>
-<block-drops>
-    <rule>
-        <filter>
-            <any>
-                <material>wood</material>
-                <material>leaves</material>
-                <material>ladder</material>
-                <material>wood step</material>
-            </any>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-</block-drops>
 <itemkeep>
     <item>wood</item>
     <item>leaves</item>
