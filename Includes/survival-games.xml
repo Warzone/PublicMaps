@@ -1,23 +1,23 @@
 <!-- Base "Survival Games" include -->
 <!-- Created by TheBestGamer, _Pear, Fishywishi, et al. -->
-<!-- Include version 1.4.0 -->
+<!-- Include version 2.0.0 -->
 <!--
-    To adequately use this include and properly set up your map, some requirements must be met:
+    Individual map requirements:
 
-    1. At the start of the match, players must be trapped in spawn cages. These are defined in
-    the map.xml in the form of cylinder regions. One cage per spawn point is required.
+    1. If you enable cages, trap players at spawn with cylinder regions.
+    One cage per spawn point is required.
 
     Example:
     <union id="spawn-cages">
         <cylinder base="-1576.5,60,-635.5" radius="1" height="2"/>
     </union>
 
-    2. In order to teleport players to the deathmatch, actions to set teleport variables must be defined.
+    2. If you enable the deathmatch, define actions to set teleport variables.
     Three variables with increasing indexes are defined per spawn point.
 
-    NOTE: Spawn points are defined at the center coordinates of a block. To teleport players correctly to
-    such spawn points that have negative coordinates, you must set the variable value to the next negative
-    integer. For example, if the spawn point is at X: -1576.5, Z: -635.5, set the variable values to X: -1577, Z: -636.
+    NOTE: If a spawn point has negative coordinates on X or Z axes, set the variable values to the next
+    negative integer. For example, if the spawn point is at X: -1576.5, Z: -635.5, set the variable values
+    to X: -1577, Z: -636.
 
     Example:
     <actions>
@@ -30,8 +30,8 @@
         </trigger>
     </actions>
 
-    3. To avoid players escaping the deathmatch, first set up a world border around the entire map.
-    Quickly reduce it in size to prevent exiting spawn once players are teleported to the deathmatch.
+    3. If you enable the deathmatch, set up a world border around the entire map.
+    Quickly reduce it in size after ${dm-teleport} to prevent escaping spawn.
 
     Example:
     <world-borders center="-1577,-611">
@@ -39,41 +39,43 @@
         <world-border size="56" after="${dm-teleport}" duration="1s"/>
     </world-borders>
 
-    4. Per standard practice, spawn or cornucopia chests must be filled with tier 2 loot. Define a region
-    enclosing these chests with an ID of "tier-2-chests". If you'd like more specific chests to be filled
-    with tier 2 loot, add them to the region as well.
+    4. Spawn or cornucopia chests are always filled with tier 2 loot. Define a region
+    enclosing these chests with an ID of "tier-2-chests". Other specific chests with tier 2 loot
+    should be defined in this region as well.
 
-    The rest of chests can be filled with either tier 1 or mixed loot. Mixed loot is a combination of
-    tier 1 and tier 2 loot, with tier 1 items weighted higher. Default loot is tier 1.
+    Available loot tables:
+    - tier-1-chests-loottable
+    - tier-2-chests-loottable
+    - mixed-chests-loottable
 
-    If you wish to use mixed loot, set the constant "chest-loot" to "mixed" in your map.xml.
-    Any other type of lootable configuration can be done on a per-map basis, ignoring this include.
+    Use constant "chest-loot" to select the loot table for non-spawn chests.
+    Other loot tables may be defined manually in the map.xml
    -->
 <map>
 <gamemode>sg</gamemode>
 <!-- Objective (shortened) inspired by the first Hunger Games book -->
 <objective>The rules of the Survival Games are simple. In punishment for the uprising, tributes will be imprisoned in a vast outdoor arena that could hold anything. They must fight to the death. The last tribute standing wins.</objective>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
-    <constant id="timelimit">13m</constant> <!-- Match ending time -->
-    <constant id="min-player-count">8</constant> <!-- Minimum player count to start the match -->
-    <constant id="max-player-count">24</constant> <!-- Maximum player count for the match -->
-    <constant id="timelock">on</constant> <!-- Whether to lock world time -->
-    <constant id="difficulty">normal</constant> <!-- Difficulty of the match (peaceful, easy, normal, hard) -->
-    <constant id="hunger-depletion">on</constant> <!-- How fast hunger depletes (0.1 = 1 hunger point every 10 minutes) -->
-    <constant id="lightning-enabled">true</constant> <!-- Whether lightning strikes should occur during the match -->
-    <constant id="cannon-enabled">true</constant> <!-- Whether to send a message when a player is killed -->
-    <constant id="grace-period-enabled">true</constant> <!-- Whether to enable the grace period -->
-    <constant id="chest-refill-enabled">true</constant> <!-- Whether to enable chest refills -->
-    <constant id="dm-enabled">true</constant> <!-- At what time will the countdown to be teleported to the deathmatch be displayed? -->
-    <constant id="dm-messages-enabled">true</constant> <!-- Whether to send messages about time until deathmatch -->
-    <constant id="dm-messages-minute-counter">11</constant> <!-- Must be the same as dm-teleport -->
-    <constant id="dm-warn">10m45s</constant> <!-- At what time will the countdown to be teleported to the deathmatch be displayed? -->
-    <constant id="dm-teleport">11m</constant> <!-- At what time will players be teleported to the deathmatch? -->
-    <constant id="dm-start">11m15s</constant> <!-- At what time will the deathmatch start (after teleporting)? -->
-    <constant id="grace-period">15s</constant> <!-- Controls how long the grace period is -->
-    <constant id="chest-refill-timer">4m</constant> <!-- How often chests will be refilled-->
-    <constant id="match-delay">10s</constant> <!-- How long before players are released from their spawn cages -->
-    <constant id="chest-loot">tier-1</constant> <!-- Loot for non-spawn chests. Use 'tier-1' or 'mixed' -->
+    <constant id="timelimit">13m</constant>                 <!-- Time to end the match-->
+    <constant id="difficulty">normal</constant>             <!-- Difficulty of the match (affects regen) -->
+    <constant id="min-player-count">8</constant>            <!-- Minimum player count to start the match -->
+    <constant id="max-player-count">24</constant>           <!-- Maximum player count for the match -->
+    <constant id="hunger-depletion">on</constant>           <!-- Enable/disable hunger depletion over time -->
+    <constant id="lightning-enabled">true</constant>        <!-- Enable/disable lightning strikes on death/kill -->
+    <constant id="cannon-enabled">true</constant>           <!-- Enable/disable sending a message when a player is killed -->
+    <constant id="match-delay-enabled">true</constant>      <!-- Enable/disable the match delay -->
+    <constant id="grace-period-enabled">true</constant>     <!-- Enable/disable the grace period -->
+    <constant id="cages-enabled">true</constant>            <!-- Enable/disable spawn cages -->
+    <constant id="dm-enabled">true</constant>               <!-- Enable/disable the deathmatch -->
+    <constant id="dm-messages-enabled">true</constant>      <!-- (Must always match dm-enabled) Enable/disable sending messages about time until deathmatch -->
+    <constant id="dm-messages-minute-counter">11</constant> <!-- (Must always match dm-teleport) Minute counter for messages about time until deathmatch. -->
+    <constant id="dm-warn">10m45s</constant>                <!-- Time to display teleport countdown to deathmatch -->
+    <constant id="dm-teleport">11m</constant>               <!-- Time to teleport players to deathmatch -->
+    <constant id="dm-start">11m15s</constant>               <!-- Time to release players from cages at deathmatch -->
+    <constant id="grace-period">15s</constant>              <!-- Time the grace period will last -->
+    <constant id="chest-refill-timer">4m</constant>         <!-- Time until chests are refilled (to disable, set to a time above the timelimit) -->
+    <constant id="match-delay">10s</constant>               <!-- Time to release players from cages after match start -->
+    <constant id="chest-loot">tier-1</constant>             <!-- Loot for non-spawn chests ('tier-1', 'mixed') -->
 </constants>
 <time>${timelimit}</time>
 <difficulty>${difficulty}</difficulty>
@@ -83,31 +85,21 @@
 </blitz>
 <players min="${min-player-count}" max="${max-player-count}" max-overfill="${max-player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
 <filters>
-    <all id="starting-countdown">
-        <not>
-            <countdown duration="${match-delay}" message="`c{0} until the games begin!" filter="match-running"/>
-        </not>
-        <match-running/>
-    </all>
-    <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
-        <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
+    <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
+        <all id="starting-countdown">
+            <not>
+                <countdown duration="${match-delay}" message="`c{0} until the games begin!" filter="match-running"/>
+            </not>
+            <match-running/>
+        </all>
     </if>
-    <if constant="chest-refill-enabled" constant-value="true" constant-compare="equals">
-        <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
-        <any id="chests">
-            <material>chest</material>
-            <material>trapped chest</material>
-        </any>
-        <all id="standard-chests">
-            <filter id="chests"/>
-            <negative>
-                <region id="tier-2-chests"/>
-            </negative>
-        </all>
-        <all id="only-tier-2-chests">
-            <filter id="chests"/>
-            <region id="tier-2-chests"/>
-        </all>
+    <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
+        <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
+            <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="starting-countdown"/>
+        </if>
+        <if constant="match-delay-enabled" constant-value="false" constant-compare="equals">
+            <countdown id="grace-period-countdown" duration="${grace-period}" message="Grace period will end in {0}" filter="match-started"/>
+        </if>
     </if>
     <if constant="dm-enabled" constant-value="true" constant-compare="equals">
         <time id="dm-warn-time">${dm-warn}</time>
@@ -119,6 +111,21 @@
             <pulse id="dm-message" period="1m" duration="1s" filter="match-started"/>
         </if>
     </if>
+    <pulse id="chest-refill" period="${chest-refill-timer}" duration="1s" filter="match-started"/>
+    <any id="chests">
+        <material>chest</material>
+        <material>trapped chest</material>
+    </any>
+    <all id="standard-chests">
+        <filter id="chests"/>
+        <negative>
+            <region id="tier-2-chests"/>
+        </negative>
+    </all>
+    <all id="only-tier-2-chests">
+        <filter id="chests"/>
+        <region id="tier-2-chests"/>
+    </all>
     <any id="allow-break">
         <material>leaves</material>
         <material>vine</material>
@@ -132,19 +139,20 @@
     </any>
 </filters>
 <variables>
-    <variable id="cages" default="1" scope="match"/>
-    <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
-        <variable id="tribute" scope="player"/>
-        <variable id="remaining" scope="match"/>
-        <variable id="tmp" scope="match"/>
+    <variable id="tribute" scope="player"/>
+    <variable id="remaining" scope="match"/>
+    <variable id="tmp" scope="match"/>
+    <if constant="cages-enabled" constant-value="false" constant-compare="equals">
+        <variable id="cages" default="0" scope="match"/>
     </if>
-    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
-        <array id="tp_points_x" size="${max-player-count}" scope="match"/>
-        <array id="tp_points_y" size="${max-player-count}" scope="match"/>
-        <array id="tp_points_z" size="${max-player-count}" scope="match"/>
-        <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
-            <variable id="time_left_dm" scope="match" default="${dm-messages-minute-counter}"/>
-        </if>
+    <if constant="cages-enabled" constant-value="true" constant-compare="equals">
+        <variable id="cages" default="1" scope="match"/>
+    </if>
+    <array id="tp_points_x" size="${max-player-count}" scope="match"/>
+    <array id="tp_points_y" size="${max-player-count}" scope="match"/>
+    <array id="tp_points_z" size="${max-player-count}" scope="match"/>
+    <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
+        <variable id="time_left_dm" scope="match" default="${dm-messages-minute-counter}"/>
     </if>
 </variables>
 <actions>
@@ -160,12 +168,22 @@
         </action>
     </trigger>
     <!-- Announces the start of the games after the starting countdown ends -->
-    <trigger scope="player" filter="starting-countdown">
-        <action scope="player">
-            <set var="cages" value="0"/>
-            <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
-            <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
-            <message text="`8`l[`6`lSG`8`l] `3May the odds be ever in your favor."/>
+    <action id="start-games" scope="player">
+        <set var="cages" value="0"/>
+        <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
+        <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
+        <message text="`8`l[`6`lSG`8`l] `3May the odds be ever in your favor."/>
+    </action>
+    <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
+        <trigger scope="player" filter="starting-countdown" action="start-games"/>
+    </if>
+    <if constant="match-delay-enabled" constant-value="false" constant-compare="equals">
+        <trigger scope="player" filter="match-started" action="start-games"/>
+    </if>
+    <!-- Announces the end of the games -->
+    <trigger scope="match" filter="match-finished">
+        <action scope="match">
+            <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
         </action>
     </trigger>
     <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
@@ -180,55 +198,58 @@
                     <not>
                         <filter id="grace-period-countdown"/>
                     </not>
-                    <filter id="starting-countdown"/>
+                    <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
+                        <filter id="starting-countdown"/>
+                    </if>
                 </all>
             </filter>
         </trigger>
     </if>
-    <if constant="chest-refill-enabled" constant-value="true" constant-compare="equals">
-        <!-- Announces that chests have been refilled -->
+    <!-- Announces that chests have been refilled -->
+    <trigger scope="match">
+        <action scope="match">
+            <message text="`8`l[`6`lSG`8`l] `3Chests have been refilled!"/>
+        </action>
+        <filter>
+            <all>
+                <filter id="chest-refill"/>
+                <time>${chest-refill-timer}</time>
+            </all>
+        </filter>
+    </trigger>
+    <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
+        <!-- Announcements for time left until deathmatch -->
         <trigger scope="match">
             <action scope="match">
-                <message text="`8`l[`6`lSG`8`l] `3Chests have been refilled!"/>
+                <set var="time_left_dm" value="time_left_dm - 1"/>
+                <message text="`8`l[`6`lSG`8`l] `c{dm-message-minutes} minute(s) until deathmatch!">
+                    <replacements>
+                        <decimal id="dm-message-minutes" value="time_left_dm"/>
+                    </replacements>
+                </message>
             </action>
             <filter>
-                <all>
-                    <filter id="chest-refill"/>
-                    <time>${chest-refill-timer}</time>
-                </all>
+                <any>
+                    <variable id="30_min_left" var="time_left_dm">30</variable>
+                    <variable id="25_min_left" var="time_left_dm">25</variable>
+                    <variable id="20_min_left" var="time_left_dm">20</variable>
+                    <variable id="15_min_left" var="time_left_dm">15</variable>
+                    <variable id="10_min_left" var="time_left_dm">10</variable>
+                    <variable id="5_min_left" var="time_left_dm">5</variable>
+                    <variable id="1_min_left" var="time_left_dm">1</variable>
+                </any>
             </filter>
+        </trigger>
+        <!-- Announces the start of the deathmatch -->
+        <trigger scope="match" filter="dm-start-time">
+            <action scope="match">
+                <set var="cages" value="0"/>
+                <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
+                <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
+            </action>
         </trigger>
     </if>
     <if constant="dm-enabled" constant-value="true" constant-compare="equals">
-        <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
-            <!-- Announcements for time left until deathmatch -->
-            <trigger scope="match">
-                <action scope="match">
-                    <set var="time_left_dm" value="time_left_dm - 1"/>
-                    <message text="`8`l[`6`lSG`8`l] `c{dm-message-minutes} minute(s) until deathmatch!">
-                        <replacements>
-                            <decimal id="dm-message-minutes" value="time_left_dm"/>
-                        </replacements>
-                    </message>
-                </action>
-                <filter>
-                    <any>
-                        <variable id="15_min_left" var="time_left_dm">15</variable>
-                        <variable id="10_min_left" var="time_left_dm">10</variable>
-                        <variable id="5_min_left" var="time_left_dm">5</variable>
-                        <variable id="1_min_left" var="time_left_dm">1</variable>
-                    </any>
-                </filter>
-            </trigger>
-            <!-- Announces the start of the deathmatch -->
-            <trigger scope="match" filter="dm-start-time">
-                <action scope="match">
-                    <set var="cages" value="0"/>
-                    <message text="`8`l[`6`lSG`8`l] `cDeathmatch has started!"/>
-                    <message text="`8`l[`6`lSG`8`l] `cFight to the death!"/>
-                </action>
-            </trigger>
-        </if>
         <!-- Teleports players to spawn points for deathmatch -->
         <trigger scope="match" filter="dm-teleport-time">
             <action>
@@ -239,12 +260,6 @@
             </action>
         </trigger>
     </if>
-    <!-- Announces the end of the games -->
-    <trigger scope="match" filter="match-finished">
-        <action scope="match">
-            <message text="`8`l[`6`lSG`8`l] `aThe games have ended!"/>
-        </action>
-    </trigger>
     <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
     <!-- Sends messages when a player is killed -->
         <action id="player-killed" scope="player">
@@ -677,35 +692,38 @@
         <fill loot="mixed-chests-loottable" filter="standard-chests" refill-trigger="chest-refill" refill-clear="false"/>
     </if>
 </lootables>
-<if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
-    <damage>
-        <deny>
-            <all>
-                <any>
+
+<damage>
+    <deny>
+        <all>
+            <any>
+                <if constant="grace-period-enabled" constant-value="true" constant-compare="equals">
                     <filter id="grace-period-countdown"/>
-                    <if constant="dm-enabled" constant-value="true" constant-compare="equals">
-                        <filter id="dm-teleport-countdown"/>
-                    </if>
+                </if>
+                <if constant="dm-enabled" constant-value="true" constant-compare="equals">
+                    <filter id="dm-teleport-countdown"/>
+                </if>
+                <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
                     <not>
                         <filter id="starting-countdown"/>
                     </not>
-                </any>
-                <any>
-                    <cause>melee</cause>
-                    <cause>projectile</cause>
-                </any>
-            </all>
-        </deny>
-    </damage>
-</if>
-<hunger>
-    <depletion>${hunger_depletion}</depletion>
-</hunger>
+                </if>
+            </any>
+            <any>
+                <cause>melee</cause>
+                <cause>projectile</cause>
+            </any>
+        </all>
+    </deny>
+</damage>
 <if constant="cannon-enabled" constant-value="true" constant-compare="equals">
     <kill-rewards>
         <kill-reward filter="not(remaining=2)" victim-action="player-killed"/>
     </kill-rewards>
 </if>
+<hunger>
+    <depletion>${hunger-depletion}</depletion>
+</hunger>
 <itemremove>
     <item>sapling</item>
     <item>seeds</item>
@@ -723,5 +741,4 @@
         <spawn>spawner</spawn>
     </filter>
 </mobs>
-<timelock>${timelock}</timelock>
 </map>
