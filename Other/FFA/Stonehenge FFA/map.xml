@@ -1,9 +1,10 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Stonehenge FFA</name>
 <created>2016-04-24</created>
-<version>1.2.5</version>
+<version>1.2.6</version>
 <objective>Be the player with the most kills after 5 minutes!</objective>
 <gamemode>ffa</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067"/> <!-- samthecat43 -->
     <author uuid="a43135a4-d7b9-49ab-ac8d-a16bb2513c8d"/> <!-- Ny_ -->
@@ -20,18 +21,18 @@
     <kit id="player">
         <clear/>
         <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite:1" material="bow"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
         <item slot="2" material="golden apple"/>
         <item slot="28" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
         <boots unbreakable="true" team-color="true" enchantment="protection fall:2" material="leather boots"/>
-        <potion duration="2.5" amplifier="10">resistance</potion>
+        <potion duration="2.5" amplifier="5">resistance</potion>
         <game-mode>adventure</game-mode>
     </kit>
     <kit id="obs">
-        <potion duration="oo">night vision</potion>
+        <effect>night vision</effect>
     </kit>
 </kits>
 <spawns>
@@ -42,15 +43,10 @@
     </spawn>
     <default kit="obs">
         <regions angle="1,13,-1">
-            <point yaw="0">-9.5,18,-45.5</point>
+            <point>-9.5,18,-45.5</point>
         </regions>
     </default>
 </spawns>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -67,4 +63,5 @@
     <depletion>off</depletion>
 </hunger>
 <timelock>on</timelock>
+<respawn auto="true"/>
 </map>
