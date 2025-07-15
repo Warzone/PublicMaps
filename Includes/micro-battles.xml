@@ -1,7 +1,7 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.06.30-2 -->
+<!-- Version 2025.07-10-1 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="use-default-teams">true</constant> <!-- Make sure this is ABOVE the include statement in your map's XML if changing to "false" -->
@@ -63,7 +63,7 @@
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="${map-radius}" height="${max-height-value}"/>
     </negative>
-    <apply region="map" block="not(${walls-filter})" message="You may not break the walls."/>
+    <apply region="${walls-region}" block="not(${walls-filter})" message="You may not break the walls."/>
     <apply region="not-map" block="never" message="You may not build outside of the map."/>
 </regions>
 <actions>
