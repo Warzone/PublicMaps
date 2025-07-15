@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <include id="infection"/>
 <name>Terminal</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <created>2013-09-03</created>
 <constants>
     <constant id="time-limit">7</constant>
@@ -21,7 +21,7 @@
     <kit id="zombie-spawn-kit" parent="default-zombie-kit" force="true">
         <double-jump recharge-time="5s" power="2" recharge-before-landing="true"/>
     </kit>
-    <lend filter="all(alive,not(after-release),only-zombies)">
+    <lend filter="all(alive,not(after-release),zombie-team)">
         <kit>
             <effect amplifier="255">weakness</effect>
             <effect amplifier="255">slow</effect>
@@ -49,10 +49,10 @@
     <point id="human-spawn">-100.5,63,34.5</point>
     <point id="zombie-spawn">-92.5,61,62.5</point>
     <cuboid id="zombie-cage" min="-94,61,64" size="3,3,-3"/>
-    <apply region="zombie-cage" leave="all(only-zombies,after-release)"/>
+    <apply region="zombie-cage" leave="all(zombie-team,after-release)"/>
 </regions>
 <kill-rewards>
-    <kill-reward filter="only-humans">
+    <kill-reward filter="human-team">
         <kit id="human-kill-reward">
             <effect duration="5" amplifier="2">regeneration</effect>
         </kit>

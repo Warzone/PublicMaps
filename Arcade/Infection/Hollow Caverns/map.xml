@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <include id="infection"/>
 <name>Hollow Caverns</name>
-<version>1.1.0</version>
+<version>1.1.1</version>
 <created>2020-04-15</created>
 <constants>
     <constant id="time-limit">7</constant>
@@ -24,7 +24,7 @@
     <kit id="zombie-spawn-kit" parent="default-zombie-kit" force="true">
         <double-jump recharge-time="5s" power="2" recharge-before-landing="true"/>
     </kit>
-    <lend filter="all(alive,not(after-release),only-zombies)">
+    <lend filter="all(alive,not(after-release),zombie-team)">
         <kit>
             <effect amplifier="255">weakness</effect>
             <effect amplifier="255">slow</effect>
@@ -52,10 +52,10 @@
     <point id="human-spawn">421.5,103,2457.5</point>
     <point id="zombie-spawn">437.5,112,2455.5</point>
     <cuboid id="zombie-cage" min="436,112,2457" size="3,3,-3"/>
-    <apply region="zombie-cage" leave="all(only-zombies,after-release)"/>
+    <apply region="zombie-cage" leave="all(zombie-team,after-release)"/>
 </regions>
 <kill-rewards>
-    <kill-reward filter="only-humans">
+    <kill-reward filter="human-team">
         <kit id="human-kill-reward">
             <effect duration="5" amplifier="2">regeneration</effect>
         </kit>

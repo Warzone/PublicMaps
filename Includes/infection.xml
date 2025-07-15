@@ -2,7 +2,7 @@
 <!-- Infection gamemode include file -->
 <!-- Created by Cazadorian -->
 <!-- Modified by zzuf -->
-<!-- Version 2024-08-10-1 -->
+<!-- Version 2025-07-15-1 -->
 <constants fallback="true">
     <constant id="time-limit">8</constant> <!-- Time limit in minutes -->
     <constant id="compass-distribution-time">7</constant> <!-- The time limit in minutes minus 1 -->
@@ -18,16 +18,33 @@
 <gamemode>arcade</gamemode> <!-- Required for disabling stats tracking on Warzone -->
 <game>Infection</game> <!-- Hide the Arcade title-->
 <broadcasts>
-    <tip after="4s" filter="only-humans">You are a ${human-team-name}, you must survive for as long as possible against the waves of ${zombie-team-name}. If you die, you join the ${zombie-team-name}!</tip>
-    <tip after="4s" filter="only-zombies">You are a ${zombie-team-name}, you must kill all of the ${human-team-name} to win!</tip>
-    <alert after="${compass-distribution-time}m" filter="${enable-player-tracker}">${zombie-team-name} can now `etrack`r the nearest ${human-team-name} with a compass!</alert>
+    <tip after="4s" filter="human-team">You are a ${human-team-name}, you must survive for as long as possible against the waves of ${zombie-team-name}. If you die, you join the ${zombie-team-name}!</tip>
+    <tip after="4s" filter="zombie-team">You are a ${zombie-team-name}, you must kill all of the ${human-team-name} to win!</tip>
+    <unless min-server-version="1.8">
+        <alert after="${compass-distribution-time}m" filter="${enable-player-tracker}">${zombie-team-name} can now `etrack`r the nearest ${human-team-name} with a compass!</alert>
+    </unless>
+    <if min-server-version="1.9">
+        <alert after="${compass-distribution-time}m" filter="${enable-player-tracker}">${zombie-team-name} can now `etrack`r glowing ${human-team-name}!</alert>
+    </if>
 </broadcasts>
 <teams>
     <team id="zombie-team" color="${zombie-team-color}" plural="true" min="1" max="4">${zombie-team-name}</team>
     <team id="human-team" color="${human-team-color}" show-name-tags="false" plural="true" min="1" max="36">${human-team-name}</team>
 </teams>
 <time result="human-team">${time-limit}m</time>
-<respawn auto="true"/>
+<respawns auto="true">
+    <respawn delay="0s" filter="human-team"/>
+    <respawn delay="0s" filter="all(zombie-team,not(wait-filter))"/>
+    <respawn delay="2s" filter="all(zombie-team,wait-filter)"/>
+</respawns>
+<filters>
+    <!-- Needed since PGM doesn't respawn you fast enough to switch to the zombie team once you die as human -->
+    <after id="wait-filter" duration="0.05s">
+        <player>
+            <team>zombie-team</team>
+        </player>
+    </after>
+</filters>
 <blitz filter="never" join-filter="always">
     <broadcastLives>false</broadcastLives>
 </blitz>
@@ -57,40 +74,50 @@
     </kit>
 </kits>
 <compass show-distance="true">
-    <player filter="only-humans" name="`eClosest ${human-team-name}"/>
+    <player filter="human-team" name="`eClosest ${human-team-name}"/>
 </compass>
-<filters>
-    <team id="only-humans">human-team</team>
-    <team id="only-zombies">zombie-team</team>
-    <deny id="deny-participating">
-        <participating/>
-    </deny>
-    <alive id="alive"/>
-</filters>
 <regions>
-    <apply block="deny-participating"/>
+    <apply block="deny(participating)"/>
 </regions>
 <actions>
-    <trigger scope="player">
-        <action>
-            <kit>
-                <item prevent-sharing="true" material="compass"/>
-            </kit>
-        </action>
-        <filter>
-            <all>
-                <filter id="${enable-player-tracker}"/>
-                <filter id="only-zombies"/>
-                <time>${compass-distribution-time}m</time>
-                <filter id="alive"/>
-                <not>
-                    <carrying>
-                        <item prevent-sharing="true" material="compass"/> <!-- Return compass after death or dropping -->
-                    </carrying>
-                </not>
-            </all>
-        </filter>
-   </trigger>
+    <unless min-server-version="1.8">
+        <trigger scope="player">
+            <action>
+                <kit>
+                    <item prevent-sharing="true" material="compass"/>
+                </kit>
+            </action>
+            <filter>
+                <all>
+                    <filter id="${enable-player-tracker}"/>
+                    <filter id="zombie-team"/>
+                    <time>${compass-distribution-time}m</time>
+                    <alive/>
+                    <not>
+                        <carrying>
+                            <item prevent-sharing="true" material="compass"/> <!-- Return compass after death or dropping -->
+                        </carrying>
+                    </not>
+                </all>
+            </filter>
+        </trigger>
+    </unless>
+    <if min-server-version="1.9">
+        <trigger scope="player">
+            <action>
+                <kit>
+                    <effect>glowing</effect>
+                </kit>
+            </action>
+            <filter>
+                <all>
+                    <filter id="${enable-player-tracker}"/>
+                    <filter id="human-team"/>
+                    <time>${compass-distribution-time}m</time>
+                </all>
+            </filter>
+        </trigger>
+    </if>
 </actions>
 <itemremove>
     <item>arrow</item>
