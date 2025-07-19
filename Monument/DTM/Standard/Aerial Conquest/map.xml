@@ -1,7 +1,8 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Aerial Conquest</name>
 <created>2017-10-04</created>
-<version>1.0.2</version>
+<version>1.0.3</version>
+<include id="gapple-kill-reward"/>
 <objective>Destroy the enemy's gold treasure located below the deck of the ship!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -25,23 +26,16 @@
         <item slot="3" unbreakable="true" material="iron pickaxe"/>
         <item slot="4" amount="64" team-color="true" material="stained glass"/>
         <item slot="5" amount="64" team-color="true" material="stained glass"/>
-        <!-- <item slot="8" amount="10" material="cooked beef"/> -->
         <item slot="9" amount="64" material="arrow"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
         <leggings unbreakable="true" material="chainmail leggings"/>
-    </kit>
-    <kit id="blue-kit" parents="default">
-        <chestplate unbreakable="true" color="3C44AA" material="leather chestplate"/>
-        <boots unbreakable="true" color="3C44AA" material="leather boots"/>
-    </kit>
-    <kit id="red-kit" parents="default">
-        <chestplate unbreakable="true" color="B02E26" material="leather chestplate"/>
-        <boots unbreakable="true" color="B02E26" material="leather boots"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
     </kit>
 </kits>
 <!-- Spawns -->
 <spawns>
-    <spawn team="blue-team" kit="blue-kit" yaw="-90" region="blue-spawn"/>
-    <spawn team="red-team" kit="red-kit" yaw="90" region="red-spawn"/>
+    <spawn team="blue-team" kit="default" yaw="-90" region="blue-spawn"/>
+    <spawn team="red-team" kit="rdefault" yaw="90" region="red-spawn"/>
     <default yaw="90" region="obs-spawn"/>
 </spawns>
 <!-- Monuments -->
@@ -49,11 +43,6 @@
     <destroyable name="Gold" owner="blue-team" region="blue-gold"/>
     <destroyable name="Gold" owner="red-team" region="red-gold"/>
 </destroyables>
-<!-- Filters -->
-<filters>
-    <team id="blue-only">blue-team</team>
-    <team id="red-only">red-team</team>
-</filters>
 <!-- Block Drops -->
 <block-drops>
     <rule wrong-tool="false">
@@ -61,9 +50,9 @@
             <material>iron block</material>
         </filter>
         <drops>
-            <item material = "gold helmet" enchantment="PROTECTION_PROJECTILE:1"/>
-            <item material = "gold boots" enchantment="PROTECTION_PROJECTILE:1"/>
-            <item material = "gold chestplate" enchantment="PROTECTION_ENVIRONMENTAL:2"/>
+            <item material ="gold helmet" enchantment="PROTECTION_PROJECTILE:1"/>
+            <item material ="gold boots" enchantment="PROTECTION_PROJECTILE:1"/>
+            <item material ="gold chestplate" enchantment="PROTECTION_ENVIRONMENTAL:2"/>
         </drops>
         <replacement>iron block</replacement>
     </rule>
@@ -88,17 +77,17 @@
     <!-- Applications -->
     <apply region="not-map" block="never" message="You may not edit outside the map!"/>
     <apply region="spawn-protections" block="never" message="You are not allowed to modify terrain here."/>
-    <apply region="blue-spawn-protection" enter="blue-only" message="You may not enter the enemy spawn."/>
-    <apply region="red-spawn-protection" enter="red-only" message="You may not enter the enemy spawn."/>
+    <apply region="blue-spawn-protection" enter="deny(red-team)" message="You may not enter the enemy's spawn."/>
+    <apply region="red-spawn-protection" enter="deny(blue-team)" message="You may not enter the enemy's spawn."/>
 </regions>
 <!-- Item Remove -->
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond axe</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
 <itemremove>
-    <item>iron sword</item>
-    <item>bow</item>
-    <item>diamond axe</item>
-    <item>iron pickaxe</item>
-    <item>cooked beef</item>
-    <item>stained glass</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>chainmail leggings</item>
@@ -111,11 +100,11 @@
     <item>gold boots</item>
     <item>golden apple</item>
     <item>arrow</item>
+    <item>stained glass</item>
 </itemkeep>
 <!-- Kill Rewards -->
 <kill-rewards>
     <kill-reward>
-        <item material="golden apple"/>
         <item amount="4" material="arrow"/>
     </kill-reward>
 </kill-rewards>
