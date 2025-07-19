@@ -1,0 +1,172 @@
+<map proto="1.5.0" game="😀">
+<name>Glorious Day for Mr. Smiley</name>
+<created>2022-05-28</created>
+<version>1.0.0</version>
+<objective>Get the most kills and cause the most amount of mayhem in 8 minutes!</objective>
+<gamemode>arcade</gamemode>
+<gamemode>ffa</gamemode>
+<gamemode>rage</gamemode>
+<authors>
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" contribution="XML creation"/> <!-- _Pear -->
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089" contribution="Map creation"/> <!-- FlammingFreak296 -->
+    <author uuid="14091c10-0c80-4700-bdc9-91de0518c79a" contribution="Map creation"/> <!-- 34905 -->
+</authors>
+<contributors>
+    <contributor contribution="Map inspiration">Mr. Smiley</contributor>
+    <contributor uuid="f846db63-3df5-4e81-9dd3-7bb05027fdfb" contribution="Added the emoji to Warzone Discord"/> <!-- TheBestGamer -->
+    <contributor uuid="50ecf5ea-d754-491f-8a8f-d4ad55875542" contribution="Happy Birthday! You hated Mr. Smiley"/> <!-- NamiNagi -->
+    <contributor uuid="74348d1f-6c4e-4629-bb8a-19371dbfa516" contribution="Map ideas"/> <!-- Preinstalled -->
+    <contributor uuid="d9efc01d-cd33-46c2-afe5-a6fc3f419f77" contribution="Map ideas"/> <!-- _NotMaria -->
+    <contributor uuid="f3a45bea-dbde-4791-8155-0988b644ac3b" contribution="Map ideas"/> <!-- _iMan -->
+    <contributor uuid="8dae23df-a462-471e-bd83-61a23e2ac9e7" contribution="Map ideas"/> <!-- DeadlyTap -->
+    <contributor uuid="4f0ac4d7-4776-4400-9283-6bf4a5bcd48f" contribution="Map ideas"/> <!-- Virus53 -->
+    <contributor uuid="0631dda2-ef9b-4f78-b16b-f4123d97d6b7" contribution="Map ideas"/> <!-- Qualqty -->
+</contributors>
+<broadcasts>
+    <alert after="1s">Fall damage is disabled.</alert>
+    <alert after="2s">Mr. Smiley is invincible and will slowly regenerate, so use explosives!</alert>
+    <tip after="4s" every="4m">Better gears will be given as a reward for kill streaks!</tip>
+</broadcasts>
+<players min="2" max="32" colors="true"/>
+<kits>
+    <kit id="default">
+        <item slot="0" name="`eMr. Smiley" enchantments="sharpness:10" material="gold sword"/>
+        <item slot="1" name="`cMr. Smiley" enchantments="arrow_damage:10" material="bow"/>
+        <item slot="2" amount="2" material="arrow"/>
+        <item slot="3" amount="3" grenade="true" name="`dMr. Smiley" grenade-power="1.5" material="snow ball"/>
+        <double-jump enabled="true" recharge-before-landing="true" power="3.5"/>
+        <effect duration="4" amplifier="5">damage_resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn kit="default" spread="true" safe="true" angle="0.5,10,0.5">
+        <region>
+            <cuboid min="-69,8,69" max="69,10,-69"/>
+        </region>
+    </spawn>
+    <default yaw="180">
+        <region>
+            <point>0.5,10,0.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <any id="block-rules">
+        <all>
+            <any>
+                <material>tnt</material>
+                <material>water</material>
+                <material>stationary water</material>
+                <material>lava</material>
+                <material>stationary lava</material>
+                <material>fire</material>
+            </any>
+            <participating/>
+        </all>
+        <all id="pgm-can-break">
+            <any>
+                <material>wool</material>
+                <material>stained glass</material>
+                <material>stained clay</material>
+                <material>fire</material>
+            </any>
+            <cause>world</cause>
+        </all>
+    </any>
+</filters>
+<regions>
+    <apply block-place="block-rules" block-break="pgm-can-break"/>
+</regions>
+<score>
+    <kills>1</kills>
+</score>
+<time>8m</time>
+<tnt>
+    <instantignite>on</instantignite>
+    <power>5.5</power>
+    <fuse>2s</fuse>
+</tnt>
+<projectiles>
+    <projectile id="fireball" name="Mr. Smiley" projectile="LargeFireball" velocity="3.5" damage="45" throwable="true"/>
+</projectiles>
+<kill-rewards>
+    <kill-reward>
+        <item material="arrow"/>
+        <item amount="1" grenade="true" name="`dMr. Smiley" grenade-power="1.5" material="snow ball"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="2" repeat="true"/>
+        </filter>
+        <item amount="1" grenade="true" name="`4Mr. Smiley's Molotov Cocktail" grenade-fire="true" grenade-destroy="false" grenade-power="2" damage="16429" material="potion"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true"/>
+        </filter>
+        <item amount="1" grenade="true" name="`5Mr. Smiley's Revenge" grenade-power="8" material="ender pearl"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="5" repeat="true"/>
+        </filter>
+        <item amount="2" material="tnt"/>
+    </kill-reward>
+    <kill-reward>
+    <filter>
+        <kill-streak count="6" repeat="true"/>
+    </filter>
+    <item projectile="fireball" grenade="true" grenade-power="4" name="`aMr. Smiley's Weapon" material="blaze rod"/>
+    </kill-reward>
+    <kill-reward>
+    <filter>
+        <kill-streak count="7" repeat="true"/>
+    </filter>
+    <item material="water bucket"/>
+    <item material="lava bucket"/>
+    </kill-reward>
+</kill-rewards>
+<renewables>
+    <renewable region="everywhere" sound="false" interval="15s" particles="false" avoid-players="0">
+        <renew-filter>
+            <any>
+                <material>wool</material>
+                <material>stained clay</material>
+                <material>stained glass</material>
+            </any>
+        </renew-filter>
+        <replace-filter>
+            <any>
+                <material>air</material>
+                <material>water</material>
+                <material>stationary water</material>
+                <material>fire</material>
+            </any>
+        </replace-filter>
+    </renewable>
+</renewables>
+<itemremove>
+    <item>gold sword</item>
+    <item>bow</item>
+    <item>arrow</item>
+    <item>egg</item>
+    <item>snow ball</item>
+    <item>ender pearl</item>
+    <item>tnt</item>
+    <item>skull</item>
+    <item>potion</item>
+    <item>blaze rod</item>
+    <item>wool</item>
+    <item>stained clay</item>
+    <item>stained glass</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<respawns>
+    <respawn delay="1" auto="true" spectate="true"/>
+</respawns>
+</map>
