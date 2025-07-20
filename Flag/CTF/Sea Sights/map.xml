@@ -1,0 +1,126 @@
+<map proto="1.5.0" min-server-version="1.21">
+<name>Sea Sights</name>
+<version>1.0.0</version>
+<objective>First team to capture the enemy's flag 6 times wins!</objective>
+<created>2025-05-12</created>
+<include id="gapple-kill-reward"/>
+<gamemode>ctf</gamemode>
+<authors>
+    <author uuid="c48598a7-c085-4e0f-b242-48c7fc452089"/> <!-- FlammingFreak296 -->
+</authors>
+<teams>
+    <team id="orange-team" color="gold" max="5">Orange</team>
+    <team id="cyan-team" color="dark aqua" max="5">Cyan</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" material="bow"/>
+        <item slot="2" material="golden apple"/>
+        <item slot="8" amount="32" material="arrow"/>
+        <helmet material="leather helmet" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
+        <boots material="leather boots" team-color="true" unbreakable="true"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <effect duration="2s" amplifier="5">damage resistance</effect>
+        <game-mode>adventure</game-mode>
+    </kit>
+    <kit id="flag-kit" force="true">
+        <effect duration="4s" amplifier="2">absorption</effect>
+        <max-health>12</max-health>
+    </kit>
+    <kit id="reset-health" force="true">
+        <max-health>20</max-health>
+        <effect duration="1s" amplifier="12">regeneration</effect>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="orange-team" kit="spawn-kit">
+        <region yaw="-180">
+            <point>-64.5,5,144.5</point>
+        </region>
+    </spawn>
+    <spawn team="cyan-team" kit="spawn-kit">
+        <region>
+            <point>-64.5,5,42.5</point>
+        </region>
+    </spawn>
+    <default>
+        <region yaw="-90" pitch="90">
+            <point>-64.5,32,93.5</point>
+        </region>
+    </default>
+</spawns>
+<filters>
+    <not id="has-flag">
+        <carrying-flag>flag</carrying-flag>
+    </not>
+</filters>
+<regions>
+    <union id="spawn-protections">
+        <cylinder id="orange-spawn-protection" base="-64.5,2,144.5" radius="7" height="oo"/>
+        <cylinder id="cyan-spawn-protection" base="-64.5,2,42.5" radius="7" height="oo"/>
+    </union>
+    <union id="spawn-flag-protections">
+        <cylinder id="orange-spawn-flag-protection" base="-64.5,2,144.5" radius="6" height="oo"/>
+        <cylinder id="cyan-spawn-flag-protection" base="-64.5,2,42.5" radius="6" height="oo"/>
+    </union>
+    <!-- Applications -->
+    <apply region="spawn-flag-protections" enter="has-flag" message="You may not enter spawn while holding the flag."/>
+    <apply region="cyan-spawn-protection" enter="cyan-team" message="You may not enter the enemy's spawn."/>
+    <apply region="orange-spawn-protection" enter="orange-team" message="You may not enter the enemy's spawn."/>
+    <apply block="never"/>
+</regions>
+<time>30m</time>
+<score>
+    <limit>6</limit>
+</score>
+<flags shared="true" deny-message="You are at the wrong net! Take the `fflag`r to the other side of the map.">
+    <flag id="flag" name="Flag" color="white" pickup-kit="flag-kit" drop-kit="reset-health" carry-message="You are carrying the `fflag`r! Bring it to your `f`lbeacon`r at the `4`lenemy's`r side!" show-respawn-on-pickup="true">
+        <post return-time="0s" respawn-time="10s">
+            <post id="top-post">-64.5,11,93.5</post>
+            <post id="bottom-post">-64.5,1,93.5</post>
+        </post>
+    </flag>
+    <net points="1" capture-filter="orange-team">
+        <region>
+            <cylinder id="orange-net" base="-15.5,11,46.5" radius="1" height="4"/>
+        </region>
+    </net>
+    <net points="1" capture-filter="cyan-team">
+        <region>
+            <cylinder id="cyan-net" base="-113.5,11,140.5" radius="1" height="4"/>
+        </region>
+    </net>
+</flags>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item amount="2" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>stone sword</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>banner</item>
+    <item>golden apple</item>
+    <item>arrow</item>
+    <item>bow</item>
+</itemremove>
+<world>
+    <timeset>10</timeset>
+</world>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<respawn delay="3s"/>
+</map>
