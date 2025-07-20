@@ -3,7 +3,7 @@
 <!-- Bridge gamemode include file -->
 <!-- Created by zzuf -->
 <gamemode>arcade</gamemode>
-<!-- Version 2025.05.29-1 -->
+<!-- Version 2025.07.18-1 -->
 <respawn auto="true" delay="0s"/>
 <modifybowprojectile pickup-filter="never"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
@@ -20,7 +20,8 @@
     <constant id="arrow-check-enabled">1</constant>
     <constant id="overtime-default">0</constant>
     <constant id="goal-scorer">1</constant>
-    <constant id="goal-type-message">1</constant>
+    <constant id="goal-type-message">1</constant> <!-- Should the default GOAL message say "GOAL"? -->
+    <constant id="goal-obs-message">1</constant> <!-- Should observers get the default GOAL message? -->
     <!-- <constant id="defense-kills">1</constant> -->
     <!-- Misc. -->
     <constant id="main-kit">spawn-kit</constant> <!-- If using a custom kit, requires a clear-[your kit name] action -->
@@ -29,6 +30,8 @@
     <constant id="max-health">20</constant>
     <constant id="show-tutorial">1</constant>
     <constant id="natural-regeneration">false</constant>
+    <constant id="arrow-type">arrow</constant>
+    <constant id="arrow-item-kit">default-arrow-item-kit</constant>
     <!-- Teams (placeholders) -->
     <constant id="team-one-spawn">0.5,0,0.5</constant>
     <constant id="team-one-yaw">-90</constant>
@@ -87,10 +90,13 @@
         <effect duration="oo" amplifier="255">slow_digging</effect>
     </kit>
     <kit id="arrow-kit">
-        <item slot="8" material="arrow" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true"/>
+        <kit id="${arrow-item-kit}"/>
         <action>
             <message actionbar="`a`lARROW READY!"/>
         </action>
+    </kit>
+    <kit id="default-arrow-item-kit">
+        <item slot="8" material="${arrow-type}" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true"/> <!-- this uses arrow-type to make sure they match -->
     </kit>
     <kit id="absorption-kit" force="true">
         <effect duration="1m">absorption</effect>
@@ -200,7 +206,10 @@
     <variable id="round-2" var="round_status">2</variable>
     <any id="remove-entities">
         <entity>dropped item</entity>
-        <entity>arrow</entity>
+        <entity>arrow</entity> <!-- includes tipped arrows as they're the same entity -->
+        <if min-server-version="1.9">
+            <entity>area effect cloud</entity>
+        </if>
     </any>
     <all id="on-buytime">
         <variable var="buytime">1</variable>
@@ -231,19 +240,19 @@
     </after>
     <all id="no-arrows">
         <not>
-            <carrying ignore-metadata="true"><item material="arrow"/></carrying>
+            <carrying ignore-metadata="true"><item material="${arrow-type}"/></carrying>
         </not>
         <participating/>
         <alive/>
         <variable var="arrow_check">1</variable>
     </all>
     <all id="1-arrow">
-        <carrying ignore-metadata="true"><item material="arrow"/></carrying>
+        <carrying ignore-metadata="true"><item material="${arrow-type}"/></carrying>
         <participating/>
         <variable var="arrow_check">1</variable>
     </all>
     <all id="more-than-1-arrow">
-        <carrying ignore-metadata="true" amount="(1,oo)"><item material="arrow"/></carrying>
+        <carrying ignore-metadata="true" amount="(1,oo)"><item material="${arrow-type}"/></carrying>
         <participating/>
         <variable var="arrow_check">1</variable>
     </all>
@@ -311,6 +320,7 @@
     <variable id="goal_scorer" scope="player" exclusive="1"/>
     <variable id="goal_scorer_enabled" scope="match" default="${goal-scorer}"/>
     <variable id="goal_type_message" scope="match" default="${goal-type-message}"/>
+    <variable id="goal_obs_message" scope="match" default="${goal-obs-message}"/>
 </variables>
 <actions>
     <action id="increment-round" scope="player">
@@ -348,8 +358,8 @@
         <set var="round_status" value="0"/>
     </action>
     <action id="remove-arrow" scope="player">
-        <replace-item>
-            <find material="arrow"/>
+        <replace-item ignore-metadata="true">
+            <find material="${arrow-type}"/>
             <replace material="air"/>
         </replace-item>
     </action>
@@ -498,7 +508,7 @@
     <trigger filter="team-two-own-goal" action="message-own-scored" scope="player"/>
     <trigger filter="team-one-enemy-goal" action="message-enemy-scored" scope="player"/>
     <trigger filter="team-two-enemy-goal" action="message-enemy-scored" scope="player"/>
-    <trigger filter="cant-score-obs" action="message-obs-scored" scope="player" observers="true"/>
+    <trigger filter="all(cant-score-obs,goal_obs_message=1)" action="message-obs-scored" scope="player" observers="true"/>
     <action id="set-team-one" scope="player">
         <switch-scope outer="player" inner="match">
             <set var="scoring_team" value="1"/>
@@ -521,7 +531,7 @@
             <replace material="air"/>
         </replace-item>
         <replace-item ignore-metadata="true">
-            <find material="arrow"/>
+            <find material="${arrow-type}"/>
             <replace material="air"/>
         </replace-item>
         <replace-item ignore-metadata="true">
@@ -610,7 +620,7 @@
     <portal destination="team-one-spawn-point" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}" sound="false"/>
     <portal destination="team-two-spawn-point" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}" sound="false"/>
     <!-- Void -->
-    <portal y="@-110" sound="false" region="void-level" observers="always"/>
+    <portal y="@-150" sound="false" region="void-level" observers="always"/>
 </portals>
 <score>
     <limit>${score-limit}</limit>
@@ -632,7 +642,7 @@
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>arrow</item>
+    <item>${arrow-type}</item>
     <item>stained clay</item>
     <item>golden apple</item>
 </itemremove>
@@ -649,19 +659,4 @@
     <damage>fall</damage>
 </disabledamage>
 <gamemode>${gamemode}</gamemode>
-<!-- can't use consumable nor prevent-sharing on item-mods at the moment -->
-<!-- <item-mods>
-    <rule>
-        <match>
-            <material>bow</material>
-        </match>
-        <modify unbreakable="true" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!"/>
-    </rule>
-    <rule>
-        <match>
-            <material>golden apple</material>
-        </match>
-        <modify consumable="bridge-apple" prevent-sharing="true" lore="`9ⓘ `7Instantly restores to `c${max-health} HP`7!|`9ⓘ `7Grants `eAbsorption`7 for `f1 minute`7!"/>
-    </rule>
-</item-mods> -->
 </map>
