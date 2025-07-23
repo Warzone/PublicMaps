@@ -1,14 +1,14 @@
 <map proto="1.5.0">
-<!-- 
+<!--
      dBBBP  dBBBBP dBP dBP dBBBBb dBBBBBBP dBBBP dBBBBBb         .dBBBBP dBBBBBBP dBBBBBb dBBBBBb  dBBBBBBP
-           dBP.BP             dBP                    dBP         BP                   dBP      BB          
-   dBP    dBP.BP dBP dBP dBP dBP   dBP   dBBP    dBBBBK          `BBBBb   dBP     dBBBBK   dBP BB   dBP    
-  dBP    dBP.BP dBP_dBP dBP dBP   dBP   dBP     dBP  BB dBBBBBP     dBP  dBP     dBP  BB  dBP  BB  dBP     
- dBBBBP dBBBBP dBBBBBP dBP dBP   dBP   dBBBBP  dBP  dB'        dBBBBP'  dBP     dBP  dB' dBBBBBBB dBP      
+           dBP.BP             dBP                    dBP         BP                   dBP      BB
+   dBP    dBP.BP dBP dBP dBP dBP   dBP   dBBP    dBBBBK          `BBBBb   dBP     dBBBBK   dBP BB   dBP
+  dBP    dBP.BP dBP_dBP dBP dBP   dBP   dBP     dBP  BB dBBBBBP     dBP  dBP     dBP  BB  dBP  BB  dBP
+ dBBBBP dBBBBP dBBBBBP dBP dBP   dBP   dBBBBP  dBP  dB'        dBBBBP'  dBP     dBP  dB' dBBBBBBB dBP
 -->
 <!-- Counter-Strat gamemode include file -->
 <!-- Created by zzuf (GitHub @zzufx) -->
-<!-- Version 2025.07.19-1 -->
+<!-- Version 2025.07.21-1 -->
 <include id="bridge"/>
 <include id="gapple-kill-reward"/>
 <constants fallback="true">
@@ -71,12 +71,7 @@
 </teams>
 <broadcasts>
     <if constant="cs-shops-enabled" constant-value="true">
-        <if min-server-version="1.21.1" max-server-version="1.21.1">
-            <tip after="2s" every="3m">`cShops in this map are enabled but not supported in PGM 1.21.1`r</tip>
-        </if>
-        <if min-server-version="1.21.5">
-            <tip after="2s" every="3m">Buy items at the spawn shops!</tip>
-        </if>
+        <tip after="2s" every="3m">Buy items at the spawn shops!</tip>
     </if>
     <if constant="cs-mode" constant-value="point">
         <tip after="3s" every="3m" filter="cs_score_mode=1">Defenders will win if the objectives are not completed when the round ends!</tip>
@@ -468,7 +463,7 @@
                 <material>bow</material>
             </match>
             <modify show-attributes="false">
-                <attribute amount="-10">player.block_interaction_range</attribute>
+                <attribute amount="-10">block_interaction_range</attribute>
             </modify>
         </rule>
     </item-mods>
