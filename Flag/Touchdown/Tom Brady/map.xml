@@ -1,0 +1,62 @@
+<map proto="1.5.0">
+<!-- ======================================================================= -->
+<!-- |  "Tom Brady" feauring the "Brady Arcade" engine:                      -->
+<!-- |    - Winner:    First to win 5 rounds                                 -->
+<!-- |    - Gameplay:  Can only enter the scoring Endzone with Flag          -->
+<!-- ======================================================================= -->
+<name>Tom Brady</name>
+<version>1.1</version>
+<created>2024-09-22</created>
+<constants>
+    <!-- Team definitions -->
+    <constant id="team-one-name">Pats</constant>
+    <constant id="team-two-name">Bucs</constant>
+    <constant id="team-one-color">blue</constant>
+    <constant id="team-two-color">red</constant>
+    <constant id="team-one-spawn">-23.5,35,-102.5</constant>
+    <constant id="team-two-spawn">-23.5,35,13.5</constant>
+    <constant id="team-one-yaw">0</constant>
+    <constant id="team-two-yaw">180</constant>
+    <constant id="team-one-pitch">0</constant>
+    <constant id="team-two-pitch">0</constant>
+    <constant id="team-size">6</constant>
+    <!-- Map mechanics -->
+    <constant id="void-plane">-64</constant>
+    <constant id="deny-endzone-entry">true</constant>
+</constants>
+<include id="touchdown"/>
+<authors>
+    <author uuid="c31e94b2-7678-4551-847e-989c1423323a"/> <!-- TommyHillfigger -->
+    <author uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b"/> <!-- MewTwoKing -->
+</authors>
+<contributors>
+    <contributor uuid="2fd57dff-4cff-4b60-96a4-d26e37759c03" contribution="XML"/> <!-- Furrie -->
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Bridge Snippets"/> <!-- zzuf -->
+    <contributor uuid="c25a6f7b-4c42-40da-8cd6-add53f0c84eb" contribution="XML Refinements"/> <!-- arcadeboss -->
+    <contributor uuid="e419983c-bb20-438d-b900-717f131a272f" contribution="XML Message Names"/> <!-- KuNet -->
+</contributors>
+<spawns>
+    <default>
+        <regions>
+            <point yaw="90">45,43,-54.5</point>
+        </regions>
+    </default>
+</spawns>
+<regions>
+    <cuboid id="playing-field" min="-47,23,-89" max="0,30,0"/>
+    <!-- Nets -->
+    <union id="nets">
+        <cuboid id="team-one-portal" min="-48,24,-100" max="1,28,-89"/> <!-- where red scores -->
+        <cuboid id="team-two-portal" min="-48,24,0" max="1,28,11"/> <!-- where blue scores -->
+    </union>
+    <!-- Flag spawnpoint -->
+    <cuboid id="flag-post" min="-24,27,-45" max="-23,28,-44"/>
+    <cuboid id="flag-indicator" min="-25,32,-46" max="-22,34,-43"/>
+    <cuboid id="flag-indicator2" min="-25,35,-46" max="-22,40,-43"/>
+</regions>
+<portals sound="false" observers="never">
+    <!-- Falling on own team's portal -->
+    <portal destination="team-one-spawn-point" filter="team-one" region="team-one-portal" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-two-spawn-point" filter="team-two" region="team-two-portal" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
+</portals>
+</map>
