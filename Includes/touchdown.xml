@@ -1,8 +1,8 @@
 <map>
 <!-- Touchdown gamemode include file -->
 <!-- XML by zzuf, arcadeboss, MewTwoKing, Furrie, TommyHillfigger, KuNet, honeyfuggle & mameBT -->
-<!-- Version 2025.07.22-7 -->
 <gamemode>ffb</gamemode>
+<!-- Version 2025.07.23-1 -->
 <game>Touchdown</game>
 <objective>Capture the flag at the end zone on the enemies' side!</objective>
 <time result="score" overtime="1m" max-overtime="1m">${time-limit}</time>
@@ -147,6 +147,8 @@
     <kit id="pre-round-kit" force="true">
         <effect>invisibility</effect>
         <effect amplifier="255">slow_digging</effect>
+        <effect duration="0s">absorption</effect>
+        <effect duration="2s" amplifier="10">regeneration</effect>
     </kit>
     <kit id="obs-kit">
         <effect>night vision</effect>
@@ -208,7 +210,6 @@
     </if>
     <give kit="tutorial-kit" filter="all(observing,show_tutorial=1)"/>
     <give kit="${main-kit}" filter="during-buytime"/>
-    <give kit="heal-gapple" filter="on-buytime"/>
     <lend kit="pre-round-kit" filter="on-buytime"/>
     <give kit="${armor-kit}" filter="not-on-buytime-after"/>
     <give kit="remove-effects-kit" filter="not-on-buytime"/>
