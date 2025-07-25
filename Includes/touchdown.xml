@@ -2,7 +2,7 @@
 <!-- Touchdown gamemode include file -->
 <!-- XML by zzuf, arcadeboss, MewTwoKing, Furrie, TommyHillfigger, KuNet, honeyfuggle & mameBT -->
 <gamemode>ffb</gamemode>
-<!-- Version 2025.07.23-1 -->
+<!-- Version 2025.07.24-1 -->
 <game>Touchdown</game>
 <objective>Capture the flag at the end zone on the enemies' side!</objective>
 <time result="score" overtime="1m" max-overtime="1m">${time-limit}</time>
@@ -69,7 +69,7 @@
     <consumable id="use-snowball" on="right click" override="false" action="snowball-thrown" consume="false"/>
 </consumables>
 <broadcasts>
-    <tip after="10s" every="70s">`6Pass`r to your teammates by throwing the Football!</tip>
+    <tip after="10s" every="70s">You can `6pass`r to your teammates by throwing the Football!</tip>
     <tip after="25s" every="2m">Score by running into the end zone on the enemies' side!</tip>
 </broadcasts>
 <variables>
@@ -384,6 +384,7 @@
 <actions>
     <action id="give-main-kit" scope="player">
         <kit id="${main-kit}"/>
+        <kit id="${armor-kit}"/>
         <action id="apply-heal"/>
     </action>
     <action id="snowball-thrown" scope="player">
@@ -527,9 +528,6 @@
         <kit id="flag-carrier"/>
         <action id="apply-heal"/>
         <action id="flag-pickup-event"/>
-    </action>
-    <action id="set-main-kit" scope="player">
-        <action id="give-main-kit"/>
     </action>
     <action id="apply-heal" scope="player">
         <action filter="instaheal=0">
