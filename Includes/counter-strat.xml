@@ -8,7 +8,7 @@
 -->
 <!-- Counter-Strat gamemode include file -->
 <!-- Created by zzuf (GitHub @zzufx) -->
-<!-- Version 2025.07.21-1 -->
+<!-- Version 2025.07.27-1 -->
 <include id="bridge"/>
 <include id="gapple-kill-reward"/>
 <constants fallback="true">
@@ -26,7 +26,7 @@
     <constant id="cs-score-mode">1</constant> <!-- Should Defenders win by default and not be able to capture points? 0: No, 1: Yes -->
     <!-- Shops -->
     <if max-server-version="1.20"><constant id="cs-shop-dude">Villager</constant></if>
-    <if min-server-version="1.21"><constant id="cs-shop-dude">Pillager</constant></if>
+    <if min-server-version="1.21"><constant id="cs-shop-dude">WanderingTrader</constant></if>
     <!-- Attackers -->
     <constant id="cs-team-one-name">Attackers</constant>
     <constant id="cs-team-one-shop-yaw">0</constant>
@@ -109,7 +109,7 @@
         <helmet material="air"/>
         <effect duration="0s">slowness</effect>
     </kit>
-    <kit id="cs-armor-kit">
+    <kit id="cs-armor-kit" force="false">
         <helmet material="leather helmet" team-color="true" unbreakable="true" locked="true"/>
         <chestplate material="leather chestplate" team-color="true" unbreakable="true" enchantment="projectile protection"/>
         <leggings material="chainmail leggings" team-color="true" unbreakable="true" locked="true"/>
@@ -290,7 +290,7 @@
         </players>
     </if>
     <after id="long-round" message="{'translate':'misc.timeRemaining','with':['{0}']}" duration="${cs-round-time}">
-        <filter id="all(can-score,not-on-buytime)"/>
+        <filter id="all(can-score,not-on-buytime,match-running)"/>
     </after>
 </filters>
 <regions>
