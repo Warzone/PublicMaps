@@ -160,6 +160,7 @@
     <trigger scope="match" filter="match-started">
         <action>
             <set var="remaining" value="0"/>
+            <set var="time_left_dm" value="time_left_dm + 1"/>
             <switch-scope inner="player">
                 <set var="remaining" value="remaining + 1"/>
                 <set var="tribute" value="tmp" />
@@ -219,9 +220,13 @@
     </trigger>
     <if constant="dm-messages-enabled" constant-value="true" constant-compare="equals">
         <!-- Announcements for time left until deathmatch -->
-        <trigger scope="match">
+        <trigger scope="match" filter="dm-message">
             <action scope="match">
                 <set var="time_left_dm" value="time_left_dm - 1"/>
+            </action>
+        </trigger>
+        <trigger scope="match">
+            <action scope="match">
                 <message text="`8`l[`6`lSG`8`l] `c{dm-message-minutes} minute(s) until deathmatch!">
                     <replacements>
                         <decimal id="dm-message-minutes" value="time_left_dm"/>
