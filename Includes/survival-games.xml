@@ -136,7 +136,9 @@
         <material>double plant</material>
         <material>long grass</material>
         <material>dead bush</material>
+        <material>fire</material>
     </any>
+    <cause id="player-cause">player</cause>
 </filters>
 <variables>
     <variable id="tribute" scope="player"/>
@@ -282,7 +284,7 @@
     </if>
 </actions>
 <regions>
-    <apply block="allow-break" block-place="always"/>
+    <apply block="deny(all(player-cause, not(allow-break)))" />
 </regions>
 <lootables>
     <loot id="tier-1-chests-loottable">
