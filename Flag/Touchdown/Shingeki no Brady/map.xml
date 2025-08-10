@@ -1,0 +1,56 @@
+<map proto="1.5.0">
+<!-- ======================================================================= -->
+<!-- |  "Shingeki no Brady" featuring the "Brady Arcade" engine:             -->
+<!-- |    - Winner:    First to win 5 rounds                                 -->
+<!-- |    - Gameplay:  Can only enter the scoring Endzone with Flag          -->
+<!-- ======================================================================= -->
+<name>Shingeki no Brady</name>
+<version>1.1</version>
+<created>2025-05-21</created>
+<constants>
+    <constant id="team-size">7</constant>
+    <constant id="team-one-name">Eldia</constant>
+    <constant id="team-two-name">Marley</constant>
+    <constant id="team-one-color">blue</constant>
+    <constant id="team-two-color">red</constant>
+    <constant id="team-one-spawn">91.5,17,148.5</constant>
+    <constant id="team-one-yaw">180</constant>
+    <constant id="team-two-spawn">91.5,17,54.5</constant>
+    <constant id="team-two-yaw">0</constant>
+    <constant id="flag-post">91.5,8,101.5</constant>
+    <constant id="flag-color">red</constant>
+    <constant id="deny-endzone-entry">true</constant>
+</constants>
+<include id="touchdown"/>
+<authors>
+    <author uuid="38ef938a-7020-4c04-9d12-4875ed0598ca"/> <!-- Kazoha -->
+    <author uuid="f6f5dce8-a158-461d-b26d-dc8acfaeedd7"/> <!-- Shuliett -->
+</authors>
+<contributors>
+    <contributor uuid="c31e94b2-7678-4551-847e-989c1423323a" contribution="Original Concept"/> <!-- TommyHillfigger -->
+    <contributor uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b" contribution="XML Book"/> <!-- MewTwoKing -->
+    <contributor uuid="2fd57dff-4cff-4b60-96a4-d26e37759c03" contribution="Original XML"/> <!-- Furrie -->
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Bridge Snippets"/> <!-- zzuf -->
+    <contributor uuid="c25a6f7b-4c42-40da-8cd6-add53f0c84eb" contribution="XML Refinements"/> <!-- arcadeboss -->
+    <contributor uuid="e419983c-bb20-438d-b900-717f131a272f" contribution="XML Message Names"/> <!-- KuNet -->
+</contributors>
+<spawns>
+    <default>
+        <region>
+            <point>91.5,35,25.5</point>
+        </region>
+    </default>
+</spawns>
+<regions>
+    <cuboid id="playing-field" min="66,4,61" max="117,11,142"/>
+    <cuboid id="team-one-portal" min="117,5,151" max="66,10,142"/> <!-- where team two scores -->
+    <cuboid id="team-two-portal" min="66,5,52" max="117,10,61"/> <!-- where team one scores -->
+    <cuboid id="flag-indicator-upper" min="90,16,100" max="93,21,103"/>
+    <cuboid id="flag-indicator-lower" min="90,13,100" max="93,15,103"/>
+</regions>
+<portals sound="false" observers="never">
+    <!-- Falling on own team's portal -->
+    <portal destination="team-one-spawn" filter="team-one" region="team-one-portal" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-two-spawn" filter="team-two" region="team-two-portal" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
+</portals>
+</map>

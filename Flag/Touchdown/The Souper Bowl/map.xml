@@ -1,0 +1,201 @@
+<map proto="1.5.0">
+<!-- ======================================================================= -->
+<!-- |  "The Souper Bowl" featuring the "Brady GridIron" engine:             -->
+<!-- |    - Winner:    Highest score at end of Time Limit                    -->
+<!-- |    - Gameplay:  Any player can enter any Endzone                      -->
+<!-- ======================================================================= -->
+<name>The Souper Bowl</name>
+<variant id="mini" world="mini" override="true">The Soup Bowl</variant>
+<version>1.2.1</version>
+<created>2025-05-25</created>
+<constants>
+    <constant id="time-limit">10m</constant>
+<if variant="default">
+    <constant id="team-size">26</constant>
+</if>
+<if variant="mini">
+    <constant id="team-size">18</constant>
+</if>
+    <constant id="team-one-name">Blue Orchid</constant>
+    <constant id="team-two-name">Red Mushroom</constant>
+    <constant id="team-one-color">blue</constant>
+    <constant id="team-two-color">red</constant>
+<if variant="default">
+    <constant id="team-one-spawn">-114.5,26,0.5</constant>
+    <constant id="team-two-spawn">115.5,26,0.5</constant>
+</if>
+<if variant="mini">
+    <constant id="team-one-spawn">-94.5,25,0.5</constant>
+    <constant id="team-two-spawn">95.5,25,0.5</constant>
+</if>
+    <constant id="team-one-yaw">270</constant>
+    <constant id="team-two-yaw">90</constant>
+    <constant id="main-kit">sb-kit</constant>
+    <constant id="enable-night-vision">true</constant>
+    <constant id="flag-post">0.5,16,0.5</constant>
+    <constant id="flag-color">yellow</constant>
+    <constant id="void-plane">7</constant>
+    <constant id="gridiron-engine">true</constant>
+    <constant id="melee-weapon">wood sword</constant>
+    <constant id="inner-indicator-materials">true</constant>
+    <constant id="indicator-outer-material">stained glass:4</constant>
+    <constant id="indicator-inner-material">glowstone</constant>
+</constants>
+<include id="touchdown"/>
+<world>
+    <timeset>14000</timeset>
+</world>
+<authors>
+    <author uuid="c25a6f7b-4c42-40da-8cd6-add53f0c84eb" contribution="Map, XML Refinements/Adjustments"/> <!-- arcadeboss -->
+</authors>
+<contributors>
+    <contributor uuid="c31e94b2-7678-4551-847e-989c1423323a" contribution="Original Concept"/> <!-- TommyHillfigger -->
+    <contributor uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b" contribution="XML Book"/> <!-- MewTwoKing -->
+    <contributor uuid="2fd57dff-4cff-4b60-96a4-d26e37759c03" contribution="Original XML"/> <!-- Furrie -->
+    <contributor uuid="9d4779a8-d35f-45d2-b51c-95de7a77e128" contribution="Bridge Snippets"/> <!-- zzuf -->
+    <contributor uuid="e419983c-bb20-438d-b900-717f131a272f" contribution="XML Message Names"/> <!-- KuNet -->
+</contributors>
+<broadcasts>
+    <tip after="7m">Did you know? The game and teams were inspired by suspicious stew!</tip>
+</broadcasts>
+<spawns>
+    <default>
+        <region yaw="180" pitch="40">
+<if variant="default">
+            <point>0.5,48,53.5</point>
+</if>
+<if variant="mini">
+            <point>0.5,48,50.25</point>
+</if>
+        </region>
+    </default>
+</spawns>
+<kits>
+    <kit id="sb-kit" parent="main-kit">
+        <effect>speed</effect>
+    </kit>
+    <take filter="has-flag">
+        <kit>
+            <effect>slowness</effect>
+        </kit>
+    </take>
+    <lend filter="player_state=${carry}">
+        <kit>
+            <effect duration="1s" amplifier="10">jump boost</effect>
+            <effect duration="10s">speed</effect>
+            <effect duration="15s">strength</effect>
+        </kit>
+    </lend>
+</kits>
+<regions>
+<!-- Velocity zones -->
+<if variant="default">
+    <apply velocity="-1.7,1.3,0"> <!-- red spawn -->
+        <region>
+            <cuboid min="114,25,-9" max="111,27,10"/>
+        </region>
+    </apply>
+    <apply velocity="1.7,1.3,0"> <!-- blue spawn -->
+        <region>
+            <cuboid min="-113,25,-9" max="-110,27,10"/>
+        </region>
+    </apply>
+    <apply velocity="-3.0,1.3,0"> <!-- red back right -->
+        <region>
+            <cuboid min="63,15,-19" max="65,17,-14"/>
+        </region>
+    </apply>
+    <apply velocity="-3.0,1.3,0"> <!-- red back left -->
+        <region>
+            <cuboid min="63,15,20" max="65,17,15"/>
+        </region>
+    </apply>
+    <apply velocity="3.0,1.3,0"> <!-- blue back right -->
+        <region>
+            <cuboid min="-63,15,-19" max="-65,17,-14"/>
+        </region>
+    </apply>
+    <apply velocity="3.0,1.3,0"> <!-- blue back left -->
+        <region>
+            <cuboid min="-63,15,20" max="-65,17,15"/>
+        </region>
+    </apply>
+    <apply velocity="1.9,1.4,0"> <!-- blue forward -->
+        <region>
+            <cuboid min="25,12,3" max="27,15,-2"/>
+        </region>
+    </apply>
+    <apply velocity="-1.9,1.4,0"> <!-- red forward -->
+        <region>
+            <cuboid min="-25,12,3" max="-27,15,-2"/>
+        </region>
+    </apply>
+</if>
+<if variant="mini">
+    <apply velocity="-1.5,1.3,0"> <!-- red spawn -->
+        <region>
+            <cuboid min="94,24,-9" max="91,26,10"/>
+        </region>
+    </apply>
+    <apply velocity="1.5,1.3,0"> <!-- blue spawn -->
+        <region>
+            <cuboid min="-93,24,-9" max="-90,26,10"/>
+        </region>
+    </apply>
+    <apply velocity="-2.5,1.3,0"> <!-- red back right -->
+        <region>
+            <cuboid min="53,14,-19" max="55,16,-14"/>
+        </region>
+    </apply>
+    <apply velocity="-2.5,1.3,0"> <!-- red back left -->
+        <region>
+            <cuboid min="53,14,20" max="55,16,15"/>
+        </region>
+    </apply>
+    <apply velocity="2.5,1.3,0"> <!-- blue back right -->
+        <region>
+            <cuboid min="-53,14,-19" max="-55,16,-14"/>
+        </region>
+    </apply>
+    <apply velocity="2.5,1.3,0"> <!-- blue back left -->
+        <region>
+            <cuboid min="-53,14,20" max="-55,16,15"/>
+        </region>
+    </apply>
+    <apply velocity="1.35,1.55,0"> <!-- blue forward -->
+        <region>
+            <cuboid min="25,12,3" max="27,15,-2"/>
+        </region>
+    </apply>
+    <apply velocity="-1.35,1.55,0"> <!-- red forward -->
+        <region>
+            <cuboid min="-25,12,3" max="-27,15,-2"/>
+        </region>
+    </apply>
+</if>
+    <apply velocity="0,1.3,1.9"> <!-- north -->
+        <region>
+            <cuboid min="2,11,-25" max="-1,14,-23"/>
+        </region>
+    </apply>
+    <apply velocity="0,1.3,-1.9"> <!-- south -->
+        <region>
+            <cuboid min="2,11,26" max="-1,14,24"/>
+        </region>
+    </apply>
+<if variant="default">
+    <cuboid id="playing-field" min="-118,5,-49" max="119,19,50"/>
+    <cuboid id="team-one-portal" min="-118,15,-49" max="-102,17,50"/> <!-- where team two scores -->
+    <cuboid id="team-two-portal" min="103,15,-49" max="119,17,50"/> <!-- where team one scores -->
+</if>
+<if variant="mini">
+    <cuboid id="playing-field" min="-98,5,-44" max="99,19,45"/>
+    <cuboid id="team-one-portal" min="-98,15,-44" max="-82,17,45"/> <!-- where team two scores -->
+    <cuboid id="team-two-portal" min="83,15,-44" max="99,17,45"/> <!-- where team one scores -->
+</if>
+    <cuboid id="flag-indicator-upper" min="-1,33,-1" max="2,38,2"/>
+    <cuboid id="flag-indicator-lower" min="-1,30,-1" max="2,32,2"/>
+    <cuboid id="flag-indicator-upper-inner" min="0,33,0" max="1,38,1"/>
+    <cuboid id="flag-indicator-lower-inner" min="0,30,0" max="1,32,1"/>
+</regions>
+</map>
