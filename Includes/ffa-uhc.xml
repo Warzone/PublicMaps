@@ -26,25 +26,21 @@
 <filters>
     <countdown id="grace-period-countdown" duration="${grace-period-duration}" message="Grace period will end in {0}" filter="match-started"/>
 </filters>
-<kits>
-    <kit id="player-spawn" force="true">
-        <saturation>20</saturation>
-        <foodlevel>20</foodlevel>
-    </kit>
-</kits>
-<spawns outdoors="true">
-    <default filter="observing">
+<spawns>
+    <default outdoors="true">
         <regions>
             <point>${obs-spawn-point}</point>
         </regions>
     </default>
-</spawns>
-<spawns outdoors="true" spread="true" safe="true">
-    <spawn filter="participating">
+    <spawn outdoors="true" spread="true" safe="true">
         <regions>
             <cuboid min="${spawn-area-min}" max="${spawn-area-max}"/>
         </regions>
     </spawn>
+    <player-kit>
+        <saturation>20</saturation>
+        <foodlevel>20</foodlevel>
+    </player-kit>
 </spawns>
 <gamerules>
     <naturalRegeneration>false</naturalRegeneration>
