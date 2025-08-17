@@ -25,6 +25,12 @@
 </blitz>
 <filters>
     <countdown id="grace-period-countdown" duration="${grace-period-duration}" message="Grace period will end in {0}" filter="match-started"/>
+    <filter id="pre-match">
+        <any>
+            <match-idle/>
+            <match-starting/>
+        </any>
+    </filter>
 </filters>
 <kits>
     <kit id="player-spawn" force="true">
@@ -55,12 +61,13 @@
 </world>
 <terrain vanilla="true" seed="${seed}"/>
 <world-borders center="${world-border-center}">
-    <world-border size="${world-border-size}"/>
+    <world-border size="${world-border-shrink-size}" when="pre-match"/>
+    <world-border size="${world-border-size}" when="match-started"/>
     <if constant="world-border-shrink-after" constant-value="0s" constant-compare="equals">
-        <world-border size="${world-border-size}" duration="${world-border-shrink-duration}"/>
+        <world-border size="${world-border-shrink-size}" duration="${world-border-shrink-duration}" when="match-started"/>
     </if>
     <unless constant="world-border-shrink-after" constant-value="0s" constant-compare="equals">
-        <world-border size="${world-border-size}" after="${world-border-shrink-after}" duration="${world-border-shrink-duration}"/>
+        <world-border size="${world-border-shrink-size}" after="${world-border-shrink-after}" duration="${world-border-shrink-duration}" when="match-started"/>
     </unless>
 </world-borders>
 <actions>
@@ -95,7 +102,6 @@
             <any>
                 <cause>melee</cause>
                 <cause>projectile</cause>
-                
             </any>
         </all>
     </deny>
@@ -106,4 +112,3 @@
   </filter>  
 </mobs>
 </map>
-
