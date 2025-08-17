@@ -1,6 +1,8 @@
 <map proto="1.5.0" game="UHC">
 <name>UHC</name>
 <version>1.0.0</version>
+<variant id="classic" world="classic" max-server-version="1.8.8">Classic</variant>
+<variant id="modern" world="modern" min-server-version="1.21">Modern</variant>
 <authors>
     <author uuid="4019ebc4-e6d7-44e1-ad5a-66dfd5f1c613"/> <!-- JorgeberrexMC -->
 </authors>
@@ -8,7 +10,25 @@
     <contributor uuid="811968c3-0a9f-4cb5-80af-19ce37141341"/> <!-- BennyDoesStuff -->
     <contributor uuid="53c7e46f-092a-4fc6-9721-54e60a97f09f"/> <!-- Fishywishi -->
     <contributor uuid="b390b87a-47e8-40d8-968a-9e7e2582a88b"/> <!-- MewTwoKing -->
+    <contributor uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb"/> <!-- _Pear -->
 </contributors>
-<include id="ffa-uhc"/>
-<include id="uhc-recipes"/>
+<unless variant="default">
+    <include id="ffa-uhc"/>
+    <include id="uhc-recipes"/>
+</if>
+<if variant="default">
+    <players min="1000" max="0" max-overfill="0" colors="false"/>
+    <objective>UHC Lobby.</objective>
+    <world-borders center="0,0">
+        <world-border size="50"/>
+    </world-borders>
+    <terrain vanilla="false"/>
+    <spawns>
+        <default>
+            <regions>
+                <point>0,100,0</point>
+            </regions>
+        </default>
+    </spawns>
+</unless>
 </map>

@@ -25,10 +25,6 @@
 </blitz>
 <filters>
     <countdown id="grace-period-countdown" duration="${grace-period-duration}" message="Grace period will end in {0}" filter="match-started"/>
-    <any id="pre-match">
-        <match-phase>idle</match-phase>
-        <match-phase>starting</match-phase>
-    </any>
 </filters>
 <kits>
     <kit id="player-spawn" force="true">
@@ -59,7 +55,7 @@
 </world>
 <terrain vanilla="true" seed="${seed}"/>
 <world-borders center="${world-border-center}">
-    <world-border size="${world-border-shrink-size}" when="pre-match"/>
+    <world-border size="${world-border-shrink-size}"/>
     <world-border size="${world-border-size}" when="match-started"/>
     <if constant="world-border-shrink-after" constant-value="0s" constant-compare="equals">
         <world-border size="${world-border-shrink-size}" duration="${world-border-shrink-duration}" when="match-started"/>
