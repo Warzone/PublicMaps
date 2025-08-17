@@ -1,0 +1,121 @@
+<map proto="1.5.0">
+<phase>staging</phase>
+<gamemode>uhc</gamemode>
+<objective>Be the last player standing. Natural health regeneration is disabled.</objective>
+<constants>
+    <constant id="grace-period-duration">5m</constant>  <!-- Duration of the grace period -->
+    <constant id="timelimit-seconds">3600</constant> <!-- Time to end the match after the grace period-->
+    <constant id="min-player-count">2</constant> <!-- Minimum player count to start the match -->
+    <constant id="max-player-count">50</constant> <!-- Maximum player count for the match -->
+    <constant id="world-time">6000</constant> <!-- Time to set the world to at the start of the match -->
+    <constant id="world-border-size">1000</constant> <!-- Initial size of the world border -->
+    <constant id="world-border-shrink-after">0s</constant> <!-- Time after which the world border starts shrinking -->
+    <constant id="world-border-shrink-duration">50m</constant> <!-- Duration of the world border shrink -->
+    <constant id="world-border-shrink-size">50</constant> <!-- Final size of the world border after shrinking -->
+    <constant id="world-border-center">0,0</constant> <!-- Center of the world border -->
+    <constant id="seed">random</constant> <!-- Seed for the world generation, if custom-seed is false -->
+    <constant id="obs-spawn-point">0,100,0</constant> <!-- Sound key for the lightning bolt sound -->
+    <constant id="spawn-area-min">-500,0,-500</constant> <!-- Minimum coordinates for the spawn area -->
+    <constant id="spawn-area-max">500,255,500</constant> <!-- Maximum coordinates for the spawn area -->
+</constants>
+<players min="${min-player-count}" max="${max-player-count}" colors="true"/>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<filters>
+    <countdown id="grace-period-countdown" duration="${grace-period-duration}" message="Grace period will end in {0}" filter="match-started"/>
+</filters>
+<kits>
+    <kit id="player-spawn" force="true">
+        <saturation>20</saturation>
+        <foodlevel>20</foodlevel>
+    </kit>
+</kits>
+<spawns outdoors="true">
+    <default filter="observing">
+        <regions>
+            <point>${obs-spawn-point}</point>
+        </regions>
+    </default>
+</spawns>
+<spawns outdoors="true" spread="true" safe="true">
+    <spawn filter="participating">
+        <regions>
+            <cuboid min="${spawn-area-min}" max="${spawn-area-max}"/>
+        </regions>
+    </spawn>
+</spawns>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
+<world>
+    <timeset>${world-time}</timeset>
+    <timelock>off</timelock>
+</world>
+<terrain vanilla="true" seed="${seed}"/>
+<world-borders center="${world-border-center}">
+    <world-border size="${world-border-size}"/>
+    <world-border size="${world-border-shrink-size}" after="${world-border-shrink-after}" duration="${world-border-shrink-duration}"/>
+</world-borders>
+<actions>
+    <trigger scope="player">
+        <action scope="player">
+            <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
+            <message text="`3Grace period is now over!"/>
+        </action>
+        <filter>
+            <all>
+                <not>
+                    <filter id="grace-period-countdown"/>
+                </not>
+            </all>
+        </filter>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after duration="${grace-period-duration}" filter="match-started"/>
+        </filter>
+        <action>
+            <set var="timelimit" value="${timelimit-seconds}"/>
+        </action>
+    </trigger>
+</actions>
+<damage>
+    <deny>
+        <all>
+            <any>
+                <filter id="grace-period-countdown"/>
+            </any>
+            <any>
+                <cause>melee</cause>
+                <cause>projectile</cause>
+                
+            </any>
+        </all>
+    </deny>
+</damage>
+<crafting>
+    <shaped override="false">
+        <result material="blaze rod" amount="9"/>
+        <shape>
+            <row>OLO</row>
+            <row>ORO</row>
+            <row>OLO</row>
+        </shape>
+        <ingredient symbol="O">stained glass:1</ingredient>
+        <ingredient symbol="L">lava bucket</ingredient>
+        <if min-server-version="1.13">
+            <ingredient symbol="R">firework rocket</ingredient>
+        </if>
+        <unless min-server-version="1.13">
+            <ingredient symbol="R">firework</ingredient>
+        </unless>
+    </shaped>
+</crafting>
+<mobs>  
+  <filter>  
+    <always/>  
+  </filter>  
+</mobs>
+</map>
