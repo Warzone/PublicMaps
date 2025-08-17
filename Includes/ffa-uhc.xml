@@ -56,7 +56,12 @@
 <terrain vanilla="true" seed="${seed}"/>
 <world-borders center="${world-border-center}">
     <world-border size="${world-border-size}"/>
-    <world-border size="${world-border-shrink-size}" after="${world-border-shrink-after}" duration="${world-border-shrink-duration}"/>
+    <if constant="world-border-shrink-after" constant-value="0s" constant-compare="equals">
+        <world-border size="${world-border-size}" duration="${world-border-shrink-duration}"/>
+    </if>
+    <unless constant="world-border-shrink-after" constant-value="0s" constant-compare="equals">
+        <world-border size="${world-border-size}" after="${world-border-shrink-after}" duration="${world-border-shrink-duration}"/>
+    </unless>
 </world-borders>
 <actions>
     <trigger scope="player">
@@ -118,6 +123,4 @@
     <always/>  
   </filter>  
 </mobs>
-
 </map>
-
