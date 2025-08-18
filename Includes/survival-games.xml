@@ -84,12 +84,6 @@
     <broadcastLives>false</broadcastLives>
 </blitz>
 <players min="${min-player-count}" max="${max-player-count}" max-overfill="${max-player-count}" colors="true"/> <!-- max-overfill should always be the same as max, otherwise maps will run out of spawn slot for players and break -->
-<spawns>
-    <player-kit>
-        <saturation>20</saturation>
-        <foodlevel>20</foodlevel>
-    </player-kit>
-</spawns>
 <filters>
     <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
         <all id="starting-countdown">
@@ -182,6 +176,10 @@
         <sound key="${entity.lightning_bolt.thunder}" volume="0.2"/>
         <message text="`8`l[`6`lSG`8`l] `3Happy Survival Games!"/>
         <message text="`8`l[`6`lSG`8`l] `3May the odds be ever in your favor."/>
+        <kit>
+            <saturation>20</saturation>
+            <foodlevel>20</foodlevel>
+        </kit>
     </action>
     <if constant="match-delay-enabled" constant-value="true" constant-compare="equals">
         <trigger scope="player" filter="starting-countdown" action="start-games"/>
