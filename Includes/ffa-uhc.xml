@@ -18,7 +18,8 @@
     <constant id="spawn-area-min">-500,0,-500</constant> <!-- Minimum coordinates for the spawn area -->
     <constant id="spawn-area-max">500,255,500</constant> <!-- Maximum coordinates for the spawn area -->
     
-    <constant id="uhc-custom-recipes">true</constant> <!-- Enable custom UHC recipes -->
+    <constant id="custom-recipes">true</constant> <!-- Enable custom UHC recipes -->
+    <constant id="recipes-book">true</constant> <!-- Enable the recipes book -->
     <constant id="crafting-blaze-rod">true</constant> <!-- Enable crafting of blaze rods -->
 </constants>
 <players min="${min-player-count}" max="${max-player-count}" colors="true"/>
@@ -43,8 +44,10 @@
     <player-kit>
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
-        <if constant="uhc-custom-recipes" constant-value="true" constant-compare="equals">
-            <kit id="recipes-catalog"/>
+        <if constant="custom-recipes" constant-value="true" constant-compare="equals">
+            <if constant="recipes-book" constant-value="true" constant-compare="equals">
+                <kit id="recipes-book"/>
+            </if>
         </if>
     </player-kit>
 </spawns>
@@ -108,10 +111,10 @@
   </filter>  
 </mobs>
 
-<if constant="uhc-custom-recipes" constant-value="true" constant-compare="equals">    
+<if constant="custom-recipes" constant-value="true" constant-compare="equals">    
     <kits>
-        <kit id="recipes-catalog">
-            <book show-other="false" name="`a`lRecipe Book" lore="`7Right-click to open the recipes catalog.">
+        <kit id="recipes-book">
+            <book show-other="false" name="`a`lRecipe Book" lore="`7Right-click to open the recipes book.">
                 <title>`a`lRecipe Book</title>
                 <author>The UHC Gods</author>
                 <if constant="crafting-blaze-rod" constant-value="true" constant-compare="equals">
