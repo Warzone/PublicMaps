@@ -17,13 +17,12 @@
     <constant id="obs-spawn-point">0,100,0</constant> <!-- Sound key for the lightning bolt sound -->
     <constant id="spawn-area-min">-500,0,-500</constant> <!-- Minimum coordinates for the spawn area -->
     <constant id="spawn-area-max">500,255,500</constant> <!-- Maximum coordinates for the spawn area -->
-    
     <constant id="custom-recipes">true</constant> <!-- Enable custom UHC recipes -->
     <constant id="recipes-book">true</constant> <!-- Enable the recipes book -->
     <constant id="crafting-blaze-rod">true</constant> <!-- Enable crafting of blaze rods -->
 </constants>
 <players min="${min-player-count}" max="${max-player-count}" colors="true"/>
-<blitz>
+<blitz lightning="true">
     <lives>1</lives>
     <broadcastLives>false</broadcastLives>
 </blitz>
@@ -110,7 +109,6 @@
     <always/>  
   </filter>  
 </mobs>
-
 <if constant="custom-recipes" constant-value="true" constant-compare="equals">    
     <kits>
         <kit id="recipes-book">
@@ -137,7 +135,6 @@
             </book>
         </kit>
     </kits>
-    
     <crafting>
         <if constant="crafting-blaze-rod" constant-value="true" constant-compare="equals">
             <shaped override="false">
@@ -160,7 +157,4 @@
         </if>
     </crafting>
 </if>
-
 </map>
-
-
