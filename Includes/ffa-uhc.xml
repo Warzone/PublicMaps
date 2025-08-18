@@ -2,7 +2,7 @@
 <phase>staging</phase>
 <gamemode>blitz</gamemode>
 <objective>Be the last player standing. Natural health regeneration is disabled.</objective>
-<constants>
+<constants fallback="true">
     <constant id="grace-period-duration">5m</constant>  <!-- Duration of the grace period -->
     <constant id="timelimit-seconds">3600</constant> <!-- Time to end the match after the grace period-->
     <constant id="min-player-count">2</constant> <!-- Minimum player count to start the match -->
@@ -17,6 +17,9 @@
     <constant id="obs-spawn-point">0,100,0</constant> <!-- Sound key for the lightning bolt sound -->
     <constant id="spawn-area-min">-500,0,-500</constant> <!-- Minimum coordinates for the spawn area -->
     <constant id="spawn-area-max">500,255,500</constant> <!-- Maximum coordinates for the spawn area -->
+    
+    <constant id="uhc-custom-recipes">true</constant> <!-- Enable custom UHC recipes -->
+    <constant id="crafting-blaze-rod">true</constant> <!-- Enable crafting of blaze rods -->
 </constants>
 <players min="${min-player-count}" max="${max-player-count}" colors="true"/>
 <blitz>
@@ -40,6 +43,9 @@
     <player-kit>
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
+        <if constant="uhc-custom-recipes" constant-value="true" constant-compare="equals">
+            <kit id="recipes-catalog"/>
+        </if>
     </player-kit>
 </spawns>
 <gamerules>
@@ -101,6 +107,57 @@
     <always/>  
   </filter>  
 </mobs>
+
+<if constant="uhc-custom-recipes" constant-value="true" constant-compare="equals">    
+    <kits>
+        <kit id="recipes-catalog">
+            <book show-other="false" name="`a`lRecipe Book" lore="`7Right-click to open the recipes catalog.">
+                <title>`a`lRecipe Book</title>
+                <author>The UHC Gods</author>
+                <if constant="crafting-blaze-rod" constant-value="true" constant-compare="equals">
+                    <pages>
+                        <page>
+                            `6» `lBlaze Rod`0
+                            `8Crafting Grid:`0
+
+                            `6O   `cL   `6O
+                            `6O   `7R   `6O
+                            `6O   `cL   `6O
+
+                            `rIngredients:`0
+                            `6O`8 = Orange Stained Glass
+                            `cL`8 = Lava Bucket
+                            `7R`8 = Firework Rocket
+                        </page>
+                    </pages>
+                </if>
+            </book>
+        </kit>
+    </kits>
+    
+    <crafting>
+        <if constant="crafting-blaze-rod" constant-value="true" constant-compare="equals">
+            <shaped override="false">
+                <result material="blaze rod" amount="1"/>
+                <shape>
+                    <row>OLO</row>
+                    <row>ORO</row>
+                    <row>OLO</row>
+                </shape>
+                <ingredient symbol="L">lava bucket</ingredient>
+                <if min-server-version="1.13">
+                    <ingredient symbol="O">orange stained glass</ingredient>
+                    <ingredient symbol="R">firework rocket</ingredient>
+                </if>
+                <unless min-server-version="1.13">
+                    <ingredient symbol="O">stained glass:1</ingredient>
+                    <ingredient symbol="R">firework</ingredient>
+                </unless>
+            </shaped>
+        </if>
+    </crafting>
+</if>
+
 </map>
 
 
