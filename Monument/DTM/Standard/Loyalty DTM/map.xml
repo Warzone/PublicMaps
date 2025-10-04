@@ -1,6 +1,7 @@
 <map proto="1.5.0">
 <name>Loyalty DTM</name>
-<version>1.1.4</version> 
+<version>1.1.6</version>
+<include id="gapple-kill-reward"/>
 <objective>Break the other team's two obsidian monuments to win!</objective>
 <gamemode>dtm</gamemode>
 <authors>
@@ -13,17 +14,18 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" material="stone sword"/>
-        <item slot="1" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" material="diamond pickaxe"/>
+        <clear/>
+        <item unbreakable="true" slot="0" material="stone sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" material="diamond pickaxe"/>
         <item slot="28" material="arrow"/>
-        <item slot="3" material="iron axe"/>
+        <item unbreakable="true" slot="3" material="iron axe"/>
         <item slot="4" amount="32" material="log"/>
-        <item slot="5" amount="32" material="bread"/>
-        <helmet team-color="true" material="leather helmet"/>
-        <chestplate material="iron chestplate"/>
-        <leggings team-color="true" material="leather leggings"/>
-        <boots team-color="true" material="leather boots"/>
+        <item slot="5" material="golden apple"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" material="iron chestplate"/>
+        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
         <effect duration="5">heal</effect>
         <effect duration="5">damage resistance</effect>
     </kit>
@@ -97,16 +99,28 @@
     <tool>bow</tool>
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
+    <tool>arrow</tool>
 </toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>log</item>
+    <item>wood</item>
+</itemkeep>
 <itemremove>
-    <item>arrow</item>
     <item>leather helmet</item>
     <item>iron chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>bread</item>
     <item>seeds</item>
+    <item>yellow flower</item>
+    <item>red rose</item>
+    <item>sugar cane</item>
+    <item>obsidian</item>
 </itemremove>
 <timelock>on</timelock>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>42</maxbuildheight>
 </map>

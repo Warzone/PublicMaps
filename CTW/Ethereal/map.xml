@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Ethereal</name>
-<version>1.3.2</version>
+<version>1.3.3</version>
 <objective>Capture the wool and return it to your victory monument.</objective>
 <gamemode>ctw</gamemode>
 <include id="gapple-kill-reward"/>
@@ -14,17 +14,18 @@
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" material="stone sword"/>
-        <item slot="1" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" enchantment="durability:4;dig speed" material="iron pickaxe"/>
-        <item slot="3" enchantment="durability:4;dig speed" material="iron axe"/>
-        <item slot="4" amount="12" material="ladder"/>
-        <item slot="5" amount="48" damage="2" material="wood"/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="durability:4;dig speed" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" enchantment="durability:4;dig speed" material="iron axe"/>
+        <item slot="4" amount="64" damage="2" material="wood"/>
+        <item slot="5" amount="64" material="glass"/>
         <item slot="6" material="boat"/>
-        <item slot="8" amount="32" material="golden carrot"/>
+        <item slot="8" amount="1" material="golden apple"/>
         <item slot="28" material="arrow"/>
-        <chestplate enchantment="protection projectile:2" unbreakable="true" material="chainmail chestplate"/>
-        <leggings team-color="true" unbreakable="true" material="leather leggings"/>
+        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
+        <leggings enchantment="protection projectile:2" unbreakable="true" material="chainmail leggings"/>
+        <boots team-color="true" unbreakable="true" material="leather boots"/>
         <effect duration="5" amplifier="3">heal</effect>
     </kit>
 </kits>
@@ -48,50 +49,25 @@
     </default>
 </spawns>
 <filters>
+    <team id="yellow-team">yellow</team>
+    <team id="pink-team">pink</team>
     <material id="webs">web</material>
-    <any id="anti-grief">
-        <material>chest</material>
-        <material>beacon</material>
-        <material>iron block</material>
-        <material>redstone wire</material>
-        <material>redstone torch on</material>
-    </any>
-    <deny id="anti-grief-yellow">
-        <all>
-            <filter id="anti-grief"/>
-            <team id="only-yellow">yellow</team>
-        </all>
-    </deny>
-    <deny id="anti-grief-pink">
-        <all>
-            <filter id="anti-grief"/>
-            <team id="only-pink">pink</team>
-        </all>
-    </deny>
-    <not id="only-pink-usage">
-        <all>
-            <any>
-                <material>chest</material>
-                <material>workbench</material>
-            </any>
-            <filter id="only-yellow"/>
-        </all>
-    </not>
-    <not id="only-yellow-usage">
-        <all>
-            <any>
-                <material>chest</material>
-                <material>workbench</material>
-            </any>
-            <filter id="only-pink"/>
-        </all>
+    <material id="beacons">beacon</material>
+    <material id="only-iron">iron block</material>
+    <not id="wool-room-blocks">
+        <any>
+            <material>chest</material>
+            <material>chest</material>
+            <material>workbench</material>
+            <material>beacon</material>
+        </any>
     </not>
 </filters>
 <regions>
     <negative id="void-area">
         <union id="bridgezones">
-            <rectangle min="128,16" max="94,-15"/>
-            <rectangle min="-127,16" max="-93,-15"/>
+            <rectangle min="127,16" max="95,-15"/>
+            <rectangle min="-126,16" max="-94,-15"/>
             <!-- mid zones -->
             <rectangle min="-12,-38" max="13,-15"/>
             <rectangle min="-12,39" max="13,16"/>
@@ -107,8 +83,14 @@
             <rectangle min="162,16" max="150,39"/>
         </union>
     </union>
-    <rectangle id="pink-wool" min="153,-5" max="172,6"/>
-    <rectangle id="yellow-wool" min="-152,6" max="-171,-5"/>
+    <rectangle id="pink-wool" min="154,-5" max="172,6"/>
+    <rectangle id="yellow-wool" min="-153,6" max="-171,-5"/>
+    <union id="iron">
+        <union id="yellow-iron">
+            <cuboid min="93,23,39" max="-144,30,-39"/>
+        </union>
+        <mirror id="pink-iron" region="yellow-iron" normal="-1,0,0" origin="0.5,24,0.5"/> 
+    </union>
     <!-- Applied -->
     <apply region="pink-base" enter="pink" message="You may not enter the enemy's spawn area!"/>
     <apply region="yellow-base" enter="yellow" message="You may not enter the enemy's spawn area!"/>
@@ -121,8 +103,8 @@
     </apply>
     <apply region="pink-wool" enter="yellow" message="You may not enter your own wool room!"/>
     <apply region="yellow-wool" enter="pink" message="You may not enter your own wool room!"/>
-    <apply region="pink-wool" block="anti-grief-yellow" use="yellow"/>
-    <apply region="yellow-wool" block="anti-grief-pink" use="pink"/>
+    <apply region="pink-wool" block="all(wool-room-blocks,deny(pink-team))" use="all(yellow-team,deny(beacons))"/>
+    <apply region="yellow-wool" block="all(wool-room-blocks,deny(yellow-team))" use="all(pink-team,deny(beacons))"/>
     <apply block="never" message="You may not modify the spawn!">
         <region>
             <above y="90"/>
@@ -143,6 +125,9 @@
         </monument>
     </wool>
 </wools>
+<renewables>
+    <renewable region="iron" renew-filter="only-iron" interval="8" grow="false" particles="true" sound="true"/>
+</renewables>
 <toolrepair>
     <tool>stone sword</tool>
     <tool>bow</tool>
@@ -153,16 +138,18 @@
     <item>seeds</item>
     <item>red rose</item>
     <item>yellow flower</item>
-    <item>ladder</item>
-    <item>chainmail chestplate</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
     <item>leather boots</item>
-    <item>leather leggings</item>
-    <item>wood</item>
     <item>string</item>
-    <item>chainmail chestplate</item>
     <item>web</item>
-    <item>golden carrot</item>
-    <item>golden apple</item>
 </itemremove>
+<kill-reward>
+    <item amount="16" material="wood"/>
+    <item amount="16" material="glass"/>
+</kill-reward>
 <maxbuildheight>45</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
