@@ -1,7 +1,7 @@
 # Warzone PublicMaps 
 <img src="https://warzone.network/img/warzone.svg" align="right" alt="Warzone logo" width="120" height="178"/>
 
-This repository contains public maps and active rotations that are found on [Warzone](https://warzone.network). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin and Minecraft 1.8.9. Non-commercial maps or maps used under the explicit permission of their author(s) are hosted at [PrivateMaps](https://github.com/Warzone/PrivateMaps). For changes, updates, or any other modification intended for privately-hosted maps, please contact a Map Developer on Warzone.
+This repository contains public maps and active rotations that are found on [Warzone](https://warzone.network). These maps are designed to be compatible with the [PvP Game Manager (PGM)](https://github.com/PGMDev/PGM) plugin utilzing both Minecraft 1.8.9 as well as the latest version. Non-commercial maps or maps used under the explicit permission of their author(s) are hosted at [PrivateMaps](https://github.com/Warzone/PrivateMaps). For changes, updates, or any other modification intended for privately-hosted maps, please contact a Map Developer on Warzone.
 <br/>
 <br/>
 <br/>
@@ -14,8 +14,8 @@ To start contributing, you must clone this repository online, [GitHub Client (re
 
 ### World Version
 
--   Every map must work with Minecraft 1.8.9. To determine the version of a map, you can open the map's `level.dat` with an NBT editor and [find the value of `Data/DataVersion` or `Version`](https://minecraft.wiki/w/Data_version#List_of_data_versions).
--   If the world version is from a future (1.9.x and above) or from past (1.7.x and below) versions of Minecraft, you **must** convert the map to be compatible with 1.8.9.
+-   Every map must work with either Minecraft 1.8.9 or the latest version. To determine the version of a map, you can open the map's `level.dat` with an NBT editor and [find the value of `Data/DataVersion` or `Version`](https://minecraft.wiki/w/Data_version#List_of_data_versions).
+-   If the world version is from a different versions of Minecraft outside of 1.8 or the latest, you **must** convert the map to be compatible with one of them.
     -   This can be done with [Chunker](https://github.com/HiveGamesOSS/Chunker) or by using [Mitchell's nbt-converter script](https://github.com/mitchts/nbt-converter).
 
 ### Chunk Pruning
