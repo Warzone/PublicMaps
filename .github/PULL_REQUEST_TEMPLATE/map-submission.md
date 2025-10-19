@@ -24,7 +24,7 @@
 - [ ] The `map.xml` explicitly [sets the gamemode](https://pgm.dev/docs/modules/general/main#map-gamemode) (for stat-tracking).
 - [ ] The `map.xml` has correctly credited the map authors and contributors.
 - [ ] Contains `map.png` file (`290x246`).
-- [ ] The map was built for (or has been converted to) Minecraft 1.8.
+- [ ] The map was built for (or has been converted to) a supported Minecraft version.
 - [ ] The map has been [pruned](https://pgm.dev/docs/guides/preparing/pruning-chunks/).
 - [ ] The map has been tested on a server running PGM.
 - [ ] I agree to submit this map under CC BY-SA 4.0 license, as mentioned in the [README](https://github.com/Warzone/PublicMaps/blob/main/README.md#license).
