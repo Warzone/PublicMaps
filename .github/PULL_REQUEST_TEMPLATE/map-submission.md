@@ -20,14 +20,15 @@
 ### Map Checklist
 >To mark as completed, replace the space between the [ ] with an `X` or click on the checkbox after submitting this pull request.
 - [ ] Contains a `map.xml` file with valid syntax and formatting.
-- [ ] The `map.xml` uses proto `1.5.0` (older or legacy maps are exempt, so long as the XML works).
-- [ ] The `map.xml` explicitly [sets the gamemode](https://pgm.dev/docs/modules/general/main#map-gamemode) (for stat-tracking).
-- [ ] The `map.xml` has correctly credited the map authors and contributors.
+- [ ] The XML uses proto `1.5.0` (older or legacy maps are exempt, so long as the XML works).
+- [ ] The XML explicitly [sets the gamemode](https://pgm.dev/docs/modules/general/main#map-gamemode) (for stat-tracking).
+- [ ] The XML has correctly credited the map authors and contributors.
 - [ ] Contains `map.png` file (`290x246`).
 - [ ] The map was built for (or has been converted to) a supported Minecraft version.
 - [ ] The map has been [pruned](https://pgm.dev/docs/guides/preparing/pruning-chunks/).
 - [ ] The map has been tested on a server running PGM.
 - [ ] I agree to submit this map under CC BY-SA 4.0 license, as mentioned in the [README](https://github.com/Warzone/PublicMaps/blob/main/README.md#license).
+- [ ] I confirm that I am an original author of this map, ***OR*** that I have obtained explicit permission from the original authors to submit the map in this manner.
 
 ---
 
