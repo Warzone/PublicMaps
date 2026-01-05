@@ -1,7 +1,7 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Penguin Pursuit</name>
-<version>1.0.2</version>
-<slug>penguin_pursuit</slug>
+<version>1.0.3</version>
+<created>2016-02-28</created>
 <objective>The Runners must get from one side of the map to the other without getting killed by the Shooters.</objective>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
@@ -10,37 +10,32 @@
     <author uuid="0347bb56-8ade-410e-9f32-31d54eb10598"/> <!-- jadsaa -->
     <author uuid="c26e7a7f-b4ce-4ebc-ac4d-f60691915d23"/> <!-- kroest/pistolento/gerrard -->
 </authors>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>false</broadcastLives>
-</blitz>
-<time result="defenders">5m</time>
 <teams>
     <team id="runners" color="light purple" max="30" max-overfill="30" plural="true">Runners</team>
     <team id="defenders" color="dark blue" max="4" plural="true">Shooters</team>
 </teams>
 <kits>
-   <kit id="regen">
-       <health>20</health>
-       <saturation>20</saturation>
-       <foodlevel>20</foodlevel>
-   </kit>
-   <kit id="runners-kit">
-       <helmet color="993333" material="leather helmet"/>
-       <chestplate color="993333" material="leather chestplate"/>
-       <leggings color="993333" material="leather leggings"/>
-       <boots enchantment="depth strider:3" color="993333" material="leather boots"/>
-       <potion>speed</potion>
-   </kit>
-   <kit id="defenders-kit">
-       <item slot="1" unbreakable="true" enchantment="power:3;infinity:1" material="bow"/>
-       <item slot="28" material="arrow"/>
-       <helmet color="D87F33" material="leather helmet"/>
-       <chestplate color="D87F33" material="leather chestplate"/>
-       <leggings color="D87F33" material="leather leggings"/>
-       <boots enchantment="depth strider:2" color="D87F33" material="leather boots"/>
-       <potion amplifier="3">speed</potion>
-   </kit>
+    <kit id="regen">
+        <health>20</health>
+        <saturation>20</saturation>
+        <foodlevel>20</foodlevel>
+    </kit>
+    <kit id="runners-kit">
+        <helmet color="993333" material="leather helmet"/>
+        <chestplate color="993333" material="leather chestplate"/>
+        <leggings color="993333" material="leather leggings"/>
+        <boots enchantment="depth strider:3" color="993333" material="leather boots"/>
+        <potion>speed</potion>
+    </kit>
+    <kit id="defenders-kit">
+        <item slot="1" unbreakable="true" enchantment="power:3;infinity:1" material="bow"/>
+        <item slot="28" material="arrow"/>
+        <helmet color="D87F33" material="leather helmet"/>
+        <chestplate color="D87F33" material="leather chestplate"/>
+        <leggings color="D87F33" material="leather leggings"/>
+        <boots enchantment="depth strider:2" color="D87F33" material="leather boots"/>
+        <potion amplifier="3">speed</potion>
+    </kit>
 </kits>
 <spawns yaw="-90">
     <spawn team="runners" kit="runners-kit">
@@ -81,6 +76,11 @@
         </region>
     </apply>
 </regions>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<time result="defenders">5m</time>
 <control-points>
     <control-point name="Capture Point" capture-time="0s">
         <capture>

@@ -1,21 +1,16 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>The Wonders of the World</name>
-<version>1.2.4</version>
+<version>1.2.5</version>
+<created>2017-01-14</created>
 <objective>Runners must break the monument at the end of the map without getting killed by the defenders.</objective>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
 <gamemode>arcade</gamemode>
-<rules>
-    <rule>Fall damage is disabled.</rule>
-    <rule>Camping is illegal.</rule>
-</rules>
-<time result="defenders">5m</time>
-<blitz/>
 <authors>
-    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Portal XML, Petra, Map Captain."/> <!-- GoldenOre -->
-    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Great Wall of China, XML."/> <!-- Jexel -->
-    <author uuid="a37e4da3-1c6c-4dc9-b085-63783406a963" contribution="Stonehenge."/> <!-- Cand -->
-    <author uuid="4faf501d-f965-4f07-887e-24cd66a4f7b0" contribution="Hanging Gardens."/> <!-- ApplePies -->
+    <author uuid="38ab65dd-95f9-406f-917c-6accc995421f" contribution="Portal XML, Petra, Map Captain"/> <!-- GoldenOre -->
+    <author uuid="9225421c-3c09-4d97-bb80-f6a77c1f360b" contribution="Great Wall of China, XML"/> <!-- Jexel -->
+    <author uuid="a37e4da3-1c6c-4dc9-b085-63783406a963" contribution="Stonehenge"/> <!-- Cand -->
+    <author uuid="4faf501d-f965-4f07-887e-24cd66a4f7b0" contribution="Hanging Gardens"/> <!-- ApplePies -->
     <author uuid="73744a16-ca6c-4db4-a293-4c0ea8c6a6ba" contribution="Parthenon"/> <!-- Olynyk -->
     <author uuid="7ab24d14-0801-48ba-8fea-147ddf400067" contribution="Colosseum"/> <!-- samthecat43 -->
     <author uuid="829ed9df-e947-40a1-933e-81aa7cb05189" contribution="Chichen Itza"/> <!-- Oxinous -->
@@ -29,14 +24,18 @@
 <contributors>
     <contributor uuid="9929437a-9b7d-4d7a-b05d-e22fe93ac042" contribution="XML Help"/> <!-- triplezko -->
 </contributors>
+<rules>
+    <rule>Fall damage is disabled.</rule>
+    <rule>Camping is illegal.</rule>
+</rules>
 <teams>
-    <team color="yellow" id="runners" max="30" max-overfill="35" plural="true">Runners</team>
-    <team color="white" id="defenders" max="4" max-overfill="5" plural="true">Defenders</team>
+    <team color="yellow" id="runners-team" max="30" max-overfill="35" plural="true">Runners</team>
+    <team color="white" id="defenders-team" max="4" max-overfill="5" plural="true">Defenders</team>
 </teams>
 <kits>
     <kit id="obs-kit">
         <effect>speed</effect>
-     </kit>
+    </kit>
     <kit id="spawn" force="true">
         <saturation>20</saturation>
         <foodlevel>20</foodlevel>
@@ -97,45 +96,67 @@
     <alert after="4s" every="2m">Camping is not allowed! Runners must try to destroy the monument!</alert>
 </broadcasts>
 <spawns>
-    <spawn team="runners" kit="runners-kit" yaw="90" region="runners-spawn"/>
-    <spawn team="defenders" kit="defenders-kit" yaw="180" region="defenders-spawn"/>
+    <spawn team="runners-team" kit="runners-kit" yaw="90" region="runners-spawn"/>
+    <spawn team="defenders-team" kit="defenders-kit" yaw="180" region="defenders-spawn"/>
     <default yaw="90" kit="obs-kit" region="runners-spawn"/>
 </spawns>
-<gamerules>
-    <naturalRegeneration>false</naturalRegeneration>
-</gamerules>
 <filters>
     <material id="monument">sponge</material>
     <all id="give-wither-filter">
-        <team>runners</team>
+        <team>runners-team</team>
         <time>12s</time>
         <region id="runners-spawn-region"/>
     </all>
     <all id="end-bridge">
-        <team>runners</team>
+        <team>runners-team</team>
         <region id="end-bridge-region"/>
     </all>
     <not id="deny-dispenser">
         <material>dispenser</material>
     </not>
-    <team id="runners-team">runners</team>
     <all id="blindness-petra">
         <region id="blindness-region"/>
-        <team>runners</team>
+        <team>runners-team</team>
     </all>
-    <not id="deny-defenders">
-        <team id="defenders-team">defenders</team>
-    </not>
 </filters>
+<regions>
+    <union id="no-defenders">
+        <cuboid min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
+        <cuboid min="-142.0,2,-200.0" max="-144.0,99,-237.0"/>
+    </union>
+    <union id="jump-pads-strong">
+        <cuboid id="jump-pad-left" min="-79,45,-208" max="-90,47,-209"/>
+        <cuboid id="jump-pad-right" min="-79,45,-227" max="-80,47,-226"/>
+    </union>
+    <cuboid id="jump-pad-weak" min="-82,65,-218" max="-83,67,-217"/>
+    <cuboid id="void-death-region" min="-49,33,-230" max="-84,35,-205"/>
+    <cuboid id="blindness-region" min="-43,33,-230" max="-84,70,-205"/>
+    <rectangle id="end-bridge-region" min="-694.0,-213.0" max="-714.0,-227.0"/>
+    <point id="runners-spawn">153.5,7,-214.5</point>
+    <point id="defenders-spawn">148.5,6,-173.5</point>
+    <negative id="play">
+        <block id="defenders-monument">-707,78,-218</block>
+    </negative>
+    <cuboid id="great-wall" min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
+    <rectangle id="runners-spawn-region" min="150.0,-203.0" max="157.0,-232.0"/>
+    <apply velocity="0.0,3.0,0.0" region="jump-pads-strong"/>
+    <apply velocity="-0.4,1.8,0.2" region="jump-pad-weak"/>
+    <apply kit="runners-kit-wall" region="great-wall" filter="runners-team"/>
+    <apply kit="void-death" region="void-death-region"/>
+    <apply block="never" region="play" use="deny-dispenser"/>
+    <apply enter="deny(defenders-team)" region="no-defenders" message="`7This region is disabled."/>
+</regions>
+<time result="defenders-team">5m</time>
+<blitz/>
 <destroyables name="Monument" materials="bedrock" mode-changes="true">
-    <destroyable owner="defenders" region="defenders-monument"/>
+    <destroyable owner="defenders-team" region="defenders-monument"/>
 </destroyables>
 <modes>
     <mode after="12s" material="sponge" show-before="10s" name="Kicking Runners out of their spawn"/>
 </modes>
 <portals>
     <portal y="-100" sound="false" region="void-death-region"/>
-    <!-- Left Portals -->
+    <!-- Left Portals-->
     <portal x="@68.5" y="@36" z="@-173.5" yaw="@90">
         <region>
             <cuboid min="80,9,-172" max="81,6,-175"/>
@@ -211,7 +232,7 @@
             <cuboid min="-462,79,-175" max="-463,76,-172"/>
         </region>
     </portal>
-    <!-- Left Side Portals -->
+    <!-- Left Side Portals-->
     <portal y="@6" z="@-261.5" yaw="@0">
         <region>
             <cuboid min="150,6,-171" max="81,5,-172"/>
@@ -242,7 +263,7 @@
             <cuboid min="-463,76,-171" max="-700,75,-172"/>
         </region>
     </portal>
-    <!-- Right Portals -->
+    <!-- Right Portals-->
     <portal x="@68.5" y="@36" z="@-261.5" yaw="@90">
         <region>
             <cuboid min="80,9,-260" max="81,6,-263"/>
@@ -313,7 +334,7 @@
             <cuboid min="-462,79,-263" max="-463,76,-260"/>
         </region>
     </portal>
-    <!-- Right Side Portals -->
+    <!-- Right Side Portals-->
     <portal y="@6" z="@-173.5" yaw="@180">
         <region>
             <cuboid min="150,6,-263" max="81,5,-264"/>
@@ -344,7 +365,7 @@
             <cuboid min="-463,76,-263" max="-700,75,-264"/>
         </region>
     </portal>
-    <!-- Eiffel Tower Portal -->
+    <!-- Eiffel Tower Portal-->
     <portal x="@-635.5" y="@77.1" z="@-217.5" yaw="@90">
         <region>
             <cuboid min="-618,135,-216" max="-617,133,-219"/>
@@ -364,33 +385,9 @@
     <item>leather leggings</item>
     <item>leather boots</item>
 </itemremove>
-<regions>
-    <union id="no-defenders">
-        <cuboid min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
-        <cuboid min="-142.0,2,-200.0" max="-144.0,99,-237.0"/>
-    </union>
-    <union id="jump-pads-strong">
-        <cuboid id="jump-pad-left" min="-79,45,-208" max="-90,47,-209"/>
-        <cuboid id="jump-pad-right" min="-79,45,-227" max="-80,47,-226"/>
-    </union>
-    <cuboid id="jump-pad-weak" min="-82,65,-218" max="-83,67,-217"/>
-    <cuboid id="void-death-region" min="-49,33,-230" max="-84,35,-205"/>
-    <cuboid id="blindness-region" min="-43,33,-230" max="-84,70,-205"/>
-    <rectangle id="end-bridge-region" min="-694.0,-213.0" max="-714.0,-227.0"/>
-    <point id="runners-spawn">153.5,7,-214.5</point>
-    <point id="defenders-spawn">148.5,6,-173.5</point>
-    <negative id="play">
-        <block id="defenders-monument">-707,78,-218</block>
-    </negative>
-    <cuboid id="great-wall" min="-84.0,60,-203.0" max="-85.0,84,-232.0"/>
-    <rectangle id="runners-spawn-region" min="150.0,-203.0" max="157.0,-232.0"/>
-    <apply velocity="0.0,3.0,0.0" region="jump-pads-strong"/>
-    <apply velocity="-0.4,1.8,0.2" region="jump-pad-weak"/>
-    <apply kit="runners-kit-wall" region="great-wall" filter="runners-team"/>
-    <apply kit="void-death" region="void-death-region"/>
-    <apply block="never" region="play" use="deny-dispenser"/>
-    <apply enter="deny-defenders" region="no-defenders" message="`7This region is disabled."/>
-</regions>
+<gamerules>
+    <naturalRegeneration>false</naturalRegeneration>
+</gamerules>
 <mobs>
     <filter>
         <all>

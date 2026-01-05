@@ -1,19 +1,12 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Juggernaut's Hall</name>
-<version>1.1.8</version>
+<version>1.1.9</version>
+<created>2016-03-26</created>
 <objective>Escape from the Juggernaut!</objective>
 <gamemode>arcade</gamemode>
 <authors>
     <author uuid="e79fbdc9-627e-4dac-97a6-81a3046220d7"/> <!-- AtlasGames -->
 </authors>
-<time result="juggernaut">150s</time>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>true</broadcastLives>
-</blitz>
-<score>
-    <limit>1</limit>
-</score>
 <broadcasts>
     <alert after="1s">`6`lRun from the Juggernaut!</alert>
     <alert after="15s">`6`lThe Juggernaut has been released!</alert>
@@ -22,23 +15,6 @@
     <team id="runners" min="3" max="50" color="red" plural="true" show-name-tags="true">Runners</team>
     <team id="juggernaut" min="1" max="1" color="blue" show-name-tags="true">Juggernaut</team>
 </teams>
-<spawns>
-    <spawn team="runners" kit="runner-kit">
-        <regions>
-            <cuboid min="-248,7,10" max="-246,7,12"/>
-        </regions>
-    </spawn>
-    <spawn team="juggernaut" kit="juggernaut-kit">
-        <regions yaw="-90">
-            <cuboid min="-253,7,15" max="-251,7,17"/>
-        </regions>
-    </spawn>
-    <default>
-        <regions>
-            <cuboid min="-248.5,7,10.5" max="-245.5,7,12.5"/>
-        </regions>
-    </default>
-</spawns>
 <kits>
     <kit id="runner-kit">
         <boots unbreakable="true" material="iron boots" locked="true"/>
@@ -49,13 +25,13 @@
                 <material>torch</material>
             </can-destroy>
         </item>
-        <item slot="2" material="iron pickaxe" enchantment="dig speed:1" unbreakable="true">
+        <item slot="2" material="iron pickaxe" enchantment="dig speed" unbreakable="true">
             <can-destroy>
                 <material>ender stone</material>
                 <material>torch</material>
             </can-destroy>
         </item>
-        <potion duration="oo" amplifier="1">invisibility</potion>
+        <effect>invisibility</effect>
         <item projectile="slowball" name="`aSlowball" amount="8" slot="1">egg</item>
         <game-mode>adventure</game-mode>
     </kit>
@@ -78,62 +54,28 @@
                 <material>stained glass</material>
             </can-destroy>
         </item>
-        <potion duration="oo" amplifier="-10">jump</potion>
-        <effect duration="oo" amplifier="10">resistance</effect>
+        <effect amplifier="-10">jump</effect>
+        <effect amplifier="10">resistance</effect>
         <game-mode>adventure</game-mode>
     </kit>
 </kits>
-<itemremove>
-    <item>iron pickaxe"</item>
-    <item>iron boots</item>
-    <item>iron chestplate</item>
-    <item>stick</item>
-    <item>diamond helmet</item>
-    <item>string</item>
-    <item>seeds</item>
-    <item>diamond chestplate</item>
-    <item>diamond leggings</item>
-    <item>diamond boots</item>
-    <item>diamond sword</item>
-    <item>sign</item>
-    <item>wood button</item>
-    <item>ender stone</item>
-    <item>torch</item>
-    <item>egg</item>
-</itemremove>
-<disabledamage>
-    <damage>fall</damage>
-</disabledamage>
-<destroyables>
-    <destroyable owner="juggernaut" materials="iron fence" name="Juggernaut Cage" show="false" completion="100%" mode-changes="true" sparks="true">
-        <region><cuboid min="-250,10,15" max="-249,6,17"/></region>
-    </destroyable>
-</destroyables>
-<modes>
-    <mode after="15s" material="air" name="Juggernaut will be released" show-before="10s"/>
-</modes>
-<projectiles>
-    <projectile id="slowball" name="Slowball" projectile="Egg" velocity="3.5" damage="0" throwable="true">
-        <potion duration="2" amplifier="10">blindness</potion>
-        <potion duration="2" amplifier="5">slow</potion>
-    </projectile>
-</projectiles>
-<falling-blocks>
-    <rule delay="30">
-        <filter>
-            <material>clay</material>
-        </filter>
-    </rule>
-</falling-blocks>
-<control-points>
-    <control-point id="win-platform" capture-time="0s" show="false" points="1" permanent="true">
-        <capture-filter><team>runners</team></capture-filter>
-        <capture><cuboid min="-288,11,37" max="-286,12,39"/></capture>
-    </control-point>
-</control-points>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
+<spawns>
+    <spawn team="runners" kit="runner-kit">
+        <region>
+            <cuboid min="-248,7,10" max="-246,7,12"/>
+        </region>
+    </spawn>
+    <spawn team="juggernaut" kit="juggernaut-kit">
+        <region yaw="-90">
+            <cuboid min="-253,7,15" max="-251,7,17"/>
+        </region>
+    </spawn>
+    <default>
+        <region>
+            <cuboid min="-248.5,7,10.5" max="-245.5,7,12.5"/>
+        </region>
+    </default>
+</spawns>
 <filters>
     <any id="only-some">
         <all>
@@ -165,4 +107,66 @@
         </region>
     </apply>
 </regions>
+<time result="juggernaut">150s</time>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<score>
+    <limit>1</limit>
+</score>
+<destroyables>
+    <destroyable owner="juggernaut" materials="iron fence" name="Juggernaut Cage" show="false" mode-changes="true" sparks="true">
+        <region>
+            <cuboid min="-250,10,15" max="-249,6,17"/>
+        </region>
+    </destroyable>
+</destroyables>
+<modes>
+    <mode after="15s" material="air" name="Juggernaut will be released" show-before="10s"/>
+</modes>
+<projectiles>
+    <projectile id="slowball" name="Slowball" projectile="Egg" velocity="3.5" damage="0" throwable="true">
+        <potion duration="2" amplifier="10">blindness</potion>
+        <potion duration="2" amplifier="5">slow</potion>
+    </projectile>
+</projectiles>
+<falling-blocks>
+    <rule delay="30">
+        <filter>
+            <material>clay</material>
+        </filter>
+    </rule>
+</falling-blocks>
+<control-points>
+    <control-point id="win-platform" capture-time="0s" show="false" points="1" permanent="true" capture-filter="runners">
+        <capture>
+            <cuboid min="-288,11,37" max="-286,12,39"/>
+        </capture>
+    </control-point>
+</control-points>
+<itemremove>
+    <item>iron pickaxe</item>
+    <item>iron boots</item>
+    <item>iron chestplate</item>
+    <item>stick</item>
+    <item>diamond helmet</item>
+    <item>string</item>
+    <item>seeds</item>
+    <item>diamond chestplate</item>
+    <item>diamond leggings</item>
+    <item>diamond boots</item>
+    <item>diamond sword</item>
+    <item>sign</item>
+    <item>wood button</item>
+    <item>ender stone</item>
+    <item>torch</item>
+    <item>egg</item>
+</itemremove>
+<disabledamage>
+    <damage>fall</damage>
+</disabledamage>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>

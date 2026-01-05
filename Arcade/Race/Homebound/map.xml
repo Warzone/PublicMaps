@@ -1,6 +1,7 @@
-<map proto="1.4.2" game="Rush">
+<map proto="1.5.0" game="Rush">
 <name>Homebound</name>
-<version>1.0.1</version>
+<version>1.0.2</version>
+<created>2016-04-20</created>
 <objective>Runners must destroy the monument on the other side of the lane without getting killed by the Defenders.</objective>
 <gamemode>ad</gamemode>
 <gamemode>blitz</gamemode>
@@ -14,22 +15,15 @@
 <rules>
     <rule>Fall Damage is disabled.</rule>
 </rules>
-<!-- <broadcasts>
-    <tip filter="defenders-only" after="5s" every="1m">Use the feather to move fast across the tracks</tip>
-</broadcasts> -->
-<destroyables>
-    <destroyable owner="defenders" name="Monument" region="monumentRegion" materials="sponge" required="true"/>
-</destroyables>
-<blitz>
-    <lives>1</lives>
-    <broadcastLives>true</broadcastLives>
-</blitz>
+<broadcasts>
+    <tip filter="defenders-team" after="5s" every="1m">Use the feather to move fast across the tracks</tip>
+</broadcasts>
 <teams>
-    <team id="runners" color="light purple" max="25" max-overfill="30">Runners</team>
-    <team id="defenders" color="dark blue" max="4">Defenders</team>
+    <team id="runners-team" color="light purple" max="25" max-overfill="30">Runners</team>
+    <team id="defenders-team" color="dark blue" max="4">Defenders</team>
 </teams>
 <kits>
-    <kit id="purple">
+    <kit id="runners-kit">
         <helmet color="FAA8B2" material="leather helmet"/>
         <chestplate color="FAA8B2" material="leather chestplate"/>
         <leggings color="8C0075" material="leather leggings"/>
@@ -44,40 +38,34 @@
         <leggings color="8C0075" material="leather leggings"/>
         <boots color="8C0075" material="leather boots"/>
     </kit>
-    <kit id="red">
+    <kit id="defenders-kit">
         <helmet color="7F1111" material="leather helmet"/>
         <chestplate color="7F1111" material="leather chestplate"/>
         <leggings color="1D0404" material="leather leggings"/>
         <boots color="1D0404" material="leather boots"/>
         <effect duration="600" amplifier="2">speed</effect>
         <effect duration="600">night vision</effect>
-        <item slot="1" unbreakable="true" enchantment="arrow knockback;arrow damage:3;arrow infinite" material="bow"/>
-        <!-- <item slot="8" lore="`4Speedy Feather" attributes="generic.movementSpeed:base:0.3" material="feather"/> -->
-        <walk-speed>1.3</walk-speed> <!-- Warzone specific, uncomment above line if you have a good anti-cheat plugin -->
+        <item slot="1" unbreakable="true" enchantment="arrow knockback:1;arrow damage:3;arrow infinite:1" material="bow"/>
+        <item slot="8" lore="`4Speedy Feather" attributes="generic.movementSpeed:base:0.3" material="feather"/>
         <item slot="28" material="arrow"/>
     </kit>
     <kit id="observerKit">
         <effect>night vision</effect>
     </kit>
 </kits>
-<itemremove>
-    <item>sponge</item>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>leather leggings</item>
-    <item>leather boots</item>
-</itemremove>
-<timelock>on</timelock>
+<spawns>
+    <spawn team="runners-team" kit="runners-kit" region="runner-spawn"/>
+    <spawn team="defenders-team" kit="defenders-kit" region="defender-spawn"/>
+    <default kit="observerKit" region="observer-spawn"/>
+</spawns>
 <filters>
-    <material id="monumentFilter">sponge</material>
-    <team id="defenders-only">defenders</team>
-    <team id="runners-only">runners</team>
+    <material id="monument">sponge</material>
 </filters>
 <regions>
-    <block id="monumentRegion">-824.5,25.5,1153.5</block>
-    <cuboid id="runnerSpawn" min="-831,7,857" max="-826,8,860"/>
-    <cuboid id="defenderSpawn" min="-875,8,853" max="-873,9,854"/>
-    <cuboid id="observerSpawn" min="-844,37,856" max="-839,38,860"/>
+    <block id="monumentregion">-824.5,25.5,1153.5</block>
+    <cuboid id="runner-spawn" min="-831,7,857" max="-826,8,860"/>
+    <cuboid id="defender-spawn" min="-875,8,853" max="-873,9,854"/>
+    <cuboid id="observer-spawn" min="-844,37,856" max="-839,38,860"/>
     <!-- Portal Regions -->
     <cuboid id="spawnTreesPortal" min="-876,7,946" max="-872,11,947"/>
     <block id="spawnTreesDestination">-873.5,35,975.5</block>
@@ -93,13 +81,16 @@
     <cuboid id="rightTrackVillageSwap" min="-876,24,1108" max="-875,25,1178"/>
     <rectangle id="enderPearlRegion" min="-857,950" max="-808,1220"/>
     <apply region="enderPearlRegion" kit="pastPearls"/>
-    <apply block="monumentFilter" message="You cannot break blocks!"/>
+    <apply block="monument" message="You may not break blocks!"/>
 </regions>
-<spawns>
-    <spawn team="runners" kit="purple" region="runnerSpawn"/>
-    <spawn team="defenders" kit="red" region="defenderSpawn"/>
-    <default kit="observerKit" region="observerSpawn"/>
-</spawns>
+<destroyables>
+    <destroyable owner="defenders-team" name="Monument" region="monumentregion" materials="sponge" required="true"/>
+</destroyables>
+<blitz>
+    <lives>1</lives>
+    <broadcastLives>true</broadcastLives>
+</blitz>
+<time result="defenders-team">5m</time>
 <portals>
     <portal region="spawnTreesPortal" destination="spawnTreesDestination"/>
     <portal region="treesSpawnPortal" destination="treesSpawnDestination"/>
@@ -110,7 +101,14 @@
     <portal x="-75" y="@26" z="10" region="leftTrackVillageSwap"/>
     <portal x="75" y="@35" z="10" region="rightTrackVillageSwap"/>
 </portals>
-<time result="defenders">5m</time>
+<itemremove>
+    <item>sponge</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+</itemremove>
+<timelock>on</timelock>
 <gamerules>
     <naturalRegeneration>false</naturalRegeneration>
 </gamerules>
