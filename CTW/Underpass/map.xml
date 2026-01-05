@@ -1,0 +1,125 @@
+<map proto="1.5.0">
+<name>Underpass</name>
+<version>1.0.4</version>
+<created>2015-08-22</created>
+<objective>Take the enemy's wool back to your side and place it on your victory monument.</objective>
+<include id="gapple-kill-reward"/>
+<gamemode>ctw</gamemode>
+<authors>
+    <author uuid="2a289d2a-d970-49c5-9a6c-01fc0264e317"/> <!-- StealthMedia -->
+    <author uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
+</authors>
+<teams>
+    <team id="yellow-team" color="gold" max="16" max-overfill="18">Yellow</team>
+    <team id="red-team" color="dark red" max="16" max-overfill="18">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="stone sword"/>
+        <item slot="1" material="bow"/>
+        <item slot="2" enchantment="durability:3;dig speed" material="iron pickaxe"/>
+        <item slot="3" amount="32" team-color="true" material="stained clay"/>
+        <item slot="28" amount="64" material="arrow"/>
+        <item slot="4" amount="32" material="leaves"/>
+        <item slot="5" material="golden apple"/>
+        <item slot="8" material="stone axe"/>
+        <chestplate team-color="true" material="leather chestplate"/>
+        <leggings material="chainmail leggings"/>
+        <boots material="iron boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region>
+            <cylinder base="72,13.2,-31" radius="1.5" height="0"/>
+        </region>
+    </default>
+    <spawn team="red-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <cylinder base="-3.5,19.2,0.5" radius="3" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="yellow-team" kit="spawn-kit" yaw="90">
+        <region>
+            <cylinder base="147.5,19.2,0.5" radius="3" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<regions>
+    <apply block="always">
+        <region>
+            <cuboid min="92,6,9" max="52,21,-8"/>
+        </region>
+    </apply>
+    <apply enter="red-team">
+        <region>
+            <cylinder id="yellow-wool" base="147.5,0,0.5" height="18" radius="11"/>
+            <cylinder id="red-spawn" base="-3.5,19,0.5" height="5" radius="11"/>
+        </region>
+    </apply>
+    <apply enter="yellow-team">
+        <region>
+            <cylinder id="red-wool" base="-3.5,0,0.5" height="18" radius="11"/>
+            <cylinder id="yellow-spawn" base="147.5,19,0.5" height="5" radius="11"/>
+        </region>
+    </apply>
+    <apply block="never">
+        <region>
+            <rectangle min="-16,-11" max="9,12"/>
+            <rectangle min="135,-11" max="160,12"/>
+        </region>
+    </apply>
+    <apply block="deny(void)"/>
+</regions>
+<wools>
+    <wool team="yellow-team" color="red" location="-4,6,1">
+        <monument>
+            <block>157.5,21.5,0.5</block>
+        </monument>
+    </wool>
+    <wool team="red-team" color="yellow" location="147,6,1">
+        <monument>
+            <block>-13.5,21.5,0.5</block>
+        </monument>
+    </wool>
+</wools>
+<itemremove>
+    <item>dirt</item>
+    <item>smooth brick</item>
+    <item>spruce fence</item>
+    <item>smooth stairs</item>
+    <item>cobblestone</item>
+    <item>gravel</item>
+    <item>stained clay</item>
+    <item>wood step</item>
+    <item>spruce wood stairs</item>
+    <item>stone</item>
+    <item>seeds</item>
+    <item>apple</item>
+    <item>wood</item>
+    <item>piston base</item>
+    <item>cauldron</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>leaves</item>
+    <item>step</item>
+    <item>arrow</item>
+	<item>flint</item>
+</itemremove>
+<toolrepair>
+    <tool>bow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>stone sword</tool>
+    <tool>stone axe</tool>
+</toolrepair>
+<kill-rewards>
+    <kill-reward>
+        <item amount="10" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<maxbuildheight>21</maxbuildheight>
+</map>
