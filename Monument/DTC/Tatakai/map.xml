@@ -1,7 +1,8 @@
 <map proto="1.5.0">
 <name>Tatakai</name>
-<version>1.0.4</version>
 <gamemode>dtc</gamemode>
+<version>1.0.5</version>
+<created>2015-05-15</created>
 <objective>Leak the enemy team's core to win!</objective>
 <include id="gapple-kill-reward"/>
 <authors>
@@ -16,21 +17,20 @@
 </teams>
 <kits>
     <kit id="spawn-kit" potion-particles="true">
-        <item slot="0" material="iron sword"/>
-        <item slot="1" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" material="diamond pickaxe"/>
-        <item slot="3" material="iron axe"/>
+        <clear/>
+        <item unbreakable="true" slot="0" material="iron sword"/>
+        <item unbreakable="true" slot="1" enchantment="arrow infinite" material="bow"/>
+        <item unbreakable="true" slot="2" material="diamond pickaxe"/>
+        <item unbreakable="true" slot="3" material="iron axe"/>
         <item slot="4" amount="2" material="golden apple"/>
         <item slot="5" amount="32" material="wood"/>
         <item slot="6" amount="16" material="glass"/>
-        <item slot="8" amount="64" material="carrot item"/>
         <item slot="28" material="arrow"/>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" material="iron chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
         <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="3" amplifier="10">heal</effect>
-        <effect duration="3" amplifier="10">damage resistance</effect>
+        <effect duration="3" amplifier="5">damage resistance</effect>
     </kit>
 </kits>
 <spawns>
@@ -89,18 +89,22 @@
     <tool>diamond pickaxe</tool>
     <tool>iron axe</tool>
 </toolrepair>
-<itemremove>
-    <item>arrow</item>
+<itemkeep>
     <item>wood</item>
     <item>glass</item>
+    <item>golden apple</item>
+</itemkeep>
+<itemremove>
+    <item>arrow</item>
     <item>obsidian</item>
     <item>gold block</item>
     <item>leather helmet</item>
     <item>iron chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
-    <item>carrot item</item>
-    <item>golden apple</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 <maxbuildheight>21</maxbuildheight>
 </map>

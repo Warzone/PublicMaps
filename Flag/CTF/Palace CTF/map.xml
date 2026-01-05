@@ -1,26 +1,32 @@
 <map proto="1.5.0">
 <name>Palace CTF</name>
-<version>1.2.4</version>
+<version>1.2.5</version>
+<created>2015-03-12</created>
 <objective>Have the most flag captures in 12 minutes!</objective>
 <gamemode>ctf</gamemode>
 <constant id="damage-resistance">4s</constant>
 <constant id="respawn-timer">4s</constant>
-<constant id="enable-feather-falling">true</constant>
-<constant id="feather-falling-level">2</constant>
 <include id="conquest"/>
 <time result="score" overtime="1m" max-overtime="2m">12m</time>
 <authors>
     <author uuid="07fa10c6-f564-4630-861e-fe134ae27527"/> <!-- Yoyo_ -->
-    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" /> <!-- Diamyx -->
+    <author uuid="f70b7a8f-93b2-480f-9d54-88e21485a042"/> <!-- Diamyx -->
 </authors>
 <contributors>
-    <contributor uuid="337ae91f-960b-4562-906d-f52f9e56d392" /> <!-- Aalhond -->
+    <contributor uuid="337ae91f-960b-4562-906d-f52f9e56d392"/> <!-- Aalhond -->
 </contributors>
 <teams>
     <team id="red-team" color="dark red" max="24">Red</team>
     <team id="yellow-team" color="yellow" max="24">Yellow</team>
 </teams>
 <kits>
+    <kit id="spawn-kit" parent="base-kit">
+        <action>
+            <enchant-item ignore-metadata="true" enchantment="feather_falling" level="2">
+                <find material="iron boots"/>
+            </enchant-item>
+        </action>
+    </kit>
     <kit id="flag-pickup" force="true">
         <max-health>16</max-health>
         <effect ambient="true">slowness</effect>

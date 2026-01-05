@@ -1,9 +1,28 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Limbo II</name>
-<version>1.0.12</version>
-<edition>standard</edition>
-<objective>Be the first team to 750 points!</objective>
 <gamemode>koth</gamemode>
+<version>1.1</version>
+<created>2015-12-19</created>
+<variant id="7v7">7v7</variant>
+<unless variant="7v7">
+    <include id="conquest"/>
+    <constant id="score">750</constant>
+    <constant id="respawn-timer">2s</constant>
+    <constant id="points-per-second">1</constant>
+    <constant id="team-size">16</constant>
+    <constant id="max-overfill" delete="true"/>
+    <constant id="damage-resistance">5s</constant>
+</unless>
+<if variant="7v7">
+    <include id="conquest-comp"/>
+    <constant id="score">2500</constant>
+    <constant id="respawn-timer">2s</constant>
+    <constant id="points-per-second">3</constant>
+    <constant id="team-size">7</constant>
+    <constant id="max-overfill">7</constant>
+    <constant id="damage-resistance">5s</constant>
+</if>
+<objective>Be the first team to ${score} points!</objective>
 <authors>
     <author uuid="5e1c0b5d-cfdd-4e10-95cd-c53f8ee92150"/> <!-- VCRHeadCleaner -->
 </authors>
@@ -11,31 +30,14 @@
     <contributor uuid="459fd919-0d58-401a-9601-6cab1eb721ab" contribution="Tourney Dude"/> <!-- Reshif -->
 </contributors>
 <teams>
-    <team id="cyan" color="dark aqua" max="16">Cyan</team>
-    <team id="orange" color="gold" max="16">Orange</team>
+    <team id="cyan" color="dark aqua" max="${team-size}" max-overfill="${team-size}">Cyan</team>
+    <team id="orange" color="gold" max="${team-size}" max-overfill="${team-size}">Orange</team>
 </teams>
 <kits>
     <kit id="default-kit">
         <effect>night vision</effect>
     </kit>
-    <kit id="spawn-kit" parents="default-kit">
-        <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
-        <item slot="8" amount="16" material="arrow"/>
-        <helmet team-color="true" unbreakable="true" material="leather helmet"/>
-        <chestplate team-color="true" unbreakable="true" material="leather chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="2">protection_projectile</enchantment>
-        </leggings>
-        <boots unbreakable="true" material="iron boots">
-            <enchantment>feather_falling</enchantment>
-        </boots>
-        <effect duration="5" amplifier="4">heal</effect>
-        <effect duration="5" amplifier="4">damage resistance</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
+    <kit id="spawn-kit" parents="default-kit,base-kit"/>
 </kits>
 <spawns>
     <default kit="default-kit">
@@ -59,13 +61,13 @@
         <cuboid id="south-pad" min="-1,6,25" max="2,9,27"/>
         <cuboid id="north-pad" min="-1,6,-26" max="2,9,-24"/>
     </union>
-    <apply velocity="@0,1.7,-0.1" region="south-pad"/>
-    <apply velocity="@0,1.7,0.1" region="north-pad"/>
+    <apply velocity="@0,1.7,-0.1" kit="used-jump-pad" region="south-pad"/>
+    <apply velocity="@0,1.7,0.1" kit="used-jump-pad" region="north-pad"/>
     <apply block="never" use="never"/>
 </regions>
 <king>
-    <hills required="false" capture-time="5s" points="1" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
-        <hill name="Point A">
+    <hills required="false" capture-time="5s" points="${points-per-second}" time-multiplier="0" show-progress="true" neutral-state="true" incremental="true" permanent="false">
+        <hill name="Hill A">
             <capture>
                 <cuboid min="-2,18,9" max="3,22,14"/>
             </capture>
@@ -76,7 +78,7 @@
                 <cuboid min="-2,26,9" max="3,31,14"/>
             </captured>
         </hill>
-        <hill name="Point B">
+        <hill name="Hill B">
             <capture>
                 <cuboid min="-2,18,-13" max="3,22,-8"/>
             </capture>
@@ -87,7 +89,7 @@
                 <cuboid min="-2,26,-13" max="3,31,-8"/>
             </captured>
         </hill>
-        <hill name="Point C">
+        <hill name="Hill C">
             <capture>
                 <cuboid min="-2,8,-2" max="3,12,3"/>
             </capture>
@@ -101,50 +103,41 @@
     </hills>
 </king>
 <score>
-    <limit>750</limit>
+    <limit>${score}</limit>
 </score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
-<itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
-</itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<kill-reward>
-    <item material="golden apple"/>
-    <item amount="8" material="arrow"/>
-</kill-reward>
-<respawn auto="true"/>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
-<filters> <!-- Disables fall damage when using jump pads, reenables it after landing -->
-    <all id="reset-antifall">
-        <not>
-            <region id="jump-pads"/>
-        </not>
-        <variable var="fall_variable">1</variable>
-        <grounded/>
-    </all>
-</filters>
-<actions>
-    <set id="fall-var-0" var="fall_variable" value="0" scope="player"/>
-    <set id="fall-var-1" var="fall_variable" value="1" scope="player"/>
-    <trigger filter="jump-pads" trigger="fall-var-1" scope="player"/>
-    <trigger filter="reset-antifall" trigger="fall-var-0" scope="player"/>
-</actions>
+<!-- Disables fall damage when using jump pads, reenables it after landing -->
+<kits>
+    <kit id="used-jump-pad">
+        <action scope="player">
+            <set var="fall_variable" value="1"/>
+        </action>
+    </kit>
+    <give>
+        <!-- Reset the variable to 0 only after a player is definitely not on the jump pad, and is more certainly grounded. If we do not time this, the variable can reset before the player has velocity applied in the jump pad region. -->
+        <filter>
+            <all>
+                <after duration="1s">
+                    <not>
+                        <region id="jump-pads"/>
+                    </not>
+                </after>
+                <after duration="0.2s">
+                    <grounded/>
+                </after>
+            </all>
+        </filter>
+        <kit>
+            <action scope="player">
+                <set var="fall_variable" value="0"/>
+            </action>
+        </kit>
+    </give>
+</kits>
 <variables>
-    <variable id="fall_variable" scope="player"/>
+    <variable id="fall_variable" scope="player" default="0"/>
 </variables>
 <damage>
-    <deny id="nofall">
+    <deny>
         <all>
             <cause>fall</cause>
             <variable var="fall_variable">1</variable>

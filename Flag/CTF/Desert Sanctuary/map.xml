@@ -1,17 +1,23 @@
 <map proto="1.5.0">
 <name>Desert Sanctuary</name>
-<version>1.6.6</version>
+<version>1.6.7</version>
 <variant id="5v5" world="5v5">5v5</variant>
 <variant id="7v7" world="7v7">7v7</variant>
+<variant id="5v5-ac" world="5v5">5v5 AC</variant>
+<variant id="7v7-ac" world="7v7">7v7 AC</variant>
 <variant id="halloween" world="halloween" override="true">Deserted Sanctuary</variant>
 <variant id="christmas" world="christmas" override="true">Christmas Sanctuary</variant>
-<unless variant="5v5,7v7">
+<constant id="damage-resistance">7.5s</constant>
+<if variant="default">
+    <created>2015-05-24</created>
+</if>
+<unless variant="5v5,7v7,5v5-ac,7v7-ac">
     <include id="kotf"/>
     <constant id="mid-post-filter">always</constant>
     <constant id="team-size">20</constant>
     <constant id="max-overfill" delete="true"/>
 </unless>
-<if variant="5v5,7v7">
+<if variant="5v5,7v7,5v5-ac,7v7-ac">
     <include id="kotf-comp"/>
     <constant id="mid-post-filter">never</constant>
 </if>
@@ -22,24 +28,27 @@
     <constant id="team-2-name">Red</constant>
     <constant id="flag-color">purple</constant>
 </unless>
+<if variant="christmas">
+    <created>2015-11-27</created>
+</if>
 <if variant="halloween">
+    <created>2015-09-30</created>
     <constant id="team-1-color">dark purple</constant>
     <constant id="team-1-name">Purple</constant>
     <constant id="team-2-color">gold</constant>
     <constant id="team-2-name">Orange</constant>
     <constant id="flag-color">lime</constant>
 </if>
-<if variant="5v5">
+<if variant="5v5,5v5-ac">
     <constant id="team-size">5</constant>
     <constant id="max-overfill">5</constant>
     <constant id="respawn-timer">4s</constant>
 </if>
-<if variant="7v7">
+<if variant="7v7,7v7-ac">
     <constant id="team-size">7</constant>
     <constant id="max-overfill">7</constant>
     <constant id="respawn-timer">5s</constant>
 </if>
-<constant id="damage-resistance">7.5s</constant>
 <objective>Control the flag for ${score} seconds to win!</objective>
 <authors>
     <author uuid="621b2aa8-4e5f-4ed8-bd36-0ae2f8952a06"/> <!-- thestrangeboy1 -->
@@ -71,10 +80,9 @@
         </if>
         <unless variant="5v5">
             <action>
-                <replace-item ignore-metadata="true">
+                <enchant-item ignore-metadata="true" enchantment="feather_falling" level="2">
                     <find material="iron boots"/>
-                    <replace unbreakable="true" enchantment="feather_falling:2" material="iron boots"/>
-                </replace-item>
+                </enchant-item>
             </action>
         </unless>
         <if variant="christmas">
@@ -143,4 +151,7 @@
         <timeset>1000</timeset>
     </world>
 </unless>
+<if variant="5v5-ac,7v7-ac">
+    <include id="arrow-cooldown"/>
+</if>
 </map>

@@ -1,6 +1,13 @@
 <map proto="1.5.0">
-<name>Hand of God</name> 
-<version>1.1.2</version> 
+<name>Hand of God</name>
+<variant id="halloween" world="halloween" override="true">Hand of Lucifer</variant>
+<version>1.3.0</version>
+<if variant="default">
+    <created>2015-03-16</created>
+</if>
+<if variant="halloween">
+    <created>2015-10-02</created>
+</if>
 <objective>Eliminate the other team!</objective>
 <gamemode>br</gamemode>
 <gamemode>arcade</gamemode>
@@ -12,7 +19,7 @@
    <team id="blue" color="blue" max="10" max-overfill="12">Blue</team>
 </teams>
 <kits>
-    <kit id="spawn">
+    <kit id="spawn-kit">
         <item slot="0" enchantment="damage all:10" material="iron sword"/>
         <item slot="1" enchantment="arrow damage:10" material="bow"/>
         <item slot="2" material="arrow"/>
@@ -22,11 +29,12 @@
         <effect duration="5" amplifier="25">damage resistance</effect>
         <effect>speed</effect>
         <effect>jump</effect>
+        <game-mode>adventure</game-mode>
     </kit>
-    <kit id="red-kit" parents="spawn">
+    <kit id="red-kit" parents="spawn-kit">
         <boots unbreakable="true" material="iron boots"/>
     </kit>
-    <kit id="blue-kit" parents="spawn">
+    <kit id="blue-kit" parents="spawn-kit">
         <boots color="334CB2" unbreakable="true" material="leather boots"/>
     </kit>
     <kit id="kill" force="true">
@@ -52,17 +60,27 @@
     </default>
 </spawns>
 <filters>
-    <not id="deny-use">
-        <material>beacon</material>
-    </not>
+    <material id="only-beacon">beacon</material>
 </filters>
 <regions>
-    <apply block="never" use="deny-use"/>
+    <apply block="never" use="deny(only-beacon)"/>
     <apply kit="kill">
         <region>
             <below y="55"/>
         </region>
     </apply>
+    <if variant="halloween">
+        <apply velocity="0,0.7,4">
+            <region>
+                <block>-21,75,-12</block>
+            </region>
+        </apply>
+        <apply velocity="0,0.7,-4">
+            <region>
+                <block>21,75,12</block>
+            </region>
+        </apply>
+    </if>
 </regions>
 <time>5m</time>
 <blitz>
@@ -86,4 +104,5 @@
     <damage>fall</damage>
 </disabledamage>
 <timelock>on</timelock>
+<respawn auto="true" delay="3s"/>
 </map>
