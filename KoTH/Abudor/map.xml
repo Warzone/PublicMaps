@@ -1,10 +1,13 @@
-<map proto="1.4.2">
+<map proto="1.5.0">
 <name>Abudor</name>
+<version>1.6.2</version>
 <variant id="christmas" world="christmas">Christmas</variant>
 <variant id="halloween" world="halloween" override="true">Abudracula</variant>
-<version>1.6.1</version>
 <objective>Capture the two hills to score points to win.</objective>
 <gamemode>koth</gamemode>
+<constant id="damage-resistance">5s</constant>
+<constant id="respawn-timer">2s</constant>
+<include id="conquest"/>
 <authors>
     <author uuid="8f9344cf-7367-4e28-9f24-5c66422f28c9" contribution="Main author, idea, gameplay, aesthetics and XML."/> <!-- Timothee38 -->
     <author uuid="b0900577-7604-4dc7-9e82-f431da31e456" contribution="Building, aesthetics, small XML work and feedback."/> <!-- Dracoheart2 -->
@@ -27,6 +30,7 @@
     <constant id="yellow-team-name">Yellow Reindeers</constant>
 </if>
 <if variant="halloween">
+    <created>2014-10-01</created>
     <constant id="pink-team-name">Vampires</constant>
     <constant id="yellow-team-name">Living Dead</constant>
 </if>
@@ -34,25 +38,6 @@
     <team id="pink" color="light purple" max="12">${pink-team-name}</team>
     <team id="yellow" color="yellow" max="12">${yellow-team-name}</team>
 </teams>
-<kits>
-    <kit id="spawn-kit">
-        <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" material="golden apple"/>
-        <item slot="3" material="gold ingot"/>
-        <item slot="4" amount="16" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" material="chainmail leggings">
-            <enchantment level="3">projectile_protection</enchantment>
-        </leggings>
-        <boots unbreakable="true" material="iron boots"/>
-        <effect duration="5" amplifier="255">heal</effect>
-        <effect duration="5" amplifier="255">damage resistance</effect>
-        <game-mode>adventure</game-mode>
-    </kit>
-</kits>
 <spawns>
     <default>
         <region yaw="90">
@@ -64,12 +49,12 @@
             </if>
         </region>
     </default>
-    <spawn team="pink" kit="spawn-kit">
+    <spawn team="pink" kit="base-kit">
         <region yaw="90">
             <point>172.5,12.5,10.5</point>
         </region>
     </spawn>
-    <spawn team="yellow" kit="spawn-kit">
+    <spawn team="yellow" kit="base-kit">
         <region yaw="-90">
             <point>78.5,12.5,10.5</point>
         </region>
@@ -118,15 +103,7 @@
 <score>
     <limit>500</limit>
 </score>
-<toolrepair>
-    <tool>stone sword</tool>
-    <tool>bow</tool>
-</toolrepair>
 <itemremove>
-    <item>leather helmet</item>
-    <item>leather chestplate</item>
-    <item>chainmail leggings</item>
-    <item>iron boots</item>
     <item>glass bottle</item>
     <if variant="christmas">
         <item>sapling:1</item>
@@ -136,19 +113,6 @@
         <item>string</item>
     </if>
 </itemremove>
-<itemkeep>
-    <item>golden apple</item>
-    <item>arrow</item>
-</itemkeep>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-        <item amount="6" material="arrow"/>
-    </kill-reward>
-</kill-rewards>
-<hunger>
-    <depletion>off</depletion>
-</hunger>
 <if variant="halloween">
     <item-mods>
         <rule>

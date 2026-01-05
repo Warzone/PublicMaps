@@ -1,10 +1,13 @@
 <map proto="1.5.0">
 <name>Empire</name>
 <variant id="halloween" world="halloween" override="true">Empire in Ruins</variant>
-<version>2.3.12</version>
+<version>2.3.13</version>
 <objective>Capture both wools and return them safely to your victory monument.</objective>
 <gamemode>ctw</gamemode>
 <include id="gapple-kill-reward"/>
+<if variant="halloween">
+    <created>2014-10-06</created>
+</if>
 <authors>
     <author uuid="c65e66b3-e932-4b33-b907-fe4916806076"/> <!-- Draco_Rogue -->
 </authors>
@@ -23,10 +26,10 @@
         </unless>
         <item slot="4" amount="64" material="wood"/>
         <item slot="5" amount="64" material="glass"/>
-        <item slot="6" amount="64" material="cooked beef"/>
+        <item slot="8" material="golden apple"/>
         <item slot="27" amount="64" material="apple"/>
-        <item slot="28" amount="1" material="arrow"/>
-        <effect duration="5" amplifier="4">damage resistance</effect>
+        <item slot="28" material="arrow"/>
+        <effect duration="5s" amplifier="5">damage resistance</effect>
         <helmet unbreakable="true" team-color="true" material="leather helmet"/>
         <chestplate unbreakable="true" team-color="true" enchantment="protection projectile:1" material="leather chestplate"/>
         <leggings unbreakable="true" team-color="true" material="leather leggings"/>
@@ -162,7 +165,6 @@
 </toolrepair>
 <itemremove>
     <item>apple</item>
-    <item>cooked beef</item>
     <item>string</item>
     <item>glowstone dust</item>
     <item>leather helmet</item>
@@ -183,4 +185,7 @@
         <item amount="16" material="wood"/>
     </kill-reward>
 </kill-rewards>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
