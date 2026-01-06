@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Ping Bomb II</name>
-<version>1.2.7</version>
+<version>1.2.8</version>
 <created>2017-01-14</created>
 <objective>Blow up the enemy side before they blow up yours!</objective>
 <gamemode>arcade</gamemode>
@@ -146,31 +146,40 @@
             </any>
         </sticky>
     </rule>
-    <rule>
-        <filter>
-            <if max-server-version="1.8">
+    <if max-server-version="1.8">
+        <rule>
+            <filter>
                 <material>sandstone</material>
-            </if>
-            <if min-server-version="1.9">
-                <material>end stone bricks</material>
-            </if>
-        </filter>
-        <sticky>
-            <any>
-                <material>stained clay</material>
-                <material>step</material>
-                <material>double step</material>
-                <material>quartz stairs</material>
-                <material>quartz block</material>
-                <if max-server-version="1.8">
+            </filter>
+            <sticky>
+                <any>
+                    <material>stained clay</material>
+                    <material>step</material>
+                    <material>double step</material>
+                    <material>quartz stairs</material>
+                    <material>quartz block</material>
                     <material>sandstone</material>
-                </if>
-                <if min-server-version="1.9">
+                </any>
+            </sticky>
+        </rule>
+    </if>
+    <if min-server-version="1.9">
+        <rule>
+            <filter>
+                <material>end stone bricks</material>
+            </filter>
+            <sticky>
+                <any>
+                    <material>stained clay</material>
+                    <material>step</material>
+                    <material>double step</material>
+                    <material>quartz stairs</material>
+                    <material>quartz block</material>
                     <material>end stone bricks</material>
-                </if>
-            </any>
-        </sticky>
-    </rule>
+                </any>
+            </sticky>
+        </rule>
+    </if>
 </falling-blocks>
 <kill-rewards>
     <kill-reward>
