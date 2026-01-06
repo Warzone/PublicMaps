@@ -1,6 +1,6 @@
 <map proto="1.5.0" game="Rush">
 <name>Biomes</name>
-<version>1.0.3</version>
+<version>1.0.5</version>
 <created>2016-09-29</created>
 <objective>Runners must get from one side of the map to the other without getting killed by the Defenders.</objective>
 <gamemode>blitz</gamemode>
@@ -11,43 +11,41 @@
     <author uuid="38ab65dd-95f9-406f-917c-6accc995421f"/> <!-- GoldenOre -->
 </authors>
 <teams>
-    <team id="runners" color="red" max="25" max-overfill="30">Runners</team>
-    <team id="defenders" color="green" max="5">Defenders</team>
+    <team id="runners-team" color="red" max="25" max-overfill="30">Runners</team>
+    <team id="defenders-team" color="green" max="5">Defenders</team>
 </teams>
 <kits>
-    <kit id="runner-kit">
-        <helmet color="F27FA5" material="leather helmet"/>
-        <chestplate color="F27FA5" material="leather chestplate"/>
-        <leggings color="F27FA5" material="leather leggings"/>
-        <boots color="F27FA5" material="leather boots"/>
+    <kit id="spawn-kit">
+        <helmet unbreakable="true" locked="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" locked="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" locked="true" team-color="true" material="leather leggings"/>
+        <boots unbreakable="true" locked="true" team-color="true" material="leather boots"/>
+    </kit>
+    <kit id="runner-kit" parents="spawn-kit">
         <effect>speed</effect>
     </kit>
-    <kit id="defender-kit">
-        <item slot="1" unbreakable="true" enchantment="arrow knockback;arrow damage:3;arrow infinite" material="bow"/>
-        <item slot="28" material="arrow"/>
-        <helmet color="7FCC19" material="leather helmet"/>
-        <chestplate color="7FCC19" material="leather chestplate"/>
-        <leggings color="7FCC19" material="leather leggings"/>
-        <boots color="7FCC19" material="leather boots"/>
+    <kit id="defender-kit" parents="spawn-kit">
+        <item slot="0" unbreakable="true" enchantment="arrow knockback;arrow damage:3;arrow infinite" material="bow"/>
+        <item slot="27" material="arrow"/>
         <effect amplifier="5">speed</effect>
     </kit>
 </kits>
 <spawns>
-    <spawn team="runners" kit="runner-kit">
-        <region>
+    <spawn team="runners-team" kit="runner-kit">
+        <regions>
             <point>443.5,47,268.5</point>
-        </region>
+        </regions>
     </spawn>
-    <spawn team="defenders" kit="defender-kit">
+    <spawn team="defenders-team" kit="defender-kit">
         <regions>
             <point>488.5,60,323.5</point>
             <point>402.5,60,323.5</point>
         </regions>
     </spawn>
     <default>
-        <region>
+        <regions>
             <point>443.5,47,268.5</point>
-        </region>
+        </regions>
     </default>
 </spawns>
 <filters>
@@ -57,7 +55,7 @@
     <apply block="monument"/>
 </regions>
 <destroyables name="Monument" materials="sponge">
-    <destroyable owner="defenders">
+    <destroyable owner="defenders-team">
         <region>
             <block>446,24,1239</block>
         </region>
@@ -67,7 +65,6 @@
     <lives>1</lives>
     <broadcastLives>true</broadcastLives>
 </blitz>
-<time result="defenders">5m</time>
 <portals>
     <portal x="@487" y="@60" yaw="@0">
         <region>
@@ -149,6 +146,7 @@
     <item>leather boots</item>
 </itemremove>
 <timelock>on</timelock>
+<time result="defenders-team">5m</time>
 <gamerules>
     <naturalRegeneration>false</naturalRegeneration>
 </gamerules>
