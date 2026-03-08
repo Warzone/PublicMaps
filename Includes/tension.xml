@@ -1,0 +1,117 @@
+<map proto="1.5.0">
+<!--
+        ====
+     ++**#*+*+*
+ %%#*+ = =#= +*+#%%
+ +++++=#*+= #=**#*#
+ +#   +#====##   *#
+ ++      +#      +#
+ +*      *#      +#
+ +#      ++      *#
+ +#      +#      +*
+         *#
+         +#
+-->
+<!-- Tension gamemode include file -->
+<!-- For Minecraft 1.21.10 - Might get a 1.8 port too -->
+<!-- Created by zzuf -->
+<!-- Version 2025.12.10-1 -->
+<include id="bridge"/>
+<game>Tension</game>
+<constants>
+    <!-- Misc -->
+    <constant id="main-kit">tension-kit</constant>
+    <constant id="arrow-type">tipped arrow</constant>
+    <constant id="arrow-item-kit">custom-arrow-item-kit</constant>
+</constants>
+<broadcasts>
+    <tip after="3s" every="3m">{"text":"","extra":[{"color":"#FFFB87","text":"Get a "},{"color":"white","sprite":"block/iron_block"},{"color":"white","italic":false,"text":" Pier Cap"},{"color":"#FFFB87","text":" at middle, and `n3`r kills for a "},{"color":"white","sprite":"item/wind_charge"},{"color":"#53AFFF","italic":false,"text":" Wind Charge"},{"color":"#FFFB87","text":"!"}]}</tip>
+</broadcasts>
+<kits>
+    <kit id="tension-kit">
+        <item material="shield" damage="330" name="`fDamaged Shield `x`B`C`7`E`4`3(repaired for now)`r" slot="slot.weapon.offhand"/>
+        <item unbreakable="true" material="stone sword"/>
+        <item material="bow" unbreakable="true" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!"/>
+        <item unbreakable="true" material="diamond pickaxe"/>
+        <item material="scaffolding" amount="64" damage="2"/>
+        <item material="scaffolding" amount="64" damage="2"/>
+        <item material="golden apple" amount="3" consumable="bridge-apple" prevent-sharing="true" lore="`9ⓘ `7Instantly restores to `c${max-health} HP`7!|`9ⓘ `7Grants `eAbsorption`7 for `f1 minute`7!"/>
+        <item unbreakable="true" name="`x`4`7`7`8`B`8Light `fMace" material="mace" attributes="generic.attack_speed:add:0.25" enchantments="wind burst:1"/>
+        <effect duration="oo">invisibility</effect>
+        <effect duration="oo" amplifier="255">slow_digging</effect>
+        <effect duration="2s" amplifier="255">resistance</effect>
+    </kit>
+    <kit id="custom-arrow-item-kit">
+        <item slot="8" material="${arrow-type}" damage="14" name="`fArrow of Levitation" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!" prevent-sharing="true">
+            <potion duration="1.75s">levitation</potion>
+        </item>
+    </kit>
+</kits>
+<actions>
+    <action id="clear-tension-kit" scope="player">
+        <replace-item ignore-metadata="true">
+            <find material="iron sword"/>
+            <replace material="air"/>
+        </replace-item>
+        <replace-item>
+            <find material="bow" unbreakable="true" lore="`e⚠ `cYou can only hold `f1`c arrow at a time!|`9ⓘ `7Get a new one `f3.5 seconds `7after shooting!"/>
+            <replace material="air"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="tipped arrow"/>
+            <replace material="air"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="diamond pickaxe"/>
+            <replace material="air"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="scaffolding"/>
+            <replace material="air"/>
+        </replace-item>
+        <replace-item ignore-metadata="true">
+            <find material="golden apple"/>
+            <replace material="air"/>
+        </replace-item>
+    </action>
+</actions>
+<spawners>
+    <spawner spawn-region="pier-caps-spawner" player-region="everywhere" delay="10s" max-entities="2">
+        <item material="iron block"/>
+    </spawner>
+</spawners>
+<item-mods>
+    <rule>
+        <match>
+            <material>iron block</material>
+        </match>
+        <modify name="`fPier Cap" enchantments="power:1" show-enchantments="false"/> <!-- Could be made into a paste-structure action -->
+    </rule>
+</item-mods>
+<kill-rewards>
+    <kill-reward>
+        <item material="scaffolding" amount="16"/>
+    </kill-reward>
+    <kill-reward>
+        <filter>
+            <kill-streak count="3" repeat="true"/>
+        </filter>
+        <item material="wind charge"/>
+    </kill-reward>
+</kill-rewards>
+<toolrepair>
+    <tool>mace</tool>
+    <tool>stone sword</tool>
+</toolrepair>
+<itemkeep>
+    <item>iron block</item>
+    <item>mace</item>
+    <item>stone sword</item>
+    <item>shield</item>
+</itemkeep>
+<itemremove>
+    <item>scaffolding</item>
+    <item>wind charge</item>
+    <item>shield</item>
+</itemremove>
+</map>
