@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Mystic Point</name>
-<version>1.1.7</version>
+<version>1.1.8</version>
 <objective>Destroy the enemy team's left and right monuments!</objective>
 <gamemode>dtm</gamemode>
 <include id="gapple-kill-reward"/>
@@ -43,9 +43,10 @@
 </kits>
 <spawns>
     <default>
-        <region yaw="180">
-            <cuboid min="-26.5,71,-83.5" max="-22.5,71,-79.5"/>
-        </region>
+        <regions>
+            <cylinder yaw="180" base="-25,70,-81.5" height="0" radius="2.5"/>
+            <cylinder base="-25,70,-193.5" height="0" radius="2.5"/>
+        </regions>
     </default>
     <spawn team="blue" kit="spawn-kit">
         <region yaw="-90">
@@ -199,7 +200,7 @@
     <stage title="Left Monument">
         <message>
             <line>This is the Left Monument.</line>
-            <line>You have to break all `5obsidian`r blocks to destory this monument.</line>
+            <line>You have to break all `5obsidian`r blocks to destroy this monument.</line>
         </message>
         <teleport>
             <point yaw="-90" pitch="0">7,28,-114</point>
@@ -208,7 +209,7 @@
     <stage title="Right Monument">
         <message>
             <line>This is the Right Monument.</line>
-            <line>You have to break all `5obsidian`r blocks to destory this monument.</line>
+            <line>You have to break all `5obsidian`r blocks to destroy this monument.</line>
         </message>
         <teleport>
             <point yaw="-90" pitch="0">21,32,-160</point>
