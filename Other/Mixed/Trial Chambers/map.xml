@@ -2,7 +2,7 @@
 <name>Trial Chambers</name>
 <variant id="blitz">Blitz</variant>
 <variant id="crossbow-blast">Crossbow Blast</variant>
-<version>1.1.6</version>
+<version>1.1.7</version>
 <created>2025-05-09</created>
 <objective>Eliminate your opponents!</objective>
 <gamemode>mixed</gamemode>
@@ -19,7 +19,7 @@
 <spawns>
     <if variant="default">
         <spawn team="purple-team" kit="spawn-kit">
-            <regions>
+            <regions yaw="0">
                 <cuboid min="-26,-13,-171" max="-35,-13,-174"/>
             </regions>
         </spawn>
@@ -31,7 +31,7 @@
     </if>
     <if variant="blitz">
         <spawn team="purple-team" kit="spawn-kit">
-            <regions>
+            <regions yaw="0">
                 <point>-30.5,-16,-161.5</point>
             </regions>
         </spawn>
@@ -43,7 +43,7 @@
     </if>
     <if variant="crossbow-blast">
         <spawn team="purple-team" kit="purple-kit">
-            <regions>
+            <regions yaw="0">
                 <cuboid min="-26,-13,-171" max="-35,-13,-174"/>
             </regions>
         </spawn>
@@ -55,7 +55,7 @@
     </if>
     <default>
         <regions>
-            <point>-30.5,0,-135.5</point>
+            <point yaw="0">-30.5,0,-135.5</point>
             <point yaw="180">-30.5,0,-127.5</point>
         </regions>
     </default>
@@ -64,7 +64,7 @@
     <kit id="spawn-kit" potion-particles="false"> <!-- set to true when ambient works ! -->
         <item slot="0" unbreakable="true" name="`fSpecial Axe" lore="`8One Hit Kill" enchantment="sharpness:10" show-enchantments="false" material="netherite axe"/>
         <if variant="default">
-            <item slot="1" unbreakable="true" name="`fSpecial Bow" enchantment="arrow damage:10;arrow infinite;sharpness:10" lore="`8One Hit Kill" material="bow"/>
+            <item slot="1" unbreakable="true" name="`fSpecial Bow" enchantment="arrow damage:10;arrow infinite:1;sharpness:10" lore="`8One Hit Kill" material="bow"/>
             <item slot="8" material="arrow"/>
             <item slot="7" material="recovery compass"/>
         </if>
@@ -139,6 +139,7 @@
     <any id="only-usable">
         <material>waxed oxidized copper door</material>
         <material>dark oak wall sign</material>
+        <material>ladder</material>
     </any>
     <after id="no-firework" duration="${recharge-time}s">
         <not id="no-firework-instant">
