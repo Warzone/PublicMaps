@@ -1,125 +1,154 @@
 <map proto="1.5.0">
 <name>Grassy Mound</name>
-<version>1.0.1</version>
-<objective>Destroy the other team's Gold monument!</objective>
-<gamemode>dtm</gamemode>
+<version>1.2.0</version>
+<variant id="default" world="dtm"/>
+<variant id="ctf" world="ctf" override="true">Grassy Mound CTF</variant>
+<include id="gapple-kill-reward"/>
 <authors>
-    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c" /> <!-- mitchiii_ -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii_ -->
 </authors>
 <teams>
-    <team id="blue-team" color="blue" max="10">Blue</team>
-    <team id="red-team" color="dark red" max="10">Red</team>
+    <team id="blue" color="blue" max="10">Blue</team>
+    <team id="red" color="dark red" max="10">Red</team>
 </teams>
+<spawns>
+    <spawn team="blue" region="blue-spawn" yaw="-90" kit="main-kit"/>
+    <spawn team="red" region="red-spawn" yaw="90" kit="main-kit"/>
+    <default region="obs-spawn" yaw="-90"/>
+</spawns>
 <kits>
     <kit id="main-kit">
-        <clear />
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" material="bow"/>
-        <item slot="2" unbreakable="true" material="stone pickaxe"/>
-        <item slot="3" unbreakable="true" material="stone axe"/>
-        <item slot="4" amount="24" material="wood"/>
-        <item slot="5" amount="32" team-color="true" material="stained clay"/>
-        <item slot="7" amount="24" material="arrow"/>
-        <item slot="8" amount="64" material="golden carrot"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" material="chainmail chestplate"/>
-        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
-        <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="3" amplifier="10">resistance</effect>
+        <clear/>
+        <item slot="0" material="stone sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="stone pickaxe" unbreakable="true"/>
+        <item slot="3" material="stone axe" unbreakable="true">
+            <enchantment level="2">efficiency</enchantment>
+        </item>
+        <item slot="4" material="wood" amount="64"/>
+        <item slot="5" material="stained clay" amount="32" team-color="true"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="28" material="arrow" amount="32"/>
+        <item slot="30" material="stone spade" unbreakable="true">
+            <enchantment level="2">efficiency</enchantment>
+        </item>
+        <helmet material="leather helmet" unbreakable="true" team-color="true"/>
+        <chestplate material="chainmail chestplate" unbreakable="true"/>
+        <leggings material="leather leggings" unbreakable="true" team-color="true"/>
+        <boots unbreakable="true" material="iron boots"/>
+        <effect duration="3s" amplifier="10">resistance</effect>
+        <knockback-reduction>1</knockback-reduction>
+    </kit>
+    <kit id="leaving-spawn" force="true">
+        <knockback-reduction>0</knockback-reduction>
+    </kit>
+    <kit id="gold-kit" deduct-items="false">
+        <item material="gold ingot" amount="9"/>
     </kit>
 </kits>
-<spawns>
-    <default yaw="-90">
-        <region>
-            <cylinder base="30.5,13,227.5" radius="1.5" height="0.2" />
-        </region>
-    </default>
-    <spawn team="blue-team" kit="main-kit" yaw="-90">
-        <region>
-            <point>36.5,8.5,280.5</point>
-        </region>
-    </spawn>
-    <spawn team="red-team" kit="main-kit" yaw="90">
-        <region>
-            <point>106.5,8.5,174.5</point>
-        </region>
-    </spawn>
-</spawns>
-<respawn delay="3s"/>
-<filters>
-    <not id="void-break-ban">
-        <any>
-            <material>web</material>
-        </any>
-    </not>
-    <not id="deny-player-cause">
-        <cause>player</cause>
-    </not>
-    <not id="deny-enchant-break">
-        <material>enchantment table</material>
-    </not>
-</filters>
-<regions>
-    <union id="team-spawns">
-        <cuboid id="blue-spawn" min="32,0,286" max="42,oo,273"/>
-        <cuboid id="red-spawn"  min="111,0,169" max="101,oo,182"/>
-    </union>
-    <above id="world-limit" y="23"/>
-    <apply region="blue-spawn" enter="blue-team" message="You may not enter the enemy's spawn"/>
-    <apply region="red-spawn" enter="red-team" message="You may not enter the enemy's spawn"/>
-    <apply region="team-spawns" block="never" message="You may not modify the spawn area"/>
-    <apply region="world-limit" block-place="deny-player-cause" message="You may not place blocks that high"/>
-    <apply block-place="deny(void)" block-break="void-break-ban" message="You may not interact with that material here"/>
-    <apply block="deny-enchant-break" message="You may not break the enchantment table"/>
-</regions>
-<destroyables materials="gold block" mode-changes="true">
-    <destroyable id="blue-monument" name="Monument" owner="blue-team">
-        <region>
-            <cuboid min="77,17,289" max="74,22,292"/>
-        </region>
-    </destroyable>
-    <destroyable id="red-monument" name="Monument" owner="red-team">
-        <region>
-            <cuboid min="69,17,166" max="66,22,163"/>
-        </region>
-    </destroyable>
-</destroyables>
-<modes>
-    <mode after="12m" material="coal block"/>
-</modes>
 <kill-rewards>
     <kill-reward>
-        <item amount="6" material="wood"/>
-        <item amount="8" material="arrow"/>
-        <item material="golden apple"/>
-        <item amount="2" material="exp bottle"/>
-        <item amount="6" team-color="true" material="stained clay"/>
+        <item material="arrow" amount="8"/>
+        <item material="wood" amount="12"/>
+        <item material="stained clay" amount="6" team-color="true"/>
+        <item material="exp bottle" amount="2"/>
+        <item material="ink sack" damage="4"/>
     </kill-reward>
     <kill-reward>
         <filter>
-            <kill-streak count="6" repeat="false"/>
+            <kill-streak count="3" repeat="true"/>
         </filter>
-        <item damage="61" material="flint and steel"/>
-        <item material="golden apple"/>
-        <item amount="2" material="exp bottle"/>
-    </kill-reward>
-    <kill-reward>
-        <filter>
-            <kill-streak count="8" repeat="true"/>
-        </filter>
+        <item material="flint and steel" damage="61"/>
         <item material="tnt"/>
     </kill-reward>
 </kill-rewards>
-<blockdrops>
+<filters>
+    <cause id="player">player</cause>
+    <material id="gold-block">gold block</material>
+    <material id="enchant-table">enchantment table</material>
+</filters>
+<regions>
+    <cylinder id="obs-spawn" base="20.5,13,227.5" radius="1.5" height="0.2"/>
+    <cylinder id="blue-spawn" base="36.5,8.5,280.5" radius="1" height="1"/>
+    <cylinder id="red-spawn" base="106.5,8.5,174.5" radius="1" height="1"/>
+    <negative id="outside-spawns">
+        <union id="team-spawns">
+            <cuboid id="blue-spawn-protection" min="32,0,286" max="42,26,273"/>
+            <cuboid id="red-spawn-protection" min="111,0,169" max="101,26,182"/>
+        </union>
+    </negative>
+    <apply region="outside-spawns" kit="leaving-spawn"/>
+    <apply region="blue-spawn-protection" enter="blue" message="You may not enter the enemy spawn!"/>
+    <apply region="red-spawn-protection" enter="red" message="You may not enter the enemy spawn!"/>
+    <apply region="team-spawns" block-place="not(player)" block-break="gold-block" message="You may not modify the spawn area!"/>
+    <apply block="deny(enchant-table)" message="You may not break the enchantment table!"/>
+    <apply block-place="deny(void)"/>
+</regions>
+<maxbuildheight>23</maxbuildheight>
+<if variant="default">
+    <created>2018-09-29</created>
+    <objective>Destroy the other team's monument!</objective>
+    <constants>
+        <constant id="eff.modes-preset">every-5m</constant>
+        <constant id="eff.efficiency-tool">stone pickaxe</constant>
+        <constant id="eff.team-1">blue</constant>
+        <constant id="eff.team-2">red</constant>
+        <constant id="eff.t1-m1-region">red-monument</constant>
+        <constant id="eff.t2-m1-region">blue-monument</constant>
+    </constants>
+    <include id="efficiency-variables"/>
+    <regions>
+        <cuboid id="blue-monument" min="77,18,289" max="74,23,292"/>
+        <cuboid id="red-monument" min="69,18,166" max="66,23,163"/>
+    </regions>
+    <destroyables name="Monument" materials="emerald block" show-progress="true" mode-changes="true">
+        <destroyable region="blue-monument" owner="blue"/>
+        <destroyable region="red-monument" owner="red"/>
+    </destroyables>
+</if>
+<if variant="ctf">
+    <created>2019-03-01</created>
+    <objective>Capture the most flags!</objective>
+    <regions>
+        <union id="post-protection">
+            <cuboid id="blue-post-protection" min="74,14,289" size="3,6,3"/>
+            <cuboid id="red-post-protection" min="66,14,163" size="3,6,3"/>
+        </union>
+        <cylinder id="blue-capture" base="75.5,14,290.5" radius="3" height="3"/>
+        <cylinder id="red-capture" base="67.5,14,164.5" radius="3" height="4"/>
+        <apply region="post-protection" block="never"/>
+    </regions>
+    <flags>
+        <flag id="blue-flag" name="Flag" color="blue" owner="blue">
+            <post pickup-filter="red" yaw="180" recover-time="20s" respawn-time="8s">75,15,290</post>
+            <net points="1" region="red-capture" capture-filter="red"/>
+            <net points="1" region="red-spawn-protection" capture-filter="red"/>
+        </flag>
+        <flag id="red-flag" name="Flag" color="red" owner="red">
+            <post pickup-filter="blue" yaw="0" recover-time="20s" respawn-time="8s">67,15,164</post>
+            <net points="1" region="blue-capture" capture-filter="blue"/>
+            <net points="1" region="blue-spawn-protection" capture-filter="blue"/>
+        </flag>
+    </flags>
+    <score>
+        <mercy>3</mercy>
+    </score>
+    <time result="score" overtime="1m" max-overtime="5m">10m</time>
+</if>
+<block-drops>
+    <rule wrong-tool="true" filter="gold-block" kit="gold-kit"/>
     <rule experience="8">
         <filter>
             <material>lapis ore</material>
         </filter>
         <drops>
-            <item material="ink sack" damage="4"/>
+            <item material="ink sack" damage="4" amount="3"/>
         </drops>
     </rule>
-</blockdrops>
+</block-drops>
+<renewables>
+    <renewable rate="10" avoid-players="0" renew-filter="gold-block" region="team-spawns"/>
+</renewables>
 <item-mods>
     <rule>
         <match>
@@ -133,30 +162,47 @@
             <material>gold boots</material>
             <material>shears</material>
         </match>
-        <modify unbreakable="true" />
+        <modify unbreakable="true"/>
     </rule>
     <rule>
         <match>
             <material>gold chestplate</material>
         </match>
         <modify>
-            <enchantment level="1">protection</enchantment>
+            <enchantment>protection</enchantment>
         </modify>
     </rule>
 </item-mods>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>stone pickaxe</tool>
+    <tool>stone axe</tool>
+    <tool>stone spade</tool>
+    <tool>gold sword</tool>
+    <tool>gold pickaxe</tool>
+    <tool>gold axe</tool>
+    <tool>gold spade</tool>
+    <tool>gold helmet</tool>
+    <tool>gold chestplate</tool>
+    <tool>gold leggings</tool>
+    <tool>gold boots</tool>
+    <tool>shears</tool>
+</toolrepair>
+<itemkeep>
+    <item>golden apple</item>
+    <item>stained clay</item>
+    <item>wood</item>
+</itemkeep>
 <itemremove>
-    <item>stone sword</item>
-    <item>bow</item>
-    <item>stone pickaxe</item>
-    <item>stone axe</item>
-    <item>golden carrot</item>
     <item>leather helmet</item>
     <item>chainmail chestplate</item>
     <item>leather leggings</item>
-    <item>leather boots</item>
+    <item>iron boots</item>
     <item>seeds</item>
-    <item>gold block</item>
-    <item>coal block</item>
-    <item>string</item>
+    <item>emerald block</item>
 </itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
 </map>
