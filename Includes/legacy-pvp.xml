@@ -2,18 +2,21 @@
 <!-- Legacy PvP mechanics include file -->
 <!-- Created by mameBT -->
 <!-- Based on Overcast Network's global include -->
-<!-- Version 2025.07.21-1 -->
-<if min-server-version="1.21.8">
-    <!-- Increase default attack speed -->
+<!-- Version 2026.02.25-1 -->
+<if min-server-version="1.21.11">
     <spawns>
         <player-kit>
-            <!-- TODO: verify if rounding errors still problematic -->
-            <attribute operation="multiply" amount="4.001">attack_speed</attribute> <!-- exactly 4 causes rounding errors -->
+            <attribute operation="add" amount="20">attack_speed</attribute>
         </player-kit>
     </spawns>
-
-    <!-- Modify speed, durability, protection, etc. of axes and armour -->
     <item-mods>
+        <rule>
+            <!-- This overwrites certain modern items for now -->
+            <match>
+                <all-materials/>
+            </match>
+            <modify components="attack_range={max_reach:3.0095,hitbox_margin:0.1}"/>
+        </rule>
         <rule>
             <match>
                 <material>wood axe</material>
@@ -285,10 +288,8 @@
             </modify>
         </rule>
     </item-mods>
-
-    <!-- Disable shield crafting -->
-    <crafting>
-        <disable>shield</disable>
-    </crafting>
+    <disabledamage>
+        <damage>entity sweep attack</damage>
+    </disabledamage>
 </if>
 </map>

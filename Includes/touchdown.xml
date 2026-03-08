@@ -1,7 +1,7 @@
 <map>
 <!-- Touchdown gamemode include file -->
 <!-- XML by zzuf, arcadeboss, MewTwoKing, Furrie, TommyHillfigger, KuNet, honeyfuggle & mameBT -->
-<!-- Version 2025.09.29-2 -->
+<!-- Version 2026.03.03-1 -->
 <game>Touchdown</game>
 <gamemode>ffb</gamemode>
 <objective>Capture the flag at the end zone on the enemies' side!</objective>
@@ -88,6 +88,26 @@
     <constant id="friendly-fire-refund">off</constant>
     <constant id="gapple-slot">8</constant>
 </constants>
+<variables>
+    <with-team id="team_one_score" var="score" team="team-one"/>
+    <with-team id="team_two_score" var="score" team="team-two"/>
+    <variable id="game_state" scope="match" default="${initial}"/>
+    <variable id="can_score" scope="match" default="1"/>
+    <variable id="round_status" scope="match" default="1"/> <!-- 0: team scored; 1: flag is active -->
+    <variable id="buytime" scope="match" default="0"/>
+    <variable id="do_fire" scope="match" default="0"/>
+    <variable id="overtime" scope="match" default="${overtime-default}"/>
+    <variable id="scoring_team" scope="match" default="0"/>
+    <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
+    <variable id="player_state" scope="player" default="${initial}" exclusive="1"/>
+    <variable id="player_score" scope="player" default="0"/>
+    <variable id="goal_scorer" scope="player" exclusive="1"/>
+    <variable id="flag_carrier" scope="player" exclusive="1"/>
+    <variable id="instaheal" scope="match" default="${instaheal-default}"/>
+    <variable id="one_pass_rule" scope="match" default="${one-pass-default}"/>
+    <variable id="passed_once" scope="match" default="0"/>
+    <variable id="last_damage_type" scope="player" default="0"/> <!-- 0: non-melee damage; 1: melee damage -->
+</variables>
 <include id="void-death"/>
 <include id="gapple-kill-reward"/>
 <stats>
@@ -107,7 +127,7 @@
 </teams>
 <kits>
     <kit id="heal-instant">
-        <effect duration="0.2s">instant health</effect>
+        <effect duration="0.3s">instant health</effect>
     </kit>
     <kit id="heal-gapple" force="true">
         <effect duration="${gapple-heal-duration}">absorption</effect>
@@ -138,7 +158,7 @@
     <kit id="flag-carrier-kit" force="true">
         <action id="give-football" filter="not(carrying-football)">
             <kit id="football-kit">
-                <item prevent-sharing="true" consumable="use-snowball" name="`4`lFootball" material="snowball"/>
+                <item consumable="use-snowball" name="`4`lFootball" material="snowball"/>
             </kit>
         </action>
         <kit id="${flag-carrier-armor-kit}"/>
@@ -147,15 +167,21 @@
         <unless constant="enable-night-vision" constant-value="true">
             <effect>night vision</effect>
         </unless>
+        <if min-server-version="1.21.10">
+            <effect>glowing</effect>
+        </if>
         <effect>slowness</effect>
         <effect duration="3s">fire resistance</effect>
         <max-health>${flag-carrier-health}</max-health>
     </kit>
     <kit id="flag-drop-kit">
-        <action filter="alive"> <!-- ??? need to make issue for error related to this -->
-            <action>
+        <!-- 05/02/2026 can't reproduce issue that required `alive` filtering for the entire
+             kit, but this specific action requires this for the projectile to actually
+             work on modern for some reason. keep alive filtering just in case. -->
+        <action filter="alive">
+            <action filter="not(player_state=${throw})">
                 <replace-item>
-                    <find prevent-sharing="true" consumable="use-snowball" name="`4`lFootball" material="snowball"/>
+                    <find consumable="use-snowball" name="`4`lFootball" material="snowball"/>
                     <replace material="air"/>
                 </replace-item>
             </action>
@@ -238,6 +264,7 @@
     <lend kit="pre-round-kit" filter="on-buytime"/>
     <give kit="pre-round-reset-kit" filter="on-buytime"/>
     <give kit="${armor-kit}" filter="not-on-buytime"/>
+    <lend kit="${flag-carrier-effects}" filter="player_state=${carry}"/>
     <give kit="football-kit" filter="dropped-football"/>
 </kits>
 <spawns>
@@ -247,26 +274,6 @@
 <consumables>
     <consumable id="use-snowball" on="right click" override="false" action="snowball-thrown" consume="false"/>
 </consumables>
-<variables>
-    <with-team id="team_one_score" var="score" team="team-one"/>
-    <with-team id="team_two_score" var="score" team="team-two"/>
-    <variable id="game_state" scope="match" default="${initial}"/>
-    <variable id="can_score" scope="match" default="1"/>
-    <variable id="round_status" scope="match" default="2"/>
-    <variable id="buytime" scope="match" default="0"/>
-    <variable id="do_fire" scope="match" default="0"/>
-    <variable id="overtime" scope="match" default="${overtime-default}"/>
-    <variable id="scoring_team" scope="match" default="0"/>
-    <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
-    <variable id="player_state" scope="player" default="${initial}" exclusive="1"/>
-    <variable id="player_score" scope="player" default="0"/>
-    <variable id="goal_scorer" scope="player" exclusive="1"/>
-    <variable id="flag_carrier" scope="player" exclusive="1"/>
-    <variable id="instaheal" scope="match" default="${instaheal-default}"/>
-    <variable id="one_pass_rule" scope="match" default="${one-pass-default}"/>
-    <variable id="passed_once" scope="match" default="0"/>
-    <variable id="last_damage_type" scope="player" default="0"/> <!-- 0: non-melee damage; 1: melee damage -->
-</variables>
 <filters>
     <any id="remove-entities">
         <entity>snowball</entity>
@@ -277,11 +284,11 @@
         <material>barrier</material>
     </not>
     <!-- flag-pickup-via-entity handles cases where the flag carrier disconnects mid-game.
-    <! - If a flag-carrier disconnects, the snowball in their inventory drops onto the ground,
-    <! - meaning if a player picks up that snowball, it should be treated as a flag pickup. -->
+         If a flag-carrier disconnects, the snowball in their inventory drops onto the ground,
+         meaning if a player picks up that snowball, it should be treated as a flag pickup. -->
     <all id="flag-pickup-via-entity">
         <carrying id="carrying-football">
-            <item prevent-sharing="true" consumable="use-snowball" name="`4`lFootball" material="snowball"/>
+            <item consumable="use-snowball" name="`4`lFootball" material="snowball"/>
         </carrying>
         <not>
             <carrying-flag id="has-flag">flag</carrying-flag>
@@ -291,15 +298,17 @@
         <variable var="player_state">${carry}</variable>
         <dead/>
     </all>
-    <all id="dropped-football">
-        <filter id="has-flag"/>
-        <variable var="player_state">${carry}</variable>
-        <not>
-            <filter id="carrying-football"/>
-        </not>
-        <alive/>
-        <variable var="can_score">1</variable>
-    </all>
+    <pulse id="dropped-football" duration="0.05s" period="0.1s">
+        <all>
+            <filter id="has-flag"/>
+            <variable var="player_state">${carry}</variable>
+            <not>
+                <filter id="carrying-football"/>
+            </not>
+            <alive/>
+            <variable var="can_score">1</variable>
+        </all>
+    </pulse>
     <after id="flag-fire-go" filter="do_fire=1" duration="1s"/>
     <after id="match-start-delay" filter="match-started" duration="0.1s"/>
     <all id="initiate-reset">
@@ -366,35 +375,27 @@
         <match-running/>
         <alive/>
     </all>
-    <variable id="round-0" var="round_status">0</variable>
-    <variable id="round-1" var="round_status">1</variable>
     <all id="should-teleport">
         <filter id="one-pass-enforcement"/>
         <variable var="can_score">0</variable>
         <match-running/>
         <alive/>
     </all>
-    <variable id="cant-score" var="can_score">0</variable>
-    <variable id="can-score" var="can_score">1</variable>
-    <after id="after-round-1" duration="0.05s" filter="round-1"/>
-    <after id="after-round-0" duration="0.05s" filter="round-0"/>
+    <after id="team-scored" filter="round_status=0" duration="0.05s"/>
     <all id="during-buytime">
         <after duration="0.05s" filter="on-buytime"/>
         <not>
             <below y="${void-plane}"/>
         </not>
     </all>
-    <variable id="round-2" var="round_status">2</variable>
     <all id="on-buytime">
         <variable var="buytime">1</variable>
         <alive/>
     </all>
-    <after id="not-on-buytime-after" duration="0.05s">
-        <all id="not-on-buytime">
-            <variable var="buytime">0</variable>
-            <alive/>
-        </all>
-    </after>
+    <all id="not-on-buytime">
+        <variable var="buytime">0</variable>
+        <alive/>
+    </all>
     <all id="team-one-buytime">
         <team>team-one</team>
         <filter id="on-buytime"/>
@@ -403,77 +404,44 @@
         <team>team-two</team>
         <filter id="on-buytime"/>
     </all>
-    <after id="cage-time" message="`a» `fNext round begins in {0} `a«" duration="${pre-round-time}">
-        <all>
-            <filter id="round-0"/>
-            <match-running/>
-        </all>
-    </after>
-    <after id="after-capture" duration="${flag-respawn}">
+    <after id="flag-respawn" duration="${flag-respawn}">
         <all id="immediately-after-capture">
-            <filter id="round-0"/>
+            <variable var="round_status">0</variable>
             <match-running/>
         </all>
     </after>
-    <all id="team-one-own-goal">
-        <team>team-one</team>
-        <variable var="scoring_team">1</variable>
-        <filter id="after-round-0"/>
+    <after id="cage-time" filter="immediately-after-capture" message="`a» `fNext round begins in {0} `a«" duration="${pre-round-time}"/>
+    <all id="goal-scored">
+        <variable var="can_score">0</variable>
+        <filter id="team-scored"/>
         <match-running/>
-    </all>
-    <all id="team-two-own-goal">
-        <team>team-two</team>
-        <variable var="scoring_team">2</variable>
-        <filter id="after-round-0"/>
-        <match-running/>
-    </all>
-    <all id="team-one-enemy-goal">
-        <team>team-one</team>
-        <variable var="scoring_team">2</variable>
-        <filter id="after-round-0"/>
-        <match-running/>
-    </all>
-    <all id="team-two-enemy-goal">
-        <team>team-two</team>
-        <variable var="scoring_team">1</variable>
-        <filter id="after-round-0"/>
-        <match-running/>
-    </all>
-    <all id="cant-score-obs">
-        <filter id="cant-score"/>
-        <filter id="after-round-1"/>
-        <observing/>
-        <match-running/>
+        <any>
+            <observing/>
+            <participating/>
+        </any>
     </all>
     <players id="instaheal-min" min="${instaheal-required}">
         <always/>
     </players>
     <all id="can-pickup-flag">
         <alive/> <!-- This shouldn't be possible but it is -->
+        <variable var="round_status">1</variable>
         <any>
             <region id="flag-posts"/>
             <filter id="carrying-football"/>
             <variable var="player_state">${carry}</variable>
         </any>
     </all>
-    <not id="return-flag-to-carrier">
-        <any>
-            <filter id="has-flag"/>
-            <all>
-                <any id="in-capture-region">
-                    <all>
-                        <filter id="team-one"/>
-                        <region id="team-two-portal"/>
-                    </all>
-                    <all>
-                        <filter id="team-two"/>
-                        <region id="team-one-portal"/>
-                    </all>
-                </any>
-                <filter id="one-pass-enforcement"/>
-            </all>
-        </any>
-    </not>
+    <any id="in-capture-region">
+        <all>
+            <filter id="team-one"/>
+            <region id="team-two-portal"/>
+        </all>
+        <all>
+            <filter id="team-two"/>
+            <region id="team-one-portal"/>
+        </all>
+    </any>
     <any id="flag-strip-in-enemy-net">
         <all>
             <filter id="team-one"/>
@@ -543,9 +511,9 @@
     <action id="flag-pickup-event" scope="player">
         <set var="player_state" value="${carry}"/>
         <set var="game_state" value="${carry}"/>
-        <set var="flag_carrier" value="1"/>
         <action id="apply-heal"/>
-        <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.2" stay="0.5" fade-out="0.2"/>
+        <set var="flag_carrier" value="1"/>
+        <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.5" stay="0.7" fade-out="0.5"/>
         <sound key="${entity.player.levelup}" volume="0.7" pitch="1.5"/>
         <switch-scope inner="match">
             <message text=" `e`l»`r {player}`6 picked up the `cFlag`6!`r" actionbar="`r{player}`6 picked up!">
@@ -581,7 +549,7 @@
         <action id="reset-after-capture">
             <set var="game_state" value="${initial}"/>
             <set var="passed_once" value="0"/>
-            <switch-scope inner="player">
+            <switch-scope inner="player" observers="true">
                 <action id="reset-player-state"/>
             </switch-scope>
         </action>
@@ -593,7 +561,9 @@
             <fill region="flag-indicator-upper-inner" material="${indicator-inner-material}"/>
             <fill region="flag-indicator-lower-inner" material="${indicator-inner-material}"/>
         </unless>
-        <kill-entities filter="remove-entities"/>
+        <action id="kill-entities" scope="match">
+            <kill-entities filter="remove-entities"/>
+        </action>
         <action filter="match-start-delay">
             <message text=" `e`l»`6 The `cFlag`6 was `cReset`6!" actionbar="`cThe Flag was Reset!"/>
             <sound key="${entity.firework_rocket.twinkle}" volume="1" pitch="1"/>
@@ -604,9 +574,9 @@
         <action id="flag-receive-event" scope="player" filter="valid-receive">
             <set var="player_state" value="${carry}"/>
             <set var="game_state" value="${carry}"/>
+            <action id="apply-heal"/>
             <set var="flag_carrier" value="1"/>
             <action id="pickup-flag"/>
-            <action id="apply-heal"/>
             <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.5" stay="0.7" fade-out="0.5"/>
             <sound key="${entity.player.levelup}" volume="0.7" pitch="1.5"/>
             <action filter="ally-damage">
@@ -640,6 +610,7 @@
     <action id="flag-steal-event" scope="player" filter="game_state=${carry}">
         <set var="player_state" value="${carry}"/>
         <set var="game_state" value="${carry}"/>
+        <action id="apply-heal"/>
         <set var="flag_carrier" value="1"/>
         <action filter="flag-strip-in-enemy-net">
             <switch-scope inner="match">
@@ -652,8 +623,7 @@
             </switch-scope>
         </action>
         <action id="pickup-flag"/>
-        <action id="apply-heal"/>
-        <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.5" stay="1" fade-out="0.5"/>
+        <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.5" stay="0.7" fade-out="0.5"/>
         <switch-scope inner="match">
             <message text=" `e`l»`r {player}`6 stripped the `cFlag`6!`r" actionbar="`r{player}`6 stripped!">
                 <replacements>
@@ -668,7 +638,7 @@
             <set var="player_state" value="${initial}"/>
         </action>
     </action>
-    <action id="apply-heal" scope="player">
+    <action id="apply-heal" scope="player" filter="not(flag_carrier=1)">
         <action filter="instaheal=0">
             <kit id="heal-gapple"/>
         </action>
@@ -684,20 +654,26 @@
             </action>
         </action>
     </action>
-    <trigger action="reset-player-state" filter="reset-observer-variables" scope="player"/>
+    <trigger action="reset-player-state" filter="reset-observer-variables" scope="player" observers="true"/>
     <trigger action="flag-pickup-event" filter="all(has-flag,not(player_state=${carry}))" scope="player"/>
-    <trigger action="pickup-flag" filter="return-flag-to-carrier" scope="player"/>
     <trigger action="pickup-flag" filter="all(flag-pickup-via-entity,not(player_state=${carry}))" scope="player"/>
     <trigger action="reset-fire" filter="just-before-reset" scope="match"/>
     <trigger action="reset-after-throw" filter="just-before-reset" scope="player"/>
     <trigger action="reset-flag" filter="flag-reset" scope="match"/>
     <trigger action="reset-after-capture" filter="immediately-after-capture" scope="match"/>
-    <trigger action="reset-flag" filter="after-capture" scope="match"/>
+    <trigger action="reset-flag" filter="flag-respawn" scope="match"/>
     <trigger action="carrier-died-event" filter="died-carrying" scope="player"/>
     <trigger action="touchdown-sound" filter="all(can_score=0,not(match-finished))" scope="match"/>
     <trigger action="reset-flag" filter="match-started" scope="match"/>
     <trigger action="go-sounds" filter="match-start-delay" scope="match"/>
     <trigger action="flag-fire" filter="flag-fire-go" scope="match"/>
+    <trigger filter="dropped-football" scope="player">
+        <action>
+            <switch-scope inner="match">
+                <action id="kill-entities"/>
+            </switch-scope>
+        </action>
+    </trigger>
     <action id="increment-round" scope="player">
         <set var="score" value="score+${score-points}"/>
         <set var="player_score" value="player_score+1"/>
@@ -712,10 +688,10 @@
         </message>
         <switch-scope inner="match">
             <set var="can_score" value="0"/>
-            <set var="round_status" value="1"/>
-            <action id="reset-fire"/>
+            <set var="round_status" value="0"/>
             <set var="buytime" value="1"/>
-            <kill-entities filter="remove-entities"/>
+            <action id="reset-fire"/>
+            <action id="kill-entities"/>
         </switch-scope>
         <action id="tiebreaker-win"/>
         <action id="message-score-display-player"/>
@@ -728,6 +704,7 @@
         <set var="can_score" value="1"/>
         <set var="buytime" value="0"/>
         <set var="passed_once" value="0"/>
+        <set var="scoring_team" value="0"/>
         <action id="go-message">
             <message title="`aGo!" fade-in="0.1" stay="0.7" fade-out="0.1"/>
             <action id="go-sounds">
@@ -744,27 +721,38 @@
     <trigger filter="team-two-scored" action="increment-round" scope="player"/>
     <trigger filter="all(can_score=0,not(match-finished))" action="create-cages" scope="match"/>
     <trigger filter="cage-time" action="remove-cages" scope="match"/>
-    <trigger filter="after-round-1" action="round_status:=0" scope="match"/>
-    <action id="message-own-scored" scope="player">
+    <trigger filter="flag-respawn" action="round_status:=1" scope="match"/>
+    <action id="message-score-display" scope="player">
         <message text="`5`l╔══════════════╗"/>
         <message text="`6         » `6`lTOUCHDOWN! `6«"/>
-        <message text="`a         Your team scored!"/>
-        <action id="message-score-display-team-one"/>
-        <action id="message-score-display-team-two"/>
+        <action filter="any(all(team-one,scoring_team=1),all(team-two,scoring_team=2))">
+            <message text="`a         Your team scored!"/>
+            <sound key="${block.portal.travel}" volume="0.2" pitch="2"/> <!-- OBJECTIVE_GOOD with lower volume -->
+        </action>
+        <action filter="any(all(team-one,scoring_team=2),all(team-two,scoring_team=1))">
+            <message text="`c        The enemy scored!"/>
+            <sound key="${entity.blaze.death}" volume="0.4" pitch="0.8"/> <!-- OBJECTIVE_BAD with lower volume -->
+        </action>
+        <action id="message-score-display-team"/>
         <message text="`5`l╚══════════════╝"/>
-        <switch-scope inner="match">
-            <action id="goal-title"/>
-        </switch-scope>
-        <sound key="${block.portal.travel}" volume="0.2" pitch="2"/> <!-- OBJECTIVE_GOOD with lower volume -->
     </action>
-    <action id="message-enemy-scored" scope="player">
-        <message text="`5`l╔══════════════╗"/>
-        <message text="`6         » `6`lTOUCHDOWN! `6«"/>
-        <message text="`c         The enemy scored"/>
-        <action id="message-score-display-team-one"/>
-        <action id="message-score-display-team-two"/>
-        <message text="`5`l╚══════════════╝"/>
-        <sound key="${entity.blaze.death}" volume="0.4" pitch="0.8"/> <!-- OBJECTIVE_BAD with lower volume -->
+    <action id="message-score-display-team" scope="player">
+        <action filter="any(team-one,observing)">
+            <message text="                 `f{one-score}`6 `l-`r `f{two-score}">
+                <replacements>
+                    <decimal id="one-score" value="team_one_score"/>
+                    <decimal id="two-score" value="team_two_score"/>
+                </replacements>
+            </message>
+        </action>
+        <action filter="team-two">
+            <message text="                 `f{two-score}`6 `l-`r `f{one-score}">
+                <replacements>
+                    <decimal id="one-score" value="team_one_score"/>
+                    <decimal id="two-score" value="team_two_score"/>
+                </replacements>
+            </message>
+        </action>
     </action>
     <action id="message-score-display-player" scope="player">
         <set var="goal_scorer" value="1"/>
@@ -774,49 +762,14 @@
                     <player id="player" var="goal_scorer"/>
                 </replacements>
             </message>
+            <message title="`f`lTOUCHDOWN!" subtitle="`7{player} takes it to the end zone!" fade-in="0.5" stay="3" fade-out="0.5">
+                <replacements>
+                    <player id="player" var="goal_scorer"/>
+                </replacements>
+            </message>
         </switch-scope>
     </action>
-    <action id="message-score-display-team-one" filter="team-one" scope="player">
-        <message text="                 `f{one-score}`6 `l-`r `f{two-score}">
-            <replacements>
-                <decimal id="one-score" value="team_one_score"/>
-                <decimal id="two-score" value="team_two_score"/>
-            </replacements>
-        </message>
-    </action>
-    <action id="message-score-display-team-two" filter="team-two" scope="player">
-        <message text="                 `f{two-score}`6 `l-`r `f{one-score}">
-            <replacements>
-                <decimal id="one-score" value="team_one_score"/>
-                <decimal id="two-score" value="team_two_score"/>
-            </replacements>
-        </message>
-    </action>
-    <action id="goal-title" scope="match">
-        <message title="`f`lTOUCHDOWN!" subtitle="`7{player} takes it to the end zone!" fade-in="0.5" stay="3" fade-out="0.5">
-            <replacements>
-                <player id="player" var="goal_scorer"/>
-            </replacements>
-        </message>
-    </action>
-    <trigger filter="after-round-0" action="scoring_team:=0" scope="match"/>
-    <action id="message-obs-scored" scope="player">
-        <message text="`5`l╔══════════════╗"/>
-        <message text="`6         » `6`lTOUCHDOWN! `6«"/>
-        <message text="                 `f{one-score}`6 `l-`r `f{two-score}">
-            <replacements>
-                <decimal id="one-score" value="team_one_score"/>
-                <decimal id="two-score" value="team_two_score"/>
-            </replacements>
-        </message>
-        <message text="`5`l╚══════════════╝"/>
-        <sound key="${entity.firework_rocket.twinkle}"/>
-    </action>
-    <trigger filter="team-one-own-goal" action="message-own-scored" scope="player"/>
-    <trigger filter="team-two-own-goal" action="message-own-scored" scope="player"/>
-    <trigger filter="team-one-enemy-goal" action="message-enemy-scored" scope="player"/>
-    <trigger filter="team-two-enemy-goal" action="message-enemy-scored" scope="player"/>
-    <trigger filter="cant-score-obs" action="message-obs-scored" scope="player"/>
+    <trigger filter="goal-scored" action="message-score-display" scope="player" observers="true"/>
     <trigger filter="team-one-scored" action="scoring_team:=1" scope="player"/>
     <trigger filter="team-two-scored" action="scoring_team:=2" scope="player"/>
     <!-- End match if overtime disabled (overtime=0) -->
@@ -961,12 +914,12 @@
           color="${flag-color}"
           shared="true"
           pickup-kit="${flag-carrier-kit}"
-          carry-kit="${flag-carrier-effects}"
           drop-kit="${flag-drop-kit}"
           show-messages="false"
           show-effects="false"
           capture-filter="all(carrying-football,one-pass-enforcement)"
-          post="default-post">
+          post="default-post"
+          allow-manual-drop="false">
         <unless constant="team-flag-posts" constant-value="true">
             <net region="team-one-portal"
                  capture-filter="all(team-two,team-one-portal)"/>
@@ -1004,6 +957,9 @@
     <item>banner</item>
     <item>golden apple</item>
 </itemremove>
+<itemkeep>
+    <item>snowball</item>
+</itemkeep>
 <disabledamage>
     <damage>fall</damage>
     <damage ally="${disable-ally-damage}" enemy="false" other="false">entity attack</damage>

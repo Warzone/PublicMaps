@@ -9,12 +9,10 @@
     <worldtime id="worldtime"/>
 </variables>
 
-<!-- Disable players in locator bar -->
-<if min-server-version="1.21.8">
-    <spawns> <!-- Using the locatorBar gamerule also hides entities in maps -->
-        <player-kit>
-            <attribute operation="multiply" amount="-1">waypoint_transmit_range</attribute>
-        </player-kit>
-    </spawns>
+<!-- Mark these map variants as staging -->
+<if has-variant="tournament,te,ranked,comp,5v5,5v5-ac,7v7">
+    <if variant="tournament,te,ranked,comp,5v5,5v5-ac,7v7">
+        <phase>staging</phase>
+    </if>
 </if>
 </map>
