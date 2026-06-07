@@ -3,7 +3,8 @@
 <!-- Bridge gamemode include file -->
 <!-- Created by zzuf -->
 <gamemode>arcade</gamemode>
-<!-- Version 2025.07.30-1 -->
+<!-- Version 2026.05.20-1 -->
+<include id="void-death"/>
 <respawn auto="true" delay="0s"/>
 <modifybowprojectile pickup-filter="never"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
@@ -59,9 +60,11 @@
         <item material="stained clay" team-color="true" amount="64"/>
         <item material="stained clay" team-color="true" amount="64"/>
         <item material="golden apple" amount="8" consumable="bridge-apple" prevent-sharing="true" lore="`9ⓘ `7Instantly restores to `c${max-health} HP`7!|`9ⓘ `7Grants `eAbsorption`7 for `f1 minute`7!"/>
-        <effect duration="oo">invisibility</effect>
-        <effect duration="oo" amplifier="255">slow_digging</effect>
-        <effect duration="2s" amplifier="255">resistance</effect>
+        <kit id="pre-round-kit" force="true">
+            <effect>invisibility</effect>
+            <effect amplifier="255">mining fatigue</effect>
+        </kit>
+        <effect duration="2s" amplifier="5">damage resistance</effect>
     </kit>
     <kit id="map-kit">
         <action id="clear-${main-kit}"/>
@@ -82,14 +85,6 @@
         <leggings material="leather leggings" team-color="true" unbreakable="true" locked="true"/>
         <boots material="leather boots" team-color="true" unbreakable="true" locked="true"/>
     </kit>
-    <kit id="remove-effects-kit" force="true">
-        <effect duration="0">invisibility</effect>
-        <effect duration="0">slow_digging</effect>
-    </kit>
-    <kit id="pre-round-kit" force="true">
-        <effect duration="oo">invisibility</effect>
-        <effect duration="oo" amplifier="255">slow_digging</effect>
-    </kit>
     <kit id="arrow-kit">
         <kit id="${arrow-item-kit}"/>
         <action>
@@ -103,17 +98,13 @@
         <effect duration="1m">absorption</effect>
     </kit>
     <kit id="absorption-reset-kit" force="true">
-        <effect duration="0" amplifier="1">absorption</effect>
+        <effect duration="0s">absorption</effect>
     </kit>
     <kit id="bridge-apple-kit" force="true">
         <health>${max-health}</health>
         <action scope="player" filter="no-absorption">
             <kit id="absorption-kit"/>
         </action>
-    </kit>
-    <kit id="void-death" force="true">
-        <clear effects="true" items="false" armor="false"/>
-        <health>1</health>
     </kit>
     <kit id="obs-kit">
         <book show-other="false">
@@ -123,14 +114,14 @@
                 <page>
                     `2» `lBRIDGE
                     `2» gamemode`0
-                    
+
                     Each team has a
                     `6portal`0, usually located
                     below or behind their
                     spawn point, and
                     sometimes marked with
                     a `1Beacon`0.
-                    
+
                     Fall into the enemy
                     team's `6portal`0 to `nscore`0,
                     or defend your own!
@@ -148,35 +139,20 @@
     <give kit="absorption-reset-kit" filter="on-buytime"/>
     <lend kit="pre-round-kit" filter="on-buytime"/>
     <give kit="${armor-kit}" filter="not-on-buytime-after"/>
-    <give kit="remove-effects-kit" filter="not-on-buytime"/>
+    <take kit="pre-round-kit" filter="not-on-buytime"/>
 </kits>
 <filters>
-    <deny id="deny-participating">
-        <participating/>
-    </deny>
-    <any id="some-blocks">
-        <allow>
+    <deny id="some-blocks">
+        <not>
             <filter id="block-list"/>
-        </allow>
-        <deny>
-            <participating/>
-        </deny>
-    </any>
-    <all id="only-team-one">
-        <team>team-one</team>
-        <participating/>
-    </all>
-    <all id="only-team-two">
-        <team>team-two</team>
-        <participating/>
-    </all>
+        </not>
+    </deny>
     <all id="team-one-scored">
         <team>team-one</team>
         <region id="team-two-portal"/>
         <variable var="can_score">1</variable>
         <match-running/>
         <alive/>
-        <participating/>
     </all>
     <all id="team-two-scored">
         <team>team-two</team>
@@ -184,13 +160,11 @@
         <variable var="can_score">1</variable>
         <match-running/>
         <alive/>
-        <participating/>
     </all>
     <variable id="round-0" var="round_status">0</variable>
     <variable id="round-1" var="round_status">1</variable>
     <all id="should-teleport">
         <variable var="can_score">0</variable>
-        <participating/>
         <match-running/>
         <alive/>
     </all>
@@ -201,7 +175,8 @@
     <all id="during-buytime">
         <after duration="0.05" filter="on-buytime"/>
         <not>
-            <region id="void-level"/>
+            <!-- from void-death include -->
+            <region id="void-plane"/>
         </not>
     </all>
     <variable id="round-2" var="round_status">2</variable>
@@ -215,21 +190,19 @@
     <all id="on-buytime">
         <variable var="buytime">1</variable>
         <alive/>
-        <participating/>
     </all>
     <after id="not-on-buytime-after" duration="0.05">
         <all id="not-on-buytime">
             <variable var="buytime">0</variable>
             <alive/>
-            <participating/>
         </all>
     </after>
     <all id="team-one-buytime">
-        <filter id="only-team-one"/>
+        <filter id="team-one"/>
         <filter id="on-buytime"/>
     </all>
     <all id="team-two-buytime">
-        <filter id="only-team-two"/>
+        <filter id="team-two"/>
         <filter id="on-buytime"/>
     </all>
     <after id="cage-time" message="`a» `fNext round begins in {0} `a«" duration="${pre-round-time}">
@@ -241,19 +214,24 @@
     </after>
     <all id="no-arrows">
         <not>
-            <carrying ignore-metadata="true"><item material="${arrow-type}"/></carrying>
+            <carrying ignore-metadata="true">
+                <item material="${arrow-type}"/>
+            </carrying>
         </not>
-        <participating/>
         <alive/>
         <variable var="arrow_check">1</variable>
     </all>
     <all id="1-arrow">
-        <carrying ignore-metadata="true"><item material="${arrow-type}"/></carrying>
+        <carrying ignore-metadata="true">
+            <item material="${arrow-type}"/>
+        </carrying>
         <participating/>
         <variable var="arrow_check">1</variable>
     </all>
     <all id="more-than-1-arrow">
-        <carrying ignore-metadata="true" amount="(1,oo)"><item material="${arrow-type}"/></carrying>
+        <carrying ignore-metadata="true" amount="(1,oo)">
+            <item material="${arrow-type}"/>
+        </carrying>
         <participating/>
         <variable var="arrow_check">1</variable>
     </all>
@@ -308,13 +286,11 @@
     <variable id="round_status" scope="match" default="2"/>
     <variable id="buytime" scope="match" default="0"/>
     <variable id="overtime" scope="match" default="${overtime-default}"/> <!-- 0: Off, 1: On, 2: First to score -->
-    <score id="team_score"/>
-    <with-team id="team_one_score" var="team_score" team="team-one"/>
-    <with-team id="team_two_score" var="team_score" team="team-two"/>
+    <with-team id="team_one_score" var="score" team="team-one"/>
+    <with-team id="team_two_score" var="score" team="team-two"/>
     <variable id="player_score" scope="player" default="0"/>
     <variable id="current_team" scope="player" default="0"/> <!-- 0: Observers, 1: team-one, 2: team-two -->
     <variable id="scoring_team" scope="match" default="0"/>
-    <timelimit id="time_limit"/>
     <variable id="pre_round" scope="match" default="${pre-round-enabled}"/>
     <variable id="arrow_check" scope="match" default="${arrow-check-enabled}"/>
     <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
@@ -325,7 +301,7 @@
 </variables>
 <actions>
     <action id="increment-round" scope="player">
-        <set var="team_score" value="team_score+1"/>
+        <set var="score" value="score+1"/>
         <set var="player_score" value="player_score+1"/>
         <action filter="goal_scorer_enabled=1">
             <message text=" `2You have scored `e{amount} `2goal(s) in this match.">
@@ -405,12 +381,12 @@
     <action id="remove-timelimit" scope="match" expose="true">
         <set var="overtime" value="1"/>
     </action>
-    <trigger filter="only-team-one" scope="player">
+    <trigger filter="team-one" scope="player">
         <action scope="player">
             <set var="current_team" value="1"/>
         </action>
     </trigger>
-    <trigger filter="only-team-two" scope="player">
+    <trigger filter="team-two" scope="player">
         <action scope="player">
             <set var="current_team" value="2"/>
         </action>
@@ -457,7 +433,7 @@
             </message>
         </switch-scope>
     </action>
-    <action filter="only-team-one" id="message-score-display-team-one" scope="player">
+    <action filter="team-one" id="message-score-display-team-one" scope="player">
         <message text="`5# #            `f{one-score}`6 `l－`r `f{two-score}`5            # #">
             <replacements>
                 <decimal id="one-score" value="team_one_score"/>
@@ -465,7 +441,7 @@
             </replacements>
         </message>
     </action>
-    <action filter="only-team-two" id="message-score-display-team-two" scope="player">
+    <action filter="team-two" id="message-score-display-team-two" scope="player">
         <message text="`5# #            `f{two-score}`6 `l－`r `f{one-score}`5            # #">
             <replacements>
                 <decimal id="one-score" value="team_one_score"/>
@@ -580,14 +556,12 @@
             </all>
         </filter>
         <action>
-            <set var="time_limit" value="0"/>
+            <set var="timelimit" value="0"/>
         </action>
     </trigger>
     <trigger scope="match">
         <filter>
-            <all>
-                <variable var="overtime">2</variable>
-            </all>
+            <variable var="overtime">2</variable>
         </filter>
         <action>
             <message text=" `e⚠ `b`lTIEBREAKER! `7First team to score `awins `7the match."/>
@@ -595,38 +569,36 @@
         </action>
     </trigger>
     <action id="tiebreaker-win" scope="player" filter="overtime=2">
-        <set var="team_score" value="${score-limit}"/>
+        <set var="score" value="${score-limit}"/>
     </action>
 </actions>
 <regions>
-    <apply block-place="deny-participating" region="not-buildable">
+    <apply block-place="deny(participating)" region="not-buildable">
         <message>{"translate":"map.protectPortal"}</message>
     </apply>
-    <apply block-break="deny-participating" region="not-buildable" message="You may not break that block!"/>
+    <apply block-break="deny(participating)" region="not-buildable" message="You may not break that block!"/>
     <apply block="some-blocks" message="You may not interact with that block!"/>
     <negative id="not-cages">
         <region id="cages"/>
     </negative>
-    <below id="void-level" y="${void-plane}"/>
-    <apply kit="void-death" region="void-level"/>
     <!-- Spawn points -->
     <point id="team-one-spawn-point">${team-one-spawn}</point>
     <point id="team-two-spawn-point">${team-two-spawn}</point>
 </regions>
 <portals sound="false" observers="never">
     <!-- Falling on own team's portal -->
-    <portal destination="team-one-spawn-point" filter="only-team-one" region="team-one-portal" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}"/>
-    <portal destination="team-two-spawn-point" filter="only-team-two" region="team-two-portal" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-one-spawn-point" filter="team-one" region="team-one-portal" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-two-spawn-point" filter="team-two" region="team-two-portal" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
     <!-- Scoring -->
-    <portal destination="team-one-spawn-point" forward="should-teleport" filter="only-team-one" yaw="@${team-one-yaw}" pitch="@${team-one-pitch}"/>
-    <portal destination="team-two-spawn-point" forward="should-teleport" filter="only-team-two" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-one-spawn-point" forward="should-teleport" filter="team-one" yaw="@${team-one-yaw}" pitch="@${team-one-pitch}"/>
+    <portal destination="team-two-spawn-point" forward="should-teleport" filter="team-two" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
     <!-- Buytime -->
-    <portal destination="team-one-spawn-point" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}" sound="false"/>
-    <portal destination="team-two-spawn-point" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}" sound="false"/>
-    <!-- Void -->
-    <portal y="@-150" sound="false" region="void-level" observers="always"/>
+    <portal destination="team-one-spawn-point" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-two-pitch}"/>
+    <portal destination="team-two-spawn-point" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
 </portals>
-<score>
+<score display="circle">
+    <box filter="team-one" region="team-two-portal" points="0" silent="true"/>
+    <box filter="team-two" region="team-one-portal" points="0" silent="true"/>
     <limit>${score-limit}</limit>
     <mercy>${mercy-limit}</mercy>
 </score>

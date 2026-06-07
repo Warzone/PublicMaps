@@ -1,5 +1,5 @@
-<map> <!-- minimum proto: 1.4.0 -->
-<!-- version 2025.06.09-1 -->
+<map>
+<!-- version 2026.04.12-2 -->
 <constants fallback="true"> <!-- Default values. Each of them be modified by authors on their maps if needed. -->
     <constant id="void-plane">-5</constant> <!-- Y level to apply include effects -->
     <!-- Note: This default value works for pre-1.18 maps, or post-1.18 Nether/End maps. The modern overworld equivalent would be -69. This value could be changed in a dedicated general include in the future (not via global so existing maps don't get their behavior changed) -->
@@ -15,29 +15,21 @@
         </if>
         <clear effects="true" items="false" armor="false"/>
     </kit>
+    <give kit="void-death">
+        <filter>
+            <all>
+                <alive/>
+                <if constant="void-upside-down" constant-value="true">
+                    <above id="void-plane" y="${void-plane}"/>
+                </if>
+                <if constant="void-upside-down" constant-value="false">
+                    <below id="void-plane" y="${void-plane}"/>
+                </if>
+            </all>
+        </filter>
+    </give>
 </kits>
 <portals>
-    <portal y="@-150" sound="false" observers="${affect-obs}">
-        <region>
-            <if constant="void-upside-down" constant-value="true">
-                <above y="${void-plane}"/>
-            </if>
-            <if constant="void-upside-down" constant-value="false">
-                <below y="${void-plane}"/>
-            </if>
-        </region>
-    </portal>
+    <portal y="@-150" sound="false" observers="${affect-obs}" region="void-plane"/>
 </portals>
-<regions>
-    <apply kit="void-death">
-        <region>
-            <if constant="void-upside-down" constant-value="true">
-                <above y="${void-plane}"/>
-            </if>
-            <if constant="void-upside-down" constant-value="false">
-                <below y="${void-plane}"/>
-            </if>
-        </region>
-    </apply>
-</regions>
 </map>

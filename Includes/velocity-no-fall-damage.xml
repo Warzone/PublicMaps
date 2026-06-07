@@ -1,0 +1,36 @@
+<map>
+<!-- Disables fall damage when using jump pads, reenables it after landing -->
+<constant id="velocity-apply-region" fallback="true">jump-pads</constant>
+<variables>
+    <variable id="fall_variable" scope="player" default="0"/>
+</variables>
+<kits>
+    <kit id="velocity-applied">
+        <action scope="player">
+            <set var="fall_variable" value="1"/>
+        </action>
+    </kit>
+    <give>
+        <!-- Reset the variable to 0 only after a player is definitely not on the jump pad, and is more certainly grounded. If we do not time this, the variable can reset before the player has velocity applied in the jump pad region. -->
+        <filter>
+            <all>
+                <after duration="1s" filter="not(${velocity-apply-region})"/>
+                <after duration="0.2s" filter="grounded"/>
+            </all>
+        </filter>
+        <kit>
+            <action scope="player">
+                <set var="fall_variable" value="0"/>
+            </action>
+        </kit>
+    </give>
+</kits>
+<damage>
+    <deny>
+        <all>
+            <cause>fall</cause>
+            <variable var="fall_variable">1</variable>
+        </all>
+    </deny>
+</damage>
+</map>

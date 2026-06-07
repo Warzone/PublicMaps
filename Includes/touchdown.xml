@@ -1,7 +1,7 @@
 <map>
 <!-- Touchdown gamemode include file -->
-<!-- XML by zzuf, arcadeboss, MewTwoKing, Furrie, TommyHillfigger, KuNet, honeyfuggle & mameBT -->
-<!-- Version 2026.03.03-1 -->
+<!-- XML by mameBT, zzuf, arcadeboss, MewTwoKing, Furrie, TommyHillfigger, KuNet & honeyfuggle -->
+<!-- Version 2026.05.12-1 -->
 <game>Touchdown</game>
 <gamemode>ffb</gamemode>
 <objective>Capture the flag at the end zone on the enemies' side!</objective>
@@ -60,24 +60,16 @@
     <constant id="fire-material">fire</constant>
     <constant id="flag-color">white</constant>
     <constant id="deny-block-interaction">true</constant>
-    <constant id="overtime-default">1</constant> <!-- 0: no overtime; 1: PGM default; 2: Tiebreaker mode -->
+    <constant id="overtime-default">2</constant> <!-- 0: no overtime; 1: PGM default; 2: Tiebreaker mode -->
     <constant id="mercy-limit">-1</constant>
     <constant id="indicator-outer-material">sea lantern</constant> <!-- Delete to disable physical indicators -->
     <constant id="indicator-inner-material" delete="true"/>
     <constant id="show-tutorial">1</constant> <!-- 0: disable tutorial; 1: enable tutorial -->
     <!-- Experimental or alternate options -->
     <constant id="team-flag-posts">false</constant>
-    <constant id="gridiron-engine">false</constant>
-    <unless constant="gridiron-engine" constant-value="true">
-        <constant id="score-display">circle</constant>
-        <constant id="score-points">1</constant>
-        <constant id="score-limit">5</constant>
-    </unless>
-    <if constant="gridiron-engine" constant-value="true">
-        <constant id="score-display" delete="true"/>
-        <constant id="score-points">7</constant>
-        <constant id="score-limit">-1</constant>
-    </if>
+    <constant id="score-display">circle</constant>
+    <constant id="score-points">1</constant>
+    <constant id="score-limit">5</constant>
     <constant id="melee-weapon">stone sword</constant>
     <constant id="melee-weapon-name" delete="true"/> <!-- optional: custom name -->
     <constant id="melee-weapon-enchantment" delete="true"/> <!-- optional: enchantment ("knockback", etc) -->
@@ -89,8 +81,11 @@
     <constant id="gapple-slot">8</constant>
 </constants>
 <variables>
+    <variable id="prev_score" scope="team"/>
     <with-team id="team_one_score" var="score" team="team-one"/>
     <with-team id="team_two_score" var="score" team="team-two"/>
+    <with-team id="team_one_prev_score" var="prev_score" team="team-one"/>
+    <with-team id="team_two_prev_score" var="prev_score" team="team-two"/>
     <variable id="game_state" scope="match" default="${initial}"/>
     <variable id="can_score" scope="match" default="1"/>
     <variable id="round_status" scope="match" default="1"/> <!-- 0: team scored; 1: flag is active -->
@@ -99,7 +94,7 @@
     <variable id="overtime" scope="match" default="${overtime-default}"/>
     <variable id="scoring_team" scope="match" default="0"/>
     <variable id="show_tutorial" scope="match" default="${show-tutorial}"/>
-    <variable id="player_state" scope="player" default="${initial}" exclusive="1"/>
+    <variable id="player_state" scope="player" default="${initial}"/>
     <variable id="player_score" scope="player" default="0"/>
     <variable id="goal_scorer" scope="player" exclusive="1"/>
     <variable id="flag_carrier" scope="player" exclusive="1"/>
@@ -188,15 +183,17 @@
             <kit id="${armor-kit}"/>
             <action id="apply-heal"/>
         </action>
+        <action filter="score-prev_score=1..">
+            <set var="prev_score" value="score"/>
+            <action id="increment-round"/>
+        </action>
     </kit>
     <kit id="pre-round-kit">
         <effect>invisibility</effect>
         <effect amplifier="255">slow digging</effect>
     </kit>
     <kit id="pre-round-reset-kit" force="true">
-        <action>
-            <set var="player.fire_ticks" value="-20"/>
-        </action>
+        <action id="player.fire_ticks:=-20"/>
         <effect duration="0s">absorption</effect>
         <effect duration="1s" amplifier="20">regeneration</effect>
     </kit>
@@ -346,12 +343,7 @@
             <variable var="player_state">${throw}</variable>
         </any>
     </all>
-    <all id="team-one-scored">
-        <team>team-one</team>
-        <region id="team-two-portal"/>
-        <variable var="can_score">1</variable>
-        <variable var="player_state">${carry}</variable>
-        <filter id="not-carried"/>
+    <all id="should-teleport">
         <any id="one-pass-enforcement">
             <variable var="one_pass_rule">0</variable>
             <variable var="passed_once">1</variable>
@@ -362,30 +354,14 @@
                 </all>
             </not>
         </any>
-        <match-running/>
-        <alive/>
-    </all>
-    <all id="team-two-scored">
-        <team>team-two</team>
-        <region id="team-one-portal"/>
-        <variable var="can_score">1</variable>
-        <variable var="player_state">${carry}</variable>
-        <filter id="not-carried"/>
-        <filter id="one-pass-enforcement"/>
-        <match-running/>
-        <alive/>
-    </all>
-    <all id="should-teleport">
-        <filter id="one-pass-enforcement"/>
         <variable var="can_score">0</variable>
         <match-running/>
         <alive/>
     </all>
-    <after id="team-scored" filter="round_status=0" duration="0.05s"/>
     <all id="during-buytime">
         <after duration="0.05s" filter="on-buytime"/>
         <not>
-            <below y="${void-plane}"/>
+            <region id="void-plane"/>
         </not>
     </all>
     <all id="on-buytime">
@@ -413,7 +389,7 @@
     <after id="cage-time" filter="immediately-after-capture" message="`a» `fNext round begins in {0} `a«" duration="${pre-round-time}"/>
     <all id="goal-scored">
         <variable var="can_score">0</variable>
-        <filter id="team-scored"/>
+        <after filter="round_status=0" duration="0.05s"/>
         <match-running/>
         <any>
             <observing/>
@@ -442,20 +418,9 @@
             <region id="team-one-portal"/>
         </all>
     </any>
-    <any id="flag-strip-in-enemy-net">
-        <all>
-            <filter id="team-one"/>
-            <region id="team-two-portal"/>
-        </all>
-        <all>
-            <filter id="team-two"/>
-            <region id="team-one-portal"/>
-        </all>
-    </any>
     <cause id="melee-damage">melee</cause>
     <relation id="ally-damage">ally</relation>
     <relation id="enemy-damage">enemy</relation>
-    <flag-captured id="flag-captured">flag</flag-captured>
     <after id="0.1-seconds" filter="match-running" duration="0.1s"/>
     <after id="3-seconds" filter="match-running" duration="3s"/>
     <all id="tied-match">
@@ -537,12 +502,14 @@
     </action>
     <action id="carrier-died-event" scope="player" filter="died-carrying">
         <set var="player_state" value="${initial}"/>
-        <set var="game_state" value="${death}"/>
+        <action filter="not-carried">
+            <set var="game_state" value="${death}"/>
+            <switch-scope inner="match">
+                <message text=" `e`l»`a The Flag carrier died!" actionbar="`aFlag carrier died!"/>
+            </switch-scope>
+        </action>
         <set var="passed_once" value="0"/>
         <set var="flag_carrier" value="0"/>
-        <switch-scope inner="match">
-            <message text=" `e`l»`a The Flag carrier died!" actionbar="`aFlag carrier died!"/>
-        </switch-scope>
     </action>
     <action id="reset-flag" scope="match">
         <!-- I think this makes more sense to be called reset-arena -->
@@ -576,7 +543,6 @@
             <set var="game_state" value="${carry}"/>
             <action id="apply-heal"/>
             <set var="flag_carrier" value="1"/>
-            <action id="pickup-flag"/>
             <message subtitle="`f`lYou are the `b`lFlag `f`lcarrier!" fade-in="0.5" stay="0.7" fade-out="0.5"/>
             <sound key="${entity.player.levelup}" volume="0.7" pitch="1.5"/>
             <action filter="ally-damage">
@@ -599,6 +565,7 @@
                 <action id="catch-sounds"/>
                 <action id="flag-fire"/> <!-- Just in case -->
             </switch-scope>
+            <action id="pickup-flag"/>
         </action>
         <action filter="melee-damage">
             <set var="last_damage_type" value="1"/>
@@ -612,12 +579,12 @@
         <set var="game_state" value="${carry}"/>
         <action id="apply-heal"/>
         <set var="flag_carrier" value="1"/>
-        <action filter="flag-strip-in-enemy-net">
+        <action filter="in-capture-region">
             <switch-scope inner="match">
                 <set var="passed_once" value="1"/>
             </switch-scope>
         </action>
-        <action filter="not(flag-strip-in-enemy-net)">
+        <action filter="not(in-capture-region)">
             <switch-scope inner="match">
                 <set var="passed_once" value="0"/>
             </switch-scope>
@@ -674,8 +641,13 @@
             </switch-scope>
         </action>
     </trigger>
-    <action id="increment-round" scope="player">
-        <set var="score" value="score+${score-points}"/>
+    <action id="increment-round" filter="score-prev_score=0" scope="player">
+        <action filter="team-one">
+            <set var="scoring_team" value="1"/>
+        </action>
+        <action filter="team-two">
+            <set var="scoring_team" value="2"/>
+        </action>
         <set var="player_score" value="player_score+1"/>
         <message text=" `2You have scored `e{amount} `2touchdown{plural} in this match.">
             <replacements>
@@ -717,8 +689,6 @@
             </action>
         </action>
     </action>
-    <trigger filter="team-one-scored" action="increment-round" scope="player"/>
-    <trigger filter="team-two-scored" action="increment-round" scope="player"/>
     <trigger filter="all(can_score=0,not(match-finished))" action="create-cages" scope="match"/>
     <trigger filter="cage-time" action="remove-cages" scope="match"/>
     <trigger filter="flag-respawn" action="round_status:=1" scope="match"/>
@@ -770,8 +740,6 @@
         </switch-scope>
     </action>
     <trigger filter="goal-scored" action="message-score-display" scope="player" observers="true"/>
-    <trigger filter="team-one-scored" action="scoring_team:=1" scope="player"/>
-    <trigger filter="team-two-scored" action="scoring_team:=2" scope="player"/>
     <!-- End match if overtime disabled (overtime=0) -->
     <trigger filter="all(in-overtime,overtime=0)" action="timelimit:=0" scope="match"/>
     <!-- Action to remove timelimit -->
@@ -882,33 +850,10 @@
     <portal destination="team-one-spawn" forward="should-teleport" filter="team-one" yaw="@${team-one-yaw}" pitch="@${team-one-pitch}"/>
     <portal destination="team-two-spawn" forward="should-teleport" filter="team-two" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
     <!-- Buytime -->
-    <portal destination="team-one-spawn" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-one-pitch}" sound="false"/>
-    <portal destination="team-two-spawn" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}" sound="false"/>
+    <portal destination="team-one-spawn" filter="team-one-buytime" region="not-cages" yaw="@${team-one-yaw}" pitch="@${team-one-pitch}"/>
+    <portal destination="team-two-spawn" filter="team-two-buytime" region="not-cages" yaw="@${team-two-yaw}" pitch="@${team-two-pitch}"/>
 </portals>
 <flags flag-proximity-metric="none" net-proximity-metric="none" required="false">
-    <post id="default-post"
-          yaw="${flag-yaw}"
-          respawn-time="${flag-respawn}"
-          recover-time="0s"
-          pickup-filter="can-pickup-flag">${flag-post}</post>
-    <if constant="team-flag-posts" constant-value="true">
-        <post id="team-one-post"
-              yaw="${team-two-yaw}"
-              respawn-time="${flag-respawn}"
-              recover-time="0s"
-              pickup-filter="can-pickup-flag"
-              fallback="default-post">
-            <post respawn-filter="flag-captured">${team-one-flag-post}</post>
-        </post>
-        <post id="team-two-post"
-              yaw="${team-one-yaw}"
-              respawn-time="${flag-respawn}"
-              recover-time="0s"
-              pickup-filter="can-pickup-flag"
-              fallback="default-post">
-            <post respawn-filter="flag-captured">${team-two-flag-post}</post>
-        </post>
-    </if>
     <flag id="flag"
           name="Flag"
           color="${flag-color}"
@@ -917,23 +862,17 @@
           drop-kit="${flag-drop-kit}"
           show-messages="false"
           show-effects="false"
-          capture-filter="all(carrying-football,one-pass-enforcement)"
-          post="default-post"
+          capture-filter="all(carrying-football,alive,one-pass-enforcement)"
           allow-manual-drop="false">
-        <unless constant="team-flag-posts" constant-value="true">
-            <net region="team-one-portal"
-                 capture-filter="all(team-two,team-one-portal)"/>
-            <net region="team-two-portal"
-                 capture-filter="all(team-one,team-two-portal)"/>
-        </unless>
-        <if constant="team-flag-posts" constant-value="true">
-            <net region="team-one-portal"
-                 capture-filter="all(team-two,team-one-portal)"
-                 post="team-one-post"/>
-            <net region="team-two-portal"
-                 capture-filter="all(team-one,team-two-portal)"
-                 post="team-two-post"/>
-        </if>
+        <net region="team-one-portal" capture-filter="team-two" points="${score-points}"/>
+        <net region="team-two-portal" capture-filter="team-one" points="${score-points}"/>
+        <post yaw="${flag-yaw}" respawn-time="${flag-respawn}" recover-time="0s" pickup-filter="can-pickup-flag">
+            <post respawn-filter="never">${flag-post}</post>
+            <if constant="team-flag-posts" constant-value="true">
+                <post id="team-one-post" yaw="${team-two-yaw}" respawn-filter="scoring_team=2">${team-one-flag-post}</post>
+                <post id="team-two-post" yaw="${team-one-yaw}" respawn-filter="scoring_team=1">${team-two-flag-post}</post>
+            </if>
+        </post>
     </flag>
 </flags>
 <score display="${score-display}">

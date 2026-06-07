@@ -7,7 +7,7 @@
 <!-- ╚═══════╝ -->
 <!-- Bridge Swap gamemode include file -->
 <!-- Created by zzuf -->
-<!-- Version 2025.02.04-1 -->
+<!-- Version 2026.04.12-1 -->
 <include id="bridge"/>
 <game>Bridge Swap</game>
 <constants fallback="true">
@@ -28,12 +28,12 @@
                 <page>
                     `2» `lBRIDGE +
                     `2» `lBLOCK SWAP`0
-                    
+
                     Each team has a
                     `6quartz platform`0,
                     below or behind their
                     spawn point.
-                    
+
                     Convert all the enemy
                     `8quartz blocks`0 into
                     wool`0!
@@ -48,19 +48,19 @@
     <!-- <all id="team-two-controlling-point"/>  -->
     <all id="team-one-own-point">
         <filter id="team-one-controlling-point"/>
-        <filter id="only-team-one"/>
+        <filter id="team-one"/>
     </all>
     <all id="team-two-own-point">
         <filter id="team-two-controlling-point"/>
-        <filter id="only-team-two"/>
+        <filter id="team-two"/>
     </all>
     <all id="team-one-other-point">
         <filter id="team-two-controlling-point"/>
-        <filter id="only-team-one"/>
+        <filter id="team-one"/>
     </all>
     <all id="team-two-other-point">
         <filter id="team-one-controlling-point"/>
-        <filter id="only-team-two"/>
+        <filter id="team-two"/>
     </all>
 </filters>
 <regions>
@@ -105,7 +105,7 @@
             </switch-scope>
         </switch-scope>
     </action>
-    <action id="platform-sfx-good-t1" scope="player" filter="only-team-one">
+    <action id="platform-sfx-good-t1" scope="player" filter="team-one">
         <sound key="${entity.firework_rocket.twinkle}"/>
         <!-- <message text=" `4Team 1`f has damaged `9Team 2 Platform`r"/> -->
         <switch-scope outer="player" inner="match">
@@ -117,7 +117,7 @@
             <action id="platform-sfx-bad-t1"/>
         </switch-scope>
     </action>
-    <action id="platform-sfx-bad-t1" scope="player" filter="only-team-one">
+    <action id="platform-sfx-bad-t1" scope="player" filter="team-one">
         <sound key="${entity.wither.hurt}" volume="0.1"/>
         <!-- <message text=" `9Team 2`f has damaged `4Team 1 Platform`r"/> -->
     </action>
@@ -128,7 +128,7 @@
             </switch-scope>
         </switch-scope>
     </action>
-    <action id="platform-sfx-good-t2" scope="player" filter="only-team-two">
+    <action id="platform-sfx-good-t2" scope="player" filter="team-two">
         <sound key="${entity.firework_rocket.twinkle}"/>
         <!-- <message text=" `9Team 2`f has damaged `4Team 1 Platform`r"/> -->
         <switch-scope outer="player" inner="match">
@@ -140,7 +140,7 @@
             <action id="platform-sfx-bad-t2"/>
         </switch-scope>
     </action>
-    <action id="platform-sfx-bad-t2" scope="player" filter="only-team-two">
+    <action id="platform-sfx-bad-t2" scope="player" filter="team-two">
         <sound key="${entity.wither.hurt}" volume="0.1"/>
         <!-- <message text=" `4Team 1`f has damaged `9Team 2 Platform`r"/> -->
     </action>
@@ -233,4 +233,10 @@
         <replacement>${team-one-block}</replacement>
     </rule>
 </block-drops>
+<if min-server-version="1.21.11">
+    <!-- to-do: objective locations -->
+    <gamerules>
+        <locator_bar>false</locator_bar>
+    </gamerules>
+</if>
 </map>
