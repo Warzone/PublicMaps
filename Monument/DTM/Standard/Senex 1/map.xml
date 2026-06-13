@@ -1,112 +1,120 @@
-<map proto="1.5.0">
+<map proto="1.5.1">
 <name>Senex 1</name>
 <variant id="christmas" world="christmas" override="true">Snowex 1</variant>
-<version>2.2.9</version>
+<version>2.4</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
+<if variant="default">
+    <constant id="wood-damage">0</constant>
+</if>
+<if variant="christmas">
+    <constant id="wood-damage">1</constant>
+</if>
 <include id="gapple-kill-reward"/>
 <authors>
     <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
 </authors>
 <teams>
-    <team id="lime-team" color="green" max="12">Lime</team>
-    <team id="cyan-team" color="dark aqua" max="12">Cyan</team>
+    <team id="lime-team" color="green" max="24">Lime</team>
+    <team id="cyan-team" color="dark aqua" max="24">Cyan</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
         <clear/>
-        <item slot="0" unbreakable="true" material="stone sword"/>
-        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" unbreakable="true" material="diamond pickaxe"/>
-        <item slot="3" unbreakable="true" material="stone axe"/>
-        <item slot="4" amount="32" material="glass"/>
-        <item slot="5" amount="64" material="sandstone"/>
-        <item slot="6" amount="64" material="wood"/>
-        <item slot="7" material="golden apple"/>
+        <item slot="0" material="stone sword"/>
+        <item slot="1" enchantment="infinity" material="bow"/>
+        <item slot="2" material="diamond pickaxe"/>
+        <item slot="3" amount="32" material="glass"/>
+        <if variant="default">
+            <item slot="4" amount="64" material="sandstone"/>
+        </if>
+        <if variant="christmas">
+            <item slot="4" amount="64" material="snow block"/>
+        </if>
+        <item slot="5" amount="64" material="log" damage="${wood-damage}"/>
+        <item slot="7" amount="2" material="golden apple"/>
         <item slot="8" amount="32" material="cooked beef"/>
         <item slot="28" material="arrow"/>
-        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
-        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
-        <leggings unbreakable="true" team-color="true" material="leather leggings"/>
-        <boots unbreakable="true" team-color="true" material="leather boots"/>
-        <effect duration="5" amplifier="5">damage resistance</effect>
-        <effect duration="5" amplifier="5">heal</effect>
+        <helmet team-color="true" material="leather helmet"/>
+        <chestplate team-color="true" material="leather chestplate"/>
+        <leggings team-color="true" material="leather leggings"/>
+        <boots team-color="true" material="leather boots"/>
+        <effect duration="5s" amplifier="5">damage resistance</effect>
+        <effect duration="5s" amplifier="5">heal</effect>
     </kit>
 </kits>
 <spawns>
+    <spawn team="lime-team" kit="spawn-kit" yaw="-90">
+        <region>
+            <cylinder base="35.5,20,-743.5" height="0" radius="1"/>
+        </region>
+    </spawn>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="90">
+        <region>
+            <cylinder base="129.5,20,-743.5" height="0" radius="1"/>
+        </region>
+    </spawn>
     <default>
         <region>
             <cylinder base="82.5,37,-811.5" height="0" radius="1"/>
         </region>
     </default>
-    <spawn team="cyan-team" kit="spawn-kit" yaw="90">
-        <region>
-            <cylinder base="129.5,20,-744.5" height="0" radius="1"/>
-        </region>
-    </spawn>
-    <spawn team="lime-team" kit="spawn-kit" yaw="-90">
-        <region>
-            <cylinder base="35.5,20,-744.5" height="0" radius="1"/>
-        </region>
-    </spawn>
 </spawns>
 <regions>
-    <!-- Definitions -->
-    <negative id="playable">
-        <rectangle id="map" min="-19,-762" max="183,-726"/>
-    </negative>
-    <union id="spawn-protections">
-        <cylinder id="cyan-spawn" base="129.5,19,-744.5" height="6" radius="8"/>
-        <cylinder id="lime-spawn" base="35.5,19,-744.5" height="6" radius="8"/>
+    <!-- rectangle id="playable" min="-19,-762" max="183,-726"/ -->
+    <union id="spawns">
+        <cylinder base="35.5,19,-743.5" height="6" radius="8"/> <!-- lime spawn -->
+        <cylinder base="129.5,19,-743.5" height="6" radius="8"/> <!-- cyan spawn -->
     </union>
-    <!-- Applications -->
-    <apply region="playable" block="never" message="You may not edit outside the map."/>
-    <apply region="spawn-protections" block="never" message="You may not modify the spawn area."/>
+    <apply block="never" region="spawns" message="You may not modify the spawn areas!"/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable id="left-lime" name="Left" owner="lime-team">
+    <destroyable name="Left" owner="lime-team">
         <region>
             <block>-12,23,-733</block>
         </region>
     </destroyable>
-    <destroyable id="right-lime" name="Right" owner="lime-team">
+    <destroyable name="Right" owner="lime-team">
         <region>
             <block>-12,23,-755</block>
         </region>
     </destroyable>
-    <destroyable id="left-cyan" name="Left" owner="cyan-team">
+    <destroyable name="Left" owner="cyan-team">
         <region>
             <block>176,23,-755</block>
         </region>
     </destroyable>
-    <destroyable id="right-cyan" name="Right" owner="cyan-team">
+    <destroyable name="Right" owner="cyan-team">
         <region>
             <block>176,23,-733</block>
         </region>
     </destroyable>
 </destroyables>
+<toolrepair>
+    <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>arrow</tool>
+</toolrepair>
 <itemremove>
     <item>obsidian</item>
-    <item>sandstone</item>
     <item>leather helmet</item>
     <item>leather chestplate</item>
     <item>leather leggings</item>
     <item>leather boots</item>
     <item>cooked beef</item>
 </itemremove>
-<toolrepair>
-    <tool>diamond pickaxe</tool>
-    <tool>bow</tool>
-    <tool>stone sword</tool>
-    <tool>stone axe</tool>
-</toolrepair>
 <itemkeep>
-    <item>arrow</item>
     <item>glass</item>
-    <item>log</item>
-    <item>wood</item>
+    <if variant="default">
+        <item>sandstone</item>
+    </if>
+    <if variant="christmas">
+        <item>snow block</item>
+    </if>
+    <item>log:${wood-damage}</item>
+    <item>wood:${wood-damage}</item>
     <item>golden apple</item>
 </itemkeep>
-<timelock>on</timelock>
 <maxbuildheight>38</maxbuildheight>
 </map>
