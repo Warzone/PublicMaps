@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Masarin II</name>
-<version>2.1.7</version>
+<version>2.1.8</version>
 <created>2015-05-08</created>
 <objective>Leak lava from the enemy's obsidian core and destroy their obsidian monument for victory.</objective>
 <gamemode>dtc</gamemode>
@@ -87,6 +87,10 @@
             <material>ice</material>
         </all>
     </deny>
+    <any id="spawn-mine-blocks">
+        <material>iron block</material>
+        <material>web</material>
+    </any>
 </filters>
 <regions>
     <union id="no-break-or-place">
@@ -97,7 +101,7 @@
     </union>
     <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy team's mountain!"/>
     <apply enter="only-red" region="red-spawn" message="You may not enter the enemy team's mountain!"/>
-    <apply block="never" region="no-break-or-place" message="You may not break or place blocks here!"/>
+    <apply block-break="spawn-mine-blocks" block-place="never" region="no-break-or-place" message="You may not break or place blocks here!"/>
     <apply block="no-ice-melting"/>
     <apply block="deny(void)" message="You may not build in the void!"/>
 </regions>
@@ -144,7 +148,6 @@
     <item>skull item</item>
     <item>obsidian</item>
     <item>gold block</item>
-    <item>string</item>
     <item>seeds</item>
     <item>flint</item>
     <item>sapling</item>
@@ -161,19 +164,6 @@
     <item>water bucket</item>
     <item>golden apple</item>
 </itemkeep>
-<block-drops>
-    <rule>
-        <filter>
-            <any>
-                <material>wood</material>
-                <material>glass</material>
-            </any>
-        </filter>
-        <drops>
-            <item chance="0" material="glass"/>
-        </drops>
-    </rule>
-</block-drops>
 <kill-rewards>
     <kill-reward>
         <item amount="32" damage="1" material="wood"/>
