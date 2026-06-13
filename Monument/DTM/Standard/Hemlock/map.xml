@@ -1,0 +1,168 @@
+<map proto="1.5.0">
+<name>Hemlock</name>
+<version>1.2</version>
+<objective>Destroy the enemy's monument</objective>
+<gamemode>dtm</gamemode>
+<constants>
+    <constant id="eff.team-1">blue-team</constant>
+    <constant id="eff.team-2">red-team</constant>
+    <constant id="eff.t2-m1-region">blue-monument</constant>
+    <constant id="eff.t1-m1-region">red-monument</constant>
+    <constant id="eff.modes-preset">every-5m</constant>
+</constants>
+<include id="efficiency-variables"/>
+<include id="gapple-kill-reward"/>
+<authors>
+    <author uuid="b03360db-b8cd-49de-8ba1-b7920c2238a9"/> <!-- Obelistics -->
+    <author uuid="bf331953-4f92-43ee-8abc-7544b8234936"/> <!-- Teamspleefer AKA Vicei -->
+    <author uuid="f690a591-348b-482e-a18d-7779d0c0a28c"/> <!-- mitchiii -->
+</authors>
+<contributors>
+    <contributor uuid="fe3608b7-d105-4029-8800-34b3147065b6"/> <!-- rockymine -->
+    <contributor uuid="c88f74cc-51e7-43da-b893-54f8ec630701"/> <!-- Epicness -->
+    <contributor uuid="2cef6d05-ec9a-44b3-bedc-53359c68ae65"/> <!-- BGMP -->
+</contributors>
+<teams>
+    <team id="blue-team" color="blue" max="14">Blue</team>
+    <team id="red-team" color="dark red" max="14">Red</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <clear/>
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="2" material="diamond pickaxe" unbreakable="true"/>
+        <item slot="3" material="diamond axe" unbreakable="true"/>
+        <item slot="4" material="wood" damage="5" amount="64"/>
+        <item slot="5" material="stained clay" team-color="true" amount="32"/>
+        <item slot="7" material="bucket"/>
+        <item slot="8" material="golden apple"/>
+        <item slot="28" material="arrow" amount="64"/>
+        <item slot="30" material="iron spade"/>
+        <helmet unbreakable="true" team-color="true" material="leather helmet"/>
+        <chestplate unbreakable="true" team-color="true" material="leather chestplate"/>
+        <leggings unbreakable="true" material="chainmail leggings"/>
+        <boots unbreakable="true" team-color="true" material="leather boots"/>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="-90">
+            <cylinder base="-79.5,36,-125.5" radius="1" height="0"/>
+        </region>
+    </default>
+    <spawn team="blue-team" kit="spawn-kit">
+        <region yaw="180">
+            <cylinder base="-41.5,6,-42.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+    <spawn team="red-team" kit="spawn-kit">
+        <region>
+            <cylinder base="-41.5,6,-208.5" radius="1" height="0"/>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <team id="only-red">red-team</team>
+    <team id="only-blue">blue-team</team>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="obs-spawn" min="-83,-129" max="-75,-122"/>
+        <rectangle id="blue-spawn" min="-50,-49" max="-34,-32"/>
+        <rectangle id="red-spawn" min="-50,-202" max="-34,-219"/>
+    </union>
+    <union id="portals">
+        <cylinder id="blue-portal" base="-50.5,7,-56" radius="3" height="7"/>
+        <cylinder id="red-portal" base="-50.5,7,-195" radius="3" height="7"/>
+    </union>
+    <union id="portal-exits">
+        <cuboid id="blue-portal-exit" min="-55.5,21,-48.5" max="-53.5,24,-50.5"/>
+        <cuboid id="red-portal-exit" min="-55.5,21,-202.5" max="-53.5,24,-200.5"/>
+    </union>
+    <union id="monuments">
+        <cylinder id="blue-monument" base="-26.5,25,-56.5" height="3" radius="0.5"/>
+        <cylinder id="red-monument" base="-26.5,25,-194.5" height="3" radius="0.5"/>
+    </union>
+    <complement id="void-region">
+        <everywhere/>
+        <rectangle min="-18,-142" max="-50,-109"/>
+        <rectangle min="-50,-97" max="-66,-154"/>
+    </complement>
+    <apply enter="only-blue" region="blue-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply enter="only-red" region="red-spawn" message="You may not enter the enemy's spawn!"/>
+    <apply block="never" region="spawns" message="You may not edit the spawns!"/>
+    <apply block="never" region="portals" message="You may not edit the blocks around the portal!"/>
+    <apply block="never" region="portal-exits" message="You may not modify the portal exits!"/>
+    <apply block-place="deny(void)" region="void-region" message="You may not edit the void!"/>
+</regions>
+<destroyables name="Monument" repairable="false" materials="obsidian">
+    <destroyable owner="blue-team" region="blue-monument"/>
+    <destroyable owner="red-team" region="red-monument"/>
+</destroyables>
+<portals>
+    <!-- Blue portal from spawn to monomuent -->
+    <portal x="@-54.5" y="@22" z="@-49.5" yaw="@-90">
+        <region>
+            <cylinder base="-50.5,8,-56" radius="0.75" height="3"/>
+        </region>
+    </portal>
+    <!-- Red portal from spawn to monomuent -->
+    <portal x="@-54.5" y="@22" z="@-201.5" yaw="@-90">
+        <region>
+            <cylinder base="-50.5,8,-195" radius="0.75" height="3"/>
+        </region>
+    </portal>
+</portals>
+<renewables>
+    <renewable rate="2.5" grow="false" particles="true" sound="true" avoid-players="4">
+        <region>
+            <rectangle min="-47,-80" max="-39,-73"/>
+            <rectangle min="-39,-178" max="-47,-171"/>
+        </region>
+        <renew-filter>
+            <material>iron block</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>diamond axe</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>obsidian</item>
+    <item>dirt</item>
+    <item>double step</item>
+    <item>step</item>
+    <item>leaves</item>
+    <item>stone</item>
+    <item>clay ball</item>
+    <item>seeds</item>
+    <item>cobble wall</item>
+    <item>rails</item>
+</itemremove>
+<itemkeep>
+    <item>wood</item>
+    <item>stained clay</item>
+    <item>bucket</item>
+    <item>water bucket</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item amount="24" damage="5" material="wood"/>
+        <item amount="12" team-color="true" material="stained clay"/>
+        <item amount="16" material="arrow"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>35</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>
