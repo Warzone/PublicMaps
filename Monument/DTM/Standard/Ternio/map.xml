@@ -1,29 +1,30 @@
-<map proto="1.4.2">
+<map proto="1.5.1">
 <name>Ternio</name>
 <variant id="christmas" world="christmas">Holiday</variant>
 <version>2.3.0</version>
 <objective>Destroy the enemy team's monuments!</objective>
 <gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
 <authors>
     <author uuid="44df6b20-168f-4389-b7ac-434518207c2f"/> <!-- ParaPenguin -->
 </authors>
 <teams>
-    <team id="purple" color="dark purple" max="16">Purple</team>
-    <team id="cyan" color="dark aqua" max="16">Cyan</team>
+    <team id="purple-team" color="dark purple" max="16">Purple</team>
+    <team id="cyan-team" color="dark aqua" max="16">Cyan</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
         <clear/>
         <item slot="0" material="stone sword"/>
-        <item slot="1" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" enchantment="dig speed" material="diamond pickaxe"/>
-        <item slot="3" amount="3" material="golden apple"/>
-        <item slot="4" amount="32" material="log"/>
-        <item slot="5" amount="64" material="glass"/>
+        <item slot="1" enchantment="infinity" material="bow"/>
+        <item slot="2" enchantment="efficiency" material="diamond pickaxe"/>
+        <item slot="3" amount="32" material="log"/>
+        <item slot="4" amount="64" material="glass"/>
+        <item slot="7" amount="3" material="golden apple"/>
         <item slot="8" amount="16" material="cooked fish"/>
         <item slot="28" material="arrow"/>
         <helmet team-color="true" material="leather helmet"/>
-        <chestplate team-color="true" enchantment="protection projectile:2" material="leather chestplate"/>
+        <chestplate team-color="true" enchantment="projectile protection:2" material="leather chestplate"/>
         <leggings team-color="true" material="leather leggings"/>
         <boots team-color="true" material="leather boots"/>
         <effect duration="5" amplifier="5">damage resistance</effect>
@@ -31,82 +32,69 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="purple" kit="spawn-kit">
-        <regions>
-            <cylinder base="4.5,25,-821.5" height="0" radius="2"/>
-        </regions>
+    <spawn team="purple-team" kit="spawn-kit">
+        <region>
+            <cylinder base="4.5,25,-820.5" height="0" radius="2"/>
+        </region>
     </spawn>
-    <spawn team="cyan" kit="spawn-kit" yaw="180">
-        <regions>
-            <cylinder base="4.5,25,-714.5" height="0" radius="2"/>
-        </regions>
+    <spawn team="cyan-team" kit="spawn-kit" yaw="180">
+        <region>
+            <cylinder base="4.5,25,-713.5" height="0" radius="2"/>
+        </region>
     </spawn>
     <default yaw="-90">
-        <regions>
+        <region>
             <cylinder base="-55.5,46,-766.5" height="0" radius="1"/>
-        </regions>
+        </region>
     </default>
 </spawns>
-<filters>
-    <deny id="deny-fire-spread">
-        <material>fire</material>
-    </deny>
-    <team id="only-purple">purple</team>
-    <team id="only-cyan">cyan</team>
-</filters>
 <regions>
     <union id="spawns">
-        <cylinder id="cyan-spawn" base="4,23,-714" height="6" radius="7"/>
-        <cylinder id="purple-spawn" base="4,23,-821" height="6" radius="7"/>
+        <cylinder id="purple-spawn" base="4.5,24,-820.5" height="6" radius="7"/>
+        <cylinder id="cyan-spawn" base="4.5,24,-713.5" height="6" radius="7"/>
     </union>
-    <apply region="cyan-spawn" enter="only-cyan" message="You may not enter `3Cyan`c's spawn area!"/>
-    <apply region="purple-spawn" enter="only-purple" message="You may not enter `5Purple`c's spawn area!"/>
-    <apply region="spawns" block="never" message="You may not modify the spawn area."/>
+    <apply enter="purple-team" region="purple-spawn" message="You may not enter `5Purple`c's spawn area!"/>
+    <apply enter="cyan-team" region="cyan-spawn" message="You may not enter `3Cyan`c's spawn area!"/>
+    <apply block="never" region="spawns" message="You may not modify the spawn areas!"/>
 </regions>
 <destroyables materials="obsidian">
-    <destroyable name="Left" owner="purple">
+    <destroyable name="Left" owner="purple-team">
         <region>
             <block>-33,29,-821</block>
         </region>
     </destroyable>
-    <destroyable name="Center" owner="purple">
+    <destroyable name="Middle" owner="purple-team">
         <region>
             <block>4,29,-858</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="purple">
+    <destroyable name="Right" owner="purple-team">
         <region>
             <block>41,29,-821</block>
         </region>
     </destroyable>
-    <destroyable name="Left" owner="cyan">
+    <destroyable name="Left" owner="cyan-team">
         <region>
             <block>41,29,-714</block>
         </region>
     </destroyable>
-    <destroyable name="Center" owner="cyan">
+    <destroyable name="Middle" owner="cyan-team">
         <region>
             <block>4,29,-677</block>
         </region>
     </destroyable>
-    <destroyable name="Right" owner="cyan">
+    <destroyable name="Right" owner="cyan-team">
         <region>
             <block>-33,29,-714</block>
         </region>
     </destroyable>
 </destroyables>
 <toolrepair>
-    <tool>diamond pickaxe</tool>
-    <tool>bow</tool>
     <tool>stone sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>arrow</tool>
 </toolrepair>
-<itemkeep>
-    <item>golden apple</item>
-    <item>log</item>
-    <item>glass</item>
-    <item>arrow</item>
-    <item>wood</item>
-</itemkeep>
 <itemremove>
     <item>obsidian</item>
     <item>leather helmet</item>
@@ -115,11 +103,14 @@
     <item>leather boots</item>
     <item>cooked fish</item>
 </itemremove>
-<kill-rewards>
-    <kill-reward>
-        <item material="golden apple"/>
-    </kill-reward>
-</kill-rewards>
-<timelock>on</timelock>
+<itemkeep>
+    <item>log:0</item>
+    <item>wood:0</item>
+    <item>glass</item>
+    <item>golden apple</item>
+</itemkeep>
 <maxbuildheight>64</maxbuildheight>
+<gamerules>
+    <doFireTick>false</doFireTick>
+</gamerules>
 </map>
