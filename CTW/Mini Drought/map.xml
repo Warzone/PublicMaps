@@ -1,6 +1,6 @@
 <map proto="1.5.0">
 <name>Mini Drought</name>
-<version>1.0.5</version>
+<version>1.0.6</version>
 <objective>Take the wool from the enemy wool rooms and place it on your victory monument while defending your own wool.</objective>
 <gamemode>ctw</gamemode>
 <authors>
@@ -10,15 +10,15 @@
     <contributor uuid="00c06fa6-1c53-4634-931a-929efd8a52df" contribution="Trend-setter"/> <!-- Nadastorm -->
 </contributors>
 <teams>
-    <team id="blue" color="blue" max="5" max-overfill="7">Blue</team>
-    <team id="red" color="dark red" max="5" max-overfill="7">Red</team>
+    <team id="blue-team" color="blue" max="5" max-overfill="7">Blue</team>
+    <team id="red-team" color="dark red" max="5" max-overfill="7">Red</team>
 </teams>
 <kits>
     <kit id="spawn-kit">
-        <item slot="0" material="stone sword"/>
-        <item slot="1" enchantment="arrow infinite" material="bow"/>
-        <item slot="2" enchantment="durability;dig speed" material="iron pickaxe"/>
-        <item slot="3" enchantment="durability:3" material="gold axe"/>
+        <item slot="0" unbreakable="true" material="stone sword"/>
+        <item slot="1" unbreakable="true" enchantment="arrow infinite" material="bow"/>
+        <item slot="2" unbreakable="true" enchantment="dig speed" material="iron pickaxe"/>
+        <item slot="3" unbreakable="true" material="gold axe"/>
         <item slot="4" amount="64" material="sandstone"/>
         <item slot="5" amount="64" damage="2" material="wood"/>
         <item slot="6" amount="64" material="ladder"/>
@@ -33,12 +33,12 @@
     </kit>
 </kits>
 <spawns>
-    <spawn team="blue" kit="spawn-kit" yaw="135">
+    <spawn team="blue-team" kit="spawn-kit" yaw="135">
         <region>
             <cylinder base="-1.4,9,-268.5" radius="1" height="0"/>
         </region>
     </spawn>
-    <spawn team="red" kit="spawn-kit" yaw="-45">
+    <spawn team="red-team" kit="spawn-kit" yaw="-45">
         <region>
             <cylinder base="-71.5,9,-338.5" radius="1" height="0"/>
         </region>
@@ -50,37 +50,10 @@
     </default>
 </spawns>
 <filters>
-    <deny id="blue-wool">
-        <all>
-            <material>chest</material>
-            <team id="only-blue">blue</team>
-        </all>
-    </deny>
-    <deny id="red-wool">
-        <all>
-            <material>chest</material>
-            <team id="only-red">red</team>
-        </all>
+    <deny id="deny-chest">
+        <material>chest</material>
     </deny>
     <material id="only-gold">gold block</material>
-    <not id="only-red-usage">
-        <all>
-            <any>
-                <material>chest</material>
-                <material>workbench</material>
-            </any>
-            <filter id="only-blue"/>
-        </all>
-    </not>
-    <not id="only-blue-usage">
-        <all>
-            <any>
-                <material>chest</material>
-                <material>workbench</material>
-            </any>
-            <filter id="only-red"/>
-        </all>
-    </not>
 </filters>
 <regions>
     <union id="bases">
@@ -90,55 +63,50 @@
     <negative id="outside-center">
         <rectangle id="center" min="-54,-321" max="-19,-286"/>
     </negative>
-    <union id="blue-wool-rooms">
-        <rectangle min="-78,-360" max="-71,-353"/>
-        <rectangle min="-93,-338" max="-86,-345"/>
+    <union id="wool-rooms">
+        <union id="blue-wool-rooms">
+            <rectangle min="-78,-360" max="-71,-353"/>
+            <rectangle min="-93,-338" max="-86,-345"/>
+        </union>
+        <union id="red-wool-rooms">
+            <rectangle min="-2,-254" max="5,-247"/>
+            <rectangle min="13,-269" max="20,-262"/>
+        </union>
     </union>
-    <union id="red-wool-rooms">
-        <rectangle min="-2,-254" max="5,-247"/>
-        <rectangle min="13,-269" max="20,-262"/>
-    </union>
-    <apply region="blue-wool-rooms" block="blue-wool" use="only-blue-usage"/>
-    <apply region="blue-wool-rooms" enter="blue" message="You may not enter your own wool room!"/>
-    <apply region="blue-base" enter="blue" message="You may not enter the enemy's base"/>
-    <apply region="red-wool-rooms" block="red-wool" use="only-red-usage"/>
-    <apply region="red-wool-rooms" enter="red" message="You may not enter your own wool room!"/>
-    <apply region="red-base" enter="red" message="You may not enter the enemy's base"/>
+    <apply region="wool-rooms" block="deny-chest" message="You may not modify the wool room chests!"/>
+    <apply region="blue-wool-rooms" block="blue-team" message="You may not modify your own wool room!"/>
+    <apply region="blue-wool-rooms" enter="blue-team" message="You may not enter your own wool room!"/>
+    <apply region="blue-wool-rooms" use="blue-team"/>
+    <apply region="blue-base" enter="blue-team" message="You may not enter the enemy's base"/>
+    <apply region="red-wool-rooms" block="red-team" message="You may not modify your own wool room!"/>
+    <apply region="red-wool-rooms" enter="red-team" message="You may not enter your own wool room!"/>
+    <apply region="red-wool-rooms" use="red-team"/>
+    <apply region="red-base" enter="red-team" message="You may not enter the enemy's base"/>
     <apply region="bases" block-break="only-gold" block-place="never" message="You may only break gold blocks in the base"/>
     <apply region="outside-center" block="deny(void)" message="You may not break or place blocks here!"/>
 </regions>
 <wools>
-    <wool team="red" color="lime" location="16.5,8,-264.5">
+    <wool team="red-team" color="lime" location="16.5,8,-264.5">
         <monument>
             <block>-63,9,-331</block>
         </monument>
     </wool>
-    <wool team="red" color="green" location="2.5,8,-250.5">
+    <wool team="red-team" color="green" location="2.5,8,-250.5">
         <monument>
             <block>-64,9,-330</block>
         </monument>
     </wool>
-    <wool team="blue" color="pink" location="-75.5,8,-356.5">
+    <wool team="blue-team" color="pink" location="-75.5,8,-356.5">
         <monument>
             <block>-10,9,-278</block>
         </monument>
     </wool>
-    <wool team="blue" color="purple" location="-89.5,8,-342.5">
+    <wool team="blue-team" color="purple" location="-89.5,8,-342.5">
         <monument>
             <block>-11,9,-277</block>
         </monument>
     </wool>
 </wools>
-<item-mods>
-    <rule>
-        <match>
-            <material>gold axe</material>
-        </match>
-        <modify>
-            <enchantment level="3">unbreaking</enchantment>
-        </modify>
-    </rule>
-</item-mods>
 <itemremove>
     <item>cooked chicken</item>
     <item>golden apple</item>
