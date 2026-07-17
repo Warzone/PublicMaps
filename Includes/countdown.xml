@@ -1,0 +1,38 @@
+<map>
+<constant id="countdown-scope">match</constant>
+<actions>
+    <trigger scope="${countdown-scope}" filter="countdown-start">  <!-- countdown 3 -->
+        <action>
+            <message title="`e3"/>
+            <sound key="${block.note_block.pling}" pitch="1.19"/>
+        </action>
+    </trigger>
+    <trigger scope="${countdown-scope}"> <!-- countdown 2 -->
+        <filter>
+            <after duration="1s" filter="countdown-start"/>
+        </filter>
+        <action>
+            <message title="`e2"/>
+            <sound key="${block.note_block.pling}" pitch="1.19"/>
+        </action>
+    </trigger>
+    <trigger scope="${countdown-scope}"> <!-- countdown 1 -->
+        <filter>
+            <after duration="2s" filter="countdown-start"/>
+        </filter>
+        <action>
+            <message title="`e1"/>
+            <sound key="${block.note_block.pling}" pitch="1.19"/>
+        </action>
+    </trigger>
+    <trigger scope="${countdown-scope}"> <!-- countdown end -->
+        <filter>
+            <after duration="3s" filter="countdown-start"/>
+        </filter>
+        <action>
+            <message title="{translate: 'broadcast.go', color: 'green'}" fade-in="0.1" stay="0.5" fade-out="0.1"/>
+            <sound key="${block.note_block.pling}" pitch="1.59"/>
+        </action>
+    </trigger>
+</actions>
+</map>
