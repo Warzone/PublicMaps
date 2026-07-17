@@ -1,0 +1,211 @@
+<map proto="1.5.1" min-server-version="1.21.11">
+<name>Order</name>
+<version>1.0.2</version>
+<created>2026-06-16</created>
+<objective>Destroy the enemy team's monument!</objective>
+<gamemode>dtm</gamemode>
+<include id="gapple-kill-reward" />
+<authors>
+    <author uuid="f610e558-a3c8-44fb-8622-68cc49dbc18f" /> <!-- jcane -->
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb" /> <!-- _Pear -->
+</authors>
+<contributors>
+    <contributor uuid="64e840c8-4fb5-4659-a36b-ff93e2f6113a" contribution="XML" /> <!-- Javg_ -->
+</contributors>
+<teams>
+    <team id="red" color="red" max="12">Red</team>
+    <team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <item slot="0" material="iron sword" unbreakable="true" />
+        <item slot="1" material="bow" unbreakable="true" />
+        <item slot="2" material="trident" enchantment="riptide:1" unbreakable="true" />
+        <item slot="3" material="stone pickaxe" unbreakable="true" />
+        <item slot="4" material="wood axe" enchantment="efficiency:3" unbreakable="true" />
+        <item slot="5" material="jungle planks" amount="64" />
+        <item slot="6" material="glass" amount="16" />
+        <item slot="8" material="golden apple" />
+        <item slot="28" material="arrow" amount="32" />
+        <item slot="31" material="iron spade" unbreakable="true" />
+        <helmet material="leather helmet" team-color="true" unbreakable="true" />
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true" />
+        <leggings material="chainmail leggings" unbreakable="true" />
+        <boots material="chainmail boots" enchantment="feather falling:3" unbreakable="true" />
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="180">
+            <point>-0.5,22,73.5</point>
+        </region>
+    </default>
+    <spawn kit="default-kit" team="red">
+        <region yaw="180">
+            <point>-76.5,17,20.5</point>
+        </region>
+    </spawn>
+    <spawn kit="default-kit" team="blue">
+        <region yaw="0">
+            <point>75.5,17,-19.5</point>
+        </region>
+    </spawn>
+</spawns>
+<regions>
+    <rectangle id="red-base" min="-60,-4" max="-86,58" />
+    <rectangle id="blue-base" min="59,5" max="85,-57" />
+    <apply use="prevent-pot" />
+    <apply region="red-base" enter="red" message="You may not enter your enemy's spawn" />
+    <apply region="red-base" block-break="breakable" block-place="placeable" use="usable" message="You may not modify the spawn" />
+    <apply region="blue-base" enter="blue" message="You may not enter your enemy's spawn" />
+    <apply region="blue-base" block-break="breakable" block-place="placeable" use="usable" message="You may not modify the spawn" />
+    <apply block="no-void" message="You may not modify the void area!">
+        <region>
+            <rectangle id="main-area" min="-86,63" max="85,-62" />
+        </region>
+    </apply>
+</regions>
+<maxbuildheight>27</maxbuildheight>
+<filters>
+    <not id="prevent-pot">
+        <material>decorated pot</material>
+    </not>
+    <any id="usable">
+        <material>chest</material>
+        <material>workbench</material>
+    </any>
+    <any id="breakable">
+        <material>gold block</material>
+    </any>
+    <all id="placeable">
+        <material>gold block</material>
+        <not>
+            <cause>player</cause>
+        </not>
+    </all>
+    <not id="no-void">
+        <void />
+    </not>
+    <carrying id="has-trident" ignore-metadata="true" ignore-name="true" ignore-enchantments="true">
+        <item material="trident" />
+    </carrying>
+</filters>
+<actions>
+    <trigger scope="player" filter="all(not(red-base),not(blue-base))">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="iron pickaxe" />
+                <replace material="stone pickaxe" unbreakable="true" />
+            </replace-item>
+        </action>
+    </trigger>
+    <trigger scope="player" filter="any(red-base,blue-base)">
+        <action>
+            <replace-item ignore-metadata="true">
+                <find material="stone pickaxe" />
+                <replace material="iron pickaxe" unbreakable="true" />
+            </replace-item>
+        </action>
+    </trigger>
+    <!-- enchant trident (riptide 2) -->
+    <trigger scope="player">
+        <filter>
+            <kill-streak count="10" />
+        </filter>
+        <action id="test" scope="player" expose="true">
+            <action filter="not(has-trident)">
+                <kit>
+                    <item material="trident" />
+                </kit>
+            </action>
+            <enchant-item enchantment="riptide" level="2" ignore-metadata="true" ignore-name="true" ignore-enchantments="true">
+                <find material="trident" />
+            </enchant-item>
+            <message text=" " />
+            <message text="»» `aYou've received a `lTrident with Riptide 2`r (10 Killstreak)" />
+            <message text=" " />
+        </action>
+    </trigger>
+    <!-- enchant trident (riptide 3) -->
+    <trigger scope="player">
+        <filter>
+            <kill-streak count="20" />
+        </filter>
+        <action>
+            <action filter="not(has-trident)">
+                <kit>
+                    <item material="trident" />
+                </kit>
+            </action>
+            <enchant-item enchantment="riptide" level="3" ignore-metadata="true" ignore-name="true" ignore-enchantments="true">
+                <find material="trident" />
+            </enchant-item>
+            <message text=" " />
+            <message text="»» `aYou've received a `lTrident with Riptide 3`r (20 Killstreak)" />
+            <message text=" " />
+        </action>
+    </trigger>
+    <!-- remove lanes glass -->
+    <trigger scope="match" filter="match-started">
+        <action>
+            <fill material="moving piston">
+                <cuboid min="9,0,7" max="26,1,22" />
+                <cuboid min="6,0,-21" max="19,1,-6" />
+                <cuboid min="-7,0,22" max="-20,1,7" />
+                <cuboid min="-10,0,-6" max="-27,1,-21" />
+            </fill>
+        </action>
+    </trigger>
+</actions>
+<destroyables name="Monument" materials="raw iron block" repairable="false" required="true" show-progress="true">
+    <destroyable owner="red">
+        <region>
+            <cuboid id="red-mon" min="-38,17,51" max="-43,22,46" />
+        </region>
+    </destroyable>
+    <destroyable owner="blue">
+        <region>
+            <cuboid id="blue-mon" min="37,17,-50" max="42,22,-45" />
+        </region>
+    </destroyable>
+</destroyables>
+<renewables>
+    <renewable avoid-players="4">
+        <renew-filter>
+            <material>gold block</material>
+        </renew-filter>
+    </renewable>
+</renewables>
+<kill-rewards>
+    <kill-reward>
+        <item material="jungle wood" amount="16" />
+        <item material="glass" amount="16" />
+    </kill-reward>
+</kill-rewards>
+<itemkeep>
+    <item>iron sword</item>
+    <item>bow</item>
+    <item>stone pickaxe</item>
+    <item>wood axe</item>
+    <item>iron spade</item>
+</itemkeep>
+<toolrepair>
+    <tool>trident</tool>
+    <tool>iron pickaxe</tool>
+</toolrepair>
+<itemremove>
+    <item>jungle wood</item>
+    <item>glass</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>chainmail boots</item>
+    <item>waxed copper block</item>
+    <item>seeds</item>
+    <item>sapling</item>
+    <item>raw iron block</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

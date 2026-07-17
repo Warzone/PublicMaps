@@ -1,0 +1,162 @@
+<map proto="1.5.0" min-server-version="1.21.11">
+<name>Crown</name>
+<version>1.0.0</version>
+<created>2026-02-22</created>
+<objective>Capture the enemy team's wool!</objective>
+<gamemode>ctw</gamemode>
+<include id="gapple-kill-reward"/>
+<authors>
+    <author uuid="f610e558-a3c8-44fb-8622-68cc49dbc18f"/> <!-- jcane -->
+</authors>
+<teams>
+    <team id="red-team" max="14" color="dark red">Red</team>
+    <team id="blue-team" max="14" color="blue">Blue</team>
+</teams>
+<kits>
+    <kit id="spawn-kit">
+        <item slot="0" material="iron sword" unbreakable="true"/>
+        <item slot="1" material="bow" unbreakable="true"/>
+        <item slot="28" material="arrow" amount="32"/>
+        <item slot="2" material="iron pickaxe" unbreakable="true" enchantment="efficiency"/>
+        <item slot="29" material="shears" unbreakable="true"/>
+        <item slot="3" material="wooden axe" unbreakable="true" enchantment="efficiency:2"/>
+        <item slot="30" material="iron spade" unbreakable="true"/>
+        <item slot="4" material="bamboo planks" amount="64"/>
+        <item slot="5" material="leaves" amount="64"/>
+        <item slot="8" material="golden apple"/>
+        <helmet material="leather helmet" team-color="true" unbreakable="true"/>
+        <chestplate material="leather chestplate" team-color="true" unbreakable="true"/>
+        <leggings material="chainmail leggings" unbreakable="true">
+            <enchantment level="2">projectile protection</enchantment>
+        </leggings>
+        <boots material="leather boots" team-color="true" unbreakable="true"/>
+        <effect amplifier="5" duration="6s">damage resistance</effect>
+    </kit>
+</kits>
+<spawns>
+    <default yaw="0">
+        <region>
+            <point>0.5,34,-58.5</point>
+        </region>
+    </default>
+    <spawn team="red-team" kit="spawn-kit" yaw="180">
+        <region>
+            <point>-79.5,23,42</point>
+        </region>
+    </spawn>
+    <spawn team="blue-team" kit="spawn-kit" yaw="0">
+        <region>
+            <point>80.5,23,-41.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <all id="only-iron-renew">
+        <material id="only-iron">iron block</material>
+        <cause>world</cause>
+    </all>
+    <deny id="deny-chest">
+        <material>waxed copper chest</material>
+    </deny>
+    <deny id="deny-anchor">
+        <material>respawn anchor</material>
+    </deny>
+    <not id="not-leaves">
+        <material>leaves</material>
+    </not>
+</filters>
+<regions>
+    <union id="spawns">
+        <rectangle id="red-spawn" min="-91,20" max="-57,48"/>
+        <rectangle id="blue-spawn" min="92,-19" max="58,-47"/>
+    </union>
+    <union id="wool-rooms">
+        <rectangle id="light-blue-wool-room" min="-126,-32" max="-106,-19"/>
+        <rectangle id="orange-wool-room" min="127,33" max="107,20"/>
+    </union>
+    <negative id="void-area">
+        <union id="buildable-area">
+            <rectangle min="-21,-32" max="22,-19"/>
+            <rectangle min="-21,-6" max="22,7"/>
+            <rectangle min="22,33" max="-21,20"/>
+            <rectangle min="7,20" max="-6,-19"/> <!-- Middle -->
+        </union>
+    </negative>
+    <cylinder id="gapple-spawner" base="0.5,17,0.5" radius="2" height="4"/>
+    <point id="gapple-spawn-point">0.5,18,0.5</point>
+    <point id="light-blue-wool-spawn">-120.5,22,-25.5</point>
+    <point id="orange-wool-spawn">121.5,22,26.5</point>
+    <below y="0" id="below-map"/>
+    <apply use="deny-anchor"/>
+    <apply block="deny-chest" region="wool-rooms"/>
+    <apply block="never" region="below-map"/>
+    <apply block="never" region="gapple-spawner" message="You may not modify the spawner!"/>
+    <apply enter="blue-team" region="blue-spawn" message="You may not enter the enemy teams spawn!"/>
+    <apply enter="red-team" region="red-spawn" message="You may not enter the enemy teams spawn!"/>
+    <apply enter="blue-team" region="light-blue-wool-room" message="You may not enter your team's wool room!"/>
+    <apply enter="red-team" region="orange-wool-room" message="You may not enter your team's wool room!"/>
+    <apply block-place="deny(void)" block-break="deny(all(not-leaves, void))" region="void-area" message="You may not modify the void!"/>
+    <apply block="blue-team" region="light-blue-wool-room" message="You may not modify your team's wool room!"/>
+    <apply block="red-team" region="orange-wool-room" message="You may not modify your team's wool room!"/>
+    <apply block-place="only-iron-renew" block-break="only-iron" region="spawns" message="You may not modify the spawn area!"/>
+</regions>
+<wools craftable="false">
+    <wool team="red-team" color="orange" location="121.5,22,26.5">
+        <monument>
+            <block>-88,23,31</block>
+        </monument>
+    </wool>
+    <wool team="blue-team" color="light blue" location="-120.5,22,-25.5">
+        <monument>
+            <block>88,23,-31</block>
+        </monument>
+    </wool>
+</wools>
+<renewables>
+    <renewable region="spawns" renew-filter="only-iron"/>
+</renewables>
+<spawners>
+    <spawner spawn-region="gapple-spawn-point" player-region="gapple-spawner" delay="10s" max-entities="1">
+        <item material="golden apple"/>
+    </spawner>
+    <spawner spawn-region="light-blue-wool-spawn" player-region="light-blue-wool-room" delay="4s" max-entities="3">
+        <item material="wool" amount="2" damage="3"/>
+    </spawner>
+    <spawner spawn-region="orange-wool-spawn" player-region="orange-wool-room" delay="4s" max-entities="3">
+        <item material="wool" amount="2" damage="1"/>
+    </spawner>
+</spawners>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>arrow</tool>
+    <tool>iron pickaxe</tool>
+    <tool>wooden axe</tool>
+    <tool>iron spade</tool>
+</toolrepair>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>leather boots</item>
+    <item>seeds</item>
+    <item>string</item>
+    <item>redstone</item>
+</itemremove>
+<itemkeep>
+    <item>bamboo planks</item>
+    <item>leaves</item>
+    <item>golden apple</item>
+</itemkeep>
+<kill-rewards>
+    <kill-reward>
+        <item material="bamboo planks" amount="8"/>
+        <item material="leaves" amount="8"/>
+        <item material="arrow" amount="8"/>
+    </kill-reward>
+</kill-rewards>
+<maxbuildheight>35</maxbuildheight>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

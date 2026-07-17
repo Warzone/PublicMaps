@@ -1,0 +1,206 @@
+<map proto="1.5.1" min-server-version="1.21.11">
+<name>Chaos Theory</name>
+<version>1.0.2</version>
+<created>2026-06-18</created>
+<objective>Destroy the enemy team's core and monuments!</objective>
+<gamemode>dtc</gamemode>
+<gamemode>dtm</gamemode>
+<include id="gapple-kill-reward"/>
+<authors>
+    <author uuid="f610e558-a3c8-44fb-8622-68cc49dbc18f"/> <!-- jcane -->
+    <author uuid="6ff4ade9-e968-4acd-80eb-1a6fa89629fb"/> <!-- _Pear -->
+</authors>
+<contributors>
+    <contributor uuid="64e840c8-4fb5-4659-a36b-ff93e2f6113a" contribution="XML"/> <!-- Javg_ -->
+</contributors>
+<teams>
+    <team id="red" color="red" max="12">Red</team>
+    <team id="blue" color="blue" max="12">Blue</team>
+</teams>
+<kits>
+    <kit id="default-kit">
+        <item slot="0" material="iron sword" unbreakable="true" />
+        <item slot="1" material="bow" enchantment="infinity" unbreakable="true" />
+        <item slot="2" material="diamond pickaxe" unbreakable="true" />
+        <item slot="3" material="concrete" amount="64" team-color="true" />
+        <item slot="4" material="golden spear" enchantment="knockback:8" unbreakable="true" />
+        <item slot="5" material="tnt" amount="16" />
+        <item slot="6" material="gold plate" amount="8" />
+        <item slot="7" material="bucket" />
+        <item slot="8" material="golden apple" />
+        <item slot="28" material="arrow" />
+        <item slot="30" material="diamond spade" unbreakable="true" />
+        <item slot="31" material="wood axe" enchantment="efficiency:3" unbreakable="true" />
+        <helmet material="leather helmet" unbreakable="true" team-color="true" />
+        <chestplate material="leather chestplate" unbreakable="true" team-color="true" />
+        <leggings material="chainmail leggings" unbreakable="true" />
+        <boots material="iron boots" unbreakable="true" />
+        <effect>night vision</effect>
+    </kit>
+</kits>
+<spawns>
+    <default>
+        <region yaw="0">
+            <point>42.5,37,-146.5</point>
+        </region>
+    </default>
+    <spawn team="red" kit="default-kit">
+        <region yaw="-90">
+            <point>-40.5,31,-65.5</point>
+        </region>
+    </spawn>
+    <spawn team="blue" kit="default-kit">
+        <region yaw="90">
+            <point>125.5,31,-65.5</point>
+        </region>
+    </spawn>
+</spawns>
+<filters>
+    <not id="no-void">
+        <void/>
+    </not>
+    <material id="tinted-glass">tinted glass</material>
+    <not id="use">
+        <any>
+            <material>respawn anchor</material>
+        </any>
+    </not>
+</filters>
+<regions>
+    <rectangle id="red-base" min="-22,-49" max="-46,-82" />
+    <rectangle id="blue-base" min="107,-82" max="131,-49" />
+    <apply use="use" />
+    <apply region="red-base" block="never" message="You may not modify this area!" />
+    <apply region="red-base" enter="red" message="You may not enter to this area!" />
+    <apply region="blue-base" block="never" message="You may not modify this area!" />
+    <apply region="blue-base" enter="blue" message="You may not enter to this area!" />
+    <apply block="no-void" message="You may not modify the void area!">
+        <region>
+            <rectangle id="main-area" min="131,-133" max="-46,2" />
+        </region>
+    </apply>
+</regions>
+<maxbuildheight>36</maxbuildheight>
+<actions>
+    <!-- clear void glass -->
+    <trigger scope="match" filter="match-started">
+        <action>
+            <fill material="moving piston" filter="tinted-glass">
+                <cuboid min="-12,0,2" max="97,1,-133" />
+            </fill>
+        </action>
+    </trigger>
+</actions>
+<destroyables required="true" materials="end stone" show-progress="true" repairable="false">
+    <destroyable owner="blue" name="North Monument">
+        <region>
+            <cuboid id="blue-north-mon" min="76,7,-105" max="81,21,-100" />
+        </region>
+    </destroyable>
+    <destroyable owner="blue" name="South Monument">
+        <region>
+            <cuboid id="blue-south-mon" min="76,7,-31" max="81,21,-26" />
+        </region>
+    </destroyable>
+    <destroyable owner="red" name="South Monument">
+        <region>
+            <cuboid id="red-south-mon" min="9,7,-26" max="4,21,-31" />
+        </region>
+    </destroyable>
+    <destroyable owner="red" name="North Monument">
+        <region>
+            <cuboid id="red-north-mon" min="9,7,-100" max="4,21,-105" />
+        </region>
+    </destroyable>
+</destroyables>
+<cores name="Core" show-progress="true">
+    <core team="blue">
+        <region>
+            <cuboid id="blue-core" min="72,19,-69" max="79,26,-62" />
+        </region>
+    </core>
+    <core team="red">
+        <region>
+            <cuboid id="red-core" min="13,19,-62" max="6,26,-69" />
+        </region>
+    </core>
+</cores>
+<kill-rewards>
+    <kill-reward>
+        <item material="concrete" amount="32" team-color="true" />
+        <item material="tnt" amount="16" />
+        <item material="gold plate" amount="8" />
+    </kill-reward>
+</kill-rewards>
+<itemremove>
+    <item>obsidian</item>
+    <item>end stone</item>
+    <item>bucket</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>chainmail leggings</item>
+    <item>iron boots</item>
+    <item>pale oak wood</item>
+    <item>polished andesite</item>
+    <item>polished andesite slab</item>
+    <item>polished andesite stairs</item>
+    <item>andesite</item>
+    <item>andesite slab</item>
+    <item>andesite stairs</item>
+    <item>polished diorite</item>
+    <item>diorite wall</item>
+    <item>stone brick wall</item>
+    <item>soul torch</item>
+    <item>stone stairs</item>
+    <item>smooth stone</item>
+    <item>tuff</item>
+    <item>tuff wall</item>
+    <item>tuff bricks</item>
+    <item>polished tuff</item>
+    <item>polished tuff slab</item>
+    <item>polished tuff wall</item>
+    <item>smooth quartz</item>
+    <item>smooth quartz stairs</item>
+    <item>cobblestone</item>
+    <item>dead fire coral block</item>
+    <item>stone button</item>
+    <item>clay ball</item>
+    <item>light gray concrete powder</item>
+    <item>light gray concrete</item>
+    <item>crimson hyphae</item>
+    <item>warped hyphae</item>
+    <item>nether bricks</item>
+    <item>nether brick wall</item>
+    <item>iron bars</item>
+    <item>iron trapdoor</item>
+    <item>cyan terracotta</item>
+    <item>black concrete</item>
+    <item>yellow concrete</item>
+    <item>dark oak trapdoor</item>
+    <item>mud</item>
+    <item>deepslate tiles</item>
+    <item>blackstone wall</item>
+    <item>gray concrete</item>
+    <item>smooth stone slab</item>
+</itemremove>
+<toolrepair>
+    <tool>iron sword</tool>
+    <tool>bow</tool>
+    <tool>diamond pickaxe</tool>
+    <tool>golden spear</tool>
+    <tool>diamond spade</tool>
+    <tool>wood axe</tool>
+</toolrepair>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<damage>
+    <deny>
+        <attacker>
+            <holding ignore-durability="true" ignore-metadata="true" ignore-name="true" ignore-enchantments="true">
+                <item material="golden spear" />
+            </holding>
+        </attacker>
+    </deny>
+</damage>
+</map>
