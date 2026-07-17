@@ -1,16 +1,18 @@
 <map>
 <!-- "Micro Battles" gamemode include file -->
 <!-- Created by Eliminate, based on the original "Cozy Cove" XML by Owehttamy -->
-<!-- Version 2025.09-09-1 -->
+<!-- Version 2026.07-08-1 -->
 <include id="gapple-kill-reward"/>
 <constants fallback="true"> <!-- Default values - Can be overriden by an individual map's code -->
     <constant id="use-default-teams">true</constant> <!-- Make sure this is ABOVE the include statement in your map's XML if changing to "false" -->
+    <constant id="use-map-crumbling">true</constant>
     <constant id="game-objective">Eliminate the other teams before the time runs out! Watch out for the shrinking world border!</constant>
     <constant id="resistance-time">0</constant>
     <constant id="max-height-value">25</constant>
     <constant id="world-border-start-size">80</constant>
     <constant id="world-border-end-size">3</constant>
     <constant id="map-radius">27.5</constant>
+    <constant id="map-max-height">38</constant>
     <constant id="walls-region">walls</constant>
     <constant id="walls-filter">only-glass</constant> <!-- The blocks that the walls are made out of -->
     <constant id="default-walls-height">14</constant> <!-- Height for the default wall regions -->
@@ -31,7 +33,6 @@
 <broadcasts>
     <alert after="1s">`cEliminate the other teams before the time runs out! Watch out for the shrinking world border!</alert>
     <alert after="10s">`cThe walls have fallen. Take cover or attack!</alert>
-    <!-- <alert after="165s">`cThe floor crumbles.</alert> -->
 </broadcasts>
 <blitz join-filter="not(walls-to-air)">
     <lives>1</lives>
@@ -63,33 +64,69 @@
     <negative id="not-map">
         <cylinder id="map" base="0.5,0,0.5" radius="${map-radius}" height="${max-height-value}"/>
     </negative>
+    <apply block="never" message="You may not build outside of the map!">
+        <region>
+            <complement>
+                <region id="map_outer" />
+                <region id="map_inner" />
+            </complement>
+        </region>
+    </apply>
     <apply region="${walls-region}" block="not(${walls-filter})" message="You may not break the walls."/>
     <apply region="not-map" block="never" message="You may not build outside of the map."/>
 </regions>
+<if constant="use-map-crumbling" constant-value="true">
+    <variables scope="match">
+        <variable id="is_map_crumbling" />
+        <variable id="border_end_radius" />
+        <cylinder id="map_outer" base="0.5,0,0.5" radius="${map-radius}" height="${map-max-height}" />
+        <cylinder id="map_inner" base="0.5,0,0.5" radius="${map-radius}" height="${map-max-height}" />
+    </variables>
+</if>
 <actions>
     <!-- Wall controls -->
-    <action id="walls-falling" scope="match">
-        <fill id="walls-air" region="${walls-region}" material="air" filter="${walls-filter}"/>
-    </action>
-    <trigger action="walls-falling" scope="match">
+    <trigger scope="match">
         <filter>
-            <after id="walls-to-air" duration="10s" message="Walls will fall in {0}">
-                <match-running/>
-            </after>
+            <after id="walls-to-air" duration="10s" message="Walls will fall in {0}" filter="match-running" />
         </filter>
+        <action scope="match">
+            <fill region="${walls-region}" material="air" filter="${walls-filter}"/>
+        </action>
     </trigger>
-    <!-- Map crumble controls - INCOMPLETE -->
-    <!-- <action id="map-crumbling" scope="match">
-        <fill id="floor-air" region="floor" material="air"/>
-    </action>
-    <trigger action="map-crumbling" scope="match">
-        <filter>
-            <after id="floor-to-air" duration="165s" message="Floor will crumble in {0}">
-                <match-started/>
-            </after>
-        </filter>
-    </trigger> -->
+    <if constant="use-map-crumbling" constant-value="true">
+        <!-- Map crumbling -->
+        <trigger scope="match" filter="always">
+            <action>
+                <set var="map_outer" index="3" value="${map-radius} + 1" />
+                <set var="map_inner" index="3" value="${map-radius} - 1" />
+                <set var="border_end_radius" value="floor(${world-border-end-size} / 2)" />
+            </action>
+        </trigger>
+        <trigger scope="match">
+            <filter>
+                <pulse period="3.3s" duration="1s" filter="is_map_crumbling=1" />
+            </filter>
+            <action>
+                <set var="map_inner" index="3" value="map_inner[3] - 1" />
+                <fill material="air" update="false">
+                    <complement>
+                        <region id="map_outer" />
+                        <region id="map_inner" />
+                    </complement>
+                </fill>
+                <action filter="map_inner[3]-border_end_radius=..0.5">
+                    <set var="is_map_crumbling" value="0" />
+                </action>
+            </action>
+        </trigger>
+        <trigger scope="match" filter="match-finished" action="is_map_crumbling := 0" />
+    </if>
 </actions>
+<if constant="use-map-crumbling" constant-value="true">
+    <modes>
+        <mode id="crumbling-mode" name="Map Crumbling" after="1m" show-before="10s" action="is_map_crumbling := 1" />
+    </modes>
+</if>
 <itemremove>
     <item>stone sword</item>
     <item>bow</item>
@@ -115,9 +152,11 @@
         <item amount="6" material="arrow"/>
     </kill-reward>
 </kill-rewards>
-<world-borders center="0.5,0.5">
-    <world-border size="${world-border-start-size}"/>
-    <world-border size="${world-border-end-size}" after="0s" duration="160s" damage="5" buffer="0"/>
-</world-borders>
+<if constant="use-map-crumbling" constant-value="false">
+    <world-borders center="0.5,0.5">
+        <world-border size="${world-border-start-size}"/>
+        <world-border size="${world-border-end-size}" after="0s" duration="160s" damage="5" buffer="0"/>
+    </world-borders>
+</if>
 <maxbuildheight>${max-height-value}</maxbuildheight>
 </map>

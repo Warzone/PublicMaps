@@ -8,7 +8,7 @@
 -->
 <!-- Counter-Strat gamemode include file -->
 <!-- Created by zzuf (GitHub @zzufx) -->
-<!-- Version 2025.07.27-1 -->
+<!-- Version 2026.07.16-1 -->
 <include id="bridge"/>
 <include id="gapple-kill-reward"/>
 <constants fallback="true">
@@ -29,11 +29,13 @@
     <if min-server-version="1.21"><constant id="cs-shop-dude">WanderingTrader</constant></if>
     <!-- Attackers -->
     <constant id="cs-team-one-name">Attackers</constant>
+    <constant id="cs-team-one-color">gold</constant>
     <constant id="cs-team-one-shop-yaw">0</constant>
     <constant id="cs-team-one-shop-pitch">0</constant>
     <constant id="cs-team-one-shop-point">0,0,0</constant>
     <!-- Defenders -->
     <constant id="cs-team-two-name">Defenders</constant>
+    <constant id="cs-team-two-color">blue</constant>
     <constant id="cs-team-two-shop-yaw">0</constant>
     <constant id="cs-team-two-shop-pitch">0</constant>
     <constant id="cs-team-two-shop-point">0,0,0</constant>
@@ -66,8 +68,8 @@
     <game>Counter-Strat: Hostage</game>
 </if>
 <teams>
-    <team id="team-one" color="gold" max="${cs-team-size}" show-name-tags="allies">${cs-team-one-name}</team>
-    <team id="team-two" color="blue" max="${cs-team-size}" show-name-tags="allies">${cs-team-two-name}</team>
+    <team id="team-one" color="${cs-team-one-color}" max="${cs-team-size}" show-name-tags="allies">${cs-team-one-name}</team>
+    <team id="team-two" color="${cs-team-two-color}" max="${cs-team-size}" show-name-tags="allies">${cs-team-two-name}</team>
 </teams>
 <broadcasts>
     <if constant="cs-shops-enabled" constant-value="true">
@@ -426,7 +428,6 @@
         projectile="Snowball"
         velocity="1.5"
         click="right"
-        power="4"
         damage="8"
         throwable="true"
         destroy-filter="never"
@@ -467,5 +468,10 @@
             </modify>
         </rule>
     </item-mods>
+</if>
+<if min-server-version="1.21.6">
+    <gamerules>
+        <locator_bar>false</locator_bar>
+    </gamerules>
 </if>
 </map>
