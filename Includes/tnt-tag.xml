@@ -1,0 +1,379 @@
+<map proto="1.5.0">
+<!-- TNT Tag gamemode include file -->
+<!-- Created by mitchiii -->
+<!-- Support from Pablete1234 <3 -->
+<!-- Version 2026.04.12 -->
+<objective>Pass the TNT to another player before it explodes!</objective>
+<game>TNT Tag</game>
+<gamemode>arcade</gamemode>
+<include id="countdown"/>
+<include id="void-death"/>
+<phase>staging</phase>
+<constants>
+    <constant id="idle">0</constant>
+    <constant id="starting">1</constant>
+    <constant id="running">2</constant>
+    <constant id="block-filter">never</constant>
+</constants>
+<blitz>
+    <broadcastLives>false</broadcastLives>
+</blitz>
+<players max="64"/>
+<kits>
+    <kit id="tnt-kit" force="true" parent="tnt-flash-red-kit">
+        <item slot="4" material="compass" locked="true"/>
+        <effect amplifier="2">speed</effect>
+        <action filter="round_deathmatch=1..">
+            <kit force="true">
+                <effect amplifier="3">speed</effect>
+                <walk-speed>1.3</walk-speed>
+            </kit>
+        </action>
+        <game-mode>adventure</game-mode>
+        <health>20</health>
+    </kit>
+    <kit id="tnt-flash-red-kit" force="true">
+        <helmet material="tnt" locked="true"/>
+        <chestplate material="leather chestplate" color="993333" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" color="993333" locked="true" unbreakable="true"/>
+        <boots material="leather boots" color="993333" locked="true" unbreakable="true" enchantments="protection_environmental:255"/>
+        <item slot="0" material="tnt" locked="true"/>
+        <item slot="1" material="tnt" locked="true"/>
+        <item slot="2" material="tnt" locked="true"/>
+        <item slot="3" material="tnt" locked="true"/>
+        <item slot="5" material="tnt" locked="true"/>
+        <item slot="6" material="tnt" locked="true"/>
+        <item slot="7" material="tnt" locked="true"/>
+        <item slot="8" material="tnt" locked="true"/>
+    </kit>
+    <kit id="tnt-flash-white-kit" force="true">
+        <helmet material="snow block" name="`rTNT" locked="true"/>
+        <chestplate material="leather chestplate" color="ffffff" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" color="ffffff" locked="true" unbreakable="true"/>
+        <boots material="leather boots" color="ffffff" locked="true" unbreakable="true" enchantments="protection_environmental:255"/>
+        <item slot="0" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="1" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="2" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="3" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="5" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="6" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="7" material="snow block" name="`rTNT" locked="true"/>
+        <item slot="8" material="snow block" name="`rTNT" locked="true"/>
+    </kit>
+    <kit id="tnt-kill" parents="clear-kit" force="true">
+        <effect amplifier="50">instant damage</effect>
+    </kit>
+    <kit id="hider-kit">
+        <effect>speed</effect>
+        <action filter="round_deathmatch=1..">
+            <kit force="true">
+                <effect amplifier="2">speed</effect>
+                <walk-speed>1</walk-speed>
+            </kit>
+        </action>
+        <game-mode>adventure</game-mode>
+        <health>20</health>
+    </kit>
+    <kit id="clear-kit">
+        <clear effects="true"/>
+        <walk-speed>1</walk-speed>
+    </kit>
+</kits>
+<compass show-distance="true">
+    <player filter="is_tnt=0" show-player="true"/>
+</compass>
+<filters>
+    <time id="delayed">0.05s</time>
+    <after id="round-starting" duration="1s" filter="round_state=${idle}"/>
+    <after id="round-begin" duration="3s" filter="round_state=${starting}" message="The next round begins in {0}"/>
+    <all id="countdown-start">
+        <match-running/>
+        <variable var="round_state">${starting}</variable>
+    </all>
+    <variable id="round-running" var="round_state">${running}</variable>
+    <any id="round-end">
+        <after id="round-sm-end" duration="15s" message="TNT explodes in {0}">
+            <all id="round-sm-begin">
+                <match-running/>
+                <variable var="players">1..8</variable>
+                <variable var="round_state">${running}</variable>
+            </all>
+        </after>
+        <after id="round-md-end" duration="25s" message="TNT explodes in {0}">
+            <all id="round-md-begin">
+                <match-running/>
+                <variable var="players">9..32</variable>
+                <variable var="round_state">${running}</variable>
+            </all>
+        </after>
+        <after id="round-lg-end" duration="45s" message="TNT explodes in {0}">
+            <all id="round-lg-begin">
+                <match-running/>
+                <variable var="players">33..</variable>
+                <variable var="round_state">${running}</variable>
+            </all>
+        </after>
+    </any>
+    <any id="start-tnt-fuse">
+        <after duration="40s" filter="round-lg-begin"/>
+        <after duration="20s" filter="round-md-begin"/>
+        <after duration="12s" filter="round-sm-begin"/>
+    </any>
+    <any id="game-damage">
+        <cause>potion</cause>
+        <cause>void</cause>
+        <cause>combustion</cause>
+        <cause>suffocation</cause>
+        <cause>squash</cause>
+        <cause>drowning</cause>
+        <cause>cactus</cause>
+    </any>
+    <attacker id="attacker-is-tnt">
+        <variable id="is-tnt" var="is_tnt">1</variable>
+    </attacker>
+    <attacker id="attacker-was-tnt">
+        <variable id="was-tnt" var="is_tnt">2</variable>
+    </attacker>
+    <victim id="victim-is-hider">
+        <any id="is-hider">
+            <variable var="is_tnt">0</variable>
+            <variable var="is_tnt">2</variable>
+        </any>
+    </victim>
+    <pulse id="transitioning-to-hider" filter="is_tnt=2" period="0.1s" duration="0.05s"/>
+</filters>
+<regions>
+    <apply block="${block-filter}"/>
+</regions>
+<portals>
+    <portal forward="all(participating, round-running, round_deathmatch=1..)" destination="center" sound="false"/>
+</portals>
+<variables scope="match" default="0">
+    <variable id="min_tmp_tnt"/>
+    <variable id="tmp_tnt" scope="player"/>
+    <variable id="is_tnt" scope="player"/>
+    <variable id="tnt_fuse"/>
+    <variable id="tmp"/>
+    <variable id="players"/>
+    <variable id="tnt_players"/>
+    <variable id="round"/>
+    <variable id="round_deathmatch"/>
+    <variable id="round_state" default="${running}"/>
+    <variable id="last_attacker" scope="player" exclusive="1"/>
+    <variable id="last_victim" scope="player" exclusive="1"/>
+</variables>
+<actions>
+    <action scope="match" id="pick-next-tnt" untrigger-filter="never">
+        <set var="players" value="0"/>
+        <switch-scope inner="player" filter="participating">
+            <set var="players" value="players + 1"/>
+            <set var="tmp_tnt" value="random()"/>
+        </switch-scope>
+        <set var="tnt_players" value="max(floor(players^0.6), 1)"/>
+        <repeat times="tnt_players">
+            <set var="min_tmp_tnt" value="99"/>
+            <switch-scope inner="player" filter="participating">
+                <set var="min_tmp_tnt" value="min(tmp_tnt, min_tmp_tnt)"/>
+            </switch-scope>
+            <switch-scope inner="player" filter="participating">
+                <set var="tmp_tnt" value="tmp_tnt - min_tmp_tnt"/>
+                <action filter="tmp_tnt=0">
+                    <set var="tmp_tnt" value="99"/>
+                    <set var="is_tnt" value="1"/>
+                </action>
+            </switch-scope>
+        </repeat>
+    </action>
+    <action scope="match" id="distribute-kits">
+        <switch-scope inner="player" filter="participating">
+            <action filter="is_tnt=0">
+                <kit id="hider-kit"/>
+            </action>
+            <action filter="is_tnt=1">
+                <kit id="tnt-kit"/>
+            </action>
+        </switch-scope>
+    </action>
+    <action scope="match" id="round-begin-message">
+        <message text=" "/>
+        <action filter="round_deathmatch=0">
+            <message text="`b`l» Round {num} has started!">
+                <replacements>
+                    <decimal id="num" value="round"/>
+                </replacements>
+            </message>
+        </action>
+        <action filter="round_deathmatch=1..">
+            <message text="`d» `lDeathmatch {num} has started!">
+                <replacements>
+                    <decimal id="num" value="round_deathmatch"/>
+                </replacements>
+            </message>
+        </action>
+        <action filter="tnt_players=2..">
+            <message text="`e» The TNT has been released to `c{num} `eplayers!">
+                <replacements>
+                    <decimal id="num" value="tnt_players"/>
+                </replacements>
+            </message>
+        </action>
+        <action filter="tnt_players=1">
+            <message text="`e» The TNT has been released to `c1 `eplayer!"/>
+        </action>
+        <switch-scope inner="player" filter="participating">
+            <message text=" "/>
+            <action filter="is_tnt=1">
+                <message text="`c» You have started as TNT! Tag someone quickly!"/>
+            </action>
+            <action filter="is_tnt=0">
+                <message text="`a» Run away from the TNT!"/>
+            </action>
+        </switch-scope>
+        <message text=" "/>
+    </action>
+    <trigger scope="match" filter="all(round-starting, delayed)">
+        <action>
+            <set var="round_state" value="${starting}"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="all(round-begin, delayed)">
+        <action>
+            <set var="round_state" value="${running}"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="all(round-running, delayed)">
+        <action>
+            <set var="round" value="round + 1"/>
+            <set var="round_state" value="${running}"/>
+            <action id="pick-next-tnt"/>
+            <action id="distribute-kits"/>
+            <action id="round-begin-message"/>
+        </action>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <after duration="1s" filter="all(delayed, round_deathmatch=1, match-running)"/>
+        </filter>
+        <action>
+            <message text=" "/>
+            <message text="`d» `lDeathmatch will begin next round!"/>
+            <message text="`e» Players will be teleported to the arena center each round of deathmatch."/>
+            <message text=" "/>
+            <sound preset="OBJECTIVE_GOOD"/>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="all(delayed, round-end)">
+        <action>
+            <set var="round_state" value="${idle}"/>
+            <switch-scope inner="player" filter="all(is_tnt=1, participating)">
+                <set var="is_tnt" value="0"/>
+                <kit id="tnt-kill"/>
+            </switch-scope>
+            <sound key="${entity.generic.explode}"/>
+            <action filter="players=..12">
+                <set var="round_deathmatch" value="round_deathmatch+1"/>
+            </action>
+        </action>
+    </trigger>
+    <trigger scope="match" filter="start-tnt-fuse">
+        <action>
+            <sound key="${entity.creeper.primed}"/>
+        </action>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <pulse period="0.5s" duration="0.25s" filter="all(delayed, start-tnt-fuse, not(round-end))"/>
+        </filter>
+        <action>
+            <set var="tnt_fuse" value="tnt_fuse - 1"/>
+            <set var="tmp" value="abs(tnt_fuse % 2)"/>
+            <action filter="tmp=0">
+                <sound key="${entity.generic.extinguish_fire}" volume="0.3"/>
+                <switch-scope inner="player" filter="all(is_tnt=1, participating)">
+                    <kit id="tnt-flash-white-kit"/>
+                </switch-scope>
+            </action>
+            <action filter="not(tmp=0)">
+                <switch-scope inner="player" filter="all(is_tnt=1, participating)">
+                    <kit id="tnt-flash-red-kit"/>
+                </switch-scope>
+            </action>
+        </action>
+    </trigger>
+    <action scope="player" id="become-hider" filter="all(attacker-is-tnt, victim-is-hider, round-running)">
+        <set var="last_attacker" value="1"/>
+        <set var="is_tnt" value="2"/>
+        <kit id="clear-kit"/>
+        <kit id="hider-kit"/>
+    </action>
+    <action scope="player" id="become-tnt" filter="all(not(game-damage), round-running)">
+        <kit force="true">
+            <health>20</health>
+        </kit>
+        <action filter="all(attacker-was-tnt, victim-is-hider)">
+            <set var="last_victim" value="1"/>
+            <set var="is_tnt" value="1"/>
+            <kit id="tnt-kit"/>
+            <sound key="${entity.creeper.hurt}" volume="1" pitch="1.5"/>
+            <switch-scope inner="match">
+                <sound key="${entity.firework_rocket.twinkle}" volume="0.2" pitch=".9"/>
+                <action filter="start-tnt-fuse">
+                    <message text="{p1} `7tagged {p2}">
+                        <replacements>
+                            <player id="p1" var="last_attacker" style="color"/>
+                            <player id="p2" var="last_victim" style="color"/>
+                        </replacements>
+                    </message>
+                </action>
+                <switch-scope inner="player">
+                    <action filter="last_attacker=1">
+                        <message actionbar="`aYou tagged {p1}">
+                            <replacements>
+                                <player id="p1" var="last_victim" style="color"/>
+                            </replacements>
+                        </message>
+                    </action>
+                    <action filter="last_victim=1">
+                        <message actionbar="{p1} `ctagged you">
+                            <replacements>
+                                <player id="p1" var="last_attacker" style="color"/>
+                            </replacements>
+                        </message>
+                    </action>
+                </switch-scope>
+            </switch-scope>
+        </action>
+    </action>
+    <trigger scope="player" filter="is_tnt=2" action="is_tnt := 0"/>
+    <trigger scope="player" filter="transitioning-to-hider" action="is_tnt := 0"/> <!-- try cover weird edge cases where is_tnt=2 is not caught by trigger above -->
+</actions>
+<damage attacker-action="become-hider" victim-action="become-tnt">
+    <deny>
+        <any>
+            <not>
+                <any>
+                    <all>
+                        <any>
+                            <cause>melee</cause>
+                            <cause>projectile</cause>
+                        </any>
+                        <filter id="round-running"/>
+                    </all>
+                    <filter id="game-damage"/>
+                </any>
+            </not>
+        </any>
+    </deny>
+</damage>
+<itemremove>
+    <item>tnt</item>
+    <item>snow block</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>compass</item>
+</itemremove>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+</map>

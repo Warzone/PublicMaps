@@ -1,0 +1,325 @@
+<map proto="1.5.0">
+<!-- Freeze Tag gamemode include file -->
+<!-- Created by mitchiii -->
+<!-- Version 2026.02.06 -->
+<objective>Taggers must freeze at least half of all Runners before time runs out!</objective>
+<game>Freeze Tag</game>
+<gamemode>arcade</gamemode>
+<include id="void-death"/>
+<include id="countdown"/>
+<constant id="countdown-scope">team</constant>
+<phase>staging</phase>
+<score/>
+<time>5m</time>
+<teams>
+    <team id="taggers" color="blue" max="3">Taggers</team>
+    <team id="runners" color="green" max="12" plural="true">Runners</team>
+</teams>
+<kits>
+    <kit id="common-kit">
+        <game-mode>adventure</game-mode>
+        <clear items="true" armor="true" effects="true"/>
+        <item material="compass" locked="true"/>
+        <chestplate material="leather chestplate" team-color="true" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" team-color="true" locked="true" unbreakable="true"/>
+        <boots material="leather boots" team-color="true" locked="true" unbreakable="true"/>
+    </kit>
+    <kit id="taggers-kit" parent="common-kit" force="true">
+        <effect>speed</effect>
+        <double-jump power="2"/>
+    </kit>
+    <kit id="runners-kit" parent="common-kit" force="true">
+        <effect>speed</effect>
+    </kit>
+    <kit id="runners-frozen-kit" force="true">
+        <effect amplifier="-20">jump boost</effect>
+        <effect amplifier="3">slowness</effect>
+        <item slot="0" material="ice" locked="true"/>
+        <item slot="1" material="ice" locked="true"/>
+        <item slot="2" material="ice" locked="true"/>
+        <firework slot="3" power="3">
+            <explosion type="burst" flicker="true" trail="true">
+                <color>287697</color>
+            </explosion>
+        </firework>
+        <item slot="4" material="ice" locked="true"/>
+        <item slot="5" material="snow ball" amount="3" locked="true"/>
+        <item slot="6" material="ice" locked="true"/>
+        <item slot="7" material="ice" locked="true"/>
+        <item slot="8" material="ice" locked="true"/>
+        <helmet material="ice" locked="true"/>
+        <chestplate material="leather chestplate" color="6699D8" locked="true" unbreakable="true"/>
+        <leggings material="leather leggings" color="6699D8" locked="true" unbreakable="true"/>
+        <boots material="leather boots" color="6699D8" locked="true" unbreakable="true"/>
+        <action>
+            <set var="frozen_at_x" value="player.x"/>
+            <set var="frozen_at_z" value="player.z"/>
+        </action>
+    </kit>
+    <give kit="runners-frozen-kit" filter="all(is_frozen=1, in-void)"/>
+</kits>
+<spawns>
+    <spawn team="taggers" region="spawn-region" kit="taggers-kit" filter="release-taggers"/>
+    <spawn team="runners" region="spawn-region" kit="runners-kit" filter="is_frozen=0"/>
+    <spawn team="runners" region="spawn-region" kit="runners-frozen-kit" filter="is_frozen=1"/>
+</spawns>
+<respawn delay="0s" auto="true"/>
+<compass show-distance="true">
+    <player filter="all(only-runner, is_frozen=0)" holder-filter="only-tagger" show-player="true"/>
+    <player filter="all(only-runner, is_frozen=1)" holder-filter="only-runner" show-player="true" name="Unfreeze"/>
+</compass>
+<broadcasts>
+    <tip after="15s" every="1m30s" filter="only-runner">Punch frozen runners to un-freeze them!</tip>
+</broadcasts>
+<filters>
+    <all id="in-match">
+        <participating id="participating"/>
+        <match-running id="match-running"/>
+    </all>
+    <observing id="observing"/>
+    <team id="only-tagger">taggers</team>
+    <team id="only-runner">runners</team>
+    <variable id="is-frozen" var="is_frozen">1</variable>
+    <attacker id="attacker-is-tagger">
+        <filter id="only-tagger"/>
+    </attacker>
+    <victim id="victim-is-tagger">
+        <filter id="only-tagger"/>
+    </victim>
+    <attacker id="attacker-is-unfrozen-runner">
+        <filter id="unfrozen-runner"/>
+    </attacker>
+    <attacker id="attacker-is-frozen-runner">
+        <filter id="frozen-runner"/>
+    </attacker>
+    <any id="victim-is-runner">
+        <victim id="victim-is-unfrozen-runner">
+            <all id="unfrozen-runner">
+                <filter id="only-runner"/>
+                <not>
+                    <filter id="is-frozen"/>
+                </not>
+            </all>
+        </victim>
+        <victim id="victim-is-frozen-runner">
+            <all id="frozen-runner">
+                <filter id="only-runner"/>
+                <filter id="is-frozen"/>
+            </all>
+        </victim>
+    </any>
+    <after id="release-taggers" duration="7s" filter="match-running" message="Taggers will be released in {0}"/>
+    <all id="countdown-start">
+        <filter id="only-tagger"/>
+        <time>5s</time>
+    </all>
+</filters>
+<regions>
+    <below id="in-void" y="0"/>
+    <apply block="never"/>
+</regions>
+<control-points>
+    <control-point id="win" name="Taggers Win" capture="everywhere" capture-time="1s" player-filter="only-tagger" capture-filter="runners_score=0" points="0" show-messages="false" show-effects="false" show-info="false" show-sidebar="false"/>
+</control-points>
+<variables>
+    <score id="score"/>
+    <with-team id="taggers_score" var="score" team="taggers"/>
+    <with-team id="runners_score" var="score" team="runners"/>
+    <variable id="counted" scope="player"/>
+    <variable id="is_frozen" scope="player"/>
+    <variable id="frozen_at_x" scope="player"/>
+    <variable id="frozen_at_z" scope="player"/>
+    <variable id="moved_from_x" scope="player"/>
+    <variable id="moved_from_z" scope="player"/>
+    <variable id="last_attacker" scope="player" exclusive="1"/>
+    <variable id="last_victim" scope="player" exclusive="1"/>
+</variables>
+<actions>
+    <trigger scope="player">
+        <filter>
+            <after duration="12s">
+                <all>
+                    <filter id="frozen-runner"/>
+                    <any>
+                        <not>
+                            <carrying ignore-metadata="true">
+                                <item material="firework"/>
+                            </carrying>
+                        </not>
+                        <not>
+                            <carrying ignore-metadata="true">
+                                <item material="snow ball"/>
+                            </carrying>
+                        </not>
+                    </any>
+                </all>
+            </after>
+        </filter>
+        <action>
+            <kit>
+                <firework slot="3" power="3">
+                    <explosion type="burst" flicker="true" trail="true">
+                        <color>287697</color>
+                    </explosion>
+                </firework>
+                <item slot="5" material="snow ball" amount="3"/>
+            </kit>
+        </action>
+    </trigger>
+    <trigger scope="player">
+        <filter>
+            <pulse period="2s" duration="1s" filter="all(in-match, frozen-runner)"/>
+        </filter>
+        <action>
+            <message actionbar="`b`lYou have been frozen!"/>
+            <action id="has-frozen-moved"/>
+        </action>
+    </trigger>
+    <trigger scope="player">
+        <filter>
+            <pulse period="2s" duration="1s">
+                <after duration="1s" filter="all(in-match, frozen-runner)"/>
+            </pulse>
+        </filter>
+        <action>
+            <message actionbar="`3`lYou have been frozen!"/>
+            <action id="has-frozen-moved"/>
+        </action>
+    </trigger>
+    <action id="has-frozen-moved" scope="player">
+        <set var="moved_from_x" value="frozen_at_x - player.x"/>
+        <set var="moved_from_z" value="frozen_at_z - player.z"/>
+    </action>
+    <trigger scope="player">
+        <filter>
+            <pulse period="0.2s" duration="0.1s" filter="all(in-match, frozen-runner, not(any(moved_from_x=0, moved_from_z=0)), not(in-void))"/>
+        </filter>
+        <action>
+            <teleport x="frozen_at_x" y="player.y" z="frozen_at_z"/>
+        </action>
+    </trigger>
+    <action id="attacker-action" scope="player">
+        <set var="last_attacker" value="1"/>
+    </action>
+    <action id="victim-action" scope="player">
+        <action filter="not(in-void)">
+            <kit force="true">
+                <health>20</health>
+            </kit>
+        </action>
+        <action filter="all(attacker-is-tagger, victim-is-unfrozen-runner)">
+            <set var="last_victim" value="1"/>
+            <set var="is_frozen" value="1"/>
+            <set var="taggers_score" value="taggers_score + 1"/>
+            <set var="runners_score" value="runners_score - 1"/>
+            <kit id="runners-frozen-kit"/>
+            <switch-scope inner="match">
+                <switch-scope inner="team">
+                    <sound key="${entity.zombie_villager.cure}" volume="0.3" pitch="1.5"/>
+                    <message text="{p1} `7froze {p2}">
+                        <replacements>
+                            <player id="p1" var="last_attacker" style="color"/>
+                            <player id="p2" var="last_victim" style="color"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
+            </switch-scope>
+        </action>
+        <action filter="all(attacker-is-unfrozen-runner, victim-is-frozen-runner)">
+            <set var="last_victim" value="1"/>
+            <set var="is_frozen" value="0"/>
+            <set var="taggers_score" value="taggers_score - 1"/>
+            <set var="runners_score" value="runners_score + 1"/>
+            <kit id="runners-kit"/>
+            <switch-scope inner="match">
+                <switch-scope inner="team">
+                    <sound key="${block.glass.break}" volume="0.3"/>
+                    <message text="{p1} `7unfroze {p2}">
+                        <replacements>
+                            <player id="p1" var="last_attacker" style="color"/>
+                            <player id="p2" var="last_victim" style="color"/>
+                        </replacements>
+                    </message>
+                </switch-scope>
+            </switch-scope>
+        </action>
+    </action>
+    <trigger scope="team">
+        <filter>
+            <pulse period="2s" duration="0.1s" filter="all(in-match, only-runner)"/>
+        </filter>
+        <action>
+            <set var="runners_score" value="0"/>
+            <set var="taggers_score" value="0"/>
+            <switch-scope inner="player" filter="is_frozen=0">
+                <set var="runners_score" value="runners_score + 1"/>
+            </switch-scope>
+            <switch-scope inner="player" filter="is_frozen=1">
+                <set var="taggers_score" value="taggers_score + 1"/>
+            </switch-scope>
+        </action>
+    </trigger>
+    <trigger scope="match">
+        <filter>
+            <not>
+                <players filter="unfrozen-runner"/>
+            </not>
+        </filter>
+        <action>
+            <set var="runners_score" value="0"/>
+        </action>
+    </trigger>
+</actions>
+<damage attacker-action="attacker-action" victim-action="victim-action">
+    <deny>
+        <any>
+            <cause>fall</cause>
+            <all>
+                <filter id="attacker-is-tagger"/>
+                <filter id="victim-is-tagger"/>
+            </all>
+            <all>
+                <filter id="attacker-is-tagger"/>
+                <filter id="victim-is-frozen-runner"/>
+                <not>
+                    <cause>void</cause>
+                </not>
+            </all>
+            <all>
+                <filter id="attacker-is-unfrozen-runner"/>
+                <filter id="victim-is-unfrozen-runner"/>
+                <not>
+                    <cause>void</cause>
+                </not>
+            </all>
+            <all>
+                <filter id="attacker-is-frozen-runner"/>
+                <any>
+                    <filter id="victim-is-runner"/>
+                    <all>
+                        <filter id="victim-is-tagger"/>
+                        <cause>melee</cause>
+                    </all>
+                </any>
+                <not>
+                    <cause>void</cause>
+                </not>
+            </all>
+        </any>
+    </deny>
+</damage>
+<friendlyfire>on</friendlyfire>
+<hunger>
+    <depletion>off</depletion>
+</hunger>
+<itemremove>
+    <item>ice</item>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>compass</item>
+    <item>snow ball</item>
+    <item>firework</item>
+</itemremove>
+</map>
