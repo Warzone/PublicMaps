@@ -1,15 +1,30 @@
-<map proto="1.5.0">
+<map proto="1.5.1">
 <name>Antiquis</name>
-<version>1.2.12</version>
-<created>2013-11-17</created>
+<variant id="christmas" world="christmas">Christmas</variant>
+<version>1.3</version>
 <include id="gapple-kill-reward"/>
 <objective>Destroy the enemy's obsidian monument!</objective>
 <gamemode>dtm</gamemode>
+<if variant="default">
+    <created>2013-11-17</created>
+    <constant id="blue-team-name">Blue</constant>
+    <constant id="blue-team-color">blue</constant>
+</if>
+<if variant="christmas">
+    <created>2021-11-11</created>
+    <constant id="blue-team-name">Green</constant>
+    <constant id="blue-team-color">dark green</constant>
+</if>
 <authors>
     <author uuid="060baa18-2852-40d8-afcb-e61607c04be3"/> <!-- pepsidawg00 -->
 </authors>
+<if variant="christmas">
+    <contributors>
+        <contributor uuid="571c1d9d-4d49-43bd-bfdb-30563e920ca9" contribution="Christmas edit"/> <!-- Wesdial -->
+    </contributors>
+</if>
 <teams>
-    <team id="blue-team" color="blue" max="16">Blue</team>
+    <team id="blue-team" color="${blue-team-color}" max="16">${blue-team-name}</team>
     <team id="red-team" color="dark red" max="16">Red</team>
 </teams>
 <broadcasts>
